@@ -40,8 +40,11 @@ jobs:
           if (-not $exe) {
             throw "Portable EXE was not generated."
           }
-          $hash = Get-FileHash -Algorithm SHA256 -LiteralPath $exe.FullName
-          "$($hash.Hash.ToLower())  $($exe.Name)" |
+          $version = node -p "require('./package.json').version"
+          $releaseExe = Join-Path "release" "VibeCoding-Basic-Class-$version.exe"
+          Move-Item -LiteralPath $exe.FullName -Destination $releaseExe -Force
+          $hash = Get-FileHash -Algorithm SHA256 -LiteralPath $releaseExe
+          "$($hash.Hash.ToLower())  $(Split-Path $releaseExe -Leaf)" |
             Set-Content -LiteralPath "release/SHA256SUMS.txt" -Encoding ascii
 
       - name: Create or update GitHub Release
@@ -64,21 +67,4 @@ jobs:
               --repo "${{ github.repository }}" `
               --title "바이브코딩 기초반 $tag" `
               --generate-notes
-          }
-
-          # GitHub CLI on Windows may shorten a Unicode asset basename.
-          # Normalize the uploaded EXE name through the GitHub API.
-          $version = node -p "require('./package.json').version"
-          $expectedName = "바이브코딩 기초반 $version.exe"
-          $release = gh api "repos/${{ github.repository }}/releases/tags/$tag" |
-            ConvertFrom-Json
-          $exeAsset = $release.assets |
-            Where-Object { $_.name -like "*.exe" } |
-            Sort-Object created_at -Descending |
-            Select-Object -First 1
-
-          if ($exeAsset -and $exeAsset.name -ne $expectedName) {
-            gh api --method PATCH `
-              "repos/${{ github.repository }}/releases/assets/$($exeAsset.id)" `
-              -f "name=$expectedName"
           }
