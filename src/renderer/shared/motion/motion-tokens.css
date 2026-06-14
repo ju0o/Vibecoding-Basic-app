@@ -1,0 +1,28 @@
+:root {
+  --edu-ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --edu-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --edu-dur-fast: 160ms;
+  --edu-dur-normal: 360ms;
+  --edu-dur-slow: 760ms;
+}
+
+.edu-enter-up {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  animation: eduEnterUp var(--edu-dur-normal) var(--edu-ease-out) forwards;
+}
+
+.edu-glow-success {
+  box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.4), 0 0 34px rgba(52, 211, 153, 0.24);
+}
+
+.edu-glow-danger {
+  box-shadow: 0 0 0 1px rgba(251, 113, 133, 0.45), 0 0 34px rgba(251, 113, 133, 0.25);
+}
+
+@keyframes eduEnterUp {
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}

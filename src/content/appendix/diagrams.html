@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시각적 다이어그램 — 바이브코딩</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --violet: #A78BFA; --violet2: #C4B5FD; --cyan: #67E8F9;
+      --amber: #FBBF24; --emerald: #34D399; --rose: #FB7185;
+      --text: #F1F0FF; --text2: #A09EC0; --text3: #6B6A8A;
+    }
+    body {
+      font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+      background: #07081A; color: var(--text);
+      overflow-y: auto; overflow-x: hidden;
+    }
+    .bg-grad {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 15% 0%, rgba(167,139,250,0.14), transparent),
+        radial-gradient(ellipse 50% 45% at 90% 100%, rgba(103,232,249,0.09), transparent);
+    }
+    .top-nav {
+      position: fixed; top: 0; left: 0; right: 0; height: 48px;
+      background: rgba(7,8,26,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; gap: 6px;
+      padding: 0 20px; z-index: 100; overflow-x: auto;
+    }
+    .top-nav::-webkit-scrollbar { display: none; }
+    .nav-home { font-size: 12px; font-weight: 700; color: var(--violet); text-decoration: none; white-space: nowrap; margin-right: 12px; }
+    .nav-link { font-size: 12px; color: var(--text2); text-decoration: none; padding: 4px 10px; border-radius: 999px; white-space: nowrap; transition: background 0.15s; }
+    .nav-link:hover { background: rgba(255,255,255,0.08); color: var(--text); }
+    .container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 72px 40px 80px; }
+    .hero { margin-bottom: 56px; }
+    .hero-eyebrow { font-size: 12px; font-weight: 700; color: var(--violet2); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; }
+    .hero-title { font-size: clamp(32px, 5vw, 72px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 14px; }
+    .hero-desc { font-size: clamp(14px, 1.4vw, 20px); color: var(--text2); line-height: 1.65; max-width: 680px; }
+    .grad-text { background: linear-gradient(135deg, #A78BFA, #67E8F9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .section { margin-bottom: 72px; scroll-margin-top: 60px; }
+    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .section-icon { font-size: 24px; }
+    .section-title { font-size: clamp(20px, 2.5vw, 32px); font-weight: 800; letter-spacing: -0.02em; }
+    .section-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: rgba(167,139,250,0.15); color: var(--violet2); border: 1px solid rgba(167,139,250,0.25); }
+    .info-box { border-left: 3px solid var(--violet); background: rgba(167,139,250,0.06); border-radius: 0 12px 12px 0; padding: 14px 18px; margin: 16px 0; font-size: clamp(13px, 1.1vw, 16px); color: var(--text2); line-height: 1.6; }
+    .info-box strong { color: var(--violet2); }
+    .tip-box { border-left: 3px solid var(--cyan); background: rgba(103,232,249,0.05); border-radius: 0 12px 12px 0; padding: 14px 18px; margin: 16px 0; font-size: clamp(13px, 1.1vw, 16px); color: var(--text2); line-height: 1.6; }
+    .tip-box strong { color: var(--cyan); }
+    /* Diagram shared */
+    .diagram-wrap { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 36px 28px; margin: 20px 0; overflow-x: auto; }
+    .diagram-caption { text-align: center; font-size: 12px; color: var(--text3); margin-top: 16px; letter-spacing: 0.05em; }
+    /* Architecture diagram */
+    .arch-flow { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: nowrap; min-width: 600px; }
+    .arch-box { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .arch-node { border-radius: 16px; padding: 18px 22px; text-align: center; min-width: 140px; }
+    .arch-node-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+    .arch-node-title { font-size: 16px; font-weight: 800; }
+    .arch-node-sub { font-size: 12px; margin-top: 4px; opacity: 0.75; }
+    .arch-node.violet { background: rgba(167,139,250,0.12); border: 1.5px solid rgba(167,139,250,0.35); }
+    .arch-node.violet .arch-node-label { color: var(--violet2); }
+    .arch-node.cyan { background: rgba(103,232,249,0.09); border: 1.5px solid rgba(103,232,249,0.3); }
+    .arch-node.cyan .arch-node-label { color: var(--cyan); }
+    .arch-node.emerald { background: rgba(52,211,153,0.09); border: 1.5px solid rgba(52,211,153,0.3); }
+    .arch-node.emerald .arch-node-label { color: var(--emerald); }
+    .arch-arrow { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 0 8px; }
+    .arch-arrow-line { width: 48px; height: 2px; background: linear-gradient(90deg, rgba(167,139,250,0.4), rgba(103,232,249,0.4)); }
+    .arch-arrow-head { font-size: 18px; color: var(--cyan); line-height: 1; }
+    .arch-arrow-label { font-size: 10px; color: var(--text3); white-space: nowrap; }
+    /* Flow step diagram */
+    .flow-steps { display: flex; flex-direction: column; gap: 0; }
+    .flow-step { display: flex; align-items: flex-start; gap: 16px; }
+    .flow-step-left { display: flex; flex-direction: column; align-items: center; }
+    .flow-dot { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; }
+    .flow-line { width: 2px; flex: 1; min-height: 20px; background: rgba(255,255,255,0.08); margin: 4px 0; }
+    .flow-content { flex: 1; padding: 6px 0 24px; }
+    .flow-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .flow-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+    .flow-code { font-family: 'JetBrains Mono',Consolas,monospace; font-size: 12px; color: var(--amber); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 2px 8px; display: inline-block; margin-top: 4px; }
+    /* Code block */
+    .code-block { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 18px 22px; font-family: 'JetBrains Mono','Fira Code',Consolas,monospace; font-size: clamp(12px, 1vw, 14px); line-height: 1.75; overflow-x: auto; position: relative; margin-top: 20px; }
+    .code-block pre { margin: 0; white-space: pre; }
+    .code-comment { color: #6B6A8A; }
+    .code-key { color: #A78BFA; }
+    .code-val { color: #34D399; }
+    .code-cmd { color: #67E8F9; }
+    .code-label { font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+    .copy-btn { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: var(--text2); font-size: 11px; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+    .copy-btn:hover { background: rgba(255,255,255,0.14); color: var(--text); }
+    /* DB table diagram */
+    .db-tables { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 20px 0; }
+    .db-table { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; overflow: hidden; }
+    .db-table-header { padding: 12px 16px; font-weight: 800; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+    .db-table-header.violet { background: rgba(167,139,250,0.12); color: var(--violet2); border-bottom: 1px solid rgba(167,139,250,0.2); }
+    .db-table-header.cyan { background: rgba(103,232,249,0.08); color: var(--cyan); border-bottom: 1px solid rgba(103,232,249,0.15); }
+    .db-table-pk { font-size: 10px; font-weight: 700; background: rgba(167,139,250,0.2); color: var(--violet2); padding: 1px 6px; border-radius: 4px; }
+    .db-table-fk { font-size: 10px; font-weight: 700; background: rgba(103,232,249,0.15); color: var(--cyan); padding: 1px 6px; border-radius: 4px; }
+    .db-row { display: grid; grid-template-columns: 1fr 80px 1fr; gap: 8px; padding: 8px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 13px; align-items: center; }
+    .db-row:last-child { border-bottom: none; }
+    .db-col-name { color: var(--text); font-weight: 600; font-family: 'JetBrains Mono',monospace; }
+    .db-col-type { color: var(--amber); font-size: 11px; font-family: 'JetBrains Mono',monospace; }
+    .db-col-desc { color: var(--text3); font-size: 12px; }
+    .db-relation { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 16px 0; font-size: 13px; color: var(--text2); }
+    .db-rel-box { background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.25); border-radius: 8px; padding: 4px 12px; font-weight: 700; color: var(--violet2); font-size: 13px; }
+    .db-rel-arrow { color: var(--text3); font-size: 20px; letter-spacing: -2px; }
+    .db-rel-label { color: var(--text3); font-size: 12px; }
+    @media (max-width: 700px) { .db-tables { grid-template-columns: 1fr; } .arch-flow { min-width: 400px; } }
+    /* Deployment diagram */
+    .deploy-diagram { display: flex; flex-direction: column; gap: 0; align-items: flex-start; }
+    .deploy-row { display: flex; align-items: center; gap: 12px; }
+    .deploy-box { border-radius: 12px; padding: 10px 18px; font-size: 14px; font-weight: 700; white-space: nowrap; }
+    .deploy-box.gh { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); }
+    .deploy-box.ci { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.25); color: var(--amber); }
+    .deploy-box.vercel { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); }
+    .deploy-box.db { background: rgba(52,211,153,0.09); border: 1px solid rgba(52,211,153,0.25); color: var(--emerald); }
+    .deploy-box.cdn { background: rgba(103,232,249,0.09); border: 1px solid rgba(103,232,249,0.25); color: var(--cyan); }
+    .deploy-box.domain { background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.25); color: var(--violet2); }
+    .deploy-arrow-h { color: var(--text3); font-size: 18px; }
+    .deploy-branch { margin: 8px 0 8px 80px; display: flex; flex-direction: column; gap: 8px; border-left: 2px solid rgba(255,255,255,0.08); padding-left: 20px; }
+    .deploy-branch-row { display: flex; align-items: center; gap: 10px; }
+    .deploy-branch-arrow { color: var(--text3); font-size: 14px; }
+    /* Cost cards */
+    .cost-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
+    @media (max-width: 800px) { .cost-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .cost-grid { grid-template-columns: 1fr; } .container { padding: 64px 20px 60px; } }
+    .cost-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 16px; }
+    .cost-service { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .cost-amount { font-size: 18px; font-weight: 800; color: var(--emerald); }
+    .cost-note { font-size: 11px; color: var(--text3); margin-top: 4px; line-height: 1.5; }
+    .cost-highlight { background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.25); }
+    .cost-highlight .cost-amount { color: var(--violet2); }
+  </style>
+</head>
+<body>
+  <div class="bg-grad"></div>
+  <nav class="top-nav">
+    <a class="nav-home" href="#">⚡ VIBE CODING</a>
+    <a class="nav-link" href="#web-architecture">전체 구조</a>
+    <a class="nav-link" href="#api-flow">API 흐름</a>
+    <a class="nav-link" href="#auth-flow">인증 흐름</a>
+    <a class="nav-link" href="#db-structure">DB 구조</a>
+    <a class="nav-link" href="#deployment">배포 구조</a>
+  </nav>
+
+  <div class="container">
+    <div class="hero">
+      <div class="hero-eyebrow">부록 G — 레퍼런스 가이드</div>
+      <h1 class="hero-title"><span class="grad-text">시각적</span> 다이어그램</h1>
+      <p class="hero-desc">API, DB, 인증 흐름을 그림으로 이해하는 시각 자료. 웹 서비스가 어떻게 작동하는지 한눈에 파악하세요.</p>
+    </div>
+
+    <!-- WEB ARCHITECTURE -->
+    <div class="section" id="web-architecture">
+      <div class="section-header">
+        <span class="section-icon">🏗</span>
+        <h2 class="section-title">웹 서비스 전체 구조</h2>
+        <span class="section-badge">큰 그림</span>
+      </div>
+      <div class="diagram-wrap">
+        <div class="arch-flow">
+          <div class="arch-box">
+            <div class="arch-node violet">
+              <div class="arch-node-label">사용자 화면</div>
+              <div class="arch-node-title">🌐 Browser</div>
+              <div class="arch-node-sub">프론트엔드</div>
+            </div>
+          </div>
+          <div class="arch-arrow" style="flex-direction:column;align-items:center;">
+            <div style="display:flex;align-items:center;gap:4px;">
+              <div style="width:48px;height:2px;background:linear-gradient(90deg,rgba(167,139,250,0.5),rgba(103,232,249,0.5))"></div>
+              <span style="color:var(--cyan);font-size:16px">→</span>
+            </div>
+            <div style="font-size:10px;color:var(--text3);margin-top:4px">HTTP 요청</div>
+          </div>
+          <div class="arch-box">
+            <div class="arch-node cyan">
+              <div class="arch-node-label">비즈니스 로직</div>
+              <div class="arch-node-title">⚙ Server / API</div>
+              <div class="arch-node-sub">백엔드</div>
+            </div>
+          </div>
+          <div class="arch-arrow" style="flex-direction:column;align-items:center;">
+            <div style="display:flex;align-items:center;gap:4px;">
+              <div style="width:48px;height:2px;background:linear-gradient(90deg,rgba(103,232,249,0.5),rgba(52,211,153,0.5))"></div>
+              <span style="color:var(--emerald);font-size:16px">→</span>
+            </div>
+            <div style="font-size:10px;color:var(--text3);margin-top:4px">Query</div>
+          </div>
+          <div class="arch-box">
+            <div class="arch-node emerald">
+              <div class="arch-node-label">데이터 저장소</div>
+              <div class="arch-node-title">🗄 Database</div>
+              <div class="arch-node-sub">Firebase / Supabase</div>
+            </div>
+          </div>
+        </div>
+        <div class="diagram-caption">사용자 요청 → 서버 처리 → DB 조회 → 응답 반환의 기본 흐름</div>
+      </div>
+      <div class="tip-box">
+        <strong>바이브코딩 시작점:</strong> Firebase나 Supabase를 쓰면 서버(API) 없이 프론트엔드에서 DB에 직접 연결할 수 있습니다. 처음엔 이 방식으로 시작하세요.
+      </div>
+    </div>
+
+    <!-- API FLOW -->
+    <div class="section" id="api-flow">
+      <div class="section-header">
+        <span class="section-icon">🔄</span>
+        <h2 class="section-title">API 통신 흐름</h2>
+        <span class="section-badge">요청 → 응답</span>
+      </div>
+      <div class="diagram-wrap">
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="flow-step-left">
+              <div class="flow-dot" style="background:rgba(167,139,250,0.15);border:1.5px solid rgba(167,139,250,0.4);color:var(--violet2)">1</div>
+              <div class="flow-line"></div>
+            </div>
+            <div class="flow-content">
+              <div class="flow-title">사용자가 버튼 클릭</div>
+              <div class="flow-desc">프론트엔드 — "게시물 불러오기" 버튼 클릭 또는 페이지 로드</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-left">
+              <div class="flow-dot" style="background:rgba(167,139,250,0.15);border:1.5px solid rgba(167,139,250,0.4);color:var(--violet2)">2</div>
+              <div class="flow-line"></div>
+            </div>
+            <div class="flow-content">
+              <div class="flow-title">HTTP 요청 발생</div>
+              <div class="flow-desc">JavaScript 코드가 API 서버로 요청을 보냄</div>
+              <div class="flow-code">fetch('/api/posts', { method: 'GET' })</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-left">
+              <div class="flow-dot" style="background:rgba(103,232,249,0.12);border:1.5px solid rgba(103,232,249,0.35);color:var(--cyan)">3</div>
+              <div class="flow-line"></div>
+            </div>
+            <div class="flow-content">
+              <div class="flow-title">서버가 요청 수신 & 검증</div>
+              <div class="flow-desc">백엔드 — 로그인 여부 확인, 권한 검사, 요청 유효성 검증</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-left">
+              <div class="flow-dot" style="background:rgba(52,211,153,0.1);border:1.5px solid rgba(52,211,153,0.35);color:var(--emerald)">4</div>
+              <div class="flow-line"></div>
+            </div>
+            <div class="flow-content">
+              <div class="flow-title">데이터베이스 조회</div>
+              <div class="flow-desc">DB에서 필요한 데이터를 가져옴 (SQL 또는 NoSQL)</div>
+              <div class="flow-code">SELECT * FROM posts WHERE user_id = $1</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-left">
+              <div class="flow-dot" style="background:rgba(251,191,36,0.1);border:1.5px solid rgba(251,191,36,0.35);color:var(--amber)">5</div>
+              <div class="flow-line"></div>
+            </div>
+            <div class="flow-content">
+              <div class="flow-title">JSON으로 응답 반환</div>
+              <div class="flow-desc">서버가 데이터를 JSON 형태로 포장해서 프론트엔드에 전달</div>
+              <div class="flow-code">{"posts": [{"id":1, "title":"..."}, ...]}</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-left">
+              <div class="flow-dot" style="background:rgba(167,139,250,0.15);border:1.5px solid rgba(167,139,250,0.4);color:var(--violet2)">6</div>
+            </div>
+            <div class="flow-content">
+              <div class="flow-title">화면에 표시</div>
+              <div class="flow-desc">프론트엔드 — 받은 데이터로 UI를 업데이트해서 사용자에게 보여줌</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="code-label">코드 예시 (Next.js)</div>
+      <div class="code-block">
+        <button class="copy-btn">복사</button>
+        <pre><span class="code-comment">// 프론트엔드 코드 (React 컴포넌트)</span>
+<span class="code-key">const</span> response = <span class="code-key">await</span> fetch(<span class="code-val">'/api/posts'</span>);
+<span class="code-key">const</span> data = <span class="code-key">await</span> response.json();
+console.log(data.posts); <span class="code-comment">// [{ id:1, title:'...' }, ...]</span>
+
+<span class="code-comment">// 서버 코드 (Next.js API Route — app/api/posts/route.js)</span>
+<span class="code-key">export async function</span> <span class="code-cmd">GET</span>() {
+  <span class="code-key">const</span> posts = <span class="code-key">await</span> db.collection(<span class="code-val">'posts'</span>).get();
+  <span class="code-key">return</span> Response.json({ posts });
+}</pre>
+      </div>
+    </div>
+
+    <!-- AUTH FLOW -->
+    <div class="section" id="auth-flow">
+      <div class="section-header">
+        <span class="section-icon">🔐</span>
+        <h2 class="section-title">인증 흐름</h2>
+        <span class="section-badge">로그인 원리</span>
+      </div>
+
+      <div style="margin-bottom:32px;">
+        <div style="font-size:15px;font-weight:700;margin-bottom:16px;color:var(--violet2)">① 이메일 / 비밀번호 로그인</div>
+        <div class="diagram-wrap" style="padding:24px;">
+          <div style="display:flex;flex-direction:column;gap:0;min-width:500px;overflow-x:auto;">
+            <div style="display:flex;align-items:center;gap:0;flex-wrap:nowrap;">
+              <div style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.25);border-radius:10px;padding:10px 16px;font-size:13px;font-weight:700;color:var(--violet2);white-space:nowrap">사용자 입력</div>
+              <div style="padding:0 8px;color:var(--text3);font-size:18px">→</div>
+              <div style="background:rgba(103,232,249,0.08);border:1px solid rgba(103,232,249,0.2);border-radius:10px;padding:10px 16px;font-size:13px;font-weight:700;color:var(--cyan);white-space:nowrap">서버로 전송</div>
+              <div style="padding:0 8px;color:var(--text3);font-size:18px">→</div>
+              <div style="background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:10px;padding:10px 16px;font-size:13px;font-weight:700;color:var(--emerald);white-space:nowrap">DB 검증</div>
+              <div style="padding:0 8px;color:var(--text3);font-size:18px">→</div>
+              <div style="background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);border-radius:10px;padding:10px 16px;font-size:13px;font-weight:700;color:var(--amber);white-space:nowrap">JWT 발급</div>
+              <div style="padding:0 8px;color:var(--text3);font-size:18px">→</div>
+              <div style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.25);border-radius:10px;padding:10px 16px;font-size:13px;font-weight:700;color:var(--violet2);white-space:nowrap">브라우저 저장</div>
+            </div>
+            <div style="margin-top:10px;padding-left:4px;font-size:12px;color:var(--text3)">이후 요청마다 JWT 토큰을 헤더에 포함 → 서버가 사용자 식별</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:16px;color:var(--cyan)">② 소셜 로그인 (Google OAuth)</div>
+        <div class="diagram-wrap" style="padding:24px;">
+          <div class="flow-steps">
+            <div class="flow-step">
+              <div class="flow-step-left">
+                <div class="flow-dot" style="background:rgba(103,232,249,0.12);border:1.5px solid rgba(103,232,249,0.35);color:var(--cyan);font-size:12px">1</div>
+                <div class="flow-line" style="min-height:16px;"></div>
+              </div>
+              <div class="flow-content" style="padding-bottom:16px;">
+                <div class="flow-title" style="font-size:13px;">"Google로 로그인" 버튼 클릭</div>
+                <div class="flow-desc" style="font-size:12px;">프론트엔드에서 OAuth 플로우 시작</div>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-step-left">
+                <div class="flow-dot" style="background:rgba(103,232,249,0.12);border:1.5px solid rgba(103,232,249,0.35);color:var(--cyan);font-size:12px">2</div>
+                <div class="flow-line" style="min-height:16px;"></div>
+              </div>
+              <div class="flow-content" style="padding-bottom:16px;">
+                <div class="flow-title" style="font-size:13px;">Google 인증 서버로 리다이렉트</div>
+                <div class="flow-desc" style="font-size:12px;">브라우저가 accounts.google.com으로 이동</div>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-step-left">
+                <div class="flow-dot" style="background:rgba(103,232,249,0.12);border:1.5px solid rgba(103,232,249,0.35);color:var(--cyan);font-size:12px">3</div>
+                <div class="flow-line" style="min-height:16px;"></div>
+              </div>
+              <div class="flow-content" style="padding-bottom:16px;">
+                <div class="flow-title" style="font-size:13px;">구글 계정으로 로그인</div>
+                <div class="flow-desc" style="font-size:12px;">사용자가 Google 화면에서 계정 선택</div>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-step-left">
+                <div class="flow-dot" style="background:rgba(103,232,249,0.12);border:1.5px solid rgba(103,232,249,0.35);color:var(--cyan);font-size:12px">4</div>
+                <div class="flow-line" style="min-height:16px;"></div>
+              </div>
+              <div class="flow-content" style="padding-bottom:16px;">
+                <div class="flow-title" style="font-size:13px;">내 서버로 콜백</div>
+                <div class="flow-desc" style="font-size:12px;">Google이 인증 코드와 함께 내 서비스로 돌아옴</div>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-step-left">
+                <div class="flow-dot" style="background:rgba(103,232,249,0.12);border:1.5px solid rgba(103,232,249,0.35);color:var(--cyan);font-size:12px">5</div>
+              </div>
+              <div class="flow-content" style="padding-bottom:0;">
+                <div class="flow-title" style="font-size:13px;">사용자 정보 저장 & 세션/토큰 발급</div>
+                <div class="flow-desc" style="font-size:12px;">이름·이메일·프로필 사진 저장 → JWT 또는 세션 발급 → 로그인 완료</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DB STRUCTURE -->
+    <div class="section" id="db-structure">
+      <div class="section-header">
+        <span class="section-icon">🗄</span>
+        <h2 class="section-title">DB 구조 예시</h2>
+        <span class="section-badge">테이블 관계</span>
+      </div>
+      <div class="info-box">
+        <strong>관계형 DB의 기본 패턴입니다.</strong> users 테이블과 posts 테이블처럼, 외래키(Foreign Key)로 테이블 간 관계를 연결합니다.
+      </div>
+      <div class="db-tables">
+        <div class="db-table">
+          <div class="db-table-header violet">
+            <span>👤 users</span>
+            <span style="font-size:12px;opacity:0.7;font-weight:400">회원 정보</span>
+          </div>
+          <div class="db-row">
+            <div class="db-col-name">id</div>
+            <div class="db-col-type">UUID</div>
+            <div class="db-col-desc">고유 식별자 <span class="db-table-pk">PK</span></div>
+          </div>
+          <div class="db-row">
+            <div class="db-col-name">email</div>
+            <div class="db-col-type">TEXT</div>
+            <div class="db-col-desc">이메일 (Unique)</div>
+          </div>
+          <div class="db-row">
+            <div class="db-col-name">name</div>
+            <div class="db-col-type">TEXT</div>
+            <div class="db-col-desc">이름</div>
+          </div>
+          <div class="db-row">
+            <div class="db-col-name">role</div>
+            <div class="db-col-type">TEXT</div>
+            <div class="db-col-desc">'user' 또는 'admin'</div>
+          </div>
+          <div class="db-row">
+            <div class="db-col-name">created_at</div>
+            <div class="db-col-type">TIMESTAMP</div>
+            <div class="db-col-desc">가입일시</div>
+          </div>
+        </div>
+        <div class="db-table">
+          <div class="db-table-header cyan">
+            <span>📝 posts</span>
+            <span style="font-size:12px;opacity:0.7;font-weight:400">게시물 정보</span>
+          </div>
+          <div class="db-row">
+            <div class="db-col-name">id</div>
+            <div class="db-col-type">UUID</div>
+            <div class="db-col-desc">고유 식별자 <span class="db-table-pk">PK</span></div>
+          </div>
+          <div class="db-row">
+            <div class="db-col-name">user_id</div>
+            <div class="db-col-type">UUID</div>
+            <div class="db-col-desc">작성자 <span class="db-table-fk">FK→users</span></div>
+          </div>
+          <div class="db-row">
+            <div class="db-col-name">title</div>
+            <div class="db-col-type">TEXT</div>
+            <div class="db-col-desc">제목</div>
+          </div>
+          <div class="db-row">
+            <div class="db-col-name">content</div>
+            <div class="db-col-type">TEXT</div>
+            <div class="db-col-desc">내용</div>
+          </div>
+          <div class="db-row">
+            <div class="db-col-name">is_public</div>
+            <div class="db-col-type">BOOLEAN</div>
+            <div class="db-col-desc">공개 여부</div>
+          </div>
+          <div class="db-row">
+            <div class="db-col-name">created_at</div>
+            <div class="db-col-type">TIMESTAMP</div>
+            <div class="db-col-desc">작성일시</div>
+          </div>
+        </div>
+      </div>
+      <div class="db-relation">
+        <div class="db-rel-box">users</div>
+        <div class="db-rel-arrow">───</div>
+        <div class="db-rel-label">1 : N</div>
+        <div class="db-rel-arrow">───</div>
+        <div class="db-rel-box" style="background:rgba(103,232,249,0.1);border-color:rgba(103,232,249,0.3);color:var(--cyan)">posts</div>
+      </div>
+      <div style="text-align:center;font-size:12px;color:var(--text3);margin-top:6px">한 명의 사용자(1)가 여러 게시물(N)을 작성할 수 있습니다</div>
+    </div>
+
+    <!-- DEPLOYMENT -->
+    <div class="section" id="deployment">
+      <div class="section-header">
+        <span class="section-icon">🚀</span>
+        <h2 class="section-title">배포 구조</h2>
+        <span class="section-badge">코드 → 세상에 공개</span>
+      </div>
+      <div class="diagram-wrap">
+        <div style="overflow-x:auto;min-width:500px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:nowrap;">
+            <div class="deploy-box gh">📁 GitHub Repository</div>
+            <div style="color:var(--text3);font-size:15px">→ push →</div>
+            <div class="deploy-box ci">⚙ GitHub Actions<br><span style="font-size:11px;font-weight:400">(CI/CD 자동화)</span></div>
+            <div style="color:var(--text3);font-size:15px">→</div>
+            <div class="deploy-box vercel">▲ Vercel Build<br><span style="font-size:11px;font-weight:400">(자동 빌드 & 배포)</span></div>
+          </div>
+          <div style="margin-left:240px;border-left:2px solid rgba(255,255,255,0.1);padding-left:20px;display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="color:var(--text3);font-size:16px">↳</span>
+              <div class="deploy-box cdn">🌐 CDN 배포<br><span style="font-size:11px;font-weight:400">전 세계 엣지 서버</span></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="color:var(--text3);font-size:16px">↳</span>
+              <div class="deploy-box db">🗄 Database<br><span style="font-size:11px;font-weight:400">Supabase / Firebase</span></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="color:var(--text3);font-size:16px">↳</span>
+              <div class="deploy-box domain">🔗 myapp.com<br><span style="font-size:11px;font-weight:400">도메인 연결</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size:14px;font-weight:700;margin:24px 0 12px;color:var(--text2)">MVP 출시 비용 예측</div>
+      <div class="cost-grid">
+        <div class="cost-card">
+          <div class="cost-service">Vercel</div>
+          <div class="cost-amount">무료</div>
+          <div class="cost-note">개인 프로젝트 무료<br>팀 Pro $20/월</div>
+        </div>
+        <div class="cost-card">
+          <div class="cost-service">Supabase</div>
+          <div class="cost-amount">무료</div>
+          <div class="cost-note">2개 프로젝트 무료<br>Pro $25/월</div>
+        </div>
+        <div class="cost-card">
+          <div class="cost-service">도메인</div>
+          <div class="cost-amount">연 1~3만원</div>
+          <div class="cost-note">가비아 / Namecheap<br>첫 해 할인 많음</div>
+        </div>
+        <div class="cost-card cost-highlight">
+          <div class="cost-service">MVP 합계</div>
+          <div class="cost-amount">월 1,000~2,000원</div>
+          <div class="cost-note">도메인 비용만!<br>서버·DB 모두 무료</div>
+        </div>
+      </div>
+      <div class="tip-box" style="margin-top:20px">
+        <strong>핵심 메시지:</strong> 처음 서비스를 출시하는 데 큰 비용이 들지 않습니다. 도메인 비용 외에는 모두 무료 플랜으로 시작할 수 있어요. 사용자가 생기고 트래픽이 올라올 때 유료 플랜으로 전환하면 됩니다.
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const block = btn.closest('.code-block');
+        const pre = block.querySelector('pre');
+        const text = pre ? pre.innerText : block.innerText.replace('복사', '').trim();
+        navigator.clipboard.writeText(text).then(() => {
+          btn.textContent = '✓ 복사됨';
+          setTimeout(() => btn.textContent = '복사', 1500);
+        });
+      });
+    });
+  </script>
+  <script src="./appendix-print.js"></script>
+
+</body>
+</html>

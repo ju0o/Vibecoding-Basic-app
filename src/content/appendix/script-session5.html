@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5강 강사용 대본 — 배포 및 보안 그리고 데이터</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+  <link rel="stylesheet" href="./instructor-note.css">
+</head>
+<body>
+<main>
+  <section class="hero">
+    <div class="eyebrow">Teacher Script · Session 05</div>
+    <h1>배포 및 보안 그리고 데이터</h1>
+    <p class="desc">5강은 내 노트북에서만 보이는 프로젝트를 링크로 접속 가능한 서비스로 올리기 전에, 배포 흐름과 비밀값, 데이터 저장을 한 번에 이해시키는 시간입니다.</p>
+  </section>
+
+  <section class="guide">
+    <div><b>수업 목표</b><span>배포, 환경변수, 데이터 저장, 오류 로그를 하나의 서비스 흐름으로 이해한다.</span></div>
+    <div><b>강의 톤</b><span>인터넷으로 나가는 길, 비밀 금고, 데이터 표 비유를 사용한다.</span></div>
+    <div><b>주의</b><span>실제 API 키, DB 비밀번호, 개인 계정 화면을 빔에 노출하지 않는다.</span></div>
+  </section>
+
+  <section>
+    <article class="slide-card"><div class="slide-head"><div class="num">1</div><h2>오프닝</h2></div><div class="block"><div class="label">SAY</div><div class="text">“오늘은 만든 앱을 내 노트북 밖으로 꺼내는 날입니다. 공개와 보호를 동시에 배웁니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">배포와 보안을 하나의 흐름으로 묶어 말한다.</div></div></article>
+    <article class="slide-card"><div class="slide-head"><div class="num">2</div><h2>배포 흐름</h2></div><div class="block"><div class="label">SAY</div><div class="text">“내 컴퓨터에서 GitHub로, GitHub에서 배포 서비스로, 배포 서비스에서 사용자에게 갑니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">네 노드를 손으로 따라가며 빔 애니메이션을 설명한다.</div></div></article>
+    <article class="slide-card"><div class="slide-head"><div class="num">3</div><h2>라이브 주소</h2></div><div class="block"><div class="label">SAY</div><div class="text">“URL이 생기면 내 노트북이 꺼져 있어도 다른 사람이 접속할 수 있습니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">localhost와 live URL 차이를 짧게 비교한다.</div></div></article>
+    <article class="slide-card"><div class="slide-head"><div class="num">4</div><h2>보안 금고</h2></div><div class="block"><div class="label">SAY</div><div class="text">“API 키는 서비스 사용 권한입니다. 코드에 직접 넣으면 집 열쇠를 길에 놓는 것과 같습니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">환경변수 이름만 보여주고 실제 값은 가린다.</div></div></article>
+    <article class="slide-card"><div class="slide-head"><div class="num">5</div><h2>데이터 형태</h2></div><div class="block"><div class="label">SAY</div><div class="text">“데이터는 표처럼 쌓이고, 기능은 이 표를 추가하고 읽고 수정하고 지웁니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">CRUD를 Create, Read, Update, Delete 한 단어씩만 설명한다.</div></div></article>
+    <article class="slide-card"><div class="slide-head"><div class="num">6</div><h2>API 성공과 실패</h2></div><div class="block"><div class="label">SAY</div><div class="text">“같은 요청도 성공하면 200, 키가 없거나 권한이 없으면 오류가 납니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">저장 성공과 키 누락 오류 버튼을 번갈아 누른다.</div></div></article>
+    <article class="slide-card"><div class="slide-head"><div class="num">7</div><h2>에러 복구</h2></div><div class="block"><div class="label">SAY</div><div class="text">“에러는 멈춤, 복사, 질문, 수정, 재실행 순서로 해결합니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">에러 해결 가이드를 수강생 책상 위에 올려두게 한다.</div></div></article>
+    <article class="slide-card"><div class="slide-head"><div class="num">8</div><h2>배포 전 점검</h2></div><div class="block"><div class="label">SAY</div><div class="text">“배포 전에 실행, 비밀값, 주소 세 가지를 확인하면 큰 사고를 줄일 수 있습니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">배포 전 체크리스트를 한 줄씩 체크하게 한다.</div></div></article>
+    <article class="slide-card"><div class="slide-head"><div class="num">9</div><h2>실습</h2></div><div class="block"><div class="label">SAY</div><div class="text">“오늘 실습은 배포 버튼을 누르는 것보다, 공개해도 되는 상태인지 확인하는 것이 먼저입니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">개인 계정 화면 노출에 주의한다.</div></div></article>
+    <article class="slide-card"><div class="slide-head"><div class="num">10</div><h2>정리</h2></div><div class="block"><div class="label">SAY</div><div class="text">“배포는 공개, 보안은 보호, 데이터는 기억입니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">6강 쇼케이스에서 공개 URL을 보여줄 수 있으면 가장 좋다고 안내한다.</div></div></article>
+  </section>
+  <section class="study-grid">
+    <article class="study-card"><b>슬라이드 2~3 · 비유/질문</b><span>배포는 건물을 공공도로와 연결하고 주소를 다는 일. “localhost와 공개 URL의 가장 큰 차이는 무엇인가요?”</span></article>
+    <article class="study-card"><b>슬라이드 4 · 비유/질문</b><span>API 키는 출입 열쇠, 환경변수는 금고. “열쇠 사진을 공개한 뒤 지우기만 하면 안전할까요?”</span></article>
+    <article class="study-card"><b>슬라이드 5~6 · 비유/질문</b><span>CRUD는 창고의 입고·조회·수정·폐기. “로그인은 Create와 Read 중 어느 쪽에 가까울까요?”</span></article>
+    <article class="study-card"><b>슬라이드 7~10 · 비유/질문</b><span>로그는 사고 기록, 체크리스트는 개장 전 점검표. “내 컴퓨터에서는 되는데 URL에서 실패하면 무엇부터 볼까요?”</span></article>
+  </section>
+</main>
+<script src="./appendix-print.js"></script>
+</body>
+</html>

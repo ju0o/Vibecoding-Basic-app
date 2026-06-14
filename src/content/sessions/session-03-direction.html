@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3강 - 개발 용어 이해</title>
+  <link rel="stylesheet" href="./session-03-direction.css?v=20260612" />
+</head>
+<body>
+  <main class="deck" id="deck">
+    <section class="slide cover active" data-title="개발 용어 이해">
+      <div class="cover-city" id="cover-city" data-step="0">
+        <div class="cover-service-console" aria-label="서비스 흐름">
+          <div class="cover-stage-track">
+            <button class="cover-stage screen" type="button" data-cover-step="1"><i><span></span></i><b>화면</b></button>
+            <button class="cover-stage process" type="button" data-cover-step="2"><i><span></span><span></span><span></span></i><b>처리</b></button>
+            <button class="cover-stage data" type="button" data-cover-step="3"><i><span></span><span></span></i><b>저장</b></button>
+            <button class="cover-stage response" type="button" data-cover-step="4"><i><span></span></i><b>응답</b></button>
+            <span class="cover-flow-path path-a"></span>
+            <span class="cover-flow-path path-b"></span>
+            <span class="cover-flow-path path-c"></span>
+            <span class="cover-flow-packet"></span>
+          </div>
+        </div>
+      </div>
+      <div class="cover-copy">
+        <p class="eyebrow">SESSION 03</p>
+        <h1>개발의 원리를<br />눈으로 이해합니다</h1>
+        <p class="cover-lead">화면을 누른 순간, 보이지 않는 곳에서 이어지는 일들을 살펴봅니다.</p>
+        <button class="primary-action" type="button" data-action="ignite-cover">흐름 재생</button>
+      </div>
+    </section>
+
+    <section class="slide signature-slide" data-title="아이디어가 서비스가 되는 과정">
+      <header class="slide-head compact">
+        <div>
+          <p class="eyebrow">SIGNATURE SCENE</p>
+          <h2>아이디어가 진짜 서비스가 되는 과정</h2>
+        </div>
+        <button class="ghost-action" type="button" data-action="play-building">전체 과정 재생</button>
+      </header>
+
+      <div class="building-lab" id="building-lab" data-stage="0">
+        <nav class="build-timeline" aria-label="건축 단계">
+          <button class="build-step active" type="button" data-building-stage="0">
+            <span class="step-index">01</span><span><b>빈 땅</b><small>아이디어만 있음</small></span>
+          </button>
+          <button class="build-step" type="button" data-building-stage="1">
+            <span class="step-index">02</span><span><b>설계도</b><small>AI와 기획</small></span>
+          </button>
+          <button class="build-step" type="button" data-building-stage="2">
+            <span class="step-index">03</span><span><b>철골</b><small>프로젝트 구조</small></span>
+          </button>
+          <button class="build-step" type="button" data-building-stage="3">
+            <span class="step-index">04</span><span><b>외관</b><small>UI와 화면</small></span>
+          </button>
+          <button class="build-step" type="button" data-building-stage="4">
+            <span class="step-index">05</span><span><b>내부 진입</b><small>겉만 완성</small></span>
+          </button>
+          <button class="build-step" type="button" data-building-stage="5">
+            <span class="step-index">06</span><span><b>내부 공사</b><small>공간과 설비 완성</small></span>
+          </button>
+          <button class="build-step" type="button" data-building-stage="6">
+            <span class="step-index">07</span><span><b>준공</b><small>운영 가능한 완성형</small></span>
+          </button>
+        </nav>
+
+        <div class="building-viewport">
+          <div class="architecture-stage-stack" aria-live="polite">
+            <img data-building-image="0" src="../assets/session-03/build-stage-01-land.png" alt="건물이 세워지기 전의 빈 부지" />
+            <img data-building-image="1" src="../assets/session-03/build-stage-02-blueprint.png" alt="빈 부지 위에 입체적으로 펼쳐진 건축 설계 도면" />
+            <img data-building-image="2" src="../assets/session-03/build-stage-03-frame.png" alt="철골과 콘크리트 뼈대가 세워진 공사 현장" />
+            <img data-building-image="3" src="../assets/session-03/build-stage-04-shell.png" alt="외관은 갖춰졌지만 일부 내부가 비어 있는 건물" />
+            <img data-building-image="4" src="../assets/session-03/build-stage-05-empty-interior-v2.png" alt="외관 장면의 입구를 따라 들어간 비어 있는 건물 내부" />
+            <img data-building-image="5" src="../assets/session-03/build-stage-06-interior-v2.png" alt="같은 내부에 조명과 사무 공간이 완성된 모습" />
+            <img data-building-image="6" src="../assets/session-03/build-stage-07-complete-v2.png" alt="같은 건물이 야간 조명과 조경까지 완성된 전체 전경" />
+          </div>
+          <span class="architecture-focus" aria-hidden="true"></span>
+          <span class="architecture-scan" aria-hidden="true"></span>
+          <div class="camera-status">
+            <span class="live-dot"></span>
+            <span id="camera-status-text">SITE CAMERA · LAND</span>
+          </div>
+          <div class="build-scene-index" aria-hidden="true">
+            <span id="build-scene-number">01</span>
+            <b id="build-scene-kind">SITE</b>
+          </div>
+          <div class="build-callouts" id="build-callouts" aria-hidden="true">
+            <span data-callout="lighting">조명</span>
+            <span data-callout="water">급수 설비</span>
+            <span data-callout="meeting">회의실</span>
+            <span data-callout="office">업무공간</span>
+          </div>
+        </div>
+
+        <aside class="building-story">
+          <p class="story-label" id="building-label">IDEA</p>
+          <h3 id="building-title">생각은 있지만 아직 아무것도 없습니다</h3>
+          <p id="building-description">버튼도, 파일도, 데이터도 없습니다. AI에게 바로 “앱을 만들어줘”라고 하면 빈 땅에 기준 없이 건물을 올리는 것과 같습니다.</p>
+          <div class="analogy-line">
+            <span id="building-real">빈 땅</span>
+            <i>＝</i>
+            <strong id="building-code">아이디어</strong>
+          </div>
+          <div class="stage-meter"><span id="building-meter"></span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="slide" data-title="개발 용어 지도">
+      <header class="slide-head">
+        <div><p class="eyebrow">RESTAURANT CUTAWAY</p><h2>식당 안의 역할을 알면 개발 용어가 보입니다</h2></div>
+        <p class="head-note">공간을 하나씩 눌러보세요</p>
+      </header>
+      <div class="term-map">
+        <div class="cutaway-building" id="term-building">
+          <img src="../assets/session-03/restaurant-cutaway-v2.png" alt="카운터, 주방, 기록 보관실, 납품 통로가 보이는 현대 식당 단면" />
+          <span class="term-vignette"></span>
+          <button class="term-zone facade active" type="button" data-term="frontend"><span><i></i>주문 카운터</span></button>
+          <button class="term-zone control" type="button" data-term="backend"><span><i></i>주방</span></button>
+          <button class="term-zone warehouse" type="button" data-term="database"><span><i></i>금고 · 기록실</span></button>
+          <button class="term-zone corridor" type="button" data-term="api"><span><i></i>납품 통로</span></button>
+          <div class="term-action-layer" aria-hidden="true">
+            <div class="term-action frontend-action"><span class="order-slip">주문서</span><i></i><b>주문 접수</b></div>
+            <div class="term-action backend-action"><span class="kitchen-ticket">ORDER 24</span><i></i><b>확인 · 조리 · 전달</b></div>
+            <div class="term-action database-action"><span class="record-card">ORDER #24</span><i></i><b>기록 보관</b></div>
+            <div class="term-action api-action"><span class="delivery-box">PAYMENT</span><i></i><b>외부 서비스 연결</b></div>
+          </div>
+        </div>
+        <aside class="term-explain">
+          <p class="term-en" id="term-en">FRONTEND</p>
+          <h3 id="term-title">손님이 보고 주문하는 카운터</h3>
+          <p id="term-description">버튼, 메뉴, 카드, 입력창, 애니메이션처럼 화면에 보이는 모든 영역입니다.</p>
+          <div class="term-equation"><span id="term-place">주문 카운터</span><i>＝</i><strong id="term-word">프론트엔드</strong></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="slide" data-title="프론트엔드 체험">
+      <header class="slide-head">
+        <div><p class="eyebrow">FRONTEND EXPERIENCE</p><h2>우리가 매일 보고 누르는 이 화면이 프론트엔드입니다</h2></div>
+        <p class="head-note">검색, 메뉴, 상품, 장바구니, 팝업을 직접 눌러보세요</p>
+      </header>
+      <div class="frontend-lab">
+        <div class="site-shell korean-store" id="site-shell" data-page="home">
+          <div class="store-browser-bar"><i></i><i></i><i></i><span>oneul-market.kr</span><b>안전한 연결</b></div>
+          <header class="store-header">
+            <button class="store-menu-trigger" type="button" data-action="toggle-menu" aria-label="전체 메뉴 열기">☰</button>
+            <strong>오늘마켓</strong>
+            <label class="store-search"><span>상품을 검색해 보세요</span><button type="button" data-action="focus-search">검색</button></label>
+            <nav><button type="button" data-action="toggle-favorite">찜 <i id="favorite-count">0</i></button><button type="button" data-action="add-store-cart">장바구니 <i id="store-cart-count">0</i></button><button type="button" data-action="open-modal">로그인</button></nav>
+          </header>
+          <nav class="store-category">
+            <button class="active" type="button" data-site-page="home">홈</button>
+            <button type="button" data-site-page="products">신상품</button>
+            <button type="button" data-site-page="profile">나의 쇼핑</button>
+            <span>오늘 주문하면 내일 도착</span>
+          </nav>
+          <div class="store-drawer">
+            <button type="button" data-site-page="home"><b>홈</b><span>추천 상품과 기획전</span></button>
+            <button type="button" data-site-page="products"><b>신상품</b><span>새로 들어온 생활용품</span></button>
+            <button type="button" data-site-page="profile"><b>나의 쇼핑</b><span>주문과 찜 목록 확인</span></button>
+          </div>
+          <div class="site-pages">
+            <div class="site-page home-page">
+              <div class="store-hero">
+                <img src="../assets/session-03/storefront-hero.png" alt="현대적인 생활용품이 놓인 작업 공간" />
+                <div><small>새로운 일상의 도구</small><h3>공간을 바꾸는<br />작은 선택</h3><p>오늘의 취향을 담은 생활용품을 만나보세요.</p><button type="button" data-site-page="products">상품 둘러보기</button></div>
+              </div>
+              <div class="store-benefits"><span><b>무료 배송</b><small>3만원 이상 주문</small></span><span><b>간편 결제</b><small>한 번에 주문 완료</small></span><span><b>쉬운 반품</b><small>7일 이내 신청</small></span></div>
+            </div>
+            <div class="site-page products-page">
+              <div class="store-page-title"><div><small>이번 주 신상품</small><b>생활을 가볍게 만드는 물건</b></div><span>총 24개</span></div>
+              <div class="store-product-grid">
+                <article><div class="product-photo lamp"></div><button type="button" data-action="toggle-favorite">♡</button><small>조명</small><b>워크스페이스 램프</b><span>129,000원</span></article>
+                <article><div class="product-photo speaker"></div><button type="button" data-action="toggle-favorite">♡</button><small>오디오</small><b>컴팩트 스피커</b><span>89,000원</span></article>
+                <article><div class="product-photo notebook"></div><button type="button" data-action="toggle-favorite">♡</button><small>문구</small><b>리넨 노트 세트</b><span>28,000원</span></article>
+              </div>
+              <button class="floating-cart" type="button" data-action="add-store-cart">선택 상품 장바구니 담기</button>
+            </div>
+            <div class="site-page profile-page">
+              <div class="store-profile-card"><span class="profile-avatar">김</span><div><small>반갑습니다</small><b>김바이브 님</b><p>주문 내역과 찜한 상품을 한 곳에서 확인합니다.</p></div></div>
+              <div class="store-orders"><article><span>배송 중</span><b>워크스페이스 램프</b><small>내일 도착 예정</small></article><article><span>찜 목록</span><b id="profile-favorite-copy">저장한 상품 없음</b><small>마음에 드는 상품을 모아보세요</small></article></div>
+            </div>
+          </div>
+          <div class="service-stage" aria-live="polite">
+            <div class="service-screen community-screen">
+              <header><b>바이브 커뮤니티</b><nav><span>피드</span><span>프로젝트</span><span>질문</span></nav><button>새 글 작성</button></header>
+              <div class="community-layout"><aside><strong>오늘의 주제</strong><span>첫 배포 경험</span><span>AI 활용 팁</span><span>프로젝트 피드백</span><div class="community-stats"><small>오늘의 활동</small><b>새 글 24</b><b>댓글 118</b><b>프로젝트 9</b></div></aside><main><article><small>김바이브 · 10분 전</small><b>처음 만든 서비스를 공개합니다</b><p>기획부터 배포까지 진행한 과정과 막혔던 부분을 정리했습니다.</p><footer><span>좋아요 38</span><span>댓글 12</span><span>저장 21</span></footer></article><article><small>박코딩 · 32분 전</small><b>배포 오류를 해결한 방법</b><p>환경변수와 빌드 로그를 확인해 문제를 찾았습니다.</p><footer><span>좋아요 21</span><span>댓글 7</span><span>저장 18</span></footer></article><article><small>이지원 · 1시간 전</small><b>로그인 화면 피드백을 부탁드립니다</b><p>입력 오류와 완료 상태가 더 잘 보이도록 화면을 수정했습니다.</p><footer><span>좋아요 14</span><span>댓글 19</span><span>저장 6</span></footer></article></main></div>
+            </div>
+            <div class="service-screen booking-screen">
+              <header><b>스튜디오 예약</b><span>공간 찾기</span><span>예약 관리</span><span>고객센터</span></header>
+              <div class="booking-layout"><section><small>STEP 1</small><b>날짜와 시간을 선택하세요</b><div class="booking-calendar"><span>9</span><span>10</span><span class="selected">11</span><span>12</span><span>13</span></div><div class="booking-times"><span>14:00</span><span class="selected">15:30</span><span>17:00</span></div></section><aside><small>예약 요약</small><b>라이트 스튜디오 A</b><span>6월 11일 · 15:30</span><span>성인 2명 · 2시간</span><strong>80,000원</strong><button>예약 확정</button></aside></div>
+            </div>
+            <div class="service-screen dashboard-screen">
+              <header><b>오늘마켓 운영센터</b><span>마지막 동기화 14:32</span></header>
+              <div class="dashboard-metrics"><article><small>오늘 주문</small><b>128</b><span>어제보다 12% 증가</span></article><article><small>처리 필요</small><b>7</b><span>배송 지연 2건</span></article><article><small>오늘 매출</small><b>4,280,000원</b><span>목표의 86%</span></article></div>
+              <div class="dashboard-table"><header><b>최근 주문</b><span>전체 보기</span></header><div><strong>#240611-18</strong><span>김바이브</span><span>워크스페이스 램프</span><i>결제 완료</i></div><div><strong>#240611-17</strong><span>박코딩</span><span>리넨 노트 세트</span><i class="warning">확인 필요</i></div><div><strong>#240611-16</strong><span>이프롬프트</span><span>컴팩트 스피커</span><i>배송 준비</i></div></div>
+            </div>
+          </div>
+          <div class="store-toast" id="store-toast"><b>장바구니에 담았습니다</b><span>화면이 행동의 결과를 바로 알려줍니다.</span></div>
+          <div class="store-insight" id="store-insight"><span id="store-insight-label">FRONTEND</span><b id="store-insight-title">사용자가 누른 요소</b><small id="store-insight-copy">클릭한 요소가 어떤 역할을 하는지 여기에 설명합니다.</small></div>
+          <div class="site-modal">
+            <div class="modal-body store-login-modal"><div class="modal-title"><span>로그인</span><button type="button" data-action="close-modal">×</button></div><b>오늘마켓에 오신 것을 환영합니다</b><label><span>이메일</span><i>name@example.com</i></label><label><span>비밀번호</span><i>••••••••</i></label><button class="modal-submit" type="button" data-action="close-modal">로그인하기</button></div>
+          </div>
+        </div>
+        <aside class="visual-summary frontend-reference" id="frontend-reference" data-example="commerce">
+          <p class="summary-kicker">FRONTEND EXAMPLE LIBRARY</p>
+          <h3>서비스가 달라지면<br />필요한 화면도 달라집니다</h3>
+          <nav class="frontend-example-tabs" aria-label="프론트엔드 예시 선택">
+            <button class="active" type="button" data-frontend-example="commerce">쇼핑몰</button>
+            <button type="button" data-frontend-example="community">커뮤니티</button>
+            <button type="button" data-frontend-example="booking">예약</button>
+            <button type="button" data-frontend-example="dashboard">관리자</button>
+          </nav>
+          <div class="frontend-example-preview">
+            <div class="example-window-head"><span id="frontend-example-label">쇼핑몰</span><i></i><i></i><i></i></div>
+            <div class="example-ui" id="frontend-example-ui" aria-live="polite"></div>
+          </div>
+          <div class="frontend-example-copy">
+            <b id="frontend-example-title">비교하고 선택하고 구매하는 화면</b>
+            <span id="frontend-example-components">검색 · 상품 카드 · 장바구니 · 결제 상태</span>
+            <small id="frontend-example-question">사용자가 상품을 찾고 주문 완료까지 막히지 않는가?</small>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="slide" data-title="UI와 UX 체험">
+      <header class="slide-head">
+        <div><p class="eyebrow">UI VS UX</p><h2>예쁜 화면과 쉬운 경험은 다릅니다</h2></div>
+        <div class="ux-controls">
+          <nav class="ux-scenario-tabs" aria-label="UI UX 비교 상황 선택">
+            <button class="active" type="button" data-ux-scenario="checkout">결제</button>
+            <button type="button" data-ux-scenario="signup">회원가입</button>
+            <button type="button" data-ux-scenario="search">검색</button>
+            <button type="button" data-ux-scenario="recovery">오류 복구</button>
+          </nav>
+          <button class="ghost-action" type="button" data-action="run-ux">비교 재생</button>
+        </div>
+      </header>
+      <div class="ux-race" id="ux-race">
+        <div class="ux-lane bad">
+          <div class="lane-head"><div><small id="bad-kicker">CHECKOUT A</small><b id="bad-title">방향을 잃는 결제</b></div><span id="bad-time">대기 중</span></div>
+          <div class="checkout bad-checkout">
+            <div class="ux-scenario-content" id="bad-scenario-content"></div>
+            <span class="demo-cursor bad-cursor"></span>
+          </div>
+          <div class="lane-result"><b id="bad-result-title">탐색 4회</b><span id="bad-result-copy">현재 단계와 최종 금액을 알기 어렵습니다</span></div>
+          <button class="ux-inspect-button" type="button" data-ux-inspect="bad">문제 지점 보기</button>
+          <div class="ux-insight-callout"><span>문제</span><b id="bad-insight-title">다음 행동이 여러 개입니다</b><small id="bad-insight-copy">어떤 버튼을 먼저 눌러야 하는지 판단해야 합니다.</small></div>
+        </div>
+        <div class="race-center"><span>같은 목표</span><b id="ux-goal">결제 완료</b><i></i></div>
+        <div class="ux-lane good">
+          <div class="lane-head"><div><small id="good-kicker">CHECKOUT B</small><b id="good-title">한눈에 읽히는 결제</b></div><span id="good-time">대기 중</span></div>
+          <div class="checkout good-checkout">
+            <div class="ux-scenario-content" id="good-scenario-content"></div>
+            <span class="demo-cursor good-cursor"></span>
+          </div>
+          <div class="lane-result"><b id="good-result-title">선택 1회</b><span id="good-result-copy">현재 위치, 금액, 다음 행동이 분명합니다</span></div>
+          <button class="ux-inspect-button" type="button" data-ux-inspect="good">개선 지점 보기</button>
+          <div class="ux-insight-callout"><span>개선</span><b id="good-insight-title">다음 행동이 하나로 보입니다</b><small id="good-insight-copy">현재 단계와 최종 금액을 확인하고 바로 결제합니다.</small></div>
+        </div>
+      </div>
+      <div class="ux-diagnosis">
+        <span><b>UI</b><small>버튼 이름 · 색 · 크기 · 배치</small></span>
+        <span><b>UX</b><small>현재 위치 · 다음 행동 · 예상 결과</small></span>
+        <span><b>좋은 경험</b><small>덜 찾고 · 덜 고민하고 · 다시 시도</small></span>
+      </div>
+    </section>
+
+    <section class="slide" data-title="화면 애니메이션">
+      <header class="slide-head">
+        <div><p class="eyebrow">INTERFACE ANIMATION</p><h2>애니메이션은 화면의 변화와 다음 행동을 이해시킵니다</h2></div>
+        <p class="head-note">열 가지 예시를 하나씩 재생해 보세요</p>
+      </header>
+      <div class="animation-lab">
+        <div class="animation-preview" id="animation-preview" data-demo="menu">
+          <div class="demo-browser">
+            <div class="demo-browser-top"><i></i><i></i><i></i><span>오늘마켓 · 화면 애니메이션 실험실</span><b class="demo-cart-badge">0</b></div>
+            <div class="demo-page">
+              <header><button type="button">☰</button><b>오늘마켓</b><span>검색</span><span>장바구니</span></header>
+              <div class="demo-content">
+                <div class="demo-hero-card"><small>NEW ARRIVAL</small><b>좋은 움직임은<br />방향을 알려줍니다</b><span>클릭 전과 후가 자연스럽게 이어집니다.</span></div>
+                <div class="demo-product-row"><article></article><article></article><article></article></div>
+              </div>
+              <aside class="demo-menu-panel"><b>전체 메뉴</b><span>신상품</span><span>베스트</span><span>나의 쇼핑</span></aside>
+              <div class="demo-loading"><i></i><i></i><i></i><i></i></div>
+              <span class="demo-fly-item"></span>
+              <div class="demo-success"><i></i><b>저장이 완료되었습니다</b><span>다음 단계로 이동할 수 있습니다.</span></div>
+              <div class="demo-tab-switch"><span class="active">추천</span><span>신상품</span><span>베스트</span><i></i></div>
+              <div class="demo-validation"><label>이메일</label><span>vibe@</span><i></i><small>올바른 이메일 형식을 입력해 주세요</small></div>
+              <div class="demo-accordion"><button type="button">배송과 반품 안내 <i>+</i></button><div><b>7일 이내 반품 가능</b><span>내용이 펼쳐지며 주변 요소가 자연스럽게 이동합니다.</span></div></div>
+              <div class="demo-page-transition"><section><small>상품 목록</small><b>워크스페이스 램프</b><button type="button">상세 보기</button></section><section><small>상품 상세</small><b>집중을 위한 조명</b><span>129,000원</span></section></div>
+              <div class="demo-favorite-action"><button type="button"><i>♥</i><span>찜하기</span></button><b>나의 쇼핑에 저장됨</b></div>
+              <div class="demo-scroll-guide"><i></i><div><span>소개</span><span>기능</span><span>리뷰</span></div><section><b>지금 읽는 위치</b><small>긴 페이지에서도 현재 위치를 놓치지 않습니다.</small></section></div>
+            </div>
+          </div>
+          <div class="animation-caption"><span id="animation-caption-label">메뉴 전환</span><b id="animation-caption-title">새 화면이 어디에서 나타났는지 보여줍니다</b><small id="animation-caption-copy">메뉴가 갑자기 생기는 대신 화면 가장자리에서 들어오면 구조를 이해하기 쉽습니다.</small></div>
+        </div>
+        <nav class="animation-catalog" data-animation-group="navigation">
+          <div class="animation-group-tabs">
+            <button class="active" type="button" data-animation-group-select="navigation">이동</button>
+            <button type="button" data-animation-group-select="state">상태</button>
+            <button type="button" data-animation-group-select="feedback">피드백</button>
+            <button type="button" data-animation-group-select="guidance">안내</button>
+          </div>
+          <button class="active" type="button" data-animation-group-item="navigation" data-animation-demo="menu"><i>01</i><span><b>메뉴 전환</b><small>화면의 출발 위치를 보여줌</small></span></button>
+          <button type="button" data-animation-group-item="state" data-animation-demo="loading"><i>02</i><span><b>로딩 전환</b><small>기다리는 이유를 알려줌</small></span></button>
+          <button type="button" data-animation-group-item="feedback" data-animation-demo="cart"><i>03</i><span><b>장바구니 이동</b><small>내 행동의 결과를 연결함</small></span></button>
+          <button type="button" data-animation-group-item="feedback" data-animation-demo="success"><i>04</i><span><b>완료 전환</b><small>작업이 끝났음을 확신시킴</small></span></button>
+          <button type="button" data-animation-group-item="navigation" data-animation-demo="tabs"><i>05</i><span><b>탭 전환</b><small>같은 화면 안의 위치를 보여줌</small></span></button>
+          <button type="button" data-animation-group-item="guidance" data-animation-demo="validation"><i>06</i><span><b>입력 검증</b><small>문제 위치와 해결법을 안내</small></span></button>
+          <button type="button" data-animation-group-item="state" data-animation-demo="accordion"><i>07</i><span><b>내용 펼치기</b><small>필요할 때만 상세 내용을 노출</small></span></button>
+          <button type="button" data-animation-group-item="navigation" data-animation-demo="page"><i>08</i><span><b>페이지 연결</b><small>목록과 상세의 관계를 유지</small></span></button>
+          <button type="button" data-animation-group-item="feedback" data-animation-demo="favorite"><i>09</i><span><b>좋아요 반응</b><small>작은 행동에 저장 확신을 제공</small></span></button>
+          <button type="button" data-animation-group-item="guidance" data-animation-demo="scroll"><i>10</i><span><b>스크롤 위치</b><small>긴 화면에서 현재 지점을 표시</small></span></button>
+          <div class="animation-rule"><span>좋은 애니메이션</span><b>원인 → 변화 → 결과</b><small>화려함보다 이해를 돕는 순서가 먼저입니다.</small></div>
+        </nav>
+      </div>
+    </section>
+
+    <section class="slide" data-title="백엔드 주문 처리">
+      <header class="slide-head">
+        <div><p class="eyebrow">BACKEND ROUND TRIP</p><h2>브라우저 뒤의 주문 처리실을 따라가 봅니다</h2></div>
+        <div class="head-actions"><button class="ghost-action" type="button" data-action="reset-order-journey">처음부터</button><button class="primary-action small" type="button" data-action="run-order-journey">다음 처리 보기</button></div>
+      </header>
+      <div class="order-journey" id="order-journey" data-step="0">
+        <div class="commerce-browser">
+          <div class="browser-chrome"><i></i><i></i><i></i><span>store.local / checkout</span></div>
+          <div class="browser-product">
+            <div class="product-image"><span>VIBE KIT</span></div>
+            <div class="product-copy"><small>WORKSHOP EDITION</small><b>바이브코딩 스타터 키트</b><span>재고 12개 · 무료배송</span><strong>39,000원</strong></div>
+          </div>
+          <button class="browser-order-button" type="button" data-order-step="1"><span>주문하기</span><i></i></button>
+          <div class="browser-result"><i></i><b>주문이 완료되었습니다</b><span>#ORDER-2406</span></div>
+        </div>
+        <div class="journey-network backend-control-room">
+          <div class="journey-rail outbound"><span>REQUEST</span></div>
+          <div class="journey-rail inbound"><span>RESPONSE</span></div>
+          <button class="journey-node front" type="button" data-order-step="1"><span>01</span><i class="station-visual ui-station"></i><b>요청 접수</b><small>상품과 수량을 받음</small></button>
+          <button class="journey-node auth" type="button" data-order-step="2"><span>02</span><i class="station-visual auth-station"></i><b>권한 확인</b><small>로그인 사용자 확인</small></button>
+          <button class="journey-node stock" type="button" data-order-step="3"><span>03</span><i class="station-visual stock-station"></i><b>재고 확인</b><small>구매 가능한지 판단</small></button>
+          <button class="journey-node payment" type="button" data-order-step="4"><span>04</span><i class="station-visual payment-station"></i><b>결제 승인</b><small>39,000원 승인 요청</small></button>
+          <button class="journey-node save" type="button" data-order-step="5"><span>05</span><i class="station-visual save-station"></i><b>주문 저장</b><small>주문 번호를 기록</small></button>
+          <span class="journey-packet"><b>ORDER</b><small>39,000</small></span>
+          <div class="journey-status"><span id="journey-status-label">READY</span><b id="journey-status">브라우저에서 주문을 기다리는 중</b></div>
+          <div class="journey-io"><span><small>들어온 값</small><b id="journey-input">상품 · 수량 · 금액</b></span><i></i><span><small>처리 결과</small><b id="journey-output">주문 대기</b></span></div>
+        </div>
+      </div>
+      <div class="bottom-equation"><span>브라우저에서 클릭</span><i>→</i><span>서버가 검사 · 결제 · 저장</span><i>→</i><span>응답이 화면으로 복귀</span></div>
+    </section>
+
+    <section class="slide" data-title="데이터베이스 기록 보관함">
+      <header class="slide-head">
+        <div><p class="eyebrow">DATABASE STORAGE</p><h2>데이터베이스는 필요한 기록을 알맞은 보관함에 넣습니다</h2></div>
+        <p class="head-note">행동을 누르고 어떤 기록이 어디로 이동하는지 보세요</p>
+      </header>
+      <div class="warehouse-lab">
+        <div class="db-browser-workbench">
+          <div class="db-browser-top"><i></i><i></i><i></i><span>오늘마켓 / 계정과 주문</span></div>
+          <nav class="warehouse-actions">
+            <span>화면 선택</span>
+            <button class="active" type="button" data-db-flow="signup"><i>01</i><b>회원가입</b><small>새 회원 정보 만들기</small></button>
+            <button type="button" data-db-flow="login"><i>02</i><b>로그인</b><small>기존 회원 정보 찾기</small></button>
+            <button type="button" data-db-flow="post"><i>03</i><b>게시글 작성</b><small>새 게시글 기록 만들기</small></button>
+            <button type="button" data-db-flow="order"><i>04</i><b>상품 주문</b><small>재고 수정과 주문 기록</small></button>
+          </nav>
+          <div class="db-browser-preview" id="db-browser-preview" data-flow="signup">
+            <div class="db-form signup-form"><small>새 계정 만들기</small><b>오늘마켓 회원가입</b><label>이름 <i>김바이브</i></label><label>이메일 <i>vibe@example.com</i></label><button type="button" data-db-flow="signup">회원가입 완료</button></div>
+            <div class="db-form login-form"><small>다시 만나서 반갑습니다</small><b>로그인</b><label>이메일 <i>vibe@example.com</i></label><label>비밀번호 <i>••••••••</i></label><button type="button" data-db-flow="login">회원정보와 비교</button></div>
+            <div class="db-form post-form"><small>프로젝트 기록</small><b>새 게시글 작성</b><label>제목 <i>첫 프로젝트를 완성했습니다</i></label><label class="large">내용 <i>AI와 함께 만든 과정을 기록합니다.</i></label><button type="button" data-db-flow="post">게시글 저장</button></div>
+            <div class="db-form order-form"><small>주문 상품</small><b>워크스페이스 램프</b><label>수량 <i>1개</i></label><label>결제 금액 <i>129,000원</i></label><button type="button" data-db-flow="order">상품 주문</button></div>
+            <div class="db-browser-feedback"><i></i><span><b id="db-feedback-title">회원가입 정보를 전송합니다</b><small id="db-feedback-copy">회원정보 창고에 새 기록이 만들어집니다.</small></span></div>
+          </div>
+        </div>
+        <div class="warehouse-scene record-vault" id="warehouse-scene" data-flow="signup">
+          <div class="vault-header"><div><i></i><span>서비스 기록 보관실</span></div><strong>필요할 때 저장하고 다시 찾습니다</strong></div>
+          <div class="record-envelope"><i></i><b id="record-envelope-title">회원 기록</b><small id="record-envelope-copy">김바이브 · vibe@example.com</small></div>
+          <div class="record-shelves">
+            <article class="record-cabinet user-store"><header><span class="cabinet-icon person"></span><div><b>회원정보 창고</b><small>이름 · 이메일 · 로그인 정보</small></div></header><div class="cabinet-drawer"><span>김바이브</span><i>회원 1,284명</i></div></article>
+            <article class="record-cabinet post-store"><header><span class="cabinet-icon document"></span><div><b>게시글 창고</b><small>제목 · 내용 · 작성자</small></div></header><div class="cabinet-drawer"><span>첫 프로젝트 기록</span><i>게시글 3,892개</i></div></article>
+            <article class="record-cabinet product-store"><header><span class="cabinet-icon box"></span><div><b>상품 창고</b><small>상품명 · 가격 · 남은 재고</small></div></header><div class="cabinet-drawer"><span id="stock-record">램프 재고 12개</span><i>상품 142개</i></div></article>
+            <article class="record-cabinet order-store"><header><span class="cabinet-icon receipt"></span><div><b>주문내역 창고</b><small>주문자 · 상품 · 결제 결과</small></div></header><div class="cabinet-drawer"><span>주문 #2406</span><i>주문 8,421건</i></div></article>
+          </div>
+          <div class="record-result"><span id="warehouse-task">회원정보 창고에 새 기록을 보관합니다</span><b id="record-result-word">저장</b></div>
+          <div class="db-operation"><span id="db-operation-code">CREATE</span><b id="db-operation-copy">새 회원 기록 생성</b></div>
+          <span class="record-packet"><b>기록</b><small>이동 중</small></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="API 연결 창구">
+      <header class="slide-head">
+        <div><p class="eyebrow">SERVICE CONNECTION</p><h2>API는 내 서비스가 다른 서비스에 부탁하고 답을 받는 창구입니다</h2></div>
+        <div class="head-actions"><button class="ghost-action" type="button" data-action="toggle-api-error">연결 끊기</button><button class="ghost-action" type="button" data-action="reset-api">처음부터</button><button class="primary-action small" type="button" data-action="next-api">다음 단계</button></div>
+      </header>
+      <div class="api-stage" id="api-stage" data-result="ready">
+        <div class="weather-app-panel">
+          <div class="weather-browser"><i></i><i></i><i></i><span>나의 여행 준비</span></div>
+          <div class="weather-card">
+            <span>서울</span><b id="weather-temperature">--°</b><small id="weather-condition">날씨 정보를 기다리는 중</small>
+            <div><i></i><span id="weather-extra">외출 전에 현재 날씨를 확인합니다.</span></div>
+          </div>
+          <button type="button" data-action="next-api">날씨 정보 요청</button>
+        </div>
+        <div class="api-bridge-panel">
+          <div class="bridge-step request-step"><i>1</i><span><b>부탁하기</b><small>“서울 날씨를 알려주세요”</small></span></div>
+          <div class="bridge-road outbound"><span>요청</span><i></i></div>
+          <div class="api-counter"><span>API 창구</span><b>정해진 약속으로 전달</b><small>누가, 무엇을, 어떤 방식으로 요청했는지 확인합니다.</small></div>
+          <div class="bridge-road inbound"><i></i><span>응답</span></div>
+          <div class="bridge-step response-step"><i>3</i><span><b>답 받기</b><small>“서울은 24도, 맑음”</small></span></div>
+          <span class="api-courier request">서울 날씨?</span><span class="api-courier response">24° 맑음</span>
+        </div>
+        <div class="weather-provider-panel">
+          <div class="provider-brand"><span>기상 정보 제공처</span><b>오늘의 서울</b></div>
+          <div class="provider-scene weather-intelligence">
+            <div class="weather-map-grid"></div>
+            <span class="weather-radar r1"></span><span class="weather-radar r2"></span><span class="weather-radar r3"></span>
+            <div class="weather-location"><i></i><b>SEOUL</b><small>37.5665° N · 126.9780° E</small></div>
+            <div class="weather-signal"><span>LIVE</span><b>맑음</b><small>관측 데이터 정상</small></div>
+            <div class="weather-chart"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="provider-data"><span>현재 기온</span><b>24°</b><span>하늘 상태</span><b>맑음</b></div>
+          <div class="api-result"><b id="api-result-title">연결 준비</b><span id="api-result-copy">내 화면은 외부 서비스의 답을 기다리고 있습니다.</span></div>
+        </div>
+        <nav class="api-stepper" aria-label="API 처리 단계">
+          <button class="active" type="button" data-api-step="1"><i>01</i><span>화면에서 요청</span></button>
+          <button type="button" data-api-step="2"><i>02</i><span>API 약속 확인</span></button>
+          <button type="button" data-api-step="3"><i>03</i><span>외부 서비스 처리</span></button>
+          <button type="button" data-api-step="4"><i>04</i><span>화면에 응답</span></button>
+        </nav>
+      </div>
+      <div class="bottom-equation"><span>내 서비스가 부탁</span><i>→</i><span>API가 전달</span><i>→</i><span>외부 서비스가 답변</span><i>→</i><span>내 화면에 표시</span></div>
+    </section>
+
+    <section class="slide" data-title="화면 구성 요소">
+      <header class="slide-head">
+        <div><p class="eyebrow">SCREEN ANATOMY</p><h2>하나의 사이트 화면도 역할이 다른 여러 요소로 이루어집니다</h2></div>
+        <button class="ghost-action" type="button" data-action="reset-components">전체 화면 보기</button>
+      </header>
+      <div class="screen-anatomy" id="component-factory" data-part="all">
+        <nav class="screen-part-list">
+          <span>화면에서 찾기</span>
+          <button type="button" data-component="header"><i>01</i><span><b>상단 메뉴</b><small>브랜드와 주요 이동</small></span></button>
+          <button type="button" data-component="search"><i>02</i><span><b>검색 영역</b><small>원하는 정보를 입력</small></span></button>
+          <button type="button" data-component="card"><i>03</i><span><b>상품 카드</b><small>반복되는 정보 묶음</small></span></button>
+          <button type="button" data-component="button"><i>04</i><span><b>행동 버튼</b><small>사용자의 선택을 실행</small></span></button>
+          <button type="button" data-component="feedback"><i>05</i><span><b>결과 알림</b><small>행동의 성공 여부 전달</small></span></button>
+        </nav>
+        <div class="screen-mockup">
+          <div class="screen-browser"><i></i><i></i><i></i><span>오늘마켓 / 신상품</span></div>
+          <header class="anatomy-header"><b>오늘마켓</b><nav><span>홈</span><span>신상품</span><span>나의 쇼핑</span></nav><i>2</i></header>
+          <label class="anatomy-search"><span>공간에 필요한 상품을 검색하세요</span><b>검색</b></label>
+          <div class="anatomy-grid">
+            <article><div class="anatomy-photo lamp"></div><small>조명</small><b>워크스페이스 램프</b><span>129,000원</span><button type="button">담기</button></article>
+            <article><div class="anatomy-photo speaker"></div><small>오디오</small><b>컴팩트 스피커</b><span>89,000원</span><button type="button">담기</button></article>
+            <article><div class="anatomy-photo notebook"></div><small>문구</small><b>리넨 노트 세트</b><span>28,000원</span><button type="button">담기</button></article>
+          </div>
+          <div class="anatomy-feedback"><i></i><span><b>장바구니에 담았습니다</b><small>오른쪽 위 숫자가 2로 바뀌었습니다.</small></span></div>
+          <div class="anatomy-highlight"><span id="anatomy-highlight-label">전체 화면</span></div>
+        </div>
+        <aside class="part-explanation">
+          <span id="part-number">전체 구조</span>
+          <h3 id="part-title">화면을 역할별로 나누면 AI에게 정확히 말할 수 있습니다</h3>
+          <p id="part-copy">“사이트를 바꿔줘”보다 “상단 메뉴, 상품 카드, 담기 버튼, 완료 알림을 이렇게 바꿔줘”라고 요청하면 수정 범위가 분명해집니다.</p>
+          <div><b>AI 요청 예시</b><span id="part-prompt">신상품 화면의 상품 카드와 장바구니 피드백을 더 명확하게 개선해 주세요.</span></div>
+          <div class="part-file"><b>예상 파일 위치</b><code id="part-file-path">src/pages/ShopPage.tsx</code></div>
+        </aside>
+      </div>
+      <div class="bottom-equation"><span>큰 화면을 통째로 요청</span><i>→</i><span>결과가 모호함</span><i>／</i><span>역할별 요소를 지정</span><i>→</i><span>수정이 정확해짐</span></div>
+    </section>
+
+    <section class="slide practice-slide" data-title="실습 30분">
+      <header class="slide-head">
+        <div><p class="eyebrow">PRACTICE SESSION</p><h2>30분 동안 각자의 프로젝트를 진행합니다</h2></div>
+        <div class="timer-controls"><button class="ghost-action" type="button" data-action="reset-practice">초기화</button><button class="primary-action small" type="button" data-action="toggle-practice">타이머 시작</button></div>
+      </header>
+      <div class="practice-layout timer-only">
+        <div class="practice-clock" id="practice-clock" data-running="false"><svg viewBox="0 0 420 420"><circle class="clock-base" cx="210" cy="210" r="184"/><circle class="clock-progress" id="practice-progress" cx="210" cy="210" r="184"/></svg><div><span>PRACTICE</span><b id="practice-time">30:00</b><small>남은 시간</small></div></div>
+      </div>
+    </section>
+
+    <section class="slide next-session-slide" data-title="다음 강의 예고">
+      <div class="next-session-copy">
+        <p class="eyebrow">NEXT · SESSION 04</p>
+        <h2>다음 시간에는<br>서비스의 방을 찾아갑니다</h2>
+        <p>화면에서 본 버튼이 어느 파일에 있고, AI가 어떤 폴더를 수정했는지 직접 추적합니다.</p>
+        <div class="next-topics"><span>파일 구조</span><span>폴더의 역할</span><span>수정 위치 찾기</span><span>의존 관계</span></div>
+        <button class="primary-action small" type="button" data-action="reveal-file-path">버튼의 파일 위치 보기</button>
+      </div>
+      <div class="next-file-scene">
+        <div class="next-screen-preview"><span>오늘마켓</span><b>워크스페이스 램프</b><button type="button">주문하기</button></div>
+        <span class="next-route-packet" aria-hidden="true">BUTTON</span>
+        <div class="file-orbit o1"><span>app/</span></div><div class="file-orbit o2"><span>components/</span></div><div class="file-orbit o3"><span>styles/</span></div>
+        <div class="next-code-window"><div class="next-code-head"><span>EXPLORER</span><b>vibe-project</b></div><div><span>▾ app</span><span class="indent">page.tsx</span><span class="indent">layout.tsx</span><span>▾ components</span><strong class="indent">OrderButton.tsx</strong><span class="indent">OrderComplete.tsx</span><span>▾ api</span><span class="indent">orders/route.ts</span><span>globals.css</span></div><i class="file-locator"></i></div>
+        <div class="next-route-line"><span>화면의 버튼</span><i></i><b>components/OrderButton.tsx</b></div>
+      </div>
+      <div class="next-session-footer"><span>오늘 만든 기능</span><i>→</i><b>다음 시간에는 그 기능의 파일 위치를 찾습니다</b></div>
+    </section>
+  </main>
+
+  <nav class="deck-nav" aria-label="슬라이드 이동">
+    <button type="button" data-action="prev-slide" aria-label="이전 슬라이드">‹</button>
+    <span id="counter">1 / 12</span>
+    <button type="button" data-action="next-slide" aria-label="다음 슬라이드">›</button>
+  </nav>
+
+  <script src="./session-03-direction.bundle.js?v=20260612"></script>
+</body>
+</html>

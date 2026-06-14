@@ -1,0 +1,215 @@
+.vibe-loop-panel {
+  padding: clamp(18px, 2.1vw, 28px);
+}
+
+.vl-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: clamp(16px, 2vw, 24px);
+}
+
+.vl-kicker {
+  color: var(--edu-violet);
+  font-size: clamp(10px, 0.8vw, 12px);
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.vl-title {
+  margin-top: 6px;
+  color: var(--edu-text);
+  font-size: clamp(16px, 1.5vw, 24px);
+  font-weight: 900;
+}
+
+/* Arena */
+.vl-arena {
+  display: grid;
+  grid-template-columns: 1fr 120px 1fr;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+/* Node */
+.vl-node {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 7px;
+  padding: clamp(16px, 2vw, 24px) clamp(12px, 1.5vw, 18px);
+  border: 1px solid var(--edu-border);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.045);
+  text-align: center;
+  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
+}
+
+.vl-node-icon {
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1;
+}
+
+.vl-node-name {
+  font-size: clamp(16px, 1.5vw, 22px);
+  font-weight: 900;
+  color: var(--edu-text);
+}
+
+.vl-node-sub {
+  font-size: clamp(10px, 0.85vw, 13px);
+  color: var(--edu-muted);
+}
+
+.vl-node-task {
+  margin-top: 6px;
+  font-size: clamp(11px, 0.88vw, 13px);
+  color: var(--edu-dim);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  padding: 5px 10px;
+  line-height: 1.4;
+}
+
+.vl-node.is-active {
+  transform: translateY(-5px);
+  border-color: rgba(167, 139, 250, 0.5);
+  background: rgba(167, 139, 250, 0.1);
+  box-shadow: 0 0 36px rgba(167, 139, 250, 0.2);
+}
+
+.vl-node.is-active .vl-node-task {
+  border-color: rgba(167, 139, 250, 0.25);
+  color: var(--edu-violet);
+}
+
+.vl-node.is-done {
+  border-color: rgba(52, 211, 153, 0.36);
+  background: rgba(52, 211, 153, 0.07);
+}
+
+/* Pipe */
+.vl-pipe {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.vl-pipe-lbl {
+  font-size: clamp(9px, 0.78vw, 11px);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--edu-muted);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.vl-pipe-lbl.top { color: var(--edu-violet); }
+.vl-pipe-lbl.bot { color: var(--edu-cyan); }
+
+.vl-pipe-line {
+  width: 2px;
+  height: 60px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, rgba(167,139,250,0.4), rgba(103,232,249,0.4));
+}
+
+.vl-loop-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(251, 191, 36, 0.12);
+  border: 2px solid rgba(251, 191, 36, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(10px, 0.82vw, 12px);
+  font-weight: 900;
+  color: var(--edu-gold);
+  transition: background 200ms, border-color 200ms;
+}
+
+.vl-loop-badge.is-pop {
+  animation: vlBadgePop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes vlBadgePop {
+  0%   { transform: translate(-50%, -50%) scale(0.7); background: rgba(251,191,36,0.25); }
+  60%  { transform: translate(-50%, -50%) scale(1.25); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Step track */
+.vl-step-track {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.vl-step-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  font-size: clamp(11px, 0.9vw, 13px);
+  color: var(--edu-muted);
+  transition: all 220ms ease;
+}
+
+.vl-step-item.vl-step-repeat {
+  border-color: rgba(251, 191, 36, 0.2);
+  color: var(--edu-gold);
+}
+
+.vl-step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--edu-dim);
+  flex-shrink: 0;
+  transition: background 220ms ease, box-shadow 220ms ease;
+}
+
+.vl-step-item.is-active {
+  border-color: rgba(167, 139, 250, 0.4);
+  background: rgba(167, 139, 250, 0.08);
+  color: var(--edu-violet);
+}
+
+.vl-step-item.is-active .vl-step-dot {
+  background: var(--edu-violet);
+  box-shadow: 0 0 14px rgba(167, 139, 250, 0.9);
+}
+
+.vl-step-item.is-done {
+  border-color: rgba(52, 211, 153, 0.3);
+  background: rgba(52, 211, 153, 0.06);
+  color: var(--edu-emerald);
+}
+
+.vl-step-item.is-done .vl-step-dot {
+  background: var(--edu-emerald);
+  box-shadow: 0 0 12px rgba(52, 211, 153, 0.8);
+}
+
+.vl-step-arrow {
+  color: var(--edu-dim);
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>발표 템플릿</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--violet:#A78BFA;--violet2:#C4B5FD;--cyan:#67E8F9;--amber:#FBBF24;--emerald:#34D399;--bg:#07081A;--surface:rgba(255,255,255,.045);--border:rgba(255,255,255,.09);--text:#F1F0FF;--text2:#A09EC0;--text3:#6B6A8A}
+    body{font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}.bg{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 45% at 8% 0%,rgba(167,139,250,.14),transparent),radial-gradient(ellipse 55% 45% at 96% 100%,rgba(52,211,153,.09),transparent)}
+    .nav{position:fixed;top:0;left:0;right:0;height:48px;display:flex;align-items:center;gap:8px;padding:0 20px;background:rgba(7,8,26,.92);border-bottom:1px solid var(--border);z-index:10;overflow-x:auto}.nav a{color:var(--text2);text-decoration:none;font-size:12px;padding:4px 10px;border-radius:999px;white-space:nowrap}.nav a:first-child{color:var(--violet2);font-weight:800;letter-spacing:.08em;margin-right:10px}.nav a:hover{background:rgba(255,255,255,.08);color:var(--text)}
+    main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:78px 40px 80px}.hero{margin-bottom:42px}.eyebrow{color:var(--violet2);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px}h1{font-size:clamp(34px,5vw,64px);line-height:1.06;letter-spacing:-.03em;margin-bottom:14px}h2{font-size:clamp(22px,2.5vw,32px);letter-spacing:-.02em;margin-bottom:16px}.grad{background:linear-gradient(135deg,var(--violet),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.desc{color:var(--text2);font-size:clamp(14px,1.3vw,19px);max-width:760px}.section{margin-bottom:42px;scroll-margin-top:64px}.head{display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--border);margin-bottom:18px}.num{width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(167,139,250,.14);border:1px solid rgba(167,139,250,.28);color:var(--violet2);font-weight:900;font-size:13px;flex-shrink:0}
+    .slides{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.slide-card{border:1px solid var(--border);border-radius:14px;background:var(--surface);padding:18px 20px;min-height:180px}.time{color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}.title{color:var(--text);font-size:16px;font-weight:800;margin-bottom:8px}.lines{display:grid;gap:12px;margin-top:16px}.line{height:1px;background:rgba(255,255,255,.18)}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0}.step{border:1px solid var(--border);background:rgba(255,255,255,.04);padding:16px 12px;text-align:center;position:relative}.step:first-child{border-radius:14px 0 0 14px}.step:last-child{border-radius:0 14px 14px 0}.step+.step{border-left:none}.step strong{display:block;color:var(--text);margin-bottom:4px}.step span{color:var(--text2);font-size:12px}
+    @media(max-width:820px){main{padding:68px 20px 60px}.slides,.flow{grid-template-columns:1fr}.step,.step:first-child,.step:last-child{border-radius:14px}.step+.step{border-left:1px solid var(--border);border-top:none}}
+    @media print{@page{size:A4;margin:13mm}body{background:#fff;color:#15151c;-webkit-print-color-adjust:exact;print-color-adjust:exact}.bg,.nav{display:none!important}main{max-width:none;padding:0}.hero{margin-bottom:24px}h1{font-size:34px;color:#15151c}.grad{-webkit-text-fill-color:#15151c;background:none}.desc,.step span{color:#3f4252}.section{break-inside:avoid;margin-bottom:26px}.slide-card,.step{background:#fff;border-color:#d9dce8}.title,.step strong,h2{color:#15151c}.line{background:#b8bdcc}}
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+  <nav class="nav"><a href="#">VIBE CODING</a><a href="#flow">발표 흐름</a><a href="#template">작성 양식</a></nav>
+  <main>
+    <section class="hero"><div class="eyebrow">별첨 자료</div><h1><span class="grad">6회차 쇼케이스</span> 발표 템플릿</h1><p class="desc">잘 만든 것보다, 무엇을 만들었고 어디까지 왔는지 명확하게 보여주는 것이 중요합니다. 발표는 3~5분 기준입니다.</p></section>
+    <section class="section" id="flow"><div class="head"><span class="num">1</span><h2>발표 흐름</h2></div><div class="flow"><div class="step"><strong>문제</strong><span>누구의 불편함?</span></div><div class="step"><strong>해결</strong><span>무엇을 만들었나?</span></div><div class="step"><strong>시연</strong><span>핵심 기능 1~3개</span></div><div class="step"><strong>배운 점</strong><span>막힌 점과 해결</span></div><div class="step"><strong>다음</strong><span>고도화 방향</span></div></div></section>
+    <section class="section" id="template"><div class="head"><span class="num">2</span><h2>발표 작성 양식</h2></div><div class="slides">
+      <div class="slide-card"><div class="time">Slide 01 · 20초</div><div class="title">프로젝트 이름</div><div class="lines"><div class="line"></div><div class="line"></div><div class="line"></div></div></div>
+      <div class="slide-card"><div class="time">Slide 02 · 40초</div><div class="title">누구의 어떤 문제를 해결하나요?</div><div class="lines"><div class="line"></div><div class="line"></div><div class="line"></div></div></div>
+      <div class="slide-card"><div class="time">Slide 03 · 90초</div><div class="title">핵심 기능 시연</div><div class="lines"><div class="line"></div><div class="line"></div><div class="line"></div></div></div>
+      <div class="slide-card"><div class="time">Slide 04 · 40초</div><div class="title">만들면서 막힌 점</div><div class="lines"><div class="line"></div><div class="line"></div><div class="line"></div></div></div>
+      <div class="slide-card"><div class="time">Slide 05 · 40초</div><div class="title">다음 고도화 방향</div><div class="lines"><div class="line"></div><div class="line"></div><div class="line"></div></div></div>
+      <div class="slide-card"><div class="time">Q&A</div><div class="title">받고 싶은 피드백</div><div class="lines"><div class="line"></div><div class="line"></div><div class="line"></div></div></div>
+    </div></section>
+  </main>  <script src="./appendix-print.js"></script>
+
+</body>
+</html>

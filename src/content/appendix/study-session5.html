@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>5강 강사용 공부자료 - 배포 보안 데이터</title>
+  <link rel="stylesheet" href="./session-material.css">
+</head>
+<body>
+  <main class="sheet">
+    <header class="material-head">
+      <div><div class="material-kicker">INSTRUCTOR STUDY · SESSION 05</div><h1>배포 · 보안 · 데이터</h1></div>
+      <span class="session-badge">강사용</span>
+    </header>
+    <div class="goal">학습 기준: 공개 URL을 만드는 과정과 공개하면 안 되는 값을 구분하고, 데이터가 저장되는 흐름을 설명한다.</div>
+    <section class="section">
+      <h2>서비스가 인터넷으로 나가는 길</h2>
+      <div class="flow">
+        <article class="flow-step"><h3>내 컴퓨터</h3><p>localhost에서 확인</p></article>
+        <article class="flow-step"><h3>Git 저장소</h3><p>코드 버전 보관</p></article>
+        <article class="flow-step"><h3>배포 서비스</h3><p>빌드하고 실행</p></article>
+        <article class="flow-step"><h3>사용자 URL</h3><p>브라우저로 접속</p></article>
+      </div>
+    </section>
+    <section class="section grid-2">
+      <article class="term"><h3>환경변수</h3><p>코드와 분리해 관리하는 설정값. 공개 저장소와 화면에 실제 값을 노출하지 않는다.</p></article>
+      <article class="term"><h3>API 키</h3><p>외부 서비스 사용 권한을 증명하는 비밀값. 노출되면 폐기하고 재발급한다.</p></article>
+      <article class="term"><h3>CRUD</h3><p>Create, Read, Update, Delete. 앱이 데이터를 추가·조회·수정·삭제하는 네 가지 기본 행동.</p></article>
+      <article class="term"><h3>로그</h3><p>배포나 실행 과정에서 어떤 단계가 실패했는지 남기는 기록. 에러 해결의 첫 근거다.</p></article>
+    </section>
+    <section class="section">
+      <h2>예상 질문과 답변</h2>
+      <div class="qa-grid">
+        <article class="qa"><b>Q. GitHub에 키를 올린 뒤 지우면 괜찮나요?</b><p class="answer">기록에 남았을 수 있으므로 키를 즉시 폐기하고 새로 발급한 뒤 기록 정리를 검토합니다.</p></article>
+        <article class="qa"><b>Q. 무료 배포 서비스는 계속 무료인가요?</b><p class="answer">정책과 한도는 바뀔 수 있습니다. 수업에서는 현재 계정의 요금·사용량 화면을 반드시 확인하게 합니다.</p></article>
+        <article class="qa"><b>Q. localhost에서는 되는데 배포 후 안 됩니다.</b><p class="answer">환경변수 누락, 빌드 오류, 주소 차이, 외부 서비스 허용 도메인을 순서대로 확인합니다.</p></article>
+        <article class="qa"><b>Q. DB에는 무엇을 저장하면 안 되나요?</b><p class="answer">평문 비밀번호, 불필요한 민감정보, 공개 목적이 없는 개인정보는 저장하지 않습니다.</p></article>
+      </div>
+    </section>
+    <section class="section"><h2>현장 보안 원칙</h2><div class="checklist">
+      <div class="check">빔프로젝터에 실제 API 키, 관리자 화면, 개인정보를 띄우지 않는다.</div>
+      <div class="check">배포 전 `.env*`, 저장소 변경 파일, 공개 URL의 핵심 동작을 확인한다.</div>
+      <div class="check">에러 발생 시 로그를 복사하되 비밀값이 포함되지 않았는지 먼저 본다.</div>
+    </div></section>
+    <div class="callout">정확성 주의: Vercel, Railway, Firebase 등의 요금제와 화면은 바뀔 수 있으므로 수업 직전에 공식 서비스 화면을 확인한다.</div>
+  </main>
+</body>
+</html>

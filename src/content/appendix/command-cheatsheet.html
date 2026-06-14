@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>명령어 치트시트 — 바이브코딩</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --violet: #A78BFA; --violet2: #C4B5FD; --cyan: #67E8F9;
+      --amber: #FBBF24; --emerald: #34D399; --rose: #FB7185;
+      --text: #F1F0FF; --text2: #A09EC0; --text3: #6B6A8A;
+    }
+    body {
+      font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+      background: #07081A; color: var(--text);
+      overflow-y: auto; overflow-x: hidden;
+    }
+    .bg-grad {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 15% 0%, rgba(167,139,250,0.14), transparent),
+        radial-gradient(ellipse 50% 45% at 90% 100%, rgba(103,232,249,0.09), transparent);
+    }
+    .top-nav {
+      position: fixed; top: 0; left: 0; right: 0; height: 48px;
+      background: rgba(7,8,26,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; gap: 6px;
+      padding: 0 20px; z-index: 100; overflow-x: auto;
+    }
+    .top-nav::-webkit-scrollbar { display: none; }
+    .nav-home { font-size: 12px; font-weight: 700; color: var(--violet); text-decoration: none; white-space: nowrap; margin-right: 12px; }
+    .nav-link { font-size: 12px; color: var(--text2); text-decoration: none; padding: 4px 10px; border-radius: 999px; white-space: nowrap; transition: background 0.15s; }
+    .nav-link:hover { background: rgba(255,255,255,0.08); color: var(--text); }
+    .container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 72px 40px 80px; }
+    .hero { margin-bottom: 56px; }
+    .hero-eyebrow { font-size: 12px; font-weight: 700; color: var(--violet2); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; }
+    .hero-title { font-size: clamp(32px, 5vw, 72px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 14px; }
+    .hero-desc { font-size: clamp(14px, 1.4vw, 20px); color: var(--text2); line-height: 1.65; max-width: 680px; }
+    .grad-text { background: linear-gradient(135deg, #A78BFA, #67E8F9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .section { margin-bottom: 60px; scroll-margin-top: 60px; }
+    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .section-icon { font-size: 24px; }
+    .section-title { font-size: clamp(20px, 2.5vw, 32px); font-weight: 800; letter-spacing: -0.02em; }
+    .section-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: rgba(167,139,250,0.15); color: var(--violet2); border: 1px solid rgba(167,139,250,0.25); }
+    table { width: 100%; border-collapse: collapse; font-size: clamp(13px, 1.1vw, 16px); }
+    th { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid rgba(255,255,255,0.08); }
+    td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text2); vertical-align: top; line-height: 1.5; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+    td:first-child { color: var(--text); font-weight: 600; font-family: 'JetBrains Mono','Fira Code',Consolas,monospace; font-size: 0.9em; }
+    .table-wrap { border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden; }
+    .info-box { border-left: 3px solid var(--violet); background: rgba(167,139,250,0.06); border-radius: 0 12px 12px 0; padding: 14px 18px; margin: 16px 0; font-size: clamp(13px, 1.1vw, 16px); color: var(--text2); line-height: 1.6; }
+    .info-box strong { color: var(--violet2); }
+    .tip-box { border-left: 3px solid var(--cyan); background: rgba(103,232,249,0.05); border-radius: 0 12px 12px 0; padding: 14px 18px; margin: 16px 0; font-size: clamp(13px, 1.1vw, 16px); color: var(--text2); line-height: 1.6; }
+    .tip-box strong { color: var(--cyan); }
+    .warn-box { border-left: 3px solid var(--amber); background: rgba(251,191,36,0.05); border-radius: 0 12px 12px 0; padding: 14px 18px; margin: 16px 0; font-size: clamp(13px, 1.1vw, 16px); color: var(--text2); line-height: 1.6; }
+    .warn-box strong { color: var(--amber); }
+    .code-group { display: grid; gap: 14px; margin-top: 16px; }
+    .code-group-2 { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 760px) { .code-group-2 { grid-template-columns: 1fr; } .container { padding: 64px 20px 60px; } }
+    .code-block { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 18px 22px; font-family: 'JetBrains Mono','Fira Code',Consolas,monospace; font-size: clamp(12px, 1vw, 14px); line-height: 1.75; overflow-x: auto; position: relative; }
+    .code-block pre { margin: 0; white-space: pre; }
+    .code-label { font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; padding: 0 4px; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between; }
+    .code-comment { color: #6B6A8A; }
+    .code-key { color: #A78BFA; }
+    .code-val { color: #34D399; }
+    .code-cmd { color: #67E8F9; }
+    .code-warn { color: #FBBF24; }
+    .copy-btn { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: var(--text2); font-size: 11px; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+    .copy-btn:hover { background: rgba(255,255,255,0.14); color: var(--text); }
+    .card-grid { display: grid; gap: 14px; }
+    .card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 600px) { .card-grid-2 { grid-template-columns: 1fr; } }
+    .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px 22px; }
+    .card-name { font-size: clamp(14px, 1.3vw, 17px); font-weight: 700; margin-bottom: 8px; }
+    .card-desc { font-size: clamp(12px, 1vw, 14px); color: var(--text2); line-height: 1.6; }
+    .kbd { display: inline-block; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 5px; padding: 1px 7px; font-family: 'JetBrains Mono',monospace; font-size: 12px; color: var(--cyan); }
+    @media print {
+      @page { size: A4; margin: 13mm; }
+      body { background: #fff; color: #15151c; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .bg-grad, .top-nav, .copy-btn { display: none !important; }
+      .container { max-width: none; padding: 0; }
+      .hero { margin-bottom: 28px; }
+      .hero-title { font-size: 34px; color: #15151c; }
+      .hero-desc, td, .card-desc, .info-box, .tip-box, .warn-box { color: #3f4252; }
+      .section { break-inside: avoid; margin-bottom: 28px; }
+      .table-wrap, .card, .code-block, .info-box, .tip-box, .warn-box { background: #fff; border-color: #d9dce8; }
+      .code-block { background: #f7f8fb; }
+      .grad-text { color: #15151c; -webkit-text-fill-color: #15151c; background: none; }
+      th { color: #5f6475; }
+      td:first-child, .card-name, .section-title { color: #15151c; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grad"></div>
+  <nav class="top-nav">
+    <a class="nav-home" href="#">⚡ VIBE CODING</a>
+    <a class="nav-link" href="#terminal-basics">터미널 기초</a>
+    <a class="nav-link" href="#setup-check">설치 확인</a>
+    <a class="nav-link" href="#npm">npm 명령어</a>
+    <a class="nav-link" href="#git">Git 명령어</a>
+    <a class="nav-link" href="#deploy">배포 명령어</a>
+    <a class="nav-link" href="#tips">유용한 팁</a>
+  </nav>
+
+  <div class="container">
+    <div class="hero">
+      <div class="hero-eyebrow">부록 D — 레퍼런스 가이드</div>
+      <h1 class="hero-title"><span class="grad-text">명령어</span> 치트시트</h1>
+      <p class="hero-desc">터미널에서 자주 쓰는 npm, git 명령어 빠른 참조표. 북마크해두고 필요할 때 바로 찾아보세요.</p>
+    </div>
+
+    <!-- TERMINAL BASICS -->
+    <div class="section" id="terminal-basics">
+      <div class="section-header">
+        <span class="section-icon">🖥</span>
+        <h2 class="section-title">터미널 기초</h2>
+        <span class="section-badge">기본 탐색</span>
+      </div>
+      <div class="info-box">
+        <strong>터미널이 무섭게 느껴지는 건 당연합니다.</strong> 실제로 쓰는 명령어는 10개 내외예요. 아래 목록만 외우면 됩니다.
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>명령어</th><th>의미</th><th>예시</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ls &nbsp;/&nbsp; dir</td>
+              <td>현재 폴더의 파일 목록 보기</td>
+              <td style="font-family:monospace; color: var(--cyan)">dir</td>
+            </tr>
+            <tr>
+              <td>cd 폴더명</td>
+              <td>폴더로 이동</td>
+              <td style="font-family:monospace; color: var(--cyan)">cd my-project</td>
+            </tr>
+            <tr>
+              <td>cd ..</td>
+              <td>상위 폴더로 이동</td>
+              <td style="font-family:monospace; color: var(--cyan)">cd ..</td>
+            </tr>
+            <tr>
+              <td>pwd</td>
+              <td>지금 내가 있는 경로 확인</td>
+              <td style="font-family:monospace; color: var(--cyan)">pwd</td>
+            </tr>
+            <tr>
+              <td>mkdir 이름</td>
+              <td>새 폴더 만들기</td>
+              <td style="font-family:monospace; color: var(--cyan)">mkdir my-app</td>
+            </tr>
+            <tr>
+              <td>Remove-Item -Recurse -Force 폴더</td>
+              <td>폴더 삭제 (⚠ 주의 — 복구 불가)</td>
+              <td style="font-family:monospace; color: var(--amber)">Remove-Item -Recurse -Force node_modules</td>
+            </tr>
+            <tr>
+              <td>clear</td>
+              <td>터미널 화면 비우기</td>
+              <td style="font-family:monospace; color: var(--cyan)">clear</td>
+            </tr>
+            <tr>
+              <td>Ctrl + C</td>
+              <td>실행 중인 명령 중단</td>
+              <td style="color: var(--text3)">(개발 서버 종료할 때)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SETUP CHECK -->
+    <div class="section" id="setup-check">
+      <div class="section-header">
+        <span class="section-icon">✅</span>
+        <h2 class="section-title">설치 확인 명령어</h2>
+        <span class="section-badge">2회차 전 숙제</span>
+      </div>
+      <div class="code-group code-group-2">
+        <div>
+          <div class="code-label">필수 프로그램 확인</div>
+          <div class="code-block">
+            <button class="copy-btn">복사</button>
+            <pre><span class="code-cmd">node -v</span>
+<span class="code-cmd">npm -v</span>
+<span class="code-cmd">git --version</span>
+<span class="code-cmd">code --version</span></pre>
+          </div>
+        </div>
+        <div>
+          <div class="code-label">수업용 폴더 만들기</div>
+          <div class="code-block">
+            <button class="copy-btn">복사</button>
+            <pre><span class="code-cmd">mkdir</span> vibe-coding
+<span class="code-cmd">cd</span> vibe-coding
+<span class="code-cmd">mkdir</span> session-02
+<span class="code-cmd">cd</span> session-02
+<span class="code-cmd">code .</span></pre>
+          </div>
+        </div>
+      </div>
+      <div class="warn-box">
+        <strong>Windows 기준:</strong> PowerShell에서 <code style="font-family:monospace;color:var(--cyan)">rm -rf</code>가 안 되면 <code style="font-family:monospace;color:var(--cyan)">Remove-Item -Recurse -Force 폴더명</code>을 사용하세요.
+      </div>
+    </div>
+
+    <!-- NPM -->
+    <div class="section" id="npm">
+      <div class="section-header">
+        <span class="section-icon">📦</span>
+        <h2 class="section-title">npm 명령어</h2>
+        <span class="section-badge">패키지 관리</span>
+      </div>
+
+      <div class="code-group code-group-2">
+        <div>
+          <div class="code-label">기본 프로젝트</div>
+          <div class="code-block">
+            <button class="copy-btn">복사</button>
+            <pre><span class="code-comment"># 새 프로젝트 초기화</span>
+<span class="code-cmd">npm init -y</span>
+
+<span class="code-comment"># 패키지 설치</span>
+<span class="code-cmd">npm install</span> 패키지명
+<span class="code-cmd">npm install</span> react react-dom
+
+<span class="code-comment"># 개발용 패키지 (배포 미포함)</span>
+<span class="code-cmd">npm install -D</span> 패키지명
+<span class="code-cmd">npm install -D</span> tailwindcss
+
+<span class="code-comment"># 패키지 삭제</span>
+<span class="code-cmd">npm uninstall</span> 패키지명</pre>
+          </div>
+        </div>
+        <div>
+          <div class="code-label">프로젝트 실행</div>
+          <div class="code-block">
+            <button class="copy-btn">복사</button>
+            <pre><span class="code-comment"># 개발 서버 시작</span>
+<span class="code-cmd">npm run dev</span>    <span class="code-comment"># 대부분의 프레임워크</span>
+<span class="code-cmd">npm start</span>       <span class="code-comment"># 구형 방식</span>
+
+<span class="code-comment"># 배포용 빌드</span>
+<span class="code-cmd">npm run build</span>
+
+<span class="code-comment"># node_modules 재설치</span>
+<span class="code-warn">Remove-Item -Recurse -Force node_modules</span>
+<span class="code-cmd">npm install</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-group code-group-2" style="margin-top: 14px;">
+        <div>
+          <div class="code-label">Next.js 새 프로젝트 (추천)</div>
+          <div class="code-block">
+            <button class="copy-btn">복사</button>
+            <pre><span class="code-cmd">npx create-next-app@latest</span> my-app
+<span class="code-cmd">cd</span> my-app
+<span class="code-cmd">npm run dev</span>
+
+<span class="code-comment"># → http://localhost:3000 열기</span></pre>
+          </div>
+        </div>
+        <div>
+          <div class="code-label">Vite + React 프로젝트</div>
+          <div class="code-block">
+            <button class="copy-btn">복사</button>
+            <pre><span class="code-cmd">npm create vite@latest</span> my-app <span class="code-key">--</span> <span class="code-key">--template</span> react
+<span class="code-cmd">cd</span> my-app
+<span class="code-cmd">npm install</span>
+<span class="code-cmd">npm run dev</span>
+
+<span class="code-comment"># → http://localhost:5173 열기</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GIT -->
+    <div class="section" id="git">
+      <div class="section-header">
+        <span class="section-icon">🔀</span>
+        <h2 class="section-title">Git 명령어</h2>
+        <span class="section-badge">버전 관리</span>
+      </div>
+
+      <div class="code-group code-group-2">
+        <div>
+          <div class="code-label">기본 흐름 (매일 쓰는 것)</div>
+          <div class="code-block">
+            <button class="copy-btn">복사</button>
+            <pre><span class="code-comment"># 1. 새 저장소 초기화</span>
+<span class="code-cmd">git init</span>
+
+<span class="code-comment"># 2. 변경사항 스테이징</span>
+<span class="code-cmd">git add .</span>           <span class="code-comment"># 모든 파일</span>
+<span class="code-cmd">git add</span> 파일명       <span class="code-comment"># 특정 파일</span>
+
+<span class="code-comment"># 3. 커밋 (변경사항 저장)</span>
+<span class="code-cmd">git commit -m</span> <span class="code-val">"feat: 로그인 기능 추가"</span>
+
+<span class="code-comment"># 4. GitHub에 올리기</span>
+<span class="code-cmd">git push origin main</span></pre>
+          </div>
+        </div>
+        <div>
+          <div class="code-label">브랜치 관리</div>
+          <div class="code-block">
+            <button class="copy-btn">복사</button>
+            <pre><span class="code-comment"># 브랜치 확인</span>
+<span class="code-cmd">git branch</span>
+
+<span class="code-comment"># 새 브랜치 만들기</span>
+<span class="code-cmd">git checkout -b</span> feature/login
+
+<span class="code-comment"># 브랜치 이동</span>
+<span class="code-cmd">git checkout</span> main
+
+<span class="code-comment"># 브랜치 합치기</span>
+<span class="code-cmd">git merge</span> feature/login
+
+<span class="code-comment"># 원격 최신 코드 가져오기</span>
+<span class="code-cmd">git pull origin main</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-group" style="margin-top:14px;">
+        <div>
+          <div class="code-label">취소 / 되돌리기</div>
+          <div class="code-block">
+            <button class="copy-btn">복사</button>
+            <pre><span class="code-comment"># 마지막 커밋 취소 (코드는 유지)</span>
+<span class="code-cmd">git reset --soft HEAD~1</span>
+
+<span class="code-comment"># 변경사항 전체 되돌리기 (⚠ 주의 — 되돌리기 불가)</span>
+<span class="code-warn">git checkout .</span>
+
+<span class="code-comment"># 특정 파일만 되돌리기</span>
+<span class="code-cmd">git checkout --</span> 파일명
+
+<span class="code-comment"># 현재 상태 확인</span>
+<span class="code-cmd">git status</span>
+<span class="code-cmd">git log --oneline</span>     <span class="code-comment"># 커밋 히스토리 한 줄로</span>
+<span class="code-cmd">git diff</span>             <span class="code-comment"># 변경된 내용 보기</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box" style="margin-top: 20px;">
+        <strong>커밋 메시지 규칙:</strong> feat: 새 기능 &nbsp;|&nbsp; fix: 버그수정 &nbsp;|&nbsp; docs: 문서 &nbsp;|&nbsp; style: 스타일 &nbsp;|&nbsp; refactor: 리팩터 &nbsp;|&nbsp; chore: 기타
+      </div>
+    </div>
+
+    <!-- DEPLOY -->
+    <div class="section" id="deploy">
+      <div class="section-header">
+        <span class="section-icon">🚀</span>
+        <h2 class="section-title">배포 명령어</h2>
+        <span class="section-badge">세상에 공개</span>
+      </div>
+
+      <div class="code-group code-group-2">
+        <div>
+          <div class="code-label">Vercel 배포</div>
+          <div class="code-block">
+            <button class="copy-btn">복사</button>
+            <pre><span class="code-comment"># Vercel CLI 설치</span>
+<span class="code-cmd">npm install -g vercel</span>
+
+<span class="code-comment"># 배포 (처음 — 설정 안내 따라가기)</span>
+<span class="code-cmd">vercel</span>
+
+<span class="code-comment"># 재배포 (프로덕션)</span>
+<span class="code-cmd">vercel --prod</span></pre>
+          </div>
+        </div>
+        <div>
+          <div class="code-label">GitHub Pages 배포</div>
+          <div class="code-block">
+            <button class="copy-btn">복사</button>
+            <pre><span class="code-comment"># gh-pages 패키지 설치</span>
+<span class="code-cmd">npm install -D gh-pages</span>
+
+<span class="code-comment"># package.json에 추가</span>
+<span class="code-val">"homepage"</span>: <span class="code-val">"https://username.github.io/repo"</span>,
+<span class="code-val">"scripts"</span>: {
+  <span class="code-val">"predeploy"</span>: <span class="code-val">"npm run build"</span>,
+  <span class="code-val">"deploy"</span>: <span class="code-val">"gh-pages -d dist"</span>
+}
+
+<span class="code-comment"># 배포 실행</span>
+<span class="code-cmd">npm run deploy</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box" style="margin-top: 20px;">
+        <strong>추천:</strong> Vercel에 GitHub 저장소를 연결하면, git push만 해도 자동으로 배포됩니다. CLI 없이도 OK.
+      </div>
+    </div>
+
+    <!-- TIPS -->
+    <div class="section" id="tips">
+      <div class="section-header">
+        <span class="section-icon">💡</span>
+        <h2 class="section-title">유용한 팁</h2>
+        <span class="section-badge">생산성 올리기</span>
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <div class="card-name">탭 자동완성</div>
+          <div class="card-desc">폴더명·파일명 입력 중 <span class="kbd">Tab</span> 누르면 자동완성. 오타 방지와 속도 향상에 필수.</div>
+        </div>
+        <div class="card">
+          <div class="card-name">명령어 기록</div>
+          <div class="card-desc"><span class="kbd">↑</span> <span class="kbd">↓</span> 방향키로 이전 명령어 재사용. 긴 명령어를 다시 입력할 필요 없음.</div>
+        </div>
+        <div class="card">
+          <div class="card-name">.gitignore 필수 항목</div>
+          <div class="card-desc">반드시 추가해야 할 항목:<br><code style="font-family:monospace; color:var(--amber); font-size:12px">node_modules/</code>&nbsp;&nbsp;<code style="font-family:monospace; color:var(--amber); font-size:12px">.env</code>&nbsp;&nbsp;<code style="font-family:monospace; color:var(--amber); font-size:12px">.env.local</code>&nbsp;&nbsp;<code style="font-family:monospace; color:var(--amber); font-size:12px">dist/</code>&nbsp;&nbsp;<code style="font-family:monospace; color:var(--amber); font-size:12px">.DS_Store</code></div>
+        </div>
+        <div class="card">
+          <div class="card-name">에러 발생 시</div>
+          <div class="card-desc">빨간 에러 메시지 전체를 복사해서 AI 채팅에 붙여넣기. "이 에러 해결해줘"라고 하면 대부분 바로 해결됩니다.</div>
+        </div>
+        <div class="card">
+          <div class="card-name">npm vs npx</div>
+          <div class="card-desc"><code style="font-family:monospace; color:var(--cyan)">npm</code>은 설치, <code style="font-family:monospace; color:var(--cyan)">npx</code>는 설치 없이 바로 실행. <code style="font-family:monospace; color:var(--cyan)">npx create-next-app</code>처럼 프로젝트 생성 도구에 씀.</div>
+        </div>
+        <div class="card">
+          <div class="card-name">Ctrl+C로 종료</div>
+          <div class="card-desc">개발 서버(<code style="font-family:monospace; color:var(--cyan)">npm run dev</code>)가 실행 중일 때 <span class="kbd">Ctrl+C</span>로 종료. 창을 그냥 닫으면 백그라운드에서 계속 실행될 수 있음.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const block = btn.closest('.code-block');
+        const pre = block.querySelector('pre');
+        const text = pre ? pre.innerText : block.innerText.replace('복사', '').trim();
+        navigator.clipboard.writeText(text).then(() => {
+          btn.textContent = '✓ 복사됨';
+          setTimeout(() => btn.textContent = '복사', 1500);
+        });
+      });
+    });
+  </script>
+  <script src="./appendix-print.js"></script>
+
+</body>
+</html>

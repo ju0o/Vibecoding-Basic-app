@@ -1,0 +1,353 @@
+.ai-chat-panel {
+  padding: clamp(16px, 2vw, 26px);
+}
+
+.ai-chat-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.ai-chat-kicker {
+  color: var(--edu-violet-2);
+  font-size: clamp(10px, 0.8vw, 12px);
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.ai-chat-title {
+  margin-top: 6px;
+  color: var(--edu-text);
+  font-size: clamp(16px, 1.5vw, 24px);
+  font-weight: 900;
+}
+
+.ai-chat-layout {
+  display: grid;
+  grid-template-columns: 0.95fr 1fr 0.95fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+/* ─── Common panel shell ─── */
+.ai-chat-window,
+.ai-code-window,
+.ai-preview {
+  min-height: 320px;
+  border: 1px solid var(--edu-border);
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Chat window ─── */
+.ai-chat-win-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--edu-border);
+  background: rgba(255, 255, 255, 0.04);
+  flex-shrink: 0;
+}
+
+.ai-chat-win-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--edu-rose);
+  flex-shrink: 0;
+}
+
+.ai-chat-win-label {
+  margin-left: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--edu-dim);
+  letter-spacing: 0.08em;
+}
+
+.ai-chat-win-body {
+  padding: 14px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.ai-message {
+  max-width: 92%;
+  margin-bottom: 10px;
+  padding: 10px 13px;
+  border-radius: 14px;
+  color: var(--edu-muted);
+  font-size: clamp(11px, 0.9vw, 14px);
+  line-height: 1.55;
+}
+
+.ai-message.user {
+  margin-left: auto;
+  color: var(--edu-text);
+  background: rgba(103, 232, 249, 0.1);
+  border: 1px solid rgba(103, 232, 249, 0.22);
+}
+
+.ai-message.ai {
+  background: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.22);
+}
+
+.ai-thinking {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.ai-thinking i {
+  width: 7px;
+  height: 7px;
+  border-radius: 99px;
+  background: var(--edu-violet-2);
+  animation: aiThinking 900ms ease-in-out infinite;
+}
+
+.ai-thinking i:nth-child(2) { animation-delay: 110ms; }
+.ai-thinking i:nth-child(3) { animation-delay: 220ms; }
+
+/* ─── Code window ─── */
+.ai-code-head {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--edu-border);
+  color: var(--edu-dim);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.ai-file-list {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border-bottom: 1px solid var(--edu-border);
+  flex-shrink: 0;
+}
+
+.ai-file-list span {
+  padding: 7px 10px;
+  border-radius: 9px;
+  color: var(--edu-muted);
+  background: rgba(255, 255, 255, 0.04);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: clamp(10px, 0.82vw, 12px);
+  transition: color 180ms, background 180ms, box-shadow 180ms;
+}
+
+.ai-file-list span.is-flash {
+  color: var(--edu-cyan);
+  background: rgba(103, 232, 249, 0.08);
+  box-shadow: 0 0 18px rgba(103, 232, 249, 0.14);
+}
+
+.ai-code-window pre {
+  margin: 0;
+  padding: 12px 14px;
+  color: var(--edu-emerald);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: clamp(10px, 0.82vw, 12px);
+  line-height: 1.65;
+  white-space: pre-wrap;
+  flex: 1;
+}
+
+/* ─── Preview: browser chrome ─── */
+.ai-preview-browser {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--edu-border);
+  background: rgba(255, 255, 255, 0.04);
+  flex-shrink: 0;
+}
+
+.ai-preview-browser i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--edu-rose);
+  flex-shrink: 0;
+}
+
+.ai-preview-browser i:nth-child(2) { background: var(--edu-amber); }
+.ai-preview-browser i:nth-child(3) { background: var(--edu-emerald); }
+
+.ai-preview-url {
+  margin-left: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--edu-dim);
+  font-family: ui-monospace, monospace;
+}
+
+/* ─── Preview: body ─── */
+.ai-preview-body {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0e1a;
+  overflow: hidden;
+}
+
+/* empty state */
+.preview-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.35;
+}
+
+.preview-empty-icon { font-size: 28px; }
+
+.preview-empty-text {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--edu-dim);
+  letter-spacing: 0.08em;
+}
+
+/* ─── Login mock ─── */
+.login-mock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 18px;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(12px) scale(0.97);
+  transition: opacity 420ms ease, transform 420ms ease;
+}
+
+.login-mock.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.login-mock-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.login-logo-icon {
+  font-size: clamp(18px, 1.7vw, 24px);
+  background: linear-gradient(135deg, #818cf8, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.login-mock-title {
+  font-size: clamp(16px, 1.5vw, 20px);
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2px;
+}
+
+.login-mock-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.login-mock-field label {
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.07em;
+}
+
+.login-mock-input {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 8px 11px;
+  font-size: clamp(11px, 0.88vw, 13px);
+  color: rgba(255, 255, 255, 0.55);
+  font-family: ui-monospace, monospace;
+}
+
+/* ─── Login button: initial state ─── */
+.login-mock-btn {
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: clamp(12px, 1vw, 14px);
+  font-weight: 700;
+  cursor: default;
+  transition:
+    background 500ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-radius 500ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    color 300ms ease,
+    transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 500ms ease;
+}
+
+/* ─── Login button: after style revision ─── */
+.login-mock-btn.is-revising {
+  transform: scale(0.93);
+  background: rgba(255, 255, 255, 0.06);
+  opacity: 0.5;
+}
+
+.login-mock-btn.is-styled {
+  border-radius: 999px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
+  color: #fff;
+  box-shadow:
+    0 0 0 2px rgba(139, 92, 246, 0.35),
+    0 6px 24px rgba(139, 92, 246, 0.45),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+  transform: scale(1.04);
+}
+
+.login-mock-link {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 2px;
+}
+
+.login-mock-link span {
+  color: #818cf8;
+  cursor: default;
+}
+
+@keyframes aiThinking {
+  0%, 100% { opacity: 0.35; transform: translateY(0); }
+  50%       { opacity: 1;    transform: translateY(-4px); }
+}
+
+@media (max-width: 1060px) {
+  .ai-chat-layout { grid-template-columns: 1fr; }
+}

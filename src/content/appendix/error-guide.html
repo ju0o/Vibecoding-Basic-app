@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>에러 해결 가이드</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --violet:#A78BFA; --violet2:#C4B5FD; --cyan:#67E8F9; --amber:#FBBF24; --emerald:#34D399; --rose:#FB7185; --bg:#07081A; --surface:rgba(255,255,255,0.045); --border:rgba(255,255,255,0.09); --text:#F1F0FF; --text2:#A09EC0; --text3:#6B6A8A; }
+    body { font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.65; overflow-x:hidden; }
+    .bg { position:fixed; inset:0; pointer-events:none; background:radial-gradient(ellipse 60% 45% at 8% 0%,rgba(167,139,250,.14),transparent),radial-gradient(ellipse 55% 45% at 96% 100%,rgba(251,113,133,.09),transparent); }
+    .nav { position:fixed; top:0; left:0; right:0; height:48px; display:flex; align-items:center; gap:8px; padding:0 20px; background:rgba(7,8,26,.92); border-bottom:1px solid var(--border); z-index:10; overflow-x:auto; }
+    .nav a { color:var(--text2); text-decoration:none; font-size:12px; padding:4px 10px; border-radius:999px; white-space:nowrap; }
+    .nav a:first-child { color:var(--violet2); font-weight:800; letter-spacing:.08em; margin-right:10px; }
+    .nav a:hover { background:rgba(255,255,255,.08); color:var(--text); }
+    main { position:relative; z-index:1; max-width:1080px; margin:0 auto; padding:78px 40px 80px; }
+    .hero { margin-bottom:42px; }
+    .eyebrow { color:var(--violet2); font-size:12px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; margin-bottom:10px; }
+    h1 { font-size:clamp(34px,5vw,64px); line-height:1.06; letter-spacing:-.03em; margin-bottom:14px; }
+    h2 { font-size:clamp(22px,2.5vw,32px); letter-spacing:-.02em; margin-bottom:16px; }
+    .grad { background:linear-gradient(135deg,var(--violet),var(--cyan)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .desc { color:var(--text2); font-size:clamp(14px,1.3vw,19px); max-width:760px; }
+    .section { margin-bottom:42px; scroll-margin-top:64px; }
+    .section-head { display:flex; align-items:center; gap:12px; padding-bottom:12px; border-bottom:1px solid var(--border); margin-bottom:18px; }
+    .num { width:30px; height:30px; display:inline-flex; align-items:center; justify-content:center; border-radius:50%; background:rgba(167,139,250,.14); border:1px solid rgba(167,139,250,.28); color:var(--violet2); font-weight:900; font-size:13px; flex-shrink:0; }
+    .grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .card, .box, .code { border:1px solid var(--border); border-radius:14px; background:var(--surface); padding:18px 20px; min-width:0; }
+    .card-title { color:var(--text); font-size:16px; font-weight:800; margin-bottom:6px; }
+    .card-body, .box { color:var(--text2); font-size:13px; }
+    .tag { display:inline-block; margin-bottom:8px; color:var(--cyan); font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    .code { position:relative; background:rgba(0,0,0,.45); color:var(--cyan); font-family:Consolas,'JetBrains Mono',monospace; font-size:13px; line-height:1.75; overflow-x:auto; white-space:pre-wrap; }
+    .copy { position:absolute; top:10px; right:10px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.08); color:var(--text2); border-radius:6px; padding:4px 10px; cursor:pointer; font-family:inherit; font-size:11px; }
+    .flow { display:grid; grid-template-columns:repeat(5,1fr); gap:0; margin-top:16px; }
+    .step { border:1px solid var(--border); background:rgba(255,255,255,.04); padding:16px 14px; text-align:center; position:relative; min-height:120px; }
+    .step:first-child { border-radius:14px 0 0 14px; }
+    .step:last-child { border-radius:0 14px 14px 0; }
+    .step + .step { border-left:none; }
+    .step::after { content:'>'; position:absolute; right:-10px; top:45%; color:var(--violet2); z-index:2; font-weight:900; }
+    .step:last-child::after { display:none; }
+    .step strong { display:block; color:var(--text); margin:6px 0; }
+    .step span { color:var(--text2); font-size:12px; }
+    .check { display:grid; gap:10px; }
+    .row { display:grid; grid-template-columns:24px 1fr auto; gap:12px; align-items:start; border:1px solid var(--border); border-radius:12px; background:rgba(255,255,255,.035); padding:13px 16px; }
+    .square { width:20px; height:20px; border:2px solid rgba(255,255,255,.28); border-radius:5px; margin-top:2px; }
+    .row b { display:block; color:var(--text); font-size:14px; }
+    .row span { color:var(--text2); font-size:12.5px; }
+    .badge { color:var(--amber); border:1px solid rgba(251,191,36,.3); background:rgba(251,191,36,.1); border-radius:999px; padding:3px 9px; font-size:10px; font-weight:800; white-space:nowrap; }
+    @media (max-width:820px){ main{padding:68px 20px 60px}.grid,.grid2,.flow{grid-template-columns:1fr}.step,.step:first-child,.step:last-child{border-radius:14px}.step+.step{border-left:1px solid var(--border);border-top:none}.step::after{display:none}.row{grid-template-columns:24px 1fr}.badge{grid-column:2;justify-self:start} }
+    @media print { @page{size:A4;margin:13mm} body{background:#fff;color:#15151c;-webkit-print-color-adjust:exact;print-color-adjust:exact}.bg,.nav,.copy{display:none!important} main{max-width:none;padding:0}.hero{margin-bottom:24px} h1{font-size:34px;color:#15151c}.grad{-webkit-text-fill-color:#15151c;background:none}.desc,.card-body,.box,.row span,.step span{color:#3f4252}.section{break-inside:avoid;margin-bottom:26px}.card,.box,.code,.row,.step{background:#fff;border-color:#d9dce8}.code{background:#f7f8fb;color:#0b6071}.card-title,.row b,.step strong,h2{color:#15151c} }
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+  <nav class="nav">
+    <a href="#">VIBE CODING</a>
+    <a href="#flow">해결 루프</a>
+    <a href="#capture">복사할 것</a>
+    <a href="#common">대표 에러</a>
+    <a href="#prompt">프롬프트</a>
+    <a href="#check">점검표</a>
+  </nav>
+  <main>
+    <section class="hero">
+      <div class="eyebrow">별첨 자료</div>
+      <h1><span class="grad">에러 해결</span> 가이드</h1>
+      <p class="desc">코딩보다 중요한 것은 막혔을 때 다시 굴리는 능력입니다. 에러는 실패가 아니라 AI에게 더 정확한 정보를 줄 기회입니다.</p>
+    </section>
+
+    <section class="section" id="flow">
+      <div class="section-head"><span class="num">1</span><h2>막혔을 때 해결 루프</h2></div>
+      <div class="flow">
+        <div class="step"><span>STEP 01</span><strong>멈추기</strong><span>아무 명령이나 더 치지 않기</span></div>
+        <div class="step"><span>STEP 02</span><strong>복사</strong><span>에러 전체와 명령어 복사</span></div>
+        <div class="step"><span>STEP 03</span><strong>상황 설명</strong><span>무엇을 하려 했는지 추가</span></div>
+        <div class="step"><span>STEP 04</span><strong>AI에게 요청</strong><span>원인, 해결 순서 받기</span></div>
+        <div class="step"><span>STEP 05</span><strong>하나씩 실행</strong><span>한 번에 하나만 적용</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="capture">
+      <div class="section-head"><span class="num">2</span><h2>AI에게 꼭 줘야 하는 정보</h2></div>
+      <div class="grid">
+        <div class="card"><span class="tag">COMMAND</span><div class="card-title">내가 입력한 명령어</div><p class="card-body">예: npm run dev, npm install, git push</p></div>
+        <div class="card"><span class="tag">ERROR</span><div class="card-title">빨간 에러 전체</div><p class="card-body">마지막 한 줄만 보내면 원인을 놓칠 수 있습니다.</p></div>
+        <div class="card"><span class="tag">CONTEXT</span><div class="card-title">지금 하려던 일</div><p class="card-body">설치 중인지, 실행 중인지, 배포 중인지 알려주세요.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="common">
+      <div class="section-head"><span class="num">3</span><h2>대표 에러 빠른 해석</h2></div>
+      <div class="grid2">
+        <div class="box"><b style="color:var(--text)">command not found / 인식되지 않습니다</b><br>프로그램이 설치되지 않았거나 PATH 연결이 빠진 상태입니다. 설치 후 터미널을 새로 여세요.</div>
+        <div class="box"><b style="color:var(--text)">Cannot find module</b><br>필요한 패키지가 없거나 node_modules가 깨졌습니다. 보통 npm install로 해결합니다.</div>
+        <div class="box"><b style="color:var(--text)">EADDRINUSE / port already in use</b><br>이미 같은 포트에서 서버가 실행 중입니다. 기존 서버를 Ctrl+C로 끄거나 다른 포트를 씁니다.</div>
+        <div class="box"><b style="color:var(--text)">npm ERR!</b><br>npm 설치/실행 단계에서 난 오류입니다. 에러 전체와 package.json을 AI에게 보여주세요.</div>
+      </div>
+    </section>
+
+    <section class="section" id="prompt">
+      <div class="section-head"><span class="num">4</span><h2>그대로 붙여넣는 에러 해결 프롬프트</h2></div>
+      <div class="code"><button class="copy">복사</button>나는 바이브코딩 기초반 수강생이고, 지금 웹 프로젝트를 실행/수정하는 중이야.
+
+내가 하려던 일:
+[여기에 상황 작성]
+
+내가 입력한 명령어:
+[여기에 명령어 작성]
+
+나온 에러 전체:
+[여기에 에러 전체 붙여넣기]
+
+내 환경:
+Windows / PowerShell / VS Code / Node.js 사용 중
+
+위 에러의 원인을 초보자도 이해할 수 있게 설명해주고,
+해결 명령어를 한 번에 하나씩 순서대로 알려줘.
+위험한 삭제 명령이 있으면 먼저 경고해줘.</div>
+    </section>
+
+    <section class="section" id="check">
+      <div class="section-head"><span class="num">5</span><h2>실행 전 점검표</h2></div>
+      <div class="check">
+        <div class="row"><div class="square"></div><div><b>현재 폴더가 맞나요?</b><span>pwd 또는 dir로 package.json이 있는 폴더인지 확인</span></div><span class="badge">CHECK</span></div>
+        <div class="row"><div class="square"></div><div><b>패키지는 설치했나요?</b><span>처음 받은 프로젝트라면 npm install 먼저 실행</span></div><span class="badge">CHECK</span></div>
+        <div class="row"><div class="square"></div><div><b>개발 서버가 이미 켜져 있나요?</b><span>Ctrl+C로 끄고 다시 npm run dev</span></div><span class="badge">CHECK</span></div>
+        <div class="row"><div class="square"></div><div><b>.env가 필요한 프로젝트인가요?</b><span>API 키가 없으면 실행은 돼도 기능이 실패할 수 있음</span></div><span class="badge">CHECK</span></div>
+      </div>
+    </section>
+  </main>
+  <script>
+    document.querySelectorAll('.copy').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const text = btn.parentElement.innerText.replace('복사', '').trim();
+        navigator.clipboard.writeText(text).then(() => {
+          btn.textContent = '복사됨';
+          setTimeout(() => btn.textContent = '복사', 1400);
+        });
+      });
+    });
+  </script>
+  <script src="./appendix-print.js"></script>
+
+</body>
+</html>

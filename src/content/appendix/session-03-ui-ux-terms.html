@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3강 프론트엔드 UI UX 애니메이션 예시집</title>
+  <link rel="stylesheet" href="./appendix-print.css">
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    body{margin:0;color:#111827;background:#edf1f5;font-family:Pretendard,"Malgun Gothic",system-ui,sans-serif;line-height:1.55}
+    main{width:min(210mm,calc(100vw - 28px));margin:20px auto;padding:14mm;background:#fff;box-shadow:0 18px 50px rgba(15,23,42,.12)}
+    .hero{padding-bottom:16px;border-bottom:3px solid #111827}
+    .eyebrow{color:#0e7490;font-size:11px;font-weight:900;letter-spacing:.12em}
+    h1{margin:6px 0 8px;font-size:31px;line-height:1.15}
+    .desc{max-width:170mm;margin:0;color:#526174;font-size:13px}
+    .section{margin-top:18px;break-inside:avoid}
+    .section.page{break-before:page}
+    h2{margin:0 0 9px;font-size:19px}
+    h3{margin:0 0 5px;font-size:15px}
+    p{margin:0}
+    table{width:100%;border-collapse:collapse;border:1px solid #cfd8e3;background:#fff}
+    th,td{padding:7px 8px;border:1px solid #cfd8e3;vertical-align:top;font-size:11px}
+    th{color:#17313b;background:#e8f1f3;text-align:left;font-size:10px}
+    td:first-child{width:30mm;font-weight:900}
+    .service-grid,.prompt-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    .service,.prompt{padding:10px 11px;border:1px solid #cfd8e3;background:#f8fafc}
+    .service b,.prompt b{display:block;margin-bottom:4px;color:#0e6479;font-size:13px}
+    .service span,.prompt span{display:block;color:#526174;font-size:11px}
+    .service small{display:block;margin-top:6px;padding-top:6px;border-top:1px solid #d8e0e8;color:#111827;font-size:10px}
+    .formula{margin-top:15px;padding:11px 13px;border-left:5px solid #047857;background:#ecfdf5;font-size:12px;font-weight:800}
+    .checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+    .check{display:flex;gap:7px;padding:8px 9px;border:1px solid #d5dde6;font-size:11px}
+    .check::before{content:"□";color:#0e7490;font-size:16px;line-height:1}
+    .state-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+    .state{padding:9px 10px;border:1px solid #cfd8e3;background:#f8fafc}
+    .state b{display:block;color:#0e6479;font-size:12px}
+    .state span{display:block;margin-top:4px;color:#526174;font-size:10px}
+    .motion-purpose{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:9px}
+    .motion-purpose div{padding:9px;border-top:3px solid #0e7490;background:#edf5f6}
+    .motion-purpose b{display:block;font-size:11px}
+    .motion-purpose span{display:block;margin-top:3px;color:#526174;font-size:9.5px}
+    .note{margin-top:15px;padding:10px 12px;border:1px solid #f0c987;background:#fff7ed;color:#7c2d12;font-size:11px;font-weight:800}
+    @media(max-width:720px){.service-grid,.prompt-grid,.checklist,.state-grid,.motion-purpose{grid-template-columns:1fr}main{padding:22px}}
+    @media print{
+      @page{size:A4;margin:11mm 12mm}
+      body{background:#fff;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+      main{width:auto;margin:0;padding:0;box-shadow:none}
+      .hero{padding-bottom:12px}
+      h1{font-size:27px}
+      .section{margin-top:14px}
+      th,td{padding:5px 6px;font-size:9.5px}
+      .service,.prompt{padding:8px 9px}
+      .service span,.prompt span,.check{font-size:9.5px}
+      .state span,.motion-purpose span{font-size:8.8px}
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <div class="eyebrow">STUDENT HANDOUT · SESSION 03</div>
+    <h1>프론트엔드 · UI/UX · 애니메이션 예시집</h1>
+    <p class="desc">용어를 외우는 자료가 아닙니다. 내 프로젝트 화면을 AI에게 설명할 때 “무엇을 어디에서 어떻게 바꿀지” 찾는 텍스트 참고표입니다. 그림과 링크 없이 인쇄해서 사용할 수 있도록 구성했습니다.</p>
+  </header>
+
+  <section class="section">
+    <h2>1. 서비스마다 필요한 프론트엔드가 다릅니다</h2>
+    <div class="service-grid">
+      <article class="service"><b>쇼핑몰</b><span>검색창, 카테고리, 상품 카드, 장바구니, 결제, 주문 완료 화면</span><small>확인 질문: 상품을 찾고 결제 완료까지 다음 행동이 계속 보이는가?</small></article>
+      <article class="service"><b>커뮤니티</b><span>게시글 목록, 글쓰기, 댓글, 좋아요, 저장, 알림, 사용자 프로필</span><small>확인 질문: 새 글과 새로운 반응을 발견하고 참여하기 쉬운가?</small></article>
+      <article class="service"><b>예약 서비스</b><span>날짜, 시간, 인원 선택, 가격 확인, 예약자 정보, 예약 완료 화면</span><small>확인 질문: 이미 고른 조건과 남은 단계를 잃어버리지 않는가?</small></article>
+      <article class="service"><b>관리자 화면</b><span>통계, 검색, 필터, 표, 상태 배지, 상세 보기, 일괄 처리</span><small>확인 질문: 지금 확인하거나 처리할 항목이 먼저 보이는가?</small></article>
+      <article class="service"><b>포트폴리오</b><span>소개, 프로젝트 목록, 상세 과정, 사용 기술, 연락 방법</span><small>확인 질문: 방문자가 짧은 시간 안에 강점과 결과물을 이해하는가?</small></article>
+      <article class="service"><b>SaaS 도구</b><span>온보딩, 작업 화면, 설정, 저장 상태, 사용량, 요금제, 도움말</span><small>확인 질문: 처음 온 사용자도 첫 결과를 만들 수 있는가?</small></article>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>2. UI: 화면에서 보고 누르는 부품</h2>
+    <table>
+      <thead><tr><th>용어</th><th>뜻</th><th>AI에게 요청하는 예시</th></tr></thead>
+      <tbody>
+        <tr><td>헤더</td><td>로고, 주요 메뉴, 검색, 로그인 등이 있는 화면 상단.</td><td>“헤더에 검색과 로그인 버튼을 정리해줘.”</td></tr>
+        <tr><td>내비게이션</td><td>사용자가 다른 화면이나 구역으로 이동하는 메뉴.</td><td>“현재 페이지가 표시되는 내비게이션을 만들어줘.”</td></tr>
+        <tr><td>버튼</td><td>저장, 주문, 시작처럼 행동을 실행하는 요소.</td><td>“가장 중요한 저장 버튼을 한눈에 보이게 해줘.”</td></tr>
+        <tr><td>입력창</td><td>검색어, 이메일, 댓글처럼 값을 입력하는 칸.</td><td>“입력 예시와 오류 메시지를 입력창 가까이에 보여줘.”</td></tr>
+        <tr><td>카드</td><td>상품, 게시글, 프로젝트처럼 한 묶음의 정보를 담는 영역.</td><td>“프로젝트 카드를 제목, 설명, 상태 순서로 정리해줘.”</td></tr>
+        <tr><td>모달</td><td>현재 화면 위에 집중 작업을 띄우는 창.</td><td>“삭제 전에 이유와 취소 버튼이 있는 확인 모달을 띄워줘.”</td></tr>
+        <tr><td>드로어</td><td>화면 가장자리에서 밀려 들어오는 메뉴나 설정 영역.</td><td>“모바일에서는 메뉴를 왼쪽 드로어로 열어줘.”</td></tr>
+        <tr><td>탭</td><td>같은 화면에서 관련 내용을 나눠 전환하는 요소.</td><td>“상세, 리뷰, 문의 탭의 현재 위치를 표시해줘.”</td></tr>
+        <tr><td>드롭다운</td><td>누르면 선택지가 아래로 펼쳐지는 메뉴.</td><td>“상태를 선택하는 드롭다운을 추가해줘.”</td></tr>
+        <tr><td>필터</td><td>가격, 날짜, 상태 등 조건으로 목록을 줄이는 기능.</td><td>“선택된 필터를 해제할 수 있는 칩으로 보여줘.”</td></tr>
+        <tr><td>표</td><td>여러 데이터의 같은 항목을 행과 열로 비교하는 화면.</td><td>“주문 번호, 고객, 상태, 금액을 표로 정리해줘.”</td></tr>
+        <tr><td>배지</td><td>배송 중, 완료, 오류 같은 짧은 상태 표시.</td><td>“주문 상태를 색만이 아니라 글자 배지로도 표시해줘.”</td></tr>
+        <tr><td>토스트</td><td>저장 완료처럼 잠깐 나타나는 작은 결과 알림.</td><td>“저장 후 우측 상단에 완료 토스트를 보여줘.”</td></tr>
+        <tr><td>빈 상태</td><td>데이터가 없을 때 다음 행동을 안내하는 화면.</td><td>“목록이 비었을 때 첫 프로젝트 만들기 버튼을 보여줘.”</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section page">
+    <h2>3. UX: 사용자가 막히지 않도록 만드는 과정</h2>
+    <table>
+      <thead><tr><th>상황</th><th>불편한 경험</th><th>좋은 경험</th></tr></thead>
+      <tbody>
+        <tr><td>결제</td><td>현재 단계와 최종 금액을 마지막까지 알 수 없다.</td><td>진행 단계, 상품 금액, 배송비, 결제 후 결과를 미리 보여준다.</td></tr>
+        <tr><td>회원가입</td><td>많은 입력칸과 약관을 한 화면에 한꺼번에 보여준다.</td><td>필요한 정보만 단계별로 묻고, 왜 필요한지 설명한다.</td></tr>
+        <tr><td>검색</td><td>결과가 없다는 문장만 보여주고 끝난다.</td><td>오타 교정, 관련 검색어, 필터, 인기 항목을 제안한다.</td></tr>
+        <tr><td>오류 복구</td><td>“오류가 발생했습니다”만 보여주고 입력 내용을 지운다.</td><td>작성 내용을 유지하고 원인, 해결법, 다시 시도 버튼을 함께 준다.</td></tr>
+        <tr><td>로딩</td><td>아무 변화가 없어 멈춘 것처럼 보인다.</td><td>로딩 중임을 알리고 콘텐츠가 나타날 자리를 먼저 보여준다.</td></tr>
+        <tr><td>삭제</td><td>한 번의 클릭으로 복구할 수 없이 삭제한다.</td><td>확인 문구를 보여주거나 잠시 되돌리기 기능을 제공한다.</td></tr>
+        <tr><td>모바일</td><td>버튼과 글자가 너무 작고 가로 스크롤이 생긴다.</td><td>중요한 행동을 손가락으로 누르기 쉬운 크기와 순서로 재배치한다.</td></tr>
+        <tr><td>접근성</td><td>색만으로 상태를 구분하고 글자 대비가 낮다.</td><td>색, 아이콘, 글자를 함께 사용하고 충분한 대비를 유지한다.</td></tr>
+      </tbody>
+    </table>
+    <div class="formula">UI는 “화면이 어떻게 생겼는가”, UX는 “사용자가 목표까지 막히지 않고 갈 수 있는가”입니다.</div>
+  </section>
+
+  <section class="section">
+    <h2>4. 화면 애니메이션 10종</h2>
+    <table>
+      <thead><tr><th>예시</th><th>무엇을 알려주는가</th><th>주의할 점</th></tr></thead>
+      <tbody>
+        <tr><td>메뉴 전환</td><td>새 선택지가 어느 방향에서 이어지는지 보여준다.</td><td>너무 느리거나 화면을 과하게 가리지 않는다.</td></tr>
+        <tr><td>스켈레톤 로딩</td><td>콘텐츠를 불러오는 중이며 어디에 나타날지 알려준다.</td><td>실제 내용과 비슷한 크기로 만든다.</td></tr>
+        <tr><td>장바구니 이동</td><td>선택한 상품과 장바구니 숫자의 변화를 연결한다.</td><td>장식보다 수량 변화가 분명해야 한다.</td></tr>
+        <tr><td>완료 전환</td><td>작업이 끝났고 다음 행동이 가능함을 확신시킨다.</td><td>성공 문구와 다음 행동을 함께 보여준다.</td></tr>
+        <tr><td>탭 전환</td><td>같은 화면 안에서 현재 보고 있는 위치를 알려준다.</td><td>선택 표시와 내용이 동시에 바뀌어야 한다.</td></tr>
+        <tr><td>입력 검증</td><td>문제가 생긴 위치와 고쳐야 할 방법을 연결한다.</td><td>빨간 흔들림만 사용하지 말고 설명을 적는다.</td></tr>
+        <tr><td>아코디언</td><td>필요한 내용만 펼쳐 정보 밀도를 조절한다.</td><td>열렸는지 닫혔는지 아이콘과 공간 변화로 보여준다.</td></tr>
+        <tr><td>페이지 전환</td><td>목록에서 선택한 대상이 상세 화면으로 이어졌음을 보여준다.</td><td>방향과 속도를 화면 이동의 의미에 맞춘다.</td></tr>
+        <tr><td>좋아요 반응</td><td>작은 저장 행동이 실제로 반영되었음을 알려준다.</td><td>아이콘, 숫자, 저장 위치가 같은 상태를 보여야 한다.</td></tr>
+        <tr><td>스크롤 진행</td><td>긴 페이지에서 현재 위치와 남은 길이를 알려준다.</td><td>내용을 가리지 않는 얇고 안정적인 표시를 사용한다.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section page">
+    <h2>5. 기능마다 확인할 화면 상태 6가지</h2>
+    <div class="state-grid">
+      <article class="state"><b>기본</b><span>아직 행동하지 않았을 때 무엇을 할 수 있는지 보인다.</span></article>
+      <article class="state"><b>처리 중</b><span>클릭을 받았고 작업이 진행 중임을 알려 중복 실행을 막는다.</span></article>
+      <article class="state"><b>성공</b><span>무엇이 완료되었고 다음에 무엇을 할 수 있는지 보여준다.</span></article>
+      <article class="state"><b>실패</b><span>원인, 유지된 내용, 해결 방법, 다시 시도를 함께 보여준다.</span></article>
+      <article class="state"><b>빈 화면</b><span>데이터가 없다는 말에서 끝내지 않고 첫 행동을 제안한다.</span></article>
+      <article class="state"><b>사용 불가</b><span>권한, 조건, 입력 부족 때문에 누를 수 없다면 이유를 알려준다.</span></article>
+    </div>
+    <div class="motion-purpose">
+      <div><b>이동</b><span>메뉴·탭·페이지가 어디로 이어지는지 설명</span></div>
+      <div><b>상태</b><span>열림·닫힘·선택·로딩처럼 현재 상태를 표시</span></div>
+      <div><b>피드백</b><span>저장·주문·좋아요의 결과를 즉시 확인</span></div>
+      <div><b>안내</b><span>오류 위치·스크롤 위치·다음 행동을 강조</span></div>
+    </div>
+    <div class="formula">움직임을 넣기 전 “사용자가 이 움직임으로 무엇을 더 잘 이해하는가?”에 답할 수 있어야 합니다. 답이 없다면 애니메이션을 넣지 않아도 됩니다.</div>
+  </section>
+
+  <section class="section">
+    <h2>6. AI에게 요청하는 문장 예시</h2>
+    <div class="prompt-grid">
+      <article class="prompt"><b>프론트엔드 전체</b><span>“한국 사용자가 익숙하게 느끼는 화면으로 만들고, 헤더·검색·목록·상세·완료 상태를 실제 서비스처럼 구현해줘.”</span></article>
+      <article class="prompt"><b>UI 정리</b><span>“중요한 버튼과 보조 버튼의 차이를 크기와 색으로 구분하고, 글자와 요소가 겹치지 않게 여백을 정리해줘.”</span></article>
+      <article class="prompt"><b>UX 개선</b><span>“처음 온 사용자도 다음 행동을 알 수 있게 현재 상태, 다음 단계, 성공과 실패 결과를 화면에 표시해줘.”</span></article>
+      <article class="prompt"><b>애니메이션</b><span>“메뉴가 열리는 위치와 저장 완료 결과를 이해할 수 있도록 200~400ms의 절제된 전환을 넣어줘.”</span></article>
+      <article class="prompt"><b>오류 복구</b><span>“오류가 나도 입력값을 유지하고, 실패 원인과 해결 방법, 다시 시도 버튼을 같은 영역에 보여줘.”</span></article>
+      <article class="prompt"><b>모바일</b><span>“모바일에서는 버튼을 누르기 쉬운 크기로 바꾸고, 표는 카드나 가로 스크롤로 안전하게 표현해줘.”</span></article>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>7. 내 프로젝트 화면 점검</h2>
+    <div class="checklist">
+      <div class="check">가장 중요한 행동이 화면에서 먼저 보인다.</div>
+      <div class="check">클릭 후 처리 중, 성공, 실패 상태가 모두 있다.</div>
+      <div class="check">빈 화면과 사용할 수 없는 상태에서 이유와 다음 행동을 알려준다.</div>
+      <div class="check">오류가 나도 입력한 내용이 가능한 한 유지된다.</div>
+      <div class="check">현재 위치와 다음 단계가 화면에 표시된다.</div>
+      <div class="check">애니메이션이 의미를 설명하고 과하게 반복되지 않는다.</div>
+      <div class="check">작은 노트북과 모바일에서도 글자와 버튼이 겹치지 않는다.</div>
+      <div class="check">색만이 아니라 글자와 아이콘으로도 상태를 구분한다.</div>
+    </div>
+  </section>
+
+  <div class="note">수업에서 모든 용어를 외울 필요는 없습니다. AI에게 “어떤 서비스의 어느 화면에서 사용자가 무엇을 하며, 어떤 결과를 보아야 하는지” 설명할 수 있으면 됩니다.</div>
+</main>
+<script src="./appendix-print.js"></script>
+</body>
+</html>

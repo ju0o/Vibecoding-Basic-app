@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>데이터베이스 완전 가이드 — 바이브코딩</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --violet: #A78BFA; --violet2: #C4B5FD; --cyan: #67E8F9;
+      --amber: #FBBF24; --emerald: #34D399; --rose: #FB7185;
+      --text: #F1F0FF; --text2: #A09EC0; --text3: #6B6A8A;
+    }
+    body {
+      font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+      background: #07081A; color: var(--text);
+      overflow-y: auto; overflow-x: hidden;
+    }
+    .bg-grad {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 15% 0%, rgba(167,139,250,0.14), transparent),
+        radial-gradient(ellipse 50% 45% at 90% 100%, rgba(103,232,249,0.09), transparent);
+    }
+    .top-nav {
+      position: fixed; top: 0; left: 0; right: 0; height: 48px;
+      background: rgba(7,8,26,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; gap: 6px;
+      padding: 0 20px; z-index: 100; overflow-x: auto;
+    }
+    .top-nav::-webkit-scrollbar { display: none; }
+    .nav-home { font-size: 12px; font-weight: 700; color: var(--violet); text-decoration: none; white-space: nowrap; margin-right: 12px; }
+    .nav-link { font-size: 12px; color: var(--text2); text-decoration: none; padding: 4px 10px; border-radius: 999px; white-space: nowrap; transition: background 0.15s; }
+    .nav-link:hover { background: rgba(255,255,255,0.08); color: var(--text); }
+    .container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 72px 40px 80px; }
+    .hero { margin-bottom: 56px; }
+    .hero-eyebrow { font-size: 12px; font-weight: 700; color: var(--violet2); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; }
+    .hero-title { font-size: clamp(32px, 5vw, 72px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 14px; }
+    .hero-desc { font-size: clamp(14px, 1.4vw, 20px); color: var(--text2); line-height: 1.65; max-width: 680px; }
+    .grad-text { background: linear-gradient(135deg, #A78BFA, #67E8F9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .section { margin-bottom: 60px; scroll-margin-top: 60px; }
+    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .section-icon { font-size: 24px; }
+    .section-title { font-size: clamp(20px, 2.5vw, 32px); font-weight: 800; letter-spacing: -0.02em; }
+    .section-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: rgba(167,139,250,0.15); color: var(--violet2); border: 1px solid rgba(167,139,250,0.25); }
+    .card-grid { display: grid; gap: 14px; }
+    .card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 900px) { .card-grid-3 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .card-grid-2, .card-grid-3 { grid-template-columns: 1fr; } .container { padding: 64px 20px 60px; } }
+    .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px 22px; transition: border-color 0.2s, background 0.2s; }
+    .card:hover { border-color: rgba(167,139,250,0.25); background: rgba(255,255,255,0.06); }
+    .card-name { font-size: clamp(15px, 1.5vw, 20px); font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+    .card-by { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+    .card-desc { font-size: clamp(12px, 1vw, 15px); color: var(--text2); line-height: 1.6; }
+    .card-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .card-pill { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 999px; }
+    .tag-free { background: rgba(52,211,153,0.12); color: var(--emerald); border: 1px solid rgba(52,211,153,0.25); }
+    .tag-paid { background: rgba(251,191,36,0.10); color: var(--amber); border: 1px solid rgba(251,191,36,0.2); }
+    .tag-oss { background: rgba(103,232,249,0.10); color: var(--cyan); border: 1px solid rgba(103,232,249,0.2); }
+    table { width: 100%; border-collapse: collapse; font-size: clamp(13px, 1.1vw, 16px); }
+    th { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid rgba(255,255,255,0.08); }
+    td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text2); vertical-align: top; line-height: 1.5; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+    td:first-child { color: var(--text); font-weight: 600; }
+    .table-wrap { border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden; }
+    .info-box { border-left: 3px solid var(--violet); background: rgba(167,139,250,0.06); border-radius: 0 12px 12px 0; padding: 14px 18px; margin: 16px 0; font-size: clamp(13px, 1.1vw, 16px); color: var(--text2); line-height: 1.6; }
+    .info-box strong { color: var(--violet2); }
+    .tip-box { border-left: 3px solid var(--cyan); background: rgba(103,232,249,0.05); border-radius: 0 12px 12px 0; padding: 14px 18px; margin: 16px 0; font-size: clamp(13px, 1.1vw, 16px); color: var(--text2); line-height: 1.6; }
+    .tip-box strong { color: var(--cyan); }
+    .code-block { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 18px 22px; font-family: 'JetBrains Mono','Fira Code',Consolas,monospace; font-size: clamp(12px, 1vw, 14px); line-height: 1.75; overflow-x: auto; position: relative; margin-top: 16px; }
+    .code-block pre { margin: 0; white-space: pre; }
+    .code-comment { color: #6B6A8A; }
+    .code-key { color: #A78BFA; }
+    .code-val { color: #34D399; }
+    .code-cmd { color: #67E8F9; }
+    .code-label { font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+    .copy-btn { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: var(--text2); font-size: 11px; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+    .copy-btn:hover { background: rgba(255,255,255,0.14); color: var(--text); }
+  </style>
+</head>
+<body>
+  <div class="bg-grad"></div>
+  <nav class="top-nav">
+    <a class="nav-home" href="#">⚡ VIBE CODING</a>
+    <a class="nav-link" href="#choose">DB 선택법</a>
+    <a class="nav-link" href="#firebase">Firebase</a>
+    <a class="nav-link" href="#supabase">Supabase</a>
+    <a class="nav-link" href="#sql">SQL DB</a>
+    <a class="nav-link" href="#nosql">NoSQL</a>
+    <a class="nav-link" href="#vector">벡터 DB</a>
+    <a class="nav-link" href="#baas">BaaS</a>
+  </nav>
+
+  <div class="container">
+    <div class="hero">
+      <div class="hero-eyebrow">부록 B — 레퍼런스 가이드</div>
+      <h1 class="hero-title"><span class="grad-text">데이터베이스</span> 완전 가이드</h1>
+      <p class="hero-desc">바이브코딩으로 서비스를 만들 때 알아야 할 DB 선택 가이드. Firebase부터 벡터 DB까지 상황별 최적 선택법을 정리했습니다.</p>
+    </div>
+
+    <!-- CHOOSE -->
+    <div class="section" id="choose">
+      <div class="section-header">
+        <span class="section-icon">🧭</span>
+        <h2 class="section-title">어떤 DB를 골라야 할까?</h2>
+      </div>
+      <div class="info-box">
+        <strong>처음 만드는 서비스라면 Firebase 또는 Supabase를 추천합니다.</strong> AI IDE로 가장 쉽게 연동할 수 있어요.
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>상황</th><th>추천 DB</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>빠르게 MVP 만들기</td><td>Firebase / Supabase</td></tr>
+            <tr><td>실시간 데이터(채팅, 알림)</td><td>Firebase Realtime DB</td></tr>
+            <tr><td>SQL이 필요한 복잡한 데이터</td><td>Supabase (PostgreSQL)</td></tr>
+            <tr><td>무료로 시작, 나중에 확장</td><td>Supabase / PocketBase</td></tr>
+            <tr><td>AI 검색 기능 추가</td><td>Pinecone / Supabase pgvector</td></tr>
+            <tr><td>대규모 트래픽 서비스</td><td>AWS DynamoDB / PlanetScale</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FIREBASE -->
+    <div class="section" id="firebase">
+      <div class="section-header">
+        <span class="section-icon">🔥</span>
+        <h2 class="section-title">Firebase (Google)</h2>
+        <span class="section-badge">초보자 추천</span>
+      </div>
+      <div class="info-box">
+        <strong>Google이 운영하는 BaaS.</strong> 무료 Spark 플랜으로 시작 가능. AI IDE 연동 코드가 많아 초보자에게 최적.
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <div class="card-name">🗄 Firestore</div>
+          <div class="card-desc">NoSQL 문서형 DB. 실시간 동기화 지원. 컬렉션-문서 구조. 가장 많이 씀.</div>
+          <div class="card-pills"><span class="card-pill tag-free">일정량 무료</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">⚡ Realtime Database</div>
+          <div class="card-desc">JSON 기반 실시간 DB. 채팅·라이브 업데이트용. Firestore보다 단순.</div>
+          <div class="card-pills"><span class="card-pill tag-free">일정량 무료</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">🔐 Firebase Auth</div>
+          <div class="card-desc">소셜 로그인(Google, GitHub, Apple 등) + 이메일 인증 내장. 가장 쉬운 인증.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">📦 Firebase Storage</div>
+          <div class="card-desc">이미지·파일 저장. 프로필 사진, 첨부파일 등. CDN 내장.</div>
+          <div class="card-pills"><span class="card-pill tag-free">일정량 무료</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">🌐 Firebase Hosting</div>
+          <div class="card-desc">정적 사이트 + API 배포. HTTPS 자동. 전 세계 CDN.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">⚙ Firebase Functions</div>
+          <div class="card-desc">서버리스 함수. 결제 처리·알림 발송 등 백엔드 로직 실행.</div>
+          <div class="card-pills"><span class="card-pill tag-free">일정량 무료</span><span class="card-pill tag-paid">초과 유료</span></div>
+        </div>
+      </div>
+      <div class="code-label" style="margin-top:24px">Firebase 연결 기본 코드</div>
+      <div class="code-block">
+        <button class="copy-btn">복사</button>
+        <pre><span class="code-comment">// Firebase 연결 기본 코드</span>
+<span class="code-key">import</span> { initializeApp } <span class="code-key">from</span> <span class="code-val">'firebase/app'</span>;
+<span class="code-key">import</span> { getFirestore } <span class="code-key">from</span> <span class="code-val">'firebase/firestore'</span>;
+
+<span class="code-key">const</span> app = initializeApp({
+  apiKey: process.env.<span class="code-cmd">FIREBASE_API_KEY</span>,
+  authDomain: <span class="code-val">"your-project.firebaseapp.com"</span>,
+  projectId: <span class="code-val">"your-project-id"</span>,
+});
+
+<span class="code-key">export const</span> db = getFirestore(app);</pre>
+      </div>
+    </div>
+
+    <!-- SUPABASE -->
+    <div class="section" id="supabase">
+      <div class="section-header">
+        <span class="section-icon">⚡</span>
+        <h2 class="section-title">Supabase</h2>
+        <span class="section-badge">SQL + 오픈소스</span>
+      </div>
+      <div class="info-box">
+        <strong>PostgreSQL 기반의 오픈소스 Firebase 대안.</strong> SQL을 쓸 수 있어 복잡한 데이터 구조에 강함. 무료 플랜으로 시작 가능.
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <div class="card-name">🗄 PostgreSQL DB</div>
+          <div class="card-desc">실제 SQL 데이터베이스. 관계형 데이터 처리. Row Level Security (RLS)로 보안 관리.</div>
+          <div class="card-pills"><span class="card-pill tag-free">2개 프로젝트 무료</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">🔐 Auth</div>
+          <div class="card-desc">소셜 로그인 + 이메일 인증. Magic Link 지원. Firebase Auth와 유사.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">📦 Storage</div>
+          <div class="card-desc">파일 저장. S3 호환 API. RLS로 권한 세밀하게 제어 가능.</div>
+          <div class="card-pills"><span class="card-pill tag-free">1GB 무료</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">⚙ Edge Functions</div>
+          <div class="card-desc">Deno 기반 서버리스 함수. 전 세계 엣지 서버에서 실행.</div>
+          <div class="card-pills"><span class="card-pill tag-free">500K 호출 무료</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">📡 Realtime</div>
+          <div class="card-desc">DB 변경사항 실시간 구독. 채팅·알림 구현 가능.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">🔎 pgvector</div>
+          <div class="card-desc">AI 벡터 검색 내장. OpenAI 임베딩과 조합해 AI 검색 기능 추가 가능.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span><span class="card-pill tag-oss">오픈소스</span></div>
+        </div>
+      </div>
+      <div class="code-label" style="margin-top:24px">Supabase 연결 기본 코드</div>
+      <div class="code-block">
+        <button class="copy-btn">복사</button>
+        <pre><span class="code-comment">// Supabase 연결 기본 코드</span>
+<span class="code-key">import</span> { createClient } <span class="code-key">from</span> <span class="code-val">'@supabase/supabase-js'</span>;
+
+<span class="code-key">const</span> supabase = createClient(
+  process.env.<span class="code-cmd">SUPABASE_URL</span>,
+  process.env.<span class="code-cmd">SUPABASE_ANON_KEY</span>
+);
+
+<span class="code-comment">// 데이터 조회 예시</span>
+<span class="code-key">const</span> { data, error } = <span class="code-key">await</span> supabase
+  .from(<span class="code-val">'posts'</span>)
+  .select(<span class="code-val">'*'</span>)
+  .eq(<span class="code-val">'user_id'</span>, userId);</pre>
+      </div>
+    </div>
+
+    <!-- SQL -->
+    <div class="section" id="sql">
+      <div class="section-header">
+        <span class="section-icon">🏗</span>
+        <h2 class="section-title">SQL 데이터베이스</h2>
+        <span class="section-badge">관계형 DB</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>이름</th><th>특징</th><th>추천 상황</th><th>가격</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PostgreSQL</td>
+              <td>가장 강력한 오픈소스 SQL DB. JSON 지원. 벡터 검색 가능</td>
+              <td>복잡한 데이터 구조</td>
+              <td>무료 (호스팅 별도)</td>
+            </tr>
+            <tr>
+              <td>MySQL / MariaDB</td>
+              <td>가장 많이 쓰이는 SQL DB. 자료 풍부. LAMP 스택 기본</td>
+              <td>전통적인 웹 서비스</td>
+              <td>무료</td>
+            </tr>
+            <tr>
+              <td>SQLite</td>
+              <td>파일 하나가 DB. 설정 없이 사용. 앱 내장 DB, 소규모 서비스</td>
+              <td>간단한 로컬 앱</td>
+              <td>무료</td>
+            </tr>
+            <tr>
+              <td>PlanetScale</td>
+              <td>서버리스 MySQL. 브랜치 기능으로 안전한 스키마 변경</td>
+              <td>스케일업 서비스</td>
+              <td>무료 플랜 / $39/월~</td>
+            </tr>
+            <tr>
+              <td>Neon</td>
+              <td>서버리스 PostgreSQL. 자동 일시정지로 비용 절감. Vercel과 찰떡</td>
+              <td>Next.js + Vercel 조합</td>
+              <td>무료 플랜</td>
+            </tr>
+            <tr>
+              <td>CockroachDB</td>
+              <td>분산 SQL DB. 전 세계 동시 쓰기 가능. 대규모 글로벌 서비스</td>
+              <td>글로벌 스케일</td>
+              <td>무료 플랜</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- NOSQL -->
+    <div class="section" id="nosql">
+      <div class="section-header">
+        <span class="section-icon">📄</span>
+        <h2 class="section-title">NoSQL 데이터베이스</h2>
+        <span class="section-badge">유연한 구조</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>이름</th><th>유형</th><th>특징</th><th>추천 상황</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MongoDB</td>
+              <td style="color:var(--text3)">문서형</td>
+              <td>JSON 유사 문서 저장. 스키마 유연. Atlas 클라우드 제공</td>
+              <td>빠른 프로토타입, 유연한 구조</td>
+            </tr>
+            <tr>
+              <td>Redis</td>
+              <td style="color:var(--text3)">키-값 (인메모리)</td>
+              <td>초고속 캐시. 세션 저장. Pub/Sub 메시지 큐</td>
+              <td>캐시, 실시간 순위, 세션</td>
+            </tr>
+            <tr>
+              <td>DynamoDB</td>
+              <td style="color:var(--text3)">키-값/문서 (AWS)</td>
+              <td>AWS 완전 관리형. 무한 확장. Lambda와 조합 최강</td>
+              <td>AWS 생태계 서비스</td>
+            </tr>
+            <tr>
+              <td>Cassandra</td>
+              <td style="color:var(--text3)">와이드 컬럼</td>
+              <td>쓰기 속도 최강. 대규모 시계열 데이터</td>
+              <td>로그, IoT 데이터</td>
+            </tr>
+            <tr>
+              <td>InfluxDB</td>
+              <td style="color:var(--text3)">시계열</td>
+              <td>시간 기반 데이터 최적화. 모니터링·센서 데이터</td>
+              <td>서버 모니터링, 분석</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- VECTOR -->
+    <div class="section" id="vector">
+      <div class="section-header">
+        <span class="section-icon">🧬</span>
+        <h2 class="section-title">벡터 데이터베이스 (AI용)</h2>
+        <span class="section-badge">AI 검색 필수</span>
+      </div>
+      <div class="info-box">
+        <strong>AI 검색 기능을 추가할 때 필요합니다.</strong> '의미 기반 검색'을 구현하려면 벡터 DB가 필요해요. 일반 키워드 검색과 달리 문장의 '의미'를 이해해서 검색합니다.
+      </div>
+      <div class="card-grid card-grid-3">
+        <div class="card">
+          <div class="card-name">Pinecone</div>
+          <div class="card-desc">AI 검색 전용 클라우드 벡터 DB. 설정 쉽고 빠름. OpenAI 임베딩과 최상의 조합.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료 플랜</span><span class="card-pill tag-paid">Standard $70/월~</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Supabase pgvector</div>
+          <div class="card-desc">Supabase에 내장된 벡터 검색. 추가 설정 없이 SQL과 통합.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span><span class="card-pill tag-oss">오픈소스</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Weaviate</div>
+          <div class="card-desc">오픈소스 벡터 DB. 멀티모달(텍스트+이미지) 검색 지원.</div>
+          <div class="card-pills"><span class="card-pill tag-oss">오픈소스</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Chroma</div>
+          <div class="card-desc">로컬 개발용 벡터 DB. 설치 간단. AI 프로토타이핑에 최적.</div>
+          <div class="card-pills"><span class="card-pill tag-oss">오픈소스</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Qdrant</div>
+          <div class="card-desc">고성능 오픈소스 벡터 DB. 필터링 기능 강함.</div>
+          <div class="card-pills"><span class="card-pill tag-oss">오픈소스</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Milvus</div>
+          <div class="card-desc">대규모 벡터 검색 특화. 수십억 벡터 처리 가능.</div>
+          <div class="card-pills"><span class="card-pill tag-oss">오픈소스</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BAAS -->
+    <div class="section" id="baas">
+      <div class="section-header">
+        <span class="section-icon">🧩</span>
+        <h2 class="section-title">BaaS (Backend as a Service)</h2>
+        <span class="section-badge">서버 없이 백엔드 완성</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>이름</th><th>특징</th><th>Firebase 대비</th><th>가격</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Appwrite</td>
+              <td>셀프호스팅 Firebase 대안. 모든 기능 포함. Docker로 배포</td>
+              <td>오픈소스, 자체 서버</td>
+              <td>무료 (셀프호스팅)</td>
+            </tr>
+            <tr>
+              <td>PocketBase</td>
+              <td>Go로 만든 초경량 BaaS. 실행파일 하나로 바로 사용</td>
+              <td>개인 프로젝트에 최강</td>
+              <td>무료 오픈소스</td>
+            </tr>
+            <tr>
+              <td>Directus</td>
+              <td>어떤 DB든 연결해 관리자 UI 제공. 콘텐츠 관리에 강함</td>
+              <td>데이터 중심 앱</td>
+              <td>오픈소스 / 클라우드 유료</td>
+            </tr>
+            <tr>
+              <td>Strapi</td>
+              <td>Node.js CMS + API 생성기. 커스텀 API 빠르게 구축</td>
+              <td>API 빌더로 최강</td>
+              <td>무료 / 기업 유료</td>
+            </tr>
+            <tr>
+              <td>Sanity</td>
+              <td>실시간 협업 CMS. 블로그·포트폴리오 콘텐츠 관리</td>
+              <td>콘텐츠 중심 사이트</td>
+              <td>무료 플랜</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const block = btn.closest('.code-block');
+        const pre = block.querySelector('pre');
+        const text = pre ? pre.innerText : block.innerText.replace('복사', '').trim();
+        navigator.clipboard.writeText(text).then(() => {
+          btn.textContent = '✓ 복사됨';
+          setTimeout(() => btn.textContent = '복사', 1500);
+        });
+      });
+    });
+  </script>
+  <script src="./appendix-print.js"></script>
+
+</body>
+</html>

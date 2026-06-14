@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 작업지시서 템플릿</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--violet:#A78BFA;--violet2:#C4B5FD;--cyan:#67E8F9;--amber:#FBBF24;--emerald:#34D399;--bg:#07081A;--surface:rgba(255,255,255,.045);--border:rgba(255,255,255,.09);--text:#F1F0FF;--text2:#A09EC0;--text3:#6B6A8A}
+    body{font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+    .bg{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 45% at 10% 0%,rgba(167,139,250,.14),transparent),radial-gradient(ellipse 55% 45% at 96% 100%,rgba(103,232,249,.1),transparent)}
+    .nav{position:fixed;top:0;left:0;right:0;height:48px;display:flex;align-items:center;gap:8px;padding:0 20px;background:rgba(7,8,26,.92);border-bottom:1px solid var(--border);z-index:10;overflow-x:auto}.nav a{color:var(--text2);text-decoration:none;font-size:12px;padding:4px 10px;border-radius:999px;white-space:nowrap}.nav a:first-child{color:var(--violet2);font-weight:800;letter-spacing:.08em;margin-right:10px}.nav a:hover{background:rgba(255,255,255,.08);color:var(--text)}
+    main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:78px 40px 80px}.hero{margin-bottom:42px}.eyebrow{color:var(--violet2);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px}h1{font-size:clamp(34px,5vw,64px);line-height:1.06;letter-spacing:-.03em;margin-bottom:14px}h2{font-size:clamp(22px,2.5vw,32px);letter-spacing:-.02em;margin-bottom:16px}.grad{background:linear-gradient(135deg,var(--violet),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.desc{color:var(--text2);font-size:clamp(14px,1.3vw,19px);max-width:760px}.section{margin-bottom:42px;scroll-margin-top:64px}.head{display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--border);margin-bottom:18px}.num{width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(167,139,250,.14);border:1px solid rgba(167,139,250,.28);color:var(--violet2);font-weight:900;font-size:13px;flex-shrink:0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{border:1px solid var(--border);border-radius:14px;background:var(--surface);padding:18px 20px;min-width:0}.card-title{color:var(--text);font-size:16px;font-weight:800;margin-bottom:6px}.card-body{color:var(--text2);font-size:13px}.code{position:relative;border:1px solid var(--border);border-radius:14px;background:rgba(0,0,0,.45);color:var(--cyan);font-family:Consolas,'JetBrains Mono',monospace;font-size:13px;line-height:1.75;padding:20px;white-space:pre-wrap;overflow-x:auto}.copy{position:absolute;top:10px;right:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.08);color:var(--text2);border-radius:6px;padding:4px 10px;cursor:pointer;font-family:inherit;font-size:11px}.tip{border-left:3px solid var(--amber);background:rgba(251,191,36,.06);border-radius:0 12px 12px 0;padding:14px 18px;color:var(--text2);font-size:13px}
+    @media(max-width:820px){main{padding:68px 20px 60px}.grid{grid-template-columns:1fr}}
+    @media print{@page{size:A4;margin:13mm}body{background:#fff;color:#15151c;-webkit-print-color-adjust:exact;print-color-adjust:exact}.bg,.nav,.copy{display:none!important}main{max-width:none;padding:0}.hero{margin-bottom:24px}h1{font-size:34px;color:#15151c}.grad{-webkit-text-fill-color:#15151c;background:none}.desc,.card-body,.tip{color:#3f4252}.section{break-inside:avoid;margin-bottom:26px}.card,.code,.tip{background:#fff;border-color:#d9dce8}.code{background:#f7f8fb;color:#0b6071}.card-title,h2{color:#15151c}}
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+  <nav class="nav"><a href="#">VIBE CODING</a><a href="#map">사용 흐름</a><a href="#design">설계</a><a href="#ide">AI IDE</a><a href="#fix">수정</a><a href="#summary">요약</a></nav>
+  <main>
+    <section class="hero"><div class="eyebrow">별첨 자료</div><h1><span class="grad">AI 작업지시서</span> 템플릿</h1><p class="desc">프롬프트를 외우지 않아도 됩니다. 상황에 맞는 템플릿을 붙여넣고 빈칸만 채우면, AI가 다음 작업을 도와줍니다.</p></section>
+
+    <section class="section" id="map"><div class="head"><span class="num">1</span><h2>템플릿 사용 흐름</h2></div><div class="grid">
+      <div class="card"><div class="card-title">GPT/Gemini/Claude</div><p class="card-body">아이디어를 설계하고, AI IDE용 프롬프트로 정리합니다.</p></div>
+      <div class="card"><div class="card-title">Cursor/Kiro/Antigravity/Codex</div><p class="card-body">정리된 지시문을 바탕으로 실제 코드를 수정합니다.</p></div>
+    </div></section>
+
+    <section class="section" id="design"><div class="head"><span class="num">2</span><h2>프로그램 설계 요청</h2></div><div class="code"><button class="copy">복사</button>나는 지금부터 [사이트/프로그램 이름]을 만들려고 해.
+
+목적:
+[누구의 어떤 문제를 해결하는지]
+
+넣고 싶은 기능:
+1. [기능 1]
+2. [기능 2]
+3. [기능 3]
+
+원하는 디자인 분위기:
+[예: 어두운 배경, 깔끔한 대시보드, 모바일 친화적]
+
+나와 대화하면서 빠진 요구사항을 질문해주고,
+마지막에는 MVP로 만들 최소 기능과 화면 구성을 정리해줘.</div></section>
+
+    <section class="section" id="ide"><div class="head"><span class="num">3</span><h2>AI IDE용 구현 지시문 만들기</h2></div><div class="code"><button class="copy">복사</button>위에서 정리한 내용을 바탕으로 Cursor/Kiro/Antigravity/Codex에게 줄 구현 프롬프트를 작성해줘.
+
+형식:
+1. 역할
+2. 목표
+3. 구현할 화면/기능
+4. 디자인 조건
+5. 제약사항
+6. 구현 후 확인할 테스트
+7. 마지막에 README 또는 작업 요약 md 작성
+
+초보자가 그대로 붙여넣을 수 있게 명확하고 단계적으로 작성해줘.</div></section>
+
+    <section class="section" id="fix"><div class="head"><span class="num">4</span><h2>현재 코드 수정 요청</h2></div><div class="code"><button class="copy">복사</button>현재 프로젝트에서 아래 문제를 고치고 싶어.
+
+문제:
+[무엇이 안 되는지]
+
+원하는 결과:
+[어떻게 바뀌면 좋은지]
+
+현재 화면/에러/코드:
+[캡처 내용 또는 에러 또는 코드 붙여넣기]
+
+먼저 원인을 설명하고,
+수정해야 할 파일 목록과 수정 순서를 알려줘.
+그 다음 실제 수정 프롬프트를 작성해줘.</div></section>
+
+    <section class="section" id="summary"><div class="head"><span class="num">5</span><h2>작업 요약 md 요청</h2></div><div class="code"><button class="copy">복사</button>지금까지 작업한 내용을 프로젝트 문서로 정리해줘.
+
+포함할 내용:
+- 프로젝트 목적
+- 주요 기능
+- 사용한 기술
+- 실행 방법
+- 현재 완성된 부분
+- 아직 남은 문제
+- 다음 작업 우선순위 5개
+
+README.md 또는 PROJECT_SUMMARY.md에 넣기 좋은 형태로 작성해줘.</div><p class="tip" style="margin-top:14px">수업에서는 "설계 AI"와 "구현 AI IDE"를 나눠 쓰면 결과가 더 안정적입니다.</p></section>
+  </main>
+  <script>document.querySelectorAll('.copy').forEach(btn=>{btn.addEventListener('click',()=>{const text=btn.parentElement.innerText.replace('복사','').trim();navigator.clipboard.writeText(text).then(()=>{btn.textContent='복사됨';setTimeout(()=>btn.textContent='복사',1400)})})})</script>
+  <script src="./appendix-print.js"></script>
+
+</body>
+</html>

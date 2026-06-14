@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' file:; script-src 'self'; style-src 'self' 'unsafe-inline' file:; img-src 'self' data: file:; font-src 'self' data: file:; object-src 'none'; base-uri 'self';" />
+  <title>VIBE STUDIO · 강의 운영 콘솔</title>
+  <link rel="stylesheet" href="../assets/fonts/pretendard.css" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app" class="app-shell">
+
+    <!-- ══════════════════════════════════════
+         SIDEBAR
+    ══════════════════════════════════════ -->
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-brand">
+        <span class="brand-mark">V</span>
+        <div class="brand-text">
+          <span class="brand-name">VIBE STUDIO</span>
+          <span class="brand-sub">Learning Console</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <p class="nav-label">강의 과정</p>
+        <div id="nav-courses" class="nav-list"></div>
+
+        <p class="nav-label" style="margin-top:20px">자료실</p>
+        <button class="nav-item" data-nav="student-materials">
+          <span class="nav-icon nav-icon-docs"></span>
+          <span class="nav-item-title">수강생 자료</span>
+        </button>
+        <button class="nav-item" data-nav="instructor-library">
+          <span class="nav-icon nav-icon-instructor"></span>
+          <span class="nav-item-title">강사 자료실</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <span class="ver">V2 CONSOLE</span>
+        <span class="ver-dot">·</span>
+        <span class="ver">OFFLINE</span>
+      </div>
+    </aside>
+
+    <!-- ══════════════════════════════════════
+         MAIN CONTENT AREA
+    ══════════════════════════════════════ -->
+    <main id="main-content" class="main-content">
+
+      <!-- ── VIEW: DASHBOARD ── -->
+      <div id="view-dashboard" class="view view-scroll">
+        <div class="view-header">
+          <div class="course-hero">
+            <div class="course-hero-main">
+              <span id="course-eyebrow" class="eyebrow"></span>
+              <h1 id="course-title" class="view-title"></h1>
+              <p id="course-desc" class="view-desc"></p>
+              <div id="course-outcomes" class="course-outcomes"></div>
+            </div>
+            <aside class="course-overview">
+              <div><span>LEVEL</span><strong id="course-level">START</strong></div>
+              <div><span>SESSIONS</span><strong id="course-session-count">06</strong></div>
+              <div><span>STATUS</span><strong id="course-status">운영 중</strong></div>
+            </aside>
+          </div>
+
+          <div class="toolbar">
+            <div class="search-wrap">
+              <span class="search-icon-svg">
+                <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
+                  <circle cx="8.5" cy="8.5" r="6" stroke="currentColor" stroke-width="2"/>
+                  <path d="M13 13l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <input id="search-sessions" class="search-input" type="text" placeholder="강의 검색..." autocomplete="off" />
+            </div>
+            <div id="progress-summary" class="progress-summary"></div>
+          </div>
+        </div>
+
+        <!-- 이어서 보기 배너 -->
+        <div id="resume-banner" class="resume-banner hidden">
+          <div class="resume-left">
+            <span class="resume-icon">▶</span>
+            <div>
+              <p class="resume-label">마지막으로 열었던 강의</p>
+              <p id="resume-session-name" class="resume-name"></p>
+            </div>
+          </div>
+          <button id="resume-btn" class="btn-resume">이어서 보기 →</button>
+        </div>
+
+        <div class="section-heading">
+          <div><span>CURRICULUM</span><h2>과정 구성</h2></div>
+          <p id="course-route-copy"></p>
+        </div>
+        <div id="session-grid" class="session-grid"></div>
+      </div>
+
+      <!-- ── VIEW: APPENDIX LIST ── -->
+      <div id="view-appendix" class="view view-scroll hidden">
+        <div class="view-header">
+          <span id="appendix-eyebrow" class="eyebrow">MATERIAL LIBRARY</span>
+          <h1 id="appendix-title" class="view-title">수강생 자료</h1>
+          <p id="appendix-desc" class="view-desc">수업 중 배포하고 실습에 사용하는 자료를 모았습니다.</p>
+
+          <div class="toolbar">
+            <div class="search-wrap">
+              <span class="search-icon-svg">
+                <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
+                  <circle cx="8.5" cy="8.5" r="6" stroke="currentColor" stroke-width="2"/>
+                  <path d="M13 13l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <input id="search-appendix" class="search-input" type="text" placeholder="자료 검색..." autocomplete="off" />
+            </div>
+            <div id="appendix-count" class="library-count"></div>
+          </div>
+        </div>
+        <div id="appendix-grid" class="session-grid"></div>
+      </div>
+
+      <!-- ── VIEW: PLAYER (강의 + 별첨 공용) ── -->
+      <div id="view-player" class="view view-player hidden">
+
+        <!-- 플레이어 상단 바 -->
+        <div id="player-topbar" class="player-topbar">
+          <button id="btn-back" class="btn-back">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+              <path d="M12 4L6 10l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            뒤로
+          </button>
+
+          <div class="player-title-wrap">
+            <span id="player-course-label" class="player-course-label"></span>
+            <span id="player-session-title" class="player-session-title"></span>
+          </div>
+
+          <div class="player-topbar-right">
+            <button id="btn-favorite" class="btn-topbar" title="즐겨찾기 토글">
+              <svg id="fav-icon" width="16" height="16" viewBox="0 0 20 20" fill="none">
+                <path d="M10 2l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 14.27l-4.77 2.45.91-5.33L2.27 7.62l5.34-.78z" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </button>
+            <button id="btn-notes-toggle" class="btn-topbar" title="발표자 메모 (M)">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                <rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M6 7h8M6 10h8M6 13h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <button id="btn-print-content" class="btn-topbar" title="현재 자료 인쇄">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                <path d="M6 7V3h8v4M6 15H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M6 12h8v5H6v-5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M15 10h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <button id="btn-save-pdf" class="btn-topbar" title="현재 자료 PDF로 저장">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                <path d="M5 2h6l4 4v12H5V2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M11 2v5h4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M7 14h6M10 10v5M8.5 13.5 10 15l1.5-1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button id="btn-share-community" class="btn-topbar btn-share-community hidden" title="커뮤니티 자료실로 공유">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                <path d="M6 13.5H5a3 3 0 0 1-.6-5.94A4.5 4.5 0 0 1 13.1 6.2 3.65 3.65 0 0 1 14.5 13.5H14" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 16V9.5M7.75 11.75 10 9.5l2.25 2.25" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button id="btn-board-toggle" class="btn-topbar" title="화면 판서 그리기 (Ctrl+Shift+D)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+              </svg>
+            </button>
+            <button id="btn-complete" class="btn-complete" title="완료 체크">미완료</button>
+            <button id="btn-presenter" class="btn-topbar btn-presenter-mode" title="발표자 모드 / 전체화면 (Ctrl+F)">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                <path d="M3 7V3h4M13 3h4v4M17 13v4h-4M7 17H3v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 진행률 바 -->
+        <div id="progress-bar-wrap" class="progress-bar-outer">
+          <div id="progress-fill" class="progress-bar-fill"></div>
+          <span id="progress-text" class="progress-bar-text"></span>
+        </div>
+
+        <!-- 플레이어 본문: webview + 메모 패널 -->
+        <div class="player-body">
+
+          <div id="player-webview-wrap" class="player-webview-wrap">
+            <!-- 로딩 오버레이 -->
+            <div id="webview-loading" class="webview-loading">
+              <div class="spinner"></div>
+              <p class="loading-text">강의자료 불러오는 중...</p>
+            </div>
+            <webview id="lecture-webview" class="lecture-webview"></webview>
+          </div>
+
+          <!-- 메모 패널 (슬라이드-인) -->
+          <aside id="notes-panel" class="notes-panel hidden">
+            <div class="notes-panel-header">
+              <span class="notes-panel-title">발표자 메모</span>
+              <button id="btn-notes-close" class="btn-small-close">✕</button>
+            </div>
+            <textarea id="notes-textarea" class="notes-textarea" placeholder="강의 중 참고할 메모를 입력하세요&#10;(자동 저장됨)"></textarea>
+          </aside>
+        </div>
+
+        <!-- 플레이어 하단 내비게이션 (강의 전용) -->
+        <div id="player-footer" class="player-footer">
+          <button id="btn-prev-session" class="btn-nav-session btn-nav-prev" disabled>
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
+              <path d="M12 4L6 10l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            이전 강의
+          </button>
+
+          <div class="footer-center">
+            <span id="session-type-badge" class="type-badge"></span>
+            <span id="session-duration-text" class="duration-text"></span>
+          </div>
+
+          <button id="btn-next-session" class="btn-nav-session btn-nav-next" disabled>
+            다음 강의
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
+              <path d="M8 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+
+      </div><!-- /view-player -->
+
+    </main>
+  </div>
+
+  <!-- 화면 판서 캔버스 오버레이 -->
+  <canvas id="board-canvas" class="board-canvas"></canvas>
+
+  <!-- 판서 플로팅 툴바 -->
+  <div id="board-toolbar" class="board-toolbar hidden">
+    <div class="toolbar-drag-handle">PRESENTATION BOARD</div>
+    <div class="toolbar-buttons">
+      <button class="color-btn active" data-color="#ff607d" style="background:#ff607d; box-shadow:0 0 8px #ff607d;" title="코랄"></button>
+      <button class="color-btn" data-color="#67e8f9" style="background:#67e8f9; box-shadow:0 0 8px #67e8f9;" title="시안"></button>
+      <button class="color-btn" data-color="#fbbf24" style="background:#fbbf24; box-shadow:0 0 8px #fbbf24;" title="골드"></button>
+      <button class="color-btn board-util-btn" data-color="eraser" title="지우개" aria-label="지우개">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+          <path d="m4 12 7-7a2 2 0 0 1 3 0l1 1a2 2 0 0 1 0 3l-6 6H6l-2-2a1 1 0 0 1 0-1Z" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M9 15h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="toolbar-divider"></div>
+      <button class="size-btn active" data-size="4" title="얇게">얇게</button>
+      <button class="size-btn" data-size="10" title="두껍게">두껍게</button>
+      <div class="toolbar-divider"></div>
+      <button id="btn-board-clear" class="board-util-btn" title="전체 지우기" aria-label="전체 지우기">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+          <path d="M4 6h12M8 3h4l1 3H7l1-3ZM6 6l1 11h6l1-11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button id="btn-board-close" class="board-util-btn" title="판서 종료" aria-label="판서 종료">×</button>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

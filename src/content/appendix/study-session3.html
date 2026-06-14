@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3강 강사용 공부자료 - 개발 용어 이해</title>
+  <link rel="stylesheet" href="./session-material.css">
+</head>
+<body>
+  <main class="sheet">
+    <header class="material-head">
+      <div><div class="material-kicker">INSTRUCTOR STUDY · SESSION 03</div><h1>개발 용어 이해</h1></div>
+      <span class="session-badge">강사용</span>
+    </header>
+    <div class="goal">학습 기준: 용어 정의를 외우게 하지 않고, 앱의 어느 공간에서 어떤 일이 일어나는지 설명할 수 있게 한다.</div>
+
+    <section class="section">
+      <h2>핵심 비유 지도</h2>
+      <div class="visual-building">
+        <div>빈 땅<br>아이디어</div><div>설계도<br>기획</div><div>철골<br>파일 구조</div>
+        <div>외관<br>프론트엔드</div><div>빈 내부<br>기능 미연결</div><div>내부 공사<br>기능 연결</div><div>준공<br>테스트·배포</div>
+      </div>
+    </section>
+
+    <section class="section grid-2">
+      <article class="term"><h3>프론트엔드</h3><p>사용자가 보고 누르는 화면. UI뿐 아니라 클릭 후 상태 변화와 오류 표시도 포함한다.</p></article>
+      <article class="term"><h3>백엔드</h3><p>브라우저에서 받은 요청의 권한, 규칙, 계산, 저장을 처리한 뒤 응답을 돌려주는 영역. 서버는 이 작업이 실행되는 컴퓨터 또는 환경이다.</p></article>
+      <article class="term"><h3>데이터베이스</h3><p>회원, 게시글, 상품, 주문처럼 정보를 목적별로 보관하고 다시 찾는 창고.</p></article>
+      <article class="term"><h3>API</h3><p>화면과 서버, 또는 내 서비스와 외부 서비스가 정해진 형식으로 요청과 응답을 주고받는 통로.</p></article>
+      <article class="term"><h3>상태</h3><p>로그인 여부, 장바구니 수량, 로딩 여부처럼 화면이 기억하는 현재 값. 로그아웃 상태의 임시 값과 계정에 연결된 값을 새로고침으로 비교한다.</p></article>
+      <article class="term"><h3>화면 애니메이션</h3><p>메뉴, 로딩, 장바구니, 완료, 탭, 입력 검증, 아코디언, 페이지 이동, 좋아요, 스크롤 위치처럼 원인과 결과를 연결하는 화면 변화.</p></article>
+    </section>
+
+    <section class="section">
+      <h2>프론트엔드 예시를 설명하는 기준</h2>
+      <div class="grid-2">
+        <article class="term"><h3>쇼핑몰</h3><p>상품을 비교하고 결제하는 흐름. 검색, 카드, 장바구니, 최종 금액, 주문 완료 상태를 짚는다.</p></article>
+        <article class="term"><h3>커뮤니티</h3><p>글을 발견하고 반응하는 흐름. 게시글, 댓글, 좋아요, 저장, 알림이 서로 다른 역할임을 설명한다.</p></article>
+        <article class="term"><h3>예약 서비스</h3><p>날짜, 시간, 인원처럼 선택한 조건을 계속 기억하고 마지막 확인 화면까지 보여주는 것이 중요하다.</p></article>
+        <article class="term"><h3>관리자 화면</h3><p>예쁨보다 비교와 반복 작업이 중요하다. 필터, 표, 상태 배지, 처리 버튼을 빠르게 찾게 해야 한다.</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>UI/UX 비교 슬라이드 진행 순서</h2>
+      <div class="checklist">
+        <div class="check">결제: 현재 단계와 최종 금액을 먼저 찾게 한다.</div>
+        <div class="check">회원가입: 한꺼번에 묻는 화면과 단계별 화면을 비교한다.</div>
+        <div class="check">검색: 결과 0개에서 사용자가 계속 갈 수 있는 길이 있는지 묻는다.</div>
+        <div class="check">오류 복구: 입력 내용 유지, 실패 원인, 재시도 행동을 확인한다.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>예상 질문과 답변</h2>
+      <div class="qa-grid">
+        <article class="qa"><b>Q. 백엔드와 DB는 같은 건가요?</b><p class="answer">아닙니다. 백엔드는 일을 처리하고, DB는 결과와 정보를 보관합니다.</p></article>
+        <article class="qa"><b>Q. API가 없으면 앱을 못 만드나요?</b><p class="answer">간단한 화면은 만들 수 있지만 외부 AI, 결제, 지도, 서버 데이터와 연결할 때 API가 필요합니다.</p></article>
+        <article class="qa"><b>Q. 장바구니 숫자는 항상 저장되나요?</b><p class="answer">아닙니다. 로그아웃 방문자의 장바구니는 화면에서만 잠시 기억할 수 있고, 로그인 사용자의 장바구니는 계정과 DB에 연결해 다시 불러오도록 설계할 수 있습니다.</p></article>
+        <article class="qa"><b>Q. 화면이 예쁘면 완성 아닌가요?</b><p class="answer">로그인, 저장, 데이터, 오류 처리까지 실제로 작동해야 서비스로 사용할 수 있습니다.</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>강의 중 확인 질문</h2>
+      <div class="checklist">
+        <div class="check">“지금 보이는 버튼은 건물의 외관과 내부 설비 중 어디일까요?”</div>
+        <div class="check">“회원가입 버튼을 누르면 어떤 창고까지 이동해야 할까요?”</div>
+        <div class="check">“겉은 예쁜데 로그인이 안 된다면 어느 공사를 요청해야 할까요?”</div>
+      </div>
+    </section>
+    <div class="callout">깊이 제한: 프레임워크 문법, 서버 종류, SQL 문법을 설명하지 않는다. 화면·처리·저장·연결의 위치와 흐름만 남긴다.</div>
+  </main>
+</body>
+</html>

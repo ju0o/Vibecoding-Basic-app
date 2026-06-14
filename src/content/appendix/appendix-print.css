@@ -1,0 +1,237 @@
+.appendix-use-card {
+  margin: -22px 0 42px;
+  border: 1px solid rgba(103,232,249,0.22);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(103,232,249,0.07), rgba(167,139,250,0.055)),
+    rgba(255,255,255,0.035);
+  overflow: hidden;
+}
+
+.appendix-use-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 22px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.appendix-use-kicker {
+  color: #67E8F9;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.appendix-use-title {
+  margin-top: 4px;
+  color: #F1F0FF;
+  font-size: clamp(17px, 1.35vw, 22px);
+  font-weight: 900;
+}
+
+.appendix-print-badge {
+  flex: 0 0 auto;
+  padding: 7px 12px;
+  border: 1px solid rgba(52,211,153,0.3);
+  border-radius: 999px;
+  color: #34D399;
+  background: rgba(52,211,153,0.08);
+  font-size: 11px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.appendix-use-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+}
+
+.appendix-use-item {
+  padding: 18px 20px;
+  border-right: 1px solid rgba(255,255,255,0.07);
+}
+
+.appendix-use-item:last-child {
+  border-right: 0;
+}
+
+.appendix-use-label {
+  margin-bottom: 8px;
+  color: #C4B5FD;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.appendix-use-body {
+  color: #A09EC0;
+  font-size: clamp(13px, 1vw, 16px);
+  line-height: 1.62;
+}
+
+.appendix-use-body strong,
+.appendix-use-body code {
+  color: #F1F0FF;
+}
+
+.appendix-use-body code {
+  font-family: Consolas, 'JetBrains Mono', monospace;
+  font-size: 0.95em;
+}
+
+@media (max-width: 860px) {
+  .appendix-use-head {
+    display: grid;
+  }
+  .appendix-use-grid {
+    grid-template-columns: 1fr;
+  }
+  .appendix-use-item {
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+}
+
+.appendix-guide-fab {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 9998;
+  border: 1px solid rgba(103,232,249,0.32);
+  border-radius: 999px;
+  background: rgba(7,8,26,0.88);
+  color: #F1F0FF;
+  box-shadow: 0 16px 46px rgba(0,0,0,0.28), 0 0 24px rgba(103,232,249,0.12);
+  backdrop-filter: blur(14px);
+  padding: 11px 16px;
+  font: 900 13px/1.2 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.appendix-guide-fab:hover {
+  border-color: rgba(103,232,249,0.58);
+  background: rgba(20,24,50,0.94);
+}
+
+.appendix-guide-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  background: rgba(0,0,0,0.42);
+}
+
+.appendix-guide-backdrop.is-open {
+  display: block;
+}
+
+.appendix-guide-panel {
+  position: fixed;
+  right: 22px;
+  bottom: 76px;
+  z-index: 10000;
+  display: none;
+  width: min(520px, calc(100vw - 32px));
+  max-height: min(680px, calc(100vh - 108px));
+  overflow: auto;
+  border: 1px solid rgba(103,232,249,0.24);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(103,232,249,0.08), rgba(167,139,250,0.06)),
+    rgba(7,8,26,0.96);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.42);
+  backdrop-filter: blur(18px);
+}
+
+.appendix-guide-panel.is-open {
+  display: block;
+}
+
+.appendix-guide-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.appendix-guide-kicker {
+  color: #67E8F9;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.appendix-guide-title {
+  margin-top: 4px;
+  color: #F1F0FF;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.appendix-guide-close {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.06);
+  color: #F1F0FF;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.appendix-guide-body {
+  display: grid;
+  gap: 12px;
+  padding: 18px 20px 20px;
+}
+
+.appendix-guide-item {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.04);
+  padding: 14px 16px;
+}
+
+.appendix-guide-label {
+  margin-bottom: 6px;
+  color: #C4B5FD;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.appendix-guide-text {
+  color: #A09EC0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.appendix-guide-text strong,
+.appendix-guide-text code {
+  color: #F1F0FF;
+}
+
+.appendix-guide-note {
+  color: #34D399;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+@media print {
+  .appendix-use-card,
+  .appendix-guide-fab,
+  .appendix-guide-backdrop,
+  .appendix-guide-panel {
+    display: none !important;
+  }
+}

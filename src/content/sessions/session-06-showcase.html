@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6강 - 쇼케이스 및 Q&A</title>
+  <style>
+    :root {
+      --text: #f5f8fc;
+      --muted: #aeb9cb;
+      --line: rgba(255, 255, 255, 0.14);
+      --cyan: #6ff2ff;
+      --green: #65f5aa;
+      --amber: #ffd166;
+      --red: #ff7180;
+      --violet: #c8a6ff;
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(198, 166, 255, 0.17), transparent 30%),
+        radial-gradient(circle at 86% 12%, rgba(101, 245, 170, 0.12), transparent 28%),
+        linear-gradient(145deg, #05070d, #0c1020 55%, #060812);
+    }
+
+    button { font: inherit; }
+
+    .deck {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      gap: clamp(18px, 2vw, 30px);
+      padding: clamp(32px, 4vw, 58px);
+      overflow: hidden;
+    }
+
+    .slide.active {
+      display: flex;
+      animation: enter 520ms ease both;
+    }
+
+    @keyframes enter {
+      from { opacity: 0.55; transform: translateY(18px) scale(0.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .topline {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      flex: 0 0 auto;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.055);
+      font-size: clamp(16px, 1.35vw, 22px);
+      font-weight: 900;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 18px rgba(111, 242, 255, 0.8);
+    }
+
+    h1, h2, h3, p { margin: 0; letter-spacing: 0; }
+    h1 { max-width: 1120px; font-size: clamp(60px, 7.2vw, 112px); line-height: 0.98; }
+    h2 { font-size: clamp(44px, 5vw, 76px); line-height: 1.04; }
+    h3 { font-size: clamp(27px, 2.15vw, 38px); line-height: 1.15; }
+    p { color: var(--muted); font-size: clamp(20px, 1.62vw, 28px); line-height: 1.42; }
+
+    .lead {
+      max-width: 1020px;
+      margin-top: 24px;
+      color: #dce5f3;
+      font-size: clamp(25px, 2.25vw, 38px);
+      line-height: 1.34;
+    }
+
+    .content {
+      display: grid;
+      gap: clamp(18px, 2vw, 28px);
+      min-height: 0;
+      flex: 1 1 auto;
+    }
+
+    .two { grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .panel {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(150deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.038));
+      box-shadow: 0 32px 84px rgba(0, 0, 0, 0.34);
+    }
+
+    .pad { padding: clamp(22px, 2.3vw, 34px); }
+
+    .big-number {
+      font-size: clamp(76px, 8vw, 140px);
+      font-weight: 950;
+      line-height: 0.82;
+      color: transparent;
+      -webkit-text-stroke: 2px rgba(255, 255, 255, 0.24);
+    }
+
+    .cover { justify-content: center; }
+
+    .stage-mark {
+      position: absolute;
+      right: 7vw;
+      bottom: 8vh;
+      width: min(44vw, 650px);
+      height: min(34vw, 500px);
+      border-radius: 48px;
+      border: 1px solid rgba(198, 166, 255, 0.28);
+      background:
+        radial-gradient(circle at 50% 30%, rgba(198, 166, 255, 0.18), transparent 34%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+      opacity: 0.75;
+      perspective: 900px;
+    }
+
+    .stage-mark::before {
+      content: "";
+      position: absolute;
+      left: 12%;
+      right: 12%;
+      bottom: 14%;
+      height: 30%;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(111, 242, 255, 0.28), transparent 68%);
+      filter: blur(6px);
+      animation: lightPulse 2.6s ease-in-out infinite;
+    }
+
+    .stage-mark::after {
+      content: "";
+      position: absolute;
+      left: 22%;
+      right: 22%;
+      bottom: 27%;
+      height: 34%;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(111, 242, 255, 0.18), rgba(255, 255, 255, 0.06));
+      transform: rotateX(55deg);
+      transform-origin: bottom;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes lightPulse {
+      0%, 100% { opacity: 0.55; transform: scaleX(0.9); }
+      50% { opacity: 1; transform: scaleX(1.08); }
+    }
+
+    .showcase-stage {
+      position: relative;
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 24px;
+      min-height: 0;
+      padding: 28px;
+    }
+
+    .spotlight {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 32%;
+      background: linear-gradient(180deg, rgba(111, 242, 255, 0.18), transparent 70%);
+      clip-path: polygon(38% 0, 62% 0, 100% 100%, 0 100%);
+      opacity: 0.42;
+      animation: sweep 4s ease-in-out infinite;
+    }
+
+    .spotlight.one { left: 18%; }
+    .spotlight.two { right: 14%; animation-delay: 1.1s; background: linear-gradient(180deg, rgba(198, 166, 255, 0.18), transparent 70%); }
+
+    @keyframes sweep {
+      0%, 100% { transform: translateX(-18px); }
+      50% { transform: translateX(18px); }
+    }
+
+    .project-screen {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-rows: 70px minmax(0, 1fr);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      overflow: hidden;
+      background: rgba(5, 9, 16, 0.84);
+      box-shadow: 0 36px 90px rgba(0, 0, 0, 0.38);
+    }
+
+    .screen-bar {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 0 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .screen-dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+
+    .screen-dot:nth-child(2) { background: var(--amber); }
+    .screen-dot:nth-child(3) { background: var(--green); }
+
+    .screen-body {
+      display: grid;
+      grid-template-columns: 0.7fr 1.3fr;
+      gap: 20px;
+      padding: 24px;
+    }
+
+    .mini-side, .mini-main {
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--line);
+    }
+
+    .mini-main {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      padding: 18px;
+    }
+
+    .mini-card {
+      border-radius: 18px;
+      background: rgba(111, 242, 255, 0.13);
+      border: 1px solid rgba(111, 242, 255, 0.22);
+      animation: cardFloat 2.8s ease-in-out infinite;
+    }
+
+    .mini-card:nth-child(2) { animation-delay: 0.3s; }
+    .mini-card:nth-child(3) { animation-delay: 0.6s; }
+    .mini-card:nth-child(4) { animation-delay: 0.9s; }
+
+    @keyframes cardFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-9px); }
+    }
+
+    .stage-script {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 14px;
+      align-content: center;
+    }
+
+    .script-card {
+      min-height: 92px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .script-card b {
+      display: block;
+      color: var(--text);
+      font-size: clamp(23px, 1.7vw, 34px);
+    }
+
+    .script-card span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: clamp(15px, 1.1vw, 20px);
+      line-height: 1.32;
+    }
+
+    .timer-ring {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 0;
+    }
+
+    .ring {
+      position: relative;
+      width: min(420px, 70%);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: conic-gradient(var(--green) 0 66%, rgba(255, 255, 255, 0.08) 66% 100%);
+      box-shadow: 0 0 54px rgba(101, 245, 170, 0.18);
+    }
+
+    .timer-ring {
+      position: relative;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 18px;
+    }
+
+    .timer-value {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -64%);
+      font-size: clamp(42px, 5vw, 82px);
+      font-weight: 950;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .timer-action {
+      position: absolute;
+      left: 50%;
+      bottom: 14%;
+      transform: translateX(-50%);
+      min-width: 150px;
+      min-height: 48px;
+      color: #071018;
+      border: 0;
+      border-radius: 8px;
+      background: var(--green);
+      font: inherit;
+      font-weight: 950;
+      cursor: pointer;
+    }
+
+    .timer-ring.running .ring {
+      animation-duration: 5s;
+      filter: drop-shadow(0 0 24px rgba(103, 232, 249, 0.38));
+    }
+
+    .qa-card {
+      cursor: pointer;
+      transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .qa-card.active {
+      transform: translateY(-10px);
+      border-color: var(--cyan);
+      box-shadow: 0 0 36px rgba(103, 232, 249, 0.16);
+    }
+
+    .qa-example {
+      display: grid;
+      place-items: center;
+      min-height: 84px;
+      margin-top: 16px;
+      padding: 0 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--text2);
+      background: rgba(255, 255, 255, 0.045);
+      font-size: clamp(18px, 1.35vw, 25px);
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .ring::before {
+      content: "";
+      position: absolute;
+      inset: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #070b13;
+    }
+
+    .feedback-board {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 24px;
+      min-height: 0;
+    }
+
+    .radar {
+      position: relative;
+      width: 360px;
+      aspect-ratio: 1;
+      place-self: center;
+      border-radius: 50%;
+      border: 1px solid rgba(111, 242, 255, 0.26);
+      background:
+        radial-gradient(circle, transparent 0 24%, rgba(255, 255, 255, 0.08) 25% 26%, transparent 27% 49%, rgba(255, 255, 255, 0.08) 50% 51%, transparent 52%),
+        conic-gradient(from 0deg, rgba(111, 242, 255, 0.12), rgba(101, 245, 170, 0.1), rgba(198, 166, 255, 0.12), rgba(111, 242, 255, 0.12));
+    }
+
+    .radar::before {
+      content: "";
+      position: absolute;
+      inset: 68px 84px 88px 58px;
+      clip-path: polygon(50% 0, 94% 35%, 75% 100%, 18% 84%, 0 28%);
+      background: rgba(101, 245, 170, 0.28);
+      border: 2px solid rgba(101, 245, 170, 0.75);
+      filter: drop-shadow(0 0 20px rgba(101, 245, 170, 0.28));
+    }
+
+    .qa-board {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .qa-card,
+    .road-card,
+    .panel-card {
+      min-height: 290px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .qa-card b,
+    .road-card b,
+    .panel-card b {
+      display: block;
+      color: var(--cyan);
+      font-size: clamp(23px, 1.7vw, 33px);
+    }
+
+    .qa-card p,
+    .road-card p,
+    .panel-card p {
+      margin-top: 12px;
+      font-size: clamp(17px, 1.2vw, 22px);
+    }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .nav {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 80;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(4, 7, 13, 0.75);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav button {
+      width: 54px;
+      height: 54px;
+      border: 0;
+      border-radius: 50%;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    .nav span {
+      min-width: 72px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    @media (max-width: 1100px) {
+      .two, .three, .four, .showcase-stage, .feedback-board, .qa-board, .roadmap {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section class="slide cover active" data-title="쇼케이스">
+      <div class="stage-mark" aria-hidden="true"></div>
+      <div class="kicker"><span class="dot"></span> 6강 · 쇼케이스 및 Q&A</div>
+      <h1>오늘은 강의가 아니라<br />작은 제품 발표회입니다</h1>
+      <p class="lead">완벽한 결과물이 목표가 아닙니다. 6주 동안 AI와 함께 만들고 고친 과정을 보여주는 것이 목표입니다.</p>
+    </section>
+
+    <section class="slide" data-title="발표 무대">
+      <div class="topline">
+        <div>
+          <div class="kicker"><span class="dot"></span> Showcase Stage</div>
+          <h2>발표는 결과물과 흐름을 함께 보여줍니다</h2>
+        </div>
+        <div class="big-number">02</div>
+      </div>
+      <div class="content">
+        <div class="showcase-stage panel">
+          <span class="spotlight one"></span>
+          <span class="spotlight two"></span>
+          <div class="project-screen">
+            <div class="screen-bar"><span class="screen-dot"></span><span class="screen-dot"></span><span class="screen-dot"></span></div>
+            <div class="screen-body">
+              <div class="mini-side"></div>
+              <div class="mini-main">
+                <span class="mini-card"></span>
+                <span class="mini-card"></span>
+                <span class="mini-card"></span>
+                <span class="mini-card"></span>
+              </div>
+            </div>
+          </div>
+          <div class="stage-script">
+            <div class="script-card"><b>무엇을 만들었는가</b><span>한 문장으로 프로젝트 목적을 말합니다.</span></div>
+            <div class="script-card"><b>어떻게 작동하는가</b><span>누를 수 있는 장면을 직접 보여줍니다.</span></div>
+            <div class="script-card"><b>어디가 어려웠는가</b><span>AI와 해결한 과정을 짧게 공유합니다.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="5분 발표 구성">
+      <div class="topline">
+        <div>
+          <div class="kicker"><span class="dot"></span> 5 Minute Pitch</div>
+          <h2>5분 발표는 세 장면이면 충분합니다</h2>
+        </div>
+        <div class="big-number">03</div>
+      </div>
+      <div class="content two">
+        <div class="timer-ring panel" id="timer-ring">
+          <div class="ring" aria-hidden="true"></div>
+          <strong class="timer-value" id="timer-value">05:00</strong>
+          <button class="timer-action" id="timer-action" type="button" onclick="toggleTimer()">타이머 시작</button>
+        </div>
+        <div class="stage-script">
+          <div class="script-card"><b>1분 · 문제</b><span>누구를 위한 프로젝트인지 말합니다.</span></div>
+          <div class="script-card"><b>3분 · 시연</b><span>가장 중요한 버튼과 흐름을 보여줍니다.</span></div>
+          <div class="script-card"><b>1분 · 다음</b><span>더 만들고 싶은 기능을 말합니다.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="시연 체크">
+      <div class="topline">
+        <div>
+          <div class="kicker"><span class="dot"></span> Demo Ready</div>
+          <h2>시연 전에는 누를 장면을 미리 정합니다</h2>
+        </div>
+        <div class="big-number">04</div>
+      </div>
+      <div class="content three">
+        <div class="panel-card"><b>첫 화면</b><p>프로젝트 목적이 바로 보이는지 확인합니다.</p></div>
+        <div class="panel-card"><b>핵심 버튼</b><p>가장 중요한 행동 하나를 직접 눌러봅니다.</p></div>
+        <div class="panel-card"><b>완료 장면</b><p>성공 메시지나 결과 화면이 보이는지 확인합니다.</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="피드백 기준">
+      <div class="topline">
+        <div>
+          <div class="kicker"><span class="dot"></span> Feedback</div>
+          <h2>피드백은 취향보다 다음 개선점을 찾는 시간입니다</h2>
+        </div>
+        <div class="big-number">05</div>
+      </div>
+      <div class="content">
+        <div class="feedback-board">
+          <div class="stage-script">
+            <div class="script-card"><b>명확성</b><span>무엇을 하는 앱인지 바로 이해되는가</span></div>
+            <div class="script-card"><b>흐름</b><span>클릭 후 다음 장면이 자연스러운가</span></div>
+            <div class="script-card"><b>완성감</b><span>텍스트, 간격, 반응이 정돈되어 있는가</span></div>
+            <div class="script-card"><b>확장성</b><span>다음 기능을 붙일 방향이 보이는가</span></div>
+          </div>
+          <div class="radar" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Q&A">
+      <div class="topline">
+        <div>
+          <div class="kicker"><span class="dot"></span> Q&A</div>
+          <h2>질문은 네 갈래로 정리하면 답이 빨라집니다</h2>
+        </div>
+        <div class="big-number">06</div>
+      </div>
+      <div class="content">
+        <div>
+          <div class="qa-board">
+            <div class="qa-card active" data-question="screen" onclick="selectQuestion('screen')"><b>화면</b><p>레이아웃, 버튼, 반응, 애니메이션 질문</p></div>
+            <div class="qa-card" data-question="feature" onclick="selectQuestion('feature')"><b>기능</b><p>로그인, 저장, 검색, 업로드 질문</p></div>
+            <div class="qa-card" data-question="data" onclick="selectQuestion('data')"><b>데이터</b><p>어떤 정보를 어디에 저장할지 질문</p></div>
+            <div class="qa-card" data-question="deploy" onclick="selectQuestion('deploy')"><b>배포</b><p>주소, 환경변수, 오류 로그 질문</p></div>
+          </div>
+          <div class="qa-example" id="qa-example">“버튼을 눌렀는데 다음 화면이 보이지 않아요.”</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="다음 단계">
+      <div class="topline">
+        <div>
+          <div class="kicker"><span class="dot"></span> Next Step</div>
+          <h2>기초반 이후에는 완성도를 높이는 단계로 갑니다</h2>
+        </div>
+        <div class="big-number">07</div>
+      </div>
+      <div class="content">
+        <div class="roadmap">
+          <div class="road-card"><b>1. 정리</b><p>프로젝트 파일과 README를 정돈합니다.</p></div>
+          <div class="road-card"><b>2. 보강</b><p>에러 처리와 빈 상태를 추가합니다.</p></div>
+          <div class="road-card"><b>3. 데이터</b><p>실제 저장 구조를 붙입니다.</p></div>
+          <div class="road-card"><b>4. 배포</b><p>주소와 환경변수를 안정화합니다.</p></div>
+          <div class="road-card"><b>5. 응용</b><p>포트폴리오, SaaS, 개인 도구로 확장합니다.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="마무리">
+      <div class="topline">
+        <div>
+          <div class="kicker"><span class="dot"></span> Finish</div>
+          <h2>바이브코딩의 핵심은 “함께 고쳐가는 힘”입니다</h2>
+        </div>
+        <div class="big-number">08</div>
+      </div>
+      <div class="content three">
+        <div class="panel pad"><h3>모르는 것을 숨기지 않기</h3><p>에러와 질문을 AI에게 정확히 보여줍니다.</p></div>
+        <div class="panel pad"><h3>작게 만들고 바로 보기</h3><p>큰 기능보다 확인 가능한 장면을 먼저 만듭니다.</p></div>
+        <div class="panel pad"><h3>계속 개선하기</h3><p>첫 결과물은 초안이고, 반복이 실력입니다.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="nav">
+    <button type="button" onclick="prevSlide()" aria-label="이전">‹</button>
+    <span id="counter">1 / 8</span>
+    <button type="button" onclick="nextSlide()" aria-label="다음">›</button>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const counter = document.getElementById("counter");
+    let current = 0;
+    let timerSeconds = 300;
+    let timerHandle = null;
+
+    const questionExamples = {
+      screen: "“버튼을 눌렀는데 다음 화면이 보이지 않아요.”",
+      feature: "“로그인은 되는데 저장 버튼이 작동하지 않아요.”",
+      data: "“회원 정보와 게시글은 각각 어디에 저장해야 하나요?”",
+      deploy: "“내 컴퓨터에서는 되는데 공개 주소에서는 오류가 납니다.”"
+    };
+
+    function showSlide(index) {
+      current = Math.max(0, Math.min(slides.length - 1, index));
+      slides.forEach((slide, i) => slide.classList.toggle("active", i === current));
+      counter.textContent = `${current + 1} / ${slides.length}`;
+    }
+
+    function renderTimer() {
+      const minutes = String(Math.floor(timerSeconds / 60)).padStart(2, "0");
+      const seconds = String(timerSeconds % 60).padStart(2, "0");
+      document.getElementById("timer-value").textContent = `${minutes}:${seconds}`;
+    }
+
+    function toggleTimer() {
+      const ring = document.getElementById("timer-ring");
+      const action = document.getElementById("timer-action");
+      if (timerHandle) {
+        clearInterval(timerHandle);
+        timerHandle = null;
+        ring.classList.remove("running");
+        action.textContent = timerSeconds === 0 ? "다시 시작" : "계속";
+        if (timerSeconds === 0) {
+          timerSeconds = 300;
+          renderTimer();
+        }
+        return;
+      }
+      ring.classList.add("running");
+      action.textContent = "일시정지";
+      timerHandle = setInterval(() => {
+        timerSeconds = Math.max(0, timerSeconds - 1);
+        renderTimer();
+        if (timerSeconds === 0) toggleTimer();
+      }, 1000);
+    }
+
+    function selectQuestion(type) {
+      document.querySelectorAll("[data-question]").forEach((card) => {
+        card.classList.toggle("active", card.dataset.question === type);
+      });
+      document.getElementById("qa-example").textContent = questionExamples[type];
+    }
+
+    function nextSlide() {
+      showSlide(current + 1);
+    }
+
+    function prevSlide() {
+      showSlide(current - 1);
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") nextSlide();
+      if (event.key === "ArrowLeft" || event.key === "PageUp") prevSlide();
+    });
+
+    const params = new URLSearchParams(location.search);
+    const requestedSlide = Number(params.get("slide"));
+    showSlide(Number.isFinite(requestedSlide) && requestedSlide > 0 ? requestedSlide - 1 : 0);
+  </script>
+</body>
+</html>

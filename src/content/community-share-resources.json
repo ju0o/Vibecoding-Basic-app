@@ -1,0 +1,268 @@
+{
+  "version": 1,
+  "resourcesUrl": "https://chillmove-526bc.web.app/resources",
+  "resources": {
+    "handout-session2-prep": {
+      "id": "appendix-session2-prep",
+      "sourceId": "vibe-basic-appendix-session2-prep",
+      "title": "2회차 사전 준비자료",
+      "type": "실습 가이드",
+      "kind": "copy-guide",
+      "date": "상시 확인",
+      "cohortTitle": "바이브코딩 2기",
+      "description": "2회차 바이브코딩 실습 전 준비해야 할 설치 링크와 확인 명령어입니다. Windows/Mac 중 본인 환경에 맞는 것만 복사해서 사용합니다.",
+      "sections": [
+        {
+          "title": "Windows 준비 명령어",
+          "description": "Windows 노트북은 PowerShell 또는 VS Code/AI IDE 터미널에서 아래 순서대로 확인합니다.",
+          "items": [
+            {
+              "label": "PowerShell 열기",
+              "value": "시작 메뉴에서 PowerShell 검색 → Windows PowerShell 실행",
+              "helper": "VS Code 또는 AI IDE 안에서는 Ctrl + ` 키로 터미널을 열 수 있습니다."
+            },
+            {
+              "label": "Node 버전 확인",
+              "type": "command",
+              "value": "node -v",
+              "helper": "v20.x 또는 v22.x처럼 버전이 나오면 설치가 된 상태입니다."
+            },
+            {
+              "label": "npm 버전 확인",
+              "type": "command",
+              "value": "npm -v",
+              "helper": "숫자가 나오면 npm도 함께 준비된 상태입니다."
+            },
+            {
+              "label": "바탕화면으로 이동",
+              "type": "command",
+              "value": "cd Desktop",
+              "helper": "영문 Windows 환경 기준입니다. 한글 폴더면 cd Desktop 대신 탐색기 주소창에서 PowerShell을 열어도 됩니다."
+            }
+          ]
+        },
+        {
+          "title": "Mac 준비 명령어",
+          "description": "MacBook은 Terminal 앱 또는 VS Code/AI IDE 터미널에서 아래 순서대로 확인합니다.",
+          "items": [
+            {
+              "label": "Terminal 열기",
+              "value": "Command + Space → Terminal 검색 → 터미널 실행",
+              "helper": "VS Code 또는 AI IDE 안에서는 Control + ` 키 또는 메뉴의 Terminal을 사용합니다."
+            },
+            {
+              "label": "Node 버전 확인",
+              "type": "command",
+              "value": "node -v",
+              "helper": "v20.x 또는 v22.x처럼 버전이 나오면 설치가 된 상태입니다."
+            },
+            {
+              "label": "npm 버전 확인",
+              "type": "command",
+              "value": "npm -v",
+              "helper": "숫자가 나오면 npm도 함께 준비된 상태입니다."
+            },
+            {
+              "label": "바탕화면으로 이동",
+              "type": "command",
+              "value": "cd ~/Desktop",
+              "helper": "수업 중 새 프로젝트를 바탕화면에 만들 때 자주 씁니다."
+            },
+            {
+              "label": "Homebrew가 있다면 Node 설치",
+              "type": "command",
+              "value": "brew install node",
+              "helper": "Homebrew를 모르면 공식 Node.js 다운로드 링크로 설치하면 됩니다."
+            }
+          ]
+        },
+        {
+          "title": "Windows 공식 다운로드 링크",
+          "description": "브라우저에 열고 Windows용 설치 파일을 받습니다. 가능하면 LTS 또는 Stable 버전을 선택합니다.",
+          "items": [
+            { "label": "Node.js LTS", "type": "link", "value": "https://nodejs.org/en/download" },
+            { "label": "Visual Studio Code", "type": "link", "value": "https://code.visualstudio.com/download" },
+            { "label": "Cursor", "type": "link", "value": "https://www.cursor.com/en/downloads" },
+            { "label": "Kiro", "type": "link", "value": "https://kiro.dev/downloads/" },
+            { "label": "Google Antigravity", "type": "link", "value": "https://antigravity.google/download" },
+            { "label": "Windsurf 설치 안내", "type": "link", "value": "https://docs.windsurf.com/windsurf/getting-started" }
+          ]
+        },
+        {
+          "title": "Mac 공식 다운로드 링크",
+          "description": "Apple Silicon/M-series 또는 Intel Mac 여부를 확인한 뒤 맞는 설치 파일을 받습니다.",
+          "items": [
+            { "label": "Node.js LTS", "type": "link", "value": "https://nodejs.org/en/download" },
+            { "label": "Visual Studio Code", "type": "link", "value": "https://code.visualstudio.com/download" },
+            { "label": "Cursor", "type": "link", "value": "https://www.cursor.com/en/downloads" },
+            { "label": "Kiro", "type": "link", "value": "https://kiro.dev/downloads/" },
+            { "label": "Google Antigravity", "type": "link", "value": "https://antigravity.google/download" },
+            { "label": "Windsurf 설치 안내", "type": "link", "value": "https://docs.windsurf.com/windsurf/getting-started" }
+          ]
+        }
+      ]
+    },
+    "command-cheatsheet": {
+      "id": "appendix-command-cheatsheet",
+      "sourceId": "vibe-basic-appendix-command-cheatsheet",
+      "title": "명령어 치트시트",
+      "type": "명령어",
+      "kind": "copy-guide",
+      "date": "2~5회차",
+      "cohortTitle": "바이브코딩 2기",
+      "description": "실습 중 자주 쓰는 npm, Git, 터미널 명령어를 모아둔 자료입니다. 외우지 말고 필요한 줄만 복사해서 사용합니다.",
+      "sections": [
+        {
+          "title": "프로젝트 실행",
+          "items": [
+            { "label": "패키지 설치", "type": "command", "value": "npm install" },
+            { "label": "개발 서버 실행", "type": "command", "value": "npm run dev" },
+            { "label": "실행 중인 서버 멈추기", "type": "command", "value": "Ctrl + C" },
+            { "label": "배포용 빌드 확인", "type": "command", "value": "npm run build" }
+          ]
+        },
+        {
+          "title": "Git 기본",
+          "items": [
+            { "label": "변경 파일 확인", "type": "command", "value": "git status" },
+            { "label": "전체 변경 파일 담기", "type": "command", "value": "git add ." },
+            { "label": "커밋 만들기", "type": "command", "value": "git commit -m \"작업 내용 요약\"" },
+            { "label": "원격 저장소에 올리기", "type": "command", "value": "git push" }
+          ]
+        }
+      ]
+    },
+    "ai-instruction-templates": {
+      "id": "appendix-ai-instruction-templates",
+      "sourceId": "vibe-basic-appendix-ai-instruction-templates",
+      "title": "AI 작업지시서 템플릿",
+      "type": "프롬프트",
+      "kind": "copy-guide",
+      "date": "2~5회차",
+      "cohortTitle": "바이브코딩 2기",
+      "description": "GPT, Gemini, Claude 또는 AI IDE에 붙여넣어 쓰는 요청문입니다. 빈칸만 바꿔서 바로 사용합니다.",
+      "sections": [
+        {
+          "title": "프로그램 설계 요청",
+          "items": [
+            {
+              "label": "설계 같이하기",
+              "type": "prompt",
+              "value": "나는 지금부터 [만들고 싶은 사이트/프로그램]을 만들려고 해.\n안에는 [필요한 기능]이 들어가면 좋겠고,\n디자인은 [원하는 분위기]였으면 해.\n나랑 같이 프로그램 설계를 함께해줘."
+            }
+          ]
+        },
+        {
+          "title": "AI IDE용 프롬프트로 변환",
+          "items": [
+            {
+              "label": "Cursor/Kiro/Antigravity/Windsurf용",
+              "type": "prompt",
+              "value": "위에서 정리한 설계를 바탕으로 Cursor / Kiro / Antigravity / Windsurf에 줄 실제 코딩 프롬프트 형태로 정리해줘.\n역할, 상황, 원하는 것, 제약, 출력 형식이 포함되게 작성해줘."
+            }
+          ]
+        },
+        {
+          "title": "결과물 개선 요청",
+          "items": [
+            {
+              "label": "더 좋게 만들기",
+              "type": "prompt",
+              "value": "아래 결과물을 더 좋게 만들고 싶어.\n1. 사용자 입장에서 어색한 부분\n2. 디자인 개선점\n3. 기능 개선점\n4. AI IDE에 다시 붙여넣을 수정 프롬프트\n순서로 정리해줘."
+            }
+          ]
+        }
+      ]
+    },
+    "handout-session4": {
+      "id": "appendix-session4-file-map",
+      "sourceId": "vibe-basic-appendix-session4-file-map",
+      "title": "4강 파일 찾기와 안전한 수정 요청문",
+      "type": "파일 구조 실습",
+      "kind": "copy-guide",
+      "date": "4회차",
+      "cohortTitle": "바이브코딩 2기",
+      "description": "브라우저에서 고치고 싶은 장면을 정한 뒤 관련 파일을 찾고, 영향 범위와 AI 수정 내역을 검토할 때 바로 복사해 쓰는 요청문입니다.",
+      "sections": [
+        {
+          "title": "관련 파일 먼저 찾기",
+          "items": [
+            {
+              "label": "화면에서 파일 위치 찾기",
+              "type": "prompt",
+              "value": "현재 브라우저에서 [바꾸고 싶은 화면 또는 기능]을 수정하려고 합니다.\n바로 코드를 수정하지 말고, 먼저 관련된 페이지 파일, 공용 컴포넌트, 스타일 파일을 찾아 경로와 역할을 목록으로 설명해주세요."
+            }
+          ]
+        },
+        {
+          "title": "수정 영향 범위 확인",
+          "items": [
+            {
+              "label": "다른 화면 영향 확인",
+              "type": "prompt",
+              "value": "찾은 파일 중 어떤 파일이 다른 페이지에서도 공용으로 사용되는지 확인해주세요.\n이 파일을 수정하면 함께 달라질 화면과 기능을 먼저 알려주고, 가장 작은 수정 범위를 추천해주세요."
+            }
+          ]
+        },
+        {
+          "title": "최소 범위로 수정하기",
+          "items": [
+            {
+              "label": "새 패키지 없이 수정",
+              "type": "prompt",
+              "value": "새로운 패키지를 설치하지 말고 기존 프로젝트 구조와 스타일을 유지해주세요.\n필요한 파일만 최소 범위로 수정하고, 기존 기능과 모바일 화면이 깨지지 않도록 구현해주세요."
+            }
+          ]
+        },
+        {
+          "title": "수정 결과 검토하기",
+          "items": [
+            {
+              "label": "diff와 브라우저 검증",
+              "type": "prompt",
+              "value": "수정이 끝나면 변경된 파일 목록과 각 파일을 바꾼 이유를 정리해주세요.\n삭제된 코드, 새로 설치된 패키지, 다른 화면에 미칠 영향이 있는지 점검하고 브라우저에서 확인할 항목도 체크리스트로 알려주세요."
+            }
+          ]
+        }
+      ]
+    },
+    "error-guide": {
+      "id": "appendix-error-guide",
+      "sourceId": "vibe-basic-appendix-error-guide",
+      "title": "에러 해결 가이드",
+      "type": "문제 해결",
+      "kind": "copy-guide",
+      "date": "2~5회차",
+      "cohortTitle": "바이브코딩 2기",
+      "description": "에러가 났을 때 당황하지 않고 AI에게 원인과 해결 순서를 물어보는 템플릿입니다.",
+      "sections": [
+        {
+          "title": "에러가 났을 때 순서",
+          "items": [
+            { "label": "1단계", "value": "명령어를 더 입력하지 말고 멈춥니다." },
+            { "label": "2단계", "value": "터미널에 나온 에러 메시지를 처음부터 끝까지 복사합니다." },
+            { "label": "3단계", "value": "아래 템플릿에 붙여넣고 AI에게 물어봅니다." }
+          ]
+        },
+        {
+          "title": "AI에게 물어볼 문장",
+          "items": [
+            {
+              "label": "에러 해결 요청",
+              "type": "prompt",
+              "value": "내가 [무엇을 하려 했는지] 하려고 했는데 아래 에러가 발생했어.\n\n[여기에 에러 메시지 전체 붙여넣기]\n\n1. 에러 원인을 초보자도 이해할 수 있게 설명해줘.\n2. 어떤 명령어를 순서대로 실행해야 하는지 알려줘.\n3. 한 번에 여러 개 말고, 먼저 해야 할 것부터 단계별로 알려줘."
+            }
+          ]
+        },
+        {
+          "title": "자주 쓰는 복구 명령어",
+          "items": [
+            { "label": "서버 중지", "type": "command", "value": "Ctrl + C" },
+            { "label": "패키지 다시 설치", "type": "command", "value": "npm install" },
+            { "label": "개발 서버 재실행", "type": "command", "value": "npm run dev" }
+          ]
+        }
+      ]
+    }
+  }
+}

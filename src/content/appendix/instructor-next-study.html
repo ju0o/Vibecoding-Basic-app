@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>후속 과정 강사용 공부자료</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+  <link rel="stylesheet" href="./instructor-note.css">
+  <style>
+    :root {
+      --ink: #17201d;
+      --muted: #59635f;
+      --line: #d9dfdc;
+      --paper: #f6f8f5;
+      --lime: #8fae28;
+      --coral: #cb6f55;
+      --blue: #397f9b;
+      --black: #111714;
+    }
+    body { background: #e8ece8; color: var(--ink); }
+    main { width: min(1120px, calc(100% - 36px)); margin: 24px auto 70px; }
+    .cover {
+      min-height: 420px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(320px, .65fr);
+      gap: 42px;
+      align-items: end;
+      padding: 54px;
+      color: #f7faf7;
+      background: var(--black);
+      border-radius: 8px;
+    }
+    .eyebrow { color: #cbe94f; font: 800 13px/1.2 ui-monospace, monospace; letter-spacing: .08em; }
+    h1 { max-width: 760px; margin: 15px 0 18px; font-size: clamp(42px, 6vw, 76px); line-height: 1.04; letter-spacing: 0; }
+    .cover p { max-width: 720px; color: #bac4bf; font-size: 19px; line-height: 1.7; }
+    .cover-index { display: grid; gap: 1px; background: #333b37; border: 1px solid #333b37; }
+    .cover-index div { padding: 18px; background: #171e1a; }
+    .cover-index span { display: block; color: #849089; font: 700 11px/1.2 ui-monospace, monospace; }
+    .cover-index b { display: block; margin-top: 5px; font-size: 17px; }
+    section.sheet { margin-top: 18px; padding: 42px; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+    .section-head { display: flex; justify-content: space-between; gap: 30px; align-items: end; margin-bottom: 24px; }
+    .section-head span { color: var(--coral); font: 800 12px/1.2 ui-monospace, monospace; }
+    h2 { margin: 6px 0 0; font-size: 30px; letter-spacing: 0; }
+    .section-head p { max-width: 520px; margin: 0; color: var(--muted); line-height: 1.65; }
+    .track-grid, .study-grid, .qa-grid { display: grid; gap: 14px; }
+    .track-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .study-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .track, .study, .qa { padding: 24px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); }
+    .track { border-top: 4px solid var(--accent); }
+    .track small, .study small { color: var(--accent, var(--blue)); font: 800 12px/1.2 ui-monospace, monospace; }
+    h3 { margin: 9px 0 10px; font-size: 21px; letter-spacing: 0; }
+    .track p, .study p, .qa p { margin: 0; color: var(--muted); line-height: 1.65; }
+    ul { margin: 15px 0 0; padding-left: 20px; color: var(--muted); line-height: 1.7; }
+    .depth-table { width: 100%; border-collapse: collapse; }
+    .depth-table th, .depth-table td { padding: 14px 15px; border: 1px solid var(--line); text-align: left; vertical-align: top; line-height: 1.55; }
+    .depth-table th { background: #eef2ef; font-size: 13px; }
+    .depth-table td:first-child { width: 19%; font-weight: 800; }
+    .depth-table td:nth-child(2) { width: 38%; }
+    .practice { display: grid; grid-template-columns: 120px minmax(0, 1fr) minmax(0, .8fr); gap: 0; border: 1px solid var(--line); }
+    .practice + .practice { border-top: 0; }
+    .practice > * { padding: 18px; border-right: 1px solid var(--line); }
+    .practice > *:last-child { border-right: 0; }
+    .practice b { color: var(--blue); }
+    .practice p { margin: 0; color: var(--muted); line-height: 1.55; }
+    .qa-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .qa b { display: block; margin-bottom: 8px; font-size: 16px; }
+    .sources { display: grid; gap: 10px; }
+    .source { display: grid; grid-template-columns: minmax(220px, .75fr) minmax(0, 1.25fr); gap: 20px; padding: 18px; border: 1px solid var(--line); }
+    .source b { font-size: 15px; }
+    .source a { color: var(--blue); word-break: break-all; }
+    .print-note { margin-top: 18px; color: var(--muted); font-size: 13px; }
+    @media (max-width: 820px) {
+      .cover, .track-grid, .study-grid, .qa-grid { grid-template-columns: 1fr; }
+      .cover { padding: 34px; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 12px; }
+      .practice { grid-template-columns: 1fr; }
+      .practice > * { border-right: 0; border-bottom: 1px solid var(--line); }
+      .practice > *:last-child { border-bottom: 0; }
+      .source { grid-template-columns: 1fr; }
+    }
+    @media print {
+      body { background: #fff; }
+      main { width: 100%; margin: 0; }
+      .cover, section.sheet { break-after: page; border-radius: 0; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header class="cover">
+    <div>
+      <div class="eyebrow">INSTRUCTOR STUDY · NEXT TRACKS</div>
+      <h1>후속 과정을 가르치기 전에 공부할 것</h1>
+      <p>수익화와 Agent 기술을 유행어로 소개하지 않고, 수강생이 실제 결과물을 만들 수 있도록 강사가 설명해야 할 개념과 실습 기준을 정리합니다.</p>
+    </div>
+    <div class="cover-index">
+      <div><span>TRACK A</span><b>응용·수익화반</b></div>
+      <div><span>TRACK X</span><b>AI 워크스페이스 심화반</b></div>
+      <div><span>TEACHING RULE</span><b>개념 → 장면 → 실행 → 검증</b></div>
+    </div>
+  </header>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>01 · COURSE BOUNDARY</span><h2>두 반은 목표가 다릅니다</h2></div>
+      <p>응용반은 프로젝트를 상품으로 만드는 과정이고, 심화반은 AI가 반복 업무를 수행하는 작업 시스템을 만드는 과정입니다.</p>
+    </div>
+    <div class="track-grid">
+      <article class="track" style="--accent:var(--coral)">
+        <small>PRODUCT & BUSINESS</small>
+        <h3>응용·수익화반</h3>
+        <p>고객 문제, MVP 범위, 가격과 결제, 출시와 피드백을 다룹니다.</p>
+        <ul><li>결과물: 실제로 소개하고 판매할 수 있는 작은 상품</li><li>강사의 역할: 기능을 줄이고 고객의 사용 장면을 선명하게 만들기</li></ul>
+      </article>
+      <article class="track" style="--accent:var(--blue)">
+        <small>AGENTIC WORKFLOW</small>
+        <h3>AI 워크스페이스 심화반</h3>
+        <p>MCP, Skill, Agent, SubAgent와 운영 규칙을 연결합니다.</p>
+        <ul><li>결과물: 반복 업무 한 사이클을 처리하는 개인 AI 작업실</li><li>강사의 역할: 권한, 종료 조건, 검증과 실패 복구를 가르치기</li></ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>02 · STUDY MAP</span><h2>강사가 먼저 설명할 수 있어야 하는 개념</h2></div>
+      <p>도구의 버튼 위치보다 개념의 경계와 실패 사례를 설명할 수 있어야 합니다.</p>
+    </div>
+    <div class="study-grid">
+      <article class="study" style="--accent:var(--coral)"><small>PRODUCT</small><h3>고객 문제와 가치</h3><p>아이디어, 기능, 문제, 고객, 가치 제안의 차이를 실제 사용 장면으로 구분합니다.</p><ul><li>누가 지금 불편한가?</li><li>현재 어떤 방식으로 해결하는가?</li><li>왜 이 제품을 선택하는가?</li></ul></article>
+      <article class="study" style="--accent:var(--coral)"><small>MVP</small><h3>최소 상품 범위</h3><p>MVP는 못 만든 버전이 아니라 가장 중요한 가설을 확인하는 최소한의 완성된 흐름입니다.</p><ul><li>핵심 사용자 행동 1개</li><li>필수 화면과 데이터</li><li>이번 버전에서 하지 않을 것</li></ul></article>
+      <article class="study" style="--accent:var(--coral)"><small>REVENUE</small><h3>가격과 결제 운영</h3><p>가격표뿐 아니라 결제 전후 상태, 취소, 환불, 세금, 고객지원까지 하나의 운영 흐름으로 이해합니다.</p></article>
+      <article class="study" style="--accent:var(--blue)"><small>MCP</small><h3>연결 표준과 권한</h3><p>host, client, server와 tools, resources, prompts의 차이를 이해합니다. 연결보다 권한 범위를 먼저 설계합니다.</p></article>
+      <article class="study" style="--accent:var(--blue)"><small>SKILL</small><h3>재사용 가능한 작업 규격</h3><p>좋은 Skill은 긴 프롬프트가 아니라 사용 조건, 입력, 절차, 산출물, 검증과 실패 기준을 갖습니다.</p></article>
+      <article class="study" style="--accent:var(--blue)"><small>AGENT</small><h3>실행 루프와 종료 조건</h3><p>Agent는 지침과 도구를 가지고 여러 단계를 실행합니다. 언제 멈추고 언제 사람에게 물을지를 정해야 합니다.</p></article>
+      <article class="study" style="--accent:var(--blue)"><small>TEAMS</small><h3>Manager와 Handoff</h3><p>Manager는 전문 Agent를 도구처럼 호출해 결과를 종합하고, handoff는 전문 Agent에게 대화의 주도권을 넘깁니다.</p></article>
+      <article class="study" style="--accent:var(--blue)"><small>WORKSPACE</small><h3>규칙·메모리·도구 묶기</h3><p>폴더 구조, 프로젝트 규칙, 문서, Skill, MCP, hooks와 작업 기록을 일관된 운영 방식으로 묶습니다.</p></article>
+      <article class="study" style="--accent:var(--lime)"><small>OPERATIONS</small><h3>관찰과 복구</h3><p>작업 로그, 도구 호출, 변경 파일, 비용, 실패 지점을 확인하고 사람이 승인하거나 되돌릴 수 있어야 합니다.</p></article>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>03 · EXPLANATION DEPTH</span><h2>수업에서 어디까지 설명할 것인가</h2></div>
+      <p>입문자에게 구현 세부를 모두 보여주기보다, 선택과 검증에 필요한 깊이까지만 설명합니다.</p>
+    </div>
+    <table class="depth-table">
+      <thead><tr><th>주제</th><th>반드시 설명</th><th>심화로 남길 내용</th></tr></thead>
+      <tbody>
+        <tr><td>수익화</td><td>고객 문제, 핵심 사용 흐름, 가격 이유, 결제 전후 상태, 지원 범위</td><td>세무·법률 판단, 복잡한 가격 최적화, 대규모 성장 실험</td></tr>
+        <tr><td>MCP</td><td>연결 대상, 읽기·쓰기 권한, 입력과 출력, 실패 시 영향</td><td>프로토콜 전송 계층, SDK 내부 구현, 자체 서버 배포</td></tr>
+        <tr><td>Skill</td><td>언제 쓰는지, 필요한 입력, 작업 순서, 결과 형식, 검증 기준</td><td>복잡한 런타임 플러그인과 배포 체계</td></tr>
+        <tr><td>Agent</td><td>목표, 도구, 상태, 종료 조건, 사람 승인 지점</td><td>대규모 평가 시스템과 분산 실행 인프라</td></tr>
+        <tr><td>Agent Teams</td><td>역할 경계, 파일 소유권, 결과 계약, 충돌 해결, 최종 책임자</td><td>에이전트 수를 늘리는 실험적 구조</td></tr>
+        <tr><td>워크스페이스</td><td>프로젝트 규칙, 문서, 메모리, Skill, MCP와 기록의 위치</td><td>모든 업무를 자동화하려는 과도한 시스템</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>04 · PRACTICE STANDARD</span><h2>실습은 연결 성공이 아니라 검증까지</h2></div>
+      <p>각 실습은 눈에 보이는 산출물과 실패 복구 장면을 포함해야 합니다.</p>
+    </div>
+    <div class="practice"><b>응용 1강</b><p>한 고객의 한 문제를 실제 상황 문장으로 작성하고 인터뷰 질문 5개를 만듭니다.</p><p>검증: 기능명이 아니라 사용자의 현재 행동이 적혀 있는가?</p></div>
+    <div class="practice"><b>응용 2강</b><p>핵심 흐름 하나를 선택해 필요한 화면·데이터·관리 기능과 제외 범위를 정합니다.</p><p>검증: 1주 안에 시연 가능한 범위인가?</p></div>
+    <div class="practice"><b>응용 3강</b><p>무료, 일회성, 구독 중 하나를 선택해 결제 전후 화면과 지원 정책을 설계합니다.</p><p>검증: 결제 실패·취소·환불 상태가 있는가?</p></div>
+    <div class="practice"><b>응용 4강</b><p>공개 URL, 소개 문구, 첫 사용자 피드백 수집과 다음 개선 3개를 준비합니다.</p><p>검증: 실제 사용자가 한 번 끝까지 사용할 수 있는가?</p></div>
+    <div class="practice"><b>심화 1강</b><p>읽기 전용 MCP 하나를 연결하고 호출 가능한 도구와 접근 데이터를 표로 만듭니다.</p><p>검증: 쓰기 권한 없이도 목표를 달성하는가?</p></div>
+    <div class="practice"><b>심화 2강</b><p>반복 업무 하나를 Skill로 만들고 잘못된 입력과 실패 조건을 시험합니다.</p><p>검증: 다른 사람이 같은 결과 형식을 얻는가?</p></div>
+    <div class="practice"><b>심화 3강</b><p>단일 Agent가 계획·실행·검증·복구를 수행하도록 종료 조건을 설정합니다.</p><p>검증: 실패 시 무한 반복하지 않고 멈추는가?</p></div>
+    <div class="practice"><b>심화 4강</b><p>리서치, 구현, QA 역할을 나누고 manager 또는 handoff 방식을 선택합니다.</p><p>검증: 같은 파일을 동시에 수정하지 않는가?</p></div>
+    <div class="practice"><b>심화 5강</b><p>프로젝트 규칙, Skill, MCP, 메모리와 작업 기록을 개인 워크스페이스로 묶습니다.</p><p>검증: 새 대화에서도 동일한 작업 방식을 재현하는가?</p></div>
+    <div class="practice"><b>심화 6강</b><p>반복 업무 한 사이클을 실행하고 도구 호출, 결과, 실패와 개선점을 발표합니다.</p><p>검증: 자동화하지 말아야 할 구간도 설명하는가?</p></div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>05 · EXPECTED QUESTIONS</span><h2>예상 질문과 답변 기준</h2></div>
+      <p>제품마다 기능 이름이 달라질 수 있으므로, 특정 서비스보다 판단 원칙을 중심으로 답합니다.</p>
+    </div>
+    <div class="qa-grid">
+      <article class="qa"><b>MCP를 쓰면 API를 몰라도 되나요?</b><p>아닙니다. MCP는 연결 인터페이스를 표준화하지만 실제 데이터 구조, 권한, 실패 응답과 비용은 여전히 이해해야 합니다.</p></article>
+      <article class="qa"><b>Skill은 프롬프트 저장 기능인가요?</b><p>프롬프트를 포함할 수 있지만 핵심은 사용 조건, 입력, 절차, 산출물과 검증 기준을 재사용 가능하게 묶는 것입니다.</p></article>
+      <article class="qa"><b>Agent가 알아서 끝까지 하면 더 좋은가요?</b><p>항상 그렇지 않습니다. 비용이 크거나 되돌리기 어려운 작업에는 사람 승인 지점을 두고, 종료 조건을 명시해야 합니다.</p></article>
+      <article class="qa"><b>Agent를 많이 만들수록 성능이 좋아지나요?</b><p>역할이 겹치면 맥락 전달과 충돌 비용이 커집니다. 단일 Agent로 시작하고 별도 전문 맥락이 필요한 경우에만 분리합니다.</p></article>
+      <article class="qa"><b>수익화는 결제만 붙이면 되나요?</b><p>결제는 한 단계입니다. 고객 문제, 가격 이유, 결제 전후 경험, 환불과 지원, 재사용 이유까지 연결되어야 상품이 됩니다.</p></article>
+      <article class="qa"><b>나만의 AI 워크스페이스는 자동화 프로그램인가요?</b><p>자동화만 의미하지 않습니다. 프로젝트 규칙과 지식, 재사용 절차, 연결 도구와 검증 기록을 일관된 작업 환경으로 묶는 것입니다.</p></article>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>06 · PRIMARY SOURCES</span><h2>강의 직전에 다시 확인할 공식 자료</h2></div>
+      <p>Agent와 MCP 기능은 빠르게 바뀌므로 강의 자료를 고정된 사실로 외우지 말고 공식 문서를 다시 확인합니다.</p>
+    </div>
+    <div class="sources">
+      <div class="source"><b>Model Context Protocol</b><div>MCP 소개와 구조<br><a href="https://modelcontextprotocol.io/docs/getting-started/intro">https://modelcontextprotocol.io/docs/getting-started/intro</a><br><a href="https://modelcontextprotocol.io/docs/learn/architecture">https://modelcontextprotocol.io/docs/learn/architecture</a></div></div>
+      <div class="source"><b>MCP Security Best Practices</b><div>권한과 공격 표면 점검<br><a href="https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices">https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices</a></div></div>
+      <div class="source"><b>OpenAI Agents SDK</b><div>Agent, tools, manager, handoff와 tracing<br><a href="https://openai.github.io/openai-agents-js/guides/agents/">https://openai.github.io/openai-agents-js/guides/agents/</a><br><a href="https://openai.github.io/openai-agents-js/guides/tools/">https://openai.github.io/openai-agents-js/guides/tools/</a></div></div>
+      <div class="source"><b>Claude Code Skills</b><div>Skill 구성과 공유<br><a href="https://docs.anthropic.com/en/docs/claude-code/skills">https://docs.anthropic.com/en/docs/claude-code/skills</a></div></div>
+      <div class="source"><b>Claude Code Subagents</b><div>전문 Agent, 별도 맥락과 도구 제한<br><a href="https://docs.anthropic.com/en/docs/claude-code/sub-agents">https://docs.anthropic.com/en/docs/claude-code/sub-agents</a></div></div>
+      <div class="source"><b>Claude Code Hooks</b><div>작업 전후 자동 검사와 운영 규칙<br><a href="https://docs.anthropic.com/en/docs/claude-code/hooks-guide">https://docs.anthropic.com/en/docs/claude-code/hooks-guide</a></div></div>
+    </div>
+    <p class="print-note">제품별 요금제, 제공 도구와 UI는 바뀔 수 있습니다. 수업 시작 주에 실제 계정과 최신 공식 문서로 다시 확인합니다.</p>
+  </section>
+</main>
+<script src="./appendix-print.js"></script>
+</body>
+</html>

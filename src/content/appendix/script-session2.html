@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2강 강사 대본 — 바이브코딩</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --violet: #A78BFA; --violet2: #C4B5FD; --cyan: #67E8F9;
+      --amber: #FBBF24; --emerald: #34D399; --rose: #FB7185;
+      --text: #F1F0FF; --text2: #A09EC0; --text3: #6B6A8A;
+    }
+    body {
+      font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+      background: #07081A; color: var(--text);
+      overflow-y: auto; overflow-x: hidden;
+    }
+    .bg-grad {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 15% 0%, rgba(167,139,250,0.14), transparent),
+        radial-gradient(ellipse 50% 45% at 90% 100%, rgba(103,232,249,0.09), transparent);
+    }
+    .top-nav {
+      position: fixed; top: 0; left: 0; right: 0; height: 48px;
+      background: rgba(7,8,26,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; gap: 6px;
+      padding: 0 20px; z-index: 100; overflow-x: auto;
+    }
+    .top-nav::-webkit-scrollbar { display: none; }
+    .nav-home { font-size: 12px; font-weight: 700; color: var(--violet); text-decoration: none; white-space: nowrap; margin-right: 12px; }
+    .nav-link { font-size: 12px; color: var(--text2); text-decoration: none; padding: 4px 10px; border-radius: 999px; white-space: nowrap; transition: background 0.15s; }
+    .nav-link:hover { background: rgba(255,255,255,0.08); color: var(--text); }
+    .container { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 72px 40px 100px; }
+    .hero { margin-bottom: 48px; }
+    .hero-eyebrow { font-size: 12px; font-weight: 700; color: var(--violet2); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; }
+    .hero-title { font-size: clamp(28px, 4vw, 56px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 14px; line-height: 1.1; }
+    .hero-desc { font-size: clamp(14px, 1.3vw, 18px); color: var(--text2); line-height: 1.65; max-width: 640px; }
+    .grad-text { background: linear-gradient(135deg, #A78BFA, #67E8F9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* Download button */
+    .download-bar {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(167,139,250,0.08);
+      border: 1px solid rgba(167,139,250,0.25);
+      border-radius: 14px; padding: 14px 18px;
+      margin-bottom: 40px;
+    }
+    .download-icon { font-size: 24px; }
+    .download-text { flex: 1; }
+    .download-text strong { display: block; font-size: 14px; font-weight: 700; color: var(--violet2); margin-bottom: 2px; }
+    .download-text span { font-size: 12px; color: var(--text3); }
+    .dl-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 20px; border-radius: 10px;
+      background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+      color: #fff; font-size: 13px; font-weight: 700;
+      border: none; cursor: pointer; white-space: nowrap;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .dl-btn:hover { opacity: 0.88; transform: scale(1.03); }
+
+    /* Slide sections */
+    .slide-section { margin-bottom: 48px; scroll-margin-top: 60px; }
+    .slide-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 20px; padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .slide-num {
+      width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
+      background: rgba(167,139,250,0.15);
+      border: 1px solid rgba(167,139,250,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 900; color: var(--violet2);
+    }
+    .slide-meta { flex: 1; }
+    .slide-eyebrow { font-size: 10px; font-weight: 700; color: var(--text3); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 3px; }
+    .slide-title { font-size: clamp(16px, 1.6vw, 22px); font-weight: 800; color: var(--text); line-height: 1.2; }
+    .slide-time { font-size: 11px; font-weight: 700; color: var(--amber); background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.2); border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+
+    /* Script lines */
+    .script-block { display: flex; flex-direction: column; gap: 10px; }
+    .line {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 11px 14px; border-radius: 10px;
+      font-size: clamp(13px, 1.1vw, 15px); line-height: 1.7;
+    }
+    .line.say {
+      background: rgba(52,211,153,0.06);
+      border: 1px solid rgba(52,211,153,0.18);
+    }
+    .line.do {
+      background: rgba(251,191,36,0.05);
+      border: 1px solid rgba(251,191,36,0.15);
+    }
+    .line.tip {
+      background: rgba(167,139,250,0.06);
+      border: 1px solid rgba(167,139,250,0.18);
+    }
+    .line.pause {
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed rgba(255,255,255,0.12);
+    }
+    .line-badge {
+      flex-shrink: 0; width: 42px; height: 22px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 900; letter-spacing: 0.08em;
+      margin-top: 2px;
+    }
+    .line.say .line-badge { background: rgba(52,211,153,0.2); color: #34D399; }
+    .line.do .line-badge  { background: rgba(251,191,36,0.2); color: #FBBF24; }
+    .line.tip .line-badge { background: rgba(167,139,250,0.2); color: #A78BFA; }
+    .line.pause .line-badge { background: rgba(255,255,255,0.07); color: var(--text3); }
+    .line-text { flex: 1; color: var(--text2); }
+    .line.say .line-text { color: var(--text); }
+    .line.tip .line-text { color: var(--violet2); font-style: italic; }
+
+    /* Inline quote styling */
+    .q { color: var(--emerald); font-weight: 700; }
+    .em { color: var(--amber); font-weight: 700; }
+    .act { color: var(--cyan); font-style: italic; }
+
+    /* Legend */
+    .legend {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px;
+      padding: 14px 18px; background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07); border-radius: 12px;
+    }
+    .legend-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text3); }
+    .legend-dot {
+      width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) { .container { padding: 64px 20px 80px; } }
+
+    /* ── Slide thumbnails ── */
+    .slide-thumb {
+      width: 100%; border-radius: 12px;
+      background: #07081A; border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden; margin-bottom: 18px;
+      padding: 12px 14px; position: relative;
+      min-height: 110px; max-height: 160px;
+      display: flex; flex-direction: column; gap: 7px;
+    }
+    .st-kicker { font-size: 7px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+    .st-big { font-size: 17px; font-weight: 800; line-height: 1.15; }
+    .st-row { display: flex; gap: 5px; align-items: stretch; flex: 1; min-height: 0; }
+    .st-card {
+      flex: 1; border-radius: 8px; border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04); padding: 6px 8px;
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .st-label { font-size: 7px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .st-title { font-size: 9px; font-weight: 700; color: #F1F0FF; line-height: 1.3; }
+    .st-body { font-size: 7.5px; color: #A09EC0; line-height: 1.4; }
+    .st-node {
+      flex: 1; border-radius: 8px; border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.04); padding: 5px 7px;
+      display: flex; flex-direction: column; gap: 2px;
+      align-items: center; text-align: center; justify-content: center;
+    }
+    .st-arrow { font-size: 9px; color: rgba(255,255,255,.25); flex-shrink: 0; align-self: center; }
+    .st-step { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+    .st-step-num {
+      width: 17px; height: 17px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 8px; font-weight: 900;
+    }
+
+    @media print {
+      @page { size: A4; margin: 13mm; }
+      body { background: #fff !important; color: #15151c !important; }
+      .bg-grad, .top-nav, .download-bar { display: none !important; }
+      .container { max-width: none; padding: 0; }
+      .slide-thumb { background: #f5f5ff !important; border-color: #dde !important; max-height: none !important; }
+      .slide-thumb * { color: #333 !important; -webkit-text-fill-color: #333 !important; }
+      .st-card, .st-node { background: #efeffa !important; border-color: #ccc !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="bg-grad"></div>
+
+<nav class="top-nav">
+  <a class="nav-home" href="../..">← 대시보드</a>
+  <a class="nav-link" href="#slide-01">커버</a>
+  <a class="nav-link" href="#slide-02">바이브코딩이란</a>
+  <a class="nav-link" href="#slide-03">작업대 4개</a>
+  <a class="nav-link" href="#slide-04">3가지 단어</a>
+  <a class="nav-link" href="#slide-05">에러 5단계</a>
+  <a class="nav-link" href="#slide-06">AI 코딩 흐름</a>
+  <a class="nav-link" href="#slide-07">AI IDE 도구</a>
+  <a class="nav-link" href="#slide-08">IDE 투어</a>
+  <a class="nav-link" href="#slide-09">CLI 에이전트</a>
+  <a class="nav-link" href="#slide-10">드래그 퀴즈</a>
+  <a class="nav-link" href="#slide-11">흐름 01–03</a>
+  <a class="nav-link" href="#slide-14">흐름 04</a>
+  <a class="nav-link" href="#slide-15">루프</a>
+  <a class="nav-link" href="#slide-16">AI 헤맬 때</a>
+  <a class="nav-link" href="#slide-17">30분 루틴</a>
+  <a class="nav-link" href="#slide-18">목표+실습</a>
+  <a class="nav-link" href="#slide-19">다음 회차</a>
+</nav>
+
+<div class="container">
+  <div class="hero">
+    <div class="hero-eyebrow">SCRIPT · 2강</div>
+    <h1 class="hero-title">2강 강사 <span class="grad-text">대본</span></h1>
+    <p class="hero-desc">슬라이드별 말할 내용, 행동 포인트, 강조 팁이 정리된 강사용 가이드입니다. 내 말투에 맞게 수정해서 사용하세요.</p>
+  </div>
+
+  <div class="download-bar" id="download-bar">
+    <div class="download-icon">📄</div>
+    <div class="download-text">
+      <strong>Word 파일로 다운로드</strong>
+      <span>내 말투로 수정할 수 있는 편집 가능한 .doc 형식</span>
+    </div>
+    <button class="dl-btn" onclick="downloadAsWord()">⬇ Word로 저장</button>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#34D399"></div> SAY — 말할 내용 (그대로 or 변형해서)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#FBBF24"></div> DO — 화면에서 할 행동</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#A78BFA"></div> TIP — 강의 팁 / 주의사항</div>
+    <div class="legend-item"><div class="legend-dot" style="background:rgba(255,255,255,0.15)"></div> PAUSE — 반응 기다리기</div>
+  </div>
+
+  <!-- ──────────── SLIDE 01 ──────────── -->
+  <div class="slide-section" id="slide-01">
+    <div class="slide-header">
+      <div class="slide-num">01</div>
+      <div class="slide-meta">
+        <div class="slide-eyebrow">COVER</div>
+        <div class="slide-title">바이브코딩, 지금 시작합니다</div>
+      </div>
+      <div class="slide-time">약 1분</div>
+    </div>
+    <div class="slide-thumb">
+      <div class="st-kicker" style="color:#C4B5FD">2회차 · VIBE CODING</div>
+      <div class="st-big" style="background:linear-gradient(135deg,#A78BFA,#67E8F9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">바이브코딩,<br>지금 시작합니다</div>
+      <div style="color:#A09EC0;font-size:8px;margin-top:2px">AI 도구 설치 · 실제 파일 만들기 · 첫 에러 고치기</div>
+    </div>
+    <div class="script-block">
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">자, 오늘이 2강입니다. 1강에서 AI가 어떤 도구인지 개념적으로 살펴봤다면, 오늘은 실제로 뭔가를 만들어볼 겁니다. 오늘 끝날 때쯤에는 여러분 각자의 화면에 뭔가가 돌아가고 있을 거예요.</span></div>
+      <div class="line tip"><span class="line-badge">TIP</span><span class="line-text">이미 Cursor/Kiro/Windsurf 설치가 안 된 분이 있으면 지금 확인. 없으면 옆 사람 화면 보면서 진행해도 OK.</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">슬라이드 1번 유지. 출석 확인 또는 간단한 분위기 환기 후 넘어가기.</span></div>
+    </div>
+  </div>
+
+  <!-- ──────────── SLIDE 02 ──────────── -->
+  <div class="slide-section" id="slide-02">
+    <div class="slide-header">
+      <div class="slide-num">02</div>
+      <div class="slide-meta">
+        <div class="slide-eyebrow">WHAT IS VIBE CODING</div>
+        <div class="slide-title">바이브코딩이란 — 이런 것입니다.</div>
+      </div>
+      <div class="slide-time">약 3분</div>
+    </div>
+    <div class="slide-thumb">
+      <div class="st-kicker" style="color:#C4B5FD">WHAT IS VIBE CODING</div>
+      <div class="st-row">
+        <div class="st-card"><div class="st-label" style="color:#67E8F9">특징 01</div><div class="st-title">코드 없이 시작</div><div class="st-body">말로 설명하면 AI가 코드를 만들어줍니다</div></div>
+        <div class="st-card"><div class="st-label" style="color:#A78BFA">특징 02</div><div class="st-title">AI가 코드 작성</div><div class="st-body">우리는 방향을 조율하는 역할</div></div>
+        <div class="st-card"><div class="st-label" style="color:#34D399">특징 03</div><div class="st-title">반복·개선</div><div class="st-body">완성이 아닌 발전하는 과정</div></div>
+        <div class="st-card"><div class="st-label" style="color:#FBBF24">특징 04</div><div class="st-title">누구나 가능</div><div class="st-body">코드를 몰라도 원하는 걸 만들 수 있다</div></div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">바이브코딩이라는 말, 들어보셨나요? 2025년 초에 Andrej Karpathy라는 AI 연구자가 처음 쓴 말인데요. 그냥 <span class="q">"느낌으로 코딩한다"</span>는 뜻에 가깝습니다.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">핵심은 이겁니다 — <span class="em">내가 코드를 직접 치지 않아도, 내가 원하는 걸 말로 설명하면 AI가 코드를 만들어준다.</span> 우리는 그 결과물을 보고 방향을 조율하는 역할을 합니다.</span></div>
+      <div class="line pause"><span class="line-badge">PAUSE</span><span class="line-text">"지금 이 개념이 신기하다 싶은 분?" 손 들어보기. 반응 확인 후 진행.</span></div>
+      <div class="line tip"><span class="line-badge">TIP</span><span class="line-text">카드 클릭하면 하이라이트 됩니다. 특히 강조하고 싶은 특징 하나씩 클릭하면서 설명하면 좋습니다.</span></div>
+    </div>
+  </div>
+
+  <!-- ──────────── SLIDE 03 ──────────── -->
+  <div class="slide-section" id="slide-03">
+    <div class="slide-header">
+      <div class="slide-num">03</div>
+      <div class="slide-meta">
+        <div class="slide-eyebrow">VIBE CODING LOOP</div>
+        <div class="slide-title">네 개의 작업대를 오갑니다.</div>
+      </div>
+      <div class="slide-time">약 4분</div>
+    </div>
+    <div class="slide-thumb">
+      <div class="st-kicker" style="color:#C4B5FD">VIBE CODING LOOP · 네 개의 작업대</div>
+      <div class="st-row">
+        <div class="st-node" style="border-color:rgba(167,139,250,.3)"><div style="font-size:16px;margin-bottom:2px">💬</div><div class="st-label" style="color:#C4B5FD">설계 AI</div><div style="font-size:7px;color:#6B6A8A;margin-top:1px">GPT · Claude · Gemini</div></div>
+        <div class="st-arrow">→</div>
+        <div class="st-node" style="border-color:rgba(103,232,249,.3)"><div style="font-size:16px;margin-bottom:2px">⌨️</div><div class="st-label" style="color:#67E8F9">AI IDE</div><div style="font-size:7px;color:#6B6A8A;margin-top:1px">Cursor · Kiro · Windsurf</div></div>
+        <div class="st-arrow">→</div>
+        <div class="st-node" style="border-color:rgba(251,191,36,.3)"><div style="font-size:16px;margin-bottom:2px">⚡</div><div class="st-label" style="color:#FBBF24">터미널</div><div style="font-size:7px;color:#6B6A8A;margin-top:1px">npm install · run dev</div></div>
+        <div class="st-arrow">→</div>
+        <div class="st-node" style="border-color:rgba(52,211,153,.3)"><div style="font-size:16px;margin-bottom:2px">🌐</div><div class="st-label" style="color:#34D399">브라우저</div><div style="font-size:7px;color:#6B6A8A;margin-top:1px">localhost:3000</div></div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">바이브코딩을 하다 보면 네 개의 창을 계속 왔다갔다 하게 됩니다. 이걸 작업대라고 부를게요.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">첫 번째, <span class="q">설계 AI</span> — ChatGPT, Claude, Gemini 같은 채팅형 AI입니다. 뭘 만들지 아이디어를 정리할 때 씁니다.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">두 번째, <span class="q">AI IDE</span> — Cursor, Kiro, Windsurf 같은 코딩 전용 도구입니다. 실제로 파일이 만들어지는 곳입니다.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">세 번째, <span class="q">터미널</span> — 명령어를 치는 검은 창입니다. 겁내지 마세요, 오늘 배울 명령어는 두세 줄이면 충분합니다.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">네 번째, <span class="q">브라우저</span> — 만든 결과물을 눈으로 확인하는 곳입니다. localhost:3000 이런 주소로 들어가게 됩니다.</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">카드를 하나씩 클릭하면서 설명. 패킷이 자동으로 왔다갔다 하는 애니메이션도 보여주기.</span></div>
+      <div class="line tip"><span class="line-badge">TIP</span><span class="line-text">수강생 중 "터미널이 무섭다"는 반응이 나오면 — "지금은 그냥 버튼처럼 쓰면 됩니다"라고 가볍게 넘기세요.</span></div>
+    </div>
+  </div>
+
+  <!-- ──────────── SLIDE 04 ──────────── -->
+  <div class="slide-section" id="slide-04">
+    <div class="slide-header">
+      <div class="slide-num">04</div>
+      <div class="slide-meta">
+        <div class="slide-eyebrow">VOCAB · 3 WORDS</div>
+        <div class="slide-title">세 가지 단어만 — 알면 됩니다.</div>
+      </div>
+      <div class="slide-time">약 3분</div>
+    </div>
+    <div class="slide-thumb">
+      <div class="st-kicker" style="color:#C4B5FD">VOCAB · 3 WORDS</div>
+      <div class="st-row">
+        <div class="st-card" style="border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.06)">
+          <div class="st-label" style="color:#A78BFA">IDE</div>
+          <div class="st-title">코드 편집기</div>
+          <div class="st-body">VS Code 같은 도구.<br>메모장의 고급 버전</div>
+        </div>
+        <div class="st-card" style="border-color:rgba(103,232,249,.3);background:rgba(103,232,249,.06)">
+          <div class="st-label" style="color:#67E8F9">AI IDE</div>
+          <div class="st-title">AI 내장 편집기</div>
+          <div class="st-body">Cursor · Kiro · Windsurf<br>채팅으로 코드 생성</div>
+        </div>
+        <div class="st-card" style="border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.06)">
+          <div class="st-label" style="color:#FBBF24">터미널</div>
+          <div class="st-title">명령 입력창</div>
+          <div class="st-body">npm run dev<br>AI IDE 안에 내장</div>
+        </div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">오늘 꼭 기억할 단어가 세 개 있습니다. IDE, AI IDE, 터미널. 이 세 가지만 알면 오늘 실습에서 헤매지 않습니다.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text"><span class="q">IDE</span>는 코드 편집기입니다. 메모장의 고급 버전이라고 생각하면 됩니다. VS Code가 대표적이에요.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text"><span class="q">AI IDE</span>는 VS Code에 AI가 붙어있는 버전입니다. Cursor, Kiro, Windsurf가 여기 해당해요. 채팅창에 말하면 파일을 직접 만들어줍니다.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text"><span class="q">터미널</span>은 컴퓨터에 명령을 직접 입력하는 공간입니다. <span class="act">npm run dev</span> 같은 걸 여기다 칩니다. AI IDE 안에 내장되어 있어서 따로 열 필요 없어요.</span></div>
+      <div class="line tip"><span class="line-badge">TIP</span><span class="line-text">VS Code vs AI IDE 구분이 자주 헷갈리는 포인트입니다. "VS Code는 AI가 없는 기본형, Cursor/Kiro/Windsurf는 AI가 내장된 VS Code"로 정리해주세요.</span></div>
+    </div>
+  </div>
+
+  <!-- ──────────── SLIDE 05 ──────────── -->
+  <div class="slide-section" id="slide-05">
+    <div class="slide-header">
+      <div class="slide-num">05</div>
+      <div class="slide-meta">
+        <div class="slide-eyebrow">TERMINAL · ERROR FIX FLOW</div>
+        <div class="slide-title">에러가 나도 — 이 5단계면 끝납니다.</div>
+      </div>
+      <div class="slide-time">약 4분</div>
+    </div>
+    <div class="slide-thumb">
+      <div class="st-kicker" style="color:#C4B5FD">TERMINAL · ERROR FIX FLOW · 5단계</div>
+      <div class="st-row" style="align-items:center;flex-wrap:nowrap">
+        <div class="st-step">
+          <div class="st-step-num" style="background:rgba(251,113,133,.2);color:#FB7185">1</div>
+          <div style="font-size:8px;color:#A09EC0;white-space:nowrap">에러 발생</div>
+        </div>
+        <div class="st-arrow">→</div>
+        <div class="st-step">
+          <div class="st-step-num" style="background:rgba(251,191,36,.2);color:#FBBF24">2</div>
+          <div style="font-size:8px;color:#A09EC0;white-space:nowrap">전체 복사</div>
+        </div>
+        <div class="st-arrow">→</div>
+        <div class="st-step">
+          <div class="st-step-num" style="background:rgba(103,232,249,.2);color:#67E8F9">3</div>
+          <div style="font-size:8px;color:#A09EC0;white-space:nowrap">AI 붙여넣기</div>
+        </div>
+        <div class="st-arrow">→</div>
+        <div class="st-step">
+          <div class="st-step-num" style="background:rgba(167,139,250,.2);color:#A78BFA">4</div>
+          <div style="font-size:8px;color:#A09EC0;white-space:nowrap">Agent 수정</div>
+        </div>
+        <div class="st-arrow">→</div>
+        <div class="st-step">
+          <div class="st-step-num" style="background:rgba(52,211,153,.2);color:#34D399">5</div>
+          <div style="font-size:8px;color:#34D399;white-space:nowrap;font-weight:700">완료</div>
+        </div>
+      </div>
+      <div style="font-size:8px;color:#6B6A8A;margin-top:2px">에러는 닫는 게 아니라 <span style="color:#FBBF24;font-weight:700">복사하는 겁니다.</span></div>
+    </div>
+    <div class="script-block">
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">실습을 하다가 빨간 글씨가 나오면 어떻게 하세요? 대부분 창을 닫습니다. (웃음) 근데 에러는 닫는 게 아니라 <span class="em">복사하는 겁니다.</span></span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">다섯 단계만 기억하세요. 에러 발생 → 에러 메시지 전체 복사 → AI 채팅창에 붙여넣기 → Agent가 수정 → 완료. 끝입니다.</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">▶ 시작하기 버튼 클릭해서 애니메이션 실행. 각 단계 넘어갈 때마다 설명 추가.</span></div>
+      <div class="line tip"><span class="line-badge">TIP</span><span class="line-text">수강생이 실습 중 에러 만났을 때 이 슬라이드로 돌아와서 단계 같이 확인하면 효과적입니다.</span></div>
+    </div>
+  </div>
+
+  <!-- ──────────── SLIDE 06 ──────────── -->
+  <div class="slide-section" id="slide-06">
+    <div class="slide-header">
+      <div class="slide-num">06</div>
+      <div class="slide-meta">
+        <div class="slide-eyebrow">AI CODING FLOW</div>
+        <div class="slide-title">채팅창에 부탁하면 — 실제 화면이 만들어집니다.</div>
+      </div>
+      <div class="slide-time">약 3분</div>
+    </div>
+    <div class="slide-thumb">
+      <div class="st-kicker" style="color:#C4B5FD">AI CODING FLOW · 시뮬레이션</div>
+      <div class="st-row">
+        <div class="st-card" style="border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.06)">
+          <div class="st-label" style="color:#A78BFA">채팅창 입력</div>
+          <div class="st-title" style="font-size:8px;font-style:italic;color:#C4B5FD">"로그인 버튼 만들어줘"</div>
+        </div>
+        <div class="st-arrow">→</div>
+        <div class="st-card" style="border-color:rgba(103,232,249,.3);background:rgba(103,232,249,.06)">
+          <div class="st-label" style="color:#67E8F9">AI 응답 · 파일 생성</div>
+          <div style="font-family:monospace;font-size:7.5px;color:#67E8F9;margin-top:3px">+ LoginButton.tsx<br>~ styles/auth.css</div>
+        </div>
+        <div class="st-arrow">→</div>
+        <div class="st-card" style="border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.06)">
+          <div class="st-label" style="color:#34D399">미리보기 반영</div>
+          <div style="margin-top:4px;padding:4px 8px;border-radius:5px;background:linear-gradient(135deg,#A78BFA,#67E8F9);color:#fff;font-size:8px;font-weight:700;text-align:center">로그인</div>
+        </div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">실제로 어떻게 동작하는지 보여드릴게요. AI IDE 채팅창에 <span class="q">"로그인 버튼 만들어줘"</span> 한 줄만 치면 어떻게 되냐면 —</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">"로그인 버튼 요청" 버튼 클릭. AI 응답 → 파일 생성 → 미리보기 업데이트 흐름 설명.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">AI가 파일을 만들고, 기존 파일을 수정하고, 미리보기까지 바꿔놓습니다. 우리가 한 건 한 줄 부탁이 전부에요.</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">"수정 요청" 버튼도 클릭해서 수정 흐름도 보여주기.</span></div>
+      <div class="line tip"><span class="line-badge">TIP</span><span class="line-text">이 시뮬레이션이 실제 AI IDE와 동일한 흐름입니다. 수강생이 Cursor에서 처음 실습할 때 "아, 이거구나!" 할 수 있게 연결해주세요.</span></div>
+    </div>
+  </div>
+
+  <!-- ──────────── SLIDE 07 ──────────── -->
+  <div class="slide-section" id="slide-07">
+    <div class="slide-header">
+      <div class="slide-num">07</div>
+      <div class="slide-meta">
+        <div class="slide-eyebrow">AI IDE TOOLS</div>
+        <div class="slide-title">AI 코딩환경 — 네 가지를 알아봅니다.</div>
+      </div>
+      <div class="slide-time">약 5분</div>
+    </div>
+    <div class="slide-thumb">
+      <div class="st-kicker" style="color:#C4B5FD">AI IDE TOOLS · 4가지 비교</div>
+      <div class="st-row">
+        <div class="st-card" style="border-color:rgba(103,232,249,.3)">
+          <div class="st-label" style="color:#67E8F9">Cursor</div>
+          <div class="st-body">레퍼런스 최다<br>초보자 추천</div>
+          <div style="font-size:7px;margin-top:3px;padding:1px 5px;background:rgba(103,232,249,.1);border-radius:3px;color:#67E8F9;display:inline-block">추천</div>
+        </div>
+        <div class="st-card" style="border-color:rgba(52,211,153,.3)">
+          <div class="st-label" style="color:#34D399">Kiro</div>
+          <div class="st-body">Amazon · 설계 우선<br>2025년 출시</div>
+        </div>
+        <div class="st-card" style="border-color:rgba(167,139,250,.3)">
+          <div class="st-label" style="color:#A78BFA">Windsurf</div>
+          <div class="st-body">OpenAI 인수<br>GPT 기반</div>
+        </div>
+        <div class="st-card" style="border-color:rgba(251,191,36,.3)">
+          <div class="st-label" style="color:#FBBF24">Antigravity</div>
+          <div class="st-body">Google Gemini<br>코드 품질 상위권</div>
+        </div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">AI IDE가 여러 개 있는데, 오늘 실습에서 쓸 도구를 소개할게요. 지금 설치된 도구 기준으로 하면 됩니다.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text"><span class="q">Cursor</span> — 지금 이 시장에서 레퍼런스가 가장 많습니다. 유튜브에서 "바이브코딩"이라고 검색하면 대부분 Cursor로 하고 있어요. 처음 시작한다면 여기서 시작하세요.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text"><span class="q">Kiro</span> — Amazon이 2025년 5월에 새로 내놓은 도구입니다. 일반 채팅형이랑 다르게, 뭘 만들지 먼저 설계서 형태로 정리한 다음에 코드를 만드는 방식이에요. 체계적으로 개발하고 싶은 분들한테 잘 맞습니다.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text"><span class="q">Windsurf</span> — OpenAI가 인수한 도구입니다. Cascade Agent라는 기능이 있어서 여러 파일을 자동으로 연결해서 수정해줍니다. GPT 기반이에요.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text"><span class="q">Antigravity</span> — Google Gemini 기반입니다. Gemini 구독 있으신 분은 이게 가장 좋은 선택일 수 있어요. 코드 품질 평가에서 상위권입니다.</span></div>
+      <div class="line pause"><span class="line-badge">PAUSE</span><span class="line-text">수강생에게 "지금 어떤 거 설치하셨어요?" 물어보고 도구별로 손 들게 하면 참여도 올라감.</span></div>
+      <div class="line tip"><span class="line-badge">TIP</span><span class="line-text">네 개 다 소개하되, "오늘 실습은 설치된 도구 아무 거나"로 마무리. 비교에 너무 많은 시간 쓰지 않도록.</span></div>
+    </div>
+  </div>
+
+  <!-- ──────────── SLIDE 08 ──────────── -->
+  <div class="slide-section" id="slide-08">
+    <div class="slide-header">
+      <div class="slide-num">08</div>
+      <div class="slide-meta">
+        <div class="slide-eyebrow">IDE · 인터페이스 투어</div>
+        <div class="slide-title">AI IDE 화면 구조 — 각 영역을 클릭해 알아봅니다.</div>
+      </div>
+      <div class="slide-time">약 5분</div>
+    </div>
+    <div class="slide-thumb" style="padding:10px 12px">
+      <div class="st-kicker" style="color:#C4B5FD;margin-bottom:5px">IDE · 인터페이스 투어 · 6개 영역</div>
+      <div style="flex:1;display:grid;grid-template-columns:22px 26px 1fr 140px;grid-template-rows:16px 1fr 28px;gap:2px;border:1px solid rgba(255,255,255,.12);border-radius:6px;overflow:hidden;font-size:7px;min-height:0">
+        <div style="grid-column:1/-1;background:rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;padding:0 8px;color:#6B6A8A;gap:4px"><span>●</span><span>●</span><span>●</span><span style="flex:1;text-align:center;font-size:6px">① 메뉴 바</span></div>
+        <div style="background:rgba(167,139,250,.08);border-right:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;padding:4px 0;color:#A78BFA;font-size:9px">📁<br style="line-height:.1">🔍<br style="line-height:.1">🔌</div>
+        <div style="border-right:1px solid rgba(255,255,255,.08);padding:3px 2px;color:#6B6A8A;font-size:6px;line-height:1.5">③<br>탐색기<br>파일목록</div>
+        <div style="background:rgba(0,0,0,.25);border-right:1px solid rgba(255,255,255,.08);padding:3px 4px;color:#A09EC0;font-size:6px;line-height:1.5">④ 코드 에디터<br><span style="color:#67E8F9">const</span> <span style="color:#A78BFA">btn</span> = () =&gt; ...</div>
+        <div style="background:rgba(103,232,249,.04);border-left:1px solid rgba(103,232,249,.2);padding:3px 4px;color:#67E8F9;font-size:6px;line-height:1.5">⑤ AI 채팅<br><span style="color:#6B6A8A">로그인 버튼<br>만들어줘</span></div>
+        <div style="grid-column:1/-1;background:rgba(0,0,0,.4);border-top:1px solid rgba(255,255,255,.08);padding:2px 6px;color:#34D399;font-family:monospace;font-size:6.5px;display:flex;align-items:center;gap:8px">⑥ 터미널 &nbsp;<span style="opacity:.6">$ npm run dev</span><span style="color:#34D399;opacity:.8">_</span></div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">자, 방금 소개한 Cursor, Kiro, Windsurf — 실제 화면을 열면 어떻게 생겼을까요? 지금 화면에 있는 걸 같이 살펴볼게요.</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">① 메뉴 바 클릭 → "파일 열고 저장하는 최상단 메뉴입니다" 설명.</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">② 액티비티 바 클릭 → "여기 아이콘들이 옆 패널을 바꿔줍니다" 설명. 아이콘 하나씩 눌러서 사이드바 내용이 바뀌는 것 보여주기.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">특히 🔌 모양 아이콘 — 여기가 확장 프로그램 설치하는 곳입니다. Claude Code, Codex 같은 걸 여기서 검색해서 설치하면 돼요. (Extensions 뷰 보여주기)</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">④ 코드 에디터 클릭 → "AI가 만든 파일 내용이 여기 나타납니다" 설명.</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">⑤ AI 채팅 패널 클릭 → "여기 채팅창에 한국어로 요청합니다" 설명. 예시 메시지 가리키기.</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">Ctrl+` 터미널 버튼 클릭 → 하단 터미널 열어서 ⑥ 설명. "npm run dev를 여기 치는 겁니다."</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">오늘 실습하면서 이 여섯 영역을 계속 오가게 됩니다. 처음에는 낯설지만 10분만 써보면 어디서 뭘 해야 하는지 자연스럽게 익혀집니다.</span></div>
+      <div class="line tip"><span class="line-badge">TIP</span><span class="line-text">"🎬 자동 투어" 버튼으로 자동 설명 돌릴 수 있습니다. 처음 소개할 때 자동 투어 한 번 돌리고, 다시 클릭해서 멈춘 뒤 질문 받으면 좋습니다.</span></div>
+    </div>
+  </div>
+
+  <!-- ──────────── SLIDE 09 ──────────── -->
+  <div class="slide-section" id="slide-09">
+    <div class="slide-header">
+      <div class="slide-num">09</div>
+      <div class="slide-meta">
+        <div class="slide-eyebrow">CLI · AI AGENTS</div>
+        <div class="slide-title">터미널에서 작동하는 — AI 에이전트도 있습니다.</div>
+      </div>
+      <div class="slide-time">약 3분</div>
+    </div>
+    <div class="slide-thumb">
+      <div class="st-kicker" style="color:#C4B5FD">CLI · AI AGENTS</div>
+      <div style="flex:1;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 12px;font-family:monospace;font-size:8.5px;line-height:1.8;overflow:hidden">
+        <div style="color:#6B6A8A">$ claude</div>
+        <div style="color:#67E8F9">✓ Claude Code 시작됨 (프로젝트 파일 스캔 중...)</div>
+        <div style="color:#A09EC0">&gt; 로그인 버튼 만들어줘</div>
+        <div style="color:#34D399">✓ components/LoginButton.tsx 생성됨</div>
+        <div style="color:#34D399">✓ styles/auth.css 업데이트됨</div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">방금 소개한 Cursor, Kiro는 GUI가 있는 도구들이에요. 근데 GUI 없이 터미널에서만 동작하는 AI도 있습니다. Claude Code, Codex CLI 같은 거요.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">터미널에 <span class="act">claude</span> 또는 <span class="act">codex</span> 한 줄 치면 AI가 켜지고, 그다음부터 말로 시키면 됩니다. AI가 프로젝트 파일 전체를 읽고 직접 수정해줘요.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">참고로 — 지금 여러분이 보고 계신 이 슬라이드 자체도 Claude Code로 만들었습니다.</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">"Claude Code 실행" 버튼 → 터미널에 AI 명령 시연. "Codex CLI 실행" 버튼도 클릭해서 비교. "확장 활성화" 버튼으로 VSCode 확장 설치 흐름도 보여주기.</span></div>
+      <div class="line tip"><span class="line-badge">TIP</span><span class="line-text">이 슬라이드는 가볍게 소개 수준으로만. "나중에 익숙해지면 이런 것도 있다" 정도로 기대감만 심어주세요.</span></div>
+    </div>
+  </div>
+
+  <!-- ──────────── SLIDE 10 ──────────── -->
+  <div class="slide-section" id="slide-10">
+    <div class="slide-header">
+      <div class="slide-num">10</div>
+      <div class="slide-meta">
+        <div class="slide-eyebrow">DRAG · 역할 매칭</div>
+        <div class="slide-title">각 작업을 — 어디에 맡길지 드래그하세요.</div>
+      </div>
+      <div class="slide-time">약 5분</div>
+    </div>
+    <div class="slide-thumb">
+      <div class="st-kicker" style="color:#C4B5FD">DRAG EXERCISE · 바이브코딩 흐름 역할 분류</div>
+      <div class="st-row">
+        <div class="st-card" style="border-color:rgba(167,139,250,.3)">
+          <div class="st-label" style="color:#C4B5FD">설계 AI</div>
+          <div style="margin-top:3px;display:flex;flex-direction:column;gap:2px">
+            <div style="font-size:7px;padding:2px 5px;background:rgba(167,139,250,.12);border-radius:4px;color:#C4B5FD">아이디어 정리</div>
+            <div style="font-size:7px;padding:2px 5px;background:rgba(167,139,250,.12);border-radius:4px;color:#C4B5FD">프롬프트 작성</div>
+          </div>
+        </div>
+        <div class="st-card" style="border-color:rgba(103,232,249,.3)">
+          <div class="st-label" style="color:#67E8F9">AI IDE</div>
+          <div style="margin-top:3px;display:flex;flex-direction:column;gap:2px">
+            <div style="font-size:7px;padding:2px 5px;background:rgba(103,232,249,.12);border-radius:4px;color:#67E8F9">파일 생성·수정</div>
+            <div style="font-size:7px;padding:2px 5px;background:rgba(103,232,249,.12);border-radius:4px;color:#67E8F9">에러 수정 요청</div>
+          </div>
+        </div>
+        <div class="st-card" style="border-color:rgba(251,191,36,.3)">
+          <div class="st-label" style="color:#FBBF24">터미널</div>
+          <div style="margin-top:3px;display:flex;flex-direction:column;gap:2px">
+            <div style="font-size:7px;padding:2px 5px;background:rgba(251,191,36,.12);border-radius:4px;color:#FBBF24">npm install</div>
+            <div style="font-size:7px;padding:2px 5px;background:rgba(251,191,36,.12);border-radius:4px;color:#FBBF24">npm run dev</div>
+          </div>
+        </div>
+        <div class="st-card" style="border-color:rgba(52,211,153,.3)">
+          <div class="st-label" style="color:#34D399">브라우저</div>
+          <div style="margin-top:3px;display:flex;flex-direction:column;gap:2px">
+            <div style="font-size:7px;padding:2px 5px;background:rgba(52,211,153,.12);border-radius:4px;color:#34D399">화면 확인</div>
+            <div style="font-size:7px;padding:2px 5px;background:rgba(52,211,153,.12);border-radius:4px;color:#34D399">모바일 확인</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">잠깐 같이 해볼게요. 지금까지 배운 네 개의 작업대 — 설계 AI, AI IDE, 터미널, 브라우저 — 에 작업들을 직접 배치해보세요.</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">수강생이 직접 드래그하도록 시간 줌. 강사도 화면으로 같이 시도하거나, 수강생 한 명 앞에서 하게 해도 좋음.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">정답 확인해볼까요? <span class="q">"아이디어 정리"는 설계 AI</span>, <span class="q">"파일 생성은 AI IDE"</span>, <span class="q">"npm install은 터미널"</span>, <span class="q">"화면 확인은 브라우저"</span>입니다.</span></div>
+      <div class="line tip"><span class="line-badge">TIP</span><span class="line-text">틀려도 괜찮습니다 — 헷갈리는 부분이 나오면 그 부분을 다시 설명하는 기회로 삼으세요.</span></div>
+    </div>
+  </div>
+
+  <!-- ──────────── SLIDES 11-13 ──────────── -->
+  <div class="slide-section" id="slide-11">
+    <div class="slide-header">
+      <div class="slide-num">11–13</div>
+      <div class="slide-meta">
+        <div class="slide-eyebrow">흐름 01–03 · START → CONVERT → PASTE</div>
+        <div class="slide-title">실제 흐름 세 단계</div>
+      </div>
+      <div class="slide-time">약 8분</div>
+    </div>
+    <div class="slide-thumb">
+      <div class="st-kicker" style="color:#C4B5FD">흐름 01 – 02 – 03 · START → CONVERT → PASTE</div>
+      <div class="st-row">
+        <div class="st-card" style="border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.06)">
+          <div class="st-label" style="color:#A78BFA">흐름 01</div>
+          <div class="st-title">막연하게라도 말하기</div>
+          <div class="st-body">설계 AI에게 아이디어 정리 요청 — 완벽하지 않아도 OK</div>
+        </div>
+        <div class="st-card" style="border-color:rgba(103,232,249,.3);background:rgba(103,232,249,.06)">
+          <div class="st-label" style="color:#67E8F9">흐름 02</div>
+          <div class="st-title">IDE용 프롬프트 변환</div>
+          <div class="st-body">"Cursor에게 줄 프롬프트로 만들어줘"</div>
+        </div>
+        <div class="st-card" style="border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.06)">
+          <div class="st-label" style="color:#34D399">흐름 03</div>
+          <div class="st-title">AI IDE에 붙여넣기</div>
+          <div class="st-body">채팅창에 붙여넣고 AI가 파일을 만들기 시작</div>
+        </div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">이제 실제로 어떻게 시작하는지 흐름을 보여드릴게요. 세 단계로 나뉩니다.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text"><span class="em">흐름 01 — 막연하게라도 말하기.</span> GPT나 Claude에게 "포트폴리오 사이트 같은 거 만들고 싶어, 근데 뭘 만들지 잘 모르겠어"라고 해도 됩니다. AI가 질문을 던져서 구체화시켜줘요. 완벽하게 준비할 필요 없습니다.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text"><span class="em">흐름 02 — IDE용 프롬프트로 변환.</span> 설계 AI와 대화가 어느 정도 됐다 싶으면 이 한 마디를 치세요. <span class="act">"지금까지 정리한 내용을 Cursor에게 줄 코딩 프롬프트로 만들어줘."</span> 그러면 AI IDE에 바로 붙여넣을 수 있는 형태로 정리해줍니다.</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">슬라이드 11에서 코드 블록 복사 버튼 클릭해서 프롬프트 복사 시연.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text"><span class="em">흐름 03 — AI IDE에 붙여넣기.</span> 받은 프롬프트를 Cursor/Kiro/Windsurf 채팅창에 붙여넣으면 끝입니다. AI가 파일을 만들기 시작해요.</span></div>
+      <div class="line tip"><span class="line-badge">TIP</span><span class="line-text">이 세 슬라이드는 빠르게 넘기면서 "아, 이게 순서구나" 감만 주면 됩니다. 세부 내용은 실습에서 자연스럽게 체득됩니다.</span></div>
+    </div>
+  </div>
+
+  <!-- ──────────── SLIDE 14 ──────────── -->
+  <div class="slide-section" id="slide-14">
+    <div class="slide-header">
+      <div class="slide-num">14</div>
+      <div class="slide-meta">
+        <div class="slide-eyebrow">흐름 04 · THE CYCLE</div>
+        <div class="slide-title">이제부터 — 이것을 반복합니다.</div>
+      </div>
+      <div class="slide-time">약 3분</div>
+    </div>
+    <div class="slide-thumb">
+      <div class="st-kicker" style="color:#C4B5FD">흐름 04 · THE CYCLE · 양방향 루프</div>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:14px">
+        <div class="st-card" style="max-width:120px;text-align:center;border-color:rgba(167,139,250,.35);background:rgba(167,139,250,.07);padding:10px 12px">
+          <div style="font-size:14px;margin-bottom:3px">💬</div>
+          <div class="st-label" style="color:#A78BFA;text-align:center">설계 AI</div>
+          <div style="font-size:7px;color:#6B6A8A;margin-top:2px">프롬프트 생성</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
+          <div style="font-size:10px;color:#67E8F9">→</div>
+          <div style="font-size:7px;color:#34D399;font-weight:700;padding:2px 6px;background:rgba(52,211,153,.1);border-radius:4px;white-space:nowrap">Loop ×N</div>
+          <div style="font-size:10px;color:#A78BFA">←</div>
+        </div>
+        <div class="st-card" style="max-width:120px;text-align:center;border-color:rgba(103,232,249,.35);background:rgba(103,232,249,.07);padding:10px 12px">
+          <div style="font-size:14px;margin-bottom:3px">⌨️</div>
+          <div class="st-label" style="color:#67E8F9;text-align:center">AI IDE</div>
+          <div style="font-size:7px;color:#6B6A8A;margin-top:2px">파일 생성·수정</div>
+        </div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">바이브코딩의 본질은 반복입니다. 설계 AI에서 프롬프트를 받아서 AI IDE에 넣고 → 결과를 다시 설계 AI에 보여주고 → 수정 받아서 다시 IDE에 넣고. 이걸 계속 돕니다.</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">"한 단계 진행" 버튼을 눌러서 파티클이 두 노드 사이를 오가는 걸 보여주기. 루프 카운터가 올라가는 것 강조.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">이 숫자가 올라갈수록 여러분의 앱이 완성에 가까워집니다. 한 번에 완성하려고 하지 마세요.</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">"자동 재생" 버튼으로 빠른 루프 시연.</span></div>
+    </div>
+  </div>
+
+  <!-- ──────────── SLIDE 15 ──────────── -->
+  <div class="slide-section" id="slide-15">
+    <div class="slide-header">
+      <div class="slide-num">15</div>
+      <div class="slide-meta">
+        <div class="slide-eyebrow">THE LOOP · 반복</div>
+        <div class="slide-title">바이브코딩은 — 이 루프를 계속 돌립니다.</div>
+      </div>
+      <div class="slide-time">약 2분</div>
+    </div>
+    <div class="slide-thumb">
+      <div class="st-kicker" style="color:#C4B5FD">THE LOOP · 순환 궤도</div>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center">
+        <div style="display:flex;align-items:center;gap:5px;flex-wrap:nowrap">
+          <div style="padding:5px 9px;border-radius:7px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.3);font-size:8.5px;font-weight:700;color:#C4B5FD;white-space:nowrap">💬 설계 AI</div>
+          <div style="font-size:9px;color:#6B6A8A">→</div>
+          <div style="padding:5px 9px;border-radius:7px;background:rgba(103,232,249,.12);border:1px solid rgba(103,232,249,.3);font-size:8.5px;font-weight:700;color:#67E8F9;white-space:nowrap">⌨️ AI IDE</div>
+          <div style="font-size:9px;color:#6B6A8A">→</div>
+          <div style="padding:5px 9px;border-radius:7px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3);font-size:8.5px;font-weight:700;color:#FBBF24;white-space:nowrap">⚡ 터미널</div>
+          <div style="font-size:9px;color:#6B6A8A">→</div>
+          <div style="padding:5px 9px;border-radius:7px;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.3);font-size:8.5px;font-weight:700;color:#34D399;white-space:nowrap">🌐 브라우저</div>
+          <div style="font-size:9px;color:#A78BFA;font-weight:700">↩</div>
+        </div>
+      </div>
+      <div style="text-align:center;font-size:8px;color:#6B6A8A">완성이 없습니다 — 더 나은 버전으로 계속 발전합니다</div>
+    </div>
+    <div class="script-block">
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">설계 AI → AI IDE → 터미널 → 브라우저 → 다시 설계 AI. 이 타원 궤도를 계속 돕니다. 한 바퀴가 끝나도 다시 처음으로 돌아오는 거예요.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">완성이라는 게 없습니다. 더 나은 버전으로 계속 발전시키는 거예요. 이게 바이브코딩의 본체입니다.</span></div>
+      <div class="line tip"><span class="line-badge">TIP</span><span class="line-text">애니메이션이 자동으로 도니까 그냥 화면 보여주면서 이야기하면 됩니다.</span></div>
+    </div>
+  </div>
+
+  <!-- ──────────── SLIDE 16 ──────────── -->
+  <div class="slide-section" id="slide-16">
+    <div class="slide-header">
+      <div class="slide-num">16</div>
+      <div class="slide-meta">
+        <div class="slide-eyebrow">TROUBLESHOOT · AI 대응법</div>
+        <div class="slide-title">AI가 헤매기 시작할 때 — 이렇게 하세요.</div>
+      </div>
+      <div class="slide-time">약 4분</div>
+    </div>
+    <div class="slide-thumb">
+      <div class="st-kicker" style="color:#C4B5FD">TROUBLESHOOT · 3가지 패턴</div>
+      <div class="st-row">
+        <div class="st-card" style="border-color:rgba(103,232,249,.3);background:rgba(103,232,249,.06)">
+          <div class="st-label" style="color:#67E8F9">패턴 01</div>
+          <div class="st-title">컨텍스트 리셋</div>
+          <div class="st-body">새 채팅창 열고<br>코드만 붙여넣어 재시작</div>
+        </div>
+        <div class="st-card" style="border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.06)">
+          <div class="st-label" style="color:#A78BFA">패턴 02</div>
+          <div class="st-title">범위 좁히기</div>
+          <div class="st-body">"버튼 색상만 바꿔줘.<br>다른 건 절대 건들지 마"</div>
+        </div>
+        <div class="st-card" style="border-color:rgba(251,113,133,.3);background:rgba(251,113,133,.06)">
+          <div class="st-label" style="color:#FB7185">패턴 03</div>
+          <div class="st-title">롤백 요청</div>
+          <div class="st-body">"방금 수정 전으로<br>되돌려줘"</div>
+        </div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">실습하다 보면 반드시 이런 상황이 옵니다. AI가 같은 실수를 반복하거나, 멀쩡했던 게 망가지거나, 뭔가 이상한 방향으로 가고 있다는 느낌이 들 때요. 이럴 때 계속 시키면 더 꼬입니다.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">세 가지 패턴을 기억하세요. <span class="em">첫 번째, 컨텍스트 리셋.</span> 새 채팅창 열고 지금까지 만든 코드만 붙여넣고 다시 시작. AI의 기억을 초기화하는 겁니다.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text"><span class="em">두 번째, 범위 좁히기.</span> "버튼 색상만 바꿔줘. 다른 건 절대 건들지 마." AI한테 작업 범위를 명확히 알려주는 겁니다.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text"><span class="em">세 번째, 롤백 요청.</span> "방금 수정 전으로 되돌려줘." AI가 망가트렸을 때 쓰는 취소 버튼이에요.</span></div>
+      <div class="line pause"><span class="line-badge">PAUSE</span><span class="line-text">"이 중에 써봤거나 써보고 싶은 게 있으신가요?" 가볍게 물어보기.</span></div>
+      <div class="line tip"><span class="line-badge">TIP</span><span class="line-text">실습 중 누군가 막히면 이 슬라이드로 바로 돌아와서 "지금 어떤 상황이에요?" 파악 후 세 패턴 중 맞는 걸 같이 시도합니다.</span></div>
+    </div>
+  </div>
+
+  <!-- ──────────── SLIDE 17 ──────────── -->
+  <div class="slide-section" id="slide-17">
+    <div class="slide-header">
+      <div class="slide-num">17</div>
+      <div class="slide-meta">
+        <div class="slide-eyebrow">30 MIN ROUTINE</div>
+        <div class="slide-title">오늘 30분 — 이 흐름으로 굴립니다.</div>
+      </div>
+      <div class="slide-time">약 2분</div>
+    </div>
+    <div class="slide-thumb">
+      <div class="st-kicker" style="color:#C4B5FD">30 MIN ROUTINE · 실습 타임라인</div>
+      <div class="st-row" style="align-items:center">
+        <div class="st-card" style="text-align:center;border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.07)">
+          <div style="font-size:13px;margin-bottom:2px">💬</div>
+          <div style="font-size:8.5px;font-weight:700;color:#A78BFA">설계 부탁</div>
+          <div style="font-size:7px;color:#6B6A8A;margin-top:1px">~5분</div>
+        </div>
+        <div class="st-arrow">→</div>
+        <div class="st-card" style="text-align:center;border-color:rgba(103,232,249,.3);background:rgba(103,232,249,.07)">
+          <div style="font-size:13px;margin-bottom:2px">⌨️</div>
+          <div style="font-size:8.5px;font-weight:700;color:#67E8F9">IDE 입력</div>
+          <div style="font-size:7px;color:#6B6A8A;margin-top:1px">~10분</div>
+        </div>
+        <div class="st-arrow">→</div>
+        <div class="st-card" style="text-align:center;border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.07)">
+          <div style="font-size:13px;margin-bottom:2px">🔄</div>
+          <div style="font-size:8.5px;font-weight:700;color:#34D399">결과 → AI</div>
+          <div style="font-size:7px;color:#6B6A8A;margin-top:1px">~5분</div>
+        </div>
+        <div class="st-arrow">→</div>
+        <div class="st-card" style="text-align:center;border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.07)">
+          <div style="font-size:13px;margin-bottom:2px">♻️</div>
+          <div style="font-size:8.5px;font-weight:700;color:#FBBF24">반복</div>
+          <div style="font-size:7px;color:#6B6A8A;margin-top:1px">나머지</div>
+        </div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">오늘 실습 30분, 이 순서로 굴리면 됩니다. 설계 부탁 → IDE에 입력 → 결과 다시 AI로 → 반복. 완성 못 해도 됩니다. 막힌 지점도 공유할 가치가 있어요.</span></div>
+      <div class="line tip"><span class="line-badge">TIP</span><span class="line-text">이 슬라이드는 빠르게 넘기고 바로 목표 설정으로 이동. 실습 전 흐름 상기 용도.</span></div>
+    </div>
+  </div>
+
+  <!-- ──────────── SLIDE 18 ──────────── -->
+  <div class="slide-section" id="slide-18">
+    <div class="slide-header">
+      <div class="slide-num">18</div>
+      <div class="slide-meta">
+        <div class="slide-eyebrow">GOAL SETTING · 오늘의 목표 + 실습 시작</div>
+        <div class="slide-title">목표를 정하고 — 바로 30분 실습으로 들어갑니다.</div>
+      </div>
+      <div class="slide-time">3~5분 + 30분 실습</div>
+    </div>
+    <div class="slide-thumb">
+      <div class="st-kicker" style="color:#C4B5FD">GOAL SETTING · 오늘 만들 것 선택 + 타이머</div>
+      <div class="st-row">
+        <div style="flex:2;display:grid;grid-template-columns:1fr 1fr;gap:4px">
+          <div class="st-card" style="padding:5px 7px;cursor:pointer"><div style="font-size:9px;font-weight:700;color:#F1F0FF">📄 포트폴리오</div></div>
+          <div class="st-card" style="padding:5px 7px"><div style="font-size:9px;font-weight:700;color:#F1F0FF">✅ 투두 앱</div></div>
+          <div class="st-card" style="padding:5px 7px"><div style="font-size:9px;font-weight:700;color:#F1F0FF">🌤 날씨 앱</div></div>
+          <div class="st-card" style="padding:5px 7px"><div style="font-size:9px;font-weight:700;color:#F1F0FF">🔢 계산기</div></div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center;border:1px solid rgba(251,191,36,.3);border-radius:8px;background:rgba(251,191,36,.05);padding:8px">
+          <div style="font-size:7px;font-weight:700;color:#FBBF24;letter-spacing:.1em">TIMER</div>
+          <div style="font-size:18px;font-weight:900;color:#FBBF24;font-family:monospace;line-height:1">30:00</div>
+          <div style="font-size:7px;padding:2px 7px;background:rgba(251,191,36,.15);border-radius:4px;color:#FBBF24;font-weight:700">▶ 시작</div>
+        </div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">뭘 만들지 아직 모르겠다는 분들을 위해 예시를 준비했습니다. 포트폴리오, 투두 앱, 날씨 앱, 계산기, 랜딩 페이지 — 이 중 하나를 고르거나, 이미 생각해둔 게 있으면 직접 입력하세요.</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">수강생이 카드 클릭하거나 직접 입력하도록 1~2분 시간 줌.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">목표 정하셨나요? 이 목표를 들고 설계 AI(GPT/Claude)에 가서 먼저 아이디어 정리부터 시작합니다. 자, 그럼 바로 시작해볼게요 — 타이머 돌립니다.</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">슬라이드 하단의 ▶ 실습 시작 버튼 클릭 → 30분 타이머 시작. 체크리스트는 수강생이 단계 완료할 때마다 함께 체크.</span></div>
+      <div class="line tip"><span class="line-badge">TIP</span><span class="line-text">실습 중 강사는 돌아다니면서 상황 파악. 막힌 분들은 슬라이드 16 (AI 헤맬 때) 패턴으로 같이 해결.</span></div>
+      <div class="line tip"><span class="line-badge">TIP</span><span class="line-text">실습 종료 5분 전 알림: "지금 어디까지 왔는지 스크린샷 찍어두세요. 다음 시간에 이어서 합니다."</span></div>
+    </div>
+  </div>
+
+  <!-- ──────────── SLIDE 19 ──────────── -->
+  <div class="slide-section" id="slide-19">
+    <div class="slide-header">
+      <div class="slide-num">19</div>
+      <div class="slide-meta">
+        <div class="slide-eyebrow">NEXT SESSION · 다음 회차 예고</div>
+        <div class="slide-title">3강에서는 — 이걸 배웁니다.</div>
+      </div>
+      <div class="slide-time">약 2분</div>
+    </div>
+    <div class="slide-thumb">
+      <div class="st-kicker" style="color:#C4B5FD">NEXT SESSION · 3강 예고</div>
+      <div class="st-row">
+        <div class="st-card" style="flex:2;border-color:rgba(103,232,249,.3);background:rgba(103,232,249,.05)">
+          <div class="st-label" style="color:#67E8F9">3강 주제</div>
+          <div class="st-title">프론트엔드 · 백엔드 · API 이해</div>
+          <div class="st-body">개발 용어를 알면 AI에게 더 정확하게 말할 수 있습니다</div>
+        </div>
+        <div class="st-card" style="border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.05)">
+          <div class="st-label" style="color:#A78BFA">가져올 것</div>
+          <div class="st-title">오늘 만든 결과물</div>
+          <div class="st-body">막힌 지점, 궁금한 것 모두 가져오기</div>
+          <div style="margin-top:4px;font-size:7px;padding:2px 6px;background:rgba(167,139,250,.12);border-radius:4px;color:#C4B5FD;display:inline-block">스크린샷 찍어두기</div>
+        </div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">오늘 수고 많으셨습니다. 루프를 한 바퀴라도 돌았다면 충분합니다. 완성 못 했어도 괜찮아요 — 3강에서 이어서 하면 됩니다.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">다음 시간에는 <span class="em">프롬프트를 더 잘 쓰는 방법</span>을 집중적으로 다룹니다. AI한테 어떻게 말해야 원하는 결과가 나오는지 — 프롬프트 패턴과 실전 예제 위주로 배웁니다.</span></div>
+      <div class="line say"><span class="line-badge">SAY</span><span class="line-text">오늘 만든 것, 막힌 지점, 궁금한 것 — 다 들고 오세요. 다음 시간에 같이 풀겠습니다.</span></div>
+      <div class="line do"><span class="line-badge">DO</span><span class="line-text">수강생에게 오늘 만든 결과물 스크린샷 공유 요청. 단톡방이나 슬랙 채널에 올리도록 안내.</span></div>
+      <div class="line tip"><span class="line-badge">TIP</span><span class="line-text">결과물 공유를 유도하면 다음 강의 참여율이 올라갑니다. "올리기 부끄러울수록 더 올리세요 — 그게 진도가 빠른 증거입니다"라고 말하면 효과적.</span></div>
+    </div>
+  </div>
+
+</div><!-- .container -->
+
+<script>
+function downloadAsWord() {
+  const header = `
+    <html xmlns:o='urn:schemas-microsoft-com:office:office'
+          xmlns:w='urn:schemas-microsoft-com:office:word'
+          xmlns='http://www.w3.org/TR/REC-html40'>
+    <head>
+      <meta charset='utf-8'>
+      <title>2강 강사 대본</title>
+      <!--[if gte mso 9]>
+      <xml><w:WordDocument><w:View>Print</w:View><w:Zoom>90</w:Zoom></w:WordDocument></xml>
+      <![endif]-->
+      <style>
+        body { font-family: '맑은 고딕', 'Malgun Gothic', sans-serif; font-size: 11pt; color: #1a1a2e; line-height: 1.7; margin: 0; }
+        h1 { font-size: 24pt; font-weight: 800; color: #1a1a2e; margin-bottom: 6pt; page-break-before: avoid; }
+        h2 { font-size: 15pt; font-weight: 700; color: #1a1a2e; border-bottom: 1.5pt solid #e0e0f0; padding-bottom: 4pt; margin-top: 28pt; margin-bottom: 10pt; page-break-after: avoid; }
+        .slide-num-label { font-size: 9pt; font-weight: 700; color: #7c6fa0; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2pt; }
+        .time-badge { font-size: 9pt; color: #b07a10; font-weight: 700; }
+        table { width: 100%; border-collapse: collapse; margin: 8pt 0 16pt; }
+        td { padding: 8pt 10pt; vertical-align: top; font-size: 10.5pt; line-height: 1.65; border: 0.75pt solid #dde; }
+        .badge { font-size: 8.5pt; font-weight: 900; padding: 1pt 6pt; border-radius: 3pt; text-align: center; white-space: nowrap; width: 38pt; }
+        .badge-say  { background: #dcf5eb; color: #1a7a4a; }
+        .badge-do   { background: #fff4d6; color: #946000; }
+        .badge-tip  { background: #ede9fb; color: #5b3fa8; }
+        .badge-pause{ background: #f3f3f5; color: #888; }
+        .say-text  { background: #f5fcf8; }
+        .do-text   { background: #fffbf0; }
+        .tip-text  { background: #f8f6ff; font-style: italic; }
+        .pause-text{ background: #f7f7f9; color: #666; }
+        .intro-box { background: #f0eeff; border-left: 4pt solid #8b5cf6; padding: 10pt 14pt; margin-bottom: 24pt; font-size: 11pt; color: #3d2d7a; line-height: 1.7; }
+        .legend-box { background: #f8f8fc; border: 0.75pt solid #dde; border-radius: 6pt; padding: 10pt 14pt; margin-bottom: 24pt; font-size: 9.5pt; }
+        .legend-row { display: flex; gap: 16pt; flex-wrap: wrap; }
+        .legend-item { display: flex; align-items: center; gap: 6pt; }
+        .legend-dot { width: 9pt; height: 9pt; border-radius: 2pt; display: inline-block; }
+        .slide-thumb { background: #f5f5ff; border: 1pt solid #dde; border-radius: 6pt; padding: 10pt 14pt; margin-bottom: 14pt; }
+        .slide-thumb * { color: #333 !important; -webkit-text-fill-color: #333 !important; background: none !important; }
+        .st-kicker { font-size: 8pt; font-weight: 700; color: #7c6fa0 !important; letter-spacing: .15em; text-transform: uppercase; display: block; margin-bottom: 6pt; }
+        .st-row { display: flex; gap: 7pt; margin-top: 4pt; }
+        .st-card { flex: 1; background: #eeecfa !important; border: 0.75pt solid #ccc; border-radius: 4pt; padding: 5pt 7pt; }
+        .st-node { flex: 1; background: #eeecfa !important; border: 0.75pt solid #ccc; border-radius: 4pt; padding: 5pt 7pt; text-align: center; }
+        .st-label { font-size: 7.5pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; display: block; color: #5b3fa8 !important; margin-bottom: 2pt; }
+        .st-title { font-size: 8.5pt; font-weight: 700; color: #15151c !important; display: block; margin-bottom: 2pt; }
+        .st-body { font-size: 7.5pt; color: #555 !important; line-height: 1.4; display: block; }
+        .st-big { font-size: 16pt; font-weight: 800; color: #1a1a2e !important; }
+        .st-arrow { font-size: 10pt; color: #999 !important; align-self: center; flex-shrink: 0; }
+        .st-step { display: flex; align-items: center; gap: 4pt; }
+        .st-step-num { width: 15pt; height: 15pt; border-radius: 50%; background: #e0e0f0 !important; text-align: center; font-size: 7.5pt; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+      </style>
+    </head>
+    <body>
+  `;
+
+  const footer = `</body></html>`;
+
+  // Build content from slide sections
+  const sections = document.querySelectorAll('.slide-section');
+  let body = `<h1>2강 강사 대본 — 바이브코딩</h1>`;
+  body += `<div class="intro-box">슬라이드별 말할 내용, 행동 포인트, 강조 팁이 정리된 강사용 가이드입니다.<br>내 말투에 맞게 수정해서 사용하세요.</div>`;
+  body += `<div class="legend-box">
+    <strong style="font-size:10pt;color:#333">범례</strong><br><br>
+    <span style="color:#1a7a4a;font-weight:700">▶ SAY</span> — 말할 내용 (그대로 or 변형해서)&nbsp;&nbsp;
+    <span style="color:#946000;font-weight:700">▶ DO</span> — 화면에서 할 행동&nbsp;&nbsp;
+    <span style="color:#5b3fa8;font-weight:700">▶ TIP</span> — 강의 팁 / 주의사항&nbsp;&nbsp;
+    <span style="color:#888;font-weight:700">▶ PAUSE</span> — 반응 기다리기
+  </div>`;
+
+  sections.forEach(section => {
+    const numEl = section.querySelector('.slide-num');
+    const eyebrowEl = section.querySelector('.slide-eyebrow');
+    const titleEl = section.querySelector('.slide-title');
+    const timeEl = section.querySelector('.slide-time');
+    const lines = section.querySelectorAll('.line');
+
+    const thumbEl = section.querySelector('.slide-thumb');
+
+    body += `<div class="slide-num-label">SLIDE ${numEl ? numEl.textContent : ''} &nbsp;·&nbsp; ${eyebrowEl ? eyebrowEl.textContent : ''} &nbsp;<span class="time-badge">${timeEl ? timeEl.textContent : ''}</span></div>`;
+    body += `<h2>${titleEl ? titleEl.textContent : ''}</h2>`;
+    if (thumbEl) body += thumbEl.outerHTML;
+    body += `<table>`;
+
+    lines.forEach(line => {
+      const badge = line.querySelector('.line-badge');
+      const text = line.querySelector('.line-text');
+      const type = badge ? badge.textContent.trim().toLowerCase() : '';
+      const badgeClass = `badge badge-${type}`;
+      const textClass = `${type}-text`;
+      body += `<tr>
+        <td style="width:44pt"><div class="${badgeClass}">${badge ? badge.textContent : ''}</div></td>
+        <td class="${textClass}">${text ? text.innerHTML : ''}</td>
+      </tr>`;
+    });
+
+    body += `</table>`;
+  });
+
+  const fullHtml = header + body + footer;
+  const blob = new Blob(['\ufeff' + fullHtml], { type: 'application/msword' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = '2강_강사대본_바이브코딩.doc';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>

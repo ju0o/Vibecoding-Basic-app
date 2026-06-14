@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 도구 완전 가이드 — 바이브코딩</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --violet: #A78BFA; --violet2: #C4B5FD; --cyan: #67E8F9;
+      --amber: #FBBF24; --emerald: #34D399; --rose: #FB7185;
+      --text: #F1F0FF; --text2: #A09EC0; --text3: #6B6A8A;
+    }
+    body {
+      font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+      background: #07081A; color: var(--text);
+      overflow-y: auto; overflow-x: hidden;
+    }
+    .bg-grad {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 15% 0%, rgba(167,139,250,0.14), transparent),
+        radial-gradient(ellipse 50% 45% at 90% 100%, rgba(103,232,249,0.09), transparent);
+    }
+    .top-nav {
+      position: fixed; top: 0; left: 0; right: 0; height: 48px;
+      background: rgba(7,8,26,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; gap: 6px;
+      padding: 0 20px; z-index: 100; overflow-x: auto;
+    }
+    .top-nav::-webkit-scrollbar { display: none; }
+    .nav-home { font-size: 12px; font-weight: 700; color: var(--violet); text-decoration: none; white-space: nowrap; margin-right: 12px; }
+    .nav-link { font-size: 12px; color: var(--text2); text-decoration: none; padding: 4px 10px; border-radius: 999px; white-space: nowrap; transition: background 0.15s; }
+    .nav-link:hover { background: rgba(255,255,255,0.08); color: var(--text); }
+    .container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 72px 40px 80px; }
+    .hero { margin-bottom: 56px; }
+    .hero-eyebrow { font-size: 12px; font-weight: 700; color: var(--violet2); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; }
+    .hero-title { font-size: clamp(32px, 5vw, 72px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 14px; }
+    .hero-desc { font-size: clamp(14px, 1.4vw, 20px); color: var(--text2); line-height: 1.65; max-width: 680px; }
+    .grad-text { background: linear-gradient(135deg, #A78BFA, #67E8F9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .section { margin-bottom: 60px; scroll-margin-top: 60px; }
+    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .section-icon { font-size: 24px; }
+    .section-title { font-size: clamp(20px, 2.5vw, 32px); font-weight: 800; letter-spacing: -0.02em; }
+    .section-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: rgba(167,139,250,0.15); color: var(--violet2); border: 1px solid rgba(167,139,250,0.25); }
+    .card-grid { display: grid; gap: 14px; }
+    .card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .card-grid-4 { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 900px) { .card-grid-3, .card-grid-4 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .card-grid-2, .card-grid-3, .card-grid-4 { grid-template-columns: 1fr; } .container { padding: 64px 20px 60px; } }
+    .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px 22px; transition: border-color 0.2s, background 0.2s; }
+    .card:hover { border-color: rgba(167,139,250,0.25); background: rgba(255,255,255,0.06); }
+    .card-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+    .card-name { font-size: clamp(15px, 1.5vw, 20px); font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+    .card-by { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+    .card-desc { font-size: clamp(12px, 1vw, 15px); color: var(--text2); line-height: 1.6; }
+    .card-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .card-pill { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 999px; }
+    .tag-free { background: rgba(52,211,153,0.12); color: var(--emerald); border: 1px solid rgba(52,211,153,0.25); }
+    .tag-paid { background: rgba(251,191,36,0.10); color: var(--amber); border: 1px solid rgba(251,191,36,0.2); }
+    .tag-oss { background: rgba(103,232,249,0.10); color: var(--cyan); border: 1px solid rgba(103,232,249,0.2); }
+    .tag-rec { background: rgba(167,139,250,0.12); color: var(--violet2); border: 1px solid rgba(167,139,250,0.25); }
+    table { width: 100%; border-collapse: collapse; font-size: clamp(13px, 1.1vw, 16px); }
+    th { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid rgba(255,255,255,0.08); }
+    td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text2); vertical-align: top; line-height: 1.5; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+    td:first-child { color: var(--text); font-weight: 600; }
+    .table-wrap { border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden; }
+    .info-box { border-left: 3px solid var(--violet); background: rgba(167,139,250,0.06); border-radius: 0 12px 12px 0; padding: 14px 18px; margin: 16px 0; font-size: clamp(13px, 1.1vw, 16px); color: var(--text2); line-height: 1.6; }
+    .info-box strong { color: var(--violet2); }
+    .tip-box { border-left: 3px solid var(--cyan); background: rgba(103,232,249,0.05); border-radius: 0 12px 12px 0; padding: 14px 18px; margin: 16px 0; font-size: clamp(13px, 1.1vw, 16px); color: var(--text2); line-height: 1.6; }
+    .tip-box strong { color: var(--cyan); }
+    .warn-box { border-left: 3px solid var(--amber); background: rgba(251,191,36,0.05); border-radius: 0 12px 12px 0; padding: 14px 18px; margin: 16px 0; font-size: clamp(13px, 1.1vw, 16px); color: var(--text2); line-height: 1.6; }
+    .warn-box strong { color: var(--amber); }
+  </style>
+</head>
+<body>
+  <div class="bg-grad"></div>
+  <nav class="top-nav">
+    <a class="nav-home" href="#">⚡ VIBE CODING</a>
+    <a class="nav-link" href="#llm">범용 AI</a>
+    <a class="nav-link" href="#coding">코딩 도구</a>
+    <a class="nav-link" href="#image">이미지</a>
+    <a class="nav-link" href="#video">영상</a>
+    <a class="nav-link" href="#audio">음성·음악</a>
+    <a class="nav-link" href="#agent">에이전트</a>
+    <a class="nav-link" href="#productivity">생산성</a>
+    <a class="nav-link" href="#search">검색 AI</a>
+  </nav>
+
+  <div class="container">
+    <div class="hero">
+      <div class="hero-eyebrow">부록 A — 레퍼런스 가이드</div>
+      <h1 class="hero-title"><span class="grad-text">AI 도구</span> 완전 가이드</h1>
+      <p class="hero-desc">2025년 기준 주요 AI 도구 전체 카탈로그. 범용 대화 AI부터 코딩·이미지·영상·음성·에이전트·생산성·검색까지 한 번에 정리했습니다.</p>
+    </div>
+
+    <!-- LLM -->
+    <div class="section" id="llm">
+      <div class="section-header">
+        <span class="section-icon">🧠</span>
+        <h2 class="section-title">범용 대화 AI (LLM)</h2>
+        <span class="section-badge">12개 도구</span>
+      </div>
+      <div class="card-grid card-grid-3">
+        <div class="card">
+          <div class="card-tag" style="color:var(--emerald)">ChatGPT</div>
+          <div class="card-name">ChatGPT</div>
+          <div class="card-by">by OpenAI</div>
+          <div class="card-desc">세계에서 가장 많이 쓰이는 AI. GPT-4o, o1, o3 모델 제공. 글쓰기·코딩·분석·이미지 모두 가능.</div>
+          <div class="card-pills">
+            <span class="card-pill tag-free">무료 제한</span>
+            <span class="card-pill tag-paid">Plus $20/월</span>
+            <span class="card-pill tag-rec">★ 추천</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-tag" style="color:var(--violet)">Claude</div>
+          <div class="card-name">Claude</div>
+          <div class="card-by">by Anthropic</div>
+          <div class="card-desc">긴 문서 처리와 코드 작성에 특히 강함. Sonnet 4.6이 현재 최고 성능. 윤리적 설계.</div>
+          <div class="card-pills">
+            <span class="card-pill tag-free">무료 제한</span>
+            <span class="card-pill tag-paid">Pro $20/월</span>
+            <span class="card-pill tag-rec">★ 추천 · 코딩 최강</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-tag" style="color:var(--cyan)">Gemini</div>
+          <div class="card-name">Gemini</div>
+          <div class="card-by">by Google</div>
+          <div class="card-desc">Google 서비스(Gmail, Docs, 검색)와 통합. Gemini 2.5 Pro는 멀티모달 최강.</div>
+          <div class="card-pills">
+            <span class="card-pill tag-free">무료 제한</span>
+            <span class="card-pill tag-paid">Advanced $19.99/월</span>
+            <span class="card-pill tag-rec">Google 생태계</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-tag" style="color:var(--amber)">Grok</div>
+          <div class="card-name">Grok</div>
+          <div class="card-by">by xAI (Elon Musk)</div>
+          <div class="card-desc">Twitter/X와 연동. 실시간 인터넷 검색. 검열이 적은 편. Grok 3 출시.</div>
+          <div class="card-pills">
+            <span class="card-pill tag-free">무료 제한</span>
+            <span class="card-pill tag-paid">Premium $8/월~</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-tag" style="color:var(--cyan)">Copilot</div>
+          <div class="card-name">Copilot</div>
+          <div class="card-by">by Microsoft</div>
+          <div class="card-desc">Windows·Office 365 통합. Bing 검색 연동. 직장인·오피스 사용자에게 최적.</div>
+          <div class="card-pills">
+            <span class="card-pill tag-free">무료 (MS 계정)</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-tag" style="color:var(--emerald)">Perplexity</div>
+          <div class="card-name">Perplexity</div>
+          <div class="card-by">by Perplexity AI</div>
+          <div class="card-desc">실시간 웹 검색 + AI 요약. 출처를 함께 보여줘 신뢰도 높음. 정보 탐색용 최강.</div>
+          <div class="card-pills">
+            <span class="card-pill tag-free">무료</span>
+            <span class="card-pill tag-paid">Pro $20/월</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-tag" style="color:var(--cyan)">DeepSeek</div>
+          <div class="card-name">DeepSeek</div>
+          <div class="card-by">by DeepSeek (중국)</div>
+          <div class="card-desc">오픈소스로 공개되어 큰 주목. GPT급 성능을 저렴하게 제공. 로컬 실행 가능.</div>
+          <div class="card-pills">
+            <span class="card-pill tag-oss">오픈소스</span>
+            <span class="card-pill tag-free">무료</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-tag" style="color:var(--cyan)">Llama</div>
+          <div class="card-name">Llama</div>
+          <div class="card-by">by Meta (오픈소스)</div>
+          <div class="card-desc">Meta의 오픈소스 LLM. 로컬 PC에 설치해서 무료로 쓸 수 있음. Ollama로 실행.</div>
+          <div class="card-pills">
+            <span class="card-pill tag-oss">오픈소스</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-tag" style="color:var(--cyan)">Mistral</div>
+          <div class="card-name">Mistral</div>
+          <div class="card-by">by Mistral AI (프랑스)</div>
+          <div class="card-desc">유럽 최강 LLM. 가볍고 빠름. Le Chat 서비스 제공. 오픈소스 버전 있음.</div>
+          <div class="card-pills">
+            <span class="card-pill tag-oss">오픈소스</span>
+            <span class="card-pill tag-free">무료</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-tag" style="color:var(--cyan)">Qwen</div>
+          <div class="card-name">Qwen</div>
+          <div class="card-by">by Alibaba (중국)</div>
+          <div class="card-desc">알리바바의 오픈소스 LLM. 한국어 지원 우수. 코딩·수학에 강점.</div>
+          <div class="card-pills">
+            <span class="card-pill tag-oss">오픈소스</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-tag" style="color:var(--cyan)">Phi-4</div>
+          <div class="card-name">Phi-4</div>
+          <div class="card-by">by Microsoft</div>
+          <div class="card-desc">소형 고성능 모델. 로컬에서도 빠르게 동작. 저사양 기기에 적합.</div>
+          <div class="card-pills">
+            <span class="card-pill tag-oss">오픈소스</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-tag" style="color:var(--amber)">Command R+</div>
+          <div class="card-name">Command R+</div>
+          <div class="card-by">by Cohere</div>
+          <div class="card-desc">기업용 특화 LLM. RAG(검색 결합) 기능 강함. API로 사용 가능.</div>
+          <div class="card-pills">
+            <span class="card-pill tag-paid">API 유료</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CODING -->
+    <div class="section" id="coding">
+      <div class="section-header">
+        <span class="section-icon">💻</span>
+        <h2 class="section-title">AI 코딩 도구</h2>
+        <span class="section-badge">바이브코딩 핵심 도구</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>도구</th>
+              <th>제작사</th>
+              <th>특징</th>
+              <th>추천 대상</th>
+              <th>가격</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cursor</td>
+              <td style="color:var(--text3)">Anysphere</td>
+              <td>다양한 AI 모델 선택 가능. 가장 안정적이고 자료 많음. VS Code 기반</td>
+              <td>모든 수준</td>
+              <td>무료 제한 / Pro $20/월</td>
+            </tr>
+            <tr>
+              <td>Kiro</td>
+              <td style="color:var(--text3)">Amazon</td>
+              <td>아마존 제작. 처음 체험하기 좋음. Spec-driven development</td>
+              <td>초보자 체험</td>
+              <td>무료 제한</td>
+            </tr>
+            <tr>
+              <td>Antigravity</td>
+              <td style="color:var(--text3)">Gemini 생태계</td>
+              <td>Gemini 구독자에게 강력. 속도와 결과물 품질 우수</td>
+              <td>Gemini 구독자</td>
+              <td>무료 제한</td>
+            </tr>
+            <tr>
+              <td>Windsurf</td>
+              <td style="color:var(--text3)">Codeium</td>
+              <td>Cursor와 유사. Cascade 에이전트로 자동 작업. UI 깔끔</td>
+              <td>중급자</td>
+              <td>무료 / Pro $15/월</td>
+            </tr>
+            <tr>
+              <td>GitHub Copilot</td>
+              <td style="color:var(--text3)">Microsoft/OpenAI</td>
+              <td>GitHub 공식 통합. 기존 코드베이스와 연동 최강</td>
+              <td>직장인 개발자</td>
+              <td>$10/월</td>
+            </tr>
+            <tr>
+              <td>Codex</td>
+              <td style="color:var(--text3)">OpenAI</td>
+              <td>GPT 기반 코드 에이전트. .md 정리·설계 문서화 특화</td>
+              <td>GPT 구독자</td>
+              <td>GPT Plus 포함</td>
+            </tr>
+            <tr>
+              <td>Claude Code</td>
+              <td style="color:var(--text3)">Anthropic</td>
+              <td>터미널 기반 코딩 에이전트. 복잡한 프로젝트 전체 수정 가능</td>
+              <td>Claude Max</td>
+              <td>Max 요금제</td>
+            </tr>
+            <tr>
+              <td>Cline</td>
+              <td style="color:var(--text3)">오픈소스</td>
+              <td>VS Code 확장. 무료로 사용. 원하는 API 연결 가능</td>
+              <td>직접 세팅 원하는 사람</td>
+              <td>무료 (API 비용 별도)</td>
+            </tr>
+            <tr>
+              <td>Aider</td>
+              <td style="color:var(--text3)">오픈소스</td>
+              <td>터미널에서 AI 코딩. Git 연동으로 변경 추적. 파워유저용</td>
+              <td>개발자</td>
+              <td>무료 (API 비용 별도)</td>
+            </tr>
+            <tr>
+              <td>Zed</td>
+              <td style="color:var(--text3)">Zed Industries</td>
+              <td>빠른 AI 에디터. Rust로 만들어 속도 최강. Claude/Copilot 내장</td>
+              <td>속도 중시자</td>
+              <td>무료</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- IMAGE -->
+    <div class="section" id="image">
+      <div class="section-header">
+        <span class="section-icon">🎨</span>
+        <h2 class="section-title">이미지 생성 AI</h2>
+        <span class="section-badge">9개 도구</span>
+      </div>
+      <div class="card-grid card-grid-3">
+        <div class="card">
+          <div class="card-name">Midjourney</div>
+          <div class="card-by">by Midjourney Inc</div>
+          <div class="card-desc">세계 최고 수준의 이미지 품질. Discord 또는 웹에서 사용. 포토리얼리즘·예술 모두 강함.</div>
+          <div class="card-pills"><span class="card-pill tag-paid">Basic $10/월</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">DALL-E 3</div>
+          <div class="card-by">by OpenAI</div>
+          <div class="card-desc">ChatGPT에 내장. 텍스트 이해도 최고. 정확한 텍스트 렌더링 가능.</div>
+          <div class="card-pills"><span class="card-pill tag-paid">GPT Plus 포함</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Stable Diffusion</div>
+          <div class="card-by">by Stability AI</div>
+          <div class="card-desc">오픈소스. 로컬 설치 가능. ComfyUI·Automatic1111으로 커스터마이즈 무한.</div>
+          <div class="card-pills"><span class="card-pill tag-oss">오픈소스</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Adobe Firefly</div>
+          <div class="card-by">by Adobe</div>
+          <div class="card-desc">상업적 사용 안전. CC 라이선스 학습. Adobe 생태계 통합.</div>
+          <div class="card-pills"><span class="card-pill tag-paid">CC 포함</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Ideogram</div>
+          <div class="card-by">by Ideogram AI</div>
+          <div class="card-desc">텍스트가 들어간 이미지 최강. 포스터·배너·로고 작업에 탁월.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span><span class="card-pill tag-paid">Plus $8/월~</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Leonardo AI</div>
+          <div class="card-by">by Leonardo</div>
+          <div class="card-desc">게임 아트·캐릭터에 특화. 스타일 일관성 유지 능력 우수.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span><span class="card-pill tag-paid">유료 플랜</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Flux</div>
+          <div class="card-by">by Black Forest Labs</div>
+          <div class="card-desc">최신 오픈소스 이미지 모델. Midjourney 수준의 품질. Replicate API로 사용 가능.</div>
+          <div class="card-pills"><span class="card-pill tag-oss">오픈소스</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Imagen 3</div>
+          <div class="card-by">by Google</div>
+          <div class="card-desc">Google의 최신 이미지 생성 AI. Gemini Advanced에 내장.</div>
+          <div class="card-pills"><span class="card-pill tag-paid">Gemini Advanced 포함</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Kling AI</div>
+          <div class="card-by">by Kuaishou (중국)</div>
+          <div class="card-desc">이미지→영상 변환도 가능. 한국어 친화적 UI.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span><span class="card-pill tag-paid">유료 플랜</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIDEO -->
+    <div class="section" id="video">
+      <div class="section-header">
+        <span class="section-icon">🎬</span>
+        <h2 class="section-title">영상 생성 AI</h2>
+        <span class="section-badge">8개 도구</span>
+      </div>
+      <div class="card-grid card-grid-3">
+        <div class="card">
+          <div class="card-name">Sora</div>
+          <div class="card-by">by OpenAI</div>
+          <div class="card-desc">텍스트→영상. 최대 1분. 물리 시뮬레이션 이해. ChatGPT Pro에서 사용 가능.</div>
+          <div class="card-pills"><span class="card-pill tag-paid">Pro $200/월</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Veo 3</div>
+          <div class="card-by">by Google DeepMind</div>
+          <div class="card-desc">음성+영상 동시 생성. 8초 클립. Gemini Ultra 포함.</div>
+          <div class="card-pills"><span class="card-pill tag-paid">Gemini Ultra 포함</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Runway ML</div>
+          <div class="card-by">by Runway</div>
+          <div class="card-desc">영상 편집 AI 최강. Gen-3 Alpha로 고품질 영상. 영상 편집자 필수 도구.</div>
+          <div class="card-pills"><span class="card-pill tag-paid">Standard $15/월</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Kling AI</div>
+          <div class="card-by">by Kuaishou</div>
+          <div class="card-desc">이미지→영상 변환 우수. 최대 2분. 한국어 지원.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span><span class="card-pill tag-paid">유료 플랜</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Pika</div>
+          <div class="card-by">by Pika Labs</div>
+          <div class="card-desc">빠르고 간단한 영상 생성. 소셜 콘텐츠용 최적.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span><span class="card-pill tag-paid">유료 플랜</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">HeyGen</div>
+          <div class="card-by">by HeyGen</div>
+          <div class="card-desc">AI 아바타 영상. 내 얼굴로 다국어 영상 자동 생성. 강의·홍보 영상용.</div>
+          <div class="card-pills"><span class="card-pill tag-paid">Essential $24/월~</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Luma Dream Machine</div>
+          <div class="card-by">by Luma AI</div>
+          <div class="card-desc">고품질 영상 생성. 3D 장면 이해 능력 우수.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span><span class="card-pill tag-paid">유료 플랜</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">CapCut AI</div>
+          <div class="card-by">by ByteDance</div>
+          <div class="card-desc">영상 편집 + AI 자막·번역·효과. 틱톡 크리에이터 필수.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUDIO -->
+    <div class="section" id="audio">
+      <div class="section-header">
+        <span class="section-icon">🎵</span>
+        <h2 class="section-title">음성·음악 AI</h2>
+        <span class="section-badge">6개 도구</span>
+      </div>
+      <div class="card-grid card-grid-3">
+        <div class="card">
+          <div class="card-name">ElevenLabs</div>
+          <div class="card-by">by ElevenLabs</div>
+          <div class="card-desc">음성 복제·TTS 최강. 내 목소리로 다국어 더빙 가능. 팟캐스트·오디오북 제작.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료 제한</span><span class="card-pill tag-paid">Starter $5/월~</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Suno</div>
+          <div class="card-by">by Suno AI</div>
+          <div class="card-desc">텍스트→음악 완성곡 생성. 가사+멜로디+보컬 모두 AI가 만들어줌.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span><span class="card-pill tag-paid">Pro $8/월</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Udio</div>
+          <div class="card-by">by Udio</div>
+          <div class="card-desc">Suno와 유사한 음악 생성 AI. 장르·스타일 세밀하게 조절 가능.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span><span class="card-pill tag-paid">유료 플랜</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Whisper</div>
+          <div class="card-by">by OpenAI</div>
+          <div class="card-desc">음성→텍스트 변환(STT). 한국어 포함 99개 언어. 오픈소스로 로컬 사용 가능.</div>
+          <div class="card-pills"><span class="card-pill tag-oss">오픈소스</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Adobe Podcast</div>
+          <div class="card-by">by Adobe</div>
+          <div class="card-desc">녹음 품질 AI 향상. 잡음 제거. 팟캐스트 제작자에게 최강.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료 (베타)</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Mubert</div>
+          <div class="card-by">by Mubert</div>
+          <div class="card-desc">배경음악 무한 생성. 영상·앱용 저작권 없는 음악.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span><span class="card-pill tag-paid">Creator $14/월</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AGENT -->
+    <div class="section" id="agent">
+      <div class="section-header">
+        <span class="section-icon">🤖</span>
+        <h2 class="section-title">에이전트 AI</h2>
+        <span class="section-badge">자동화 실행</span>
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <div class="card-name">Manus AI</div>
+          <div class="card-by">by Monica</div>
+          <div class="card-desc">브라우저를 직접 조작해 작업 수행. 쇼핑·리서치·예약을 AI가 알아서.</div>
+          <div class="card-pills"><span class="card-pill tag-paid">유료</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Claude Computer Use</div>
+          <div class="card-by">by Anthropic</div>
+          <div class="card-desc">컴퓨터 화면 직접 조작. API로 사용 가능. 자동화 에이전트 구축 가능.</div>
+          <div class="card-pills"><span class="card-pill tag-paid">API 유료</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Devin</div>
+          <div class="card-by">by Cognition</div>
+          <div class="card-desc">세계 최초 AI 소프트웨어 엔지니어. GitHub 이슈 읽고 PR까지 자동 작성.</div>
+          <div class="card-pills"><span class="card-pill tag-paid">기업용</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">OpenAI Operator</div>
+          <div class="card-by">by OpenAI</div>
+          <div class="card-desc">웹 브라우저 자동 조작 에이전트. 폼 작성·주문·예약 자동화.</div>
+          <div class="card-pills"><span class="card-pill tag-paid">Pro $200/월</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Browser Use</div>
+          <div class="card-by">by 오픈소스</div>
+          <div class="card-desc">오픈소스 브라우저 자동화 에이전트. Python으로 제어 가능.</div>
+          <div class="card-pills"><span class="card-pill tag-oss">오픈소스</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">n8n</div>
+          <div class="card-by">by n8n GmbH</div>
+          <div class="card-desc">노코드 자동화 워크플로우. AI 노드 포함. Zapier 대안 (자체 호스팅 가능).</div>
+          <div class="card-pills"><span class="card-pill tag-oss">오픈소스</span><span class="card-pill tag-free">무료 (셀프호스팅)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTIVITY -->
+    <div class="section" id="productivity">
+      <div class="section-header">
+        <span class="section-icon">📋</span>
+        <h2 class="section-title">생산성·문서 AI</h2>
+        <span class="section-badge">8개 도구</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>도구</th>
+              <th>용도</th>
+              <th>특징</th>
+              <th>가격</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>NotebookLM</td>
+              <td>리서치·공부</td>
+              <td>내 문서 업로드 → AI가 요약·질문 답변. 유튜브·PDF 분석 가능</td>
+              <td><span class="card-pill tag-free" style="font-size:11px">무료</span></td>
+            </tr>
+            <tr>
+              <td>Gamma</td>
+              <td>프레젠테이션</td>
+              <td>텍스트→슬라이드 자동 생성. Canva AI 대안</td>
+              <td>무료 / Pro $10/월</td>
+            </tr>
+            <tr>
+              <td>Notion AI</td>
+              <td>문서·메모</td>
+              <td>Notion에 내장된 AI. 요약·번역·아이디어 확장</td>
+              <td>Notion Plus 포함</td>
+            </tr>
+            <tr>
+              <td>Tome</td>
+              <td>스토리텔링</td>
+              <td>이야기 구조 중심의 AI 프레젠테이션</td>
+              <td>무료 / Pro $8/월</td>
+            </tr>
+            <tr>
+              <td>Beautiful.ai</td>
+              <td>발표자료</td>
+              <td>AI가 레이아웃 자동 정렬. 디자이너 없이 전문적 슬라이드</td>
+              <td>Pro $12/월</td>
+            </tr>
+            <tr>
+              <td>Jasper</td>
+              <td>마케팅 콘텐츠</td>
+              <td>마케팅 카피·블로그·광고 문구 생성 특화</td>
+              <td>$39/월~</td>
+            </tr>
+            <tr>
+              <td>Copy.ai</td>
+              <td>카피라이팅</td>
+              <td>광고 카피·이메일·소셜 콘텐츠 대량 생성</td>
+              <td>무료 / Pro $36/월</td>
+            </tr>
+            <tr>
+              <td>Otter.ai</td>
+              <td>회의 녹취</td>
+              <td>회의 내용 자동 텍스트 변환+요약. Zoom 연동</td>
+              <td>무료 / Pro $16.99/월</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="section" id="search">
+      <div class="section-header">
+        <span class="section-icon">🔍</span>
+        <h2 class="section-title">검색 AI</h2>
+        <span class="section-badge">5개 도구</span>
+      </div>
+      <div class="card-grid card-grid-3">
+        <div class="card">
+          <div class="card-name">Perplexity AI</div>
+          <div class="card-by">by Perplexity</div>
+          <div class="card-desc">실시간 웹 검색+AI 답변. 출처 표시. 가장 정확한 AI 검색.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span><span class="card-pill tag-paid">Pro $20/월</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">You.com</div>
+          <div class="card-by">by You.com</div>
+          <div class="card-desc">개인화 AI 검색. 코딩 도우미 YouCode 포함.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Phind</div>
+          <div class="card-by">by Phind</div>
+          <div class="card-desc">개발자 특화 검색 AI. Stack Overflow·GitHub 데이터 학습.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span><span class="card-pill tag-paid">Pro $15/월</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Elicit</div>
+          <div class="card-by">by Elicit</div>
+          <div class="card-desc">논문·학술 자료 AI 검색+요약. 리서치 자동화.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span></div>
+        </div>
+        <div class="card">
+          <div class="card-name">Consensus</div>
+          <div class="card-by">by Consensus</div>
+          <div class="card-desc">과학 논문 기반 AI 검색. 근거 기반 답변.</div>
+          <div class="card-pills"><span class="card-pill tag-free">무료</span><span class="card-pill tag-paid">Premium $9.99/월</span></div>
+        </div>
+      </div>
+
+      <div class="info-box" style="margin-top:32px">
+        💡 <strong>AI 도구는 매달 새로 출시되고 업데이트됩니다.</strong> 이 목록은 2025년 5월 기준이며, 항상 최신 정보를 확인하세요.
+      </div>
+    </div>
+
+  </div>  <script src="./appendix-print.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,191 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --ink: #111827;
+  --muted: #526174;
+  --line: #cfd8e3;
+  --cyan: #0e7490;
+  --green: #047857;
+  --amber: #b45309;
+  --red: #b91c1c;
+  --paper: #ffffff;
+  --soft: #f3f7fb;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: #e9eef4;
+  font-family: Pretendard, "Malgun Gothic", system-ui, sans-serif;
+  line-height: 1.55;
+}
+
+.sheet {
+  width: min(210mm, calc(100vw - 28px));
+  min-height: 297mm;
+  margin: 20px auto;
+  padding: 14mm;
+  background: var(--paper);
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+}
+
+.material-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: end;
+  padding-bottom: 14px;
+  border-bottom: 3px solid var(--ink);
+}
+
+.material-kicker {
+  color: var(--cyan);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+h1 { margin: 5px 0 0; font-size: 31px; line-height: 1.15; }
+h2 { margin: 0 0 10px; font-size: 20px; }
+h3 { margin: 0 0 6px; font-size: 16px; }
+p { margin: 0; }
+
+.session-badge {
+  padding: 8px 12px;
+  color: #fff;
+  border-radius: 6px;
+  background: var(--ink);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.goal {
+  margin: 16px 0;
+  padding: 13px 15px;
+  border-left: 5px solid var(--green);
+  background: #ecfdf5;
+  font-weight: 800;
+}
+
+.grid-2, .grid-3, .flow, .qa-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.grid-2, .qa-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.section { margin-top: 16px; break-inside: avoid; }
+
+.box, .term, .qa, .flow-step {
+  padding: 12px 13px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--paper);
+}
+
+.box p, .term p, .qa p, .flow-step p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.term b { color: var(--cyan); }
+.qa b { color: var(--amber); }
+.qa .answer { margin-top: 7px; color: var(--ink); }
+
+.flow {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  position: relative;
+}
+
+.flow-step {
+  position: relative;
+  min-height: 88px;
+}
+
+.flow-step:not(:last-child)::after {
+  content: ">";
+  position: absolute;
+  right: -10px;
+  top: 32px;
+  z-index: 2;
+  color: var(--cyan);
+  font-weight: 950;
+}
+
+.checklist { display: grid; gap: 7px; }
+.check { display: flex; gap: 9px; align-items: flex-start; font-size: 13px; }
+.check::before { content: "□"; color: var(--cyan); font-size: 18px; line-height: 1; }
+
+.visual-building {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+  align-items: end;
+}
+
+.visual-building div {
+  display: grid;
+  place-items: center;
+  min-height: 70px;
+  padding: 7px;
+  border: 1px solid var(--line);
+  border-bottom: 5px solid var(--cyan);
+  background: var(--soft);
+  font-size: 11px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.visual-building div:nth-child(5) { border-bottom-color: var(--red); }
+.visual-building div:nth-child(6),
+.visual-building div:nth-child(7) { border-bottom-color: var(--green); }
+
+.notes {
+  min-height: 108px;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 25px,
+    #d7dee8 26px
+  );
+}
+
+.callout {
+  padding: 11px 13px;
+  border: 1px solid #f4c98b;
+  border-radius: 6px;
+  background: #fff7ed;
+  color: #7c2d12;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.footer-goal {
+  margin-top: 16px;
+  padding-top: 10px;
+  border-top: 2px solid var(--ink);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+@media (max-width: 760px) {
+  .sheet { padding: 22px; }
+  .grid-2, .grid-3, .qa-grid, .flow { grid-template-columns: 1fr; }
+  .visual-building { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .flow-step::after { display: none; }
+}
+
+@media print {
+  @page { size: A4; margin: 0; }
+  body { background: #fff; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .sheet {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0;
+    padding: 12mm 13mm;
+    box-shadow: none;
+    page-break-after: always;
+  }
+  .sheet:last-child { page-break-after: auto; }
+}

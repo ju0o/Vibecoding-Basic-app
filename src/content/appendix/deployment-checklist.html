@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>배포 전 체크리스트</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--violet:#A78BFA;--violet2:#C4B5FD;--cyan:#67E8F9;--amber:#FBBF24;--emerald:#34D399;--rose:#FB7185;--bg:#07081A;--surface:rgba(255,255,255,.045);--border:rgba(255,255,255,.09);--text:#F1F0FF;--text2:#A09EC0;--text3:#6B6A8A}
+    body{font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}.bg{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 45% at 8% 0%,rgba(167,139,250,.14),transparent),radial-gradient(ellipse 55% 45% at 96% 100%,rgba(251,191,36,.09),transparent)}
+    .nav{position:fixed;top:0;left:0;right:0;height:48px;display:flex;align-items:center;gap:8px;padding:0 20px;background:rgba(7,8,26,.92);border-bottom:1px solid var(--border);z-index:10;overflow-x:auto}.nav a{color:var(--text2);text-decoration:none;font-size:12px;padding:4px 10px;border-radius:999px;white-space:nowrap}.nav a:first-child{color:var(--violet2);font-weight:800;letter-spacing:.08em;margin-right:10px}.nav a:hover{background:rgba(255,255,255,.08);color:var(--text)}
+    main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:78px 40px 80px}.hero{margin-bottom:42px}.eyebrow{color:var(--violet2);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px}h1{font-size:clamp(34px,5vw,64px);line-height:1.06;letter-spacing:-.03em;margin-bottom:14px}h2{font-size:clamp(22px,2.5vw,32px);letter-spacing:-.02em;margin-bottom:16px}.grad{background:linear-gradient(135deg,var(--violet),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.desc{color:var(--text2);font-size:clamp(14px,1.3vw,19px);max-width:760px}.section{margin-bottom:42px;scroll-margin-top:64px}.head{display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--border);margin-bottom:18px}.num{width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(167,139,250,.14);border:1px solid rgba(167,139,250,.28);color:var(--violet2);font-weight:900;font-size:13px;flex-shrink:0}
+    .check{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.row{display:grid;grid-template-columns:24px 1fr auto;gap:12px;align-items:start;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.035);padding:13px 16px}.square{width:20px;height:20px;border:2px solid rgba(255,255,255,.28);border-radius:5px;margin-top:2px}.row b{display:block;color:var(--text);font-size:14px}.row span{color:var(--text2);font-size:12.5px}.badge{color:var(--emerald);border:1px solid rgba(52,211,153,.3);background:rgba(52,211,153,.1);border-radius:999px;padding:3px 9px;font-size:10px;font-weight:800;white-space:nowrap}.code{border:1px solid var(--border);border-radius:14px;background:rgba(0,0,0,.45);color:var(--cyan);font-family:Consolas,'JetBrains Mono',monospace;font-size:13px;line-height:1.75;padding:20px;white-space:pre-wrap;overflow-x:auto}
+    @media(max-width:820px){main{padding:68px 20px 60px}.check{grid-template-columns:1fr}.row{grid-template-columns:24px 1fr}.badge{grid-column:2;justify-self:start}}
+    @media print{@page{size:A4;margin:13mm}body{background:#fff;color:#15151c;-webkit-print-color-adjust:exact;print-color-adjust:exact}.bg,.nav{display:none!important}main{max-width:none;padding:0}.hero{margin-bottom:24px}h1{font-size:34px;color:#15151c}.grad{-webkit-text-fill-color:#15151c;background:none}.desc,.row span{color:#3f4252}.section{break-inside:avoid;margin-bottom:26px}.row,.code{background:#fff;border-color:#d9dce8}.code{background:#f7f8fb;color:#0b6071}.row b,h2{color:#15151c}.square{border-color:#9aa1b6}}
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+  <nav class="nav"><a href="#">VIBE CODING</a><a href="#local">로컬</a><a href="#security">보안</a><a href="#mobile">화면</a><a href="#deploy">배포</a></nav>
+  <main>
+    <section class="hero"><div class="eyebrow">별첨 자료</div><h1><span class="grad">배포 전</span> 체크리스트</h1><p class="desc">링크를 공개하기 전 마지막 점검표입니다. 수업에서는 완벽보다 안전한 첫 배포가 목표입니다.</p></section>
+    <section class="section" id="local"><div class="head"><span class="num">1</span><h2>로컬 실행 확인</h2></div><div class="check">
+      <div class="row"><div class="square"></div><div><b>npm install 완료</b><span>새 컴퓨터에서도 설치 가능한 상태인지 확인</span></div><span class="badge">LOCAL</span></div>
+      <div class="row"><div class="square"></div><div><b>npm run dev 성공</b><span>브라우저에서 메인 화면이 열리는지 확인</span></div><span class="badge">LOCAL</span></div>
+      <div class="row"><div class="square"></div><div><b>npm run build 성공</b><span>배포 전 빌드 오류가 없는지 확인</span></div><span class="badge">BUILD</span></div>
+      <div class="row"><div class="square"></div><div><b>콘솔 에러 확인</b><span>브라우저 개발자도구 Console에 빨간 에러가 없는지 확인</span></div><span class="badge">BROWSER</span></div>
+    </div></section>
+    <section class="section" id="security"><div class="head"><span class="num">2</span><h2>보안 확인</h2></div><div class="check">
+      <div class="row"><div class="square"></div><div><b>.env 파일 GitHub 업로드 금지</b><span>.gitignore에 .env, .env.local이 있는지 확인</span></div><span class="badge">SECRET</span></div>
+      <div class="row"><div class="square"></div><div><b>API 키 직접 입력 금지</b><span>코드에 sk-, api_key 같은 값이 박혀 있지 않은지 검색</span></div><span class="badge">SECRET</span></div>
+      <div class="row"><div class="square"></div><div><b>DB 권한 잠금</b><span>Firebase/Supabase 권한이 모두 허용 상태가 아닌지 확인</span></div><span class="badge">DB</span></div>
+      <div class="row"><div class="square"></div><div><b>개인정보 제거</b><span>전화번호, 주소, 테스트 계정 비밀번호가 노출되지 않는지 확인</span></div><span class="badge">PRIVACY</span></div>
+    </div></section>
+    <section class="section" id="mobile"><div class="head"><span class="num">3</span><h2>화면 확인</h2></div><div class="check">
+      <div class="row"><div class="square"></div><div><b>모바일 화면</b><span>작은 화면에서 버튼과 글자가 겹치지 않는지 확인</span></div><span class="badge">UI</span></div>
+      <div class="row"><div class="square"></div><div><b>핵심 버튼 클릭</b><span>저장, 제출, 결제, 로그인 같은 핵심 흐름 테스트</span></div><span class="badge">FLOW</span></div>
+    </div></section>
+    <section class="section" id="deploy"><div class="head"><span class="num">4</span><h2>배포 명령어</h2></div><div class="code">npm install
+npm run build
+
+# Vercel CLI를 쓰는 경우
+vercel
+vercel --prod</div></section>
+  </main>  <script src="./appendix-print.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회차별 별첨자료 활용 맵 — 바이브코딩</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --violet: #A78BFA; --violet2: #C4B5FD; --cyan: #67E8F9;
+      --amber: #FBBF24; --emerald: #34D399; --rose: #FB7185;
+      --text: #F1F0FF; --text2: #A09EC0; --text3: #6B6A8A;
+      --bg: #07081A; --line: rgba(255,255,255,0.09);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .bg {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 14% 0%, rgba(167,139,250,0.14), transparent),
+        radial-gradient(ellipse 55% 50% at 88% 100%, rgba(103,232,249,0.10), transparent);
+    }
+    .top-nav {
+      position: fixed; top: 0; left: 0; right: 0; height: 48px;
+      z-index: 10; display: flex; align-items: center; gap: 8px;
+      padding: 0 20px; background: rgba(7,8,26,0.92);
+      border-bottom: 1px solid var(--line); backdrop-filter: blur(12px);
+      overflow-x: auto;
+    }
+    .top-nav::-webkit-scrollbar { display: none; }
+    .nav-home { color: var(--violet2); font-size: 12px; font-weight: 900; letter-spacing: 0.08em; text-decoration: none; white-space: nowrap; }
+    .nav-link { color: var(--text2); font-size: 12px; text-decoration: none; padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+    .nav-link:hover { background: rgba(255,255,255,0.08); color: var(--text); }
+    .container { position: relative; z-index: 1; max-width: 1160px; margin: 0 auto; padding: 78px 40px 80px; }
+    .hero { margin-bottom: 46px; }
+    .eyebrow { margin-bottom: 10px; color: var(--violet2); font-size: 12px; font-weight: 900; letter-spacing: 0.18em; text-transform: uppercase; }
+    h1 { margin-bottom: 14px; font-size: clamp(34px, 5vw, 68px); line-height: 1.06; letter-spacing: -0.03em; }
+    .grad-text { background: linear-gradient(135deg, var(--violet), var(--cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-desc { max-width: 760px; color: var(--text2); font-size: clamp(15px, 1.35vw, 20px); }
+    .section { margin-bottom: 58px; scroll-margin-top: 64px; }
+    .section-head { display: flex; align-items: center; gap: 12px; padding-bottom: 14px; margin-bottom: 22px; border-bottom: 1px solid var(--line); }
+    .section-num { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: rgba(167,139,250,0.14); border: 1px solid rgba(167,139,250,0.28); color: var(--violet2); font-weight: 900; }
+    h2 { font-size: clamp(22px, 2.6vw, 34px); letter-spacing: -0.02em; }
+    .timeline { display: grid; gap: 14px; }
+    .session-row {
+      display: grid;
+      grid-template-columns: 110px 1.1fr 1.4fr 1.2fr;
+      gap: 14px;
+      align-items: stretch;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+    .session-chip {
+      display: grid; place-items: center; min-height: 116px;
+      background: linear-gradient(135deg, rgba(167,139,250,0.18), rgba(103,232,249,0.08));
+      border-right: 1px solid var(--line);
+      color: var(--text); font-size: 18px; font-weight: 900;
+    }
+    .cell { padding: 18px 18px; }
+    .label { margin-bottom: 8px; color: var(--text3); font-size: 11px; font-weight: 900; letter-spacing: 0.13em; text-transform: uppercase; }
+    .title { color: var(--text); font-size: 18px; font-weight: 900; }
+    .body { color: var(--text2); font-size: 15px; }
+    .body strong { color: var(--cyan); }
+    .material-list { display: grid; gap: 8px; }
+    .material { display: flex; align-items: flex-start; gap: 8px; color: var(--text2); font-size: 14px; }
+    .material::before { content: ""; width: 7px; height: 7px; margin-top: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 12px rgba(103,232,249,0.6); flex: 0 0 auto; }
+    .bundle-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .card { border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,0.04); padding: 20px 22px; }
+    .card-name { margin-bottom: 8px; color: var(--text); font-size: 18px; font-weight: 900; }
+    .card-desc { color: var(--text2); font-size: 14px; }
+    .print-note { border-left: 3px solid var(--amber); background: rgba(251,191,36,0.06); border-radius: 0 14px 14px 0; padding: 16px 18px; color: var(--text2); font-size: 15px; }
+    .print-note strong { color: var(--amber); }
+    @media (max-width: 900px) {
+      .container { padding: 68px 22px 60px; }
+      .session-row { grid-template-columns: 1fr; }
+      .session-chip { min-height: 62px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .bundle-grid { grid-template-columns: 1fr; }
+    }
+    @media print {
+      @page { size: A4; margin: 12mm; }
+      body { background: #fff; color: #15151c; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .bg, .top-nav { display: none !important; }
+      .container { max-width: none; padding: 0; }
+      h1 { font-size: 33px; color: #15151c; }
+      h2 { font-size: 22px; color: #15151c; }
+      .hero { margin-bottom: 22px; }
+      .hero-desc, .body, .material, .card-desc, .print-note { color: #3f4252; }
+      .section { margin-bottom: 24px; break-inside: avoid; }
+      .session-row { grid-template-columns: 72px 1fr 1.15fr 1fr; gap: 0; border-color: #d9dce8; background: #fff; break-inside: avoid; }
+      .session-chip { min-height: auto; border-color: #d9dce8; color: #15151c; background: #eef4ff; font-size: 14px; }
+      .cell { padding: 10px 12px; border-left: 1px solid #d9dce8; }
+      .title { color: #15151c; font-size: 14px; }
+      .body, .material { font-size: 11.5px; }
+      .label { color: #5f6475; font-size: 9px; }
+      .material::before { background: #315fc6; box-shadow: none; }
+      .bundle-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .card, .print-note { border-color: #d9dce8; background: #fff; break-inside: avoid; }
+      .card-name { color: #15151c; font-size: 14px; }
+      .grad-text { color: #15151c; -webkit-text-fill-color: #15151c; background: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+  <nav class="top-nav">
+    <a class="nav-home" href="#">VIBE CODING</a>
+    <a class="nav-link" href="#map">회차별 맵</a>
+    <a class="nav-link" href="#bundle">출력 묶음</a>
+    <a class="nav-link" href="#print">배포 방식</a>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <div class="eyebrow">APPENDIX A · PRINT PACK</div>
+      <h1><span class="grad-text">회차별 별첨자료</span><br>활용 맵</h1>
+      <p class="hero-desc">1~6회차에서 수강생에게 나눠줄 프린트물과 강사가 따로 볼 대본·공부자료를 구분해 정리한 강사용 운영표입니다.</p>
+    </section>
+
+    <section class="section" id="map">
+      <div class="section-head">
+        <span class="section-num">1</span>
+        <h2>회차별 자료 배포 순서</h2>
+      </div>
+      <div class="timeline">
+        <div class="session-row">
+          <div class="session-chip">1회차</div>
+          <div class="cell">
+            <div class="label">강의 주제</div>
+            <div class="title">AI는 도구다</div>
+            <div class="body">다양한 AI 도구와 바이브코딩 준비물을 이해합니다.</div>
+          </div>
+          <div class="cell">
+            <div class="label">수강생 배포자료</div>
+            <div class="material-list">
+              <div class="material">1~6강 커리큘럼 1페이지 요약</div>
+              <div class="material">AI 종류별 특화 도구 가이드</div>
+              <div class="material">AI 도구 완전 가이드</div>
+              <div class="material">2회차 사전 준비자료</div>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="label">사용 방식</div>
+            <div class="body">시작 전 커리큘럼 요약을 나눠주고, 마지막 5분에 <strong>Node, VS Code, AI IDE</strong> 설치 숙제를 배포합니다. 강사용: 1강 대본 + 강사용 공부자료.</div>
+          </div>
+        </div>
+
+        <div class="session-row">
+          <div class="session-chip">2회차</div>
+          <div class="cell">
+            <div class="label">강의 주제</div>
+            <div class="title">바이브코딩 첫 실습</div>
+            <div class="body">AI에게 설계시키고, AI IDE에 작업을 맡기는 흐름을 익힙니다.</div>
+          </div>
+          <div class="cell">
+            <div class="label">수강생 배포자료</div>
+            <div class="material-list">
+              <div class="material">명령어 치트시트</div>
+              <div class="material">AI 작업지시서 템플릿</div>
+              <div class="material">MVP 기획 워크시트</div>
+              <div class="material">수강생 실습 기록지</div>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="label">사용 방식</div>
+            <div class="body">실습 전에 명령어와 작업지시서만 먼저 보여주고, 30분 실습 뒤 기록지를 작성하게 합니다. 강사용: 2강 대본 + 강사용 공부자료.</div>
+          </div>
+        </div>
+
+        <div class="session-row">
+          <div class="session-chip">3회차</div>
+          <div class="cell">
+            <div class="label">강의 주제</div>
+            <div class="title">개발 용어 이해</div>
+            <div class="body">프론트, 백엔드, API, DB의 위치와 연결 흐름을 비유와 화면으로 이해합니다.</div>
+          </div>
+          <div class="cell">
+            <div class="label">수강생 배포자료</div>
+            <div class="material-list">
+              <div class="material">UI/UX·프론트엔드 용어 정리</div>
+              <div class="material">3강 수강생 한 장 요약</div>
+              <div class="material">한 기능 완성 점검 워크시트</div>
+              <div class="material">프로그램 구조 시각적 다이어그램</div>
+              <div class="material">AI 작업지시서 템플릿</div>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="label">사용 방식</div>
+            <div class="body">수강생에게는 용어 프린트물만 배포하고, 강사용 대본은 발표자가 화면 비유와 클릭 순서를 리허설할 때 사용합니다. 강사용: 3강 대본 + 강사용 공부자료.</div>
+          </div>
+        </div>
+
+        <div class="session-row">
+          <div class="session-chip">4회차</div>
+          <div class="cell">
+            <div class="label">강의 주제</div>
+            <div class="title">파일 구조 이해</div>
+            <div class="body">AI가 만든 프로젝트에서 어떤 파일을 봐야 하는지 익힙니다.</div>
+          </div>
+          <div class="cell">
+            <div class="label">수강생 배포자료</div>
+            <div class="material-list">
+              <div class="material">프로젝트 폴더 구조 설명</div>
+              <div class="material">4강 프로젝트 파일 지도 + 파일 추적 워크시트</div>
+              <div class="material">명령어 치트시트</div>
+              <div class="material">에러 해결 가이드</div>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="label">사용 방식</div>
+            <div class="body">프로젝트 폴더를 직접 열고 <strong>브라우저 화면 → 검색어 → 페이지·컴포넌트·스타일 파일 → 수정 결과</strong>를 워크시트에 기록하게 합니다. 강사용: 4강 12장 상세 대본 + 강사용 공부자료.</div>
+          </div>
+        </div>
+
+        <div class="session-row">
+          <div class="session-chip">5회차</div>
+          <div class="cell">
+            <div class="label">강의 주제</div>
+            <div class="title">배포와 보안 그리고 데이터</div>
+            <div class="body">내 컴퓨터의 프로젝트를 인터넷으로 공개하기 전 필요한 개념을 봅니다.</div>
+          </div>
+          <div class="cell">
+            <div class="label">수강생 배포자료</div>
+            <div class="material-list">
+              <div class="material">데이터베이스 완전 가이드</div>
+              <div class="material">5강 서비스 공개 점검표</div>
+              <div class="material">배포 전 체크리스트</div>
+              <div class="material">시각적 다이어그램</div>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="label">사용 방식</div>
+            <div class="body">환경변수와 API 키는 “절대 공개하지 않는 메모”로 표시하고, 배포 전 체크리스트를 함께 훑습니다. 강사용: 5강 대본 + 강사용 공부자료.</div>
+          </div>
+        </div>
+
+        <div class="session-row">
+          <div class="session-chip">6회차</div>
+          <div class="cell">
+            <div class="label">강의 주제</div>
+            <div class="title">쇼케이스 발표</div>
+            <div class="body">각자 만든 프로그램을 보여주고, 다음 개선 방향을 정합니다.</div>
+          </div>
+          <div class="cell">
+            <div class="label">수강생 배포자료</div>
+            <div class="material-list">
+              <div class="material">발표 템플릿</div>
+              <div class="material">6강 쇼케이스 발표지</div>
+              <div class="material">수강생 실습 기록지</div>
+              <div class="material">응용반 예고 · 기능 확장 아이디어</div>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="label">사용 방식</div>
+            <div class="body">기술 설명보다 “무엇을 만들었고, 어디까지 작동하고, 다음에 무엇을 붙일지”에 집중합니다. 강사용: 6강 대본 + 강사용 공부자료.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bundle">
+      <div class="section-head">
+        <span class="section-num">2</span>
+        <h2>추천 출력 묶음</h2>
+      </div>
+      <div class="bundle-grid">
+        <div class="card">
+          <div class="card-name">1회차 종료 숙제 묶음</div>
+          <p class="card-desc">사전 준비 체크리스트 + 설치·다운로드 위치 안내 + VSCode & AI IDE 셋업 가이드. 2회차 실습 준비용입니다.</p>
+        </div>
+        <div class="card">
+          <div class="card-name">실습 테이블 기본 묶음</div>
+          <p class="card-desc">명령어 치트시트 + AI 작업지시서 템플릿 + 에러 해결 가이드 + 실습 기록지. 2~5회차 매번 책상에 둡니다.</p>
+        </div>
+        <div class="card">
+          <div class="card-name">발표 준비 묶음</div>
+          <p class="card-desc">MVP 기획 워크시트 + 발표 템플릿 + 기능 확장 아이디어. 6회차 발표와 응용반 연결에 사용합니다.</p>
+        </div>
+        <div class="card">
+          <div class="card-name">강사용 리허설 묶음</div>
+          <p class="card-desc">1~6강 강사용 대본 + 강사용 공부자료. 수업 전 동선, 클릭 순서, 질문 대응 범위를 확인할 때 사용합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="print">
+      <div class="section-head">
+        <span class="section-num">3</span>
+        <h2>프린트 배포 방식</h2>
+      </div>
+      <div class="print-note">
+        <strong>권장:</strong> 모든 자료를 처음부터 한꺼번에 나눠주기보다, 회차별로 필요한 종이만 꺼내 주세요. 수강생 배포자료와 강사용 대본은 분리해서 출력하고, 실습 중에는 “명령어 치트시트 · AI 작업지시서 · 에러 해결 가이드” 세 장만 책상 위에 두는 것이 가장 좋습니다.
+      </div>
+    </section>
+  </main>
+
+  <script src="./appendix-print.js"></script>
+</body>
+</html>
+

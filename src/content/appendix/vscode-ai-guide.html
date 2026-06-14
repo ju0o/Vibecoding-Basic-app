@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VSCode & AI IDE 셋업 가이드 — 바이브코딩</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --violet: #A78BFA; --violet2: #C4B5FD; --cyan: #67E8F9;
+      --amber: #FBBF24; --emerald: #34D399; --rose: #FB7185;
+      --text: #F1F0FF; --text2: #A09EC0; --text3: #6B6A8A;
+    }
+    body {
+      font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+      background: #07081A; color: var(--text);
+      overflow-y: auto; overflow-x: hidden;
+    }
+    .bg-grad {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 15% 0%, rgba(167,139,250,0.14), transparent),
+        radial-gradient(ellipse 50% 45% at 90% 100%, rgba(103,232,249,0.09), transparent);
+    }
+    .top-nav {
+      position: fixed; top: 0; left: 0; right: 0; height: 48px;
+      background: rgba(7,8,26,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; gap: 6px;
+      padding: 0 20px; z-index: 100; overflow-x: auto;
+    }
+    .top-nav::-webkit-scrollbar { display: none; }
+    .nav-home { font-size: 12px; font-weight: 700; color: var(--violet); text-decoration: none; white-space: nowrap; margin-right: 12px; }
+    .nav-link { font-size: 12px; color: var(--text2); text-decoration: none; padding: 4px 10px; border-radius: 999px; white-space: nowrap; transition: background 0.15s; }
+    .nav-link:hover { background: rgba(255,255,255,0.08); color: var(--text); }
+    .container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 72px 40px 80px; }
+    .hero { margin-bottom: 56px; }
+    .hero-eyebrow { font-size: 12px; font-weight: 700; color: var(--violet2); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; }
+    .hero-title { font-size: clamp(32px, 5vw, 72px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 14px; }
+    .hero-desc { font-size: clamp(14px, 1.4vw, 20px); color: var(--text2); line-height: 1.65; max-width: 680px; }
+    .grad-text { background: linear-gradient(135deg, #A78BFA, #67E8F9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .section { margin-bottom: 60px; scroll-margin-top: 60px; }
+    .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .section-icon { font-size: 24px; }
+    .section-title { font-size: clamp(20px, 2.5vw, 32px); font-weight: 800; letter-spacing: -0.02em; }
+    .section-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: rgba(167,139,250,0.15); color: var(--violet2); border: 1px solid rgba(167,139,250,0.25); }
+    .info-box { border-left: 3px solid var(--violet); background: rgba(167,139,250,0.06); border-radius: 0 12px 12px 0; padding: 14px 18px; margin: 16px 0; font-size: clamp(13px, 1.1vw, 16px); color: var(--text2); line-height: 1.6; }
+    .info-box strong { color: var(--violet2); }
+    .tip-box { border-left: 3px solid var(--cyan); background: rgba(103,232,249,0.05); border-radius: 0 12px 12px 0; padding: 14px 18px; margin: 16px 0; font-size: clamp(13px, 1.1vw, 16px); color: var(--text2); line-height: 1.6; }
+    .tip-box strong { color: var(--cyan); }
+    .warn-box { border-left: 3px solid var(--amber); background: rgba(251,191,36,0.05); border-radius: 0 12px 12px 0; padding: 14px 18px; margin: 16px 0; font-size: clamp(13px, 1.1vw, 16px); color: var(--text2); line-height: 1.6; }
+    .warn-box strong { color: var(--amber); }
+    /* Steps */
+    .steps { display: grid; gap: 12px; margin: 20px 0; }
+    .step { display: flex; gap: 16px; align-items: flex-start; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 16px 18px; transition: border-color 0.2s; }
+    .step:hover { border-color: rgba(167,139,250,0.25); }
+    .step-num { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: rgba(167,139,250,0.15); border: 1px solid rgba(167,139,250,0.3); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: var(--violet2); }
+    .step-body { flex: 1; }
+    .step-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .step-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+    /* Code */
+    .code-block { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 18px 22px; font-family: 'JetBrains Mono','Fira Code',Consolas,monospace; font-size: clamp(12px, 1vw, 14px); line-height: 1.75; overflow-x: auto; position: relative; margin-top: 16px; }
+    .code-block pre { margin: 0; white-space: pre; }
+    .code-comment { color: #6B6A8A; }
+    .code-key { color: #A78BFA; }
+    .code-val { color: #34D399; }
+    .code-cmd { color: #67E8F9; }
+    .copy-btn { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: var(--text2); font-size: 11px; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+    .copy-btn:hover { background: rgba(255,255,255,0.14); color: var(--text); }
+    /* Table */
+    table { width: 100%; border-collapse: collapse; font-size: clamp(13px, 1.1vw, 16px); }
+    th { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid rgba(255,255,255,0.08); }
+    td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text2); vertical-align: top; line-height: 1.5; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+    td:first-child { color: var(--text); font-weight: 600; }
+    .table-wrap { border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden; }
+    /* Cards */
+    .card-grid { display: grid; gap: 14px; }
+    .card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 600px) { .card-grid-2 { grid-template-columns: 1fr; } .container { padding: 64px 20px 60px; } }
+    .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px 22px; transition: border-color 0.2s; }
+    .card:hover { border-color: rgba(167,139,250,0.25); }
+    .card-name { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .card-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+    .kbd { display: inline-block; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 5px; padding: 1px 7px; font-family: 'JetBrains Mono',monospace; font-size: 12px; color: var(--cyan); }
+    @media print {
+      @page { size: A4; margin: 13mm; }
+      body { background: #fff; color: #15151c; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .bg-grad, .top-nav, .copy-btn { display: none !important; }
+      .container { max-width: none; padding: 0; }
+      .hero { margin-bottom: 28px; }
+      .hero-title { font-size: 34px; color: #15151c; }
+      .hero-desc, .step-desc, td, .card-desc, .info-box, .tip-box, .warn-box { color: #3f4252; }
+      .section { break-inside: avoid; margin-bottom: 28px; }
+      .step, .table-wrap, .card, .code-block, .info-box, .tip-box, .warn-box { background: #fff; border-color: #d9dce8; }
+      .code-block { background: #f7f8fb; }
+      .grad-text { color: #15151c; -webkit-text-fill-color: #15151c; background: none; }
+      th { color: #5f6475; }
+      td:first-child, .card-name, .step-title, .section-title { color: #15151c; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grad"></div>
+  <nav class="top-nav">
+    <a class="nav-home" href="#">⚡ VIBE CODING</a>
+    <a class="nav-link" href="#install-vscode">VS Code 설치</a>
+    <a class="nav-link" href="#cursor">Cursor</a>
+    <a class="nav-link" href="#kiro">Kiro</a>
+    <a class="nav-link" href="#antigravity">Antigravity</a>
+    <a class="nav-link" href="#windsurf">Windsurf</a>
+    <a class="nav-link" href="#extensions">확장 프로그램</a>
+    <a class="nav-link" href="#tips">실전 팁</a>
+  </nav>
+
+  <div class="container">
+    <div class="hero">
+      <div class="hero-eyebrow">부록 F — 레퍼런스 가이드</div>
+      <h1 class="hero-title"><span class="grad-text">VSCode & AI IDE</span><br>셋업 가이드</h1>
+      <p class="hero-desc">VS Code 설치부터 AI 코딩환경 준비까지 단계별 가이드. Cursor, Kiro, Antigravity, Windsurf를 수업 전에 점검할 수 있게 정리했습니다.</p>
+    </div>
+
+    <!-- INSTALL VSCODE -->
+    <div class="section" id="install-vscode">
+      <div class="section-header">
+        <span class="section-icon">📥</span>
+        <h2 class="section-title">VS Code 설치</h2>
+        <span class="section-badge">기반 에디터</span>
+      </div>
+      <div class="info-box">
+        <strong>코딩 실습의 기본 작업 공간입니다.</strong> 먼저 VS Code를 설치하세요. 많은 AI 코딩 도구가 VS Code와 비슷한 구조를 사용해서, 한 번 익히면 다른 도구로 넘어가기 쉽습니다.
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">다운로드</div>
+            <div class="step-desc"><strong style="color:var(--cyan)">code.visualstudio.com</strong> 접속 → 운영체제에 맞게 다운로드 (Windows / Mac / Linux)</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">설치</div>
+            <div class="step-desc">설치 파일 실행 → 기본 설정으로 Next → Install → Finish. 기본값 그대로 진행하면 됩니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">한국어 설정</div>
+            <div class="step-desc"><kbd class="kbd">Ctrl+Shift+P</kbd> → "Configure Display Language" 입력 → "ko" 선택 → 재시작</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">터미널 열기</div>
+            <div class="step-desc"><kbd class="kbd">Ctrl+`</kbd> (백틱) 또는 상단 메뉴 Terminal → New Terminal. 여기서 npm, git 명령어를 입력합니다.</div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-box">
+        <strong>참고:</strong> VS Code는 설치만 해도 됩니다. 2회차에서는 VS Code 또는 AI IDE에서 프로젝트 폴더를 열고 터미널을 실행하는 흐름을 연습합니다.
+      </div>
+    </div>
+
+    <!-- CURSOR -->
+    <div class="section" id="cursor">
+      <div class="section-header">
+        <span class="section-icon">✨</span>
+        <h2 class="section-title">Cursor 설치 & 연동</h2>
+        <span class="section-badge">대표 AI IDE</span>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">다운로드</div>
+            <div class="step-desc"><strong style="color:var(--cyan)">cursor.com</strong> 접속 → 무료 다운로드 → 설치</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">계정 생성</div>
+            <div class="step-desc">GitHub 또는 이메일로 가입. 무료 플랜으로 시작 가능.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">VS Code 설정 가져오기</div>
+            <div class="step-desc">설치 시 VS Code 확장, 설정, 테마 자동 가져오기 선택 가능. 기존 환경을 그대로 이어받을 수 있음.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">AI 모델 선택</div>
+            <div class="step-desc">우측 하단 모델 선택 → 수업 당일 사용 가능한 모델 중 하나를 선택. 처음에는 기본 추천 모델로 시작해도 충분합니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <div class="step-title">채팅 시작</div>
+            <div class="step-desc"><kbd class="kbd">Ctrl+L</kbd> 채팅창 열기 또는 <kbd class="kbd">Ctrl+K</kbd> 인라인 편집. AI에게 자연어로 요청하면 바로 코드 작성.</div>
+          </div>
+        </div>
+      </div>
+      <div class="code-block">
+        <button class="copy-btn">복사</button>
+        <pre><span class="code-comment">Cursor 주요 단축키</span>
+<span class="code-comment">────────────────────────────────────</span>
+<span class="code-cmd">Ctrl+L</span>           채팅창 열기 (AI와 대화)
+<span class="code-cmd">Ctrl+K</span>           현재 코드 AI로 수정
+<span class="code-cmd">Ctrl+Shift+L</span>     전체 코드베이스 채팅
+<span class="code-cmd">Tab</span>              AI 자동완성 수락
+<span class="code-cmd">Esc</span>              AI 제안 거부
+<span class="code-cmd">Ctrl+Shift+P</span>     명령 팔레트 열기</pre>
+      </div>
+      <div class="warn-box">
+        <strong>주의:</strong> 무료 제공량과 요금제는 자주 바뀝니다. 처음에는 무료 범위에서 체험하고, 실제로 계속 쓸 도구를 고른 뒤 구독 여부를 결정하세요.
+      </div>
+    </div>
+
+    <!-- KIRO -->
+    <div class="section" id="kiro">
+      <div class="section-header">
+        <span class="section-icon">🎯</span>
+        <h2 class="section-title">Kiro 설치 & 연동</h2>
+        <span class="section-badge">AWS 제작</span>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">다운로드</div>
+            <div class="step-desc"><strong style="color:var(--cyan)">kiro.dev</strong> 접속 → 무료 다운로드</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">AWS 계정 연동</div>
+            <div class="step-desc">화면 안내에 따라 AWS Builder ID 등 필요한 계정으로 로그인합니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">프로젝트 열기</div>
+            <div class="step-desc">File → Open Folder → 내 프로젝트 폴더 선택</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">AI 채팅 시작</div>
+            <div class="step-desc">우측 패널 AI 아이콘 클릭 → 채팅 시작. Cursor와 비슷한 인터페이스.</div>
+          </div>
+        </div>
+      </div>
+      <div class="info-box">
+        <strong>Kiro의 특징 — Spec-driven development:</strong> Kiro는 '스펙 주도 개발'이라는 독특한 방식을 씁니다. 요구사항을 먼저 문서로 정의한 후 코드를 생성해서, 결과물이 더 체계적이에요. 처음 체험하기 가장 좋은 도구입니다.
+      </div>
+    </div>
+
+    <!-- ANTIGRAVITY -->
+    <div class="section" id="antigravity">
+      <div class="section-header">
+        <span class="section-icon">🌌</span>
+        <h2 class="section-title">Antigravity IDE 설치 & 연동</h2>
+        <span class="section-badge">Google 생태계</span>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">다운로드</div>
+            <div class="step-desc"><strong style="color:var(--cyan)">antigravity.google</strong> 접속 → Antigravity IDE 다운로드</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Google 계정 연동</div>
+            <div class="step-desc">Google 계정으로 로그인합니다. 사용 가능한 모델과 제공량은 계정 상태에 따라 달라질 수 있습니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">모델과 권한 확인</div>
+            <div class="step-desc">설정에서 사용 가능한 모델, 에이전트 권한, 터미널 실행 승인 방식을 확인합니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">채팅 시작</div>
+            <div class="step-desc">AI에게 계획, 구현, 실행 확인을 요청합니다. 터미널 실행 전에는 어떤 명령인지 꼭 확인하세요.</div>
+          </div>
+        </div>
+      </div>
+      <div class="info-box">
+        <strong>안전 팁:</strong> AI IDE가 터미널 명령을 실행하겠다고 할 때는 삭제 명령, 전체 드라이브 대상 명령, API 키 출력 명령이 아닌지 먼저 확인하세요.
+      </div>
+    </div>
+
+    <!-- WINDSURF -->
+    <div class="section" id="windsurf">
+      <div class="section-header">
+        <span class="section-icon">🌊</span>
+        <h2 class="section-title">Windsurf 설치 & 연동</h2>
+        <span class="section-badge">AI IDE</span>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">다운로드</div>
+            <div class="step-desc">검색창에 <strong style="color:var(--cyan)">Windsurf AI IDE download</strong> 입력 → 공식 사이트에서 Windows 또는 Mac 설치 파일 다운로드</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">계정 로그인</div>
+            <div class="step-desc">화면 안내에 따라 로그인합니다. 무료 제공량과 사용 가능한 모델은 시점에 따라 달라질 수 있습니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">프로젝트 열기</div>
+            <div class="step-desc">File → Open Folder → 내 프로젝트 폴더 선택. 처음에는 빈 폴더를 열어도 괜찮습니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">AI 채팅 확인</div>
+            <div class="step-desc">Cascade 또는 AI 채팅창을 열고 “간단한 HTML 페이지 만들어줘”처럼 작은 요청을 입력해봅니다.</div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-box">
+        <strong>추천:</strong> Cursor와 Windsurf는 모두 2회차 실습 후보입니다. 둘 중 하나만 준비해도 충분하고, 둘 다 설치해오면 본인에게 맞는 사용감을 비교할 수 있습니다.
+      </div>
+    </div>
+
+    <!-- EXTENSIONS -->
+    <div class="section" id="extensions">
+      <div class="section-header">
+        <span class="section-icon">🧩</span>
+        <h2 class="section-title">유용한 확장 프로그램</h2>
+        <span class="section-badge">생산성 향상</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>확장 이름</th><th>기능</th><th>추천 대상</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Prettier</td>
+              <td>코드 자동 포맷팅. 저장 시 자동 정렬. 들여쓰기·따옴표 통일</td>
+              <td>모든 사람</td>
+            </tr>
+            <tr>
+              <td>ESLint</td>
+              <td>JavaScript 문법 오류 실시간 표시. 빨간 밑줄로 문제 위치 표시</td>
+              <td>JavaScript 사용자</td>
+            </tr>
+            <tr>
+              <td>GitLens</td>
+              <td>Git 변경 이력을 코드에 직접 표시. 누가 언제 수정했는지 확인</td>
+              <td>Git 사용자</td>
+            </tr>
+            <tr>
+              <td>Thunder Client</td>
+              <td>VS Code 내 API 테스트 도구. Postman 대체. API 요청/응답 확인</td>
+              <td>API 작업 시</td>
+            </tr>
+            <tr>
+              <td>DotENV</td>
+              <td>.env 파일 문법 하이라이팅. 환경변수 관리를 쉽게</td>
+              <td>환경변수 관리 시</td>
+            </tr>
+            <tr>
+              <td>Korean Language Pack</td>
+              <td>VS Code 전체 UI를 한국어로 변경</td>
+              <td>한국어 선호 시</td>
+            </tr>
+            <tr>
+              <td>Auto Rename Tag</td>
+              <td>HTML 태그 이름 바꾸면 닫는 태그도 자동으로 함께 변경</td>
+              <td>HTML 작업 시</td>
+            </tr>
+            <tr>
+              <td>Path Intellisense</td>
+              <td>파일 경로 자동완성. import 경로 입력할 때 파일 목록 제안</td>
+              <td>파일 임포트 시</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tip-box" style="margin-top:16px">
+        <strong>확장 프로그램 설치:</strong> <kbd class="kbd">Ctrl+Shift+X</kbd> → 이름 검색 → Install 클릭. Cursor·Kiro 등 AI IDE에서도 동일하게 설치 가능합니다.
+      </div>
+    </div>
+
+    <!-- TIPS -->
+    <div class="section" id="tips">
+      <div class="section-header">
+        <span class="section-icon">💡</span>
+        <h2 class="section-title">실전 팁</h2>
+        <span class="section-badge">더 잘 쓰기</span>
+      </div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <div class="card-name">터미널 여러 개 열기</div>
+          <div class="card-desc">터미널 우측 <kbd class="kbd">+</kbd> 버튼으로 탭 추가. 개발 서버 실행 중에 다른 명령어 동시 입력 가능.</div>
+        </div>
+        <div class="card">
+          <div class="card-name">멀티 커서</div>
+          <div class="card-desc"><kbd class="kbd">Alt+클릭</kbd>으로 여러 위치 동시 편집. 같은 내용을 여러 줄에 반복 수정할 때 최강.</div>
+        </div>
+        <div class="card">
+          <div class="card-name">파일 빠른 이동</div>
+          <div class="card-desc"><kbd class="kbd">Ctrl+P</kbd> → 파일명 입력. 마우스 없이 원하는 파일로 빠르게 이동.</div>
+        </div>
+        <div class="card">
+          <div class="card-name">전체 텍스트 검색</div>
+          <div class="card-desc"><kbd class="kbd">Ctrl+Shift+F</kbd> → 프로젝트 전체에서 텍스트 검색. 변수명이나 함수 찾을 때 사용.</div>
+        </div>
+        <div class="card">
+          <div class="card-name">AI에게 코드 설명 요청</div>
+          <div class="card-desc">모르는 코드를 드래그 → <kbd class="kbd">Ctrl+L</kbd> → "이 코드 설명해줘". AI가 한국어로 설명해줌.</div>
+        </div>
+        <div class="card">
+          <div class="card-name">에러 메시지 그대로 복사</div>
+          <div class="card-desc">빨간 에러 메시지 전체를 AI 채팅에 붙여넣기. "이 에러 해결해줘"라고 하면 대부분 바로 해결.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const block = btn.closest('.code-block');
+        const pre = block.querySelector('pre');
+        const text = pre ? pre.innerText : block.innerText.replace('복사', '').trim();
+        navigator.clipboard.writeText(text).then(() => {
+          btn.textContent = '✓ 복사됨';
+          setTimeout(() => btn.textContent = '복사', 1500);
+        });
+      });
+    });
+  </script>
+  <script src="./appendix-print.js"></script>
+
+</body>
+</html>

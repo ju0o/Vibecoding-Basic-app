@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3강 한 기능 완성 점검 워크시트</title>
+  <link rel="stylesheet" href="./appendix-print.css">
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    :root{--ink:#172026;--muted:#5c6971;--line:#cbd5da;--soft:#f3f6f7;--teal:#0f766e;--teal-soft:#e6f4f1;--amber:#9a6418;--amber-soft:#fff4dc}
+    html,body{margin:0;color:var(--ink);background:#e8edef;font-family:Pretendard,"Malgun Gothic",system-ui,sans-serif;line-height:1.5;letter-spacing:0}
+    main{width:min(210mm,calc(100vw - 24px));margin:18px auto;background:#fff;box-shadow:0 18px 48px rgba(22,32,38,.13)}
+    .page{position:relative;min-height:297mm;padding:13mm 14mm;break-after:page}
+    .page:last-child{break-after:auto}
+    header{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding-bottom:11px;border-bottom:3px solid var(--ink)}
+    .kicker{color:var(--teal);font-size:10px;font-weight:950}
+    h1{margin:5px 0 6px;font-size:29px;line-height:1.16}
+    .lead{max-width:155mm;color:var(--muted);font-size:11px}
+    .page-no{display:grid;place-items:center;min-width:38px;height:38px;color:#fff;background:var(--ink);font-size:12px;font-weight:950}
+    section{margin-top:14px;break-inside:avoid}
+    h2{margin:0 0 7px;font-size:17px}
+    h3{margin:0;font-size:12px}
+    p{margin:0}
+    .identity{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+    .write-line{min-height:42px;padding:8px 9px;border:1px solid var(--line);background:#fff}
+    .write-line b{display:block;color:var(--teal);font-size:9px}
+    .write-line span{display:block;margin-top:9px;border-bottom:1px solid #89969c}
+    .journey{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+    .journey article{position:relative;min-height:84px;padding:9px;border:1px solid var(--line);background:var(--soft)}
+    .journey article:not(:last-child)::after{content:"→";position:absolute;z-index:2;right:-10px;top:31px;color:var(--teal);font-size:15px;font-weight:950}
+    .journey small{display:block;color:var(--teal);font-size:8px;font-weight:950}
+    .journey b{display:block;margin-top:3px;font-size:11px}
+    .journey i{display:block;height:24px;margin-top:10px;border-bottom:1px solid #89969c}
+    table{width:100%;border-collapse:collapse;border:1px solid var(--line)}
+    th,td{padding:7px;border:1px solid var(--line);vertical-align:top;font-size:9.5px;text-align:left}
+    th{background:#e9f1f2;font-size:9px}
+    td:first-child{width:25mm;font-weight:950}
+    td:nth-child(2){width:58mm}
+    .blank{display:block;height:19px;border-bottom:1px solid #89969c}
+    .state-name{color:var(--teal)}
+    .tip{margin-top:9px;padding:9px 11px;border-left:4px solid var(--teal);background:var(--teal-soft);font-size:10px;font-weight:800}
+    .decision{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+    .decision article{min-height:76px;padding:9px;border-top:3px solid var(--teal);background:var(--soft)}
+    .decision b{display:block;font-size:11px}
+    .decision span{display:block;margin-top:4px;color:var(--muted);font-size:9px}
+    .decision label{display:block;margin-top:7px;font-size:9px}
+    .storyboard{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+    .storyboard article{min-height:96px;padding:9px;border:1px solid var(--line)}
+    .storyboard small{color:var(--teal);font-size:8px;font-weight:950}
+    .storyboard b{display:block;margin-top:2px;font-size:11px}
+    .storyboard i{display:block;height:45px;margin-top:8px;border:1px dashed #9aa6ac;background:linear-gradient(135deg,#fff,#f5f7f8)}
+    .prompt-box{padding:11px;border:1px solid var(--line);background:#f8fafb;font-size:10px}
+    .prompt-box b{color:var(--teal)}
+    .fill{display:inline-block;min-width:34mm;height:14px;margin:0 3px;border-bottom:1px solid #66757c;vertical-align:bottom}
+    .check-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+    .check{display:flex;gap:7px;min-height:38px;padding:8px;border:1px solid var(--line);font-size:9.5px}
+    .check::before{content:"□";color:var(--teal);font-size:15px;line-height:1}
+    .notes{height:38mm;border:1px solid var(--line);background:repeating-linear-gradient(#fff 0 8mm,#d9e0e3 8.1mm 8.25mm)}
+    .warning{padding:9px 11px;color:#754a0c;background:var(--amber-soft);font-size:10px;font-weight:850}
+    footer{position:absolute;left:14mm;right:14mm;bottom:8mm;display:flex;justify-content:space-between;color:#7a878d;font-size:8px}
+    @media(max-width:720px){main{width:100%;margin:0;box-shadow:none}.page{min-height:0;padding:22px}.journey,.decision,.storyboard,.check-grid,.identity{grid-template-columns:1fr}.journey article::after{display:none}}
+    @media print{
+      @page{size:A4 portrait;margin:0}
+      html,body{background:#fff;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+      main{width:210mm;margin:0;box-shadow:none}
+      .page{width:210mm;height:297mm;min-height:297mm;padding:13mm 14mm;overflow:hidden}
+    }
+  </style>
+</head>
+<body>
+<main>
+  <article class="page">
+    <header>
+      <div><div class="kicker">STUDENT WORKSHEET · SESSION 03</div><h1>한 기능 완성 점검 워크시트</h1><p class="lead">예쁜 화면 하나를 만드는 데서 끝내지 않고, 사용자가 누른 뒤 실제 결과와 실패 복구까지 이어지는지 점검합니다. 내 프로젝트의 핵심 기능 하나만 골라 작성하세요.</p></div>
+      <span class="page-no">1/2</span>
+    </header>
+
+    <section>
+      <h2>1. 오늘 점검할 기능</h2>
+      <div class="identity">
+        <div class="write-line"><b>프로젝트 이름</b><span></span></div>
+        <div class="write-line"><b>기능 이름</b><span></span></div>
+        <div class="write-line"><b>이 기능을 쓰는 사람</b><span></span></div>
+        <div class="write-line"><b>사용자가 얻어야 하는 결과</b><span></span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. 화면에서 결과까지</h2>
+      <div class="journey">
+        <article><small>01</small><b>시작 화면</b><i></i></article>
+        <article><small>02</small><b>사용자 행동</b><i></i></article>
+        <article><small>03</small><b>처리 과정</b><i></i></article>
+        <article><small>04</small><b>저장·변경</b><i></i></article>
+        <article><small>05</small><b>화면 응답</b><i></i></article>
+      </div>
+      <div class="tip">예: 상품 화면 → 주문하기 클릭 → 권한·재고·결제 확인 → 주문 저장 → 주문 완료 화면</div>
+    </section>
+
+    <section>
+      <h2>3. 기능의 화면 상태 6가지</h2>
+      <table>
+        <thead><tr><th>상태</th><th>사용자가 보아야 하는 것</th><th>내 화면에서는 어떻게 보여줄까?</th></tr></thead>
+        <tbody>
+          <tr><td class="state-name">기본</td><td>무엇을 입력하거나 누를 수 있는지</td><td><span class="blank"></span></td></tr>
+          <tr><td class="state-name">처리 중</td><td>작업 중 표시와 중복 클릭 방지</td><td><span class="blank"></span></td></tr>
+          <tr><td class="state-name">성공</td><td>완료 결과와 다음 행동</td><td><span class="blank"></span></td></tr>
+          <tr><td class="state-name">실패</td><td>원인, 유지된 내용, 해결법, 다시 시도</td><td><span class="blank"></span></td></tr>
+          <tr><td class="state-name">빈 화면</td><td>데이터가 없을 때 첫 행동 안내</td><td><span class="blank"></span></td></tr>
+          <tr><td class="state-name">사용 불가</td><td>누를 수 없는 이유와 필요한 조건</td><td><span class="blank"></span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>4. UX 복구 질문</h2>
+      <div class="check-grid">
+        <div class="check">사용자가 현재 위치를 알 수 있다.</div>
+        <div class="check">다음에 누를 행동이 분명하다.</div>
+        <div class="check">오류가 나도 입력한 내용이 가능한 한 유지된다.</div>
+        <div class="check">실패 후 다시 시도할 방법이 있다.</div>
+      </div>
+    </section>
+    <footer><span>3강 · 개발 용어 이해</span><span>화면 상태 점검</span></footer>
+  </article>
+
+  <article class="page">
+    <header>
+      <div><div class="kicker">UI · UX · ANIMATION</div><h1>움직임을 넣기 전, 목적부터 정하기</h1><p class="lead">애니메이션은 장식이 아니라 사용자가 변화와 결과를 이해하도록 돕는 설명입니다. 필요한 역할만 선택하고 짧은 장면으로 설계하세요.</p></div>
+      <span class="page-no">2/2</span>
+    </header>
+
+    <section>
+      <h2>5. 이 기능에 필요한 애니메이션 역할</h2>
+      <div class="decision">
+        <article><b>□ 이동</b><span>메뉴, 탭, 페이지가 어디로 이어지는지 보여준다.</span><label>적용 위치: __________</label></article>
+        <article><b>□ 상태</b><span>열림, 선택, 로딩처럼 현재 상태의 변화를 보여준다.</span><label>적용 위치: __________</label></article>
+        <article><b>□ 피드백</b><span>저장, 주문, 좋아요가 반영되었음을 알려준다.</span><label>적용 위치: __________</label></article>
+        <article><b>□ 안내</b><span>오류 위치, 진행 위치, 다음 행동을 강조한다.</span><label>적용 위치: __________</label></article>
+      </div>
+      <div class="warning">움직임으로 더 명확해지는 정보가 없다면 애니메이션을 넣지 않아도 됩니다. 반복 재생과 과한 흔들림은 중요한 내용을 방해할 수 있습니다.</div>
+    </section>
+
+    <section>
+      <h2>6. 애니메이션 네 장면</h2>
+      <div class="storyboard">
+        <article><small>BEFORE</small><b>행동 전</b><i></i></article>
+        <article><small>TRIGGER</small><b>클릭·입력</b><i></i></article>
+        <article><small>CHANGE</small><b>움직이는 변화</b><i></i></article>
+        <article><small>AFTER</small><b>결과 화면</b><i></i></article>
+      </div>
+    </section>
+
+    <section>
+      <h2>7. AI에게 보낼 요청문 만들기</h2>
+      <div class="prompt-box">
+        <b>요청문</b><br>
+        내 프로젝트의 <span class="fill"></span> 화면에서 사용자가 <span class="fill"></span>을 누르면,
+        먼저 <span class="fill"></span> 상태를 보여주고 <span class="fill"></span> 처리를 진행해줘.
+        성공하면 <span class="fill"></span>을 보여주고, 실패하면 입력값을 유지한 채
+        <span class="fill"></span>과 다시 시도 버튼을 보여줘.
+        애니메이션은 <span class="fill"></span>을 이해시키는 목적으로만 사용해줘.
+      </div>
+    </section>
+
+    <section>
+      <h2>8. 완성 전에 확인</h2>
+      <div class="check-grid">
+        <div class="check">가장 중요한 행동이 먼저 보인다.</div>
+        <div class="check">버튼 문구만 읽어도 결과를 예상할 수 있다.</div>
+        <div class="check">처리 중에 같은 행동이 중복 실행되지 않는다.</div>
+        <div class="check">성공과 실패가 색뿐 아니라 글자로도 구분된다.</div>
+        <div class="check">빈 화면에도 시작할 수 있는 버튼이 있다.</div>
+        <div class="check">작은 노트북에서도 글자와 버튼이 겹치지 않는다.</div>
+        <div class="check">움직임이 너무 오래 반복되지 않는다.</div>
+        <div class="check">AI에게 수정할 화면과 결과를 구체적으로 설명했다.</div>
+      </div>
+    </section>
+
+    <section><h2>수업 중 메모</h2><div class="notes"></div></section>
+    <footer><span>3강 · 개발 용어 이해</span><span>한 기능 완성 기준</span></footer>
+  </article>
+</main>
+<script src="./appendix-print.js"></script>
+</body>
+</html>

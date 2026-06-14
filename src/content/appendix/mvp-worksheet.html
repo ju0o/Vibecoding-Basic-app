@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MVP 기획 워크시트</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--violet:#A78BFA;--violet2:#C4B5FD;--cyan:#67E8F9;--amber:#FBBF24;--emerald:#34D399;--bg:#07081A;--surface:rgba(255,255,255,.045);--border:rgba(255,255,255,.09);--text:#F1F0FF;--text2:#A09EC0;--text3:#6B6A8A}
+    body{font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}.bg{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 45% at 8% 0%,rgba(167,139,250,.14),transparent),radial-gradient(ellipse 55% 45% at 96% 100%,rgba(52,211,153,.09),transparent)}
+    .nav{position:fixed;top:0;left:0;right:0;height:48px;display:flex;align-items:center;gap:8px;padding:0 20px;background:rgba(7,8,26,.92);border-bottom:1px solid var(--border);z-index:10;overflow-x:auto}.nav a{color:var(--text2);text-decoration:none;font-size:12px;padding:4px 10px;border-radius:999px;white-space:nowrap}.nav a:first-child{color:var(--violet2);font-weight:800;letter-spacing:.08em;margin-right:10px}.nav a:hover{background:rgba(255,255,255,.08);color:var(--text)}
+    main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:78px 40px 80px}.hero{margin-bottom:42px}.eyebrow{color:var(--violet2);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px}h1{font-size:clamp(34px,5vw,64px);line-height:1.06;letter-spacing:-.03em;margin-bottom:14px}h2{font-size:clamp(22px,2.5vw,32px);letter-spacing:-.02em;margin-bottom:16px}.grad{background:linear-gradient(135deg,var(--violet),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.desc{color:var(--text2);font-size:clamp(14px,1.3vw,19px);max-width:760px}.section{margin-bottom:42px;scroll-margin-top:64px}.head{display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--border);margin-bottom:18px}.num{width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(167,139,250,.14);border:1px solid rgba(167,139,250,.28);color:var(--violet2);font-weight:900;font-size:13px;flex-shrink:0}
+    .worksheet{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field{border:1px solid var(--border);border-radius:14px;background:var(--surface);padding:18px 20px;min-height:130px}.wide{grid-column:1/-1}.label{color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}.question{color:var(--text);font-size:16px;font-weight:800;margin-bottom:8px}.lines{display:grid;gap:12px;margin-top:14px}.line{height:1px;background:rgba(255,255,255,.18)}.funnel{display:grid;grid-template-columns:1fr;gap:10px;max-width:720px}.funnel div{margin:0 auto;text-align:center;border:1px solid var(--border);background:rgba(255,255,255,.045);padding:12px 18px;border-radius:12px;color:var(--text2)}.funnel div:nth-child(1){width:100%}.funnel div:nth-child(2){width:82%}.funnel div:nth-child(3){width:64%}.funnel div:nth-child(4){width:46%;color:var(--emerald);border-color:rgba(52,211,153,.3)}.tip{border-left:3px solid var(--amber);background:rgba(251,191,36,.06);border-radius:0 12px 12px 0;padding:14px 18px;color:var(--text2);font-size:13px}
+    @media(max-width:820px){main{padding:68px 20px 60px}.worksheet{grid-template-columns:1fr}.wide{grid-column:auto}.funnel div{width:100%!important}}
+    @media print{@page{size:A4;margin:13mm}body{background:#fff;color:#15151c;-webkit-print-color-adjust:exact;print-color-adjust:exact}.bg,.nav{display:none!important}main{max-width:none;padding:0}.hero{margin-bottom:24px}h1{font-size:34px;color:#15151c}.grad{-webkit-text-fill-color:#15151c;background:none}.desc,.tip{color:#3f4252}.section{break-inside:avoid;margin-bottom:26px}.field,.funnel div,.tip{background:#fff;border-color:#d9dce8}.question,h2{color:#15151c}.line{background:#b8bdcc}}
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+  <nav class="nav"><a href="#">VIBE CODING</a><a href="#funnel">MVP 줄이기</a><a href="#worksheet">워크시트</a><a href="#scope">이번 기초반 범위</a></nav>
+  <main>
+    <section class="hero"><div class="eyebrow">별첨 자료</div><h1><span class="grad">MVP 기획</span> 워크시트</h1><p class="desc">큰 아이디어를 6주 안에 발표 가능한 최소 버전으로 줄입니다. 완벽한 서비스가 아니라, 작동하는 첫 버전을 목표로 합니다.</p></section>
+    <section class="section" id="funnel"><div class="head"><span class="num">1</span><h2>아이디어를 MVP로 줄이는 순서</h2></div><div class="funnel"><div>하고 싶은 것 전부</div><div>사용자에게 꼭 필요한 것</div><div>이번 6주 안에 만들 수 있는 것</div><div>발표 가능한 핵심 기능 1개</div></div></section>
+    <section class="section" id="worksheet"><div class="head"><span class="num">2</span><h2>작성 워크시트</h2></div><div class="worksheet">
+      <div class="field"><div class="label">WHO</div><div class="question">누가 사용할 프로그램인가요?</div><div class="lines"><div class="line"></div><div class="line"></div><div class="line"></div></div></div>
+      <div class="field"><div class="label">PROBLEM</div><div class="question">그 사람은 무엇이 불편한가요?</div><div class="lines"><div class="line"></div><div class="line"></div><div class="line"></div></div></div>
+      <div class="field"><div class="label">SOLUTION</div><div class="question">내 프로그램은 무엇을 해결하나요?</div><div class="lines"><div class="line"></div><div class="line"></div><div class="line"></div></div></div>
+      <div class="field"><div class="label">CORE ACTION</div><div class="question">사용자가 반드시 해야 하는 행동 1개는?</div><div class="lines"><div class="line"></div><div class="line"></div><div class="line"></div></div></div>
+      <div class="field wide"><div class="label">MVP</div><div class="question">이번 기초반에서 만들 최소 버전 한 문장</div><div class="lines"><div class="line"></div><div class="line"></div><div class="line"></div></div></div>
+      <div class="field"><div class="label">IN</div><div class="question">이번 버전에 넣을 기능 3개</div><div class="lines"><div class="line"></div><div class="line"></div><div class="line"></div></div></div>
+      <div class="field"><div class="label">OUT</div><div class="question">이번 버전에서 과감히 뺄 기능 3개</div><div class="lines"><div class="line"></div><div class="line"></div><div class="line"></div></div></div>
+    </div></section>
+    <section class="section" id="scope"><div class="head"><span class="num">3</span><h2>기초반에서 좋은 MVP 기준</h2></div><p class="tip">화면 1~3개, 핵심 기능 1개, 배포 가능한 링크 1개면 충분합니다. 로그인, 결제, 관리자, 알림은 나중에 붙여도 됩니다.</p></section>
+  </main>  <script src="./appendix-print.js"></script>
+
+</body>
+</html>

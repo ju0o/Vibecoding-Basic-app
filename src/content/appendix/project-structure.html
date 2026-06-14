@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>프로젝트 폴더 구조 설명</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--violet:#A78BFA;--violet2:#C4B5FD;--cyan:#67E8F9;--amber:#FBBF24;--emerald:#34D399;--rose:#FB7185;--bg:#07081A;--surface:rgba(255,255,255,.045);--border:rgba(255,255,255,.09);--text:#F1F0FF;--text2:#A09EC0;--text3:#6B6A8A}
+    body{font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}.bg{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 45% at 8% 0%,rgba(167,139,250,.14),transparent),radial-gradient(ellipse 55% 45% at 96% 100%,rgba(103,232,249,.09),transparent)}
+    .nav{position:fixed;top:0;left:0;right:0;height:48px;display:flex;align-items:center;gap:8px;padding:0 20px;background:rgba(7,8,26,.92);border-bottom:1px solid var(--border);z-index:10;overflow-x:auto}.nav a{color:var(--text2);text-decoration:none;font-size:12px;padding:4px 10px;border-radius:999px;white-space:nowrap}.nav a:first-child{color:var(--violet2);font-weight:800;letter-spacing:.08em;margin-right:10px}.nav a:hover{background:rgba(255,255,255,.08);color:var(--text)}
+    main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:78px 40px 80px}.hero{margin-bottom:42px}.eyebrow{color:var(--violet2);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px}h1{font-size:clamp(34px,5vw,64px);line-height:1.06;letter-spacing:-.03em;margin-bottom:14px}h2{font-size:clamp(22px,2.5vw,32px);letter-spacing:-.02em;margin-bottom:16px}.grad{background:linear-gradient(135deg,var(--violet),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.desc{color:var(--text2);font-size:clamp(14px,1.3vw,19px);max-width:760px}.section{margin-bottom:42px;scroll-margin-top:64px}.head{display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--border);margin-bottom:18px}.num{width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(167,139,250,.14);border:1px solid rgba(167,139,250,.28);color:var(--violet2);font-weight:900;font-size:13px;flex-shrink:0}
+    .layout{display:grid;grid-template-columns:340px 1fr;gap:18px}.tree,.list{border:1px solid var(--border);border-radius:14px;background:var(--surface);padding:20px}.tree{font-family:Consolas,'JetBrains Mono',monospace;color:var(--cyan);font-size:13px;line-height:1.9;white-space:pre}.item{display:grid;grid-template-columns:140px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}.item:last-child{border-bottom:none}.name{font-family:Consolas,'JetBrains Mono',monospace;color:var(--text);font-weight:800}.body{color:var(--text2);font-size:13px}.warn{border-left:3px solid var(--amber);background:rgba(251,191,36,.06);border-radius:0 12px 12px 0;padding:14px 18px;color:var(--text2);font-size:13px;margin-top:16px}
+    @media(max-width:820px){main{padding:68px 20px 60px}.layout{grid-template-columns:1fr}.item{grid-template-columns:1fr}}
+    @media print{@page{size:A4;margin:13mm}body{background:#fff;color:#15151c;-webkit-print-color-adjust:exact;print-color-adjust:exact}.bg,.nav{display:none!important}main{max-width:none;padding:0}.hero{margin-bottom:24px}h1{font-size:34px;color:#15151c}.grad{-webkit-text-fill-color:#15151c;background:none}.desc,.body,.warn{color:#3f4252}.section{break-inside:avoid;margin-bottom:26px}.tree,.list,.warn{background:#fff;border-color:#d9dce8}.tree{color:#0b6071}.name,h2{color:#15151c}}
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+  <nav class="nav"><a href="#">VIBE CODING</a><a href="#tree">기본 구조</a><a href="#roles">파일 역할</a><a href="#types">파일 형식</a><a href="#workflow">수정 순서</a><a href="#safe">수정 기준</a></nav>
+  <main>
+    <section class="hero"><div class="eyebrow">별첨 자료</div><h1><span class="grad">프로젝트 폴더</span> 구조 설명</h1><p class="desc">AI가 만든 프로젝트를 처음 열면 파일이 너무 많아 보입니다. 하지만 자주 보는 파일은 몇 개뿐입니다.</p></section>
+    <section class="section" id="tree"><div class="head"><span class="num">1</span><h2>웹 프로젝트 기본 구조</h2></div><div class="layout">
+      <div class="tree">my-app/
+  package.json
+  package-lock.json
+  node_modules/
+  public/
+  src/
+    app/
+    components/
+    lib/
+  .env.local
+  .gitignore
+  README.md</div>
+      <div class="list">
+        <div class="item"><div class="name">package.json</div><div class="body">프로젝트 정보, 실행 명령어, 설치된 패키지 목록이 들어있습니다.</div></div>
+        <div class="item"><div class="name">src/</div><div class="body">source의 줄임말로, 실제 화면과 기능 코드가 들어있는 핵심 작업 폴더입니다. 대부분의 수정은 여기에서 일어납니다.</div></div>
+        <div class="item"><div class="name">public/</div><div class="body">이미지, 아이콘, 정적 파일을 넣는 폴더입니다.</div></div>
+        <div class="item"><div class="name">.env.local</div><div class="body">API 키 같은 비밀값을 넣는 파일입니다. GitHub에 올리면 안 됩니다.</div></div>
+        <div class="item"><div class="name">.gitignore</div><div class="body">GitHub에 올리지 않을 파일과 폴더를 지정합니다.</div></div>
+      </div>
+    </div></section>
+    <section class="section" id="roles"><div class="head"><span class="num">2</span><h2>초보자가 자주 만지는 파일</h2></div><div class="list">
+      <div class="item"><div class="name">README.md</div><div class="body">프로젝트 설명서입니다. 실행 방법과 작업 요약을 정리합니다.</div></div>
+      <div class="item"><div class="name">components/</div><div class="body">버튼, 카드, 헤더처럼 재사용되는 UI 조각이 들어갑니다.</div></div>
+      <div class="item"><div class="name">app/ 또는 pages/</div><div class="body">페이지 단위 코드가 들어갑니다. 화면을 바꾸고 싶을 때 자주 봅니다.</div></div>
+      <div class="item"><div class="name">lib/</div><div class="body">API 연결, DB 연결, 공통 함수가 들어가는 경우가 많습니다.</div></div>
+      <div class="item"><div class="name">styles/</div><div class="body">색상, 폰트, 간격, 반응형 화면처럼 시각 규칙을 관리합니다. 프로젝트에 따라 파일이 각 컴포넌트 옆에 있을 수도 있습니다.</div></div>
+      <div class="item"><div class="name">package-lock.json</div><div class="body">설치된 패키지의 정확한 버전을 자동 기록합니다. 직접 작성하거나 편집하는 파일이 아닙니다.</div></div>
+    </div></section>
+    <section class="section" id="types"><div class="head"><span class="num">3</span><h2>자주 만나는 파일 형식</h2></div><div class="list">
+      <div class="item"><div class="name">.js / .jsx</div><div class="body">JavaScript 코드와 화면 코드를 담습니다. JSX는 화면 구조를 함께 표현할 수 있습니다.</div></div>
+      <div class="item"><div class="name">.ts / .tsx</div><div class="body">TypeScript 코드입니다. TSX는 화면 코드에 타입 검사까지 더한 형식입니다.</div></div>
+      <div class="item"><div class="name">.css / .scss</div><div class="body">색, 크기, 간격, 배치와 같은 화면 스타일을 정의합니다.</div></div>
+      <div class="item"><div class="name">.json</div><div class="body">프로젝트 설정과 구조화된 데이터를 기록합니다. 쉼표와 따옴표 규칙이 중요합니다.</div></div>
+      <div class="item"><div class="name">.md</div><div class="body">Markdown 문서입니다. README, 작업 계획, AI 작업 요약을 사람이 읽기 좋게 정리합니다.</div></div>
+    </div></section>
+    <section class="section" id="workflow"><div class="head"><span class="num">4</span><h2>바이브코딩 수정 순서</h2></div><div class="list">
+      <div class="item"><div class="name">1. 화면</div><div class="body">브라우저에서 바꾸고 싶은 장면과 결과를 한 문장으로 정합니다.</div></div>
+      <div class="item"><div class="name">2. 검색</div><div class="body">보이는 문구나 기능 이름으로 IDE 전체 검색을 실행합니다.</div></div>
+      <div class="item"><div class="name">3. 설명</div><div class="body">AI에게 관련 페이지, 컴포넌트, 스타일 파일의 연결 관계를 먼저 설명하게 합니다.</div></div>
+      <div class="item"><div class="name">4. 수정</div><div class="body">필요한 파일만 최소 범위로 수정하고 변경 파일 목록을 확인합니다.</div></div>
+      <div class="item"><div class="name">5. 검증</div><div class="body">브라우저에서 클릭, 모바일 화면, 다른 페이지의 영향까지 확인합니다.</div></div>
+    </div></section>
+    <section class="section" id="safe"><div class="head"><span class="num">5</span><h2>파일별 수정 기준</h2></div><p class="warn"><b>자주 확인:</b> src, components, public · <b>AI와 영향 확인:</b> package.json, 환경변수, 설정 파일 · <b>직접 수정하지 않기:</b> node_modules, package-lock.json, build/dist 결과물. .env.local의 실제 값은 절대 공유하지 않습니다.</p></section>
+  </main>  <script src="./appendix-print.js"></script>
+
+</body>
+</html>

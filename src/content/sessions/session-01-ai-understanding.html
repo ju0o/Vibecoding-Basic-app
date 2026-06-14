@@ -1,0 +1,3870 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1회차 · AI는 도구다</title>
+<link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+<link rel="stylesheet" href="../../renderer/interactive-education.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --violet: #A78BFA;
+  --violet2: #C4B5FD;
+  --cyan: #67E8F9;
+  --amber: #FBBF24;
+  --emerald: #34D399;
+  --rose: #FB7185;
+  --bg: #07081A;
+  --surface: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.08);
+  --text: #F1F0FF;
+  --text2: #A09EC0;
+  --text3: #6B6A8A;
+}
+
+body {
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+.app {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.app::before {
+  content: '';
+  position: absolute;
+  top: -20%; left: -10%;
+  width: 60%; height: 60%;
+  background: radial-gradient(ellipse, rgba(167,139,250,0.12) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app::after {
+  content: '';
+  position: absolute;
+  bottom: -20%; right: -10%;
+  width: 55%; height: 55%;
+  background: radial-gradient(ellipse, rgba(103,232,249,0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.nav-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 48px;
+  background: rgba(7,8,26,0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 100;
+}
+
+.nav-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+  letter-spacing: 0.04em;
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.nav-btn:hover:not(:disabled) { background: rgba(255,255,255,0.08); border-color: var(--violet); }
+.nav-btn:disabled { opacity: 0.3; cursor: default; }
+
+#counter {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+  min-width: 48px;
+  text-align: center;
+}
+
+.deck {
+  position: absolute;
+  top: 48px; left: 0; right: 0; bottom: 0;
+  z-index: 1;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  padding: 5% 8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  overflow-y: auto;
+  pointer-events: none;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: all;
+}
+
+.slide.prev {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.slide.cover { justify-content: center; align-items: flex-start; }
+
+.deck-meta {
+  font-size: clamp(12px, 1.1vw, 16px);
+  font-weight: 600;
+  color: var(--violet2);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.slide.cover h1 {
+  font-size: clamp(44px, 7vw, 110px);
+  font-weight: 800;
+  line-height: 1.05;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: clamp(18px, 1.8vw, 28px);
+  color: var(--text2);
+  line-height: 1.65;
+  max-width: 620px;
+  margin-bottom: 32px;
+}
+
+.meta-row {
+  font-size: clamp(12px, 1vw, 16px);
+  color: var(--text3);
+  font-weight: 500;
+}
+
+.eyebrow {
+  font-size: clamp(13px, 1.05vw, 17px);
+  font-weight: 700;
+  color: var(--violet2);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+h2 {
+  font-size: clamp(40px, 4.8vw, 78px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+.body {
+  font-size: clamp(20px, 1.75vw, 30px);
+  color: var(--text2);
+  line-height: 1.65;
+  max-width: 800px;
+  margin-bottom: 28px;
+}
+
+.note {
+  font-size: clamp(14px, 1.05vw, 18px);
+  color: var(--text3);
+  line-height: 1.5;
+  margin-top: 16px;
+}
+
+.grad-text {
+  background: linear-gradient(135deg, var(--violet) 0%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hl-v { color: var(--violet); }
+.hl-c { color: var(--cyan); }
+.hl-a { color: var(--amber); }
+.hl-e { color: var(--emerald); }
+
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+
+.curriculum-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.curriculum-card {
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+}
+
+.curriculum-card .card-label {
+  color: var(--cyan);
+}
+
+.curriculum-card .card-body {
+  margin-top: auto;
+}
+
+.ai-showcase {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+.ai-demo-card {
+  position: relative;
+  min-height: 220px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+  overflow: hidden;
+  padding: 18px;
+}
+.ai-demo-label {
+  position: relative;
+  z-index: 2;
+  color: var(--violet2);
+  font-size: clamp(10px, .85vw, 12px);
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.ai-demo-title {
+  position: relative;
+  z-index: 2;
+  color: var(--text);
+  font-size: clamp(14px, 1.2vw, 20px);
+  font-weight: 800;
+}
+.demo-canvas {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  height: 118px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.09);
+  background: rgba(0,0,0,.22);
+  overflow: hidden;
+}
+.demo-image {
+  background:
+    radial-gradient(circle at 30% 35%, rgba(251,191,36,.9) 0 7%, transparent 8%),
+    linear-gradient(135deg, rgba(167,139,250,.42), rgba(103,232,249,.16)),
+    linear-gradient(45deg, transparent 55%, rgba(52,211,153,.28) 56%);
+}
+.demo-image::after {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 2px solid rgba(255,255,255,.14);
+  border-radius: 10px;
+  animation: frameScan 2.4s ease-in-out infinite;
+}
+.demo-video::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(103,232,249,.12), rgba(167,139,250,.28), rgba(251,191,36,.14));
+  animation: videoPan 3.8s linear infinite;
+}
+.demo-video::after {
+  content: '▶';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,.14);
+  color: var(--text);
+}
+.demo-code {
+  padding: 16px;
+  font-family: ui-monospace, monospace;
+  color: var(--cyan);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.demo-code span {
+  display: block;
+  width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: codeType 3.2s steps(24, end) infinite;
+}
+.demo-code span:nth-child(2) { animation-delay: .4s; color: var(--violet2); }
+.demo-code span:nth-child(3) { animation-delay: .8s; color: var(--emerald); }
+.demo-brain::before,
+.demo-brain::after {
+  content: '';
+  position: absolute;
+  border-radius: 999px;
+  border: 1px solid rgba(103,232,249,.28);
+  inset: 24px;
+  animation: pulseRing 2.6s ease-in-out infinite;
+}
+.demo-brain::after {
+  inset: 42px;
+  animation-delay: .5s;
+  border-color: rgba(167,139,250,.32);
+}
+.demo-brain .dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cyan);
+  animation: floatBob 3s ease-in-out infinite;
+}
+.demo-brain .dot:nth-child(1) { left: 28%; top: 42%; }
+.demo-brain .dot:nth-child(2) { right: 30%; top: 34%; animation-delay: .5s; }
+.demo-brain .dot:nth-child(3) { left: 48%; bottom: 28%; animation-delay: 1s; }
+
+@keyframes frameScan {
+  0%, 100% { transform: scale(.9); opacity: .45; }
+  50% { transform: scale(1); opacity: 1; }
+}
+@keyframes videoPan {
+  0% { transform: translateX(-35%); }
+  100% { transform: translateX(35%); }
+}
+@keyframes codeType {
+  0%, 15% { width: 0; }
+  50%, 85% { width: 100%; }
+  100% { width: 0; }
+}
+@keyframes pulseRing {
+  0%, 100% { transform: scale(.86); opacity: .3; }
+  50% { transform: scale(1.05); opacity: .9; }
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 26px 28px;
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: rgba(167,139,250,0.3); }
+
+.card-label {
+  font-size: clamp(13px, 1vw, 16px);
+  font-weight: 700;
+  color: var(--violet2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.card-title {
+  font-size: clamp(20px, 1.65vw, 28px);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.card-body {
+  font-size: clamp(16px, 1.2vw, 21px);
+  color: var(--text2);
+  line-height: 1.6;
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.chip {
+  background: rgba(167,139,250,0.12);
+  border: 1px solid rgba(167,139,250,0.25);
+  color: var(--violet2);
+  padding: 7px 14px;
+  border-radius: 100px;
+  font-size: clamp(12px, 1vw, 15px);
+  font-weight: 600;
+}
+
+.pipeline {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  align-items: stretch;
+  margin-top: 24px;
+}
+
+.pipeline-step {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 20px 18px;
+  position: relative;
+}
+.pipeline-step:first-child { border-radius: 16px 0 0 16px; }
+.pipeline-step:last-child { border-radius: 0 16px 16px 0; }
+.pipeline-step + .pipeline-step { border-left: none; }
+.pipeline-step::after {
+  content: '→';
+  position: absolute;
+  right: -14px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--violet2);
+  font-size: 18px;
+  z-index: 2;
+}
+.pipeline-step:last-child::after { display: none; }
+
+.step-num {
+  font-size: clamp(10px, 0.8vw, 12px);
+  font-weight: 700;
+  color: var(--violet);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.step-title {
+  font-size: clamp(13px, 1.2vw, 18px);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.step-body {
+  font-size: clamp(11px, 0.9vw, 14px);
+  color: var(--text2);
+  line-height: 1.5;
+}
+
+.progress-list { display: flex; flex-direction: column; gap: 28px; margin-top: 28px; max-width: 1100px; }
+
+.progress-label {
+  display: flex; justify-content: space-between;
+  font-size: clamp(24px, 2.1vw, 36px);
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.progress-sub {
+  font-size: clamp(17px, 1.25vw, 23px);
+  color: var(--text2);
+  margin-bottom: 12px;
+}
+
+.progress-track {
+  width: 100%; height: 26px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 100px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: inset 0 0 18px rgba(0,0,0,0.28);
+}
+
+.progress-fill {
+  height: 100%; border-radius: 100px;
+  background: linear-gradient(90deg, var(--violet), var(--cyan));
+  transition: width 0.6s ease;
+  box-shadow: 0 0 24px rgba(103,232,249,0.3);
+}
+.progress-fill.slow { background: linear-gradient(90deg, var(--rose), var(--amber)); }
+.progress-fill::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  animation: gaugeShine 2.2s linear infinite;
+}
+
+.time-compare {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 28px;
+  align-items: stretch;
+  margin-top: 26px;
+}
+.time-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 220px;
+  padding: 26px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: rgba(255,255,255,0.045);
+}
+.time-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 20% 0%, rgba(167,139,250,0.12), transparent 38%);
+}
+.time-card.ai::before { background: radial-gradient(circle at 20% 0%, rgba(52,211,153,0.14), transparent 38%); }
+.time-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: 999px;
+  color: var(--text2);
+  font-size: clamp(13px, 1vw, 16px);
+  font-weight: 900;
+}
+.time-big {
+  position: relative;
+  margin: 22px 0 10px;
+  font-size: clamp(56px, 6vw, 104px);
+  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+.time-desc {
+  position: relative;
+  color: var(--text2);
+  font-size: clamp(18px, 1.35vw, 24px);
+  line-height: 1.5;
+}
+.time-flow {
+  display: grid;
+  gap: 12px;
+}
+.time-flow-step {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: rgba(0,0,0,0.22);
+  color: var(--text);
+  font-size: clamp(16px, 1.2vw, 21px);
+  font-weight: 800;
+}
+.time-flow-step span:last-child {
+  color: var(--text3);
+  font-size: clamp(13px, .95vw, 16px);
+}
+.slide.active .time-flow-step {
+  animation: flowPulse 2.4s ease-in-out infinite;
+}
+.slide.active .time-flow-step:nth-child(2) { animation-delay: .25s; }
+.slide.active .time-flow-step:nth-child(3) { animation-delay: .5s; }
+.slide.active .time-flow-step:nth-child(4) { animation-delay: .75s; }
+
+.result-showcase {
+  display: grid;
+  grid-template-columns: minmax(330px, .82fr) minmax(520px, 1.18fr);
+  gap: 24px;
+  align-items: stretch;
+  margin-top: 22px;
+}
+.result-menu {
+  display: grid;
+  gap: 14px;
+}
+.result-card {
+  position: relative;
+  min-height: 116px;
+  padding: 20px 22px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+  color: inherit;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color .2s, background .2s, transform .2s, box-shadow .2s;
+}
+.result-card:hover,
+.result-card.is-active {
+  transform: translate3d(0,-2px,0);
+  border-color: rgba(103,232,249,0.45);
+  background: rgba(103,232,249,0.07);
+  box-shadow: 0 0 30px rgba(103,232,249,0.12);
+}
+.result-card .card-label { color: var(--cyan); }
+.result-card-hint {
+  display: block;
+  margin-top: 8px;
+  color: var(--text3);
+  font-size: clamp(13px, .95vw, 16px);
+  font-weight: 700;
+}
+.result-stage {
+  position: relative;
+  min-height: 520px;
+  border: 1px solid rgba(255,255,255,0.11);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 16% 10%, rgba(103,232,249,0.13), transparent 34%),
+    radial-gradient(circle at 90% 84%, rgba(167,139,250,0.12), transparent 38%),
+    rgba(0,0,0,0.24);
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.28);
+}
+.result-stage-head {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 22px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+}
+.result-stage-title {
+  color: var(--text);
+  font-size: clamp(18px, 1.45vw, 26px);
+  font-weight: 900;
+}
+.result-stage-badge {
+  color: var(--emerald);
+  font-size: clamp(12px, .95vw, 16px);
+  font-weight: 900;
+}
+.result-preview {
+  min-height: 460px;
+  padding: 28px;
+}
+.result-preview.is-swapping {
+  animation: previewSwap .34s ease both;
+}
+.mock-doc,
+.mock-slide,
+.mock-social,
+.mock-image,
+.mock-browser,
+.mock-dashboard,
+.mock-mobile,
+.mock-community {
+  min-height: 390px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  background: rgba(255,255,255,0.055);
+  overflow: hidden;
+}
+.mock-paper {
+  width: min(520px, 92%);
+  min-height: 360px;
+  margin: 0 auto;
+  padding: 34px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.92);
+  color: #111827;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.28);
+}
+.mock-paper h3 { font-size: 30px; margin-bottom: 18px; letter-spacing: 0; }
+.mock-line { height: 15px; margin: 12px 0; border-radius: 999px; background: rgba(17,24,39,0.16); }
+.mock-line.w70 { width: 70%; } .mock-line.w50 { width: 50%; } .mock-line.w85 { width: 85%; }
+.mock-slide {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 18px;
+  padding: 28px;
+}
+.mock-slide-main {
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(167,139,250,.55), rgba(103,232,249,.24));
+  padding: 28px;
+}
+.mock-slide-main strong { display:block; font-size: 38px; line-height: 1.05; margin-bottom: 22px; }
+.mock-slide-side { display:grid; gap: 14px; }
+.mock-thumb { border-radius: 14px; background: rgba(255,255,255,0.1); border: 1px solid var(--border); }
+.mock-social {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, rgba(251,113,133,.2), rgba(167,139,250,.16), rgba(103,232,249,.14));
+}
+.mock-phone {
+  width: 220px;
+  height: 360px;
+  border: 10px solid rgba(255,255,255,0.16);
+  border-radius: 36px;
+  padding: 22px;
+  background: rgba(0,0,0,0.36);
+  box-shadow: 0 18px 50px rgba(0,0,0,.28);
+}
+.mock-phone-title { font-size: 30px; font-weight: 900; margin-bottom: 16px; }
+.mock-image {
+  position: relative;
+  background: linear-gradient(135deg, rgba(52,211,153,.18), rgba(103,232,249,.18), rgba(167,139,250,.2));
+}
+.mock-image::before {
+  content: '';
+  position: absolute;
+  inset: 52px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 34% 35%, rgba(255,255,255,.9) 0 36px, transparent 37px),
+    linear-gradient(135deg, rgba(15,23,42,.9), rgba(30,41,59,.72));
+  box-shadow: 0 20px 70px rgba(0,0,0,.32);
+}
+.mock-image::after {
+  content: 'AI THUMBNAIL';
+  position: absolute;
+  left: 86px; bottom: 82px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: 900;
+}
+.mock-browser-bar {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+}
+.mock-dot { width: 11px; height: 11px; border-radius: 999px; background: var(--rose); }
+.mock-dot:nth-child(2) { background: var(--amber); }
+.mock-dot:nth-child(3) { background: var(--emerald); }
+.mock-browser-body { padding: 28px; }
+.mock-hero { height: 82px; border-radius: 18px; background: linear-gradient(90deg, var(--violet), var(--cyan)); margin-bottom: 20px; animation: heroGlow 2.4s ease-in-out infinite; }
+.mock-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.mock-box { min-height: 130px; border-radius: 16px; border: 1px solid var(--border); background: rgba(255,255,255,0.07); }
+.mock-dashboard { padding: 24px; }
+.mock-dashboard-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.mock-stat { min-height: 118px; border-radius: 16px; background: rgba(52,211,153,.1); border: 1px solid rgba(52,211,153,.24); padding: 18px; }
+.mock-stat strong { display:block; font-size: 34px; margin-top: 14px; color: var(--emerald); }
+.mock-mobile { display:grid; place-items:center; }
+.mock-community { padding: 24px; }
+.mock-post { display:flex; gap: 16px; align-items:center; min-height: 76px; margin-bottom: 14px; padding: 0 18px; border-radius: 16px; background: rgba(255,255,255,0.06); }
+.mock-avatar { width: 42px; height:42px; border-radius:999px; background: var(--cyan); }
+
+@keyframes gaugeShine {
+  from { transform: translateX(-120%); }
+  to { transform: translateX(120%); }
+}
+@keyframes flowPulse {
+  0%, 100% { border-color: var(--border); background: rgba(0,0,0,0.22); }
+  50% { border-color: rgba(103,232,249,.36); background: rgba(103,232,249,.08); }
+}
+@keyframes beamTravel {
+  0%, 100% { transform: scaleX(.36); opacity:.35; }
+  50% { transform: scaleX(1); opacity:1; }
+}
+@keyframes previewSwap {
+  from { opacity: 0; transform: translate3d(20px, 0, 0) scale(.985); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+@keyframes heroGlow {
+  0%, 100% { filter: saturate(1); transform: scaleX(.96); transform-origin:left; }
+  50% { filter: saturate(1.7); transform: scaleX(1); }
+}
+
+/* ═══════════════════════════════════════
+   HIGH-QUALITY LIVE PREVIEW SYSTEM
+═══════════════════════════════════════ */
+
+/* Browser chrome shell */
+.pv-browser { border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.13); background: #0f1117; min-height: 390px; display: flex; flex-direction: column; }
+.pv-bar { height: 38px; display: flex; align-items: center; gap: 6px; padding: 0 14px; background: #1a1d25; border-bottom: 1px solid rgba(255,255,255,0.07); flex-shrink: 0; }
+.pv-dot-r { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; flex-shrink: 0; }
+.pv-dot-y { width: 10px; height: 10px; border-radius: 50%; background: #febc2e; flex-shrink: 0; }
+.pv-dot-g { width: 10px; height: 10px; border-radius: 50%; background: #28c840; flex-shrink: 0; }
+.pv-url { flex: 1; height: 22px; background: rgba(255,255,255,0.06); border-radius: 5px; padding: 0 10px; font-size: 10px; color: rgba(255,255,255,0.28); display: flex; align-items: center; }
+.pv-scroll { flex: 1; overflow-y: auto; }
+
+/* Document (기획서) */
+.pv-doc-wrap { min-height: 390px; padding: 18px; background: #f0f2f8; }
+.pv-paper { background: #fff; border-radius: 12px; padding: 24px 26px; box-shadow: 0 8px 32px rgba(0,0,0,0.18); }
+.pv-doc-badge { display: inline-block; background: #ede9fe; color: #6d28d9; font-size: 9px; font-weight: 800; letter-spacing: 0.12em; padding: 3px 10px; border-radius: 100px; margin-bottom: 10px; }
+.pv-doc-title { font-size: 15px; font-weight: 900; color: #111; margin-bottom: 3px; min-height: 18px; line-height: 1.3; }
+.pv-doc-meta { font-size: 10px; color: #9ca3af; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1.5px solid #f3f4f6; }
+.pv-doc-sec { margin-bottom: 11px; }
+.pv-doc-sl { font-size: 9px; font-weight: 800; color: #6d28d9; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 5px; }
+.pv-doc-tx { font-size: 11.5px; color: #374151; line-height: 1.6; min-height: 14px; }
+.pv-tag-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+.pv-dtag { font-size: 10px; font-weight: 600; padding: 2px 9px; border-radius: 100px; background: #ede9fe; color: #6d28d9; }
+.pv-dtag.c { background: #cffafe; color: #0891b2; }
+.pv-dtag.g { background: #d1fae5; color: #059669; }
+.pv-dtag.a { background: #fef3c7; color: #d97706; }
+
+/* Presentation (발표 자료) */
+.pv-ppt { display: grid; grid-template-columns: 68px 1fr; gap: 10px; min-height: 390px; padding: 14px; }
+.pv-ppt-thumbs { display: flex; flex-direction: column; gap: 6px; }
+.pv-ptt { height: 50px; border-radius: 7px; overflow: hidden; border: 2px solid transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; color: rgba(255,255,255,0.4); transition: border-color 0.2s; }
+.pv-ptt.on { border-color: var(--violet); }
+.pv-ptt:nth-child(1) { background: linear-gradient(135deg,#1e1b4b,#312e81); }
+.pv-ptt:nth-child(2) { background: linear-gradient(135deg,#042f2e,#134e4a); }
+.pv-ptt:nth-child(3) { background: linear-gradient(135deg,#1c1917,#292524); }
+.pv-ptt:nth-child(4) { background: linear-gradient(135deg,#0c0a1a,#1e1b4b); }
+.pv-main-slide { border-radius: 12px; background: linear-gradient(145deg,#1e1b4b 0%,#0f0f1a 55%,#042f2e 100%); padding: 22px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+.pv-main-slide::before { content: ''; position: absolute; top: -20%; right: -5%; width: 170px; height: 170px; border-radius: 50%; background: radial-gradient(circle, rgba(167,139,250,0.18), transparent 65%); pointer-events: none; }
+.pv-sn { font-size: 9px; font-weight: 800; color: rgba(255,255,255,0.3); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 10px; }
+.pv-sh { font-size: 20px; font-weight: 900; color: #fff; line-height: 1.2; margin-bottom: 14px; min-height: 24px; }
+.pv-bi { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 8px; font-weight: 500; }
+.pv-bd { width: 5px; height: 5px; border-radius: 50%; background: var(--cyan); flex-shrink: 0; }
+
+/* SNS / Instagram */
+.pv-sns-wrap { min-height: 390px; display: flex; align-items: center; justify-content: center; padding: 20px; background: #fafafa; }
+.pv-ig { width: 200px; background: #fff; border: 1px solid #dbdbdb; border-radius: 10px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.14); font-family: -apple-system, sans-serif; }
+.pv-ig-top { display: flex; align-items: center; gap: 7px; padding: 8px 10px; }
+.pv-ig-av { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); flex-shrink: 0; }
+.pv-ig-user { font-size: 11px; font-weight: 700; color: #111; }
+.pv-ig-img { width: 100%; height: 145px; background: linear-gradient(135deg,#667eea,#764ba2,#f093fb); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.pv-ig-img-txt { font-size: 16px; font-weight: 900; color: #fff; text-align: center; line-height: 1.2; text-shadow: 0 2px 8px rgba(0,0,0,0.5); padding: 0 10px; position: relative; z-index: 1; }
+.pv-ig-actions { display: flex; gap: 8px; padding: 7px 10px 3px; font-size: 16px; }
+.pv-ig-body { padding: 2px 10px 10px; }
+.pv-ig-likes { font-size: 11px; font-weight: 700; color: #111; margin-bottom: 3px; }
+.pv-ig-cap { font-size: 11px; color: #374151; line-height: 1.45; min-height: 26px; }
+.pv-ig-time { font-size: 9px; color: #9ca3af; margin-top: 3px; }
+
+/* Thumbnail (YouTube) */
+.pv-yt-wrap { min-height: 390px; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.pv-yt { width: 100%; max-width: 320px; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; position: relative; box-shadow: 0 16px 50px rgba(0,0,0,0.55); }
+.pv-yt-bg { position: absolute; inset: 0; background: linear-gradient(135deg,#090909 0%,#1a0533 40%,#0a1628 100%); }
+.pv-yt-g1 { position: absolute; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle,rgba(167,139,250,0.45),transparent 60%); top: -50px; right: -30px; pointer-events: none; }
+.pv-yt-g2 { position: absolute; width: 130px; height: 130px; border-radius: 50%; background: radial-gradient(circle,rgba(103,232,249,0.25),transparent 60%); bottom: -25px; left: -15px; pointer-events: none; }
+.pv-yt-content { position: relative; z-index: 1; padding: 16px; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+.pv-yt-tag { display: inline-block; background: rgba(167,139,250,0.2); border: 1px solid rgba(167,139,250,0.4); color: var(--violet2); font-size: 9px; font-weight: 800; padding: 2px 8px; border-radius: 100px; letter-spacing: 0.1em; }
+.pv-yt-h { font-size: 18px; font-weight: 900; color: #fff; line-height: 1.15; min-height: 22px; }
+.pv-yt-sub { font-size: 10px; color: rgba(255,255,255,0.4); }
+.pv-yt-ch { display: flex; align-items: center; gap: 6px; }
+.pv-yt-chav { width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg,var(--violet),var(--cyan)); flex-shrink: 0; }
+.pv-yt-chn { font-size: 9px; color: rgba(255,255,255,0.55); font-weight: 600; }
+
+/* Portfolio site */
+.pv-portfolio { display: flex; flex-direction: column; }
+.pv-pf-hero { background: linear-gradient(135deg,rgba(167,139,250,0.12),rgba(103,232,249,0.06)); border-bottom: 1px solid rgba(255,255,255,0.07); padding: 16px 18px 12px; display: flex; align-items: center; gap: 12px; }
+.pv-pf-av { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg,var(--violet),var(--cyan)); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.pv-pf-name { font-size: 15px; font-weight: 900; color: #fff; min-height: 18px; margin-bottom: 3px; }
+.pv-pf-role { font-size: 10px; color: var(--violet2); font-weight: 600; min-height: 12px; }
+.pv-skills-sec { padding: 10px 18px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.pv-sk-label { font-size: 9px; font-weight: 800; color: var(--text3); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 7px; }
+.pv-sk-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 5px; }
+.pv-sk { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); border-radius: 7px; padding: 5px 4px; text-align: center; font-size: 9px; font-weight: 600; color: var(--text2); }
+.pv-sk .e { font-size: 13px; display: block; margin-bottom: 2px; }
+.pv-proj-sec { padding: 10px 18px; }
+.pv-proj-row { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 7px 11px; margin-bottom: 5px; }
+.pv-proj-n { font-size: 11px; font-weight: 700; color: #fff; }
+.pv-proj-b { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 100px; background: rgba(52,211,153,0.1); color: var(--emerald); border: 1px solid rgba(52,211,153,0.2); }
+
+/* AI Chat (웹앱) */
+.pv-chat { padding: 12px; min-height: 390px; display: flex; flex-direction: column; gap: 9px; }
+.pv-chat-hd { display: flex; align-items: center; gap: 8px; padding-bottom: 9px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.pv-chat-logo { width: 26px; height: 26px; border-radius: 7px; background: linear-gradient(135deg,var(--violet),var(--cyan)); display: flex; align-items: center; justify-content: center; font-size: 13px; }
+.pv-chat-htitle { font-size: 12px; font-weight: 800; color: #fff; }
+.pv-chat-status { font-size: 9px; color: var(--emerald); font-weight: 700; margin-left: auto; }
+.pv-msgs { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.pv-mr { display: flex; gap: 7px; align-items: flex-start; }
+.pv-mr.u { flex-direction: row-reverse; }
+.pv-mav { width: 24px; height: 24px; border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+.pv-mav.ai { background: linear-gradient(135deg,var(--violet),var(--cyan)); }
+.pv-mav.u { background: rgba(255,255,255,0.1); }
+.pv-mb { max-width: 83%; padding: 7px 11px; border-radius: 9px; border-top-left-radius: 3px; font-size: 11px; line-height: 1.55; color: var(--text2); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); min-height: 28px; }
+.pv-mr.u .pv-mb { background: rgba(167,139,250,0.12); border-color: rgba(167,139,250,0.22); color: var(--violet2); border-radius: 9px; border-top-right-radius: 3px; }
+.pv-chat-inp { display: flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 7px 11px; font-size: 11px; color: var(--text3); }
+
+/* Booking Tool */
+.pv-bk { padding: 13px; min-height: 390px; }
+.pv-bk-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 11px; }
+.pv-bk-title { font-size: 13px; font-weight: 800; color: #fff; }
+.pv-bk-badge { font-size: 9px; font-weight: 800; padding: 2px 8px; border-radius: 100px; background: rgba(103,232,249,0.1); color: var(--cyan); border: 1px solid rgba(103,232,249,0.2); }
+.pv-bk-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin-bottom: 11px; }
+.pv-bk-stat { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 7px 9px; }
+.pv-bk-sn { font-size: 17px; font-weight: 900; color: var(--violet2); line-height: 1; }
+.pv-bk-sl { font-size: 9px; color: var(--text3); margin-top: 2px; }
+.pv-cal { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; margin-bottom: 11px; }
+.pv-cd { height: 26px; border-radius: 5px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--text3); font-weight: 500; }
+.pv-cd.bk { background: rgba(167,139,250,0.14); border-color: rgba(167,139,250,0.28); color: var(--violet2); font-weight: 700; }
+.pv-cd.td { background: var(--violet); border-color: var(--violet2); color: #fff; font-weight: 900; }
+.pv-bk-list { display: flex; flex-direction: column; gap: 5px; }
+.pv-bk-row { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 7px 10px; }
+.pv-bk-time { font-size: 11px; font-weight: 800; color: var(--cyan); min-width: 38px; }
+.pv-bk-name { font-size: 11px; color: #fff; font-weight: 600; flex: 1; }
+.pv-bk-st { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 100px; }
+.pv-bk-st.ok { background: rgba(52,211,153,0.1); color: var(--emerald); border: 1px solid rgba(52,211,153,0.2); }
+.pv-bk-st.wt { background: rgba(251,191,36,0.1); color: var(--amber); border: 1px solid rgba(251,191,36,0.2); }
+
+/* Community */
+.pv-comm { padding: 13px; min-height: 390px; }
+.pv-comm-top { display: flex; align-items: center; gap: 8px; margin-bottom: 11px; }
+.pv-comm-logo { width: 26px; height: 26px; border-radius: 7px; background: linear-gradient(135deg,var(--amber),var(--rose)); display: flex; align-items: center; justify-content: center; font-size: 13px; }
+.pv-comm-title { font-size: 12px; font-weight: 800; color: #fff; }
+.pv-comm-members { font-size: 9px; color: var(--emerald); font-weight: 700; margin-left: auto; }
+.pv-msec-label { font-size: 9px; font-weight: 800; color: var(--text3); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+.pv-mrow { display: flex; align-items: center; gap: 8px; padding: 7px 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; margin-bottom: 5px; }
+.pv-m-icon { font-size: 13px; flex-shrink: 0; }
+.pv-m-name { font-size: 11px; font-weight: 600; color: var(--text); flex: 1; }
+.pv-mprog { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
+.pv-mpct { font-size: 9px; font-weight: 800; color: var(--violet2); min-width: 26px; text-align: right; }
+.pv-pt { width: 55px; height: 5px; background: rgba(255,255,255,0.08); border-radius: 100px; overflow: hidden; }
+.pv-pf2 { height: 100%; border-radius: 100px; background: linear-gradient(90deg,var(--violet),var(--cyan)); transition: width 0.7s ease; }
+.pv-fsec { margin-top: 9px; }
+.pv-frow { display: flex; align-items: flex-start; gap: 7px; padding: 7px 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; margin-bottom: 5px; }
+.pv-fav { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; background: var(--violet); }
+.pv-fav.b { background: var(--cyan); }
+.pv-fav.c { background: var(--emerald); }
+.pv-fbody { flex: 1; }
+.pv-fnm { font-size: 10px; font-weight: 700; color: var(--text); }
+.pv-ftx { font-size: 10px; color: var(--text2); line-height: 1.4; min-height: 22px; }
+.pv-flk { font-size: 9px; color: var(--text3); margin-top: 2px; }
+
+/* Type cursor */
+.tc { display: inline-block; width: 2px; height: 0.9em; background: var(--violet2); margin-left: 1px; vertical-align: middle; animation: blinkC 0.75s step-end infinite; }
+@keyframes blinkC { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* AI generating overlay */
+.pv-gen { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(7,8,26,0.85); z-index: 10; border-radius: 14px; font-size: 12px; font-weight: 600; color: var(--text3); transition: opacity 0.3s ease; }
+.gd { width: 7px; height: 7px; border-radius: 50%; background: var(--violet); animation: gp 1.1s ease-in-out infinite; }
+.gd:nth-child(2){animation-delay:.18s;background:var(--cyan);}
+.gd:nth-child(3){animation-delay:.36s;}
+@keyframes gp { 0%,100%{transform:scale(.6);opacity:.4} 50%{transform:scale(1.2);opacity:1} }
+
+/* ── AI History Timeline ── */
+.ai-htl { display: flex; flex-direction: column; gap: 0; margin-top: clamp(12px,1.5vw,22px); position: relative; }
+.ai-htl::before { content:''; position:absolute; left:clamp(54px,5.5vw,80px); top:10px; bottom:10px; width:2px; background:linear-gradient(180deg,var(--violet),var(--cyan),var(--violet)); opacity:.25; }
+.ai-htl-item { display:flex; align-items:flex-start; gap:clamp(12px,1.5vw,20px); padding:clamp(6px,0.8vw,10px) 0; }
+.ai-htl-year { min-width:clamp(50px,5vw,76px); font-size:clamp(11px,1vw,15px); font-weight:900; color:var(--text3); text-align:right; padding-top:2px; flex-shrink:0; }
+.ai-htl-dot { width:12px; height:12px; border-radius:50%; background:var(--violet); flex-shrink:0; margin-top:4px; z-index:1; }
+.ai-htl-card { flex:1; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:clamp(10px,1.2vw,14px) clamp(12px,1.5vw,18px); }
+.ai-htl-title { font-size:clamp(13px,1.2vw,18px); font-weight:800; color:var(--text); margin-bottom:4px; }
+.ai-htl-desc { font-size:clamp(11px,0.95vw,14px); color:var(--text2); line-height:1.55; }
+.ai-htl-big .ai-htl-card { padding:clamp(12px,1.4vw,18px); }
+
+/* ── Before vs After ── */
+.bva-grid { display:grid; grid-template-columns:1fr auto 1fr; gap:clamp(10px,1.5vw,20px); align-items:center; }
+.bva-arrow { font-size:clamp(24px,3vw,44px); color:var(--violet2); font-weight:900; text-align:center; }
+.bva-col { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:clamp(14px,1.8vw,24px); display:flex; flex-direction:column; gap:clamp(8px,1vw,12px); }
+.bva-before { border-color:rgba(251,113,133,0.2); background:rgba(251,113,133,0.04); }
+.bva-after  { border-color:rgba(52,211,153,0.25); background:rgba(52,211,153,0.04); }
+.bva-label { font-size:clamp(11px,0.95vw,14px); font-weight:800; color:var(--text2); margin-bottom:4px; letter-spacing:.04em; }
+.bva-row { display:flex; align-items:flex-start; gap:10px; font-size:clamp(12px,1.05vw,16px); color:var(--text2); line-height:1.45; }
+.bva-x { color:var(--rose); font-weight:900; flex-shrink:0; }
+.bva-o { color:var(--emerald); font-weight:900; flex-shrink:0; }
+
+/* ── LLM Shift / Tool Routing ── */
+.llm-shift {
+  display:grid;
+  grid-template-columns:minmax(220px,.9fr) 76px minmax(260px,1fr) 76px minmax(260px,1.05fr);
+  gap:clamp(10px,1.2vw,18px);
+  align-items:stretch;
+  margin-top:clamp(18px,2vw,30px);
+}
+.llm-panel {
+  min-height:clamp(220px,27vh,300px);
+  border:1px solid var(--border);
+  border-radius:24px;
+  background:rgba(255,255,255,.045);
+  padding:clamp(22px,2.2vw,34px);
+  position:relative;
+  overflow:hidden;
+}
+.llm-panel::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg, color-mix(in srgb, var(--accent, var(--violet)) 14%, transparent), transparent 58%);
+  pointer-events:none;
+}
+.llm-kicker { position:relative; color:var(--text3); font-size:clamp(12px,1vw,15px); font-weight:900; letter-spacing:.14em; text-transform:uppercase; margin-bottom:14px; }
+.llm-title { position:relative; color:var(--text); font-size:clamp(30px,3.4vw,56px); line-height:1.04; font-weight:950; letter-spacing:0; margin-bottom:18px; }
+.llm-desc { position:relative; color:var(--text2); font-size:clamp(18px,1.35vw,25px); line-height:1.55; }
+.llm-beam {
+  display:grid;
+  place-items:center;
+  color:var(--cyan);
+  font-size:clamp(28px,3.2vw,52px);
+  font-weight:950;
+  position:relative;
+}
+.llm-beam::before {
+  content:'';
+  position:absolute;
+  width:100%;
+  height:4px;
+  border-radius:999px;
+  background:linear-gradient(90deg, transparent, rgba(103,232,249,.9), transparent);
+  animation:beamTravel 1.8s ease-in-out infinite;
+}
+.llm-stack { position:relative; display:grid; gap:12px; margin-top:18px; }
+.llm-token {
+  min-height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:0 16px;
+  border-radius:14px;
+  background:rgba(0,0,0,.22);
+  border:1px solid rgba(255,255,255,.09);
+  color:var(--text);
+  font-size:clamp(15px,1.15vw,20px);
+  font-weight:850;
+}
+.llm-token span:last-child { color:var(--text3); font-size:clamp(12px,.95vw,15px); }
+.slide.active .llm-panel { animation:fadeInScale .45s both; }
+.slide.active .llm-panel:nth-child(3) { animation-delay:.12s; }
+.slide.active .llm-panel:nth-child(5) { animation-delay:.24s; }
+.slide.active .llm-token { animation:flowPulse 2.5s ease-in-out infinite; }
+.slide.active .llm-token:nth-child(2) { animation-delay:.25s; }
+.slide.active .llm-token:nth-child(3) { animation-delay:.5s; }
+
+.route-board {
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:clamp(18px,2vw,30px);
+  align-items:stretch;
+  margin-top:clamp(16px,2vw,28px);
+}
+.route-output {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+.route-card {
+  min-height:clamp(145px,19vh,210px);
+  border:1px solid var(--border);
+  border-radius:22px;
+  background:rgba(255,255,255,.045);
+  padding:clamp(18px,1.8vw,26px);
+  position:relative;
+  overflow:hidden;
+}
+.route-card::after {
+  content:'';
+  position:absolute;
+  left:18px;
+  right:18px;
+  bottom:16px;
+  height:5px;
+  border-radius:999px;
+  background:linear-gradient(90deg, var(--accent), transparent);
+  opacity:.8;
+}
+.route-icon { font-size:clamp(30px,3vw,52px); margin-bottom:10px; }
+.route-name { color:var(--text); font-size:clamp(21px,1.9vw,32px); font-weight:950; margin-bottom:8px; }
+.route-desc { color:var(--text2); font-size:clamp(15px,1.12vw,20px); line-height:1.45; }
+.route-formula {
+  border:1px solid rgba(103,232,249,.24);
+  border-radius:26px;
+  background:rgba(103,232,249,.055);
+  padding:clamp(24px,2.5vw,38px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:18px;
+}
+.formula-title { color:var(--cyan); font-size:clamp(15px,1.1vw,20px); font-weight:950; letter-spacing:.12em; text-transform:uppercase; }
+.formula-main { color:var(--text); font-size:clamp(34px,3.8vw,66px); line-height:1.06; font-weight:950; letter-spacing:0; }
+.formula-sub { color:var(--text2); font-size:clamp(18px,1.35vw,25px); line-height:1.55; }
+.slide.active .route-card { animation:fadeInUp .4s both; }
+.slide.active .route-card:nth-child(2) { animation-delay:.09s; }
+.slide.active .route-card:nth-child(3) { animation-delay:.18s; }
+.slide.active .route-card:nth-child(4) { animation-delay:.27s; }
+.slide.active .route-formula { animation:fadeInScale .45s .15s both; }
+
+/* ── AI Tool Cards ── */
+.aitool-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:clamp(10px,1.05vw,16px); margin-top:clamp(16px,1.8vw,26px); }
+.aitool-card {
+  min-height:clamp(150px,18.5vh,210px);
+  background:rgba(255,255,255,.045); border:1px solid color-mix(in srgb, var(--ac) 26%, var(--border));
+  border-radius:20px; padding:clamp(16px,1.45vw,22px);
+  position:relative; overflow:hidden; cursor:default;
+  transition:border-color .25s, transform .25s, background .25s, box-shadow .25s;
+  display:flex;
+  flex-direction:column;
+}
+.aitool-card::before {
+  content:''; position:absolute; left:0; right:0; top:0; height:5px;
+  background:linear-gradient(90deg, var(--ac), transparent);
+  pointer-events:none;
+}
+.aitool-card:hover { border-color:color-mix(in srgb, var(--ac) 56%, transparent); background:color-mix(in srgb, var(--ac) 6%, transparent); transform:translateY(-3px); box-shadow:0 0 34px color-mix(in srgb, var(--ac) 18%, transparent); }
+.aitool-icon { font-size:clamp(26px,2.5vw,44px); margin-bottom:10px; line-height:1; }
+.aitool-brand { font-size:clamp(18px,1.45vw,26px); line-height:1.08; font-weight:950; color:var(--ac,var(--text)); margin-bottom:8px; letter-spacing:0; }
+.aitool-tag { display:inline-flex; width:max-content; font-size:clamp(10px,.85vw,13px); font-weight:900; padding:4px 9px; border-radius:100px; background:color-mix(in srgb, var(--ac) 15%, transparent); color:var(--ac,var(--text2)); border:1px solid color-mix(in srgb, var(--ac) 25%, transparent); margin-bottom:10px; letter-spacing:.04em; }
+.aitool-uses { margin-top:auto; font-size:clamp(13px,1vw,17px); color:var(--text2); line-height:1.45; }
+.slide.active .aitool-card:nth-child(1){animation:fadeInScale .35s .05s both}
+.slide.active .aitool-card:nth-child(2){animation:fadeInScale .35s .1s both}
+.slide.active .aitool-card:nth-child(3){animation:fadeInScale .35s .15s both}
+.slide.active .aitool-card:nth-child(4){animation:fadeInScale .35s .2s both}
+.slide.active .aitool-card:nth-child(5){animation:fadeInScale .35s .25s both}
+.slide.active .aitool-card:nth-child(6){animation:fadeInScale .35s .3s both}
+.slide.active .aitool-card:nth-child(7){animation:fadeInScale .35s .35s both}
+.slide.active .aitool-card:nth-child(8){animation:fadeInScale .35s .4s both}
+.slide.active .aitool-card:nth-child(9){animation:fadeInScale .35s .45s both}
+.slide.active .aitool-card:nth-child(10){animation:fadeInScale .35s .5s both}
+
+/* ── AI Tool Quiz ── */
+.aiq-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(12px,1.25vw,18px); }
+.aiq-card {
+  min-height:clamp(156px,19vh,220px);
+  background:rgba(255,255,255,.045); border:1px solid var(--border);
+  border-radius:20px; padding:clamp(18px,1.6vw,24px);
+  cursor:pointer; position:relative; overflow:hidden;
+  transition:border-color .25s, background .25s, transform .2s, box-shadow .25s;
+  display:flex;
+  flex-direction:column;
+}
+.aiq-card::before {
+  content:'';
+  position:absolute;
+  inset:0 0 auto 0;
+  height:5px;
+  background:linear-gradient(90deg, var(--ac2, var(--violet2)), transparent);
+  opacity:.8;
+}
+.aiq-card:hover { transform:translateY(-3px); border-color:rgba(167,139,250,0.36); }
+.aiq-card.revealed { border-color:var(--ac2, var(--emerald)); background:color-mix(in srgb, var(--ac2, var(--emerald)) 8%, transparent); box-shadow:0 0 34px color-mix(in srgb, var(--ac2, var(--emerald)) 18%, transparent); }
+.aiq-mode { color:var(--text3); font-size:clamp(10px,.85vw,13px); font-weight:950; letter-spacing:.12em; text-transform:uppercase; margin-bottom:10px; }
+.aiq-q { font-size:clamp(17px,1.35vw,24px); color:var(--text); font-weight:850; line-height:1.38; margin-bottom:14px; }
+.aiq-reveal { display:none; margin-top:8px; }
+.aiq-card.revealed .aiq-reveal { display:block; animation:fadeInUp .3s both; }
+.aiq-card.revealed .aiq-hint { display:none; }
+.aiq-ans-label { font-size:clamp(10px,.85vw,13px); font-weight:900; color:var(--text3); letter-spacing:.08em; }
+.aiq-ans-name { font-size:clamp(20px,1.65vw,30px); line-height:1.1; font-weight:950; display:block; margin-top:6px; }
+.aiq-hint { margin-top:auto; font-size:clamp(12px,.95vw,15px); color:var(--text3); font-weight:800; }
+.slide.active .aiq-card:nth-child(1){animation:fadeInUp .35s .05s both}
+.slide.active .aiq-card:nth-child(2){animation:fadeInUp .35s .12s both}
+.slide.active .aiq-card:nth-child(3){animation:fadeInUp .35s .19s both}
+.slide.active .aiq-card:nth-child(4){animation:fadeInUp .35s .26s both}
+.slide.active .aiq-card:nth-child(5){animation:fadeInUp .35s .33s both}
+.slide.active .aiq-card:nth-child(6){animation:fadeInUp .35s .40s both}
+
+/* ── Briefing Controls ── */
+.briefing-board {
+  display:grid;
+  grid-template-columns:minmax(360px,1.05fr) minmax(320px,.95fr);
+  gap:clamp(18px,2vw,30px);
+  align-items:stretch;
+  margin-top:clamp(16px,2vw,28px);
+}
+.briefing-controls {
+  border:1px solid var(--border);
+  border-radius:26px;
+  background:rgba(255,255,255,.045);
+  padding:clamp(24px,2.35vw,36px);
+  display:grid;
+  gap:18px;
+}
+.brief-row { display:grid; grid-template-columns:132px 1fr 58px; gap:16px; align-items:center; }
+.brief-label { color:var(--text); font-size:clamp(16px,1.25vw,22px); font-weight:900; }
+.brief-track { height:18px; border-radius:999px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1); overflow:hidden; }
+.brief-fill { height:100%; width:0; border-radius:999px; background:linear-gradient(90deg,var(--violet),var(--cyan)); box-shadow:0 0 22px rgba(103,232,249,.24); transition:width .75s ease; }
+.brief-score { color:var(--cyan); font-size:clamp(18px,1.4vw,26px); font-weight:950; text-align:right; }
+.slide.active .brief-fill { width:var(--w); }
+.brief-result {
+  border:1px solid rgba(52,211,153,.26);
+  border-radius:26px;
+  background:rgba(52,211,153,.055);
+  padding:clamp(26px,2.6vw,42px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+.brief-result::before {
+  content:'';
+  position:absolute;
+  left:0; right:0; top:0; height:6px;
+  background:linear-gradient(90deg,var(--emerald),var(--cyan),transparent);
+}
+.brief-result-kicker { color:var(--emerald); font-size:clamp(13px,1vw,17px); font-weight:950; letter-spacing:.14em; text-transform:uppercase; margin-bottom:16px; }
+.brief-result-title { color:var(--text); font-size:clamp(36px,4.2vw,72px); line-height:1.02; font-weight:950; letter-spacing:0; margin-bottom:18px; }
+.brief-result-desc { color:var(--text2); font-size:clamp(18px,1.35vw,25px); line-height:1.55; }
+.brief-result-bad {
+  margin-top:18px;
+  color:var(--rose);
+  font-size:clamp(14px,1.05vw,18px);
+  font-weight:900;
+}
+.slide.active .briefing-controls { animation:fadeInScale .45s .08s both; }
+.slide.active .brief-result { animation:fadeInScale .45s .22s both; }
+
+/* ── Prompt Compare ── */
+.prompt-compare { display:grid; grid-template-columns:1fr auto 1fr; gap:clamp(10px,1.5vw,20px); align-items:start; }
+.pc-vs { font-size:clamp(16px,1.8vw,26px); font-weight:900; color:var(--text3); text-align:center; padding-top:60px; }
+.pc-col { display:flex; flex-direction:column; gap:8px; }
+.pc-label { font-size:clamp(10px,.9vw,13px); font-weight:800; letter-spacing:.08em; margin-bottom:4px; }
+.pc-bad .pc-label { color:var(--rose); }
+.pc-good .pc-label { color:var(--emerald); }
+.pc-prompt {
+  background:rgba(255,255,255,0.05); border:1px solid var(--border);
+  border-radius:12px; padding:clamp(10px,1.2vw,14px) clamp(12px,1.4vw,16px);
+  font-size:clamp(12px,1vw,15px); color:var(--text); line-height:1.55; font-style:italic;
+}
+.pc-bad .pc-prompt { border-color:rgba(251,113,133,0.25); background:rgba(251,113,133,0.05); }
+.pc-good .pc-prompt { border-color:rgba(52,211,153,0.2); background:rgba(52,211,153,0.04); }
+.pc-arrow { font-size:22px; text-align:center; color:var(--text3); margin:2px 0; }
+.pc-result {
+  border-radius:12px; padding:clamp(10px,1.2vw,14px) clamp(12px,1.4vw,16px);
+  font-size:clamp(11px,.95vw,14px); color:var(--text2); line-height:1.55;
+  border:1px solid var(--border);
+}
+.pc-result-bad { background:rgba(251,113,133,0.08); border-color:rgba(251,113,133,0.2); }
+.pc-result-good { background:rgba(52,211,153,0.08); border-color:rgba(52,211,153,0.2); }
+.pc-note { font-size:10px; font-weight:800; display:block; margin-top:6px; }
+.pc-bad .pc-note { color:var(--rose); }
+.pc-good .pc-note { color:var(--emerald); }
+.slide.active .pc-col { animation:fadeInScale .45s .1s both; }
+.slide.active .pc-vs { animation:fadeInUp .3s .25s both; }
+
+/* Stagger for new slides */
+.slide.active .ai-htl-item:nth-child(1) { animation: fadeInUp .4s .05s both; }
+.slide.active .ai-htl-item:nth-child(2) { animation: fadeInUp .4s .15s both; }
+.slide.active .ai-htl-item:nth-child(3) { animation: fadeInUp .4s .25s both; }
+.slide.active .ai-htl-item:nth-child(4) { animation: fadeInUp .4s .35s both; }
+.slide.active .ai-htl-item:nth-child(5) { animation: fadeInUp .4s .45s both; }
+.slide.active .bva-col { animation: fadeInScale .45s .1s both; }
+.slide.active .bva-arrow { animation: fadeInUp .3s .2s both; }
+.slide.active .bva-row:nth-child(2) { animation: fadeInLeft .35s .2s both; }
+.slide.active .bva-row:nth-child(3) { animation: fadeInLeft .35s .32s both; }
+.slide.active .bva-row:nth-child(4) { animation: fadeInLeft .35s .44s both; }
+.slide.active .bva-row:nth-child(5) { animation: fadeInLeft .35s .56s both; }
+
+.timeline {
+  display: flex; flex-direction: row;
+  gap: 0; margin-top: 32px;
+  align-items: flex-start;
+}
+
+.timeline-item {
+  flex: 1;
+  position: relative;
+  padding: 0 12px;
+  text-align: center;
+}
+
+.timeline-dot {
+  width: 12px; height: 12px;
+  background: var(--violet);
+  border-radius: 50%;
+  margin: 0 auto 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 6px; left: calc(50% + 8px); right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--violet), var(--violet2));
+}
+.timeline-item:last-child .timeline-line { display: none; }
+
+.timeline-year {
+  font-size: clamp(11px, 0.9vw, 14px);
+  font-weight: 700;
+  color: var(--violet2);
+  margin-bottom: 6px;
+}
+
+.timeline-text {
+  font-size: clamp(11px, 0.9vw, 14px);
+  color: var(--text2);
+  line-height: 1.4;
+}
+
+.quote-text {
+  font-size: clamp(24px, 3.5vw, 52px);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+.attribution {
+  font-size: clamp(12px, 1vw, 16px);
+  color: var(--violet2);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.big-no {
+  font-size: clamp(60px, 8vw, 120px);
+  font-weight: 900;
+  color: var(--violet);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.big-card {
+  background: var(--surface);
+  border: 1px solid rgba(167,139,250,0.3);
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-top: 16px;
+  max-width: 800px;
+}
+
+.vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+
+.vs-col {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+}
+.vs-col.bad { border-color: rgba(251,113,133,0.3); background: rgba(251,113,133,0.05); }
+.vs-col.good { border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.05); }
+
+.vs-label {
+  font-size: clamp(11px, 0.9vw, 14px);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 14px;
+}
+.vs-label.bad { color: var(--rose); }
+.vs-label.good { color: var(--emerald); }
+
+.vs-item {
+  font-size: clamp(12px, 1vw, 16px);
+  color: var(--text2);
+  line-height: 1.6;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+}
+.vs-item:last-child { border-bottom: none; }
+
+.checklist { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 15px 18px;
+}
+
+.badge {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.badge-must { background: rgba(251,191,36,0.18); color: var(--amber); border: 1px solid rgba(251,191,36,0.3); }
+.badge-check { background: rgba(52,211,153,0.15); color: var(--emerald); border: 1px solid rgba(52,211,153,0.3); }
+.badge-skip { background: rgba(160,158,192,0.1); color: var(--text3); border: 1px solid var(--border); }
+
+.check-body { font-size: clamp(13px, 1.1vw, 17px); color: var(--text); line-height: 1.5; }
+.check-sub { font-size: clamp(11px, 0.9vw, 14px); color: var(--text2); display: block; margin-top: 4px; }
+
+/* ── INTERACTIVE ── */
+/* 카드 클릭 강조 (수업 중 포인트 강조용) */
+.card[data-hl] { cursor: pointer; user-select: none; }
+.card[data-hl]:hover { border-color: rgba(167,139,250,0.3); background: rgba(167,139,250,0.05); }
+.card[data-hl].lit { border-color: var(--cyan); background: rgba(103,232,249,0.07); box-shadow: 0 0 0 1px rgba(103,232,249,0.2), 0 0 20px rgba(103,232,249,0.08); }
+
+/* 체크리스트 인터랙티브 */
+.check-item[data-check] { cursor: pointer; user-select: none; }
+.check-item[data-check]:hover { background: rgba(255,255,255,0.06); }
+.check-indicator { width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.18); border-radius: 5px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; font-size: 11px; font-weight: 800; color: transparent; }
+.check-item[data-check].done .check-indicator { background: var(--emerald); border-color: var(--emerald); color: #07081A; }
+.check-item[data-check].done .check-body { opacity: 0.5; text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.3); }
+
+/* 퀴즈 reveal */
+.btn-quiz { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; padding: 10px 22px; border: 1px solid var(--violet); border-radius: 999px; background: rgba(167,139,250,0.1); color: var(--violet2); font-size: clamp(13px,1.1vw,16px); font-weight: 700; cursor: pointer; transition: background 0.2s, transform 0.15s; }
+.btn-quiz:hover { background: rgba(167,139,250,0.2); transform: scale(1.03); }
+.btn-quiz.done { border-color: var(--emerald); background: rgba(52,211,153,0.1); color: var(--emerald); }
+.quiz-reveal { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 0.5s ease, opacity 0.4s; margin-top: 0; }
+.quiz-reveal.open { max-height: 300px; opacity: 1; margin-top: 18px; }
+
+/* 프로그레스 바 애니메이션 */
+.progress-fill[data-w] { width: 0; transition: width 1.3s cubic-bezier(0.4,0,0.2,1); }
+
+/* 키보드 힌트 */
+.kb-hint { position: fixed; bottom: 14px; right: 18px; font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 5px; z-index: 50; pointer-events: none; }
+.kb-key { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 20px; border: 1px solid var(--border); border-radius: 4px; background: rgba(255,255,255,0.04); font-size: 10px; color: var(--text2); }
+
+/* ═══════════════════════════════════════
+   ANIMATIONS & VISUAL ENHANCEMENTS
+═══════════════════════════════════════ */
+
+/* Entrance animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Typing cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Float bob */
+@keyframes floatBob {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-12px) rotate(1.5deg); }
+  66%       { transform: translateY(-6px) rotate(-1deg); }
+}
+
+/* Glow pulse */
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 0.9; transform: scale(1.08); }
+}
+
+/* Shimmer sweep */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Counter spin */
+@keyframes countUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+/* Orbit rotate */
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+}
+
+/* Draw line */
+@keyframes drawLine {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+/* Stagger helpers for cards */
+.slide.active .card { animation: fadeInUp 0.5s ease both; }
+.slide.active .card:nth-child(1) { animation-delay: 0.05s; }
+.slide.active .card:nth-child(2) { animation-delay: 0.12s; }
+.slide.active .card:nth-child(3) { animation-delay: 0.19s; }
+.slide.active .card:nth-child(4) { animation-delay: 0.26s; }
+.slide.active .card:nth-child(5) { animation-delay: 0.33s; }
+.slide.active .card:nth-child(6) { animation-delay: 0.40s; }
+.slide.active .card:nth-child(7) { animation-delay: 0.47s; }
+.slide.active .card:nth-child(8) { animation-delay: 0.54s; }
+
+/* Stagger for pipeline steps */
+.slide.active .pipeline-step { animation: fadeInLeft 0.4s ease both; }
+.slide.active .pipeline-step:nth-child(1) { animation-delay: 0.1s; }
+.slide.active .pipeline-step:nth-child(2) { animation-delay: 0.22s; }
+.slide.active .pipeline-step:nth-child(3) { animation-delay: 0.34s; }
+.slide.active .pipeline-step:nth-child(4) { animation-delay: 0.46s; }
+
+/* Stagger for check items */
+.slide.active .check-item { animation: fadeInLeft 0.4s ease both; }
+.slide.active .check-item:nth-child(1) { animation-delay: 0.1s; }
+.slide.active .check-item:nth-child(2) { animation-delay: 0.2s; }
+.slide.active .check-item:nth-child(3) { animation-delay: 0.3s; }
+.slide.active .check-item:nth-child(4) { animation-delay: 0.4s; }
+
+/* Slide headings animate in */
+.slide.active h2 { animation: fadeInUp 0.45s ease both 0.02s; }
+.slide.active .eyebrow { animation: fadeInUp 0.4s ease both; }
+.slide.active .body { animation: fadeInUp 0.45s ease both 0.08s; }
+.slide.active .note { animation: fadeInUp 0.4s ease both 0.15s; }
+
+/* Cover slide elements */
+.slide.active.cover h1 { animation: fadeInUp 0.6s cubic-bezier(0.2,0.8,0.2,1) both 0.1s; }
+.slide.active.cover .subtitle { animation: fadeInUp 0.5s ease both 0.3s; }
+.slide.active.cover .deck-meta { animation: fadeInUp 0.4s ease both; }
+.slide.active.cover .cover-lead { animation: fadeInUp 0.4s ease both 0.08s; }
+
+/* VS grid animate */
+.slide.active .vs-col { animation: fadeInScale 0.5s ease both; }
+.slide.active .vs-col:nth-child(2) { animation-delay: 0.15s; }
+
+/* Timeline dots */
+.slide.active .tl-dot { animation: fadeInScale 0.4s ease both; }
+.slide.active .tl-item:nth-child(1) .tl-dot { animation-delay: 0.1s; }
+.slide.active .tl-item:nth-child(2) .tl-dot { animation-delay: 0.25s; }
+.slide.active .tl-item:nth-child(3) .tl-dot { animation-delay: 0.4s; }
+.slide.active .tl-item:nth-child(4) .tl-dot { animation-delay: 0.55s; }
+
+/* Table rows stagger */
+.slide.active tr { animation: fadeInLeft 0.35s ease both; }
+.slide.active tr:nth-child(1) { animation-delay: 0.05s; }
+.slide.active tr:nth-child(2) { animation-delay: 0.12s; }
+.slide.active tr:nth-child(3) { animation-delay: 0.19s; }
+.slide.active tr:nth-child(4) { animation-delay: 0.26s; }
+.slide.active tr:nth-child(5) { animation-delay: 0.33s; }
+
+/* Shimmer gradient text */
+.shimmer-text {
+  background: linear-gradient(90deg, var(--violet2) 0%, var(--cyan) 25%, var(--violet2) 50%, var(--cyan) 75%, var(--violet2) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Decorative floating orbs (add to cover slides) */
+.deco-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(40px);
+  animation: glowPulse 4s ease-in-out infinite;
+}
+.deco-orb-1 {
+  width: clamp(200px, 30vw, 400px);
+  height: clamp(200px, 30vw, 400px);
+  right: -5%; top: -10%;
+  background: radial-gradient(circle, rgba(167,139,250,0.35) 0%, transparent 70%);
+  animation-delay: 0s;
+}
+.deco-orb-2 {
+  width: clamp(150px, 20vw, 280px);
+  height: clamp(150px, 20vw, 280px);
+  left: 5%; bottom: -5%;
+  background: radial-gradient(circle, rgba(103,232,249,0.25) 0%, transparent 70%);
+  animation-delay: 2s;
+}
+.deco-orb-3 {
+  width: clamp(80px, 12vw, 160px);
+  height: clamp(80px, 12vw, 160px);
+  left: 40%; top: 10%;
+  background: radial-gradient(circle, rgba(251,191,36,0.2) 0%, transparent 70%);
+  animation-delay: 1s;
+}
+
+/* Decorative grid pattern */
+.deco-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(167,139,250,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(167,139,250,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 40%, transparent 100%);
+}
+
+/* Floating particles */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatBob linear infinite;
+}
+
+/* Decorative line accent */
+.deco-line {
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, var(--violet), var(--cyan), transparent);
+  border-radius: 999px;
+  margin: 12px 0;
+}
+.slide.active .deco-line { animation: drawLine 0.8s ease both 0.2s; width: 0; }
+
+/* Big background number (decorative) */
+.deco-bignum {
+  position: absolute;
+  right: -2%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: ui-monospace, monospace;
+  font-size: clamp(120px, 22vw, 320px);
+  font-weight: 900;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(167,139,250,0.08);
+  user-select: none;
+  pointer-events: none;
+  letter-spacing: -0.05em;
+}
+
+/* Typing animation class */
+.type-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--cyan);
+  animation: blink 0.8s step-end infinite;
+}
+.slide.active .type-text {
+  animation: typing 1.5s steps(30, end) both 0.3s, blink 0.8s step-end 1.8s infinite;
+}
+@keyframes typing {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+/* Icon badge on cards */
+.card-icon-lg {
+  font-size: clamp(28px, 3.5vw, 52px);
+  margin-bottom: 12px;
+  display: block;
+  animation: floatBob 3s ease-in-out infinite;
+}
+
+/* Highlight bar on stat items */
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-label { font-size: clamp(13px,1.2vw,18px); color: var(--text2); flex: 1; }
+.stat-value { font-size: clamp(20px,2.5vw,40px); font-weight: 800; font-family: ui-monospace,monospace; }
+.stat-bar { height: 6px; background: var(--border); border-radius: 999px; margin-top: 4px; flex: 2; overflow: hidden; }
+.stat-bar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--violet), var(--cyan)); width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+.slide.active .stat-bar-fill { width: var(--bar-w, 0); }
+
+/* Neon glow on eyebrow when active */
+.slide.active .eyebrow { text-shadow: 0 0 20px rgba(196,181,253,0.4); }
+
+/* Glass morphism card variant */
+.card-glass {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 24px;
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+}
+.card-glass::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+}
+
+/* Number counter display */
+.big-number {
+  font-size: clamp(60px, 10vw, 140px);
+  font-weight: 900;
+  font-family: ui-monospace, monospace;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--violet2), var(--cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.04em;
+}
+
+/* Laptop-fit overrides: keep dense visual slides inside one projector/laptop frame. */
+.slide.fit-laptop {
+  padding: clamp(22px, 2.35vw, 36px) clamp(48px, 5.6vw, 90px);
+  overflow: hidden;
+}
+
+.slide.fit-laptop .eyebrow {
+  margin-bottom: 8px;
+  font-size: clamp(11px, .9vw, 14px);
+}
+
+.slide.fit-laptop h2 {
+  margin-bottom: 12px;
+  font-size: clamp(30px, 3.25vw, 54px);
+  line-height: 1.06;
+}
+
+.slide.fit-laptop .body {
+  max-width: 980px;
+  margin-bottom: 14px;
+  font-size: clamp(16px, 1.25vw, 22px);
+  line-height: 1.45;
+}
+
+.slide.fit-laptop .note {
+  margin-top: 10px;
+  font-size: clamp(11px, .85vw, 14px);
+}
+
+.slide.fit-time .time-compare {
+  grid-template-columns: 1.12fr .88fr;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.slide.fit-time .progress-list {
+  gap: 12px;
+  margin-top: 0;
+}
+
+.slide.fit-time .time-card {
+  min-height: 142px;
+  padding: 18px;
+  border-radius: 18px;
+}
+
+.slide.fit-time .time-chip {
+  min-height: 28px;
+  padding: 0 11px;
+  font-size: clamp(10px, .82vw, 13px);
+}
+
+.slide.fit-time .time-big {
+  margin: 12px 0 6px;
+  font-size: clamp(42px, 5vw, 80px);
+}
+
+.slide.fit-time .time-desc {
+  font-size: clamp(14px, 1vw, 18px);
+  line-height: 1.42;
+}
+
+.slide.fit-time .progress-label {
+  margin-bottom: 6px;
+  font-size: clamp(18px, 1.55vw, 28px);
+}
+
+.slide.fit-time .progress-sub {
+  margin-bottom: 8px;
+  font-size: clamp(13px, 1vw, 17px);
+}
+
+.slide.fit-time .progress-track {
+  height: 18px;
+}
+
+.slide.fit-time .time-flow {
+  gap: 8px;
+  margin-top: 12px !important;
+}
+
+.slide.fit-time .time-flow-step {
+  min-height: 42px;
+  padding: 0 14px;
+  border-radius: 12px;
+  font-size: clamp(12px, .95vw, 16px);
+}
+
+.slide.fit-time .time-flow-step span:last-child {
+  font-size: clamp(10px, .78vw, 13px);
+}
+
+.slide.fit-result .result-showcase {
+  grid-template-columns: minmax(235px, .56fr) minmax(420px, 1.44fr);
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.slide.fit-result .result-menu {
+  gap: 10px;
+}
+
+.slide.fit-result .result-card {
+  min-height: 76px;
+  padding: 12px 14px;
+  border-radius: 14px;
+}
+
+.slide.fit-result .result-card .card-label {
+  margin-bottom: 3px;
+  font-size: clamp(9px, .72vw, 11px);
+}
+
+.slide.fit-result .result-card .card-title {
+  margin-bottom: 3px;
+  font-size: clamp(15px, 1.05vw, 19px);
+}
+
+.slide.fit-result .result-card .card-body {
+  font-size: clamp(11px, .82vw, 14px);
+  line-height: 1.35;
+}
+
+.slide.fit-result .result-card-hint {
+  display: none;
+}
+
+.slide.fit-result .result-stage {
+  min-height: 420px;
+  border-radius: 18px;
+}
+
+.slide.fit-result .result-stage-head {
+  min-height: 42px;
+  padding: 0 16px;
+}
+
+.slide.fit-result .result-stage-title {
+  font-size: clamp(14px, 1.1vw, 20px);
+}
+
+.slide.fit-result .result-stage-badge {
+  font-size: clamp(10px, .78vw, 12px);
+}
+
+.slide.fit-result .result-preview {
+  min-height: 378px;
+  padding: 14px;
+}
+
+.slide.fit-result .pv-browser,
+.slide.fit-result .pv-doc-wrap,
+.slide.fit-result .pv-ppt,
+.slide.fit-result .pv-sns-wrap,
+.slide.fit-result .pv-yt-wrap,
+.slide.fit-result .pv-chat,
+.slide.fit-result .pv-bk,
+.slide.fit-result .pv-comm {
+  min-height: 330px;
+}
+
+.slide.fit-result .pv-paper {
+  padding: 18px 20px;
+}
+
+.slide.fit-result .pv-ppt {
+  grid-template-columns: 54px 1fr;
+  padding: 10px;
+}
+
+.slide.fit-result .pv-ptt {
+  height: 40px;
+}
+
+.slide.fit-result .pv-main-slide {
+  padding: 16px;
+}
+
+.slide.fit-result .pv-phone,
+.slide.fit-result .mock-phone {
+  transform: scale(.88);
+}
+
+.slide.fit-history .ai-htl {
+  margin-top: 10px;
+}
+
+.slide.fit-history .ai-htl::before {
+  top: 8px;
+  bottom: 8px;
+}
+
+.slide.fit-history .ai-htl-item {
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.slide.fit-history .ai-htl-year {
+  min-width: 66px;
+  font-size: clamp(10px, .82vw, 13px);
+}
+
+.slide.fit-history .ai-htl-dot {
+  width: 10px;
+  height: 10px;
+  margin-top: 5px;
+}
+
+.slide.fit-history .ai-htl-card,
+.slide.fit-history .ai-htl-big .ai-htl-card {
+  padding: 9px 12px;
+  border-radius: 10px;
+}
+
+.slide.fit-history .ai-htl-title {
+  margin-bottom: 2px;
+  font-size: clamp(12px, .95vw, 15px);
+}
+
+.slide.fit-history .ai-htl-desc {
+  font-size: clamp(10.5px, .8vw, 13px);
+  line-height: 1.36;
+}
+
+.slide.fit-tools .aitool-grid {
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.slide.fit-tools .aitool-card {
+  min-height: clamp(116px, 14.3vh, 150px);
+  padding: 12px;
+  border-radius: 16px;
+}
+
+.slide.fit-tools .aitool-card::before {
+  height: 4px;
+}
+
+.slide.fit-tools .aitool-icon {
+  margin-bottom: 6px;
+  font-size: clamp(20px, 1.9vw, 32px);
+}
+
+.slide.fit-tools .aitool-brand {
+  margin-bottom: 5px;
+  font-size: clamp(14px, 1.12vw, 20px);
+}
+
+.slide.fit-tools .aitool-tag {
+  margin-bottom: 6px;
+  padding: 3px 7px;
+  font-size: clamp(8px, .68vw, 10px);
+}
+
+.slide.fit-tools .aitool-uses {
+  font-size: clamp(10.5px, .82vw, 13px);
+  line-height: 1.32;
+}
+
+@media (max-height: 760px) {
+  .slide.fit-laptop {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .slide.fit-result .result-stage {
+    min-height: 390px;
+  }
+
+  .slide.fit-result .result-preview {
+    min-height: 348px;
+    padding: 12px;
+  }
+
+  .slide.fit-result .pv-browser,
+  .slide.fit-result .pv-doc-wrap,
+  .slide.fit-result .pv-ppt,
+  .slide.fit-result .pv-sns-wrap,
+  .slide.fit-result .pv-yt-wrap,
+  .slide.fit-result .pv-chat,
+  .slide.fit-result .pv-bk,
+  .slide.fit-result .pv-comm {
+    min-height: 306px;
+  }
+
+  .slide.fit-time .time-card {
+    min-height: 132px;
+    padding: 15px;
+  }
+
+  .slide.fit-tools .aitool-card {
+    min-height: 112px;
+  }
+}
+
+/* ── AI INTERACTIVE DEMO SYSTEM (Slide 09) ───────────────────── */
+.aitool-interactive{display:flex;gap:clamp(8px,1vw,14px);height:clamp(220px,28vw,360px);margin-top:clamp(6px,.8vw,12px);}
+.aitool-btns{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:4px 5px;width:clamp(185px,24vw,295px);flex-shrink:0;}
+.aitool-btn{display:flex;align-items:center;gap:7px;padding:5px 8px;border-radius:9px;border:1.5px solid rgba(255,255,255,.07);background:rgba(255,255,255,.025);cursor:pointer;transition:border-color .18s,background .18s,box-shadow .18s;user-select:none;}
+.aitool-btn:hover{border-color:color-mix(in srgb,var(--ac) 50%,transparent);background:color-mix(in srgb,var(--ac) 10%,transparent);}
+.aitool-btn.active{border-color:color-mix(in srgb,var(--ac) 75%,transparent);background:color-mix(in srgb,var(--ac) 16%,transparent);box-shadow:0 0 10px color-mix(in srgb,var(--ac) 22%,transparent);}
+.atb-icon{font-size:15px;flex-shrink:0;line-height:1;}
+.atb-name{font-size:clamp(9px,.78vw,11px);font-weight:700;color:var(--text);line-height:1.2;}
+.atb-tag{font-size:clamp(7.5px,.65vw,9px);color:var(--text3);margin-top:1px;}
+.aitool-demo-panel{flex:1;background:rgba(255,255,255,.02);border:1.5px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden;position:relative;min-width:0;}
+.demo-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;}
+.demo-ph-arrow{font-size:clamp(22px,3.2vw,38px);animation:phBounce 1.6s ease-in-out infinite;}
+@keyframes phBounce{0%,100%{transform:translateX(0)}50%{transform:translateX(-10px)}}
+.demo-inner{position:absolute;inset:0;padding:11px 13px;overflow:hidden;display:flex;flex-direction:column;gap:6px;animation:demoFadeIn .28s ease both;}
+@keyframes demoFadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.demo-hd{font-size:clamp(9px,.8vw,11px);font-weight:800;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.demo-hd-badge{padding:2px 7px;border-radius:20px;font-size:8.5px;background:color-mix(in srgb,currentColor 16%,transparent);border:1px solid color-mix(in srgb,currentColor 45%,transparent);}
+
+/* chat-style */
+.dc-msg{border-radius:9px;padding:6px 10px;font-size:9.5px;line-height:1.5;}
+.dc-msg.user{align-self:flex-end;margin-left:15%;background:rgba(255,255,255,.07);color:var(--text2);border:1px solid rgba(255,255,255,.1);}
+.dc-msg.ai{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column;gap:3px;}
+.dc-ai-tag{font-size:8.5px;font-weight:800;}
+.dc-ai-line{font-size:9.5px;line-height:1.55;min-height:14px;}
+.dc-stat{display:flex;align-items:center;gap:4px;font-size:8.5px;flex-shrink:0;padding-top:4px;border-top:1px solid rgba(255,255,255,.06);}
+.dc-tag{color:var(--text3);}.dc-val{color:var(--text);font-weight:700;}
+
+/* code editor */
+.dc-code-editor,.di-editor{background:#0d0d1a;border:1px solid rgba(255,255,255,.08);border-radius:9px;overflow:hidden;}
+.dce-tabs,.die-tabs{background:rgba(255,255,255,.04);padding:0 10px;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.07);}
+.dce-tab,.die-tab{font-size:8.5px;padding:5px 8px;color:var(--text3);}
+.dce-tab.active,.die-tab.active{color:var(--text);border-bottom:2px solid var(--violet);}
+.dce-body,.die-body{padding:7px 10px;overflow:hidden;}
+.dce-line,.die-line{font-family:'Courier New',monospace;font-size:9px;line-height:1.75;}
+.die-n{color:var(--text3);margin-right:10px;user-select:none;}
+.dce-kw,.die-kw{color:#C084FC;}.dce-fn{color:#67E8F9;}.dce-str,.die-str{color:#34D399;}.dce-cm,.die-cm{color:#F87171;font-style:italic;}
+.dce-highlight{background:rgba(248,113,113,.15);border-radius:4px;}.die-active{background:rgba(52,211,153,.06);}
+.dc-analysis{background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.2);border-radius:9px;padding:7px 10px;flex-shrink:0;}
+.da-title{font-size:8.5px;font-weight:700;margin-bottom:4px;}
+.da-item{font-size:9.5px;line-height:1.55;min-height:14px;}
+.die-autocomplete{background:#1a1a2e;border:1px solid rgba(52,211,153,.3);border-radius:7px;padding:5px 9px;margin-top:4px;box-shadow:0 4px 16px rgba(0,0,0,.4);}
+.diac-hd{font-size:8px;color:#34D399;font-weight:700;margin-bottom:3px;}
+.diac-code{font-family:'Courier New',monospace;font-size:8.5px;color:#A78BFA;line-height:1.55;}
+
+/* Gemini detection */
+.dg-img{border-radius:9px;border:1px solid rgba(96,165,250,.15);overflow:hidden;position:relative;background:linear-gradient(160deg,#2c3e50 0%,#3498db 40%,#e67e22 70%,#d35400 100%);flex:1.1;}
+.dg-box{position:absolute;border:2px solid;border-color:var(--bc,#60A5FA);border-radius:4px;display:flex;align-items:flex-end;padding:2px;}
+.dg-lbl{font-size:7px;background:rgba(0,0,0,.75);padding:1px 4px;border-radius:3px;color:#fff;white-space:nowrap;}
+.dg-result{flex:1;display:flex;flex-direction:column;justify-content:center;gap:4px;}
+.dg-item{font-size:9.5px;line-height:1.6;min-height:14px;}
+
+/* Veo/Sora video */
+.dv-prompt{display:flex;align-items:center;gap:6px;background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.2);border-radius:8px;padding:5px 9px;font-size:9.5px;flex-shrink:0;}
+.dv-frames{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;}
+.dv-frame{background:var(--fc);border-radius:7px;position:relative;aspect-ratio:16/9;display:flex;align-items:flex-end;padding:3px 5px;border:1px solid rgba(248,113,113,.2);}
+.dv-frame-n{font-size:7.5px;color:rgba(255,255,255,.75);font-weight:700;}
+.dv-meta{display:flex;gap:7px;flex-shrink:0;justify-content:flex-end;}
+.dv-tag{font-size:8.5px;color:var(--text3);background:rgba(255,255,255,.05);padding:2px 7px;border-radius:5px;}
+
+/* Nano Banana image gen */
+.dnb-stages{display:flex;align-items:center;gap:8px;overflow:hidden;}
+.dnb-stage{display:flex;flex-direction:column;align-items:center;gap:5px;}
+.dnb-s-lbl{font-size:8px;color:var(--text3);}
+.dnb-img{width:clamp(52px,6.5vw,78px);aspect-ratio:1;border-radius:8px;border:1px solid rgba(255,255,255,.1);}
+.dnb-orig{background:linear-gradient(135deg,#2d3436,#636e72);}
+.dnb-blur{background:linear-gradient(135deg,#fd79a8,#e84393);filter:blur(6px);animation:dnbProcess .8s .6s forwards;}
+@keyframes dnbProcess{to{filter:blur(0);background:linear-gradient(135deg,#a29bfe,#6c5ce7);}}
+.dnb-final{background:linear-gradient(135deg,#e17055,#d63031);animation:dnbReveal .5s 1.2s both;}
+@keyframes dnbReveal{from{opacity:0;transform:scale(0.85)}to{opacity:1;transform:scale(1)}}
+.dnb-arrow{font-size:14px;color:var(--text3);}
+.dnb-info{display:flex;flex-direction:column;gap:6px;justify-content:center;}
+.dnb-prompt{font-size:9.5px;min-height:14px;}
+.dnb-tag{font-size:9.5px;font-weight:700;}
+
+/* NotebookLM */
+.dnlm-src{display:flex;align-items:center;gap:9px;background:rgba(251,146,60,.07);border:1px solid rgba(251,146,60,.2);border-radius:8px;padding:7px 10px;flex-shrink:0;}
+.dnlm-pdf{font-size:22px;}
+.dnlm-chat{display:flex;flex-direction:column;gap:5px;overflow:hidden;}
+.dnlm-q{background:rgba(255,255,255,.07);border-radius:8px 8px 2px 8px;padding:5px 9px;font-size:9.5px;align-self:flex-end;color:var(--text2);max-width:90%;}
+.dnlm-a{background:rgba(251,146,60,.05);border:1px solid rgba(251,146,60,.15);border-radius:2px 8px 8px 8px;padding:7px 10px;font-size:9.5px;line-height:1.55;display:flex;flex-direction:column;gap:2px;}
+
+/* Manus/n8n */
+.dmn-flow{display:flex;flex-direction:column;gap:2px;justify-content:center;}
+.dmn-node{background:color-mix(in srgb,var(--nc) 15%,transparent);border:1.5px solid color-mix(in srgb,var(--nc) 45%,transparent);border-radius:8px;padding:5px 9px;font-size:9.5px;font-weight:600;color:var(--nc);}
+.dmn-arrow{font-size:12px;color:var(--text3);text-align:center;line-height:1.3;}
+.dmn-char{background:rgba(192,132,252,.06);border:1px solid rgba(192,132,252,.2);border-radius:9px;padding:8px;display:flex;flex-direction:column;align-items:center;}
+.dmn-char-img{position:relative;width:50px;height:60px;margin-bottom:4px;flex-shrink:0;}
+.dmn-char-face{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#fdcb6e,#e17055);position:absolute;top:0;left:50%;transform:translateX(-50%);border:2px solid rgba(255,255,255,.3);}
+.dmn-char-body{width:36px;height:26px;border-radius:7px 7px 0 0;background:linear-gradient(135deg,#a29bfe,#6c5ce7);position:absolute;bottom:0;left:50%;transform:translateX(-50%);}
+
+/* Perplexity/Grok */
+.dpx-query{display:flex;align-items:center;gap:6px;background:rgba(34,211,238,.07);border:1px solid rgba(34,211,238,.2);border-radius:8px;padding:5px 10px;font-size:9.5px;flex-shrink:0;}
+.dpx-src-lbl{font-size:8.5px;color:var(--text3);margin-bottom:4px;}
+.dpx-src-chips{display:flex;gap:5px;flex-wrap:wrap;}
+.dpx-chip{font-size:8px;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25);border-radius:5px;padding:2px 6px;color:#22D3EE;}
+.dpx-ans{overflow:hidden;}
+.dpx-ans-hd{font-size:8.5px;font-weight:700;margin-bottom:4px;}
+
+/* Kiro/Antigravity */
+.dkiro-wrap{display:flex;gap:8px;overflow:hidden;}
+.dkiro-spec{flex:1.2;background:#0d0d1a;border:1px solid rgba(139,92,246,.2);border-radius:9px;padding:8px 10px;overflow:hidden;}
+.dkiro-spec-hd{font-size:8.5px;font-weight:700;color:#8B5CF6;margin-bottom:5px;}
+.dkiro-spec-line{font-family:'Courier New',monospace;font-size:8.5px;color:var(--text2);line-height:1.7;min-height:14px;}
+.dkiro-tasks{flex:1;background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.2);border-radius:9px;padding:8px 10px;overflow:hidden;}
+.dkiro-tasks-hd{font-size:8.5px;font-weight:700;color:#8B5CF6;margin-bottom:5px;}
+.dkiro-task{font-size:9px;padding:3px 0;line-height:1.5;}
+.dkiro-done{color:#34D399;}.dkiro-run{color:#FBBF24;animation:pulse 1s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* ── UPGRADED DEMO ANIMATIONS & COMPONENTS ────────────────────── */
+/* shared */
+@keyframes scanLine{0%{top:-3%}100%{top:106%}}
+@keyframes videoFill{from{width:0}to{width:72%}}
+@keyframes glowBeat{0%,100%{opacity:.65;transform:scale(1)}50%{opacity:1;transform:scale(1.04)}}
+@keyframes nodeAppear{from{opacity:0;transform:scale(.75) translateY(5px)}to{opacity:1;transform:none}}
+@keyframes pixelBlur{0%{filter:blur(14px) saturate(3)}60%{filter:blur(3px) saturate(1.3)}100%{filter:blur(0) saturate(1)}}
+@keyframes photoReveal{to{opacity:1}}
+@keyframes barGrow{from{width:0}to{width:var(--w,80%)}}
+@keyframes connGrow{from{height:0;opacity:0}to{height:14px;opacity:1}}
+@keyframes nlmWave{0%{height:3px}100%{height:var(--wh,12px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* GPT */
+.gpt-ui{display:flex;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.09);}
+.gpt-sidebar{width:86px;background:#0f0f0f;padding:6px 5px;display:flex;flex-direction:column;gap:3px;border-right:1px solid rgba(255,255,255,.07);flex-shrink:0;}
+.gpt-sb-new{font-size:8px;padding:4px 6px;border:1px solid rgba(255,255,255,.14);border-radius:6px;color:var(--text2);text-align:center;margin-bottom:2px;}
+.gpt-sb-item{font-size:7.5px;padding:4px 6px;border-radius:5px;color:var(--text3);line-height:1.3;cursor:pointer;}
+.gpt-sb-item.on{background:rgba(255,255,255,.09);color:var(--text);}
+.gpt-chat{flex:1;background:#212121;padding:7px 10px;display:flex;flex-direction:column;gap:6px;overflow:hidden;}
+.gpt-msg-u{background:rgba(255,255,255,.09);color:var(--text2);font-size:8.5px;padding:5px 9px;border-radius:9px;align-self:flex-end;max-width:82%;}
+.gpt-msg-a{display:flex;gap:8px;align-items:flex-start;flex:1;overflow:hidden;}
+.gpt-logo{width:22px;height:22px;border-radius:50%;background:#19c37d;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:11px;color:#fff;flex-shrink:0;margin-top:1px;}
+.gpt-resp{flex:1;font-size:9.5px;line-height:1.65;color:var(--text);overflow:hidden;}
+.gpt-rl{min-height:14px;margin-bottom:2px;}
+.gpt-badge{background:rgba(251,191,36,.18);border:1px solid rgba(251,191,36,.3);color:#FBBF24;border-radius:4px;padding:1px 5px;font-size:7.5px;font-weight:700;vertical-align:middle;}
+.gpt-foot{display:flex;align-items:center;gap:5px;font-size:8px;flex-shrink:0;padding-top:4px;border-top:1px solid rgba(255,255,255,.06);}
+
+/* Claude */
+.claude-split{display:flex;gap:7px;}
+.claude-editor{flex:1.65;background:#0d0d1a;border:1px solid rgba(167,139,250,.18);border-radius:9px;overflow:hidden;display:flex;flex-direction:column;}
+.ce-bar{background:rgba(255,255,255,.04);padding:0 8px;display:flex;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0;}
+.ce-tab{font-size:8px;padding:5px 9px;color:var(--text3);}
+.ce-tab.on{color:#A78BFA;border-bottom:2px solid #A78BFA;background:rgba(167,139,250,.06);}
+.ce-code{padding:7px 10px;overflow:hidden;flex:1;}
+.ce-line{font-family:'Courier New',monospace;font-size:9px;line-height:1.78;display:flex;gap:7px;}
+.ce-n{color:rgba(255,255,255,.2);min-width:12px;text-align:right;user-select:none;}
+.ce-kw{color:#C084FC;}.ce-fn{color:#67E8F9;}.ce-str{color:#34D399;}.ce-cm{color:#64748b;font-style:italic;}
+.ce-err{background:rgba(248,113,113,.1);border-left:3px solid #F87171;padding-left:4px;}
+.claude-side{flex:1;display:flex;flex-direction:column;gap:5px;overflow:hidden;}
+.cs-hd{font-size:8px;font-weight:800;color:#A78BFA;letter-spacing:.05em;padding-bottom:4px;border-bottom:1px solid rgba(167,139,250,.15);}
+.cs-warn{background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.25);border-radius:8px;padding:6px 8px;font-size:8.5px;line-height:1.5;}
+.cs-warn b{color:#F87171;}
+.cs-fix{background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.25);border-radius:8px;padding:6px 8px;font-size:8px;color:#34D399;font-family:'Courier New',monospace;line-height:1.55;}
+.cs-fix-lbl{font-size:7.5px;color:rgba(52,211,153,.65);margin-bottom:3px;font-family:inherit;}
+
+/* Gemini */
+.gem-layout{display:flex;gap:8px;}
+.gem-photo{flex:1.3;border-radius:10px;overflow:hidden;position:relative;background:linear-gradient(155deg,#1e3a5f 0%,#2563eb 28%,#d97706 58%,#991b1b 100%);border:1px solid rgba(96,165,250,.22);min-height:0;}
+.gem-scan{position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent 0%,rgba(96,165,250,.85) 50%,transparent 100%);animation:scanLine 1.8s linear infinite;z-index:2;}
+.gem-box{position:absolute;border:2.5px solid;border-radius:4px;}
+.gem-box-lbl{position:absolute;bottom:-17px;left:0;font-size:7px;background:rgba(0,0,0,.88);padding:1px 5px;border-radius:3px;color:#fff;white-space:nowrap;}
+.gem-rows{flex:1;display:flex;flex-direction:column;gap:5px;overflow:hidden;}
+.gem-hd{font-size:8px;font-weight:800;color:#60A5FA;letter-spacing:.05em;margin-bottom:1px;}
+.gem-row{background:rgba(96,165,250,.05);border:1px solid rgba(96,165,250,.14);border-radius:7px;padding:5px 8px;}
+.gem-row-top{display:flex;align-items:center;margin-bottom:3px;}
+.gem-lbl{font-size:9px;font-weight:600;flex:1;}.gem-pct{font-size:9px;font-weight:800;color:#60A5FA;}
+.gem-track{height:5px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;}
+.gem-fill{height:100%;background:linear-gradient(90deg,#60A5FA,#93C5FD);border-radius:99px;width:0;animation:barGrow .9s ease forwards;}
+.gem-sync{font-size:8px;color:#34D399;background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.2);border-radius:6px;padding:4px 8px;text-align:center;margin-top:auto;}
+
+/* Veo */
+.veo-wrap{display:flex;flex-direction:column;gap:6px;}
+.veo-prompt-bar{font-size:8.5px;color:var(--text2);background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.2);border-radius:8px;padding:6px 10px;flex-shrink:0;}
+.veo-player{border-radius:10px;overflow:hidden;border:1px solid rgba(248,113,113,.25);display:flex;flex-direction:column;flex:1;min-height:0;}
+.veo-screen{flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:1px;background:#000;min-height:0;}
+.veo-frame-inner{width:100%;height:100%;}
+.veo-ctrl{background:#0a0a0a;padding:5px 10px;display:flex;align-items:center;gap:7px;flex-shrink:0;}
+.veo-play-btn{font-size:12px;color:#F87171;flex-shrink:0;}
+.veo-track{flex:1;height:4px;background:rgba(255,255,255,.12);border-radius:99px;overflow:hidden;}
+.veo-prog{height:100%;background:linear-gradient(90deg,#F87171,#FB923C);width:0;animation:videoFill 3s .4s ease forwards;}
+.veo-time{font-size:8px;color:var(--text3);}
+.veo-badges{display:flex;gap:5px;flex-shrink:0;}
+.veo-badge{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.25);border-radius:5px;padding:2px 8px;font-size:8px;color:#F87171;font-weight:700;}
+
+/* Cursor/Windsurf IDE */
+.ide-wrap{display:flex;border-radius:9px;overflow:hidden;border:1px solid rgba(52,211,153,.15);background:#0d1117;}
+.ide-tree{width:76px;background:#010409;padding:5px 4px;display:flex;flex-direction:column;gap:1px;border-right:1px solid rgba(255,255,255,.06);flex-shrink:0;}
+.ide-tree-h{font-size:7px;color:var(--text3);padding:3px 5px;letter-spacing:.08em;text-transform:uppercase;}
+.ide-tf{font-size:8px;padding:3px 5px;border-radius:3px;color:var(--text3);display:flex;align-items:center;gap:3px;}
+.ide-tf.on{background:rgba(52,211,153,.09);color:#34D399;}
+.ide-main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.ide-tabrow{background:#010409;padding:0 6px;display:flex;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0;}
+.ide-tabl{font-size:8px;padding:4px 8px;color:var(--text3);}
+.ide-tabl.on{color:#34D399;border-bottom:2px solid #34D399;background:rgba(52,211,153,.04);}
+.ide-body{padding:6px 10px;overflow:hidden;flex:1;}
+.ide-ln{font-family:'Courier New',monospace;font-size:8.5px;line-height:1.78;display:flex;gap:8px;}
+.ide-lnum{color:rgba(255,255,255,.18);min-width:12px;text-align:right;user-select:none;}
+.ide-kw{color:#FF7B72;}.ide-fn{color:#D2A8FF;}.ide-str{color:#A5D6FF;}.ide-op{color:#79C0FF;}
+.ide-ghost{color:rgba(52,211,153,.4);font-style:italic;}
+.ide-autocomplete{background:#1c2128;border:1px solid rgba(52,211,153,.35);border-radius:7px;padding:5px 9px;margin:2px 0 0 20px;box-shadow:0 6px 24px rgba(0,0,0,.6);}
+.iac-hd{font-size:7.5px;color:#34D399;font-weight:700;margin-bottom:3px;}
+.iac-line{font-family:'Courier New',monospace;font-size:8.5px;color:#A5D6FF;line-height:1.6;min-height:13px;}
+.ide-foot{display:flex;align-items:center;gap:6px;font-size:8px;color:var(--text3);flex-shrink:0;padding:4px 10px;border-top:1px solid rgba(255,255,255,.06);background:#010409;}
+.ide-foot b{color:#34D399;}
+
+/* Nano Banana */
+.nb-layout{display:flex;gap:10px;align-items:center;}
+.nb-canvas{flex:1.1;border-radius:10px;overflow:hidden;position:relative;border:1px solid rgba(244,114,182,.25);aspect-ratio:1/1;max-height:100%;background:#111;}
+.nb-noise{position:absolute;inset:0;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);animation:pixelBlur 2s .2s forwards;}
+.nb-result{position:absolute;inset:0;opacity:0;animation:photoReveal .7s 1.8s forwards;}
+.nb-gradient{width:100%;height:100%;background:linear-gradient(145deg,#c0392b 0%,#e74c3c 18%,#fd79a8 38%,#6c5ce7 62%,#00b894 82%,#fdcb6e 100%);}
+.nb-person{position:absolute;bottom:12%;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;}
+.nb-head{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#fdcb6e,#e17055);border:2px solid rgba(255,255,255,.4);}
+.nb-body{width:28px;height:18px;border-radius:5px 5px 0 0;background:linear-gradient(135deg,#a29bfe,#6c5ce7);}
+.nb-caption{position:absolute;bottom:5px;left:50%;transform:translateX(-50%);font-size:7px;background:rgba(0,0,0,.8);color:#fff;padding:2px 6px;border-radius:4px;white-space:nowrap;opacity:0;animation:photoReveal .4s 2.3s forwards;}
+.nb-pbar{position:absolute;top:8px;left:8px;right:8px;height:3px;background:rgba(0,0,0,.5);border-radius:99px;overflow:hidden;}
+.nb-pfill{height:100%;background:#F472B6;width:0;animation:barGrow 2s .2s ease forwards;--w:100%;}
+.nb-info{flex:1;display:flex;flex-direction:column;gap:7px;justify-content:center;}
+.nb-pbox{background:rgba(244,114,182,.07);border:1px solid rgba(244,114,182,.2);border-radius:9px;padding:8px 10px;}
+.nb-plbl{font-size:7.5px;color:var(--text3);margin-bottom:3px;text-transform:uppercase;letter-spacing:.05em;}
+.nb-ptxt{font-size:9.5px;line-height:1.5;min-height:14px;}
+.nb-steps{display:flex;flex-direction:column;gap:5px;}
+.nb-step{display:flex;align-items:center;gap:7px;font-size:8.5px;}
+.nb-sd{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;}
+.nb-sd.done{background:rgba(52,211,153,.2);border:1.5px solid #34D399;color:#34D399;}
+.nb-sd.run{background:rgba(244,114,182,.2);border:1.5px solid #F472B6;color:#F472B6;animation:glowBeat .9s ease-in-out infinite;}
+
+/* NotebookLM */
+.nlm-layout{display:flex;gap:7px;}
+.nlm-doc{flex:1;background:#0d1117;border:1px solid rgba(251,146,60,.18);border-radius:9px;overflow:hidden;display:flex;flex-direction:column;}
+.nlm-doc-bar{background:rgba(251,146,60,.08);padding:5px 9px;display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(251,146,60,.14);flex-shrink:0;}
+.nlm-doc-title{font-size:8.5px;font-weight:700;}
+.nlm-doc-pg{font-size:8px;color:var(--text3);margin-left:auto;}
+.nlm-doc-body{flex:1;padding:8px;display:flex;flex-direction:column;gap:3px;overflow:hidden;}
+.nlm-ln{height:7px;border-radius:3px;background:rgba(255,255,255,.07);}
+.nlm-ln.hl{background:rgba(251,146,60,.38);animation:glowBeat 1.4s ease-in-out infinite;}
+.nlm-qa{flex:1;display:flex;flex-direction:column;gap:5px;overflow:hidden;}
+.nlm-q{background:rgba(255,255,255,.07);border-radius:8px 8px 2px 8px;padding:5px 9px;font-size:9px;align-self:flex-end;color:var(--text2);max-width:95%;}
+.nlm-a{background:rgba(251,146,60,.05);border:1px solid rgba(251,146,60,.15);border-radius:2px 8px 8px 8px;padding:7px 9px;font-size:9px;line-height:1.55;flex:1;display:flex;flex-direction:column;gap:2px;}
+.nlm-a-hd{color:#FB923C;font-size:8px;font-weight:800;margin-bottom:1px;}
+.nlm-al{min-height:13px;}
+.nlm-audio{background:rgba(251,146,60,.07);border:1px solid rgba(251,146,60,.2);border-radius:8px;padding:5px 9px;display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.nlm-play{width:20px;height:20px;border-radius:50%;background:#FB923C;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;}
+.nlm-wave{flex:1;display:flex;align-items:center;gap:2px;height:20px;}
+.nlm-wbar{width:3px;background:rgba(251,146,60,.7);border-radius:99px;animation:nlmWave .5s ease-in-out infinite alternate;}
+
+/* Manus/n8n */
+.mn-layout{display:flex;gap:8px;}
+.mn-flow{flex:1.4;background:#09090f;border:1px solid rgba(192,132,252,.18);border-radius:10px;padding:8px;display:flex;flex-direction:column;gap:0;overflow:hidden;}
+.mn-flow-hd{font-size:7.5px;color:var(--text3);margin-bottom:5px;letter-spacing:.06em;text-transform:uppercase;}
+.mn-node{border-radius:8px;padding:5px 9px;font-size:8.5px;font-weight:700;border:1.5px solid;display:flex;align-items:center;gap:5px;animation:nodeAppear .35s ease both;}
+.mn-conn{display:flex;justify-content:center;}
+.mn-cline{width:2px;background:rgba(255,255,255,.14);border-radius:99px;animation:connGrow .3s ease both;}
+.mn-nbadge{font-size:7px;margin-left:auto;padding:1px 5px;border-radius:4px;font-weight:700;}
+.mn-char{flex:1;background:rgba(192,132,252,.04);border:1px solid rgba(192,132,252,.2);border-radius:10px;padding:9px;display:flex;flex-direction:column;align-items:center;overflow:hidden;}
+.mn-char-hd{font-size:7.5px;color:var(--text3);margin-bottom:6px;align-self:flex-start;letter-spacing:.05em;text-transform:uppercase;}
+.mn-char-fig{width:56px;height:70px;position:relative;margin:0 auto 8px;}
+.mn-char-hair{width:36px;height:14px;background:#2d1b69;position:absolute;top:-3px;left:50%;transform:translateX(-50%);border-radius:50% 50% 0 0;}
+.mn-char-face{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#fdcb6e,#e17055);position:absolute;top:6px;left:50%;transform:translateX(-50%);border:3px solid rgba(255,255,255,.35);box-shadow:0 0 14px rgba(253,203,110,.3);}
+.mn-char-body{width:42px;height:28px;border-radius:8px 8px 0 0;background:linear-gradient(135deg,#a29bfe,#6c5ce7);position:absolute;bottom:0;left:50%;transform:translateX(-50%);box-shadow:0 0 10px rgba(162,155,254,.2);}
+.mn-char-name{font-size:11px;font-weight:800;color:#C084FC;}
+.mn-char-tag{font-size:8px;color:var(--text3);margin-top:2px;}
+
+/* Perplexity */
+.px-layout{display:flex;flex-direction:column;gap:5px;}
+.px-bar{display:flex;align-items:center;gap:7px;background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.28);border-radius:10px;padding:6px 10px;flex-shrink:0;}
+.px-icon{font-size:14px;flex-shrink:0;}
+.px-qtext{font-size:9.5px;flex:1;min-height:14px;}
+.px-sources{display:flex;gap:5px;flex-wrap:wrap;flex-shrink:0;}
+.px-src{display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:6px;padding:3px 8px;font-size:8px;color:var(--text2);}
+.px-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.px-answer{flex:1;background:rgba(34,211,238,.04);border:1px solid rgba(34,211,238,.14);border-radius:10px;padding:8px 10px;overflow:hidden;display:flex;flex-direction:column;gap:3px;}
+.px-ans-hd{font-size:8px;font-weight:800;color:#22D3EE;margin-bottom:2px;}
+.px-aline{font-size:9.5px;line-height:1.55;min-height:14px;}
+.px-cite{font-size:7.5px;color:var(--text3);padding-top:4px;border-top:1px solid rgba(255,255,255,.06);}
+
+/* Kiro */
+.kiro-layout{display:flex;gap:7px;}
+.kiro-term{flex:1.2;background:#0d0d0d;border:1px solid rgba(139,92,246,.22);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;}
+.kiro-term-bar{background:#1a1a1a;padding:5px 9px;display:flex;align-items:center;gap:5px;border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0;}
+.kiro-dots{display:flex;gap:4px;}
+.kiro-dot{width:9px;height:9px;border-radius:50%;}
+.kiro-term-title{font-size:8px;color:var(--text3);margin:0 auto;}
+.kiro-term-body{flex:1;padding:7px 9px;overflow:hidden;display:flex;flex-direction:column;gap:2px;}
+.kiro-tl{font-family:'Courier New',monospace;font-size:8.5px;line-height:1.65;min-height:13px;}
+.kiro-pr{color:#8B5CF6;font-weight:700;}.kiro-cm{color:var(--text);}.kiro-ok{color:#34D399;}.kiro-out{color:var(--text3);}
+.kiro-spin{display:inline-block;color:#FBBF24;animation:spin .8s linear infinite;}
+.kiro-spec{flex:1;background:rgba(139,92,246,.04);border:1px solid rgba(139,92,246,.18);border-radius:10px;padding:9px;overflow:hidden;display:flex;flex-direction:column;gap:3px;}
+.kiro-spec-hd{font-size:8px;font-weight:800;color:#8B5CF6;letter-spacing:.05em;margin-bottom:2px;}
+.kiro-md-h{font-size:11px;font-weight:800;color:var(--text);min-height:14px;}
+.kiro-md{font-family:'Courier New',monospace;font-size:8.5px;color:var(--text2);line-height:1.7;min-height:13px;}
+.kiro-tasks{padding-top:5px;border-top:1px solid rgba(139,92,246,.15);margin-top:2px;}
+.kiro-tasks-hd{font-size:7.5px;font-weight:700;color:#8B5CF6;margin-bottom:3px;text-transform:uppercase;letter-spacing:.05em;}
+.kiro-task{font-size:8.5px;padding:2px 0;display:flex;align-items:center;gap:5px;}
+.kiro-t-done{color:#34D399;}.kiro-t-run{color:#FBBF24;animation:pulse 1s ease-in-out infinite;}
+
+/* ══════════════════════════════════════════
+   HIGH-QUALITY ANIMATION UPGRADE v2
+══════════════════════════════════════════ */
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes flowDown{0%{top:0;opacity:0}15%{opacity:1}85%{opacity:1}100%{top:calc(100% + 6px);opacity:0}}
+@keyframes sweepV{0%{top:-50%}100%{top:140%}}
+@keyframes shimmer{0%{transform:translateX(-250%)}100%{transform:translateX(350%)}}
+
+/* GPT: streaming cursor + token shimmer bar */
+.gpt-cursor-blink{display:inline-block;width:7px;height:12px;background:#19c37d;border-radius:1px;animation:blink .8s infinite;vertical-align:middle;margin-left:2px;}
+.gpt-token-bar-outer{width:55px;height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;margin:0 4px;flex-shrink:0;}
+.gpt-token-bar-fill{height:100%;width:100%;background:linear-gradient(90deg,rgba(25,195,125,0) 0%,rgba(25,195,125,.9) 50%,rgba(25,195,125,0) 100%);animation:shimmer 2s linear infinite;}
+
+/* Gemini: corner bracket detection markers */
+.gem-box-cv{position:absolute;animation:nodeAppear .4s ease both;}
+.gem-box-cv-inner{position:absolute;inset:0;border:1.5px solid;border-color:var(--gc,#fff);border-radius:2px;opacity:.4;}
+.gem-c{position:absolute;width:11px;height:11px;border-style:solid;border-color:var(--gc,#fff);}
+.gem-c.tl{top:-1.5px;left:-1.5px;border-width:2.5px 0 0 2.5px;}
+.gem-c.tr{top:-1.5px;right:-1.5px;border-width:2.5px 2.5px 0 0;}
+.gem-c.bl{bottom:-1.5px;left:-1.5px;border-width:0 0 2.5px 2.5px;}
+.gem-c.br{bottom:-1.5px;right:-1.5px;border-width:0 2.5px 2.5px 0;}
+.gem-cv-lbl{position:absolute;bottom:-17px;left:0;background:rgba(0,0,0,.85);border:1px solid;border-color:var(--gc,#fff);border-radius:3px;padding:1.5px 5px;font-size:7px;color:#fff;white-space:nowrap;font-weight:700;}
+
+/* Veo: cinematic scanline overlay */
+.veo-scanline-ovl{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:4;border-radius:inherit;}
+.veo-scanline-beam{position:absolute;left:0;right:0;height:40%;background:linear-gradient(180deg,transparent 0%,rgba(255,255,255,.055) 50%,transparent 100%);animation:sweepV 2.4s linear infinite;}
+.veo-framenum{position:absolute;top:3px;right:3px;font-size:5.5px;font-family:monospace;color:rgba(255,255,255,.45);background:rgba(0,0,0,.5);padding:1px 3px;border-radius:2px;z-index:5;}
+
+/* Manus: animated flow dots along connectors */
+.mn-fdot{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--dc,#C084FC);left:calc(50% - 3.5px);top:0;animation:flowDown 1.6s ease-in-out infinite;box-shadow:0 0 8px var(--dc),0 0 16px var(--dc);}
+.mn-fdot.d2{animation-delay:.8s;}
+.mn-conn{position:relative;overflow:visible;}
+
+/* Cursor: AI chat panel */
+.ide-with-chat{display:flex;gap:6px;flex:1;}
+.cursor-cpanel{width:105px;flex-shrink:0;background:#010409;border:1px solid rgba(52,211,153,.18);border-radius:8px;display:flex;flex-direction:column;overflow:hidden;}
+.ccp-bar{background:#0d1117;padding:5px 7px;font-size:7.5px;font-weight:700;color:#34D399;border-bottom:1px solid rgba(52,211,153,.1);display:flex;align-items:center;gap:4px;flex-shrink:0;}
+.ccp-body{flex:1;padding:5px;display:flex;flex-direction:column;gap:4px;overflow:hidden;}
+.ccp-u{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.15);border-radius:5px;padding:3px 5px;font-size:7px;}
+.ccp-ai{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:5px;padding:4px 5px;flex:1;display:flex;flex-direction:column;gap:1px;overflow:hidden;}
+.ccp-ai-hd{font-size:6.5px;font-weight:700;color:#34D399;margin-bottom:3px;}
+.ccp-dline{font-family:monospace;font-size:6.5px;line-height:1.65;}
+.ccp-add{color:#34D399;}.ccp-rem{color:#F87171;text-decoration:line-through;opacity:.55;}
+.ccp-foot{display:flex;gap:2px;padding:4px 5px;border-top:1px solid rgba(255,255,255,.06);flex-shrink:0;}
+.ccp-fbtn{flex:1;text-align:center;padding:2.5px;border-radius:3px;font-size:7px;font-weight:700;}
+.ccp-fbtn.ok{background:rgba(52,211,153,.15);border:1px solid rgba(52,211,153,.3);color:#34D399;}
+.ccp-fbtn.no{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.25);color:#F87171;}
+
+/* Perplexity: "thinking" animated dots */
+.px-thinking{display:flex;align-items:center;gap:4px;font-size:8px;color:#22D3EE;margin-bottom:4px;}
+.px-td{width:4px;height:4px;border-radius:50%;background:#22D3EE;animation:pulse .85s ease-in-out infinite;}
+.px-td:nth-child(2){animation-delay:.22s}.px-td:nth-child(3){animation-delay:.44s}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="nav-bar">
+    <span class="nav-title">바이브코딩 2기 · 1회차</span>
+    <div class="nav-controls">
+      <button class="nav-btn" id="btn-prev" onclick="move(-1)">←</button>
+      <span id="counter">1 / 19</span>
+      <button class="nav-btn" id="btn-next" onclick="move(1)">→</button>
+    </div>
+  </nav>
+
+  <div class="deck">
+
+    <!-- 01: COVER -->
+    <div class="slide cover active">
+      <div class="deco-grid"></div>
+      <div class="deco-orb deco-orb-1"></div>
+      <div class="deco-orb deco-orb-2"></div>
+      <div class="particle" style="width:6px;height:6px;background:rgba(167,139,250,0.6);left:15%;top:30%;animation-duration:5s;animation-delay:0s;"></div>
+      <div class="particle" style="width:4px;height:4px;background:rgba(103,232,249,0.5);left:25%;top:60%;animation-duration:7s;animation-delay:1s;"></div>
+      <div class="particle" style="width:5px;height:5px;background:rgba(251,191,36,0.4);left:70%;top:25%;animation-duration:6s;animation-delay:2s;"></div>
+      <div class="particle" style="width:3px;height:3px;background:rgba(167,139,250,0.7);left:80%;top:70%;animation-duration:8s;animation-delay:0.5s;"></div>
+      <div class="particle" style="width:6px;height:6px;background:rgba(103,232,249,0.4);left:50%;top:80%;animation-duration:5.5s;animation-delay:1.5s;"></div>
+      <div class="deck-meta">바이브코딩 모임 2기 · 1회차</div>
+      <h1 class="grad-text">AI는 도구다</h1>
+      <p class="subtitle">디자이너, 개발자, 그 어떤 직군이든 — AI는 이미 우리 곁에 빽빽하게 들어와 있는 도구입니다.</p>
+      <div class="meta-row">주엉쓰 황주영 · Blankory</div>
+    </div>
+
+    <!-- 02: 기초반 커리큘럼 -->
+    <div class="slide">
+      <div class="eyebrow">BASIC COURSE ROADMAP</div>
+      <h2>기초반은 총 6강, 6주 과정입니다.</h2>
+      <p class="body">저희 강의는 AI를 이해하는 것에서 시작해, 각자의 아이디어를 프로그램으로 만들고 발표하는 흐름으로 진행됩니다.</p>
+      <div class="curriculum-grid">
+        <div class="card curriculum-card">
+          <div class="card-label">1회차</div>
+          <div class="card-title">AI 이해하기</div>
+          <div class="card-body">AI 종류, AI로 무엇을 할 수 있는가, AI를 도구로 바라보는 관점</div>
+        </div>
+        <div class="card curriculum-card">
+          <div class="card-label">2회차</div>
+          <div class="card-title">바이브코딩</div>
+          <div class="card-body">바이브코딩이란 무엇인가, AI 코딩 툴 종류, 첫 실습</div>
+        </div>
+        <div class="card curriculum-card">
+          <div class="card-label">3회차</div>
+          <div class="card-title">개발 용어 이해</div>
+          <div class="card-body">프론트엔드, 백엔드, DB, API가 실제로 연결되고 움직이는 과정을 시각적으로 이해</div>
+        </div>
+        <div class="card curriculum-card">
+          <div class="card-label">4회차</div>
+          <div class="card-title">파일 구조 이해</div>
+          <div class="card-body">package.json, src, components, .env, README 등 AI가 만든 프로젝트를 읽는 법</div>
+        </div>
+        <div class="card curriculum-card">
+          <div class="card-label">5회차</div>
+          <div class="card-title">배포와 보안 그리고 데이터 이해</div>
+          <div class="card-body">내 프로젝트를 링크로 공유하기 전 배포, 환경변수, 데이터 구조 점검</div>
+        </div>
+        <div class="card curriculum-card">
+          <div class="card-label">6회차</div>
+          <div class="card-title">발표 및 서로 피드백</div>
+          <div class="card-body">각자 만든 프로그램을 발표하고, 다음 고도화 방향을 함께 정리</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02: 왜 지금 AI인가? -->
+    <div class="slide">
+      <div class="eyebrow">WHY NOW</div>
+      <h2>왜 지금 AI인가?</h2>
+      <p class="body">이제 일터에서 AI는 선택지가 아닙니다. 단순하게 '를 활용할 수 있는가 / 없는가'로 나뉘는 시대가 되었죠.</p>
+    </div>
+
+    <!-- 03: 시간이 급감했습니다 -->
+    <div class="slide fit-laptop fit-time">
+      <div class="eyebrow">TIME SAVED</div>
+      <h2>디자인도, 코딩도 — 시간이 급감했습니다.</h2>
+      <p class="body">게이지는 "일의 양"이 아니라, 같은 결과물을 만들기까지 필요한 체감 시간의 차이를 보여줍니다.</p>
+      <div class="time-compare">
+        <div class="progress-list">
+          <div class="time-card old">
+            <span class="time-chip">BEFORE</span>
+            <div class="progress-label">
+              <span>기존 작업</span>
+              <span class="hl-a">8시간+</span>
+            </div>
+            <div class="progress-sub">기획 → 디자인 → 코딩 → 수정 → 다시 확인</div>
+            <div class="progress-track">
+              <div class="progress-fill slow" data-w="94%"></div>
+            </div>
+          </div>
+          <div class="time-card ai">
+            <span class="time-chip">WITH AI</span>
+            <div class="progress-label">
+              <span>AI 활용</span>
+              <span class="hl-e">30분~2시간</span>
+            </div>
+            <div class="progress-sub">말로 설계 → AI 생성 → 보고 수정 → 반복</div>
+            <div class="progress-track">
+              <div class="progress-fill" data-w="24%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="time-card">
+          <span class="time-chip">FLOW</span>
+          <div class="time-big shimmer-text">4~10x</div>
+          <div class="time-desc">중요한 건 "AI가 대신 끝낸다"가 아니라, 내가 생각하고 확인하는 속도가 빨라진다는 점입니다.</div>
+          <div class="time-flow" style="margin-top:22px;">
+            <div class="time-flow-step"><span>아이디어</span><span>말로 입력</span></div>
+            <div class="time-flow-step"><span>초안 생성</span><span>AI가 제작</span></div>
+            <div class="time-flow-step"><span>수정 요청</span><span>반복 개선</span></div>
+            <div class="time-flow-step"><span>결과 확인</span><span>내가 판단</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="note">※ 작업물 종류와 숙련도에 따라 다르지만, 체감 시간은 대부분 크게 줄어듭니다.</p>
+    </div>
+
+    <!-- 04: 무엇을 만들 수 있는가? 1/2 -->
+    <div class="slide fit-laptop fit-result">
+      <div class="eyebrow">WHAT YOU CAN MAKE · 1/2</div>
+      <h2>무엇들을 만들 수 있는가? — 문서·이미지</h2>
+      <p class="body">카드를 클릭하면 오른쪽에 AI로 만든 결과물 미리보기가 바로 바뀝니다.</p>
+      <div class="result-showcase" data-result-showcase="creative">
+        <div class="result-menu">
+          <button class="result-card is-active" data-preview="doc">
+          <div class="card-label">DOCUMENT</div>
+          <div class="card-title">프로젝트 기획서</div>
+            <div class="card-body">아이디어를 구조화된 문서로 정리</div>
+            <span class="result-card-hint">클릭해서 보기</span>
+          </button>
+          <button class="result-card" data-preview="slide">
+          <div class="card-label">SLIDE</div>
+          <div class="card-title">발표 자료</div>
+            <div class="card-body">강의·제안서·보고서용 슬라이드 초안</div>
+            <span class="result-card-hint">클릭해서 보기</span>
+          </button>
+          <button class="result-card" data-preview="sns">
+          <div class="card-label">SNS</div>
+          <div class="card-title">SNS 콘텐츠</div>
+            <div class="card-body">짧은 홍보 영상과 카드뉴스 구성</div>
+            <span class="result-card-hint">클릭해서 보기</span>
+          </button>
+          <button class="result-card" data-preview="image">
+          <div class="card-label">IMAGE</div>
+          <div class="card-title">이미지·썸네일</div>
+            <div class="card-body">브랜드 무드에 맞춘 시각 이미지</div>
+            <span class="result-card-hint">클릭해서 보기</span>
+          </button>
+        </div>
+        <div class="result-stage">
+          <div class="result-stage-head">
+            <span class="result-stage-title" data-result-title>프로젝트 기획서</span>
+            <span class="result-stage-badge">LIVE PREVIEW</span>
+          </div>
+          <div class="result-preview" data-result-preview></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05: 무엇을 만들 수 있는가? 2/2 -->
+    <div class="slide fit-laptop fit-result">
+      <div class="eyebrow">WHAT YOU CAN MAKE · 2/2</div>
+      <h2>무엇들을 만들 수 있는가? — 사이트·프로그램</h2>
+      <p class="body">이번에는 화면으로 동작하는 사이트와 프로그램 예시입니다. 카드를 누르면 결과 화면이 바뀝니다.</p>
+      <div class="result-showcase" data-result-showcase="apps">
+        <div class="result-menu">
+          <button class="result-card is-active" data-preview="portfolio">
+          <div class="card-label">PORTFOLIO</div>
+          <div class="card-title">자기소개 사이트</div>
+            <div class="card-body">소개, 경력, 포트폴리오를 담은 웹사이트</div>
+            <span class="result-card-hint">클릭해서 보기</span>
+          </button>
+          <button class="result-card" data-preview="webapp">
+          <div class="card-label">WEB APP</div>
+          <div class="card-title">간단한 웹앱</div>
+            <div class="card-body">입력하고 저장하고 결과를 보는 도구</div>
+            <span class="result-card-hint">클릭해서 보기</span>
+          </button>
+          <button class="result-card" data-preview="tool">
+          <div class="card-label">TOOL</div>
+          <div class="card-title">예약/관리 도구</div>
+            <div class="card-body">예약, 고객, 일정 데이터를 관리</div>
+            <span class="result-card-hint">클릭해서 보기</span>
+          </button>
+          <button class="result-card" data-preview="community">
+          <div class="card-label">COMMUNITY</div>
+          <div class="card-title">커뮤니티·미션 사이트</div>
+            <div class="card-body">게시글, 참여, 피드백 흐름을 구성</div>
+            <span class="result-card-hint">클릭해서 보기</span>
+          </button>
+        </div>
+        <div class="result-stage">
+          <div class="result-stage-head">
+            <span class="result-stage-title" data-result-title>자기소개 사이트</span>
+            <span class="result-stage-badge">LIVE PREVIEW</span>
+          </div>
+          <div class="result-preview" data-result-preview></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06: AI는 어떻게 우리 곁에 왔는가 (대형 타임라인) -->
+    <div class="slide fit-laptop fit-history">
+      <div class="eyebrow">AI HISTORY · 한눈에 보기</div>
+      <h2>AI, 70년 역사가 <em style="font-style:normal;color:var(--cyan)">2022년</em>에 폭발했다</h2>
+      <div class="ai-htl">
+        <div class="ai-htl-item">
+          <div class="ai-htl-year">1950</div>
+          <div class="ai-htl-dot"></div>
+          <div class="ai-htl-card">
+            <div class="ai-htl-title">개념 탄생</div>
+            <div class="ai-htl-desc">앨런 튜링 "기계가 생각할 수 있는가?" 발표. 그 후 70년간 연구자들만의 세계</div>
+          </div>
+        </div>
+        <div class="ai-htl-item">
+          <div class="ai-htl-year">2012</div>
+          <div class="ai-htl-dot"></div>
+          <div class="ai-htl-card">
+            <div class="ai-htl-title">딥러닝 혁명</div>
+            <div class="ai-htl-desc">이미지 인식 정확도가 인간을 넘어섬. 자율주행·의료 분야에 실용화 시작</div>
+          </div>
+        </div>
+        <div class="ai-htl-item">
+          <div class="ai-htl-year">2017</div>
+          <div class="ai-htl-dot"></div>
+          <div class="ai-htl-card">
+            <div class="ai-htl-title">트랜스포머 발명</div>
+            <div class="ai-htl-desc">구글 "Attention is All You Need" 논문. 대화형 AI의 기초 구조가 탄생</div>
+          </div>
+        </div>
+        <div class="ai-htl-item ai-htl-big">
+          <div class="ai-htl-year" style="color:var(--cyan)">2022.11.30</div>
+          <div class="ai-htl-dot" style="background:var(--cyan);box-shadow:0 0 18px rgba(103,232,249,0.6);width:16px;height:16px;"></div>
+          <div class="ai-htl-card" style="border-color:rgba(103,232,249,0.35);background:rgba(103,232,249,0.06);">
+            <div class="ai-htl-title" style="color:var(--cyan)">ChatGPT 출시 💥</div>
+            <div class="ai-htl-desc">출시 5일 만에 100만 명 · 2개월 만에 1억 명. 역사상 가장 빠른 제품 성장. <strong style="color:#fff">AI가 드디어 '누구나의 도구'가 됐다</strong></div>
+          </div>
+        </div>
+        <div class="ai-htl-item">
+          <div class="ai-htl-year" style="color:var(--violet2)">NOW</div>
+          <div class="ai-htl-dot" style="background:var(--violet2);box-shadow:0 0 14px rgba(196,181,253,0.5)"></div>
+          <div class="ai-htl-card" style="border-color:rgba(167,139,250,0.3)">
+            <div class="ai-htl-title" style="color:var(--violet2)">바이브코딩 시대</div>
+            <div class="ai-htl-desc">코딩을 모르는 사람도 AI와 대화하며 프로그램을 만드는 지금. 우리가 배우는 것이 바로 이것</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 07: LLM 이후 바뀐 핵심 -->
+    <div class="slide">
+      <div class="eyebrow">LLM SHIFT · 사용 방식의 변화</div>
+      <h2>이제 AI는 <em style="font-style:normal;color:var(--cyan)">대화</em>로 움직인다</h2>
+      <p class="body" style="margin-bottom:0">핵심은 기술 이름이 아니라, 내 말이 AI에게 작업 지시가 되는 구조입니다.</p>
+      <div class="llm-shift">
+        <div class="llm-panel" style="--accent:var(--amber)">
+          <div class="llm-kicker">Input</div>
+          <div class="llm-title">내 생각</div>
+          <div class="llm-desc">말, 문장, 이미지, 파일, 화면 캡처로 의도를 전달합니다.</div>
+        </div>
+        <div class="llm-beam">→</div>
+        <div class="llm-panel" style="--accent:var(--violet)">
+          <div class="llm-kicker">Reasoning</div>
+          <div class="llm-title">LLM</div>
+          <div class="llm-desc">맥락을 이해하고, 필요한 작업 순서를 추론합니다.</div>
+        </div>
+        <div class="llm-beam">→</div>
+        <div class="llm-panel" style="--accent:var(--emerald)">
+          <div class="llm-kicker">Output</div>
+          <div class="llm-title">결과물</div>
+          <div class="llm-stack">
+            <div class="llm-token"><span>문서·기획</span><span>정리</span></div>
+            <div class="llm-token"><span>이미지·영상</span><span>생성</span></div>
+            <div class="llm-token"><span>사이트·앱</span><span>구현</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 08: 결과물 기준으로 도구를 고른다 -->
+    <div class="slide">
+      <div class="eyebrow">TOOL ROUTING · 선택 기준</div>
+      <h2>AI 도구는 <em style="font-style:normal;color:var(--emerald)">결과물</em>로 고른다</h2>
+      <p class="body" style="margin-bottom:0">“무슨 AI가 좋아요?”보다 먼저 물어야 할 질문은 “무엇을 만들 건가요?”입니다.</p>
+      <div class="route-board">
+        <div class="route-output">
+          <div class="route-card" style="--accent:var(--amber)">
+            <div class="route-icon">📄</div>
+            <div class="route-name">생각·문서</div>
+            <div class="route-desc">기획서, 요약, 대본, 아이디어 정리</div>
+          </div>
+          <div class="route-card" style="--accent:var(--rose)">
+            <div class="route-icon">🎨</div>
+            <div class="route-name">이미지·디자인</div>
+            <div class="route-desc">썸네일, 상세페이지, 브랜드 무드</div>
+          </div>
+          <div class="route-card" style="--accent:var(--cyan)">
+            <div class="route-icon">🎬</div>
+            <div class="route-name">영상·미디어</div>
+            <div class="route-desc">홍보 영상, 쇼츠, 데모 장면</div>
+          </div>
+          <div class="route-card" style="--accent:var(--emerald)">
+            <div class="route-icon">💻</div>
+            <div class="route-name">사이트·앱</div>
+            <div class="route-desc">웹페이지, 대시보드, 자동화 도구</div>
+          </div>
+        </div>
+        <div class="route-formula">
+          <div class="formula-title">오늘의 선택 공식</div>
+          <div class="formula-main">목표 → 도구 → 지시</div>
+          <div class="formula-sub">도구 이름을 외우는 수업이 아닙니다. 내가 만들 결과물을 보고, 맞는 AI에게 일을 맡기는 감각을 익힙니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 09: 분야별 AI 도구들 (인터랙티브 강점 데모) -->
+    <div class="slide fit-laptop fit-tools">
+      <div class="eyebrow">AI TOOL MAP · 클릭하면 강점을 보여줍니다</div>
+      <h2>AI는 하나가 아니라 — <br><em style="font-style:normal;color:var(--violet2)">전문가 팀</em>에 가깝다</h2>
+      <div class="aitool-interactive">
+        <div class="aitool-btns" id="aitoolBtns">
+          <div class="aitool-btn" data-ai="gpt" style="--ac:#FBBF24"><span class="atb-icon">🧠</span><div><div class="atb-name">ChatGPT</div><div class="atb-tag">범용 두뇌</div></div></div>
+          <div class="aitool-btn" data-ai="claude" style="--ac:#A78BFA"><span class="atb-icon">💬</span><div><div class="atb-name">Claude</div><div class="atb-tag">깊은 이해·코드</div></div></div>
+          <div class="aitool-btn" data-ai="gemini" style="--ac:#60A5FA"><span class="atb-icon">🖼️</span><div><div class="atb-name">Gemini</div><div class="atb-tag">멀티모달</div></div></div>
+          <div class="aitool-btn" data-ai="veo" style="--ac:#F87171"><span class="atb-icon">🎬</span><div><div class="atb-name">Veo · Sora</div><div class="atb-tag">영상 생성</div></div></div>
+          <div class="aitool-btn" data-ai="cursor" style="--ac:#34D399"><span class="atb-icon">💻</span><div><div class="atb-name">Cursor · Windsurf</div><div class="atb-tag">AI 코딩</div></div></div>
+          <div class="aitool-btn" data-ai="banana" style="--ac:#F472B6"><span class="atb-icon">🎨</span><div><div class="atb-name">Nano Banana</div><div class="atb-tag">이미지 편집</div></div></div>
+          <div class="aitool-btn" data-ai="notebooklm" style="--ac:#FB923C"><span class="atb-icon">📚</span><div><div class="atb-name">NotebookLM</div><div class="atb-tag">나만의 AI 비서</div></div></div>
+          <div class="aitool-btn" data-ai="manus" style="--ac:#C084FC"><span class="atb-icon">🤖</span><div><div class="atb-name">Manus · n8n</div><div class="atb-tag">자율 에이전트</div></div></div>
+          <div class="aitool-btn" data-ai="perplexity" style="--ac:#22D3EE"><span class="atb-icon">🔎</span><div><div class="atb-name">Perplexity · Grok</div><div class="atb-tag">검색·리서치</div></div></div>
+          <div class="aitool-btn" data-ai="kiro" style="--ac:#8B5CF6"><span class="atb-icon">🛠️</span><div><div class="atb-name">Kiro · Antigravity</div><div class="atb-tag">AI 개발환경</div></div></div>
+        </div>
+        <div class="aitool-demo-panel" id="aiDemoPanel">
+          <div class="demo-ph">
+            <div class="demo-ph-arrow">👈</div>
+            <div style="font-size:clamp(12px,1.2vw,16px);font-weight:700;color:var(--text)">AI 카드 클릭</div>
+            <div style="font-size:clamp(10px,.9vw,13px);color:var(--text2)">각 AI의 강점을 바로 보여드립니다</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10: 나는 어떤 AI를 쓸까? (인터랙티브 매칭) -->
+    <div class="slide">
+      <div class="eyebrow">AI 도구 선택 감각 익히기</div>
+      <h2>이 상황엔 어떤 AI가 맞을까?</h2>
+      <p class="body" style="margin-bottom:clamp(16px,1.8vw,26px)">카드를 클릭하면, 목적에 맞는 AI 조합이 바로 열립니다.</p>
+      <div class="aiq-grid">
+        <div class="aiq-card" data-ans="Cursor / Windsurf / Kiro / Antigravity" data-color="var(--emerald)">
+          <div class="aiq-mode">SITE / APP</div>
+          <div class="aiq-q">홈페이지를 만들고 싶어. 그런데 코딩은 전혀 몰라.</div>
+          <div class="aiq-reveal"><span class="aiq-ans-label">최적 도구 →</span> <span class="aiq-ans-name">Cursor / Windsurf / Kiro / Antigravity</span><div style="margin-top:5px;font-size:10px;color:var(--text3)">모두 AI 코딩 특화 에디터. 취향껏 선택!</div></div>
+          <div class="aiq-hint">클릭해서 확인</div>
+        </div>
+        <div class="aiq-card" data-ans="Nano Banana / Midjourney" data-color="var(--rose)">
+          <div class="aiq-mode">IMAGE</div>
+          <div class="aiq-q">SNS 카드뉴스와 썸네일 이미지를 빠르게 만들고 싶어.</div>
+          <div class="aiq-reveal"><span class="aiq-ans-label">최적 도구 →</span> <span class="aiq-ans-name">Nano Banana / Midjourney</span></div>
+          <div class="aiq-hint">클릭해서 확인</div>
+        </div>
+        <div class="aiq-card" data-ans="GPT / Claude" data-color="var(--amber)">
+          <div class="aiq-mode">DOCUMENT</div>
+          <div class="aiq-q">사업계획서 초안과 발표 대본을 빠르게 정리하고 싶어.</div>
+          <div class="aiq-reveal"><span class="aiq-ans-label">최적 도구 →</span> <span class="aiq-ans-name">GPT / Claude</span></div>
+          <div class="aiq-hint">클릭해서 확인</div>
+        </div>
+        <div class="aiq-card" data-ans="Veo / Sora / Runway" data-color="var(--rose)">
+          <div class="aiq-mode">VIDEO</div>
+          <div class="aiq-q">30초 홍보 영상이나 제품 데모 장면을 만들고 싶어.</div>
+          <div class="aiq-reveal"><span class="aiq-ans-label">최적 도구 →</span> <span class="aiq-ans-name">Veo / Sora / Runway</span></div>
+          <div class="aiq-hint">클릭해서 확인</div>
+        </div>
+        <div class="aiq-card" data-ans="NotebookLM" data-color="var(--cyan)">
+          <div class="aiq-mode">STUDY</div>
+          <div class="aiq-q">강의 PDF와 녹취록을 넣고, 내 자료 기반으로 질문하고 싶어.</div>
+          <div class="aiq-reveal"><span class="aiq-ans-label">최적 도구 →</span> <span class="aiq-ans-name">NotebookLM</span></div>
+          <div class="aiq-hint">클릭해서 확인</div>
+        </div>
+        <div class="aiq-card" data-ans="Manus / n8n" data-color="var(--violet2)">
+          <div class="aiq-mode">AGENT</div>
+          <div class="aiq-q">매일 반복되는 작업을 자동으로 실행하고 관리하고 싶어.</div>
+          <div class="aiq-reveal"><span class="aiq-ans-label">최적 도구 →</span> <span class="aiq-ans-name">Manus / n8n</span><div style="margin-top:5px;font-size:10px;color:var(--text3)">Kiro·Antigravity는 코딩 에디터 → 자동화와 다른 범주!</div></div>
+          <div class="aiq-hint">클릭해서 확인</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11: AI 결과 품질의 비밀 -->
+    <div class="slide">
+      <div class="eyebrow">KEY INSIGHT · 핵심</div>
+      <h2>AI의 결과는 <em style="font-style:normal;color:var(--cyan)">브리핑 품질</em>을 따라간다</h2>
+      <p class="body" style="margin-bottom:0">예시 문장을 길게 외우는 게 아니라, 일을 맡길 때 필요한 정보가 빠졌는지 보는 감각이 중요합니다.</p>
+      <div class="briefing-board">
+        <div class="briefing-controls">
+          <div class="brief-row">
+            <div class="brief-label">역할</div>
+            <div class="brief-track"><div class="brief-fill" style="--w:92%"></div></div>
+            <div class="brief-score">92</div>
+          </div>
+          <div class="brief-row">
+            <div class="brief-label">상황</div>
+            <div class="brief-track"><div class="brief-fill" style="--w:84%"></div></div>
+            <div class="brief-score">84</div>
+          </div>
+          <div class="brief-row">
+            <div class="brief-label">목표</div>
+            <div class="brief-track"><div class="brief-fill" style="--w:96%"></div></div>
+            <div class="brief-score">96</div>
+          </div>
+          <div class="brief-row">
+            <div class="brief-label">제약</div>
+            <div class="brief-track"><div class="brief-fill" style="--w:72%"></div></div>
+            <div class="brief-score">72</div>
+          </div>
+          <div class="brief-row">
+            <div class="brief-label">출력</div>
+            <div class="brief-track"><div class="brief-fill" style="--w:88%"></div></div>
+            <div class="brief-score">88</div>
+          </div>
+        </div>
+        <div class="brief-result">
+          <div class="brief-result-kicker">AI RESPONSE QUALITY</div>
+          <div class="brief-result-title">선명한 지시<br>선명한 결과</div>
+          <div class="brief-result-desc">AI가 못 만드는 게 아니라, 무엇을 만들어야 하는지 모르는 경우가 훨씬 많습니다.</div>
+          <div class="brief-result-bad">막연한 요청 = 막연한 결과</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11: QUOTE -->
+    <div class="slide">
+      <div class="eyebrow">QUOTE</div>
+      <div style="font-size:clamp(80px,12vw,180px);line-height:0.8;color:rgba(167,139,250,0.12);font-family:Georgia,serif;margin-bottom:-20px;user-select:none;">"</div>
+      <div class="quote-text">"좋은 결과에는 좋은 맥락이 필요하다."</div>
+      <div class="attribution">수업용 요약 메시지</div>
+      <p class="body">AI가 멍청하게 느껴질 때는, 역할·상황·원하는 결과·제약 조건을 더 분명히 주면 결과가 크게 달라집니다.</p>
+    </div>
+
+    <!-- 12: 프롬프트가 뭔가요? -->
+    <div class="slide">
+      <div class="eyebrow">WHAT IS A PROMPT</div>
+      <h2>그래서, 프롬프트가 뭔가요?</h2>
+      <div class="big-card">
+        <div class="card-title" style="font-size:clamp(16px,1.6vw,24px);margin-bottom:12px;">AI에게 원하는 것을 전달하는 지시문</div>
+        <div class="card-body" style="font-size:clamp(13px,1.1vw,18px);">내가 무엇을 원하는지, 어떤 상황인지, 어떤 형태로 받고 싶은지 — 그걸 글로 풀어쓴 것이 프롬프트입니다.</div>
+      </div>
+    </div>
+
+    <!-- 13: 프롬프트의 황금 비율 5단계 -->
+    <div class="slide">
+      <div class="eyebrow">GOLDEN RATIO</div>
+      <h2>프롬프트의 황금 비율 · 5단계.</h2>
+      <p style="font-size:clamp(12px,1vw,16px);color:var(--text2);margin-bottom:18px;">이 구조만 외워두면, AI가 헛돌지 않습니다.</p>
+      <p style="font-size:clamp(11px,0.85vw,13px);color:var(--text3);margin-bottom:6px;">💡 카드를 클릭하면 강조됩니다</p>
+      <div class="grid-5">
+        <div class="card" data-hl>
+          <div class="step-num">STEP 01</div>
+          <div class="card-title">역할</div>
+          <div class="card-body">"너는 20년 경력의 웹 개발자야."</div>
+        </div>
+        <div class="card" data-hl>
+          <div class="step-num">STEP 02</div>
+          <div class="card-title">상황</div>
+          <div class="card-body">"나를 소개할 자기소개 사이트를 만들고 싶어."</div>
+        </div>
+        <div class="card" data-hl>
+          <div class="step-num">STEP 03</div>
+          <div class="card-title">원하는 것</div>
+          <div class="card-body">"이름, 연락처, 포트폴리오, 경력을 넣어줘."</div>
+        </div>
+        <div class="card" data-hl>
+          <div class="step-num">STEP 04</div>
+          <div class="card-title">제약</div>
+          <div class="card-body">"사진과 연락처가 무단으로 퍼가지 않게, 우클릭은 막아줘."</div>
+        </div>
+        <div class="card" data-hl>
+          <div class="step-num">STEP 05</div>
+          <div class="card-title">출력</div>
+          <div class="card-body">"구현 후, 개발서버 실행 + .md로 프로젝트 요약까지 정리해줘."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14: 같은 부탁 완전히 다른 결과 -->
+    <div class="slide">
+      <div class="eyebrow">BAD VS GOOD</div>
+      <h2>같은 부탁, 완전히 다른 결과.</h2>
+      <div class="vs-grid">
+        <div class="vs-col bad">
+          <div class="vs-label bad">BAD</div>
+          <div class="vs-item" style="color:var(--rose);font-weight:700;">"나 OO사이트 만들어줘."</div>
+          <div class="vs-item">역할 없음</div>
+          <div class="vs-item">상황·맥락 없음</div>
+          <div class="vs-item">원하는 결과 모호</div>
+          <div class="vs-item">AI가 추측하다가 이상한 결과물을 내놓는다</div>
+        </div>
+        <div class="vs-col good">
+          <div class="vs-label good">GOOD</div>
+          <div class="vs-item" style="color:var(--emerald);font-weight:700;">역할+상황+원하는 것+제약+출력</div>
+          <div class="vs-item">AI에게 나와 목적을 설명</div>
+          <div class="vs-item">조건과 제한 분명</div>
+          <div class="vs-item">받고 싶은 형태 지정</div>
+          <div class="vs-item">AI가 추측이 아닌 지시로 움직인다</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15: 우리는 프롬프트를 외우지 않습니다 -->
+    <div class="slide">
+      <div class="eyebrow">OUR APPROACH</div>
+      <h2>그런데 우리는 프롬프트를 외우지 않습니다.</h2>
+      <p class="body">구조를 이해하는 건 중요합니다. 그러나 — 사람이 사람을 가장 잘 이해하듯, AI는 AI를 가장 잘 이해합니다. 그래서 우리는 '프롬프트를 직접 쓰는 능력'보다 — AI에게 프롬프트를 부탁해서, AI로 바이브코딩하는 흐름을 익힙니다.</p>
+    </div>
+
+    <!-- 16: AI에게 프롬프트를 부탁하기 -->
+    <div class="slide">
+      <div class="eyebrow">OUR METHOD</div>
+      <h2>AI에게 프롬프트를 부탁하기.</h2>
+      <p style="font-size:clamp(12px,1vw,16px);color:var(--text2);margin-bottom:20px;">우리는 '프롬프트 작성자'가 아니라 '바이브코딩 디렉터'가 됩니다.</p>
+      <div class="pipeline">
+        <div class="pipeline-step">
+          <div class="step-num">STEP 01</div>
+          <div class="step-title">AI와 함께 설계</div>
+          <div class="step-body">GPT/Gemini/Claude에 "나랑 같이 설계해줘."</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">STEP 02</div>
+          <div class="step-title">프롬프트 부탁</div>
+          <div class="step-body">"이 내용을 Cursor/Kiro/Antigravity용 프롬프트로 정리해줘."</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">STEP 03</div>
+          <div class="step-title">AI IDE 실행</div>
+          <div class="step-body">받은 프롬프트를 AI 코딩 도구에 그대로 붙여넣기.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 17: 다음 주 준비물 -->
+    <div class="slide">
+      <div class="eyebrow">NEXT WEEK · CHECKLIST</div>
+      <h2>다음 주 준비물.</h2>
+      <p style="font-size:clamp(11px,0.85vw,13px);color:var(--text3);margin-bottom:8px;">✅ 클릭해서 체크하세요</p>
+      <div class="checklist">
+        <div class="check-item" data-check>
+          <div class="check-indicator"></div>
+          <span class="badge badge-must">MUST</span>
+          <div class="check-body">
+            노트북 필수
+            <span class="check-sub">현장에서 바로 실습합니다. 충전기까지 챙겨오세요.</span>
+          </div>
+        </div>
+        <div class="check-item" data-check>
+          <div class="check-indicator"></div>
+          <span class="badge badge-must">MUST</span>
+          <div class="check-body">
+            VS Code 설치
+            <span class="check-sub">실습 도구의 기반이 됩니다.</span>
+          </div>
+        </div>
+        <div class="check-item" data-check>
+          <div class="check-indicator"></div>
+          <span class="badge badge-check">CHECK</span>
+          <div class="check-body">
+            Node.js LTS, Git 설치 확인
+            <span class="check-sub">별첨 자료의 체크리스트를 보며 node -v, npm -v, git --version까지 확인합니다.</span>
+          </div>
+        </div>
+        <div class="check-item" data-check>
+          <div class="check-indicator"></div>
+          <span class="badge badge-check">CHECK</span>
+          <div class="check-body">
+            Cursor / Windsurf / Kiro 중 하나 이상 설치
+            <span class="check-sub">무료 플랜으로 먼저 체험하고, 어떤 AI 코딩환경이 맞는지 천천히 고릅니다.</span>
+          </div>
+        </div>
+        <div class="check-item" data-check>
+          <div class="check-indicator"></div>
+          <span class="badge badge-check">PDF</span>
+          <div class="check-body">
+            별첨 자료 출력 또는 PDF 저장
+            <span class="check-sub">앱 상단의 인쇄/PDF 버튼으로 '1회차 숙제 · 사전 준비 체크리스트'를 저장해오세요.</span>
+          </div>
+        </div>
+        <div class="check-item" data-check>
+          <div class="check-indicator"></div>
+          <span class="badge badge-check">OPTION</span>
+          <div class="check-body">
+            Codex · Claude Code · Antigravity — 선택사항
+            <span class="check-sub">유료 구독이 필요합니다. 관심 있으면 2회차 이후 천천히 검토하세요.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- .deck -->
+</div><!-- .app -->
+
+<script>
+const slides = [...document.querySelectorAll('.slide')];
+let cur = 0;
+
+// ── 프로그레스 바 애니메이션 ──
+function animateBars(slideEl) {
+  slideEl.querySelectorAll('.progress-fill[data-w]').forEach(bar => {
+    bar.style.width = '0%';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      bar.style.width = bar.dataset.w;
+    }));
+  });
+}
+
+function render() {
+  slides.forEach((s, i) => {
+    s.classList.remove('active', 'prev');
+    if (i === cur) { s.classList.add('active'); animateBars(s); }
+    else if (i < cur) s.classList.add('prev');
+  });
+  document.getElementById('counter').textContent = `${cur + 1} / ${slides.length}`;
+  document.getElementById('btn-prev').disabled = cur === 0;
+  document.getElementById('btn-next').disabled = cur === slides.length - 1;
+}
+
+function move(d) {
+  cur = Math.max(0, Math.min(slides.length - 1, cur + d));
+  render();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); move(1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); move(-1); }
+});
+
+// ── 카드 클릭 강조 (수업 중 포인트 표시용) ──
+document.querySelectorAll('.card[data-hl]').forEach(card => {
+  card.addEventListener('click', () => card.classList.toggle('lit'));
+});
+
+// ── 체크리스트 인터랙티브 ──
+document.querySelectorAll('.check-item[data-check]').forEach(item => {
+  item.addEventListener('click', () => {
+    item.classList.toggle('done');
+    const ind = item.querySelector('.check-indicator');
+    if (ind) ind.textContent = item.classList.contains('done') ? '✓' : '';
+  });
+});
+
+// ── AI 도구 퀴즈 카드 (aiq-card) ──
+document.querySelectorAll('.aiq-card').forEach(card => {
+  card.addEventListener('click', () => {
+    if (card.classList.contains('revealed')) return;
+    const ans = card.dataset.ans;
+    const color = card.dataset.color;
+    if (color) card.style.setProperty('--ac2', color);
+    card.classList.add('revealed');
+    const nameEl = card.querySelector('.aiq-ans-name');
+    if (nameEl) { nameEl.textContent = ans; nameEl.style.color = color; }
+  });
+});
+
+// ── AI TOOL INTERACTIVE DEMO SYSTEM (Slide 09) ──────────────────
+const aiDemos = {
+
+  gpt: `<div class="demo-inner">
+    <div class="demo-hd" style="color:#FBBF24">🧠 ChatGPT &nbsp;<span class="demo-hd-badge">범용 두뇌</span></div>
+    <div class="gpt-ui sa" style="flex:1">
+      <div class="gpt-sidebar">
+        <div class="gpt-sb-new">+ 새 채팅</div>
+        <div class="gpt-sb-item on">📋 사업계획서</div>
+        <div class="gpt-sb-item">🎯 마케팅 전략</div>
+        <div class="gpt-sb-item">✍️ 블로그 초안</div>
+        <div class="gpt-sb-item">💡 아이디어 정리</div>
+      </div>
+      <div class="gpt-chat">
+        <div class="gpt-msg-u sa">사업계획서 초안을 한 페이지로 써줘</div>
+        <div class="gpt-msg-a sa">
+          <div class="gpt-logo">G</div>
+          <div class="gpt-resp">
+            <div class="gpt-rl"><b>📋 사업계획서</b> &nbsp;<span class="gpt-badge">AI 스터디 출석 관리</span></div>
+            <div class="gpt-rl sa" data-type="• 핵심 기능: 자동 출석 + 카카오 리마인더" data-delay="500"></div>
+            <div class="gpt-rl sa" data-type="• 수익 모델: 월 9,900원 / 연 89,000원" data-delay="1100"></div>
+            <div class="gpt-rl sa" data-type="• 1개월 목표: 베타 100팀 모집 완료" data-delay="1700"></div>
+            <div class="gpt-rl sa" style="padding-top:3px"><span class="gpt-cursor-blink"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gpt-foot sa">
+      <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#19c37d"></span>
+      <span style="color:#19c37d;font-size:8px">GPT-4o</span>
+      <span style="margin-left:auto;color:var(--text3);font-size:8px">토큰</span>
+      <div class="gpt-token-bar-outer"><div class="gpt-token-bar-fill"></div></div>
+      <span style="color:#FBBF24;font-weight:700" data-count="847">0</span>
+      <span style="color:var(--text3);font-size:8px">/ 128k</span>
+    </div>
+  </div>`,
+
+  claude: `<div class="demo-inner">
+    <div class="demo-hd" style="color:#A78BFA">💬 Claude &nbsp;<span class="demo-hd-badge">코드 분석</span></div>
+    <div class="claude-split sa" style="flex:1">
+      <div class="claude-editor">
+        <div class="ce-bar">
+          <span class="ce-tab on">app.py</span><span class="ce-tab">utils.js</span><span class="ce-tab">README</span>
+        </div>
+        <div class="ce-code">
+          <div class="ce-line sa"><span class="ce-n">1</span><span><span class="ce-kw">def</span> <span class="ce-fn">get_user</span>(user_id):</span></div>
+          <div class="ce-line sa ce-err"><span class="ce-n">2</span><span>&nbsp;&nbsp;sql = <span class="ce-str">f"SELECT * WHERE id={user_id}"</span></span></div>
+          <div class="ce-line sa"><span class="ce-n">3</span><span>&nbsp;&nbsp;<span class="ce-cm"># ← 보안 취약점 발생!</span></span></div>
+          <div class="ce-line sa"><span class="ce-n">4</span><span>&nbsp;&nbsp;<span class="ce-kw">return</span> db.execute(sql)</span></div>
+        </div>
+      </div>
+      <div class="claude-side">
+        <div class="cs-hd">CLAUDE ANALYSIS</div>
+        <div class="cs-warn sa"><b>⚠️ SQL 인젝션 위험</b><br>f-string 직접 삽입 → 공격자가 임의 쿼리를 실행할 수 있습니다</div>
+        <div class="cs-fix sa">
+          <div class="cs-fix-lbl">✅ 수정 코드</div>
+          db.execute(sql,<br>&nbsp;&nbsp;(user_id,))
+        </div>
+      </div>
+    </div>
+  </div>`,
+
+  gemini: `<div class="demo-inner">
+    <div class="demo-hd" style="color:#60A5FA">🖼️ Gemini &nbsp;<span class="demo-hd-badge">멀티모달</span></div>
+    <div class="gem-layout sa" style="flex:1">
+      <div class="gem-photo">
+        <div class="gem-scan"></div>
+        <div class="gem-box-cv sa" style="top:8%;left:5%;width:40%;height:44%;--gc:#60A5FA;animation-delay:.45s">
+          <div class="gem-box-cv-inner"></div>
+          <div class="gem-c tl"></div><div class="gem-c tr"></div><div class="gem-c bl"></div><div class="gem-c br"></div>
+          <div class="gem-cv-lbl">사람 👤 99.2%</div>
+        </div>
+        <div class="gem-box-cv sa" style="top:10%;left:50%;width:42%;height:38%;--gc:#34D399;animation-delay:.75s">
+          <div class="gem-box-cv-inner"></div>
+          <div class="gem-c tl"></div><div class="gem-c tr"></div><div class="gem-c bl"></div><div class="gem-c br"></div>
+          <div class="gem-cv-lbl">스마트폰 📱 96%</div>
+        </div>
+        <div class="gem-box-cv sa" style="top:60%;left:4%;width:82%;height:30%;--gc:#FBBF24;animation-delay:1.05s">
+          <div class="gem-box-cv-inner"></div>
+          <div class="gem-c tl"></div><div class="gem-c tr"></div><div class="gem-c bl"></div><div class="gem-c br"></div>
+          <div class="gem-cv-lbl">책상 🪑 91.4%</div>
+        </div>
+      </div>
+      <div class="gem-rows">
+        <div class="gem-hd">GEMINI VISION · 분석 결과</div>
+        <div class="gem-row sa">
+          <div class="gem-row-top"><span class="gem-lbl">👤 사람</span><span class="gem-pct">99%</span></div>
+          <div class="gem-track"><div class="gem-fill" style="animation-delay:.5s;--w:99%"></div></div>
+        </div>
+        <div class="gem-row sa">
+          <div class="gem-row-top"><span class="gem-lbl">📱 스마트폰</span><span class="gem-pct">96%</span></div>
+          <div class="gem-track"><div class="gem-fill" style="animation-delay:.8s;--w:96%"></div></div>
+        </div>
+        <div class="gem-row sa">
+          <div class="gem-row-top"><span class="gem-lbl">🪑 책상</span><span class="gem-pct">91%</span></div>
+          <div class="gem-track"><div class="gem-fill" style="animation-delay:1.1s;--w:91%"></div></div>
+        </div>
+        <div class="gem-sync sa">☁️ Google Drive 동기화 완료 ✓</div>
+      </div>
+    </div>
+  </div>`,
+
+  veo: `<div class="demo-inner">
+    <div class="demo-hd" style="color:#F87171">🎬 Veo · Sora &nbsp;<span class="demo-hd-badge">영상 생성</span></div>
+    <div class="veo-wrap sa" style="flex:1">
+      <div class="veo-prompt-bar"><span style="color:var(--text3);font-size:8px">PROMPT →</span> 해변 카페, 커피 마시는 사람, 영화적 조명, 4K 슬로우모션</div>
+      <div class="veo-player">
+        <div class="veo-screen" style="position:relative">
+          <div class="veo-scanline-ovl"><div class="veo-scanline-beam"></div></div>
+          <div class="veo-frame" style="position:relative"><div class="veo-frame-inner sa" style="background:linear-gradient(135deg,#0f4c75 0%,#1b6ca8 60%,#f59e0b 100%)"></div><div class="veo-framenum">001</div></div>
+          <div class="veo-frame" style="position:relative"><div class="veo-frame-inner sa" style="background:linear-gradient(135deg,#0d3b66 0%,#155e8a 50%,#d97706 100%)"></div><div class="veo-framenum">024</div></div>
+          <div class="veo-frame" style="position:relative"><div class="veo-frame-inner sa" style="background:linear-gradient(180deg,#1a3a5c 0%,#2463eb 40%,#c2410c 100%)"></div><div class="veo-framenum">048</div></div>
+          <div class="veo-frame" style="position:relative"><div class="veo-frame-inner sa" style="background:linear-gradient(135deg,#154360 0%,#1f618d 50%,#92400e 100%)"></div><div class="veo-framenum">072</div></div>
+          <div class="veo-frame" style="position:relative"><div class="veo-frame-inner sa" style="background:linear-gradient(135deg,#0c2a4a 0%,#1e4d8c 55%,#b45309 100%)"></div><div class="veo-framenum">096</div></div>
+          <div class="veo-frame" style="position:relative"><div class="veo-frame-inner sa" style="background:linear-gradient(135deg,#1a5276 0%,#2980b9 55%,#78350f 100%)"></div><div class="veo-framenum">120</div></div>
+        </div>
+        <div class="veo-ctrl">
+          <span class="veo-play-btn">▶</span>
+          <div class="veo-track"><div class="veo-prog"></div></div>
+          <span class="veo-time">04.3 / 06.0s</span>
+        </div>
+      </div>
+      <div class="veo-badges sa">
+        <span class="veo-badge">4K UHD</span>
+        <span class="veo-badge">24fps</span>
+        <span class="veo-badge">6초</span>
+        <span class="veo-badge" style="margin-left:auto;color:#34D399;border-color:rgba(52,211,153,.35);background:rgba(52,211,153,.1)">✓ 생성 완료</span>
+      </div>
+    </div>
+  </div>`,
+
+  cursor: `<div class="demo-inner">
+    <div class="demo-hd" style="color:#34D399">💻 Cursor · Windsurf &nbsp;<span class="demo-hd-badge">AI 코딩</span></div>
+    <div class="ide-with-chat sa">
+      <div class="ide-wrap" style="flex:1.3">
+        <div class="ide-tree">
+          <div class="ide-tree-h">Explorer</div>
+          <div class="ide-tf">📁 src</div>
+          <div class="ide-tf" style="padding-left:12px">📁 components</div>
+          <div class="ide-tf on" style="padding-left:20px">📄 Button.tsx</div>
+          <div class="ide-tf" style="padding-left:20px">📄 Card.tsx</div>
+          <div class="ide-tf" style="padding-left:12px">📁 pages</div>
+          <div class="ide-tf">📄 package.json</div>
+        </div>
+        <div class="ide-main">
+          <div class="ide-tabrow">
+            <span class="ide-tabl on">Button.tsx</span>
+            <span class="ide-tabl">Card.tsx</span>
+          </div>
+          <div class="ide-body">
+            <div class="ide-ln sa"><span class="ide-lnum">1</span><span><span class="ide-kw">import</span> <span class="ide-op">{</span> FC <span class="ide-op">}</span> from <span class="ide-str">'react'</span></span></div>
+            <div class="ide-ln sa"><span class="ide-lnum">2</span></div>
+            <div class="ide-ln sa"><span class="ide-lnum">3</span><span><span class="ide-kw">const</span> <span class="ide-fn">Button</span><span class="ide-op">:</span> <span class="ide-fn">FC</span> = (props) <span class="ide-op">=&gt;</span> <span class="ide-ghost">▌</span></span></div>
+            <div class="ide-autocomplete sa">
+              <div class="iac-hd">✦ Cursor AI &nbsp;&nbsp; Tab 으로 수락</div>
+              <div class="iac-line" data-type="  return &lt;button onClick={props.onClick}&gt;"></div>
+              <div class="iac-line sa" data-type="    {props.children}" data-delay="600"></div>
+              <div class="iac-line sa" data-type="  &lt;/button&gt;" data-delay="1000"></div>
+            </div>
+          </div>
+          <div class="ide-foot sa">
+            <span>⎇ main</span>&nbsp;
+            <span style="color:#34D399">✦ AI</span>&nbsp;
+            <span>자동완성</span>&nbsp;<b data-count="247">0</b><span>회</span>
+            <span style="margin-left:auto">에러</span>&nbsp;<b data-count="12">0</b><span>건</span>
+          </div>
+        </div>
+      </div>
+      <div class="cursor-cpanel sa">
+        <div class="ccp-bar">✦ Cursor AI Chat</div>
+        <div class="ccp-body">
+          <div class="ccp-u">Button 컴포넌트 완성해줘</div>
+          <div class="ccp-ai">
+            <div class="ccp-ai-hd">Cursor &nbsp;✦ 제안</div>
+            <div class="ccp-dline ccp-rem">const Button = () =&gt;</div>
+            <div class="ccp-dline ccp-add" data-type="const Button: FC ="></div>
+            <div class="ccp-dline ccp-add" data-type="  (props) => (" data-delay="350"></div>
+            <div class="ccp-dline ccp-add" data-type="  &lt;button&gt;" data-delay="650"></div>
+            <div class="ccp-dline ccp-add" data-type="  {props.children}" data-delay="900"></div>
+            <div class="ccp-dline ccp-add" data-type="  &lt;/button&gt;)" data-delay="1150"></div>
+          </div>
+        </div>
+        <div class="ccp-foot">
+          <div class="ccp-fbtn ok">✓ 적용</div>
+          <div class="ccp-fbtn no">✕ 취소</div>
+        </div>
+      </div>
+    </div>
+  </div>`,
+
+  banana: `<div class="demo-inner">
+    <div class="demo-hd" style="color:#F472B6">🎨 Nano Banana &nbsp;<span class="demo-hd-badge">이미지 편집</span></div>
+    <div class="nb-layout sa" style="flex:1">
+      <div class="nb-canvas">
+        <div class="nb-noise"></div>
+        <div class="nb-result">
+          <div class="nb-gradient"></div>
+          <div class="nb-person">
+            <div class="nb-head"></div>
+            <div class="nb-body"></div>
+          </div>
+          <div class="nb-caption">🗼 파리 · 에펠탑 배경 합성</div>
+        </div>
+        <div class="nb-pbar"><div class="nb-pfill"></div></div>
+      </div>
+      <div class="nb-info">
+        <div class="nb-pbox">
+          <div class="nb-plbl">프롬프트</div>
+          <div class="nb-ptxt" data-type="배경: 파리 에펠탑 · 인물 피부 보정 · 황금빛 빛 조정"></div>
+        </div>
+        <div class="nb-steps">
+          <div class="nb-step sa"><div class="nb-sd done">✓</div><span>원본 이미지 분석</span></div>
+          <div class="nb-step sa"><div class="nb-sd done">✓</div><span>배경 세그멘테이션</span></div>
+          <div class="nb-step sa"><div class="nb-sd run">⟳</div><span style="color:#F472B6">합성 · 보정 처리 중…</span></div>
+        </div>
+        <div class="sa" style="font-size:9px;color:#F472B6;font-weight:700;margin-top:4px">✓ 평균 3.2초 완성</div>
+      </div>
+    </div>
+  </div>`,
+
+  notebooklm: `<div class="demo-inner">
+    <div class="demo-hd" style="color:#FB923C">📚 NotebookLM &nbsp;<span class="demo-hd-badge">나만의 AI 비서</span></div>
+    <div class="nlm-layout sa" style="flex:1">
+      <div class="nlm-doc">
+        <div class="nlm-doc-bar">
+          <span style="font-size:16px">📄</span>
+          <span class="nlm-doc-title">강의자료_5강.pdf</span>
+          <span class="nlm-doc-pg">42p</span>
+        </div>
+        <div class="nlm-doc-body">
+          <div class="nlm-ln" style="width:85%"></div>
+          <div class="nlm-ln hl" style="width:95%"></div>
+          <div class="nlm-ln hl" style="width:90%"></div>
+          <div class="nlm-ln" style="width:70%"></div>
+          <div class="nlm-ln hl" style="width:88%;animation-delay:.3s"></div>
+          <div class="nlm-ln" style="width:60%"></div>
+          <div class="nlm-ln" style="width:80%"></div>
+          <div class="nlm-ln hl" style="width:92%;animation-delay:.6s"></div>
+          <div class="nlm-ln" style="width:55%"></div>
+        </div>
+      </div>
+      <div class="nlm-qa">
+        <div class="nlm-q sa">5강 핵심을 3줄로 요약해줘 💬</div>
+        <div class="nlm-a sa" style="flex:1">
+          <div class="nlm-a-hd">NotebookLM ✦</div>
+          <div class="nlm-al" data-type="1. 배포는 Vercel / Netlify 추천"></div>
+          <div class="nlm-al sa" data-type="2. 환경변수는 .env 파일에만 보관" data-delay="900"></div>
+          <div class="nlm-al sa" data-type="3. DB 연결 전 보안 체크 필수" data-delay="1800"></div>
+        </div>
+        <div class="nlm-audio sa">
+          <div class="nlm-play">▶</div>
+          <div class="nlm-wave">
+            <div class="nlm-wbar" style="--wh:5px;animation-delay:0s"></div>
+            <div class="nlm-wbar" style="--wh:12px;animation-delay:.08s"></div>
+            <div class="nlm-wbar" style="--wh:8px;animation-delay:.16s"></div>
+            <div class="nlm-wbar" style="--wh:14px;animation-delay:.24s"></div>
+            <div class="nlm-wbar" style="--wh:6px;animation-delay:.32s"></div>
+            <div class="nlm-wbar" style="--wh:11px;animation-delay:.4s"></div>
+            <div class="nlm-wbar" style="--wh:9px;animation-delay:.48s"></div>
+            <div class="nlm-wbar" style="--wh:13px;animation-delay:.56s"></div>
+            <div class="nlm-wbar" style="--wh:7px;animation-delay:.64s"></div>
+          </div>
+          <span style="font-size:8px;color:var(--text3)">AI 팟캐스트 생성</span>
+        </div>
+      </div>
+    </div>
+  </div>`,
+
+  manus: `<div class="demo-inner">
+    <div class="demo-hd" style="color:#C084FC">🤖 Manus · n8n &nbsp;<span class="demo-hd-badge">자율 에이전트</span></div>
+    <div class="mn-layout sa" style="flex:1">
+      <div class="mn-flow">
+        <div class="mn-flow-hd">자동화 워크플로</div>
+        <div class="mn-node sa" style="border-color:rgba(192,132,252,.5);color:#C084FC;background:rgba(192,132,252,.12);animation-delay:.1s">
+          📨 이메일 수신<span class="mn-nbadge" style="background:rgba(52,211,153,.15);color:#34D399">실행중</span>
+        </div>
+        <div class="mn-conn sa" style="animation-delay:.25s">
+          <div class="mn-cline" style="animation-delay:.25s"></div>
+          <div class="mn-fdot" style="--dc:#C084FC;animation-delay:.4s"></div>
+          <div class="mn-fdot d2" style="--dc:#C084FC"></div>
+        </div>
+        <div class="mn-node sa" style="border-color:rgba(167,139,250,.5);color:#A78BFA;background:rgba(167,139,250,.12);animation-delay:.35s">
+          🤖 AI 분류 처리<span class="mn-nbadge" style="background:rgba(52,211,153,.15);color:#34D399">완료</span>
+        </div>
+        <div class="mn-conn sa" style="animation-delay:.5s">
+          <div class="mn-cline" style="animation-delay:.5s"></div>
+          <div class="mn-fdot" style="--dc:#A78BFA;animation-delay:.65s"></div>
+          <div class="mn-fdot d2" style="--dc:#A78BFA"></div>
+        </div>
+        <div class="mn-node sa" style="border-color:rgba(139,92,246,.5);color:#8B5CF6;background:rgba(139,92,246,.12);animation-delay:.6s">
+          📊 시트 기록<span class="mn-nbadge" style="background:rgba(52,211,153,.15);color:#34D399">완료</span>
+        </div>
+        <div class="mn-conn sa" style="animation-delay:.75s">
+          <div class="mn-cline" style="animation-delay:.75s"></div>
+          <div class="mn-fdot" style="--dc:#8B5CF6;animation-delay:.9s"></div>
+          <div class="mn-fdot d2" style="--dc:#8B5CF6"></div>
+        </div>
+        <div class="mn-node sa" style="border-color:rgba(124,58,237,.5);color:#7C3AED;background:rgba(124,58,237,.12);animation-delay:.85s">
+          ✉️ 자동 답장<span class="mn-nbadge" style="background:rgba(251,191,36,.12);color:#FBBF24">대기</span>
+        </div>
+      </div>
+      <div class="mn-char">
+        <div class="mn-char-hd">캐릭터 생성</div>
+        <div class="mn-char-fig">
+          <div class="mn-char-hair"></div>
+          <div class="mn-char-face"></div>
+          <div class="mn-char-body"></div>
+        </div>
+        <div class="mn-char-name" data-type="비비"></div>
+        <div class="mn-char-tag sa" data-type="2D 애니메이션" data-delay="700"></div>
+        <div class="sa" style="font-size:8px;color:#C084FC;margin-top:6px;font-weight:700" data-type="✦ 생성 완료" data-delay="1400"></div>
+      </div>
+    </div>
+  </div>`,
+
+  perplexity: `<div class="demo-inner">
+    <div class="demo-hd" style="color:#22D3EE">🔎 Perplexity · Grok &nbsp;<span class="demo-hd-badge">검색·리서치</span></div>
+    <div class="px-layout sa" style="flex:1">
+      <div class="px-bar">
+        <span class="px-icon">🔍</span>
+        <span class="px-qtext" data-type="Claude 4 vs GPT-5 성능 비교 최신 2025"></span>
+      </div>
+      <div class="px-sources sa">
+        <div class="px-src"><div class="px-dot" style="background:#FF4500"></div>techcrunch.com</div>
+        <div class="px-src sa"><div class="px-dot" style="background:#10A37F"></div>openai.com</div>
+        <div class="px-src sa"><div class="px-dot" style="background:#CC785C"></div>anthropic.com</div>
+        <div class="px-src sa"><div class="px-dot" style="background:#555"></div>theverge.com</div>
+        <div class="px-src sa" style="color:#22D3EE;border-color:rgba(34,211,238,.25)">+<span data-count="4">0</span>개 더</div>
+      </div>
+      <div class="px-answer">
+        <div class="px-ans-hd sa">
+          <div class="px-thinking"><div class="px-td"></div><div class="px-td"></div><div class="px-td"></div>&nbsp;8개 출처 분석 중…</div>
+        </div>
+        <div class="px-aline sa" data-type="Claude 4는 긴 문서·코드 분석에서 우위를 보입니다."></div>
+        <div class="px-aline sa" data-type="GPT-5는 멀티모달 이미지 처리에서 강점을 가집니다." data-delay="900"></div>
+        <div class="px-cite sa">출처: techcrunch.com [1] · openai.com [2] · anthropic.com [3]</div>
+      </div>
+    </div>
+  </div>`,
+
+  kiro: `<div class="demo-inner">
+    <div class="demo-hd" style="color:#8B5CF6">🛠️ Kiro · Antigravity &nbsp;<span class="demo-hd-badge">AI 개발환경</span></div>
+    <div class="kiro-layout sa" style="flex:1">
+      <div class="kiro-term">
+        <div class="kiro-term-bar">
+          <div class="kiro-dots">
+            <div class="kiro-dot" style="background:#FF5F57"></div>
+            <div class="kiro-dot" style="background:#FEBC2E"></div>
+            <div class="kiro-dot" style="background:#28C840"></div>
+          </div>
+          <span class="kiro-term-title">Kiro Agent</span>
+        </div>
+        <div class="kiro-term-body">
+          <div class="kiro-tl sa"><span class="kiro-pr">$ </span><span class="kiro-cm" data-type="kiro init shopping-mvp"></span></div>
+          <div class="kiro-tl sa"><span class="kiro-ok">✓ SPEC.md 생성 완료</span></div>
+          <div class="kiro-tl sa"><span class="kiro-ok">✓ 폴더 구조 스캐폴딩</span></div>
+          <div class="kiro-tl sa"><span class="kiro-pr">$ </span><span class="kiro-cm" data-type="kiro run --agent" data-delay="800"></span></div>
+          <div class="kiro-tl sa"><span class="kiro-out">→ 컴포넌트 생성 완료</span></div>
+          <div class="kiro-tl sa"><span class="kiro-spin">⟳</span><span class="kiro-out"> API 엔드포인트 연결 중…</span></div>
+        </div>
+      </div>
+      <div class="kiro-spec">
+        <div class="kiro-spec-hd">📋 SPEC.md</div>
+        <div class="kiro-md-h" data-type="# 쇼핑몰 MVP"></div>
+        <div class="kiro-md sa" data-type="- 상품 목록 페이지" data-delay="600"></div>
+        <div class="kiro-md sa" data-type="- 장바구니 + 수량 조절" data-delay="1200"></div>
+        <div class="kiro-md sa" data-type="- 토스페이 결제 연동" data-delay="1800"></div>
+        <div class="kiro-tasks sa">
+          <div class="kiro-tasks-hd">에이전트 현황</div>
+          <div class="kiro-task kiro-t-done sa">✓ 폴더 초기화</div>
+          <div class="kiro-task kiro-t-done sa">✓ 컴포넌트 생성</div>
+          <div class="kiro-task kiro-t-run sa">⟳ API 연결 중…</div>
+        </div>
+      </div>
+    </div>
+  </div>`
+};
+
+function showAiDemo(key) {
+  const panel = document.getElementById('aiDemoPanel');
+  if (!panel || !aiDemos[key]) return;
+  document.querySelectorAll('#aitoolBtns .aitool-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.ai === key);
+  });
+  panel.innerHTML = aiDemos[key];
+  const inner = panel.querySelector('.demo-inner');
+  if (inner) playPreviewAnim(inner);
+}
+
+document.querySelectorAll('#aitoolBtns .aitool-btn').forEach(btn => {
+  btn.addEventListener('click', () => showAiDemo(btn.dataset.ai));
+});
+
+// Auto-show GPT demo when slide becomes active
+(function() {
+  const toolSlide = document.querySelector('#aitoolBtns')?.closest('.slide');
+  if (!toolSlide) return;
+  new MutationObserver(mutations => {
+    mutations.forEach(m => {
+      if (m.target === toolSlide && toolSlide.classList.contains('active')) {
+        const panel = document.getElementById('aiDemoPanel');
+        if (panel && !panel.querySelector('.demo-inner')) showAiDemo('gpt');
+      }
+    });
+  }).observe(toolSlide, { attributes: true, attributeFilter: ['class'] });
+})();
+
+// ── 퀴즈 reveal (레거시 호환) ──
+document.querySelectorAll('.btn-quiz').forEach(btn => {
+  const targetId = btn.id + '-ans';
+  const ans = document.getElementById(targetId);
+  if (!ans) return;
+  btn.addEventListener('click', () => {
+    const open = ans.classList.toggle('open');
+    btn.textContent = open ? '✓ 답 확인됨' : '🤔 여러분 생각은? → 답 확인하기';
+    btn.classList.toggle('done', open);
+  });
+});
+
+// ═══════════════════════════════════════
+//  HIGH-QUALITY LIVE PREVIEW SYSTEM
+// ═══════════════════════════════════════
+
+// Typewriter: types text into el char by char
+function typewrite(el, text, speed) {
+  if (!el) return Promise.resolve();
+  speed = speed || 30;
+  el.textContent = '';
+  const cursor = document.createElement('span');
+  cursor.className = 'tc';
+  el.appendChild(cursor);
+  let i = 0;
+  return new Promise(res => {
+    const tick = () => {
+      if (i < text.length) {
+        el.insertBefore(document.createTextNode(text[i++]), cursor);
+        setTimeout(tick, speed + Math.random() * 10);
+      } else {
+        setTimeout(() => { if (cursor.parentNode) cursor.remove(); }, 1100);
+        res();
+      }
+    };
+    setTimeout(tick, 60);
+  });
+}
+
+// Count up number
+function countUp(el, target, delay) {
+  if (!el) return;
+  delay = delay || 0;
+  setTimeout(() => {
+    const start = Date.now();
+    const dur = 1000;
+    const tick = () => {
+      const t = Math.min((Date.now() - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.round(ease * target);
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    tick();
+  }, delay);
+}
+
+// Stagger-reveal items in container matching selector
+function staggerIn(container, selector, delay) {
+  delay = delay || 95;
+  const els = Array.from(container.querySelectorAll(selector));
+  els.forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(11px)';
+    setTimeout(() => {
+      el.style.transition = 'opacity 0.32s ease, transform 0.32s ease';
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    }, delay * (i + 1) + 160);
+  });
+}
+
+// Animate progress bars
+function animBars(container) {
+  container.querySelectorAll('[data-bar]').forEach((el, i) => {
+    el.style.width = '0';
+    setTimeout(() => { el.style.width = el.dataset.bar; }, i * 130 + 420);
+  });
+}
+
+// Show brief "AI 생성 중…" overlay, then reveal content
+function playPreviewAnim(container) {
+  // brief generating flash
+  const gen = container.querySelector('.pv-gen');
+  if (gen) {
+    setTimeout(() => {
+      gen.style.opacity = '0';
+      setTimeout(() => gen.remove(), 320);
+    }, 480);
+  }
+  const t0 = gen ? 520 : 0;
+
+  // typewriters
+  container.querySelectorAll('[data-type]').forEach(el => {
+    setTimeout(() => typewrite(el, el.dataset.type, parseInt(el.dataset.speed || '28')), t0 + (parseInt(el.dataset.delay || '0')));
+  });
+  // stagger groups
+  setTimeout(() => staggerIn(container, '.sa'), t0);
+  // bars
+  setTimeout(() => animBars(container), t0);
+  // counts
+  container.querySelectorAll('[data-count]').forEach((el, i) => {
+    countUp(el, parseInt(el.dataset.count), t0 + i * 180 + 300);
+  });
+}
+
+// ── TEMPLATES ──────────────────────────────────────
+const resultTemplates = {
+
+  doc: {
+    title: '프로젝트 기획서',
+    html: `
+    <div class="pv-doc-wrap" style="position:relative">
+      <div class="pv-gen"><div class="gd"></div><div class="gd"></div><div class="gd"></div>&nbsp;AI가 생성 중…</div>
+      <div class="pv-paper">
+        <div class="pv-doc-badge sa">📄 PROJECT BRIEF</div>
+        <div class="pv-doc-title sa" data-type="AI 스터디 출석 관리 서비스 기획서"></div>
+        <div class="pv-doc-meta sa">작성: Claude AI &nbsp;·&nbsp; 2025.05.28 &nbsp;·&nbsp; v1.0</div>
+        <div class="pv-doc-sec sa">
+          <div class="pv-doc-sl">📌 01 개요</div>
+          <div class="pv-doc-tx" data-type="AI를 활용해 스터디 출석을 자동 관리하고, 리마인더를 발송하는 웹 서비스입니다." data-delay="200"></div>
+        </div>
+        <div class="pv-doc-sec sa">
+          <div class="pv-doc-sl">🎯 02 핵심 기능</div>
+          <div class="pv-doc-tx">• 출석 체크 자동화 &nbsp;• AI 일정 분석<br>• 카카오톡 리마인더 연동 &nbsp;• 통계 대시보드</div>
+        </div>
+        <div class="pv-doc-sec sa">
+          <div class="pv-doc-sl">🛠️ 03 기술 스택</div>
+          <div class="pv-tag-row">
+            <span class="pv-dtag">Next.js</span>
+            <span class="pv-dtag c">Claude AI</span>
+            <span class="pv-dtag g">Supabase</span>
+            <span class="pv-dtag a">Vercel</span>
+          </div>
+        </div>
+      </div>
+    </div>`
+  },
+
+  slide: {
+    title: '발표 자료',
+    html: `
+    <div class="pv-ppt" style="position:relative">
+      <div class="pv-gen"><div class="gd"></div><div class="gd"></div><div class="gd"></div>&nbsp;AI가 생성 중…</div>
+      <div class="pv-ppt-thumbs">
+        <div class="pv-ptt on sa">01</div>
+        <div class="pv-ptt sa">02</div>
+        <div class="pv-ptt sa">03</div>
+        <div class="pv-ptt sa">04</div>
+      </div>
+      <div class="pv-main-slide sa">
+        <div class="pv-sn">SLIDE 01 / 04</div>
+        <div class="pv-sh" data-type="AI는 도구다" data-delay="120"></div>
+        <div class="pv-bi sa"><div class="pv-bd"></div>코딩 없이도 프로그램 완성</div>
+        <div class="pv-bi sa"><div class="pv-bd"></div>기획부터 배포까지 AI와 함께</div>
+        <div class="pv-bi sa"><div class="pv-bd"></div>6주 안에 수익화까지</div>
+      </div>
+    </div>`
+  },
+
+  sns: {
+    title: 'SNS 콘텐츠',
+    html: `
+    <div class="pv-sns-wrap" style="position:relative">
+      <div class="pv-gen"><div class="gd"></div><div class="gd"></div><div class="gd"></div>&nbsp;AI가 생성 중…</div>
+      <div class="pv-ig sa">
+        <div class="pv-ig-top">
+          <div class="pv-ig-av"></div>
+          <div class="pv-ig-user">vibe.coding.kr</div>
+          <div style="margin-left:auto;font-size:18px;color:#111">⋯</div>
+        </div>
+        <div class="pv-ig-img">
+          <div class="pv-ig-img-txt">🚀 AI로<br>첫 앱 론칭!</div>
+        </div>
+        <div class="pv-ig-actions">❤️ 💬 📤</div>
+        <div class="pv-ig-body">
+          <div class="pv-ig-likes">좋아요 <span data-count="1247">0</span>개</div>
+          <div class="pv-ig-cap" data-type="드디어 AI로 만든 첫 번째 웹앱을 론칭했습니다 🎉 코딩 한 줄 없이 6시간 만에 완성!" data-speed="22" data-delay="300"></div>
+          <div class="pv-ig-time">1시간 전</div>
+        </div>
+      </div>
+    </div>`
+  },
+
+  image: {
+    title: '이미지·썸네일',
+    html: `
+    <div class="pv-yt-wrap" style="position:relative">
+      <div class="pv-gen"><div class="gd"></div><div class="gd"></div><div class="gd"></div>&nbsp;AI가 이미지 생성 중…</div>
+      <div class="pv-yt sa">
+        <div class="pv-yt-bg"></div>
+        <div class="pv-yt-g1"></div>
+        <div class="pv-yt-g2"></div>
+        <div class="pv-yt-content">
+          <div class="pv-yt-tag sa">AI THUMBNAIL</div>
+          <div>
+            <div class="pv-yt-h" data-type="코딩 몰라도 앱 만드는 법" data-delay="200"></div>
+            <div class="pv-yt-sub sa">바이브코딩 완전 정복 · 2025</div>
+          </div>
+          <div class="pv-yt-ch sa">
+            <div class="pv-yt-chav"></div>
+            <div class="pv-yt-chn">바이브코딩 스튜디오</div>
+          </div>
+        </div>
+      </div>
+    </div>`
+  },
+
+  portfolio: {
+    title: '자기소개 사이트',
+    html: `
+    <div class="pv-browser" style="position:relative">
+      <div class="pv-gen"><div class="gd"></div><div class="gd"></div><div class="gd"></div>&nbsp;AI가 사이트 생성 중…</div>
+      <div class="pv-bar">
+        <div class="pv-dot-r"></div><div class="pv-dot-y"></div><div class="pv-dot-g"></div>
+        <div class="pv-url">portfolio.vercel.app</div>
+      </div>
+      <div class="pv-portfolio">
+        <div class="pv-pf-hero sa">
+          <div class="pv-pf-av">👤</div>
+          <div>
+            <div class="pv-pf-name" data-type="김바이브" data-delay="200"></div>
+            <div class="pv-pf-role" data-type="AI 풀스택 메이커" data-delay="600" data-speed="40"></div>
+          </div>
+        </div>
+        <div class="pv-skills-sec sa">
+          <div class="pv-sk-label">SKILLS</div>
+          <div class="pv-sk-grid">
+            <div class="pv-sk sa"><span class="e">⚛️</span>React</div>
+            <div class="pv-sk sa"><span class="e">🤖</span>Claude</div>
+            <div class="pv-sk sa"><span class="e">🗄️</span>Supabase</div>
+            <div class="pv-sk sa"><span class="e">🚀</span>Vercel</div>
+          </div>
+        </div>
+        <div class="pv-proj-sec">
+          <div class="pv-sk-label">PROJECTS</div>
+          <div class="pv-proj-row sa"><span class="pv-proj-n">📋 출석 관리 앱</span><span class="pv-proj-b">LIVE</span></div>
+          <div class="pv-proj-row sa"><span class="pv-proj-n">🛒 쇼핑 큐레이터</span><span class="pv-proj-b">LIVE</span></div>
+        </div>
+      </div>
+    </div>`
+  },
+
+  webapp: {
+    title: '간단한 웹앱',
+    html: `
+    <div class="pv-browser" style="position:relative">
+      <div class="pv-gen"><div class="gd"></div><div class="gd"></div><div class="gd"></div>&nbsp;AI가 앱 생성 중…</div>
+      <div class="pv-bar">
+        <div class="pv-dot-r"></div><div class="pv-dot-y"></div><div class="pv-dot-g"></div>
+        <div class="pv-url">habitboard.vercel.app</div>
+      </div>
+      <div class="pv-scroll" style="padding:0">
+        <!-- App header -->
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(167,139,250,0.08);border-bottom:1px solid rgba(255,255,255,0.07)">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,var(--violet),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:13px">📋</div>
+            <span style="font-size:13px;font-weight:800;color:#fff">HabitBoard</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <div style="width:7px;height:7px;border-radius:50%;background:var(--emerald)"></div>
+            <span style="font-size:10px;color:var(--emerald);font-weight:700">오늘 3/5 완료</span>
+          </div>
+        </div>
+        <!-- Stats row -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:10px 12px 6px">
+          <div class="sa" style="background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.2);border-radius:9px;padding:8px 10px">
+            <div style="font-size:18px;font-weight:900;color:var(--emerald)" data-count="12">0</div>
+            <div style="font-size:9px;color:var(--text3);margin-top:1px">연속 일수</div>
+          </div>
+          <div class="sa" style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2);border-radius:9px;padding:8px 10px">
+            <div style="font-size:18px;font-weight:900;color:var(--violet2)" data-count="87">0</div>
+            <div style="font-size:9px;color:var(--text3);margin-top:1px">이번달 %</div>
+          </div>
+          <div class="sa" style="background:rgba(103,232,249,0.1);border:1px solid rgba(103,232,249,0.2);border-radius:9px;padding:8px 10px">
+            <div style="font-size:18px;font-weight:900;color:var(--cyan)" data-count="5">0</div>
+            <div style="font-size:9px;color:var(--text3);margin-top:1px">활성 습관</div>
+          </div>
+        </div>
+        <!-- Habit list -->
+        <div style="padding:4px 12px 10px;display:flex;flex-direction:column;gap:5px">
+          <div style="font-size:9px;font-weight:800;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px">오늘의 습관</div>
+          <div class="sa" style="display:flex;align-items:center;gap:10px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:9px;padding:8px 11px">
+            <div style="width:18px;height:18px;border-radius:50%;background:var(--emerald);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">✓</div>
+            <span style="font-size:11px;color:var(--text);flex:1;text-decoration:line-through;opacity:.6">아침 30분 독서</span>
+            <span style="font-size:9px;color:var(--emerald);font-weight:700">완료</span>
+          </div>
+          <div class="sa" style="display:flex;align-items:center;gap:10px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:9px;padding:8px 11px">
+            <div style="width:18px;height:18px;border-radius:50%;background:var(--emerald);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0">✓</div>
+            <span style="font-size:11px;color:var(--text);flex:1;text-decoration:line-through;opacity:.6">운동 20분</span>
+            <span style="font-size:9px;color:var(--emerald);font-weight:700">완료</span>
+          </div>
+          <div class="sa" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:9px;padding:8px 11px">
+            <div style="width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);flex-shrink:0"></div>
+            <span style="font-size:11px;color:var(--text);flex:1">바이브코딩 1시간</span>
+            <span style="font-size:9px;color:var(--text3)">진행 중</span>
+          </div>
+          <div class="sa" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:9px;padding:8px 11px">
+            <div style="width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);flex-shrink:0"></div>
+            <span style="font-size:11px;color:var(--text);flex:1">물 2L 마시기</span>
+            <span style="font-size:9px;color:var(--text3)">대기</span>
+          </div>
+          <!-- Add button -->
+          <div class="sa" style="display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(167,139,250,0.08);border:1px dashed rgba(167,139,250,0.3);border-radius:9px;padding:8px;cursor:pointer;margin-top:2px">
+            <span style="font-size:14px;color:var(--violet2)">+</span>
+            <span style="font-size:11px;color:var(--violet2);font-weight:600">새 습관 추가</span>
+          </div>
+        </div>
+      </div>
+    </div>`
+  },
+
+  tool: {
+    title: '예약/관리 도구',
+    html: `
+    <div class="pv-browser" style="position:relative">
+      <div class="pv-gen"><div class="gd"></div><div class="gd"></div><div class="gd"></div>&nbsp;AI가 대시보드 생성 중…</div>
+      <div class="pv-bar">
+        <div class="pv-dot-r"></div><div class="pv-dot-y"></div><div class="pv-dot-g"></div>
+        <div class="pv-url">booking.myservice.com</div>
+      </div>
+      <div class="pv-bk">
+        <div class="pv-bk-top">
+          <div class="pv-bk-title">📅 5월 예약 현황</div>
+          <div class="pv-bk-badge">오늘</div>
+        </div>
+        <div class="pv-bk-stats">
+          <div class="pv-bk-stat sa"><div class="pv-bk-sn" data-count="24">0</div><div class="pv-bk-sl">이번달 예약</div></div>
+          <div class="pv-bk-stat sa"><div class="pv-bk-sn" data-count="3">0</div><div class="pv-bk-sl">오늘 일정</div></div>
+          <div class="pv-bk-stat sa"><div class="pv-bk-sn" data-count="92">0</div><div class="pv-bk-sl">만족도 %</div></div>
+        </div>
+        <div class="pv-cal">
+          <div class="pv-cd sa">26</div><div class="pv-cd sa">27</div><div class="pv-cd td sa">28</div>
+          <div class="pv-cd bk sa">29</div><div class="pv-cd sa">30</div><div class="pv-cd bk sa">31</div><div class="pv-cd sa">1</div>
+        </div>
+        <div class="pv-bk-list">
+          <div class="pv-bk-row sa"><span class="pv-bk-time">10:00</span><span class="pv-bk-name">이수진 님</span><span class="pv-bk-st ok">완료</span></div>
+          <div class="pv-bk-row sa"><span class="pv-bk-time">14:30</span><span class="pv-bk-name">박지훈 님</span><span class="pv-bk-st wt">대기</span></div>
+        </div>
+      </div>
+    </div>`
+  },
+
+  community: {
+    title: '커뮤니티·미션 사이트',
+    html: `
+    <div class="pv-browser" style="position:relative">
+      <div class="pv-gen"><div class="gd"></div><div class="gd"></div><div class="gd"></div>&nbsp;AI가 커뮤니티 생성 중…</div>
+      <div class="pv-bar">
+        <div class="pv-dot-r"></div><div class="pv-dot-y"></div><div class="pv-dot-g"></div>
+        <div class="pv-url">community.vibe.kr</div>
+      </div>
+      <div class="pv-comm">
+        <div class="pv-comm-top">
+          <div class="pv-comm-logo">🏆</div>
+          <div class="pv-comm-title">바이브코딩 스터디</div>
+          <div class="pv-comm-members">● 42명 접속 중</div>
+        </div>
+        <div class="pv-msec-label">이번 주 미션</div>
+        <div class="pv-mrow sa">
+          <div class="pv-m-icon">🛠️</div>
+          <div class="pv-m-name">첫 번째 앱 배포하기</div>
+          <div class="pv-mprog"><span class="pv-mpct">78%</span><div class="pv-pt"><div class="pv-pf2" data-bar="78%" style="width:0"></div></div></div>
+        </div>
+        <div class="pv-mrow sa">
+          <div class="pv-m-icon">✍️</div>
+          <div class="pv-m-name">후기 포스팅 작성</div>
+          <div class="pv-mprog"><span class="pv-mpct">55%</span><div class="pv-pt"><div class="pv-pf2" data-bar="55%" style="width:0"></div></div></div>
+        </div>
+        <div class="pv-fsec">
+          <div class="pv-msec-label">최근 피드</div>
+          <div class="pv-frow sa">
+            <div class="pv-fav"></div>
+            <div class="pv-fbody">
+              <div class="pv-fnm">김민준</div>
+              <div class="pv-ftx" data-type="드디어 배포 성공했어요! 생각보다 어렵지 않네요 🎉" data-speed="25" data-delay="500"></div>
+              <div class="pv-flk">❤️ 24 · 5분 전</div>
+            </div>
+          </div>
+          <div class="pv-frow sa">
+            <div class="pv-fav b"></div>
+            <div class="pv-fbody">
+              <div class="pv-fnm">이지아</div>
+              <div class="pv-ftx">AI 프롬프트 잘 쓰면 속도가 3배는 빨라지는 것 같아요</div>
+              <div class="pv-flk">❤️ 18 · 12분 전</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`
+  },
+};
+
+function setResultPreview(showcase, key) {
+  const template = resultTemplates[key];
+  if (!template) return;
+  const titleEl = showcase.querySelector('[data-result-title]');
+  const preview = showcase.querySelector('[data-result-preview]');
+  if (titleEl) titleEl.textContent = template.title;
+  preview.innerHTML = template.html;
+  preview.style.opacity = '0';
+  preview.style.transform = 'translateX(14px)';
+  requestAnimationFrame(() => {
+    preview.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+    preview.style.opacity = '1';
+    preview.style.transform = 'translateX(0)';
+  });
+  showcase.querySelectorAll('.result-card').forEach(card => {
+    card.classList.toggle('is-active', card.dataset.preview === key);
+  });
+  setTimeout(() => playPreviewAnim(preview), 40);
+}
+
+document.querySelectorAll('[data-result-showcase]').forEach(showcase => {
+  const first = showcase.querySelector('.result-card')?.dataset.preview;
+  if (first) setResultPreview(showcase, first);
+  showcase.querySelectorAll('.result-card').forEach(card => {
+    card.addEventListener('click', () => setResultPreview(showcase, card.dataset.preview));
+  });
+});
+
+// ── 키보드 힌트 ──
+const hint = document.createElement('div');
+hint.className = 'kb-hint';
+hint.innerHTML = '<span class="kb-key">←</span> <span class="kb-key">→</span> 슬라이드 이동';
+document.body.appendChild(hint);
+
+// ── 콘텐츠 진입 시 바 애니메이션 ──
+document.querySelectorAll('.slide').forEach(slide => {
+  const obs = new MutationObserver(() => {
+    if (slide.classList.contains('active')) {
+      slide.querySelectorAll('.stat-bar-fill[data-w]').forEach(bar => {
+        bar.style.width = '0';
+        requestAnimationFrame(() => requestAnimationFrame(() => { bar.style.width = bar.dataset.w; }));
+      });
+    }
+  });
+  obs.observe(slide, { attributes: true, attributeFilter: ['class'] });
+});
+
+render();
+</script>
+<script type="module" src="../../renderer/interactive-education.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1~6강 커리큘럼 1페이지 요약 · 바이브코딩 기초반</title>
+<link rel="stylesheet" href="./appendix-print.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
+  background: #eef1f7;
+  color: #111827;
+  line-height: 1.48;
+  padding: 28px 18px;
+}
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 10px 35px rgba(15,23,42,.12);
+  padding: 16mm 15mm 14mm;
+}
+.print-btn {
+  position: fixed;
+  right: 22px;
+  top: 18px;
+  border: 0;
+  border-radius: 10px;
+  background: #4f46e5;
+  color: #fff;
+  padding: 10px 18px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.appendix-use-card {
+  margin: 0 0 12px;
+  border: 1px solid #d7def0;
+  border-radius: 10px;
+  background: #f8fafc;
+  padding: 10px 12px;
+}
+.use-line {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 8px;
+  font-size: 11px;
+  color: #4b5563;
+}
+.use-line + .use-line { margin-top: 3px; }
+.use-line strong { color: #4338ca; }
+.label { font-weight: 900; color: #64748b; letter-spacing: .08em; }
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 14px;
+  border-bottom: 3px solid #111827;
+}
+.course-kicker {
+  font-size: 11px;
+  color: #4f46e5;
+  font-weight: 950;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+h1 {
+  margin-top: 6px;
+  font-size: 31px;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+.name-box {
+  min-width: 185px;
+  align-self: flex-end;
+  font-size: 12px;
+  color: #6b7280;
+}
+.write-line {
+  display: inline-block;
+  min-width: 116px;
+  border-bottom: 1px solid #9ca3af;
+  transform: translateY(-2px);
+}
+.goal {
+  margin: 14px 0;
+  border: 1.5px solid #c7d2fe;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+  padding: 12px 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+.goal-card {
+  border-left: 4px solid #4f46e5;
+  padding-left: 10px;
+}
+.goal-title {
+  font-size: 13px;
+  font-weight: 950;
+  color: #111827;
+}
+.goal-text {
+  margin-top: 4px;
+  font-size: 11.5px;
+  color: #4b5563;
+}
+.timeline {
+  display: grid;
+  gap: 9px;
+}
+.session {
+  display: grid;
+  grid-template-columns: 58px 1.1fr 1.35fr 1fr;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 74px;
+}
+.num {
+  display: grid;
+  place-items: center;
+  background: #111827;
+  color: #fff;
+  font-weight: 950;
+  font-size: 17px;
+}
+.cell {
+  padding: 10px 12px;
+  border-left: 1px solid #e5e7eb;
+}
+.cell-label {
+  font-size: 9px;
+  color: #6b7280;
+  font-weight: 950;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.cell-title {
+  font-size: 15px;
+  font-weight: 950;
+  color: #111827;
+}
+.cell-body {
+  font-size: 11.2px;
+  color: #4b5563;
+}
+.badge {
+  display: inline-flex;
+  margin-top: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #4338ca;
+  font-size: 9.5px;
+  font-weight: 900;
+}
+.bottom {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 12px;
+}
+.box {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px 14px;
+  min-height: 92px;
+}
+.box-title {
+  font-size: 12px;
+  font-weight: 950;
+  color: #111827;
+  margin-bottom: 8px;
+}
+.dot-list {
+  display: grid;
+  gap: 5px;
+  font-size: 11.2px;
+  color: #4b5563;
+}
+.dot-list div::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #4f46e5;
+  margin-right: 7px;
+  transform: translateY(-1px);
+}
+@media print {
+  @page { size: A4; margin: 0; }
+  body { background: #fff; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .print-btn { display: none; }
+  .page { width: 210mm; min-height: 297mm; box-shadow: none; }
+}
+</style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">인쇄 / PDF 저장</button>
+<main class="page">
+  <section class="appendix-use-card" aria-label="자료 사용 안내">
+    <div class="use-line"><span class="label">사용 회차</span><span><strong>1회차</strong> 강의 시작 또는 커리큘럼 소개 시점</span></div>
+    <div class="use-line"><span class="label">사용 방식</span><span>6주 동안 무엇을 배우고, 어떤 실습으로 이어지는지 한 장으로 안내합니다.</span></div>
+    <div class="use-line"><span class="label">배포 안내</span><span>첫 수업 시작 전 책상 위에 놓거나, 1회차 종료 후 숙제 자료와 함께 배포합니다.</span></div>
+  </section>
+
+  <section class="hero">
+    <div>
+      <div class="course-kicker">VIBE CODING BASIC · 6 WEEK ROADMAP</div>
+      <h1>바이브코딩 기초반<br>1~6강 커리큘럼 요약</h1>
+    </div>
+    <div class="name-box">
+      이름 <span class="write-line"></span><br>
+      날짜 <span class="write-line"></span>
+    </div>
+  </section>
+
+  <section class="goal">
+    <div class="goal-card">
+      <div class="goal-title">핵심 목표</div>
+      <p class="goal-text">6주 동안 내 작은 프로젝트를 만들며 AI에게 일을 맡기는 흐름을 몸에 익힙니다.</p>
+    </div>
+    <div class="goal-card">
+      <div class="goal-title">수업 방식</div>
+      <p class="goal-text">앞부분은 짧게 이론, 대부분은 실습과 반복 수정으로 진행합니다.</p>
+    </div>
+    <div class="goal-card">
+      <div class="goal-title">최종 결과</div>
+      <p class="goal-text">6회차에 각자 만든 프로그램을 보여주고, 다음 고도화 방향을 정합니다.</p>
+    </div>
+  </section>
+
+  <section class="timeline">
+    <div class="session">
+      <div class="num">1</div>
+      <div class="cell"><div class="cell-label">주제</div><div class="cell-title">AI 이해</div><span class="badge">AI는 도구다</span></div>
+      <div class="cell"><div class="cell-label">배우는 것</div><div class="cell-body">AI 종류, AI로 만들 수 있는 결과물, 분야별 AI 도구의 차이</div></div>
+      <div class="cell"><div class="cell-label">별첨자료</div><div class="cell-body">AI 종류 가이드, 2회차 사전 준비자료</div></div>
+    </div>
+    <div class="session">
+      <div class="num">2</div>
+      <div class="cell"><div class="cell-label">주제</div><div class="cell-title">바이브코딩</div><span class="badge">첫 실습</span></div>
+      <div class="cell"><div class="cell-label">배우는 것</div><div class="cell-body">AI 코딩 툴 사용법, 프롬프트를 AI에게 정리시키는 흐름</div></div>
+      <div class="cell"><div class="cell-label">실습</div><div class="cell-body">간단한 웹페이지 또는 미니 프로그램 생성</div></div>
+    </div>
+    <div class="session">
+      <div class="num">3</div>
+      <div class="cell"><div class="cell-label">주제</div><div class="cell-title">개발 용어 이해</div><span class="badge">위치 설명하기</span></div>
+      <div class="cell"><div class="cell-label">배우는 것</div><div class="cell-body">프론트엔드, 백엔드, DB, API, UI/UX, React, Next.js</div></div>
+      <div class="cell"><div class="cell-label">실습</div><div class="cell-body">프로그램의 각 공간과 데이터 흐름을 찾아 설명하기</div></div>
+    </div>
+    <div class="session">
+      <div class="num">4</div>
+      <div class="cell"><div class="cell-label">주제</div><div class="cell-title">파일 구조 이해</div><span class="badge">프로젝트 읽기</span></div>
+      <div class="cell"><div class="cell-label">배우는 것</div><div class="cell-body">package.json, src, components, public, .env, README 역할</div></div>
+      <div class="cell"><div class="cell-label">실습</div><div class="cell-body">AI가 만든 파일을 찾고 작은 수정 반영</div></div>
+    </div>
+    <div class="session">
+      <div class="num">5</div>
+      <div class="cell"><div class="cell-label">주제</div><div class="cell-title">배포·보안·데이터</div><span class="badge">공개 전 점검</span></div>
+      <div class="cell"><div class="cell-label">배우는 것</div><div class="cell-body">배포, 환경변수, API 키, 데이터베이스, 데이터 흐름</div></div>
+      <div class="cell"><div class="cell-label">실습</div><div class="cell-body">배포 준비와 보안 체크리스트 확인</div></div>
+    </div>
+    <div class="session">
+      <div class="num">6</div>
+      <div class="cell"><div class="cell-label">주제</div><div class="cell-title">쇼케이스 발표</div><span class="badge">피드백</span></div>
+      <div class="cell"><div class="cell-label">배우는 것</div><div class="cell-body">내가 만든 결과물을 설명하고, 다음 개선 방향 정리</div></div>
+      <div class="cell"><div class="cell-label">실습</div><div class="cell-body">발표, 질의응답, 서로 피드백</div></div>
+    </div>
+  </section>
+
+  <section class="bottom">
+    <div class="box">
+      <div class="box-title">기초반에서 하지 않는 것</div>
+      <div class="dot-list">
+        <div>수익화, 외주, SaaS, 포트폴리오 전략은 응용반에서 다룹니다.</div>
+        <div>기초반은 “작게 만들고, 직접 실행하고, 반복 수정하는 능력”에 집중합니다.</div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-title">수강생 준비물</div>
+      <div class="dot-list">
+        <div>노트북과 충전기</div>
+        <div>2회차 전 Node.js, VS Code, AI IDE 설치</div>
+        <div>만들고 싶은 작은 아이디어 1개</div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="./appendix-print.js"></script>
+</body>
+</html>
+

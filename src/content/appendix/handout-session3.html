@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3강 수강생 프린트물 - 개발 용어 지도</title>
+  <link rel="stylesheet" href="./session-material.css">
+  <style>
+    .goal{margin:12px 0;padding:10px 13px}
+    .section{margin-top:12px}
+    .box,.term,.qa,.flow-step{padding:9px 11px}
+    .visual-building div{min-height:62px}
+    .notes{min-height:72px}
+    .footer-goal{margin-top:11px;padding-top:8px}
+    @media print{
+      .sheet{padding:10mm 12mm}
+      h1{font-size:28px}
+      h2{margin-bottom:7px;font-size:17px}
+      h3{font-size:14px}
+      .box p,.term p,.qa p,.flow-step p,.check,.footer-goal{font-size:11px}
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header class="material-head">
+      <div><div class="material-kicker">STUDENT HANDOUT · SESSION 03</div><h1>앱을 건물처럼 이해하기</h1></div>
+      <span class="session-badge">3강</span>
+    </header>
+    <div class="goal">오늘의 목표: “이상해요” 대신 어떤 공간의 어떤 기능을 고쳐야 하는지 말할 수 있다.</div>
+    <section class="section">
+      <h2>아이디어가 진짜 서비스가 되는 7단계</h2>
+      <div class="visual-building">
+        <div>빈 땅<br>아이디어</div><div>설계도<br>기획</div><div>철골<br>파일 구조</div>
+        <div>외관<br>프론트엔드</div><div>빈 내부<br>기능 없음</div><div>내부 공사<br>기능 연결</div><div>준공<br>테스트·배포</div>
+      </div>
+    </section>
+    <section class="section grid-2">
+      <article class="term"><h3>프론트엔드</h3><p>사용자가 보는 화면과 누르는 요소</p></article>
+      <article class="term"><h3>백엔드</h3><p>요청의 권한, 재고, 결제, 저장을 처리하고 응답을 돌려주는 영역</p></article>
+      <article class="term"><h3>데이터베이스</h3><p>회원, 게시글, 상품, 주문을 나눠 보관하는 창고</p></article>
+      <article class="term"><h3>API</h3><p>화면과 서버 또는 외부 서비스가 대화하는 통로</p></article>
+    </section>
+    <section class="section grid-2">
+      <article class="term"><h3>기능의 화면 상태</h3><p>기본, 처리 중, 성공, 실패, 빈 화면, 사용 불가 상태를 함께 준비해야 실제 사용 가능한 기능이 된다.</p></article>
+      <article class="term"><h3>기능의 완성 기준</h3><p>사용자가 현재 상태와 다음 행동을 알고, 실패해도 내용을 잃지 않고 다시 시도할 수 있어야 한다.</p></article>
+    </section>
+    <section class="section grid-3">
+      <article class="term"><h3>UI</h3><p>버튼, 입력창, 카드처럼 화면의 생김새와 부품</p></article>
+      <article class="term"><h3>UX</h3><p>현재 위치와 다음 행동을 잃지 않는 사용 과정</p></article>
+      <article class="term"><h3>애니메이션</h3><p>원인, 변화, 결과를 이어주는 절제된 화면 움직임</p></article>
+    </section>
+    <section class="section">
+      <h2>내 프로젝트 체크</h2>
+      <div class="checklist">
+        <div class="check">사용자가 가장 먼저 보는 화면은 무엇인가?</div>
+        <div class="check">가장 중요한 버튼을 누르면 어디까지 이동하는가?</div>
+        <div class="check">저장해야 하는 데이터는 무엇인가?</div>
+        <div class="check">기본, 처리 중, 성공, 실패, 빈 화면, 사용 불가 상태가 필요한가?</div>
+        <div class="check">사용자가 현재 위치와 다음 행동을 알 수 있는가?</div>
+        <div class="check">움직임이 장식이 아니라 변화를 설명하는가?</div>
+      </div>
+    </section>
+    <section class="section"><h2>내 프로젝트를 건물로 설명하기</h2><div class="notes"></div></section>
+    <div class="footer-goal">다음 4강: 이 기능들이 실제로 어느 파일과 폴더에 들어 있는지 찾습니다.</div>
+  </main>
+</body>
+</html>

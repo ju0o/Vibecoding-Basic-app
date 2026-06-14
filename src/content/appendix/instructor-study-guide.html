@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>강사용 공부자료 — 바이브코딩 기초반</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+  <link rel="stylesheet" href="./instructor-note.css">
+</head>
+<body>
+<main>
+  <section class="hero">
+    <div class="eyebrow">Teacher Study Pack · Basic V1</div>
+    <h1>강사용 공부자료</h1>
+    <p class="desc">수업 전에 강사가 훑어볼 핵심 개념 정리입니다. 수강생 배포용이 아니라, 질문이 들어왔을 때 어디까지 설명하고 어디서 멈출지 정하는 기준으로 사용합니다.</p>
+  </section>
+
+  <section class="guide">
+    <div><b>공통 원칙</b><span>초보자에게는 정답보다 비유, 구조보다 흐름, 문법보다 작동 장면이 먼저입니다.</span></div>
+    <div><b>설명 깊이</b><span>한 번에 3개 이상의 새 용어를 던지지 않습니다.</span></div>
+    <div><b>실습 원칙</b><span>보여주고, 같이 누르고, 각자 해보고, AI에게 다시 묻습니다.</span></div>
+  </section>
+
+  <section class="study-grid">
+    <article class="study-card"><b>1강 · AI 이해</b><span>LLM은 자연어로 요청을 이해하고 답을 생성하는 모델입니다. 수업에서는 모델 구조보다 “대화로 일을 맡길 수 있다”는 점만 강조합니다. GPT, Claude, Gemini, 이미지·영상 AI는 목적별 도구로 분류합니다.</span></article>
+    <article class="study-card"><b>2강 · 바이브코딩</b><span>바이브코딩은 개발 지식 없이도 AI와 대화하며 설계, 구현, 수정, 실행을 반복하는 방식입니다. 핵심은 한 번에 완성시키는 것이 아니라 작은 결과를 보고 다시 요청하는 루프입니다.</span></article>
+    <article class="study-card"><b>3강 · 개발 용어</b><span>프론트엔드는 보이는 화면, 백엔드는 규칙 처리, DB는 정보 창고, API는 요청 통로입니다. React는 화면 조각 조립, Next.js는 페이지·서버·배포 구조를 묶는 프레임 정도로 설명합니다.</span></article>
+    <article class="study-card"><b>4강 · 파일 구조</b><span>app/pages는 화면 주소, components는 재사용 부품, styles는 시각 규칙, public은 이미지 등 정적 파일, .env는 비밀값입니다. node_modules는 설치된 부품 창고라 직접 수정하지 않는다고 설명합니다.</span></article>
+    <article class="study-card"><b>5강 · 배포와 보안</b><span>배포는 localhost 앱을 인터넷 주소로 공개하는 과정입니다. GitHub는 코드 보관소, Vercel/Railway는 실행 공간입니다. 환경변수는 API 키, DB 주소 같은 비밀값을 코드 밖에 보관하는 장치입니다.</span></article>
+    <article class="study-card"><b>6강 · 쇼케이스</b><span>발표는 완성도 평가가 아니라 작동 장면 공유입니다. 무엇을 만들었는지, 어떤 버튼이 작동하는지, 어디서 막혔고 어떻게 해결했는지, 다음에 무엇을 붙일지 중심으로 진행합니다.</span></article>
+  </section>
+
+  <section>
+    <article class="slide-card"><div class="slide-head"><div class="num">Q</div><h2>질문이 들어왔을 때 멈추는 기준</h2></div><div class="block"><div class="label">강사용 기준</div><div class="text">수강생이 지금 실습에서 바로 써먹을 수 있는 설명이면 답하고, 프레임워크 내부 원리나 서버 세부 구조처럼 지금 당장 필요하지 않은 내용은 “응용반에서 다룰 내용”으로 넘깁니다.</div></div></article>
+    <article class="slide-card"><div class="slide-head"><div class="num">A</div><h2>AI에게 다시 물어보게 하는 문장</h2></div><div class="block"><div class="label">템플릿</div><div class="text">“나는 바이브코딩 초보자야. 지금 [상황]에서 [에러/원하는 기능]이 발생했어. 아래 내용을 보고 원인을 쉬운 말로 설명하고, 어떤 파일을 봐야 하는지 단계별로 알려줘.”</div></div></article>
+  </section>
+</main>
+<script src="./appendix-print.js"></script>
+</body>
+</html>
