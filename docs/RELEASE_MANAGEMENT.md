@@ -69,8 +69,10 @@ git push origin main --follow-tags
 
 생성되는 Release 자산:
 
-- `바이브코딩 기초반 X.Y.Z.exe`
+- `VibeCoding-Basic-Class-X.Y.Z.exe`
 - `SHA256SUMS.txt`
+
+로컬 `release/` 폴더에서는 한글 EXE 이름을 사용하고, GitHub 다운로드 자산은 URL과 브라우저 호환성을 위해 ASCII 파일명으로 정규화합니다.
 
 ## 긴급 수정
 
