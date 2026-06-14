@@ -65,3 +65,20 @@ jobs:
               --title "바이브코딩 기초반 $tag" `
               --generate-notes
           }
+
+          # GitHub CLI on Windows may shorten a Unicode asset basename.
+          # Normalize the uploaded EXE name through the GitHub API.
+          $version = node -p "require('./package.json').version"
+          $expectedName = "바이브코딩 기초반 $version.exe"
+          $release = gh api "repos/${{ github.repository }}/releases/tags/$tag" |
+            ConvertFrom-Json
+          $exeAsset = $release.assets |
+            Where-Object { $_.name -like "*.exe" } |
+            Sort-Object created_at -Descending |
+            Select-Object -First 1
+
+          if ($exeAsset -and $exeAsset.name -ne $expectedName) {
+            gh api --method PATCH `
+              "repos/${{ github.repository }}/releases/assets/$($exeAsset.id)" `
+              -f "name=$expectedName"
+          }
