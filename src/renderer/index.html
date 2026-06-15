@@ -24,6 +24,16 @@
       </div>
 
       <nav class="sidebar-nav">
+        <p class="nav-label">프로그램</p>
+        <button class="nav-item" data-nav="catalog">
+          <span class="nav-icon nav-icon-catalog"></span>
+          <span class="nav-item-title">전체 과정</span>
+        </button>
+        <button class="nav-item" data-nav="planner">
+          <span class="nav-icon nav-icon-planner"></span>
+          <span class="nav-item-title">일정 및 메모</span>
+        </button>
+
         <p class="nav-label">강의 과정</p>
         <div id="nav-courses" class="nav-list"></div>
 
@@ -49,6 +59,35 @@
          MAIN CONTENT AREA
     ══════════════════════════════════════ -->
     <main id="main-content" class="main-content">
+
+      <!-- ── VIEW: COURSE CATALOG ── -->
+      <div id="view-catalog" class="view view-scroll hidden">
+        <div class="catalog-hero">
+          <div>
+            <span class="eyebrow">VIBE CODING LEARNING SYSTEM</span>
+            <h1 class="view-title">배우는 순서가 보이는<br>바이브코딩 교육 프로그램</h1>
+            <p class="view-desc">기초에서 시작해 서비스 제작, 수익화, 자동화, MCP, Agent, Claude Code와 Codex까지 단계별 과정을 관리합니다.</p>
+          </div>
+          <aside class="catalog-summary">
+            <div><span>COURSES</span><strong id="catalog-course-count">00</strong></div>
+            <div><span>LESSONS</span><strong id="catalog-lesson-count">00</strong></div>
+            <div><span>ACTIVE</span><strong id="catalog-active-count">00</strong></div>
+          </aside>
+        </div>
+        <div class="catalog-toolbar">
+          <div id="catalog-track-filter" class="filter-chips"></div>
+          <div class="search-wrap">
+            <span class="search-icon-svg">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
+                <circle cx="8.5" cy="8.5" r="6" stroke="currentColor" stroke-width="2"/>
+                <path d="M13 13l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <input id="search-catalog" class="search-input" type="text" placeholder="과정 검색..." autocomplete="off" />
+          </div>
+        </div>
+        <div id="catalog-grid" class="catalog-grid"></div>
+      </div>
 
       <!-- ── VIEW: DASHBOARD ── -->
       <div id="view-dashboard" class="view view-scroll">
@@ -119,8 +158,35 @@
             </div>
             <div id="appendix-count" class="library-count"></div>
           </div>
+          <div id="appendix-filters" class="filter-chips library-filters"></div>
         </div>
-        <div id="appendix-grid" class="session-grid"></div>
+        <div id="appendix-grid" class="library-groups"></div>
+      </div>
+
+      <!-- ── VIEW: SCHEDULE & NOTES ── -->
+      <div id="view-planner" class="view view-scroll hidden">
+        <div class="planner-head">
+          <div>
+            <span class="eyebrow">PROGRAM OPERATIONS</span>
+            <h1 class="view-title">강의 일정과 운영 메모</h1>
+            <p class="view-desc">과정별 수업 날짜와 장소를 기록하고, 다음 수업에서 확인할 내용을 한 화면에 모읍니다.</p>
+          </div>
+          <div class="planner-save-state"><i></i><span id="planner-save-label">자동 저장</span></div>
+        </div>
+        <section class="planner-note-section">
+          <div class="section-heading">
+            <div><span>PROGRAM NOTE</span><h2>전체 운영 메모</h2></div>
+            <p>기수 운영, 준비물, 공통 공지처럼 모든 과정에 걸친 내용을 기록합니다.</p>
+          </div>
+          <textarea id="program-note" class="program-note" placeholder="다음 수업 준비, 공통 공지, 개선할 점을 기록하세요."></textarea>
+        </section>
+        <section>
+          <div class="section-heading">
+            <div><span>CLASS SCHEDULE</span><h2>과정별 일정</h2></div>
+            <p>날짜와 시간, 장소, 준비 메모는 이 컴퓨터에 자동 저장됩니다.</p>
+          </div>
+          <div id="schedule-list" class="schedule-list"></div>
+        </section>
       </div>
 
       <!-- ── VIEW: PLAYER (강의 + 별첨 공용) ── -->

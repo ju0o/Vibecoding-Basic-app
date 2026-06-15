@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>5강 강사용 대본 — 배포 및 보안 그리고 데이터</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>5강 강사용 상세 대본 - 배포와 보안 그리고 데이터</title>
   <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
   <link rel="stylesheet" href="./appendix-print.css">
   <link rel="stylesheet" href="./instructor-note.css">
@@ -11,34 +11,143 @@
 <body>
 <main>
   <section class="hero">
-    <div class="eyebrow">Teacher Script · Session 05</div>
-    <h1>배포 및 보안 그리고 데이터</h1>
-    <p class="desc">5강은 내 노트북에서만 보이는 프로젝트를 링크로 접속 가능한 서비스로 올리기 전에, 배포 흐름과 비밀값, 데이터 저장을 한 번에 이해시키는 시간입니다.</p>
+    <div class="eyebrow">TEACHER SCRIPT · SESSION 05 · 17 SLIDES</div>
+    <h1>배포와 보안 그리고 데이터</h1>
+    <p class="desc">수강생이 만든 프로젝트를 GitHub에 저장하고 Vercel 또는 Firebase로 공개하는 흐름, 비밀값을 코드에서 분리하는 이유, 데이터 권한을 설정하는 사고방식을 설명하는 상세 진행 원고입니다.</p>
   </section>
 
   <section class="guide">
-    <div><b>수업 목표</b><span>배포, 환경변수, 데이터 저장, 오류 로그를 하나의 서비스 흐름으로 이해한다.</span></div>
-    <div><b>강의 톤</b><span>인터넷으로 나가는 길, 비밀 금고, 데이터 표 비유를 사용한다.</span></div>
-    <div><b>주의</b><span>실제 API 키, DB 비밀번호, 개인 계정 화면을 빔에 노출하지 않는다.</span></div>
+    <div><b>수업 목표</b><span>GitHub 저장 흐름, 배포 서비스 선택, 환경변수와 데이터 권한을 하나의 공개 과정으로 설명한다.</span></div>
+    <div><b>진행 방식</b><span>자동 재생하지 않는다. 각 인터랙션을 한 번씩 눌러 수강생의 시선이 따라온 뒤 다음 단계로 이동한다.</span></div>
+    <div><b>보안 원칙</b><span>실제 API 키, 계정 이메일, 관리자 화면, 결제 정보는 빔프로젝터에 노출하지 않는다.</span></div>
   </section>
 
   <section>
-    <article class="slide-card"><div class="slide-head"><div class="num">1</div><h2>오프닝</h2></div><div class="block"><div class="label">SAY</div><div class="text">“오늘은 만든 앱을 내 노트북 밖으로 꺼내는 날입니다. 공개와 보호를 동시에 배웁니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">배포와 보안을 하나의 흐름으로 묶어 말한다.</div></div></article>
-    <article class="slide-card"><div class="slide-head"><div class="num">2</div><h2>배포 흐름</h2></div><div class="block"><div class="label">SAY</div><div class="text">“내 컴퓨터에서 GitHub로, GitHub에서 배포 서비스로, 배포 서비스에서 사용자에게 갑니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">네 노드를 손으로 따라가며 빔 애니메이션을 설명한다.</div></div></article>
-    <article class="slide-card"><div class="slide-head"><div class="num">3</div><h2>라이브 주소</h2></div><div class="block"><div class="label">SAY</div><div class="text">“URL이 생기면 내 노트북이 꺼져 있어도 다른 사람이 접속할 수 있습니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">localhost와 live URL 차이를 짧게 비교한다.</div></div></article>
-    <article class="slide-card"><div class="slide-head"><div class="num">4</div><h2>보안 금고</h2></div><div class="block"><div class="label">SAY</div><div class="text">“API 키는 서비스 사용 권한입니다. 코드에 직접 넣으면 집 열쇠를 길에 놓는 것과 같습니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">환경변수 이름만 보여주고 실제 값은 가린다.</div></div></article>
-    <article class="slide-card"><div class="slide-head"><div class="num">5</div><h2>데이터 형태</h2></div><div class="block"><div class="label">SAY</div><div class="text">“데이터는 표처럼 쌓이고, 기능은 이 표를 추가하고 읽고 수정하고 지웁니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">CRUD를 Create, Read, Update, Delete 한 단어씩만 설명한다.</div></div></article>
-    <article class="slide-card"><div class="slide-head"><div class="num">6</div><h2>API 성공과 실패</h2></div><div class="block"><div class="label">SAY</div><div class="text">“같은 요청도 성공하면 200, 키가 없거나 권한이 없으면 오류가 납니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">저장 성공과 키 누락 오류 버튼을 번갈아 누른다.</div></div></article>
-    <article class="slide-card"><div class="slide-head"><div class="num">7</div><h2>에러 복구</h2></div><div class="block"><div class="label">SAY</div><div class="text">“에러는 멈춤, 복사, 질문, 수정, 재실행 순서로 해결합니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">에러 해결 가이드를 수강생 책상 위에 올려두게 한다.</div></div></article>
-    <article class="slide-card"><div class="slide-head"><div class="num">8</div><h2>배포 전 점검</h2></div><div class="block"><div class="label">SAY</div><div class="text">“배포 전에 실행, 비밀값, 주소 세 가지를 확인하면 큰 사고를 줄일 수 있습니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">배포 전 체크리스트를 한 줄씩 체크하게 한다.</div></div></article>
-    <article class="slide-card"><div class="slide-head"><div class="num">9</div><h2>실습</h2></div><div class="block"><div class="label">SAY</div><div class="text">“오늘 실습은 배포 버튼을 누르는 것보다, 공개해도 되는 상태인지 확인하는 것이 먼저입니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">개인 계정 화면 노출에 주의한다.</div></div></article>
-    <article class="slide-card"><div class="slide-head"><div class="num">10</div><h2>정리</h2></div><div class="block"><div class="label">SAY</div><div class="text">“배포는 공개, 보안은 보호, 데이터는 기억입니다.”</div></div><div class="block"><div class="label">DO</div><div class="note">6강 쇼케이스에서 공개 URL을 보여줄 수 있으면 가장 좋다고 안내한다.</div></div></article>
+    <article class="slide-card">
+      <div class="slide-head"><div class="num">1</div><h2>서비스를 세상 밖으로</h2></div>
+      <div class="block"><div class="label">핵심</div><div class="note">오늘의 주제는 단순히 배포 버튼을 누르는 법이 아니라, 프로젝트가 내 컴퓨터에서 인터넷으로 이동할 때 거치는 전체 경로다.</div></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“지난 시간까지는 프로젝트 안의 파일을 찾고 수정하는 방법을 배웠습니다. 오늘은 그 프로젝트를 내 노트북 밖으로 꺼냅니다. 왼쪽에서 만든 코드가 GitHub에 저장되고, 배포 서비스를 거쳐, 마지막에는 다른 사람이 접속하는 주소가 됩니다. 그런데 인터넷에 공개되는 순간부터는 보안과 데이터 관리도 함께 시작됩니다.”</div></div>
+      <div class="block"><div class="label">DO</div><div class="note">오른쪽의 LOCAL, GITHUB, DEPLOY, LIVE 순서를 손으로 따라간다. 작은 설명을 길게 읽지 말고 네 단어만 반복한다.</div></div>
+      <div class="block"><div class="label">QUESTION</div><div class="note">“지금 여러분 프로젝트는 내 노트북에서만 보이나요, 주소를 아는 사람도 볼 수 있나요?”</div></div>
+    </article>
+
+    <article class="slide-card">
+      <div class="slide-head"><div class="num">2</div><h2>로컬과 공개 주소</h2></div>
+      <div class="block"><div class="label">핵심</div><div class="note">localhost는 내 컴퓨터가 임시 서버 역할을 하는 상태이고, 공개 URL은 배포 서비스의 서버가 프로젝트를 계속 제공하는 상태다.</div></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“주소창에 localhost가 보이는 동안에는 내 컴퓨터 안에서만 확인하는 중입니다. 같은 와이파이에 있다고 해서 자동으로 모두가 볼 수 있는 것도 아닙니다. 배포하면 프로젝트 파일이 인터넷에 연결된 서버로 올라가고, 누구나 입력할 수 있는 URL이 생깁니다. 그래서 노트북을 꺼도 서비스 주소는 계속 열릴 수 있습니다.”</div></div>
+      <div class="block"><div class="label">비유</div><div class="note">localhost는 작업실 안에서만 켜 본 시제품, 공개 URL은 매장에 진열하고 주소를 단 제품이다.</div></div>
+      <div class="block"><div class="label">주의</div><div class="note">“배포 = 도메인 구매”라고 설명하지 않는다. 기본 제공 URL만으로도 배포는 완료될 수 있고, 맞춤 도메인은 이후 선택 사항이다.</div></div>
+    </article>
+
+    <article class="slide-card">
+      <div class="slide-head"><div class="num">3</div><h2>Git과 GitHub</h2></div>
+      <div class="block"><div class="label">핵심</div><div class="note">Git은 변경 이력을 관리하는 도구이고 GitHub는 Git 저장소를 온라인에 보관하고 협업·배포 서비스와 연결하는 플랫폼이다.</div></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“Git과 GitHub는 같은 말이 아닙니다. Git은 내 컴퓨터에서 파일의 변경 기록을 남기는 방식입니다. GitHub는 그 기록과 파일을 온라인 저장소에 보관하는 서비스입니다. 워드 파일을 저장하는 것과 클라우드에 올리는 것이 다른 것처럼 생각하면 됩니다. commit은 특정 시점의 저장 지점이고, push는 그 저장 지점을 GitHub로 보내는 행동입니다.”</div></div>
+      <div class="block"><div class="label">QUESTION</div><div class="note">“파일을 수정만 하고 commit하지 않았다면 GitHub에 새 변경이 올라갈까요?” 정답: 아니다. 수정 확인, add, commit, push가 필요하다.</div></div>
+    </article>
+
+    <article class="slide-card">
+      <div class="slide-head"><div class="num">4</div><h2>GitHub로 보내는 네 단계</h2></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“첫 번째는 git status입니다. 무엇이 바뀌었는지 확인합니다. 두 번째 git add는 이번 저장에 포함할 파일을 고르는 단계입니다. 세 번째 commit은 현재 상태를 설명과 함께 하나의 저장 지점으로 만듭니다. 마지막 push는 그 commit을 GitHub로 전송합니다. 이 순서를 이해하면 AI에게 ‘GitHub에 올려줘’라고 부탁했을 때 AI가 무엇을 하고 있는지 확인할 수 있습니다.”</div></div>
+      <div class="block"><div class="label">DO</div><div class="note">‘단계 시작’을 네 번 천천히 누른다. 각 명령에서 화면의 강조가 끝난 뒤 다음 단계로 넘어간다.</div></div>
+      <div class="block"><div class="label">강조</div><div class="note">`git add .`는 모든 변경 파일을 포함한다. 비밀값이나 불필요한 대용량 파일이 없는지 `git status`로 먼저 확인해야 한다.</div></div>
+    </article>
+
+    <article class="slide-card">
+      <div class="slide-head"><div class="num">5</div><h2>Git 명령어 실행</h2></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“명령어를 외우는 것이 오늘의 목표는 아닙니다. 실행 전후의 상태를 읽는 것이 목표입니다. status에서 변경 파일이 보이고, add 이후에는 commit할 준비가 되며, commit에서는 변경 수와 메시지가 나오고, push 마지막에는 어느 저장소와 브랜치로 전송됐는지 표시됩니다.”</div></div>
+      <div class="block"><div class="label">DO</div><div class="note">왼쪽 버튼을 위에서 아래로 하나씩 누른다. 터미널의 초록색 완료 문장과 파일 이름을 수강생이 직접 읽게 한다.</div></div>
+      <div class="block"><div class="label">현장 멘트</div><div class="text">“AI IDE가 대신 입력해도 괜찮습니다. 다만 마지막 결과에 error가 있는지, 어느 repository와 branch에 보냈는지는 사람이 확인해야 합니다.”</div></div>
+    </article>
+
+    <article class="slide-card">
+      <div class="slide-head"><div class="num">6</div><h2>브랜치와 커밋</h2></div>
+      <div class="block"><div class="label">핵심</div><div class="note">브랜치는 main을 바로 훼손하지 않고 별도의 작업선에서 수정·검토할 수 있게 한다. 초급 수업에서는 개념과 필요성까지만 다룬다.</div></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“main은 지금 공개해도 되는 기준 버전이라고 생각해봅시다. 큰 기능을 추가할 때 main을 바로 바꾸면, 중간에 실패했을 때 공개 버전도 함께 망가질 수 있습니다. 그래서 feature라는 별도 작업선을 만들고, 수정과 확인이 끝난 결과만 main에 합칩니다. 이 합치는 행동을 merge라고 부릅니다.”</div></div>
+      <div class="block"><div class="label">DO</div><div class="note">main, 기능 시작, 수정 완료, merge 노드를 순서대로 클릭한다. 명령어는 보여주지 않아도 된다.</div></div>
+    </article>
+
+    <article class="slide-card">
+      <div class="slide-head"><div class="num">7</div><h2>배포 서비스 선택</h2></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“Vercel과 Firebase 중 무엇이 무조건 더 좋다는 답은 없습니다. Vercel은 GitHub 저장소를 연결해 웹 프로젝트를 배포하고, 브랜치마다 미리보기 주소를 만드는 흐름이 편합니다. Firebase는 Hosting뿐 아니라 로그인, Firestore 데이터베이스, 파일 저장소 같은 Google의 앱 기능을 함께 연결하기 좋습니다. 지금 프로젝트가 무엇으로 만들어졌고 어떤 기능을 쓰는지 보고 고릅니다.”</div></div>
+      <div class="block"><div class="label">DO</div><div class="note">각 카드의 ‘배포 흐름 보기’를 눌러 하단 문장을 비교한다.</div></div>
+      <div class="block"><div class="label">주의</div><div class="note">요금제·무료 한도·지원 프레임워크는 바뀔 수 있으므로 수업 직전 공식 대시보드에서 확인한다.</div></div>
+    </article>
+
+    <article class="slide-card">
+      <div class="slide-head"><div class="num">8</div><h2>Vercel 배포</h2></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“Vercel에서는 먼저 GitHub repository를 가져옵니다. 다음으로 프로젝트가 Vite인지 Next.js인지, build 명령과 결과 폴더가 무엇인지 확인합니다. 로컬에서 사용한 환경변수는 Vercel 설정 화면에 다시 입력합니다. Deploy를 누르면 Vercel이 코드를 내려받고 패키지를 설치하고 build를 실행합니다. 마지막 READY 표시만 보지 말고 실제 URL에서 기능을 다시 눌러봐야 합니다.”</div></div>
+      <div class="block"><div class="label">DO</div><div class="note">왼쪽의 다섯 단계를 한 번씩 누른다. 2단계에서 Vite의 일반적인 `npm run build`, `dist` 예시가 모든 프로젝트에 동일한 값은 아니라고 말한다.</div></div>
+      <div class="block"><div class="label">보충</div><div class="note">Git 연동 시 일반적으로 push마다 Preview 배포가 만들어지고, production branch의 최신 변경이 운영 배포로 이어질 수 있다. 프로젝트 설정에 따라 다를 수 있다.</div></div>
+    </article>
+
+    <article class="slide-card">
+      <div class="slide-head"><div class="num">9</div><h2>Firebase Hosting 배포</h2></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“Firebase Hosting은 터미널에서 내 프로젝트 폴더와 Firebase 프로젝트를 연결합니다. 먼저 firebase-tools를 설치하고, Google 계정으로 로그인합니다. firebase init hosting에서 연결할 프로젝트와 공개할 결과 폴더를 정합니다. 마지막 firebase deploy --only hosting을 실행하면 Hosting 부분만 배포합니다.”</div></div>
+      <div class="block"><div class="label">DO</div><div class="note">‘한 단계 실행’을 네 번 누른다. `firebase init hosting`에서 public root가 빌드 결과 폴더인지 확인해야 한다고 강조한다.</div></div>
+      <div class="block"><div class="label">주의</div><div class="note">React/Vite SPA는 초기화 질문에서 single-page app 설정이 필요할 수 있다. 프레임워크와 라우팅 방식에 따라 설정이 달라진다.</div></div>
+    </article>
+
+    <article class="slide-card">
+      <div class="slide-head"><div class="num">10</div><h2>배포 파이프라인</h2></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“배포 서비스는 파일을 그냥 복사하지 않습니다. GitHub에서 소스를 받고, package.json을 기준으로 필요한 패키지를 설치하고, production용 파일을 build한 뒤, 성공한 결과에 URL을 연결합니다. 따라서 내 컴퓨터에서는 되는데 배포가 실패했다면 어느 단계에서 멈췄는지 로그를 봐야 합니다.”</div></div>
+      <div class="block"><div class="label">DO</div><div class="note">먼저 ‘배포 실행’을 눌러 성공 흐름을 보여준다. 이어 ‘오류 상황’을 눌러 build에서 멈추는 장면을 보여준다.</div></div>
+      <div class="block"><div class="label">질문</div><div class="note">“패키지 설치는 성공했지만 build가 실패했습니다. 인터넷 주소 문제일까요, 코드와 설정 문제일까요?” 정답: 우선 build 로그와 환경변수를 본다.</div></div>
+    </article>
+
+    <article class="slide-card">
+      <div class="slide-head"><div class="num">11</div><h2>하드코딩의 위험</h2></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“하드코딩은 바뀔 수 있는 값이나 비밀값을 코드 안에 직접 적는 방식입니다. 브라우저에서 실행되는 JavaScript에 비밀키를 넣으면, 화면에는 보이지 않아도 개발자 도구나 내려받은 파일에서 찾을 수 있습니다. 이미 GitHub에 push했다면 파일에서 지우는 것만으로 끝나지 않습니다. Git 기록에 남았을 수 있으므로 키를 폐기하고 새로 발급해야 합니다.”</div></div>
+      <div class="block"><div class="label">DO</div><div class="note">‘공개 후 검사’를 누르고 오른쪽 Network에 Authorization 값이 나타나는 장면을 기다린다.</div></div>
+      <div class="block"><div class="label">주의</div><div class="note">Firebase 웹 설정의 `apiKey`는 일반적인 서버 비밀키와 성격이 다르다. Firebase 데이터 접근 권한은 Security Rules와 App Check로 보호한다. Gemini API 키 등 다른 키와 혼동하지 않는다.</div></div>
+    </article>
+
+    <article class="slide-card">
+      <div class="slide-head"><div class="num">12</div><h2>환경변수 금고</h2></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“로컬에서는 .env.local 같은 파일에 값을 넣고, .gitignore가 그 파일이 GitHub로 올라가지 않게 막습니다. 배포할 때는 같은 값을 Vercel이나 Firebase의 설정에 별도로 입력합니다. 코드는 PAYMENT_SECRET이라는 이름만 알고, 실제 값은 실행 환경이 전달합니다.”</div></div>
+      <div class="block"><div class="label">강조</div><div class="note">`.env`는 암호화 금고 그 자체가 아니라 코드와 값을 분리하는 파일이다. Git에 올리지 않고, 화면에 출력하지 않고, 서버에서만 읽도록 해야 비밀이 유지된다.</div></div>
+      <div class="block"><div class="label">질문</div><div class="note">“`.env.local`을 만들었는데 `.gitignore`에 없으면 안전할까요?” 정답: 아니다. 실수로 commit될 수 있다.</div></div>
+    </article>
+
+    <article class="slide-card">
+      <div class="slide-head"><div class="num">13</div><h2>공개 변수와 비밀 변수</h2></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“환경변수라는 이름만으로 공개와 비밀이 정해지지 않습니다. 브라우저에 전달되는 값은 사용자가 볼 수 있다고 생각해야 합니다. Next.js의 NEXT_PUBLIC_이나 Vite의 VITE_처럼 공개용 접두사가 붙은 변수는 브라우저 번들에 포함됩니다. 사이트 이름이나 공개 분석 식별자는 괜찮지만, 결제 비밀키와 관리자 DB 주소는 서버에서만 사용해야 합니다.”</div></div>
+      <div class="block"><div class="label">DO</div><div class="note">가운데 변수 카드를 하나씩 눌러 PUBLIC과 SECRET 영역으로 보내고, 매번 이유를 말하게 한다.</div></div>
+      <div class="block"><div class="label">주의</div><div class="note">공개 접두사가 붙은 값은 빌드 시 클라이언트 코드에 포함될 수 있다. 접두사를 비밀키 이름에 붙이지 않는다.</div></div>
+    </article>
+
+    <article class="slide-card">
+      <div class="slide-head"><div class="num">14</div><h2>데이터와 보안 규칙</h2></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“데이터베이스 보안은 주소나 API 키를 감추는 것만으로 완성되지 않습니다. 비회원은 공개 게시글만 읽고, 로그인한 회원은 자기 주문만 볼 수 있고, 관리자는 운영에 필요한 범위에서 재고를 바꿀 수 있어야 합니다. 즉 누가 어떤 데이터에 어떤 행동을 할 수 있는지 규칙을 정해야 합니다.”</div></div>
+      <div class="block"><div class="label">DO</div><div class="note">비회원, 회원, 관리자를 차례로 누른다. 각 역할에서 허용 스위치가 어떻게 바뀌는지 읽는다.</div></div>
+      <div class="block"><div class="label">강조</div><div class="note">최소 권한 원칙: 필요한 사람에게 필요한 행동만 허용한다. 개발 중 편의를 위해 모든 읽기/쓰기를 허용한 규칙을 운영에 그대로 두지 않는다.</div></div>
+    </article>
+
+    <article class="slide-card">
+      <div class="slide-head"><div class="num">15</div><h2>공개 전 최종 점검</h2></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“배포 성공이라는 초록색 표시가 서비스 완성을 뜻하지는 않습니다. 첫째, 로컬과 배포 환경에서 build가 성공하는지 봅니다. 둘째, .env와 GitHub 기록에 비밀값이 없는지 확인합니다. 셋째, 로그인과 저장처럼 핵심 기능을 실제 URL에서 눌러봅니다. 넷째, 다른 기기와 모바일 화면에서도 다시 확인합니다.”</div></div>
+      <div class="block"><div class="label">DO</div><div class="note">네 항목을 실제 점검했다고 가정하며 하나씩 눌러 4/4와 READY 상태를 보여준다.</div></div>
+      <div class="block"><div class="label">현장 운영</div><div class="note">수강생에게 체크리스트 프린트물을 배포하고 자기 프로젝트의 결과를 직접 표시하게 한다.</div></div>
+    </article>
+
+    <article class="slide-card">
+      <div class="slide-head"><div class="num">16</div><h2>30분 실습</h2></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“지금부터 실습 시간입니다. 오늘 배운 흐름을 자기 프로젝트에 적용해보세요. GitHub 상태를 확인하고, 배포 방법을 하나 정하고, 비밀값이 코드에 직접 들어가 있지 않은지 확인한 뒤, 가능한 분은 공개 URL까지 만들어봅니다. 계정이나 설정 때문에 막히면 그 지점을 기록해도 충분합니다.”</div></div>
+      <div class="block"><div class="label">DO</div><div class="note">타이머의 ‘시작’을 누른다. 10분, 20분 시점에 build/환경변수/실제 URL 확인을 안내한다.</div></div>
+    </article>
+
+    <article class="slide-card">
+      <div class="slide-head"><div class="num">17</div><h2>다음 강의 예고</h2></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“다음 시간은 시험이나 작품 심사가 아닙니다. 내가 무엇을 만들었고, 어떤 장면이 작동하며, 어디에서 막혔고, 다음에는 무엇을 개선하고 싶은지 공유하는 시간입니다. 완성도가 서로 달라도 괜찮습니다. 실제로 움직이는 한 장면과 내가 배운 한 가지를 준비해오세요.”</div></div>
+      <div class="block"><div class="label">DO</div><div class="note">발표 큐시트와 6강 수강생 발표지를 미리 배포한다.</div></div>
+    </article>
   </section>
+
   <section class="study-grid">
-    <article class="study-card"><b>슬라이드 2~3 · 비유/질문</b><span>배포는 건물을 공공도로와 연결하고 주소를 다는 일. “localhost와 공개 URL의 가장 큰 차이는 무엇인가요?”</span></article>
-    <article class="study-card"><b>슬라이드 4 · 비유/질문</b><span>API 키는 출입 열쇠, 환경변수는 금고. “열쇠 사진을 공개한 뒤 지우기만 하면 안전할까요?”</span></article>
-    <article class="study-card"><b>슬라이드 5~6 · 비유/질문</b><span>CRUD는 창고의 입고·조회·수정·폐기. “로그인은 Create와 Read 중 어느 쪽에 가까울까요?”</span></article>
-    <article class="study-card"><b>슬라이드 7~10 · 비유/질문</b><span>로그는 사고 기록, 체크리스트는 개장 전 점검표. “내 컴퓨터에서는 되는데 URL에서 실패하면 무엇부터 볼까요?”</span></article>
+    <article class="study-card"><b>시간 배분</b><span>오프닝 5분, Git/GitHub 12분, 배포 15분, 보안·데이터 15분, 질문 5분, 실습 30분을 기본으로 잡는다.</span></article>
+    <article class="study-card"><b>수업 전 준비</b><span>실습용 공개 저장소, 가린 환경변수 예시, Vercel/Firebase 테스트 프로젝트, 성공 URL과 실패 build 로그를 준비한다.</span></article>
+    <article class="study-card"><b>절대 금지</b><span>개인 프로젝트의 실제 `.env`, 결제 비밀키, 서비스 계정 JSON, 학생 개인정보가 담긴 DB 화면을 빔에 띄우지 않는다.</span></article>
+    <article class="study-card"><b>정확성 기준</b><span>서비스 화면과 요금 정책은 수업 직전에 공식 문서로 확인한다. Firebase 웹 API 키와 일반 비밀 API 키를 같은 방식으로 설명하지 않는다.</span></article>
   </section>
 </main>
 <script src="./appendix-print.js"></script>

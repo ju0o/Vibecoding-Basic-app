@@ -1,9 +1,9 @@
 
 # VIBE STUDIO · 바이브코딩 강의 운영 콘솔
 
-바이브코딩 기초반 1~6회차, 후속 과정 커리큘럼, 수강생 자료와 강사 자료실을 한 곳에서 관리하는 Electron 기반 Windows 프로그램입니다.
+바이브코딩 기초반부터 응용·수익화반, AI 워크스페이스 심화반과 후속 전문 과정까지 한 곳에서 운영하는 Electron 기반 Windows 교육 프로그램입니다.
 
-현재 앱 버전은 **1.0.0**이며, 프로그램 내부 과정명은 **바이브코딩 기초반 V1**입니다.
+현재 앱 버전은 **2.0.0**이며, 제품명은 **VIBE STUDIO**입니다. 기초반은 프로그램 안에서 운영되는 첫 번째 정규 과정으로 유지됩니다.
 
 ## 실행
 
@@ -15,26 +15,26 @@ npm start
 ## Windows EXE 만들기
 
 ```bash
-npm run release:build
+npm run release:current
 ```
 
-생성 결과는 `release/` 폴더에 만들어집니다.
+현재 버전의 portable EXE, 현장 실행 가이드, 강의 전 체크리스트와 릴리즈 보고서가 생성됩니다. 빌드만 필요하면 `npm run release:build`를 사용합니다.
 
 ## GitHub 릴리즈
 
 릴리즈는 [Semantic Versioning](https://semver.org/) 형식으로 관리합니다.
 
-1. `package.json`의 버전을 변경합니다.
+1. `package.json`과 `package-lock.json`의 버전을 변경합니다.
 2. `CHANGELOG.md`에 변경 내용을 기록합니다.
-3. 변경 사항을 `main`에 반영합니다.
-4. 같은 버전의 태그를 푸시합니다.
+3. 변경 사항을 Pull Request로 검증한 뒤 `main`에 반영합니다.
+4. 같은 버전의 태그를 `main` 커밋에 푸시합니다.
 
 ```bash
-npm version patch
-git push origin main --follow-tags
+git tag v2.0.0
+git push origin v2.0.0
 ```
 
-`v1.0.1` 같은 태그가 올라오면 GitHub Actions가 Windows portable EXE와 SHA-256 체크섬을 자동 생성해 GitHub Release에 첨부합니다.
+`v2.0.0` 같은 태그가 올라오면 GitHub Actions가 Windows portable EXE와 SHA-256 체크섬을 자동 생성해 GitHub Release에 첨부합니다.
 
 자세한 절차는 `docs/RELEASE_MANAGEMENT.md`에 정리되어 있습니다.
 
@@ -84,4 +84,4 @@ npm run check
 npm run smoke:app
 ```
 
-`check`는 JavaScript 문법, 강의 매니페스트와 슬라이드 수를 검사합니다. `smoke:app`은 Electron 대시보드, 강사 자료실과 4강 플레이어를 실제로 열어 확인합니다.
+`check`는 JavaScript 문법, 강의 매니페스트와 슬라이드 수를 검사합니다. `smoke:app`은 Electron 대시보드, 강사 자료실, 기초반 5강, 응용·수익화반과 AI 심화반 플레이어를 실제로 열어 확인합니다.

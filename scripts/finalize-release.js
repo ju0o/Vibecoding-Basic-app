@@ -8,6 +8,11 @@ const root = path.join(__dirname, '..');
 const releaseDir = path.join(root, 'release');
 const assetsDir = path.join(releaseDir, 'assets');
 const docsDir = path.join(root, 'docs');
+const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf-8'));
+const version = packageJson.version;
+const productName = packageJson.build?.productName || 'VIBE STUDIO';
+const executableName = `${productName} ${version}.exe`;
+const releaseLabel = `V${version.split('.')[0]}`;
 
 function crc32(buffer) {
   let crc = 0xffffffff;
@@ -127,12 +132,12 @@ function writeReleaseDocs() {
   fs.mkdirSync(assetsDir, { recursive: true });
   fs.mkdirSync(docsDir, { recursive: true });
 
-  fs.writeFileSync(path.join(releaseDir, 'README-현장실행가이드.md'), `# 바이브코딩 기초반 V1 현장 실행 가이드
+  fs.writeFileSync(path.join(releaseDir, 'README-현장실행가이드.md'), `# ${productName} ${releaseLabel} 현장 실행 가이드
 
 ## 실행 방법
-1. \`바이브코딩 기초반 1.0.0.exe\`를 더블클릭합니다.
+1. \`${executableName}\`를 더블클릭합니다.
 2. Windows 보안 안내가 뜨면 \`추가 정보\` → \`실행\`을 선택합니다.
-3. 첫 화면에서 \`바이브코딩 기초반\` 강의 카드를 선택합니다.
+3. 첫 화면에서 진행할 강의 과정과 회차를 선택합니다.
 
 ## 전체화면
 - 상단 우측 전체화면 버튼을 누릅니다.
@@ -145,13 +150,14 @@ function writeReleaseDocs() {
 - 하단 이전/다음 버튼으로 회차 이동
 
 ## 별첨자료 사용
-- 왼쪽 \`별첨 자료\` 클릭
-- 설치 체크리스트, 명령어 치트시트, 배포 체크리스트 등을 열람합니다.
+- 왼쪽 \`수강생 자료\` 또는 \`강사 자료실\`을 클릭합니다.
+- 과정과 회차 필터로 설치 체크리스트, 명령어 치트시트, 강사용 대본 등을 찾습니다.
 - 상단 인쇄 버튼 또는 PDF 버튼으로 현장 출력 자료를 만들 수 있습니다.
 
 ## 발표자 HUD
-- 강의 화면 왼쪽 아래에 현재 슬라이드와 발표 도구 안내가 표시됩니다.
-- 세션 화면에서 \`N\` 키를 누르면 발표 메모 표시 상태가 전환됩니다.
+- 강의 자료 내부 HUD에서는 현재 슬라이드와 발표 도구 안내를 확인합니다.
+- 운영 콘솔의 발표자 메모 패널은 \`M\` 키로 열고 닫습니다.
+- 일부 강의 자료 내부의 발표 노트는 \`N\` 키를 사용합니다.
 
 ## 레이저 포인터
 - 세션 화면에서 \`L\` 키를 누르면 레이저 포인터가 켜집니다.
@@ -170,12 +176,12 @@ function writeReleaseDocs() {
 - 강의실 조명이 밝으면 화면 밝기와 contrast를 올림
 `, 'utf-8');
 
-  fs.writeFileSync(path.join(releaseDir, 'CHECKLIST-강의전점검.md'), `# 바이브코딩 기초반 V1 강의 전 QA 체크리스트
+  fs.writeFileSync(path.join(releaseDir, 'CHECKLIST-강의전점검.md'), `# ${productName} ${releaseLabel} 강의 전 QA 체크리스트
 
 ## 실행
-- [ ] Windows에서 \`바이브코딩 기초반 1.0.0.exe\` 실행 확인
-- [ ] 앱 창 제목이 \`바이브코딩 기초반\`으로 표시되는지 확인
-- [ ] EXE 파일명이 \`바이브코딩 기초반 1.0.0.exe\`인지 확인
+- [ ] Windows에서 \`${executableName}\` 실행 확인
+- [ ] 앱 창 제목이 \`VIBE STUDIO · 강의 운영 콘솔\`로 표시되는지 확인
+- [ ] EXE 파일명이 \`${executableName}\`인지 확인
 - [ ] 인터넷 OFF 상태에서 앱 첫 화면이 열리는지 확인
 
 ## 강의 자료
@@ -186,6 +192,8 @@ function writeReleaseDocs() {
 - [ ] 5강 실행 확인
 - [ ] 6강 실행 확인
 - [ ] 별첨자료 목록 실행 확인
+- [ ] 응용·수익화반 강의 실행 확인
+- [ ] AI 워크스페이스 심화반 강의 실행 확인
 - [ ] PDF 저장 또는 인쇄 버튼 확인
 
 ## 인터랙션
@@ -207,36 +215,37 @@ function writeReleaseDocs() {
 - [ ] 빔프로젝터 해상도와 배율 확인
 `, 'utf-8');
 
-  fs.writeFileSync(path.join(docsDir, 'V1_RELEASE_REPORT.md'), `# 바이브코딩 기초반 V1 릴리즈 완료 보고서
+  fs.writeFileSync(path.join(docsDir, `${releaseLabel}_RELEASE_REPORT.md`), `# ${productName} ${releaseLabel} 릴리즈 완료 보고서
 
 ## 버전
-- 앱 버전: 1.0.0
-- 프로그램명: 바이브코딩 기초반
-- 내부 과정명: 바이브코딩 기초반 V1
+- 앱 버전: ${version}
+- 프로그램명: ${productName}
+- 포함 과정: 바이브코딩 기초반, 응용·수익화반, AI 워크스페이스 심화반
+- 설계 과정: SaaS, 외주, 자동화, MCP, Skill, Agent, Agent Teams, Claude Code, Codex, 강사 마스터
 
 ## 릴리즈 산출물
-- release/바이브코딩 기초반 1.0.0.exe
+- release/${executableName}
 - release/README-현장실행가이드.md
 - release/CHECKLIST-강의전점검.md
 - release/assets/preview.png
 
 ## 포함 기능
-- 강의 선택 대시보드
-- 1~6강 HTML 세션 플레이어
-- 별첨자료 플레이어
+- 전체 과정 카탈로그와 과정별 대시보드
+- 강의 일정 및 운영 메모
+- 수강생 자료실과 강사 자료실
+- 기초반 1~6강, 응용·수익화반 1~6강, AI 심화반 1~6강
 - 인쇄/PDF 저장
-- 발표자 모드
-- 레이저 포인터
-- API 흐름, 터미널, 파일트리, 배포, AI 채팅, 드래그 실습 시뮬레이션
+- 발표자 모드와 화면 판서
+- 파일트리, 배포, 보안, 제품 설계와 Agent 흐름 인터랙션
 
 ## 아이콘 교체 방법
 1. \`build/icon.ico\` 파일을 원하는 아이콘으로 교체합니다.
-2. \`npm run release:v1\`을 실행합니다.
+2. \`npm run release:current\`를 실행합니다.
 3. 아이콘 파일이 없으면 electron-builder와 앱 창 모두 기본 아이콘으로 fallback됩니다.
 
 ## 빌드 명령어
 \`\`\`bash
-npm run release:v1
+npm run release:current
 \`\`\`
 `, 'utf-8');
 }
@@ -244,4 +253,4 @@ npm run release:v1
 safeRemoveWinUnpacked();
 writeReleaseDocs();
 writePreviewPng(path.join(assetsDir, 'preview.png'));
-console.log('✓ release V1 finalized');
+console.log(`✓ release ${version} finalized`);

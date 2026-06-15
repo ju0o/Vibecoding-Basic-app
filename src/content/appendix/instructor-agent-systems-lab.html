@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>강사용 인터랙티브 학습실 - AI 작업 시스템</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <style>
+    :root{--bg:#090c12;--panel:#111722;--line:rgba(255,255,255,.12);--text:#f5f2eb;--muted:#97a2b3;--lime:#c6f36d;--blue:#73b7ff;--coral:#ff8977;--violet:#bba5ff;font-family:"Pretendard Variable","Pretendard","Malgun Gothic",sans-serif}
+    *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text)}button{font:inherit}.app{display:grid;grid-template-columns:280px 1fr;height:100vh;background:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),var(--bg);background-size:34px 34px}.side{padding:28px 18px;border-right:1px solid var(--line);background:rgba(8,11,16,.94)}.eyebrow{color:var(--lime);font:800 11px Consolas,monospace;letter-spacing:.1em}.side h1{margin:12px 0 8px;font-size:29px;line-height:1.1}.side p{margin:0 0 26px;color:var(--muted);font-size:14px;line-height:1.55}.steps{display:grid;gap:8px}.steps button{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:center;min-height:56px;padding:9px;border:1px solid var(--line);color:var(--muted);background:transparent;text-align:left;cursor:pointer}.steps button span{display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--line);font:800 11px Consolas,monospace}.steps button b{font-size:14px}.steps button.active{border-color:rgba(198,243,109,.5);color:var(--text);background:rgba(198,243,109,.07)}.main{display:grid;grid-template-rows:auto 1fr auto;min-width:0;padding:38px 48px 30px}.head{display:flex;justify-content:space-between;gap:24px}.head h2{margin:8px 0 0;font-size:clamp(38px,4vw,65px);letter-spacing:0;line-height:1.05}.head p{max-width:620px;margin:13px 0 0;color:var(--muted);font-size:19px;line-height:1.5}.index{color:rgba(255,255,255,.12);font:900 66px Consolas,monospace}.stage{position:relative;min-height:0;margin-top:24px;border:1px solid var(--line);background:rgba(255,255,255,.018);overflow:hidden}.node{position:absolute;display:grid;place-items:center;text-align:center;width:170px;height:115px;border:1px solid var(--line);background:#111824;transition:.55s cubic-bezier(.16,1,.3,1);opacity:.22;transform:scale(.85)}.node b{font-size:22px}.node span{display:block;margin-top:6px;color:var(--muted);font-size:13px}.node.active{opacity:1;transform:scale(1);border-color:var(--node-color);box-shadow:0 0 38px color-mix(in srgb,var(--node-color) 18%,transparent)}.human{left:5%;top:42%;--node-color:var(--text)}.prompt{left:25%;top:18%;--node-color:var(--coral)}.skill{left:25%;bottom:12%;--node-color:var(--violet)}.mcp{left:49%;top:18%;--node-color:var(--blue)}.agent{left:49%;bottom:12%;--node-color:var(--lime)}.team{right:5%;top:31%;width:210px;height:170px;--node-color:#f2c868}.beam{position:absolute;height:3px;background:linear-gradient(90deg,transparent,var(--lime),transparent);opacity:0;transform-origin:left center}.beam.active{opacity:1;animation:flow 1.7s ease-in-out infinite}@keyframes flow{0%,100%{filter:brightness(.6)}50%{filter:brightness(1.8);box-shadow:0 0 18px var(--lime)}}.b1{left:17%;top:49%;width:13%;transform:rotate(-21deg)}.b2{left:17%;top:55%;width:13%;transform:rotate(20deg)}.b3{left:37%;top:29%;width:16%}.b4{left:37%;top:67%;width:16%}.b5{left:61%;top:31%;width:25%;transform:rotate(16deg)}.b6{left:61%;top:69%;width:25%;transform:rotate(-17deg)}.packet{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--lime);box-shadow:0 0 18px var(--lime);opacity:0}.stage.running .packet{opacity:1;animation:packet 3.2s ease-in-out infinite}@keyframes packet{0%{left:14%;top:51%}20%{left:28%;top:29%}42%{left:52%;top:29%}65%{left:52%;top:66%}100%{left:83%;top:51%}}.detail{display:grid;grid-template-columns:160px 1fr 1fr;gap:12px;margin-top:14px}.detail div{padding:14px 16px;border-top:1px solid var(--line);background:rgba(255,255,255,.018)}.detail small{display:block;color:var(--muted);font:700 10px Consolas,monospace}.detail b{display:block;margin-top:6px;font-size:17px}.detail p{margin:6px 0 0;color:var(--muted);font-size:14px;line-height:1.45}.run{align-self:start;min-height:43px;border:0;color:#0b0e10;background:var(--lime);cursor:pointer;font-weight:850}@media(max-width:1000px){.app{grid-template-columns:220px 1fr}.main{padding:28px}.node{width:130px;height:96px}.team{width:160px}}
+  </style>
+</head>
+<body>
+<main class="app">
+  <aside class="side">
+    <div class="eyebrow">INSTRUCTOR LEARNING LAB</div>
+    <h1>AI 작업 시스템<br>확장 지도</h1>
+    <p>각 단계를 누르면 기능이 추가되는 것이 아니라, AI에게 맡길 수 있는 일의 범위와 책임이 어떻게 바뀌는지 확인합니다.</p>
+    <div class="steps">
+      <button class="active" data-step="0"><span>01</span><b>프롬프트</b></button>
+      <button data-step="1"><span>02</span><b>Skill</b></button>
+      <button data-step="2"><span>03</span><b>MCP</b></button>
+      <button data-step="3"><span>04</span><b>Agent</b></button>
+      <button data-step="4"><span>05</span><b>Agent Team</b></button>
+    </div>
+  </aside>
+  <section class="main">
+    <header class="head">
+      <div><div class="eyebrow" id="kicker">01 · INSTRUCTION</div><h2 id="title">한 번의 요청을<br>정확하게 전달합니다</h2><p id="copy">프롬프트는 지금 할 일의 목표, 상황, 제약과 원하는 결과를 전달합니다. 실행 능력이나 장기 기억 자체는 아닙니다.</p></div>
+      <div class="index" id="index">01</div>
+    </header>
+    <div class="stage" id="stage">
+      <div class="node human active"><div><b>사람</b><span>목표와 판단</span></div></div>
+      <div class="node prompt active"><div><b>Prompt</b><span>이번 요청</span></div></div>
+      <div class="node skill"><div><b>Skill</b><span>재사용 작업법</span></div></div>
+      <div class="node mcp"><div><b>MCP</b><span>외부 도구 연결</span></div></div>
+      <div class="node agent"><div><b>Agent</b><span>계획·실행·검증</span></div></div>
+      <div class="node team"><div><b>Agent Team</b><span>역할 분담<br>인수인계·리뷰</span></div></div>
+      <i class="beam b1 active"></i><i class="beam b2"></i><i class="beam b3"></i><i class="beam b4"></i><i class="beam b5"></i><i class="beam b6"></i>
+      <i class="packet"></i>
+    </div>
+    <footer class="detail">
+      <button class="run" id="run">흐름 실행</button>
+      <div><small>추가되는 능력</small><b id="ability">요청 해석</b><p id="ability-copy">사람이 전달한 한 번의 목표와 조건을 이해합니다.</p></div>
+      <div><small>사람의 책임</small><b id="responsibility">좋은 목표와 완료 기준</b><p id="responsibility-copy">무엇을 왜 해야 하는지와 결과를 어떻게 확인할지 정합니다.</p></div>
+    </footer>
+  </section>
+</main>
+<script>
+const data=[
+  {k:"01 · INSTRUCTION",t:"한 번의 요청을<br>정확하게 전달합니다",c:"프롬프트는 지금 할 일의 목표, 상황, 제약과 원하는 결과를 전달합니다. 실행 능력이나 장기 기억 자체는 아닙니다.",a:"요청 해석",ac:"사람이 전달한 한 번의 목표와 조건을 이해합니다.",r:"좋은 목표와 완료 기준",rc:"무엇을 왜 해야 하는지와 결과를 어떻게 확인할지 정합니다."},
+  {k:"02 · REUSABLE WORKFLOW",t:"반복 설명을<br>작업 표준으로 만듭니다",c:"Skill은 특정 업무의 지침, 참고자료와 선택적 스크립트를 묶습니다. 같은 품질 기준을 여러 작업에서 다시 사용할 수 있습니다.",a:"재사용 가능한 절차",ac:"입력, 실행 순서, 산출물과 검증 기준을 필요할 때 불러옵니다.",r:"경계와 실패 조건",rc:"Skill 하나가 맡을 책임과 언제 사용하지 말아야 하는지 정합니다."},
+  {k:"03 · TOOL CONNECTION",t:"AI가 외부의<br>도구와 데이터를 사용합니다",c:"MCP는 파일, 브라우저, 데이터와 서비스 기능을 AI에 연결합니다. 연결된 도구의 권한과 반환 형식이 안전해야 합니다.",a:"외부 읽기와 실행",ac:"실제 정보에 접근하고 허용된 도구의 행동을 호출합니다.",r:"최소 권한과 승인",rc:"민감정보, 쓰기 작업과 파괴적 행동에 제한과 기록을 둡니다."},
+  {k:"04 · EXECUTION LOOP",t:"목표를 계획하고<br>실행하며 검증합니다",c:"Agent는 목표를 작은 작업으로 나누고 도구를 사용한 뒤 결과를 확인하고 필요하면 복구합니다. 자율성보다 중단 기준이 중요합니다.",a:"계획·도구·검증 루프",ac:"여러 단계의 상태를 유지하며 완료 조건까지 작업합니다.",r:"관찰·비용·Human Checkpoint",rc:"실패를 감지하고 사람이 확인해야 할 순간을 설계합니다."},
+  {k:"05 · COORDINATION",t:"전문 역할들이<br>하나의 결과로 합류합니다",c:"Agent Team은 리서치, 구현, 디자인과 QA를 나눕니다. 각 역할의 파일 소유권, 공통 산출물과 최종 책임자가 필요합니다.",a:"병렬 작업과 전문 리뷰",ac:"독립적인 작업을 동시에 수행하고 요약된 결과를 합칩니다.",r:"경계·인수인계·최종 책임",rc:"충돌을 막고 Reviewer와 Human Lead가 최종 품질을 결정합니다."}
+];
+const buttons=[...document.querySelectorAll("[data-step]")],nodes=[...document.querySelectorAll(".node")],beams=[...document.querySelectorAll(".beam")];
+function selectStep(i){buttons.forEach((b,n)=>b.classList.toggle("active",n===i));nodes.forEach((n,idx)=>n.classList.toggle("active",idx<=i+1));beams.forEach((b,n)=>b.classList.toggle("active",n<=Math.max(0,i)));const d=data[i];document.getElementById("kicker").textContent=d.k;document.getElementById("title").innerHTML=d.t;document.getElementById("copy").textContent=d.c;document.getElementById("index").textContent=String(i+1).padStart(2,"0");document.getElementById("ability").textContent=d.a;document.getElementById("ability-copy").textContent=d.ac;document.getElementById("responsibility").textContent=d.r;document.getElementById("responsibility-copy").textContent=d.rc}
+buttons.forEach(b=>b.addEventListener("click",()=>selectStep(Number(b.dataset.step))));
+document.getElementById("run").addEventListener("click",()=>{const s=document.getElementById("stage");s.classList.remove("running");void s.offsetWidth;s.classList.add("running")});
+</script>
+</body>
+</html>

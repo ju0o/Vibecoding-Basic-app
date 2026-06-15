@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenAI Codex 강사용 공부자료</title>
+  <link rel="stylesheet" href="./session-material.css">
+</head>
+<body>
+<main class="sheet">
+  <header class="material-head">
+    <div><div class="material-kicker">TOOL STUDY · OPENAI CODEX · 2026-06</div><h1>Codex를 가르치기 전에</h1></div>
+    <span class="session-badge">T02</span>
+  </header>
+  <div class="goal">학습 기준: Codex를 코드 생성 채팅이 아니라 목표, 작업공간 규칙, 도구 실행, 검증과 Git 운영을 연결하는 코딩 Agent로 설명합니다.</div>
+
+  <section class="section">
+    <h2>Codex 작업 구조</h2>
+    <div class="flow">
+      <article class="flow-step"><h3>GOAL</h3><p>바꿀 결과 정의</p></article>
+      <article class="flow-step"><h3>CONTEXT</h3><p>파일·오류·규칙 제공</p></article>
+      <article class="flow-step"><h3>CONSTRAINTS</h3><p>안전·구조·범위</p></article>
+      <article class="flow-step"><h3>DONE WHEN</h3><p>테스트·화면·보고</p></article>
+    </div>
+  </section>
+
+  <section class="section grid-2">
+    <article class="term"><h3>AGENTS.md</h3><p>저장소 구조, 실행·검사 명령, 개발 규칙, 금지 사항과 완료 기준을 지속 지침으로 둡니다. 더 가까운 하위 폴더의 지침이 해당 범위에서 우선합니다.</p></article>
+    <article class="term"><h3>Plan mode</h3><p>복잡하거나 모호한 작업에서 구현 전에 컨텍스트를 모으고 질문과 계획 검토를 진행하는 방식입니다.</p></article>
+    <article class="term"><h3>Skills</h3><p>특정 업무의 지침, 자료와 선택적 스크립트를 묶는 재사용 워크플로입니다. 이름과 description을 보고 명시적 또는 암묵적으로 선택됩니다.</p></article>
+    <article class="term"><h3>Plugins</h3><p>여러 Skill, 앱 연결, MCP 설정과 자산을 설치 가능한 단위로 배포할 때 사용합니다. 개인 저장소의 한 업무라면 Skill부터 시작합니다.</p></article>
+    <article class="term"><h3>MCP와 Connectors</h3><p>외부 데이터와 동작을 연결합니다. private workspace 데이터는 승인된 connector나 MCP를 사용하고 웹 검색과 구분합니다.</p></article>
+    <article class="term"><h3>Subagents</h3><p>탐색, 테스트, 리뷰처럼 독립적인 작업을 별도 Agent에 맡겨 주 대화의 컨텍스트를 보호합니다. 쓰기 작업 병렬화는 충돌을 고려합니다.</p></article>
+  </section>
+
+  <section class="section">
+    <h2>강의에서 강조할 작업 습관</h2>
+    <div class="checklist">
+      <div class="check">작업 전 현재 저장소의 구조, 지침 파일과 변경 상태를 읽게 합니다.</div>
+      <div class="check">요청에는 목표, 관련 컨텍스트, 제약과 완료 조건을 포함합니다.</div>
+      <div class="check">복잡한 작업은 계획을 검토한 뒤 구현하고, 진행 중 새 사실이 나오면 계획을 갱신합니다.</div>
+      <div class="check">코드 작성 후 lint, test, build와 실제 브라우저 화면 등 위험에 맞는 검증을 실행합니다.</div>
+      <div class="check">diff를 검토하고 사용자 변경을 되돌리지 않으며 작은 범위로 commit합니다.</div>
+      <div class="check">같은 실수가 반복되면 AGENTS.md나 Skill을 개선해 다음 작업의 기본값을 바꿉니다.</div>
+    </div>
+  </section>
+
+  <section class="section grid-2">
+    <article class="qa"><b>Skill과 AGENTS.md</b><p class="answer">항상 적용할 저장소 규칙은 AGENTS.md, 특정 작업에서만 불러올 절차와 자료는 Skill에 둡니다.</p></article>
+    <article class="qa"><b>Skill과 Plugin</b><p class="answer">워크플로를 작성하고 개인·저장소에서 쓸 때는 Skill, 여러 기능과 연결을 설치·배포할 때는 Plugin이 적합합니다.</p></article>
+    <article class="qa"><b>MCP와 Skill</b><p class="answer">MCP는 실제 외부 도구와 데이터 접근, Skill은 그 도구를 언제 어떤 순서와 품질 기준으로 사용할지 정하는 작업법입니다.</p></article>
+    <article class="qa"><b>Subagent와 Agent Team</b><p class="answer">Subagent는 한 작업을 위임한 전문 Agent, Agent Team은 여러 역할과 인수인계를 포함한 협업 구조로 설명합니다.</p></article>
+  </section>
+
+  <section class="section">
+    <h2>예상 질문</h2>
+    <div class="qa-grid">
+      <article class="qa"><b>Q. 프롬프트를 완벽하게 써야 하나요?</b><p class="answer">완벽한 문장보다 목표와 완료 조건이 중요합니다. 모호한 작업은 Plan mode나 인터뷰 방식으로 함께 구체화합니다.</p></article>
+      <article class="qa"><b>Q. Codex가 테스트까지 알아서 하나요?</b><p class="answer">가능하지만 어떤 검사를 통과해야 하는지 프로젝트 지침이나 요청에 알려줘야 결과가 안정적입니다.</p></article>
+      <article class="qa"><b>Q. Skill이 많을수록 좋은가요?</b><p class="answer">아닙니다. 겹치는 Skill은 선택을 어렵게 합니다. 한 가지 책임과 분명한 trigger를 가진 작은 Skill이 낫습니다.</p></article>
+      <article class="qa"><b>Q. Subagent를 자동으로 항상 쓰나요?</b><p class="answer">공식 매뉴얼 기준으로 명시적으로 병렬 Agent 작업을 요청하는 방식이 기본입니다. 독립적인 읽기 작업부터 시작합니다.</p></article>
+    </div>
+  </section>
+
+  <div class="callout">공식 확인 위치: OpenAI Codex Manual의 Best practices, Codex app, AGENTS.md, Agent Skills, MCP, Plugins, Subagents. 수업 자료는 2026년 6월 15일 공식 매뉴얼을 기준으로 정리했습니다.</div>
+</main>
+</body>
+</html>

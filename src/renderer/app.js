@@ -4,7 +4,7 @@
    STATE
 ═══════════════════════════════════════════════════════ */
 const state = {
-  view: 'dashboard',          // 'dashboard' | 'appendix' | 'player'
+  view: 'catalog',            // 'catalog' | 'dashboard' | 'appendix' | 'planner' | 'player'
   activeCourseId: 'basic',
   activeSessionId: null,      // session.id 또는 appendix.id
   isAppendixMode: false,      // true = 별첨 자료 플레이어
@@ -12,6 +12,8 @@ const state = {
   contentBase: null,
   shareConfig: null,
   appendixAudience: 'student',
+  appendixCourseFilter: 'all',
+  catalogTrackFilter: 'all',
   notesOpen: false,
   presenterMode: false,
   isDev: false,
@@ -60,6 +62,18 @@ const store = {
     const notes = JSON.parse(localStorage.getItem('vbc_notes') || '{}');
     notes[id] = text;
     localStorage.setItem('vbc_notes', JSON.stringify(notes));
+  },
+
+  get programNote() { return localStorage.getItem('vbc_program_note') || ''; },
+  setProgramNote(text) { localStorage.setItem('vbc_program_note', text); },
+
+  get schedule() {
+    return JSON.parse(localStorage.getItem('vbc_schedule') || '{}');
+  },
+  setSchedule(courseId, field, value) {
+    const schedule = this.schedule;
+    schedule[courseId] = { ...(schedule[courseId] || {}), [field]: value };
+    localStorage.setItem('vbc_schedule', JSON.stringify(schedule));
   },
 };
 
@@ -112,6 +126,27 @@ function getAppendixAudience(item) {
   return 'student';
 }
 
+function getCourseFamily(course) {
+  return course.family || course.track || '기타 과정';
+}
+
+function getAppendixCourseId(item) {
+  if (item.courseId) return item.courseId;
+  if (/session[1-6]|session-0[1-6]|curriculum|ai-types|preclass|command|error-guide|mvp|glossary|project-structure|database|deployment|presentation|practice-log|diagrams/.test(item.id)) {
+    return 'basic';
+  }
+  return 'program';
+}
+
+function getAppendixSessionLabel(item) {
+  if (item.sessionId) {
+    const found = getSession(item.sessionId);
+    return found?.session?.title || item.sessionId;
+  }
+  const match = item.id.match(/session-?0?(\d+)/);
+  return match ? `${Number(match[1])}강` : (item.scopeLabel || '공통');
+}
+
 function getCourseStatusLabel(course) {
   if (course.status === 'planning' || course.comingSoon) return '기획 완료';
   if (course.status === 'updating') return '업데이트 중';
@@ -138,7 +173,7 @@ function renderSidebar() {
   for (const course of state.manifest.courses) {
     const done = course.sessions.filter(s => store.isDone(s.id)).length;
     const total = course.sessions.length;
-    const isActive = course.id === state.activeCourseId && !state.isAppendixMode;
+    const isActive = course.id === state.activeCourseId && !state.isAppendixMode && ['dashboard', 'player'].includes(state.view);
     const courseCode = course.code || course.shortTitle?.slice(0, 2) || 'VC';
 
     const btn = document.createElement('button');
@@ -164,8 +199,87 @@ function renderSidebar() {
 
   const studentBtn = $('[data-nav="student-materials"]');
   const instructorBtn = $('[data-nav="instructor-library"]');
+  const catalogBtn = $('[data-nav="catalog"]');
+  const plannerBtn = $('[data-nav="planner"]');
   studentBtn?.classList.toggle('active', state.isAppendixMode && state.appendixAudience === 'student');
   instructorBtn?.classList.toggle('active', state.isAppendixMode && state.appendixAudience === 'instructor');
+  catalogBtn?.classList.toggle('active', state.view === 'catalog');
+  plannerBtn?.classList.toggle('active', state.view === 'planner');
+}
+
+/* ═══════════════════════════════════════════════════════
+   COURSE CATALOG
+═══════════════════════════════════════════════════════ */
+function showCatalog() {
+  state.isAppendixMode = false;
+  state.activeSessionId = null;
+  renderSidebar();
+  renderCatalog();
+  showView('catalog');
+  renderSidebar();
+}
+
+function renderCatalog() {
+  const courses = state.manifest.courses;
+  const families = [...new Set(courses.map(getCourseFamily))];
+  const filterWrap = $('#catalog-track-filter');
+  filterWrap.innerHTML = [
+    `<button class="filter-chip${state.catalogTrackFilter === 'all' ? ' active' : ''}" data-track-filter="all">전체</button>`,
+    ...families.map((family) => `<button class="filter-chip${state.catalogTrackFilter === family ? ' active' : ''}" data-track-filter="${family}">${family}</button>`)
+  ].join('');
+  $$('[data-track-filter]', filterWrap).forEach((button) => {
+    button.addEventListener('click', () => {
+      state.catalogTrackFilter = button.dataset.trackFilter;
+      renderCatalogGrid($('#search-catalog').value.trim());
+      renderCatalog();
+    });
+  });
+
+  setText('#catalog-course-count', String(courses.length).padStart(2, '0'));
+  setText('#catalog-lesson-count', String(courses.reduce((sum, course) => sum + course.sessions.length, 0)).padStart(2, '0'));
+  setText('#catalog-active-count', String(courses.filter((course) => course.status === 'active').length).padStart(2, '0'));
+  renderCatalogGrid($('#search-catalog').value.trim());
+}
+
+function renderCatalogGrid(filter = '') {
+  const grid = $('#catalog-grid');
+  const courses = state.manifest.courses.filter((course) => {
+    const matchesTrack = state.catalogTrackFilter === 'all' || getCourseFamily(course) === state.catalogTrackFilter;
+    const haystack = `${course.title} ${course.shortTitle || ''} ${course.description || ''} ${course.track || ''}`;
+    return matchesTrack && (!filter || haystack.toLowerCase().includes(filter.toLowerCase()));
+  });
+
+  if (courses.length === 0) {
+    grid.innerHTML = '<div class="empty-state"><p>조건에 맞는 과정이 없습니다.</p></div>';
+    return;
+  }
+
+  grid.innerHTML = '';
+  courses.forEach((course) => {
+    const done = course.sessions.filter((session) => store.isDone(session.id)).length;
+    const card = document.createElement('article');
+    card.className = 'catalog-card';
+    card.style.setProperty('--catalog-accent', course.color || '#d8ff66');
+    card.innerHTML = `
+      <div class="catalog-card-head">
+        <span class="catalog-code">${course.code || 'VIBE'}</span>
+        <span class="catalog-family">${getCourseFamily(course)}</span>
+      </div>
+      <h3>${course.title}</h3>
+      <p class="catalog-route">${course.description || course.route || ''}</p>
+      <div class="catalog-metrics">
+        <span>${course.sessions.length} LESSONS</span>
+        <span>${done} COMPLETE</span>
+        <span>${course.level || 'ALL'}</span>
+      </div>
+      <div class="catalog-card-foot">
+        <span class="catalog-status">${getCourseStatusLabel(course)}</span>
+        <button class="catalog-open" data-open-course="${course.id}">과정 보기</button>
+      </div>
+    `;
+    card.querySelector('[data-open-course]').addEventListener('click', () => selectCourse(course.id));
+    grid.appendChild(card);
+  });
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -176,9 +290,9 @@ function selectCourse(courseId) {
   state.activeSessionId = null;
   state.isAppendixMode = false;
 
-  renderSidebar();
   renderDashboard(courseId);
   showView('dashboard');
+  renderSidebar();
 }
 
 function renderDashboard(courseId) {
@@ -404,6 +518,7 @@ function showAppendixList(audience = 'student') {
   state.isAppendixMode = true;
   state.activeSessionId = null;
   state.appendixAudience = audience;
+  state.appendixCourseFilter = state.appendixCourseFilter || 'all';
   const isInstructor = audience === 'instructor';
   setText('#appendix-eyebrow', isInstructor ? 'INSTRUCTOR LIBRARY' : 'STUDENT MATERIALS');
   setText('#appendix-title', isInstructor ? '강사 자료실' : '수강생 자료');
@@ -413,9 +528,35 @@ function showAppendixList(audience = 'student') {
       ? '강의 대본, 개념 공부자료, 다음 과정 설계 문서를 한곳에서 관리합니다.'
       : '수업 중 배포하고 실습에 사용하는 요약표, 워크시트와 참고자료입니다.'
   );
-  renderSidebar();
-  renderAppendixGrid('');
   showView('appendix');
+  renderSidebar();
+  renderAppendixFilters();
+  renderAppendixGrid('');
+}
+
+function renderAppendixFilters() {
+  const wrap = $('#appendix-filters');
+  const audienceItems = state.manifest.appendix.filter(
+    (item) => getAppendixAudience(item) === state.appendixAudience
+  );
+  const courseIds = [...new Set(audienceItems.map(getAppendixCourseId))];
+  const options = [
+    { id: 'all', label: '전체 과정' },
+    ...courseIds.map((courseId) => ({
+      id: courseId,
+      label: courseId === 'program' ? '프로그램 공통' : (getCourse(courseId)?.shortTitle || getCourse(courseId)?.title || courseId)
+    }))
+  ];
+  wrap.innerHTML = options.map((option) => `
+    <button class="filter-chip${state.appendixCourseFilter === option.id ? ' active' : ''}" data-appendix-course="${option.id}">${option.label}</button>
+  `).join('');
+  $$('[data-appendix-course]', wrap).forEach((button) => {
+    button.addEventListener('click', () => {
+      state.appendixCourseFilter = button.dataset.appendixCourse;
+      renderAppendixFilters();
+      renderAppendixGrid($('#search-appendix').value.trim());
+    });
+  });
 }
 
 function renderAppendixGrid(filter) {
@@ -425,39 +566,109 @@ function renderAppendixGrid(filter) {
   const audienceItems = state.manifest.appendix.filter(
     (item) => getAppendixAudience(item) === state.appendixAudience
   );
+  const courseItems = state.appendixCourseFilter === 'all'
+    ? audienceItems
+    : audienceItems.filter((item) => getAppendixCourseId(item) === state.appendixCourseFilter);
   const items = filter
-    ? audienceItems.filter(a =>
-        a.title.includes(filter) || (a.description || '').includes(filter)
+    ? courseItems.filter(a =>
+        a.title.toLowerCase().includes(filter.toLowerCase()) || (a.description || '').toLowerCase().includes(filter.toLowerCase())
       )
-    : audienceItems;
+    : courseItems;
 
   setText('#appendix-count', `${items.length}개 자료`);
 
   if (items.length === 0) {
-    grid.innerHTML = `<div class="empty-state"><span class="empty-icon">🔍</span><p>검색 결과가 없습니다.</p></div>`;
+    grid.innerHTML = `<div class="empty-state"><p>검색 결과가 없습니다.</p></div>`;
     return;
   }
 
-  items.forEach(item => {
-    const isShareable = Boolean(getShareableResource(item.id));
-    const card = document.createElement('article');
-    card.className = 'session-card appendix-card';
-    card.innerHTML = `
-      <div class="card-top">
-        <span class="card-num appendix-code">${item.code || (state.appendixAudience === 'instructor' ? 'NOTE' : 'FILE')}</span>
-        ${isShareable ? '<span class="badge badge-practice">커뮤니티 공유</span>' : ''}
+  const grouped = new Map();
+  items.forEach((item) => {
+    const courseId = getAppendixCourseId(item);
+    if (!grouped.has(courseId)) grouped.set(courseId, []);
+    grouped.get(courseId).push(item);
+  });
+
+  grouped.forEach((groupItems, courseId) => {
+    const course = getCourse(courseId);
+    const section = document.createElement('section');
+    section.className = 'library-group';
+    section.innerHTML = `
+      <div class="library-group-head">
+        <div><span>${course?.code || 'COMMON'}</span><h2>${course?.title || '프로그램 공통 자료'}</h2></div>
+        <small>${groupItems.length} MATERIALS</small>
       </div>
-      <h3 class="card-title">${item.title}</h3>
-      ${item.subtitle ? `<p class="card-subtitle">${item.subtitle}</p>` : ''}
-      <p class="card-desc">${item.description || ''}</p>
-      <div class="card-foot">
-        <button class="btn-card-open" data-appendix-id="${item.id}">열람하기 →</button>
-      </div>
+      <div class="library-group-grid"></div>
     `;
-    card.querySelector('.btn-card-open').addEventListener('click', () => {
-      openAppendix(item.id);
+    const groupGrid = section.querySelector('.library-group-grid');
+
+    groupItems
+      .sort((a, b) => getAppendixSessionLabel(a).localeCompare(getAppendixSessionLabel(b), 'ko'))
+      .forEach(item => {
+        const isShareable = Boolean(getShareableResource(item.id));
+        const card = document.createElement('article');
+        card.className = 'session-card appendix-card';
+        card.innerHTML = `
+          <div class="card-top">
+            <span class="card-num appendix-code">${item.code || (state.appendixAudience === 'instructor' ? 'NOTE' : 'FILE')}</span>
+            <span class="material-session">${getAppendixSessionLabel(item)}</span>
+            ${isShareable ? '<span class="badge badge-practice">커뮤니티 공유</span>' : ''}
+          </div>
+          <h3 class="card-title">${item.title}</h3>
+          ${item.subtitle ? `<p class="card-subtitle">${item.subtitle}</p>` : ''}
+          <p class="card-desc">${item.description || ''}</p>
+          <div class="card-foot">
+            <button class="btn-card-open" data-appendix-id="${item.id}">열람하기 →</button>
+          </div>
+        `;
+        card.querySelector('.btn-card-open').addEventListener('click', () => openAppendix(item.id));
+        groupGrid.appendChild(card);
+      });
+    grid.appendChild(section);
+  });
+}
+
+/* ═══════════════════════════════════════════════════════
+   PROGRAM PLANNER
+═══════════════════════════════════════════════════════ */
+function showPlanner() {
+  state.isAppendixMode = false;
+  state.activeSessionId = null;
+  showView('planner');
+  renderSidebar();
+  renderPlanner();
+}
+
+function flashPlannerSaved() {
+  setText('#planner-save-label', '저장됨');
+  clearTimeout(flashPlannerSaved.timer);
+  flashPlannerSaved.timer = setTimeout(() => setText('#planner-save-label', '자동 저장'), 1200);
+}
+
+function renderPlanner() {
+  $('#program-note').value = store.programNote;
+  const list = $('#schedule-list');
+  const schedule = store.schedule;
+  list.innerHTML = '';
+  state.manifest.courses.forEach((course) => {
+    const saved = schedule[course.id] || {};
+    const row = document.createElement('article');
+    row.className = 'schedule-row';
+    row.style.setProperty('--row-accent', course.color || '#d8ff66');
+    row.innerHTML = `
+      <span class="schedule-code">${course.code || 'VC'}</span>
+      <div class="schedule-title"><b>${course.shortTitle || course.title}</b><span>${course.sessions.length}회 · ${getCourseStatusLabel(course)}</span></div>
+      <input type="date" data-schedule-field="date" value="${saved.date || ''}" aria-label="${course.title} 날짜">
+      <input type="time" data-schedule-field="time" value="${saved.time || ''}" aria-label="${course.title} 시간">
+      <input type="text" data-schedule-field="note" value="${saved.note || ''}" placeholder="장소 · 기수 · 준비 메모" aria-label="${course.title} 메모">
+    `;
+    $$('[data-schedule-field]', row).forEach((input) => {
+      input.addEventListener('input', () => {
+        store.setSchedule(course.id, input.dataset.scheduleField, input.value);
+        flashPlannerSaved();
+      });
     });
-    grid.appendChild(card);
+    list.appendChild(row);
   });
 }
 
@@ -468,7 +679,11 @@ function openAppendix(appendixId) {
   state.activeSessionId = appendixId;
   state.isAppendixMode = true;
 
-  setText('#player-course-label', state.appendixAudience === 'instructor' ? '강사 자료실' : '수강생 자료');
+  const itemCourse = getCourse(getAppendixCourseId(item));
+  setText(
+    '#player-course-label',
+    `${state.appendixAudience === 'instructor' ? '강사 자료실' : '수강생 자료'} · ${itemCourse?.shortTitle || '공통'} · ${getAppendixSessionLabel(item)}`
+  );
   setText('#player-session-title', item.title);
 
   syncFavoriteBtn(appendixId);
@@ -742,6 +957,9 @@ function goBack() {
    EVENT BINDINGS
 ═══════════════════════════════════════════════════════ */
 function bindEvents() {
+  $('[data-nav="catalog"]').addEventListener('click', showCatalog);
+  $('[data-nav="planner"]').addEventListener('click', showPlanner);
+
   // 사이드바: 자료실
   $('[data-nav="student-materials"]').addEventListener('click', () => showAppendixList('student'));
   $('[data-nav="instructor-library"]').addEventListener('click', () => showAppendixList('instructor'));
@@ -813,12 +1031,21 @@ function bindEvents() {
     renderAppendixGrid(e.target.value.trim());
   });
 
+  $('#search-catalog').addEventListener('input', (e) => {
+    renderCatalogGrid(e.target.value.trim());
+  });
+
+  $('#program-note').addEventListener('input', (e) => {
+    store.setProgramNote(e.target.value);
+    flashPlannerSaved();
+  });
+
   // 키보드 단축키 (메인 프로세스에서 전달)
   window.vibeCodingApp.onShortcut((key) => {
     if (key === 'home') {
       saveCurrentNote();
       exitPresenter();
-      selectCourse(state.activeCourseId || 'basic');
+      showCatalog();
     } else if (key === 'escape') {
       if (state.presenterMode) {
         exitPresenter();
@@ -894,9 +1121,8 @@ async function init() {
   initBoardDrawing();
   makeToolbarDraggable();
   renderSidebar();
-  renderDashboard('basic');
   bindEvents();
-  showView('dashboard');
+  showCatalog();
 }
 
 document.addEventListener('DOMContentLoaded', init);

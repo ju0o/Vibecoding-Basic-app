@@ -41,7 +41,7 @@ jobs:
             throw "Portable EXE was not generated."
           }
           $version = node -p "require('./package.json').version"
-          $releaseExe = Join-Path "release" "VibeCoding-Basic-Class-$version.exe"
+          $releaseExe = Join-Path "release" "VIBE-STUDIO-$version.exe"
           Move-Item -LiteralPath $exe.FullName -Destination $releaseExe -Force
           $hash = Get-FileHash -Algorithm SHA256 -LiteralPath $releaseExe
           "$($hash.Hash.ToLower())  $(Split-Path $releaseExe -Leaf)" |
@@ -65,6 +65,6 @@ jobs:
           } else {
             gh release create $tag $assets `
               --repo "${{ github.repository }}" `
-              --title "바이브코딩 기초반 $tag" `
+              --title "VIBE STUDIO $tag" `
               --generate-notes
           }

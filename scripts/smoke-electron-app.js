@@ -11,7 +11,9 @@ const screenshotPath = process.env.SMOKE_SCREENSHOT
 const reportPath = process.env.SMOKE_REPORT
   ? path.resolve(process.env.SMOKE_REPORT)
   : path.join(root, 'artifacts', 'qa', 'app-dashboard.json');
-const playerScreenshotPath = path.join(path.dirname(screenshotPath), 'app-player-session4.png');
+const playerScreenshotPath = path.join(path.dirname(screenshotPath), 'app-player-session5.png');
+const practicalScreenshotPath = path.join(path.dirname(screenshotPath), 'app-player-practical.png');
+const advancedScreenshotPath = path.join(path.dirname(screenshotPath), 'app-player-advanced.png');
 
 ipcMain.handle('read-manifest', () => {
   return JSON.parse(fs.readFileSync(path.join(root, 'src/content/course-manifest.json'), 'utf-8'));
@@ -59,13 +61,16 @@ app.whenReady().then(async () => {
     win.showInactive();
     await new Promise((resolve) => setTimeout(resolve, 250));
 
-    const dashboard = await win.webContents.executeJavaScript(`
+    const catalog = await win.webContents.executeJavaScript(`
       (() => ({
-        title: document.querySelector('#course-title')?.textContent || '',
+        title: document.querySelector('#view-catalog .view-title')?.textContent || '',
         courses: document.querySelectorAll('#nav-courses .nav-item').length,
-        sessionCards: document.querySelectorAll('#session-grid .session-card').length,
+        catalogCards: document.querySelectorAll('#catalog-grid .catalog-card').length,
+        courseCount: document.querySelector('#catalog-course-count')?.textContent || '',
+        lessonCount: document.querySelector('#catalog-lesson-count')?.textContent || '',
         studentLibraryButton: Boolean(document.querySelector('[data-nav="student-materials"]')),
         instructorLibraryButton: Boolean(document.querySelector('[data-nav="instructor-library"]')),
+        plannerButton: Boolean(document.querySelector('[data-nav="planner"]')),
         viewportOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth,
         activeView: document.querySelector('.view:not(.hidden)')?.id || ''
       }))()
@@ -90,8 +95,20 @@ app.whenReady().then(async () => {
     `);
 
     await win.webContents.executeJavaScript(`
+      document.querySelector('[data-nav="planner"]').click()
+    `);
+    await new Promise((resolve) => setTimeout(resolve, 200));
+    const planner = await win.webContents.executeJavaScript(`
+      (() => ({
+        activeView: document.querySelector('.view:not(.hidden)')?.id || '',
+        scheduleRows: document.querySelectorAll('#schedule-list .schedule-row').length,
+        noteReady: Boolean(document.querySelector('#program-note'))
+      }))()
+    `);
+
+    await win.webContents.executeJavaScript(`
       document.querySelector('[data-course-id="basic"]').click();
-      document.querySelector('[data-session-id="basic-04"]').click();
+      document.querySelector('[data-session-id="basic-05"]').click();
     `);
     await new Promise((resolve) => setTimeout(resolve, 1600));
 
@@ -118,31 +135,89 @@ app.whenReady().then(async () => {
     const playerImage = await win.webContents.capturePage();
     fs.writeFileSync(playerScreenshotPath, playerImage.toPNG());
 
-    const ok = dashboard.title === '바이브코딩 기초반'
-      && dashboard.courses >= 3
-      && dashboard.sessionCards === 6
-      && dashboard.studentLibraryButton
-      && dashboard.instructorLibraryButton
-      && !dashboard.viewportOverflow
-      && dashboard.activeView === 'view-dashboard'
+    async function inspectTrack(courseId, sessionId, screenshotTarget) {
+      await win.webContents.executeJavaScript(`
+        document.querySelector('[data-course-id="${courseId}"]').click();
+        document.querySelector('[data-session-id="${sessionId}"]').click();
+      `);
+      await new Promise((resolve) => setTimeout(resolve, 900));
+
+      const result = await win.webContents.executeJavaScript(`
+        (async () => {
+          const webview = document.querySelector('#lecture-webview');
+          const inner = await webview.executeJavaScript(\`
+            ({
+              slides: document.querySelectorAll('.slide').length,
+              activeSlides: document.querySelectorAll('.slide.active').length,
+              title: document.title,
+              hasInteractiveControls: document.querySelectorAll('button').length > 4
+            })
+          \`);
+          return {
+            activeView: document.querySelector('.view:not(.hidden)')?.id || '',
+            sessionTitle: document.querySelector('#player-session-title')?.textContent || '',
+            loadingHidden: document.querySelector('#webview-loading')?.classList.contains('hidden') || false,
+            inner
+          };
+        })()
+      `);
+
+      const image = await win.webContents.capturePage();
+      fs.writeFileSync(screenshotTarget, image.toPNG());
+      return result;
+    }
+
+    const practicalPlayer = await inspectTrack('practical', 'practical-01', practicalScreenshotPath);
+    const advancedPlayer = await inspectTrack('advanced', 'advanced-03', advancedScreenshotPath);
+
+    const ok = catalog.title.includes('바이브코딩 교육 프로그램')
+      && catalog.courses >= 13
+      && catalog.catalogCards >= 13
+      && catalog.courseCount === '13'
+      && Number(catalog.lessonCount) >= 70
+      && catalog.studentLibraryButton
+      && catalog.instructorLibraryButton
+      && catalog.plannerButton
+      && !catalog.viewportOverflow
+      && catalog.activeView === 'view-catalog'
       && instructorLibrary.title === '강사 자료실'
       && instructorLibrary.cards > 0
       && instructorLibrary.hasRoadmap
+      && planner.activeView === 'view-planner'
+      && planner.scheduleRows >= 13
+      && planner.noteReady
       && player.activeView === 'view-player'
-      && player.sessionTitle.includes('4강')
+      && player.sessionTitle.includes('5강')
       && player.loadingHidden
       && player.inner.slides === 17
       && player.inner.activeSlides === 1
+      && practicalPlayer.activeView === 'view-player'
+      && practicalPlayer.sessionTitle.includes('팔릴 이유')
+      && practicalPlayer.loadingHidden
+      && practicalPlayer.inner.slides === 11
+      && practicalPlayer.inner.activeSlides === 1
+      && practicalPlayer.inner.hasInteractiveControls
+      && advancedPlayer.activeView === 'view-player'
+      && advancedPlayer.sessionTitle.includes('Agent 설계')
+      && advancedPlayer.loadingHidden
+      && advancedPlayer.inner.slides === 11
+      && advancedPlayer.inner.activeSlides === 1
+      && advancedPlayer.inner.hasInteractiveControls
       && errors.length === 0;
 
     const report = {
       ok,
-      dashboard,
+      catalog,
       instructorLibrary,
+      planner,
       player,
+      practicalPlayer,
+      advancedPlayer,
       errors,
       screenshotPath,
       playerScreenshotPath,
+      practicalScreenshotPath,
+      advancedScreenshotPath,
     };
     fs.mkdirSync(path.dirname(reportPath), { recursive: true });
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2), 'utf-8');

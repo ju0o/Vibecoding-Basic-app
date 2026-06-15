@@ -92,7 +92,7 @@ try {
   checkJavaScript();
   checkManifest();
   checkSlideCounters();
-  console.log('V1 check passed.');
+  console.log('Project check passed.');
 } catch (error) {
   console.error(error.message);
   process.exit(1);
