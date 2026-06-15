@@ -1,9 +1,22 @@
+# VIBE STUDIO
 
-# VIBE STUDIO · 바이브코딩 강의 운영 콘솔
+현재 진행 중인 바이브코딩 기초반과 다음 전문과정을 운영하는 Electron 기반 강의 스튜디오입니다.
 
-바이브코딩 기초반부터 응용·수익화반, AI 워크스페이스 심화반과 후속 전문 과정까지 한 곳에서 운영하는 Electron 기반 Windows 교육 프로그램입니다. 현재 13개 과정, 70개 회차가 모두 실행 가능한 강의로 연결되어 있습니다.
+현재 개발 버전은 **3.0.0-beta.1**입니다. `기초반 2기 6주 운영본`은 그대로 보존하고, 다음 기수용 4주 개편본과 전문과정은 V3 공통 강의·자료 엔진으로 관리합니다.
 
-현재 앱 버전은 **2.0.0**이며, 제품명은 **VIBE STUDIO**입니다. 기초반은 프로그램 안에서 운영되는 첫 번째 정규 과정으로 유지됩니다.
+## 과정 구조
+
+학생 모드에는 다음 5개 과정만 표시됩니다.
+
+1. 바이브코딩 기초반 · 2기 운영본 6주
+2. AI 제품·수익화 8주
+3. AI Workflow Architect 4주
+4. Claude Code Professional 6주
+5. Codex Professional 6주
+
+강사 모드에서는 다음 기수용 `바이브코딩 기초반 4주 개편본`을 추가로 미리 볼 수 있습니다.
+
+권장 순서는 `기초 → Workflow Architect → Claude Code 또는 Codex`입니다. 제품·수익화는 기초 수료 후 선택하는 별도 사업 트랙입니다.
 
 ## 실행
 
@@ -12,78 +25,66 @@ npm install
 npm start
 ```
 
-## Windows EXE 만들기
+앱은 전체 과정 카탈로그 대신 다음 3단 구조로 시작합니다.
+
+- 왼쪽: 5개 과정, 일정, 설정
+- 가운데: 선택 과정의 회차 또는 자료
+- 오른쪽: 목표, 준비물, 결과물과 실행 버튼
+
+`Ctrl+K`로 과정·회차·자료를 검색할 수 있습니다.
+
+## V3 콘텐츠 생성
 
 ```bash
-npm run release:current
+npm run build:v3
 ```
 
-현재 버전의 portable EXE, 현장 실행 가이드, 강의 전 체크리스트와 릴리즈 보고서가 생성됩니다. 빌드만 필요하면 `npm run release:build`를 사용합니다.
+`scripts/build-v3-content.js`가 다음 파일을 동기화합니다.
 
-## GitHub 릴리즈
+- `src/content/course-manifest.json`
+- `src/content/v3/course-data.js`
+- `docs/v3/basic-v2-freeze.json`
 
-릴리즈는 [Semantic Versioning](https://semver.org/) 형식으로 관리합니다.
+현재 2기 강의인 `src/content/sessions/*`는 생성 대상이 아니며 해시 감사로 변경 여부를 검사합니다.
 
-1. `package.json`과 `package-lock.json`의 버전을 변경합니다.
-2. `CHANGELOG.md`에 변경 내용을 기록합니다.
-3. 변경 사항을 Pull Request로 검증한 뒤 `main`에 반영합니다.
-4. 같은 버전의 태그를 `main` 커밋에 푸시합니다.
+## 공식 참고자료 갱신
 
 ```bash
-git tag v2.0.0
-git push origin v2.0.0
+npm run sources:refresh
 ```
 
-`v2.0.0` 같은 태그가 올라오면 GitHub Actions가 Windows portable EXE와 SHA-256 체크섬을 자동 생성해 GitHub Release에 첨부합니다.
-
-자세한 절차는 `docs/RELEASE_MANAGEMENT.md`에 정리되어 있습니다.
-
-## 강의자료 교체 위치
-
-- `src/content/sessions/session-01-ai-understanding.html` — 1강 AI 이해
-- `src/content/sessions/session-02-vibe-coding.html` — 2강 바이브코딩
-- `src/content/sessions/session-03-direction.html` — 3강 프로그램이 움직이는 원리
-- `src/content/sessions/session-04-revenue.html` — 4강 파일 구조 이해
-- `src/content/sessions/session-05-security-api.html` — 5강 배포와 보안 그리고 데이터
-- `src/content/sessions/session-06-showcase.html` — 6강 쇼케이스 Q&A
-
-## 별첨 자료 위치
-
-- `src/content/appendix/curriculum-one-page.html`
-- `src/content/appendix/ai-types-specialized-catalog.html`
-- `src/content/appendix/handout-session2-prep.html`
-- `src/content/appendix/practice-log.html`
-- `src/content/appendix/command-cheatsheet.html`
-- `src/content/appendix/ai-instruction-templates.html`
-- `src/content/appendix/error-guide.html`
-- `src/content/appendix/mvp-worksheet.html`
-- `src/content/appendix/glossary.html`
-- `src/content/appendix/session-03-ui-ux-terms.html`
-- `src/content/appendix/session-03-feature-review-workbook.html`
-- `src/content/appendix/diagrams.html`
-- `src/content/appendix/project-structure.html`
-- `src/content/appendix/deployment-checklist.html`
-- `src/content/appendix/presentation-template.html`
-- `src/content/appendix/databases.html`
-
-구버전·중복 별첨 HTML은 디자인 레퍼런스 보존용으로 파일만 남겨두고, 앱의 별첨 대시보드에서는 제외했습니다.
-정리 기준은 `docs/APPENDIX_CLEANUP.md`에 따로 남겨두었습니다.
-
-## 수업자료 출력
-
-강의/별첨 플레이어 상단의 인쇄 버튼으로 바로 출력할 수 있고, PDF 버튼으로 현재 자료를 PDF 파일로 저장할 수 있습니다.
-
-## 인터랙티브 시스템
-
-시뮬레이션 엔진, 컴포넌트 구조, 새 인터랙션 추가 방법은 `docs/INTERACTIVE_SYSTEM.md`에 정리되어 있습니다.
+GitHub, Vercel, Firebase, MCP, Claude Code, Codex 등의 공식 URL만 확인합니다. 원문을 복제하지 않고 상태, 확인 날짜, 쉬운 한국어 설명과 강사 주의점을 저장합니다.
 
 ## 품질 검사
 
 ```bash
-npm run build:tracks
+npm run audit:curriculum
 npm run check
 npm run smoke:app
 npm run smoke:tracks
+npm run qa:print
 ```
 
-`build:tracks`는 과정 매니페스트를 기준으로 64개 전문 강의와 24개 과정별 자료실 항목을 동기화합니다. `check`는 JavaScript 문법, 강의 매니페스트와 슬라이드 수를 검사합니다. `smoke:app`은 Electron 대시보드와 자료실을, `smoke:tracks`는 64개 공통 엔진 강의의 레이아웃과 인터랙션을 실제 Chromium에서 전수 검사합니다.
+- `audit:curriculum`: 과정 수, 회차 수, 중복 제목, 자료 연결, 공식 출처 키와 V2 동결 파일 검사
+- `check`: JavaScript 문법, 매니페스트와 파일 연결, 기존 슬라이드 카운터 검사
+- `smoke:app`: 학생·강사 모드, 3단 UI, 자료 탭, 플레이어, `Ctrl+K` 검사
+- `smoke:tracks`: 28개 V3 회차의 13장 덱과 수동 진행 제어 전수 검사
+- `qa:print`: 45개 수강생·강사용 A4 PDF의 페이지 수, 밝은 배경과 가로 넘침 검사
+
+## Windows Beta EXE
+
+```bash
+npm run release:v3-beta
+```
+
+`release/`에 portable EXE, 현장 실행 가이드, 강의 전 체크리스트와 미리보기 이미지가 생성됩니다.
+
+## 주요 문서
+
+- `docs/v3/CURRICULUM-V3.md`
+- `docs/v3/CURRICULUM-MATRIX.md`
+- `docs/v3/ARCHITECTURE.md`
+- `docs/v3/QA-CHECKLIST.md`
+- `docs/v3/SOURCES-WORKFLOW.md`
+
+기존 2기 운영 커리큘럼은 `docs/CURRICULUM.md`에 그대로 보존합니다.

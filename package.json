@@ -1,7 +1,7 @@
 {
   "name": "vibe-coding-basic-class-app",
-  "version": "2.0.0",
-  "description": "기초부터 수익화와 AI Agent 과정까지 운영하는 바이브코딩 교육 콘솔",
+  "version": "3.0.0-beta.1",
+  "description": "현장 운영 과정과 차기 커리큘럼을 함께 관리하는 VIBE STUDIO 강의 스튜디오",
   "author": "ju0o",
   "repository": {
     "type": "git",
@@ -12,8 +12,13 @@
   "scripts": {
     "start": "node scripts/start-electron.js",
     "dev": "npm start",
-    "build:tracks": "node scripts/build-track-lessons.js",
+    "build:legacy-tracks": "node scripts/build-track-lessons.js",
+    "build:v3": "node scripts/build-v3-content.js",
+    "build:tracks": "npm run build:v3",
     "build:slides": "esbuild src/content/sessions/session-03-direction.js --bundle --format=iife --target=chrome120 --minify --outfile=src/content/sessions/session-03-direction.bundle.js",
+    "sources:refresh": "node scripts/refresh-official-sources.js",
+    "audit:curriculum": "node scripts/audit-v3-curriculum.js",
+    "qa:print": "electron scripts/qa-v3-print.js",
     "export:script3": "electron scripts/export-session3-script-pdf.js",
     "export:review3": "electron scripts/export-mobile-review-pdf.js docs/reviews/session-03-mobile-review.html release/3강-모바일-검토자료.pdf",
     "check": "node scripts/check.js",
@@ -21,11 +26,11 @@
     "smoke:app": "electron scripts/smoke-electron-app.js",
     "smoke:tracks": "electron scripts/smoke-track-lessons.js",
     "release:verify": "node scripts/verify-release-version.js",
-    "release:build": "npm run build:tracks && npm run build:slides && npm run check && npm run dist:portable",
+    "release:build": "npm run build:v3 && npm run build:slides && npm run audit:curriculum && npm run check && npm run dist:portable",
     "dist": "electron-builder --win nsis portable",
     "dist:portable": "electron-builder --win portable",
-    "release:current": "node scripts/prepare-release.js && npm run build:tracks && npm run build:slides && npm run check && npm run dist:portable && node scripts/finalize-release.js",
-    "release:v2": "npm run release:current"
+    "release:current": "node scripts/prepare-release.js && npm run build:v3 && npm run build:slides && npm run audit:curriculum && npm run check && npm run dist:portable && node scripts/finalize-release.js",
+    "release:v3-beta": "npm run release:current"
   },
   "devDependencies": {
     "electron": "^31.7.7",

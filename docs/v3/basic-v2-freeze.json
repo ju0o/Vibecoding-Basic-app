@@ -1,0 +1,72 @@
+{
+  "label": "기초반 2기 6주 운영본",
+  "frozenAt": "2026-06-16",
+  "note": "V3 개발 중 이 파일들은 수정하지 않는다.",
+  "files": [
+    {
+      "file": "src/content/sessions/session-00-curriculum.html",
+      "bytes": 21113,
+      "sha256": "841b1d1f3288eea7c7f817ae9a5bdf4f51b4d716124f1874237fc92de6c7e9e1"
+    },
+    {
+      "file": "src/content/sessions/session-01-ai-understanding.html",
+      "bytes": 185772,
+      "sha256": "1503abe583aee9ac8fdd845bcf212ba062e65e612e27a782462e793a6d868090"
+    },
+    {
+      "file": "src/content/sessions/session-02-handout.html",
+      "bytes": 21723,
+      "sha256": "532dc49fa85a187750fb5f8b6b5f7dcaa34f53fef9818beb216719a1207ac31b"
+    },
+    {
+      "file": "src/content/sessions/session-02-vibe-coding.html",
+      "bytes": 112571,
+      "sha256": "a4ff9d6301a02c50397a0852491eaf88ee8c8b868e15f1ed10a0213df729fb2e"
+    },
+    {
+      "file": "src/content/sessions/session-03-direction.bundle.js",
+      "bytes": 612567,
+      "sha256": "a5760d6462a067979574e3db21066b8c3bf086d5a1501efd6833de097f6493cb"
+    },
+    {
+      "file": "src/content/sessions/session-03-direction.css",
+      "bytes": 247500,
+      "sha256": "bb581a9c31bda9210d5a05e59d763bb7912cbd2fd827d0c0dd443754d0706a5d"
+    },
+    {
+      "file": "src/content/sessions/session-03-direction.html",
+      "bytes": 46776,
+      "sha256": "782d9cc92f6e0030a13c0ea7a7c1062fa49790923cfb29dec86efc509687a4ae"
+    },
+    {
+      "file": "src/content/sessions/session-03-direction.js",
+      "bytes": 98761,
+      "sha256": "8321a88ce4eaee59109ccff247a304040d09181bf82a3c885649dd73393d7a73"
+    },
+    {
+      "file": "src/content/sessions/session-04-revenue.html",
+      "bytes": 172517,
+      "sha256": "e80c370963020c83296ce756d5246ce9673f54730997b8043a79b80ff49f6d2e"
+    },
+    {
+      "file": "src/content/sessions/session-05-security-api.css",
+      "bytes": 43044,
+      "sha256": "7c9aa860c9d393c16e35c2ac2d96ed4aed1093cc4bc8c1d07aa3cb0177b9243a"
+    },
+    {
+      "file": "src/content/sessions/session-05-security-api.html",
+      "bytes": 27759,
+      "sha256": "513c4a19f2c7166bacec2aa6d658b50bb5fcadbb9c2dd79926be76c9ed18515e"
+    },
+    {
+      "file": "src/content/sessions/session-05-security-api.js",
+      "bytes": 18185,
+      "sha256": "b8cfa3258a7a7770b583ba547e8b4d8d827c324a7dcebe16d950895dae818774"
+    },
+    {
+      "file": "src/content/sessions/session-06-showcase.html",
+      "bytes": 23679,
+      "sha256": "b7f4bb19518f545115274b672719a2353696c15020018786a290cfede3e66ff0"
+    }
+  ]
+}

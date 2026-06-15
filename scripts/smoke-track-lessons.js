@@ -6,12 +6,9 @@ const path = require('path');
 
 const root = path.join(__dirname, '..');
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'src/content/course-manifest.json'), 'utf-8'));
-const trackSessions = manifest.courses.flatMap((course) =>
-  course.sessions
-    .filter((session) => session.file?.startsWith('tracks/'))
-    .map((session) => ({ courseId: course.id, session }))
-);
-
+const sessions = manifest.courses
+  .filter((course) => course.id !== 'basic-current')
+  .flatMap((course) => course.sessions.map((session) => ({ courseId: course.id, session })));
 const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
 app.whenReady().then(async () => {
@@ -19,63 +16,56 @@ app.whenReady().then(async () => {
     show: false,
     width: 1280,
     height: 720,
-    backgroundColor: '#080b13',
-    webPreferences: {
-      contextIsolation: true,
-      nodeIntegration: false,
-      sandbox: false,
-    },
+    backgroundColor: '#0d0e10',
+    webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: false },
   });
 
   const failures = [];
   const results = [];
   let currentFile = '';
-
   win.webContents.on('console-message', (_event, level, message) => {
     if (/Electron Security Warning/i.test(message)) return;
-    if (level >= 2 || /uncaught|failed|error/i.test(message)) {
-      failures.push(`${currentFile}: ${message}`);
-    }
+    if (level >= 2 || /uncaught|failed|error/i.test(message)) failures.push(`${currentFile}: ${message}`);
   });
 
-  for (const { courseId, session } of trackSessions) {
+  for (const { courseId, session } of sessions) {
     currentFile = session.file;
-    const target = path.join(root, 'src', 'content', session.file);
-    await win.loadFile(target);
-    await wait(35);
+    const [relativeFile, query = ''] = session.file.split('?');
+    const target = path.join(root, 'src', 'content', relativeFile);
+    await win.loadFile(target, { query: Object.fromEntries(new URLSearchParams(query)) });
+    await wait(45);
 
     const result = await win.webContents.executeJavaScript(`
       (() => {
-        const active = document.querySelector('.slide.active');
-        const sequenceButton = document.querySelector('[data-sequence="1"]');
-        const journeyButton = document.querySelector('#journey-next');
-        const beforeSequence = document.querySelector('#sequence-title')?.textContent || '';
-        sequenceButton?.click();
-        journeyButton?.click();
+        const before = document.querySelector('#live-state')?.textContent || '';
+        document.querySelector('#live-start')?.click();
+        const afterStart = document.querySelector('#live-state')?.textContent || '';
+        document.querySelector('#live-next')?.click();
+        const afterNext = document.querySelector('#live-state')?.textContent || '';
+        document.querySelector('#live-reset')?.click();
+        const afterReset = document.querySelector('#live-state')?.textContent || '';
         return {
           title: document.title,
           slides: document.querySelectorAll('.slide').length,
           activeSlides: document.querySelectorAll('.slide.active').length,
           mode: document.body.dataset.mode || '',
-          widthOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth,
-          heightOverflow: document.documentElement.scrollHeight > document.documentElement.clientHeight,
-          sequenceChanged: beforeSequence !== (document.querySelector('#sequence-title')?.textContent || ''),
-          journeyActive: document.querySelectorAll('[data-journey].active').length,
-          interactiveButtons: document.querySelectorAll('button').length,
-          activeTitle: active?.dataset.title || ''
+          widthOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+          heightOverflow: document.documentElement.scrollHeight > document.documentElement.clientHeight + 1,
+          manualControls: ['live-start','live-next','live-pause','live-reset'].every((id) => Boolean(document.getElementById(id))),
+          stageAdvanced: before !== afterStart && afterStart !== afterNext && afterReset.includes('READY'),
+          buttons: document.querySelectorAll('button').length
         };
       })()
     `);
 
-    const ok = result.slides === 11
+    const ok = result.slides === 13
       && result.activeSlides === 1
       && result.mode
       && !result.widthOverflow
       && !result.heightOverflow
-      && result.sequenceChanged
-      && result.journeyActive === 2
-      && result.interactiveButtons >= 18;
-
+      && result.manualControls
+      && result.stageAdvanced
+      && result.buttons >= 20;
     if (!ok) failures.push(`${session.file}: ${JSON.stringify(result)}`);
     results.push({ courseId, sessionId: session.id, ok, ...result });
   }
@@ -86,7 +76,6 @@ app.whenReady().then(async () => {
     courses: new Set(results.map((result) => result.courseId)).size,
     failures,
   };
-
   console.log(JSON.stringify(summary, null, 2));
   app.exit(summary.ok ? 0 : 1);
 }).catch((error) => {

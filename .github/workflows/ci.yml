@@ -25,11 +25,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build slide bundle
-        run: npm run build:tracks && npm run build:slides
+      - name: Build V3 curriculum and slide bundle
+        run: npm run build:v3 && npm run build:slides
 
       - name: Verify generated course files are committed
-        run: git diff --exit-code -- src/content/course-manifest.json src/content/tracks src/content/sessions/session-03-direction.bundle.js
+        run: git diff --exit-code -- src/content/course-manifest.json src/content/v3/course-data.js src/content/sessions/session-03-direction.bundle.js
 
-      - name: Run source checks
-        run: npm run check
+      - name: Run curriculum audit and source checks
+        run: npm run audit:curriculum && npm run check

@@ -3,6 +3,7 @@ release/
 dist/
 artifacts/
 tmp/
+output/
 *.log
 .DS_Store
 .env

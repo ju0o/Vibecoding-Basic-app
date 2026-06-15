@@ -1,24 +1,77 @@
 {
-  "version": "1.0",
+  "version": "3.0-beta",
+  "productName": "VIBE STUDIO",
+  "currentCohort": "2기",
+  "defaultCourseId": "basic-current",
+  "studentCourseIds": [
+    "basic-current",
+    "product",
+    "workflow",
+    "claude",
+    "codex"
+  ],
+  "recommendedRoute": [
+    "basic-current",
+    "workflow",
+    [
+      "claude",
+      "codex"
+    ]
+  ],
+  "modes": {
+    "student": {
+      "label": "학생 모드",
+      "show": [
+        "primary"
+      ]
+    },
+    "instructor": {
+      "label": "강사 모드",
+      "show": [
+        "primary",
+        "preview"
+      ]
+    }
+  },
   "courses": [
     {
-      "id": "basic",
-      "title": "바이브코딩 기초반",
-      "shortTitle": "기초반",
-      "code": "B01",
+      "id": "basic-current",
+      "title": "바이브코딩 기초반 · 2기 운영본",
+      "shortTitle": "기초반 2기",
+      "code": "B02",
       "family": "기초",
-      "track": "FOUNDATION TRACK",
+      "track": "CURRENT COHORT · 6 WEEKS",
       "level": "START",
       "status": "active",
-      "description": "AI 이해부터 프로그램 발표까지 이어지는 입문 과정. 코딩을 몰라도 내 프로그램을 만들 수 있습니다.",
-      "icon": "🚀",
-      "color": "#D8FF66",
-      "route": "AI를 도구로 이해한 뒤 파일, 배포, 데이터의 기본 구조를 익히고 하나의 프로젝트를 완성합니다.",
+      "visibility": "primary",
+      "audience": [
+        "student",
+        "instructor"
+      ],
+      "curriculumVersion": "2기-6주",
+      "cohort": "2기",
+      "description": "현재 수업 중인 6주 운영본입니다. 기존 강의 파일과 진행 상태를 그대로 유지합니다.",
+      "color": "#d8ff66",
+      "route": "AI 이해 → 바이브코딩 → 개발 용어 → 파일 구조 → 배포·보안 → 쇼케이스",
       "outcomes": [
-        "AI와 함께 설계하기",
-        "파일 위치 판단하기",
-        "안전하게 수정하기",
-        "프로젝트 발표하기"
+        "현재 기수 운영 유지",
+        "기존 진행률 보존",
+        "프로젝트 배포",
+        "6주 수업 마무리"
+      ],
+      "modules": [
+        {
+          "id": "current",
+          "title": "현재 2기 수업",
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        }
       ],
       "sessions": [
         {
@@ -28,7 +81,15 @@
           "description": "AI 종류, AI로 할 수 있는 것들, AI를 도구로 바라보는 관점",
           "duration": "30분 이론",
           "type": "theory",
-          "file": "sessions/session-01-ai-understanding.html"
+          "file": "sessions/session-01-ai-understanding.html",
+          "moduleId": "current",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트"
+          ],
+          "deliverables": [
+            "수업별 실습 결과"
+          ]
         },
         {
           "id": "basic-02",
@@ -37,7 +98,15 @@
           "description": "바이브코딩 개념, AI 코딩 툴 종류, 코딩 툴 연동과 첫 실습",
           "duration": "30분 이론 + 30~50분 실습",
           "type": "practice",
-          "file": "sessions/session-02-vibe-coding.html"
+          "file": "sessions/session-02-vibe-coding.html",
+          "moduleId": "current",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트"
+          ],
+          "deliverables": [
+            "수업별 실습 결과"
+          ]
         },
         {
           "id": "basic-03",
@@ -46,1516 +115,1589 @@
           "description": "프론트엔드, UI/UX, 애니메이션, 백엔드, 데이터베이스, API를 실제 서비스 장면으로 이해",
           "duration": "30분 이론 + 30분 실습",
           "type": "practice",
-          "file": "sessions/session-03-direction.html"
+          "file": "sessions/session-03-direction.html",
+          "moduleId": "current",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트"
+          ],
+          "deliverables": [
+            "수업별 실습 결과"
+          ]
         },
         {
           "id": "basic-04",
           "title": "4강 · 파일 구조 이해",
           "subtitle": "AI가 만든 프로젝트를 읽는 법",
-          "description": "VS Code 파일 트리에서 수정 위치를 찾고 공용 파일의 영향 범위와 AI diff를 검토한 뒤 브라우저 결과를 확인",
+          "description": "VS Code 파일 트리에서 수정 위치와 영향 범위, AI diff와 브라우저 결과를 확인",
           "duration": "20분 이론 + 40분 실습",
           "type": "practice",
-          "file": "sessions/session-04-revenue.html"
+          "file": "sessions/session-04-revenue.html",
+          "moduleId": "current",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트"
+          ],
+          "deliverables": [
+            "수업별 실습 결과"
+          ]
         },
         {
           "id": "basic-05",
           "title": "5강 · 배포와 보안 그리고 데이터",
           "subtitle": "내 프로그램을 링크로 공유하기 전",
-          "description": "배포, 환경변수, API 키, 데이터베이스, 데이터 흐름, 배포 전 체크리스트 이해와 실습",
+          "description": "GitHub, 배포, 환경변수, API 키, 데이터 권한과 재배포를 이해하고 실습",
           "duration": "25분 이론 + 35분 실습",
           "type": "practice",
-          "file": "sessions/session-05-security-api.html"
+          "file": "sessions/session-05-security-api.html",
+          "moduleId": "current",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트"
+          ],
+          "deliverables": [
+            "수업별 실습 결과"
+          ]
         },
         {
           "id": "basic-06",
           "title": "6강 · 쇼케이스 및 Q&A",
           "subtitle": "발표 · 피드백 · 다음 단계",
-          "description": "각자 만든 프로그램 발표, 피드백, 다음 고도화 방향 정리",
+          "description": "현재 2기 수강생의 프로젝트 발표, 피드백과 다음 고도화 방향 정리",
           "duration": "발표 + Q&A",
           "type": "showcase",
-          "file": "sessions/session-06-showcase.html"
+          "file": "sessions/session-06-showcase.html",
+          "moduleId": "current",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트"
+          ],
+          "deliverables": [
+            "프로젝트 발표",
+            "피드백 기록"
+          ]
         }
-      ]
+      ],
+      "materials": {
+        "student": [
+          {
+            "id": "basic-current-curriculum",
+            "title": "과정 안내·실습 기록",
+            "description": "현재 6주 흐름과 매주 실습 기록",
+            "file": "appendix/practice-log.html",
+            "audience": "student",
+            "courseId": "basic-current"
+          },
+          {
+            "id": "basic-current-setup",
+            "title": "Windows·Mac 설치 준비",
+            "description": "Node·VS Code·AI IDE와 터미널 준비",
+            "file": "appendix/handout-session2-prep.html",
+            "audience": "student",
+            "courseId": "basic-current"
+          },
+          {
+            "id": "basic-current-commands",
+            "title": "명령어·설정집",
+            "description": "복사 가능한 필수 명령과 오류 확인",
+            "file": "appendix/command-cheatsheet.html",
+            "audience": "student",
+            "courseId": "basic-current"
+          },
+          {
+            "id": "basic-current-errors",
+            "title": "오류 해결 훈련자료",
+            "description": "오류 복사, 질문, 수정과 재실행",
+            "file": "appendix/error-guide.html",
+            "audience": "student",
+            "courseId": "basic-current"
+          },
+          {
+            "id": "basic-current-submit",
+            "title": "배포·제출 체크리스트",
+            "description": "보안과 공개 URL 최종 점검",
+            "file": "appendix/deployment-checklist.html",
+            "audience": "student",
+            "courseId": "basic-current"
+          }
+        ],
+        "instructor": [
+          {
+            "id": "basic-current-script2",
+            "title": "2강 상세 대본",
+            "description": "바이브코딩과 첫 실습 운영",
+            "file": "appendix/script-session2.html",
+            "audience": "instructor",
+            "courseId": "basic-current"
+          },
+          {
+            "id": "basic-current-script3",
+            "title": "3강 상세 대본",
+            "description": "개발 구조와 용어 설명",
+            "file": "appendix/script-session3.html",
+            "audience": "instructor",
+            "courseId": "basic-current"
+          },
+          {
+            "id": "basic-current-script4",
+            "title": "4강 상세 대본",
+            "description": "파일 구조 시연과 실습 운영",
+            "file": "appendix/script-session4.html",
+            "audience": "instructor",
+            "courseId": "basic-current"
+          },
+          {
+            "id": "basic-current-script5",
+            "title": "5강 상세 대본",
+            "description": "GitHub·배포·보안 수업 운영",
+            "file": "appendix/script-session5.html",
+            "audience": "instructor",
+            "courseId": "basic-current"
+          },
+          {
+            "id": "basic-current-study",
+            "title": "강사용 공부자료",
+            "description": "현재 6주 과정의 핵심 개념과 예상 질문",
+            "file": "appendix/instructor-study-guide.html",
+            "audience": "instructor",
+            "courseId": "basic-current"
+          }
+        ]
+      }
     },
     {
-      "id": "practical",
-      "title": "바이브코딩 응용·수익화반",
-      "shortTitle": "응용·수익화",
-      "code": "A01",
-      "family": "응용·수익화",
-      "track": "PRODUCT & BUSINESS TRACK",
-      "level": "APPLY",
+      "id": "product",
+      "title": "AI 제품·수익화",
+      "shortTitle": "제품·수익화",
+      "code": "P10",
+      "family": "비즈니스 실전",
+      "track": "비즈니스 실전 · 8 WEEKS",
+      "level": "PROJECT",
       "status": "active",
-      "description": "기초반에서 만든 프로젝트를 고객이 사용할 수 있는 상품으로 다듬고, 포트폴리오·외주·SaaS·수익화 방향으로 연결하는 과정입니다.",
-      "icon": "💡",
-      "color": "#FF9F7A",
-      "route": "문제와 고객을 정한 뒤 MVP, 가격, 결제, 출시와 개선까지 하나의 작은 사업 흐름으로 연결합니다.",
+      "visibility": "primary",
+      "audience": [
+        "student",
+        "instructor"
+      ],
+      "curriculumVersion": "V3",
+      "description": "공통 4주 후 SaaS팀과 외주팀으로 나뉘어 협업 프로젝트와 개인 사이드 프로젝트를 함께 완성합니다.",
+      "color": "#ffb071",
+      "route": "문제·MVP·UX·가격 → SaaS 또는 외주 팀 프로젝트 → 출시·납품",
       "outcomes": [
-        "고객 문제 정의",
-        "MVP 범위 설계",
-        "가격·결제 이해",
-        "출시와 피드백 운영"
+        "고객 문제 검증",
+        "팀 역할과 리뷰",
+        "개인 사이드 프로젝트",
+        "출시 또는 납품"
+      ],
+      "visualMode": "product",
+      "modules": [
+        {
+          "id": "common",
+          "title": "COMMON · 01",
+          "weeks": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "id": "track",
+          "title": "TRACK · 05",
+          "weeks": [
+            5,
+            6,
+            7,
+            8
+          ]
+        }
       ],
       "sessions": [
         {
-          "id": "practical-01",
-          "title": "1강 · 만들 것보다 팔릴 이유",
-          "subtitle": "고객 문제 · 타깃 · 가치 제안",
-          "description": "아이디어를 기능 목록으로 시작하지 않고, 누가 어떤 문제 때문에 사용할지 정의하고 검증 가능한 한 문장으로 정리합니다.",
-          "duration": "25분 이론 + 35분 워크숍",
+          "id": "product-01",
+          "title": "1강 · 고객 문제와 팀 구성",
+          "subtitle": "문제 장면 · 고객 · 역할 · 협업 계약",
+          "description": "기능 아이디어를 고객의 반복 문제로 바꾸고 팀 역할과 의사결정 규칙을 정합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/practical-01.html"
+          "file": "v3/deck.html?course=product&lesson=1",
+          "moduleId": "common",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "팀 문제 선언문",
+            "역할 순환표",
+            "협업 계약서",
+            "개인 문제 정의"
+          ],
+          "sourceKeys": [],
+          "pathway": null
         },
         {
-          "id": "practical-02",
-          "title": "2강 · MVP와 상품 구조",
-          "subtitle": "SaaS · 포트폴리오 · 외주 · 내부도구",
-          "description": "프로젝트 목적에 따라 필요한 화면, 데이터, 관리자 기능과 완성 기준이 어떻게 달라지는지 설계합니다.",
-          "duration": "20분 이론 + 40분 설계",
+          "id": "product-02",
+          "title": "2강 · MVP와 제품 구조",
+          "subtitle": "핵심 행동 · Must/Later · 화면 · 데이터",
+          "description": "팀과 개인 프로젝트에서 4주 안에 검증할 핵심 행동과 최소 제품 범위를 정합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/practical-02.html"
+          "file": "v3/deck.html?course=product&lesson=2",
+          "moduleId": "common",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "MVP 범위표",
+            "핵심 사용자 흐름",
+            "완료 시연 기준"
+          ],
+          "sourceKeys": [],
+          "pathway": null
         },
         {
-          "id": "practical-03",
-          "title": "3강 · 가격과 결제 흐름",
-          "subtitle": "무료·구독·일회성 · 전환 설계",
-          "description": "가격표, 무료 체험, 결제 전후 화면, 환불과 고객지원까지 수익화에 필요한 전체 사용자 흐름을 이해합니다.",
-          "duration": "25분 이론 + 35분 실습",
+          "id": "product-03",
+          "title": "3강 · UI·UX·신뢰·온보딩",
+          "subtitle": "첫 문장 · 실제 화면 · 피드백 · 첫 성공",
+          "description": "사용자가 제품을 이해하고 믿고 첫 성공에 도달하도록 화면과 피드백을 설계합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/practical-03.html"
+          "file": "v3/deck.html?course=product&lesson=3",
+          "moduleId": "common",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "5장면 UX 흐름",
+            "상태·피드백 목록",
+            "동료 리뷰 기록"
+          ],
+          "sourceKeys": [],
+          "pathway": null
         },
         {
-          "id": "practical-04",
-          "title": "4강 · 신뢰를 만드는 상품 화면",
-          "subtitle": "랜딩 · 온보딩 · 가격표 · FAQ",
-          "description": "첫 화면에서 문제, 대상, 결과, 가격과 다음 행동이 명확히 보이도록 실제 판매 화면과 가입 전후 사용자 흐름을 설계합니다.",
-          "duration": "20분 분석 + 40분 제작",
+          "id": "product-04",
+          "title": "4강 · 가격·수익모델·검증",
+          "subtitle": "가치 단위 · 비용 · 결제 상태 · 트랙 선택",
+          "description": "가격 숫자가 아니라 고객이 돈을 내는 결과와 제공 비용을 기준으로 모델을 정하고 팀 트랙을 선택합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/practical-04.html"
+          "file": "v3/deck.html?course=product&lesson=4",
+          "moduleId": "common",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "가격·원가 가설",
+            "결제 상태표",
+            "트랙 선택서"
+          ],
+          "sourceKeys": [],
+          "pathway": null
         },
         {
-          "id": "practical-05",
-          "title": "5강 · 출시와 첫 고객",
-          "subtitle": "배포 · 소개 문구 · 채널 · 피드백",
-          "description": "공개 URL과 소개 문구를 준비하고 커뮤니티, 지인, 고객 후보에게 작은 출시를 실행해 실제 반응을 수집합니다.",
-          "duration": "20분 전략 + 40분 출시 실습",
+          "id": "product-05",
+          "title": "5강 · 트랙 설계 I",
+          "subtitle": "SaaS 데이터·회원 / 외주 요구사항·견적",
+          "description": "같은 강의실에서 SaaS팀은 상태·회원·권한을, 외주팀은 범위·견적·승인 구조를 완성합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/practical-05.html"
+          "file": "v3/deck.html?course=product&lesson=5",
+          "moduleId": "track",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "트랙별 설계 문서",
+            "교차 리뷰 기록",
+            "개인 적용본"
+          ],
+          "sourceKeys": [],
+          "pathway": [
+            "saas",
+            "freelance"
+          ]
         },
         {
-          "id": "practical-06",
-          "title": "6강 · 숫자로 개선하기",
-          "subtitle": "전환 · 유지 · 문의 · 다음 실험",
-          "description": "방문, 가입, 핵심 행동, 결제와 이탈을 관찰해 감이 아니라 근거로 다음 기능과 운영 우선순위를 정합니다.",
-          "duration": "25분 분석 + 35분 개선 설계",
+          "id": "product-06",
+          "title": "6강 · 트랙 제작 II",
+          "subtitle": "SaaS 핵심 기능 / 외주 마일스톤 제작",
+          "description": "SaaS팀은 핵심 행동을 실제 데이터와 연결하고 외주팀은 승인 가능한 마일스톤 단위로 제작합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/practical-06.html"
+          "file": "v3/deck.html?course=product&lesson=6",
+          "moduleId": "track",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "실행 가능한 마일스톤",
+            "테스트 결과",
+            "승인·반려 기록"
+          ],
+          "sourceKeys": [],
+          "pathway": [
+            "saas",
+            "freelance"
+          ]
+        },
+        {
+          "id": "product-07",
+          "title": "7강 · 운영 III",
+          "subtitle": "SaaS 결제·운영 / 외주 수정·검수·버전",
+          "description": "정상 화면 뒤에 있는 비용·실패·운영·변경 관리를 실제 사례로 연결합니다.",
+          "duration": "120분",
+          "type": "practice",
+          "file": "v3/deck.html?course=product&lesson=7",
+          "moduleId": "track",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "운영·변경 사건 기록",
+            "복구 결과",
+            "회귀 테스트표"
+          ],
+          "sourceKeys": [],
+          "pathway": [
+            "saas",
+            "freelance"
+          ]
+        },
+        {
+          "id": "product-08",
+          "title": "8강 · 출시·납품 IV",
+          "subtitle": "SaaS 지표 / 외주 인수인계·사례화",
+          "description": "SaaS팀은 실제 출시와 지표를, 외주팀은 안전한 납품과 포트폴리오 사례를 완성합니다.",
+          "duration": "120분",
+          "type": "practice",
+          "file": "v3/deck.html?course=product&lesson=8",
+          "moduleId": "track",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "출시 URL 또는 납품 확인서",
+            "지표·인수 문서",
+            "팀 회고",
+            "개인 사례 초안"
+          ],
+          "sourceKeys": [],
+          "pathway": [
+            "saas",
+            "freelance"
+          ]
         }
-      ]
+      ],
+      "materials": {
+        "student": [
+          {
+            "id": "product-workbook",
+            "title": "통합 실습 워크북",
+            "description": "AI 제품·수익화 회차별 작업지와 메모",
+            "file": "v3/material.html?course=product&kind=workbook&audience=student",
+            "audience": "student",
+            "courseId": "product"
+          },
+          {
+            "id": "product-commands",
+            "title": "Windows·Mac 명령어 및 설정집",
+            "description": "설치·실행·설정과 복구 명령",
+            "file": "v3/material.html?course=product&kind=commands&audience=student",
+            "audience": "student",
+            "courseId": "product"
+          },
+          {
+            "id": "product-examples",
+            "title": "예제·설정·복구 파일",
+            "description": "실습 시작본과 실패 복구 예시",
+            "file": "v3/material.html?course=product&kind=examples&audience=student",
+            "audience": "student",
+            "courseId": "product"
+          },
+          {
+            "id": "product-errors",
+            "title": "오류 사례와 해결 훈련",
+            "description": "로그 분석과 재실행 시나리오",
+            "file": "v3/material.html?course=product&kind=errors&audience=student",
+            "audience": "student",
+            "courseId": "product"
+          },
+          {
+            "id": "product-assessment",
+            "title": "프로젝트 체크·평가표",
+            "description": "제출 기준과 자기·동료 평가",
+            "file": "v3/material.html?course=product&kind=assessment&audience=student",
+            "audience": "student",
+            "courseId": "product"
+          }
+        ],
+        "instructor": [
+          {
+            "id": "product-script",
+            "title": "슬라이드별 상세 대본",
+            "description": "SAY·DO·ASK·예상 답변·복구·시간 조정",
+            "file": "v3/material.html?course=product&kind=script&audience=instructor",
+            "audience": "instructor",
+            "courseId": "product"
+          },
+          {
+            "id": "product-demo",
+            "title": "실제 시연 운영 매뉴얼",
+            "description": "정상 시연과 실패 시 대체 화면",
+            "file": "v3/material.html?course=product&kind=demo&audience=instructor",
+            "audience": "instructor",
+            "courseId": "product"
+          },
+          {
+            "id": "product-answers",
+            "title": "정답·평가·예상 질문",
+            "description": "실습 평가 기준과 질문 대응",
+            "file": "v3/material.html?course=product&kind=answers&audience=instructor",
+            "audience": "instructor",
+            "courseId": "product"
+          },
+          {
+            "id": "product-study",
+            "title": "강사용 애니메이션 학습실",
+            "description": "핵심 개념을 다시 조작하며 공부",
+            "file": "v3/deck.html?course=product&lesson=1&study=1",
+            "audience": "instructor",
+            "courseId": "product"
+          },
+          {
+            "id": "product-research",
+            "title": "공식 참고자료 연구노트",
+            "description": "공식 문서의 쉬운 한국어 요약과 반영 위치",
+            "file": "v3/material.html?course=product&kind=research&audience=instructor",
+            "audience": "instructor",
+            "courseId": "product"
+          }
+        ]
+      }
     },
     {
-      "id": "advanced",
-      "title": "AI 워크스페이스 심화반",
-      "shortTitle": "AI 심화",
-      "code": "X01",
-      "family": "AI 심화",
-      "track": "AGENTIC WORKFLOW TRACK",
-      "level": "BUILD",
+      "id": "workflow",
+      "title": "AI Workflow Architect",
+      "shortTitle": "Workflow Architect",
+      "code": "W20",
+      "family": "AI 시스템 설계",
+      "track": "AI 시스템 설계 · 4 WEEKS",
+      "level": "ARCHITECT",
       "status": "active",
-      "description": "MCP, Skill, Agent와 SubAgent를 각각의 유행어가 아니라 반복 업무를 실행하는 하나의 AI 작업 시스템으로 설계하는 과정입니다.",
-      "icon": "⚡",
-      "color": "#73D6FF",
-      "route": "외부 도구 연결에서 시작해 재사용 지침, 에이전트 역할, 팀 협업과 개인 AI 워크스페이스까지 단계적으로 구축합니다.",
+      "visibility": "primary",
+      "audience": [
+        "student",
+        "instructor"
+      ],
+      "curriculumVersion": "V3",
+      "description": "특정 제품 사용법이 아니라 업무를 AI가 안전하고 반복 가능하게 수행하도록 구조화하는 4주 고밀도 과정입니다.",
+      "color": "#74d9c4",
+      "route": "터미널·로그 → 컨텍스트·메모리 → Tool·MCP·권한 → Agent·자동화·평가",
       "outcomes": [
-        "MCP 연결 판단",
-        "재사용 Skill 설계",
-        "Agent 업무 분해",
-        "나만의 AI 작업실 구축"
+        "업무 흐름 모델링",
+        "컨텍스트 설계",
+        "최소 권한 Tool 계약",
+        "평가·복구 가능한 Agent"
+      ],
+      "visualMode": "workflow",
+      "modules": [
+        {
+          "id": "01",
+          "title": "01 · OPERATING LAYER",
+          "weeks": [
+            1
+          ]
+        },
+        {
+          "id": "02",
+          "title": "02 · CONTEXT LAYER",
+          "weeks": [
+            2
+          ]
+        },
+        {
+          "id": "03",
+          "title": "03 · TOOL LAYER",
+          "weeks": [
+            3
+          ]
+        },
+        {
+          "id": "04",
+          "title": "04 · CONTROL LAYER",
+          "weeks": [
+            4
+          ]
+        }
       ],
       "sessions": [
         {
-          "id": "advanced-01",
-          "title": "1강 · MCP와 외부 도구 연결",
-          "subtitle": "AI가 파일·브라우저·서비스를 사용하는 방식",
-          "description": "MCP 서버와 도구의 역할, 권한과 보안, 어떤 작업을 연결하고 어떤 작업은 연결하지 말아야 하는지 실습합니다.",
-          "duration": "30분 개념 + 30분 연결 실습",
+          "id": "workflow-01",
+          "title": "1강 · 터미널·Git·프로세스·로그",
+          "subtitle": "명령의 목적 · 상태 · 기록 · 복구",
+          "description": "명령어 암기보다 현재 위치, 실행 중인 프로세스, 변경 기록과 오류 로그를 읽는 운영 감각을 만듭니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/advanced-01.html"
+          "file": "v3/deck.html?course=workflow&lesson=1",
+          "moduleId": "01",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "터미널 운영 일지",
+            "오류 분석 템플릿",
+            "Git 복구 체크포인트"
+          ],
+          "sourceKeys": [
+            "github-git"
+          ],
+          "pathway": null
         },
         {
-          "id": "advanced-02",
-          "title": "2강 · Skill로 반복 업무 표준화",
-          "subtitle": "좋은 지침 · 입력 · 산출물 · 검증",
-          "description": "매번 길게 설명하던 작업을 재사용 가능한 Skill로 만들고, 실패 조건과 품질 기준을 함께 정의합니다.",
-          "duration": "20분 개념 + 40분 제작",
+          "id": "workflow-02",
+          "title": "2강 · 워크플로·컨텍스트·지침·메모리",
+          "subtitle": "Trigger · Input · Decision · Action · Output",
+          "description": "반복 업무를 단계와 상태로 분해하고 현재 작업 컨텍스트, 지속 지침과 장기 지식을 구분합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/advanced-02.html"
+          "file": "v3/deck.html?course=workflow&lesson=2",
+          "moduleId": "02",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "워크플로 상태도",
+            "컨텍스트 예산표",
+            "지침·메모리 승격 규칙"
+          ],
+          "sourceKeys": [],
+          "pathway": null
         },
         {
-          "id": "advanced-03",
-          "title": "3강 · Agent 설계와 실행 루프",
-          "subtitle": "계획 · 실행 · 검증 · 복구",
-          "description": "Agent에게 목표와 권한을 주는 법, 작업을 작은 단계로 나누는 법, 결과를 스스로 검사하고 실패에서 복구하게 하는 법을 다룹니다.",
-          "duration": "25분 개념 + 35분 실습",
+          "id": "workflow-03",
+          "title": "3강 · Tool·MCP·API·인증·최소 권한",
+          "subtitle": "입력 계약 · 권한 · 승인 · 감사",
+          "description": "AI가 외부 세계를 읽고 바꿀 때 필요한 Tool 계약과 최소 권한, 인증과 사람 승인 지점을 설계합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/advanced-03.html"
+          "file": "v3/deck.html?course=workflow&lesson=3",
+          "moduleId": "03",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "Tool 계약서",
+            "권한 매트릭스",
+            "승인·감사 흐름"
+          ],
+          "sourceKeys": [
+            "mcp-intro",
+            "mcp-security"
+          ],
+          "pathway": null
         },
         {
-          "id": "advanced-04",
-          "title": "4강 · SubAgent와 Agent Teams",
-          "subtitle": "역할 분담 · 병렬 작업 · 인수인계",
-          "description": "리서치, 구현, 디자인, QA 역할을 나누고 여러 Agent가 충돌 없이 협업하도록 작업 경계와 결과 형식을 설계합니다.",
-          "duration": "25분 개념 + 35분 팀 시뮬레이션",
+          "id": "workflow-04",
+          "title": "4강 · Agent·팀·자동화·평가·복구",
+          "subtitle": "Plan · Act · Observe · Evaluate · Recover",
+          "description": "자율성을 높이기 전에 목표, 예산, 평가, 중단, 사람 인계와 복구 경로를 가진 Agent 시스템을 설계합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/advanced-04.html"
-        },
-        {
-          "id": "advanced-05",
-          "title": "5강 · 나만의 AI 워크스페이스",
-          "subtitle": "규칙 · 메모리 · 템플릿 · 자동화",
-          "description": "내 프로젝트와 업무에 맞는 폴더, 지침, 문서, Skill과 도구를 묶어 매번 처음부터 설명하지 않는 작업 환경을 만듭니다.",
-          "duration": "20분 개념 + 40분 구축",
-          "type": "practice",
-          "file": "tracks/advanced-05.html"
-        },
-        {
-          "id": "advanced-06",
-          "title": "6강 · 운영·평가·복구 설계",
-          "subtitle": "관찰 가능성 · 비용 · 실패 격리 · Human Checkpoint",
-          "description": "Agent가 잘 작동하는 장면보다 실패했을 때 멈추고 기록하고 복구하는 구조, 품질 평가와 비용 통제 기준을 강의 중심으로 다룹니다.",
-          "duration": "45분 강의 + 15분 설계 검토",
-          "type": "theory",
-          "file": "tracks/advanced-06.html"
+          "file": "v3/deck.html?course=workflow&lesson=4",
+          "moduleId": "04",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "Agent 시스템 설계도",
+            "평가 루브릭",
+            "비용·복구 운영표"
+          ],
+          "sourceKeys": [],
+          "pathway": null
         }
-      ]
-    },
-    {
-      "id": "saas-launch",
-      "title": "AI SaaS 제작·출시반",
-      "shortTitle": "SaaS 출시",
-      "code": "P02",
-      "family": "응용·수익화",
-      "track": "SAAS PRODUCT TRACK",
-      "level": "SHIP",
-      "status": "active",
-      "description": "한 번 쓰는 데모를 넘어 가입, 핵심 기능, 결제, 운영과 개선이 연결되는 작은 SaaS를 설계하고 출시합니다.",
-      "color": "#FFCE73",
-      "route": "고객 문제에서 시작해 데이터 모델, 계정, 결제, 운영 화면과 출시 지표까지 실제 서비스의 뼈대를 완성합니다.",
-      "outcomes": [
-        "SaaS 구조 설계",
-        "회원·결제 흐름",
-        "운영자 기능",
-        "출시 지표"
       ],
-      "sessions": [
-        {
-          "id": "saas-01",
-          "title": "1강 · 문제와 반복 사용 이유",
-          "subtitle": "고객 · 빈도 · 핵심 행동",
-          "description": "한 번의 호기심이 아니라 반복해서 사용할 문제와 핵심 행동을 정의합니다.",
-          "duration": "25분 강의 + 35분 워크숍",
-          "type": "practice",
-          "file": "tracks/saas-01.html"
-        },
-        {
-          "id": "saas-02",
-          "title": "2강 · SaaS 화면과 데이터 모델",
-          "subtitle": "페이지 · 사용자 · 권한 · 상태",
-          "description": "사용자 화면과 관리자 화면, 저장할 데이터와 역할별 권한을 함께 설계합니다.",
-          "duration": "20분 강의 + 40분 설계",
-          "type": "practice",
-          "file": "tracks/saas-02.html"
-        },
-        {
-          "id": "saas-03",
-          "title": "3강 · 회원가입과 온보딩",
-          "subtitle": "인증 · 첫 성공 경험 · 이탈 방지",
-          "description": "가입 직후 사용자가 핵심 가치를 빠르게 경험하도록 온보딩 흐름을 만듭니다.",
-          "duration": "20분 강의 + 40분 제작",
-          "type": "practice",
-          "file": "tracks/saas-03.html"
-        },
-        {
-          "id": "saas-04",
-          "title": "4강 · 구독과 사용량 제한",
-          "subtitle": "플랜 · 결제 · 권한 · 실패 처리",
-          "description": "무료와 유료 플랜, 결제 성공·실패, 기능 제한과 구독 상태를 설계합니다.",
-          "duration": "30분 강의 + 30분 설계",
-          "type": "practice",
-          "file": "tracks/saas-04.html"
-        },
-        {
-          "id": "saas-05",
-          "title": "5강 · 운영자 도구와 고객지원",
-          "subtitle": "관리자 · 로그 · 문의 · 환불",
-          "description": "사용자 상태, 결제, 오류와 문의를 확인하는 최소 운영 콘솔을 구성합니다.",
-          "duration": "20분 강의 + 40분 제작",
-          "type": "practice",
-          "file": "tracks/saas-05.html"
-        },
-        {
-          "id": "saas-06",
-          "title": "6강 · 출시와 제품 지표",
-          "subtitle": "활성화 · 유지 · 전환 · 다음 실험",
-          "description": "출시 후 관찰할 지표와 고객 피드백을 연결해 다음 개선 실험을 정합니다.",
-          "duration": "30분 강의 + 30분 분석",
-          "type": "theory",
-          "file": "tracks/saas-06.html"
-        }
-      ]
+      "materials": {
+        "student": [
+          {
+            "id": "workflow-workbook",
+            "title": "통합 실습 워크북",
+            "description": "AI Workflow Architect 회차별 작업지와 메모",
+            "file": "v3/material.html?course=workflow&kind=workbook&audience=student",
+            "audience": "student",
+            "courseId": "workflow"
+          },
+          {
+            "id": "workflow-commands",
+            "title": "Windows·Mac 명령어 및 설정집",
+            "description": "설치·실행·설정과 복구 명령",
+            "file": "v3/material.html?course=workflow&kind=commands&audience=student",
+            "audience": "student",
+            "courseId": "workflow"
+          },
+          {
+            "id": "workflow-examples",
+            "title": "예제·설정·복구 파일",
+            "description": "실습 시작본과 실패 복구 예시",
+            "file": "v3/material.html?course=workflow&kind=examples&audience=student",
+            "audience": "student",
+            "courseId": "workflow"
+          },
+          {
+            "id": "workflow-errors",
+            "title": "오류 사례와 해결 훈련",
+            "description": "로그 분석과 재실행 시나리오",
+            "file": "v3/material.html?course=workflow&kind=errors&audience=student",
+            "audience": "student",
+            "courseId": "workflow"
+          },
+          {
+            "id": "workflow-assessment",
+            "title": "프로젝트 체크·평가표",
+            "description": "제출 기준과 자기·동료 평가",
+            "file": "v3/material.html?course=workflow&kind=assessment&audience=student",
+            "audience": "student",
+            "courseId": "workflow"
+          }
+        ],
+        "instructor": [
+          {
+            "id": "workflow-script",
+            "title": "슬라이드별 상세 대본",
+            "description": "SAY·DO·ASK·예상 답변·복구·시간 조정",
+            "file": "v3/material.html?course=workflow&kind=script&audience=instructor",
+            "audience": "instructor",
+            "courseId": "workflow"
+          },
+          {
+            "id": "workflow-demo",
+            "title": "실제 시연 운영 매뉴얼",
+            "description": "정상 시연과 실패 시 대체 화면",
+            "file": "v3/material.html?course=workflow&kind=demo&audience=instructor",
+            "audience": "instructor",
+            "courseId": "workflow"
+          },
+          {
+            "id": "workflow-answers",
+            "title": "정답·평가·예상 질문",
+            "description": "실습 평가 기준과 질문 대응",
+            "file": "v3/material.html?course=workflow&kind=answers&audience=instructor",
+            "audience": "instructor",
+            "courseId": "workflow"
+          },
+          {
+            "id": "workflow-study",
+            "title": "강사용 애니메이션 학습실",
+            "description": "핵심 개념을 다시 조작하며 공부",
+            "file": "v3/deck.html?course=workflow&lesson=1&study=1",
+            "audience": "instructor",
+            "courseId": "workflow"
+          },
+          {
+            "id": "workflow-research",
+            "title": "공식 참고자료 연구노트",
+            "description": "공식 문서의 쉬운 한국어 요약과 반영 위치",
+            "file": "v3/material.html?course=workflow&kind=research&audience=instructor",
+            "audience": "instructor",
+            "courseId": "workflow"
+          }
+        ]
+      }
     },
     {
-      "id": "freelance",
-      "title": "AI 포트폴리오·외주 실전반",
-      "shortTitle": "외주 실전",
-      "code": "P03",
-      "family": "응용·수익화",
-      "track": "FREELANCE DELIVERY TRACK",
-      "level": "DELIVER",
-      "status": "active",
-      "description": "만들 수 있다는 말 대신 결과물, 범위, 일정과 인수인계로 신뢰를 만드는 포트폴리오·외주 과정입니다.",
-      "color": "#FF8F8F",
-      "route": "의뢰 분석에서 견적, 제작, 수정 범위, 배포와 인수인계까지 분쟁을 줄이는 작업 구조를 익힙니다.",
-      "outcomes": [
-        "포트폴리오 서사",
-        "요구사항 정리",
-        "견적·범위 관리",
-        "인수인계"
-      ],
-      "sessions": [
-        {
-          "id": "freelance-01",
-          "title": "1강 · 결과가 보이는 포트폴리오",
-          "subtitle": "문제 · 과정 · 전후 · 역할",
-          "description": "예쁜 화면보다 무엇을 해결했고 어떤 판단을 했는지 보이는 사례 페이지를 만듭니다.",
-          "duration": "25분 강의 + 35분 제작",
-          "type": "practice",
-          "file": "tracks/freelance-01.html"
-        },
-        {
-          "id": "freelance-02",
-          "title": "2강 · 요구사항과 견적",
-          "subtitle": "필수 · 선택 · 제외 · 변경",
-          "description": "모호한 의뢰를 화면, 기능, 데이터, 일정과 제외 범위로 바꾸고 견적 근거를 만듭니다.",
-          "duration": "30분 강의 + 30분 워크숍",
-          "type": "practice",
-          "file": "tracks/freelance-02.html"
-        },
-        {
-          "id": "freelance-03",
-          "title": "3강 · 수정과 검수 운영",
-          "subtitle": "마일스톤 · 피드백 · 버전 · 승인",
-          "description": "무한 수정을 막고 고객이 판단하기 쉬운 검수 단위와 승인 기록을 설계합니다.",
-          "duration": "25분 강의 + 35분 시뮬레이션",
-          "type": "practice",
-          "file": "tracks/freelance-03.html"
-        },
-        {
-          "id": "freelance-04",
-          "title": "4강 · 납품과 인수인계",
-          "subtitle": "계정 · 도메인 · 문서 · 유지보수",
-          "description": "소스, 계정, 배포, 환경변수, 사용법과 유지보수 범위를 안전하게 전달합니다.",
-          "duration": "30분 강의 + 30분 문서화",
-          "type": "practice",
-          "file": "tracks/freelance-04.html"
-        }
-      ]
-    },
-    {
-      "id": "automation",
-      "title": "AI 업무자동화 구축반",
-      "shortTitle": "업무자동화",
-      "code": "W01",
-      "family": "자동화",
-      "track": "WORKFLOW AUTOMATION TRACK",
-      "level": "AUTOMATE",
-      "status": "active",
-      "description": "반복 업무를 발견하고 입력, 판단, 실행, 검증과 예외 처리를 갖춘 자동화 흐름으로 바꿉니다.",
-      "color": "#76E0C2",
-      "route": "무작정 자동화하지 않고 반복 빈도와 위험을 평가한 뒤 API, 웹훅과 스케줄 실행을 연결합니다.",
-      "outcomes": [
-        "업무 흐름 분석",
-        "API·웹훅 연결",
-        "예외 처리",
-        "자동화 운영"
-      ],
-      "sessions": [
-        {
-          "id": "automation-01",
-          "title": "1강 · 자동화할 일 고르기",
-          "subtitle": "반복 · 규칙 · 비용 · 위험",
-          "description": "사람이 계속 해야 할 판단과 기계가 맡아도 되는 반복을 구분합니다.",
-          "duration": "30분 강의 + 30분 분석",
-          "type": "practice",
-          "file": "tracks/automation-01.html"
-        },
-        {
-          "id": "automation-02",
-          "title": "2강 · 트리거와 액션",
-          "subtitle": "일정 · 입력 · 웹훅 · 실행",
-          "description": "언제 시작되고 어떤 데이터를 받아 무엇을 실행할지 자동화의 기본 골격을 만듭니다.",
-          "duration": "25분 강의 + 35분 설계",
-          "type": "practice",
-          "file": "tracks/automation-02.html"
-        },
-        {
-          "id": "automation-03",
-          "title": "3강 · 서비스 연결",
-          "subtitle": "API · 인증 · 데이터 변환",
-          "description": "서로 다른 서비스의 입력 형식을 맞추고 인증과 결과 변환을 다룹니다.",
-          "duration": "25분 강의 + 35분 연결",
-          "type": "practice",
-          "file": "tracks/automation-03.html"
-        },
-        {
-          "id": "automation-04",
-          "title": "4강 · 실패와 재시도",
-          "subtitle": "중복 · 타임아웃 · 로그 · 알림",
-          "description": "자동화가 조용히 실패하거나 같은 작업을 두 번 실행하지 않도록 보호 장치를 설계합니다.",
-          "duration": "30분 강의 + 30분 테스트",
-          "type": "practice",
-          "file": "tracks/automation-04.html"
-        },
-        {
-          "id": "automation-05",
-          "title": "5강 · 운영 가능한 자동화",
-          "subtitle": "권한 · 비용 · 모니터링 · 승인",
-          "description": "민감한 작업에 사람 승인을 두고 사용량, 비용과 실패 기록을 운영합니다.",
-          "duration": "35분 강의 + 25분 운영 설계",
-          "type": "theory",
-          "file": "tracks/automation-05.html"
-        }
-      ]
-    },
-    {
-      "id": "mcp",
-      "title": "MCP 연결 설계반",
-      "shortTitle": "MCP",
-      "code": "G01",
-      "family": "Agent 시스템",
-      "track": "MODEL CONTEXT PROTOCOL TRACK",
-      "level": "CONNECT",
-      "status": "active",
-      "description": "AI가 파일, 브라우저, 데이터와 외부 서비스를 사용할 때 필요한 MCP의 구조, 권한과 안전한 연결 방식을 학습합니다.",
-      "color": "#74C7FF",
-      "route": "도구 목록을 늘리는 데 그치지 않고 어떤 컨텍스트와 권한을 언제 제공할지 설계합니다.",
-      "outcomes": [
-        "MCP 구조 이해",
-        "서버 연결",
-        "권한 설계",
-        "도구 선택"
-      ],
-      "sessions": [
-        {
-          "id": "mcp-01",
-          "title": "1강 · MCP는 무엇을 연결하는가",
-          "subtitle": "Host · Client · Server · Tool",
-          "description": "AI 앱과 외부 기능 사이에서 MCP 구성요소가 맡는 역할을 시각적으로 이해합니다.",
-          "duration": "40분 강의 + 20분 데모",
-          "type": "theory",
-          "file": "tracks/mcp-01.html"
-        },
-        {
-          "id": "mcp-02",
-          "title": "2강 · 로컬 MCP 연결",
-          "subtitle": "파일 · 데이터 · 설정 · 로그",
-          "description": "로컬 서버를 등록하고 노출되는 도구와 경로, 실행 로그를 확인합니다.",
-          "duration": "25분 강의 + 35분 연결",
-          "type": "practice",
-          "file": "tracks/mcp-02.html"
-        },
-        {
-          "id": "mcp-03",
-          "title": "3강 · 원격 서비스와 인증",
-          "subtitle": "OAuth · 토큰 · 범위 · 만료",
-          "description": "원격 MCP가 계정 권한을 받는 방식과 최소 권한, 토큰 수명과 폐기를 다룹니다.",
-          "duration": "35분 강의 + 25분 검토",
-          "type": "theory",
-          "file": "tracks/mcp-03.html"
-        },
-        {
-          "id": "mcp-04",
-          "title": "4강 · 좋은 Tool 설계",
-          "subtitle": "이름 · 입력 · 출력 · 오류",
-          "description": "Agent가 잘못 호출하지 않도록 명확한 도구 설명과 구조화된 결과, 실패 메시지를 설계합니다.",
-          "duration": "25분 강의 + 35분 설계",
-          "type": "practice",
-          "file": "tracks/mcp-04.html"
-        },
-        {
-          "id": "mcp-05",
-          "title": "5강 · 보안과 운영",
-          "subtitle": "승인 · 감사 · 제한 · 복구",
-          "description": "쓰기 작업 승인, 민감정보 차단, 호출 기록과 장애 격리 기준을 구성합니다.",
-          "duration": "40분 강의 + 20분 점검",
-          "type": "theory",
-          "file": "tracks/mcp-05.html"
-        }
-      ]
-    },
-    {
-      "id": "skills",
-      "title": "AI Skill 제작반",
-      "shortTitle": "Skill 제작",
-      "code": "G02",
-      "family": "Agent 시스템",
-      "track": "REUSABLE SKILL TRACK",
-      "level": "STANDARDIZE",
-      "status": "active",
-      "description": "반복해서 설명하던 업무를 입력, 절차, 산출물과 검증 기준이 있는 재사용 Skill로 바꿉니다.",
-      "color": "#B59CFF",
-      "route": "좋은 프롬프트 모음이 아니라 실패 조건과 품질 검증까지 포함한 실행 가능한 작업 표준을 만듭니다.",
-      "outcomes": [
-        "업무 표준화",
-        "입출력 계약",
-        "검증 루프",
-        "Skill 유지보수"
-      ],
-      "sessions": [
-        {
-          "id": "skills-01",
-          "title": "1강 · Skill의 경계 정하기",
-          "subtitle": "한 가지 책임 · 입력 · 완료 조건",
-          "description": "너무 넓거나 모호한 업무를 재사용 가능한 하나의 책임으로 줄입니다.",
-          "duration": "30분 강의 + 30분 분해",
-          "type": "practice",
-          "file": "tracks/skills-01.html"
-        },
-        {
-          "id": "skills-02",
-          "title": "2강 · 지침과 자료 구조",
-          "subtitle": "절차 · 예시 · 참고자료 · 도구",
-          "description": "AI가 필요한 순간에 필요한 정보만 읽도록 Skill 파일과 참고자료를 구성합니다.",
-          "duration": "25분 강의 + 35분 제작",
-          "type": "practice",
-          "file": "tracks/skills-02.html"
-        },
-        {
-          "id": "skills-03",
-          "title": "3강 · 검증 가능한 산출물",
-          "subtitle": "체크 · 테스트 · 실패 · 재시도",
-          "description": "좋아 보이는 결과가 아니라 조건을 통과한 결과를 만들도록 검증 단계를 넣습니다.",
-          "duration": "25분 강의 + 35분 테스트",
-          "type": "practice",
-          "file": "tracks/skills-03.html"
-        },
-        {
-          "id": "skills-04",
-          "title": "4강 · 버전과 배포",
-          "subtitle": "변경 기록 · 호환성 · 공유",
-          "description": "Skill의 수정 이유와 사용 범위를 기록하고 개인·팀 환경에 안전하게 배포합니다.",
-          "duration": "30분 강의 + 30분 운영",
-          "type": "theory",
-          "file": "tracks/skills-04.html"
-        }
-      ]
-    },
-    {
-      "id": "agents",
-      "title": "AI Agent 설계반",
-      "shortTitle": "Agent 설계",
-      "code": "G03",
-      "family": "Agent 시스템",
-      "track": "AGENT ARCHITECTURE TRACK",
-      "level": "ORCHESTRATE",
-      "status": "active",
-      "description": "목표를 받은 Agent가 계획하고 도구를 사용하고 결과를 검증하며 실패에서 복구하는 실행 구조를 설계합니다.",
-      "color": "#66D6EB",
-      "route": "자율성을 높이는 것보다 권한, 중단 조건, 평가와 사람의 확인 지점을 명확히 합니다.",
-      "outcomes": [
-        "Agent 루프",
-        "도구 사용",
-        "메모리 판단",
-        "평가·복구"
-      ],
-      "sessions": [
-        {
-          "id": "agents-01",
-          "title": "1강 · Agent와 채팅의 차이",
-          "subtitle": "목표 · 상태 · 도구 · 반복",
-          "description": "답변 생성과 여러 행동을 수행하는 Agent 실행 루프를 구분합니다.",
-          "duration": "40분 강의 + 20분 시뮬레이션",
-          "type": "theory",
-          "file": "tracks/agents-01.html"
-        },
-        {
-          "id": "agents-02",
-          "title": "2강 · 계획과 작업 분해",
-          "subtitle": "목표 · 제약 · 순서 · 완료",
-          "description": "큰 목표를 검증 가능한 작업 단위로 나누고 중간 결과를 정의합니다.",
-          "duration": "25분 강의 + 35분 설계",
-          "type": "practice",
-          "file": "tracks/agents-02.html"
-        },
-        {
-          "id": "agents-03",
-          "title": "3강 · 도구 선택과 권한",
-          "subtitle": "읽기 · 쓰기 · 승인 · 제한",
-          "description": "Agent가 사용할 도구와 위험한 행동 전 사람 승인 지점을 정합니다.",
-          "duration": "30분 강의 + 30분 권한 설계",
-          "type": "practice",
-          "file": "tracks/agents-03.html"
-        },
-        {
-          "id": "agents-04",
-          "title": "4강 · 컨텍스트와 메모리",
-          "subtitle": "현재 작업 · 장기 지식 · 요약 · 망각",
-          "description": "모든 정보를 계속 넣지 않고 작업에 필요한 기억을 선택하고 갱신합니다.",
-          "duration": "35분 강의 + 25분 구조화",
-          "type": "theory",
-          "file": "tracks/agents-04.html"
-        },
-        {
-          "id": "agents-05",
-          "title": "5강 · 평가와 복구",
-          "subtitle": "성공 기준 · 로그 · 재시도 · 중단",
-          "description": "실패를 감지하고 안전하게 재시도하거나 사람에게 넘기는 기준을 만듭니다.",
-          "duration": "30분 강의 + 30분 테스트",
-          "type": "practice",
-          "file": "tracks/agents-05.html"
-        },
-        {
-          "id": "agents-06",
-          "title": "6강 · 비용과 운영",
-          "subtitle": "모델 · 토큰 · 지연 · 관찰",
-          "description": "작업 가치에 맞는 모델과 실행 횟수, 로그와 비용 한도를 설계합니다.",
-          "duration": "40분 강의 + 20분 운영표",
-          "type": "theory",
-          "file": "tracks/agents-06.html"
-        }
-      ]
-    },
-    {
-      "id": "agent-teams",
-      "title": "SubAgent·Agent Teams 설계반",
-      "shortTitle": "Agent Teams",
-      "code": "G04",
-      "family": "Agent 시스템",
-      "track": "MULTI AGENT TEAM TRACK",
-      "level": "COORDINATE",
-      "status": "active",
-      "description": "리서치, 기획, 구현, 디자인과 QA Agent가 같은 파일을 망가뜨리지 않고 협업하도록 팀 구조를 설계합니다.",
-      "color": "#F0A8FF",
-      "route": "Agent 수를 늘리기 전에 역할 경계, 공통 산출물, 인수인계와 최종 책임자를 정합니다.",
-      "outcomes": [
-        "역할 분해",
-        "병렬 실행",
-        "인수인계",
-        "충돌 해결"
-      ],
-      "sessions": [
-        {
-          "id": "teams-01",
-          "title": "1강 · 팀이 필요한 작업",
-          "subtitle": "복잡도 · 병렬성 · 전문성 · 비용",
-          "description": "한 Agent가 더 나은 작업과 여러 역할이 필요한 작업을 구분합니다.",
-          "duration": "35분 강의 + 25분 판단",
-          "type": "theory",
-          "file": "tracks/teams-01.html"
-        },
-        {
-          "id": "teams-02",
-          "title": "2강 · 역할과 작업 경계",
-          "subtitle": "Owner · Specialist · Reviewer",
-          "description": "각 Agent가 소유하는 파일과 결정, 전달해야 할 산출물을 정의합니다.",
-          "duration": "25분 강의 + 35분 설계",
-          "type": "practice",
-          "file": "tracks/teams-02.html"
-        },
-        {
-          "id": "teams-03",
-          "title": "3강 · 병렬 작업과 합류",
-          "subtitle": "공유 계약 · 의존성 · merge",
-          "description": "동시에 진행해도 되는 일과 순서가 필요한 일을 나누고 결과를 합칩니다.",
-          "duration": "30분 강의 + 30분 시뮬레이션",
-          "type": "practice",
-          "file": "tracks/teams-03.html"
-        },
-        {
-          "id": "teams-04",
-          "title": "4강 · Reviewer와 품질 게이트",
-          "subtitle": "검토 · 반려 · 재작업 · 승인",
-          "description": "작성 Agent와 검토 Agent를 분리하고 통과 기준과 반려 형식을 정합니다.",
-          "duration": "30분 강의 + 30분 리뷰",
-          "type": "practice",
-          "file": "tracks/teams-04.html"
-        },
-        {
-          "id": "teams-05",
-          "title": "5강 · 팀 운영과 실패 격리",
-          "subtitle": "로그 · 비용 · 충돌 · Human Lead",
-          "description": "여러 Agent의 오류가 전체 작업으로 번지지 않게 중단과 책임 구조를 둡니다.",
-          "duration": "40분 강의 + 20분 운영 설계",
-          "type": "theory",
-          "file": "tracks/teams-05.html"
-        }
-      ]
-    },
-    {
-      "id": "claude-code",
-      "title": "Claude Code 실전반",
+      "id": "claude",
+      "title": "Claude Code Professional",
       "shortTitle": "Claude Code",
-      "code": "T01",
+      "code": "C30",
       "family": "도구 전문",
-      "track": "CLAUDE CODE MASTERY",
+      "track": "도구 전문 · 6 WEEKS",
       "level": "PRO",
       "status": "active",
-      "description": "Claude Code의 프로젝트 읽기, 계획, 수정, 명령 실행과 컨텍스트 운영을 실제 저장소 기준으로 깊게 다룹니다.",
-      "color": "#E7A879",
-      "route": "도구 사용법을 나열하지 않고 큰 코드베이스에서 안전하게 탐색하고 수정하고 검증하는 작업 습관을 만듭니다.",
+      "visibility": "primary",
+      "audience": [
+        "student",
+        "instructor"
+      ],
+      "curriculumVersion": "V3",
+      "description": "Workflow Architect의 원리를 Claude Code의 프로젝트 지침, Skills, Plugins, MCP, Hooks와 Agent Teams로 구현합니다.",
+      "color": "#e6a879",
+      "route": "환경·탐색 → CLAUDE.md·Git → Skills → Plugins·MCP·Hooks → Agents → 자동화·배포",
       "outcomes": [
-        "코드베이스 탐색",
-        "계획·수정",
-        "CLAUDE.md",
-        "검증·복구"
+        "Claude 저장소 운영",
+        "재사용 Skills",
+        "Plugin·MCP 연결",
+        "Agent 팀·배포 워크스페이스"
+      ],
+      "visualMode": "claude",
+      "modules": [
+        {
+          "id": "01",
+          "title": "01 · FOUNDATION",
+          "weeks": [
+            1
+          ]
+        },
+        {
+          "id": "02",
+          "title": "02 · PROJECT CONTROL",
+          "weeks": [
+            2
+          ]
+        },
+        {
+          "id": "03",
+          "title": "03 · REUSABLE WORK",
+          "weeks": [
+            3
+          ]
+        },
+        {
+          "id": "04",
+          "title": "04 · EXTENSIONS",
+          "weeks": [
+            4
+          ]
+        },
+        {
+          "id": "05",
+          "title": "05 · MULTI AGENT",
+          "weeks": [
+            5
+          ]
+        },
+        {
+          "id": "06",
+          "title": "06 · OPERATIONS",
+          "weeks": [
+            6
+          ]
+        }
       ],
       "sessions": [
         {
           "id": "claude-01",
-          "title": "1강 · Claude Code 작업 모델",
-          "subtitle": "세션 · 컨텍스트 · 도구 · 권한",
-          "description": "터미널 기반 Agent가 저장소를 읽고 명령과 수정을 실행하는 방식을 이해합니다.",
-          "duration": "40분 강의 + 20분 데모",
-          "type": "theory",
-          "file": "tracks/claude-01.html"
+          "title": "1강 · 설치·터미널·세션·권한·저장소 탐색",
+          "subtitle": "CLI · 프로젝트 범위 · 읽기·쓰기 승인",
+          "description": "Claude Code를 올바른 프로젝트 위치에서 실행하고 탐색·계획·권한 확인 후 첫 안전한 변경을 완료합니다.",
+          "duration": "120분",
+          "type": "practice",
+          "file": "v3/deck.html?course=claude&lesson=1",
+          "moduleId": "01",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "저장소 지도",
+            "검토한 계획",
+            "첫 안전한 diff"
+          ],
+          "sourceKeys": [
+            "claude-overview",
+            "claude-quickstart"
+          ],
+          "pathway": null
         },
         {
           "id": "claude-02",
-          "title": "2강 · 프로젝트 탐색과 계획",
-          "subtitle": "검색 · 의존성 · 변경 범위",
-          "description": "큰 저장소에서 관련 파일과 위험 범위를 먼저 찾고 구현 계획을 검토합니다.",
-          "duration": "25분 강의 + 35분 실습",
+          "title": "2강 · CLAUDE.md·계획·Git·Diff·테스트",
+          "subtitle": "프로젝트 규칙 · 변경 계약 · 검증",
+          "description": "반복 설명을 CLAUDE.md에 정리하고 계획, 작은 diff, 테스트와 Git 체크포인트로 변경을 운영합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/claude-02.html"
+          "file": "v3/deck.html?course=claude&lesson=2",
+          "moduleId": "02",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "CLAUDE.md",
+            "변경 계획",
+            "테스트가 포함된 커밋"
+          ],
+          "sourceKeys": [
+            "claude-memory",
+            "github-git"
+          ],
+          "pathway": null
         },
         {
           "id": "claude-03",
-          "title": "3강 · CLAUDE.md와 프로젝트 규칙",
-          "subtitle": "명령 · 스타일 · 금지 · 검증",
-          "description": "반복 설명을 줄이고 프로젝트에 맞는 작업 규칙과 검증 명령을 문서화합니다.",
-          "duration": "25분 강의 + 35분 작성",
+          "title": "3강 · Skills와 반복 작업 표준화",
+          "subtitle": "Trigger · 절차 · 자료 · 검증",
+          "description": "반복되는 한 업무를 호출 조건, 단계, 자료와 완료 검증을 가진 Claude Skill로 만듭니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/claude-03.html"
+          "file": "v3/deck.html?course=claude&lesson=3",
+          "moduleId": "03",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "실행 가능한 Skill",
+            "정상·실패 테스트",
+            "버전 기록"
+          ],
+          "sourceKeys": [
+            "claude-skills"
+          ],
+          "pathway": null
         },
         {
           "id": "claude-04",
-          "title": "4강 · 안전한 수정과 리뷰",
-          "subtitle": "diff · 테스트 · 되돌리기 · commit",
-          "description": "AI가 바꾼 파일을 diff로 검토하고 테스트와 작은 commit으로 위험을 줄입니다.",
-          "duration": "25분 강의 + 35분 실습",
+          "title": "4강 · Plugins·MCP·Hooks와 서비스 연결",
+          "subtitle": "배포 단위 · Tool · 이벤트 · 보안",
+          "description": "Skill과 설정을 Plugin으로 묶고 MCP Tool과 Hook을 연결해 외부 서비스를 안전하게 사용합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/claude-04.html"
+          "file": "v3/deck.html?course=claude&lesson=4",
+          "moduleId": "04",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "Claude Plugin",
+            "MCP·Hook 설정",
+            "보안 설치 가이드"
+          ],
+          "sourceKeys": [
+            "claude-plugins",
+            "claude-mcp",
+            "claude-hooks",
+            "mcp-intro"
+          ],
+          "pathway": null
         },
         {
           "id": "claude-05",
-          "title": "5강 · MCP와 확장 작업",
-          "subtitle": "도구 연결 · 자료 접근 · 권한",
-          "description": "Claude Code에서 외부 도구를 연결할 때 필요한 범위와 보안 기준을 다룹니다.",
-          "duration": "35분 강의 + 25분 연결",
+          "title": "5강 · Subagents·Agent Teams·리뷰 게이트",
+          "subtitle": "역할 · 병렬 작업 · 인수인계 · 승인",
+          "description": "독립 작업만 Subagent와 Agent Team으로 분리하고 반환 형식, Reviewer와 Human Lead를 운영합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/claude-05.html"
+          "file": "v3/deck.html?course=claude&lesson=5",
+          "moduleId": "05",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "멀티 Agent 작업 계약",
+            "역할별 결과",
+            "리뷰·통합 보고서"
+          ],
+          "sourceKeys": [
+            "claude-subagents",
+            "claude-agent-teams"
+          ],
+          "pathway": null
         },
         {
           "id": "claude-06",
-          "title": "6강 · 장기 작업 운영",
-          "subtitle": "분할 · 인수인계 · 비용 · 복구",
-          "description": "긴 작업을 세션과 단계로 나누고 요약, 체크포인트와 실패 복구를 운영합니다.",
-          "duration": "40분 강의 + 20분 운영표",
-          "type": "theory",
-          "file": "tracks/claude-06.html"
+          "title": "6강 · 자동화·배포·PR·Claude 워크스페이스",
+          "subtitle": "반복 실행 · CI · 인수인계 · 운영",
+          "description": "안정된 Claude 작업을 자동화하고 GitHub PR, 테스트, 배포와 다음 세션 인수인계까지 연결합니다.",
+          "duration": "120분",
+          "type": "practice",
+          "file": "v3/deck.html?course=claude&lesson=6",
+          "moduleId": "06",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "최종 Claude 워크스페이스",
+            "자동화·CI 흐름",
+            "PR·운영 매뉴얼"
+          ],
+          "sourceKeys": [
+            "claude-github-actions",
+            "github-actions"
+          ],
+          "pathway": null
         }
-      ]
+      ],
+      "materials": {
+        "student": [
+          {
+            "id": "claude-workbook",
+            "title": "통합 실습 워크북",
+            "description": "Claude Code Professional 회차별 작업지와 메모",
+            "file": "v3/material.html?course=claude&kind=workbook&audience=student",
+            "audience": "student",
+            "courseId": "claude"
+          },
+          {
+            "id": "claude-commands",
+            "title": "Windows·Mac 명령어 및 설정집",
+            "description": "설치·실행·설정과 복구 명령",
+            "file": "v3/material.html?course=claude&kind=commands&audience=student",
+            "audience": "student",
+            "courseId": "claude"
+          },
+          {
+            "id": "claude-examples",
+            "title": "예제·설정·복구 파일",
+            "description": "실습 시작본과 실패 복구 예시",
+            "file": "v3/material.html?course=claude&kind=examples&audience=student",
+            "audience": "student",
+            "courseId": "claude"
+          },
+          {
+            "id": "claude-errors",
+            "title": "오류 사례와 해결 훈련",
+            "description": "로그 분석과 재실행 시나리오",
+            "file": "v3/material.html?course=claude&kind=errors&audience=student",
+            "audience": "student",
+            "courseId": "claude"
+          },
+          {
+            "id": "claude-assessment",
+            "title": "프로젝트 체크·평가표",
+            "description": "제출 기준과 자기·동료 평가",
+            "file": "v3/material.html?course=claude&kind=assessment&audience=student",
+            "audience": "student",
+            "courseId": "claude"
+          }
+        ],
+        "instructor": [
+          {
+            "id": "claude-script",
+            "title": "슬라이드별 상세 대본",
+            "description": "SAY·DO·ASK·예상 답변·복구·시간 조정",
+            "file": "v3/material.html?course=claude&kind=script&audience=instructor",
+            "audience": "instructor",
+            "courseId": "claude"
+          },
+          {
+            "id": "claude-demo",
+            "title": "실제 시연 운영 매뉴얼",
+            "description": "정상 시연과 실패 시 대체 화면",
+            "file": "v3/material.html?course=claude&kind=demo&audience=instructor",
+            "audience": "instructor",
+            "courseId": "claude"
+          },
+          {
+            "id": "claude-answers",
+            "title": "정답·평가·예상 질문",
+            "description": "실습 평가 기준과 질문 대응",
+            "file": "v3/material.html?course=claude&kind=answers&audience=instructor",
+            "audience": "instructor",
+            "courseId": "claude"
+          },
+          {
+            "id": "claude-study",
+            "title": "강사용 애니메이션 학습실",
+            "description": "핵심 개념을 다시 조작하며 공부",
+            "file": "v3/deck.html?course=claude&lesson=1&study=1",
+            "audience": "instructor",
+            "courseId": "claude"
+          },
+          {
+            "id": "claude-research",
+            "title": "공식 참고자료 연구노트",
+            "description": "공식 문서의 쉬운 한국어 요약과 반영 위치",
+            "file": "v3/material.html?course=claude&kind=research&audience=instructor",
+            "audience": "instructor",
+            "courseId": "claude"
+          }
+        ]
+      }
     },
     {
       "id": "codex",
-      "title": "OpenAI Codex 실전반",
+      "title": "Codex Professional",
       "shortTitle": "Codex",
-      "code": "T02",
+      "code": "O40",
       "family": "도구 전문",
-      "track": "CODEX MASTERY",
+      "track": "도구 전문 · 6 WEEKS",
       "level": "PRO",
       "status": "active",
-      "description": "Codex의 계획, 도구 사용, Skills, 앱 연결, 브라우저 검증과 병렬 작업을 프로젝트 운영 관점에서 학습합니다.",
-      "color": "#8BC7FF",
-      "route": "명확한 목표, 작업 공간 규칙, 검증 가능한 도구 실행과 결과 보고를 하나의 개발 운영 흐름으로 묶습니다.",
+      "visibility": "primary",
+      "audience": [
+        "student",
+        "instructor"
+      ],
+      "curriculumVersion": "V3",
+      "description": "Workflow Architect의 원리를 Codex App·CLI·IDE, Skills, Plugins, MCP, Browser, Subagents와 GitHub Release로 구현합니다.",
+      "color": "#82c8ff",
+      "route": "환경·권한 → AGENTS.md·Git → Skills·Plugins → MCP·Browser → Subagents → Hooks·Release",
       "outcomes": [
-        "Codex 작업 설계",
-        "Skills·Plugins",
-        "브라우저 QA",
-        "병렬 에이전트"
+        "Codex 작업 계약",
+        "재사용 Plugin",
+        "브라우저 시각 QA",
+        "GitHub Release 자동화"
+      ],
+      "visualMode": "codex",
+      "modules": [
+        {
+          "id": "01",
+          "title": "01 · FOUNDATION",
+          "weeks": [
+            1
+          ]
+        },
+        {
+          "id": "02",
+          "title": "02 · PROJECT CONTROL",
+          "weeks": [
+            2
+          ]
+        },
+        {
+          "id": "03",
+          "title": "03 · REUSABLE WORK",
+          "weeks": [
+            3
+          ]
+        },
+        {
+          "id": "04",
+          "title": "04 · CONNECTED WORK",
+          "weeks": [
+            4
+          ]
+        },
+        {
+          "id": "05",
+          "title": "05 · PARALLEL DELIVERY",
+          "weeks": [
+            5
+          ]
+        },
+        {
+          "id": "06",
+          "title": "06 · OPERATIONS",
+          "weeks": [
+            6
+          ]
+        }
       ],
       "sessions": [
         {
           "id": "codex-01",
-          "title": "1강 · Codex 작업 환경",
-          "subtitle": "Workspace · 권한 · 도구 · 목표",
-          "description": "작업공간과 권한, 계획과 실행이 어떻게 연결되는지 이해합니다.",
-          "duration": "40분 강의 + 20분 데모",
-          "type": "theory",
-          "file": "tracks/codex-01.html"
+          "title": "1강 · App·CLI·IDE·Workspace·Sandbox",
+          "subtitle": "표면 선택 · 작업공간 · 승인 · 목표",
+          "description": "작업에 맞는 Codex 표면을 선택하고 Workspace, Sandbox와 승인 정책 안에서 검증 가능한 첫 작업을 완료합니다.",
+          "duration": "120분",
+          "type": "practice",
+          "file": "v3/deck.html?course=codex&lesson=1",
+          "moduleId": "01",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "표면 선택 기준표",
+            "작업 계약",
+            "첫 검증된 변경"
+          ],
+          "sourceKeys": [
+            "codex-overview",
+            "codex-security"
+          ],
+          "pathway": null
         },
         {
           "id": "codex-02",
-          "title": "2강 · 좋은 작업 요청과 계획",
-          "subtitle": "목표 · 제약 · 완료 기준 · 검증",
-          "description": "긴 프롬프트보다 실제 산출물과 확인 방법이 분명한 작업 요청을 설계합니다.",
-          "duration": "25분 강의 + 35분 실습",
+          "title": "2강 · AGENTS.md·config.toml·Rules·Git",
+          "subtitle": "지속 지침 · 설정 · 정책 · 변경 기록",
+          "description": "저장소 규칙과 개인 설정, 실행 정책을 구분하고 Git 기반의 안전한 변경 루프를 구축합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/codex-02.html"
+          "file": "v3/deck.html?course=codex&lesson=2",
+          "moduleId": "02",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "AGENTS.md",
+            "Codex 설정 설명서",
+            "검증된 Git 커밋"
+          ],
+          "sourceKeys": [
+            "codex-agents-md",
+            "codex-config",
+            "codex-rules"
+          ],
+          "pathway": null
         },
         {
           "id": "codex-03",
-          "title": "3강 · Skills와 Plugins",
-          "subtitle": "재사용 지침 · 도구 · 앱 연결",
-          "description": "반복 업무를 Skill로 만들고 필요한 Plugin과 Connector를 선택합니다.",
-          "duration": "30분 강의 + 30분 제작",
+          "title": "3강 · Skills·Plugins와 재사용 작업",
+          "subtitle": "워크플로 작성 · 설치 단위 · 점진적 공개",
+          "description": "반복 업무를 Skill로 설계하고 다른 환경에 설치할 수 있도록 Plugin으로 묶어 검증합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/codex-03.html"
+          "file": "v3/deck.html?course=codex&lesson=3",
+          "moduleId": "03",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "Codex Skill",
+            "Plugin 패키지",
+            "테스트·업데이트 기록"
+          ],
+          "sourceKeys": [
+            "codex-skills",
+            "codex-plugins"
+          ],
+          "pathway": null
         },
         {
           "id": "codex-04",
-          "title": "4강 · 브라우저와 시각 검증",
-          "subtitle": "화면 · 인터랙션 · 반응형 · 회귀",
-          "description": "코드 완료가 아니라 실제 사용자 화면과 상호작용을 브라우저에서 검증합니다.",
-          "duration": "25분 강의 + 35분 QA",
+          "title": "4강 · MCP·Apps·Connectors·Browser",
+          "subtitle": "외부 데이터 · 실제 행동 · 시각 검증",
+          "description": "외부 서비스의 자료와 행동을 적절한 MCP·App·Connector로 연결하고 Browser로 실제 결과를 검증합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/codex-04.html"
+          "file": "v3/deck.html?course=codex&lesson=4",
+          "moduleId": "04",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "연결 결정표",
+            "권한 설정",
+            "브라우저 QA 보고서"
+          ],
+          "sourceKeys": [
+            "codex-mcp",
+            "codex-browser",
+            "mcp-intro"
+          ],
+          "pathway": null
         },
         {
           "id": "codex-05",
-          "title": "5강 · SubAgent와 병렬 작업",
-          "subtitle": "분해 · 동시 실행 · 결과 통합",
-          "description": "독립적인 조사와 구현을 병렬화하고 충돌 없이 결과를 합치는 법을 다룹니다.",
-          "duration": "30분 강의 + 30분 팀 실습",
+          "title": "5강 · Subagents·Worktrees·리뷰·시각 QA",
+          "subtitle": "병렬 탐색 · 작업 격리 · 통합 · 품질",
+          "description": "독립 작업을 Subagent와 Worktree로 격리하고 리뷰·테스트·스크린샷을 통합 품질 게이트로 운영합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/codex-05.html"
+          "file": "v3/deck.html?course=codex&lesson=5",
+          "moduleId": "05",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "병렬 작업 계획",
+            "역할별 결과·증거",
+            "통합 리뷰 보고서"
+          ],
+          "sourceKeys": [
+            "codex-subagents",
+            "codex-worktrees",
+            "codex-review"
+          ],
+          "pathway": null
         },
         {
           "id": "codex-06",
-          "title": "6강 · 저장소와 릴리즈 운영",
-          "subtitle": "Git · GitHub · CI · Release",
-          "description": "변경을 검증하고 commit, push, PR과 릴리즈 산출물까지 연결합니다.",
-          "duration": "35분 강의 + 25분 운영",
-          "type": "theory",
-          "file": "tracks/codex-06.html"
+          "title": "6강 · Hooks·Automations·GitHub Actions·Release",
+          "subtitle": "정책 실행 · 일정 작업 · CI · 배포 자산",
+          "description": "안정된 Codex 작업을 Hook과 Automation으로 운영하고 GitHub Actions, PR과 Release까지 연결합니다.",
+          "duration": "120분",
+          "type": "practice",
+          "file": "v3/deck.html?course=codex&lesson=6",
+          "moduleId": "06",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "운영 Hook·Automation",
+            "GitHub Actions",
+            "최종 Codex 릴리즈 시스템"
+          ],
+          "sourceKeys": [
+            "codex-hooks",
+            "codex-automations",
+            "github-actions",
+            "github-releases"
+          ],
+          "pathway": null
         }
-      ]
+      ],
+      "materials": {
+        "student": [
+          {
+            "id": "codex-workbook",
+            "title": "통합 실습 워크북",
+            "description": "Codex Professional 회차별 작업지와 메모",
+            "file": "v3/material.html?course=codex&kind=workbook&audience=student",
+            "audience": "student",
+            "courseId": "codex"
+          },
+          {
+            "id": "codex-commands",
+            "title": "Windows·Mac 명령어 및 설정집",
+            "description": "설치·실행·설정과 복구 명령",
+            "file": "v3/material.html?course=codex&kind=commands&audience=student",
+            "audience": "student",
+            "courseId": "codex"
+          },
+          {
+            "id": "codex-examples",
+            "title": "예제·설정·복구 파일",
+            "description": "실습 시작본과 실패 복구 예시",
+            "file": "v3/material.html?course=codex&kind=examples&audience=student",
+            "audience": "student",
+            "courseId": "codex"
+          },
+          {
+            "id": "codex-errors",
+            "title": "오류 사례와 해결 훈련",
+            "description": "로그 분석과 재실행 시나리오",
+            "file": "v3/material.html?course=codex&kind=errors&audience=student",
+            "audience": "student",
+            "courseId": "codex"
+          },
+          {
+            "id": "codex-assessment",
+            "title": "프로젝트 체크·평가표",
+            "description": "제출 기준과 자기·동료 평가",
+            "file": "v3/material.html?course=codex&kind=assessment&audience=student",
+            "audience": "student",
+            "courseId": "codex"
+          }
+        ],
+        "instructor": [
+          {
+            "id": "codex-script",
+            "title": "슬라이드별 상세 대본",
+            "description": "SAY·DO·ASK·예상 답변·복구·시간 조정",
+            "file": "v3/material.html?course=codex&kind=script&audience=instructor",
+            "audience": "instructor",
+            "courseId": "codex"
+          },
+          {
+            "id": "codex-demo",
+            "title": "실제 시연 운영 매뉴얼",
+            "description": "정상 시연과 실패 시 대체 화면",
+            "file": "v3/material.html?course=codex&kind=demo&audience=instructor",
+            "audience": "instructor",
+            "courseId": "codex"
+          },
+          {
+            "id": "codex-answers",
+            "title": "정답·평가·예상 질문",
+            "description": "실습 평가 기준과 질문 대응",
+            "file": "v3/material.html?course=codex&kind=answers&audience=instructor",
+            "audience": "instructor",
+            "courseId": "codex"
+          },
+          {
+            "id": "codex-study",
+            "title": "강사용 애니메이션 학습실",
+            "description": "핵심 개념을 다시 조작하며 공부",
+            "file": "v3/deck.html?course=codex&lesson=1&study=1",
+            "audience": "instructor",
+            "courseId": "codex"
+          },
+          {
+            "id": "codex-research",
+            "title": "공식 참고자료 연구노트",
+            "description": "공식 문서의 쉬운 한국어 요약과 반영 위치",
+            "file": "v3/material.html?course=codex&kind=research&audience=instructor",
+            "audience": "instructor",
+            "courseId": "codex"
+          }
+        ]
+      }
     },
     {
-      "id": "instructor-master",
-      "title": "바이브코딩 강사 양성과정",
-      "shortTitle": "강사 양성",
-      "code": "I01",
-      "family": "강사 과정",
-      "track": "INSTRUCTOR MASTERY TRACK",
-      "level": "TEACH",
-      "status": "active",
-      "description": "비개발자 수강생에게 AI와 개발 개념을 시각적으로 설명하고 실습과 돌발 상황을 운영하는 강사 과정입니다.",
-      "color": "#D7F58B",
-      "route": "지식을 많이 말하는 강의가 아니라 초보자의 오해를 발견하고 시각화, 질문과 실습으로 이해를 확인하는 수업을 설계합니다.",
+      "id": "foundation-next",
+      "title": "바이브코딩 기초반 · 다음 기수",
+      "shortTitle": "기초반 4주 개편본",
+      "code": "B03",
+      "family": "기초",
+      "track": "기초 · 4 WEEKS",
+      "level": "START",
+      "status": "preview",
+      "visibility": "preview",
+      "audience": [
+        "instructor"
+      ],
+      "curriculumVersion": "다음-4주",
+      "description": "AI 일반론 없이 바이브코딩 작업 환경에서 시작해 내 프로젝트를 안전하게 배포하는 4주 과정입니다.",
+      "color": "#d8ff66",
+      "route": "바이브코딩 시작 → 프로그램 구조 → 파일 구조 → GitHub·배포·보안",
       "outcomes": [
-        "초보자 설명법",
-        "시각화 설계",
-        "실습 운영",
-        "질문·장애 대응"
+        "첫 프로젝트 실행",
+        "문제 위치 판단",
+        "안전한 파일 수정",
+        "공개 URL 배포"
+      ],
+      "visualMode": "foundation",
+      "modules": [
+        {
+          "id": "01",
+          "title": "01 · START",
+          "weeks": [
+            1
+          ]
+        },
+        {
+          "id": "02",
+          "title": "02 · SYSTEM",
+          "weeks": [
+            2
+          ]
+        },
+        {
+          "id": "03",
+          "title": "03 · STRUCTURE",
+          "weeks": [
+            3
+          ]
+        },
+        {
+          "id": "04",
+          "title": "04 · SHIP",
+          "weeks": [
+            4
+          ]
+        }
       ],
       "sessions": [
         {
-          "id": "instructor-01",
-          "title": "1강 · 비개발자 학습 설계",
-          "subtitle": "인지 부하 · 비유 · 오개념 · 목표",
-          "description": "외워야 할 용어를 줄이고 한 장면에서 하나의 판단을 배우도록 수업을 설계합니다.",
-          "duration": "45분 강의 + 15분 진단",
-          "type": "theory",
-          "file": "tracks/instructor-01.html"
-        },
-        {
-          "id": "instructor-02",
-          "title": "2강 · 보는 순간 이해되는 시각화",
-          "subtitle": "흐름 · 상태 · 원인 · 결과",
-          "description": "장식 애니메이션과 설명 애니메이션을 구분하고 수동 진행 가능한 장면을 설계합니다.",
-          "duration": "30분 강의 + 30분 설계",
+          "id": "foundation-next-01",
+          "title": "1강 · 바이브코딩과 AI 개발환경",
+          "subtitle": "설계 AI · AI IDE · 터미널 · 브라우저",
+          "description": "네 작업대의 역할을 구분하고 요청, 생성, 실행, 확인의 첫 반복을 완성합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/instructor-02.html"
+          "file": "v3/deck.html?course=foundation-next&lesson=1",
+          "moduleId": "01",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "실행되는 로컬 프로젝트",
+            "첫 작업 요청서",
+            "수정 전후 캡처"
+          ],
+          "sourceKeys": [
+            "github-git",
+            "node-download",
+            "vscode-download"
+          ],
+          "pathway": null
         },
         {
-          "id": "instructor-03",
-          "title": "3강 · 강사용 대본과 질문",
-          "subtitle": "SAY · DO · 질문 · 예상 답변",
-          "description": "슬라이드 설명, 화면 조작, 질문 유도와 추가 설명을 실제 진행 원고로 작성합니다.",
-          "duration": "25분 강의 + 35분 작성",
+          "id": "foundation-next-02",
+          "title": "2강 · 프로그램이 작동하는 구조",
+          "subtitle": "UI·UX · 프론트엔드 · 백엔드 · API · DB",
+          "description": "버튼 클릭이 화면, 처리, 저장, 응답을 지나 돌아오는 과정을 보고 문제 위치를 구분합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/instructor-03.html"
+          "file": "v3/deck.html?course=foundation-next&lesson=2",
+          "moduleId": "02",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "기능 흐름도",
+            "문제 위치 판단표",
+            "AI 수정 요청"
+          ],
+          "sourceKeys": [
+            "mdn-http",
+            "firebase-data"
+          ],
+          "pathway": null
         },
         {
-          "id": "instructor-04",
-          "title": "4강 · 실습과 에러 운영",
-          "subtitle": "시간 · 수준 차이 · 오류 · 복구",
-          "description": "실습 속도 차이, 계정 문제, 설치 오류와 수강생 불안을 현장에서 처리합니다.",
-          "duration": "35분 강의 + 25분 시뮬레이션",
+          "id": "foundation-next-03",
+          "title": "3강 · 프로젝트와 파일 구조",
+          "subtitle": "src · 컴포넌트 · 설정파일 · 패키지 · Git",
+          "description": "VS Code 파일 트리에서 수정 위치와 영향 범위를 찾고 diff를 확인한 뒤 안전하게 변경합니다.",
+          "duration": "120분",
           "type": "practice",
-          "file": "tracks/instructor-04.html"
+          "file": "v3/deck.html?course=foundation-next&lesson=3",
+          "moduleId": "03",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "개인 프로젝트 파일 지도",
+            "검토한 Git diff",
+            "안전한 수정 체크리스트"
+          ],
+          "sourceKeys": [
+            "github-git",
+            "npm-package-json"
+          ],
+          "pathway": null
         },
         {
-          "id": "instructor-05",
-          "title": "5강 · 과정 개선 시스템",
-          "subtitle": "피드백 · 기록 · 개편 · 자료실",
-          "description": "수업 기록과 질문을 다음 강의 개편, 별첨자료와 강사 학습 계획으로 연결합니다.",
-          "duration": "35분 강의 + 25분 운영 설계",
-          "type": "theory",
-          "file": "tracks/instructor-05.html"
+          "id": "foundation-next-04",
+          "title": "4강 · GitHub·배포·보안·데이터",
+          "subtitle": "저장소 · Vercel · Firebase · .env · 권한",
+          "description": "코드를 GitHub에 안전하게 저장하고 비밀값을 분리한 뒤 공개 URL로 배포하고 재배포합니다.",
+          "duration": "120분",
+          "type": "practice",
+          "file": "v3/deck.html?course=foundation-next&lesson=4",
+          "moduleId": "04",
+          "preparation": [
+            "개인 노트북",
+            "현재 프로젝트",
+            "강의 워크북"
+          ],
+          "deliverables": [
+            "GitHub 저장소",
+            "공개 배포 URL",
+            "보안·재배포 점검표"
+          ],
+          "sourceKeys": [
+            "github-repository",
+            "vercel-deploy",
+            "vercel-env",
+            "firebase-hosting",
+            "firebase-rules"
+          ],
+          "pathway": null
         }
-      ]
+      ],
+      "materials": {
+        "student": [
+          {
+            "id": "foundation-next-workbook",
+            "title": "통합 실습 워크북",
+            "description": "바이브코딩 기초반 · 다음 기수 회차별 작업지와 메모",
+            "file": "v3/material.html?course=foundation-next&kind=workbook&audience=student",
+            "audience": "student",
+            "courseId": "foundation-next"
+          },
+          {
+            "id": "foundation-next-commands",
+            "title": "Windows·Mac 명령어 및 설정집",
+            "description": "설치·실행·설정과 복구 명령",
+            "file": "v3/material.html?course=foundation-next&kind=commands&audience=student",
+            "audience": "student",
+            "courseId": "foundation-next"
+          },
+          {
+            "id": "foundation-next-examples",
+            "title": "예제·설정·복구 파일",
+            "description": "실습 시작본과 실패 복구 예시",
+            "file": "v3/material.html?course=foundation-next&kind=examples&audience=student",
+            "audience": "student",
+            "courseId": "foundation-next"
+          },
+          {
+            "id": "foundation-next-errors",
+            "title": "오류 사례와 해결 훈련",
+            "description": "로그 분석과 재실행 시나리오",
+            "file": "v3/material.html?course=foundation-next&kind=errors&audience=student",
+            "audience": "student",
+            "courseId": "foundation-next"
+          },
+          {
+            "id": "foundation-next-assessment",
+            "title": "프로젝트 체크·평가표",
+            "description": "제출 기준과 자기·동료 평가",
+            "file": "v3/material.html?course=foundation-next&kind=assessment&audience=student",
+            "audience": "student",
+            "courseId": "foundation-next"
+          }
+        ],
+        "instructor": [
+          {
+            "id": "foundation-next-script",
+            "title": "슬라이드별 상세 대본",
+            "description": "SAY·DO·ASK·예상 답변·복구·시간 조정",
+            "file": "v3/material.html?course=foundation-next&kind=script&audience=instructor",
+            "audience": "instructor",
+            "courseId": "foundation-next"
+          },
+          {
+            "id": "foundation-next-demo",
+            "title": "실제 시연 운영 매뉴얼",
+            "description": "정상 시연과 실패 시 대체 화면",
+            "file": "v3/material.html?course=foundation-next&kind=demo&audience=instructor",
+            "audience": "instructor",
+            "courseId": "foundation-next"
+          },
+          {
+            "id": "foundation-next-answers",
+            "title": "정답·평가·예상 질문",
+            "description": "실습 평가 기준과 질문 대응",
+            "file": "v3/material.html?course=foundation-next&kind=answers&audience=instructor",
+            "audience": "instructor",
+            "courseId": "foundation-next"
+          },
+          {
+            "id": "foundation-next-study",
+            "title": "강사용 애니메이션 학습실",
+            "description": "핵심 개념을 다시 조작하며 공부",
+            "file": "v3/deck.html?course=foundation-next&lesson=1&study=1",
+            "audience": "instructor",
+            "courseId": "foundation-next"
+          },
+          {
+            "id": "foundation-next-research",
+            "title": "공식 참고자료 연구노트",
+            "description": "공식 문서의 쉬운 한국어 요약과 반영 위치",
+            "file": "v3/material.html?course=foundation-next&kind=research&audience=instructor",
+            "audience": "instructor",
+            "courseId": "foundation-next"
+          }
+        ]
+      }
     }
   ],
-  "appendix": [
-    {
-      "id": "script-session1",
-      "title": "1강 강사용 대본",
-      "subtitle": "AI 이해 · 슬라이드별 SAY/DO",
-      "description": "1강에서 AI를 도구로 설명하고 2회차 사전 준비 숙제로 연결하는 강사용 진행 대본입니다.",
-      "icon": "🎙️",
-      "file": "appendix/script-session1.html"
-    },
-    {
-      "id": "script-session2",
-      "title": "2강 강사 대본",
-      "subtitle": "슬라이드별 말할 내용 · 행동 포인트 · Word 다운로드",
-      "description": "2강 수업 전 미리 읽어두는 강사용 가이드. 슬라이드별 SAY/DO/TIP으로 정리되어 있으며, 내 말투로 수정할 수 있는 Word(.doc) 파일로 바로 다운로드 가능합니다.",
-      "icon": "🎙️",
-      "file": "appendix/script-session2.html"
-    },
-    {
-      "id": "script-session3",
-      "title": "3강 강사용 대본",
-      "subtitle": "12장 상세 원고 · 단계별 화면 조작 · 암기 모드",
-      "description": "슬라이드별 상세 멘트, 화면 조작, 비유, 예상 질문과 답변, 서비스 흐름 설명, 실습 운영과 개인 메모 저장 기능을 포함한 강사용 학습 대본입니다.",
-      "icon": "🎙️",
-      "file": "appendix/script-session3.html"
-    },
-    {
-      "id": "script-session4",
-      "title": "4강 강사용 대본",
-      "subtitle": "17장 상세 원고 · 파일 탐색 · 영향 범위 · diff 검토",
-      "description": "4강의 17개 슬라이드를 따라 프로젝트 루트, src, 코드와 화면 연결, 공용 파일의 영향 범위와 AI 수정 내역 검토까지 설명하는 상세 강사용 대본입니다.",
-      "icon": "🎙️",
-      "file": "appendix/script-session4.html"
-    },
-    {
-      "id": "script-session5",
-      "title": "5강 강사용 대본",
-      "subtitle": "배포 · 보안 · 데이터 · 슬라이드별 SAY/DO",
-      "description": "5강에서 배포 흐름, 환경변수, 데이터 저장, API 성공/실패를 설명하는 강사용 대본입니다.",
-      "icon": "🎙️",
-      "file": "appendix/script-session5.html"
-    },
-    {
-      "id": "script-session6",
-      "title": "6강 강사용 대본",
-      "subtitle": "쇼케이스 · Q&A · 발표 운영",
-      "description": "6강 쇼케이스 발표를 평가가 아닌 공유와 회고의 시간으로 운영하기 위한 강사용 대본입니다.",
-      "icon": "🎙️",
-      "file": "appendix/script-session6.html"
-    },
-    {
-      "id": "instructor-study-guide",
-      "title": "강사용 공부자료",
-      "subtitle": "1~6강 핵심 개념 · 설명 깊이 기준",
-      "description": "수업 전 강사가 훑어볼 1~6강 핵심 개념, 설명 범위, 질문 대응 기준을 정리한 강사용 자료입니다.",
-      "icon": "📚",
-      "file": "appendix/instructor-study-guide.html"
-    },
-    {
-      "id": "instructor-next-tracks",
-      "title": "후속 과정 설계 및 강사 학습 로드맵",
-      "subtitle": "응용·수익화반 4강 + AI 워크스페이스 심화반 6강",
-      "description": "수익화, MCP, Skill, Agent, SubAgent와 개인 AI 워크스페이스를 어떤 순서와 깊이로 공부하고 가르칠지 정리한 강사용 과정 설계 문서입니다.",
-      "icon": "▦",
-      "code": "ROADMAP",
-      "audience": "instructor",
-      "file": "appendix/instructor-next-tracks.html"
-    },
-    {
-      "id": "instructor-next-study",
-      "title": "후속 과정 강사용 공부자료",
-      "subtitle": "수익화 · MCP · Skill · Agent · Agent Teams · AI 워크스페이스",
-      "description": "응용·수익화반과 AI 워크스페이스 심화반을 가르치기 전에 강사가 공부할 개념, 설명 깊이, 실습 기준과 예상 질문을 정리한 자료입니다.",
-      "icon": "BOOK",
-      "code": "STUDY",
-      "audience": "instructor",
-      "file": "appendix/instructor-next-study.html"
-    },
-    {
-      "id": "instructor-program-catalog",
-      "title": "전체 교육과정 설계도",
-      "subtitle": "13개 과정 · 70개 회차 · 선수 과정 · 강사 학습 순서",
-      "description": "기초, 수익화, 자동화, MCP, Skill, Agent, 도구 전문과 강사 양성까지 전체 교육과정의 목적과 추천 학습 경로를 정리한 인쇄용 강사 문서입니다.",
-      "icon": "MAP",
-      "code": "PROGRAM",
-      "audience": "instructor",
-      "courseId": "program",
-      "scopeLabel": "전체 과정",
-      "file": "appendix/instructor-program-catalog.html"
-    },
-    {
-      "id": "instructor-agent-systems-lab",
-      "title": "AI 작업 시스템 인터랙티브 학습실",
-      "subtitle": "Prompt · Skill · MCP · Agent · Agent Team",
-      "description": "강사가 각 단계를 직접 눌러 AI 작업 시스템의 능력과 사람의 책임이 어떻게 확장되는지 애니메이션으로 학습하는 화면입니다.",
-      "icon": "LAB",
-      "code": "INTERACTIVE",
-      "audience": "instructor",
-      "courseId": "advanced",
-      "scopeLabel": "심화 공통",
-      "file": "appendix/instructor-agent-systems-lab.html"
-    },
-    {
-      "id": "practical-course-teaching-guide",
-      "title": "응용·수익화반 강사용 설계자료",
-      "subtitle": "기초반과 다른 목표 · 6회 핵심 장면 · 준비 체크",
-      "description": "응용반을 기능 제작 수업이 아니라 고객, MVP, 가격, 출시와 지표를 판단하는 상위 과정으로 운영하기 위한 강사용 설계 문서입니다.",
-      "icon": "GUIDE",
-      "code": "A01",
-      "audience": "instructor",
-      "courseId": "practical",
-      "scopeLabel": "과정 공통",
-      "file": "appendix/practical-course-teaching-guide.html"
-    },
-    {
-      "id": "study-claude-code",
-      "title": "Claude Code 강사용 공부자료",
-      "subtitle": "작업 모델 · CLAUDE.md · MCP · Subagents · 예상 질문",
-      "description": "Claude Code 공식 문서를 기준으로 설치, 지속 지침, 메모리, 권한, MCP와 여러 Agent의 차이를 정리한 별도 강사 학습자료입니다.",
-      "icon": "STUDY",
-      "code": "T01",
-      "audience": "instructor",
-      "courseId": "claude-code",
-      "scopeLabel": "과정 공통",
-      "file": "appendix/study-claude-code.html"
-    },
-    {
-      "id": "study-codex",
-      "title": "OpenAI Codex 강사용 공부자료",
-      "subtitle": "AGENTS.md · Skills · Plugins · MCP · Subagents · 브라우저 검증",
-      "description": "최신 OpenAI Codex 공식 매뉴얼을 기준으로 Codex 작업 구조와 재사용 지침, 도구 연결, 병렬 작업과 검증 습관을 정리한 별도 자료입니다.",
-      "icon": "STUDY",
-      "code": "T02",
-      "audience": "instructor",
-      "courseId": "codex",
-      "scopeLabel": "과정 공통",
-      "file": "appendix/study-codex.html"
-    },
-    {
-      "id": "study-session3",
-      "title": "3강 강사용 공부자료",
-      "subtitle": "개발 용어 · 건축 비유 · 예상 질문",
-      "description": "3강 수업 전 프론트엔드, 백엔드, API, DB의 설명 깊이와 예상 질문 답변을 점검하는 강사용 자료입니다.",
-      "icon": "📘",
-      "file": "appendix/study-session3.html"
-    },
-    {
-      "id": "wireframe-session3",
-      "title": "3강 화면 설계도 (강사용)",
-      "subtitle": "시그니처 · 브라우저 · 비교 · 애니메이션 레이아웃",
-      "description": "3강 고도화에 적용한 화면 비율과 인터랙션 배치 기준을 실제 와이어프레임으로 확인하는 강사용 화면입니다.",
-      "icon": "▦",
-      "file": "appendix/wireframe-session3.html"
-    },
-    {
-      "id": "study-session4",
-      "title": "4강 강사용 공부자료",
-      "subtitle": "src · 파일 형식 · 설정 파일 · 예상 질문",
-      "description": "4강 수업 전 프로젝트 구조의 변형, JSX/TSX/Markdown, package 파일과 초보자 질문 답변을 점검하는 강사용 자료입니다.",
-      "icon": "📘",
-      "file": "appendix/study-session4.html"
-    },
-    {
-      "id": "study-session5",
-      "title": "5강 강사용 공부자료",
-      "subtitle": "배포 · 보안 · 데이터 · 예상 질문",
-      "description": "5강 수업 전 환경변수, API 키, CRUD, 배포 오류와 현장 보안 원칙을 확인하는 강사용 자료입니다.",
-      "icon": "📘",
-      "file": "appendix/study-session5.html"
-    },
-    {
-      "id": "study-session6",
-      "title": "6강 강사용 공부자료",
-      "subtitle": "쇼케이스 운영 · Q&A · 돌발 대응",
-      "description": "6강 발표 순서, 피드백 원칙, 시연 장애와 시간 초과 대응을 정리한 강사용 자료입니다.",
-      "icon": "📘",
-      "file": "appendix/study-session6.html"
-    },
-    {
-      "id": "handout-session3",
-      "title": "3강 수강생 한 장 요약",
-      "subtitle": "앱을 건물처럼 이해하기 · A4",
-      "description": "건물 7단계와 프론트엔드, 백엔드, API, DB를 한 장에 정리하고 메모할 수 있는 프린트물입니다.",
-      "icon": "🧾",
-      "file": "appendix/handout-session3.html"
-    },
-    {
-      "id": "handout-session4",
-      "title": "4강 수강생 파일 지도",
-      "subtitle": "프로젝트 구조 + 파일 추적 실습 · A4 2페이지",
-      "description": "src, 페이지, 컴포넌트, 설정 파일의 역할을 확인하고 실제 수정 경로와 AI 요청문을 작성하는 수강생 프린트물입니다.",
-      "icon": "🧾",
-      "file": "appendix/handout-session4.html"
-    },
-    {
-      "id": "handout-session5",
-      "title": "5강 서비스 공개 점검표",
-      "subtitle": "배포 · 보안 · 데이터 · A4",
-      "description": "공개 URL을 만들기 전 환경변수, 비밀값, 주요 기능을 확인하는 수강생 프린트물입니다.",
-      "icon": "🧾",
-      "file": "appendix/handout-session5.html"
-    },
-    {
-      "id": "handout-session6",
-      "title": "6강 쇼케이스 발표지",
-      "subtitle": "5분 발표 큐시트 · A4",
-      "description": "프로젝트 한 문장, 핵심 시연, 받은 피드백, 다음 기능을 기록하는 수강생 프린트물입니다.",
-      "icon": "🧾",
-      "file": "appendix/handout-session6.html"
-    },
-    {
-      "id": "curriculum-one-page",
-      "title": "1~6강 커리큘럼 1페이지 요약",
-      "subtitle": "기초반 전체 흐름 한 장 정리",
-      "description": "1회차 시작 시 배포하는 1페이지 프린트 자료. 6주 동안 무엇을 배우고 무엇을 만드는지 한눈에 보여줍니다.",
-      "icon": "🗓️",
-      "file": "appendix/curriculum-one-page.html"
-    },
-    {
-      "id": "ai-types-specialized-catalog",
-      "title": "AI 종류별 특화 도구 가이드",
-      "subtitle": "10종 이상 AI 도구 · 2페이지 설명",
-      "description": "1회차 AI 이해 시간에 쓰는 프린트 자료. ChatGPT, Claude, Gemini, Nano Banana, Veo, Cursor, Kiro 등 도구별 강점을 설명합니다.",
-      "icon": "🤖",
-      "file": "appendix/ai-types-specialized-catalog.html"
-    },
-    {
-      "id": "handout-session2-prep",
-      "title": "2회차 사전 준비자료",
-      "subtitle": "Windows/Mac 설치 체크리스트 + AI 코딩환경",
-      "description": "1회차 마칠 때 배포하는 숙제 안내서. 터미널 여는 법, Node.js, VS Code, Cursor, Kiro, Antigravity, Windsurf 설치 위치와 확인 명령어를 담았습니다.",
-      "icon": "🧰",
-      "file": "appendix/handout-session2-prep.html"
-    },
-    {
-      "id": "practice-log",
-      "title": "수강생 실습 기록지",
-      "subtitle": "회차별 실습 메모 · 에러 · AI 질문 기록",
-      "description": "2~6회차 실습 중 만든 것, 막힌 점, AI에게 물어본 내용을 기록하는 프린트용 워크시트입니다.",
-      "icon": "📝",
-      "file": "appendix/practice-log.html"
-    },
-    {
-      "id": "command-cheatsheet",
-      "title": "명령어 치트시트",
-      "subtitle": "npm · git 기본 명령어",
-      "description": "2~5회차 실습 중 npm install, npm run dev, build, git status를 찾아 입력하는 빠른 참조표입니다.",
-      "icon": "📋",
-      "file": "appendix/command-cheatsheet.html"
-    },
-    {
-      "id": "ai-instruction-templates",
-      "title": "AI 작업지시서 템플릿",
-      "subtitle": "설계 · 구현 · 수정 · 요약 프롬프트",
-      "description": "2회차 첫 실습부터 5회차 수정 작업까지 GPT/Gemini/Claude와 AI IDE에 쓰는 요청문 모음입니다.",
-      "icon": "🧠",
-      "file": "appendix/ai-instruction-templates.html"
-    },
-    {
-      "id": "error-guide",
-      "title": "에러 해결 가이드",
-      "subtitle": "막혔을 때 AI에게 다시 시키는 법",
-      "description": "2~5회차 실습 중 npm, 포트 충돌, 모듈 없음, 화면 오류가 발생했을 때 쓰는 해결 루프입니다.",
-      "icon": "🧯",
-      "file": "appendix/error-guide.html"
-    },
-    {
-      "id": "mvp-worksheet",
-      "title": "MVP 기획 워크시트",
-      "subtitle": "6주 안에 만들 최소 버전 정하기",
-      "description": "2회차 첫 프로젝트 주제 선정과 6회차 발표 준비에 쓰는 작성형 워크시트입니다.",
-      "icon": "🎯",
-      "file": "appendix/mvp-worksheet.html"
-    },
-    {
-      "id": "glossary",
-      "title": "코딩 용어집",
-      "subtitle": "초보자용 용어 정리",
-      "description": "3회차 개발 용어 이해 수업 이후 계속 옆에 두고 확인하는 초보자용 용어 사전입니다.",
-      "icon": "📖",
-      "file": "appendix/glossary.html"
-    },
-    {
-      "id": "session-03-ui-ux-terms",
-      "title": "3강 프론트엔드·UI/UX·애니메이션 예시집",
-      "subtitle": "이미지 없는 텍스트 프린트물",
-      "description": "쇼핑몰, 커뮤니티, 예약, 관리자 화면과 UI/UX 상황, 애니메이션 10종, AI 요청 예시를 텍스트로 정리한 배포용 프린트입니다.",
-      "icon": "🧾",
-      "file": "appendix/session-03-ui-ux-terms.html"
-    },
-    {
-      "id": "session-03-feature-review-workbook",
-      "title": "3강 한 기능 완성 점검 워크시트",
-      "subtitle": "UI·UX·화면 상태·애니메이션 · A4 2페이지",
-      "description": "내 프로젝트의 핵심 기능 하나를 골라 기본, 처리 중, 성공, 실패, 빈 화면과 애니메이션 목적까지 직접 작성하는 수강생용 워크시트입니다.",
-      "icon": "✍️",
-      "file": "appendix/session-03-feature-review-workbook.html"
-    },
-    {
-      "id": "diagrams",
-      "title": "시각적 다이어그램",
-      "subtitle": "API · DB 구조",
-      "description": "3회차 개발 용어와 5회차 데이터 흐름에서 API, 서버, DB 위치를 그림으로 이해하는 자료입니다.",
-      "icon": "🗺️",
-      "file": "appendix/diagrams.html"
-    },
-    {
-      "id": "project-structure",
-      "title": "프로젝트 폴더 구조 설명",
-      "subtitle": "src · 파일 형식 · package 파일 · 수정 순서",
-      "description": "4회차 파일 구조 이해 시간에 프로젝트 파일의 역할과 확장자, 안전한 수정 순서를 찾아보는 참고자료입니다.",
-      "icon": "🗂️",
-      "file": "appendix/project-structure.html"
-    },
-    {
-      "id": "databases",
-      "title": "데이터베이스 완전 가이드",
-      "subtitle": "DB 선택 & 연동 가이드",
-      "description": "5회차 데이터 이해 시간에 Firebase, Supabase, SQL, NoSQL, BaaS 차이를 비교하는 참고자료입니다.",
-      "icon": "🗄️",
-      "file": "appendix/databases.html"
-    },
-    {
-      "id": "deployment-checklist",
-      "title": "배포 전 체크리스트",
-      "subtitle": "공개하기 전에 반드시 확인할 것",
-      "description": "5회차 배포와 보안 실습에서 실행, 모바일, 환경변수, 공개 링크를 확인하는 점검표입니다.",
-      "icon": "🚦",
-      "file": "appendix/deployment-checklist.html"
-    },
-    {
-      "id": "presentation-template",
-      "title": "발표 템플릿",
-      "subtitle": "6회차 쇼케이스 발표 자료",
-      "description": "6회차 쇼케이스에서 만든 것, 대상, 작동 장면, 다음 개선 방향을 정리하는 발표 큐시트입니다.",
-      "icon": "🎤",
-      "file": "appendix/presentation-template.html"
-    },
-    {
-      "id": "practical-student-workbook",
-      "title": "바이브코딩 응용·수익화반 수강생 워크북",
-      "subtitle": "6개 회차 핵심 요약 · 판단표 · 실습 메모",
-      "description": "바이브코딩 응용·수익화반 전 회차의 핵심 개념, 체크리스트와 내 프로젝트 적용 메모를 과정 순서대로 작성하는 A4 프린트 자료입니다.",
-      "icon": "WORKBOOK",
-      "code": "A01",
-      "audience": "student",
-      "courseId": "practical",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=practical&audience=student",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "practical-instructor-guide",
-      "title": "바이브코딩 응용·수익화반 강사용 운영 가이드",
-      "subtitle": "6개 회차 설명 핵심 · 질문 · 오개념 · 교정",
-      "description": "바이브코딩 응용·수익화반을 가르치기 전 회차별 설명 순서, 화면 조작, 질문 유도, 예상 오개념과 교정 기준을 공부하고 인쇄하는 강사용 자료입니다.",
-      "icon": "TEACH",
-      "code": "A01",
-      "audience": "instructor",
-      "courseId": "practical",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=practical&audience=instructor",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "advanced-student-workbook",
-      "title": "AI 워크스페이스 심화반 수강생 워크북",
-      "subtitle": "6개 회차 핵심 요약 · 판단표 · 실습 메모",
-      "description": "AI 워크스페이스 심화반 전 회차의 핵심 개념, 체크리스트와 내 프로젝트 적용 메모를 과정 순서대로 작성하는 A4 프린트 자료입니다.",
-      "icon": "WORKBOOK",
-      "code": "X01",
-      "audience": "student",
-      "courseId": "advanced",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=advanced&audience=student",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "advanced-instructor-guide",
-      "title": "AI 워크스페이스 심화반 강사용 운영 가이드",
-      "subtitle": "6개 회차 설명 핵심 · 질문 · 오개념 · 교정",
-      "description": "AI 워크스페이스 심화반을 가르치기 전 회차별 설명 순서, 화면 조작, 질문 유도, 예상 오개념과 교정 기준을 공부하고 인쇄하는 강사용 자료입니다.",
-      "icon": "TEACH",
-      "code": "X01",
-      "audience": "instructor",
-      "courseId": "advanced",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=advanced&audience=instructor",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "saas-launch-student-workbook",
-      "title": "AI SaaS 제작·출시반 수강생 워크북",
-      "subtitle": "6개 회차 핵심 요약 · 판단표 · 실습 메모",
-      "description": "AI SaaS 제작·출시반 전 회차의 핵심 개념, 체크리스트와 내 프로젝트 적용 메모를 과정 순서대로 작성하는 A4 프린트 자료입니다.",
-      "icon": "WORKBOOK",
-      "code": "P02",
-      "audience": "student",
-      "courseId": "saas-launch",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=saas&audience=student",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "saas-launch-instructor-guide",
-      "title": "AI SaaS 제작·출시반 강사용 운영 가이드",
-      "subtitle": "6개 회차 설명 핵심 · 질문 · 오개념 · 교정",
-      "description": "AI SaaS 제작·출시반을 가르치기 전 회차별 설명 순서, 화면 조작, 질문 유도, 예상 오개념과 교정 기준을 공부하고 인쇄하는 강사용 자료입니다.",
-      "icon": "TEACH",
-      "code": "P02",
-      "audience": "instructor",
-      "courseId": "saas-launch",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=saas&audience=instructor",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "freelance-student-workbook",
-      "title": "AI 포트폴리오·외주 실전반 수강생 워크북",
-      "subtitle": "4개 회차 핵심 요약 · 판단표 · 실습 메모",
-      "description": "AI 포트폴리오·외주 실전반 전 회차의 핵심 개념, 체크리스트와 내 프로젝트 적용 메모를 과정 순서대로 작성하는 A4 프린트 자료입니다.",
-      "icon": "WORKBOOK",
-      "code": "P03",
-      "audience": "student",
-      "courseId": "freelance",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=freelance&audience=student",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "freelance-instructor-guide",
-      "title": "AI 포트폴리오·외주 실전반 강사용 운영 가이드",
-      "subtitle": "4개 회차 설명 핵심 · 질문 · 오개념 · 교정",
-      "description": "AI 포트폴리오·외주 실전반을 가르치기 전 회차별 설명 순서, 화면 조작, 질문 유도, 예상 오개념과 교정 기준을 공부하고 인쇄하는 강사용 자료입니다.",
-      "icon": "TEACH",
-      "code": "P03",
-      "audience": "instructor",
-      "courseId": "freelance",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=freelance&audience=instructor",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "automation-student-workbook",
-      "title": "AI 업무자동화 구축반 수강생 워크북",
-      "subtitle": "5개 회차 핵심 요약 · 판단표 · 실습 메모",
-      "description": "AI 업무자동화 구축반 전 회차의 핵심 개념, 체크리스트와 내 프로젝트 적용 메모를 과정 순서대로 작성하는 A4 프린트 자료입니다.",
-      "icon": "WORKBOOK",
-      "code": "W01",
-      "audience": "student",
-      "courseId": "automation",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=automation&audience=student",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "automation-instructor-guide",
-      "title": "AI 업무자동화 구축반 강사용 운영 가이드",
-      "subtitle": "5개 회차 설명 핵심 · 질문 · 오개념 · 교정",
-      "description": "AI 업무자동화 구축반을 가르치기 전 회차별 설명 순서, 화면 조작, 질문 유도, 예상 오개념과 교정 기준을 공부하고 인쇄하는 강사용 자료입니다.",
-      "icon": "TEACH",
-      "code": "W01",
-      "audience": "instructor",
-      "courseId": "automation",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=automation&audience=instructor",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "mcp-student-workbook",
-      "title": "MCP 연결 설계반 수강생 워크북",
-      "subtitle": "5개 회차 핵심 요약 · 판단표 · 실습 메모",
-      "description": "MCP 연결 설계반 전 회차의 핵심 개념, 체크리스트와 내 프로젝트 적용 메모를 과정 순서대로 작성하는 A4 프린트 자료입니다.",
-      "icon": "WORKBOOK",
-      "code": "G01",
-      "audience": "student",
-      "courseId": "mcp",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=mcp&audience=student",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "mcp-instructor-guide",
-      "title": "MCP 연결 설계반 강사용 운영 가이드",
-      "subtitle": "5개 회차 설명 핵심 · 질문 · 오개념 · 교정",
-      "description": "MCP 연결 설계반을 가르치기 전 회차별 설명 순서, 화면 조작, 질문 유도, 예상 오개념과 교정 기준을 공부하고 인쇄하는 강사용 자료입니다.",
-      "icon": "TEACH",
-      "code": "G01",
-      "audience": "instructor",
-      "courseId": "mcp",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=mcp&audience=instructor",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "skills-student-workbook",
-      "title": "AI Skill 제작반 수강생 워크북",
-      "subtitle": "4개 회차 핵심 요약 · 판단표 · 실습 메모",
-      "description": "AI Skill 제작반 전 회차의 핵심 개념, 체크리스트와 내 프로젝트 적용 메모를 과정 순서대로 작성하는 A4 프린트 자료입니다.",
-      "icon": "WORKBOOK",
-      "code": "G02",
-      "audience": "student",
-      "courseId": "skills",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=skills&audience=student",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "skills-instructor-guide",
-      "title": "AI Skill 제작반 강사용 운영 가이드",
-      "subtitle": "4개 회차 설명 핵심 · 질문 · 오개념 · 교정",
-      "description": "AI Skill 제작반을 가르치기 전 회차별 설명 순서, 화면 조작, 질문 유도, 예상 오개념과 교정 기준을 공부하고 인쇄하는 강사용 자료입니다.",
-      "icon": "TEACH",
-      "code": "G02",
-      "audience": "instructor",
-      "courseId": "skills",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=skills&audience=instructor",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "agents-student-workbook",
-      "title": "AI Agent 설계반 수강생 워크북",
-      "subtitle": "6개 회차 핵심 요약 · 판단표 · 실습 메모",
-      "description": "AI Agent 설계반 전 회차의 핵심 개념, 체크리스트와 내 프로젝트 적용 메모를 과정 순서대로 작성하는 A4 프린트 자료입니다.",
-      "icon": "WORKBOOK",
-      "code": "G03",
-      "audience": "student",
-      "courseId": "agents",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=agents&audience=student",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "agents-instructor-guide",
-      "title": "AI Agent 설계반 강사용 운영 가이드",
-      "subtitle": "6개 회차 설명 핵심 · 질문 · 오개념 · 교정",
-      "description": "AI Agent 설계반을 가르치기 전 회차별 설명 순서, 화면 조작, 질문 유도, 예상 오개념과 교정 기준을 공부하고 인쇄하는 강사용 자료입니다.",
-      "icon": "TEACH",
-      "code": "G03",
-      "audience": "instructor",
-      "courseId": "agents",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=agents&audience=instructor",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "agent-teams-student-workbook",
-      "title": "SubAgent·Agent Teams 설계반 수강생 워크북",
-      "subtitle": "5개 회차 핵심 요약 · 판단표 · 실습 메모",
-      "description": "SubAgent·Agent Teams 설계반 전 회차의 핵심 개념, 체크리스트와 내 프로젝트 적용 메모를 과정 순서대로 작성하는 A4 프린트 자료입니다.",
-      "icon": "WORKBOOK",
-      "code": "G04",
-      "audience": "student",
-      "courseId": "agent-teams",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=teams&audience=student",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "agent-teams-instructor-guide",
-      "title": "SubAgent·Agent Teams 설계반 강사용 운영 가이드",
-      "subtitle": "5개 회차 설명 핵심 · 질문 · 오개념 · 교정",
-      "description": "SubAgent·Agent Teams 설계반을 가르치기 전 회차별 설명 순서, 화면 조작, 질문 유도, 예상 오개념과 교정 기준을 공부하고 인쇄하는 강사용 자료입니다.",
-      "icon": "TEACH",
-      "code": "G04",
-      "audience": "instructor",
-      "courseId": "agent-teams",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=teams&audience=instructor",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "claude-code-student-workbook",
-      "title": "Claude Code 실전반 수강생 워크북",
-      "subtitle": "6개 회차 핵심 요약 · 판단표 · 실습 메모",
-      "description": "Claude Code 실전반 전 회차의 핵심 개념, 체크리스트와 내 프로젝트 적용 메모를 과정 순서대로 작성하는 A4 프린트 자료입니다.",
-      "icon": "WORKBOOK",
-      "code": "T01",
-      "audience": "student",
-      "courseId": "claude-code",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=claude&audience=student",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "claude-code-instructor-guide",
-      "title": "Claude Code 실전반 강사용 운영 가이드",
-      "subtitle": "6개 회차 설명 핵심 · 질문 · 오개념 · 교정",
-      "description": "Claude Code 실전반을 가르치기 전 회차별 설명 순서, 화면 조작, 질문 유도, 예상 오개념과 교정 기준을 공부하고 인쇄하는 강사용 자료입니다.",
-      "icon": "TEACH",
-      "code": "T01",
-      "audience": "instructor",
-      "courseId": "claude-code",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=claude&audience=instructor",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "codex-student-workbook",
-      "title": "OpenAI Codex 실전반 수강생 워크북",
-      "subtitle": "6개 회차 핵심 요약 · 판단표 · 실습 메모",
-      "description": "OpenAI Codex 실전반 전 회차의 핵심 개념, 체크리스트와 내 프로젝트 적용 메모를 과정 순서대로 작성하는 A4 프린트 자료입니다.",
-      "icon": "WORKBOOK",
-      "code": "T02",
-      "audience": "student",
-      "courseId": "codex",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=codex&audience=student",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "codex-instructor-guide",
-      "title": "OpenAI Codex 실전반 강사용 운영 가이드",
-      "subtitle": "6개 회차 설명 핵심 · 질문 · 오개념 · 교정",
-      "description": "OpenAI Codex 실전반을 가르치기 전 회차별 설명 순서, 화면 조작, 질문 유도, 예상 오개념과 교정 기준을 공부하고 인쇄하는 강사용 자료입니다.",
-      "icon": "TEACH",
-      "code": "T02",
-      "audience": "instructor",
-      "courseId": "codex",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=codex&audience=instructor",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "instructor-master-student-workbook",
-      "title": "바이브코딩 강사 양성과정 수강생 워크북",
-      "subtitle": "5개 회차 핵심 요약 · 판단표 · 실습 메모",
-      "description": "바이브코딩 강사 양성과정 전 회차의 핵심 개념, 체크리스트와 내 프로젝트 적용 메모를 과정 순서대로 작성하는 A4 프린트 자료입니다.",
-      "icon": "WORKBOOK",
-      "code": "I01",
-      "audience": "student",
-      "courseId": "instructor-master",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=instructor&audience=student",
-      "generatedTrackMaterial": true
-    },
-    {
-      "id": "instructor-master-instructor-guide",
-      "title": "바이브코딩 강사 양성과정 강사용 운영 가이드",
-      "subtitle": "5개 회차 설명 핵심 · 질문 · 오개념 · 교정",
-      "description": "바이브코딩 강사 양성과정을 가르치기 전 회차별 설명 순서, 화면 조작, 질문 유도, 예상 오개념과 교정 기준을 공부하고 인쇄하는 강사용 자료입니다.",
-      "icon": "TEACH",
-      "code": "I01",
-      "audience": "instructor",
-      "courseId": "instructor-master",
-      "scopeLabel": "과정 전체",
-      "file": "appendix/course-materials.html?course=instructor&audience=instructor",
-      "generatedTrackMaterial": true
-    }
-  ]
+  "legacyManifest": "archive/v2-course-manifest.json",
+  "appendix": []
 }

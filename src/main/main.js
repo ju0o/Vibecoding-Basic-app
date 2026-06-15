@@ -18,9 +18,9 @@ function createWindow() {
     height: 900,
     minWidth: 1100,
     minHeight: 700,
-    title: 'VIBE STUDIO · 강의 운영 콘솔',
+    title: 'VIBE STUDIO · Curriculum Studio',
     ...(icon ? { icon } : {}),
-    backgroundColor: '#07081A',
+    backgroundColor: '#0D0E10',
     webPreferences: {
       preload: path.join(__dirname, '../preload/preload.js'),
       contextIsolation: true,
