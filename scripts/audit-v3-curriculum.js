@@ -17,6 +17,13 @@ const pass = (condition, message) => {
   else console.log(`✓ ${message}`);
 };
 
+function normalizeFrozenBuffer(buffer) {
+  if (freeze.hashMode === 'text-lf-normalized') {
+    return Buffer.from(buffer.toString('utf-8').replace(/\r\n/g, '\n'), 'utf-8');
+  }
+  return buffer;
+}
+
 pass(pkg.version === '3.0.0-beta.1', 'package version is 3.0.0-beta.1');
 pass(manifest.defaultCourseId === 'basic-current', 'current cohort remains the default course');
 pass(manifest.studentCourseIds.length === 5, 'student mode has exactly five courses');
@@ -55,7 +62,7 @@ for (const record of freeze.files) {
     failures.push(`frozen current-course file missing: ${record.file}`);
     continue;
   }
-  const buffer = fs.readFileSync(filePath);
+  const buffer = normalizeFrozenBuffer(fs.readFileSync(filePath));
   const hash = crypto.createHash('sha256').update(buffer).digest('hex');
   if (hash !== record.sha256 || buffer.length !== record.bytes) {
     failures.push(`frozen current-course file changed: ${record.file}`);

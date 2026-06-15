@@ -2,16 +2,17 @@
   "label": "기초반 2기 6주 운영본",
   "frozenAt": "2026-06-16",
   "note": "V3 개발 중 이 파일들은 수정하지 않는다.",
+  "hashMode": "text-lf-normalized",
   "files": [
     {
       "file": "src/content/sessions/session-00-curriculum.html",
-      "bytes": 21113,
-      "sha256": "841b1d1f3288eea7c7f817ae9a5bdf4f51b4d716124f1874237fc92de6c7e9e1"
+      "bytes": 21112,
+      "sha256": "89b4e88321c757ef2619f29b0965163584ba440aaa19e110479738ef80a7602d"
     },
     {
       "file": "src/content/sessions/session-01-ai-understanding.html",
-      "bytes": 185772,
-      "sha256": "1503abe583aee9ac8fdd845bcf212ba062e65e612e27a782462e793a6d868090"
+      "bytes": 185771,
+      "sha256": "a019f2937a01d7ed06220a9dc1519506e4a5f0d1d58c6db3f26c3aaac5546d17"
     },
     {
       "file": "src/content/sessions/session-02-handout.html",
@@ -20,8 +21,8 @@
     },
     {
       "file": "src/content/sessions/session-02-vibe-coding.html",
-      "bytes": 112571,
-      "sha256": "a4ff9d6301a02c50397a0852491eaf88ee8c8b868e15f1ed10a0213df729fb2e"
+      "bytes": 112570,
+      "sha256": "82cac2c841bd3d6546defeaefa811cdf22021a05853735dd3efdef4e74144989"
     },
     {
       "file": "src/content/sessions/session-03-direction.bundle.js",

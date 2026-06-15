@@ -19,19 +19,26 @@ function writeIfChanged(filePath, content) {
   return true;
 }
 
+function normalizedTextBuffer(buffer) {
+  return Buffer.from(buffer.toString('utf-8').replace(/\r\n/g, '\n'), 'utf-8');
+}
+
 function preserveV2Sources() {
   fs.mkdirSync(archiveDir, { recursive: true });
   if (!fs.existsSync(archiveManifestPath)) {
     fs.copyFileSync(manifestPath, archiveManifestPath);
   }
 
-  if (!fs.existsSync(freezePath)) {
+  const existingFreeze = fs.existsSync(freezePath)
+    ? JSON.parse(fs.readFileSync(freezePath, 'utf-8'))
+    : null;
+  if (!existingFreeze || existingFreeze.hashMode !== 'text-lf-normalized') {
     const sessionDir = path.join(contentDir, 'sessions');
     const files = fs.readdirSync(sessionDir)
       .filter((name) => fs.statSync(path.join(sessionDir, name)).isFile())
       .sort()
       .map((name) => {
-        const buffer = fs.readFileSync(path.join(sessionDir, name));
+        const buffer = normalizedTextBuffer(fs.readFileSync(path.join(sessionDir, name)));
         return {
           file: `src/content/sessions/${name}`,
           bytes: buffer.length,
@@ -42,6 +49,7 @@ function preserveV2Sources() {
       label: '기초반 2기 6주 운영본',
       frozenAt: '2026-06-16',
       note: 'V3 개발 중 이 파일들은 수정하지 않는다.',
+      hashMode: 'text-lf-normalized',
       files,
     }, null, 2)}\n`);
   }
