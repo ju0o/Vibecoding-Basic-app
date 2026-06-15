@@ -12,17 +12,19 @@
   "scripts": {
     "start": "node scripts/start-electron.js",
     "dev": "npm start",
+    "build:tracks": "node scripts/build-track-lessons.js",
     "build:slides": "esbuild src/content/sessions/session-03-direction.js --bundle --format=iife --target=chrome120 --minify --outfile=src/content/sessions/session-03-direction.bundle.js",
     "export:script3": "electron scripts/export-session3-script-pdf.js",
     "export:review3": "electron scripts/export-mobile-review-pdf.js docs/reviews/session-03-mobile-review.html release/3강-모바일-검토자료.pdf",
     "check": "node scripts/check.js",
     "lint": "npm run check",
     "smoke:app": "electron scripts/smoke-electron-app.js",
+    "smoke:tracks": "electron scripts/smoke-track-lessons.js",
     "release:verify": "node scripts/verify-release-version.js",
-    "release:build": "npm run build:slides && npm run check && npm run dist:portable",
+    "release:build": "npm run build:tracks && npm run build:slides && npm run check && npm run dist:portable",
     "dist": "electron-builder --win nsis portable",
     "dist:portable": "electron-builder --win portable",
-    "release:current": "node scripts/prepare-release.js && npm run build:slides && npm run check && npm run dist:portable && node scripts/finalize-release.js",
+    "release:current": "node scripts/prepare-release.js && npm run build:tracks && npm run build:slides && npm run check && npm run dist:portable && node scripts/finalize-release.js",
     "release:v2": "npm run release:current"
   },
   "devDependencies": {

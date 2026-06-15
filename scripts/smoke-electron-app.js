@@ -68,6 +68,8 @@ app.whenReady().then(async () => {
         catalogCards: document.querySelectorAll('#catalog-grid .catalog-card').length,
         courseCount: document.querySelector('#catalog-course-count')?.textContent || '',
         lessonCount: document.querySelector('#catalog-lesson-count')?.textContent || '',
+        activeCount: document.querySelector('#catalog-active-count')?.textContent || '',
+        plannedSessionButtons: document.querySelectorAll('.btn-card-open[disabled]').length,
         studentLibraryButton: Boolean(document.querySelector('[data-nav="student-materials"]')),
         instructorLibraryButton: Boolean(document.querySelector('[data-nav="instructor-library"]')),
         plannerButton: Boolean(document.querySelector('[data-nav="planner"]')),
@@ -91,6 +93,19 @@ app.whenReady().then(async () => {
         cards: document.querySelectorAll('#appendix-grid .session-card').length,
         hasRoadmap: [...document.querySelectorAll('#appendix-grid .card-title')]
           .some((node) => node.textContent.includes('후속 과정 설계'))
+      }))()
+    `);
+
+    await win.webContents.executeJavaScript(`
+      document.querySelector('[data-nav="student-materials"]').click()
+    `);
+    await new Promise((resolve) => setTimeout(resolve, 250));
+    const studentLibrary = await win.webContents.executeJavaScript(`
+      (() => ({
+        title: document.querySelector('#appendix-title')?.textContent || '',
+        cards: document.querySelectorAll('#appendix-grid .session-card').length,
+        generatedWorkbooks: [...document.querySelectorAll('#appendix-grid .card-title')]
+          .filter((node) => node.textContent.includes('수강생 워크북')).length
       }))()
     `);
 
@@ -175,6 +190,8 @@ app.whenReady().then(async () => {
       && catalog.catalogCards >= 13
       && catalog.courseCount === '13'
       && Number(catalog.lessonCount) >= 70
+      && catalog.activeCount === '13'
+      && catalog.plannedSessionButtons === 0
       && catalog.studentLibraryButton
       && catalog.instructorLibraryButton
       && catalog.plannerButton
@@ -183,6 +200,9 @@ app.whenReady().then(async () => {
       && instructorLibrary.title === '강사 자료실'
       && instructorLibrary.cards > 0
       && instructorLibrary.hasRoadmap
+      && studentLibrary.title === '수강생 자료'
+      && studentLibrary.cards > 0
+      && studentLibrary.generatedWorkbooks >= 12
       && planner.activeView === 'view-planner'
       && planner.scheduleRows >= 13
       && planner.noteReady
@@ -209,6 +229,7 @@ app.whenReady().then(async () => {
       ok,
       catalog,
       instructorLibrary,
+      studentLibrary,
       planner,
       player,
       practicalPlayer,

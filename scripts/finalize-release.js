@@ -194,6 +194,10 @@ function writeReleaseDocs() {
 - [ ] 별첨자료 목록 실행 확인
 - [ ] 응용·수익화반 강의 실행 확인
 - [ ] AI 워크스페이스 심화반 강의 실행 확인
+- [ ] SaaS·외주·자동화·MCP·Skill 강의 실행 확인
+- [ ] Agent·Agent Teams·Claude Code·Codex 강의 실행 확인
+- [ ] 강사 양성과정 실행 확인
+- [ ] 과정별 수강생 워크북과 강사용 운영 가이드 확인
 - [ ] PDF 저장 또는 인쇄 버튼 확인
 
 ## 인터랙션
@@ -220,8 +224,8 @@ function writeReleaseDocs() {
 ## 버전
 - 앱 버전: ${version}
 - 프로그램명: ${productName}
-- 포함 과정: 바이브코딩 기초반, 응용·수익화반, AI 워크스페이스 심화반
-- 설계 과정: SaaS, 외주, 자동화, MCP, Skill, Agent, Agent Teams, Claude Code, Codex, 강사 마스터
+- 포함 과정: 13개 과정, 70개 실행 강의
+- 전문 과정: 응용·수익화, AI 심화, SaaS, 외주, 자동화, MCP, Skill, Agent, Agent Teams, Claude Code, Codex, 강사 마스터
 
 ## 릴리즈 산출물
 - release/${executableName}
@@ -233,7 +237,8 @@ function writeReleaseDocs() {
 - 전체 과정 카탈로그와 과정별 대시보드
 - 강의 일정 및 운영 메모
 - 수강생 자료실과 강사 자료실
-- 기초반 1~6강, 응용·수익화반 1~6강, AI 심화반 1~6강
+- 기초반 1~6강과 64개 공통 엔진 전문 강의
+- 12개 후속 과정별 수강생 워크북과 강사용 운영 가이드
 - 인쇄/PDF 저장
 - 발표자 모드와 화면 판서
 - 파일트리, 배포, 보안, 제품 설계와 Agent 흐름 인터랙션

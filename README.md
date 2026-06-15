@@ -1,7 +1,7 @@
 
 # VIBE STUDIO · 바이브코딩 강의 운영 콘솔
 
-바이브코딩 기초반부터 응용·수익화반, AI 워크스페이스 심화반과 후속 전문 과정까지 한 곳에서 운영하는 Electron 기반 Windows 교육 프로그램입니다.
+바이브코딩 기초반부터 응용·수익화반, AI 워크스페이스 심화반과 후속 전문 과정까지 한 곳에서 운영하는 Electron 기반 Windows 교육 프로그램입니다. 현재 13개 과정, 70개 회차가 모두 실행 가능한 강의로 연결되어 있습니다.
 
 현재 앱 버전은 **2.0.0**이며, 제품명은 **VIBE STUDIO**입니다. 기초반은 프로그램 안에서 운영되는 첫 번째 정규 과정으로 유지됩니다.
 
@@ -80,8 +80,10 @@ git push origin v2.0.0
 ## 품질 검사
 
 ```bash
+npm run build:tracks
 npm run check
 npm run smoke:app
+npm run smoke:tracks
 ```
 
-`check`는 JavaScript 문법, 강의 매니페스트와 슬라이드 수를 검사합니다. `smoke:app`은 Electron 대시보드, 강사 자료실, 기초반 5강, 응용·수익화반과 AI 심화반 플레이어를 실제로 열어 확인합니다.
+`build:tracks`는 과정 매니페스트를 기준으로 64개 전문 강의와 24개 과정별 자료실 항목을 동기화합니다. `check`는 JavaScript 문법, 강의 매니페스트와 슬라이드 수를 검사합니다. `smoke:app`은 Electron 대시보드와 자료실을, `smoke:tracks`는 64개 공통 엔진 강의의 레이아웃과 인터랙션을 실제 Chromium에서 전수 검사합니다.

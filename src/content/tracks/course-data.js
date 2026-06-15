@@ -3,6 +3,8 @@ window.VIBE_TRACKS = {
     courseTitle: "바이브코딩 응용·수익화반",
     courseCode: "A01",
     family: "PRODUCT & BUSINESS",
+    visualMode: "product",
+    sourceLinks: [],
     theme: {
       bg: "#100b0a",
       surface: "#1b1311",
@@ -223,6 +225,12 @@ window.VIBE_TRACKS = {
     courseTitle: "AI 워크스페이스 심화반",
     courseCode: "X01",
     family: "AGENTIC WORKFLOW",
+    visualMode: "agent",
+    sourceLinks: [
+      ["MCP 공식 문서", "https://modelcontextprotocol.io/docs/getting-started/intro"],
+      ["OpenAI Codex 공식 문서", "https://developers.openai.com/codex"],
+      ["Claude Code 공식 문서", "https://code.claude.com/docs/en/overview"]
+    ],
     theme: {
       bg: "#080b13",
       surface: "#111827",

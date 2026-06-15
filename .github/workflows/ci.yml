@@ -26,10 +26,10 @@ jobs:
         run: npm ci
 
       - name: Build slide bundle
-        run: npm run build:slides
+        run: npm run build:tracks && npm run build:slides
 
-      - name: Verify generated bundle is committed
-        run: git diff --exit-code -- src/content/sessions/session-03-direction.bundle.js
+      - name: Verify generated course files are committed
+        run: git diff --exit-code -- src/content/course-manifest.json src/content/tracks src/content/sessions/session-03-direction.bundle.js
 
       - name: Run source checks
         run: npm run check

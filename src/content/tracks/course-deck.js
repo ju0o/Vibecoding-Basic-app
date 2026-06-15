@@ -9,6 +9,8 @@ if (!course || !lesson) {
 }
 
 Object.entries(course.theme).forEach(([key, value]) => document.documentElement.style.setProperty(`--${key}`, value));
+document.body.dataset.mode = course.visualMode || "system";
+document.body.dataset.track = courseKey;
 document.title = `${course.courseTitle} ${lessonIndex + 1}강 - ${lesson.title}`;
 
 const deck = document.getElementById("deck");
@@ -23,9 +25,14 @@ deck.innerHTML = `
       <p class="lead">${escapeHtml(lesson.subtitle)}</p>
       <p style="margin-top:26px;max-width:800px">${escapeHtml(lesson.objective)}</p>
     </div>
-    <div class="cover-orbit" aria-hidden="true">
+    <div class="cover-orbit mode-${escapeHtml(course.visualMode || "system")}" aria-hidden="true">
       <div class="ring r1"><i></i></div><div class="ring r2"><i></i></div>
       <div class="core">${course.courseCode}<br>${String(lessonIndex + 1).padStart(2, "0")}</div>
+      <div class="mode-stage">
+        ${lesson.nodes.map(([title], index) => `<span class="mode-node n${index + 1}">${escapeHtml(title)}</span>`).join("")}
+        <i class="mode-path p1"></i><i class="mode-path p2"></i><i class="mode-path p3"></i>
+      </div>
+      <div class="mode-caption">${escapeHtml(course.family)}</div>
       <div class="cover-code">${String(lessonIndex + 1).padStart(2, "0")}</div>
     </div>
   </section>
@@ -104,6 +111,7 @@ function showSlide(index) {
 document.getElementById("prev").addEventListener("click", () => showSlide(current - 1));
 document.getElementById("next").addEventListener("click", () => showSlide(current + 1));
 document.addEventListener("keydown", (event) => {
+  if (event.target.closest("button, input, textarea, select, a")) return;
   if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") showSlide(current + 1);
   if (event.key === "ArrowLeft" || event.key === "PageUp") showSlide(current - 1);
 });
@@ -119,7 +127,7 @@ document.querySelectorAll("[data-sequence]").forEach((button) => button.addEvent
   document.getElementById("sequence-label").textContent = `STEP ${String(index + 1).padStart(2, "0")}`;
   document.getElementById("sequence-title").textContent = lesson.steps[index][0];
   document.getElementById("sequence-copy").textContent = lesson.steps[index][1];
-  document.getElementById("sequence-fill").style.width = `${(index + 1) * 25}%`;
+  document.getElementById("sequence-fill").style.width = `${((index + 1) / lesson.steps.length) * 100}%`;
 }));
 
 document.querySelectorAll("[data-choice]").forEach((button) => button.addEventListener("click", () => {

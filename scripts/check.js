@@ -50,13 +50,13 @@ function checkManifest() {
         missing.push(`${session.id || session.title}: file 속성 없음`);
         continue;
       }
-      const target = path.join(root, 'src', 'content', session.file);
+      const target = path.join(root, 'src', 'content', session.file.split(/[?#]/)[0]);
       if (!fs.existsSync(target)) missing.push(session.file);
     }
   }
 
   for (const appendix of manifest.appendix || []) {
-    const target = path.join(root, 'src', 'content', appendix.file);
+    const target = path.join(root, 'src', 'content', appendix.file.split(/[?#]/)[0]);
     if (!fs.existsSync(target)) missing.push(appendix.file);
   }
 
