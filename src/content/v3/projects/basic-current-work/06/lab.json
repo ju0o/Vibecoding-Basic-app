@@ -1,0 +1,24 @@
+{
+  "courseId": "basic-current-work",
+  "lessonNumber": 6,
+  "title": "쇼케이스 및 Q&A",
+  "revision": "3.0.0-beta.2-review",
+  "status": "review",
+  "sceneId": "basic-current-work-06-showcase",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "발표 직전 인터넷 또는 배포 URL이 열리지 않음",
+    "trace": "network unavailable / live URL timeout",
+    "cause": "오프라인 대체 화면과 로컬 실행 준비가 없음",
+    "fix": "로컬 완성본, 캡처, 짧은 대체 시연 순서를 준비"
+  },
+  "deliverables": [
+    "5분 발표",
+    "피드백 기록",
+    "다음 개선 작업"
+  ]
+}

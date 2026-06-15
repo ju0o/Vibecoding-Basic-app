@@ -1,0 +1,24 @@
+{
+  "courseId": "codex",
+  "lessonNumber": 1,
+  "title": "App·CLI·IDE·Workspace·Sandbox",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "codex-01-workspace",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "Codex가 파일을 찾지 못함",
+    "trace": "path outside writable workspace",
+    "cause": "Workspace와 실제 프로젝트 위치가 다름",
+    "fix": "올바른 폴더를 Workspace로 열고 권한 범위를 확인"
+  },
+  "deliverables": [
+    "표면 선택 기준표",
+    "작업 계약",
+    "첫 검증된 변경"
+  ]
+}

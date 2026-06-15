@@ -1,0 +1,24 @@
+{
+  "courseId": "product",
+  "lessonNumber": 3,
+  "title": "UI·UX·신뢰·온보딩",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "product-03-browser",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "가입률은 높지만 첫 기능 사용률이 낮음",
+    "trace": "signup 68% / activation 11%",
+    "cause": "가입 이후 다음 행동과 빈 상태 안내가 없음",
+    "fix": "샘플 데이터, 한 단계 안내와 완료 피드백 추가"
+  },
+  "deliverables": [
+    "5장면 UX 흐름",
+    "상태·피드백 목록",
+    "동료 리뷰 기록"
+  ]
+}

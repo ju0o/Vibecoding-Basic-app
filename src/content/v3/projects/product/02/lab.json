@@ -1,0 +1,24 @@
+{
+  "courseId": "product",
+  "lessonNumber": 2,
+  "title": "MVP와 제품 구조",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "product-02-scope",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "매주 기능은 늘지만 데모가 끝까지 안 됨",
+    "trace": "12 screens / 0 complete journeys",
+    "cause": "화면 단위로 만들고 사용자 흐름을 연결하지 않음",
+    "fix": "핵심 행동의 시작부터 완료까지 세로 한 줄로 우선 완성"
+  },
+  "deliverables": [
+    "MVP 범위표",
+    "핵심 사용자 흐름",
+    "완료 시연 기준"
+  ]
+}

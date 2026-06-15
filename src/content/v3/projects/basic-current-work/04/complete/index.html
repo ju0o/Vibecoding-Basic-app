@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>바이브코딩 기초반 · 2기 V3 작업본 - 파일 구조 이해 - complete</title>
+  <style>
+    :root{color-scheme:dark;--accent:#d8ff66;font-family:Pretendard,"Malgun Gothic",sans-serif}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;color:#edf2f1;background:#0b1012;letter-spacing:0}
+    header{display:flex;justify-content:space-between;align-items:center;padding:22px 6vw;border-bottom:1px solid #263035}
+    header b{font-size:14px}header span{color:var(--accent);font:700 11px Consolas}
+    main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:24px;padding:6vh 6vw}
+    .hero,.panel{border:1px solid #2b363b;background:#11181b}.hero{min-height:520px;padding:48px}
+    small{color:var(--accent);font:800 10px Consolas}h1{max-width:780px;margin:22px 0 14px;font-size:clamp(36px,5vw,72px);line-height:1.02}
+    p{color:#9aa8ad;font-size:18px;line-height:1.65}.state{margin:36px 0;padding:20px;border-left:3px solid var(--accent);background:#172125}
+    .state b{display:block;margin-top:9px;font-size:22px}.state.error{border-color:#ff796c}.state.error b{color:#ff9a90}
+    button{min-height:48px;padding:0 20px;border:0;color:#101513;background:var(--accent);font-weight:850;cursor:pointer}
+    .panel{padding:24px}.panel h2{margin:0 0 20px;font-size:19px}.panel ol{display:grid;gap:7px;margin:0;padding:0;list-style:none}
+    .panel li{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:center;min-height:58px;padding:10px;border:1px solid #273136;color:#758388}
+    .panel li span{font:750 10px Consolas}.panel li.active{color:#edf2f1;border-color:color-mix(in srgb,var(--accent) 55%,#273136);background:color-mix(in srgb,var(--accent) 7%,transparent)}
+    footer{padding:18px 6vw;color:#657378;border-top:1px solid #263035;font-size:11px}
+    @media(max-width:800px){main{grid-template-columns:1fr}.hero{min-height:auto;padding:30px}}
+  </style>
+</head>
+<body data-variant="complete">
+  <header><b>VIBE STUDIO LAB</b><span>B02R · 3.0.0-beta.2-review</span></header>
+  <main>
+    <section class="hero">
+      <small>COMPLETE STATE · 검증 완료</small>
+      <h1>파일 구조 이해</h1>
+      <p>VS Code 파일 트리에서 수정 위치와 영향 범위를 찾고 작은 diff를 브라우저 결과와 연결합니다.</p>
+      <div id="result" class="state">
+        <span>현재 결과</span>
+        <b>개인 파일 지도 · 검토한 Git diff · 안전한 수정 기록</b>
+      </div>
+      <button id="run" type="button">요소 선택</button>
+    </section>
+    <aside class="panel">
+      <h2>실행 흐름</h2>
+      <ol>
+    <li data-step="0"><span>01</span><b>바꿀 화면 요소 지정</b></li>
+    <li data-step="1"><span>02</span><b>텍스트·파일 검색</b></li>
+    <li data-step="2"><span>03</span><b>파일 역할 확인</b></li>
+    <li data-step="3"><span>04</span><b>작은 diff 적용</b></li>
+    <li data-step="4"><span>05</span><b>브라우저와 Git 상태 검증</b></li></ol>
+    </aside>
+  </main>
+  <footer>Shared Button component updated · 전용 variant 또는 페이지 전용 범위로 수정</footer>
+  <script>
+    const steps = [...document.querySelectorAll('[data-step]')];
+    const result = document.getElementById('result');
+    let index = -1;
+    document.getElementById('run').addEventListener('click', () => {
+      index = Math.min(steps.length - 1, index + 1);
+      steps.forEach((step, stepIndex) => step.classList.toggle('active', stepIndex <= index));
+      const labels = ["바꿀 화면 요소 지정","텍스트·파일 검색","파일 역할 확인","작은 diff 적용","브라우저와 Git 상태 검증"];
+      if (document.body.dataset.variant === 'broken' && index >= 1) {
+        result.classList.add('error');
+        result.querySelector('b').textContent = "버튼 하나를 바꿨는데 모든 페이지 버튼이 변함";
+        return;
+      }
+      result.classList.remove('error');
+      result.querySelector('b').textContent = labels[index] || "개인 파일 지도 · 검토한 Git diff · 안전한 수정 기록";
+    });
+  </script>
+</body>
+</html>

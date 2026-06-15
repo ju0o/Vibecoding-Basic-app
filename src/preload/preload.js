@@ -27,6 +27,9 @@ contextBridge.exposeInMainWorld('vibeCodingApp', {
   // 사용자 데이터 저장/불러오기 (app userData 폴더)
   saveData: (key, value) => ipcRenderer.invoke('save-user-data', key, value),
   loadData: (key) => ipcRenderer.invoke('load-user-data', key),
+  exportData: () => ipcRenderer.invoke('export-user-data'),
+  importData: () => ipcRenderer.invoke('import-user-data'),
+  openContentPath: (relativePath) => ipcRenderer.invoke('open-content-path', relativePath),
 
   // 개발/패키징 여부
   isDev: () => ipcRenderer.invoke('is-dev'),

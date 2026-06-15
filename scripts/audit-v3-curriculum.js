@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const vm = require('vm');
 
 const root = path.join(__dirname, '..');
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'src/content/course-manifest.json'), 'utf-8'));
@@ -10,6 +11,12 @@ const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf-8')
 const freeze = JSON.parse(fs.readFileSync(path.join(root, 'docs/v3/basic-v2-freeze.json'), 'utf-8'));
 const sourceCatalog = JSON.parse(fs.readFileSync(path.join(root, 'src/content/sources/official-sources.json'), 'utf-8'));
 const indexHtml = fs.readFileSync(path.join(root, 'src/renderer/index.html'), 'utf-8');
+const courseDataContext = { window: {} };
+vm.runInNewContext(
+  fs.readFileSync(path.join(root, 'src/content/v3/course-data.js'), 'utf-8'),
+  courseDataContext
+);
+const v3CourseData = courseDataContext.window.VIBE_V3_COURSES;
 
 const failures = [];
 const pass = (condition, message) => {
@@ -24,7 +31,7 @@ function normalizeFrozenBuffer(buffer) {
   return buffer;
 }
 
-pass(pkg.version === '3.0.0-beta.1', 'package version is 3.0.0-beta.1');
+pass(pkg.version === '3.0.0-beta.2', 'package version is 3.0.0-beta.2');
 pass(manifest.defaultCourseId === 'basic-current', 'current cohort remains the default course');
 pass(manifest.studentCourseIds.length === 5, 'student mode has exactly five courses');
 pass(new Set(manifest.studentCourseIds).size === 5, 'student course ids are unique');
@@ -43,8 +50,10 @@ for (const [courseId, expected] of Object.entries(expectedCounts)) {
   pass(Boolean(course), `${courseId} exists`);
   if (!course) continue;
   pass(course.sessions.length === expected, `${courseId} has ${expected} lessons`);
-  pass((course.materials?.student || []).length === 5, `${courseId} has five student materials`);
-  pass((course.materials?.instructor || []).length === 5, `${courseId} has five instructor materials`);
+  const expectedStudent = courseId === 'basic-current' ? 7 : 6;
+  const expectedInstructor = courseId === 'basic-current' ? 8 : 7;
+  pass((course.materials?.student || []).length === expectedStudent, `${courseId} has ${expectedStudent} student materials`);
+  pass((course.materials?.instructor || []).length === expectedInstructor, `${courseId} has ${expectedInstructor} instructor materials`);
 }
 
 const preview = manifest.courses.find((course) => course.id === 'foundation-next');
@@ -55,6 +64,7 @@ pass(!preview.sessions.some((session) => /AI 이해|쇼케이스/.test(session.t
 const current = manifest.courses.find((course) => course.id === 'basic-current');
 pass(current.curriculumVersion === '2기-6주', 'current six-week cohort keeps its curriculum version');
 pass(current.sessions.some((session) => session.type === 'showcase'), 'current cohort still contains its showcase');
+pass(current.sessions.every((session) => session.revisions?.length === 2), 'current cohort has active and V3 work revisions');
 
 for (const record of freeze.files) {
   const filePath = path.join(root, record.file);
@@ -81,6 +91,30 @@ for (const course of v3Courses) {
     }
   }
 }
+
+const sceneIds = new Set();
+let sceneLessons = 0;
+for (const [courseId, course] of Object.entries(v3CourseData)) {
+  for (const [index, session] of course.sessions.entries()) {
+    sceneLessons += 1;
+    pass(Boolean(session.revision), `${courseId}-${index + 1} has a revision`);
+    pass(['review', 'ready'].includes(session.status), `${courseId}-${index + 1} has a production status`);
+    pass(Boolean(session.visualScene?.id), `${courseId}-${index + 1} has a visual scene`);
+    pass(session.visualScene?.type !== 'generic', `${courseId}-${index + 1} does not use a generic scene`);
+    if (sceneIds.has(session.visualScene?.id)) failures.push(`duplicate scene id: ${session.visualScene.id}`);
+    sceneIds.add(session.visualScene?.id);
+    pass(session.interactions?.controls?.join(',') === 'start,previous,next,pause,reset', `${courseId}-${index + 1} has manual controls`);
+    pass(session.scriptSlides?.length === 13, `${courseId}-${index + 1} has a 13-slide instructor script`);
+    for (const variant of ['starter', 'broken', 'complete']) {
+      const target = path.join(root, 'src/content', session.demoProject?.[variant] || '', 'index.html');
+      if (!fs.existsSync(target)) failures.push(`${courseId}-${index + 1} missing ${variant} lab`);
+    }
+    const fallback = path.join(root, 'src/content', session.fallbackMedia?.image || '');
+    if (!fs.existsSync(fallback)) failures.push(`${courseId}-${index + 1} missing fallback image`);
+  }
+}
+pass(sceneLessons === 34, '34 revised lessons have scene and teaching data');
+pass(sceneIds.size === 34, 'all 34 revised lessons have unique scene ids');
 
 const titles = new Map();
 for (const course of v3Courses) {
@@ -116,6 +150,7 @@ const summary = {
   courses: manifest.courses.length,
   studentCourses: manifest.studentCourseIds.length,
   v3Lessons: v3Courses.reduce((total, course) => total + course.sessions.length, 0),
+  revisedLessons: sceneLessons,
   sourceCount: Object.keys(sourceCatalog.sources).length,
   failures,
 };

@@ -1,0 +1,24 @@
+{
+  "courseId": "codex",
+  "lessonNumber": 3,
+  "title": "Skills·Plugins와 재사용 작업",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "codex-03-plugin",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "Plugin 업데이트 후 Skill이 보이지 않음",
+    "trace": "manifest cache unchanged",
+    "cause": "매니페스트·설치 캐시·버전 갱신 누락",
+    "fix": "구조 검증 후 버전과 설치 캐시를 갱신하고 재시작"
+  },
+  "deliverables": [
+    "Codex Skill",
+    "Plugin 패키지",
+    "테스트·업데이트 기록"
+  ]
+}

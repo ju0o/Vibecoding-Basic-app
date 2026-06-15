@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-product-08",
+  "private": true,
+  "version": "1.0.0",
+  "description": "SaaS팀은 실제 출시와 지표를, 외주팀은 안전한 납품과 포트폴리오 사례를 완성합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

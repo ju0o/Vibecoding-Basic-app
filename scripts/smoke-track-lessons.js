@@ -6,9 +6,20 @@ const path = require('path');
 
 const root = path.join(__dirname, '..');
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'src/content/course-manifest.json'), 'utf-8'));
-const sessions = manifest.courses
+const manifestSessions = manifest.courses
   .filter((course) => course.id !== 'basic-current')
   .flatMap((course) => course.sessions.map((session) => ({ courseId: course.id, session })));
+const current = manifest.courses.find((course) => course.id === 'basic-current');
+const currentWorkSessions = current.sessions.map((session, index) => ({
+  courseId: 'basic-current-work',
+  session: {
+    ...session,
+    id: `${session.id}-v3-work`,
+    file: session.revisions.find((revision) => revision.id === 'v3-work').file,
+  },
+  index,
+}));
+const sessions = [...manifestSessions, ...currentWorkSessions];
 const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
 app.whenReady().then(async () => {
@@ -51,7 +62,7 @@ app.whenReady().then(async () => {
           mode: document.body.dataset.mode || '',
           widthOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
           heightOverflow: document.documentElement.scrollHeight > document.documentElement.clientHeight + 1,
-          manualControls: ['live-start','live-next','live-pause','live-reset'].every((id) => Boolean(document.getElementById(id))),
+          manualControls: ['live-start','live-prev','live-next','live-pause','live-reset'].every((id) => Boolean(document.getElementById(id))),
           stageAdvanced: before !== afterStart && afterStart !== afterNext && afterReset.includes('READY'),
           buttons: document.querySelectorAll('button').length
         };

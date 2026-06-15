@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-product-05",
+  "private": true,
+  "version": "1.0.0",
+  "description": "같은 강의실에서 SaaS팀은 상태·회원·권한을, 외주팀은 범위·견적·승인 구조를 완성합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

@@ -34,13 +34,12 @@ jobs:
       - name: Create SHA-256 checksum
         shell: pwsh
         run: |
-          $exe = Get-ChildItem -Path release -Filter "*.exe" |
-            Where-Object { $_.Name -notmatch "Setup" } |
-            Select-Object -First 1
-          if (-not $exe) {
-            throw "Portable EXE was not generated."
-          }
           $version = node -p "require('./package.json').version"
+          $exePath = Join-Path "release" "VIBE STUDIO $version.exe"
+          if (-not (Test-Path -LiteralPath $exePath)) {
+            throw "Expected portable EXE was not generated: $exePath"
+          }
+          $exe = Get-Item -LiteralPath $exePath
           $releaseExe = Join-Path "release" "VIBE-STUDIO-$version.exe"
           Move-Item -LiteralPath $exe.FullName -Destination $releaseExe -Force
           $hash = Get-FileHash -Algorithm SHA256 -LiteralPath $releaseExe
@@ -63,8 +62,15 @@ jobs:
           if ($LASTEXITCODE -eq 0) {
             gh release upload $tag $assets --clobber --repo "${{ github.repository }}"
           } else {
-            gh release create $tag $assets `
-              --repo "${{ github.repository }}" `
-              --title "VIBE STUDIO $tag" `
-              --generate-notes
+            $arguments = @(
+              "release", "create", $tag
+            ) + $assets + @(
+              "--repo", "${{ github.repository }}",
+              "--title", "VIBE STUDIO $tag",
+              "--generate-notes"
+            )
+            if ($tag -match "-(beta|rc)") {
+              $arguments += "--prerelease"
+            }
+            gh @arguments
           }

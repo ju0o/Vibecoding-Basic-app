@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-claude-03",
+  "private": true,
+  "version": "1.0.0",
+  "description": "반복되는 한 업무를 호출 조건, 단계, 자료와 완료 검증을 가진 Claude Skill로 만듭니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

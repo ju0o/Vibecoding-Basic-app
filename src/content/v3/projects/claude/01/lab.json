@@ -1,0 +1,24 @@
+{
+  "courseId": "claude",
+  "lessonNumber": 1,
+  "title": "설치·터미널·세션·권한·저장소 탐색",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "claude-01-terminal",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "Claude가 관련 없는 저장소 파일을 탐색",
+    "trace": "working directory: user home",
+    "cause": "프로젝트 루트가 아닌 위치에서 시작",
+    "fix": "올바른 저장소 폴더로 이동해 새 세션 시작"
+  },
+  "deliverables": [
+    "저장소 지도",
+    "검토한 계획",
+    "첫 안전한 diff"
+  ]
+}

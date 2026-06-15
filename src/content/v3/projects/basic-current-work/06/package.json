@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-basic-current-work-06",
+  "private": true,
+  "version": "1.0.0",
+  "description": "프로젝트의 문제·핵심 흐름·직접 해결한 오류를 짧게 시연하고 다음 개선 한 가지를 정합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

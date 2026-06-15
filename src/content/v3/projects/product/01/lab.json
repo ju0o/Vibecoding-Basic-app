@@ -1,0 +1,25 @@
+{
+  "courseId": "product",
+  "lessonNumber": 1,
+  "title": "고객 문제와 팀 구성",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "product-01-team",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "회의는 길지만 결정이 남지 않음",
+    "trace": "Owner: none / deadline changed 3x",
+    "cause": "최종 결정자와 기록 형식이 없음",
+    "fix": "결정 Owner, Reviewer, 마감과 변경 로그를 계약서에 추가"
+  },
+  "deliverables": [
+    "팀 문제 선언문",
+    "역할 순환표",
+    "협업 계약서",
+    "개인 문제 정의"
+  ]
+}

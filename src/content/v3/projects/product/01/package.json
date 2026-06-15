@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-product-01",
+  "private": true,
+  "version": "1.0.0",
+  "description": "기능 아이디어를 고객의 반복 문제로 바꾸고 팀 역할과 의사결정 규칙을 정합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "courseId": "workflow",
+  "lessonNumber": 4,
+  "title": "Agent·팀·자동화·평가·복구",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "workflow-04-agent",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "여러 Agent가 같은 설정을 다르게 수정",
+    "trace": "merge conflict / owner duplicated",
+    "cause": "역할·파일·결정 소유권이 겹침",
+    "fix": "작업 계약과 반환 형식, 통합 Owner, 실패 격리 설정"
+  },
+  "deliverables": [
+    "Agent 시스템 설계도",
+    "평가 루브릭",
+    "비용·복구 운영표"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "courseId": "codex",
+  "lessonNumber": 5,
+  "title": "Subagents·Worktrees·리뷰·시각 QA",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "codex-05-team",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "각 브랜치는 통과하지만 합치면 UI가 깨짐",
+    "trace": "integration regression",
+    "cause": "개별 테스트만 있고 통합 시나리오가 없음",
+    "fix": "병합 후 전체 사용자 흐름과 스크린샷 회귀를 다시 실행"
+  },
+  "deliverables": [
+    "병렬 작업 계획",
+    "역할별 결과·증거",
+    "통합 리뷰 보고서"
+  ]
+}

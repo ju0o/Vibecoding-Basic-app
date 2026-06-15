@@ -33,3 +33,39 @@ jobs:
 
       - name: Run curriculum audit and source checks
         run: npm run audit:curriculum && npm run check
+
+  windows-qa:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build generated content
+        run: npm run build:v3 && npm run build:slides
+
+      - name: Capture offline fallback scenes
+        run: npm run capture:v3-fallbacks
+
+      - name: Run Windows Electron and print QA
+        run: npm run audit:curriculum && npm run check && npm run smoke:app && npm run smoke:tracks && npm run qa:print
+
+      - name: Verify generated files are committed
+        run: git diff --exit-code -- src/content/course-manifest.json src/content/v3/course-data.js src/content/v3/projects src/content/assets/v3/fallbacks src/content/sessions/session-03-direction.bundle.js
+
+      - name: Upload QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-v3-qa
+          path: |
+            artifacts/qa/
+            output/pdf/v3-qa/report.json

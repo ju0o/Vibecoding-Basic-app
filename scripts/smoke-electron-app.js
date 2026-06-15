@@ -22,6 +22,9 @@ ipcMain.handle('toggle-fullscreen', () => false);
 ipcMain.handle('is-dev', () => true);
 ipcMain.handle('load-user-data', () => null);
 ipcMain.handle('save-user-data', () => true);
+ipcMain.handle('export-user-data', () => ({ ok: true, filePath: 'smoke-backup.json' }));
+ipcMain.handle('import-user-data', () => ({ ok: false, canceled: true }));
+ipcMain.handle('open-content-path', () => ({ ok: true }));
 
 app.whenReady().then(async () => {
   const win = new BrowserWindow({
@@ -35,6 +38,7 @@ app.whenReady().then(async () => {
       nodeIntegration: false,
       sandbox: false,
       webviewTag: true,
+      partition: `vibe-smoke-${Date.now()}`,
     },
   });
   const errors = [];
@@ -45,7 +49,7 @@ app.whenReady().then(async () => {
 
   try {
     await win.loadFile(path.join(root, 'src/renderer/index.html'));
-    await wait(900);
+    await wait(1100);
 
     const student = await win.webContents.executeJavaScript(`
       (() => ({
@@ -70,7 +74,8 @@ app.whenReady().then(async () => {
       (() => ({
         courses: document.querySelectorAll('#course-list .course-button').length,
         previewCourses: document.querySelectorAll('#course-list .preview-flag').length,
-        instructorTab: !document.querySelector('[data-tab="instructor"]').classList.contains('hidden')
+        instructorTab: !document.querySelector('[data-tab="instructor"]').classList.contains('hidden'),
+        labsTab: !document.querySelector('[data-tab="labs"]').classList.contains('hidden')
       }))()
     `);
 
@@ -92,15 +97,21 @@ app.whenReady().then(async () => {
       document.querySelector('[data-session="foundation-next-01"]').click();
       document.querySelector('#btn-open-lesson').click();
     `);
-    await wait(900);
+    await wait(1800);
     const player = await win.webContents.executeJavaScript(`
       (async () => {
         const webview = document.querySelector('#lecture-webview');
-        const inner = await webview.executeJavaScript(\`({
-          slides: document.querySelectorAll('.slide').length,
-          activeSlides: document.querySelectorAll('.slide.active').length,
-          controls: ['live-start','live-next','live-pause','live-reset'].every((id) => Boolean(document.getElementById(id)))
-        })\`);
+        let inner;
+        try {
+          inner = await webview.executeJavaScript(\`({
+            slides: document.querySelectorAll('.slide').length,
+            activeSlides: document.querySelectorAll('.slide.active').length,
+            controls: ['live-start','live-prev','live-next','live-pause','live-reset'].every((id) => Boolean(document.getElementById(id))),
+            scene: document.querySelector('[data-scene-id]')?.dataset.sceneId || ''
+          })\`);
+        } catch (error) {
+          inner = { slides: 0, activeSlides: 0, controls: false, scene: '', error: error.message };
+        }
         return {
           open: !document.querySelector('#player').classList.contains('hidden'),
           loadingHidden: document.querySelector('#player-loading').classList.contains('hidden'),
@@ -134,14 +145,16 @@ app.whenReady().then(async () => {
       && instructor.courses === 6
       && instructor.previewCourses === 1
       && instructor.instructorTab
+      && instructor.labsTab
       && materials.title.includes('다음 기수')
-      && materials.rows === 5
+      && materials.rows === 6
       && materials.detail.includes('A4')
       && player.open
       && player.loadingHidden
       && player.inner.slides === 13
       && player.inner.activeSlides === 1
       && player.inner.controls
+      && player.inner.scene
       && command.open
       && command.items > 20
       && errors.length === 0;

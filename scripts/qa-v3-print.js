@@ -9,7 +9,6 @@ const manifest = JSON.parse(fs.readFileSync(path.join(root, 'src/content/course-
 const outputDir = path.join(root, 'output', 'pdf', 'v3-qa');
 const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 const targets = manifest.courses
-  .filter((course) => course.id !== 'basic-current')
   .flatMap((course) => ['student', 'instructor'].flatMap((audience) =>
     (course.materials?.[audience] || [])
       .filter((material) => material.file.startsWith('v3/material.html'))

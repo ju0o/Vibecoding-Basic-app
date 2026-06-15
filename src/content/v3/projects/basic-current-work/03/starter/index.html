@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>바이브코딩 기초반 · 2기 V3 작업본 - 개발 용어 이해 - starter</title>
+  <style>
+    :root{color-scheme:dark;--accent:#d8ff66;font-family:Pretendard,"Malgun Gothic",sans-serif}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;color:#edf2f1;background:#0b1012;letter-spacing:0}
+    header{display:flex;justify-content:space-between;align-items:center;padding:22px 6vw;border-bottom:1px solid #263035}
+    header b{font-size:14px}header span{color:var(--accent);font:700 11px Consolas}
+    main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:24px;padding:6vh 6vw}
+    .hero,.panel{border:1px solid #2b363b;background:#11181b}.hero{min-height:520px;padding:48px}
+    small{color:var(--accent);font:800 10px Consolas}h1{max-width:780px;margin:22px 0 14px;font-size:clamp(36px,5vw,72px);line-height:1.02}
+    p{color:#9aa8ad;font-size:18px;line-height:1.65}.state{margin:36px 0;padding:20px;border-left:3px solid var(--accent);background:#172125}
+    .state b{display:block;margin-top:9px;font-size:22px}.state.error{border-color:#ff796c}.state.error b{color:#ff9a90}
+    button{min-height:48px;padding:0 20px;border:0;color:#101513;background:var(--accent);font-weight:850;cursor:pointer}
+    .panel{padding:24px}.panel h2{margin:0 0 20px;font-size:19px}.panel ol{display:grid;gap:7px;margin:0;padding:0;list-style:none}
+    .panel li{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:center;min-height:58px;padding:10px;border:1px solid #273136;color:#758388}
+    .panel li span{font:750 10px Consolas}.panel li.active{color:#edf2f1;border-color:color-mix(in srgb,var(--accent) 55%,#273136);background:color-mix(in srgb,var(--accent) 7%,transparent)}
+    footer{padding:18px 6vw;color:#657378;border-top:1px solid #263035;font-size:11px}
+    @media(max-width:800px){main{grid-template-columns:1fr}.hero{min-height:auto;padding:30px}}
+  </style>
+</head>
+<body data-variant="starter">
+  <header><b>VIBE STUDIO LAB</b><span>B02R · 3.0.0-beta.2-review</span></header>
+  <main>
+    <section class="hero">
+      <small>STARTER STATE · 시작 준비</small>
+      <h1>개발 용어 이해</h1>
+      <p>사용자 행동이 프론트엔드·API·백엔드·DB를 지나 돌아오는 과정을 보고 문제 위치를 말할 수 있습니다.</p>
+      <div id="result" class="state">
+        <span>현재 결과</span>
+        <b>버튼을 눌러 첫 상태를 확인하세요.</b>
+      </div>
+      <button id="run" type="button">주문 클릭</button>
+    </section>
+    <aside class="panel">
+      <h2>실행 흐름</h2>
+      <ol>
+    <li data-step="0"><span>01</span><b>브라우저에서 행동</b></li>
+    <li data-step="1"><span>02</span><b>프론트엔드 요청 생성</b></li>
+    <li data-step="2"><span>03</span><b>API 전달</b></li>
+    <li data-step="3"><span>04</span><b>백엔드 규칙 처리</b></li>
+    <li data-step="4"><span>05</span><b>DB 저장과 응답</b></li></ol>
+    </aside>
+  </main>
+  <footer>POST /orders 200, DB write skipped · 저장 완료 응답 이후에만 성공 UI 표시</footer>
+  <script>
+    const steps = [...document.querySelectorAll('[data-step]')];
+    const result = document.getElementById('result');
+    let index = -1;
+    document.getElementById('run').addEventListener('click', () => {
+      index = Math.min(steps.length - 1, index + 1);
+      steps.forEach((step, stepIndex) => step.classList.toggle('active', stepIndex <= index));
+      const labels = ["브라우저에서 행동","프론트엔드 요청 생성","API 전달","백엔드 규칙 처리","DB 저장과 응답"];
+      if (document.body.dataset.variant === 'broken' && index >= 1) {
+        result.classList.add('error');
+        result.querySelector('b').textContent = "완료 알림은 뜨지만 주문 목록에 없음";
+        return;
+      }
+      result.classList.remove('error');
+      result.querySelector('b').textContent = labels[index] || "버튼을 눌러 첫 상태를 확인하세요.";
+    });
+  </script>
+</body>
+</html>

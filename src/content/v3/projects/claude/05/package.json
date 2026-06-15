@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-claude-05",
+  "private": true,
+  "version": "1.0.0",
+  "description": "독립 작업만 Subagent와 Agent Team으로 분리하고 반환 형식, Reviewer와 Human Lead를 운영합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

@@ -90,14 +90,39 @@ function writePreviewPng(filePath) {
 
 function cleanReleaseDirectory() {
   fs.mkdirSync(releaseDir, { recursive: true });
+  const archiveDir = path.join(root, 'output', 'release-archive');
+  fs.mkdirSync(archiveDir, { recursive: true });
+  const allowedFiles = new Set([
+    executableName,
+    'README-현장실행가이드.md',
+    'CHECKLIST-강의전점검.md',
+    'SHA256SUMS.txt',
+  ]);
+  const allowedDirectories = new Set(['assets']);
   const unpacked = path.resolve(releaseDir, 'win-unpacked');
   if (unpacked.startsWith(path.resolve(releaseDir) + path.sep) && fs.existsSync(unpacked)) {
     fs.rmSync(unpacked, { recursive: true, force: true });
   }
   for (const entry of fs.readdirSync(releaseDir, { withFileTypes: true })) {
-    if (entry.isFile() && (/\.nsis\.7z$|\.blockmap$|latest.*\.yml$/i.test(entry.name))) {
-      fs.rmSync(path.join(releaseDir, entry.name), { force: true });
+    const source = path.join(releaseDir, entry.name);
+    if (entry.isDirectory()) {
+      if (allowedDirectories.has(entry.name)) continue;
+      const destination = path.join(archiveDir, entry.name);
+      fs.rmSync(destination, { recursive: true, force: true });
+      fs.renameSync(source, destination);
+      continue;
     }
+    if (allowedFiles.has(entry.name)) continue;
+    if (/\.nsis\.7z$|\.blockmap$|latest.*\.yml$|^builder-.*\.(yml|yaml)$/i.test(entry.name)) {
+      fs.rmSync(source, { force: true });
+      continue;
+    }
+    const parsed = path.parse(entry.name);
+    let destination = path.join(archiveDir, entry.name);
+    if (fs.existsSync(destination)) {
+      destination = path.join(archiveDir, `${parsed.name}-${Date.now()}${parsed.ext}`);
+    }
+    fs.renameSync(source, destination);
   }
 }
 
@@ -120,8 +145,14 @@ function writeReleaseDocs() {
 
 ## 강의와 자료
 - 과정 선택 후 \`강의 / 수강생 자료 / 강사 자료\` 탭을 사용합니다.
+- 강사 모드의 \`실습 파일\` 탭에서 starter·broken·complete를 미리 보거나 문서 폴더로 추출합니다.
 - 강사 자료와 다음 기수 4주 개편본은 \`강사 모드\`에서만 보입니다.
 - 자료를 열면 상단 인쇄 또는 PDF 저장 버튼을 사용할 수 있습니다.
+- 현재 2기 회차는 \`현재 운영본 / V3 개편 작업본\` 중 하나를 검수하고 회차별로 운영본에 승격할 수 있습니다.
+
+## 백업과 복원
+- 화면 설정에서 기수 일정, 메모, 진행률과 활성 강의 버전을 ZIP 또는 JSON으로 백업합니다.
+- 복원 후 앱이 다시 열리면 백업한 운영 상태가 적용됩니다.
 
 ## 발표
 - 전체화면: \`Ctrl + F\`
@@ -156,11 +187,13 @@ function writeReleaseDocs() {
 - [ ] Claude Code Professional 6강 실행
 - [ ] Codex Professional 6강 실행
 - [ ] 시작·다음·일시정지·초기화
+- [ ] 현재 2기 운영본·V3 작업본 전환과 승격
+- [ ] 실습 파일 starter·broken·complete 실행
 - [ ] 오류 복구·타이머·다음 강의 화면
 
 ## 자료
-- [ ] 선택 과정의 수강생 자료 5종
-- [ ] 선택 과정의 강사 자료 5종
+- [ ] 선택 과정의 수강생 자료 6종
+- [ ] 선택 과정의 강사 자료 7종
 - [ ] A4 인쇄와 PDF 저장
 - [ ] 밝은 배경, 글자 대비와 페이지 분할
 
@@ -169,6 +202,7 @@ function writeReleaseDocs() {
 - [ ] 1280×720 또는 1920×1080
 - [ ] 전체화면과 Esc
 - [ ] 판서와 발표자 메모
+- [ ] ZIP/JSON 백업과 복원
 - [ ] 빔프로젝터 화면비와 스피커
 `, 'utf-8');
 
@@ -176,26 +210,28 @@ function writeReleaseDocs() {
 
 ## 버전
 - 앱: ${version}
-- 현재 운영본: 기초반 2기 6주, 파일 해시 동결
+- 현재 운영본: 기초반 2기 6주, 활성 파일 해시 보호와 회차별 V3 작업본
 - 학생 공개 과정: 5개
 - 강사 전용 미리보기: 다음 기수 기초반 4주
-- 신규 V3 회차: 28개
+- V3 개편 회차: 현재 2기 작업본 6개 + 신규 과정 28개
 
 ## 구현
 - 카드 카탈로그를 3단 Curriculum Studio로 교체
 - 강사 모드와 과정별 자료 탭
 - Ctrl+K 과정·회차·자료 검색
-- 13장 공통 강의 엔진과 발표자 수동 진행
-- 학생 5종·강사 5종 자료 엔진
+- 8개 장면군과 34개 고유 scene id를 가진 수동 시뮬레이션 레지스트리
+- 회차별 starter·broken·complete 실행 실습 패키지
+- 학생 6종·강사 7종 자료 엔진과 13장별 상세 대본
+- 회차별 운영본 승격·복구, 실습 파일 추출, ZIP/JSON 백업
 - 공식 출처 39개 갱신
-- A4 PDF 45종 자동 QA
+- A4 PDF 65종 자동 QA
 
 ## 검증
 - V2 동결 파일 13개 해시 일치
-- 1280×720, 1920×1080 Electron 스모크 통과
-- 신규 회차 28개 전수 스모크 통과
+- 1280×720, 1366×768, 1920×1080 Electron 스모크 통과
+- 현재 작업본 포함 34개 회차 전수 스모크 통과
 - 공식 출처 39개 응답 확인
-- A4 자료 45종 페이지 분할 검사 통과
+- A4 자료 65종 페이지 분할 검사 통과
 
 ## 산출물
 - \`release/${executableName}\`

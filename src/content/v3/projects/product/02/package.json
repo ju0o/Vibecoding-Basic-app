@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-product-02",
+  "private": true,
+  "version": "1.0.0",
+  "description": "팀과 개인 프로젝트에서 4주 안에 검증할 핵심 행동과 최소 제품 범위를 정합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

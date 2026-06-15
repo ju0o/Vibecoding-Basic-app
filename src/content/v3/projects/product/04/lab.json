@@ -1,0 +1,24 @@
+{
+  "courseId": "product",
+  "lessonNumber": 4,
+  "title": "가격·수익모델·검증",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "product-04-pricing",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "사용자는 늘지만 사용할수록 손실 증가",
+    "trace": "revenue 0 / model cost +38%",
+    "cause": "사용량 비용과 무료 한도를 설계하지 않음",
+    "fix": "원가 추정, 사용량 제한, 유료 전환 조건을 함께 설계"
+  },
+  "deliverables": [
+    "가격·원가 가설",
+    "결제 상태표",
+    "트랙 선택서"
+  ]
+}

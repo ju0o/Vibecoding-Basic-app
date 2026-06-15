@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-claude-04",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Skill과 설정을 Plugin으로 묶고 MCP Tool과 Hook을 연결해 외부 서비스를 안전하게 사용합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

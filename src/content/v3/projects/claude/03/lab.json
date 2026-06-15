@@ -1,0 +1,24 @@
+{
+  "courseId": "claude",
+  "lessonNumber": 3,
+  "title": "Skills와 반복 작업 표준화",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "claude-03-skill",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "관련 없는 요청에도 Skill이 활성화",
+    "trace": "description matched broad term",
+    "cause": "설명과 경계가 너무 넓음",
+    "fix": "명확한 Trigger·비사용 조건과 한 책임으로 축소"
+  },
+  "deliverables": [
+    "실행 가능한 Skill",
+    "정상·실패 테스트",
+    "버전 기록"
+  ]
+}

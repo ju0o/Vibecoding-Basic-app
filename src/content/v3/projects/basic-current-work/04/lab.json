@@ -1,0 +1,24 @@
+{
+  "courseId": "basic-current-work",
+  "lessonNumber": 4,
+  "title": "파일 구조 이해",
+  "revision": "3.0.0-beta.2-review",
+  "status": "review",
+  "sceneId": "basic-current-work-04-ide",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "버튼 하나를 바꿨는데 모든 페이지 버튼이 변함",
+    "trace": "Shared Button component updated",
+    "cause": "공용 컴포넌트 영향 범위를 확인하지 않음",
+    "fix": "전용 variant 또는 페이지 전용 범위로 수정"
+  },
+  "deliverables": [
+    "개인 파일 지도",
+    "검토한 Git diff",
+    "안전한 수정 기록"
+  ]
+}

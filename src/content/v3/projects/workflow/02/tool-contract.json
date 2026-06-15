@@ -1,0 +1,11 @@
+{
+  "scope": "lesson-project",
+  "permissions": [
+    "read"
+  ],
+  "approvalRequiredFor": [
+    "write",
+    "external-send"
+  ],
+  "audit": true
+}

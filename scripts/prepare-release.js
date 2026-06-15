@@ -6,6 +6,23 @@ const path = require('path');
 const root = path.join(__dirname, '..');
 const buildDir = path.join(root, 'build');
 const iconPath = path.join(buildDir, 'icon.ico');
+const releaseDir = path.join(root, 'release');
+
+function cleanGeneratedReleaseFiles() {
+  fs.mkdirSync(releaseDir, { recursive: true });
+  const allowedDirectories = new Set(['assets']);
+  for (const entry of fs.readdirSync(releaseDir, { withFileTypes: true })) {
+    const target = path.resolve(releaseDir, entry.name);
+    if (!target.startsWith(path.resolve(releaseDir) + path.sep)) continue;
+    if (entry.isDirectory()) {
+      if (!allowedDirectories.has(entry.name)) fs.rmSync(target, { recursive: true, force: true });
+      continue;
+    }
+    if (/\.exe$|\.blockmap$|\.yml$|\.nsis\.7z$|^SHA256SUMS\.txt$|^README-|^CHECKLIST-/i.test(entry.name)) {
+      fs.rmSync(target, { force: true });
+    }
+  }
+}
 
 function clamp(value, min = 0, max = 255) {
   return Math.max(min, Math.min(max, Math.round(value)));
@@ -118,6 +135,8 @@ function writeIco(filePath) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   fs.writeFileSync(filePath, Buffer.concat([header, entry, image]));
 }
+
+cleanGeneratedReleaseFiles();
 
 if (fs.existsSync(iconPath)) {
   console.log(`✓ brand icon exists: ${path.relative(root, iconPath)}`);

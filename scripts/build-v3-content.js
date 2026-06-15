@@ -48,7 +48,7 @@ function preserveV2Sources() {
     writeIfChanged(freezePath, `${JSON.stringify({
       label: '기초반 2기 6주 운영본',
       frozenAt: '2026-06-16',
-      note: 'V3 개발 중 이 파일들은 수정하지 않는다.',
+      note: '현재 활성 운영본은 해시로 보호한다. V3 개편은 별도 작업본에서 검수 후 회차별로 승격한다.',
       hashMode: 'text-lf-normalized',
       files,
     }, null, 2)}\n`);
@@ -580,6 +580,181 @@ const curricula = {
   },
 };
 
+curricula['basic-current-work'] = {
+  title: '바이브코딩 기초반 · 2기 V3 작업본',
+  shortTitle: '기초반 2기 작업본',
+  code: 'B02R',
+  family: '기초 운영 개편',
+  level: 'REVIEW',
+  color: '#d8ff66',
+  visualMode: 'foundation',
+  description: '현재 운영본을 유지하면서 회차별 검수와 승격을 위해 제작하는 V3 작업본입니다.',
+  route: 'AI 도구 → 바이브코딩 → 작동 구조 → 파일 구조 → 배포·보안 → 쇼케이스',
+  outcomes: ['프로젝터 가독성', '수동 시연', '오프라인 대체자료', '회차별 승격'],
+  sessions: [
+    detail({
+      title: 'AI는 도구다',
+      subtitle: '목적에 맞는 AI를 선택하고 결과를 검증하는 법',
+      module: 'CURRENT · 01',
+      objective: '텍스트·이미지·코딩·영상 AI가 같은 요청을 서로 다른 결과로 바꾸는 장면을 보고 도구 선택 기준을 이해합니다.',
+      concepts: [['생성 AI', '입력에서 새로운 텍스트·이미지·코드·영상을 만듭니다.'], ['특화 도구', '같은 AI라도 강점과 출력 형태가 다릅니다.'], ['프롬프트', '원하는 결과와 제약을 전달하는 작업 지시입니다.'], ['검증', 'AI 결과를 사람이 확인하고 다음 요청을 정합니다.']],
+      sequence: ['해결할 문제를 한 문장으로 정의', '텍스트 AI로 구조 정리', '이미지 AI로 시각 결과 생성', '코딩 AI로 작동 결과 제작', '결과 비교 후 다음 도구 선택'],
+      demo: { type: 'ai-landscape', title: '하나의 아이디어가 서로 다른 AI 결과로 확장되는 장면', stages: ['문제 입력', '텍스트 설계', '이미지 결과', '코드 결과', '영상 결과', '사람 검증'] },
+      compare: { bad: ['도구 이름만 외움', '첫 결과를 정답으로 사용', '목표 없이 여러 AI 이동'], good: ['결과 형태로 도구 선택', '비교·수정·검증', '한 작업의 다음 단계와 연결'] },
+      decisions: [['가장 유명한 AI 하나면 모든 작업에 충분하다', '아님', '출력과 작업 방식에 따라 도구를 선택합니다.'], ['AI 결과를 실제 화면과 파일로 검증한다', '좋음', '그럴듯함과 작동을 구분할 수 있습니다.'], ['좋은 결과가 나올 때까지 질문만 길게 만든다', '주의', '작은 결과를 확인하며 요청을 조정합니다.']],
+      error: { symptom: '설명은 그럴듯하지만 실제 결과가 요구와 다름', trace: 'output accepted without verification', cause: '완료 기준과 검증 장면이 없음', fix: '예상 결과·제약·확인 방법을 추가하고 작은 출력부터 비교' },
+      practice: '자신의 프로젝트 아이디어를 텍스트·이미지·코딩 작업으로 나누고 사용할 AI와 검증 방법을 적습니다.',
+      deliverables: ['AI 작업 분해표', '도구 선택 이유', '검증 질문 세 가지'],
+    }),
+    detail({
+      title: '바이브코딩, 우리는 코딩을 할 줄 모른다',
+      subtitle: '설계 AI · AI IDE · 터미널 · 브라우저',
+      module: 'CURRENT · 02',
+      objective: '네 작업대를 순환하며 첫 프로젝트를 만들고 브라우저 결과를 보고 다시 수정하는 흐름을 익힙니다.',
+      concepts: [['설계 AI', '만들고 싶은 것을 질문과 작업 순서로 정리합니다.'], ['AI IDE', '프로젝트 파일을 생성하고 수정합니다.'], ['터미널', '설치와 실행 상태를 확인합니다.'], ['브라우저', '실제 사용자가 보는 결과를 검증합니다.']],
+      sequence: ['아이디어 설명', '완료 장면 합의', 'AI IDE에 작업 전달', '개발 서버 실행', '브라우저 확인과 수정 반복'],
+      demo: { type: 'workspace', title: '요청이 네 작업대를 순환하며 결과가 되는 장면', stages: ['설계', '파일 생성', '실행', '브라우저', '피드백', '재수정'] },
+      compare: { bad: ['한 번에 전체 완성 요청', '오류를 닫고 다시 생성', '결과 확인 없이 다음 기능'], good: ['작은 완료 기준', '오류를 복사해 질문', '브라우저 확인 후 다음 요청'] },
+      decisions: [['AI IDE가 명령을 실행하면 확인하지 않아도 된다', '주의', '명령 목적과 실행 위치는 알아야 합니다.'], ['한 도구의 기본 흐름부터 익힌다', '좋음', '도구 비교보다 제작 반복을 먼저 배웁니다.'], ['프로젝트가 안 되면 새 폴더에서 다시 만든다', '위험', '오류와 마지막 정상 상태를 먼저 확인합니다.']],
+      error: { symptom: '개발 서버가 시작되지 않음', trace: 'npm ERR! missing script: dev', cause: '프로젝트 폴더 또는 실행 명령이 다름', fix: '현재 경로와 package.json scripts를 확인해 올바른 명령 실행' },
+      practice: '작은 사이트를 만들고 텍스트·색상·버튼 동작을 한 번씩 수정합니다.',
+      deliverables: ['실행되는 로컬 프로젝트', '첫 작업 요청서', '수정 전후 캡처'],
+    }),
+    detail({
+      title: '개발 용어 이해',
+      subtitle: '화면 · 처리 · 저장 · 응답',
+      module: 'CURRENT · 03',
+      objective: '사용자 행동이 프론트엔드·API·백엔드·DB를 지나 돌아오는 과정을 보고 문제 위치를 말할 수 있습니다.',
+      concepts: [['프론트엔드', '사용자가 보고 누르는 실제 화면입니다.'], ['백엔드', '권한과 업무 규칙을 처리합니다.'], ['API', '기능 사이에 요청과 응답을 전달합니다.'], ['데이터베이스', '회원·게시글·상품·주문 상태를 저장합니다.']],
+      sequence: ['브라우저에서 행동', '프론트엔드 요청 생성', 'API 전달', '백엔드 규칙 처리', 'DB 저장과 응답'],
+      demo: { type: 'request', title: '주문 버튼을 누른 데이터가 다녀오는 왕복 여행', stages: ['주문 클릭', '권한 확인', '재고 확인', '결제 승인', '주문 저장', '완료 응답'] },
+      compare: { bad: ['화면만 보이면 완성', '실패 상태 없음', '저장 확인 안 함'], good: ['로딩·성공·실패 UI', '처리 규칙 확인', '새로고침 후 데이터 확인'] },
+      decisions: [['UI가 예쁘면 기능도 완성된 것이다', '아님', '화면과 실제 처리는 별개입니다.'], ['문제 위치를 화면·처리·저장으로 나눈다', '좋음', 'AI에게 더 정확히 요청할 수 있습니다.'], ['오류 메시지는 사용자에게 숨긴다', '주의', '친절한 안내와 내부 로그가 모두 필요합니다.']],
+      error: { symptom: '완료 알림은 뜨지만 주문 목록에 없음', trace: 'POST /orders 200, DB write skipped', cause: '화면 성공과 저장 성공이 연결되지 않음', fix: '저장 완료 응답 이후에만 성공 UI 표시' },
+      practice: '프로젝트 핵심 버튼 하나를 화면·처리·저장·응답으로 나누어 흐름도를 작성합니다.',
+      deliverables: ['기능 흐름도', '문제 위치 판단표', 'AI 수정 요청'],
+    }),
+    detail({
+      title: '파일 구조 이해',
+      subtitle: '파일 트리 · 코드 · Diff · 미리보기',
+      module: 'CURRENT · 04',
+      objective: 'VS Code 파일 트리에서 수정 위치와 영향 범위를 찾고 작은 diff를 브라우저 결과와 연결합니다.',
+      concepts: [['src', '직접 만드는 화면과 기능 코드가 모입니다.'], ['컴포넌트', '여러 화면에서 재사용하는 UI 단위입니다.'], ['설정파일', '실행 명령과 프로젝트 규칙을 설명합니다.'], ['Git Diff', '실제로 바뀐 줄과 영향 범위를 보여줍니다.']],
+      sequence: ['바꿀 화면 요소 지정', '텍스트·파일 검색', '파일 역할 확인', '작은 diff 적용', '브라우저와 Git 상태 검증'],
+      demo: { type: 'ide', title: '버튼 한 줄의 수정이 브라우저 화면에 도착하는 장면', stages: ['요소 선택', '파일 검색', '코드 위치', 'Diff 검토', '미리보기', 'Git 확인'] },
+      compare: { bad: ['프로젝트 전체 재작성', 'node_modules 수정', '모든 변경 승인'], good: ['관련 파일만 수정', 'src와 설정 구분', 'diff·브라우저·Git 확인'] },
+      decisions: [['node_modules 안의 파일을 직접 고친다', '아님', '재설치하면 사라지는 외부 패키지입니다.'], ['공용 컴포넌트의 사용처를 확인한다', '좋음', '다른 화면에 미치는 영향을 예상합니다.'], ['작동하면 diff는 볼 필요가 없다', '위험', '원치 않는 변경이 섞일 수 있습니다.']],
+      error: { symptom: '버튼 하나를 바꿨는데 모든 페이지 버튼이 변함', trace: 'Shared Button component updated', cause: '공용 컴포넌트 영향 범위를 확인하지 않음', fix: '전용 variant 또는 페이지 전용 범위로 수정' },
+      practice: '프로젝트 요소 하나를 검색해 관련 파일, 공용 여부, 수정 전후 diff를 기록합니다.',
+      deliverables: ['개인 파일 지도', '검토한 Git diff', '안전한 수정 기록'],
+    }),
+    detail({
+      title: '배포와 보안 그리고 데이터',
+      subtitle: 'GitHub · 배포 · 환경변수 · 권한',
+      module: 'CURRENT · 05',
+      objective: '코드를 저장소에 기록하고 비밀값을 분리한 뒤 공개 URL로 배포하고 오류를 복구합니다.',
+      concepts: [['GitHub', '코드와 변경 기록을 보관합니다.'], ['배포', '내 컴퓨터의 프로젝트를 인터넷 서비스로 공개합니다.'], ['환경변수', 'API 키와 설정을 코드에서 분리합니다.'], ['데이터 권한', '사용자가 읽고 쓸 수 있는 범위를 제한합니다.']],
+      sequence: ['비밀값과 gitignore 점검', 'commit과 push', '배포 서비스 연결', '환경변수와 권한 설정', 'URL·로그·재배포 검증'],
+      demo: { type: 'deploy', title: '내 컴퓨터의 프로젝트가 실제 사용자에게 전달되는 과정', stages: ['LOCAL', 'COMMIT', 'GITHUB', 'BUILD', 'ENV', 'LIVE URL'] },
+      compare: { bad: ['키를 코드에 입력', 'DB 전체 허용', '배포 성공 화면만 확인'], good: ['환경변수와 gitignore', '사용자별 최소 권한', 'URL·로그·모바일 검증'] },
+      decisions: [['프론트엔드 환경변수는 모두 비밀이다', '아님', '브라우저에 전달되는 값은 볼 수 있습니다.'], ['노출된 키는 즉시 폐기하고 재발급한다', '좋음', 'Git 기록 삭제만으로 부족합니다.'], ['테스트 권한을 운영에서도 유지한다', '위험', '배포 전에 권한 규칙을 작성합니다.']],
+      error: { symptom: '로컬에서는 되지만 배포 URL에서 API 오류', trace: '401 Unauthorized / ENV undefined', cause: '배포 환경변수 누락 또는 권한 설정 차이', fix: '배포 환경변수와 권한 등록 후 새 빌드하고 로그 검증' },
+      practice: '프로젝트를 GitHub에 저장하고 비밀값·권한을 점검한 뒤 공개 URL로 배포합니다.',
+      deliverables: ['GitHub 저장소', '공개 배포 URL', '보안·재배포 점검표'],
+    }),
+    detail({
+      title: '쇼케이스 및 Q&A',
+      subtitle: '시연 · 피드백 · 다음 단계',
+      module: 'CURRENT · 06',
+      objective: '프로젝트의 문제·핵심 흐름·직접 해결한 오류를 짧게 시연하고 다음 개선 한 가지를 정합니다.',
+      concepts: [['문제', '누구의 어떤 불편을 해결하는지 설명합니다.'], ['핵심 시연', '가장 중요한 사용자 행동을 끝까지 보여줍니다.'], ['증거', 'URL·화면·로그·diff로 결과를 확인합니다.'], ['다음 단계', '피드백을 작은 한 작업으로 바꿉니다.']],
+      sequence: ['문제와 대상 소개', '핵심 행동 시연', '어려웠던 오류와 해결', '동료 질문과 피드백', '다음 개선 한 가지 결정'],
+      demo: { type: 'showcase', title: '설명보다 실제 작동을 먼저 보여주는 5분 발표', stages: ['문제', '사용자', 'LIVE DEMO', '오류 해결', '피드백', 'NEXT'] },
+      compare: { bad: ['기능 목록 발표', '영상만 재생', '피드백 전부 수용'], good: ['문제와 핵심 행동', '실제 URL 시연', '근거로 다음 작업 선택'] },
+      decisions: [['만든 기능을 모두 설명한다', '과함', '핵심 흐름 한 가지를 끝까지 보여줍니다.'], ['오류와 해결 과정을 함께 말한다', '좋음', '실제 제작 역량이 드러납니다.'], ['피드백을 즉시 모두 구현한다', '주의', '목표와 영향에 따라 우선순위를 정합니다.']],
+      error: { symptom: '발표 직전 인터넷 또는 배포 URL이 열리지 않음', trace: 'network unavailable / live URL timeout', cause: '오프라인 대체 화면과 로컬 실행 준비가 없음', fix: '로컬 완성본, 캡처, 짧은 대체 시연 순서를 준비' },
+      practice: '프로젝트를 5분 동안 시연하고 받은 피드백에서 다음 작업 한 가지를 선택합니다.',
+      deliverables: ['5분 발표', '피드백 기록', '다음 개선 작업'],
+    }),
+  ],
+};
+
+function buildScriptSlides(session) {
+  const conceptNames = session.concepts.map(([title]) => title).join(' · ');
+  return [
+    ['표지', `오늘의 목표는 ${session.objective}`, `최근 이 주제에서 막힌 장면이 있었는지 한 명에게 묻습니다.`],
+    ['작업 지도', '120분의 다섯 구간과 각 구간의 산출물을 먼저 합의합니다.', '수업이 끝날 때 무엇이 화면 밖에 남아야 하는지 질문합니다.'],
+    ['핵심 개념', `${conceptNames}을 정의가 아니라 판단 순서로 연결합니다.`, `각 개념을 자신의 프로젝트 장면으로 바꾸어 말하게 합니다.`],
+    ['원인과 결과', `${session.sequence.join(' → ')} 순서를 수동으로 진행합니다.`, '다음 단계에서 무엇이 달라질지 먼저 예측하게 합니다.'],
+    ['대표 시연', `${session.demo.title} 장면을 자동 재생 없이 한 단계씩 실행합니다.`, '화면 변화와 확인할 로그를 수강생이 먼저 찾게 합니다.'],
+    ['비교', `취약한 방식과 검증 가능한 방식의 차이를 ${session.compare.bad[0]}와 ${session.compare.good[0]}에서 시작해 설명합니다.`, '자신의 현재 작업이 어느 쪽에 가까운지 이유와 함께 답하게 합니다.'],
+    ['판단', session.decisions.map(([question, , feedback]) => `${question}: ${feedback}`).join(' '), '카드를 누르기 전에 선택과 이유를 말하게 합니다.'],
+    ['오류 복구', `${session.error.symptom} 증상을 고정하고 ${session.error.trace}에서 첫 원인을 읽습니다.`, '오류를 닫지 않고 AI에게 전달할 네 가지 정보를 말하게 합니다.'],
+    ['업무 적용', `${session.sequence.slice(0, 5).join(' → ')}를 실제 프로젝트 장면으로 다시 연결합니다.`, '도구 이름이 바뀌어도 유지되는 판단 기준을 묻습니다.'],
+    ['실습 브리프', session.practice, `완료 기준인 ${session.deliverables.join(', ')}을 화면·파일·로그로 어떻게 증명할지 질문합니다.`],
+    ['실습 타이머', '40분 동안 작은 범위를 끝까지 실행하고 중간에 결과를 저장하게 합니다.', '막힌 사람에게 결과 대신 현재 상태와 다음 한 단계를 말하게 합니다.'],
+    ['리뷰', `${session.deliverables.join(', ')}을 직접 실행해 확인합니다.`, '사람이 판단한 부분과 AI 결과를 검증한 근거를 묻습니다.'],
+    ['다음 회차', '오늘 산출물을 다음 수업의 입력으로 보존합니다.', '다음 수업 전 한 가지 준비 행동을 말하고 종료합니다.'],
+  ].map(([title, say, ask], index) => ({
+    slide: index + 1,
+    title,
+    say,
+    do: index === 4 ? `시작 버튼을 누르고 ${session.demo.stages.join(' → ')}를 수동으로 진행합니다.` : '화면 요소를 하나씩 공개하고 수강생의 시선을 한 지점에 고정합니다.',
+    ask,
+    expected: index === 7 ? `${session.error.cause}와 ${session.error.fix}를 연결한 답` : '자신의 프로젝트 또는 업무 사례를 포함한 한 문장 답',
+    recovery: index === 4 ? '실제 도구가 실패하면 저장된 대체 캡처와 동일한 로그로 시연을 계속합니다.' : '응답이 없으면 구체적인 화면 예시 하나를 제시하고 다시 질문합니다.',
+  }));
+}
+
+function enrichCurricula() {
+  for (const [courseId, course] of Object.entries(curricula)) {
+    course.sessions.forEach((session, index) => {
+      const lessonNumber = String(index + 1).padStart(2, '0');
+      const labRoot = `v3/projects/${courseId}/${lessonNumber}`;
+      const sceneId = `${courseId}-${lessonNumber}-${session.demo.type}`;
+      session.revision = courseId === 'basic-current-work' ? '3.0.0-beta.2-review' : '3.0.0';
+      session.status = courseId === 'basic-current-work' ? 'review' : 'ready';
+      session.visualScene = {
+        id: sceneId,
+        type: session.demo.type,
+        title: session.demo.title,
+        steps: session.demo.stages.map((label, stageIndex) => ({
+          label,
+          title: session.sequence[stageIndex] || label,
+          detail: session.concepts[stageIndex % session.concepts.length]?.[1] || session.objective,
+        })),
+      };
+      session.interactions = {
+        controls: ['start', 'previous', 'next', 'pause', 'reset'],
+        predictionPrompt: '다음 단계에서 무엇이 달라질지 먼저 말한 뒤 진행',
+        decisionCards: session.decisions.length,
+        failureRecovery: true,
+      };
+      session.assets = {
+        fallbackImage: `assets/v3/fallbacks/${courseId}-${lessonNumber}.png`,
+        sceneId,
+      };
+      session.demoProject = {
+        root: labRoot,
+        starter: `${labRoot}/starter`,
+        broken: `${labRoot}/broken`,
+        complete: `${labRoot}/complete`,
+        manifest: `${labRoot}/lab.json`,
+      };
+      session.fallbackMedia = {
+        image: `assets/v3/fallbacks/${courseId}-${lessonNumber}.png`,
+        slide: `v3/deck.html?course=${courseId}&lesson=${index + 1}&slide=5&motion=low`,
+      };
+      session.studentMaterials = ['workbook', 'commands', 'examples', 'errors', 'assessment', 'practice-log'];
+      session.instructorMaterials = ['script', 'demo', 'answers', 'research', 'fallback', 'rehearsal'];
+      session.sourceKeys = session.sources || [];
+      session.scriptSlides = buildScriptSlides(session);
+    });
+  }
+}
+
+enrichCurricula();
+
 const currentBasic = {
   id: 'basic-current',
   title: '바이브코딩 기초반 · 2기 운영본',
@@ -605,10 +780,19 @@ const currentBasic = {
     ['basic-04', '4강 · 파일 구조 이해', 'AI가 만든 프로젝트를 읽는 법', 'VS Code 파일 트리에서 수정 위치와 영향 범위, AI diff와 브라우저 결과를 확인', '20분 이론 + 40분 실습', 'practice', 'sessions/session-04-revenue.html'],
     ['basic-05', '5강 · 배포와 보안 그리고 데이터', '내 프로그램을 링크로 공유하기 전', 'GitHub, 배포, 환경변수, API 키, 데이터 권한과 재배포를 이해하고 실습', '25분 이론 + 35분 실습', 'practice', 'sessions/session-05-security-api.html'],
     ['basic-06', '6강 · 쇼케이스 및 Q&A', '발표 · 피드백 · 다음 단계', '현재 2기 수강생의 프로젝트 발표, 피드백과 다음 고도화 방향 정리', '발표 + Q&A', 'showcase', 'sessions/session-06-showcase.html'],
-  ].map(([id, title, subtitle, description, duration, type, file]) => ({
+  ].map(([id, title, subtitle, description, duration, type, file], index) => ({
     id, title, subtitle, description, duration, type, file, moduleId: 'current',
+    revision: '2기-6주-active',
+    status: 'active',
+    activeRevision: 'v2-active',
+    revisions: [
+      { id: 'v2-active', label: '현재 운영본', revision: '2기-6주', status: 'active', file },
+      { id: 'v3-work', label: 'V3 개편 작업본', revision: '3.0.0-beta.2-review', status: 'review', file: `v3/deck.html?course=basic-current-work&lesson=${index + 1}` },
+    ],
     preparation: ['개인 노트북', '현재 프로젝트'],
     deliverables: type === 'showcase' ? ['프로젝트 발표', '피드백 기록'] : ['수업별 실습 결과'],
+    demoProject: curricula['basic-current-work'].sessions[index].demoProject,
+    fallbackMedia: curricula['basic-current-work'].sessions[index].fallbackMedia,
   })),
   materials: {
     student: [
@@ -617,6 +801,8 @@ const currentBasic = {
       ['basic-current-commands', '명령어·설정집', '복사 가능한 필수 명령과 오류 확인', 'appendix/command-cheatsheet.html'],
       ['basic-current-errors', '오류 해결 훈련자료', '오류 복사, 질문, 수정과 재실행', 'appendix/error-guide.html'],
       ['basic-current-submit', '배포·제출 체크리스트', '보안과 공개 URL 최종 점검', 'appendix/deployment-checklist.html'],
+      ['basic-current-v3-workbook', '2기 V3 개편 실습 워크북', '현재 운영본과 함께 검수하는 회차별 작업지', 'v3/material.html?course=basic-current-work&kind=workbook&audience=student'],
+      ['basic-current-v3-practice', '2기 개인 실습 기록지', '판단·변경·검증·다음 작업 기록', 'v3/material.html?course=basic-current-work&kind=practice&audience=student'],
     ],
     instructor: [
       ['basic-current-script2', '2강 상세 대본', '바이브코딩과 첫 실습 운영', 'appendix/script-session2.html'],
@@ -624,6 +810,9 @@ const currentBasic = {
       ['basic-current-script4', '4강 상세 대본', '파일 구조 시연과 실습 운영', 'appendix/script-session4.html'],
       ['basic-current-script5', '5강 상세 대본', 'GitHub·배포·보안 수업 운영', 'appendix/script-session5.html'],
       ['basic-current-study', '강사용 공부자료', '현재 6주 과정의 핵심 개념과 예상 질문', 'appendix/instructor-study-guide.html'],
+      ['basic-current-v3-script', '2기 V3 개편 상세 대본', '13장별 SAY·DO·ASK와 오류 복구', 'v3/material.html?course=basic-current-work&kind=script&audience=instructor'],
+      ['basic-current-v3-fallback', '2기 오프라인 대체 화면', '회차별 V3 작업본 캡처와 대체 진행', 'v3/material.html?course=basic-current-work&kind=fallback&audience=instructor'],
+      ['basic-current-v3-rehearsal', '2기 현장 리허설', '프로젝터·시연 속도·실습 복구 점검', 'v3/material.html?course=basic-current-work&kind=rehearsal&audience=instructor'],
     ],
   },
 };
@@ -638,6 +827,7 @@ function materialEntries(courseId, title) {
       [`${courseId}-examples`, '예제·설정·복구 파일', '실습 시작본과 실패 복구 예시', query('examples')],
       [`${courseId}-errors`, '오류 사례와 해결 훈련', '로그 분석과 재실행 시나리오', query('errors')],
       [`${courseId}-assessment`, '프로젝트 체크·평가표', '제출 기준과 자기·동료 평가', query('assessment')],
+      [`${courseId}-practice`, '개인 실습 기록지', '회차별 판단·변경·검증·다음 작업 기록', query('practice')],
     ],
     instructor: [
       [`${courseId}-script`, '슬라이드별 상세 대본', 'SAY·DO·ASK·예상 답변·복구·시간 조정', query('script', 'instructor')],
@@ -645,6 +835,8 @@ function materialEntries(courseId, title) {
       [`${courseId}-answers`, '정답·평가·예상 질문', '실습 평가 기준과 질문 대응', query('answers', 'instructor')],
       [`${courseId}-study`, '강사용 애니메이션 학습실', '핵심 개념을 다시 조작하며 공부', `v3/deck.html?course=${courseId}&lesson=1&study=1`],
       [`${courseId}-research`, '공식 참고자료 연구노트', '공식 문서의 쉬운 한국어 요약과 반영 위치', query('research', 'instructor')],
+      [`${courseId}-fallback`, '오프라인 대체 화면', '인터넷·로그인·빌드 실패 시 사용하는 회차별 캡처', query('fallback', 'instructor')],
+      [`${courseId}-rehearsal`, '현장 리허설 체크리스트', '프로젝터·실습 파일·시연 속도와 복구 점검', query('rehearsal', 'instructor')],
     ],
   };
 }
@@ -662,7 +854,16 @@ function makeCourse(id, course, visibility = 'primary') {
     moduleId: session.module.split('·')[0].trim().toLowerCase().replace(/[^a-z0-9가-힣]+/g, '-'),
     preparation: session.preparation,
     deliverables: session.deliverables,
-    sourceKeys: session.sources,
+    revision: session.revision,
+    status: session.status,
+    visualScene: session.visualScene,
+    interactions: session.interactions,
+    assets: session.assets,
+    demoProject: session.demoProject,
+    fallbackMedia: session.fallbackMedia,
+    studentMaterials: session.studentMaterials,
+    instructorMaterials: session.instructorMaterials,
+    sourceKeys: session.sourceKeys,
     pathway: session.pathway,
   }));
 
@@ -722,7 +923,7 @@ const courses = [
 ];
 
 const manifest = {
-  version: '3.0-beta',
+  version: '3.0.0-beta.2',
   productName: 'VIBE STUDIO',
   currentCohort: '2기',
   defaultCourseId: 'basic-current',

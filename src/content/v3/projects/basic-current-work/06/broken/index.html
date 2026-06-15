@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>바이브코딩 기초반 · 2기 V3 작업본 - 쇼케이스 및 Q&amp;A - broken</title>
+  <style>
+    :root{color-scheme:dark;--accent:#d8ff66;font-family:Pretendard,"Malgun Gothic",sans-serif}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;color:#edf2f1;background:#0b1012;letter-spacing:0}
+    header{display:flex;justify-content:space-between;align-items:center;padding:22px 6vw;border-bottom:1px solid #263035}
+    header b{font-size:14px}header span{color:var(--accent);font:700 11px Consolas}
+    main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:24px;padding:6vh 6vw}
+    .hero,.panel{border:1px solid #2b363b;background:#11181b}.hero{min-height:520px;padding:48px}
+    small{color:var(--accent);font:800 10px Consolas}h1{max-width:780px;margin:22px 0 14px;font-size:clamp(36px,5vw,72px);line-height:1.02}
+    p{color:#9aa8ad;font-size:18px;line-height:1.65}.state{margin:36px 0;padding:20px;border-left:3px solid var(--accent);background:#172125}
+    .state b{display:block;margin-top:9px;font-size:22px}.state.error{border-color:#ff796c}.state.error b{color:#ff9a90}
+    button{min-height:48px;padding:0 20px;border:0;color:#101513;background:var(--accent);font-weight:850;cursor:pointer}
+    .panel{padding:24px}.panel h2{margin:0 0 20px;font-size:19px}.panel ol{display:grid;gap:7px;margin:0;padding:0;list-style:none}
+    .panel li{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:center;min-height:58px;padding:10px;border:1px solid #273136;color:#758388}
+    .panel li span{font:750 10px Consolas}.panel li.active{color:#edf2f1;border-color:color-mix(in srgb,var(--accent) 55%,#273136);background:color-mix(in srgb,var(--accent) 7%,transparent)}
+    footer{padding:18px 6vw;color:#657378;border-top:1px solid #263035;font-size:11px}
+    @media(max-width:800px){main{grid-template-columns:1fr}.hero{min-height:auto;padding:30px}}
+  </style>
+</head>
+<body data-variant="broken">
+  <header><b>VIBE STUDIO LAB</b><span>B02R · 3.0.0-beta.2-review</span></header>
+  <main>
+    <section class="hero">
+      <small>BROKEN STATE · 오류 재현 중</small>
+      <h1>쇼케이스 및 Q&amp;A</h1>
+      <p>프로젝트의 문제·핵심 흐름·직접 해결한 오류를 짧게 시연하고 다음 개선 한 가지를 정합니다.</p>
+      <div id="result" class="state error">
+        <span>현재 결과</span>
+        <b>발표 직전 인터넷 또는 배포 URL이 열리지 않음</b>
+      </div>
+      <button id="run" type="button">문제</button>
+    </section>
+    <aside class="panel">
+      <h2>실행 흐름</h2>
+      <ol>
+    <li data-step="0"><span>01</span><b>문제와 대상 소개</b></li>
+    <li data-step="1"><span>02</span><b>핵심 행동 시연</b></li>
+    <li data-step="2"><span>03</span><b>어려웠던 오류와 해결</b></li>
+    <li data-step="3"><span>04</span><b>동료 질문과 피드백</b></li>
+    <li data-step="4"><span>05</span><b>다음 개선 한 가지 결정</b></li></ol>
+    </aside>
+  </main>
+  <footer>network unavailable / live URL timeout · 로컬 완성본, 캡처, 짧은 대체 시연 순서를 준비</footer>
+  <script>
+    const steps = [...document.querySelectorAll('[data-step]')];
+    const result = document.getElementById('result');
+    let index = -1;
+    document.getElementById('run').addEventListener('click', () => {
+      index = Math.min(steps.length - 1, index + 1);
+      steps.forEach((step, stepIndex) => step.classList.toggle('active', stepIndex <= index));
+      const labels = ["문제와 대상 소개","핵심 행동 시연","어려웠던 오류와 해결","동료 질문과 피드백","다음 개선 한 가지 결정"];
+      if (document.body.dataset.variant === 'broken' && index >= 1) {
+        result.classList.add('error');
+        result.querySelector('b').textContent = "발표 직전 인터넷 또는 배포 URL이 열리지 않음";
+        return;
+      }
+      result.classList.remove('error');
+      result.querySelector('b').textContent = labels[index] || "발표 직전 인터넷 또는 배포 URL이 열리지 않음";
+    });
+  </script>
+</body>
+</html>

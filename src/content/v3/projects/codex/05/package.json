@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-codex-05",
+  "private": true,
+  "version": "1.0.0",
+  "description": "독립 작업을 Subagent와 Worktree로 격리하고 리뷰·테스트·스크린샷을 통합 품질 게이트로 운영합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

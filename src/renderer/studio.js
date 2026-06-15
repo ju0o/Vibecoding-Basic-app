@@ -15,6 +15,9 @@ const appApi = window.vibeCodingApp || {
   savePdf: async () => ({ ok: false, canceled: true }),
   saveData: async () => true,
   loadData: async () => null,
+  exportData: async () => ({ ok: false, canceled: true }),
+  importData: async () => ({ ok: false, canceled: true }),
+  openContentPath: async () => ({ ok: false }),
   onShortcut: () => {},
 };
 const state = {
@@ -27,6 +30,9 @@ const state = {
   completed: new Set(JSON.parse(localStorage.getItem('vibe-v3-completed') || '[]')),
   notes: JSON.parse(localStorage.getItem('vibe-v3-notes') || '{}'),
   schedule: JSON.parse(localStorage.getItem('vibe-v3-schedule') || '{}'),
+  revisionOverrides: JSON.parse(localStorage.getItem('vibe-v3-revision-overrides') || '{}'),
+  revisionSelection: {},
+  lowMotion: localStorage.getItem('vibe-v3-low-motion') === 'true',
   programNote: localStorage.getItem('vibe-v3-program-note') || '',
   commandIndex: 0,
   commandItems: [],
@@ -45,6 +51,13 @@ function persist(key, value) {
   appApi?.saveData?.(key, value);
 }
 
+function applyImportedData(data) {
+  Object.entries(data || {}).forEach(([key, value]) => {
+    localStorage.setItem(key, typeof value === 'string' ? value : JSON.stringify(value));
+  });
+  location.reload();
+}
+
 function getCourse(id = state.courseId) {
   return state.manifest.courses.find((course) => course.id === id);
 }
@@ -56,6 +69,39 @@ function visibleCourses() {
 
 function setAccent(course) {
   document.documentElement.style.setProperty('--accent', course.color || '#d8ff66');
+}
+
+function statusLabel(status) {
+  return {
+    draft: '초안',
+    review: '검수 중',
+    pilot: '파일럿',
+    ready: '준비 완료',
+    active: '운영 중',
+    archived: '보관',
+    preview: '미리보기',
+  }[status] || status || '준비 중';
+}
+
+function getSessionRevision(session) {
+  if (!session.revisions?.length) return { ...session, revisionId: null };
+  const activeId = state.revisionOverrides[session.id] || session.activeRevision || session.revisions[0].id;
+  const selectedId = state.mode === 'instructor'
+    ? state.revisionSelection[session.id] || activeId
+    : activeId;
+  const revision = session.revisions.find((item) => item.id === selectedId) || session.revisions[0];
+  return {
+    ...session,
+    ...revision,
+    id: session.id,
+    title: session.title,
+    subtitle: session.subtitle,
+    description: session.description,
+    preparation: session.preparation,
+    deliverables: session.deliverables,
+    revisionId: revision.id,
+    activeRevisionId: activeId,
+  };
 }
 
 function renderCourseRail() {
@@ -101,9 +147,11 @@ function renderStudio() {
   $('#btn-mode').setAttribute('aria-pressed', String(state.mode === 'instructor'));
   $$('.instructor-only').forEach((node) => node.classList.toggle('hidden', state.mode !== 'instructor'));
   if (state.tab === 'instructor' && state.mode !== 'instructor') state.tab = 'lessons';
+  if (state.tab === 'labs' && state.mode !== 'instructor') state.tab = 'lessons';
   $$('#course-tabs button').forEach((button) => button.classList.toggle('active', button.dataset.tab === state.tab));
 
   if (state.tab === 'lessons') renderLessons(course);
+  else if (state.tab === 'labs') renderLabs(course);
   else renderMaterials(course, state.tab);
 }
 
@@ -127,7 +175,7 @@ function renderLessons(course) {
       <button class="lesson-row${session.id === state.selectionId ? ' active' : ''}${state.completed.has(session.id) ? ' complete' : ''}"
         type="button" data-session="${escapeHtml(session.id)}">
         <span class="lesson-no">${String(index + 1).padStart(2, '0')}</span>
-        <span class="lesson-copy"><b>${escapeHtml(session.title.replace(/^\d+강\s*·\s*/, ''))}</b><span>${escapeHtml(session.subtitle || session.description)}</span></span>
+        <span class="lesson-copy"><b>${escapeHtml(session.title.replace(/^\d+강\s*·\s*/, ''))}</b><span>${escapeHtml(session.subtitle || session.description)}</span><em class="readiness ${escapeHtml(session.status || 'active')}">${escapeHtml(statusLabel(session.status || 'active'))}</em></span>
         <span class="lesson-state">${state.completed.has(session.id) ? '✓' : '›'}</span>
       </button>
     `);
@@ -145,6 +193,21 @@ function renderLessons(course) {
 
 function renderLessonDetail(course, session) {
   const index = course.sessions.findIndex((item) => item.id === session.id);
+  const selected = getSessionRevision(session);
+  const revisions = session.revisions || [];
+  const revisionControl = state.mode === 'instructor' && revisions.length > 1
+    ? `
+      <section class="revision-panel">
+        <div>
+          <span>LESSON VERSION</span>
+          <strong>${escapeHtml(statusLabel(selected.status))} · ${escapeHtml(selected.revision || '')}</strong>
+        </div>
+        <select id="revision-select">
+          ${revisions.map((revision) => `<option value="${escapeHtml(revision.id)}"${revision.id === selected.revisionId ? ' selected' : ''}>${escapeHtml(revision.label)} · ${escapeHtml(statusLabel(revision.status))}</option>`).join('')}
+        </select>
+        <button id="btn-promote-revision" class="secondary-action" type="button">${selected.revisionId === selected.activeRevisionId ? '현재 활성본' : '이 버전을 운영본으로 승격'}</button>
+      </section>`
+    : '';
   $('#detail-position').textContent = `LESSON ${String(index + 1).padStart(2, '0')} / ${String(course.sessions.length).padStart(2, '0')}`;
   const preparation = session.preparation || ['개인 노트북', '현재 프로젝트'];
   const deliverables = session.deliverables || ['수업 실습 결과'];
@@ -158,6 +221,7 @@ function renderLessonDetail(course, session) {
       <span>THIS LESSON</span>
       <p>${escapeHtml(session.description)}</p>
     </div>
+    ${revisionControl}
     <div class="detail-grid">
       <section class="info-panel"><h3>준비물</h3><ul>${preparation.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></section>
       <section class="info-panel"><h3>수업 결과물</h3><ul>${deliverables.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></section>
@@ -168,12 +232,25 @@ function renderLessonDetail(course, session) {
     </div>
     <div class="detail-meta">
       <span>${escapeHtml(session.duration || '120분')}</span>
-      <span>${escapeHtml(course.curriculumVersion || '')}</span>
+      <span>${escapeHtml(selected.revision || course.curriculumVersion || '')}</span>
+      <span>${escapeHtml(statusLabel(selected.status))}</span>
       <span>${session.sourceKeys?.length || 0} OFFICIAL SOURCES</span>
     </div>
   `;
-  $('#btn-open-lesson').addEventListener('click', () => openPlayer(course, session));
+  $('#btn-open-lesson').addEventListener('click', () => openPlayer(course, selected));
   $('#btn-toggle-complete').addEventListener('click', () => toggleComplete(session.id));
+  if ($('#revision-select')) {
+    $('#revision-select').addEventListener('change', (event) => {
+      state.revisionSelection[session.id] = event.target.value;
+      renderLessonDetail(course, session);
+    });
+    $('#btn-promote-revision').disabled = selected.revisionId === selected.activeRevisionId;
+    $('#btn-promote-revision').addEventListener('click', () => {
+      state.revisionOverrides[session.id] = selected.revisionId;
+      persist('vibe-v3-revision-overrides', state.revisionOverrides);
+      renderLessonDetail(course, session);
+    });
+  }
 }
 
 function renderMaterials(course, audience) {
@@ -229,6 +306,81 @@ function renderMaterialDetail(course, material, audience) {
   $('#btn-open-material').addEventListener('click', () => openPlayer(course, material, true));
 }
 
+function renderLabs(course) {
+  const sessions = (course.sessions || []).filter((session) => session.demoProject);
+  if (!state.selectionId || !sessions.some((session) => session.id === state.selectionId)) {
+    state.selectionId = sessions[0]?.id;
+  }
+  $('#list-summary').textContent = `${sessions.length} LESSON LABS · STARTER / BROKEN / COMPLETE`;
+  $('#lesson-list').innerHTML = sessions.map((session, index) => `
+    <button class="lesson-row lab-row${session.id === state.selectionId ? ' active' : ''}" type="button" data-lab="${escapeHtml(session.id)}">
+      <span class="lesson-no">${String(index + 1).padStart(2, '0')}</span>
+      <span class="lesson-copy"><b>${escapeHtml(session.title.replace(/^\d+강\s*·\s*/, ''))}</b><span>시작본 · 오류본 · 완성본 · 복구 파일</span><em class="readiness ready">실행 가능</em></span>
+      <span class="lesson-state">›</span>
+    </button>
+  `).join('') || '<div class="command-empty">이 과정에 연결된 실습 파일이 없습니다.</div>';
+  $$('#lesson-list [data-lab]').forEach((button) => {
+    button.addEventListener('click', () => {
+      state.selectionId = button.dataset.lab;
+      renderLabs(course);
+    });
+  });
+  renderLabDetail(course, sessions.find((session) => session.id === state.selectionId));
+}
+
+function renderLabDetail(course, session) {
+  $('#detail-position').textContent = 'PRACTICE FILES';
+  if (!session?.demoProject) {
+    $('#detail-content').innerHTML = '<div class="command-empty">선택할 실습 파일이 없습니다.</div>';
+    return;
+  }
+  const lab = session.demoProject;
+  const variants = [
+    ['starter', '시작본', '수강생이 직접 작업을 시작하는 최소 상태'],
+    ['broken', '오류본', '수업에서 원인을 찾고 복구하는 실패 상태'],
+    ['complete', '완성본', '정상 흐름과 완료 기준을 확인하는 상태'],
+  ];
+  $('#detail-content').innerHTML = `
+    <div class="lab-detail">
+      <span class="detail-number">${escapeHtml(course.code)} · EXECUTABLE LAB</span>
+      <h2>${escapeHtml(session.title.replace(/^\d+강\s*·\s*/, ''))}</h2>
+      <p>${escapeHtml(session.description)}</p>
+      <div class="lab-variants">
+        ${variants.map(([key, title, copy]) => `
+          <article class="lab-variant ${key}">
+            <span>${escapeHtml(key.toUpperCase())}</span>
+            <h3>${escapeHtml(title)}</h3>
+            <p>${escapeHtml(copy)}</p>
+            <div>
+              <button class="secondary-action" type="button" data-preview-lab="${key}">미리보기</button>
+              <button class="secondary-action" type="button" data-open-lab="${key}">폴더 열기</button>
+            </div>
+          </article>`).join('')}
+      </div>
+      <div class="lab-command">
+        <span>LOCAL COMMAND</span>
+        <code>npm run dev:starter · npm run dev:broken · npm run dev:complete</code>
+        <button id="btn-open-lab-root" class="primary-action" type="button">전체 실습 폴더 열기</button>
+      </div>
+    </div>
+  `;
+  $$('[data-preview-lab]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const variant = button.dataset.previewLab;
+      openPlayer(course, {
+        id: `${session.id}-${variant}`,
+        title: `${session.title} · ${variant}`,
+        duration: 'OFFLINE LAB',
+        file: `${lab.root}/${variant}/index.html`,
+      }, true);
+    });
+  });
+  $$('[data-open-lab]').forEach((button) => {
+    button.addEventListener('click', () => appApi.openContentPath(`${lab.root}/${button.dataset.openLab}`));
+  });
+  $('#btn-open-lab-root').addEventListener('click', () => appApi.openContentPath(lab.root));
+}
+
 function toggleComplete(sessionId) {
   if (state.completed.has(sessionId)) state.completed.delete(sessionId);
   else state.completed.add(sessionId);
@@ -237,7 +389,9 @@ function toggleComplete(sessionId) {
 }
 
 function buildContentUrl(file) {
-  return `${state.contentBase}/${file}`;
+  const separator = file.includes('?') ? '&' : '?';
+  const motion = file.startsWith('v3/deck.html') && state.lowMotion ? `${separator}motion=low` : '';
+  return `${state.contentBase}/${file}${motion}`;
 }
 
 function openPlayer(course, item, isMaterial = false) {
@@ -276,7 +430,7 @@ function movePlayer(direction) {
   if (!current || current.isMaterial) return;
   const index = current.course.sessions.findIndex((session) => session.id === current.item.id);
   const next = current.course.sessions[index + direction];
-  if (next) openPlayer(current.course, next);
+  if (next) openPlayer(current.course, getSessionRevision(next));
 }
 
 async function printPlayer() {
@@ -317,6 +471,12 @@ function renderCommandResults(query = '') {
       type: 'LESSON', title: session.title, subtitle: `${course.shortTitle} · ${session.subtitle || ''}`,
       courseId: course.id, id: session.id,
     }));
+    if (state.mode === 'instructor') {
+      course.sessions.filter((session) => session.demoProject).forEach((session) => items.push({
+        type: 'LAB', title: `${session.title} 실습 파일`, subtitle: `${course.shortTitle} · starter / broken / complete`,
+        courseId: course.id, id: session.id, tab: 'labs',
+      }));
+    }
     ['student', ...(state.mode === 'instructor' ? ['instructor'] : [])].forEach((audience) => {
       (course.materials?.[audience] || []).forEach((material) => items.push({
         type: audience === 'student' ? 'STUDENT' : 'INSTRUCTOR',
@@ -343,7 +503,7 @@ function executeCommand(index = state.commandIndex) {
   if (!item) return;
   state.courseId = item.courseId;
   state.selectionId = item.id;
-  state.tab = item.audience || (item.type === 'LESSON' || item.type === 'COURSE' ? 'lessons' : 'student');
+  state.tab = item.tab || item.audience || (item.type === 'LESSON' || item.type === 'COURSE' ? 'lessons' : 'student');
   persist('vibe-v3-course', item.courseId);
   closeCommandPalette();
   renderStudio();
@@ -400,14 +560,41 @@ function openDrawer(type) {
     $('#drawer-content').innerHTML = `
       <section class="drawer-section">
         <div class="setting-row"><span><b>현재 표시 모드</b><span>다음 기수 자료는 강사 모드에서만 표시됩니다.</span></span><button id="drawer-mode" class="secondary-action" type="button">${state.mode === 'student' ? '강사 모드로 전환' : '학생 모드로 전환'}</button></div>
+        <div class="setting-row"><span><b>저사양 모션</b><span>장면 전환을 즉시 표시하고 지속 애니메이션을 줄입니다.</span></span><button id="drawer-motion" class="secondary-action" type="button">${state.lowMotion ? '사용 중' : '사용 안 함'}</button></div>
         <div class="setting-row"><span><b>빠른 검색</b><span>과정·회차·자료를 어디서든 찾습니다.</span></span><kbd>Ctrl K</kbd></div>
         <div class="setting-row"><span><b>전체화면</b><span>프로젝터 발표 화면으로 전환합니다.</span></span><kbd>Ctrl F</kbd></div>
-        <div class="setting-row"><span><b>운영본 보호</b><span>기초반 2기 6주 강의 파일은 V3에서 동결되어 있습니다.</span></span><strong>LOCKED</strong></div>
+        <div class="setting-row"><span><b>운영본 보호</b><span>작업본은 검수 후 회차별로 승격되며 이전 활성본은 보존됩니다.</span></span><strong>VERSIONED</strong></div>
+      </section>
+      <section class="drawer-section">
+        <h3>운영 데이터</h3>
+        <div class="backup-actions">
+          <button id="btn-export-data" class="secondary-action" type="button">ZIP/JSON 백업</button>
+          <button id="btn-import-data" class="secondary-action" type="button">백업 복원</button>
+        </div>
+        <p id="backup-status" class="drawer-help">기수 일정, 강사 메모, 진행 상태와 회차별 활성 버전을 백업합니다.</p>
       </section>
     `;
     $('#drawer-mode').addEventListener('click', () => {
       closeDrawer();
       setMode(state.mode === 'student' ? 'instructor' : 'student');
+    });
+    $('#drawer-motion').addEventListener('click', () => {
+      state.lowMotion = !state.lowMotion;
+      persist('vibe-v3-low-motion', String(state.lowMotion));
+      openDrawer('settings');
+    });
+    $('#btn-export-data').addEventListener('click', async () => {
+      const result = await appApi.exportData();
+      $('#backup-status').textContent = result.ok ? `백업 완료: ${result.filePath}` : '백업을 취소했습니다.';
+    });
+    $('#btn-import-data').addEventListener('click', async () => {
+      try {
+        const result = await appApi.importData();
+        if (result.ok) applyImportedData(result.data);
+        else $('#backup-status').textContent = '복원을 취소했습니다.';
+      } catch (error) {
+        $('#backup-status').textContent = `복원 실패: ${error.message}`;
+      }
     });
   }
   $('#utility-drawer').classList.add('open');

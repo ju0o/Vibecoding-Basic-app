@@ -1,0 +1,24 @@
+{
+  "courseId": "foundation-next",
+  "lessonNumber": 2,
+  "title": "프로그램이 작동하는 구조",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "foundation-next-02-request",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "주문 완료 알림은 뜨지만 목록에 없음",
+    "trace": "POST /orders 200, DB write skipped",
+    "cause": "화면 성공 처리와 데이터 저장이 분리됨",
+    "fix": "저장 성공 응답 이후에만 완료 UI를 표시하도록 요청"
+  },
+  "deliverables": [
+    "기능 흐름도",
+    "문제 위치 판단표",
+    "AI 수정 요청"
+  ]
+}

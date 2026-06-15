@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-workflow-03",
+  "private": true,
+  "version": "1.0.0",
+  "description": "AI가 외부 세계를 읽고 바꿀 때 필요한 Tool 계약과 최소 권한, 인증과 사람 승인 지점을 설계합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

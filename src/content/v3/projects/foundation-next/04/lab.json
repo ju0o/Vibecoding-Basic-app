@@ -1,0 +1,24 @@
+{
+  "courseId": "foundation-next",
+  "lessonNumber": 4,
+  "title": "GitHub·배포·보안·데이터",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "foundation-next-04-deploy",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "로컬에서는 되지만 배포 URL에서 API 오류",
+    "trace": "401 Unauthorized / ENV undefined",
+    "cause": "배포 환경변수 누락 또는 공개·서버 변수 혼동",
+    "fix": "배포 서비스 환경변수 등록 후 새 빌드하고 네트워크 로그 확인"
+  },
+  "deliverables": [
+    "GitHub 저장소",
+    "공개 배포 URL",
+    "보안·재배포 점검표"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "courseId": "workflow",
+  "lessonNumber": 1,
+  "title": "터미널·Git·프로세스·로그",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "workflow-01-terminal",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "개발 서버가 이미 사용 중인 포트로 실패",
+    "trace": "EADDRINUSE :3000",
+    "cause": "이전 프로세스가 종료되지 않음",
+    "fix": "포트 사용 프로세스를 확인해 종료하거나 다른 포트로 실행"
+  },
+  "deliverables": [
+    "터미널 운영 일지",
+    "오류 분석 템플릿",
+    "Git 복구 체크포인트"
+  ]
+}

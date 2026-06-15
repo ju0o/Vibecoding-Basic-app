@@ -14,10 +14,13 @@ const kindTitles = {
   examples: '예제·설정·복구 파일',
   errors: '오류 사례와 해결 훈련',
   assessment: '프로젝트 체크·평가표',
+  practice: '개인 실습 기록지',
   script: '슬라이드별 상세 대본',
   demo: '실제 시연 운영 매뉴얼',
   answers: '정답·평가·예상 질문',
   research: '공식 참고자료 연구노트',
+  fallback: '오프라인 대체 화면',
+  rehearsal: '현장 리허설 체크리스트',
 };
 
 if (!course || !kindTitles[kind]) {
@@ -162,6 +165,12 @@ function examples() {
 3. 변경 후 실행할 검증 명령을 알려줘.
 4. 승인 후 구현하고 diff와 결과를 요약해줘.</div>
       <h3>정상 시작 순서</h3>${list(lesson.sequence, 'numbered')}
+      <h3>실제 실습 파일</h3>
+      <table><tbody>
+        <tr><th>시작본</th><td><code>${escapeHtml(lesson.demoProject.starter)}</code></td></tr>
+        <tr><th>오류본</th><td><code>${escapeHtml(lesson.demoProject.broken)}</code></td></tr>
+        <tr><th>완성본</th><td><code>${escapeHtml(lesson.demoProject.complete)}</code></td></tr>
+      </tbody></table>
       ${footer('EXAMPLES · A', index * 2 + 1)}
     </section>
     <section class="sheet">
@@ -240,46 +249,47 @@ function assessment() {
     </section>`;
 }
 
-function script() {
+function practice() {
   return course.sessions.map((lesson, index) => `
     <section class="sheet">
-      ${pageHead(lesson, index, '강사용 상세 대본')}
+      ${pageHead(lesson, index, '개인 실습 기록')}
       <h2>${escapeHtml(lesson.title)}</h2>
-      <p class="objective">${escapeHtml(lesson.objective)}</p>
-      <div class="script-block"><span class="script-label">SAY · 도입</span><span class="script-copy">오늘은 ${escapeHtml(lesson.subtitle)}를 외우는 시간이 아닙니다. 수업이 끝났을 때 여러분의 프로젝트에서 ${escapeHtml(lesson.deliverables[0])}을 직접 확인할 수 있어야 합니다. 먼저 지금 어디에서 막히는지 짧게 확인하겠습니다.</span></div>
-      <div class="script-block"><span class="script-label">ASK · 진단</span><span class="script-copy">현재 프로젝트에서 결과는 보이지만 왜 그렇게 작동하는지 설명하기 어려운 장면이 있나요? 최근에 가장 오래 멈췄던 지점을 한 문장으로 이야기해 주세요.</span></div>
-      <div class="script-block"><span class="script-label">예상 답변</span><span class="script-copy">어떤 파일을 고쳐야 할지 몰랐다, 오류가 길어서 닫았다, 배포 후에만 문제가 났다, AI가 너무 많은 파일을 바꿨다 같은 답이 나올 수 있습니다. 답을 평가하지 말고 오늘 개념과 연결할 단어만 칠판에 남깁니다.</span></div>
-      <div class="script-block"><span class="script-label">SAY · 핵심</span><span class="script-copy">${escapeHtml(lesson.concepts.map(([title, copy]) => `${title}는 ${copy}`).join(' '))} 이 네 가지는 서로 떨어진 용어가 아니라 한 작업을 판단하는 순서입니다.</span></div>
-      <div class="script-block"><span class="script-label">DO · 애니메이션</span><span class="script-copy">자동 재생하지 않습니다. 시작을 누른 뒤 ${escapeHtml(lesson.demo.stages.join(' → '))} 순서로 한 단계씩 진행합니다. 각 단계에서 화면 변화와 확인할 로그를 짚고 다음 버튼을 누르기 전에 수강생에게 다음 결과를 예측하게 합니다.</span></div>
-      ${footer('INSTRUCTOR SCRIPT · A', index * 3 + 1)}
-    </section>
-    <section class="sheet">
-      ${pageHead(lesson, index, '강사용 진행·복구 대본')}
-      <h2>${escapeHtml(lesson.title)} 진행 운영</h2>
-      <div class="script-block"><span class="script-label">ASK · 이해</span><span class="script-copy">지금 문제가 생긴다면 어느 단계에서 멈췄다고 AI에게 말해야 할까요? 화면에서 보이는 증상과 실제 원인을 구분해서 이야기해 보세요.</span></div>
-      <div class="script-block"><span class="script-label">오류 복구</span><span class="script-copy">${escapeHtml(lesson.error.symptom)} 상황을 보여줍니다. 오류 전문을 지우지 않고 ${escapeHtml(lesson.error.trace)}를 읽은 뒤 ${escapeHtml(lesson.error.cause)}라는 가설을 세웁니다. ${escapeHtml(lesson.error.fix)} 후 같은 조건으로 다시 실행해야 복구가 끝납니다.</span></div>
-      <div class="script-block"><span class="script-label">DO · 실습</span><span class="script-copy">${escapeHtml(lesson.practice)} 강사는 완성 화면을 대신 만들어주지 않고 수강생이 현재 상태, 다음 한 단계, 확인 방법을 말하도록 돕습니다.</span></div>
-      <div class="script-block"><span class="script-label">ASK · 리뷰</span><span class="script-copy">오늘 만든 결과에서 사람이 직접 판단한 부분은 무엇인가요? AI가 만든 결과를 어떤 화면, 로그, diff 또는 데이터로 검증했나요?</span></div>
-      <div class="script-block"><span class="script-label">시간 조정</span><span class="script-copy">10분이 부족하면 개념 카드 설명을 줄이고 시연과 실습을 유지합니다. 10분이 남으면 수강생 두 명의 서로 다른 해결 방법을 비교합니다. 실습이 막히면 완성본을 대신 보여주기보다 증상 수집 템플릿을 함께 채웁니다.</span></div>
-      <h3>강사가 확인할 결과</h3>${list(lesson.deliverables.map((item) => `${item}: 말이 아니라 화면, 파일, 로그 또는 URL로 확인`))}
-      ${footer('INSTRUCTOR SCRIPT · B', index * 3 + 2)}
-    </section>
-    <section class="sheet">
-      ${pageHead(lesson, index, '강사용 시간 운영표')}
-      <h2>${escapeHtml(lesson.title)} 120분 운영</h2>
-      <h3>120분 운영표</h3>
-      <table><thead><tr><th>구간</th><th>강사 행동</th><th>확인할 산출물</th></tr></thead><tbody>
-        <tr><td>진단 10분</td><td>경험과 막힘 수집</td><td>오늘 질문 한 가지</td></tr>
-        <tr><td>이론·시각화 35분</td><td>수동 단계 시연</td><td>원인과 결과 설명</td></tr>
-        <tr><td>실제 시연 20분</td><td>정상·실패 비교</td><td>검증 화면 또는 로그</td></tr>
-        <tr><td>실습 40분</td><td>작은 범위 코칭</td><td>${escapeHtml(lesson.deliverables[0])}</td></tr>
-        <tr><td>복구·리뷰 15분</td><td>오류와 다음 작업 정리</td><td>복구 기록</td></tr>
-      </tbody></table>
-      <h3>현장 체크</h3>${list(['자동 재생을 끄고 발표자가 단계를 제어한다', '수강생이 다음 결과를 예측한 뒤 진행한다', '실패 화면을 숨기지 않고 복구 절차에 사용한다', '실습 종료 10분 전에 결과물 저장을 안내한다', '다음 작업 한 가지를 기록하고 종료한다'])}
-      <h3>수업 후 기록</h3>${lines(6)}
-      ${footer('INSTRUCTOR SCRIPT · C', index * 3 + 3)}
+      <p class="objective">${escapeHtml(lesson.practice)}</p>
+      <div class="two-col">
+        <div class="box"><h3>시작 전 판단</h3><p>오늘 바꿀 한 가지</p>${lines(3)}<p>완료를 확인할 화면·파일·로그</p>${lines(3)}</div>
+        <div class="box"><h3>AI에게 맡길 일</h3><p>사람이 결정할 것</p>${lines(3)}<p>AI가 탐색·작성할 것</p>${lines(3)}</div>
+      </div>
+      <h3>변경과 검증 기록</h3>
+      <table><thead><tr><th>순서</th><th>한 행동</th><th>확인한 결과</th><th>다음 판단</th></tr></thead>
+      <tbody>${Array.from({ length: 5 }, (_, row) => `<tr><td>${row + 1}</td><td></td><td></td><td></td></tr>`).join('')}</tbody></table>
+      <div class="callout"><b>오늘의 다음 작업</b>${lines(2)}</div>
+      ${footer('PRACTICE LOG', index + 1)}
     </section>
   `).join('');
+}
+
+function script() {
+  return course.sessions.map((lesson, index) => {
+    const groups = [lesson.scriptSlides.slice(0, 7), lesson.scriptSlides.slice(7)];
+    return groups.map((slides, groupIndex) => `
+      <section class="sheet">
+        ${pageHead(lesson, index, `강사용 상세 대본 ${groupIndex + 1}/2`)}
+        <h2>${escapeHtml(lesson.title)}</h2>
+        <p class="objective">${escapeHtml(lesson.objective)}</p>
+        <div class="script-slide-list">
+          ${slides.map((entry) => `
+            <article class="script-slide">
+              <header><b>SLIDE ${String(entry.slide).padStart(2, '0')}</b><span>${escapeHtml(entry.title)}</span></header>
+              <p><strong>SAY</strong>${escapeHtml(entry.say)}</p>
+              <p><strong>DO</strong>${escapeHtml(entry.do)}</p>
+              <p><strong>ASK</strong>${escapeHtml(entry.ask)}</p>
+              <p><strong>예상 답변</strong>${escapeHtml(entry.expected)}</p>
+              <p><strong>복구</strong>${escapeHtml(entry.recovery)}</p>
+            </article>`).join('')}
+        </div>
+        ${footer('INSTRUCTOR SCRIPT', index * 2 + groupIndex + 1)}
+      </section>`).join('');
+  }).join('');
 }
 
 function demo() {
@@ -386,5 +396,44 @@ function research() {
       </section>`}`;
 }
 
-const renderers = { workbook, commands, examples, errors, assessment, script, demo, answers, research };
+function fallback() {
+  return course.sessions.map((lesson, index) => `
+    <section class="sheet fallback-sheet">
+      ${pageHead(lesson, index, '오프라인 대체 화면')}
+      <h2>${escapeHtml(lesson.demo.title)}</h2>
+      <p class="objective">실제 도구, 로그인 또는 인터넷이 실패하면 아래 캡처를 띄우고 같은 단계와 질문으로 수업을 계속합니다.</p>
+      <div class="fallback-frame">
+        <img src="../${escapeHtml(lesson.fallbackMedia.image)}" alt="${escapeHtml(lesson.title)} 대체 화면">
+      </div>
+      <h3>대체 진행</h3>${list(lesson.demo.stages.map((stage, step) => `${step + 1}. ${stage}: 다음 결과를 질문하고 캡처에서 해당 영역을 가리킴`), 'numbered')}
+      <div class="callout danger"><b>실제 시연 실패 원인 기록</b>${lines(2)}</div>
+      ${footer('OFFLINE FALLBACK', index + 1)}
+    </section>
+  `).join('');
+}
+
+function rehearsal() {
+  return course.sessions.map((lesson, index) => `
+    <section class="sheet">
+      ${pageHead(lesson, index, '현장 리허설')}
+      <h2>${escapeHtml(lesson.title)}</h2>
+      <div class="two-col">
+        <div class="box"><h3>화면·장비</h3>${list(['1280×720과 1920×1080에서 겹침 확인', '프로젝터 복제·화면비·배율 확인', '전체화면과 Esc 동작 확인', '글자와 버튼을 마지막 좌석에서 확인'])}</div>
+        <div class="box"><h3>시연·실습</h3>${list(['starter·broken·complete 세 상태 실행', '시작·이전·다음·일시정지·초기화 확인', '오프라인 대체 캡처 열기', '실습 결과 저장 위치 확인'])}</div>
+      </div>
+      <h3>회차별 시연 순서</h3>${list(lesson.demo.stages, 'numbered')}
+      <h3>예상 실패와 대체</h3>
+      <table><tbody>
+        <tr><th>대표 실패</th><td>${escapeHtml(lesson.error.symptom)}</td></tr>
+        <tr><th>첫 확인</th><td>${escapeHtml(lesson.error.trace)}</td></tr>
+        <tr><th>대체 진행</th><td>${escapeHtml(lesson.fallbackMedia.image)}</td></tr>
+        <tr><th>복구 기준</th><td>${escapeHtml(lesson.error.fix)}</td></tr>
+      </tbody></table>
+      <h3>리허설 메모</h3>${lines(5)}
+      ${footer('REHEARSAL', index + 1)}
+    </section>
+  `).join('');
+}
+
+const renderers = { workbook, commands, examples, errors, assessment, practice, script, demo, answers, research, fallback, rehearsal };
 root.innerHTML = cover() + renderers[kind]();

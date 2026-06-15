@@ -24,6 +24,7 @@ const stageLabels = lesson.demo.stages;
 const sourceNote = lesson.sources?.length ? `공식 자료 ${lesson.sources.length}개 연결` : '과정 내부 사례 기반';
 let currentSlide = 0;
 let liveStage = -1;
+let sceneController = null;
 let timerSeconds = 40 * 60;
 let timerHandle = null;
 
@@ -139,19 +140,15 @@ function sequence() {
 function liveDemo() {
   return slide(4, lesson.demo.title, `
     <div class="live-layout">
-      <div class="live-stage">
-        <div class="live-grid"></div>
-        <div class="live-track"></div>
-        <div class="live-nodes">${stageLabels.map((label, index) => `<div class="live-node" data-live-node="${index}">${escapeHtml(label)}</div>`).join('')}</div>
-        <div class="live-packet" id="live-packet"></div>
-        <div class="live-caption" id="live-caption">시작을 누르면 첫 단계가 강조됩니다. 자동으로 넘어가지 않습니다.</div>
-      </div>
+      <div class="live-stage scene-stage" id="scene-stage"></div>
       <aside class="live-controls">
         <h3>LIVE CONTROL</h3>
         <button class="control-btn primary" type="button" id="live-start">시작</button>
+        <button class="control-btn" type="button" id="live-prev">이전 단계</button>
         <button class="control-btn" type="button" id="live-next">다음 단계</button>
         <button class="control-btn" type="button" id="live-pause">일시정지</button>
         <button class="control-btn" type="button" id="live-reset">초기화</button>
+        <p class="control-caption" id="live-caption">시작을 누르면 첫 단계가 열립니다. 자동으로 넘어가지 않습니다.</p>
         <div class="control-state" id="live-state">READY<br>0 / ${stageLabels.length}</div>
       </aside>
     </div>
@@ -294,8 +291,18 @@ deck.innerHTML = [
 const slides = [...document.querySelectorAll('.slide')];
 
 function showSlide(index) {
+  const previousSlide = currentSlide;
   currentSlide = Math.max(0, Math.min(slides.length - 1, index));
   slides.forEach((slideElement, slideIndex) => slideElement.classList.toggle('active', slideIndex === currentSlide));
+  if (previousSlide === 4 && currentSlide !== 4) {
+    document.body.classList.add('is-paused');
+    sceneController?.pause(liveStage, true);
+  }
+  if (currentSlide !== 10 && timerHandle) {
+    clearInterval(timerHandle);
+    timerHandle = null;
+    document.getElementById('timer-toggle').textContent = '계속';
+  }
 }
 
 document.querySelectorAll('[data-deck-prev]').forEach((button) => button.addEventListener('click', () => showSlide(currentSlide - 1)));
@@ -329,24 +336,31 @@ document.querySelectorAll('[data-sequence]').forEach((button) => button.addEvent
 }));
 
 function renderLive() {
-  const nodes = [...document.querySelectorAll('[data-live-node]')];
-  nodes.forEach((node, index) => node.classList.toggle('active', index <= liveStage));
-  const progress = liveStage < 0 ? 0 : (liveStage / Math.max(1, nodes.length - 1)) * 84;
-  document.getElementById('live-packet').style.left = `${8 + progress}%`;
+  const paused = document.body.classList.contains('is-paused');
+  sceneController?.pause(liveStage, paused);
+  const current = stageLabels[Math.max(0, liveStage)];
   document.getElementById('live-caption').textContent = liveStage < 0
     ? '시작을 누르면 첫 단계가 강조됩니다. 자동으로 넘어가지 않습니다.'
-    : `${liveStage + 1}. ${stageLabels[liveStage]} 단계에서 무엇을 입력하고 무엇을 확인해야 하는지 설명합니다.`;
-  document.getElementById('live-state').innerHTML = `${document.body.classList.contains('is-paused') ? 'PAUSED' : liveStage < 0 ? 'READY' : 'MANUAL'}<br>${Math.max(0, liveStage + 1)} / ${stageLabels.length}`;
+    : `${liveStage + 1}. ${current} · 다음 결과를 먼저 질문한 뒤 진행하세요.`;
+  document.getElementById('live-state').innerHTML = `${paused ? 'PAUSED' : liveStage < 0 ? 'READY' : liveStage === stageLabels.length - 1 ? 'VERIFIED' : 'MANUAL'}<br>${Math.max(0, liveStage + 1)} / ${stageLabels.length}`;
 }
 
 document.getElementById('live-start').addEventListener('click', () => {
   document.body.classList.remove('is-paused');
   liveStage = 0;
+  sceneController?.start();
+  renderLive();
+});
+document.getElementById('live-prev').addEventListener('click', () => {
+  if (document.body.classList.contains('is-paused')) return;
+  liveStage = Math.max(0, liveStage - 1);
+  sceneController?.go(liveStage);
   renderLive();
 });
 document.getElementById('live-next').addEventListener('click', () => {
   if (document.body.classList.contains('is-paused')) return;
   liveStage = Math.min(stageLabels.length - 1, liveStage + 1);
+  sceneController?.go(liveStage);
   renderLive();
 });
 document.getElementById('live-pause').addEventListener('click', () => {
@@ -357,6 +371,7 @@ document.getElementById('live-pause').addEventListener('click', () => {
 document.getElementById('live-reset').addEventListener('click', () => {
   document.body.classList.remove('is-paused');
   liveStage = -1;
+  sceneController?.reset();
   document.getElementById('live-pause').textContent = '일시정지';
   renderLive();
 });
@@ -414,6 +429,13 @@ document.getElementById('timer-reset').addEventListener('click', () => {
 });
 
 const requestedSlide = Number(params.get('slide'));
+sceneController = window.VibeSceneRegistry?.mount(document.getElementById('scene-stage'), {
+  course,
+  lesson,
+  lessonIndex,
+  scene: lesson.visualScene,
+});
+if (params.get('motion') === 'low') document.body.classList.add('low-motion');
 if (Number.isFinite(requestedSlide) && requestedSlide > 0) showSlide(requestedSlide - 1);
 renderLive();
 renderTimer();

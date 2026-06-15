@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-basic-current-work-04",
+  "private": true,
+  "version": "1.0.0",
+  "description": "VS Code 파일 트리에서 수정 위치와 영향 범위를 찾고 작은 diff를 브라우저 결과와 연결합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "courseId": "basic-current-work",
+  "lessonNumber": 1,
+  "title": "AI는 도구다",
+  "revision": "3.0.0-beta.2-review",
+  "status": "review",
+  "sceneId": "basic-current-work-01-ai-landscape",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "설명은 그럴듯하지만 실제 결과가 요구와 다름",
+    "trace": "output accepted without verification",
+    "cause": "완료 기준과 검증 장면이 없음",
+    "fix": "예상 결과·제약·확인 방법을 추가하고 작은 출력부터 비교"
+  },
+  "deliverables": [
+    "AI 작업 분해표",
+    "도구 선택 이유",
+    "검증 질문 세 가지"
+  ]
+}

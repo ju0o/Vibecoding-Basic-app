@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-workflow-02",
+  "private": true,
+  "version": "1.0.0",
+  "description": "반복 업무를 단계와 상태로 분해하고 현재 작업 컨텍스트, 지속 지침과 장기 지식을 구분합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}
