@@ -70,6 +70,29 @@ button, input, textarea { font: inherit; letter-spacing: 0; }
 .terminal { margin: 3mm 0; padding: 4mm; overflow-wrap: anywhere; color: #f1f4f4; background: #20262a; font-family: Consolas, monospace; font-size: 9.5pt; line-height: 1.6; white-space: pre-wrap; }
 .callout { margin: 4mm 0; padding: 4mm; border: .4mm solid #a9c9c5; background: #edf7f5; }
 .danger { border-color: #ddafb0; background: #fff1f1; }
+.professional-brief,
+.professional-note {
+  margin: 4mm 0;
+  padding: 4mm;
+  border: .45mm solid #9ebbb7;
+  background: linear-gradient(180deg, #f4fbfa, #eef6f4);
+  break-inside: avoid;
+}
+.professional-brief span,
+.professional-note span {
+  display: block;
+  color: var(--accent);
+  font-size: 8pt;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.professional-brief p,
+.professional-note p {
+  margin-top: 2mm;
+}
+.professional-note h3:first-of-type {
+  margin-top: 2mm;
+}
 .source-card { margin: 4mm 0; padding: 4mm; border: .3mm solid var(--line); break-inside: avoid; }
 .source-card header { display: flex; align-items: center; justify-content: space-between; gap: 4mm; }
 .source-card h3 { margin: 0; font-size: 12pt; }

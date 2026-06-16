@@ -43,6 +43,28 @@ const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (character
 const list = (items, className = 'checklist') => `<ul class="${className}">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`;
 const lines = (count = 4) => `<div class="memo-lines">${Array.from({ length: count }, () => '<i></i>').join('')}</div>`;
 const footer = (label, page) => `<footer class="page-foot"><span>VIBE STUDIO · ${escapeHtml(course.code)}</span><span>${escapeHtml(label)} · ${String(page).padStart(2, '0')}</span></footer>`;
+const professionalBlock = (lesson, variant = 'summary') => {
+  const note = lesson.professional;
+  if (!note) return '';
+  if (variant === 'compact') {
+    return `
+      <div class="professional-brief">
+        <span>${escapeHtml(note.level || '전문 강사용 노트')}</span>
+        <p>${escapeHtml(note.focus)}</p>
+      </div>`;
+  }
+  return `
+    <div class="professional-note">
+      <span>${escapeHtml(note.level || '전문 강사용 노트')}</span>
+      <h3>강사가 먼저 이해할 핵심</h3>
+      <p>${escapeHtml(note.focus)}</p>
+      <h3>공식자료 기반 학습 포인트</h3>
+      ${list(note.officialStudy || [])}
+    </div>`;
+};
+const professionalPairs = (items = [], labelPrefix = 'Q') => items.map(([title, copy], index) => `
+  <div class="script-block"><span class="script-label">${escapeHtml(labelPrefix)}${index + 1}</span><span class="script-copy"><b>${escapeHtml(title)}</b><br>${escapeHtml(copy)}</span></div>
+`).join('');
 
 function cover() {
   return `
@@ -72,6 +94,7 @@ function workbook() {
         <div class="box"><h3>오늘의 판단 기준</h3>${list(lesson.concepts.map(([title, copy]) => `${title}: ${copy}`))}</div>
         <div class="box"><h3>수업 결과물</h3>${list(lesson.deliverables)}</div>
       </div>
+      ${professionalBlock(lesson, 'compact')}
       <h3>작업 순서</h3>${list(lesson.sequence, 'numbered')}
       <div class="callout"><b>수업 중 확인</b><p>설명을 들은 뒤 각 단계에서 화면, 파일, 로그 또는 데이터 중 무엇을 확인해야 하는지 표시합니다.</p></div>
       ${footer('WORKBOOK · A', index * 2 + 1)}
@@ -175,6 +198,7 @@ function examples() {
         <tr><th>오류본</th><td><code>${escapeHtml(lesson.demoProject.broken)}</code></td></tr>
         <tr><th>완성본</th><td><code>${escapeHtml(lesson.demoProject.complete)}</code></td></tr>
       </tbody></table>
+      ${lesson.professional?.exercise ? `<div class="callout"><b>전문과정 실습 포인트</b><p>${escapeHtml(lesson.professional.exercise)}</p></div>` : ''}
       ${footer('EXAMPLES · A', index * 2 + 1)}
     </section>
     <section class="sheet">
@@ -308,8 +332,10 @@ function demo() {
       ${pageHead(lesson, index, '실제 시연 운영 매뉴얼')}
       <h2>${escapeHtml(lesson.demo.title)}</h2>
       <p class="objective">발표자는 시작, 다음, 일시정지, 초기화를 직접 제어합니다. 수강생이 결과를 예측할 시간을 확보합니다.</p>
+      ${professionalBlock(lesson)}
       <h3>시연 전 준비</h3>${list([...lesson.preparation, '정상 상태 캡처', '실패 상태 캡처', '복구 명령 또는 되돌릴 커밋'])}
       <h3>정상 시연 순서</h3>${list(lesson.demo.stages.map((stage, step) => `${step + 1}. ${stage}: 화면 변화와 확인 기준을 말한 뒤 다음 단계로 이동`), 'numbered')}
+      ${lesson.professional?.demoRun ? `<h3>전문 시연 운영 순서</h3>${list(lesson.professional.demoRun, 'numbered')}` : ''}
       <div class="callout"><b>속도 원칙</b><p>한 단계가 끝날 때마다 다음 결과를 질문하고 3초 이상 기다립니다. 수강생 답을 들은 뒤 다음 버튼을 누릅니다.</p></div>
       ${footer('LIVE DEMO · A', index * 2 + 1)}
     </section>
@@ -324,6 +350,7 @@ function demo() {
         <tr><th>예상 밖 오류</th><td>오류를 숨기지 않고 수업의 오류 복구 템플릿을 즉시 적용합니다.</td></tr>
       </tbody></table>
       <h3>현장 실패 복구 순서</h3>${list(['증상과 시간을 그대로 말한다', '수강생에게 오류 화면을 함께 읽게 한다', '사전 준비한 대체 캡처로 개념 설명을 이어간다', '휴식 또는 실습 중 실제 원인을 복구한다', '복구 결과를 수업 종료 전에 공유한다'], 'numbered')}
+      ${lesson.professional?.failureDrill ? `<h3>전문 실패 훈련</h3>${list(lesson.professional.failureDrill, 'numbered')}` : ''}
       <h3>강의 전 리허설 기록</h3>${lines(6)}
       ${footer('LIVE DEMO · B', index * 2 + 2)}
     </section>
@@ -337,6 +364,7 @@ function qaBank() {
       <h2>${escapeHtml(lesson.title)}</h2>
       <h3>판단 실습 해설</h3>
       ${lesson.decisions.map(([question, tone, feedback]) => `<div class="script-block"><span class="script-label">${escapeHtml(tone)}</span><span class="script-copy"><b>${escapeHtml(question)}</b><br>${escapeHtml(feedback)}</span></div>`).join('')}
+      ${lesson.professional?.misconceptions ? `<h3>전문과정 오해 교정</h3>${professionalPairs(lesson.professional.misconceptions, 'M')}` : ''}
       <h3>완료 판단</h3>${list(lesson.deliverables.map((item) => `${item}: 화면, 파일, 로그 또는 URL로 확인할 수 있어야 함`))}
       <h3>미완료로 판단하는 경우</h3>${list(['결과 화면만 있고 실행 과정이 재현되지 않음', 'AI가 바꾼 파일과 이유를 설명하지 못함', '오류 또는 실패 상태를 확인하지 않음', '다른 사람이 같은 프로젝트를 실행할 수 없음'])}
       <h3>대표 오류 복구</h3>
@@ -355,6 +383,7 @@ function qaBank() {
       <div class="script-block"><span class="script-label">Q2</span><span class="script-copy"><b>정답 도구나 유일한 방식이 있나요?</b><br>도구는 바뀌지만 목표, 입력, 권한, 검증, 복구라는 작업 구조는 유지됩니다. 이 과정은 그 판단 기준을 훈련합니다.</span></div>
       <div class="script-block"><span class="script-label">Q3</span><span class="script-copy"><b>어디까지 직접 하고 어디부터 AI에게 맡기나요?</b><br>문제와 완료 기준, 승인과 검증은 사람이 소유합니다. 탐색, 초안, 반복 구현과 정리는 AI에게 맡길 수 있습니다.</span></div>
       <div class="script-block"><span class="script-label">Q4</span><span class="script-copy"><b>오류가 나면 처음부터 다시 만들어야 하나요?</b><br>먼저 마지막 정상 상태와 현재 diff를 비교합니다. 증상, 로그, 직전 변경을 기준으로 가장 작은 원인부터 확인하면 대부분 전체 재작성이 필요하지 않습니다.</span></div>
+      ${lesson.professional?.expertQuestions ? `<h3>전문 회차 예상 질문</h3>${professionalPairs(lesson.professional.expertQuestions, 'P')}` : ''}
       <h3>추가 질문 기록</h3>${lines(5)}
       ${footer('QA BANK · B', index * 2 + 2)}
     </section>
@@ -363,6 +392,24 @@ function qaBank() {
 
 function sourceStudy() {
   const keys = [...new Set(course.sessions.flatMap((lesson) => lesson.sources || []))];
+  const professionalLessons = course.sessions.map((lesson, index) => {
+    if (!lesson.professional) return '';
+    return `
+      <section class="sheet">
+        ${pageHead(lesson, index, '회차별 공식자료 학습 설계')}
+        <h2>${escapeHtml(lesson.title)}</h2>
+        <p class="objective">${escapeHtml(lesson.professional.focus)}</p>
+        <h3>이 회차에서 반드시 읽어야 할 공식 개념</h3>
+        ${list(lesson.professional.officialStudy || [])}
+        <h3>수업에서 보여줄 시각 장면</h3>
+        <p>${escapeHtml(lesson.professional.visualSimulation)}</p>
+        <h3>공식자료를 읽고 수업 전 답해야 할 질문</h3>
+        ${professionalPairs(lesson.professional.expertQuestions || [], 'Q')}
+        <h3>연결 공식자료 키</h3>
+        <div class="source-card">${(lesson.sources || []).map((key) => `<a href="${escapeHtml(sourceCatalog[key]?.url || '#')}">${escapeHtml(key)} · ${escapeHtml(sourceCatalog[key]?.title || '출처 미등록')}</a>`).join('')}</div>
+        ${footer('LESSON SOURCE STUDY', index + 2)}
+      </section>`;
+  }).join('');
   const cards = keys.map((key, index) => {
     const source = sourceCatalog[key];
     if (!source) return `
@@ -415,6 +462,7 @@ function sourceStudy() {
       <div class="callout"><b>마지막 갱신</b><p>${escapeHtml(window.VIBE_OFFICIAL_SOURCES.checkedAt || '아직 실행되지 않음')}</p></div>
       ${footer('SOURCE STUDY', 1)}
     </section>
+    ${professionalLessons}
     ${cards || `
       <section class="sheet">
         ${pageHead(course.sessions[0], 1, '공식자료 연구노트')}
@@ -431,12 +479,18 @@ function deepDive() {
       ${pageHead(lesson, index, '강사용 심화 개념집')}
       <h2>${escapeHtml(lesson.title)}</h2>
       <p class="objective">이 페이지는 수강생에게 그대로 나눠주는 자료가 아니라, 강사가 공식자료와 실제 시연 사이의 논리를 이해하기 위한 공부 자료입니다.</p>
+      ${professionalBlock(lesson)}
+      ${lesson.professional?.visualSimulation ? `<h3>시각 시뮬레이션 설계 의도</h3><p>${escapeHtml(lesson.professional.visualSimulation)}</p>` : ''}
       <h3>쉬운 설명</h3>
       ${lesson.concepts.map(([title, copy]) => `<div class="script-block"><span class="script-label">${escapeHtml(title)}</span><span class="script-copy">${escapeHtml(copy)}<br>수업에서는 정의를 먼저 말하지 말고, 화면에서 어떤 판단을 해야 하는지 사례로 설명합니다.</span></div>`).join('')}
       <h3>전문가 관점에서 강조할 것</h3>
-      ${list(['권한과 비용은 기능 완성 이후가 아니라 설계 단계에서 함께 결정', 'AI 결과물은 실행·diff·로그·브라우저 증거로 검증', '도구별 명령보다 목표, 컨텍스트, 승인, 복구 흐름을 우선', '수강생의 질문은 정답보다 문제 위치 판단으로 되돌림'])}
+      ${list(lesson.professional
+        ? ['공식자료의 기능 설명을 그대로 읽지 말고 작업 판단 기준으로 번역', '실제 화면·터미널·diff·로그로 증거를 남기게 운영', '권한·비용·복구 기준을 기능 구현 전부터 함께 설계', '자동화와 병렬화는 성공률과 책임 경계가 확인된 뒤 적용']
+        : ['권한과 비용은 기능 완성 이후가 아니라 설계 단계에서 함께 결정', 'AI 결과물은 실행·diff·로그·브라우저 증거로 검증', '도구별 명령보다 목표, 컨텍스트, 승인, 복구 흐름을 우선', '수강생의 질문은 정답보다 문제 위치 판단으로 되돌림'])}
+      ${lesson.professional?.failureDrill ? `<h3>강사가 리허설해야 할 실패 장면</h3>${list(lesson.professional.failureDrill, 'numbered')}` : ''}
       <h3>오해 방지 문장</h3>
       <p>${escapeHtml(lesson.compare.bad.join(' / '))} 방식은 결과를 빨리 보이게 하지만 운영 가능한 결과를 보장하지 않습니다. ${escapeHtml(lesson.compare.good.join(' / '))} 기준으로 다시 묶어 설명합니다.</p>
+      ${lesson.professional?.misconceptions ? professionalPairs(lesson.professional.misconceptions, '오해') : ''}
       <h3>강사 메모</h3>${lines(5)}
       ${footer('DEEP DIVE', index + 1)}
     </section>

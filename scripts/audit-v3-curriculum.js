@@ -109,6 +109,14 @@ for (const [courseId, course] of Object.entries(v3CourseData)) {
     if (['claude', 'codex'].includes(courseId) && session.status === 'ready') {
       pass((session.sourceKeys || []).length >= 3, `${courseId}-${index + 1} has at least 3 official study sources`);
     }
+    if (courseId === 'codex' && session.status === 'ready') {
+      pass(Boolean(session.professional?.focus), `${courseId}-${index + 1} has Codex professional focus`);
+      pass((session.professional?.officialStudy || []).length >= 3, `${courseId}-${index + 1} has Codex official study notes`);
+      pass(Boolean(session.professional?.visualSimulation), `${courseId}-${index + 1} has Codex visual simulation brief`);
+      pass((session.professional?.demoRun || []).length >= 4, `${courseId}-${index + 1} has Codex demo runbook steps`);
+      pass((session.professional?.failureDrill || []).length >= 3, `${courseId}-${index + 1} has Codex failure drills`);
+      pass((session.professional?.expertQuestions || []).length >= 2, `${courseId}-${index + 1} has Codex expert Q&A`);
+    }
     for (const variant of ['starter', 'broken', 'complete']) {
       const target = path.join(root, 'src/content', session.demoProject?.[variant] || '', 'index.html');
       if (!fs.existsSync(target)) failures.push(`${courseId}-${index + 1} missing ${variant} lab`);

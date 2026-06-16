@@ -71,6 +71,7 @@ function detail({
   preparation = ['개인 노트북', '현재 프로젝트', '강의 워크북'],
   sources = [],
   pathway = null,
+  professional = null,
 }) {
   return {
     title,
@@ -90,6 +91,30 @@ function detail({
     preparation,
     sources,
     pathway,
+    professional,
+  };
+}
+
+function codexProfessional({
+  focus,
+  officialStudy,
+  visualSimulation,
+  demoRun,
+  failureDrill,
+  exercise,
+  misconceptions,
+  expertQuestions,
+}) {
+  return {
+    level: 'Codex Professional 강사용 연구노트',
+    focus,
+    officialStudy,
+    visualSimulation,
+    demoRun,
+    failureDrill,
+    exercise,
+    misconceptions,
+    expertQuestions,
   };
 }
 
@@ -499,6 +524,35 @@ const curricula = {
         error: { symptom: 'Codex가 파일을 찾지 못함', trace: 'path outside writable workspace', cause: 'Workspace와 실제 프로젝트 위치가 다름', fix: '올바른 폴더를 Workspace로 열고 권한 범위를 확인' },
         practice: 'App·CLI·IDE 중 작업에 맞는 표면을 골라 저장소 탐색, 작은 수정과 검증을 완료합니다.',
         deliverables: ['표면 선택 기준표', '작업 계약', '첫 검증된 변경'],
+        professional: codexProfessional({
+          focus: 'Codex의 핵심은 “대화형 코드 생성기”가 아니라 작업 표면, 작업공간, 권한, 검증 증거를 연결하는 실행 루프입니다. 강사는 App·CLI·IDE를 기능 목록으로 나열하지 말고 피드백 속도와 위험 범위가 다른 세 작업실로 설명합니다.',
+          officialStudy: [
+            'Codex는 코드 작성, 코드베이스 이해, 리뷰, 디버깅, 반복 개발 작업 자동화를 수행하는 코딩 에이전트입니다.',
+            '로컬 CLI와 IDE에서는 기본적으로 네트워크가 꺼져 있고, 쓰기 범위는 활성 작업공간으로 제한되는 샌드박스와 승인 정책이 함께 작동합니다.',
+            '작업 표면 선택은 취향 문제가 아니라 필요한 문맥, 확인 방식, 승인 범위, 화면 검증 필요성에 따라 달라지는 운영 판단입니다.',
+          ],
+          visualSimulation: '하나의 요구사항이 App 계획 보드, CLI 터미널 세션, IDE 파일 트리, Browser 시각 QA로 이동하는 “surface router” 장면을 사용합니다. 각 단계는 자동 재생하지 않고 승인 범위가 바뀌는 순간에 멈춥니다.',
+          demoRun: [
+            '같은 저장소에서 “작은 UI 문구 수정” 작업을 App, CLI, IDE 중 어디서 시작할지 먼저 투표시킵니다.',
+            '작업공간 경로, Git 상태, 권한 상태를 보여준 뒤 Codex에게 탐색과 계획만 요청합니다.',
+            '실제 수정은 한 파일 한 줄로 제한하고, 실행 명령과 브라우저 확인을 증거로 남깁니다.',
+            '마지막에 “표면 선택 기준표”를 학생 프로젝트에 맞게 다시 작성하게 합니다.',
+          ],
+          failureDrill: [
+            '작업공간 밖 파일을 요청했을 때 승인 또는 거부가 발생하는 장면을 보여줍니다.',
+            '네트워크가 필요한 명령을 바로 실행하지 않고 왜 승인이 필요한지 설명합니다.',
+            '경로 오류가 나면 “현재 cwd, Git root, 실제 프로젝트 폴더” 세 가지를 확인하게 합니다.',
+          ],
+          exercise: '학생은 자신의 프로젝트에서 App·CLI·IDE 중 하나를 선택하고, 선택 이유·필요 권한·검증 명령·성공 화면을 한 장의 작업 계약서로 작성합니다.',
+          misconceptions: [
+            ['Codex는 그냥 ChatGPT가 코드를 써주는 것이다', 'Codex는 저장소, 명령, diff, 브라우저, 승인 흐름과 연결될 때 개발 에이전트가 됩니다.'],
+            ['권한을 크게 열수록 더 빨리 끝난다', '초보자일수록 최소 권한과 작은 변경이 오히려 복구 시간을 줄입니다.'],
+          ],
+          expertQuestions: [
+            ['이 작업은 어느 표면에서 시작해야 하나요?', '결과를 확인해야 하는 증거가 코드 diff인지, 터미널 로그인지, 실제 화면인지부터 묻고 표면을 고르게 합니다.'],
+            ['승인을 요청하면 그냥 허용하면 되나요?', '승인 전에는 명령 목적, 영향 범위, 되돌릴 방법을 한 문장으로 확인해야 합니다.'],
+          ],
+        }),
         sources: ['codex-overview', 'codex-security', 'github-git'],
       }),
       detail({
@@ -514,6 +568,35 @@ const curricula = {
         error: { symptom: '프로젝트 config가 적용되지 않음', trace: 'project layer ignored: untrusted', cause: '신뢰하지 않은 저장소의 프로젝트 설정', fix: '프로젝트 신뢰 상태를 확인하고 전역·프로젝트 설정 범위를 구분' },
         practice: 'AGENTS.md, 최소 config와 Rules를 설계하고 Git diff·테스트·commit까지 실행합니다.',
         deliverables: ['AGENTS.md', 'Codex 설정 설명서', '검증된 Git 커밋'],
+        professional: codexProfessional({
+          focus: '이 회차의 핵심은 “좋은 프롬프트”가 아니라 반복되는 기대를 저장소 운영 체계로 옮기는 것입니다. AGENTS.md는 협업 계약, config.toml은 실행 환경 설정, Rules는 위험 행동 정책, Git은 결과 검증 장부로 분리해 가르칩니다.',
+          officialStudy: [
+            'Codex는 작업 시작 전 전역 AGENTS.md와 프로젝트 경로상의 AGENTS.md를 읽고, 더 가까운 하위 지침이 나중에 결합되어 실무 지침을 구체화합니다.',
+            'config.toml과 프로필은 모델, 승인 정책, 샌드박스, MCP 같은 실행 옵션을 관리하는 설정 계층입니다.',
+            'Review와 Git diff는 Codex가 만든 변경뿐 아니라 저장소의 현재 변경 전체를 보여주므로, 사용자 변경을 보호하는 습관과 함께 설명해야 합니다.',
+          ],
+          visualSimulation: '왼쪽에는 전역 AGENTS.md, 루트 AGENTS.md, 하위 폴더 AGENTS.md가 층층이 쌓이는 instruction stack을 보여주고, 오른쪽에는 config와 Rules가 실행 게이트로 작동하는 회로도를 배치합니다.',
+          demoRun: [
+            '저장소 루트에 AGENTS.md를 만들고 “검증 명령, 스타일, 금지 행동” 세 항목만 작성합니다.',
+            '하위 폴더에 더 구체적인 AGENTS.md를 두고 적용 범위가 어떻게 달라지는지 설명합니다.',
+            'config.toml 예시는 실제 값보다 설정 책임을 보여주는 데 집중합니다.',
+            '수정 후 git diff, 테스트, commit 메시지까지 한 번의 작은 루프로 닫습니다.',
+          ],
+          failureDrill: [
+            'AGENTS.md에 개인 취향과 프로젝트 규칙을 섞어 팀 전체에 불필요한 규칙이 퍼지는 오류를 보여줍니다.',
+            '프로젝트 설정이 신뢰되지 않아 적용되지 않는 상황을 “설정이 틀린 것”과 구분하게 합니다.',
+            'AI가 만든 변경과 사용자가 만든 변경이 섞였을 때 diff 범위를 먼저 나누게 합니다.',
+          ],
+          exercise: '학생은 자신의 프로젝트에 맞는 AGENTS.md 초안을 작성하고, 반드시 들어갈 검증 명령 2개와 절대 하지 말아야 할 행동 2개를 정합니다.',
+          misconceptions: [
+            ['AGENTS.md에 많이 적을수록 좋다', '긴 지침보다 실제로 반복되는 검증, 파일 소유권, 금지 행동을 짧게 적는 편이 안정적입니다.'],
+            ['config와 AGENTS.md는 같은 것이다', 'AGENTS.md는 작업 방식 지침이고 config는 실행 환경 설정입니다. 섞이면 유지보수가 어려워집니다.'],
+          ],
+          expertQuestions: [
+            ['AGENTS.md에는 무엇을 적어야 하나요?', '프로젝트의 반복 규칙, 검증 명령, 안전 기준, 리뷰 기대치를 적고 개인 선호나 일회성 요청은 분리합니다.'],
+            ['Rules는 언제 필요한가요?', '허용하거나 차단할 행동이 반복되고 위험 비용이 클 때 정책으로 분리합니다.'],
+          ],
+        }),
         sources: ['codex-agents-md', 'codex-config', 'codex-rules'],
       }),
       detail({
@@ -529,6 +612,35 @@ const curricula = {
         error: { symptom: 'Plugin 업데이트 후 Skill이 보이지 않음', trace: 'manifest cache unchanged', cause: '매니페스트·설치 캐시·버전 갱신 누락', fix: '구조 검증 후 버전과 설치 캐시를 갱신하고 재시작' },
         practice: '한 Skill을 만들고 테스트한 뒤 설치 가능한 개인 Plugin으로 패키징합니다.',
         deliverables: ['Codex Skill', 'Plugin 패키지', '테스트·업데이트 기록'],
+        professional: codexProfessional({
+          focus: 'Skill은 프롬프트 저장소가 아니라 특정 업무를 반복 가능한 절차로 만드는 강사용 핵심 주제입니다. Plugin은 그 Skill과 앱, MCP, Hook, 자산을 설치 가능한 배포 단위로 묶는 단계입니다.',
+          officialStudy: [
+            'Skill은 SKILL.md와 선택적 스크립트, 참고자료를 포함하는 디렉터리이며 Codex가 필요할 때 전체 지침을 읽는 점진적 공개 구조를 사용합니다.',
+            'Skill 설명은 암시 호출 정확도에 직접 영향을 주므로 무엇을 할 때 쓰고 무엇에는 쓰지 않는지 앞부분에 명확해야 합니다.',
+            'Plugin은 Skills, Apps, MCP 서버 같은 기능을 설치 가능한 워크플로 단위로 묶습니다.',
+          ],
+          visualSimulation: '반복 업무 로그가 “Trigger → SKILL.md → references/scripts → 검증 → plugin.json → 설치” 순서로 압축되는 패키징 라인을 보여줍니다.',
+          demoRun: [
+            '반복 업무 하나를 고르고 성공 조건, 입력 자료, 금지 범위를 먼저 정합니다.',
+            'Skill 설명을 작성한 뒤 명시 호출과 암시 호출 두 방식으로 테스트합니다.',
+            '참고자료를 항상 본문에 넣지 않고 필요한 파일로 분리하는 이유를 보여줍니다.',
+            'Plugin 매니페스트에 Skill을 묶고 설치·업데이트 기록을 남깁니다.',
+          ],
+          failureDrill: [
+            'Skill 설명이 넓어서 엉뚱한 작업에 호출되는 사례를 보여줍니다.',
+            'SKILL.md에 긴 문서를 모두 붙여 context 낭비가 생기는 사례를 비교합니다.',
+            'Plugin 업데이트 후 버전 또는 캐시 갱신 누락으로 보이지 않는 상황을 복구합니다.',
+          ],
+          exercise: '학생은 본인이 자주 반복하는 작업 하나를 Skill 후보로 정의하고, trigger, input, output, verification, out-of-scope를 작성합니다.',
+          misconceptions: [
+            ['Skill은 좋은 프롬프트를 저장하는 곳이다', 'Skill은 업무 절차, 필요한 자료, 검증 명령, 실패 대처까지 포함하는 재사용 워크플로입니다.'],
+            ['Plugin은 복잡한 개발자만 만든다', '작게는 개인 Skill 몇 개를 설치 가능한 묶음으로 관리하는 것부터 시작할 수 있습니다.'],
+          ],
+          expertQuestions: [
+            ['Skill과 AGENTS.md의 차이는 무엇인가요?', 'AGENTS.md는 저장소 기본 규칙이고 Skill은 특정 작업을 수행하는 절차입니다. 범위가 다릅니다.'],
+            ['언제 Plugin으로 묶나요?', '다른 프로젝트나 사람에게 설치·배포·업데이트해야 할 때 Plugin으로 묶습니다.'],
+          ],
+        }),
         sources: ['codex-skills', 'codex-plugins', 'codex-overview'],
       }),
       detail({
@@ -544,6 +656,35 @@ const curricula = {
         error: { symptom: '자동 테스트는 통과했지만 버튼이 화면 밖에 있음', trace: 'DOM present / viewport clipped', cause: '동작 검사만 하고 실제 렌더링을 보지 않음', fix: '대표 해상도 스크린샷과 인터랙션 QA 추가' },
         practice: 'MCP 또는 Connector 하나를 연결하고 로컬 앱을 Browser로 조작해 동작·반응형·시각 회귀를 검증합니다.',
         deliverables: ['연결 결정표', '권한 설정', '브라우저 QA 보고서'],
+        professional: codexProfessional({
+          focus: '외부 연결의 핵심은 “많은 도구 연결”이 아니라 데이터 출처, 행동 권한, 인증, 시각 증거를 분리해 가장 좁은 연결을 선택하는 것입니다.',
+          officialStudy: [
+            'MCP는 모델에 도구와 컨텍스트를 연결하는 프로토콜이며 Codex는 STDIO 서버와 Streamable HTTP 서버, 인증, 서버 instructions를 지원합니다.',
+            'MCP 서버 instructions는 도구 선택과 사용 제약을 안내하므로, 서버 전체에 적용되는 워크플로와 rate limit 같은 내용을 짧고 명확하게 작성해야 합니다.',
+            '브라우저와 앱 연결은 실제 UI·개인 데이터·외부 행동을 다루므로, 승인과 side effect를 수업의 핵심 판단으로 다뤄야 합니다.',
+          ],
+          visualSimulation: '요청 하나가 “공개 웹 검색, 공식 API, 인증 Connector, MCP, Browser” 중 어느 경로를 타야 하는지 분기하는 권한망을 보여주고, 각 분기마다 데이터 민감도와 검증 증거가 달라지게 합니다.',
+          demoRun: [
+            '동일한 질문을 공개 문서 조회, 개인 계정 데이터 조회, 로컬 UI 검증 세 장면으로 나눕니다.',
+            '각 장면에서 왜 web search, Connector, Browser 중 하나를 선택해야 하는지 설명합니다.',
+            'MCP 연결은 도구 목록보다 권한·인증·실패 시 대체 경로를 먼저 점검합니다.',
+            'Browser QA에서는 DOM 존재 여부가 아니라 클릭, 스크린샷, 반응형 화면을 증거로 남깁니다.',
+          ],
+          failureDrill: [
+            '개인 데이터가 필요한 요청을 일반 웹 검색으로 처리하려는 잘못된 흐름을 막습니다.',
+            'MCP 서버는 연결됐지만 인증이 빠져 빈 결과가 나오는 상황을 구분합니다.',
+            '자동 테스트는 통과하지만 화면 배치가 깨진 사례를 Browser 스크린샷으로 찾아냅니다.',
+          ],
+          exercise: '학생은 자신의 프로젝트에서 외부 연결 후보 하나를 골라 공개 데이터인지, 개인 인증 데이터인지, 실제 화면 검증인지 분류하고 가장 좁은 도구를 선택합니다.',
+          misconceptions: [
+            ['MCP를 많이 연결할수록 더 똑똑해진다', '연결이 늘수록 권한, 비용, 오류 표면도 늘어납니다. 필요한 연결만 켜야 합니다.'],
+            ['테스트가 통과하면 UI도 괜찮다', '사용자가 보는 화면은 스크린샷과 상호작용으로 별도 검증해야 합니다.'],
+          ],
+          expertQuestions: [
+            ['MCP와 Connector는 무엇이 다른가요?', 'MCP는 도구와 컨텍스트를 연결하는 표준 경로이고, Connector는 특정 서비스의 인증된 데이터와 행동을 앱 형태로 제공하는 경우가 많습니다.'],
+            ['브라우저 QA는 언제 필요한가요?', '레이아웃, 클릭 흐름, 로그인 상태, 실제 사용자 화면을 확인해야 할 때 필요합니다.'],
+          ],
+        }),
         sources: ['codex-mcp', 'codex-browser', 'mcp-intro'],
       }),
       detail({
@@ -559,6 +700,35 @@ const curricula = {
         error: { symptom: '각 브랜치는 통과하지만 합치면 UI가 깨짐', trace: 'integration regression', cause: '개별 테스트만 있고 통합 시나리오가 없음', fix: '병합 후 전체 사용자 흐름과 스크린샷 회귀를 다시 실행' },
         practice: '하나의 기능을 탐색·구현·테스트·리뷰로 나눠 Subagent/Worktree에서 수행하고 통합 QA합니다.',
         deliverables: ['병렬 작업 계획', '역할별 결과·증거', '통합 리뷰 보고서'],
+        professional: codexProfessional({
+          focus: 'Subagent와 Worktree는 속도 자랑이 아니라 컨텍스트 오염을 줄이고 독립 작업을 안전하게 병렬화하기 위한 구조입니다. 강사는 “무엇을 병렬화하면 안 되는지”를 반드시 함께 가르쳐야 합니다.',
+          officialStudy: [
+            'Subagent는 탐색, 테스트, 리뷰처럼 독립적인 작업을 별도 컨텍스트에서 수행해 주 대화를 요구사항과 의사결정 중심으로 유지합니다.',
+            'Worktree는 같은 Git 저장소에서 별도 체크아웃을 만들어 병렬 작업이 현재 Local 작업을 방해하지 않게 합니다.',
+            'Review는 Git 저장소 상태를 기준으로 변경 범위, staged/unstaged, branch diff를 확인하게 해 통합 전 검토의 기준점이 됩니다.',
+          ],
+          visualSimulation: '메인 관제실에서 요구사항과 통합 기준을 들고 있고, 세 개의 Worktree/Subagent가 탐색·테스트·리뷰를 병렬 수행한 뒤 요약 증거만 다시 합류하는 관제판을 보여줍니다.',
+          demoRun: [
+            '한 기능을 파일 소유권이 겹치지 않는 탐색, 구현, 테스트, 리뷰 작업으로 나눕니다.',
+            '각 작업에 반환 형식: 결론, 변경 파일, 실행한 검증, 남은 위험을 지정합니다.',
+            'Subagent 결과를 원문 로그가 아니라 요약 증거로 받는 이유를 설명합니다.',
+            '통합 후 전체 사용자 흐름과 화면 QA를 다시 실행해 “각자 성공”과 “전체 성공”의 차이를 보여줍니다.',
+          ],
+          failureDrill: [
+            '두 작업이 같은 파일을 동시에 고쳐 충돌하는 사례를 파일 소유권 계약으로 복구합니다.',
+            'Subagent가 긴 로그를 그대로 반환해 본 대화가 흐려지는 사례를 요약 형식으로 줄입니다.',
+            '개별 브랜치는 통과하지만 병합 후 UI가 깨지는 상황을 통합 QA로 잡습니다.',
+          ],
+          exercise: '학생은 본인 프로젝트의 다음 작업을 병렬 가능/불가능으로 분류하고, 병렬 가능한 작업에 대해 역할, 파일 범위, 반환 형식, 통합 검증을 작성합니다.',
+          misconceptions: [
+            ['작업을 많이 쪼개면 항상 빨라진다', '의존성이 크거나 같은 파일을 고치면 병렬화가 오히려 복구 비용을 키웁니다.'],
+            ['Subagent가 낸 결과는 바로 합치면 된다', '주 Agent와 사람이 통합 품질과 최종 책임을 가져야 합니다.'],
+          ],
+          expertQuestions: [
+            ['언제 Subagent를 쓰면 좋나요?', '읽기 중심 탐색, 테스트 로그 분석, 리뷰처럼 독립적이고 결과를 요약할 수 있는 작업에 좋습니다.'],
+            ['Worktree와 브랜치는 어떻게 다르나요?', '브랜치는 기록의 선이고 Worktree는 그 브랜치를 실제 별도 폴더에서 작업하게 하는 공간입니다.'],
+          ],
+        }),
         sources: ['codex-subagents', 'codex-worktrees', 'codex-review', 'github-git'],
       }),
       detail({
@@ -574,6 +744,35 @@ const curricula = {
         error: { symptom: 'Release에는 이전 버전 실행 파일이 올라감', trace: 'tag v3 / package 2.0.0', cause: '태그·package 버전·자산명 검증 누락', fix: 'CI에서 버전 일치 검사 후 빌드·체크섬·업로드' },
         practice: 'Hook 또는 Automation 하나와 GitHub Actions 검증, PR, 버전 태그, Release 자산 흐름을 완성합니다.',
         deliverables: ['운영 Hook·Automation', 'GitHub Actions', '최종 Codex 릴리즈 시스템'],
+        professional: codexProfessional({
+          focus: '마지막 회차의 핵심은 Codex가 만든 작업을 “반복 가능한 운영 체계”로 승격하는 것입니다. Hook은 정책 실행, Automation은 반복 작업, GitHub Actions는 저장소 검증, Release는 배포 증거라는 경계를 분명히 나눕니다.',
+          officialStudy: [
+            'Hooks는 도구 사용 전후와 세션 이벤트에 스크립트를 주입해 로깅, 비밀값 차단, 검증 강제, 메모리 생성 같은 정책을 실행할 수 있습니다.',
+            'Automations와 background worktree는 반복 작업을 현재 작업과 분리해 실행하게 만들지만, 실패 반복·비용·알림·복구 기준을 함께 설계해야 합니다.',
+            'Release는 버전, 변경 기록, 실행 파일, 체크섬, 복구 경로가 일치할 때 강의나 제품 운영에서 신뢰 가능한 배포 단위가 됩니다.',
+          ],
+          visualSimulation: 'Hook 게이트, Automation 스케줄러, GitHub Actions CI, PR 리뷰, tag, release asset이 한 줄 파이프라인으로 이어지고, 각 단계가 통과할 때만 다음 노드가 켜지는 운영 관제 화면을 보여줍니다.',
+          demoRun: [
+            '위험하거나 반복되는 행동 하나를 Hook 후보로 고르고, 차단할지 기록할지 검증할지 구분합니다.',
+            'Automation 후보는 수동으로 세 번 성공한 읽기·검사 중심 작업부터 선정합니다.',
+            'GitHub Actions에서는 build, audit, smoke, print QA 중 최소 검증 세트를 연결합니다.',
+            'Release 단계에서는 package version, 태그, EXE 파일명, SHA-256이 모두 일치하는지 확인합니다.',
+          ],
+          failureDrill: [
+            'Hook이 너무 넓게 잡혀 정상 작업까지 막는 사례를 최소 정책으로 좁힙니다.',
+            '자동화가 실패를 반복하면서 비용과 알림 피로를 만드는 상황을 중지 조건과 재시도 정책으로 복구합니다.',
+            '태그, package version, 릴리즈 자산명이 불일치해 이전 EXE가 배포되는 상황을 CI 버전 검사로 막습니다.',
+          ],
+          exercise: '학생은 자신의 Codex 워크스페이스에 적용할 운영 정책 하나, 반복 자동화 후보 하나, 릴리즈 전 검증 명령 세 개를 작성합니다.',
+          misconceptions: [
+            ['자동화하면 사람이 안 봐도 된다', '자동화는 반복 실행을 맡을 뿐, 승인 기준과 실패 복구 책임은 사람이 설계해야 합니다.'],
+            ['Hook은 많을수록 안전하다', '너무 많은 Hook은 작업을 불안정하게 만들 수 있어 핵심 위험에만 적용해야 합니다.'],
+          ],
+          expertQuestions: [
+            ['Hook과 CI의 차이는 무엇인가요?', 'Hook은 Codex 작업 루프 안에서 빠르게 정책을 실행하고, CI는 저장소 이벤트 기준으로 독립 검증을 수행합니다.'],
+            ['언제 자동화를 켜야 하나요?', '수동으로 안정적으로 성공하고 실패 비용과 복구 기준이 명확할 때 켭니다.'],
+          ],
+        }),
         sources: ['codex-hooks', 'codex-automations', 'github-actions', 'github-releases'],
       }),
     ],
@@ -681,6 +880,11 @@ curricula['basic-current-work'] = {
 
 function buildScriptSlides(session) {
   const conceptNames = session.concepts.map(([title]) => title).join(' · ');
+  const professional = session.professional;
+  const professionalFocus = professional
+    ? professional.focus
+    : `${session.title}에서 강사가 먼저 이해해야 할 심화 기준은 ${session.concepts.map(([title, copy]) => `${title}: ${copy}`).join(' / ')}입니다.`;
+  const professionalStudy = professional?.officialStudy || [];
   return [
     ['표지', `오늘의 목표는 ${session.objective}`, `최근 이 주제에서 막힌 장면이 있었는지 한 명에게 묻습니다.`],
     ['작업 지도', '120분의 다섯 구간과 각 구간의 산출물을 먼저 합의합니다.', '수업이 끝날 때 무엇이 화면 밖에 남아야 하는지 질문합니다.'],
@@ -702,7 +906,9 @@ function buildScriptSlides(session) {
     do: index === 4 ? `시작 버튼을 누르고 ${session.demo.stages.join(' → ')}를 수동으로 진행합니다.` : '화면 요소를 하나씩 공개하고 수강생의 시선을 한 지점에 고정합니다.',
     ask,
     expected: index === 7 ? `${session.error.cause}와 ${session.error.fix}를 연결한 답` : '자신의 프로젝트 또는 업무 사례를 포함한 한 문장 답',
-    deepDive: `${session.title}에서 강사가 먼저 이해해야 할 심화 기준은 ${session.concepts.map(([title, copy]) => `${title}: ${copy}`).join(' / ')}입니다. 공식자료와 실제 시연을 연결해 수강생에게는 정의보다 판단 기준으로 설명합니다.`,
+    deepDive: professional
+      ? `${professionalFocus} ${professionalStudy[index % Math.max(1, professionalStudy.length)] || ''}`
+      : `${professionalFocus} 공식자료와 실제 시연을 연결해 수강생에게는 정의보다 판단 기준으로 설명합니다.`,
     recovery: index === 4 ? '실제 도구가 실패하면 저장된 대체 캡처와 동일한 로그로 시연을 계속합니다.' : '응답이 없으면 구체적인 화면 예시 하나를 제시하고 다시 질문합니다.',
   }));
 }
