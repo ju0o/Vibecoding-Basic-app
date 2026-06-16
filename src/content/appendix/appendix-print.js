@@ -198,6 +198,12 @@
       action: '공식자료 읽는 순서, 개념 경계, 시각 슬라이드 장면, 별도 심화과정 분리 기준을 확인합니다.',
       download: '강사용 연구자료입니다. 수강생에게 배포하지 않고 강사자료실에서 PDF로 저장해 수업 전 공부자료로 사용합니다.',
     },
+    'instructor-codex-professional-research.html': {
+      session: '심화과정 / Codex Professional',
+      timing: 'Codex 전문과정 슬라이드, 시연, 실습을 설계하기 전',
+      action: 'Codex 공식 매뉴얼 기반으로 표면 선택, 지속 지침, 권한, 검증, 릴리즈 운영 흐름을 공부합니다.',
+      download: '강사용 연구자료입니다. 수강생에게 배포하지 않고 강사자료실에서 PDF로 저장해 수업 전 공부자료로 사용합니다.',
+    },
   };
 
   const filename = decodeURIComponent(location.pathname.split('/').pop() || '');

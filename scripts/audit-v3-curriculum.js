@@ -51,7 +51,7 @@ for (const [courseId, expected] of Object.entries(expectedCounts)) {
   if (!course) continue;
   pass(course.sessions.length === expected, `${courseId} has ${expected} lessons`);
   const expectedStudent = courseId === 'basic-current' ? 7 : 6;
-  const expectedInstructor = courseId === 'basic-current' ? 9 : courseId === 'workflow' ? 8 : 7;
+  const expectedInstructor = courseId === 'basic-current' ? 9 : ['workflow', 'codex'].includes(courseId) ? 8 : 7;
   pass((course.materials?.student || []).length === expectedStudent, `${courseId} has ${expectedStudent} student materials`);
   pass((course.materials?.instructor || []).length === expectedInstructor, `${courseId} has ${expectedInstructor} instructor materials`);
 }

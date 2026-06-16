@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Professional 전문 연구자료 - 강사용</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+  <style>
+    :root {
+      --ink: #11171c;
+      --muted: #58646d;
+      --line: #d7dee4;
+      --paper: #f4f7f9;
+      --deep: #071016;
+      --blue: #1d6f9f;
+      --cyan: #2c8c9f;
+      --green: #28775e;
+      --amber: #a66d18;
+      --red: #b4403d;
+      --violet: #6758b8;
+      font-family: "Pretendard Variable", "Pretendard", "Malgun Gothic", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: #dde5eb; letter-spacing: 0; }
+    main { width: min(1200px, calc(100% - 34px)); margin: 24px auto 72px; }
+    h1, h2, h3, h4, p { margin: 0; word-break: keep-all; }
+    a { color: var(--blue); }
+    code { font-family: Consolas, "JetBrains Mono", monospace; }
+    .cover {
+      min-height: 460px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(380px, .95fr);
+      gap: 48px;
+      align-items: end;
+      padding: 58px;
+      color: #f8fbfd;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(44,140,159,.24), transparent 34%),
+        linear-gradient(135deg, rgba(29,111,159,.22), transparent 48%),
+        var(--deep);
+    }
+    .eyebrow { color: #7fd8ed; font: 850 12px/1.2 Consolas, monospace; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin-top: 16px; font-size: clamp(42px, 6vw, 76px); line-height: 1.03; letter-spacing: 0; }
+    .cover p { max-width: 760px; margin-top: 20px; color: #bdcbd1; font-size: 19px; line-height: 1.72; }
+    .command-room {
+      min-height: 340px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(7,16,22,.72);
+      box-shadow: 0 32px 70px rgba(0,0,0,.28);
+    }
+    .room-top, .room-bottom { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .room-bottom { border-top: 1px solid rgba(255,255,255,.1); border-bottom: 0; color: #83d4e7; font: 800 11px/1.2 Consolas, monospace; letter-spacing: .07em; }
+    .dots { display: flex; gap: 7px; }
+    .dots i { width: 10px; height: 10px; border-radius: 50%; background: #39464d; }
+    .dots i:nth-child(1) { background: #f05d56; }
+    .dots i:nth-child(2) { background: #e7b84a; }
+    .dots i:nth-child(3) { background: #49bc75; }
+    .room-label { color: #90a2ab; font: 850 11px/1 Consolas, monospace; letter-spacing: .08em; }
+    .room-body { display: grid; grid-template-columns: .7fr 1fr; gap: 1px; background: rgba(255,255,255,.08); }
+    .room-pane { padding: 18px; background: #0c171f; }
+    .file-row, .log-row { display: flex; gap: 10px; align-items: center; min-height: 30px; color: #cdd8dc; font-size: 13px; }
+    .file-row b { width: 12px; height: 12px; border-radius: 3px; background: var(--color, #5b6a72); }
+    .log-row { font-family: Consolas, monospace; color: #9db1ba; }
+    .log-row strong { color: #f2fbff; font-weight: 800; }
+    .log-row span { color: #5fb9cb; }
+    .gate { margin-top: 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .gate div { padding: 11px 10px; color: #dce7eb; background: #101f28; border-top: 3px solid var(--color); font: 800 11px/1.35 Consolas, monospace; }
+    section.sheet { margin-top: 18px; padding: 42px 46px; background: #fff; border: 1px solid var(--line); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 28px; padding-bottom: 18px; border-bottom: 1px solid var(--line); margin-bottom: 24px; }
+    .section-head span { color: var(--blue); font: 850 11px/1.2 Consolas, monospace; letter-spacing: .08em; }
+    h2 { margin-top: 6px; font-size: 31px; line-height: 1.16; }
+    .section-head p { max-width: 570px; color: var(--muted); font-size: 14px; line-height: 1.65; text-align: right; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .card, .note, .source, .lesson, .scene, .qa {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 22px;
+    }
+    .card, .scene { border-top: 4px solid var(--accent, var(--blue)); }
+    .card small, .note small, .lesson small, .scene small, .qa small { display: block; color: var(--accent, var(--blue)); font: 850 11px/1.2 Consolas, monospace; letter-spacing: .06em; }
+    h3 { margin-top: 9px; font-size: 21px; line-height: 1.28; }
+    h4 { margin-top: 14px; font-size: 15px; color: var(--ink); }
+    .card p, .note p, .source p, .lesson p, .scene p, .qa p { margin-top: 10px; color: var(--muted); font-size: 14px; line-height: 1.68; }
+    ul, ol { margin: 12px 0 0; padding-left: 20px; color: var(--muted); font-size: 14px; line-height: 1.72; }
+    li + li { margin-top: 4px; }
+    .matrix { width: 100%; border-collapse: collapse; }
+    .matrix th, .matrix td { padding: 14px 15px; border: 1px solid var(--line); text-align: left; vertical-align: top; font-size: 14px; line-height: 1.58; }
+    .matrix th { color: #2b363d; background: #edf3f6; font-size: 12px; }
+    .matrix td:first-child { width: 18%; color: var(--ink); font-weight: 850; }
+    .surface-map { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+    .surface-map div { min-height: 148px; padding: 16px; color: #f7fbfd; background: #0d1820; border-top: 4px solid var(--accent); }
+    .surface-map b { display: block; font-size: 18px; }
+    .surface-map span { display: block; margin-top: 9px; color: #afc0c8; font-size: 13px; line-height: 1.5; }
+    .lessons { display: grid; gap: 10px; }
+    .lesson { display: grid; grid-template-columns: 76px minmax(190px, .7fr) minmax(0, 1.3fr) minmax(210px, .7fr); gap: 16px; align-items: start; }
+    .lesson-num { color: var(--accent); font: 950 24px/1 Consolas, monospace; }
+    .source { display: grid; grid-template-columns: minmax(230px, .7fr) minmax(0, 1.3fr); gap: 18px; }
+    .source b { font-size: 15px; }
+    .source a { word-break: break-all; }
+    .cue { margin-top: 16px; padding: 16px 18px; border-left: 4px solid var(--amber); background: #fff7ea; color: #60462b; font-size: 14px; line-height: 1.65; }
+    .danger { border-left-color: var(--red); background: #fff0ef; color: #6b3836; }
+    .script-box { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 12px; align-items: start; margin-top: 12px; }
+    .script-box b { color: var(--blue); font: 850 12px/1.2 Consolas, monospace; letter-spacing: .06em; }
+    .script-box p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+    .print-note { margin-top: 18px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    @media (max-width: 920px) {
+      main { width: min(100% - 24px, 1200px); }
+      .cover, .grid-2, .grid-3, .source, .lesson { grid-template-columns: 1fr; }
+      .cover, section.sheet { padding: 30px; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 12px; text-align: left; }
+      .surface-map { grid-template-columns: 1fr 1fr; }
+      .room-body { grid-template-columns: 1fr; }
+    }
+    @media print {
+      @page { size: A4; margin: 12mm; }
+      body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      main { width: 100%; margin: 0; }
+      .cover, section.sheet { break-after: page; margin: 0; border: 0; }
+      section.sheet { padding: 20px 0; }
+      .cover { min-height: auto; padding: 32px; }
+      h1 { font-size: 36px; }
+      h2 { font-size: 24px; }
+      .surface-map { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .card, .note, .source, .lesson, .scene, .qa { break-inside: avoid; }
+      a { color: #111; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header class="cover">
+    <div>
+      <div class="eyebrow">Instructor Research · Codex Professional</div>
+      <h1>Codex를<br>전문가 과정으로<br>가르치는 법</h1>
+      <p>이 자료는 기능 소개용 요약본이 아닙니다. Codex 공식 매뉴얼을 바탕으로 강사가 App, CLI, IDE, Sandbox, AGENTS.md, Skills, Plugins, MCP, Browser, Subagents, Worktrees, Hooks, Automations, Release를 실제 강의 장면과 실습으로 바꾸기 위한 연구노트입니다.</p>
+    </div>
+    <aside class="command-room" aria-label="Codex professional control room illustration">
+      <div class="room-top">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="room-label">CODEX CONTROL ROOM</div>
+      </div>
+      <div class="room-body">
+        <div class="room-pane">
+          <div class="file-row"><b style="--color:#82c8ff"></b><span>AGENTS.md</span></div>
+          <div class="file-row"><b style="--color:#54d6a7"></b><span>.codex/config.toml</span></div>
+          <div class="file-row"><b style="--color:#b7a7ff"></b><span>skills/release/SKILL.md</span></div>
+          <div class="file-row"><b style="--color:#ffc36b"></b><span>.github/workflows/release.yml</span></div>
+          <div class="gate">
+            <div style="--color:#54d6a7">SANDBOX<br>workspace</div>
+            <div style="--color:#ffc36b">APPROVAL<br>on-request</div>
+            <div style="--color:#ff756f">HOOK<br>secret scan</div>
+          </div>
+        </div>
+        <div class="room-pane">
+          <div class="log-row"><span>01</span><strong>plan</strong> scope + evidence</div>
+          <div class="log-row"><span>02</span><strong>diff</strong> one behavior change</div>
+          <div class="log-row"><span>03</span><strong>browser</strong> screenshot QA</div>
+          <div class="log-row"><span>04</span><strong>review</strong> risk + test gap</div>
+          <div class="log-row"><span>05</span><strong>release</strong> tag + checksum</div>
+        </div>
+      </div>
+      <div class="room-bottom"><span>OFFICIAL MANUAL CHECKED · 2026-06-17</span><span>V3 BETA</span></div>
+    </aside>
+  </header>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>01 · COURSE BOUNDARY</span><h2>Codex Professional의 차별점</h2></div>
+      <p>Workflow 과정이 “왜 이런 구조가 필요한가”라면, Codex 과정은 그 구조를 Codex에서 실제로 구현하고 검증하는 과정입니다.</p>
+    </div>
+    <table class="matrix">
+      <thead><tr><th>구분</th><th>Workflow Architect</th><th>Codex Professional</th><th>수업에서 지켜야 할 선</th></tr></thead>
+      <tbody>
+        <tr><td>목표</td><td>AI 업무를 설계하는 원리와 판단 기준</td><td>Codex 표면, 지침, 권한, 검증, 릴리즈를 실제 저장소에서 운영</td><td>Codex 수업에서는 이론 복습을 10분 이하로 줄이고 바로 구현 장면으로 들어갑니다.</td></tr>
+        <tr><td>핵심 증거</td><td>워크플로 도식, 권한표, 역할표</td><td>실제 파일, 터미널 로그, diff, 브라우저 캡처, PR, Release 자산</td><td>카드 설명만 있으면 전문과정처럼 보이지 않습니다. 반드시 실행 증거를 남깁니다.</td></tr>
+        <tr><td>실패 복구</td><td>위험을 예측하고 승인 지점 설계</td><td>경로 오류, sandbox 거부, stale instruction, MCP 인증, browser QA, release mismatch 복구</td><td>실패 화면에서 끝내지 않고 복구 후 성공 증거까지 보여줍니다.</td></tr>
+        <tr><td>수강 가치</td><td>도구가 바뀌어도 유지되는 설계 감각</td><td>Codex로 실제 업무용 워크스페이스를 만들고 검증 루프를 운영하는 능력</td><td>“Codex 기능 소개”가 아니라 “Codex 운영 능력”으로 포지셔닝합니다.</td></tr>
+      </tbody>
+    </table>
+    <div class="cue"><b>강사용 기준:</b> Codex 과정의 모든 슬라이드는 질문 하나에 답해야 합니다. “이 기능을 켜면 무엇을 더 잘할 수 있고, 대신 어떤 책임과 검증이 추가되는가?”</div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>02 · SURFACE MAP</span><h2>표면 선택을 가르치는 첫 장면</h2></div>
+      <p>수강생이 Codex를 “대화창”으로만 이해하지 않도록, 작업 표면을 실제 운영실처럼 나눠 보여줍니다.</p>
+    </div>
+    <div class="surface-map">
+      <div style="--accent:#82c8ff"><b>App</b><span>계획, 리뷰, 브라우저 QA, 장기 작업을 한 화면에서 운영하는 표면입니다.</span></div>
+      <div style="--accent:#54d6a7"><b>CLI</b><span>터미널 중심 저장소 작업, 명령 검증, 자동화 실험에 적합합니다.</span></div>
+      <div style="--accent:#b7a7ff"><b>IDE</b><span>현재 편집 중인 파일, 선택 영역, diff 감각이 중요할 때 씁니다.</span></div>
+      <div style="--accent:#ffc36b"><b>Browser</b><span>로컬 화면을 클릭하고 스크린샷으로 UI 품질을 검증합니다.</span></div>
+      <div style="--accent:#ff756f"><b>Chrome</b><span>로그인 세션, 확장, 실제 프로필이 필요한 웹 작업에 씁니다.</span></div>
+      <div style="--accent:#6ee7f0"><b>GitHub</b><span>PR, review, checks, release 같은 저장소 협업 표면입니다.</span></div>
+    </div>
+    <div class="cue danger"><b>오해 차단:</b> “어느 도구가 제일 좋은가”가 아니라 “이번 작업의 증거가 어디에 남는가”로 선택합니다. 화면 품질은 Browser, 정책은 config와 rules, 협업 검증은 GitHub, 빠른 로컬 명령은 CLI가 더 적합할 수 있습니다.</div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>03 · OFFICIAL STUDY ORDER</span><h2>공식자료를 공부하는 순서</h2></div>
+      <p>아래 순서로 읽으면 Codex를 기능 목록이 아니라 운영 체계로 이해할 수 있습니다. 원문은 링크로 확인하고 강의에서는 쉬운 한국어로 재구성합니다.</p>
+    </div>
+    <div class="grid-2">
+      <div class="source"><b>1. Codex 개요와 표면</b><p>Codex가 코드 작성, 코드베이스 이해, 리뷰, 디버깅을 지원하는 개발 Agent라는 큰 역할을 먼저 잡습니다.<br><a href="https://developers.openai.com/codex">developers.openai.com/codex</a></p></div>
+      <div class="source"><b>2. Sandbox와 승인</b><p>기술적 작업 경계와 사람이 승인해야 하는 지점을 분리해 설명합니다. 최소 권한은 강의의 핵심 주제입니다.<br><a href="https://developers.openai.com/codex/security">developers.openai.com/codex/security</a></p></div>
+      <div class="source"><b>3. AGENTS.md</b><p>전역, 프로젝트, 하위 폴더 지침이 어떤 순서로 합쳐지는지 이해합니다. 수업에서는 “저장소 작업 계약서”로 설명합니다.<br><a href="https://developers.openai.com/codex/guides/agents-md">developers.openai.com/codex/guides/agents-md</a></p></div>
+      <div class="source"><b>4. Skills와 Plugins</b><p>반복 업무는 Skill로 만들고, 팀이나 다른 프로젝트에 배포할 때 Plugin으로 묶는 경계를 학습합니다.<br><a href="https://developers.openai.com/codex/skills">developers.openai.com/codex/skills</a><br><a href="https://developers.openai.com/codex/plugins">developers.openai.com/codex/plugins</a></p></div>
+      <div class="source"><b>5. MCP와 Browser</b><p>외부 도구·문서·앱 연결은 MCP, 실제 렌더링 검증은 Browser로 나눠 가르칩니다. 인증과 민감정보는 항상 함께 다룹니다.<br><a href="https://developers.openai.com/codex/mcp">developers.openai.com/codex/mcp</a><br><a href="https://developers.openai.com/codex/app/browser">developers.openai.com/codex/app/browser</a></p></div>
+      <div class="source"><b>6. Subagents, Worktrees, Review</b><p>병렬 작업은 속도가 아니라 컨텍스트 오염 감소와 작업 격리를 위해 사용합니다. 통합 책임은 사람과 주 작업에 남습니다.<br><a href="https://developers.openai.com/codex/subagents">developers.openai.com/codex/subagents</a><br><a href="https://developers.openai.com/codex/app/worktrees">developers.openai.com/codex/app/worktrees</a></p></div>
+      <div class="source"><b>7. Hooks와 Automations</b><p>Hook은 작업 루프 안의 정책 실행, Automation은 반복 작업 운영입니다. 둘 다 실패 비용과 중지 기준을 먼저 설계합니다.<br><a href="https://developers.openai.com/codex/hooks">developers.openai.com/codex/hooks</a><br><a href="https://developers.openai.com/codex/app/automations">developers.openai.com/codex/app/automations</a></p></div>
+      <div class="source"><b>8. GitHub Action과 Release</b><p>전문과정의 마지막은 실제 릴리즈 증거입니다. version, tag, artifact, checksum, rollback 기준까지 맞춥니다.<br><a href="https://developers.openai.com/codex/github-action">developers.openai.com/codex/github-action</a></p></div>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>04 · DURABLE INSTRUCTIONS</span><h2>어디에 무엇을 적을지</h2></div>
+      <p>수강생이 모든 것을 프롬프트에 넣지 않도록, 지속 지침과 설정의 위치를 명확히 구분합니다.</p>
+    </div>
+    <table class="matrix">
+      <thead><tr><th>표면</th><th>사용 시점</th><th>좋은 예</th><th>피해야 할 예</th></tr></thead>
+      <tbody>
+        <tr><td>Prompt</td><td>이번 한 번의 목표, 제약, 산출물</td><td>“오늘은 로그인 버튼 문구만 수정하고 브라우저로 확인해줘.”</td><td>매번 반복할 팀 규칙을 장문의 프롬프트로 붙여넣기</td></tr>
+        <tr><td><code>AGENTS.md</code></td><td>저장소의 지속 작업 계약</td><td>검증 명령, 코딩 스타일, 금지 행동, PR 기대치</td><td>개인 요금제, 모델 취향, 일회성 지시</td></tr>
+        <tr><td><code>config.toml</code></td><td>Codex 실행 설정</td><td>sandbox, approval, MCP, model, reasoning, profile 설정</td><td>프로젝트 코드 스타일을 설정 파일에 섞기</td></tr>
+        <tr><td>Skill</td><td>반복 가능한 특정 작업 절차</td><td>“릴리즈 전 QA”처럼 입력, 절차, 산출물, 검증 기준이 있는 업무</td><td>그냥 좋은 프롬프트 모음</td></tr>
+        <tr><td>Plugin</td><td>설치·공유·업데이트가 필요한 묶음</td><td>Skills, MCP 설정, Hook, assets를 한 패키지로 배포</td><td>아직 검증 안 된 개인 실험을 팀 전체에 배포</td></tr>
+        <tr><td>MCP</td><td>외부 데이터와 행동 연결</td><td>공식 문서, Figma, GitHub, 브라우저, 로그 시스템 연결</td><td>필요 없는 서버를 모두 켜 두기</td></tr>
+        <tr><td>Hook</td><td>반복되는 정책을 작업 루프에서 강제</td><td>비밀키 패턴 감지, 검증 명령 실행, 로그 기록</td><td>모든 명령을 Hook으로 막아 정상 작업까지 방해</td></tr>
+        <tr><td>Automation</td><td>주기적 확인과 반복 작업</td><td>PR 상태 확인, 야간 QA, 문서 갱신 점검</td><td>실패 조건이 불명확한 쓰기 작업을 무인 반복</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>05 · SIX LESSONS</span><h2>6회차별 전문 강의 설계</h2></div>
+      <p>각 회차는 고유 장면, 정상 흐름, 실패 흐름, 복구 흐름, 강사용 심화 해설을 반드시 갖습니다.</p>
+    </div>
+    <div class="lessons">
+      <article class="lesson" style="--accent:#82c8ff">
+        <div class="lesson-num">01</div>
+        <div><small>FOUNDATION</small><h3>App·CLI·IDE·Workspace·Sandbox</h3></div>
+        <p><b>대표 장면:</b> 하나의 요청이 App 계획, CLI 실행, IDE diff, Browser QA로 이동하는 command center. 승인 게이트가 켜지는 순간마다 멈춥니다.</p>
+        <p><b>실습:</b> 작업 표면 선택표, 권한 범위, 검증 명령, 성공 캡처를 한 장의 작업 계약서로 작성합니다.</p>
+      </article>
+      <article class="lesson" style="--accent:#54d6a7">
+        <div class="lesson-num">02</div>
+        <div><small>PROJECT CONTROL</small><h3>AGENTS.md·config.toml·Rules·Git</h3></div>
+        <p><b>대표 장면:</b> 전역 지침, 루트 지침, 하위 폴더 지침이 instruction stack으로 쌓이고 config와 rules가 실행 게이트로 작동합니다.</p>
+        <p><b>실습:</b> 내 프로젝트용 AGENTS.md, 금지 행동 2개, 검증 명령 2개, 첫 commit을 만듭니다.</p>
+      </article>
+      <article class="lesson" style="--accent:#b7a7ff">
+        <div class="lesson-num">03</div>
+        <div><small>REUSABLE WORK</small><h3>Skills·Plugins</h3></div>
+        <p><b>대표 장면:</b> 반복 업무가 Trigger, SKILL.md, references, scripts, verification, plugin.json으로 압축되는 패키징 라인.</p>
+        <p><b>실습:</b> 개인 반복 작업 하나를 Skill 후보로 만들고, 명시 호출과 암시 호출을 모두 테스트합니다.</p>
+      </article>
+      <article class="lesson" style="--accent:#6ee7f0">
+        <div class="lesson-num">04</div>
+        <div><small>CONNECTED WORK</small><h3>MCP·Apps·Connectors·Browser</h3></div>
+        <p><b>대표 장면:</b> 공개 웹, 공식 API, 인증 Connector, MCP, Browser 중 어떤 경로를 타야 하는지 선택하는 권한망.</p>
+        <p><b>실습:</b> 외부 연결 후보를 민감도, 읽기/쓰기, 승인, 대체 경로, 화면 증거 기준으로 평가합니다.</p>
+      </article>
+      <article class="lesson" style="--accent:#ffc36b">
+        <div class="lesson-num">05</div>
+        <div><small>PARALLEL DELIVERY</small><h3>Subagents·Worktrees·Review·QA</h3></div>
+        <p><b>대표 장면:</b> Main Lead가 요구사항을 고정하고 Research, Builder, Reviewer가 격리된 Worktree에서 작업 후 요약 증거만 합류합니다.</p>
+        <p><b>실습:</b> 병렬 가능 작업과 불가능 작업을 나누고, 파일 소유권과 반환 형식을 작성합니다.</p>
+      </article>
+      <article class="lesson" style="--accent:#ff756f">
+        <div class="lesson-num">06</div>
+        <div><small>OPERATIONS</small><h3>Hooks·Automations·GitHub Actions·Release</h3></div>
+        <p><b>대표 장면:</b> Hook gate, automation schedule, CI checks, PR review, tag, release artifact, checksum이 한 줄 파이프라인으로 켜집니다.</p>
+        <p><b>실습:</b> 릴리즈 전 검증 명령 3개, 실패 중지 조건, version/tag/artifact 일치 체크리스트를 만듭니다.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>06 · MOTION BRIEF</span><h2>슬라이드와 애니메이션 고도화 기준</h2></div>
+      <p>전문가 과정의 모션은 장식이 아니라 인과 관계를 보여주는 증거여야 합니다.</p>
+    </div>
+    <div class="grid-3">
+      <article class="scene" style="--accent:#82c8ff"><small>APPROVAL GATE</small><h3>권한 요청은 멈춰야 한다</h3><p>명령이 sandbox 밖으로 나가면 화면 전체를 어둡게 하고 명령 목적, 영향 범위, 되돌릴 방법 3개만 밝힙니다. 발표자가 승인 버튼을 눌러야 다음 단계로 갑니다.</p></article>
+      <article class="scene" style="--accent:#54d6a7"><small>INSTRUCTION STACK</small><h3>지침은 위에서 아래로 쌓인다</h3><p>Global, Project, Folder 지침 카드를 한 장씩 쌓고 마지막에 실제 작업 프롬프트가 얹힙니다. 가까운 폴더 지침이 마지막 판단에 영향을 주는 장면을 보여줍니다.</p></article>
+      <article class="scene" style="--accent:#b7a7ff"><small>SKILL LOADING</small><h3>필요할 때만 읽는다</h3><p>처음에는 skill 이름과 설명만 보이고, 선택된 순간 SKILL.md, references, scripts가 단계적으로 열립니다. 이것이 progressive disclosure라는 점을 시각화합니다.</p></article>
+      <article class="scene" style="--accent:#6ee7f0"><small>MCP PERMISSION NET</small><h3>연결은 권한망이다</h3><p>읽기 도구는 얇은 초록선, 쓰기 도구는 노란 승인선, 삭제성 행동은 빨간 차단선으로 표시합니다. 연결 성공보다 권한 범위가 먼저 보이게 합니다.</p></article>
+      <article class="scene" style="--accent:#ffc36b"><small>WORKTREE BOARD</small><h3>병렬 작업은 격리되어야 한다</h3><p>같은 파일을 두 agent가 잡으면 충돌 표시가 뜨고, 파일 소유권이 나뉘면 각 작업이 별도 트랙으로 움직입니다. 마지막 merge 전에는 review gate가 멈춥니다.</p></article>
+      <article class="scene" style="--accent:#ff756f"><small>RELEASE PIPELINE</small><h3>릴리즈는 증거 묶음이다</h3><p>version, tag, build artifact, SHA-256, changelog가 맞을 때만 초록색으로 연결됩니다. 하나라도 틀리면 배포 자산 업로드 노드가 잠깁니다.</p></article>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>07 · SCRIPT TEMPLATE</span><h2>강사용 대본을 얕게 만들지 않는 틀</h2></div>
+      <p>각 슬라이드는 SAY, DO, ASK만 적는 것이 아니라 공식 근거, 실패 복구, 시간 조정까지 포함해야 합니다.</p>
+    </div>
+    <div class="grid-2">
+      <article class="qa">
+        <small>SAY / DO / ASK</small>
+        <h3>수업 중 실제 멘트 구조</h3>
+        <div class="script-box"><b>SAY</b><p>“지금 보는 화면은 Codex가 코드를 쓰는 장면이 아니라, 어디까지 자동으로 움직이고 어디서 사람이 승인해야 하는지 보여주는 장면입니다.”</p></div>
+        <div class="script-box"><b>DO</b><p>승인 게이트 앞에서 멈춘 뒤 명령, 영향 범위, 되돌릴 방법을 하나씩 하이라이트합니다.</p></div>
+        <div class="script-box"><b>ASK</b><p>“이 명령은 읽기 작업인가요, 쓰기 작업인가요? 실패하면 무엇을 확인해야 할까요?”</p></div>
+      </article>
+      <article class="qa">
+        <small>DEEP / RECOVER</small>
+        <h3>전문 과정의 깊이를 만드는 부분</h3>
+        <div class="script-box"><b>근거</b><p>공식 매뉴얼의 sandbox와 approval 개념을 쉬운 말로 연결합니다. “경계”와 “승인”은 다른 통제라는 점을 강조합니다.</p></div>
+        <div class="script-box"><b>복구</b><p>승인 실패, 경로 오류, 네트워크 차단, UI 캡처 실패가 나면 대체 캡처와 로그 예시로 같은 설명을 이어갑니다.</p></div>
+        <div class="script-box"><b>시간</b><p>시간이 부족하면 개념 설명을 줄이고 정상 흐름 1회, 실패 흐름 1회, 복구 흐름 1회만 남깁니다.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>08 · FAILURE DRILLS</span><h2>반드시 보여줄 실패 훈련</h2></div>
+      <p>유료 전문과정은 성공 시연보다 실패 복구를 잘 보여줄 때 신뢰가 올라갑니다.</p>
+    </div>
+    <table class="matrix">
+      <thead><tr><th>실패</th><th>보여줄 화면</th><th>강사용 설명</th><th>복구 산출물</th></tr></thead>
+      <tbody>
+        <tr><td>Workspace 오류</td><td>현재 폴더와 Git root가 다른 터미널</td><td>Codex가 틀린 게 아니라 공유 작업공간이 맞지 않는 상황입니다.</td><td>올바른 cwd, repo root, 실행 명령 기록</td></tr>
+        <tr><td>Sandbox 거부</td><td>권한 밖 파일 또는 네트워크 접근 요청</td><td>막힌 것은 실패가 아니라 안전장치가 작동한 것입니다.</td><td>명령 목적, 영향 범위, 승인 여부 표</td></tr>
+        <tr><td>AGENTS.md 과밀</td><td>지침이 길어 핵심 규칙이 묻힌 파일</td><td>지침은 많이 적는 것이 아니라 반복 기준만 남기는 것입니다.</td><td>검증 명령, 금지 행동, 리뷰 기대치만 남긴 축약본</td></tr>
+        <tr><td>MCP 인증 누락</td><td>서버는 연결됐지만 빈 결과 또는 권한 오류</td><td>연결과 인증은 다릅니다. 데이터 접근에는 scope와 토큰이 필요합니다.</td><td>권한 범위, 인증 상태, 대체 자료 경로</td></tr>
+        <tr><td>Browser QA 실패</td><td>테스트 통과, 실제 화면 overflow</td><td>DOM 존재와 사용자가 보는 화면은 다릅니다.</td><td>스크린샷, viewport, 수정 diff</td></tr>
+        <tr><td>Release 불일치</td><td>tag, package version, 파일명이 서로 다름</td><td>릴리즈는 파일 업로드가 아니라 신뢰 가능한 증거 묶음입니다.</td><td>version/tag/artifact/checksum 일치표</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>09 · PROFESSIONAL Q&A</span><h2>강사가 준비해야 할 질문</h2></div>
+      <p>질문에 답할 때는 기능명보다 판단 기준, 위험, 검증 증거를 먼저 말합니다.</p>
+    </div>
+    <div class="grid-2">
+      <article class="note"><small>Q1</small><h3>Codex와 Claude Code 중 무엇을 먼저 배워야 하나요?</h3><p>둘 다 “AI와 저장소에서 일하는 방식”을 다루지만, 이 과정에서는 Codex의 표면, sandbox, AGENTS.md, Browser QA, GitHub release 중심으로 갑니다. Workflow Architect를 먼저 들으면 설계 기준이 잡히고, 이후 도구 전문과정은 선택형으로 들으면 됩니다.</p></article>
+      <article class="note"><small>Q2</small><h3>AGENTS.md와 Skill은 무엇이 다른가요?</h3><p>AGENTS.md는 저장소에서 항상 적용되는 작업 계약이고, Skill은 특정 업무를 수행할 때 불러오는 재사용 절차입니다. 저장소 기본 규칙은 AGENTS.md, 반복 업무 방법론은 Skill로 분리합니다.</p></article>
+      <article class="note"><small>Q3</small><h3>MCP를 많이 연결하면 더 좋은가요?</h3><p>아닙니다. 연결이 늘수록 권한, 인증, 비용, 실패 표면도 늘어납니다. 필요한 데이터와 행동을 먼저 분류하고, 가장 좁은 연결부터 사용합니다.</p></article>
+      <article class="note"><small>Q4</small><h3>Subagent는 언제 써야 하나요?</h3><p>읽기 중심 조사, 테스트 로그 분석, 리뷰처럼 독립적이고 요약 가능한 작업에 좋습니다. 같은 파일을 동시에 고치는 작업은 충돌과 통합 비용이 커질 수 있습니다.</p></article>
+      <article class="note"><small>Q5</small><h3>Hook과 GitHub Actions는 무엇이 다른가요?</h3><p>Hook은 Codex 작업 루프 안에서 빠르게 정책을 실행하는 장치이고, GitHub Actions는 저장소 이벤트 기준의 독립 검증 파이프라인입니다. 둘은 보완 관계입니다.</p></article>
+      <article class="note"><small>Q6</small><h3>자동화하면 사람이 볼 필요가 없나요?</h3><p>자동화는 반복 실행을 맡길 뿐입니다. 실패 조건, 권한, 비용, 알림, 중지 기준을 사람이 설계해야 실제 운영이 가능합니다.</p></article>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>10 · REHEARSAL CHECKLIST</span><h2>수업 전 리허설 체크</h2></div>
+      <p>전문가 과정은 수업 전 캡처, 로그, 대체 화면, 실패 복구 리허설이 품질을 결정합니다.</p>
+    </div>
+    <div class="grid-2">
+      <article class="note"><small>공식자료</small><h3>강사 예습</h3><ul><li>해당 회차 공식자료 3개 이상 접속 상태 확인</li><li>기능 안정성, 메뉴명, 명령어, 요금·권한 변경 여부 확인</li><li>수강생에게 말할 쉬운 비유 한 문장 준비</li><li>공식 용어와 실제 화면의 대응 지점 표시</li></ul></article>
+      <article class="note"><small>시연</small><h3>현장 운영</h3><ul><li>정상 흐름 캡처 1장, 실패 흐름 캡처 1장, 복구 후 캡처 1장</li><li>수동 진행 버튼으로 단계별 정지 확인</li><li>인터넷 OFF 상태에서 대체 캡처로 설명 가능 여부 확인</li><li>실습 산출물과 평가 기준을 30초 안에 설명</li></ul></article>
+      <article class="note"><small>품질</small><h3>슬라이드 검수</h3><ul><li>단순 카드 대신 실제 터미널, IDE, diff, browser, PR 화면 재현 사용</li><li>텍스트는 프로젝터 기준으로 줄이고 실행 증거를 크게 배치</li><li>모션은 자동 진행하지 않고 시작·다음·일시정지·초기화로 통일</li><li>색상은 차분한 전문 톤을 유지하고 과한 네온 제거</li></ul></article>
+      <article class="note"><small>평가</small><h3>수강생 산출물</h3><ul><li>말로 이해한 것이 아니라 실제 파일이나 로그로 남았는지 확인</li><li>실패 상황을 AI에게 전달할 정보 4개를 적게 하기</li><li>권한과 보안 선택 이유를 한 문장으로 말하게 하기</li><li>릴리즈 전 검증 명령과 증거를 분리해 제출</li></ul></article>
+    </div>
+    <p class="print-note">이 자료는 강사용 연구자료입니다. 수강생에게 그대로 배포하지 말고, 각 회차의 실습 워크북과 출력물로 다시 압축해 사용합니다.</p>
+  </section>
+</main>
+<script src="./appendix-print.js"></script>
+</body>
+</html>

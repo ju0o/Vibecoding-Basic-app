@@ -3795,6 +3795,14 @@
             "file": "v3/material.html?course=codex&kind=rehearsal&audience=instructor",
             "audience": "instructor",
             "courseId": "codex"
+          },
+          {
+            "id": "codex-codex-professional-research",
+            "title": "Codex Professional 전문 연구자료",
+            "description": "Codex 공식 매뉴얼 기반 표면·지침·권한·검증·릴리즈 연구자료",
+            "file": "appendix/instructor-codex-professional-research.html",
+            "audience": "instructor",
+            "courseId": "codex"
           }
         ]
       }

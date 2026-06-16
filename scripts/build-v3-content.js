@@ -1256,9 +1256,14 @@ const currentBasic = {
 function materialEntries(courseId, title) {
   const query = (kind, audience = 'student') =>
     `v3/material.html?course=${encodeURIComponent(courseId)}&kind=${kind}&audience=${audience}`;
-  const professionalInstructorExtras = courseId === 'workflow'
-    ? [[`${courseId}-agent-mcp-skill-research`, 'Agent·MCP·Skill 전문 연구자료', '공식자료 기반 개념 경계, 슬라이드 장면, 별도 심화과정 분리 기준', 'appendix/instructor-agent-mcp-skill-research.html']]
-    : [];
+  const professionalInstructorExtras = [
+    ...(courseId === 'workflow'
+      ? [[`${courseId}-agent-mcp-skill-research`, 'Agent·MCP·Skill 전문 연구자료', '공식자료 기반 개념 경계, 슬라이드 장면, 별도 심화과정 분리 기준', 'appendix/instructor-agent-mcp-skill-research.html']]
+      : []),
+    ...(courseId === 'codex'
+      ? [[`${courseId}-codex-professional-research`, 'Codex Professional 전문 연구자료', 'Codex 공식 매뉴얼 기반 표면·지침·권한·검증·릴리즈 연구자료', 'appendix/instructor-codex-professional-research.html']]
+      : []),
+  ];
   return {
     student: [
       [`${courseId}-workbook`, '통합 실습 워크북', `${title} 회차별 작업지와 메모`, query('workbook')],
