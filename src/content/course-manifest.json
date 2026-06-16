@@ -1504,6 +1504,14 @@
             "file": "v3/material.html?course=product&kind=rehearsal&audience=instructor",
             "audience": "instructor",
             "courseId": "product"
+          },
+          {
+            "id": "product-professional-production-standard",
+            "title": "V3 전문과정 제작·고도화 기준표",
+            "description": "공식자료 기반 회차 제작 순서, 대표 장면, 슬라이드 품질 기준",
+            "file": "appendix/instructor-v3-professional-production-standard.html",
+            "audience": "instructor",
+            "courseId": "product"
           }
         ]
       }
@@ -2104,6 +2112,14 @@
             "title": "현장 리허설 체크리스트",
             "description": "프로젝터·실습 파일·시연 속도와 복구 점검",
             "file": "v3/material.html?course=workflow&kind=rehearsal&audience=instructor",
+            "audience": "instructor",
+            "courseId": "workflow"
+          },
+          {
+            "id": "workflow-professional-production-standard",
+            "title": "V3 전문과정 제작·고도화 기준표",
+            "description": "공식자료 기반 회차 제작 순서, 대표 장면, 슬라이드 품질 기준",
+            "file": "appendix/instructor-v3-professional-production-standard.html",
             "audience": "instructor",
             "courseId": "workflow"
           },
@@ -2951,6 +2967,22 @@
             "file": "v3/material.html?course=claude&kind=rehearsal&audience=instructor",
             "audience": "instructor",
             "courseId": "claude"
+          },
+          {
+            "id": "claude-professional-production-standard",
+            "title": "V3 전문과정 제작·고도화 기준표",
+            "description": "공식자료 기반 회차 제작 순서, 대표 장면, 슬라이드 품질 기준",
+            "file": "appendix/instructor-v3-professional-production-standard.html",
+            "audience": "instructor",
+            "courseId": "claude"
+          },
+          {
+            "id": "claude-claude-code-professional-research",
+            "title": "Claude Code Professional 전문 연구자료",
+            "description": "Anthropic 공식자료 기반 세션·지침·권한·확장·Agent Teams·PR 운영 연구자료",
+            "file": "appendix/instructor-claude-code-professional-research.html",
+            "audience": "instructor",
+            "courseId": "claude"
           }
         ]
       }
@@ -3793,6 +3825,14 @@
             "title": "현장 리허설 체크리스트",
             "description": "프로젝터·실습 파일·시연 속도와 복구 점검",
             "file": "v3/material.html?course=codex&kind=rehearsal&audience=instructor",
+            "audience": "instructor",
+            "courseId": "codex"
+          },
+          {
+            "id": "codex-professional-production-standard",
+            "title": "V3 전문과정 제작·고도화 기준표",
+            "description": "공식자료 기반 회차 제작 순서, 대표 장면, 슬라이드 품질 기준",
+            "file": "appendix/instructor-v3-professional-production-standard.html",
             "audience": "instructor",
             "courseId": "codex"
           },

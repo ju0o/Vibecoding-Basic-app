@@ -46,18 +46,18 @@
     },
     {
       "file": "src/content/sessions/session-04-revenue.html",
-      "bytes": 175701,
-      "sha256": "6fb8cce5378f7a758712b8092fde8e104ad1c7d6b899e32182897a498a68793f"
+      "bytes": 179064,
+      "sha256": "a0347596b4b4a0827f0bf9a20058a92d56193d370c89e195019f1234c365b99b"
     },
     {
       "file": "src/content/sessions/session-05-security-api.css",
-      "bytes": 43324,
-      "sha256": "f6f4ec34a9604d8d7368caa273430112c8fce76563532ae7953d2a15358d6749"
+      "bytes": 44232,
+      "sha256": "e135b46609e72f0fdba6312870c82a34eef23215f14ae691a9f22e9019153071"
     },
     {
       "file": "src/content/sessions/session-05-security-api.html",
-      "bytes": 27987,
-      "sha256": "97025959cd837cfa65484fc5c95ab35a7432f39ce0726415ebe226a2e2055eb4"
+      "bytes": 28482,
+      "sha256": "894980e6b56b0cd7dbecc6537e2b572e0ad0cbd0d0d56c990d8c395f66633c0a"
     },
     {
       "file": "src/content/sessions/session-05-security-api.js",

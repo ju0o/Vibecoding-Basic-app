@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claude Code Professional 전문 연구자료 - 강사용</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+  <style>
+    :root {
+      --ink: #18130f;
+      --muted: #6a5d51;
+      --line: #ded2c8;
+      --paper: #fbf7f1;
+      --deep: #120c08;
+      --orange: #c46f36;
+      --amber: #b8892f;
+      --green: #567b4f;
+      --blue: #3f718d;
+      --violet: #7562a8;
+      --red: #b54a3a;
+      font-family: "Pretendard Variable", "Pretendard", "Malgun Gothic", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: #e8ded3; letter-spacing: 0; }
+    main { width: min(1200px, calc(100% - 34px)); margin: 24px auto 72px; }
+    h1, h2, h3, h4, p { margin: 0; word-break: keep-all; }
+    a { color: #8d4e24; }
+    code { font-family: Consolas, "JetBrains Mono", monospace; }
+    .cover {
+      min-height: 460px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(380px, .95fr);
+      gap: 48px;
+      align-items: end;
+      padding: 58px;
+      color: #fffaf4;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(196,111,54,.28), transparent 34%),
+        linear-gradient(135deg, rgba(117,98,168,.18), transparent 50%),
+        var(--deep);
+    }
+    .eyebrow { color: #f0b47d; font: 850 12px/1.2 Consolas, monospace; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin-top: 16px; font-size: clamp(42px, 6vw, 76px); line-height: 1.03; letter-spacing: 0; }
+    .cover p { max-width: 750px; margin-top: 20px; color: #d8c9bc; font-size: 19px; line-height: 1.72; }
+    .terminal-room {
+      min-height: 340px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(18,12,8,.78);
+      box-shadow: 0 32px 70px rgba(0,0,0,.28);
+    }
+    .room-top, .room-bottom { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .room-bottom { border-top: 1px solid rgba(255,255,255,.1); border-bottom: 0; color: #f0b47d; font: 800 11px/1.2 Consolas, monospace; letter-spacing: .07em; }
+    .dots { display: flex; gap: 7px; }
+    .dots i { width: 10px; height: 10px; border-radius: 50%; background: #4a3a30; }
+    .dots i:nth-child(1) { background: #f06052; }
+    .dots i:nth-child(2) { background: #e6b34b; }
+    .dots i:nth-child(3) { background: #63bd75; }
+    .room-label { color: #a99585; font: 850 11px/1 Consolas, monospace; letter-spacing: .08em; }
+    .room-body { display: grid; grid-template-columns: .68fr 1fr; gap: 1px; background: rgba(255,255,255,.08); }
+    .room-pane { padding: 18px; background: #19100b; }
+    .terminal-line, .file-row { min-height: 30px; display: flex; gap: 10px; align-items: center; color: #dbcfc4; font-size: 13px; }
+    .terminal-line { font-family: Consolas, monospace; color: #bcaea1; }
+    .terminal-line strong { color: #fff7ee; font-weight: 850; }
+    .terminal-line span { color: #f0b47d; }
+    .file-row b { width: 12px; height: 12px; border-radius: 3px; background: var(--color); }
+    .loop { margin-top: 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .loop div { padding: 11px 10px; color: #f5ebe2; background: #23170f; border-top: 3px solid var(--color); font: 800 11px/1.35 Consolas, monospace; }
+    section.sheet { margin-top: 18px; padding: 42px 46px; background: #fff; border: 1px solid var(--line); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 28px; padding-bottom: 18px; border-bottom: 1px solid var(--line); margin-bottom: 24px; }
+    .section-head span { color: var(--orange); font: 850 11px/1.2 Consolas, monospace; letter-spacing: .08em; }
+    h2 { margin-top: 6px; font-size: 31px; line-height: 1.16; }
+    .section-head p { max-width: 570px; color: var(--muted); font-size: 14px; line-height: 1.65; text-align: right; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .card, .note, .source, .lesson, .scene, .qa {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 22px;
+    }
+    .card, .scene { border-top: 4px solid var(--accent, var(--orange)); }
+    .card small, .note small, .lesson small, .scene small, .qa small { display: block; color: var(--accent, var(--orange)); font: 850 11px/1.2 Consolas, monospace; letter-spacing: .06em; }
+    h3 { margin-top: 9px; font-size: 21px; line-height: 1.28; }
+    h4 { margin-top: 14px; font-size: 15px; color: var(--ink); }
+    .card p, .note p, .source p, .lesson p, .scene p, .qa p { margin-top: 10px; color: var(--muted); font-size: 14px; line-height: 1.68; }
+    ul, ol { margin: 12px 0 0; padding-left: 20px; color: var(--muted); font-size: 14px; line-height: 1.72; }
+    li + li { margin-top: 4px; }
+    .matrix { width: 100%; border-collapse: collapse; }
+    .matrix th, .matrix td { padding: 14px 15px; border: 1px solid var(--line); text-align: left; vertical-align: top; font-size: 14px; line-height: 1.58; }
+    .matrix th { color: #3a3028; background: #f4ece4; font-size: 12px; }
+    .matrix td:first-child { width: 18%; color: var(--ink); font-weight: 850; }
+    .surface-map { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+    .surface-map div { min-height: 148px; padding: 16px; color: #fff8ef; background: #1a110c; border-top: 4px solid var(--accent); }
+    .surface-map b { display: block; font-size: 18px; }
+    .surface-map span { display: block; margin-top: 9px; color: #d4c5b7; font-size: 13px; line-height: 1.5; }
+    .source { display: grid; grid-template-columns: minmax(230px, .7fr) minmax(0, 1.3fr); gap: 18px; }
+    .source b { font-size: 15px; }
+    .source a { word-break: break-all; }
+    .lessons { display: grid; gap: 10px; }
+    .lesson { display: grid; grid-template-columns: 76px minmax(190px, .7fr) minmax(0, 1.3fr) minmax(210px, .7fr); gap: 16px; align-items: start; }
+    .lesson-num { color: var(--accent); font: 950 24px/1 Consolas, monospace; }
+    .cue { margin-top: 16px; padding: 16px 18px; border-left: 4px solid var(--amber); background: #fff7e9; color: #60492d; font-size: 14px; line-height: 1.65; }
+    .danger { border-left-color: var(--red); background: #fff0ec; color: #6a3a33; }
+    .script-box { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 12px; align-items: start; margin-top: 12px; }
+    .script-box b { color: var(--orange); font: 850 12px/1.2 Consolas, monospace; letter-spacing: .06em; }
+    .script-box p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+    .print-note { margin-top: 18px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    @media (max-width: 920px) {
+      main { width: min(100% - 24px, 1200px); }
+      .cover, .grid-2, .grid-3, .source, .lesson { grid-template-columns: 1fr; }
+      .cover, section.sheet { padding: 30px; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 12px; text-align: left; }
+      .surface-map { grid-template-columns: 1fr 1fr; }
+      .room-body { grid-template-columns: 1fr; }
+    }
+    @media print {
+      @page { size: A4; margin: 12mm; }
+      body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      main { width: 100%; margin: 0; }
+      .cover, section.sheet { break-after: page; margin: 0; border: 0; }
+      section.sheet { padding: 20px 0; }
+      .cover { min-height: auto; padding: 32px; }
+      h1 { font-size: 36px; }
+      h2 { font-size: 24px; }
+      .surface-map { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .card, .note, .source, .lesson, .scene, .qa { break-inside: avoid; }
+      a { color: #111; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header class="cover">
+    <div>
+      <div class="eyebrow">Instructor Research · Claude Code Professional</div>
+      <h1>Claude Code를<br>전문가 과정으로<br>가르치는 법</h1>
+      <p>이 자료는 Claude Code 기능 소개가 아닙니다. Anthropic 공식 문서를 바탕으로 강사가 agentic loop, 터미널 세션, CLAUDE.md, auto memory, permission modes, Skills, Plugins, MCP, Hooks, Subagents, Agent Teams, GitHub Actions를 실제 수업 장면과 실습으로 바꾸기 위한 연구노트입니다.</p>
+    </div>
+    <aside class="terminal-room" aria-label="Claude Code terminal operating room illustration">
+      <div class="room-top">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="room-label">CLAUDE CODE OPERATING ROOM</div>
+      </div>
+      <div class="room-body">
+        <div class="room-pane">
+          <div class="file-row"><b style="--color:#f0b47d"></b><span>CLAUDE.md</span></div>
+          <div class="file-row"><b style="--color:#87b36f"></b><span>.claude/settings.json</span></div>
+          <div class="file-row"><b style="--color:#8fb6cb"></b><span>.claude/skills/review/SKILL.md</span></div>
+          <div class="file-row"><b style="--color:#b9a1ff"></b><span>.mcp.json</span></div>
+          <div class="loop">
+            <div style="--color:#f0b47d">GATHER<br>context</div>
+            <div style="--color:#87b36f">ACT<br>tools</div>
+            <div style="--color:#8fb6cb">VERIFY<br>tests</div>
+          </div>
+        </div>
+        <div class="room-pane">
+          <div class="terminal-line"><span>$</span><strong>claude</strong> --permission-mode plan</div>
+          <div class="terminal-line"><span>→</span><strong>read</strong> CLAUDE.md + git state</div>
+          <div class="terminal-line"><span>→</span><strong>plan</strong> before edit</div>
+          <div class="terminal-line"><span>→</span><strong>edit</strong> small diff</div>
+          <div class="terminal-line"><span>✓</span><strong>verify</strong> test + PR note</div>
+        </div>
+      </div>
+      <div class="room-bottom"><span>ANTHROPIC DOCS CHECKED · 2026-06-17</span><span>V3 BETA</span></div>
+    </aside>
+  </header>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>01 · COURSE BOUNDARY</span><h2>Claude Code Professional의 차별점</h2></div>
+      <p>Claude Code 수업은 “AI가 코드를 고쳐준다”가 아니라, 터미널 기반 에이전트 루프를 안전하게 운영하는 능력을 가르칩니다.</p>
+    </div>
+    <table class="matrix">
+      <thead><tr><th>구분</th><th>Workflow Architect</th><th>Claude Code Professional</th><th>수업에서 지켜야 할 선</th></tr></thead>
+      <tbody>
+        <tr><td>목표</td><td>AI 업무 구조와 도구 선택 원리</td><td>Claude Code의 세션, 권한, 지속 지침, 확장, 자동화, PR 흐름을 실제 저장소에서 운영</td><td>이론은 10분 이내로 복습하고 바로 터미널·파일·로그·PR 장면으로 들어갑니다.</td></tr>
+        <tr><td>핵심 증거</td><td>워크플로 도식과 판단표</td><td>터미널 로그, CLAUDE.md, settings, Skill, Hook, MCP config, subagent 결과, PR</td><td>전문과정에서는 텍스트 카드보다 실행 증거와 실패 복구 장면이 우선입니다.</td></tr>
+        <tr><td>Claude다운 지점</td><td>도구 독립적인 설계</td><td>gather context → take action → verify results 루프, permission modes, checkpoints, auto memory</td><td>도구명보다 세션 운영, 컨텍스트 관리, 검증 루프를 보여줍니다.</td></tr>
+        <tr><td>주의</td><td>개념이 깊어질수록 별도 과정화</td><td>Agent Teams는 실험 기능이며 비용과 조율 부담이 큽니다.</td><td>실험 기능은 “가능하다”보다 “언제 쓰면 안 되는가”까지 함께 가르칩니다.</td></tr>
+      </tbody>
+    </table>
+    <div class="cue"><b>강사용 기준:</b> Claude Code 전문과정의 중심 질문은 “Claude가 무엇을 할 수 있나?”가 아니라 “Claude가 무엇을 보고, 무엇을 실행하고, 무엇으로 검증하며, 어디서 사람이 멈춰야 하는가?”입니다.</div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>02 · OPERATING MODEL</span><h2>Claude Code를 한 장으로 설명하는 지도</h2></div>
+      <p>수강생에게 처음 보여줄 장면은 터미널 하나가 여러 운영 표면으로 확장되는 지도여야 합니다.</p>
+    </div>
+    <div class="surface-map">
+      <div style="--accent:#f0b47d"><b>Terminal</b><span>기본 작업실입니다. 프로젝트 루트에서 시작하고 명령, 파일, Git 상태를 함께 다룹니다.</span></div>
+      <div style="--accent:#87b36f"><b>CLAUDE.md</b><span>매 세션에 로드되는 프로젝트·사용자·조직 지침입니다. 반복 설명을 여기에 둡니다.</span></div>
+      <div style="--accent:#8fb6cb"><b>Settings</b><span>권한 모드, scope, hooks, plugins, MCP 같은 실행 환경을 관리합니다.</span></div>
+      <div style="--accent:#b9a1ff"><b>Skills</b><span>반복 절차를 필요한 때만 불러오는 재사용 업무 단위입니다.</span></div>
+      <div style="--accent:#e9bc62"><b>MCP</b><span>외부 도구, DB, 이슈, 모니터링, 디자인 자료를 연결하는 통로입니다.</span></div>
+      <div style="--accent:#ee6f5f"><b>Agents</b><span>Subagent와 Agent Team으로 탐색, 리뷰, 병렬 작업을 분리합니다.</span></div>
+    </div>
+    <div class="cue danger"><b>오해 차단:</b> Claude Code는 “프롬프트 잘 쓰면 끝”이 아닙니다. 프로젝트 루트, permission mode, CLAUDE.md, settings scope, Skill trigger, MCP 인증, Hook 실패 정책을 구분해야 현장에서 안정적으로 운영됩니다.</div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>03 · OFFICIAL STUDY ORDER</span><h2>공식자료를 공부하는 순서</h2></div>
+      <p>아래 순서로 읽으면 Claude Code를 기능 목록이 아니라 운영 체계로 이해할 수 있습니다. 원문 전체를 복사하지 말고, 강의에서는 쉬운 한국어와 실제 시연으로 바꿉니다.</p>
+    </div>
+    <div class="grid-2">
+      <div class="source"><b>1. Overview</b><p>Claude Code가 코드베이스를 읽고, 파일을 수정하고, 명령을 실행하며 개발 도구와 통합되는 agentic coding tool이라는 큰 역할을 잡습니다.<br><a href="https://code.claude.com/docs/en/overview">code.claude.com/docs/en/overview</a></p></div>
+      <div class="source"><b>2. How Claude Code works</b><p>수업의 핵심 루프입니다. context gathering, action, verification이 반복되며, 모델과 도구가 함께 agentic loop를 구성합니다.<br><a href="https://code.claude.com/docs/en/how-claude-code-works">code.claude.com/docs/en/how-claude-code-works</a></p></div>
+      <div class="source"><b>3. Quickstart + permission modes</b><p>설치 명령보다 중요한 것은 프로젝트 루트에서 시작하고, 읽기·쓰기·명령 실행의 승인 경계를 이해하는 것입니다.<br><a href="https://code.claude.com/docs/en/quickstart">code.claude.com/docs/en/quickstart</a><br><a href="https://code.claude.com/docs/en/permission-modes">code.claude.com/docs/en/permission-modes</a></p></div>
+      <div class="source"><b>4. Memory and settings</b><p>CLAUDE.md, auto memory, rules, settings scope를 분리합니다. 강의에서는 “지침·학습·정책·개인설정”으로 번역합니다.<br><a href="https://code.claude.com/docs/en/memory">code.claude.com/docs/en/memory</a><br><a href="https://code.claude.com/docs/en/settings">code.claude.com/docs/en/settings</a></p></div>
+      <div class="source"><b>5. Skills and plugins</b><p>반복 절차는 Skill, 공유·배포·버전 관리는 Plugin입니다. Claude는 Skill body를 필요할 때 로드한다는 점을 강조합니다.<br><a href="https://code.claude.com/docs/en/skills">code.claude.com/docs/en/skills</a><br><a href="https://code.claude.com/docs/en/plugins">code.claude.com/docs/en/plugins</a></p></div>
+      <div class="source"><b>6. MCP and hooks</b><p>MCP는 외부 시스템 연결이고 Hook은 lifecycle 이벤트에서 정책을 실행합니다. 둘 다 권한과 실패 정책이 핵심입니다.<br><a href="https://code.claude.com/docs/en/mcp">code.claude.com/docs/en/mcp</a><br><a href="https://code.claude.com/docs/en/hooks">code.claude.com/docs/en/hooks</a></p></div>
+      <div class="source"><b>7. Subagents and Agent Teams</b><p>Subagent는 한 세션 안의 위임, Agent Team은 여러 Claude Code 인스턴스의 팀 운영입니다. Agent Teams는 실험 기능이므로 제한을 함께 가르칩니다.<br><a href="https://code.claude.com/docs/en/sub-agents">code.claude.com/docs/en/sub-agents</a><br><a href="https://code.claude.com/docs/en/agent-teams">code.claude.com/docs/en/agent-teams</a></p></div>
+      <div class="source"><b>8. GitHub Actions</b><p>전문 과정의 마지막은 세션 결과를 PR과 CI/CD로 옮기는 것입니다. GitHub App, secrets, workflow, review 기준을 분리합니다.<br><a href="https://code.claude.com/docs/en/github-actions">code.claude.com/docs/en/github-actions</a></p></div>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>04 · WHERE TO PUT WHAT</span><h2>어디에 무엇을 적을지</h2></div>
+      <p>Claude Code 수업에서 가장 많이 헷갈리는 부분입니다. 모든 지시를 CLAUDE.md에 넣으면 과정이 얕아집니다.</p>
+    </div>
+    <table class="matrix">
+      <thead><tr><th>표면</th><th>사용 시점</th><th>좋은 예</th><th>피해야 할 예</th></tr></thead>
+      <tbody>
+        <tr><td>Prompt</td><td>이번 한 번의 목표와 제약</td><td>“로그인 오류를 조사하고, 계획을 먼저 제시한 뒤 테스트까지 실행해줘.”</td><td>팀 규칙과 반복 체크리스트를 매번 붙여넣기</td></tr>
+        <tr><td><code>CLAUDE.md</code></td><td>매 세션에 유지되어야 하는 프로젝트 지침</td><td>빌드 명령, 코드 스타일, 아키텍처 규칙, 리뷰 체크리스트</td><td>긴 절차, 한 파일에만 적용되는 세부 규칙, 일회성 요청</td></tr>
+        <tr><td>Auto memory</td><td>Claude가 작업하며 배운 반복 패턴</td><td>디버깅 인사이트, 빌드 명령, 사용자의 반복 선호</td><td>강제 정책이나 보안 금지사항을 auto memory에만 의존</td></tr>
+        <tr><td><code>.claude/rules</code></td><td>파일 경로나 조건별 지침</td><td>특정 폴더, 테스트 파일, API 라우트에만 적용되는 규칙</td><td>프로젝트 전체 공통 규칙을 너무 잘게 분산</td></tr>
+        <tr><td>Skill</td><td>반복 절차와 체크리스트</td><td>PR 리뷰, 릴리즈 QA, 배포 전 점검, 에러 분석</td><td>사실과 배경 정보만 잔뜩 넣은 지침 파일</td></tr>
+        <tr><td>Settings</td><td>도구 실행 환경과 권한</td><td>permission mode, allowed tools, hooks, plugins, MCP scope</td><td>코딩 스타일과 팀 철학을 settings에 섞기</td></tr>
+        <tr><td>Hook</td><td>정책을 자동 실행해야 할 때</td><td>비밀키 검사, 포맷, 테스트, PR 메시지 검사, team gate</td><td>모든 행동을 Hook으로 막아 정상 작업까지 느리게 만들기</td></tr>
+        <tr><td>Plugin</td><td>여러 프로젝트나 팀에 배포할 때</td><td>Skill, agents, hooks, MCP, settings를 버전 있는 패키지로 묶기</td><td>개인 실험을 검증 없이 팀 전체 설치로 전환</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>05 · SIX LESSONS</span><h2>6회차별 전문 강의 설계</h2></div>
+      <p>각 회차는 고유 장면, 정상 흐름, 실패 흐름, 복구 흐름, 강사용 심화 해설을 반드시 갖습니다.</p>
+    </div>
+    <div class="lessons">
+      <article class="lesson" style="--accent:#f0b47d">
+        <div class="lesson-num">01</div>
+        <div><small>FOUNDATION</small><h3>설치·터미널·세션·권한·저장소 탐색</h3></div>
+        <p><b>대표 장면:</b> 잘못된 홈 폴더 세션과 올바른 프로젝트 루트 세션을 나란히 보여주고, plan mode에서 읽기 탐색 후 작은 diff로 이동합니다.</p>
+        <p><b>실습:</b> 저장소 지도, 현재 permission mode, 첫 안전한 변경, 검증 명령을 한 장에 기록합니다.</p>
+      </article>
+      <article class="lesson" style="--accent:#87b36f">
+        <div class="lesson-num">02</div>
+        <div><small>PROJECT CONTROL</small><h3>CLAUDE.md·계획·Git·Diff·테스트</h3></div>
+        <p><b>대표 장면:</b> 반복 설명이 CLAUDE.md와 path rule로 정리되고, diff와 test가 Git checkpoint로 고정되는 운영판.</p>
+        <p><b>실습:</b> CLAUDE.md 초안, 검증 명령 2개, 금지 행동 2개, 테스트 포함 commit을 만듭니다.</p>
+      </article>
+      <article class="lesson" style="--accent:#8fb6cb">
+        <div class="lesson-num">03</div>
+        <div><small>REUSABLE WORK</small><h3>Skills와 반복 작업 표준화</h3></div>
+        <p><b>대표 장면:</b> 붙여넣던 체크리스트가 SKILL.md, supporting files, trigger, verification으로 분리되는 Skill loader.</p>
+        <p><b>실습:</b> 반복 업무 하나를 Skill로 만들고 정상 요청, 엉뚱한 요청, 실패 요청 3개로 테스트합니다.</p>
+      </article>
+      <article class="lesson" style="--accent:#b9a1ff">
+        <div class="lesson-num">04</div>
+        <div><small>EXTENSIONS</small><h3>Plugins·MCP·Hooks와 서비스 연결</h3></div>
+        <p><b>대표 장면:</b> Skill, agent, hook, MCP, settings가 plugin root에서 묶이고, 쓰기 도구 앞에 Hook gate가 켜지는 확장 설계도.</p>
+        <p><b>실습:</b> 개인 Skill을 Plugin 후보로 묶고, 읽기 전용 MCP 또는 모의 Tool, Hook 실패 정책을 작성합니다.</p>
+      </article>
+      <article class="lesson" style="--accent:#e9bc62">
+        <div class="lesson-num">05</div>
+        <div><small>MULTI AGENT</small><h3>Subagents·Agent Teams·리뷰 게이트</h3></div>
+        <p><b>대표 장면:</b> Explore/Plan subagent가 컨텍스트 오염을 줄이고, Agent Team은 lead, teammate, shared task list로 분리되는 관제판.</p>
+        <p><b>실습:</b> 병렬 가치가 있는 작업만 골라 역할, 파일 소유권, 반환 형식, reviewer gate를 작성합니다.</p>
+      </article>
+      <article class="lesson" style="--accent:#ee6f5f">
+        <div class="lesson-num">06</div>
+        <div><small>OPERATIONS</small><h3>자동화·배포·PR·Claude 워크스페이스</h3></div>
+        <p><b>대표 장면:</b> Claude 세션 결과가 branch, tests, PR, GitHub Action, deploy, handoff summary로 이동하는 릴리즈 파이프라인.</p>
+        <p><b>실습:</b> 최종 Claude 워크스페이스 운영 매뉴얼과 PR 템플릿, CI 실패 복구 시나리오를 완성합니다.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>06 · MOTION BRIEF</span><h2>슬라이드와 애니메이션 고도화 기준</h2></div>
+      <p>Claude Code 전문과정의 모션은 터미널·파일·권한·검증의 인과 관계를 보여줘야 합니다.</p>
+    </div>
+    <div class="grid-3">
+      <article class="scene" style="--accent:#f0b47d"><small>AGENTIC LOOP</small><h3>세 단계 루프</h3><p>Gather context, take action, verify results 세 노드를 원형으로 배치합니다. 테스트 실패 시 verify에서 gather로 되돌아가는 루프를 수동 진행합니다.</p></article>
+      <article class="scene" style="--accent:#87b36f"><small>PERMISSION RAIL</small><h3>권한 모드는 레일이다</h3><p>default, acceptEdits, plan, auto, dontAsk, bypassPermissions를 레일로 보여주고, 위험도가 올라갈수록 감독·격리·복구 필요성이 같이 켜집니다.</p></article>
+      <article class="scene" style="--accent:#8fb6cb"><small>MEMORY STACK</small><h3>CLAUDE.md와 memory 구분</h3><p>사용자 작성 지침과 Claude가 저장한 auto memory를 두 층으로 보여줍니다. 보안 정책은 Hook으로 빠지는 분기선을 함께 표시합니다.</p></article>
+      <article class="scene" style="--accent:#b9a1ff"><small>PLUGIN BUNDLE</small><h3>확장은 묶음이다</h3><p>skills, agents, hooks, .mcp.json, settings.json이 plugin root에 모이고, .claude-plugin/plugin.json은 식별표 역할만 하도록 강조합니다.</p></article>
+      <article class="scene" style="--accent:#e9bc62"><small>TEAM BOARD</small><h3>팀은 역할 경계다</h3><p>Lead, teammate, shared task list, mailbox를 실제 보드처럼 배치합니다. 같은 파일을 잡으면 충돌 표시, 독립 작업이면 병렬 진행으로 보여줍니다.</p></article>
+      <article class="scene" style="--accent:#ee6f5f"><small>PR PIPELINE</small><h3>작업은 PR로 검증된다</h3><p>issue, branch, diff, test, PR comment, GitHub Action, review, deploy가 순서대로 켜지고 실패 시 해당 노드에서 멈춥니다.</p></article>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>07 · SCRIPT TEMPLATE</span><h2>강사용 대본을 얕게 만들지 않는 틀</h2></div>
+      <p>Claude Code 수업은 “이 버튼을 누르세요”가 아니라 세션 운영 판단을 가르쳐야 합니다.</p>
+    </div>
+    <div class="grid-2">
+      <article class="qa">
+        <small>SAY / DO / ASK</small>
+        <h3>수업 중 실제 멘트 구조</h3>
+        <div class="script-box"><b>SAY</b><p>“Claude Code가 강한 이유는 한 번에 정답을 말해서가 아니라, 프로젝트를 읽고, 행동하고, 검증하면서 방향을 조정하는 루프를 갖기 때문입니다.”</p></div>
+        <div class="script-box"><b>DO</b><p>터미널에서 계획 단계, 파일 읽기, 작은 diff, 테스트 실행, 실패 후 재시도를 한 단계씩 멈춰 보여줍니다.</p></div>
+        <div class="script-box"><b>ASK</b><p>“지금 단계에서 Claude가 새로 알게 된 정보는 무엇이고, 다음 행동은 왜 달라져야 할까요?”</p></div>
+      </article>
+      <article class="qa">
+        <small>DEEP / RECOVER</small>
+        <h3>전문 과정의 깊이를 만드는 부분</h3>
+        <div class="script-box"><b>근거</b><p>공식 문서의 agentic loop, permission modes, checkpoints, CLAUDE.md와 auto memory 구분을 실제 화면과 연결합니다.</p></div>
+        <div class="script-box"><b>복구</b><p>권한 모드가 너무 느슨하거나, CLAUDE.md가 과밀하거나, MCP 인증이 빠지거나, 팀 작업이 충돌하는 상황을 준비합니다.</p></div>
+        <div class="script-box"><b>시간</b><p>시간이 부족하면 확장 기능 설명을 줄이고 “루트 확인 → plan → diff → test → PR note” 흐름만 남깁니다.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>08 · FAILURE DRILLS</span><h2>반드시 보여줄 실패 훈련</h2></div>
+      <p>Claude Code 전문과정은 실패를 숨기지 않고 복구하는 장면에서 강의 신뢰가 올라갑니다.</p>
+    </div>
+    <table class="matrix">
+      <thead><tr><th>실패</th><th>보여줄 화면</th><th>강사용 설명</th><th>복구 산출물</th></tr></thead>
+      <tbody>
+        <tr><td>잘못된 cwd</td><td>홈 폴더에서 시작해 관련 없는 파일을 탐색</td><td>Claude가 모르는 것이 아니라 작업공간이 틀린 것입니다.</td><td>프로젝트 루트, Git branch, 실행 명령 기록</td></tr>
+        <tr><td>권한 모드 오해</td><td>bypassPermissions를 편의 기능처럼 사용하는 화면</td><td>권한 축소는 속도 문제가 아니라 피해 범위와 복구 가능성 문제입니다.</td><td>작업별 permission mode 선택표</td></tr>
+        <tr><td>CLAUDE.md 과밀</td><td>긴 지침으로 핵심 검증 명령이 묻힌 파일</td><td>반복 사실은 CLAUDE.md, 절차는 Skill, 강제 정책은 Hook으로 분리합니다.</td><td>축약 CLAUDE.md와 Skill 분리안</td></tr>
+        <tr><td>Skill trigger 과다</td><td>관련 없는 요청에도 Skill이 실행</td><td>Skill 설명은 “언제 사용하지 않는지”까지 적어야 합니다.</td><td>trigger, out-of-scope, 테스트 요청 3개</td></tr>
+        <tr><td>MCP 인증 누락</td><td>서버는 추가됐지만 데이터 조회가 실패</td><td>연결, 인증, 권한 scope, 출력 한도는 각각 다른 문제입니다.</td><td>MCP 진단표와 대체 자료 경로</td></tr>
+        <tr><td>Agent Team 충돌</td><td>두 teammate가 같은 파일을 수정</td><td>팀은 agent 수가 아니라 역할 경계와 task ownership으로 운영됩니다.</td><td>파일 소유권, task dependency, review gate</td></tr>
+        <tr><td>PR 인수인계 부족</td><td>PR은 열렸지만 사람이 처음부터 다시 조사</td><td>PR에는 변경 이유, 검증, 남은 위험, 다음 행동이 있어야 합니다.</td><td>PR 템플릿과 handoff summary</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>09 · PROFESSIONAL Q&A</span><h2>강사가 준비해야 할 질문</h2></div>
+      <p>질문에 답할 때는 기능명보다 세션 운영 기준, 권한, 검증 증거를 먼저 말합니다.</p>
+    </div>
+    <div class="grid-2">
+      <article class="note"><small>Q1</small><h3>Claude Code와 Codex는 어떻게 다르게 가르치나요?</h3><p>Claude Code는 터미널 세션, CLAUDE.md, permission modes, checkpoints, Skill/Plugin/MCP/Hook, Agent Teams 흐름을 중심으로 갑니다. Codex는 App/CLI/IDE/Browser/Review/Release를 포함한 표면 선택과 검증 운영을 더 강조합니다.</p></article>
+      <article class="note"><small>Q2</small><h3>CLAUDE.md와 Skill은 무엇이 다른가요?</h3><p>CLAUDE.md는 매 세션에 유지될 사실과 규칙이고, Skill은 특정 업무를 수행하는 절차입니다. “항상 알아야 할 것”은 CLAUDE.md, “반복해서 수행할 것”은 Skill로 분리합니다.</p></article>
+      <article class="note"><small>Q3</small><h3>Auto memory를 믿어도 되나요?</h3><p>Auto memory는 Claude가 배운 패턴을 저장하는 보조 장치입니다. 보안 금지, 승인 정책, 팀 규칙처럼 강제해야 하는 것은 CLAUDE.md, settings, hooks로 분리해야 합니다.</p></article>
+      <article class="note"><small>Q4</small><h3>Agent Teams는 언제 별도 과정으로 빼야 하나요?</h3><p>역할 설계, task dependency, teammate communication, hooks quality gate, 비용·토큰, cleanup까지 다루기 시작하면 Claude Code Professional 안의 한 회차로는 부족합니다. 그때는 Agent Systems 또는 Team Automation 과정으로 분리하는 편이 좋습니다.</p></article>
+      <article class="note"><small>Q5</small><h3>Hooks는 왜 위험할 수 있나요?</h3><p>Hook은 자동으로 실행됩니다. 잘못 설정하면 정상 작업을 막거나 민감 정보를 잘못 처리할 수 있습니다. 따라서 event, matcher, exit code, 실패 정책을 먼저 설계해야 합니다.</p></article>
+      <article class="note"><small>Q6</small><h3>GitHub Actions는 그냥 자동 PR인가요?</h3><p>아닙니다. Claude Code 작업이 팀 저장소의 review, secrets, CI, permissions, PR 기록으로 들어가는 운영 단계입니다. 강의에서는 “자동화”보다 “검증 가능한 협업 기록”으로 설명합니다.</p></article>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>10 · REHEARSAL CHECKLIST</span><h2>수업 전 리허설 체크</h2></div>
+      <p>전문가 과정은 수업 전 실제 실패 캡처와 복구 경로가 준비되어야 합니다.</p>
+    </div>
+    <div class="grid-2">
+      <article class="note"><small>공식자료</small><h3>강사 예습</h3><ul><li>해당 회차 Anthropic 공식 문서 3개 이상 접속 상태 확인</li><li>기능 안정성, 실험 기능 여부, 버전 요구사항 확인</li><li>설치 명령, permission mode, settings scope 최신 상태 확인</li><li>수강생에게 말할 쉬운 비유와 금지 오해 한 문장 준비</li></ul></article>
+      <article class="note"><small>시연</small><h3>현장 운영</h3><ul><li>정상 흐름 캡처 1장, 실패 흐름 캡처 1장, 복구 후 캡처 1장</li><li>터미널 로그 글자 크기와 프로젝터 가독성 확인</li><li>네트워크 또는 로그인 실패 시 대체 캡처로 진행 가능 여부 확인</li><li>실습 산출물과 평가 기준을 30초 안에 설명</li></ul></article>
+      <article class="note"><small>품질</small><h3>슬라이드 검수</h3><ul><li>단순 카드 대신 실제 터미널, 파일 트리, diff, settings, PR 화면 재현 사용</li><li>모션은 자동 진행하지 않고 시작·다음·일시정지·초기화로 통일</li><li>색감은 Claude 과정답게 따뜻한 전문가 톤으로 유지</li><li>실험 기능은 명확히 experimental 표시</li></ul></article>
+      <article class="note"><small>평가</small><h3>수강생 산출물</h3><ul><li>CLAUDE.md와 Skill을 올바르게 분리했는지 확인</li><li>권한 모드 선택 이유와 실패 복구 경로를 말하게 하기</li><li>Subagent/Agent Team 사용 여부를 비용과 독립성 기준으로 설명하게 하기</li><li>PR 또는 handoff summary에 검증 증거가 남았는지 확인</li></ul></article>
+    </div>
+    <p class="print-note">이 자료는 강사용 연구자료입니다. 수강생에게 그대로 배포하지 말고, 각 회차의 실습 워크북과 출력물로 다시 압축해 사용합니다.</p>
+  </section>
+</main>
+<script src="./appendix-print.js"></script>
+</body>
+</html>

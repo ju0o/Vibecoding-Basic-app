@@ -1256,12 +1256,19 @@ const currentBasic = {
 function materialEntries(courseId, title) {
   const query = (kind, audience = 'student') =>
     `v3/material.html?course=${encodeURIComponent(courseId)}&kind=${kind}&audience=${audience}`;
+  const professionalQualityExtras = ['product', 'workflow', 'claude', 'codex'].includes(courseId)
+    ? [[`${courseId}-professional-production-standard`, 'V3 전문과정 제작·고도화 기준표', '공식자료 기반 회차 제작 순서, 대표 장면, 슬라이드 품질 기준', 'appendix/instructor-v3-professional-production-standard.html']]
+    : [];
   const professionalInstructorExtras = [
+    ...professionalQualityExtras,
     ...(courseId === 'workflow'
       ? [[`${courseId}-agent-mcp-skill-research`, 'Agent·MCP·Skill 전문 연구자료', '공식자료 기반 개념 경계, 슬라이드 장면, 별도 심화과정 분리 기준', 'appendix/instructor-agent-mcp-skill-research.html']]
       : []),
     ...(courseId === 'codex'
       ? [[`${courseId}-codex-professional-research`, 'Codex Professional 전문 연구자료', 'Codex 공식 매뉴얼 기반 표면·지침·권한·검증·릴리즈 연구자료', 'appendix/instructor-codex-professional-research.html']]
+      : []),
+    ...(courseId === 'claude'
+      ? [[`${courseId}-claude-code-professional-research`, 'Claude Code Professional 전문 연구자료', 'Anthropic 공식자료 기반 세션·지침·권한·확장·Agent Teams·PR 운영 연구자료', 'appendix/instructor-claude-code-professional-research.html']]
       : []),
   ];
   return {

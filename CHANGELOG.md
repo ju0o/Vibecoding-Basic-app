@@ -11,8 +11,10 @@
 - Workflow Architect 강사용 `Agent·MCP·Skill 전문 연구자료`
 - 공식자료 연구노트, 시연 운영 매뉴얼, 강사용 심화 개념집, 질문·답변·오류 복구집
 - 공식 출처 59개에 강사용 배경, 쉬운 비유, 자주 생기는 오해, 시연 포인트와 수업 전 체크리스트
+- Claude Code Professional 강사용 `Anthropic 공식자료 기반 전문 연구자료`를 추가해 agentic loop, CLAUDE.md, auto memory, permission modes, Skills, Plugins, MCP, Hooks, Subagents, Agent Teams, GitHub Actions를 공식자료 학습 순서와 슬라이드 장면으로 정리
 - Codex Professional 6회차별 전문 강사용 연구노트, 시각 시뮬레이션 설계 의도, 실패 훈련, 전문 Q&A
 - Codex Professional 강사용 `Codex 공식 매뉴얼 기반 전문 연구자료`를 추가해 표면 선택, 지속 지침, 권한, 검증, Subagents, Worktrees, Hooks, Automations, Release를 공식자료 학습 순서와 슬라이드 장면으로 정리
+- AI 제품·수익화, Workflow Architect, Claude Code Professional, Codex Professional 강사자료실에 `V3 전문과정 제작·고도화 기준표`를 추가해 공식자료 기반 회차 제작 순서, 대표 장면, 슬라이드 품질 기준을 통일
 - 다음 기수 기초 4주, Workflow Architect, Claude Code, Codex, AI 제품·수익화 전 회차에 공식자료 기반 전문 연구노트 자동 생성
 - 회차별 강사용 공부 순서, 슬라이드 고도화 브리프, 모션 스토리보드, 실제 자료 확보 목록, 리허설 체크리스트
 

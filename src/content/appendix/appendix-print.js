@@ -198,10 +198,22 @@
       action: '공식자료 읽는 순서, 개념 경계, 시각 슬라이드 장면, 별도 심화과정 분리 기준을 확인합니다.',
       download: '강사용 연구자료입니다. 수강생에게 배포하지 않고 강사자료실에서 PDF로 저장해 수업 전 공부자료로 사용합니다.',
     },
+    'instructor-v3-professional-production-standard.html': {
+      session: '심화·응용과정 전체',
+      timing: '새 전문 회차를 제작하거나 기존 심화 슬라이드를 고도화하기 전',
+      action: '공식자료 → 대표 장면 → 대본 → 시연 → 실습 → QA 순서로 회차 품질 기준을 확인합니다.',
+      download: '강사용 제작 기준표입니다. 강사자료실에서 PDF로 저장해 커리큘럼 제작 체크리스트로 사용합니다.',
+    },
     'instructor-codex-professional-research.html': {
       session: '심화과정 / Codex Professional',
       timing: 'Codex 전문과정 슬라이드, 시연, 실습을 설계하기 전',
       action: 'Codex 공식 매뉴얼 기반으로 표면 선택, 지속 지침, 권한, 검증, 릴리즈 운영 흐름을 공부합니다.',
+      download: '강사용 연구자료입니다. 수강생에게 배포하지 않고 강사자료실에서 PDF로 저장해 수업 전 공부자료로 사용합니다.',
+    },
+    'instructor-claude-code-professional-research.html': {
+      session: '심화과정 / Claude Code Professional',
+      timing: 'Claude Code 전문과정 슬라이드, 시연, 실습을 설계하기 전',
+      action: 'Anthropic 공식자료 기반으로 세션, CLAUDE.md, 권한, Skills, Plugins, MCP, Hooks, Agent Teams, PR 운영 흐름을 공부합니다.',
       download: '강사용 연구자료입니다. 수강생에게 배포하지 않고 강사자료실에서 PDF로 저장해 수업 전 공부자료로 사용합니다.',
     },
   };
