@@ -149,6 +149,7 @@ function liveDemo() {
         <button class="control-btn" type="button" id="live-pause">일시정지</button>
         <button class="control-btn" type="button" id="live-reset">초기화</button>
         <p class="control-caption" id="live-caption">시작을 누르면 첫 단계가 열립니다. 자동으로 넘어가지 않습니다.</p>
+        ${lesson.professional?.visualSimulation ? `<div class="motion-brief"><b>MOTION INTENT</b><span>${escapeHtml(lesson.professional.visualSimulation)}</span></div>` : ''}
         <div class="control-state" id="live-state">READY<br>0 / ${stageLabels.length}</div>
       </aside>
     </div>

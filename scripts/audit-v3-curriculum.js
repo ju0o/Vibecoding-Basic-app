@@ -105,7 +105,7 @@ for (const [courseId, course] of Object.entries(v3CourseData)) {
     sceneIds.add(session.visualScene?.id);
     pass(session.interactions?.controls?.join(',') === 'start,previous,next,pause,reset', `${courseId}-${index + 1} has manual controls`);
     pass(session.scriptSlides?.length === 13, `${courseId}-${index + 1} has a 13-slide instructor script`);
-    pass(session.scriptSlides?.every((slide) => slide.say && slide.do && slide.ask && slide.expected && slide.deepDive && slide.recovery), `${courseId}-${index + 1} has SAY/DO/ASK/expected/deep-dive/recovery script`);
+    pass(session.scriptSlides?.every((slide) => slide.say && slide.do && slide.ask && slide.expected && slide.deepDive && slide.recovery && slide.motionCue && slide.sourceCue), `${courseId}-${index + 1} has SAY/DO/ASK/expected/deep-dive/motion/source/recovery script`);
     if (session.status === 'ready') {
       pass((session.sourceKeys || []).length >= 3, `${courseId}-${index + 1} has at least 3 official study sources`);
       pass(Boolean(session.professional?.focus), `${courseId}-${index + 1} has professional research focus`);
@@ -115,6 +115,11 @@ for (const [courseId, course] of Object.entries(v3CourseData)) {
       pass((session.professional?.failureDrill || []).length >= 3, `${courseId}-${index + 1} has failure drills`);
       pass((session.professional?.misconceptions || []).length >= 2, `${courseId}-${index + 1} has misconception corrections`);
       pass((session.professional?.expertQuestions || []).length >= 2, `${courseId}-${index + 1} has expert Q&A`);
+      pass((session.professional?.studyPath || []).length >= 5, `${courseId}-${index + 1} has instructor study path`);
+      pass((session.professional?.slideUpgrade || []).length >= 5, `${courseId}-${index + 1} has slide upgrade brief`);
+      pass((session.professional?.motionStoryboard || []).length >= 5, `${courseId}-${index + 1} has motion storyboard`);
+      pass((session.professional?.realWorldAssets || []).length >= 5, `${courseId}-${index + 1} has real-world asset checklist`);
+      pass((session.professional?.rehearsalChecklist || []).length >= 5, `${courseId}-${index + 1} has rehearsal checklist`);
     }
     for (const variant of ['starter', 'broken', 'complete']) {
       const target = path.join(root, 'src/content', session.demoProject?.[variant] || '', 'index.html');

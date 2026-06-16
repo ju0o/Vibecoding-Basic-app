@@ -30,6 +30,14 @@
 - AI 제품·수익화 과정은 YC, Atlassian, Nielsen Norman Group, Material Design, Stripe, Toss Payments, Supabase 자료를 연결해 팀 프로젝트와 수익화 판단이 실제 자료 기반으로 설명되도록 했습니다.
 - `npm run audit:curriculum`은 Codex만이 아니라 모든 ready 회차에 동일한 품질 기준을 적용합니다.
 
+## Beta 3 추가 고도화
+
+- 공식자료는 59개로 확대했고, 결제 Webhook, 고객 포털, 인증, 데이터 권한, 배포 롤백, PR 리뷰, Actions secrets, OpenAI Agents SDK와 Tools 자료를 추가했습니다.
+- 모든 V3 ready 회차는 강사용 공부 순서, 슬라이드 고도화 브리프, 모션 스토리보드, 실제 자료 확보 목록, 리허설 체크리스트를 포함해야 합니다.
+- 강사용 상세 대본은 `SAY / DO / ASK / 예상 답변 / 심화 설명 / 모션·시각 큐 / 공식자료 큐 / 오류 복구` 구조로 확장했습니다.
+- 대표 시연 슬라이드는 우측 컨트롤에 `MOTION INTENT`를 표시해 발표자가 장면의 교육 목적을 놓치지 않도록 했습니다.
+- `npm run audit:curriculum`은 새 필드가 빠진 ready 회차를 실패 처리합니다.
+
 ## 정식 승격 조건
 
 - 각 과정 실제 수업 1회 이상 운영

@@ -322,6 +322,9 @@ body.low-motion *, body.low-motion *::before, body.low-motion *::after {
 .control-btn { width: 100%; padding: 0 14px; text-align: left; }
 .control-btn.primary { color: var(--bg); border-color: var(--accent); background: var(--accent); font-weight: 850; }
 .control-caption { min-height: 66px; margin: 6px 0 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
+.motion-brief { display: grid; gap: 6px; padding: 10px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.025); }
+.motion-brief b { color: var(--accent); font: 800 9px var(--mono); letter-spacing: .08em; }
+.motion-brief span { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; color: #b8c1c5; font-size: 10px; line-height: 1.45; }
 .control-state { margin-top: 10px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font: 700 11px/1.6 var(--mono); }
 
 .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }

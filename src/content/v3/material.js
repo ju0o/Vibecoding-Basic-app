@@ -318,6 +318,8 @@ function script() {
               <p><strong>ASK</strong>${escapeHtml(entry.ask)}</p>
               <p><strong>예상 답변</strong>${escapeHtml(entry.expected)}</p>
               <p><strong>심화 설명</strong>${escapeHtml(entry.deepDive || '공식자료와 실제 시연을 연결해 정의보다 판단 기준으로 설명합니다.')}</p>
+              <p><strong>모션·시각 큐</strong>${escapeHtml(entry.motionCue || '현재 단계만 강조하고 다음 단계는 발표자 클릭 전까지 멈춥니다.')}</p>
+              <p><strong>공식자료 큐</strong>${escapeHtml(entry.sourceCue || '공식자료를 판단 기준으로만 짧게 연결합니다.')}</p>
               <p><strong>오류 복구</strong>${escapeHtml(entry.recovery)}</p>
             </article>`).join('')}
         </div>
@@ -336,6 +338,8 @@ function demo() {
       <h3>시연 전 준비</h3>${list([...lesson.preparation, '정상 상태 캡처', '실패 상태 캡처', '복구 명령 또는 되돌릴 커밋'])}
       <h3>정상 시연 순서</h3>${list(lesson.demo.stages.map((stage, step) => `${step + 1}. ${stage}: 화면 변화와 확인 기준을 말한 뒤 다음 단계로 이동`), 'numbered')}
       ${lesson.professional?.demoRun ? `<h3>전문 시연 운영 순서</h3>${list(lesson.professional.demoRun, 'numbered')}` : ''}
+      ${lesson.professional?.motionStoryboard ? `<h3>모션 스토리보드</h3>${list(lesson.professional.motionStoryboard, 'numbered')}` : ''}
+      ${lesson.professional?.realWorldAssets ? `<h3>실제 자료 확보 목록</h3>${list(lesson.professional.realWorldAssets)}` : ''}
       <div class="callout"><b>속도 원칙</b><p>한 단계가 끝날 때마다 다음 결과를 질문하고 3초 이상 기다립니다. 수강생 답을 들은 뒤 다음 버튼을 누릅니다.</p></div>
       ${footer('LIVE DEMO · A', index * 2 + 1)}
     </section>
@@ -351,6 +355,7 @@ function demo() {
       </tbody></table>
       <h3>현장 실패 복구 순서</h3>${list(['증상과 시간을 그대로 말한다', '수강생에게 오류 화면을 함께 읽게 한다', '사전 준비한 대체 캡처로 개념 설명을 이어간다', '휴식 또는 실습 중 실제 원인을 복구한다', '복구 결과를 수업 종료 전에 공유한다'], 'numbered')}
       ${lesson.professional?.failureDrill ? `<h3>전문 실패 훈련</h3>${list(lesson.professional.failureDrill, 'numbered')}` : ''}
+      ${lesson.professional?.rehearsalChecklist ? `<h3>리허설 체크리스트</h3>${list(lesson.professional.rehearsalChecklist)}` : ''}
       <h3>강의 전 리허설 기록</h3>${lines(6)}
       ${footer('LIVE DEMO · B', index * 2 + 2)}
     </section>
@@ -401,8 +406,14 @@ function sourceStudy() {
         <p class="objective">${escapeHtml(lesson.professional.focus)}</p>
         <h3>이 회차에서 반드시 읽어야 할 공식 개념</h3>
         ${list(lesson.professional.officialStudy || [])}
+        <h3>강사용 공부 순서</h3>
+        ${list(lesson.professional.studyPath || [], 'numbered')}
         <h3>수업에서 보여줄 시각 장면</h3>
         <p>${escapeHtml(lesson.professional.visualSimulation)}</p>
+        <h3>슬라이드 고도화 브리프</h3>
+        ${list(lesson.professional.slideUpgrade || [], 'numbered')}
+        <h3>실제 자료 확보 목록</h3>
+        ${list(lesson.professional.realWorldAssets || [])}
         <h3>공식자료를 읽고 수업 전 답해야 할 질문</h3>
         ${professionalPairs(lesson.professional.expertQuestions || [], 'Q')}
         <h3>연결 공식자료 키</h3>
@@ -481,6 +492,8 @@ function deepDive() {
       <p class="objective">이 페이지는 수강생에게 그대로 나눠주는 자료가 아니라, 강사가 공식자료와 실제 시연 사이의 논리를 이해하기 위한 공부 자료입니다.</p>
       ${professionalBlock(lesson)}
       ${lesson.professional?.visualSimulation ? `<h3>시각 시뮬레이션 설계 의도</h3><p>${escapeHtml(lesson.professional.visualSimulation)}</p>` : ''}
+      ${lesson.professional?.slideUpgrade ? `<h3>슬라이드 고도화 설계</h3>${list(lesson.professional.slideUpgrade, 'numbered')}` : ''}
+      ${lesson.professional?.motionStoryboard ? `<h3>애니메이션·모션 리허설</h3>${list(lesson.professional.motionStoryboard, 'numbered')}` : ''}
       <h3>쉬운 설명</h3>
       ${lesson.concepts.map(([title, copy]) => `<div class="script-block"><span class="script-label">${escapeHtml(title)}</span><span class="script-copy">${escapeHtml(copy)}<br>수업에서는 정의를 먼저 말하지 말고, 화면에서 어떤 판단을 해야 하는지 사례로 설명합니다.</span></div>`).join('')}
       <h3>전문가 관점에서 강조할 것</h3>
@@ -488,6 +501,7 @@ function deepDive() {
         ? ['공식자료의 기능 설명을 그대로 읽지 말고 작업 판단 기준으로 번역', '실제 화면·터미널·diff·로그로 증거를 남기게 운영', '권한·비용·복구 기준을 기능 구현 전부터 함께 설계', '자동화와 병렬화는 성공률과 책임 경계가 확인된 뒤 적용']
         : ['권한과 비용은 기능 완성 이후가 아니라 설계 단계에서 함께 결정', 'AI 결과물은 실행·diff·로그·브라우저 증거로 검증', '도구별 명령보다 목표, 컨텍스트, 승인, 복구 흐름을 우선', '수강생의 질문은 정답보다 문제 위치 판단으로 되돌림'])}
       ${lesson.professional?.failureDrill ? `<h3>강사가 리허설해야 할 실패 장면</h3>${list(lesson.professional.failureDrill, 'numbered')}` : ''}
+      ${lesson.professional?.realWorldAssets ? `<h3>강사가 미리 준비할 실제 자료</h3>${list(lesson.professional.realWorldAssets)}` : ''}
       <h3>오해 방지 문장</h3>
       <p>${escapeHtml(lesson.compare.bad.join(' / '))} 방식은 결과를 빨리 보이게 하지만 운영 가능한 결과를 보장하지 않습니다. ${escapeHtml(lesson.compare.good.join(' / '))} 기준으로 다시 묶어 설명합니다.</p>
       ${lesson.professional?.misconceptions ? professionalPairs(lesson.professional.misconceptions, '오해') : ''}
