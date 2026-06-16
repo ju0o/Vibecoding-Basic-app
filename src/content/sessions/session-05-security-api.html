@@ -298,16 +298,16 @@
       </header>
       <div class="env-system">
         <article class="env-file">
-          <div class="file-tab"><span>.env.local</span><b>LOCAL ONLY</b></div>
-          <div class="env-code">
-            <span><i>1</i><code>PAYMENT_SECRET=••••••</code></span>
-            <span><i>2</i><code>DATABASE_URL=••••••</code></span>
-            <span><i>3</i><code>AI_API_KEY=••••••</code></span>
+          <div class="file-tab"><span>Local env files</span><b>ROOT LEVEL</b></div>
+          <div class="env-code env-code-compact">
+            <span><i>.env</i><code>공통 기본값 · 팀 정책에 따라 사용</code></span>
+            <span><i>.env.local</i><code>내 PC 실제 비밀값 · GitHub 금지</code></span>
+            <span><i>.env.example</i><code>공유용 이름 견본 · 실제 값 없음</code></span>
           </div>
-          <p>내 컴퓨터의 개발 환경에 전달</p>
+          <p>모두 프로젝트 루트에 두며, <b>src 안에 넣지 않습니다.</b></p>
         </article>
         <div class="env-gate">
-          <div class="ignore-file"><b>.gitignore</b><code>.env*</code><span>GitHub 전송 차단</span></div>
+          <div class="ignore-file"><b>.gitignore</b><code>.env<br>.env.local<br>.env.*.local</code><span>실제 값 전송 차단</span></div>
           <div class="gate-line blocked-line"><i></i><b>BLOCK</b></div>
           <div class="gate-line safe-line"><i></i><b>INJECT</b></div>
         </div>
@@ -321,7 +321,7 @@
           <p>Vercel/Firebase 설정 화면에서 별도로 입력</p>
         </article>
       </div>
-      <div class="env-rule"><b>핵심</b><span>`.env`에 넣었다고 무조건 비밀이 되는 것은 아닙니다. 브라우저로 전달되는 변수는 사용자가 볼 수 있습니다.</span></div>
+      <div class="env-rule"><b>핵심</b><span>`.env.example`은 공유해도 되지만 실제 값이 있는 `.env`와 `.env.local`은 공유하지 않습니다. `NEXT_PUBLIC_`, `VITE_`처럼 브라우저로 전달되는 변수에는 비밀값을 넣지 않습니다.</span></div>
     </section>
 
     <section class="slide" data-title="공개 변수와 비밀 변수">

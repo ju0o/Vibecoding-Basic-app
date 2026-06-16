@@ -8,6 +8,7 @@
 
 - 단일 강사용 로컬 스튜디오 구조
 - 전역 강사자료실, 수강생 출력물, 실습파일, 공식자료 학습실 탭
+- Workflow Architect 강사용 `Agent·MCP·Skill 전문 연구자료`
 - 공식자료 연구노트, 시연 운영 매뉴얼, 강사용 심화 개념집, 질문·답변·오류 복구집
 - 공식 출처 59개에 강사용 배경, 쉬운 비유, 자주 생기는 오해, 시연 포인트와 수업 전 체크리스트
 - Codex Professional 6회차별 전문 강사용 연구노트, 시각 시뮬레이션 설계 의도, 실패 훈련, 전문 Q&A
@@ -24,6 +25,9 @@
 - AI 제품·수익화 과정에 YC, Atlassian, Nielsen Norman Group, Material Design, Stripe, Toss Payments, Supabase, GitHub, Firebase, Vercel 공식·전문 자료 연결
 - `Ctrl+K` 검색 범위를 강의, 강사자료, 수강생 출력물, 실습파일, 공식자료로 확대
 - A4 PDF QA 대상을 71종으로 확대
+- 4강 파일 구조 설명에서 `src`, `public`, `node_modules`, `package*.json`, `.env*`가 모두 프로젝트 루트 기준에서 구분되도록 수정
+- 5강 환경변수 설명에 `.env`, `.env.local`, `.env.example`, 배포 환경변수의 차이를 추가
+- 2기 운영본 freeze 기준을 4강 파일 구조와 5강 환경변수 오류 수정본으로 재고정
 
 ## [3.0.0-beta.2] - 2026-06-16
 

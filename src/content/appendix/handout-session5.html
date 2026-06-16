@@ -44,7 +44,8 @@
     <h2>3. 공개하면 안 되는 값</h2>
     <div class="checklist">
       <div class="check">결제 비밀키, AI API 키, 관리자 DB 주소, 서비스 계정 파일을 코드에 직접 쓰지 않습니다.</div>
-      <div class="check">`.env`, `.env.local`이 `.gitignore`에 포함되어 있는지 확인합니다.</div>
+      <div class="check">실제 값이 들어간 `.env`, `.env.local`, `.env.*.local`이 `.gitignore`에 포함되어 있는지 확인합니다.</div>
+      <div class="check">공유가 필요할 때는 실제 값이 없는 `.env.example`에 변수 이름만 적습니다.</div>
       <div class="check">배포 서비스의 Environment Variables에 실제 값을 별도로 입력합니다.</div>
       <div class="check">`NEXT_PUBLIC_`, `VITE_`처럼 브라우저에 전달되는 변수에는 비밀값을 넣지 않습니다.</div>
       <div class="check">이미 노출된 비밀키는 삭제만 하지 말고 폐기한 뒤 새로 발급합니다.</div>

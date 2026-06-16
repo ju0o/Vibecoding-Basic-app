@@ -1,7 +1,7 @@
 {
   "label": "기초반 2기 6주 운영본",
-  "frozenAt": "2026-06-16",
-  "note": "V3 개발 중 이 파일들은 수정하지 않는다.",
+  "frozenAt": "2026-06-17",
+  "note": "2기 운영본은 자동 교체하지 않는다. 2026-06-17에 4강 파일 구조와 5강 환경변수 설명 오류를 검수 수정한 뒤 다시 고정했다.",
   "hashMode": "text-lf-normalized",
   "files": [
     {
@@ -46,18 +46,18 @@
     },
     {
       "file": "src/content/sessions/session-04-revenue.html",
-      "bytes": 172517,
-      "sha256": "e80c370963020c83296ce756d5246ce9673f54730997b8043a79b80ff49f6d2e"
+      "bytes": 175701,
+      "sha256": "6fb8cce5378f7a758712b8092fde8e104ad1c7d6b899e32182897a498a68793f"
     },
     {
       "file": "src/content/sessions/session-05-security-api.css",
-      "bytes": 43044,
-      "sha256": "7c9aa860c9d393c16e35c2ac2d96ed4aed1093cc4bc8c1d07aa3cb0177b9243a"
+      "bytes": 43324,
+      "sha256": "f6f4ec34a9604d8d7368caa273430112c8fce76563532ae7953d2a15358d6749"
     },
     {
       "file": "src/content/sessions/session-05-security-api.html",
-      "bytes": 27759,
-      "sha256": "513c4a19f2c7166bacec2aa6d658b50bb5fcadbb9c2dd79926be76c9ed18515e"
+      "bytes": 27987,
+      "sha256": "97025959cd837cfa65484fc5c95ab35a7432f39ce0726415ebe226a2e2055eb4"
     },
     {
       "file": "src/content/sessions/session-05-security-api.js",

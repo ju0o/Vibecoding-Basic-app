@@ -104,9 +104,9 @@
 
     <article class="slide-card">
       <div class="slide-head"><div class="num">12</div><h2>환경변수 금고</h2></div>
-      <div class="block"><div class="label">SAY</div><div class="text">“로컬에서는 .env.local 같은 파일에 값을 넣고, .gitignore가 그 파일이 GitHub로 올라가지 않게 막습니다. 배포할 때는 같은 값을 Vercel이나 Firebase의 설정에 별도로 입력합니다. 코드는 PAYMENT_SECRET이라는 이름만 알고, 실제 값은 실행 환경이 전달합니다.”</div></div>
-      <div class="block"><div class="label">강조</div><div class="note">`.env`는 암호화 금고 그 자체가 아니라 코드와 값을 분리하는 파일이다. Git에 올리지 않고, 화면에 출력하지 않고, 서버에서만 읽도록 해야 비밀이 유지된다.</div></div>
-      <div class="block"><div class="label">질문</div><div class="note">“`.env.local`을 만들었는데 `.gitignore`에 없으면 안전할까요?” 정답: 아니다. 실수로 commit될 수 있다.</div></div>
+      <div class="block"><div class="label">SAY</div><div class="text">“환경변수 파일은 모두 프로젝트 루트에 둡니다. <code>.env</code>는 공통 환경값을 둘 수 있는 파일이고, <code>.env.local</code>은 내 컴퓨터에서만 쓰는 실제 비밀값 파일입니다. 반대로 <code>.env.example</code>은 실제 값이 아니라 ‘이 프로젝트를 실행하려면 이런 이름의 값이 필요하다’고 알려주는 공유용 견본입니다. 배포할 때는 로컬 파일을 업로드하는 것이 아니라 Vercel이나 Firebase의 Environment Variables 설정에 같은 이름으로 값을 다시 입력합니다.”</div></div>
+      <div class="block"><div class="label">강조</div><div class="note">`.env`는 암호화 금고 그 자체가 아니라 코드와 값을 분리하는 파일이다. Git에 올리지 않고, 화면에 출력하지 않고, 서버에서만 읽도록 해야 비밀이 유지된다. `.env.example`은 공유 가능하지만 실제 값이 들어가면 안 된다.</div></div>
+      <div class="block"><div class="label">질문</div><div class="note">“팀원에게 어떤 환경변수가 필요한지 알려주고 싶을 때 실제 `.env.local`을 보내도 될까요?” 정답: 아니다. `.env.example`에 이름만 적어 공유한다.</div></div>
     </article>
 
     <article class="slide-card">

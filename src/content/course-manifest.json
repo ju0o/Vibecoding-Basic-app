@@ -2106,6 +2106,14 @@
             "file": "v3/material.html?course=workflow&kind=rehearsal&audience=instructor",
             "audience": "instructor",
             "courseId": "workflow"
+          },
+          {
+            "id": "workflow-agent-mcp-skill-research",
+            "title": "Agent·MCP·Skill 전문 연구자료",
+            "description": "공식자료 기반 개념 경계, 슬라이드 장면, 별도 심화과정 분리 기준",
+            "file": "appendix/instructor-agent-mcp-skill-research.html",
+            "audience": "instructor",
+            "courseId": "workflow"
           }
         ]
       }

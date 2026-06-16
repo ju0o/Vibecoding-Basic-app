@@ -1256,6 +1256,9 @@ const currentBasic = {
 function materialEntries(courseId, title) {
   const query = (kind, audience = 'student') =>
     `v3/material.html?course=${encodeURIComponent(courseId)}&kind=${kind}&audience=${audience}`;
+  const professionalInstructorExtras = courseId === 'workflow'
+    ? [[`${courseId}-agent-mcp-skill-research`, 'Agent·MCP·Skill 전문 연구자료', '공식자료 기반 개념 경계, 슬라이드 장면, 별도 심화과정 분리 기준', 'appendix/instructor-agent-mcp-skill-research.html']]
+    : [];
   return {
     student: [
       [`${courseId}-workbook`, '통합 실습 워크북', `${title} 회차별 작업지와 메모`, query('workbook')],
@@ -1273,6 +1276,7 @@ function materialEntries(courseId, title) {
       [`${courseId}-qa-bank`, '질문·답변·오류 복구집', '예상 질문, 평가 기준, 복구 시나리오', query('qa-bank', 'instructor')],
       [`${courseId}-fallback`, '오프라인 대체 화면', '인터넷·로그인·빌드 실패 시 사용하는 회차별 캡처', query('fallback', 'instructor')],
       [`${courseId}-rehearsal`, '현장 리허설 체크리스트', '프로젝터·실습 파일·시연 속도와 복구 점검', query('rehearsal', 'instructor')],
+      ...professionalInstructorExtras,
     ],
   };
 }

@@ -247,7 +247,55 @@
     </section>
 
     <section class="section">
-      <h2>3. 파일과 경로 핵심 원리 판서 요령</h2>
+      <h2>3. 반드시 바로잡아야 할 루트 구조와 환경변수 파일</h2>
+      <p style="font-size:14px; line-height:1.65; color:#4b4b4b; margin-bottom:15px;">
+        수강생에게 처음 보여주는 파일 구조는 앞으로 모든 AI 요청의 기준이 됩니다. <code>public/</code>과 <code>node_modules/</code>가 <code>src/</code> 안에 들어간 것처럼 설명하면 실제 프로젝트에서 파일을 잘못 찾게 되므로, 루트 레벨과 <code>src/</code> 내부를 분명히 나눠 설명합니다.
+      </p>
+      <table class="analogy-table">
+        <thead>
+          <tr>
+            <th style="width: 24%;">항목</th>
+            <th style="width: 28%;">정확한 위치</th>
+            <th style="width: 48%;">강사용 설명 기준</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>src/</code></td>
+            <td><code>my-project/src/</code></td>
+            <td>화면, 컴포넌트, 함수처럼 사람이 주로 수정하는 소스 코드 영역입니다.</td>
+          </tr>
+          <tr>
+            <td><code>public/</code></td>
+            <td><code>my-project/public/</code></td>
+            <td><code>src</code> 안이 아니라 루트에 있는 정적 파일 폴더입니다. 프로젝트에 따라 <code>src/assets</code> 방식도 있을 수 있습니다.</td>
+          </tr>
+          <tr>
+            <td><code>node_modules/</code></td>
+            <td><code>my-project/node_modules/</code></td>
+            <td>설치 결과물입니다. 직접 수정하지 않고 <code>npm install</code>로 다시 만들 수 있습니다.</td>
+          </tr>
+          <tr>
+            <td><code>.env</code></td>
+            <td><code>my-project/.env</code></td>
+            <td>공통 환경값을 둘 수 있지만, 실제 비밀값이 들어가면 GitHub에 올리지 않습니다.</td>
+          </tr>
+          <tr>
+            <td><code>.env.local</code></td>
+            <td><code>my-project/.env.local</code></td>
+            <td>내 컴퓨터에서만 쓰는 실제 비밀값입니다. 수업 화면에 실제 값을 띄우지 않습니다.</td>
+          </tr>
+          <tr>
+            <td><code>.env.example</code></td>
+            <td><code>my-project/.env.example</code></td>
+            <td>필요한 변수 이름만 공유하는 견본입니다. 실제 키 값은 비워두거나 예시 문자열로 둡니다.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>4. 파일과 경로 핵심 원리 판서 요령</h2>
       <p style="font-size:14px; line-height:1.6; color:#4b4b4b; margin-bottom:15px;">
         추상적인 파일 개념과 경로 규칙을 학생들이 시각적으로 쉽게 이해할 수 있도록 돕는 칠판 판서 시각화 모델과 스피치 팁입니다.
       </p>
@@ -275,7 +323,7 @@
     </section>
 
     <section class="section">
-      <h2>4. AI가 기능을 여러 파일로 나눌 때의 코칭 요령</h2>
+      <h2>5. AI가 기능을 여러 파일로 나눌 때의 코칭 요령</h2>
       <p style="font-size:14px; line-height:1.6; color:#4b4b4b; margin-bottom:15px;">
         수강생의 프로젝트 주제와 관계없이, 화면 부품과 데이터 처리 로직을 연결할 때 자주 발생하는 오류와 강사의 대응 기준입니다.
       </p>
