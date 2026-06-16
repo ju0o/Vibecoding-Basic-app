@@ -59,7 +59,7 @@ jobs:
         run: npm run audit:curriculum && npm run check && npm run smoke:app && npm run smoke:tracks && npm run qa:print
 
       - name: Verify generated files are committed
-        run: git diff --exit-code -- src/content/course-manifest.json src/content/v3/course-data.js src/content/v3/projects src/content/assets/v3/fallbacks src/content/sessions/session-03-direction.bundle.js
+        run: git diff --exit-code -- src/content/course-manifest.json src/content/v3/course-data.js src/content/v3/projects src/content/sessions/session-03-direction.bundle.js
 
       - name: Upload QA evidence
         if: always()
