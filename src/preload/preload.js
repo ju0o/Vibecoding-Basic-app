@@ -6,6 +6,9 @@ contextBridge.exposeInMainWorld('vibeCodingApp', {
   // 강의 매니페스트 읽기
   readManifest: () => ipcRenderer.invoke('read-manifest'),
 
+  // 공식자료 연구노트 카탈로그 읽기
+  readOfficialSources: () => ipcRenderer.invoke('read-official-sources'),
+
   // 커뮤니티에 공유 가능한 별첨자료 목록 읽기
   readShareResources: () => ipcRenderer.invoke('read-community-share-resources'),
 

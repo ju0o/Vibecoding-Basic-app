@@ -8,14 +8,14 @@
 - `scripts/build-v3-content.js`: V3 과정과 자료 연결 생성기.
 - `src/content/v3/course-data.js`: 28개 신규 회차의 상세 데이터.
 - `src/content/v3/deck.*`: 13장 공통 인터랙티브 강의 엔진.
-- `src/content/v3/material.*`: 학생·강사용 A4 자료 엔진.
+- `src/content/v3/material.*`: 수강생 출력물과 강사용 A4 자료 엔진.
 - `src/content/sources/`: 공식 출처와 갱신 상태.
 
 ## 앱 인터페이스
 
 - `src/renderer/index.html`: 3단 스튜디오와 플레이어 구조.
 - `src/renderer/studio.css`: 1280×720, 1920×1080 대응 화면 스타일.
-- `src/renderer/studio.js`: 과정·회차·자료 상태, 강사 모드, 검색, 일정, 플레이어와 판서.
+- `src/renderer/studio.js`: 과정·회차·자료 상태, 전역 강사자료실, 공식자료 학습실, 검색, 일정, 플레이어와 판서.
 
 ## 새 강의 추가
 

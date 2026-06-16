@@ -6,6 +6,11 @@ const appApi = window.vibeCodingApp || {
     if (!response.ok) throw new Error(`Manifest HTTP ${response.status}`);
     return response.json();
   },
+  readOfficialSources: async () => {
+    const response = await fetch('../content/sources/official-sources.json');
+    if (!response.ok) throw new Error(`Sources HTTP ${response.status}`);
+    return response.json();
+  },
   getContentBase: async () => new URL('../content', location.href).href.replace(/\/$/, ''),
   toggleFullscreen: async () => {
     if (document.fullscreenElement) await document.exitFullscreen();
@@ -13,6 +18,7 @@ const appApi = window.vibeCodingApp || {
     return Boolean(document.fullscreenElement);
   },
   savePdf: async () => ({ ok: false, canceled: true }),
+  openExternal: async () => ({ ok: false }),
   saveData: async () => true,
   loadData: async () => null,
   exportData: async () => ({ ok: false, canceled: true }),
@@ -22,8 +28,8 @@ const appApi = window.vibeCodingApp || {
 };
 const state = {
   manifest: null,
+  sources: { version: 1, sources: {} },
   contentBase: '',
-  mode: localStorage.getItem('vibe-v3-mode') || 'student',
   courseId: localStorage.getItem('vibe-v3-course') || 'basic-current',
   tab: 'lessons',
   selectionId: null,
@@ -63,8 +69,7 @@ function getCourse(id = state.courseId) {
 }
 
 function visibleCourses() {
-  const allowed = new Set(state.manifest.modes[state.mode].show);
-  return state.manifest.courses.filter((course) => allowed.has(course.visibility));
+  return state.manifest.courses;
 }
 
 function setAccent(course) {
@@ -86,9 +91,7 @@ function statusLabel(status) {
 function getSessionRevision(session) {
   if (!session.revisions?.length) return { ...session, revisionId: null };
   const activeId = state.revisionOverrides[session.id] || session.activeRevision || session.revisions[0].id;
-  const selectedId = state.mode === 'instructor'
-    ? state.revisionSelection[session.id] || activeId
-    : activeId;
+  const selectedId = state.revisionSelection[session.id] || activeId;
   const revision = session.revisions.find((item) => item.id === selectedId) || session.revisions[0];
   return {
     ...session,
@@ -143,15 +146,11 @@ function renderStudio() {
   $('#course-title').textContent = course.title;
   $('#course-route').textContent = course.route;
   $('#detail-course-code').textContent = course.code;
-  $('#mode-label').textContent = state.mode === 'instructor' ? '강사 모드' : '학생 모드';
-  $('#btn-mode').setAttribute('aria-pressed', String(state.mode === 'instructor'));
-  $$('.instructor-only').forEach((node) => node.classList.toggle('hidden', state.mode !== 'instructor'));
-  if (state.tab === 'instructor' && state.mode !== 'instructor') state.tab = 'lessons';
-  if (state.tab === 'labs' && state.mode !== 'instructor') state.tab = 'lessons';
   $$('#course-tabs button').forEach((button) => button.classList.toggle('active', button.dataset.tab === state.tab));
 
   if (state.tab === 'lessons') renderLessons(course);
   else if (state.tab === 'labs') renderLabs(course);
+  else if (state.tab === 'sources') renderSources(course);
   else renderMaterials(course, state.tab);
 }
 
@@ -195,7 +194,7 @@ function renderLessonDetail(course, session) {
   const index = course.sessions.findIndex((item) => item.id === session.id);
   const selected = getSessionRevision(session);
   const revisions = session.revisions || [];
-  const revisionControl = state.mode === 'instructor' && revisions.length > 1
+  const revisionControl = revisions.length > 1
     ? `
       <section class="revision-panel">
         <div>
@@ -254,40 +253,47 @@ function renderLessonDetail(course, session) {
 }
 
 function renderMaterials(course, audience) {
-  const materials = course.materials?.[audience] || [];
+  const materials = audience === 'instructor'
+    ? visibleCourses().flatMap((item) => (item.materials?.instructor || []).map((material) => ({ ...material, courseId: item.id, courseTitle: item.shortTitle, courseCode: item.code })))
+    : (course.materials?.student || []).map((material) => ({ ...material, courseId: course.id, courseTitle: course.shortTitle, courseCode: course.code }));
   if (!state.selectionId || !materials.some((material) => material.id === state.selectionId)) {
-    state.selectionId = materials[0]?.id;
+    const courseFirst = materials.find((material) => material.courseId === course.id);
+    state.selectionId = (courseFirst || materials[0])?.id;
   }
-  $('#list-summary').textContent = `${materials.length} ${audience === 'student' ? 'STUDENT MATERIALS' : 'INSTRUCTOR MATERIALS'} · A4 PRINT READY`;
+  $('#list-summary').textContent = audience === 'instructor'
+    ? `${materials.length} INSTRUCTOR LIBRARY · ALL COURSES`
+    : `${materials.length} STUDENT PRINTS · ${course.shortTitle}`;
   $('#lesson-list').innerHTML = materials.map((material, index) => `
-    <button class="lesson-row material-row${material.id === state.selectionId ? ' active' : ''}" type="button" data-material="${escapeHtml(material.id)}">
+    <button class="lesson-row material-row${material.id === state.selectionId ? ' active' : ''}" type="button" data-material="${escapeHtml(material.id)}" data-course="${escapeHtml(material.courseId)}">
       <span class="lesson-no">${String(index + 1).padStart(2, '0')}</span>
-      <span class="lesson-copy"><b>${escapeHtml(material.title)}</b><span>${escapeHtml(material.description)}</span><span class="material-audience">${audience}</span></span>
+      <span class="lesson-copy"><b>${escapeHtml(material.title)}</b><span>${escapeHtml(material.description)}</span><span class="material-audience">${escapeHtml(material.courseCode)} · ${audience === 'instructor' ? '강사자료실' : '수강생 출력물'}</span></span>
       <span class="lesson-state">›</span>
     </button>
   `).join('') || '<div class="command-empty">이 과정에 연결된 자료가 없습니다.</div>';
 
   $$('#lesson-list [data-material]').forEach((button) => {
     button.addEventListener('click', () => {
+      state.courseId = button.dataset.course || state.courseId;
       state.selectionId = button.dataset.material;
-      renderMaterials(course, audience);
+      renderStudio();
     });
   });
-  renderMaterialDetail(course, materials.find((material) => material.id === state.selectionId), audience);
+  const material = materials.find((item) => item.id === state.selectionId);
+  renderMaterialDetail(getCourse(material?.courseId) || course, material, audience);
 }
 
 function renderMaterialDetail(course, material, audience) {
-  $('#detail-position').textContent = audience === 'student' ? 'STUDENT MATERIAL' : 'INSTRUCTOR MATERIAL';
+  $('#detail-position').textContent = audience === 'student' ? 'STUDENT PRINT' : 'INSTRUCTOR LIBRARY';
   if (!material) {
     $('#detail-content').innerHTML = '<div class="command-empty">선택할 자료가 없습니다.</div>';
     return;
   }
   const instructorCopy = audience === 'instructor'
-    ? ['SAY / DO / ASK 구조', '예상 답변과 오류 복구', '시간 조정과 공식 참고자료']
+    ? ['공식자료 연구노트', '심화 개념과 예상 오해', '시연·오류 복구 운영']
     : ['단계별 작업지', '메모와 체크리스트', '밝은 A4 인쇄 레이아웃'];
   $('#detail-content').innerHTML = `
     <div class="material-preview">
-      <span class="detail-number">${audience === 'student' ? 'STUDENT' : 'INSTRUCTOR'} LIBRARY</span>
+      <span class="detail-number">${escapeHtml(course.code)} · ${audience === 'student' ? 'STUDENT PRINT' : 'INSTRUCTOR LIBRARY'}</span>
       <h2>${escapeHtml(material.title)}</h2>
       <p>${escapeHtml(material.description)}</p>
       <div class="paper-preview">
@@ -304,6 +310,87 @@ function renderMaterialDetail(course, material, audience) {
     </div>
   `;
   $('#btn-open-material').addEventListener('click', () => openPlayer(course, material, true));
+}
+
+function sourceUsageRows(sourceKey) {
+  return visibleCourses().flatMap((course) => course.sessions
+    .filter((session) => session.sourceKeys?.includes(sourceKey))
+    .map((session) => `${course.code} ${session.title.replace(/^\d+강\s*·\s*/, '')}`));
+}
+
+function renderSources(course) {
+  const catalog = state.sources?.sources || {};
+  const usedKeys = [...new Set(visibleCourses().flatMap((item) => item.sessions.flatMap((session) => session.sourceKeys || [])))];
+  const rows = usedKeys.map((key) => ({ key, source: catalog[key], usage: sourceUsageRows(key) }))
+    .filter((item) => item.source)
+    .sort((a, b) => `${a.source.publisher} ${a.source.title}`.localeCompare(`${b.source.publisher} ${b.source.title}`, 'ko'));
+  if (!state.selectionId || !rows.some((row) => row.key === state.selectionId)) state.selectionId = rows[0]?.key;
+  $('#list-summary').textContent = `${rows.length} OFFICIAL SOURCES · STUDY NOTES`;
+  $('#lesson-list').innerHTML = rows.map((row, index) => `
+    <button class="lesson-row source-row${row.key === state.selectionId ? ' active' : ''}" type="button" data-source="${escapeHtml(row.key)}">
+      <span class="lesson-no">${String(index + 1).padStart(2, '0')}</span>
+      <span class="lesson-copy"><b>${escapeHtml(row.source.title)}</b><span>${escapeHtml(row.source.summaryKo || row.source.coreConceptKo)}</span><span class="material-audience">${escapeHtml(row.source.publisher)} · ${escapeHtml(row.source.maturity)}</span></span>
+      <span class="lesson-state">›</span>
+    </button>
+  `).join('') || '<div class="command-empty">연결된 공식자료가 없습니다.</div>';
+  $$('#lesson-list [data-source]').forEach((button) => {
+    button.addEventListener('click', () => {
+      state.selectionId = button.dataset.source;
+      renderSources(course);
+    });
+  });
+  renderSourceDetail(rows.find((row) => row.key === state.selectionId));
+}
+
+function renderSourceDetail(row) {
+  $('#detail-position').textContent = 'OFFICIAL SOURCE STUDY';
+  if (!row?.source) {
+    $('#detail-content').innerHTML = '<div class="command-empty">선택할 공식자료가 없습니다.</div>';
+    return;
+  }
+  const source = row.source;
+  const checks = source.preClassCheck || [];
+  const questions = source.expectedQuestions || [];
+  $('#detail-content').innerHTML = `
+    <div class="source-detail">
+      <span class="detail-number">${escapeHtml(source.publisher)} · ${escapeHtml(source.maturity)}</span>
+      <h2>${escapeHtml(source.title)}</h2>
+      <p>${escapeHtml(source.coreConceptKo || source.summaryKo)}</p>
+      <div class="source-grid">
+        <section><h3>강사가 이해할 배경</h3><p>${escapeHtml(source.instructorBackground || source.instructorNote)}</p></section>
+        <section><h3>쉬운 비유</h3><p>${escapeHtml(source.classroomAnalogy || source.summaryKo)}</p></section>
+        <section><h3>자주 생기는 오해</h3><p>${escapeHtml(source.commonMisunderstanding || source.instructorNote)}</p></section>
+        <section><h3>시연 포인트</h3><p>${escapeHtml(source.demoPoint || source.instructorNote)}</p></section>
+      </div>
+      <div class="objective-box">
+        <span>강의 반영 위치</span>
+        <p>${escapeHtml(row.usage.join(' · ') || source.lectureUseHint || '공통 연구자료')}</p>
+      </div>
+      <div class="detail-grid">
+        <section class="info-panel"><h3>예상 질문</h3><ul>${questions.map((item) => `<li><b>${escapeHtml(item.q)}</b><br>${escapeHtml(item.a)}</li>`).join('') || '<li>수업 중 질문을 기록합니다.</li>'}</ul></section>
+        <section class="info-panel"><h3>수업 전 재확인</h3><ul>${checks.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></section>
+      </div>
+      <div class="lesson-actions">
+        <button class="primary-action" id="btn-open-source-material" type="button">과정별 연구노트 열기</button>
+        <button class="secondary-action" id="btn-open-source-url" type="button">공식 문서 열기</button>
+      </div>
+      <div class="detail-meta">
+        <span>${escapeHtml(row.key)}</span>
+        <span>${escapeHtml(source.status || 'not checked')} · HTTP ${escapeHtml(source.httpStatus || '-')}</span>
+        <span>${escapeHtml(source.checkedAt || state.sources.checkedAt || 'not checked')}</span>
+      </div>
+    </div>
+  `;
+  $('#btn-open-source-material').addEventListener('click', () => {
+    const sourceCourse = visibleCourses().find((item) => item.sessions.some((session) => session.sourceKeys?.includes(row.key))) || getCourse();
+    openPlayer(sourceCourse, {
+      id: `${sourceCourse.id}-source-study`,
+      title: `${sourceCourse.shortTitle} · 공식자료 연구노트`,
+      duration: 'A4 STUDY',
+      file: `v3/material.html?course=${sourceCourse.id}&kind=source-study&audience=instructor`,
+    }, true);
+  });
+  $('#btn-open-source-url').addEventListener('click', () => appApi.openExternal?.(source.url));
 }
 
 function renderLabs(course) {
@@ -453,15 +540,6 @@ async function savePlayerPdf() {
   }
 }
 
-function setMode(mode) {
-  state.mode = mode;
-  persist('vibe-v3-mode', mode);
-  if (mode === 'student' && getCourse()?.visibility === 'preview') {
-    state.courseId = state.manifest.defaultCourseId;
-  }
-  renderStudio();
-}
-
 function renderCommandResults(query = '') {
   const term = query.trim().toLowerCase();
   const items = [];
@@ -471,17 +549,29 @@ function renderCommandResults(query = '') {
       type: 'LESSON', title: session.title, subtitle: `${course.shortTitle} · ${session.subtitle || ''}`,
       courseId: course.id, id: session.id,
     }));
-    if (state.mode === 'instructor') {
-      course.sessions.filter((session) => session.demoProject).forEach((session) => items.push({
-        type: 'LAB', title: `${session.title} 실습 파일`, subtitle: `${course.shortTitle} · starter / broken / complete`,
-        courseId: course.id, id: session.id, tab: 'labs',
-      }));
-    }
-    ['student', ...(state.mode === 'instructor' ? ['instructor'] : [])].forEach((audience) => {
+    course.sessions.filter((session) => session.demoProject).forEach((session) => items.push({
+      type: 'LAB', title: `${session.title} 실습 파일`, subtitle: `${course.shortTitle} · starter / broken / complete`,
+      courseId: course.id, id: session.id, tab: 'labs',
+    }));
+    ['student', 'instructor'].forEach((audience) => {
       (course.materials?.[audience] || []).forEach((material) => items.push({
-        type: audience === 'student' ? 'STUDENT' : 'INSTRUCTOR',
-        title: material.title, subtitle: course.shortTitle, courseId: course.id, id: material.id, audience,
+        type: audience === 'student' ? 'PRINT' : 'LIBRARY',
+        title: material.title, subtitle: `${course.shortTitle} · ${audience === 'student' ? '수강생 출력물' : '강사자료실'}`,
+        courseId: course.id, id: material.id, tab: audience,
       }));
+    });
+    course.sessions.flatMap((session) => session.sourceKeys || []).forEach((key) => {
+      const source = state.sources?.sources?.[key];
+      if (source) {
+        items.push({
+          type: 'SOURCE',
+          title: source.title,
+          subtitle: `${source.publisher} · ${course.shortTitle}`,
+          courseId: course.id,
+          id: key,
+          tab: 'sources',
+        });
+      }
     });
   });
   state.commandItems = items.filter((item) => !term || `${item.title} ${item.subtitle} ${item.type}`.toLowerCase().includes(term)).slice(0, 30);
@@ -503,7 +593,7 @@ function executeCommand(index = state.commandIndex) {
   if (!item) return;
   state.courseId = item.courseId;
   state.selectionId = item.id;
-  state.tab = item.tab || item.audience || (item.type === 'LESSON' || item.type === 'COURSE' ? 'lessons' : 'student');
+  state.tab = item.tab || (item.type === 'LESSON' || item.type === 'COURSE' ? 'lessons' : 'student');
   persist('vibe-v3-course', item.courseId);
   closeCommandPalette();
   renderStudio();
@@ -559,7 +649,7 @@ function openDrawer(type) {
     $('#drawer-title').textContent = '화면 설정';
     $('#drawer-content').innerHTML = `
       <section class="drawer-section">
-        <div class="setting-row"><span><b>현재 표시 모드</b><span>다음 기수 자료는 강사 모드에서만 표시됩니다.</span></span><button id="drawer-mode" class="secondary-action" type="button">${state.mode === 'student' ? '강사 모드로 전환' : '학생 모드로 전환'}</button></div>
+        <div class="setting-row"><span><b>단일 강사용 스튜디오</b><span>운영 강의, 강사자료실, 수강생 출력물과 공식자료를 한 화면에서 관리합니다.</span></span><strong>STUDIO</strong></div>
         <div class="setting-row"><span><b>저사양 모션</b><span>장면 전환을 즉시 표시하고 지속 애니메이션을 줄입니다.</span></span><button id="drawer-motion" class="secondary-action" type="button">${state.lowMotion ? '사용 중' : '사용 안 함'}</button></div>
         <div class="setting-row"><span><b>빠른 검색</b><span>과정·회차·자료를 어디서든 찾습니다.</span></span><kbd>Ctrl K</kbd></div>
         <div class="setting-row"><span><b>전체화면</b><span>프로젝터 발표 화면으로 전환합니다.</span></span><kbd>Ctrl F</kbd></div>
@@ -574,10 +664,6 @@ function openDrawer(type) {
         <p id="backup-status" class="drawer-help">기수 일정, 강사 메모, 진행 상태와 회차별 활성 버전을 백업합니다.</p>
       </section>
     `;
-    $('#drawer-mode').addEventListener('click', () => {
-      closeDrawer();
-      setMode(state.mode === 'student' ? 'instructor' : 'student');
-    });
     $('#drawer-motion').addEventListener('click', () => {
       state.lowMotion = !state.lowMotion;
       persist('vibe-v3-low-motion', String(state.lowMotion));
@@ -665,9 +751,7 @@ function closeBoard() {
 }
 
 function bindEvents() {
-  $('#btn-mode').addEventListener('click', () => setMode(state.mode === 'student' ? 'instructor' : 'student'));
   $$('#course-tabs button').forEach((button) => button.addEventListener('click', () => {
-    if (button.dataset.tab === 'instructor' && state.mode !== 'instructor') return;
     state.tab = button.dataset.tab;
     state.selectionId = null;
     renderStudio();
@@ -737,9 +821,10 @@ function bindEvents() {
 }
 
 async function boot() {
-  const [manifest, contentBase] = await Promise.all([appApi.readManifest(), appApi.getContentBase()]);
+  const [manifest, contentBase, sources] = await Promise.all([appApi.readManifest(), appApi.getContentBase(), appApi.readOfficialSources()]);
   state.manifest = manifest;
   state.contentBase = contentBase;
+  state.sources = sources || state.sources;
   if (!visibleCourses().some((course) => course.id === state.courseId)) state.courseId = manifest.defaultCourseId;
   bindEvents();
   setupBoard();

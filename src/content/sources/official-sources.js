@@ -1,6 +1,6 @@
 window.VIBE_OFFICIAL_SOURCES = {
   "version": 1,
-  "checkedAt": "2026-06-15T18:08:26.591Z",
+  "checkedAt": "2026-06-16T03:49:59.844Z",
   "sources": {
     "github-git": {
       "publisher": "GitHub",
@@ -9,11 +9,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "Git은 프로젝트 파일의 변경 이력을 저장하고 이전 상태를 비교하거나 복구할 수 있게 하는 버전 관리 도구입니다.",
       "instructorNote": "명령어 암기보다 현재 변경 상태, 커밋의 의미, 원격 저장소와의 차이를 먼저 설명합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://docs.github.com/en/get-started/using-git/about-git",
-      "pageTitle": "About Git - GitHub Docs"
+      "pageTitle": "About Git - GitHub Docs",
+      "coreConceptKo": "Git은 프로젝트 파일의 변경 이력을 저장하고 이전 상태를 비교하거나 복구할 수 있게 하는 버전 관리 도구입니다.",
+      "instructorBackground": "GitHub 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Git 기본 개념의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'GitHub가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Git 기본 개념의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "github-repository": {
       "publisher": "GitHub",
@@ -22,11 +44,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "GitHub 저장소는 프로젝트 코드와 변경 기록을 온라인에서 보관하고 협업하는 공간입니다.",
       "instructorNote": "공개 저장소와 비공개 저장소, README, 첫 push의 관계를 실제 화면으로 보여줍니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories",
-      "pageTitle": "Quickstart for repositories - GitHub Docs"
+      "pageTitle": "Quickstart for repositories - GitHub Docs",
+      "coreConceptKo": "GitHub 저장소는 프로젝트 코드와 변경 기록을 온라인에서 보관하고 협업하는 공간입니다.",
+      "instructorBackground": "GitHub 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 저장소 빠른 시작의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'GitHub가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 저장소 빠른 시작의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "github-actions": {
       "publisher": "GitHub",
@@ -35,11 +79,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "저장소 이벤트를 기준으로 테스트, 빌드, 배포 같은 반복 작업을 자동 실행합니다.",
       "instructorNote": "자동화는 사람이 확인할 로그와 실패 시 중단 기준을 함께 설계해야 합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://docs.github.com/en/actions",
-      "pageTitle": "GitHub Actions documentation - GitHub Docs"
+      "pageTitle": "GitHub Actions documentation - GitHub Docs",
+      "coreConceptKo": "저장소 이벤트를 기준으로 테스트, 빌드, 배포 같은 반복 작업을 자동 실행합니다.",
+      "instructorBackground": "GitHub 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 GitHub Actions의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'GitHub가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 GitHub Actions의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "github-releases": {
       "publisher": "GitHub",
@@ -48,11 +114,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "특정 버전의 코드와 실행 파일, 변경 내용을 묶어 사용자에게 배포하는 기능입니다.",
       "instructorNote": "태그, 버전, 릴리즈 자산, 체크섬을 하나의 배포 단위로 설명합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases",
-      "pageTitle": "About releases - GitHub Docs"
+      "pageTitle": "About releases - GitHub Docs",
+      "coreConceptKo": "특정 버전의 코드와 실행 파일, 변경 내용을 묶어 사용자에게 배포하는 기능입니다.",
+      "instructorBackground": "GitHub 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 릴리즈 관리의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'GitHub가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 릴리즈 관리의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "node-download": {
       "publisher": "Node.js",
@@ -61,11 +149,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "JavaScript 프로젝트의 패키지 설치와 개발 서버 실행에 필요한 Node.js 설치 페이지입니다.",
       "instructorNote": "초보 수강생에게는 최신 Current보다 LTS 설치를 우선 안내합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://nodejs.org/en/download",
-      "pageTitle": "Node.js — Download Node.js®"
+      "pageTitle": "Node.js — Download Node.js®",
+      "coreConceptKo": "JavaScript 프로젝트의 패키지 설치와 개발 서버 실행에 필요한 Node.js 설치 페이지입니다.",
+      "instructorBackground": "Node.js 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Node.js 다운로드의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Node.js가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Node.js 다운로드의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "vscode-download": {
       "publisher": "Microsoft",
@@ -74,11 +184,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "프로젝트 폴더와 파일, 터미널, 확장 기능을 한 화면에서 다루는 코드 편집기 설치 페이지입니다.",
       "instructorNote": "Visual Studio와 Visual Studio Code가 다른 제품이라는 점을 명확히 구분합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.visualstudio.com/download",
-      "pageTitle": "Download Visual Studio Code - Free AI Code Editor for Mac, Linux, Windows"
+      "pageTitle": "Download Visual Studio Code - Free AI Code Editor for Mac, Linux, Windows",
+      "coreConceptKo": "프로젝트 폴더와 파일, 터미널, 확장 기능을 한 화면에서 다루는 코드 편집기 설치 페이지입니다.",
+      "instructorBackground": "VS Code 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Visual Studio Code 다운로드의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'VS Code가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Visual Studio Code 다운로드의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "mdn-http": {
       "publisher": "MDN",
@@ -87,11 +219,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "브라우저와 서버가 요청과 응답을 주고받는 기본 통신 규칙을 설명합니다.",
       "instructorNote": "URL, 메서드, 상태 코드, 요청 본문을 주문서 비유와 실제 네트워크 화면으로 연결합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview",
-      "pageTitle": "Overview of HTTP - HTTP | MDN"
+      "pageTitle": "Overview of HTTP - HTTP | MDN",
+      "coreConceptKo": "브라우저와 서버가 요청과 응답을 주고받는 기본 통신 규칙을 설명합니다.",
+      "instructorBackground": "HTTP 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 HTTP 개요의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'HTTP가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 HTTP 개요의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "npm-package-json": {
       "publisher": "npm",
@@ -100,10 +254,32 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "프로젝트 이름, 실행 명령, 설치 패키지와 버전 정보를 기록하는 설정 파일입니다.",
       "instructorNote": "package-lock.json과 node_modules의 역할을 함께 비교하고 직접 수정할 범위를 구분합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
-      "finalUrl": "https://docs.npmjs.com/cli/configuring-npm/package-json/"
+      "finalUrl": "https://docs.npmjs.com/cli/configuring-npm/package-json/",
+      "coreConceptKo": "프로젝트 이름, 실행 명령, 설치 패키지와 버전 정보를 기록하는 설정 파일입니다.",
+      "instructorBackground": "npm 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 package.json의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'npm가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 package.json의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "firebase-data": {
       "publisher": "Google Firebase",
@@ -112,11 +288,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "앱의 데이터를 저장하고 여러 사용자 화면에 실시간으로 전달할 수 있는 관리형 데이터베이스입니다.",
       "instructorNote": "저장 기능과 접근 권한은 별개의 설정이라는 점을 강조합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://firebase.google.com/docs/database",
-      "pageTitle": "Firebase Realtime Database"
+      "pageTitle": "Firebase Realtime Database",
+      "coreConceptKo": "앱의 데이터를 저장하고 여러 사용자 화면에 실시간으로 전달할 수 있는 관리형 데이터베이스입니다.",
+      "instructorBackground": "Firebase 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Firebase 데이터베이스의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Firebase가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Firebase 데이터베이스의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "firebase-hosting": {
       "publisher": "Google Firebase",
@@ -125,11 +323,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "웹 프로젝트를 공개 주소로 배포하고 버전을 관리하는 호스팅 서비스입니다.",
       "instructorNote": "로컬 실행, 빌드 결과, 공개 URL의 차이를 단계별로 보여줍니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://firebase.google.com/docs/hosting",
-      "pageTitle": "Firebase Hosting"
+      "pageTitle": "Firebase Hosting",
+      "coreConceptKo": "웹 프로젝트를 공개 주소로 배포하고 버전을 관리하는 호스팅 서비스입니다.",
+      "instructorBackground": "Firebase 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Firebase Hosting의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Firebase가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Firebase Hosting의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "firebase-rules": {
       "publisher": "Google Firebase",
@@ -138,11 +358,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "누가 어떤 데이터와 파일을 읽거나 쓸 수 있는지 서버 측에서 제한하는 규칙입니다.",
       "instructorNote": "테스트 모드를 운영에 그대로 쓰면 안 되는 이유와 사용자별 최소 권한을 설명합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://firebase.google.com/docs/rules",
-      "pageTitle": "Firebase Security Rules"
+      "pageTitle": "Firebase Security Rules",
+      "coreConceptKo": "누가 어떤 데이터와 파일을 읽거나 쓸 수 있는지 서버 측에서 제한하는 규칙입니다.",
+      "instructorBackground": "Firebase 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Firebase Security Rules의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Firebase가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Firebase Security Rules의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "vercel-deploy": {
       "publisher": "Vercel",
@@ -151,11 +393,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "Git 저장소 또는 CLI에서 프로젝트를 빌드해 공개 URL로 배포하는 흐름입니다.",
       "instructorNote": "배포 성공 표시와 실제 기능 검증은 다르므로 모바일, 새로고침, 로그까지 확인합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://vercel.com/docs/deployments",
-      "pageTitle": "Deploying to Vercel"
+      "pageTitle": "Deploying to Vercel",
+      "coreConceptKo": "Git 저장소 또는 CLI에서 프로젝트를 빌드해 공개 URL로 배포하는 흐름입니다.",
+      "instructorBackground": "Vercel 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Vercel 배포의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Vercel가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Vercel 배포의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "vercel-env": {
       "publisher": "Vercel",
@@ -164,11 +428,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "코드에 직접 넣지 않을 설정값을 개발, 미리보기, 운영 환경별로 관리합니다.",
       "instructorNote": "브라우저에 전달되는 공개 값과 서버에서만 써야 하는 비밀값을 구분합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://vercel.com/docs/environment-variables",
-      "pageTitle": "Environment variables"
+      "pageTitle": "Environment variables",
+      "coreConceptKo": "코드에 직접 넣지 않을 설정값을 개발, 미리보기, 운영 환경별로 관리합니다.",
+      "instructorBackground": "Vercel 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 환경 변수의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Vercel가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 환경 변수의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "mcp-intro": {
       "publisher": "Model Context Protocol",
@@ -177,11 +463,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "AI 애플리케이션이 외부 데이터와 도구를 일정한 방식으로 연결하도록 만든 개방형 규격입니다.",
       "instructorNote": "MCP 자체가 Agent는 아니며 도구와 컨텍스트를 제공하는 연결 규격이라는 경계를 설명합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://modelcontextprotocol.io/docs/getting-started/intro",
-      "pageTitle": "What is the Model Context Protocol (MCP)? - Model Context Protocol"
+      "pageTitle": "What is the Model Context Protocol (MCP)? - Model Context Protocol",
+      "coreConceptKo": "AI 애플리케이션이 외부 데이터와 도구를 일정한 방식으로 연결하도록 만든 개방형 규격입니다.",
+      "instructorBackground": "MCP 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 MCP 소개의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'MCP가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 MCP 소개의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "mcp-security": {
       "publisher": "Model Context Protocol",
@@ -190,11 +498,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "draft",
       "summaryKo": "외부 도구 연결에서 인증, 권한, 토큰 전달, 사용자 동의와 공격 표면을 다루는 보안 권고입니다.",
       "instructorNote": "모든 도구를 연결하기보다 필요한 서버와 기능만 허용하는 최소 권한 원칙을 적용합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices",
-      "pageTitle": "Security Best Practices - Model Context Protocol"
+      "pageTitle": "Security Best Practices - Model Context Protocol",
+      "coreConceptKo": "외부 도구 연결에서 인증, 권한, 토큰 전달, 사용자 동의와 공격 표면을 다루는 보안 권고입니다.",
+      "instructorBackground": "MCP 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 MCP 보안 권고의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'MCP가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 MCP 보안 권고의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "claude-overview": {
       "publisher": "Anthropic",
@@ -203,11 +533,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "터미널에서 저장소를 탐색하고 파일 수정, 명령 실행, Git 작업을 수행하는 Anthropic의 코딩 도구입니다.",
       "instructorNote": "제품 사용법보다 작업 폴더, 권한 승인, diff 검토의 기본 계약부터 시연합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/overview",
-      "pageTitle": "Overview - Claude Code Docs"
+      "pageTitle": "Overview - Claude Code Docs",
+      "coreConceptKo": "터미널에서 저장소를 탐색하고 파일 수정, 명령 실행, Git 작업을 수행하는 Anthropic의 코딩 도구입니다.",
+      "instructorBackground": "Claude Code 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Claude Code 개요의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Claude Code가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Claude Code 개요의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "claude-quickstart": {
       "publisher": "Anthropic",
@@ -216,11 +568,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "설치, 인증, 프로젝트 실행과 첫 작업을 시작하는 공식 절차입니다.",
       "instructorNote": "설치 명령은 운영체제와 공식 문서의 최신 안내를 수업 직전에 다시 확인합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/quickstart",
-      "pageTitle": "Quickstart - Claude Code Docs"
+      "pageTitle": "Quickstart - Claude Code Docs",
+      "coreConceptKo": "설치, 인증, 프로젝트 실행과 첫 작업을 시작하는 공식 절차입니다.",
+      "instructorBackground": "Claude Code 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Claude Code 빠른 시작의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Claude Code가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Claude Code 빠른 시작의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "claude-memory": {
       "publisher": "Anthropic",
@@ -229,11 +603,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "프로젝트와 사용자 범위의 지속 지침을 파일 계층에 따라 Claude Code에 전달합니다.",
       "instructorNote": "대화 프롬프트와 저장소의 지속 규칙을 분리하고 짧고 검증 가능한 지침으로 작성합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/memory",
-      "pageTitle": "How Claude remembers your project - Claude Code Docs"
+      "pageTitle": "How Claude remembers your project - Claude Code Docs",
+      "coreConceptKo": "프로젝트와 사용자 범위의 지속 지침을 파일 계층에 따라 Claude Code에 전달합니다.",
+      "instructorBackground": "Claude Code 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Claude Code 메모리의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Claude Code가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Claude Code 메모리의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "claude-skills": {
       "publisher": "Anthropic",
@@ -242,11 +638,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "반복 작업의 절차와 참고자료를 재사용 가능한 작업 단위로 구성합니다.",
       "instructorNote": "범용 설명보다 입력, 절차, 산출물, 실패 조건이 명확한 Skill을 설계합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/skills",
-      "pageTitle": "Extend Claude with skills - Claude Code Docs"
+      "pageTitle": "Extend Claude with skills - Claude Code Docs",
+      "coreConceptKo": "반복 작업의 절차와 참고자료를 재사용 가능한 작업 단위로 구성합니다.",
+      "instructorBackground": "Claude Code 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Claude Code Skills의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Claude Code가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Claude Code Skills의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "claude-plugins": {
       "publisher": "Anthropic",
@@ -255,11 +673,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "Skills, 명령, Agent, Hook 등의 구성을 설치하고 배포 가능한 묶음으로 관리합니다.",
       "instructorNote": "개인 프로젝트 규칙과 여러 팀에 배포할 플러그인의 경계를 구분합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/plugins",
-      "pageTitle": "Create plugins - Claude Code Docs"
+      "pageTitle": "Create plugins - Claude Code Docs",
+      "coreConceptKo": "Skills, 명령, Agent, Hook 등의 구성을 설치하고 배포 가능한 묶음으로 관리합니다.",
+      "instructorBackground": "Claude Code 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Claude Code Plugins의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Claude Code가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Claude Code Plugins의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "claude-mcp": {
       "publisher": "Anthropic",
@@ -268,11 +708,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "Claude Code에 외부 서비스와 데이터 도구를 MCP 서버로 연결합니다.",
       "instructorNote": "연결 성공보다 도구 범위, 인증 정보, 승인 흐름, 실패 시 제거 방법까지 확인합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/mcp",
-      "pageTitle": "Connect Claude Code to tools via MCP - Claude Code Docs"
+      "pageTitle": "Connect Claude Code to tools via MCP - Claude Code Docs",
+      "coreConceptKo": "Claude Code에 외부 서비스와 데이터 도구를 MCP 서버로 연결합니다.",
+      "instructorBackground": "Claude Code 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Claude Code MCP의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Claude Code가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Claude Code MCP의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "claude-hooks": {
       "publisher": "Anthropic",
@@ -281,11 +743,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "도구 사용이나 세션 이벤트 전후에 정해진 명령과 검사를 자동 실행합니다.",
       "instructorNote": "Hook은 결정적 제어에 사용하고 실패 시 작업을 막을지 기록만 남길지 정합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/hooks",
-      "pageTitle": "Hooks reference - Claude Code Docs"
+      "pageTitle": "Hooks reference - Claude Code Docs",
+      "coreConceptKo": "도구 사용이나 세션 이벤트 전후에 정해진 명령과 검사를 자동 실행합니다.",
+      "instructorBackground": "Claude Code 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Claude Code Hooks의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Claude Code가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Claude Code Hooks의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "claude-subagents": {
       "publisher": "Anthropic",
@@ -294,11 +778,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "역할과 도구 범위가 분리된 보조 Agent에게 독립 작업을 맡깁니다.",
       "instructorNote": "쓰기 범위를 겹치지 않게 나누고 최종 통합 책임은 주 작업자에게 둡니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/sub-agents",
-      "pageTitle": "Create custom subagents - Claude Code Docs"
+      "pageTitle": "Create custom subagents - Claude Code Docs",
+      "coreConceptKo": "역할과 도구 범위가 분리된 보조 Agent에게 독립 작업을 맡깁니다.",
+      "instructorBackground": "Claude Code 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Claude Code Subagents의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Claude Code가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Claude Code Subagents의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "claude-agent-teams": {
       "publisher": "Anthropic",
@@ -307,11 +813,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "experimental",
       "summaryKo": "여러 Agent가 역할을 나눠 협업하는 실험적 작업 방식을 다룹니다.",
       "instructorNote": "실험 기능은 비용과 충돌 가능성을 먼저 설명하고 단일 Agent 대비 이득을 측정합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/agent-teams",
-      "pageTitle": "Orchestrate teams of Claude Code sessions - Claude Code Docs"
+      "pageTitle": "Orchestrate teams of Claude Code sessions - Claude Code Docs",
+      "coreConceptKo": "여러 Agent가 역할을 나눠 협업하는 실험적 작업 방식을 다룹니다.",
+      "instructorBackground": "Claude Code 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Claude Code Agent Teams의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Claude Code가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Claude Code Agent Teams의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "claude-github-actions": {
       "publisher": "Anthropic",
@@ -320,11 +848,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "GitHub 이슈와 PR 이벤트에서 Claude Code 작업을 자동 실행하도록 연결합니다.",
       "instructorNote": "토큰 권한, 트리거 범위, 변경 검토와 병합 게이트를 함께 설정합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/github-actions",
-      "pageTitle": "Claude Code GitHub Actions - Claude Code Docs"
+      "pageTitle": "Claude Code GitHub Actions - Claude Code Docs",
+      "coreConceptKo": "GitHub 이슈와 PR 이벤트에서 Claude Code 작업을 자동 실행하도록 연결합니다.",
+      "instructorBackground": "Claude Code 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Claude Code GitHub Actions의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Claude Code가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Claude Code GitHub Actions의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "codex-overview": {
       "publisher": "OpenAI",
@@ -333,11 +883,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "앱, CLI, IDE와 클라우드 환경에서 코딩 작업을 계획하고 구현하고 검증하는 OpenAI의 개발 Agent입니다.",
       "instructorNote": "작업 특성에 맞는 표면을 선택하고 목표, 범위, 검증 기준을 먼저 합의합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex",
-      "pageTitle": "Codex | OpenAI Developers"
+      "pageTitle": "Codex | OpenAI Developers",
+      "coreConceptKo": "앱, CLI, IDE와 클라우드 환경에서 코딩 작업을 계획하고 구현하고 검증하는 OpenAI의 개발 Agent입니다.",
+      "instructorBackground": "Codex 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Codex 개요의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Codex가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Codex 개요의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "codex-security": {
       "publisher": "OpenAI",
@@ -346,11 +918,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "Sandbox와 승인 정책으로 파일, 네트워크, 명령 실행 범위를 제어하는 방식을 설명합니다.",
       "instructorNote": "권한을 무조건 넓히기보다 필요한 작업 범위에 맞춰 최소 권한을 사용합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/security",
-      "pageTitle": "Security – Codex | OpenAI Developers"
+      "pageTitle": "Security – Codex | OpenAI Developers",
+      "coreConceptKo": "Sandbox와 승인 정책으로 파일, 네트워크, 명령 실행 범위를 제어하는 방식을 설명합니다.",
+      "instructorBackground": "Codex 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Codex 보안의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Codex가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Codex 보안의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "codex-agents-md": {
       "publisher": "OpenAI",
@@ -359,11 +953,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "저장소 안에서 Codex가 따라야 할 지속 지침을 디렉터리 범위별로 작성합니다.",
       "instructorNote": "팀 규칙, 명령, 검증 기준을 간결하게 기록하고 코드와 함께 버전 관리합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/guides/agents-md",
-      "pageTitle": "Custom instructions with AGENTS.md – Codex | OpenAI Developers"
+      "pageTitle": "Custom instructions with AGENTS.md – Codex | OpenAI Developers",
+      "coreConceptKo": "저장소 안에서 Codex가 따라야 할 지속 지침을 디렉터리 범위별로 작성합니다.",
+      "instructorBackground": "Codex 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 AGENTS.md의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Codex가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 AGENTS.md의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "codex-config": {
       "publisher": "OpenAI",
@@ -372,11 +988,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "config.toml에서 모델, 승인, Sandbox, 기능과 프로필을 사용자 환경에 맞게 설정합니다.",
       "instructorNote": "저장소 규칙과 개인 설정을 분리하고 공유 가능한 항목만 프로젝트에 둡니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/config-basic",
-      "pageTitle": "Config basics – Codex | OpenAI Developers"
+      "pageTitle": "Config basics – Codex | OpenAI Developers",
+      "coreConceptKo": "config.toml에서 모델, 승인, Sandbox, 기능과 프로필을 사용자 환경에 맞게 설정합니다.",
+      "instructorBackground": "Codex 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Codex 설정의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Codex가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Codex 설정의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "codex-rules": {
       "publisher": "OpenAI",
@@ -385,11 +1023,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "특정 명령 실행에 대한 허용, 확인, 금지 정책을 규칙으로 관리합니다.",
       "instructorNote": "위험 명령 패턴과 일상 명령을 분리하고 팀의 승인 기준을 명시합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/rules",
-      "pageTitle": "Rules – Codex | OpenAI Developers"
+      "pageTitle": "Rules – Codex | OpenAI Developers",
+      "coreConceptKo": "특정 명령 실행에 대한 허용, 확인, 금지 정책을 규칙으로 관리합니다.",
+      "instructorBackground": "Codex 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Codex Rules의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Codex가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Codex Rules의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "codex-skills": {
       "publisher": "OpenAI",
@@ -398,11 +1058,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "반복 가능한 전문 작업 절차와 도구 사용법을 Skill로 묶어 필요할 때 불러옵니다.",
       "instructorNote": "언제 실행되는지, 어떤 파일을 읽는지, 어떤 검증으로 끝나는지를 명시합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/skills",
-      "pageTitle": "Agent Skills – Codex | OpenAI Developers"
+      "pageTitle": "Agent Skills – Codex | OpenAI Developers",
+      "coreConceptKo": "반복 가능한 전문 작업 절차와 도구 사용법을 Skill로 묶어 필요할 때 불러옵니다.",
+      "instructorBackground": "Codex 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Codex Skills의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Codex가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Codex Skills의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "codex-plugins": {
       "publisher": "OpenAI",
@@ -411,11 +1093,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "Skills와 도구 연결, 설정을 설치 가능한 확장 묶음으로 배포합니다.",
       "instructorNote": "Skill과 Plugin의 배포 범위 차이를 실제 폴더 구조로 비교합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/plugins",
-      "pageTitle": "Plugins – Codex | OpenAI Developers"
+      "pageTitle": "Plugins – Codex | OpenAI Developers",
+      "coreConceptKo": "Skills와 도구 연결, 설정을 설치 가능한 확장 묶음으로 배포합니다.",
+      "instructorBackground": "Codex 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Codex Plugins의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Codex가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Codex Plugins의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "codex-mcp": {
       "publisher": "OpenAI",
@@ -424,11 +1128,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "Codex가 MCP 서버의 도구와 데이터를 사용하도록 설정하고 인증합니다.",
       "instructorNote": "도구 발견, 호출, 오류, 제거까지 한 번의 운영 시나리오로 시연합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/mcp",
-      "pageTitle": "Model Context Protocol – Codex | OpenAI Developers"
+      "pageTitle": "Model Context Protocol – Codex | OpenAI Developers",
+      "coreConceptKo": "Codex가 MCP 서버의 도구와 데이터를 사용하도록 설정하고 인증합니다.",
+      "instructorBackground": "Codex 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Codex MCP의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Codex가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Codex MCP의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "codex-browser": {
       "publisher": "OpenAI",
@@ -437,11 +1163,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "Codex 앱에서 작업공간, 브라우저, 연결 도구와 시각 검증을 함께 운영합니다.",
       "instructorNote": "코드 생성 후 실제 화면을 열고 클릭하고 캡처해 검증하는 폐쇄 루프를 강조합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/app",
-      "pageTitle": "App – Codex | OpenAI Developers"
+      "pageTitle": "App – Codex | OpenAI Developers",
+      "coreConceptKo": "Codex 앱에서 작업공간, 브라우저, 연결 도구와 시각 검증을 함께 운영합니다.",
+      "instructorBackground": "Codex 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Codex App의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Codex가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Codex App의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "codex-subagents": {
       "publisher": "OpenAI",
@@ -450,11 +1198,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "독립적인 하위 작업을 여러 Agent에 분리하고 결과를 주 작업에서 통합합니다.",
       "instructorNote": "즉시 필요한 작업은 로컬에서 처리하고 병렬화 가능한 작업만 명확한 소유권과 함께 분리합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/subagents",
-      "pageTitle": "Subagents – Codex | OpenAI Developers"
+      "pageTitle": "Subagents – Codex | OpenAI Developers",
+      "coreConceptKo": "독립적인 하위 작업을 여러 Agent에 분리하고 결과를 주 작업에서 통합합니다.",
+      "instructorBackground": "Codex 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Codex Subagents의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Codex가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Codex Subagents의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "codex-worktrees": {
       "publisher": "OpenAI",
@@ -463,11 +1233,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "여러 작업을 서로 다른 Git 작업 디렉터리와 브랜치에서 충돌 없이 진행합니다.",
       "instructorNote": "작업 분리, 브랜치 이름, 통합 순서를 먼저 정하고 같은 파일 소유권이 겹치지 않게 합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/app/worktrees",
-      "pageTitle": "Worktrees – Codex app | OpenAI Developers"
+      "pageTitle": "Worktrees – Codex app | OpenAI Developers",
+      "coreConceptKo": "여러 작업을 서로 다른 Git 작업 디렉터리와 브랜치에서 충돌 없이 진행합니다.",
+      "instructorBackground": "Codex 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Codex Worktrees의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Codex가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Codex Worktrees의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "codex-review": {
       "publisher": "OpenAI",
@@ -476,11 +1268,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "변경 내용을 버그, 회귀, 위험과 테스트 누락 관점에서 검토합니다.",
       "instructorNote": "요약보다 발견 사항과 재현 근거, 파일 위치, 우선순위를 먼저 제시합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/integrations/github",
-      "pageTitle": "Code review in GitHub – Codex | OpenAI Developers"
+      "pageTitle": "Code review in GitHub – Codex | OpenAI Developers",
+      "coreConceptKo": "변경 내용을 버그, 회귀, 위험과 테스트 누락 관점에서 검토합니다.",
+      "instructorBackground": "Codex 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Codex Code Review의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Codex가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Codex Code Review의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "codex-hooks": {
       "publisher": "OpenAI",
@@ -489,11 +1303,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "작업 이벤트에 맞춰 검사, 알림, 보조 명령을 실행하는 확장 지점입니다.",
       "instructorNote": "Hook이 실패했을 때 작업을 차단할지 경고만 남길지 운영 정책을 정합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/hooks",
-      "pageTitle": "Hooks – Codex | OpenAI Developers"
+      "pageTitle": "Hooks – Codex | OpenAI Developers",
+      "coreConceptKo": "작업 이벤트에 맞춰 검사, 알림, 보조 명령을 실행하는 확장 지점입니다.",
+      "instructorBackground": "Codex 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Codex Hooks의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Codex가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Codex Hooks의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     },
     "codex-automations": {
       "publisher": "OpenAI",
@@ -502,11 +1338,33 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "정해진 시간이나 반복 조건에 따라 Codex 작업을 자동 실행하고 결과를 확인합니다.",
       "instructorNote": "자동 실행 전 입력, 권한, 비용, 실패 알림과 사람이 승인할 지점을 설계합니다.",
-      "checkedAt": "2026-06-15T18:08:26.591Z",
+      "checkedAt": "2026-06-16T03:49:59.844Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/app/automations",
-      "pageTitle": "Automations – Codex app | OpenAI Developers"
+      "pageTitle": "Automations – Codex app | OpenAI Developers",
+      "coreConceptKo": "정해진 시간이나 반복 조건에 따라 Codex 작업을 자동 실행하고 결과를 확인합니다.",
+      "instructorBackground": "Codex 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Codex Automations의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Codex가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Codex Automations의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
     }
   }
 };

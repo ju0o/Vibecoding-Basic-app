@@ -16,9 +16,13 @@ const kindTitles = {
   assessment: '프로젝트 체크·평가표',
   practice: '개인 실습 기록지',
   script: '슬라이드별 상세 대본',
-  demo: '실제 시연 운영 매뉴얼',
-  answers: '정답·평가·예상 질문',
-  research: '공식 참고자료 연구노트',
+  'source-study': '공식자료 연구노트',
+  'demo-runbook': '시연 운영 매뉴얼',
+  'deep-dive': '강사용 심화 개념집',
+  'qa-bank': '질문·답변·오류 복구집',
+  demo: '시연 운영 매뉴얼',
+  answers: '질문·답변·오류 복구집',
+  research: '공식자료 연구노트',
   fallback: '오프라인 대체 화면',
   rehearsal: '현장 리허설 체크리스트',
 };
@@ -270,10 +274,15 @@ function practice() {
 
 function script() {
   return course.sessions.map((lesson, index) => {
-    const groups = [lesson.scriptSlides.slice(0, 7), lesson.scriptSlides.slice(7)];
+    const groups = [
+      lesson.scriptSlides.slice(0, 4),
+      lesson.scriptSlides.slice(4, 8),
+      lesson.scriptSlides.slice(8, 11),
+      lesson.scriptSlides.slice(11),
+    ];
     return groups.map((slides, groupIndex) => `
       <section class="sheet">
-        ${pageHead(lesson, index, `강사용 상세 대본 ${groupIndex + 1}/2`)}
+        ${pageHead(lesson, index, `강사용 상세 대본 ${groupIndex + 1}/4`)}
         <h2>${escapeHtml(lesson.title)}</h2>
         <p class="objective">${escapeHtml(lesson.objective)}</p>
         <div class="script-slide-list">
@@ -284,10 +293,11 @@ function script() {
               <p><strong>DO</strong>${escapeHtml(entry.do)}</p>
               <p><strong>ASK</strong>${escapeHtml(entry.ask)}</p>
               <p><strong>예상 답변</strong>${escapeHtml(entry.expected)}</p>
-              <p><strong>복구</strong>${escapeHtml(entry.recovery)}</p>
+              <p><strong>심화 설명</strong>${escapeHtml(entry.deepDive || '공식자료와 실제 시연을 연결해 정의보다 판단 기준으로 설명합니다.')}</p>
+              <p><strong>오류 복구</strong>${escapeHtml(entry.recovery)}</p>
             </article>`).join('')}
         </div>
-        ${footer('INSTRUCTOR SCRIPT', index * 2 + groupIndex + 1)}
+        ${footer('INSTRUCTOR SCRIPT', index * 4 + groupIndex + 1)}
       </section>`).join('');
   }).join('');
 }
@@ -320,16 +330,23 @@ function demo() {
   `).join('');
 }
 
-function answers() {
+function qaBank() {
   return course.sessions.map((lesson, index) => `
     <section class="sheet">
-      ${pageHead(lesson, index, '정답·평가 기준')}
+      ${pageHead(lesson, index, '질문·답변·오류 복구집')}
       <h2>${escapeHtml(lesson.title)}</h2>
       <h3>판단 실습 해설</h3>
       ${lesson.decisions.map(([question, tone, feedback]) => `<div class="script-block"><span class="script-label">${escapeHtml(tone)}</span><span class="script-copy"><b>${escapeHtml(question)}</b><br>${escapeHtml(feedback)}</span></div>`).join('')}
       <h3>완료 판단</h3>${list(lesson.deliverables.map((item) => `${item}: 화면, 파일, 로그 또는 URL로 확인할 수 있어야 함`))}
       <h3>미완료로 판단하는 경우</h3>${list(['결과 화면만 있고 실행 과정이 재현되지 않음', 'AI가 바꾼 파일과 이유를 설명하지 못함', '오류 또는 실패 상태를 확인하지 않음', '다른 사람이 같은 프로젝트를 실행할 수 없음'])}
-      ${footer('ANSWERS · A', index * 2 + 1)}
+      <h3>대표 오류 복구</h3>
+      <table><tbody>
+        <tr><th>증상</th><td>${escapeHtml(lesson.error.symptom)}</td></tr>
+        <tr><th>처음 읽을 로그</th><td><code>${escapeHtml(lesson.error.trace)}</code></td></tr>
+        <tr><th>원인 가설</th><td>${escapeHtml(lesson.error.cause)}</td></tr>
+        <tr><th>복구 요청</th><td>${escapeHtml(lesson.error.fix)}</td></tr>
+      </tbody></table>
+      ${footer('QA BANK · A', index * 2 + 1)}
     </section>
     <section class="sheet">
       ${pageHead(lesson, index, '예상 질문과 답변')}
@@ -339,12 +356,12 @@ function answers() {
       <div class="script-block"><span class="script-label">Q3</span><span class="script-copy"><b>어디까지 직접 하고 어디부터 AI에게 맡기나요?</b><br>문제와 완료 기준, 승인과 검증은 사람이 소유합니다. 탐색, 초안, 반복 구현과 정리는 AI에게 맡길 수 있습니다.</span></div>
       <div class="script-block"><span class="script-label">Q4</span><span class="script-copy"><b>오류가 나면 처음부터 다시 만들어야 하나요?</b><br>먼저 마지막 정상 상태와 현재 diff를 비교합니다. 증상, 로그, 직전 변경을 기준으로 가장 작은 원인부터 확인하면 대부분 전체 재작성이 필요하지 않습니다.</span></div>
       <h3>추가 질문 기록</h3>${lines(5)}
-      ${footer('ANSWERS · B', index * 2 + 2)}
+      ${footer('QA BANK · B', index * 2 + 2)}
     </section>
   `).join('');
 }
 
-function research() {
+function sourceStudy() {
   const keys = [...new Set(course.sessions.flatMap((lesson) => lesson.sources || []))];
   const cards = keys.map((key, index) => {
     const source = sourceCatalog[key];
@@ -356,20 +373,32 @@ function research() {
         ${footer('RESEARCH SOURCE', index + 2)}
       </section>`;
     const lessons = course.sessions.map((lesson, index) => lesson.sources?.includes(key) ? `${index + 1}강` : null).filter(Boolean).join(', ');
+    const expectedQuestions = source.expectedQuestions || [];
     return `
       <section class="sheet">
-        ${pageHead(course.sessions[0], index + 1, '공식 참고자료')}
+        ${pageHead(course.sessions[0], index + 1, '공식자료 연구노트')}
         <span class="document-kicker">${escapeHtml(source.publisher)} · ${escapeHtml(source.maturity)}</span>
         <h2>${escapeHtml(source.title)}</h2>
-        <p class="objective">${escapeHtml(source.summaryKo)}</p>
+        <p class="objective">${escapeHtml(source.coreConceptKo || source.summaryKo)}</p>
         <table><tbody>
           <tr><th>강의 반영 회차</th><td>${escapeHtml(lessons || '공통')}</td></tr>
+          <tr><th>강의 반영 위치</th><td>${escapeHtml(source.lectureUseHint || '연결 회차의 공식 개념 학습과 시연 전 주의점')}</td></tr>
           <tr><th>기능 안정성</th><td>${escapeHtml(source.maturity)}</td></tr>
           <tr><th>문서 확인일</th><td>${escapeHtml(source.checkedAt || window.VIBE_OFFICIAL_SOURCES.checkedAt || 'sources:refresh 실행 전')}</td></tr>
           <tr><th>응답 상태</th><td>${escapeHtml(source.status || 'not checked')} · HTTP ${escapeHtml(source.httpStatus || '-')}</td></tr>
         </tbody></table>
+        <h3>강사가 반드시 이해할 배경</h3>
+        <div class="callout"><p>${escapeHtml(source.instructorBackground || source.instructorNote)}</p></div>
+        <h3>수강생에게 말할 쉬운 비유</h3>
+        <p>${escapeHtml(source.classroomAnalogy || source.summaryKo)}</p>
+        <h3>자주 생기는 오해</h3>
+        <p>${escapeHtml(source.commonMisunderstanding || source.instructorNote)}</p>
+        <h3>실제 시연 포인트</h3>
+        <p>${escapeHtml(source.demoPoint || source.instructorNote)}</p>
         <h3>강사가 알아야 할 주의점</h3>
         <div class="callout"><p>${escapeHtml(source.instructorNote)}</p></div>
+        <h3>예상 질문</h3>
+        ${expectedQuestions.map((item, questionIndex) => `<div class="script-block"><span class="script-label">Q${questionIndex + 1}</span><span class="script-copy"><b>${escapeHtml(item.q)}</b><br>${escapeHtml(item.a)}</span></div>`).join('') || '<p>수업 중 받은 질문을 기록합니다.</p>'}
         <h3>공식 문서</h3>
         <div class="source-card"><a href="${escapeHtml(source.url)}">${escapeHtml(source.url)}</a></div>
         <h3>수업 전 추가 확인</h3>${list(['설치 명령과 지원 운영체제', '가격·요금제 또는 사용 한도', '베타·실험 기능 상태', '권한과 보안 주의점', '슬라이드와 대본의 표현이 현재 문서와 일치하는지'])}
@@ -380,20 +409,50 @@ function research() {
   return `
     <section class="sheet">
       ${pageHead(course.sessions[0], 0)}
-      <h2>공식 참고자료 사용 원칙</h2>
-      <p class="objective">원문 전체를 복제하지 않고 공식 URL, 확인 날짜, 기능 안정성, 쉬운 한국어 설명과 강의 반영 위치만 관리합니다.</p>
-      ${list(['기수 시작 전 npm run sources:refresh 실행', '베타·실험 기능은 수업 자료에 상태를 명시', '설치 명령과 가격·요금제는 수업 당일 다시 확인', '슬라이드에는 핵심 원리, 강사 자료에는 주의점 기록'])}
+      <h2>공식자료를 강의로 바꾸는 방식</h2>
+      <p class="objective">원문 전체를 복제하지 않고 공식 URL, 확인 날짜, 안정성, 쉬운 한국어 설명, 오해 교정, 시연 포인트만 관리합니다.</p>
+      ${list(['기수 시작 전 npm run sources:refresh 실행', '베타·실험 기능은 수업 자료에 상태를 명시', '설치 명령과 가격·요금제는 수업 당일 다시 확인', '슬라이드에는 핵심 원리, 강사 자료에는 배경과 주의점 기록', '공식 문서 내용은 그대로 읽지 말고 수강생 프로젝트 상황으로 번역'])}
       <div class="callout"><b>마지막 갱신</b><p>${escapeHtml(window.VIBE_OFFICIAL_SOURCES.checkedAt || '아직 실행되지 않음')}</p></div>
-      ${footer('RESEARCH', 1)}
+      ${footer('SOURCE STUDY', 1)}
     </section>
     ${cards || `
       <section class="sheet">
-        ${pageHead(course.sessions[0], 1, '공식 참고자료')}
+        ${pageHead(course.sessions[0], 1, '공식자료 연구노트')}
         <h2>${escapeHtml(course.title)} 연구 메모</h2>
         <p class="objective">이 과정은 제품별 명령보다 도구 독립적인 설계 원리를 중심으로 구성됩니다.</p>
         <h3>강사가 추가할 사례</h3>${lines(12)}
-        ${footer('RESEARCH', 2)}
+        ${footer('SOURCE STUDY', 2)}
       </section>`}`;
+}
+
+function deepDive() {
+  return course.sessions.map((lesson, index) => `
+    <section class="sheet">
+      ${pageHead(lesson, index, '강사용 심화 개념집')}
+      <h2>${escapeHtml(lesson.title)}</h2>
+      <p class="objective">이 페이지는 수강생에게 그대로 나눠주는 자료가 아니라, 강사가 공식자료와 실제 시연 사이의 논리를 이해하기 위한 공부 자료입니다.</p>
+      <h3>쉬운 설명</h3>
+      ${lesson.concepts.map(([title, copy]) => `<div class="script-block"><span class="script-label">${escapeHtml(title)}</span><span class="script-copy">${escapeHtml(copy)}<br>수업에서는 정의를 먼저 말하지 말고, 화면에서 어떤 판단을 해야 하는지 사례로 설명합니다.</span></div>`).join('')}
+      <h3>전문가 관점에서 강조할 것</h3>
+      ${list(['권한과 비용은 기능 완성 이후가 아니라 설계 단계에서 함께 결정', 'AI 결과물은 실행·diff·로그·브라우저 증거로 검증', '도구별 명령보다 목표, 컨텍스트, 승인, 복구 흐름을 우선', '수강생의 질문은 정답보다 문제 위치 판단으로 되돌림'])}
+      <h3>오해 방지 문장</h3>
+      <p>${escapeHtml(lesson.compare.bad.join(' / '))} 방식은 결과를 빨리 보이게 하지만 운영 가능한 결과를 보장하지 않습니다. ${escapeHtml(lesson.compare.good.join(' / '))} 기준으로 다시 묶어 설명합니다.</p>
+      <h3>강사 메모</h3>${lines(5)}
+      ${footer('DEEP DIVE', index + 1)}
+    </section>
+  `).join('');
+}
+
+function demoRunbook() {
+  return demo();
+}
+
+function answers() {
+  return qaBank();
+}
+
+function research() {
+  return sourceStudy();
 }
 
 function fallback() {
@@ -435,5 +494,22 @@ function rehearsal() {
   `).join('');
 }
 
-const renderers = { workbook, commands, examples, errors, assessment, practice, script, demo, answers, research, fallback, rehearsal };
+const renderers = {
+  workbook,
+  commands,
+  examples,
+  errors,
+  assessment,
+  practice,
+  script,
+  demo,
+  answers,
+  research,
+  fallback,
+  rehearsal,
+  'source-study': sourceStudy,
+  'demo-runbook': demoRunbook,
+  'deep-dive': deepDive,
+  'qa-bank': qaBank,
+};
 root.innerHTML = cover() + renderers[kind]();

@@ -395,7 +395,7 @@ const curricula = {
         error: { symptom: 'Claude가 관련 없는 저장소 파일을 탐색', trace: 'working directory: user home', cause: '프로젝트 루트가 아닌 위치에서 시작', fix: '올바른 저장소 폴더로 이동해 새 세션 시작' },
         practice: '실제 저장소를 탐색하고 구조 설명, 변경 계획, 작은 수정, 테스트까지 한 세션으로 완료합니다.',
         deliverables: ['저장소 지도', '검토한 계획', '첫 안전한 diff'],
-        sources: ['claude-overview', 'claude-quickstart'],
+        sources: ['claude-overview', 'claude-quickstart', 'github-git'],
       }),
       detail({
         title: 'CLAUDE.md·계획·Git·Diff·테스트',
@@ -410,7 +410,7 @@ const curricula = {
         error: { symptom: 'CLAUDE.md 규칙이 서로 충돌', trace: 'root says npm / nested says pnpm', cause: '범위와 우선순위를 고려하지 않음', fix: '루트는 공통 규칙, 하위 파일은 해당 영역의 구체 규칙으로 정리' },
         practice: '프로젝트 CLAUDE.md를 만들고 계획→diff→테스트→commit까지 검증 가능한 변경을 수행합니다.',
         deliverables: ['CLAUDE.md', '변경 계획', '테스트가 포함된 커밋'],
-        sources: ['claude-memory', 'github-git'],
+        sources: ['claude-memory', 'github-git', 'claude-overview'],
       }),
       detail({
         title: 'Skills와 반복 작업 표준화',
@@ -425,7 +425,7 @@ const curricula = {
         error: { symptom: '관련 없는 요청에도 Skill이 활성화', trace: 'description matched broad term', cause: '설명과 경계가 너무 넓음', fix: '명확한 Trigger·비사용 조건과 한 책임으로 축소' },
         practice: '자신의 반복 개발 업무 하나를 Claude Skill로 만들고 세 개의 테스트 요청으로 검증합니다.',
         deliverables: ['실행 가능한 Skill', '정상·실패 테스트', '버전 기록'],
-        sources: ['claude-skills'],
+        sources: ['claude-skills', 'claude-memory', 'claude-overview'],
       }),
       detail({
         title: 'Plugins·MCP·Hooks와 서비스 연결',
@@ -455,7 +455,7 @@ const curricula = {
         error: { symptom: 'Agent 결과가 서로 다른 전제를 사용', trace: 'contract mismatch', cause: '공통 목표·입력·반환 형식이 없음', fix: '작업 계약과 공유 결정 로그를 먼저 제공' },
         practice: '한 저장소 과제를 탐색·구현·테스트·리뷰로 분리하고 반환 계약과 품질 게이트를 적용합니다.',
         deliverables: ['멀티 Agent 작업 계약', '역할별 결과', '리뷰·통합 보고서'],
-        sources: ['claude-subagents', 'claude-agent-teams'],
+        sources: ['claude-subagents', 'claude-agent-teams', 'claude-overview'],
       }),
       detail({
         title: '자동화·배포·PR·Claude 워크스페이스',
@@ -470,7 +470,7 @@ const curricula = {
         error: { symptom: '자동 PR은 열리지만 항상 사람이 처음부터 다시 조사', trace: 'handoff missing context', cause: '작업 근거와 검증·위험 요약이 없음', fix: '정형화된 PR·세션 인수인계 템플릿 적용' },
         practice: 'Claude 워크스페이스에 Skill·Plugin·Agent 작업과 CI·PR·배포·인수인계 흐름을 통합합니다.',
         deliverables: ['최종 Claude 워크스페이스', '자동화·CI 흐름', 'PR·운영 매뉴얼'],
-        sources: ['claude-github-actions', 'github-actions'],
+        sources: ['claude-github-actions', 'github-actions', 'github-releases'],
       }),
     ],
   },
@@ -499,7 +499,7 @@ const curricula = {
         error: { symptom: 'Codex가 파일을 찾지 못함', trace: 'path outside writable workspace', cause: 'Workspace와 실제 프로젝트 위치가 다름', fix: '올바른 폴더를 Workspace로 열고 권한 범위를 확인' },
         practice: 'App·CLI·IDE 중 작업에 맞는 표면을 골라 저장소 탐색, 작은 수정과 검증을 완료합니다.',
         deliverables: ['표면 선택 기준표', '작업 계약', '첫 검증된 변경'],
-        sources: ['codex-overview', 'codex-security'],
+        sources: ['codex-overview', 'codex-security', 'github-git'],
       }),
       detail({
         title: 'AGENTS.md·config.toml·Rules·Git',
@@ -529,7 +529,7 @@ const curricula = {
         error: { symptom: 'Plugin 업데이트 후 Skill이 보이지 않음', trace: 'manifest cache unchanged', cause: '매니페스트·설치 캐시·버전 갱신 누락', fix: '구조 검증 후 버전과 설치 캐시를 갱신하고 재시작' },
         practice: '한 Skill을 만들고 테스트한 뒤 설치 가능한 개인 Plugin으로 패키징합니다.',
         deliverables: ['Codex Skill', 'Plugin 패키지', '테스트·업데이트 기록'],
-        sources: ['codex-skills', 'codex-plugins'],
+        sources: ['codex-skills', 'codex-plugins', 'codex-overview'],
       }),
       detail({
         title: 'MCP·Apps·Connectors·Browser',
@@ -559,7 +559,7 @@ const curricula = {
         error: { symptom: '각 브랜치는 통과하지만 합치면 UI가 깨짐', trace: 'integration regression', cause: '개별 테스트만 있고 통합 시나리오가 없음', fix: '병합 후 전체 사용자 흐름과 스크린샷 회귀를 다시 실행' },
         practice: '하나의 기능을 탐색·구현·테스트·리뷰로 나눠 Subagent/Worktree에서 수행하고 통합 QA합니다.',
         deliverables: ['병렬 작업 계획', '역할별 결과·증거', '통합 리뷰 보고서'],
-        sources: ['codex-subagents', 'codex-worktrees', 'codex-review'],
+        sources: ['codex-subagents', 'codex-worktrees', 'codex-review', 'github-git'],
       }),
       detail({
         title: 'Hooks·Automations·GitHub Actions·Release',
@@ -702,6 +702,7 @@ function buildScriptSlides(session) {
     do: index === 4 ? `시작 버튼을 누르고 ${session.demo.stages.join(' → ')}를 수동으로 진행합니다.` : '화면 요소를 하나씩 공개하고 수강생의 시선을 한 지점에 고정합니다.',
     ask,
     expected: index === 7 ? `${session.error.cause}와 ${session.error.fix}를 연결한 답` : '자신의 프로젝트 또는 업무 사례를 포함한 한 문장 답',
+    deepDive: `${session.title}에서 강사가 먼저 이해해야 할 심화 기준은 ${session.concepts.map(([title, copy]) => `${title}: ${copy}`).join(' / ')}입니다. 공식자료와 실제 시연을 연결해 수강생에게는 정의보다 판단 기준으로 설명합니다.`,
     recovery: index === 4 ? '실제 도구가 실패하면 저장된 대체 캡처와 동일한 로그로 시연을 계속합니다.' : '응답이 없으면 구체적인 화면 예시 하나를 제시하고 다시 질문합니다.',
   }));
 }
@@ -712,7 +713,7 @@ function enrichCurricula() {
       const lessonNumber = String(index + 1).padStart(2, '0');
       const labRoot = `v3/projects/${courseId}/${lessonNumber}`;
       const sceneId = `${courseId}-${lessonNumber}-${session.demo.type}`;
-      session.revision = courseId === 'basic-current-work' ? '3.0.0-beta.2-review' : '3.0.0';
+      session.revision = courseId === 'basic-current-work' ? '3.0.0-beta.3-review' : '3.0.0';
       session.status = courseId === 'basic-current-work' ? 'review' : 'ready';
       session.visualScene = {
         id: sceneId,
@@ -746,7 +747,7 @@ function enrichCurricula() {
         slide: `v3/deck.html?course=${courseId}&lesson=${index + 1}&slide=5&motion=low`,
       };
       session.studentMaterials = ['workbook', 'commands', 'examples', 'errors', 'assessment', 'practice-log'];
-      session.instructorMaterials = ['script', 'demo', 'answers', 'research', 'fallback', 'rehearsal'];
+      session.instructorMaterials = ['script', 'source-study', 'demo-runbook', 'deep-dive', 'qa-bank', 'fallback', 'rehearsal'];
       session.sourceKeys = session.sources || [];
       session.scriptSlides = buildScriptSlides(session);
     });
@@ -765,7 +766,7 @@ const currentBasic = {
   level: 'START',
   status: 'active',
   visibility: 'primary',
-  audience: ['student', 'instructor'],
+  audience: ['studio'],
   curriculumVersion: '2기-6주',
   cohort: '2기',
   description: '현재 수업 중인 6주 운영본입니다. 기존 강의 파일과 진행 상태를 그대로 유지합니다.',
@@ -787,7 +788,7 @@ const currentBasic = {
     activeRevision: 'v2-active',
     revisions: [
       { id: 'v2-active', label: '현재 운영본', revision: '2기-6주', status: 'active', file },
-      { id: 'v3-work', label: 'V3 개편 작업본', revision: '3.0.0-beta.2-review', status: 'review', file: `v3/deck.html?course=basic-current-work&lesson=${index + 1}` },
+      { id: 'v3-work', label: 'V3 개편 작업본', revision: '3.0.0-beta.3-review', status: 'review', file: `v3/deck.html?course=basic-current-work&lesson=${index + 1}` },
     ],
     preparation: ['개인 노트북', '현재 프로젝트'],
     deliverables: type === 'showcase' ? ['프로젝트 발표', '피드백 기록'] : ['수업별 실습 결과'],
@@ -811,6 +812,7 @@ const currentBasic = {
       ['basic-current-script5', '5강 상세 대본', 'GitHub·배포·보안 수업 운영', 'appendix/script-session5.html'],
       ['basic-current-study', '강사용 공부자료', '현재 6주 과정의 핵심 개념과 예상 질문', 'appendix/instructor-study-guide.html'],
       ['basic-current-v3-script', '2기 V3 개편 상세 대본', '13장별 SAY·DO·ASK와 오류 복구', 'v3/material.html?course=basic-current-work&kind=script&audience=instructor'],
+      ['basic-current-v3-source-study', '2기 공식자료 연구노트', '공식 문서의 배경·오해·시연 포인트', 'v3/material.html?course=basic-current-work&kind=source-study&audience=instructor'],
       ['basic-current-v3-fallback', '2기 오프라인 대체 화면', '회차별 V3 작업본 캡처와 대체 진행', 'v3/material.html?course=basic-current-work&kind=fallback&audience=instructor'],
       ['basic-current-v3-rehearsal', '2기 현장 리허설', '프로젝터·시연 속도·실습 복구 점검', 'v3/material.html?course=basic-current-work&kind=rehearsal&audience=instructor'],
     ],
@@ -831,10 +833,10 @@ function materialEntries(courseId, title) {
     ],
     instructor: [
       [`${courseId}-script`, '슬라이드별 상세 대본', 'SAY·DO·ASK·예상 답변·복구·시간 조정', query('script', 'instructor')],
-      [`${courseId}-demo`, '실제 시연 운영 매뉴얼', '정상 시연과 실패 시 대체 화면', query('demo', 'instructor')],
-      [`${courseId}-answers`, '정답·평가·예상 질문', '실습 평가 기준과 질문 대응', query('answers', 'instructor')],
-      [`${courseId}-study`, '강사용 애니메이션 학습실', '핵심 개념을 다시 조작하며 공부', `v3/deck.html?course=${courseId}&lesson=1&study=1`],
-      [`${courseId}-research`, '공식 참고자료 연구노트', '공식 문서의 쉬운 한국어 요약과 반영 위치', query('research', 'instructor')],
+      [`${courseId}-source-study`, '공식자료 연구노트', '공식 문서의 배경·오해·시연 포인트', query('source-study', 'instructor')],
+      [`${courseId}-demo-runbook`, '시연 운영 매뉴얼', '정상 흐름·실패 흐름·대체 화면 운영', query('demo-runbook', 'instructor')],
+      [`${courseId}-deep-dive`, '강사용 심화 개념집', '회차별 쉬운 설명과 전문가 관점', query('deep-dive', 'instructor')],
+      [`${courseId}-qa-bank`, '질문·답변·오류 복구집', '예상 질문, 평가 기준, 복구 시나리오', query('qa-bank', 'instructor')],
       [`${courseId}-fallback`, '오프라인 대체 화면', '인터넷·로그인·빌드 실패 시 사용하는 회차별 캡처', query('fallback', 'instructor')],
       [`${courseId}-rehearsal`, '현장 리허설 체크리스트', '프로젝터·실습 파일·시연 속도와 복구 점검', query('rehearsal', 'instructor')],
     ],
@@ -889,7 +891,7 @@ function makeCourse(id, course, visibility = 'primary') {
     level: course.level,
     status: isPreview ? 'preview' : 'active',
     visibility,
-    audience: isPreview ? ['instructor'] : ['student', 'instructor'],
+    audience: ['studio'],
     curriculumVersion: isPreview ? '다음-4주' : 'V3',
     description: course.description,
     color: course.color,
@@ -923,15 +925,15 @@ const courses = [
 ];
 
 const manifest = {
-  version: '3.0.0-beta.2',
+  version: '3.0.0-beta.3',
   productName: 'VIBE STUDIO',
   currentCohort: '2기',
   defaultCourseId: 'basic-current',
   studentCourseIds: ['basic-current', 'product', 'workflow', 'claude', 'codex'],
   recommendedRoute: ['basic-current', 'workflow', ['claude', 'codex']],
   modes: {
-    student: { label: '학생 모드', show: ['primary'] },
-    instructor: { label: '강사 모드', show: ['primary', 'preview'] },
+    studio: { label: '강사용 로컬 스튜디오', show: ['primary', 'preview'] },
+    printPreview: { label: '수강생 출력물 미리보기', show: ['primary'] },
   },
   courses,
   legacyManifest: 'archive/v2-course-manifest.json',
@@ -944,5 +946,5 @@ writeIfChanged(
   `window.VIBE_V3_COURSES = ${JSON.stringify(curricula, null, 2)};\n`
 );
 
-console.log(`✓ V3 manifest generated: ${courses.length} courses (${manifest.studentCourseIds.length} student-visible)`);
+console.log(`✓ V3 manifest generated: ${courses.length} studio courses`);
 console.log(`✓ V3 lesson data generated: ${Object.values(curricula).reduce((sum, course) => sum + course.sessions.length, 0)} lessons`);

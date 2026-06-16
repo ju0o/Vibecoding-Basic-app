@@ -15,6 +15,7 @@ const reportPath = process.env.SMOKE_REPORT
 const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
 ipcMain.handle('read-manifest', () => JSON.parse(fs.readFileSync(path.join(root, 'src/content/course-manifest.json'), 'utf-8')));
+ipcMain.handle('read-official-sources', () => JSON.parse(fs.readFileSync(path.join(root, 'src/content/sources/official-sources.json'), 'utf-8')));
 ipcMain.handle('read-community-share-resources', () => ({ version: 1, resources: {} }));
 ipcMain.handle('get-content-base', () => `file:///${path.join(root, 'src/content').replace(/\\/g, '/')}`);
 ipcMain.handle('get-fullscreen', () => false);
@@ -51,13 +52,14 @@ app.whenReady().then(async () => {
     await win.loadFile(path.join(root, 'src/renderer/index.html'));
     await wait(1100);
 
-    const student = await win.webContents.executeJavaScript(`
+    const studio = await win.webContents.executeJavaScript(`
       (() => ({
         courses: document.querySelectorAll('#course-list .course-button').length,
         previewCourses: document.querySelectorAll('#course-list .preview-flag').length,
         panes: ['.course-rail','.lesson-pane','.detail-pane'].every((selector) => Boolean(document.querySelector(selector))),
         cards: document.querySelectorAll('.catalog-card,.session-card').length,
         tabs: document.querySelectorAll('#course-tabs button:not(.hidden)').length,
+        modeButton: Boolean(document.querySelector('#btn-mode')),
         selectedTitle: document.querySelector('#course-title')?.textContent || '',
         selectedLessons: document.querySelectorAll('#lesson-list .lesson-row').length,
         overflowX: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
@@ -68,14 +70,12 @@ app.whenReady().then(async () => {
     fs.mkdirSync(path.dirname(screenshotPath), { recursive: true });
     fs.writeFileSync(screenshotPath, (await win.webContents.capturePage()).toPNG());
 
-    await win.webContents.executeJavaScript(`document.querySelector('#btn-mode').click()`);
+    await win.webContents.executeJavaScript(`document.querySelector('[data-tab="instructor"]').click()`);
     await wait(180);
-    const instructor = await win.webContents.executeJavaScript(`
+    const instructorMaterials = await win.webContents.executeJavaScript(`
       (() => ({
-        courses: document.querySelectorAll('#course-list .course-button').length,
-        previewCourses: document.querySelectorAll('#course-list .preview-flag').length,
-        instructorTab: !document.querySelector('[data-tab="instructor"]').classList.contains('hidden'),
-        labsTab: !document.querySelector('[data-tab="labs"]').classList.contains('hidden')
+        rows: document.querySelectorAll('#lesson-list .material-row').length,
+        detail: document.querySelector('#detail-content')?.textContent || ''
       }))()
     `);
 
@@ -88,6 +88,15 @@ app.whenReady().then(async () => {
       (() => ({
         title: document.querySelector('#course-title')?.textContent || '',
         rows: document.querySelectorAll('#lesson-list .material-row').length,
+        detail: document.querySelector('#detail-content')?.textContent || ''
+      }))()
+    `);
+
+    await win.webContents.executeJavaScript(`document.querySelector('[data-tab="sources"]').click()`);
+    await wait(150);
+    const sources = await win.webContents.executeJavaScript(`
+      (() => ({
+        rows: document.querySelectorAll('#lesson-list .source-row').length,
         detail: document.querySelector('#detail-content')?.textContent || ''
       }))()
     `);
@@ -133,22 +142,23 @@ app.whenReady().then(async () => {
       }))()
     `);
 
-    const ok = student.courses === 5
-      && student.previewCourses === 0
-      && student.panes
-      && student.cards === 0
-      && student.tabs === 2
-      && student.selectedTitle.includes('2기')
-      && student.selectedLessons === 6
-      && !student.overflowX
-      && !student.overflowY
-      && instructor.courses === 6
-      && instructor.previewCourses === 1
-      && instructor.instructorTab
-      && instructor.labsTab
+    const ok = studio.courses === 6
+      && studio.previewCourses === 1
+      && studio.panes
+      && studio.cards === 0
+      && studio.tabs === 5
+      && !studio.modeButton
+      && studio.selectedTitle.includes('2기')
+      && studio.selectedLessons === 6
+      && !studio.overflowX
+      && !studio.overflowY
+      && instructorMaterials.rows >= 40
+      && instructorMaterials.detail.includes('공식자료')
       && materials.title.includes('다음 기수')
       && materials.rows === 6
       && materials.detail.includes('A4')
+      && sources.rows >= 30
+      && sources.detail.includes('강사가 이해할 배경')
       && player.open
       && player.loadingHidden
       && player.inner.slides === 13
@@ -159,7 +169,7 @@ app.whenReady().then(async () => {
       && command.items > 20
       && errors.length === 0;
 
-    const report = { ok, student, instructor, materials, player, command, errors, screenshotPath };
+    const report = { ok, studio, instructorMaterials, materials, sources, player, command, errors, screenshotPath };
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2), 'utf-8');
     console.log(JSON.stringify(report, null, 2));
     app.exit(ok ? 0 : 1);

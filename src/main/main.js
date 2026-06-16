@@ -6,7 +6,9 @@ const fs = require('fs');
 const AdmZip = require('adm-zip');
 
 let mainWindow;
-const smokeMode = process.argv.includes('--smoke-test');
+const smokeMode = process.argv.includes('--smoke-test')
+  || process.env.VIBE_SMOKE_TEST === '1'
+  || Boolean(process.env.VIBE_SMOKE_REPORT);
 
 function getOptionalIconPath() {
   const iconPath = path.join(__dirname, '../../build/icon.ico');
@@ -48,7 +50,7 @@ function createWindow() {
             version: document.querySelector('.rail-footer strong')?.textContent || ''
           })`);
           const report = {
-            ok: result.courses >= 5 && result.lessons > 0 && result.panes && result.version.includes('BETA 2'),
+            ok: result.courses >= 5 && result.lessons > 0 && result.panes && result.version.includes('BETA 3'),
             packaged: app.isPackaged,
             appVersion: app.getVersion(),
             ...result,
@@ -96,6 +98,12 @@ function registerShortcuts() {
 ipcMain.handle('read-manifest', () => {
   const manifestPath = path.join(__dirname, '../content/course-manifest.json');
   const raw = fs.readFileSync(manifestPath, 'utf-8');
+  return JSON.parse(raw);
+});
+
+ipcMain.handle('read-official-sources', () => {
+  const sourcesPath = path.join(__dirname, '../content/sources/official-sources.json');
+  const raw = fs.readFileSync(sourcesPath, 'utf-8');
   return JSON.parse(raw);
 });
 

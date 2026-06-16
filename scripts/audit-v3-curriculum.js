@@ -31,10 +31,10 @@ function normalizeFrozenBuffer(buffer) {
   return buffer;
 }
 
-pass(pkg.version === '3.0.0-beta.2', 'package version is 3.0.0-beta.2');
+pass(pkg.version === '3.0.0-beta.3', 'package version is 3.0.0-beta.3');
 pass(manifest.defaultCourseId === 'basic-current', 'current cohort remains the default course');
-pass(manifest.studentCourseIds.length === 5, 'student mode has exactly five courses');
-pass(new Set(manifest.studentCourseIds).size === 5, 'student course ids are unique');
+pass(manifest.modes?.studio?.show?.includes('preview'), 'studio mode can see preview courses');
+pass(manifest.modes?.printPreview?.show?.includes('primary'), 'print preview remains primary-course scoped');
 
 const expectedCounts = {
   'basic-current': 6,
@@ -51,14 +51,14 @@ for (const [courseId, expected] of Object.entries(expectedCounts)) {
   if (!course) continue;
   pass(course.sessions.length === expected, `${courseId} has ${expected} lessons`);
   const expectedStudent = courseId === 'basic-current' ? 7 : 6;
-  const expectedInstructor = courseId === 'basic-current' ? 8 : 7;
+  const expectedInstructor = courseId === 'basic-current' ? 9 : 7;
   pass((course.materials?.student || []).length === expectedStudent, `${courseId} has ${expectedStudent} student materials`);
   pass((course.materials?.instructor || []).length === expectedInstructor, `${courseId} has ${expectedInstructor} instructor materials`);
 }
 
 const preview = manifest.courses.find((course) => course.id === 'foundation-next');
 pass(preview.visibility === 'preview', 'future four-week foundation is preview-only');
-pass(preview.audience.length === 1 && preview.audience[0] === 'instructor', 'future foundation is instructor-only');
+pass(preview.audience.length === 1 && preview.audience[0] === 'studio', 'future foundation is studio-only');
 pass(!preview.sessions.some((session) => /AI 이해|쇼케이스/.test(session.title)), 'future foundation excludes AI general theory and showcase');
 
 const current = manifest.courses.find((course) => course.id === 'basic-current');
@@ -105,6 +105,10 @@ for (const [courseId, course] of Object.entries(v3CourseData)) {
     sceneIds.add(session.visualScene?.id);
     pass(session.interactions?.controls?.join(',') === 'start,previous,next,pause,reset', `${courseId}-${index + 1} has manual controls`);
     pass(session.scriptSlides?.length === 13, `${courseId}-${index + 1} has a 13-slide instructor script`);
+    pass(session.scriptSlides?.every((slide) => slide.say && slide.do && slide.ask && slide.expected && slide.deepDive && slide.recovery), `${courseId}-${index + 1} has SAY/DO/ASK/expected/deep-dive/recovery script`);
+    if (['claude', 'codex'].includes(courseId) && session.status === 'ready') {
+      pass((session.sourceKeys || []).length >= 3, `${courseId}-${index + 1} has at least 3 official study sources`);
+    }
     for (const variant of ['starter', 'broken', 'complete']) {
       const target = path.join(root, 'src/content', session.demoProject?.[variant] || '', 'index.html');
       if (!fs.existsSync(target)) failures.push(`${courseId}-${index + 1} missing ${variant} lab`);
@@ -129,8 +133,19 @@ for (const course of v3Courses) {
 console.log(`✓ ${titles.size} V3 lesson titles are distinct`);
 
 pass(!/전체 과정|catalog-grid|catalog-card|과정 통계/.test(indexHtml), 'catalog and course-card dashboard are removed');
+pass(!/학생 모드|강사 모드|btn-mode|mode-toggle/.test(indexHtml), 'student/instructor mode toggle is removed from UI');
 pass(/course-rail/.test(indexHtml) && /lesson-pane/.test(indexHtml) && /detail-pane/.test(indexHtml), 'three-pane studio structure exists');
 pass(/command-palette/.test(indexHtml), 'Ctrl+K command palette exists');
+
+for (const [key, source] of Object.entries(sourceCatalog.sources)) {
+  pass(Boolean(source.coreConceptKo), `${key} has Korean core concept`);
+  pass(Boolean(source.instructorBackground), `${key} has instructor background`);
+  pass(Boolean(source.classroomAnalogy), `${key} has classroom analogy`);
+  pass(Boolean(source.commonMisunderstanding), `${key} has common misunderstanding`);
+  pass(Boolean(source.demoPoint), `${key} has demo point`);
+  pass(Array.isArray(source.expectedQuestions) && source.expectedQuestions.length >= 2, `${key} has expected questions`);
+  pass(Array.isArray(source.preClassCheck) && source.preClassCheck.length >= 4, `${key} has pre-class checklist`);
+}
 
 for (const course of manifest.courses) {
   for (const session of course.sessions) {
@@ -148,7 +163,7 @@ for (const course of manifest.courses) {
 const summary = {
   ok: failures.length === 0,
   courses: manifest.courses.length,
-  studentCourses: manifest.studentCourseIds.length,
+  studioCourses: manifest.courses.length,
   v3Lessons: v3Courses.reduce((total, course) => total + course.sessions.length, 0),
   revisedLessons: sceneLessons,
   sourceCount: Object.keys(sourceCatalog.sources).length,

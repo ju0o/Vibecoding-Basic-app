@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-beta.2",
+  "version": "3.0.0-beta.3",
   "productName": "VIBE STUDIO",
   "currentCohort": "2기",
   "defaultCourseId": "basic-current",
@@ -19,17 +19,17 @@
     ]
   ],
   "modes": {
-    "student": {
-      "label": "학생 모드",
-      "show": [
-        "primary"
-      ]
-    },
-    "instructor": {
-      "label": "강사 모드",
+    "studio": {
+      "label": "강사용 로컬 스튜디오",
       "show": [
         "primary",
         "preview"
+      ]
+    },
+    "printPreview": {
+      "label": "수강생 출력물 미리보기",
+      "show": [
+        "primary"
       ]
     }
   },
@@ -45,8 +45,7 @@
       "status": "active",
       "visibility": "primary",
       "audience": [
-        "student",
-        "instructor"
+        "studio"
       ],
       "curriculumVersion": "2기-6주",
       "cohort": "2기",
@@ -97,7 +96,7 @@
             {
               "id": "v3-work",
               "label": "V3 개편 작업본",
-              "revision": "3.0.0-beta.2-review",
+              "revision": "3.0.0-beta.3-review",
               "status": "review",
               "file": "v3/deck.html?course=basic-current-work&lesson=1"
             }
@@ -144,7 +143,7 @@
             {
               "id": "v3-work",
               "label": "V3 개편 작업본",
-              "revision": "3.0.0-beta.2-review",
+              "revision": "3.0.0-beta.3-review",
               "status": "review",
               "file": "v3/deck.html?course=basic-current-work&lesson=2"
             }
@@ -191,7 +190,7 @@
             {
               "id": "v3-work",
               "label": "V3 개편 작업본",
-              "revision": "3.0.0-beta.2-review",
+              "revision": "3.0.0-beta.3-review",
               "status": "review",
               "file": "v3/deck.html?course=basic-current-work&lesson=3"
             }
@@ -238,7 +237,7 @@
             {
               "id": "v3-work",
               "label": "V3 개편 작업본",
-              "revision": "3.0.0-beta.2-review",
+              "revision": "3.0.0-beta.3-review",
               "status": "review",
               "file": "v3/deck.html?course=basic-current-work&lesson=4"
             }
@@ -285,7 +284,7 @@
             {
               "id": "v3-work",
               "label": "V3 개편 작업본",
-              "revision": "3.0.0-beta.2-review",
+              "revision": "3.0.0-beta.3-review",
               "status": "review",
               "file": "v3/deck.html?course=basic-current-work&lesson=5"
             }
@@ -332,7 +331,7 @@
             {
               "id": "v3-work",
               "label": "V3 개편 작업본",
-              "revision": "3.0.0-beta.2-review",
+              "revision": "3.0.0-beta.3-review",
               "status": "review",
               "file": "v3/deck.html?course=basic-current-work&lesson=6"
             }
@@ -467,6 +466,14 @@
             "courseId": "basic-current"
           },
           {
+            "id": "basic-current-v3-source-study",
+            "title": "2기 공식자료 연구노트",
+            "description": "공식 문서의 배경·오해·시연 포인트",
+            "file": "v3/material.html?course=basic-current-work&kind=source-study&audience=instructor",
+            "audience": "instructor",
+            "courseId": "basic-current"
+          },
+          {
             "id": "basic-current-v3-fallback",
             "title": "2기 오프라인 대체 화면",
             "description": "회차별 V3 작업본 캡처와 대체 진행",
@@ -496,8 +503,7 @@
       "status": "active",
       "visibility": "primary",
       "audience": [
-        "student",
-        "instructor"
+        "studio"
       ],
       "curriculumVersion": "V3",
       "description": "공통 4주 후 SaaS팀과 외주팀으로 나뉘어 협업 프로젝트와 개인 사이드 프로젝트를 함께 완성합니다.",
@@ -624,9 +630,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -723,9 +730,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -822,9 +830,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -921,9 +930,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -1020,9 +1030,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -1122,9 +1133,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -1224,9 +1236,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -1327,9 +1340,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -1401,34 +1415,34 @@
             "courseId": "product"
           },
           {
-            "id": "product-demo",
-            "title": "실제 시연 운영 매뉴얼",
-            "description": "정상 시연과 실패 시 대체 화면",
-            "file": "v3/material.html?course=product&kind=demo&audience=instructor",
+            "id": "product-source-study",
+            "title": "공식자료 연구노트",
+            "description": "공식 문서의 배경·오해·시연 포인트",
+            "file": "v3/material.html?course=product&kind=source-study&audience=instructor",
             "audience": "instructor",
             "courseId": "product"
           },
           {
-            "id": "product-answers",
-            "title": "정답·평가·예상 질문",
-            "description": "실습 평가 기준과 질문 대응",
-            "file": "v3/material.html?course=product&kind=answers&audience=instructor",
+            "id": "product-demo-runbook",
+            "title": "시연 운영 매뉴얼",
+            "description": "정상 흐름·실패 흐름·대체 화면 운영",
+            "file": "v3/material.html?course=product&kind=demo-runbook&audience=instructor",
             "audience": "instructor",
             "courseId": "product"
           },
           {
-            "id": "product-study",
-            "title": "강사용 애니메이션 학습실",
-            "description": "핵심 개념을 다시 조작하며 공부",
-            "file": "v3/deck.html?course=product&lesson=1&study=1",
+            "id": "product-deep-dive",
+            "title": "강사용 심화 개념집",
+            "description": "회차별 쉬운 설명과 전문가 관점",
+            "file": "v3/material.html?course=product&kind=deep-dive&audience=instructor",
             "audience": "instructor",
             "courseId": "product"
           },
           {
-            "id": "product-research",
-            "title": "공식 참고자료 연구노트",
-            "description": "공식 문서의 쉬운 한국어 요약과 반영 위치",
-            "file": "v3/material.html?course=product&kind=research&audience=instructor",
+            "id": "product-qa-bank",
+            "title": "질문·답변·오류 복구집",
+            "description": "예상 질문, 평가 기준, 복구 시나리오",
+            "file": "v3/material.html?course=product&kind=qa-bank&audience=instructor",
             "audience": "instructor",
             "courseId": "product"
           },
@@ -1462,8 +1476,7 @@
       "status": "active",
       "visibility": "primary",
       "audience": [
-        "student",
-        "instructor"
+        "studio"
       ],
       "curriculumVersion": "V3",
       "description": "특정 제품 사용법이 아니라 업무를 AI가 안전하고 반복 가능하게 수행하도록 구조화하는 4주 고밀도 과정입니다.",
@@ -1597,9 +1610,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -1703,9 +1717,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -1807,9 +1822,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -1914,9 +1930,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -1985,34 +2002,34 @@
             "courseId": "workflow"
           },
           {
-            "id": "workflow-demo",
-            "title": "실제 시연 운영 매뉴얼",
-            "description": "정상 시연과 실패 시 대체 화면",
-            "file": "v3/material.html?course=workflow&kind=demo&audience=instructor",
+            "id": "workflow-source-study",
+            "title": "공식자료 연구노트",
+            "description": "공식 문서의 배경·오해·시연 포인트",
+            "file": "v3/material.html?course=workflow&kind=source-study&audience=instructor",
             "audience": "instructor",
             "courseId": "workflow"
           },
           {
-            "id": "workflow-answers",
-            "title": "정답·평가·예상 질문",
-            "description": "실습 평가 기준과 질문 대응",
-            "file": "v3/material.html?course=workflow&kind=answers&audience=instructor",
+            "id": "workflow-demo-runbook",
+            "title": "시연 운영 매뉴얼",
+            "description": "정상 흐름·실패 흐름·대체 화면 운영",
+            "file": "v3/material.html?course=workflow&kind=demo-runbook&audience=instructor",
             "audience": "instructor",
             "courseId": "workflow"
           },
           {
-            "id": "workflow-study",
-            "title": "강사용 애니메이션 학습실",
-            "description": "핵심 개념을 다시 조작하며 공부",
-            "file": "v3/deck.html?course=workflow&lesson=1&study=1",
+            "id": "workflow-deep-dive",
+            "title": "강사용 심화 개념집",
+            "description": "회차별 쉬운 설명과 전문가 관점",
+            "file": "v3/material.html?course=workflow&kind=deep-dive&audience=instructor",
             "audience": "instructor",
             "courseId": "workflow"
           },
           {
-            "id": "workflow-research",
-            "title": "공식 참고자료 연구노트",
-            "description": "공식 문서의 쉬운 한국어 요약과 반영 위치",
-            "file": "v3/material.html?course=workflow&kind=research&audience=instructor",
+            "id": "workflow-qa-bank",
+            "title": "질문·답변·오류 복구집",
+            "description": "예상 질문, 평가 기준, 복구 시나리오",
+            "file": "v3/material.html?course=workflow&kind=qa-bank&audience=instructor",
             "audience": "instructor",
             "courseId": "workflow"
           },
@@ -2046,8 +2063,7 @@
       "status": "active",
       "visibility": "primary",
       "audience": [
-        "student",
-        "instructor"
+        "studio"
       ],
       "curriculumVersion": "V3",
       "description": "Workflow Architect의 원리를 Claude Code의 프로젝트 지침, Skills, Plugins, MCP, Hooks와 Agent Teams로 구현합니다.",
@@ -2200,15 +2216,17 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
           "sourceKeys": [
             "claude-overview",
-            "claude-quickstart"
+            "claude-quickstart",
+            "github-git"
           ],
           "pathway": null
         },
@@ -2307,15 +2325,17 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
           "sourceKeys": [
             "claude-memory",
-            "github-git"
+            "github-git",
+            "claude-overview"
           ],
           "pathway": null
         },
@@ -2409,14 +2429,17 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
           "sourceKeys": [
-            "claude-skills"
+            "claude-skills",
+            "claude-memory",
+            "claude-overview"
           ],
           "pathway": null
         },
@@ -2515,9 +2538,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -2624,15 +2648,17 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
           "sourceKeys": [
             "claude-subagents",
-            "claude-agent-teams"
+            "claude-agent-teams",
+            "claude-overview"
           ],
           "pathway": null
         },
@@ -2731,15 +2757,17 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
           "sourceKeys": [
             "claude-github-actions",
-            "github-actions"
+            "github-actions",
+            "github-releases"
           ],
           "pathway": null
         }
@@ -2805,34 +2833,34 @@
             "courseId": "claude"
           },
           {
-            "id": "claude-demo",
-            "title": "실제 시연 운영 매뉴얼",
-            "description": "정상 시연과 실패 시 대체 화면",
-            "file": "v3/material.html?course=claude&kind=demo&audience=instructor",
+            "id": "claude-source-study",
+            "title": "공식자료 연구노트",
+            "description": "공식 문서의 배경·오해·시연 포인트",
+            "file": "v3/material.html?course=claude&kind=source-study&audience=instructor",
             "audience": "instructor",
             "courseId": "claude"
           },
           {
-            "id": "claude-answers",
-            "title": "정답·평가·예상 질문",
-            "description": "실습 평가 기준과 질문 대응",
-            "file": "v3/material.html?course=claude&kind=answers&audience=instructor",
+            "id": "claude-demo-runbook",
+            "title": "시연 운영 매뉴얼",
+            "description": "정상 흐름·실패 흐름·대체 화면 운영",
+            "file": "v3/material.html?course=claude&kind=demo-runbook&audience=instructor",
             "audience": "instructor",
             "courseId": "claude"
           },
           {
-            "id": "claude-study",
-            "title": "강사용 애니메이션 학습실",
-            "description": "핵심 개념을 다시 조작하며 공부",
-            "file": "v3/deck.html?course=claude&lesson=1&study=1",
+            "id": "claude-deep-dive",
+            "title": "강사용 심화 개념집",
+            "description": "회차별 쉬운 설명과 전문가 관점",
+            "file": "v3/material.html?course=claude&kind=deep-dive&audience=instructor",
             "audience": "instructor",
             "courseId": "claude"
           },
           {
-            "id": "claude-research",
-            "title": "공식 참고자료 연구노트",
-            "description": "공식 문서의 쉬운 한국어 요약과 반영 위치",
-            "file": "v3/material.html?course=claude&kind=research&audience=instructor",
+            "id": "claude-qa-bank",
+            "title": "질문·답변·오류 복구집",
+            "description": "예상 질문, 평가 기준, 복구 시나리오",
+            "file": "v3/material.html?course=claude&kind=qa-bank&audience=instructor",
             "audience": "instructor",
             "courseId": "claude"
           },
@@ -2866,8 +2894,7 @@
       "status": "active",
       "visibility": "primary",
       "audience": [
-        "student",
-        "instructor"
+        "studio"
       ],
       "curriculumVersion": "V3",
       "description": "Workflow Architect의 원리를 Codex App·CLI·IDE, Skills, Plugins, MCP, Browser, Subagents와 GitHub Release로 구현합니다.",
@@ -3020,15 +3047,17 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
           "sourceKeys": [
             "codex-overview",
-            "codex-security"
+            "codex-security",
+            "github-git"
           ],
           "pathway": null
         },
@@ -3127,9 +3156,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -3235,15 +3265,17 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
           "sourceKeys": [
             "codex-skills",
-            "codex-plugins"
+            "codex-plugins",
+            "codex-overview"
           ],
           "pathway": null
         },
@@ -3342,9 +3374,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -3450,16 +3483,18 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
           "sourceKeys": [
             "codex-subagents",
             "codex-worktrees",
-            "codex-review"
+            "codex-review",
+            "github-git"
           ],
           "pathway": null
         },
@@ -3558,9 +3593,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -3634,34 +3670,34 @@
             "courseId": "codex"
           },
           {
-            "id": "codex-demo",
-            "title": "실제 시연 운영 매뉴얼",
-            "description": "정상 시연과 실패 시 대체 화면",
-            "file": "v3/material.html?course=codex&kind=demo&audience=instructor",
+            "id": "codex-source-study",
+            "title": "공식자료 연구노트",
+            "description": "공식 문서의 배경·오해·시연 포인트",
+            "file": "v3/material.html?course=codex&kind=source-study&audience=instructor",
             "audience": "instructor",
             "courseId": "codex"
           },
           {
-            "id": "codex-answers",
-            "title": "정답·평가·예상 질문",
-            "description": "실습 평가 기준과 질문 대응",
-            "file": "v3/material.html?course=codex&kind=answers&audience=instructor",
+            "id": "codex-demo-runbook",
+            "title": "시연 운영 매뉴얼",
+            "description": "정상 흐름·실패 흐름·대체 화면 운영",
+            "file": "v3/material.html?course=codex&kind=demo-runbook&audience=instructor",
             "audience": "instructor",
             "courseId": "codex"
           },
           {
-            "id": "codex-study",
-            "title": "강사용 애니메이션 학습실",
-            "description": "핵심 개념을 다시 조작하며 공부",
-            "file": "v3/deck.html?course=codex&lesson=1&study=1",
+            "id": "codex-deep-dive",
+            "title": "강사용 심화 개념집",
+            "description": "회차별 쉬운 설명과 전문가 관점",
+            "file": "v3/material.html?course=codex&kind=deep-dive&audience=instructor",
             "audience": "instructor",
             "courseId": "codex"
           },
           {
-            "id": "codex-research",
-            "title": "공식 참고자료 연구노트",
-            "description": "공식 문서의 쉬운 한국어 요약과 반영 위치",
-            "file": "v3/material.html?course=codex&kind=research&audience=instructor",
+            "id": "codex-qa-bank",
+            "title": "질문·답변·오류 복구집",
+            "description": "예상 질문, 평가 기준, 복구 시나리오",
+            "file": "v3/material.html?course=codex&kind=qa-bank&audience=instructor",
             "audience": "instructor",
             "courseId": "codex"
           },
@@ -3695,7 +3731,7 @@
       "status": "preview",
       "visibility": "preview",
       "audience": [
-        "instructor"
+        "studio"
       ],
       "curriculumVersion": "다음-4주",
       "description": "AI 일반론 없이 바이브코딩 작업 환경에서 시작해 내 프로젝트를 안전하게 배포하는 4주 과정입니다.",
@@ -3829,9 +3865,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -3937,9 +3974,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -4039,9 +4077,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -4146,9 +4185,10 @@
           ],
           "instructorMaterials": [
             "script",
-            "demo",
-            "answers",
-            "research",
+            "source-study",
+            "demo-runbook",
+            "deep-dive",
+            "qa-bank",
             "fallback",
             "rehearsal"
           ],
@@ -4223,34 +4263,34 @@
             "courseId": "foundation-next"
           },
           {
-            "id": "foundation-next-demo",
-            "title": "실제 시연 운영 매뉴얼",
-            "description": "정상 시연과 실패 시 대체 화면",
-            "file": "v3/material.html?course=foundation-next&kind=demo&audience=instructor",
+            "id": "foundation-next-source-study",
+            "title": "공식자료 연구노트",
+            "description": "공식 문서의 배경·오해·시연 포인트",
+            "file": "v3/material.html?course=foundation-next&kind=source-study&audience=instructor",
             "audience": "instructor",
             "courseId": "foundation-next"
           },
           {
-            "id": "foundation-next-answers",
-            "title": "정답·평가·예상 질문",
-            "description": "실습 평가 기준과 질문 대응",
-            "file": "v3/material.html?course=foundation-next&kind=answers&audience=instructor",
+            "id": "foundation-next-demo-runbook",
+            "title": "시연 운영 매뉴얼",
+            "description": "정상 흐름·실패 흐름·대체 화면 운영",
+            "file": "v3/material.html?course=foundation-next&kind=demo-runbook&audience=instructor",
             "audience": "instructor",
             "courseId": "foundation-next"
           },
           {
-            "id": "foundation-next-study",
-            "title": "강사용 애니메이션 학습실",
-            "description": "핵심 개념을 다시 조작하며 공부",
-            "file": "v3/deck.html?course=foundation-next&lesson=1&study=1",
+            "id": "foundation-next-deep-dive",
+            "title": "강사용 심화 개념집",
+            "description": "회차별 쉬운 설명과 전문가 관점",
+            "file": "v3/material.html?course=foundation-next&kind=deep-dive&audience=instructor",
             "audience": "instructor",
             "courseId": "foundation-next"
           },
           {
-            "id": "foundation-next-research",
-            "title": "공식 참고자료 연구노트",
-            "description": "공식 문서의 쉬운 한국어 요약과 반영 위치",
-            "file": "v3/material.html?course=foundation-next&kind=research&audience=instructor",
+            "id": "foundation-next-qa-bank",
+            "title": "질문·답변·오류 복구집",
+            "description": "예상 질문, 평가 기준, 복구 시나리오",
+            "file": "v3/material.html?course=foundation-next&kind=qa-bank&audience=instructor",
             "audience": "instructor",
             "courseId": "foundation-next"
           },
