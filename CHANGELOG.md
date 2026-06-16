@@ -9,15 +9,17 @@
 - 단일 강사용 로컬 스튜디오 구조
 - 전역 강사자료실, 수강생 출력물, 실습파일, 공식자료 학습실 탭
 - 공식자료 연구노트, 시연 운영 매뉴얼, 강사용 심화 개념집, 질문·답변·오류 복구집
-- 공식 출처 39개에 강사용 배경, 쉬운 비유, 자주 생기는 오해, 시연 포인트와 수업 전 체크리스트
+- 공식 출처 48개에 강사용 배경, 쉬운 비유, 자주 생기는 오해, 시연 포인트와 수업 전 체크리스트
 - Codex Professional 6회차별 전문 강사용 연구노트, 시각 시뮬레이션 설계 의도, 실패 훈련, 전문 Q&A
+- 다음 기수 기초 4주, Workflow Architect, Claude Code, Codex, AI 제품·수익화 전 회차에 공식자료 기반 전문 연구노트 자동 생성
 
 ### 변경
 
 - 학생/강사 모드 토글을 제거하고 모든 운영 기능을 강사용 스튜디오에서 직접 접근
-- Claude Code와 Codex ready 회차는 공식자료 연구노트 3개 이상 연결
+- 모든 V3 ready 회차는 공식자료 3개 이상, 전문 연구노트, 시연 런북, 실패 훈련, 전문 Q&A를 감사 기준으로 통과해야 함
 - 강사용 대본을 SAY·DO·ASK·예상 답변·심화 설명·오류 복구 구조로 확장
 - Codex Professional 강사용 대본과 출력물을 공식 매뉴얼 기반의 표면 선택, AGENTS.md, Skills·Plugins, MCP·Browser, Subagents·Worktrees, Hooks·Release 운영 흐름으로 보강
+- AI 제품·수익화 과정에 YC, Atlassian, Nielsen Norman Group, Material Design, Stripe, Toss Payments, Supabase 공식·전문 자료 연결
 - `Ctrl+K` 검색 범위를 강의, 강사자료, 수강생 출력물, 실습파일, 공식자료로 확대
 - A4 PDF QA 대상을 71종으로 확대
 

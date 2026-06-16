@@ -21,7 +21,90 @@ const allowedHosts = [
   'docs.anthropic.com',
   'code.claude.com',
   'developers.openai.com',
+  'docs.stripe.com',
+  'supabase.com',
+  'docs.tosspayments.com',
+  'www.nngroup.com',
+  'www.atlassian.com',
+  'www.ycombinator.com',
+  'm2.material.io',
+  'm3.material.io',
 ];
+
+const additionalSources = {
+  'product-yc-startup-advice': {
+    publisher: 'Y Combinator',
+    title: '스타트업 핵심 조언',
+    url: 'https://www.ycombinator.com/library/4D-yc-s-essential-startup-advice',
+    maturity: 'stable',
+    summaryKo: '기능보다 실제 고객 문제, 빠른 출시, 사용자와의 직접 대화를 우선하는 초기 제품 검증 관점입니다.',
+    instructorNote: '제품·수익화 과정에서 아이디어를 기능 목록이 아니라 반복 문제와 검증 행동으로 바꾸는 기준으로 사용합니다.',
+  },
+  'product-atlassian-user-stories': {
+    publisher: 'Atlassian',
+    title: '사용자 스토리',
+    url: 'https://www.atlassian.com/agile/project-management/user-stories',
+    maturity: 'stable',
+    summaryKo: '사용자, 목표, 기대 가치가 드러나는 짧은 요구사항 문장으로 팀이 왜 만드는지 합의하게 합니다.',
+    instructorNote: '팀 프로젝트에서 “누가 무엇을 왜 하는가”를 한 문장으로 고정하고 MVP 범위와 검수 기준으로 연결합니다.',
+  },
+  'product-nng-heuristics': {
+    publisher: 'Nielsen Norman Group',
+    title: '10가지 UI 사용성 휴리스틱',
+    url: 'https://www.nngroup.com/articles/ten-usability-heuristics/',
+    maturity: 'stable',
+    summaryKo: '시스템 상태 표시, 현실 세계와의 일치, 사용자 통제, 오류 예방 등 사용성 점검의 기본 원칙입니다.',
+    instructorNote: 'UI/UX 수업에서 예쁜 화면보다 사용자가 현재 상태와 다음 행동을 이해하는지를 점검하는 기준으로 사용합니다.',
+  },
+  'product-material-onboarding': {
+    publisher: 'Google Material Design',
+    title: '온보딩 패턴',
+    url: 'https://m2.material.io/design/communication/onboarding.html',
+    maturity: 'stable',
+    summaryKo: '사용자가 앱을 처음 만났을 때 핵심 가치와 첫 행동을 이해하도록 돕는 온보딩 설계 원칙입니다.',
+    instructorNote: '가입 이후 첫 성공까지의 빈 상태, 안내, 진행 피드백을 설계하는 강사용 기준으로 사용합니다.',
+  },
+  'product-material-design': {
+    publisher: 'Google Material Design',
+    title: 'Material Design 3 시작하기',
+    url: 'https://m3.material.io/get-started',
+    maturity: 'stable',
+    summaryKo: 'Google이 지원하는 디자인 시스템으로, 일관된 UI 컴포넌트와 사용성 있는 제품 설계의 기반을 제공합니다.',
+    instructorNote: '디자인 시스템을 컬러·카드 장식이 아니라 반복 가능한 UI 규칙과 컴포넌트 언어로 설명할 때 사용합니다.',
+  },
+  'stripe-subscriptions': {
+    publisher: 'Stripe',
+    title: 'Stripe Subscriptions',
+    url: 'https://docs.stripe.com/subscriptions',
+    maturity: 'stable',
+    summaryKo: '구독 상품의 가격, 청구 주기, 사용량, 체험 기간, 고객 포털 같은 반복 결제 운영 요소를 다룹니다.',
+    instructorNote: 'SaaS 수익화에서 결제 버튼만이 아니라 고객, 가격, 상태, 권한, 실패와 취소 흐름이 필요함을 설명합니다.',
+  },
+  'stripe-checkout': {
+    publisher: 'Stripe',
+    title: 'Stripe Checkout',
+    url: 'https://docs.stripe.com/payments/checkout',
+    maturity: 'stable',
+    summaryKo: '호스팅 또는 임베드 결제 UI를 통해 결제 세션, 성공·취소 URL, 결제 흐름을 구성합니다.',
+    instructorNote: '결제는 UI, 서버 세션, 성공·실패 상태, 권한 부여가 함께 움직인다는 것을 시각화할 때 사용합니다.',
+  },
+  'product-toss-widget': {
+    publisher: 'Toss Payments',
+    title: '결제위젯 연동',
+    url: 'https://docs.tosspayments.com/en/integration-widget',
+    maturity: 'stable',
+    summaryKo: '체크아웃 페이지에 결제 UI를 임베드하고 관리자에서 일부 결제 UI를 설정할 수 있는 저코드 결제 방식입니다.',
+    instructorNote: '국내 결제 예시가 필요할 때 결제 UI, 결제 요청, 테스트 키, 운영 키의 차이를 설명하는 자료로 사용합니다.',
+  },
+  'supabase-rls': {
+    publisher: 'Supabase',
+    title: 'Row Level Security',
+    url: 'https://supabase.com/docs/guides/database/postgres/row-level-security',
+    maturity: 'stable',
+    summaryKo: 'Postgres의 행 단위 보안으로, 사용자별로 읽고 쓸 수 있는 데이터 범위를 정책으로 제한합니다.',
+    instructorNote: 'SaaS와 배포 수업에서 “로그인했다”와 “해당 데이터에 접근할 수 있다”가 다르다는 점을 설명합니다.',
+  },
+};
 
 function sourceFocus(key, source) {
   if (key.startsWith('claude-')) return 'Claude Code';
@@ -30,6 +113,13 @@ function sourceFocus(key, source) {
   if (key.startsWith('firebase-')) return 'Firebase';
   if (key.startsWith('vercel-')) return 'Vercel';
   if (key.startsWith('mcp-')) return 'MCP';
+  if (key.startsWith('stripe-')) return 'Stripe';
+  if (key.startsWith('supabase-')) return 'Supabase';
+  if (key.startsWith('product-toss')) return 'Toss Payments';
+  if (key.startsWith('product-nng')) return 'UX Research';
+  if (key.startsWith('product-atlassian')) return 'Product Planning';
+  if (key.startsWith('product-yc')) return 'Startup/Product';
+  if (key.startsWith('product-material')) return 'UI/UX';
   if (key.startsWith('node-')) return 'Node.js';
   if (key.startsWith('vscode-')) return 'VS Code';
   if (key.startsWith('mdn-')) return 'HTTP';
@@ -126,6 +216,12 @@ function request(url, redirects = 0) {
 }
 
 async function main() {
+  for (const [key, source] of Object.entries(additionalSources)) {
+    catalog.sources[key] = {
+      ...catalog.sources[key],
+      ...source,
+    };
+  }
   const checkedAt = new Date().toISOString();
   let okCount = 0;
   for (const [key, source] of Object.entries(catalog.sources)) {

@@ -11,6 +11,14 @@ const archiveDir = path.join(contentDir, 'archive');
 const archiveManifestPath = path.join(archiveDir, 'v2-course-manifest.json');
 const freezePath = path.join(root, 'docs', 'v3', 'basic-v2-freeze.json');
 const outputDataPath = path.join(contentDir, 'v3', 'course-data.js');
+const officialSourcesPath = path.join(contentDir, 'sources', 'official-sources.json');
+
+let officialSources = { sources: {} };
+try {
+  officialSources = JSON.parse(fs.readFileSync(officialSourcesPath, 'utf-8'));
+} catch (error) {
+  officialSources = { sources: {} };
+}
 
 function writeIfChanged(filePath, content) {
   if (fs.existsSync(filePath) && fs.readFileSync(filePath, 'utf-8') === content) return false;
@@ -55,6 +63,100 @@ function preserveV2Sources() {
   }
 }
 
+function sourceLabel(key) {
+  const source = officialSources.sources?.[key];
+  if (!source) return key;
+  return `${source.publisher || '공식자료'} · ${source.title || source.pageTitle || key}`;
+}
+
+function inferProfessionalCourse({ title, module, sources }) {
+  if (sources.some((key) => key.startsWith('stripe-') || key.startsWith('supabase-') || key.startsWith('product-'))) return 'AI 제품·수익화';
+  if (/LAYER/.test(module)) return 'AI Workflow Architect';
+  if (sources.some((key) => key.startsWith('claude-'))) return 'Claude Code Professional';
+  if (sources.some((key) => key.startsWith('codex-'))) return 'Codex Professional';
+  if (sources.some((key) => key.startsWith('mcp-'))) return 'AI Workflow Architect';
+  if (/바이브코딩|프로그램|프로젝트와 파일|GitHub·배포|START|SYSTEM|STRUCTURE|SHIP/.test(`${title} ${module}`)) return '바이브코딩 기초반 4주';
+  return 'VIBE STUDIO';
+}
+
+function professionalStudyNote(courseName, {
+  focus,
+  officialStudy,
+  visualSimulation,
+  demoRun,
+  failureDrill,
+  exercise,
+  misconceptions,
+  expertQuestions,
+}) {
+  return {
+    level: `${courseName} 강사용 연구노트`,
+    focus,
+    officialStudy,
+    visualSimulation,
+    demoRun,
+    failureDrill,
+    exercise,
+    misconceptions,
+    expertQuestions,
+  };
+}
+
+function buildProfessionalStudy({
+  title,
+  subtitle,
+  module,
+  objective,
+  concepts,
+  sequence,
+  demo,
+  compare,
+  decisions,
+  error,
+  practice,
+  deliverables,
+  sources,
+}) {
+  if (!sources || sources.length < 3) return null;
+  const courseName = inferProfessionalCourse({ title, module, sources });
+  const studySources = sources.slice(0, 4).map(sourceLabel);
+  const conceptLine = concepts.map(([name, copy]) => `${name}: ${copy}`).join(' / ');
+  const bad = compare.bad || [];
+  const good = compare.good || [];
+  const firstDecision = decisions[0] || ['이 판단이 왜 필요한가요?', '검토', '공식자료와 실제 실행 증거를 함께 확인합니다.'];
+  const secondDecision = decisions[1] || firstDecision;
+
+  return professionalStudyNote(courseName, {
+    focus: `${courseName}의 ${title} 회차는 "${subtitle}"를 기능 목록으로 설명하는 수업이 아니라, ${objective} 강사는 ${conceptLine}를 실제 도구 화면, 로그, 권한, 실패 조건과 연결해 가르칩니다.`,
+    officialStudy: studySources.slice(0, 3).map((label, index) => {
+      const stage = sequence[index] || demo.stages[index] || title;
+      return `${label}를 수업 전 확인하고, "${stage}" 단계에서 공식 용어가 실제 화면·명령·로그 중 어디에 대응되는지 한 문장으로 연결합니다.`;
+    }),
+    visualSimulation: `${demo.title} 장면을 대표 시뮬레이션으로 사용합니다. ${demo.stages.join(' → ')} 흐름을 발표자가 수동으로 넘기며, 각 단계마다 화면 변화와 검증 증거가 동시에 바뀌게 설계합니다.`,
+    demoRun: [
+      `공식자료 ${studySources[0]}의 핵심 용어를 열고 오늘 시연의 판단 기준을 먼저 고정합니다.`,
+      `${sequence.slice(0, 3).join(' → ')} 구간을 실제 도구 또는 브라우저 재현 화면으로 보여줍니다.`,
+      `정상 흐름에서는 ${good[0] || deliverables[0]}가 어떤 증거로 남는지 확인합니다.`,
+      `실패 흐름에서는 ${error.symptom}를 재현하고 로그, diff, 권한, 설정 중 첫 확인 지점을 찾습니다.`,
+      `마지막에는 ${deliverables.join(', ')}를 학생 프로젝트에 적용할 수 있게 작업지에 기록시킵니다.`,
+    ],
+    failureDrill: [
+      `${error.symptom} 상황을 일부러 보여주고 ${error.trace}에서 첫 원인을 찾게 합니다.`,
+      `${error.cause}를 AI에게 전달할 때 목표, 실행 명령, 로그, 기대 결과를 함께 적게 합니다.`,
+      `${error.fix} 이후 같은 문제가 재발하지 않도록 체크리스트나 권한 규칙으로 남깁니다.`,
+    ],
+    exercise: practice,
+    misconceptions: [
+      [bad[0] || '도구가 알아서 완성한다', good[0] || '사람이 판단 기준과 검증 증거를 확인해야 합니다.'],
+      [bad[1] || '공식 문서는 강사만 보면 된다', good[1] || '수강생에게도 어디를 확인해야 하는지 쉬운 언어로 안내합니다.'],
+    ],
+    expertQuestions: [
+      [firstDecision[0], `${firstDecision[2]} 이 판단은 공식자료의 책임 범위와 실제 시연 증거를 함께 보며 설명합니다.`],
+      [secondDecision[0], `${secondDecision[2]} 수강생에게는 정의보다 "어디를 확인하면 되는가"로 답합니다.`],
+    ],
+  });
+}
+
 function detail({
   title,
   subtitle,
@@ -91,7 +193,21 @@ function detail({
     preparation,
     sources,
     pathway,
-    professional,
+    professional: professional || buildProfessionalStudy({
+      title,
+      subtitle,
+      module,
+      objective,
+      concepts,
+      sequence,
+      demo,
+      compare,
+      decisions,
+      error,
+      practice,
+      deliverables,
+      sources,
+    }),
   };
 }
 
@@ -105,8 +221,7 @@ function codexProfessional({
   misconceptions,
   expertQuestions,
 }) {
-  return {
-    level: 'Codex Professional 강사용 연구노트',
+  return professionalStudyNote('Codex Professional', {
     focus,
     officialStudy,
     visualSimulation,
@@ -115,7 +230,7 @@ function codexProfessional({
     exercise,
     misconceptions,
     expertQuestions,
-  };
+  });
 }
 
 const curricula = {
@@ -159,7 +274,7 @@ const curricula = {
         error: { symptom: '주문 완료 알림은 뜨지만 목록에 없음', trace: 'POST /orders 200, DB write skipped', cause: '화면 성공 처리와 데이터 저장이 분리됨', fix: '저장 성공 응답 이후에만 완료 UI를 표시하도록 요청' },
         practice: '내 프로젝트의 핵심 버튼 하나를 선택해 화면·처리·저장·응답 흐름과 실패 상태를 그립니다.',
         deliverables: ['기능 흐름도', '문제 위치 판단표', 'AI 수정 요청'],
-        sources: ['mdn-http', 'firebase-data'],
+        sources: ['mdn-http', 'firebase-data', 'mcp-intro'],
       }),
       detail({
         title: '프로젝트와 파일 구조',
@@ -174,7 +289,7 @@ const curricula = {
         error: { symptom: '한 버튼 수정 후 모든 페이지 버튼이 변함', trace: 'Shared Button component updated', cause: '공용 컴포넌트의 영향 범위를 확인하지 않음', fix: '전용 variant 또는 페이지 전용 컴포넌트로 범위를 제한' },
         practice: '내 프로젝트에서 바꾸고 싶은 요소를 검색해 관련 파일, 공용 여부, 수정 전후 diff를 기록합니다.',
         deliverables: ['개인 프로젝트 파일 지도', '검토한 Git diff', '안전한 수정 체크리스트'],
-        sources: ['github-git', 'npm-package-json'],
+        sources: ['github-git', 'npm-package-json', 'vscode-download'],
       }),
       detail({
         title: 'GitHub·배포·보안·데이터',
@@ -218,6 +333,7 @@ const curricula = {
         error: { symptom: '회의는 길지만 결정이 남지 않음', trace: 'Owner: none / deadline changed 3x', cause: '최종 결정자와 기록 형식이 없음', fix: '결정 Owner, Reviewer, 마감과 변경 로그를 계약서에 추가' },
         practice: '팀 문제 선언문, 역할표, 협업 계약서를 만들고 개인 사이드 프로젝트 문제도 한 문장으로 정리합니다.',
         deliverables: ['팀 문제 선언문', '역할 순환표', '협업 계약서', '개인 문제 정의'],
+        sources: ['product-yc-startup-advice', 'product-atlassian-user-stories', 'product-nng-heuristics'],
       }),
       detail({
         title: 'MVP와 제품 구조',
@@ -232,6 +348,7 @@ const curricula = {
         error: { symptom: '매주 기능은 늘지만 데모가 끝까지 안 됨', trace: '12 screens / 0 complete journeys', cause: '화면 단위로 만들고 사용자 흐름을 연결하지 않음', fix: '핵심 행동의 시작부터 완료까지 세로 한 줄로 우선 완성' },
         practice: '팀·개인 프로젝트의 기능을 Must/Later/Remove로 분류하고 핵심 흐름을 5단계 이하로 만듭니다.',
         deliverables: ['MVP 범위표', '핵심 사용자 흐름', '완료 시연 기준'],
+        sources: ['product-yc-startup-advice', 'product-atlassian-user-stories', 'github-git'],
       }),
       detail({
         title: 'UI·UX·신뢰·온보딩',
@@ -246,6 +363,7 @@ const curricula = {
         error: { symptom: '가입률은 높지만 첫 기능 사용률이 낮음', trace: 'signup 68% / activation 11%', cause: '가입 이후 다음 행동과 빈 상태 안내가 없음', fix: '샘플 데이터, 한 단계 안내와 완료 피드백 추가' },
         practice: '팀·개인 프로젝트의 첫 화면부터 첫 성공까지 다섯 장면을 제작하고 막힘을 상호 리뷰합니다.',
         deliverables: ['5장면 UX 흐름', '상태·피드백 목록', '동료 리뷰 기록'],
+        sources: ['product-nng-heuristics', 'product-material-onboarding', 'product-material-design'],
       }),
       detail({
         title: '가격·수익모델·검증',
@@ -260,6 +378,7 @@ const curricula = {
         error: { symptom: '사용자는 늘지만 사용할수록 손실 증가', trace: 'revenue 0 / model cost +38%', cause: '사용량 비용과 무료 한도를 설계하지 않음', fix: '원가 추정, 사용량 제한, 유료 전환 조건을 함께 설계' },
         practice: '가격 가설과 비용표를 만든 뒤 팀은 SaaS 또는 외주 트랙을 선택하고 역할을 재배정합니다.',
         deliverables: ['가격·원가 가설', '결제 상태표', '트랙 선택서'],
+        sources: ['stripe-subscriptions', 'stripe-checkout', 'product-toss-widget'],
       }),
       detail({
         title: '트랙 설계 I',
@@ -274,6 +393,7 @@ const curricula = {
         error: { symptom: '팀마다 완료 기준이 다름', trace: 'scope mismatch / role undefined', cause: '상태 또는 범위를 화면 이름만으로 표현', fix: '입력·행동·결과·제외·승인을 표로 명시' },
         practice: 'SaaS팀은 데이터·회원·권한표, 외주팀은 요구사항·견적·변경 계약서를 만들고 교차 검토합니다.',
         deliverables: ['트랙별 설계 문서', '교차 리뷰 기록', '개인 적용본'],
+        sources: ['supabase-rls', 'firebase-rules', 'stripe-subscriptions'],
         pathway: ['saas', 'freelance'],
       }),
       detail({
@@ -289,6 +409,7 @@ const curricula = {
         error: { symptom: '각 기능은 있지만 전체 사용 흐름이 끊김', trace: 'pages ready / journey failed', cause: '파일·화면 단위로 병렬 제작하고 통합 책임자가 없음', fix: '통합 Owner가 사용자 흐름 기준으로 병합·테스트' },
         practice: '팀은 한 세로 기능 또는 마일스톤을 완성하고 다른 역할의 사람이 검수해 승인 기록을 남깁니다.',
         deliverables: ['실행 가능한 마일스톤', '테스트 결과', '승인·반려 기록'],
+        sources: ['github-git', 'github-actions', 'product-atlassian-user-stories'],
         pathway: ['saas', 'freelance'],
       }),
       detail({
@@ -304,6 +425,7 @@ const curricula = {
         error: { symptom: '수정 후 이전 승인 기능이 깨짐', trace: 'regression in accepted milestone', cause: '버전 기준과 회귀 체크리스트가 없음', fix: '승인 버전 태그와 핵심 시나리오 재검증' },
         practice: 'SaaS팀은 결제·운영 사건을, 외주팀은 변경 요청을 처리하고 복구와 보고서까지 작성합니다.',
         deliverables: ['운영·변경 사건 기록', '복구 결과', '회귀 테스트표'],
+        sources: ['stripe-subscriptions', 'stripe-checkout', 'supabase-rls', 'github-actions'],
         pathway: ['saas', 'freelance'],
       }),
       detail({
@@ -319,6 +441,7 @@ const curricula = {
         error: { symptom: '배포는 됐지만 아무도 다음 행동을 모름', trace: 'URL live / owner undefined', cause: '운영·측정·인수 책임이 정해지지 않음', fix: '운영 Owner, 지표 대시보드, 계정 인수와 다음 실험을 명시' },
         practice: '팀 프로젝트를 출시 또는 납품하고 개인 사이드 프로젝트의 다음 30일 개선 계획을 작성합니다.',
         deliverables: ['출시 URL 또는 납품 확인서', '지표·인수 문서', '팀 회고', '개인 사례 초안'],
+        sources: ['github-releases', 'vercel-deploy', 'stripe-subscriptions', 'product-yc-startup-advice'],
         pathway: ['saas', 'freelance'],
       }),
     ],
@@ -348,7 +471,7 @@ const curricula = {
         error: { symptom: '개발 서버가 이미 사용 중인 포트로 실패', trace: 'EADDRINUSE :3000', cause: '이전 프로세스가 종료되지 않음', fix: '포트 사용 프로세스를 확인해 종료하거나 다른 포트로 실행' },
         practice: '의도적으로 경로·포트·의존성 오류를 만들고 로그·Git 상태·복구 절차를 운영 일지에 기록합니다.',
         deliverables: ['터미널 운영 일지', '오류 분석 템플릿', 'Git 복구 체크포인트'],
-        sources: ['github-git'],
+        sources: ['github-git', 'github-actions', 'node-download'],
       }),
       detail({
         title: '워크플로·컨텍스트·지침·메모리',
@@ -363,6 +486,7 @@ const curricula = {
         error: { symptom: 'AI가 이전 프로젝트 규칙을 현재 작업에 잘못 적용', trace: 'stale context selected', cause: '범위와 유효기간 없는 메모리', fix: '프로젝트·경로·유효기간·근거를 메모리에 함께 저장하고 폐기 규칙 설정' },
         practice: '자신의 반복 업무 하나를 상태도로 만들고 정보들을 현재 컨텍스트·지속 지침·메모리로 분류합니다.',
         deliverables: ['워크플로 상태도', '컨텍스트 예산표', '지침·메모리 승격 규칙'],
+        sources: ['codex-agents-md', 'claude-memory', 'github-git'],
       }),
       detail({
         title: 'Tool·MCP·API·인증·최소 권한',
@@ -377,7 +501,7 @@ const curricula = {
         error: { symptom: 'Agent가 잘못된 고객 폴더에 결과를 저장', trace: 'write scope: /**', cause: '도구 입력 검증과 경로 제한이 없음', fix: '허용 경로 목록, dry-run, 쓰기 전 승인과 감사 로그 추가' },
         practice: '업무 하나의 Tool 명세를 만들고 MCP 필요성, 인증, 최소 권한, 승인과 감사 정책을 설계합니다.',
         deliverables: ['Tool 계약서', '권한 매트릭스', '승인·감사 흐름'],
-        sources: ['mcp-intro', 'mcp-security'],
+        sources: ['mcp-intro', 'mcp-security', 'codex-mcp', 'claude-mcp'],
       }),
       detail({
         title: 'Agent·팀·자동화·평가·복구',
@@ -392,6 +516,7 @@ const curricula = {
         error: { symptom: '여러 Agent가 같은 설정을 다르게 수정', trace: 'merge conflict / owner duplicated', cause: '역할·파일·결정 소유권이 겹침', fix: '작업 계약과 반환 형식, 통합 Owner, 실패 격리 설정' },
         practice: '하나의 AI 업무 시스템에 Agent 루프, 역할, 비용 한도, 평가표, 실패 격리와 사람 인계를 설계합니다.',
         deliverables: ['Agent 시스템 설계도', '평가 루브릭', '비용·복구 운영표'],
+        sources: ['codex-subagents', 'claude-subagents', 'github-actions'],
       }),
     ],
   },

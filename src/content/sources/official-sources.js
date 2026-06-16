@@ -1,6 +1,6 @@
 window.VIBE_OFFICIAL_SOURCES = {
   "version": 1,
-  "checkedAt": "2026-06-16T03:49:59.844Z",
+  "checkedAt": "2026-06-16T13:53:45.329Z",
   "sources": {
     "github-git": {
       "publisher": "GitHub",
@@ -9,7 +9,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "Git은 프로젝트 파일의 변경 이력을 저장하고 이전 상태를 비교하거나 복구할 수 있게 하는 버전 관리 도구입니다.",
       "instructorNote": "명령어 암기보다 현재 변경 상태, 커밋의 의미, 원격 저장소와의 차이를 먼저 설명합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://docs.github.com/en/get-started/using-git/about-git",
@@ -44,7 +44,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "GitHub 저장소는 프로젝트 코드와 변경 기록을 온라인에서 보관하고 협업하는 공간입니다.",
       "instructorNote": "공개 저장소와 비공개 저장소, README, 첫 push의 관계를 실제 화면으로 보여줍니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories",
@@ -79,7 +79,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "저장소 이벤트를 기준으로 테스트, 빌드, 배포 같은 반복 작업을 자동 실행합니다.",
       "instructorNote": "자동화는 사람이 확인할 로그와 실패 시 중단 기준을 함께 설계해야 합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://docs.github.com/en/actions",
@@ -114,7 +114,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "특정 버전의 코드와 실행 파일, 변경 내용을 묶어 사용자에게 배포하는 기능입니다.",
       "instructorNote": "태그, 버전, 릴리즈 자산, 체크섬을 하나의 배포 단위로 설명합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases",
@@ -149,7 +149,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "JavaScript 프로젝트의 패키지 설치와 개발 서버 실행에 필요한 Node.js 설치 페이지입니다.",
       "instructorNote": "초보 수강생에게는 최신 Current보다 LTS 설치를 우선 안내합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://nodejs.org/en/download",
@@ -184,7 +184,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "프로젝트 폴더와 파일, 터미널, 확장 기능을 한 화면에서 다루는 코드 편집기 설치 페이지입니다.",
       "instructorNote": "Visual Studio와 Visual Studio Code가 다른 제품이라는 점을 명확히 구분합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.visualstudio.com/download",
@@ -219,7 +219,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "브라우저와 서버가 요청과 응답을 주고받는 기본 통신 규칙을 설명합니다.",
       "instructorNote": "URL, 메서드, 상태 코드, 요청 본문을 주문서 비유와 실제 네트워크 화면으로 연결합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview",
@@ -254,7 +254,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "프로젝트 이름, 실행 명령, 설치 패키지와 버전 정보를 기록하는 설정 파일입니다.",
       "instructorNote": "package-lock.json과 node_modules의 역할을 함께 비교하고 직접 수정할 범위를 구분합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://docs.npmjs.com/cli/configuring-npm/package-json/",
@@ -288,7 +288,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "앱의 데이터를 저장하고 여러 사용자 화면에 실시간으로 전달할 수 있는 관리형 데이터베이스입니다.",
       "instructorNote": "저장 기능과 접근 권한은 별개의 설정이라는 점을 강조합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://firebase.google.com/docs/database",
@@ -323,7 +323,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "웹 프로젝트를 공개 주소로 배포하고 버전을 관리하는 호스팅 서비스입니다.",
       "instructorNote": "로컬 실행, 빌드 결과, 공개 URL의 차이를 단계별로 보여줍니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://firebase.google.com/docs/hosting",
@@ -358,7 +358,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "누가 어떤 데이터와 파일을 읽거나 쓸 수 있는지 서버 측에서 제한하는 규칙입니다.",
       "instructorNote": "테스트 모드를 운영에 그대로 쓰면 안 되는 이유와 사용자별 최소 권한을 설명합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://firebase.google.com/docs/rules",
@@ -393,7 +393,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "Git 저장소 또는 CLI에서 프로젝트를 빌드해 공개 URL로 배포하는 흐름입니다.",
       "instructorNote": "배포 성공 표시와 실제 기능 검증은 다르므로 모바일, 새로고침, 로그까지 확인합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://vercel.com/docs/deployments",
@@ -428,7 +428,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "코드에 직접 넣지 않을 설정값을 개발, 미리보기, 운영 환경별로 관리합니다.",
       "instructorNote": "브라우저에 전달되는 공개 값과 서버에서만 써야 하는 비밀값을 구분합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://vercel.com/docs/environment-variables",
@@ -463,7 +463,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "AI 애플리케이션이 외부 데이터와 도구를 일정한 방식으로 연결하도록 만든 개방형 규격입니다.",
       "instructorNote": "MCP 자체가 Agent는 아니며 도구와 컨텍스트를 제공하는 연결 규격이라는 경계를 설명합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://modelcontextprotocol.io/docs/getting-started/intro",
@@ -498,7 +498,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "draft",
       "summaryKo": "외부 도구 연결에서 인증, 권한, 토큰 전달, 사용자 동의와 공격 표면을 다루는 보안 권고입니다.",
       "instructorNote": "모든 도구를 연결하기보다 필요한 서버와 기능만 허용하는 최소 권한 원칙을 적용합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices",
@@ -533,7 +533,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "터미널에서 저장소를 탐색하고 파일 수정, 명령 실행, Git 작업을 수행하는 Anthropic의 코딩 도구입니다.",
       "instructorNote": "제품 사용법보다 작업 폴더, 권한 승인, diff 검토의 기본 계약부터 시연합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/overview",
@@ -568,7 +568,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "설치, 인증, 프로젝트 실행과 첫 작업을 시작하는 공식 절차입니다.",
       "instructorNote": "설치 명령은 운영체제와 공식 문서의 최신 안내를 수업 직전에 다시 확인합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/quickstart",
@@ -603,7 +603,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "프로젝트와 사용자 범위의 지속 지침을 파일 계층에 따라 Claude Code에 전달합니다.",
       "instructorNote": "대화 프롬프트와 저장소의 지속 규칙을 분리하고 짧고 검증 가능한 지침으로 작성합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/memory",
@@ -638,7 +638,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "반복 작업의 절차와 참고자료를 재사용 가능한 작업 단위로 구성합니다.",
       "instructorNote": "범용 설명보다 입력, 절차, 산출물, 실패 조건이 명확한 Skill을 설계합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/skills",
@@ -673,7 +673,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "Skills, 명령, Agent, Hook 등의 구성을 설치하고 배포 가능한 묶음으로 관리합니다.",
       "instructorNote": "개인 프로젝트 규칙과 여러 팀에 배포할 플러그인의 경계를 구분합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/plugins",
@@ -708,7 +708,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "Claude Code에 외부 서비스와 데이터 도구를 MCP 서버로 연결합니다.",
       "instructorNote": "연결 성공보다 도구 범위, 인증 정보, 승인 흐름, 실패 시 제거 방법까지 확인합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/mcp",
@@ -743,7 +743,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "도구 사용이나 세션 이벤트 전후에 정해진 명령과 검사를 자동 실행합니다.",
       "instructorNote": "Hook은 결정적 제어에 사용하고 실패 시 작업을 막을지 기록만 남길지 정합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/hooks",
@@ -778,7 +778,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "역할과 도구 범위가 분리된 보조 Agent에게 독립 작업을 맡깁니다.",
       "instructorNote": "쓰기 범위를 겹치지 않게 나누고 최종 통합 책임은 주 작업자에게 둡니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/sub-agents",
@@ -813,7 +813,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "experimental",
       "summaryKo": "여러 Agent가 역할을 나눠 협업하는 실험적 작업 방식을 다룹니다.",
       "instructorNote": "실험 기능은 비용과 충돌 가능성을 먼저 설명하고 단일 Agent 대비 이득을 측정합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/agent-teams",
@@ -848,7 +848,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "GitHub 이슈와 PR 이벤트에서 Claude Code 작업을 자동 실행하도록 연결합니다.",
       "instructorNote": "토큰 권한, 트리거 범위, 변경 검토와 병합 게이트를 함께 설정합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://code.claude.com/docs/en/github-actions",
@@ -883,7 +883,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "앱, CLI, IDE와 클라우드 환경에서 코딩 작업을 계획하고 구현하고 검증하는 OpenAI의 개발 Agent입니다.",
       "instructorNote": "작업 특성에 맞는 표면을 선택하고 목표, 범위, 검증 기준을 먼저 합의합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex",
@@ -918,7 +918,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "Sandbox와 승인 정책으로 파일, 네트워크, 명령 실행 범위를 제어하는 방식을 설명합니다.",
       "instructorNote": "권한을 무조건 넓히기보다 필요한 작업 범위에 맞춰 최소 권한을 사용합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/security",
@@ -953,7 +953,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "저장소 안에서 Codex가 따라야 할 지속 지침을 디렉터리 범위별로 작성합니다.",
       "instructorNote": "팀 규칙, 명령, 검증 기준을 간결하게 기록하고 코드와 함께 버전 관리합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/guides/agents-md",
@@ -988,7 +988,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "config.toml에서 모델, 승인, Sandbox, 기능과 프로필을 사용자 환경에 맞게 설정합니다.",
       "instructorNote": "저장소 규칙과 개인 설정을 분리하고 공유 가능한 항목만 프로젝트에 둡니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/config-basic",
@@ -1023,7 +1023,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "특정 명령 실행에 대한 허용, 확인, 금지 정책을 규칙으로 관리합니다.",
       "instructorNote": "위험 명령 패턴과 일상 명령을 분리하고 팀의 승인 기준을 명시합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/rules",
@@ -1058,7 +1058,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "반복 가능한 전문 작업 절차와 도구 사용법을 Skill로 묶어 필요할 때 불러옵니다.",
       "instructorNote": "언제 실행되는지, 어떤 파일을 읽는지, 어떤 검증으로 끝나는지를 명시합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/skills",
@@ -1093,7 +1093,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "Skills와 도구 연결, 설정을 설치 가능한 확장 묶음으로 배포합니다.",
       "instructorNote": "Skill과 Plugin의 배포 범위 차이를 실제 폴더 구조로 비교합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/plugins",
@@ -1128,7 +1128,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "Codex가 MCP 서버의 도구와 데이터를 사용하도록 설정하고 인증합니다.",
       "instructorNote": "도구 발견, 호출, 오류, 제거까지 한 번의 운영 시나리오로 시연합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/mcp",
@@ -1163,7 +1163,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "Codex 앱에서 작업공간, 브라우저, 연결 도구와 시각 검증을 함께 운영합니다.",
       "instructorNote": "코드 생성 후 실제 화면을 열고 클릭하고 캡처해 검증하는 폐쇄 루프를 강조합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/app",
@@ -1198,7 +1198,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "독립적인 하위 작업을 여러 Agent에 분리하고 결과를 주 작업에서 통합합니다.",
       "instructorNote": "즉시 필요한 작업은 로컬에서 처리하고 병렬화 가능한 작업만 명확한 소유권과 함께 분리합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/subagents",
@@ -1233,7 +1233,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "여러 작업을 서로 다른 Git 작업 디렉터리와 브랜치에서 충돌 없이 진행합니다.",
       "instructorNote": "작업 분리, 브랜치 이름, 통합 순서를 먼저 정하고 같은 파일 소유권이 겹치지 않게 합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/app/worktrees",
@@ -1268,7 +1268,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "변경 내용을 버그, 회귀, 위험과 테스트 누락 관점에서 검토합니다.",
       "instructorNote": "요약보다 발견 사항과 재현 근거, 파일 위치, 우선순위를 먼저 제시합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/integrations/github",
@@ -1303,7 +1303,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "작업 이벤트에 맞춰 검사, 알림, 보조 명령을 실행하는 확장 지점입니다.",
       "instructorNote": "Hook이 실패했을 때 작업을 차단할지 경고만 남길지 운영 정책을 정합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/hooks",
@@ -1338,7 +1338,7 @@ window.VIBE_OFFICIAL_SOURCES = {
       "maturity": "stable",
       "summaryKo": "정해진 시간이나 반복 조건에 따라 Codex 작업을 자동 실행하고 결과를 확인합니다.",
       "instructorNote": "자동 실행 전 입력, 권한, 비용, 실패 알림과 사람이 승인할 지점을 설계합니다.",
-      "checkedAt": "2026-06-16T03:49:59.844Z",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
       "httpStatus": 200,
       "status": "verified",
       "finalUrl": "https://developers.openai.com/codex/app/automations",
@@ -1365,6 +1365,321 @@ window.VIBE_OFFICIAL_SOURCES = {
         "수강생에게 말할 쉬운 비유 한 문장 준비"
       ],
       "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다."
+    },
+    "product-yc-startup-advice": {
+      "publisher": "Y Combinator",
+      "title": "스타트업 핵심 조언",
+      "url": "https://www.ycombinator.com/library/4D-yc-s-essential-startup-advice",
+      "maturity": "stable",
+      "summaryKo": "기능보다 실제 고객 문제, 빠른 출시, 사용자와의 직접 대화를 우선하는 초기 제품 검증 관점입니다.",
+      "instructorNote": "제품·수익화 과정에서 아이디어를 기능 목록이 아니라 반복 문제와 검증 행동으로 바꾸는 기준으로 사용합니다.",
+      "coreConceptKo": "기능보다 실제 고객 문제, 빠른 출시, 사용자와의 직접 대화를 우선하는 초기 제품 검증 관점입니다.",
+      "instructorBackground": "Startup/Product 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 스타트업 핵심 조언의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Startup/Product가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 스타트업 핵심 조언의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다.",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
+      "httpStatus": 200,
+      "status": "verified",
+      "finalUrl": "https://www.ycombinator.com/library/4D-yc-s-essential-startup-advice",
+      "pageTitle": "YC&#39;s essential startup advice : YC Startup Library | Y Combinator"
+    },
+    "product-atlassian-user-stories": {
+      "publisher": "Atlassian",
+      "title": "사용자 스토리",
+      "url": "https://www.atlassian.com/agile/project-management/user-stories",
+      "maturity": "stable",
+      "summaryKo": "사용자, 목표, 기대 가치가 드러나는 짧은 요구사항 문장으로 팀이 왜 만드는지 합의하게 합니다.",
+      "instructorNote": "팀 프로젝트에서 “누가 무엇을 왜 하는가”를 한 문장으로 고정하고 MVP 범위와 검수 기준으로 연결합니다.",
+      "coreConceptKo": "사용자, 목표, 기대 가치가 드러나는 짧은 요구사항 문장으로 팀이 왜 만드는지 합의하게 합니다.",
+      "instructorBackground": "Product Planning 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 사용자 스토리의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Product Planning가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 사용자 스토리의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다.",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
+      "httpStatus": 200,
+      "status": "verified",
+      "finalUrl": "https://www.atlassian.com/agile/project-management/user-stories",
+      "pageTitle": "User Stories With Examples and a Template | Atlassian"
+    },
+    "product-nng-heuristics": {
+      "publisher": "Nielsen Norman Group",
+      "title": "10가지 UI 사용성 휴리스틱",
+      "url": "https://www.nngroup.com/articles/ten-usability-heuristics/",
+      "maturity": "stable",
+      "summaryKo": "시스템 상태 표시, 현실 세계와의 일치, 사용자 통제, 오류 예방 등 사용성 점검의 기본 원칙입니다.",
+      "instructorNote": "UI/UX 수업에서 예쁜 화면보다 사용자가 현재 상태와 다음 행동을 이해하는지를 점검하는 기준으로 사용합니다.",
+      "coreConceptKo": "시스템 상태 표시, 현실 세계와의 일치, 사용자 통제, 오류 예방 등 사용성 점검의 기본 원칙입니다.",
+      "instructorBackground": "UX Research 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 10가지 UI 사용성 휴리스틱의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'UX Research가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 10가지 UI 사용성 휴리스틱의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다.",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
+      "httpStatus": 200,
+      "status": "verified",
+      "finalUrl": "https://www.nngroup.com/articles/ten-usability-heuristics/",
+      "pageTitle": "10 Usability Heuristics for User Interface Design - NN/G"
+    },
+    "product-material-onboarding": {
+      "publisher": "Google Material Design",
+      "title": "온보딩 패턴",
+      "url": "https://m2.material.io/design/communication/onboarding.html",
+      "maturity": "stable",
+      "summaryKo": "사용자가 앱을 처음 만났을 때 핵심 가치와 첫 행동을 이해하도록 돕는 온보딩 설계 원칙입니다.",
+      "instructorNote": "가입 이후 첫 성공까지의 빈 상태, 안내, 진행 피드백을 설계하는 강사용 기준으로 사용합니다.",
+      "coreConceptKo": "사용자가 앱을 처음 만났을 때 핵심 가치와 첫 행동을 이해하도록 돕는 온보딩 설계 원칙입니다.",
+      "instructorBackground": "UI/UX 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 온보딩 패턴의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'UI/UX가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 온보딩 패턴의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다.",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
+      "httpStatus": 200,
+      "status": "verified",
+      "finalUrl": "https://m2.material.io/design/communication/onboarding.html",
+      "pageTitle": "Material Design"
+    },
+    "product-material-design": {
+      "publisher": "Google Material Design",
+      "title": "Material Design 3 시작하기",
+      "url": "https://m3.material.io/get-started",
+      "maturity": "stable",
+      "summaryKo": "Google이 지원하는 디자인 시스템으로, 일관된 UI 컴포넌트와 사용성 있는 제품 설계의 기반을 제공합니다.",
+      "instructorNote": "디자인 시스템을 컬러·카드 장식이 아니라 반복 가능한 UI 규칙과 컴포넌트 언어로 설명할 때 사용합니다.",
+      "coreConceptKo": "Google이 지원하는 디자인 시스템으로, 일관된 UI 컴포넌트와 사용성 있는 제품 설계의 기반을 제공합니다.",
+      "instructorBackground": "UI/UX 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Material Design 3 시작하기의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'UI/UX가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Material Design 3 시작하기의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다.",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
+      "httpStatus": 200,
+      "status": "verified",
+      "finalUrl": "https://m3.material.io/get-started",
+      "pageTitle": "Get started with Modern UI design - Material Design 3"
+    },
+    "stripe-subscriptions": {
+      "publisher": "Stripe",
+      "title": "Stripe Subscriptions",
+      "url": "https://docs.stripe.com/subscriptions",
+      "maturity": "stable",
+      "summaryKo": "구독 상품의 가격, 청구 주기, 사용량, 체험 기간, 고객 포털 같은 반복 결제 운영 요소를 다룹니다.",
+      "instructorNote": "SaaS 수익화에서 결제 버튼만이 아니라 고객, 가격, 상태, 권한, 실패와 취소 흐름이 필요함을 설명합니다.",
+      "coreConceptKo": "구독 상품의 가격, 청구 주기, 사용량, 체험 기간, 고객 포털 같은 반복 결제 운영 요소를 다룹니다.",
+      "instructorBackground": "Stripe 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Stripe Subscriptions의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Stripe가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Stripe Subscriptions의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다.",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
+      "httpStatus": 200,
+      "status": "verified",
+      "finalUrl": "https://docs.stripe.com/subscriptions",
+      "pageTitle": "Subscriptions | Stripe Documentation"
+    },
+    "stripe-checkout": {
+      "publisher": "Stripe",
+      "title": "Stripe Checkout",
+      "url": "https://docs.stripe.com/payments/checkout",
+      "maturity": "stable",
+      "summaryKo": "호스팅 또는 임베드 결제 UI를 통해 결제 세션, 성공·취소 URL, 결제 흐름을 구성합니다.",
+      "instructorNote": "결제는 UI, 서버 세션, 성공·실패 상태, 권한 부여가 함께 움직인다는 것을 시각화할 때 사용합니다.",
+      "coreConceptKo": "호스팅 또는 임베드 결제 UI를 통해 결제 세션, 성공·취소 URL, 결제 흐름을 구성합니다.",
+      "instructorBackground": "Stripe 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Stripe Checkout의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Stripe가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Stripe Checkout의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다.",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
+      "httpStatus": 200,
+      "status": "verified",
+      "finalUrl": "https://docs.stripe.com/payments/checkout",
+      "pageTitle": "Build a payments page | Stripe Documentation"
+    },
+    "product-toss-widget": {
+      "publisher": "Toss Payments",
+      "title": "결제위젯 연동",
+      "url": "https://docs.tosspayments.com/en/integration-widget",
+      "maturity": "stable",
+      "summaryKo": "체크아웃 페이지에 결제 UI를 임베드하고 관리자에서 일부 결제 UI를 설정할 수 있는 저코드 결제 방식입니다.",
+      "instructorNote": "국내 결제 예시가 필요할 때 결제 UI, 결제 요청, 테스트 키, 운영 키의 차이를 설명하는 자료로 사용합니다.",
+      "coreConceptKo": "체크아웃 페이지에 결제 UI를 임베드하고 관리자에서 일부 결제 UI를 설정할 수 있는 저코드 결제 방식입니다.",
+      "instructorBackground": "Toss Payments 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 결제위젯 연동의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Toss Payments가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 결제위젯 연동의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다.",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
+      "httpStatus": 200,
+      "status": "verified",
+      "finalUrl": "https://docs.tosspayments.com/en/integration-widget",
+      "pageTitle": "Integrate payment widgets | 토스페이먼츠 개발자센터"
+    },
+    "supabase-rls": {
+      "publisher": "Supabase",
+      "title": "Row Level Security",
+      "url": "https://supabase.com/docs/guides/database/postgres/row-level-security",
+      "maturity": "stable",
+      "summaryKo": "Postgres의 행 단위 보안으로, 사용자별로 읽고 쓸 수 있는 데이터 범위를 정책으로 제한합니다.",
+      "instructorNote": "SaaS와 배포 수업에서 “로그인했다”와 “해당 데이터에 접근할 수 있다”가 다르다는 점을 설명합니다.",
+      "coreConceptKo": "Postgres의 행 단위 보안으로, 사용자별로 읽고 쓸 수 있는 데이터 범위를 정책으로 제한합니다.",
+      "instructorBackground": "Supabase 공식 문서는 버튼 위치를 외우기 위한 자료가 아니라 기능의 책임, 권한, 실패 조건을 확인하기 위한 기준 문서입니다. 강사는 이 문서를 수업 전 다시 열어 Row Level Security의 현재 메뉴명과 지원 상태를 확인해야 합니다.",
+      "classroomAnalogy": "이 문서는 현장 시연에서 사용하는 조작 설명서라기보다, 건물의 전기·수도 도면처럼 문제가 생겼을 때 어느 연결을 확인할지 알려주는 기준표로 설명합니다.",
+      "commonMisunderstanding": "수강생은 'Supabase가 알아서 처리한다'고 이해하기 쉽습니다. 하지만 공식 문서가 말하는 범위, 권한, 로그, 검증 조건을 사람이 확인해야 실제 운영 가능한 결과가 됩니다.",
+      "demoPoint": "슬라이드에서는 개념을 먼저 보여주고, 시연에서는 Row Level Security의 공식 용어가 실제 터미널·IDE·브라우저 화면에서 어디에 대응되는지 한 단계만 연결합니다.",
+      "expectedQuestions": [
+        {
+          "q": "이 내용을 모두 외워야 하나요?",
+          "a": "아닙니다. 수업에서는 정의 암기가 아니라 문제가 생겼을 때 어떤 공식 기준을 다시 확인해야 하는지 판단하는 법을 배웁니다."
+        },
+        {
+          "q": "AI에게 맡기면 공식 문서를 몰라도 되지 않나요?",
+          "a": "AI가 초안을 만들 수는 있지만 권한, 비용, 보안, 배포 같은 결정은 사람이 공식 기준으로 검토해야 합니다."
+        }
+      ],
+      "preClassCheck": [
+        "공식 URL 접속과 리다이렉트 상태 확인",
+        "설치 명령, 요금제, 베타 기능 여부 재확인",
+        "수업에서 보여줄 화면과 대체 캡처 준비",
+        "수강생에게 말할 쉬운 비유 한 문장 준비"
+      ],
+      "lectureUseHint": "course-data의 sourceKeys로 연결된 회차에서 공식 개념 학습, 시연 전 주의점, 예상 질문 답변에 사용합니다.",
+      "checkedAt": "2026-06-16T13:53:45.329Z",
+      "httpStatus": 200,
+      "status": "verified",
+      "finalUrl": "https://supabase.com/docs/guides/database/postgres/row-level-security",
+      "pageTitle": "Row Level Security | Supabase Docs"
     }
   }
 };
