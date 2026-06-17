@@ -313,7 +313,15 @@
       font-family: var(--mono);
     }
 
+    .file-tree.root-siblings {
+      display: grid;
+      gap: 7px;
+      align-content: start;
+      padding-bottom: 12px;
+    }
+
     .tree-row {
+      position: relative;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -340,6 +348,28 @@
 
     .tree-row[data-level="1"] { padding-left: 28px; }
     .tree-row[data-level="2"] { padding-left: 48px; }
+
+    .root-siblings .tree-row[data-level="0"] {
+      min-height: 44px;
+      border-color: rgba(231, 121, 93, 0.25);
+      background: rgba(231, 121, 93, 0.08);
+      font-size: clamp(16px, 1.12vw, 20px);
+    }
+
+    .root-siblings .tree-row[data-level="1"] {
+      min-height: clamp(32px, 3.5vh, 41px);
+      padding-left: 12px;
+      border-left: 3px solid rgba(217, 184, 117, 0.45);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .root-siblings .tree-row[data-level="1"]::before {
+      content: "";
+      width: 18px;
+      height: 1px;
+      flex: 0 0 18px;
+      background: rgba(217, 184, 117, 0.46);
+    }
 
     .tree-row .level-tag {
       margin-left: auto;
@@ -447,8 +477,31 @@
       border-radius: 8px;
     }
 
+    .root-map-links {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.88;
+    }
+
+    .root-map-links line {
+      stroke: rgba(217, 184, 117, 0.58);
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-dasharray: 6 9;
+      animation: line-dash 2.6s linear infinite;
+    }
+
+    .root-map-links line:nth-child(2n) {
+      stroke: rgba(45, 212, 191, 0.52);
+      animation-duration: 3.1s;
+    }
+
     .map-node {
       position: absolute;
+      z-index: 2;
       display: grid;
       place-items: center;
       width: 132px;
@@ -466,34 +519,46 @@
       cursor: pointer;
     }
 
+    .map-node small {
+      margin-top: 2px;
+      color: inherit;
+      opacity: 0.7;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
     .map-node:hover {
       transform: scale(1.06) translateY(-2px);
       box-shadow: 0 20px 45px rgba(255, 96, 125, 0.25);
       border-color: var(--coral);
     }
 
-    .map-node.root { 
-      left: 8%; 
-      top: 40%; 
+    .map-node.root {
+      left: 50%;
+      top: 45%;
+      transform: translate(-50%, -50%);
       border-color: var(--coral);
       animation: pulse-neon 2s infinite ease-in-out; 
     }
-    .map-node.src { 
-      left: 38%; 
-      top: 18%; 
-      width: 150px; 
-      color: #0b0509; 
-      background: linear-gradient(135deg, var(--sage), #34d399); 
+    .map-node.root:hover {
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+    .map-node.src {
+      left: 9%;
+      top: 9%;
+      width: 150px;
+      color: #0b0509;
+      background: linear-gradient(135deg, var(--sage), #34d399);
       border-color: transparent;
     }
     .map-node.src:hover {
       box-shadow: 0 20px 45px rgba(45, 212, 191, 0.35);
     }
-    .map-node.public { left: 38%; bottom: 15%; }
-    .map-node.config { right: 7%; top: 7%; }
-    .map-node.docs { right: 7%; top: 31%; }
-    .map-node.env { right: 7%; top: 55%; color: #0b0509; background: linear-gradient(135deg, var(--gold), #facc15); border-color: transparent; }
-    .map-node.install { right: 7%; bottom: 5%; }
+    .map-node.public { right: 9%; top: 9%; }
+    .map-node.config { right: 8%; top: 39%; }
+    .map-node.docs { left: 8%; top: 39%; }
+    .map-node.env { right: 9%; bottom: 9%; color: #0b0509; background: linear-gradient(135deg, var(--gold), #facc15); border-color: transparent; }
+    .map-node.install { left: 9%; bottom: 9%; }
 
     .map-line {
       position: absolute;
@@ -519,6 +584,13 @@
       0% { background-position: 200% 0; }
       100% { background-position: -200% 0; }
     }
+
+    @keyframes line-dash {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: -60; }
+    }
+
+    .root-map .map-line { display: none; }
 
     .map-line.l1 { left: 27%; top: 47%; width: 19%; transform: rotate(-27deg); }
     .map-line.l2 { left: 27%; top: 51%; width: 17%; transform: rotate(23deg); }
@@ -955,7 +1027,7 @@
 
     .document-stage {
       display: grid;
-      grid-template-rows: auto 1fr auto;
+      grid-template-rows: auto 1fr auto auto;
       min-height: 0;
       overflow: hidden;
       padding: 24px;
@@ -1219,6 +1291,32 @@
       line-height: 1.45;
     }
 
+    .document-effects {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .document-effects span {
+      min-height: 54px;
+      padding: 9px 10px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 7px;
+      background: rgba(255,255,255,.035);
+      color: #ded8d4;
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .document-effects b {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--gold);
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
     .relation-layout {
       position: relative;
       display: grid;
@@ -1355,6 +1453,7 @@
     }
 
     .impact-source {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -1364,6 +1463,20 @@
       border: 1px solid var(--line-strong);
       border-radius: 6px;
       background: #222527;
+    }
+
+    .impact-source::after {
+      content: "변경 시작점";
+      position: absolute;
+      right: 16px;
+      bottom: -13px;
+      padding: 4px 8px;
+      border: 1px solid rgba(217,184,117,.35);
+      border-radius: 999px;
+      color: #1b1710;
+      background: var(--gold);
+      font: 900 10px var(--mono);
+      box-shadow: 0 8px 20px rgba(0,0,0,.24);
     }
 
     .impact-source code {
@@ -1749,7 +1862,7 @@
     }
 
     .workflow-scene {
-      width: min(640px, 92%);
+      width: min(720px, 94%);
     }
 
     .workflow-scene .scene-label {
@@ -1775,6 +1888,104 @@
       font-size: clamp(15px, 1.05vw, 19px);
       line-height: 1.55;
       white-space: pre-wrap;
+    }
+
+    .workflow-visual {
+      position: relative;
+      min-height: 350px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 10px;
+      background: linear-gradient(145deg, #101213, #202326);
+      box-shadow: 0 24px 64px rgba(0,0,0,.38);
+    }
+
+    .workflow-visual-inner {
+      position: absolute;
+      inset: 18px;
+      display: grid;
+      place-items: center;
+      animation: visual-rise 320ms cubic-bezier(.16,1,.3,1);
+    }
+
+    .workflow-browser,
+    .workflow-search,
+    .workflow-chat,
+    .workflow-diff,
+    .workflow-verify {
+      width: min(560px, 100%);
+      min-height: 260px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 9px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.34);
+    }
+
+    .workflow-browser {
+      background: #f6f2ea;
+      color: #172019;
+    }
+
+    .workflow-browser .source-browser-page {
+      padding: 34px;
+    }
+
+    .workflow-search,
+    .workflow-chat,
+    .workflow-diff,
+    .workflow-verify {
+      display: grid;
+      align-content: center;
+      gap: 12px;
+      padding: 24px;
+      background: #111314;
+      color: var(--text);
+      font-family: var(--mono);
+    }
+
+    .workflow-search b,
+    .workflow-chat b,
+    .workflow-diff b,
+    .workflow-verify b {
+      color: var(--sage);
+      font-size: 13px;
+    }
+
+    .workflow-search span,
+    .workflow-chat span,
+    .workflow-diff span,
+    .workflow-verify span {
+      min-height: 38px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 5px;
+      background: rgba(255,255,255,.04);
+      color: #d8d3cc;
+      font-size: 14px;
+    }
+
+    .workflow-diff span.add { border-color: rgba(45,212,191,.28); background: rgba(45,212,191,.08); }
+    .workflow-diff span.remove { border-color: rgba(248,113,113,.26); background: rgba(248,113,113,.08); }
+
+    .workflow-verify {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      font-family: var(--sans);
+    }
+
+    .verify-tile {
+      min-height: 104px;
+      display: grid;
+      align-content: center;
+      gap: 5px;
+      padding: 14px;
+      border: 1px solid rgba(45,212,191,.25);
+      border-radius: 8px;
+      background: rgba(45,212,191,.07);
+    }
+
+    .verify-tile b {
+      color: var(--sage);
+      font-family: var(--mono);
     }
 
     .prompt-layout {
@@ -2759,6 +2970,207 @@
       padding: 20px 24px;
     }
 
+    .source-visual {
+      position: relative;
+      min-height: 270px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 10px;
+      background:
+        radial-gradient(circle at 22% 18%, color-mix(in srgb, var(--source-accent) 24%, transparent), transparent 34%),
+        linear-gradient(145deg, #111314, #1b1e20);
+      box-shadow: 0 24px 58px rgba(0, 0, 0, 0.34);
+    }
+
+    .source-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 20px 20px;
+      opacity: 0.5;
+    }
+
+    .source-visual-inner {
+      position: absolute;
+      inset: 18px;
+      display: grid;
+      place-items: center;
+    }
+
+    .source-browser-mock,
+    .source-component-kit,
+    .source-logic-map,
+    .source-style-board {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      min-height: 208px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 8px;
+      background: #f4f1eb;
+      color: #172019;
+      box-shadow: 0 18px 46px rgba(0,0,0,.34);
+      animation: visual-rise 340ms cubic-bezier(.16,1,.3,1);
+    }
+
+    .source-browser-bar {
+      height: 28px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 10px;
+      background: #24282b;
+    }
+
+    .source-browser-bar i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #858b90;
+    }
+
+    .source-browser-bar span {
+      margin-left: 6px;
+      color: #cad0d1;
+      font: 700 10px var(--mono);
+    }
+
+    .source-browser-page {
+      display: grid;
+      gap: 12px;
+      padding: 22px;
+    }
+
+    .source-browser-page h4 {
+      color: #172019;
+      font-size: 25px;
+      line-height: 1.08;
+    }
+
+    .source-browser-page p {
+      color: #64706a;
+      font-size: 13px;
+    }
+
+    .source-browser-page button {
+      width: fit-content;
+      min-height: 34px;
+      padding: 0 15px;
+      border: 0;
+      border-radius: 5px;
+      background: var(--source-accent);
+      color: #0d060a;
+      font-weight: 900;
+    }
+
+    .source-component-kit {
+      display: grid;
+      grid-template-rows: 40px 1fr;
+      background: #191c1f;
+      color: var(--text);
+    }
+
+    .source-component-kit header {
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      border-bottom: 1px solid var(--line);
+      color: var(--gold);
+      font: 800 12px var(--mono);
+    }
+
+    .component-shelf {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      padding: 16px;
+    }
+
+    .component-shelf span {
+      display: grid;
+      place-items: center;
+      min-height: 58px;
+      border: 1px solid rgba(217,184,117,.28);
+      border-radius: 7px;
+      background: rgba(217,184,117,.07);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .source-logic-map {
+      display: grid;
+      place-items: center;
+      background: #111314;
+      color: var(--text);
+    }
+
+    .logic-flow {
+      display: grid;
+      grid-template-columns: 1fr 42px 1fr 42px 1fr;
+      align-items: center;
+      gap: 8px;
+      width: 90%;
+    }
+
+    .logic-flow b {
+      display: grid;
+      place-items: center;
+      min-height: 70px;
+      padding: 10px;
+      border: 1px solid rgba(56,189,248,.34);
+      border-radius: 8px;
+      background: rgba(56,189,248,.08);
+      color: #dff5ff;
+      font-size: 12px;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .logic-flow i {
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), transparent);
+      box-shadow: 0 0 10px rgba(56,189,248,.4);
+    }
+
+    .source-style-board {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 18px;
+      background: #f7f2eb;
+    }
+
+    .style-token {
+      display: grid;
+      align-content: center;
+      gap: 6px;
+      min-height: 74px;
+      padding: 12px;
+      border: 1px solid #ddd4c7;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .style-token b {
+      color: #172019;
+      font: 850 13px var(--mono);
+    }
+
+    .style-token span {
+      height: 12px;
+      border-radius: 99px;
+      background: var(--source-accent);
+    }
+
+    @keyframes visual-rise {
+      from { opacity: .35; transform: translateY(10px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
     .source-file-stack {
       position: relative;
       height: 210px;
@@ -2883,6 +3295,7 @@
     .assembly-browser-bar span { margin-left: 8px; color: #bac0c2; font-family: var(--mono); font-size: 11px; }
 
     .assembly-page {
+      position: relative;
       display: grid;
       grid-template-rows: 46px 1fr;
       height: calc(100% - 34px);
@@ -2911,7 +3324,58 @@
     .assembly-copy p { margin-top: 8px; color: #65706b; font-size: 15px; }
     .assembly-copy button { margin-top: 18px; padding: 10px 18px; border: 0; border-radius: 5px; background: #1f6d5a; color: #fff; font-weight: 800; }
     .assembly-cards { display: grid; grid-template-columns: repeat(2,1fr); gap: 9px; }
-    .assembly-cards span { height: 82px; border: 1px solid #d8d0c5; border-radius: 6px; background: linear-gradient(145deg,#fff,#ece6dc); }
+    .assembly-cards span {
+      display: grid;
+      align-content: center;
+      gap: 4px;
+      height: 82px;
+      padding: 10px;
+      border: 1px solid #d8d0c5;
+      border-radius: 6px;
+      background: linear-gradient(145deg,#fff,#ece6dc);
+      color: #172019;
+      font-size: 11px;
+      font-weight: 850;
+      transition: opacity 260ms ease, transform 260ms ease, background 260ms ease, box-shadow 260ms ease;
+    }
+
+    .assembly-cards span small {
+      color: #69736d;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .assembly-change-tag {
+      position: absolute;
+      left: 24px;
+      bottom: 18px;
+      max-width: 260px;
+      padding: 9px 11px;
+      border: 1px solid rgba(31, 109, 90, .28);
+      border-radius: 7px;
+      background: rgba(255, 255, 255, .9);
+      color: #172019;
+      box-shadow: 0 14px 34px rgba(0,0,0,.18);
+      font-size: 12px;
+      line-height: 1.35;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 240ms ease, transform 240ms ease;
+    }
+
+    .assembly-change-tag.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .assembly-browser[data-step="0"] .assembly-copy h3,
+    .assembly-browser[data-step="1"] #assembly-button,
+    .assembly-browser[data-step="2"] .assembly-page,
+    .assembly-browser[data-step="3"] .assembly-cards span {
+      outline: 3px solid rgba(31, 109, 90, .45);
+      outline-offset: 5px;
+      box-shadow: 0 0 0 9px rgba(31, 109, 90, .08);
+    }
 
     .assembly-callout {
       position: absolute;
@@ -2931,8 +3395,25 @@
     .assembly-callout span { display: block; margin-top: 5px; color: var(--muted); font-size: 13px; line-height: 1.45; }
 
     .impact-page { position: relative; overflow: hidden; }
+
+    .impact-page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      border: 2px solid transparent;
+      transition: border-color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .impact-page.changed::before {
+      border-color: rgba(45, 212, 191, .62);
+      box-shadow: inset 0 0 0 999px rgba(45, 212, 191, .055), 0 0 30px rgba(45, 212, 191, .18);
+    }
+
     .impact-page-overlay {
       position: absolute;
+      z-index: 2;
       inset: auto 8px 8px;
       padding: 8px 9px;
       border: 1px solid rgba(255,255,255,.18);
@@ -2951,6 +3432,26 @@
     .impact-page.unchanged .impact-page-overlay { opacity: 1; transform: translateY(0); }
     .impact-page.changed .impact-page-overlay { border-color: rgba(45,212,191,.45); }
     .impact-page.unchanged .impact-page-overlay { color: #c9c3bf; }
+
+    .impact-change-pin {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 3;
+      padding: 5px 7px;
+      border-radius: 999px;
+      color: #06110f;
+      background: var(--sage);
+      font: 900 10px var(--mono);
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+
+    .impact-page.changed .impact-change-pin {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     .impact-stage[data-impact="shared"] .impact-page-body button {
       border-radius: 999px;
@@ -3148,13 +3649,13 @@
             <span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span>
             <span style="margin-left: 8px;">EXPLORER · my-project</span>
           </div>
-          <div class="file-tree" id="root-tree">
+          <div class="file-tree root-siblings" id="root-tree">
             <div class="tree-row active" data-root-key="root" data-level="0"><span class="chevron">⌄</span><span class="folder-mark"></span>my-project/</div>
-            <div class="tree-row" data-root-key="src" data-level="1"><span class="chevron">⌄</span><span class="folder-mark"></span>src/<span class="level-tag">ROOT</span></div>
-            <div class="tree-row" data-root-key="public" data-level="1"><span class="chevron">›</span><span class="folder-mark"></span>public/<span class="level-tag">ROOT</span></div>
+            <div class="tree-row" data-root-key="src" data-level="1"><span class="chevron">•</span><span class="folder-mark"></span>src/<span class="level-tag">ROOT</span></div>
+            <div class="tree-row" data-root-key="public" data-level="1"><span class="chevron">•</span><span class="folder-mark"></span>public/<span class="level-tag">ROOT</span></div>
             <div class="tree-row" data-root-key="package" data-level="1"><span class="chevron"></span><span class="file-mark"></span>package.json<span class="level-tag">ROOT</span></div>
             <div class="tree-row" data-root-key="lock" data-level="1"><span class="chevron"></span><span class="file-mark"></span>package-lock.json<span class="level-tag">ROOT</span></div>
-            <div class="tree-row" data-root-key="modules" data-level="1"><span class="chevron">›</span><span class="folder-mark"></span>node_modules/<span class="level-tag">ROOT</span></div>
+            <div class="tree-row" data-root-key="modules" data-level="1"><span class="chevron">•</span><span class="folder-mark"></span>node_modules/<span class="level-tag">ROOT</span></div>
             <div class="tree-row" data-root-key="env" data-level="1"><span class="chevron"></span><span class="file-mark"></span>.env / .env.local / .env.example<span class="level-tag">ROOT</span></div>
             <div class="tree-row" data-root-key="gitignore" data-level="1"><span class="chevron"></span><span class="file-mark"></span>.gitignore<span class="level-tag">ROOT</span></div>
             <div class="tree-row" data-root-key="readme" data-level="1"><span class="chevron"></span><span class="file-mark"></span>README.md<span class="level-tag">ROOT</span></div>
@@ -3173,8 +3674,16 @@
             </div>
           </div>
           <div class="root-map panel">
+            <svg class="root-map-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <line x1="50" y1="45" x2="23" y2="22"></line>
+              <line x1="50" y1="45" x2="77" y2="22"></line>
+              <line x1="50" y1="45" x2="80" y2="50"></line>
+              <line x1="50" y1="45" x2="80" y2="78"></line>
+              <line x1="50" y1="45" x2="22" y2="78"></line>
+              <line x1="50" y1="45" x2="20" y2="50"></line>
+            </svg>
             <span class="map-line l1"></span><span class="map-line l2"></span><span class="map-line l3"></span><span class="map-line l4"></span><span class="map-line l5"></span><span class="map-line l6"></span>
-            <div class="map-node root">PROJECT</div>
+            <div class="map-node root">my-project/<br><small>ROOT</small></div>
             <div class="map-node src">src/<br><small>실제 작업</small></div>
             <div class="map-node public">public/</div>
             <div class="map-node config">package*.json</div>
@@ -3329,7 +3838,18 @@
         <article class="source-detail panel" id="source-detail" style="--source-accent:var(--coral)">
           <div class="source-detail-head"><code id="source-zone-path">src/app/page.tsx</code><span id="source-zone-role">PAGE ASSEMBLY</span></div>
           <div class="source-scene">
-            <div class="source-file-stack" aria-hidden="true"><span style="--x:-22px;--y:18px;--r:-7deg"></span><span style="--x:20px;--y:-14px;--r:6deg"></span><span style="--x:0;--y:0;--r:0deg"></span></div>
+            <div class="source-visual" id="source-zone-visual" data-zone="page" aria-hidden="true">
+              <div class="source-visual-inner">
+                <div class="source-browser-mock">
+                  <div class="source-browser-bar"><i></i><i></i><i></i><span>/reserve</span></div>
+                  <div class="source-browser-page">
+                    <h4>공간 예약</h4>
+                    <p>page.tsx가 이 주소에서 보일 화면의 큰 배치를 조립합니다.</p>
+                    <button type="button">예약하기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="source-explanation">
               <h3 id="source-zone-title">사용자가 들어오는 한 화면을 조립합니다</h3>
               <p id="source-zone-copy">제목, 설명, 버튼과 카드 부품을 모아 특정 주소에서 보이는 페이지를 만듭니다.</p>
@@ -3436,6 +3956,11 @@
             </div>
           </div>
           <p class="document-note" id="document-note">프로젝트 이름, `npm run dev` 같은 실행 명령, 설치해야 할 라이브러리를 기록합니다. AI가 패키지를 추가하면 이 파일도 함께 바뀔 수 있습니다.</p>
+          <div class="document-effects" id="document-effects" aria-hidden="true">
+            <span><b>터미널</b>npm run dev 실행</span>
+            <span><b>설치</b>필요 패키지 확인</span>
+            <span><b>AI 작업</b>새 라이브러리 추가 여부 검토</span>
+          </div>
         </div>
       </div>
     </section>
@@ -3466,6 +3991,7 @@
                 <div class="assembly-copy"><h3 id="assembly-title">공간 예약</h3><p id="assembly-copy">page.tsx가 제목과 설명의 자리를 먼저 만듭니다.</p><button id="assembly-button" type="button">부품 연결 전</button></div>
                 <div class="assembly-cards"><span></span><span></span><span></span><span></span></div>
               </div>
+              <div class="assembly-change-tag visible" id="assembly-change-tag">page.tsx가 화면의 뼈대와 문구 자리를 먼저 만듭니다.</div>
             </div>
           </div>
           <div class="assembly-callout"><b id="assembly-callout-title">app/reserve/page.tsx</b><span id="assembly-callout-copy">페이지는 주소에 맞는 화면의 전체 배치와 들어갈 부품의 자리를 정합니다.</span></div>
@@ -3503,16 +4029,19 @@
             <article class="impact-page" data-impact-page="home">
               <div class="impact-page-head">/home</div>
               <div class="impact-page-body"><b>오늘의 공간</b><span></span><span style="width:70%;"></span><button type="button">둘러보기</button></div>
+              <div class="impact-change-pin">CHANGE</div>
               <div class="impact-page-overlay" data-impact-overlay="home">영향 없음 · 이 페이지 파일은 수정하지 않았습니다.</div>
             </article>
             <article class="impact-page changed" data-impact-page="reserve">
               <div class="impact-page-head">/reserve</div>
               <div class="impact-page-body"><b>공간 예약</b><span></span><span style="width:68%;"></span><button type="button">예약하기</button></div>
+              <div class="impact-change-pin">CHANGE</div>
               <div class="impact-page-overlay" data-impact-overlay="reserve">변경됨 · 이 페이지의 제목과 배치만 달라집니다.</div>
             </article>
             <article class="impact-page" data-impact-page="admin">
               <div class="impact-page-head">/admin</div>
               <div class="impact-page-body"><b>예약 관리</b><span></span><span style="width:76%;"></span><button type="button">확인하기</button></div>
+              <div class="impact-change-pin">CHANGE</div>
               <div class="impact-page-overlay" data-impact-overlay="admin">영향 없음 · 공용 파일을 건드리지 않았습니다.</div>
             </article>
           </div>
@@ -3563,40 +4092,13 @@
       </div>
     </section>
 
-    <section class="slide" data-title="수정 안전도 퀴즈">
-      <div class="topline">
-        <div>
-          <div class="kicker">QUICK DECISION PRACTICE</div>
-          <h2>퀴즈 · 이 파일은 어떻게 다뤄야 할까요?</h2>
-        </div>
-        <div class="page-index">11</div>
-      </div>
-      <div class="content safety-quiz">
-        <article class="safety-question panel">
-          <div class="safety-progress" id="safety-progress">QUESTION 1 / 4</div>
-          <div class="safety-file"><code id="safety-file">src/app/page.tsx</code><p id="safety-question-copy">화면의 제목 문구를 바꾸려 합니다. 이 파일은 어떻게 다루는 것이 좋을까요?</p></div>
-          <div class="safety-choices">
-            <button type="button" data-safety-choice="safe">직접 확인하며 수정</button>
-            <button type="button" data-safety-choice="ask">AI와 영향 확인 후 수정</button>
-            <button type="button" data-safety-choice="avoid">직접 수정하지 않기</button>
-          </div>
-        </article>
-        <aside class="safety-answer panel">
-          <div class="answer-state" id="safety-answer-state">판단 연습</div>
-          <h3 id="safety-answer-title">파일을 보고 수정 안전도를 골라보세요</h3>
-          <p id="safety-answer-copy">정답을 고르면 왜 그런지와 AI에게 어떻게 요청할지 함께 표시됩니다.</p>
-          <button class="safety-next" id="safety-next" type="button" disabled>다음 파일</button>
-        </aside>
-      </div>
-    </section>
-
     <section class="slide" data-title="수정 작업 순서">
       <div class="topline">
         <div>
           <div class="kicker">CHANGE WORKFLOW</div>
           <h2>바이브코딩에서는 수정 전후의 흐름이 더 중요합니다</h2>
         </div>
-        <div class="page-index">12</div>
+        <div class="page-index">11</div>
       </div>
       <div class="content workflow">
         <div class="workflow-steps" id="workflow-steps">
@@ -3611,43 +4113,19 @@
             <div class="scene-label" id="workflow-label">01 · TARGET</div>
             <h3 id="workflow-title">수정할 장면을 한 문장으로 정합니다</h3>
             <p id="workflow-copy">“예약 화면의 주황색 버튼을 더 차분한 색으로 바꾸고 싶다”처럼 화면에서 확인 가능한 목표를 먼저 고릅니다.</p>
-            <div class="workflow-code" id="workflow-code">화면: /reserve
-대상: 예약하기 버튼
-원하는 변화: 색상과 클릭 상태 개선</div>
+            <div class="workflow-visual" id="workflow-visual" aria-hidden="true">
+              <div class="workflow-visual-inner">
+                <div class="workflow-browser">
+                  <div class="source-browser-bar"><i></i><i></i><i></i><span>/reserve</span></div>
+                  <div class="source-browser-page">
+                    <h4>공간 예약</h4>
+                    <p>바꿀 대상: 예약하기 버튼</p>
+                    <button type="button">예약하기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide" data-title="AI에게 파일 구조 요청하기">
-      <div class="topline">
-        <div>
-          <div class="kicker">AI COLLABORATION</div>
-          <h2>AI에게 수정 전에 구조부터 찾게 합니다</h2>
-        </div>
-        <div class="page-index">13</div>
-      </div>
-      <div class="content prompt-layout">
-        <div class="prompt-builder panel">
-          <h3>좋은 수정 요청의 네 단계</h3>
-          <div class="prompt-options">
-            <div class="prompt-option" style="--accent: var(--blue);"><b>찾기</b><span>관련된 파일과 연결 관계를 먼저 찾아줘.</span></div>
-            <div class="prompt-option" style="--accent: var(--gold);"><b>설명</b><span>각 파일을 왜 수정해야 하는지 초보자에게 설명해줘.</span></div>
-            <div class="prompt-option" style="--accent: var(--coral);"><b>수정</b><span>필요한 파일만 최소 범위로 수정해줘.</span></div>
-            <div class="prompt-option" style="--accent: var(--sage);"><b>검증</b><span>변경 파일과 브라우저 확인 방법을 정리해줘.</span></div>
-          </div>
-        </div>
-        <div class="prompt-result panel">
-          <h3>AI IDE에 전달할 예시</h3>
-          <div class="prompt-code">예약 화면의 버튼 문구와 색상을 수정하려고 합니다.
-
-먼저 관련된 페이지, 컴포넌트, 스타일 파일을 찾아
-각 파일의 역할과 연결 관계를 설명해주세요.
-
-그다음 필요한 파일만 수정하고,
-마지막에 변경된 파일 목록과
-브라우저에서 확인할 항목을 정리해주세요.</div>
-          <div class="prompt-rule">핵심: 찾기 → 설명 → 수정 → 검증</div>
         </div>
       </div>
     </section>
@@ -3658,7 +4136,7 @@
           <div class="kicker">COMMON MISTAKES</div>
           <h2>초보자가 가장 자주 겪는 파일 구조 실수 3가지</h2>
         </div>
-        <div class="page-index">14</div>
+        <div class="page-index">12</div>
       </div>
       <div class="content mistakes-layout">
         <article class="mistake-card panel" style="--accent: var(--danger);">
@@ -3724,7 +4202,7 @@
           <div class="kicker">SESSION MAP</div>
           <h2>파일 구조를 이해하면 수정은 네 단계로 정리됩니다</h2>
         </div>
-        <div class="page-index">15</div>
+        <div class="page-index">13</div>
       </div>
       <div class="content recap-layout">
         <article class="recap-step panel" style="--recap:var(--blue)"><span>01 · FIND</span><h3>화면에서 대상을 정한다</h3><p>문구, 버튼, 기능 이름처럼 눈으로 확인 가능한 목표부터 고릅니다.</p></article>
@@ -3741,7 +4219,7 @@
           <div class="kicker">PRACTICE · 30 MINUTES</div>
           <h2>지금부터 실습 시간입니다</h2>
         </div>
-        <div class="page-index">16</div>
+        <div class="page-index">14</div>
       </div>
       <div class="content practice-layout">
         <div class="practice-control panel">
@@ -3775,7 +4253,7 @@
 
   <nav class="nav" aria-label="슬라이드 이동">
       <button type="button" onclick="prevSlide()" aria-label="이전 슬라이드">‹</button>
-      <span id="counter">1 / 17</span>
+      <span id="counter">1 / 15</span>
       <button type="button" onclick="nextSlide()" aria-label="다음 슬라이드">›</button>
     </nav>
 
@@ -3873,14 +4351,14 @@
     };
 
     const manifestDetails = {
-      package: ["package.json", "PROJECT MANIFEST", "프로젝트 이름, `npm run dev` 같은 실행 명령, 설치해야 할 라이브러리를 기록합니다. AI가 패키지를 추가하면 이 파일도 함께 바뀔 수 있습니다."],
-      lock: ["package-lock.json", "INSTALL SNAPSHOT", "설치된 패키지의 정확한 버전과 연결 관계를 자동 기록합니다. 충돌 원인을 모른 채 직접 고치거나 삭제하지 않습니다."],
-      modules: ["node_modules/", "DEPENDENCY STORAGE", "npm install로 받은 외부 패키지의 실제 코드가 저장됩니다. 용량이 크고 다시 설치할 수 있어 GitHub에는 보통 올리지 않습니다."],
-      readme: ["README.md", "PROJECT HANDBOOK", "Markdown 형식의 프로젝트 설명서입니다. 실행 방법, 기능, 폴더 구조, AI 작업 요약을 기록하면 다음 수정이 쉬워집니다."],
-      env: [".env", "ENV DEFAULTS", "프로젝트가 실행될 때 읽는 환경값 파일입니다. 팀 정책에 따라 공통 기본값을 둘 수 있지만, 실제 비밀값은 보통 .env.local에 둡니다."],
-      envlocal: [".env.local", "LOCAL SECRETS", "내 컴퓨터에서 개발할 때만 쓰는 실제 비밀값입니다. GitHub에 올리지 않고 배포 서비스에는 같은 이름으로 별도 등록합니다."],
-      envexample: [".env.example", "SHAREABLE TEMPLATE", "팀원과 AI에게 필요한 변수 이름만 알려주는 견본 파일입니다. 실제 키 값은 비워두거나 예시값으로 둡니다."],
-      gitignore: [".gitignore", "EXCLUDE RULES", "GitHub에 올리지 않을 파일과 폴더를 지정합니다. node_modules, 환경변수, 빌드 결과물이 대표적입니다."]
+      package: ["package.json", "PROJECT MANIFEST", "프로젝트 이름, `npm run dev` 같은 실행 명령, 설치해야 할 라이브러리를 기록합니다. AI가 패키지를 추가하면 이 파일도 함께 바뀔 수 있습니다.", ["터미널|npm run dev 같은 실행 명령", "설치|필요 패키지 목록 확인", "AI 작업|새 라이브러리 추가 이유 검토"]],
+      lock: ["package-lock.json", "INSTALL SNAPSHOT", "설치된 패키지의 정확한 버전과 연결 관계를 자동 기록합니다. 충돌 원인을 모른 채 직접 고치거나 삭제하지 않습니다.", ["재현성|다른 PC도 같은 버전 설치", "자동관리|npm install이 갱신", "주의|직접 손편집하지 않기"]],
+      modules: ["node_modules/", "DEPENDENCY STORAGE", "npm install로 받은 외부 패키지의 실제 코드가 저장됩니다. 용량이 크고 다시 설치할 수 있어 GitHub에는 보통 올리지 않습니다.", ["용량|매우 크고 파일이 많음", "복구|삭제해도 npm install로 재생성", "GitHub|보통 올리지 않음"]],
+      readme: ["README.md", "PROJECT HANDBOOK", "Markdown 형식의 프로젝트 설명서입니다. 실행 방법, 기능, 폴더 구조, AI 작업 요약을 기록하면 다음 수정이 쉬워집니다.", ["공유|프로젝트 소개와 실행법", "온보딩|다음 작업자가 빠르게 이해", "기록|AI 작업 요약 보관"]],
+      env: [".env", "ENV DEFAULTS", "프로젝트가 실행될 때 읽는 환경값 파일입니다. 팀 정책에 따라 공통 기본값을 둘 수 있지만, 실제 비밀값은 보통 .env.local에 둡니다.", ["설정|공통 환경값 후보", "주의|실제 키는 넣지 않기", "배포|서비스별 환경변수와 연결"]],
+      envlocal: [".env.local", "LOCAL SECRETS", "내 컴퓨터에서 개발할 때만 쓰는 실제 비밀값입니다. GitHub에 올리지 않고 배포 서비스에는 같은 이름으로 별도 등록합니다.", ["비밀값|API 키와 DB 주소", "GitHub|절대 업로드 금지", "배포|Vercel/Firebase에 따로 입력"]],
+      envexample: [".env.example", "SHAREABLE TEMPLATE", "팀원과 AI에게 필요한 변수 이름만 알려주는 견본 파일입니다. 실제 키 값은 비워두거나 예시값으로 둡니다.", ["공유가능|실제 키 없이 변수명만", "협업|팀원이 준비할 값 확인", "AI 요청|필요 환경변수 설명"]],
+      gitignore: [".gitignore", "EXCLUDE RULES", "GitHub에 올리지 않을 파일과 폴더를 지정합니다. node_modules, 환경변수, 빌드 결과물이 대표적입니다.", ["차단|비밀값과 대용량 폴더 제외", "보안|.env.local 보호", "정리|빌드 결과물 업로드 방지"]]
     };
 
     const impactDetails = {
@@ -3945,11 +4423,36 @@
     };
 
     const workflowDetails = [
-      ["01 · TARGET", "수정할 장면을 한 문장으로 정합니다", "“예약 화면의 주황색 버튼을 더 차분한 색으로 바꾸고 싶다”처럼 화면에서 확인 가능한 목표를 먼저 고릅니다.", "화면: /reserve\n대상: 예약하기 버튼\n원하는 변화: 색상과 클릭 상태 개선"],
-      ["02 · SEARCH", "화면 문구와 파일 검색을 연결합니다", "브라우저에 보이는 “예약하기” 문구를 IDE 전체 검색에 넣어 관련 페이지와 컴포넌트 후보를 좁힙니다.", "검색어: 예약하기\n후보: app/reserve/page.tsx\n후보: components/ReserveButton.tsx"],
-      ["03 · REQUEST", "AI에게 범위와 지켜야 할 조건을 말합니다", "찾은 파일 후보와 원하는 결과를 주고, 다른 화면에는 영향이 없는지 확인하도록 요청합니다.", "이 두 파일의 연결 관계를 먼저 설명하고\n예약 화면의 버튼만 수정해줘.\n다른 페이지의 버튼은 바꾸지 마."],
-      ["04 · DIFF", "AI가 바꾼 파일과 코드 차이를 확인합니다", "파일이 예상보다 많이 바뀌었다면 이유를 묻습니다. 변경 전후를 비교하는 화면을 diff라고 부릅니다.", "변경 파일 2개\nM app/reserve/page.tsx\nM components/ReserveButton.tsx"],
-      ["05 · VERIFY", "브라우저에서 정상 동작을 다시 확인합니다", "색상만 보지 말고 클릭, 로딩, 모바일 화면과 다른 페이지 영향까지 확인해야 수정이 끝납니다.", "확인: 문구 / 색상 / 클릭\n확인: 모바일 화면\n확인: 다른 페이지 영향 없음"]
+      {
+        label: "01 · TARGET",
+        title: "수정할 장면을 한 문장으로 정합니다",
+        copy: "화면에서 직접 보이는 대상을 먼저 고르면 AI에게도 수정 범위를 훨씬 정확하게 말할 수 있습니다.",
+        visual: `<div class="workflow-browser"><div class="source-browser-bar"><i></i><i></i><i></i><span>/reserve</span></div><div class="source-browser-page"><h4>공간 예약</h4><p>바꿀 대상: 예약하기 버튼</p><button type="button">예약하기</button></div></div>`
+      },
+      {
+        label: "02 · SEARCH",
+        title: "화면 문구와 파일 검색을 연결합니다",
+        copy: "브라우저에 보이는 문구를 검색어로 사용해 페이지와 컴포넌트 후보를 좁힙니다.",
+        visual: `<div class="workflow-search"><b>IDE SEARCH</b><span>검색어: 예약하기</span><span>app/reserve/page.tsx · 화면 배치</span><span>components/ReserveButton.tsx · 버튼 부품</span></div>`
+      },
+      {
+        label: "03 · REQUEST",
+        title: "AI에게 범위와 지켜야 할 조건을 말합니다",
+        copy: "찾은 파일 후보와 원하는 결과를 주고, 다른 화면에 영향이 없는지 확인하도록 요청합니다.",
+        visual: `<div class="workflow-chat"><b>AI IDE REQUEST</b><span>두 파일의 연결 관계를 먼저 설명해줘.</span><span>예약 화면의 버튼만 수정해줘.</span><span>다른 페이지 버튼은 바꾸지 마.</span></div>`
+      },
+      {
+        label: "04 · DIFF",
+        title: "변경된 파일과 코드 차이를 확인합니다",
+        copy: "파일이 예상보다 많이 바뀌었다면 수정 전에 이유를 묻습니다. diff는 AI 작업의 영수증입니다.",
+        visual: `<div class="workflow-diff"><b>CHANGES</b><span class="remove">- &lt;button&gt;예약하기&lt;/button&gt;</span><span class="add">+ &lt;button className="calm"&gt;자리 확인&lt;/button&gt;</span><span>M components/ReserveButton.tsx</span></div>`
+      },
+      {
+        label: "05 · VERIFY",
+        title: "브라우저에서 정상 동작을 다시 확인합니다",
+        copy: "색상만 보지 말고 클릭, 로딩, 모바일 화면과 다른 페이지 영향까지 확인해야 수정이 끝납니다.",
+        visual: `<div class="workflow-verify"><div class="verify-tile"><b>문구</b><span>자리 확인</span></div><div class="verify-tile"><b>클릭</b><span>예약 단계 이동</span></div><div class="verify-tile"><b>모바일</b><span>겹침 없음</span></div><div class="verify-tile"><b>영향</b><span>다른 페이지 정상</span></div></div>`
+      }
     ];
 
     const sourceZoneDetails = {
@@ -3959,7 +4462,16 @@
         title: "사용자가 들어오는 한 화면을 조립합니다",
         copy: "제목, 설명, 버튼과 카드 부품을 모아 특정 주소에서 보이는 페이지를 만듭니다.",
         question: "AI에게: “이 문구가 보이는 페이지 파일을 먼저 찾아줘.”",
-        accent: "var(--coral)"
+        accent: "var(--coral)",
+        visual: `
+          <div class="source-browser-mock">
+            <div class="source-browser-bar"><i></i><i></i><i></i><span>/reserve</span></div>
+            <div class="source-browser-page">
+              <h4>공간 예약</h4>
+              <p>page.tsx가 이 주소에서 보일 화면의 큰 배치를 조립합니다.</p>
+              <button type="button">예약하기</button>
+            </div>
+          </div>`
       },
       component: {
         path: "src/components/Button.tsx",
@@ -3967,7 +4479,14 @@
         title: "여러 화면에서 반복되는 부품을 한 번 정의합니다",
         copy: "버튼, 카드, 헤더처럼 반복되는 요소를 독립 파일로 두면 한 곳에서 모양과 행동을 관리할 수 있습니다.",
         question: "AI에게: “이 버튼을 사용하는 모든 페이지와 영향 범위를 알려줘.”",
-        accent: "var(--gold)"
+        accent: "var(--gold)",
+        visual: `
+          <div class="source-component-kit">
+            <header>components/ UI KIT</header>
+            <div class="component-shelf">
+              <span>Button</span><span>Header</span><span>Card</span><span>Modal</span>
+            </div>
+          </div>`
       },
       logic: {
         path: "src/lib/api.ts",
@@ -3975,7 +4494,13 @@
         title: "화면 뒤에서 반복되는 처리 방법을 모읍니다",
         copy: "데이터 요청, 날짜 변환, 유효성 검사처럼 여러 페이지가 함께 쓰는 처리 규칙을 둡니다.",
         question: "AI에게: “이 함수가 어디에서 호출되고 어떤 데이터를 돌려주는지 설명해줘.”",
-        accent: "var(--blue)"
+        accent: "var(--blue)",
+        visual: `
+          <div class="source-logic-map">
+            <div class="logic-flow">
+              <b>브라우저<br>요청</b><i></i><b>lib/api.ts<br>공통 처리</b><i></i><b>서버<br>응답</b>
+            </div>
+          </div>`
       },
       style: {
         path: "src/styles/globals.css",
@@ -3983,7 +4508,14 @@
         title: "서비스 전체의 색상과 간격 규칙을 관리합니다",
         copy: "글꼴, 색상, 여백 같은 공통 스타일은 넓은 화면에 영향을 주므로 수정 범위를 먼저 확인해야 합니다.",
         question: "AI에게: “이 클래스가 적용되는 화면을 찾고, 다른 화면 영향 없이 수정해줘.”",
-        accent: "var(--sage)"
+        accent: "var(--sage)",
+        visual: `
+          <div class="source-style-board">
+            <div class="style-token"><b>COLOR</b><span></span></div>
+            <div class="style-token"><b>RADIUS</b><span style="border-radius:4px;background:#e8dacb;"></span></div>
+            <div class="style-token"><b>SPACE</b><span style="width:68%;background:#c6d8ce;"></span></div>
+            <div class="style-token"><b>FONT</b><span style="height:18px;background:#172019;"></span></div>
+          </div>`
       }
     };
 
@@ -3993,28 +4525,36 @@
         copy: "page.tsx가 제목과 설명의 자리를 먼저 만듭니다.",
         button: "부품 연결 전",
         calloutTitle: "app/reserve/page.tsx",
-        calloutCopy: "페이지는 주소에 맞는 화면의 전체 배치와 들어갈 부품의 자리를 정합니다."
+        calloutCopy: "페이지는 주소에 맞는 화면의 전체 배치와 들어갈 부품의 자리를 정합니다.",
+        tag: "page.tsx가 화면의 뼈대와 문구 자리를 먼저 만듭니다.",
+        cards: ["자리만 있음|데이터 없음", "자리만 있음|데이터 없음", "자리만 있음|데이터 없음", "자리만 있음|데이터 없음"]
       },
       {
         title: "공간 예약",
         copy: "페이지가 ReserveButton 부품을 불러와 실제 버튼을 배치합니다.",
         button: "예약하기",
         calloutTitle: "components/ReserveButton.tsx",
-        calloutCopy: "공용 부품은 한 번 만든 뒤 여러 페이지에서 불러옵니다. 이 파일을 바꾸면 사용하는 화면도 함께 달라질 수 있습니다."
+        calloutCopy: "공용 부품은 한 번 만든 뒤 여러 페이지에서 불러옵니다. 이 파일을 바꾸면 사용하는 화면도 함께 달라질 수 있습니다.",
+        tag: "components/Button.tsx가 연결되며 버튼의 문구와 모양이 실제 요소가 됩니다.",
+        cards: ["회의실 A|부품 연결 전", "스튜디오 B|부품 연결 전", "작업실 C|부품 연결 전", "라운지 D|부품 연결 전"]
       },
       {
         title: "집중할 공간을 예약하세요",
         copy: "globals.css의 색상, 여백, 글꼴 규칙이 화면 전체에 적용됩니다.",
         button: "자리 확인",
         calloutTitle: "styles/globals.css",
-        calloutCopy: "스타일 파일은 코드의 내용을 바꾸지 않고 화면의 인상과 가독성을 바꿉니다."
+        calloutCopy: "스타일 파일은 코드의 내용을 바꾸지 않고 화면의 인상과 가독성을 바꿉니다.",
+        tag: "styles/globals.css가 적용되며 색상, 간격, 버튼 둥글기가 한 번에 정돈됩니다.",
+        cards: ["회의실 A|차분한 카드", "스튜디오 B|정돈된 간격", "작업실 C|통일된 색상", "라운지 D|읽기 쉬움"]
       },
       {
         title: "오늘 예약 가능한 공간",
         copy: "데이터가 연결되면 카드에 실제 공간과 예약 가능 상태가 채워집니다.",
         button: "10개 공간 확인",
         calloutTitle: "lib/api.ts → page.tsx → browser",
-        calloutCopy: "데이터 도구가 정보를 가져오고 페이지가 부품과 함께 조립하면 사용자가 보는 최종 서비스가 됩니다."
+        calloutCopy: "데이터 도구가 정보를 가져오고 페이지가 부품과 함께 조립하면 사용자가 보는 최종 서비스가 됩니다.",
+        tag: "lib/api.ts에서 받은 데이터가 카드에 채워져 빈 화면이 실제 서비스처럼 작동합니다.",
+        cards: ["회의실 A|예약 가능", "스튜디오 B|2자리 남음", "작업실 C|오늘 마감", "라운지 D|즉시 예약"]
       }
     ];
 
@@ -4114,6 +4654,13 @@
       document.querySelectorAll("[data-manifest]").forEach((button) => button.classList.toggle("active", button.dataset.manifest === key));
       document.getElementById("document-title").textContent = detail[0];
       document.getElementById("document-note").textContent = detail[2];
+      const effects = document.getElementById("document-effects");
+      if (effects) {
+        effects.innerHTML = (detail[3] || []).map((item) => {
+          const [label, copy] = item.split("|");
+          return `<span><b>${label}</b>${copy}</span>`;
+        }).join("");
+      }
 
       const paper = document.getElementById("document-paper");
       if (paper) {
@@ -4296,6 +4843,11 @@
       document.getElementById("source-zone-title").textContent = detail.title;
       document.getElementById("source-zone-copy").textContent = detail.copy;
       document.getElementById("source-zone-question").textContent = detail.question;
+      const visual = document.getElementById("source-zone-visual");
+      if (visual) {
+        visual.dataset.zone = key;
+        visual.innerHTML = `<div class="source-visual-inner">${detail.visual}</div>`;
+      }
     }
 
     function selectAssemblyStep(index) {
@@ -4310,9 +4862,17 @@
       document.getElementById("assembly-button").textContent = detail.button;
       document.getElementById("assembly-callout-title").textContent = detail.calloutTitle;
       document.getElementById("assembly-callout-copy").textContent = detail.calloutCopy;
+      const changeTag = document.getElementById("assembly-change-tag");
+      if (changeTag) {
+        changeTag.classList.remove("visible");
+        changeTag.textContent = detail.tag;
+        requestAnimationFrame(() => changeTag.classList.add("visible"));
+      }
 
       const cards = browser.querySelectorAll(".assembly-cards span");
       cards.forEach((card, cardIndex) => {
+        const [title, state] = (detail.cards?.[cardIndex] || "").split("|");
+        card.innerHTML = title ? `${title}<small>${state || ""}</small>` : "";
         card.style.opacity = index === 0 ? ".18" : index === 1 ? ".36" : index === 2 ? ".68" : "1";
         card.style.transform = index === 3 ? "translateY(0)" : `translateY(${Math.max(0, 8 - index * 3)}px)`;
         card.style.background = index === 3 && cardIndex === 0
@@ -4374,10 +4934,11 @@
     function selectWorkflowStep(index) {
       const detail = workflowDetails[index] || workflowDetails[0];
       document.querySelectorAll("[data-step]").forEach((button) => button.classList.toggle("active", Number(button.dataset.step) === index));
-      document.getElementById("workflow-label").textContent = detail[0];
-      document.getElementById("workflow-title").textContent = detail[1];
-      document.getElementById("workflow-copy").textContent = detail[2];
-      document.getElementById("workflow-code").textContent = detail[3];
+      document.getElementById("workflow-label").textContent = detail.label;
+      document.getElementById("workflow-title").textContent = detail.title;
+      document.getElementById("workflow-copy").textContent = detail.copy;
+      const visual = document.getElementById("workflow-visual");
+      if (visual) visual.innerHTML = `<div class="workflow-visual-inner">${detail.visual}</div>`;
     }
 
     function showSlide(index) {
@@ -4675,10 +5236,13 @@
     document.querySelectorAll("[data-source-zone]").forEach((button) => button.addEventListener("click", () => selectSourceZone(button.dataset.sourceZone)));
     document.querySelectorAll("[data-assembly-step]").forEach((button) => button.addEventListener("click", () => selectAssemblyStep(Number(button.dataset.assemblyStep))));
     document.querySelectorAll("[data-safety-choice]").forEach((button) => button.addEventListener("click", () => answerSafetyQuestion(button.dataset.safetyChoice)));
-    document.getElementById("safety-next").addEventListener("click", () => {
-      safetyQuestionIndex = (safetyQuestionIndex + 1) % safetyQuestions.length;
-      renderSafetyQuestion();
-    });
+    const safetyNextButton = document.getElementById("safety-next");
+    if (safetyNextButton) {
+      safetyNextButton.addEventListener("click", () => {
+        safetyQuestionIndex = (safetyQuestionIndex + 1) % safetyQuestions.length;
+        renderSafetyQuestion();
+      });
+    }
 
     document.querySelectorAll("[data-change]").forEach((button) => button.addEventListener("click", () => {
       if (isTyping) return;
@@ -4851,7 +5415,7 @@
     selectWorkflowStep(0);
     selectSourceZone("page");
     selectAssemblyStep(0);
-    renderSafetyQuestion();
+    if (document.getElementById("safety-progress")) renderSafetyQuestion();
     updateTimer();
     
     // 초기 양방향 바인딩 실행
