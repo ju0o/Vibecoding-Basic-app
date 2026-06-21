@@ -128,7 +128,7 @@ function assetFrame(item, mode = 'img') {
   const visual = mode === 'img'
     ? `<img class="asset-keyvisual" data-kv-img src="../${item.asset}" alt="${escapeHtml(item.screenText)}">
        <div class="asset-fallback-placeholder" style="position:absolute; inset:0; width:100%; height:100%;">${keyVisualSVG(item.slot, accent, lesson)}</div>
-       <div class="keyvisual-caption"><span>${escapeHtml(item.slot || 'visual')}</span><b>${escapeHtml(item.screenText)}</b></div>`
+       <div class="keyvisual-caption"><span>${escapeHtml(item.slot || 'visual')}</span></div>`
     : `<div class="asset-grid-lines"></div>
        <div class="asset-device">
          <span>${escapeHtml(item.slot || 'visual')}</span>
@@ -141,54 +141,81 @@ function assetFrame(item, mode = 'img') {
       <div class="asset-canvas">
         ${visual}
       </div>
-      <small>${mode === 'img' ? 'AI 키비주얼 교체 대상 · ' : ''}${escapeHtml(item.asset || (item.captures || []).join(' · ') || 'offline generated preview')}</small>
     </div>
   `;
 }
 
+// Documentary capture frames (basic-course aesthetic): realistic terminal/browser
+// mockups instead of abstract panels. Course-aware — cross-tool panels for advanced,
+// concept-derived panels for every other track.
 function captureMatrix(item) {
-  const captures = item.captures?.length ? item.captures : lesson.assets?.captures || [];
-  const labels = ['Claude CLI', 'Codex CLI/App', 'IDE/App'];
+  const isAdvanced = course.visualMode === 'advanced';
+  const clip = (text, n) => String(text || '').slice(0, n);
+  const panels = isAdvanced
+    ? [
+      { chrome: 'claude — cli', tag: 'diff', title: '저장소 탐색·변경 설명', desc: '텍스트 증거가 강함', lines: [['p', '$ claude'], ['d', '› 저장소 구조 탐색'], ['d', '› 변경 지점 diff 설명'], ['c', '+ 12  − 4  · 3 files'], ['o', '✓ diff ready'], ['m', '텍스트 증거 확보']] },
+      { chrome: 'codex — exec', tag: 'qa', title: '승인·sandbox·브라우저 QA', desc: '검증 증거가 강함', lines: [['p', '$ codex exec'], ['w', 'approve run? (y)'], ['d', '› sandbox 실행'], ['d', '› 브라우저 QA'], ['o', '✓ verified'], ['m', '검증 증거 확보']] },
+      { chrome: 'localhost:3000', tag: 'preview', title: '코드와 실제 화면 동시 확인', desc: '시각 판단이 강함', browser: true },
+    ]
+    : (lesson.concepts || []).slice(0, 3).map(([title, copy], index) => ({
+      chrome: `step ${String(index + 1).padStart(2, '0')}`,
+      tag: ['why', 'how', 'check'][index] || 'note',
+      title,
+      desc: copy,
+      lines: [['p', `> ${clip(title, 22)}`], ['d', `› ${clip(copy, 24)}`], ['d', `  ${clip(String(copy).slice(24), 24)}`], ['o', '✓ 확인 기준 충족']],
+    }));
   return `
     <div class="capture-matrix">
-      ${labels.map((label, index) => `
-        <article style="--i:${index}">
-          <header><span>${escapeHtml(label)}</span><b>${index === 0 ? 'diff' : index === 1 ? 'qa' : 'preview'}</b></header>
-          <div class="capture-screen">
-            <code>${escapeHtml(captures[index] || 'capture pending')}</code>
-            <strong>${escapeHtml(index === 0 ? '저장소 탐색·변경 설명' : index === 1 ? '승인·sandbox·브라우저 QA' : '코드와 실제 화면 동시 확인')}</strong>
-            <p>${escapeHtml(index === 0 ? '텍스트 증거가 강함' : index === 1 ? '검증 증거가 강함' : '시각 판단이 강함')}</p>
+      ${panels.map((panel, index) => `
+        <article class="doc-frame${panel.browser ? ' is-browser' : ''}" style="--i:${index}">
+          <div class="doc-chrome"><i></i><i></i><i></i><small>${escapeHtml(panel.chrome)}</small><b>${escapeHtml(panel.tag)}</b></div>
+          <div class="doc-screen">
+            ${panel.browser
+              ? `<div class="doc-browser"><span class="doc-pill"></span><strong>${escapeHtml(panel.title)}</strong><span class="doc-bar"></span><span class="doc-bar short"></span><span class="doc-btn">실행 결과 확인</span></div>`
+              : `<div class="doc-term">${(panel.lines || []).map(([type, text]) => `<span class="ln ${type}">${escapeHtml(text)}</span>`).join('')}</div>`}
           </div>
+          <div class="doc-cap"><b>${escapeHtml(panel.title)}</b><small>${escapeHtml(panel.desc)}</small></div>
         </article>
       `).join('')}
     </div>
   `;
 }
 
-// Ultra cover: a real CSS-3D, pointer-interactive hero (perspective + preserve-3d),
-// animated orbit rings, floating concept nodes, glowing core, and a canvas particle field.
+// Documentary cover: editorial title on the left, realistic device mockups on the
+// right (a course card listing what this lesson teaches + a terminal frame), angled
+// in 3D with depth shadows and a gentle pointer tilt.
 function heroCover(item, index) {
   const concepts = lesson.concepts.map(([title]) => title);
-  const nodes = concepts.map((title, i) => {
-    const ang = Math.round(i * (360 / concepts.length));
-    return `<div class="hero-node" style="--ang:${ang}deg;--i:${i}"><b></b><span>${escapeHtml(title)}</span></div>`;
-  }).join('');
+  const conceptRows = concepts.slice(0, 5).map((title, i) =>
+    `<div class="cd-row"><span class="cd-n">${String(i + 1).padStart(2, '0')}</span><b>${escapeHtml(title)}</b></div>`).join('');
+  const cliLines = (lesson.sequence || []).slice(0, 3).map((step) =>
+    `<span class="ln d">› ${escapeHtml(step)}</span>`).join('');
+  const titleHtml = lesson.title.includes(' — ')
+    ? `${escapeHtml(lesson.title.split(' — ')[0])}<span class="hero-title-2">${escapeHtml(lesson.title.split(' — ').slice(1).join(' — '))}</span>`
+    : escapeHtml(lesson.title);
   return `
     <section class="slide hero-slide${index === 0 ? ' active' : ''}" data-slide="${index + 1}" data-title="${escapeHtml(item.title)}">
-      <div class="hero-3d" data-hero>
+      <div class="hero-3d cover-doc" data-hero>
         <canvas class="hero-particles" aria-hidden="true"></canvas>
-        <div class="hero-scene">
-          <div class="hero-floor"></div>
-          <div class="hero-rings"><i style="--r:300px;--d:16s"></i><i style="--r:430px;--d:26s;--rev:reverse"></i><i style="--r:580px;--d:40s"></i></div>
-          <div class="hero-nodes">${nodes}</div>
-          <div class="hero-core"><b>${escapeHtml(course.code)}</b><span>${String(lessonIndex + 1).padStart(2, '0')}</span></div>
-        </div>
         <div class="hero-copy">
           <div class="hero-kicker"><i></i>${escapeHtml(course.code)} · ${escapeHtml(lesson.module)}</div>
-          <h1 class="hero-title">${escapeHtml(lesson.title)}</h1>
+          <h1 class="hero-title">${titleHtml}</h1>
           <p class="hero-sub">${escapeHtml(item.screenText || lesson.subtitle)}</p>
-          <div class="hero-flow">${lesson.flow.map((flowItem) => `<span>${escapeHtml(flowItem)}</span>`).join('')}</div>
-          <div class="hero-hint"><span class="dot"></span>마우스를 움직이면 시점이 따라옵니다 · → 키로 다음 슬라이드</div>
+        </div>
+        <div class="hero-scene">
+          <div class="cover-stage">
+            <div class="cover-device">
+              <div class="doc-chrome"><i></i><i></i><i></i><small>vibe-studio — ${escapeHtml(lesson.core || course.code)}</small><b>${escapeHtml(item.tag || 'COVER')}</b></div>
+              <div class="cover-screen">
+                <span class="cd-kicker">이번 강의에서 배우는 것</span>
+                <div class="cd-list">${conceptRows}</div>
+              </div>
+            </div>
+            <div class="cover-cli">
+              <div class="doc-chrome"><i></i><i></i><i></i><small>terminal</small></div>
+              <div class="doc-term">${cliLines}<span class="ln o">✓ 검증 완료</span></div>
+            </div>
+          </div>
         </div>
         <div class="hero-vignette" aria-hidden="true"></div>
       </div>
@@ -242,10 +269,10 @@ function slotSlide(item, index) {
         </section>
         <aside class="slot-note-board">
           ${lesson.decisions.map(([question, tone, feedback], decisionIndex) => `
-            <article style="--i:${decisionIndex}">
+            <article style="--i:${decisionIndex}" data-tone="${escapeHtml(tone)}">
               <i>${String(decisionIndex + 1).padStart(2, '0')}</i>
               <b>${escapeHtml(question)}</b>
-              <span>${escapeHtml(tone)} · ${escapeHtml(feedback)}</span>
+              <span><em class="nb-tone">${escapeHtml(tone)}</em>${escapeHtml(feedback)}</span>
             </article>
           `).join('')}
         </aside>
@@ -662,8 +689,8 @@ function initHeroes() {
         if (!rect.width) return;
         const px = (event.clientX - rect.left) / rect.width - 0.5;
         const py = (event.clientY - rect.top) / rect.height - 0.5;
-        scene.style.transform = `rotateY(${(px * 18).toFixed(2)}deg) rotateX(${(-py * 13).toFixed(2)}deg)`;
-        if (copy) copy.style.transform = `translateZ(140px) translate(${(-px * 16).toFixed(1)}px, ${(-py * 12).toFixed(1)}px)`;
+        scene.style.transform = `scale(1.03) rotateY(${(px * 16).toFixed(2)}deg) rotateX(${(-py * 11).toFixed(2)}deg)`;
+        if (copy) copy.style.transform = `translateY(-50%) translate(${(-px * 14).toFixed(1)}px, ${(-py * 9).toFixed(1)}px)`;
       });
       hero.addEventListener('pointerleave', () => {
         scene.style.transform = '';
