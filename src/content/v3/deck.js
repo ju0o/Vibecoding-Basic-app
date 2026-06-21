@@ -20,6 +20,8 @@ const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => 
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 }[char]));
 
+const structuredSlides = Array.isArray(lesson.slides) && lesson.slides.length ? lesson.slides : null;
+const totalSlides = structuredSlides ? structuredSlides.length : 13;
 const stageLabels = lesson.demo.stages;
 const sourceNote = lesson.sources?.length ? `공식 자료 ${lesson.sources.length}개 연결` : '과정 내부 사례 기반';
 let currentSlide = 0;
@@ -34,7 +36,7 @@ function footer(index) {
       <small>${escapeHtml(course.code)} · ${escapeHtml(lesson.module)} · ${escapeHtml(sourceNote)}</small>
       <div class="deck-nav">
         <button type="button" data-deck-prev aria-label="이전 슬라이드">‹</button>
-        <span class="deck-counter">${String(index + 1).padStart(2, '0')} / 13</span>
+        <span class="deck-counter">${String(index + 1).padStart(2, '0')} / ${totalSlides}</span>
         <button type="button" data-deck-next aria-label="다음 슬라이드">›</button>
       </div>
     </footer>
@@ -62,6 +64,205 @@ function slide(index, title, body, intro = '', kicker = lesson.module) {
       ${footer(index)}
     </section>
   `;
+}
+
+// Code key visual: a generated SVG motif (no external image asset needed).
+// The AI-image path stays as the caption so it can be swapped in later.
+function keyVisualSVG(slot, accent, currentLesson) {
+  const amber = '#f59e0b';
+  const moduleLabel = escapeHtml(currentLesson.module || '');
+  const titleLabel = escapeHtml(currentLesson.title || '');
+  const defs = `
+    <defs>
+      <linearGradient id="kvbg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#0a111c"/><stop offset="1" stop-color="#0d1726"/>
+      </linearGradient>
+      <radialGradient id="kvglow" cx="0.72" cy="0.22" r="0.62">
+        <stop offset="0" stop-color="${accent}" stop-opacity="0.30"/><stop offset="1" stop-color="${accent}" stop-opacity="0"/>
+      </radialGradient>
+    </defs>`;
+  const base = `
+    <rect width="640" height="360" fill="url(#kvbg)"/>
+    <rect width="640" height="360" fill="url(#kvglow)"/>
+    <g stroke="${accent}" stroke-opacity="0.08">
+      ${Array.from({ length: 7 }, (_, i) => `<line x1="0" y1="${i * 52 + 18}" x2="640" y2="${i * 52 + 18}"/>`).join('')}
+      ${Array.from({ length: 11 }, (_, i) => `<line x1="${i * 64 + 16}" y1="0" x2="${i * 64 + 16}" y2="360"/>`).join('')}
+    </g>`;
+  let motif = '';
+  if (slot === 'metaphor') {
+    motif = `
+      <g transform="translate(330,176)">
+        <rect x="-160" y="-80" width="210" height="132" rx="16" fill="${accent}" fill-opacity="0.10" stroke="${accent}" stroke-opacity="0.55" transform="rotate(-9)"/>
+        <rect x="-46" y="-52" width="210" height="132" rx="16" fill="${amber}" fill-opacity="0.08" stroke="${amber}" stroke-opacity="0.45" transform="rotate(7)"/>
+        <circle cx="-66" cy="-4" r="6" fill="${accent}"/><circle cx="76" cy="22" r="6" fill="${amber}"/>
+        <line x1="-66" y1="-4" x2="76" y2="22" stroke="${accent}" stroke-opacity="0.5"/>
+      </g>`;
+  } else if (slot === 'next') {
+    motif = `
+      <g fill="none" stroke="${accent}" stroke-linecap="round" stroke-linejoin="round">
+        ${[0, 1, 2].map((i) => `<path d="M${300 + i * 74} 126 L${342 + i * 74} 180 L${300 + i * 74} 234" stroke-opacity="${0.28 + i * 0.3}" stroke-width="${5 + i}"/>`).join('')}
+      </g>
+      <line x1="60" y1="300" x2="580" y2="300" stroke="${accent}" stroke-opacity="0.3"/>
+      <circle cx="150" cy="300" r="5" fill="${amber}"/><circle cx="470" cy="178" r="7" fill="${accent}"/>`;
+  } else {
+    motif = `
+      <g transform="translate(438,178)" fill="none">
+        ${[64, 104, 146].map((r, i) => `<circle r="${r}" stroke="${accent}" stroke-opacity="${0.46 - i * 0.13}"/>`).join('')}
+        <circle r="11" fill="${accent}"/>
+        <circle cx="103" cy="-103" r="7" fill="${amber}"/>
+      </g>
+      <line x1="40" y1="302" x2="600" y2="302" stroke="${accent}" stroke-opacity="0.3"/>
+      ${[120, 232, 344].map((x) => `<circle cx="${x}" cy="302" r="4" fill="${accent}" fill-opacity="0.6"/>`).join('')}`;
+  }
+  return `
+    <svg class="asset-keyvisual" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      ${defs}${base}<g class="kv-anim kv-${slot}">${motif}</g>
+      <text x="40" y="54" fill="${accent}" font-family="monospace" font-size="13" font-weight="700" opacity="0.85">${moduleLabel}</text>
+      <text x="40" y="332" fill="#9fb2bd" font-family="monospace" font-size="11" opacity="0.55">${titleLabel}</text>
+    </svg>`;
+}
+
+function assetFrame(item, mode = 'img') {
+  const label = mode === 'cap' ? 'DOCUMENTARY CAPTURE' : 'KEY VISUAL';
+  const accent = (typeof course !== 'undefined' && course && course.color) || '#2dd4bf';
+  const visual = mode === 'img'
+    ? `<img class="asset-keyvisual" data-kv-img src="../${item.asset}" alt="${escapeHtml(item.screenText)}">
+       <div class="asset-fallback-placeholder" style="position:absolute; inset:0; width:100%; height:100%;">${keyVisualSVG(item.slot, accent, lesson)}</div>
+       <div class="keyvisual-caption"><span>${escapeHtml(item.slot || 'visual')}</span><b>${escapeHtml(item.screenText)}</b></div>`
+    : `<div class="asset-grid-lines"></div>
+       <div class="asset-device">
+         <span>${escapeHtml(item.slot || 'visual')}</span>
+         <h3>${escapeHtml(item.screenText)}</h3>
+         <p>${escapeHtml(item.presenterNote)}</p>
+       </div>`;
+  return `
+    <div class="slot-asset-frame" data-asset-kind="${escapeHtml(mode)}">
+      <div class="asset-toolbar"><span>${escapeHtml(label)}</span><b>${escapeHtml(item.tag || item.kind || '')}</b></div>
+      <div class="asset-canvas">
+        ${visual}
+      </div>
+      <small>${mode === 'img' ? 'AI 키비주얼 교체 대상 · ' : ''}${escapeHtml(item.asset || (item.captures || []).join(' · ') || 'offline generated preview')}</small>
+    </div>
+  `;
+}
+
+function captureMatrix(item) {
+  const captures = item.captures?.length ? item.captures : lesson.assets?.captures || [];
+  const labels = ['Claude CLI', 'Codex CLI/App', 'IDE/App'];
+  return `
+    <div class="capture-matrix">
+      ${labels.map((label, index) => `
+        <article style="--i:${index}">
+          <header><span>${escapeHtml(label)}</span><b>${index === 0 ? 'diff' : index === 1 ? 'qa' : 'preview'}</b></header>
+          <div class="capture-screen">
+            <code>${escapeHtml(captures[index] || 'capture pending')}</code>
+            <strong>${escapeHtml(index === 0 ? '저장소 탐색·변경 설명' : index === 1 ? '승인·sandbox·브라우저 QA' : '코드와 실제 화면 동시 확인')}</strong>
+            <p>${escapeHtml(index === 0 ? '텍스트 증거가 강함' : index === 1 ? '검증 증거가 강함' : '시각 판단이 강함')}</p>
+          </div>
+        </article>
+      `).join('')}
+    </div>
+  `;
+}
+
+// Ultra cover: a real CSS-3D, pointer-interactive hero (perspective + preserve-3d),
+// animated orbit rings, floating concept nodes, glowing core, and a canvas particle field.
+function heroCover(item, index) {
+  const concepts = lesson.concepts.map(([title]) => title);
+  const nodes = concepts.map((title, i) => {
+    const ang = Math.round(i * (360 / concepts.length));
+    return `<div class="hero-node" style="--ang:${ang}deg;--i:${i}"><b></b><span>${escapeHtml(title)}</span></div>`;
+  }).join('');
+  return `
+    <section class="slide hero-slide${index === 0 ? ' active' : ''}" data-slide="${index + 1}" data-title="${escapeHtml(item.title)}">
+      <div class="hero-3d" data-hero>
+        <canvas class="hero-particles" aria-hidden="true"></canvas>
+        <div class="hero-scene">
+          <div class="hero-floor"></div>
+          <div class="hero-rings"><i style="--r:300px;--d:16s"></i><i style="--r:430px;--d:26s;--rev:reverse"></i><i style="--r:580px;--d:40s"></i></div>
+          <div class="hero-nodes">${nodes}</div>
+          <div class="hero-core"><b>${escapeHtml(course.code)}</b><span>${String(lessonIndex + 1).padStart(2, '0')}</span></div>
+        </div>
+        <div class="hero-copy">
+          <div class="hero-kicker"><i></i>${escapeHtml(course.code)} · ${escapeHtml(lesson.module)}</div>
+          <h1 class="hero-title">${escapeHtml(lesson.title)}</h1>
+          <p class="hero-sub">${escapeHtml(item.screenText || lesson.subtitle)}</p>
+          <div class="hero-flow">${lesson.flow.map((flowItem) => `<span>${escapeHtml(flowItem)}</span>`).join('')}</div>
+          <div class="hero-hint"><span class="dot"></span>마우스를 움직이면 시점이 따라옵니다 · → 키로 다음 슬라이드</div>
+        </div>
+        <div class="hero-vignette" aria-hidden="true"></div>
+      </div>
+      ${footer(index)}
+    </section>
+  `;
+}
+
+function slotSlide(item, index) {
+  const kicker = `${lesson.module} · ${escapeHtml(item.tag || item.kind || 'SLOT')}`;
+  if (item.slot === 'cover') return heroCover(item, index);
+  if (item.kind === 'scene') {
+    return slide(index, item.title, `
+      <div class="live-layout structured-live">
+        <div class="live-stage scene-stage" id="scene-stage"></div>
+        <aside class="live-controls">
+          <h3>MANUAL SCENE</h3>
+          <button class="control-btn primary" type="button" id="live-start">시작</button>
+          <button class="control-btn" type="button" id="live-prev">이전 단계</button>
+          <button class="control-btn" type="button" id="live-next">다음 단계</button>
+          <button class="control-btn" type="button" id="live-pause">일시정지</button>
+          <button class="control-btn" type="button" id="live-reset">초기화</button>
+          <p class="control-caption" id="live-caption">시작을 누르면 첫 표면이 강조됩니다. 자동으로 넘어가지 않습니다.</p>
+          <div class="motion-brief"><b>SCENE INTENT</b><span>${escapeHtml(item.screenText)}</span></div>
+          <div class="control-state" id="live-state">READY<br>0 / ${stageLabels.length}</div>
+        </aside>
+      </div>
+    `, item.presenterNote, kicker);
+  }
+
+  if (item.kind === 'cap') {
+    return slide(index, item.title, `
+      <div class="slot-layout cap-slot">
+        <section class="slot-copy">
+          <span>${escapeHtml(item.tag)}</span>
+          <h3>${escapeHtml(item.screenText)}</h3>
+          <p>${escapeHtml(item.presenterNote)}</p>
+        </section>
+        ${captureMatrix(item)}
+      </div>
+    `, '본문은 실제 캡처를 우선하고, 캡처가 없는 부분만 코드 렌더 장면으로 보완합니다.', kicker);
+  }
+
+  if (item.kind === 'text') {
+    return slide(index, item.title, `
+      <div class="slot-layout text-slot">
+        <section class="slot-copy large">
+          <span>${escapeHtml(item.tag)}</span>
+          <h3>${escapeHtml(item.screenText)}</h3>
+          <p>${escapeHtml(item.presenterNote)}</p>
+        </section>
+        <aside class="slot-note-board">
+          ${lesson.decisions.map(([question, tone, feedback], decisionIndex) => `
+            <article style="--i:${decisionIndex}">
+              <i>${String(decisionIndex + 1).padStart(2, '0')}</i>
+              <b>${escapeHtml(question)}</b>
+              <span>${escapeHtml(tone)} · ${escapeHtml(feedback)}</span>
+            </article>
+          `).join('')}
+        </aside>
+      </div>
+    `, '화면에 문장을 많이 넣지 않고 판단 기준만 남깁니다.', kicker);
+  }
+
+  return slide(index, item.title, `
+    <div class="slot-layout image-slot">
+      <section class="slot-copy">
+        <span>${escapeHtml(item.tag)}</span>
+        <h3>${escapeHtml(item.screenText)}</h3>
+        <p>${escapeHtml(item.presenterNote)}</p>
+      </section>
+      ${assetFrame(item, 'img')}
+    </div>
+  `, '키비주얼은 표지·은유·다음 예고에만 사용합니다.', kicker);
 }
 
 function cover() {
@@ -153,7 +354,7 @@ function liveDemo() {
         <div class="control-state" id="live-state">READY<br>0 / ${stageLabels.length}</div>
       </aside>
     </div>
-  `, '설명보다 실제 처리 흐름이 먼저 보이도록 구성한 수동 시연입니다.');
+  `);
 }
 
 function compare() {
@@ -273,36 +474,41 @@ function next() {
   `, nextLesson ? '이번 산출물을 다음 회차의 입력으로 가져옵니다.' : '강의가 끝나도 운영 기록과 개선 루프는 계속됩니다.');
 }
 
-deck.innerHTML = [
-  cover(),
-  agenda(),
-  concepts(),
-  sequence(),
-  liveDemo(),
-  compare(),
-  decisions(),
-  errorRecovery(),
-  caseWorkshop(),
-  practiceBrief(),
-  timer(),
-  review(),
-  next(),
-].join('');
+deck.innerHTML = structuredSlides
+  ? structuredSlides.map((item, index) => slotSlide(item, index)).join('')
+  : [
+    cover(),
+    agenda(),
+    concepts(),
+    sequence(),
+    liveDemo(),
+    compare(),
+    decisions(),
+    errorRecovery(),
+    caseWorkshop(),
+    practiceBrief(),
+    timer(),
+    review(),
+    next(),
+  ].join('');
 
 const slides = [...document.querySelectorAll('.slide')];
+const liveSlideIndex = structuredSlides ? structuredSlides.findIndex((item) => item.kind === 'scene') : 4;
+const timerSlideIndex = structuredSlides ? -1 : 10;
 
 function showSlide(index) {
   const previousSlide = currentSlide;
   currentSlide = Math.max(0, Math.min(slides.length - 1, index));
   slides.forEach((slideElement, slideIndex) => slideElement.classList.toggle('active', slideIndex === currentSlide));
-  if (previousSlide === 4 && currentSlide !== 4) {
+  if (previousSlide === liveSlideIndex && currentSlide !== liveSlideIndex) {
     document.body.classList.add('is-paused');
     sceneController?.pause(liveStage, true);
   }
-  if (currentSlide !== 10 && timerHandle) {
+  if (timerSlideIndex >= 0 && currentSlide !== timerSlideIndex && timerHandle) {
     clearInterval(timerHandle);
     timerHandle = null;
-    document.getElementById('timer-toggle').textContent = '계속';
+    const timerButton = document.getElementById('timer-toggle');
+    if (timerButton) timerButton.textContent = '계속';
   }
 }
 
@@ -337,39 +543,42 @@ document.querySelectorAll('[data-sequence]').forEach((button) => button.addEvent
 }));
 
 function renderLive() {
+  const caption = document.getElementById('live-caption');
+  const state = document.getElementById('live-state');
+  if (!caption || !state) return;
   const paused = document.body.classList.contains('is-paused');
   sceneController?.pause(liveStage, paused);
   const current = stageLabels[Math.max(0, liveStage)];
-  document.getElementById('live-caption').textContent = liveStage < 0
+  caption.textContent = liveStage < 0
     ? '시작을 누르면 첫 단계가 강조됩니다. 자동으로 넘어가지 않습니다.'
     : `${liveStage + 1}. ${current} · 다음 결과를 먼저 질문한 뒤 진행하세요.`;
-  document.getElementById('live-state').innerHTML = `${paused ? 'PAUSED' : liveStage < 0 ? 'READY' : liveStage === stageLabels.length - 1 ? 'VERIFIED' : 'MANUAL'}<br>${Math.max(0, liveStage + 1)} / ${stageLabels.length}`;
+  state.innerHTML = `${paused ? 'PAUSED' : liveStage < 0 ? 'READY' : liveStage === stageLabels.length - 1 ? 'VERIFIED' : 'MANUAL'}<br>${Math.max(0, liveStage + 1)} / ${stageLabels.length}`;
 }
 
-document.getElementById('live-start').addEventListener('click', () => {
+document.getElementById('live-start')?.addEventListener('click', () => {
   document.body.classList.remove('is-paused');
   liveStage = 0;
   sceneController?.start();
   renderLive();
 });
-document.getElementById('live-prev').addEventListener('click', () => {
+document.getElementById('live-prev')?.addEventListener('click', () => {
   if (document.body.classList.contains('is-paused')) return;
   liveStage = Math.max(0, liveStage - 1);
   sceneController?.go(liveStage);
   renderLive();
 });
-document.getElementById('live-next').addEventListener('click', () => {
+document.getElementById('live-next')?.addEventListener('click', () => {
   if (document.body.classList.contains('is-paused')) return;
   liveStage = Math.min(stageLabels.length - 1, liveStage + 1);
   sceneController?.go(liveStage);
   renderLive();
 });
-document.getElementById('live-pause').addEventListener('click', () => {
+document.getElementById('live-pause')?.addEventListener('click', () => {
   document.body.classList.toggle('is-paused');
   document.getElementById('live-pause').textContent = document.body.classList.contains('is-paused') ? '계속' : '일시정지';
   renderLive();
 });
-document.getElementById('live-reset').addEventListener('click', () => {
+document.getElementById('live-reset')?.addEventListener('click', () => {
   document.body.classList.remove('is-paused');
   liveStage = -1;
   sceneController?.reset();
@@ -398,11 +607,13 @@ document.querySelectorAll('[data-path]').forEach((button) => button.addEventList
 document.querySelectorAll('.check-btn').forEach((button) => button.addEventListener('click', () => button.classList.toggle('checked')));
 
 function renderTimer() {
+  const timerValue = document.getElementById('timer-value');
+  if (!timerValue) return;
   const minutes = Math.floor(timerSeconds / 60);
   const seconds = timerSeconds % 60;
-  document.getElementById('timer-value').textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  timerValue.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
-document.getElementById('timer-toggle').addEventListener('click', () => {
+document.getElementById('timer-toggle')?.addEventListener('click', () => {
   const button = document.getElementById('timer-toggle');
   if (timerHandle) {
     clearInterval(timerHandle);
@@ -421,7 +632,7 @@ document.getElementById('timer-toggle').addEventListener('click', () => {
     }
   }, 1000);
 });
-document.getElementById('timer-reset').addEventListener('click', () => {
+document.getElementById('timer-reset')?.addEventListener('click', () => {
   if (timerHandle) clearInterval(timerHandle);
   timerHandle = null;
   timerSeconds = 40 * 60;
@@ -430,13 +641,103 @@ document.getElementById('timer-reset').addEventListener('click', () => {
 });
 
 const requestedSlide = Number(params.get('slide'));
-sceneController = window.VibeSceneRegistry?.mount(document.getElementById('scene-stage'), {
-  course,
-  lesson,
-  lessonIndex,
-  scene: lesson.visualScene,
-});
+const sceneHost = document.getElementById('scene-stage');
+if (sceneHost) {
+  sceneController = window.VibeSceneRegistry?.mount(sceneHost, {
+    course,
+    lesson,
+    lessonIndex,
+    scene: lesson.visualScene,
+  });
+}
+function initHeroes() {
+  const lowMotion = document.body.classList.contains('low-motion');
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.hero-3d[data-hero]').forEach((hero) => {
+    const scene = hero.querySelector('.hero-scene');
+    const copy = hero.querySelector('.hero-copy');
+    if (scene && !reduce) {
+      hero.addEventListener('pointermove', (event) => {
+        const rect = hero.getBoundingClientRect();
+        if (!rect.width) return;
+        const px = (event.clientX - rect.left) / rect.width - 0.5;
+        const py = (event.clientY - rect.top) / rect.height - 0.5;
+        scene.style.transform = `rotateY(${(px * 18).toFixed(2)}deg) rotateX(${(-py * 13).toFixed(2)}deg)`;
+        if (copy) copy.style.transform = `translateZ(140px) translate(${(-px * 16).toFixed(1)}px, ${(-py * 12).toFixed(1)}px)`;
+      });
+      hero.addEventListener('pointerleave', () => {
+        scene.style.transform = '';
+        if (copy) copy.style.transform = '';
+      });
+    }
+    const canvas = hero.querySelector('.hero-particles');
+    if (!canvas || !canvas.getContext) return;
+    const ctx = canvas.getContext('2d');
+    const accent = (getComputedStyle(hero).getPropertyValue('--accent') || '#2dd4bf').trim() || '#2dd4bf';
+    let width = 0;
+    let height = 0;
+    let dots = [];
+    let raf = 0;
+    function resize() {
+      const rect = hero.getBoundingClientRect();
+      width = canvas.width = Math.max(1, Math.floor(rect.width));
+      height = canvas.height = Math.max(1, Math.floor(rect.height));
+      const count = Math.max(24, Math.min(96, Math.floor(width / 15)));
+      dots = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        z: Math.random() * 0.8 + 0.2,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+      }));
+    }
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      for (const dot of dots) {
+        dot.x += dot.vx * dot.z * 2.2;
+        dot.y += dot.vy * dot.z * 2.2;
+        if (dot.x < -4) dot.x = width + 4; else if (dot.x > width + 4) dot.x = -4;
+        if (dot.y < -4) dot.y = height + 4; else if (dot.y > height + 4) dot.y = -4;
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, dot.z * 1.9, 0, Math.PI * 2);
+        ctx.globalAlpha = dot.z * 0.55;
+        ctx.fillStyle = accent;
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+    function loop() {
+      draw();
+      raf = window.requestAnimationFrame(loop);
+    }
+    try {
+      resize();
+      window.addEventListener('resize', () => { window.cancelAnimationFrame(raf); resize(); if (!(lowMotion || reduce)) loop(); });
+      if (lowMotion || reduce) draw();
+      else loop();
+    } catch (error) { /* canvas unsupported: keep the static composition */ }
+  });
+}
+
 if (params.get('motion') === 'low') document.body.classList.add('low-motion');
 if (Number.isFinite(requestedSlide) && requestedSlide > 0) showSlide(requestedSlide - 1);
+function wireKeyvisualImages() {
+  document.querySelectorAll('img[data-kv-img]').forEach((img) => {
+    const placeholder = img.nextElementSibling;
+    const hidePlaceholder = () => {
+      if (placeholder && placeholder.classList.contains('asset-fallback-placeholder')) placeholder.style.display = 'none';
+    };
+    const hideImg = () => { img.style.display = 'none'; };
+    if (img.complete) {
+      if (img.naturalWidth > 0) hidePlaceholder();
+      else hideImg();
+    }
+    img.addEventListener('load', hidePlaceholder);
+    img.addEventListener('error', hideImg);
+  });
+}
+
 renderLive();
 renderTimer();
+initHeroes();
+wireKeyvisualImages();

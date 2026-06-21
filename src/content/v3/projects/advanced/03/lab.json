@@ -1,0 +1,25 @@
+{
+  "courseId": "advanced",
+  "lessonNumber": 3,
+  "title": "Skill·재사용 자산 크로스툴",
+  "revision": "3.0.0-beta.3",
+  "status": "review",
+  "sceneId": "s-03-skill",
+  "aliasSceneId": "claude-03-skill",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "같은 작업을 반복할 때마다 결과가 다름",
+    "trace": "skill drift: ad-hoc instructions, no shared asset; claude/codex steps diverge",
+    "cause": "반복 작업을 자산으로 묶지 않음",
+    "fix": "트리거·절차·예시를 자산으로 묶고 두 도구가 같은 자산을 가리키게 검증"
+  },
+  "deliverables": [
+    "트리거·검증",
+    "크로스툴 동일",
+    "버전·근거"
+  ]
+}

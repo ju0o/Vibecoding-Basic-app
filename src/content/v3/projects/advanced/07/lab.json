@@ -1,0 +1,25 @@
+{
+  "courseId": "advanced",
+  "lessonNumber": 7,
+  "title": "평가·신뢰성·관측성·비용",
+  "revision": "3.0.0-beta.3",
+  "status": "review",
+  "sceneId": "s-07-reliability",
+  "aliasSceneId": "workflow-04-agent",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "조용한 품질 저하와 비용 급증",
+    "trace": "silent regression; no eval baseline; token cost spike unbounded",
+    "cause": "평가·관측·비용 가드 없이 변경",
+    "fix": "평가 하니스·회귀 베이스라인·트레이스·비용 가드를 두고 변경 전후 비교"
+  },
+  "deliverables": [
+    "정량 평가",
+    "회귀 방지",
+    "비용 가드"
+  ]
+}

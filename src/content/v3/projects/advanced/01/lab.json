@@ -1,0 +1,26 @@
+{
+  "courseId": "advanced",
+  "lessonNumber": 1,
+  "title": "도구 선택·CLI/표면 전략",
+  "revision": "3.0.0-beta.3",
+  "status": "review",
+  "sceneId": "s-01-surface",
+  "aliasSceneId": "workflow-01-terminal",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "작업에 맞지 않는 표면을 골라 검증 증거가 부족함",
+    "trace": "surface mismatch: visual QA requested, terminal-only evidence attached",
+    "cause": "작업 성격을 분류하지 않고 익숙한 도구에서 바로 시작함",
+    "fix": "작업→도구·표면 결정표를 작성하고 필요한 증거가 남는 표면으로 재실행"
+  },
+  "deliverables": [
+    "작업→도구·표면 결정표",
+    "선택 근거 메모",
+    "실행 1건의 캡처 또는 로그",
+    "실패 시 재선택 기준"
+  ]
+}

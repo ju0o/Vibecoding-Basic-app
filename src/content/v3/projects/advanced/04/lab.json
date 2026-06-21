@@ -1,0 +1,25 @@
+{
+  "courseId": "advanced",
+  "lessonNumber": 4,
+  "title": "MCP·커넥터·권한 크로스툴",
+  "revision": "3.0.0-beta.3",
+  "status": "review",
+  "sceneId": "s-04-mcp",
+  "aliasSceneId": "workflow-03-protocol",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "의도치 않은 파일 쓰기·삭제 발생",
+    "trace": "write scope: /** ; indirect prompt injection from external doc",
+    "cause": "필요 이상 권한 + 외부 입력 신뢰",
+    "fix": "권한 범위를 좁히고 승인 게이트·감사를 추가하며 외부=불신으로 처리"
+  },
+  "deliverables": [
+    "최소 권한",
+    "승인·감사",
+    "인젝션 방어"
+  ]
+}
