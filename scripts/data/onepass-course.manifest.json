@@ -1,0 +1,246 @@
+{
+  "id": "onepass",
+  "title": "AI 한방 이해하기 · 4주 집중",
+  "shortTitle": "AI 한방",
+  "code": "ONE",
+  "family": "원샷 집중",
+  "track": "원샷 집중 · 4주 (1주 플래그십)",
+  "level": "ALL-IN-ONE",
+  "status": "preview",
+  "visibility": "preview",
+  "audience": [
+    "studio"
+  ],
+  "curriculumVersion": "ONEPASS-W1-PILOT",
+  "description": "바이브코딩의 원리부터 CLI·MCP·Skill, 나만의 자동화, 그리고 나만의 AI 사무실까지 4주에 압축한 원샷 집중 트랙입니다.",
+  "color": "#a78bfa",
+  "route": "원리 → CLI·MCP·Skill 이해 → 나만의 MCP·Skill·Workflow 제작 → 오케스트레이션·AI 사무실",
+  "outcomes": [
+    "AI에게 일을 시키고 검증·복구하는 사고법",
+    "CLI·MCP·Skill의 개념과 사용",
+    "나만의 MCP·Skill·SubAgent·Workflow 제작",
+    "오케스트레이션으로 나만의 AI 사무실 구성"
+  ],
+  "visualMode": "onepass",
+  "modules": [
+    {
+      "id": "W1",
+      "title": "W1 · WHY IT WORKS",
+      "weeks": [
+        1
+      ]
+    },
+    {
+      "id": "W2",
+      "title": "W2 · CLI · MCP · SKILL",
+      "weeks": [
+        2
+      ]
+    },
+    {
+      "id": "W3",
+      "title": "W3 · BUILD · PARALLEL",
+      "weeks": [
+        3
+      ]
+    },
+    {
+      "id": "W4",
+      "title": "W4 · ORCHESTRATION · AI OFFICE",
+      "weeks": [
+        4
+      ]
+    }
+  ],
+  "sessions": [
+    {
+      "id": "onepass-01",
+      "title": "W1 · 바이브코딩의 원리 — 왜 AI에게 맡겨도 되는가",
+      "subtitle": "도구 사용법이 아니라, AI에게 일을 시키고 결과를 신뢰·검증·복구하는 사고법",
+      "description": "도구 사용법을 외우기 전에, AI에게 무엇을·어디까지 맡기고 결과를 어떻게 검증·복구하는지 판단 기준을 만듭니다.",
+      "duration": "180분",
+      "type": "practice",
+      "slideCount": 9,
+      "file": "sessions/onepass-week1.html",
+      "moduleId": "W1",
+      "revision": "3.0.0-beta.1",
+      "status": "preview",
+      "sourceKeys": [
+        "claude-overview",
+        "claude-quickstart",
+        "anthropic-eng-agents",
+        "node-download"
+      ],
+      "preparation": [
+        "개인 노트북",
+        "AI 코딩 도구 실행 환경",
+        "만들어보고 싶은 작은 아이디어 1건"
+      ],
+      "deliverables": [
+        "한 문장 목표와 완료 기준",
+        "맥락·예시 메모",
+        "직접 실행한 검증 기록",
+        "실패 시 복구 한 단계"
+      ],
+      "demoProject": {
+        "root": "v3/projects/onepass/01",
+        "starter": "v3/projects/onepass/01/starter",
+        "broken": "v3/projects/onepass/01/broken",
+        "complete": "v3/projects/onepass/01/complete",
+        "manifest": "v3/projects/onepass/01/lab.json"
+      },
+      "fallbackMedia": {
+        "image": "assets/v3/fallbacks/onepass-01.png",
+        "slide": "v3/deck.html?course=onepass&lesson=1&slide=4&motion=low"
+      }
+    },
+    {
+      "id": "onepass-02",
+      "title": "W2 · CLI로 바이브코딩 + MCP·Skill 이해",
+      "subtitle": "터미널 작업 흐름과 외부 능력(MCP)·반복 자산(Skill)의 개념·사용",
+      "description": "터미널에서 일하는 법, AI에 외부 능력을 끼우는 MCP, 반복을 자산으로 만드는 Skill을 한 흐름으로 이해합니다.",
+      "duration": "180분",
+      "type": "practice",
+      "slideCount": 11,
+      "file": "sessions/onepass-week2.html",
+      "moduleId": "W2",
+      "revision": "3.0.0-beta.1",
+      "status": "preview",
+      "sourceKeys": [
+        "claude-overview",
+        "claude-mcp",
+        "claude-skills",
+        "codex-overview"
+      ],
+      "preparation": [
+        "개인 노트북",
+        "AI 코딩 도구 실행 환경"
+      ],
+      "deliverables": [
+        "CLI로 작은 변경 1건",
+        "필요한 MCP 1개 연결",
+        "반복 작업 1개 Skill 후보 메모"
+      ]
+    },
+    {
+      "id": "onepass-03",
+      "title": "W3 · 나만의 MCP·Skill 만들기 + SubAgent·Workflow",
+      "subtitle": "직접 제작 — Skill·MCP 제작, 작업을 나누는 SubAgent, 반복 자동화 Workflow",
+      "description": "반복 작업을 나만의 Skill·MCP로 만들고, SubAgent로 병렬 처리하며, Workflow로 자동화합니다.",
+      "duration": "180분",
+      "type": "practice",
+      "slideCount": 10,
+      "file": "sessions/onepass-week3.html",
+      "moduleId": "W3",
+      "revision": "3.0.0-beta.1",
+      "status": "preview",
+      "sourceKeys": [
+        "claude-skills",
+        "claude-mcp",
+        "claude-subagents",
+        "anthropic-eng-multiagent"
+      ],
+      "preparation": [
+        "개인 노트북",
+        "AI 코딩 도구 실행 환경"
+      ],
+      "deliverables": [
+        "나만의 Skill 1개",
+        "연결한 MCP 1개",
+        "작업 분해·병렬 계획",
+        "자동화 Workflow 초안"
+      ]
+    },
+    {
+      "id": "onepass-04",
+      "title": "W4 · 오케스트레이션 + 나만의 AI 사무실",
+      "subtitle": "만든 조각을 하나의 흐름으로 — 결정적+에이전틱, 핸드오프·정지조건, 역할별 에이전트",
+      "description": "Skill·MCP·SubAgent·Workflow를 하나의 흐름으로 묶고, 역할을 나눈 나만의 AI 사무실을 운영합니다.",
+      "duration": "180분",
+      "type": "practice",
+      "slideCount": 9,
+      "file": "sessions/onepass-week4.html",
+      "moduleId": "W4",
+      "revision": "3.0.0-beta.1",
+      "status": "preview",
+      "sourceKeys": [
+        "anthropic-eng-agents",
+        "anthropic-eng-multiagent",
+        "github-actions",
+        "openai-agents-sdk"
+      ],
+      "preparation": [
+        "개인 노트북",
+        "AI 코딩 도구 실행 환경"
+      ],
+      "deliverables": [
+        "오케스트레이션 흐름도",
+        "정지조건·복구 경로",
+        "역할별 AI 사무실 구성",
+        "4주 통합 적용 계획"
+      ]
+    }
+  ],
+  "materials": {
+    "student": [
+      {
+        "id": "onepass-workbook",
+        "title": "원샷 실습 워크북",
+        "description": "주차별 작업지와 메모",
+        "file": "v3/material.html?course=onepass&kind=workbook&audience=student",
+        "audience": "student",
+        "courseId": "onepass"
+      },
+      {
+        "id": "onepass-practice",
+        "title": "개인 실습 기록지",
+        "description": "목표·맥락·검증·복구 기록",
+        "file": "v3/material.html?course=onepass&kind=practice&audience=student",
+        "audience": "student",
+        "courseId": "onepass"
+      }
+    ],
+    "instructor": [
+      {
+        "id": "onepass-script",
+        "title": "슬라이드별 상세 대본",
+        "description": "SAY·DO·ASK·예상 답변·복구",
+        "file": "v3/material.html?course=onepass&kind=script&audience=instructor",
+        "audience": "instructor",
+        "courseId": "onepass"
+      },
+      {
+        "id": "onepass-source-study",
+        "title": "공식자료 연구노트",
+        "description": "원리 회차 공식 문서 기반 연구자료",
+        "file": "v3/material.html?course=onepass&kind=source-study&audience=instructor",
+        "audience": "instructor",
+        "courseId": "onepass"
+      },
+      {
+        "id": "onepass-deep-dive",
+        "title": "강사용 심화 개념집",
+        "description": "사고법 중심 배경지식",
+        "file": "v3/material.html?course=onepass&kind=deep-dive&audience=instructor",
+        "audience": "instructor",
+        "courseId": "onepass"
+      },
+      {
+        "id": "onepass-qa-bank",
+        "title": "질문·답변·오류 복구집",
+        "description": "바이브코더 예상 질문과 복구 답변",
+        "file": "v3/material.html?course=onepass&kind=qa-bank&audience=instructor",
+        "audience": "instructor",
+        "courseId": "onepass"
+      },
+      {
+        "id": "onepass-rehearsal",
+        "title": "현장 리허설 체크리스트",
+        "description": "프로젝터·수동 진행 QA",
+        "file": "v3/material.html?course=onepass&kind=rehearsal&audience=instructor",
+        "audience": "instructor",
+        "courseId": "onepass"
+      }
+    ]
+  }
+}

@@ -69,14 +69,20 @@ app.whenReady().then(async () => {
       })()
     `);
 
-    const ok = result.slides === 13
-      && result.activeSlides === 1
-      && result.mode
-      && !result.widthOverflow
-      && !result.heightOverflow
-      && result.manualControls
-      && result.stageAdvanced
-      && result.buttons >= 20;
+    const expectedSlides = session.slideCount || 13;
+    const isV3Deck = session.file.includes('v3/deck.html');
+    const ok = isV3Deck
+      ? (result.slides === expectedSlides
+        && result.activeSlides === 1
+        && result.mode
+        && !result.widthOverflow
+        && !result.heightOverflow
+        && result.manualControls
+        && result.stageAdvanced
+        && result.buttons >= 20)
+      // standalone tutorial decks (onepass weeks): V3 scene/structure checks don't apply,
+      // so only require one active slide and no overflow (console errors handled above).
+      : (result.activeSlides === 1 && !result.widthOverflow && !result.heightOverflow);
     if (!ok) failures.push(`${session.file}: ${JSON.stringify(result)}`);
     results.push({ courseId, sessionId: session.id, ok, ...result });
   }

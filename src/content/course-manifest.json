@@ -848,7 +848,10 @@
           "sourceKeys": [
             "product-nng-heuristics",
             "product-material-onboarding",
-            "product-material-design"
+            "product-material-design",
+            "claude-vision",
+            "openai-images-vision",
+            "openai-audio"
           ],
           "pathway": null
         },
@@ -1278,7 +1281,8 @@
             "stripe-webhooks",
             "stripe-customer-portal",
             "supabase-rls",
-            "github-actions"
+            "github-actions",
+            "owasp-llm-top10"
           ],
           "pathway": [
             "saas",
@@ -1595,32 +1599,50 @@
           "visualScene": {
             "id": "workflow-01-terminal",
             "type": "terminal",
-            "title": "명령을 외우지 않고 상태를 읽는 운영 콘솔",
+            "title": "로그 분석실",
+            "layout": "terminal-log-analysis-room",
+            "normalFlow": [
+              "경로 확인",
+              "프로세스 실행",
+              "로그 관찰",
+              "변경 확인",
+              "체크포인트 저장"
+            ],
+            "failureFlow": [
+              "EADDRINUSE :3000",
+              "기존 프로세스 점유",
+              "중복 실행 확인"
+            ],
+            "recoveryFlow": [
+              "포트 점유 프로세스 확인",
+              "종료 또는 포트 변경",
+              "Git 체크포인트 기록"
+            ],
             "steps": [
               {
                 "label": "LOCATION",
-                "title": "pwd·ls로 위치 확인",
-                "detail": "명령이 어느 프로젝트와 폴더에 적용되는지 결정합니다."
+                "title": "작업 위치를 먼저 고정",
+                "detail": "pwd, ls로 현재 폴더가 수업 프로젝트인지 확인한 뒤 명령을 실행합니다."
               },
               {
                 "label": "PROCESS",
-                "title": "프로세스 실행",
-                "detail": "실행 중인 서버와 작업의 상태입니다."
+                "title": "서버 실행 상태 확인",
+                "detail": "npm run dev가 새 프로세스를 여는지, 이미 실행 중인 서버와 충돌하지 않는지 봅니다."
               },
               {
                 "label": "LOG",
-                "title": "로그에서 첫 오류 찾기",
-                "detail": "변경·스테이징·커밋의 기록입니다."
+                "title": "첫 오류 줄을 증거로 고정",
+                "detail": "EADDRINUSE :3000은 코드 문제가 아니라 같은 포트를 이미 쓰고 있다는 운영 신호입니다."
               },
               {
                 "label": "DIFF",
-                "title": "Git diff로 변경 확인",
-                "detail": "실패 지점과 원인을 추적하는 사건 기록입니다."
+                "title": "변경 전후를 Git diff로 확인",
+                "detail": "복구 전에 내가 바꾼 파일과 AI가 바꾼 파일을 분리해서 되돌릴 범위를 좁힙니다."
               },
               {
                 "label": "CHECKPOINT",
-                "title": "안전한 복구 지점 생성",
-                "detail": "명령이 어느 프로젝트와 폴더에 적용되는지 결정합니다."
+                "title": "복구 가능한 체크포인트 생성",
+                "detail": "서버를 정상 실행한 뒤 운영 일지와 Git 상태를 남겨 다음 실습의 출발점으로 만듭니다."
               }
             ]
           },
@@ -1699,37 +1721,55 @@
           "visualScene": {
             "id": "workflow-02-workflow",
             "type": "workflow",
-            "title": "모호한 반복 업무가 실행 가능한 상태도로 변환",
+            "title": "컨텍스트 설계판",
+            "layout": "context-design-board",
+            "normalFlow": [
+              "작업 범위 선택",
+              "지침 분리",
+              "근거 연결",
+              "유효기간 설정",
+              "메모리 승격"
+            ],
+            "failureFlow": [
+              "stale context selected",
+              "이전 프로젝트 규칙 오염",
+              "근거 없는 장기 메모리"
+            ],
+            "recoveryFlow": [
+              "프로젝트·경로·유효기간 기록",
+              "근거 없는 메모리 폐기",
+              "승격 규칙 문서화"
+            ],
             "steps": [
               {
                 "label": "TRIGGER",
                 "title": "업무 시작 신호 정의",
-                "detail": "시작 조건부터 결과까지 이어지는 상태 변화입니다."
+                "detail": "AI가 언제 움직여야 하는지, 사람이 어떤 입력을 줘야 하는지 먼저 정합니다."
               },
               {
                 "label": "INPUT",
-                "title": "필수 입력과 결정 분리",
-                "detail": "이번 작업에만 필요한 목표와 자료입니다."
+                "title": "현재 컨텍스트만 작업대에 올림",
+                "detail": "이번 작업에 필요한 파일, 목표, 로그만 올리고 오래된 프로젝트 규칙은 분리합니다."
               },
               {
                 "label": "DECISION",
-                "title": "행동·도구·Owner 지정",
-                "detail": "항상 지켜야 할 규칙과 검증 명령입니다."
+                "title": "지속 지침과 임시 자료 구분",
+                "detail": "항상 지킬 규칙과 이번에만 참고할 자료를 나누면 AI가 엉뚱한 기억을 덜 사용합니다."
               },
               {
                 "label": "ACTION",
-                "title": "산출물과 완료 기준",
-                "detail": "다음 작업에도 가치가 있는 검증된 지식입니다."
+                "title": "Owner와 완료 기준 지정",
+                "detail": "누가 검토하고 어떤 산출물이 나오면 끝인지 정해야 워크플로가 반복 가능합니다."
               },
               {
                 "label": "OUTPUT",
-                "title": "지침·메모리로 승격할 내용 선택",
-                "detail": "시작 조건부터 결과까지 이어지는 상태 변화입니다."
+                "title": "검증 증거를 결과에 붙임",
+                "detail": "파일 diff, 실행 로그, 브라우저 캡처처럼 확인 가능한 증거를 결과물에 연결합니다."
               },
               {
                 "label": "MEMORY",
-                "title": "MEMORY",
-                "detail": "이번 작업에만 필요한 목표와 자료입니다."
+                "title": "검증된 규칙만 메모리로 승격",
+                "detail": "근거와 유효기간이 있는 지식만 남기고 stale context selected 재발을 막습니다."
               }
             ]
           },
@@ -1780,7 +1820,8 @@
           "sourceKeys": [
             "codex-agents-md",
             "claude-memory",
-            "github-git"
+            "github-git",
+            "anthropic-eng-context"
           ],
           "pathway": null
         },
@@ -1808,37 +1849,57 @@
           "visualScene": {
             "id": "workflow-03-protocol",
             "type": "protocol",
-            "title": "Agent가 외부 서비스에 손을 뻗기 전 거치는 계약",
+            "title": "MCP 권한망",
+            "layout": "mcp-permission-mesh",
+            "normalFlow": [
+              "Host 의도",
+              "Client 세션",
+              "Server 도구",
+              "인증",
+              "사람 승인",
+              "감사 로그"
+            ],
+            "failureFlow": [
+              "write scope: /**",
+              "경로 제한 없음",
+              "민감 폴더 오염"
+            ],
+            "recoveryFlow": [
+              "허용 경로 목록",
+              "dry-run",
+              "쓰기 전 승인",
+              "감사 로그 저장"
+            ],
             "steps": [
               {
                 "label": "INTENT",
-                "title": "업무에서 외부 행동 찾기",
-                "detail": "언제 호출하고 무엇을 입력·반환하는지 정의합니다."
+                "title": "사용자 의도와 외부 행동 분리",
+                "detail": "AI가 무엇을 읽고 무엇을 바꿀지 Host 화면에서 먼저 확인합니다."
               },
               {
                 "label": "TOOL",
-                "title": "Tool 입력·출력·오류 정의",
-                "detail": "도구와 컨텍스트를 AI 앱에 표준 방식으로 연결합니다."
+                "title": "Tool 입력·출력·오류 계약",
+                "detail": "MCP Server가 제공하는 Tool은 이름보다 입력 형식, 반환값, 실패 조건이 중요합니다."
               },
               {
                 "label": "AUTH",
-                "title": "읽기·쓰기 권한 분리",
-                "detail": "누가 어떤 서비스에 접근하는지 증명합니다."
+                "title": "인증과 세션 범위 제한",
+                "detail": "토큰은 프롬프트에 넣지 않고, 읽기와 쓰기를 분리해 필요한 범위만 연결합니다."
               },
               {
                 "label": "APPROVAL",
-                "title": "민감정보·승인 지점",
-                "detail": "업무에 필요한 읽기·쓰기 범위만 제공합니다."
+                "title": "쓰기 전 사람 승인 게이트",
+                "detail": "/** 같은 전체 쓰기 범위는 차단하고 허용 경로, dry-run, 승인 버튼을 거칩니다."
               },
               {
                 "label": "EXECUTE",
-                "title": "호출 로그와 폐기",
-                "detail": "언제 호출하고 무엇을 입력·반환하는지 정의합니다."
+                "title": "허용된 경로에만 실행",
+                "detail": "Agent가 고객 폴더를 잘못 선택하지 않도록 대상 경로와 명령을 실행 직전 다시 표시합니다."
               },
               {
                 "label": "AUDIT",
-                "title": "AUDIT",
-                "detail": "도구와 컨텍스트를 AI 앱에 표준 방식으로 연결합니다."
+                "title": "호출 로그와 폐기 기록",
+                "detail": "누가 어떤 Tool을 어떤 입력으로 호출했는지 남겨 복구와 책임 추적이 가능하게 합니다."
               }
             ]
           },
@@ -1888,11 +1949,14 @@
           ],
           "sourceKeys": [
             "mcp-intro",
+            "mcp-architecture",
+            "mcp-spec",
             "mcp-security",
             "openai-tools",
             "openai-apps-sdk",
             "codex-mcp",
-            "claude-mcp"
+            "claude-mcp",
+            "owasp-llm-top10"
           ],
           "pathway": null
         },
@@ -1920,37 +1984,57 @@
           "visualScene": {
             "id": "workflow-04-agent",
             "type": "agent",
-            "title": "멈출 줄 아는 Agent가 운영 가능한 Agent다",
+            "title": "Agent 관제실",
+            "layout": "agent-control-room",
+            "normalFlow": [
+              "목표",
+              "역할 분리",
+              "권한·예산",
+              "관찰",
+              "평가",
+              "복구"
+            ],
+            "failureFlow": [
+              "merge conflict / owner duplicated",
+              "소유권 중복",
+              "병렬 수정 충돌"
+            ],
+            "recoveryFlow": [
+              "파일 Owner 지정",
+              "Reviewer 게이트",
+              "통합 Owner",
+              "실패 격리"
+            ],
             "steps": [
               {
                 "label": "GOAL",
-                "title": "측정 가능한 목표",
-                "detail": "계획·행동·관찰·평가를 반복합니다."
+                "title": "측정 가능한 목표 고정",
+                "detail": "Agent에게 자유를 주기 전에 성공 기준, 비용 한도, 중단 조건을 먼저 정합니다."
               },
               {
                 "label": "PLAN",
-                "title": "작업·역할·도구 분해",
-                "detail": "Owner·Specialist·Reviewer의 책임을 분리합니다."
+                "title": "역할과 파일 Owner 분리",
+                "detail": "조사, 구현, 리뷰, 통합 역할을 나누고 같은 설정 파일을 동시에 수정하지 않게 합니다."
               },
               {
                 "label": "ACT",
-                "title": "예산·권한·승인",
-                "detail": "안정된 워크플로를 일정·이벤트로 실행합니다."
+                "title": "권한과 실행 범위 제한",
+                "detail": "각 Agent가 필요한 도구와 폴더만 사용하도록 작업 계약과 반환 형식을 제한합니다."
               },
               {
                 "label": "OBSERVE",
-                "title": "평가와 재시도",
-                "detail": "성공 기준, 재시도 한도와 사람 인계를 둡니다."
+                "title": "로그와 산출물을 관찰",
+                "detail": "실행 결과, diff, 테스트 로그를 모아 현재 Agent가 계속 진행해도 되는지 판단합니다."
               },
               {
                 "label": "EVALUATE",
-                "title": "중단·격리·사람 인계",
-                "detail": "계획·행동·관찰·평가를 반복합니다."
+                "title": "Reviewer 게이트 통과",
+                "detail": "자동화 전에 사람 또는 Reviewer Agent가 품질 기준과 충돌 가능성을 확인합니다."
               },
               {
                 "label": "RECOVER",
-                "title": "RECOVER",
-                "detail": "Owner·Specialist·Reviewer의 책임을 분리합니다."
+                "title": "충돌 격리 후 사람에게 인계",
+                "detail": "merge conflict나 owner duplicated가 나오면 병합을 멈추고 통합 Owner가 결정합니다."
               }
             ]
           },
@@ -2000,9 +2084,13 @@
           ],
           "sourceKeys": [
             "openai-agents-sdk",
+            "anthropic-eng-agents",
+            "anthropic-eng-multiagent",
             "codex-subagents",
             "claude-subagents",
-            "github-actions"
+            "claude-agent-sdk",
+            "github-actions",
+            "owasp-llm-top10"
           ],
           "pathway": null
         }
@@ -2124,6 +2212,14 @@
             "courseId": "workflow"
           },
           {
+            "id": "workflow-materials-handoff",
+            "title": "외부 연구자료 흡수·ClaudeCode 업무분담",
+            "description": "D:\\vibe-coding-course-materials 활용 방식, 과정 매핑, 업무 분담 프롬프트",
+            "file": "appendix/instructor-course-materials-handoff.html",
+            "audience": "instructor",
+            "courseId": "workflow"
+          },
+          {
             "id": "workflow-agent-mcp-skill-research",
             "title": "Agent·MCP·Skill 전문 연구자료",
             "description": "공식자료 기반 개념 경계, 슬라이드 장면, 별도 심화과정 분리 기준",
@@ -2227,37 +2323,57 @@
           "visualScene": {
             "id": "claude-01-terminal",
             "type": "terminal",
-            "title": "큰 저장소에서 바로 수정하지 않는 첫 세션",
+            "title": "터미널 세션·저장소 탐색",
+            "layout": "claude-terminal-session",
+            "normalFlow": [
+              "프로젝트 루트 진입",
+              "저장소 지도 작성",
+              "읽기 전용 탐색",
+              "계획 검토",
+              "작은 변경",
+              "실행 검증"
+            ],
+            "failureFlow": [
+              "working directory: user home",
+              "무관한 파일 탐색",
+              "저장소 경계 불명확"
+            ],
+            "recoveryFlow": [
+              "cd 프로젝트 루트",
+              "Git root 확인",
+              "새 세션 시작",
+              "탐색 후 계획 승인"
+            ],
             "steps": [
               {
                 "label": "LAUNCH",
-                "title": "설치·로그인 확인",
-                "detail": "현재 목표와 대화·도구 실행이 이어지는 작업 단위입니다."
+                "title": "세션은 위치에서 시작",
+                "detail": "Claude Code를 열기 전에 현재 폴더가 실제 프로젝트 루트인지 확인합니다."
               },
               {
                 "label": "MAP",
-                "title": "프로젝트 루트에서 실행",
-                "detail": "Claude가 읽고 수정할 저장소 경계입니다."
+                "title": "저장소 지도를 먼저 그림",
+                "detail": "파일을 바로 수정하지 않고 README, package, src 구조와 실행 명령을 읽습니다."
               },
               {
                 "label": "PLAN",
-                "title": "파일·명령 구조 탐색",
-                "detail": "명령·파일·외부 연결을 허용하는 범위입니다."
+                "title": "읽기 결과로 계획을 받음",
+                "detail": "어떤 파일을 왜 볼지, 어떤 검증을 할지 먼저 합의한 뒤 쓰기 권한을 판단합니다."
               },
               {
                 "label": "APPROVE",
-                "title": "계획과 권한 검토",
-                "detail": "검색과 의존성을 통해 변경 지점을 찾습니다."
+                "title": "행동별 권한을 승인",
+                "detail": "검색, 파일 쓰기, 명령 실행을 구분해 필요한 범위만 허용합니다."
               },
               {
                 "label": "CHANGE",
-                "title": "작은 수정·실행 확인",
-                "detail": "현재 목표와 대화·도구 실행이 이어지는 작업 단위입니다."
+                "title": "첫 변경은 작게 제한",
+                "detail": "한 번에 큰 리팩토링보다 한 파일의 작은 diff로 영향 범위를 좁힙니다."
               },
               {
                 "label": "VERIFY",
-                "title": "VERIFY",
-                "detail": "Claude가 읽고 수정할 저장소 경계입니다."
+                "title": "실행 결과를 증거로 남김",
+                "detail": "명령 로그, diff, 브라우저 화면을 세션 요약에 남겨 다음 작업이 이어지게 합니다."
               }
             ]
           },
@@ -2337,37 +2453,57 @@
           "visualScene": {
             "id": "claude-02-ide",
             "type": "ide",
-            "title": "프롬프트 반복이 프로젝트 운영 규칙으로 정착",
+            "title": "CLAUDE.md 계층",
+            "layout": "claude-md-hierarchy",
+            "normalFlow": [
+              "반복 규칙 추출",
+              "루트 공통 규칙",
+              "하위 영역 규칙",
+              "계획·Diff",
+              "테스트",
+              "커밋"
+            ],
+            "failureFlow": [
+              "root says npm / nested says pnpm",
+              "명령 우선순위 충돌",
+              "테스트 기준 불명확"
+            ],
+            "recoveryFlow": [
+              "루트는 공통 원칙",
+              "하위 파일은 영역 규칙",
+              "명령 우선순위 명시",
+              "검증 명령 고정"
+            ],
             "steps": [
               {
                 "label": "FRICTION",
-                "title": "반복 규칙 추출",
-                "detail": "저장소에서 지속되는 프로젝트 지침입니다."
+                "title": "반복 설명을 수집",
+                "detail": "매번 말하게 되는 실행 명령, 금지 사항, 검증 기준을 먼저 모읍니다."
               },
               {
                 "label": "RULE",
-                "title": "CLAUDE.md 범위 정하기",
-                "detail": "목표·범위·순서·검증을 합의합니다."
+                "title": "루트와 하위 규칙을 분리",
+                "detail": "루트 CLAUDE.md에는 공통 규칙, 하위 CLAUDE.md에는 해당 폴더의 구체 규칙을 둡니다."
               },
               {
                 "label": "PLAN",
-                "title": "계획 검토",
-                "detail": "실제 바뀐 코드와 의도를 비교합니다."
+                "title": "계획이 규칙을 따르는지 확인",
+                "detail": "AI가 선택한 명령과 파일 범위가 어떤 지침에서 왔는지 확인합니다."
               },
               {
                 "label": "DIFF",
-                "title": "작은 diff와 테스트",
-                "detail": "기대 행동이 유지되는지 실행으로 확인합니다."
+                "title": "규칙이 실제 변경으로 이어짐",
+                "detail": "diff를 보며 규칙이 작업 품질을 높였는지, 과도한 지시가 되었는지 판단합니다."
               },
               {
                 "label": "TEST",
-                "title": "Git commit과 세션 요약",
-                "detail": "저장소에서 지속되는 프로젝트 지침입니다."
+                "title": "검증 명령을 고정",
+                "detail": "npm, pnpm처럼 충돌하는 명령은 프로젝트 위치별 우선순위를 명확히 정합니다."
               },
               {
                 "label": "COMMIT",
-                "title": "COMMIT",
-                "detail": "목표·범위·순서·검증을 합의합니다."
+                "title": "결정과 근거를 커밋에 남김",
+                "detail": "규칙 변경은 코드 변경만큼 팀 작업에 영향을 주므로 의도와 검증을 기록합니다."
               }
             ]
           },
@@ -2419,7 +2555,8 @@
             "claude-memory",
             "github-git",
             "github-pull-requests",
-            "claude-overview"
+            "claude-overview",
+            "anthropic-eng-context"
           ],
           "pathway": null
         },
@@ -2447,32 +2584,52 @@
           "visualScene": {
             "id": "claude-03-skill",
             "type": "skill",
-            "title": "좋은 프롬프트가 재사용 가능한 작업 표준이 되는 과정",
+            "title": "SKILL.md 제작실·트리거 경계",
+            "layout": "claude-skill-boundary",
+            "normalFlow": [
+              "반복 업무 선택",
+              "한 책임으로 축소",
+              "Trigger 작성",
+              "자료 분리",
+              "정상·실패 테스트",
+              "버전 기록"
+            ],
+            "failureFlow": [
+              "description matched broad term",
+              "관련 없는 요청 활성화",
+              "컨텍스트 과소비"
+            ],
+            "recoveryFlow": [
+              "Trigger 좁히기",
+              "비사용 조건 추가",
+              "자료 지연 로드",
+              "대표 요청으로 검증"
+            ],
             "steps": [
               {
                 "label": "REPEAT",
-                "title": "반복 업무와 실패 수집",
-                "detail": "Skill을 사용해야 하는 요청과 사용하지 않을 경계입니다."
+                "title": "반복되는 한 작업을 고름",
+                "detail": "모든 개발을 처리하는 Skill이 아니라 자주 반복되는 한 업무만 표준화합니다."
               },
               {
                 "label": "BOUNDARY",
-                "title": "한 가지 책임으로 축소",
-                "detail": "순서대로 실행할 판단과 행동입니다."
+                "title": "Trigger와 비사용 조건을 나눔",
+                "detail": "언제 켜지는지뿐 아니라 언제 켜지면 안 되는지도 적어야 오작동이 줄어듭니다."
               },
               {
                 "label": "SKILL",
-                "title": "Skill 지침과 자료 분리",
-                "detail": "필요한 시점에만 읽는 예시·참고파일입니다."
+                "title": "SKILL.md는 절차의 목차",
+                "detail": "본문에는 판단 순서만 두고 예시, 스크립트, 긴 자료는 필요할 때 읽게 분리합니다."
               },
               {
                 "label": "TEST",
-                "title": "정상·실패 테스트",
-                "detail": "산출물이 통과해야 하는 체크와 명령입니다."
+                "title": "정상·경계·실패 요청으로 검증",
+                "detail": "좋은 결과 하나보다 관련 없는 요청에서 켜지지 않는지가 더 중요합니다."
               },
               {
                 "label": "VERSION",
-                "title": "팀 공유와 버전 기록",
-                "detail": "Skill을 사용해야 하는 요청과 사용하지 않을 경계입니다."
+                "title": "팀에서 쓰는 작업 표준으로 기록",
+                "detail": "Skill 변경 이유와 테스트 요청을 남겨 다음 버전에서 경계가 흐려지지 않게 합니다."
               }
             ]
           },
@@ -2522,8 +2679,10 @@
           ],
           "sourceKeys": [
             "claude-skills",
+            "claude-skills-cc",
             "claude-memory",
-            "claude-overview"
+            "claude-overview",
+            "anthropic-eng-skills"
           ],
           "pathway": null
         },
@@ -2551,37 +2710,57 @@
           "visualScene": {
             "id": "claude-04-plugin",
             "type": "plugin",
-            "title": "개인 설정이 설치 가능한 Claude 작업 시스템으로",
+            "title": "Plugin·MCP·Hooks 이벤트 흐름",
+            "layout": "claude-plugin-event-flow",
+            "normalFlow": [
+              "Skill 묶기",
+              "Plugin 매니페스트",
+              "MCP 연결",
+              "Hook 정책",
+              "설치 진단",
+              "감사 로그"
+            ],
+            "failureFlow": [
+              "missing env CLAUDE_SERVICE_TOKEN",
+              "인증 안내 누락",
+              "연결 실패 원인 불명"
+            ],
+            "recoveryFlow": [
+              "환경변수 검사",
+              "설정 가이드 제공",
+              "연결 진단 명령",
+              "실패 시 안전 차단"
+            ],
             "steps": [
               {
                 "label": "SKILL",
-                "title": "확장할 업무 선택",
-                "detail": "Skills·Hooks·Agents·MCP 설정을 설치 가능한 단위로 묶습니다."
+                "title": "개인 작업 표준을 묶음",
+                "detail": "반복 작업 Skill과 필요한 파일을 설치 가능한 단위로 정리합니다."
               },
               {
                 "label": "PLUGIN",
-                "title": "Plugin 구성 설계",
-                "detail": "외부 서비스의 자료와 행동을 Tool로 제공합니다."
+                "title": "설치 단위와 요구사항 명시",
+                "detail": "어떤 설정, 환경변수, 권한이 필요한지 사용자가 설치 전에 알 수 있어야 합니다."
               },
               {
                 "label": "MCP",
-                "title": "MCP 입력·출력·인증",
-                "detail": "도구 호출 전후와 세션 이벤트에 정책을 실행합니다."
+                "title": "외부 서비스 Tool 연결",
+                "detail": "MCP는 외부 자료와 행동을 Claude가 쓸 수 있는 Tool 계약으로 연결합니다."
               },
               {
                 "label": "HOOK",
-                "title": "Hook 정책과 실패 처리",
-                "detail": "토큰·권한·승인·로그를 통제합니다."
+                "title": "도구 호출 전후 정책 실행",
+                "detail": "쓰기 전 승인, 민감정보 차단, 실패 진단처럼 운영 규칙을 이벤트에 붙입니다."
               },
               {
                 "label": "INSTALL",
-                "title": "설치·호출·감사 테스트",
-                "detail": "Skills·Hooks·Agents·MCP 설정을 설치 가능한 단위로 묶습니다."
+                "title": "설치 후 환경 검사",
+                "detail": "CLAUDE_SERVICE_TOKEN 같은 값이 없으면 친절한 설정 안내와 진단으로 멈춥니다."
               },
               {
                 "label": "AUDIT",
-                "title": "AUDIT",
-                "detail": "외부 서비스의 자료와 행동을 Tool로 제공합니다."
+                "title": "호출과 실패를 감사 로그로 남김",
+                "detail": "무엇을 호출했고 어떤 값이 빠졌는지 남겨 다음 수업과 현장 복구에 씁니다."
               }
             ]
           },
@@ -2634,7 +2813,10 @@
             "claude-mcp",
             "claude-hooks",
             "mcp-intro",
-            "openai-tools"
+            "mcp-architecture",
+            "mcp-spec",
+            "openai-tools",
+            "owasp-llm-top10"
           ],
           "pathway": null
         },
@@ -2662,37 +2844,57 @@
           "visualScene": {
             "id": "claude-05-team",
             "type": "team",
-            "title": "Agent 수가 아니라 경계가 팀을 만든다",
+            "title": "Subagents 작업 계약·리뷰 게이트",
+            "layout": "claude-subagent-review-gate",
+            "normalFlow": [
+              "작업 분해",
+              "소유권 지정",
+              "독립 실행",
+              "반환 계약",
+              "리뷰 게이트",
+              "통합"
+            ],
+            "failureFlow": [
+              "contract mismatch",
+              "서로 다른 전제 사용",
+              "통합 근거 부족"
+            ],
+            "recoveryFlow": [
+              "공통 목표 제공",
+              "입력·반환 형식 고정",
+              "공유 결정 로그",
+              "Reviewer 승인"
+            ],
             "steps": [
               {
                 "label": "DECOMPOSE",
-                "title": "병렬화 가치 판단",
-                "detail": "주 컨텍스트 밖에서 전문 작업을 수행합니다."
+                "title": "병렬화할 가치가 있는 작업만 분리",
+                "detail": "같은 파일 수정은 분리하지 않고 조사, 구현, 테스트, 리뷰처럼 독립성이 큰 일을 나눕니다."
               },
               {
                 "label": "OWN",
-                "title": "역할·파일·결정 소유권",
-                "detail": "여러 독립 역할이 공유 목표를 병렬 수행합니다."
+                "title": "파일·결정 Owner를 지정",
+                "detail": "누가 어떤 파일과 판단을 책임지는지 정해야 Agent 수가 늘어도 충돌이 줄어듭니다."
               },
               {
                 "label": "PARALLEL",
-                "title": "독립 실행",
-                "detail": "결과·근거·변경·위험을 정해진 형식으로 돌려줍니다."
+                "title": "각 Agent는 제한된 맥락에서 실행",
+                "detail": "모든 로그를 공유하지 않고 필요한 입력과 산출 형식만 제공합니다."
               },
               {
                 "label": "HANDOFF",
-                "title": "반환 요약과 증거",
-                "detail": "통합 전 검토·반려·재작업·승인을 둡니다."
+                "title": "반환 계약으로 결과를 모음",
+                "detail": "결론, 변경, 검증, 위험, 다음 행동을 같은 형식으로 돌려받습니다."
               },
               {
                 "label": "REVIEW",
-                "title": "Reviewer·Human Lead 통합",
-                "detail": "주 컨텍스트 밖에서 전문 작업을 수행합니다."
+                "title": "Reviewer가 전제와 증거를 비교",
+                "detail": "contract mismatch가 보이면 병합하지 않고 공통 목표와 입력을 다시 맞춥니다."
               },
               {
                 "label": "MERGE",
-                "title": "MERGE",
-                "detail": "여러 독립 역할이 공유 목표를 병렬 수행합니다."
+                "title": "Human Lead가 통합 결정",
+                "detail": "최종 책임자는 사람이거나 명확한 통합 Owner여야 합니다."
               }
             ]
           },
@@ -2744,6 +2946,8 @@
             "claude-subagents",
             "claude-agent-teams",
             "openai-agents-sdk",
+            "anthropic-eng-agents",
+            "anthropic-eng-multiagent",
             "claude-overview"
           ],
           "pathway": null
@@ -2772,37 +2976,57 @@
           "visualScene": {
             "id": "claude-06-release",
             "type": "release",
-            "title": "Claude 세션이 팀의 릴리즈 파이프라인으로",
+            "title": "PR 자동화·세션 인수인계",
+            "layout": "claude-pr-handoff-pipeline",
+            "normalFlow": [
+              "반복 작업 안정성 평가",
+              "브랜치 생성",
+              "테스트·CI",
+              "PR 작성",
+              "배포 확인",
+              "세션 인수인계"
+            ],
+            "failureFlow": [
+              "handoff missing context",
+              "작업 근거 누락",
+              "검증·위험 요약 없음"
+            ],
+            "recoveryFlow": [
+              "PR 템플릿",
+              "검증 증거 첨부",
+              "위험·미해결 기록",
+              "다음 세션 체크리스트"
+            ],
             "steps": [
               {
                 "label": "TASK",
-                "title": "반복 작업 안정성 평가",
-                "detail": "규칙과 검증이 안정된 반복 작업입니다."
+                "title": "자동화 후보를 선별",
+                "detail": "수동으로 안정성을 검증한 반복 작업만 자동화 후보로 올립니다."
               },
               {
                 "label": "BRANCH",
-                "title": "자동 실행과 승인 분리",
-                "detail": "변경마다 빌드·테스트·검사를 실행합니다."
+                "title": "변경 범위를 브랜치에 격리",
+                "detail": "Claude 세션의 변경을 PR로 설명할 수 있는 단위로 나눕니다."
               },
               {
                 "label": "TEST",
-                "title": "브랜치·PR·CI",
-                "detail": "변경 이유·영향·검증을 리뷰 가능한 기록으로 남깁니다."
+                "title": "CI와 로컬 검증을 함께 남김",
+                "detail": "테스트 명령, 실패 로그, 브라우저 확인 같은 증거를 PR에 연결합니다."
               },
               {
                 "label": "PR",
-                "title": "배포와 모니터링",
-                "detail": "다음 세션이 이어갈 목표·상태·위험을 요약합니다."
+                "title": "왜 바꿨는지 리뷰 가능하게 기록",
+                "detail": "코드 diff만이 아니라 의도, 영향 범위, 되돌리는 방법을 같이 적습니다."
               },
               {
                 "label": "DEPLOY",
-                "title": "세션 요약·복구 지점",
-                "detail": "규칙과 검증이 안정된 반복 작업입니다."
+                "title": "배포는 승인과 관찰 뒤 진행",
+                "detail": "검사 실패를 무시하지 않고 Beta/Stable 채널과 롤백 방법을 확인합니다."
               },
               {
                 "label": "HANDOFF",
-                "title": "HANDOFF",
-                "detail": "변경마다 빌드·테스트·검사를 실행합니다."
+                "title": "다음 세션이 이어받을 맥락을 고정",
+                "detail": "목표, 결정, 검증, 남은 위험을 남기면 사람이 처음부터 다시 조사하지 않아도 됩니다."
               }
             ]
           },
@@ -2852,10 +3076,12 @@
           ],
           "sourceKeys": [
             "claude-github-actions",
+            "claude-agent-sdk",
             "github-actions",
             "github-actions-secrets",
             "github-releases",
-            "github-pull-requests"
+            "github-pull-requests",
+            "owasp-llm-top10"
           ],
           "pathway": null
         }
@@ -3080,37 +3306,57 @@
           "visualScene": {
             "id": "codex-01-workspace",
             "type": "workspace",
-            "title": "같은 Codex, 다른 작업 표면과 권한",
+            "title": "4표면 비교판·Workspace 경계",
+            "layout": "codex-surface-workspace-boundary",
+            "normalFlow": [
+              "표면 선택",
+              "Workspace 확인",
+              "Sandbox 범위",
+              "계획 검토",
+              "작은 실행",
+              "증거 검증"
+            ],
+            "failureFlow": [
+              "path outside writable workspace",
+              "작업공간 밖 파일 요청",
+              "권한·경로 경계 불명확"
+            ],
+            "recoveryFlow": [
+              "올바른 Workspace 열기",
+              "Git root 확인",
+              "쓰기 범위 재확인",
+              "작은 변경으로 검증"
+            ],
             "steps": [
               {
                 "label": "CHOOSE",
-                "title": "작업 성격으로 표면 선택",
-                "detail": "계획·리뷰·장기 작업을 시각적으로 운영합니다."
+                "title": "작업 표면을 먼저 고름",
+                "detail": "App, CLI, IDE, Browser 중 어떤 화면이 증거를 가장 잘 남기는지 선택합니다."
               },
               {
                 "label": "SCOPE",
-                "title": "Workspace와 목표 확인",
-                "detail": "터미널 또는 편집기 문맥에서 저장소를 다룹니다."
+                "title": "Workspace 경계를 고정",
+                "detail": "Codex가 실제로 읽고 쓸 수 있는 프로젝트 폴더와 Git root를 확인합니다."
               },
               {
                 "label": "PLAN",
-                "title": "권한·네트워크 범위",
-                "detail": "사용자와 Codex가 공유하는 실제 작업 공간입니다."
+                "title": "수정 전에 탐색·계획",
+                "detail": "작업공간 밖 추정 파일을 건드리지 않고 저장소 안에서 근거를 찾습니다."
               },
               {
                 "label": "APPROVE",
-                "title": "탐색·계획·실행",
-                "detail": "읽기·쓰기·네트워크 영향 범위를 제한합니다."
+                "title": "Sandbox와 승인 범위 확인",
+                "detail": "파일 쓰기, 명령 실행, 네트워크 접근을 나눠 필요한 범위만 승인합니다."
               },
               {
                 "label": "EXECUTE",
-                "title": "명령·화면으로 검증",
-                "detail": "계획·리뷰·장기 작업을 시각적으로 운영합니다."
+                "title": "작은 변경으로 실행",
+                "detail": "한 번에 큰 변경보다 한 파일의 작은 diff로 경계를 검증합니다."
               },
               {
                 "label": "VERIFY",
-                "title": "VERIFY",
-                "detail": "터미널 또는 편집기 문맥에서 저장소를 다룹니다."
+                "title": "diff·로그·화면으로 증거화",
+                "detail": "첫 검증된 변경을 남겨 다음 회차의 AGENTS.md와 설정으로 이어갑니다."
               }
             ]
           },
@@ -3162,7 +3408,8 @@
             "codex-overview",
             "codex-security",
             "github-git",
-            "github-pull-requests"
+            "github-pull-requests",
+            "openai-models"
           ],
           "pathway": null
         },
@@ -3190,37 +3437,57 @@
           "visualScene": {
             "id": "codex-02-config",
             "type": "config",
-            "title": "말로 반복하던 기대가 저장소 운영 체계로",
+            "title": "AGENTS.md·config 검증실·신뢰 계층",
+            "layout": "codex-agents-config-trust-lab",
+            "normalFlow": [
+              "반복 규칙 분리",
+              "AGENTS.md 범위",
+              "config 계층",
+              "Rules 정책",
+              "Diff 검토",
+              "Commit"
+            ],
+            "failureFlow": [
+              "project layer ignored: untrusted",
+              "프로젝트 설정 무시",
+              "신뢰 계층 확인 누락"
+            ],
+            "recoveryFlow": [
+              "저장소 신뢰 확인",
+              "전역·프로젝트 설정 분리",
+              "Rules 최소화",
+              "검증 명령 고정"
+            ],
             "steps": [
               {
                 "label": "FRICTION",
-                "title": "반복 규칙과 개인 취향 분리",
-                "detail": "저장소와 하위 경로에 적용되는 지속 지침입니다."
+                "title": "반복되는 기대를 수집",
+                "detail": "매번 말하는 검증 명령, 금지 행동, 스타일을 지침 후보로 모읍니다."
               },
               {
                 "label": "AGENTS",
-                "title": "AGENTS.md 범위 설계",
-                "detail": "모델·권한·MCP·기능 같은 Codex 설정입니다."
+                "title": "AGENTS.md 범위를 설계",
+                "detail": "저장소 공통 규칙과 하위 폴더 규칙을 나누어 충돌을 줄입니다."
               },
               {
                 "label": "CONFIG",
-                "title": "config·Rules 최소 설정",
-                "detail": "허용·승인·차단할 명령 정책입니다."
+                "title": "config.toml 계층을 확인",
+                "detail": "개인 설정, 프로젝트 설정, 신뢰 상태가 실제 실행에 어떻게 반영되는지 봅니다."
               },
               {
                 "label": "RULES",
-                "title": "계획·diff·테스트",
-                "detail": "변경을 검토·복구·공유하는 기록입니다."
+                "title": "위험 행동 정책을 최소화",
+                "detail": "무작정 허용하지 않고 삭제, 네트워크, 외부 전송 같은 위험만 정책화합니다."
               },
               {
                 "label": "DIFF",
-                "title": "작은 commit과 리뷰",
-                "detail": "저장소와 하위 경로에 적용되는 지속 지침입니다."
+                "title": "규칙이 만든 변경을 검토",
+                "detail": "설정 변경과 코드 변경을 Git diff로 분리해 되돌릴 수 있게 합니다."
               },
               {
                 "label": "COMMIT",
-                "title": "COMMIT",
-                "detail": "모델·권한·MCP·기능 같은 Codex 설정입니다."
+                "title": "신뢰된 설정만 기록",
+                "detail": "검증된 Git 커밋으로 다음 실습에서 재사용 가능한 운영 기준을 남깁니다."
               }
             ]
           },
@@ -3271,7 +3538,8 @@
           "sourceKeys": [
             "codex-agents-md",
             "codex-config",
-            "codex-rules"
+            "codex-rules",
+            "anthropic-eng-context"
           ],
           "pathway": null
         },
@@ -3299,37 +3567,57 @@
           "visualScene": {
             "id": "codex-03-plugin",
             "type": "plugin",
-            "title": "개인 작업법이 설치 가능한 Codex 도구가 되는 과정",
+            "title": "Skill·Plugin 재사용·매니페스트/캐시",
+            "layout": "codex-plugin-cache-studio",
+            "normalFlow": [
+              "반복 작업 정의",
+              "Skill 경계 작성",
+              "Plugin 매니페스트",
+              "설치 테스트",
+              "캐시 갱신",
+              "버전 기록"
+            ],
+            "failureFlow": [
+              "manifest cache unchanged",
+              "Plugin 업데이트 미반영",
+              "버전·설치 캐시 누락"
+            ],
+            "recoveryFlow": [
+              "manifest 구조 검증",
+              "버전 갱신",
+              "캐시 재설치",
+              "재시작 후 호출 테스트"
+            ],
             "steps": [
               {
                 "label": "WORKFLOW",
-                "title": "반복 업무 선택",
-                "detail": "지침·자료·스크립트를 가진 재사용 워크플로입니다."
+                "title": "반복 업무를 한 책임으로 좁힘",
+                "detail": "조사·구현·배포를 한 Skill에 넣지 않고 재사용 가능한 한 업무로 나눕니다."
               },
               {
                 "label": "SKILL",
-                "title": "Skill 책임·Trigger·자료",
-                "detail": "필요한 자료만 선택한 시점에 읽습니다."
+                "title": "Trigger와 비사용 조건 작성",
+                "detail": "언제 호출되고 언제 호출되면 안 되는지 명확히 적어 암시 호출을 안정화합니다."
               },
               {
                 "label": "TEST",
-                "title": "대표 요청 테스트",
-                "detail": "Skills·도구·Hooks·Assets를 설치 가능한 단위로 묶습니다."
+                "title": "명시·암시 호출을 테스트",
+                "detail": "잘 작동하는 요청뿐 아니라 관련 없는 요청에서 켜지지 않는지도 확인합니다."
               },
               {
                 "label": "PLUGIN",
-                "title": "Plugin 구조·매니페스트",
-                "detail": "명시·암시 호출과 실패 경계를 검증합니다."
+                "title": "설치 가능한 매니페스트 구성",
+                "detail": "Skill, assets, optional tools를 plugin.json에서 관리 가능한 단위로 묶습니다."
               },
               {
                 "label": "INSTALL",
-                "title": "설치·업데이트·버전",
-                "detail": "지침·자료·스크립트를 가진 재사용 워크플로입니다."
+                "title": "설치·캐시 상태 확인",
+                "detail": "manifest cache unchanged가 나오면 구조보다 버전·재설치·재시작 흐름을 먼저 봅니다."
               },
               {
                 "label": "UPDATE",
-                "title": "UPDATE",
-                "detail": "필요한 자료만 선택한 시점에 읽습니다."
+                "title": "업데이트 기록과 테스트 증거 저장",
+                "detail": "설치 후 보이는지, 어떤 요청에서 호출되는지 기록합니다."
               }
             ]
           },
@@ -3380,7 +3668,8 @@
           "sourceKeys": [
             "codex-skills",
             "codex-plugins",
-            "codex-overview"
+            "codex-overview",
+            "anthropic-eng-skills"
           ],
           "pathway": null
         },
@@ -3408,37 +3697,57 @@
           "visualScene": {
             "id": "codex-04-connected",
             "type": "connected",
-            "title": "요청에 맞는 외부 연결을 고르고 화면까지 검증",
+            "title": "Connectors 권한망 + 브라우저 시각 QA",
+            "layout": "codex-connected-browser-qa",
+            "normalFlow": [
+              "필요 데이터 분류",
+              "도구 선택",
+              "인증·권한",
+              "행동 실행",
+              "브라우저 QA",
+              "증거 저장"
+            ],
+            "failureFlow": [
+              "DOM present / viewport clipped",
+              "DOM 검사는 통과",
+              "실제 버튼은 화면 밖"
+            ],
+            "recoveryFlow": [
+              "대표 해상도 캡처",
+              "가시영역 검사",
+              "클릭 가능성 확인",
+              "스크린샷 회귀 추가"
+            ],
             "steps": [
               {
                 "label": "NEED",
-                "title": "필요 데이터·행동 분류",
-                "detail": "도구와 컨텍스트를 Codex에 연결합니다."
+                "title": "필요한 데이터·행동을 분류",
+                "detail": "공개 문서, 인증 데이터, 실제 화면 검증 중 무엇이 필요한지 먼저 나눕니다."
               },
               {
                 "label": "SELECT",
-                "title": "가장 좁은 도구 선택",
-                "detail": "인증된 개인·업무 서비스의 데이터를 사용합니다."
+                "title": "가장 좁은 연결 선택",
+                "detail": "웹 검색, 공식 API, Connector, MCP, Browser 중 가장 직접적인 경로를 고릅니다."
               },
               {
                 "label": "AUTH",
-                "title": "인증·권한·승인",
-                "detail": "로컬·웹 UI를 클릭하고 화면으로 검증합니다."
+                "title": "인증과 권한 범위를 확인",
+                "detail": "로그인 데이터와 외부 행동은 최소 권한과 승인 흐름으로 제한합니다."
               },
               {
                 "label": "ACT",
-                "title": "실행과 결과 캡처",
-                "detail": "검색·API·Connector·브라우저 중 가장 직접적인 경로를 고릅니다."
+                "title": "실제 행동과 로그를 남김",
+                "detail": "도구 호출 결과만 보지 않고 어떤 계정과 권한으로 실행됐는지 기록합니다."
               },
               {
                 "label": "BROWSER",
-                "title": "민감정보·실패 로그 확인",
-                "detail": "도구와 컨텍스트를 Codex에 연결합니다."
+                "title": "보이는 화면까지 검증",
+                "detail": "toBeInTheDocument만으로 끝내지 않고 viewport, 클릭 가능성, 반응형 화면을 봅니다."
               },
               {
                 "label": "EVIDENCE",
-                "title": "EVIDENCE",
-                "detail": "인증된 개인·업무 서비스의 데이터를 사용합니다."
+                "title": "QA 증거를 저장",
+                "detail": "스크린샷, 해상도, 클릭 결과를 브라우저 QA 보고서에 남깁니다."
               }
             ]
           },
@@ -3490,8 +3799,11 @@
             "codex-mcp",
             "codex-browser",
             "mcp-intro",
+            "mcp-architecture",
+            "mcp-spec",
             "openai-tools",
-            "openai-apps-sdk"
+            "openai-apps-sdk",
+            "owasp-llm-top10"
           ],
           "pathway": null
         },
@@ -3519,37 +3831,57 @@
           "visualScene": {
             "id": "codex-05-team",
             "type": "team",
-            "title": "빠른 병렬 작업이 안전한 하나의 결과로 합류",
+            "title": "Worktree 병렬·통합 회귀 QA",
+            "layout": "codex-worktree-regression-gate",
+            "normalFlow": [
+              "작업 분리",
+              "Worktree 격리",
+              "병렬 실행",
+              "증거 반환",
+              "통합 리뷰",
+              "회귀 QA"
+            ],
+            "failureFlow": [
+              "integration regression",
+              "개별 브랜치 통과",
+              "병합 후 UI 깨짐"
+            ],
+            "recoveryFlow": [
+              "통합 시나리오 실행",
+              "스크린샷 회귀",
+              "파일 Owner 재조정",
+              "병합 전 리뷰 게이트"
+            ],
             "steps": [
               {
                 "label": "SPLIT",
-                "title": "병렬화 가능성 판단",
-                "detail": "탐색·테스트·리뷰 같은 독립 작업을 별도 컨텍스트에서 수행합니다."
+                "title": "병렬 가능한 작업만 분리",
+                "detail": "의존성이 크거나 같은 파일을 만지는 작업은 병렬화하지 않습니다."
               },
               {
                 "label": "WORKTREE",
-                "title": "역할·파일·Worktree 분리",
-                "detail": "Git 브랜치 작업 공간을 물리적으로 격리합니다."
+                "title": "작업공간을 물리적으로 격리",
+                "detail": "각 Worktree가 서로의 로컬 변경을 덮어쓰지 않도록 분리합니다."
               },
               {
                 "label": "PARALLEL",
-                "title": "동시 탐색·구현·테스트",
-                "detail": "각 작업의 파일 소유권과 반환 형식을 정합니다."
+                "title": "탐색·구현·테스트를 병렬 실행",
+                "detail": "각 역할은 정해진 파일 범위와 반환 형식 안에서 움직입니다."
               },
               {
                 "label": "REPORT",
-                "title": "요약·diff·증거 반환",
-                "detail": "코드·테스트·화면·위험을 합쳐 검토합니다."
+                "title": "결과·증거·위험을 요약 반환",
+                "detail": "원시 로그 전부가 아니라 결론, diff, 실행한 검증, 남은 위험을 돌려받습니다."
               },
               {
                 "label": "REVIEW",
-                "title": "리뷰·통합·회귀 QA",
-                "detail": "탐색·테스트·리뷰 같은 독립 작업을 별도 컨텍스트에서 수행합니다."
+                "title": "통합 전 전제와 diff를 비교",
+                "detail": "개별 성공을 전체 성공으로 착각하지 않도록 통합 기준을 확인합니다."
               },
               {
                 "label": "MERGE",
-                "title": "MERGE",
-                "detail": "Git 브랜치 작업 공간을 물리적으로 격리합니다."
+                "title": "병합 후 전체 사용자 흐름 검증",
+                "detail": "integration regression은 병합 후 전체 시나리오와 스크린샷으로 잡습니다."
               }
             ]
           },
@@ -3602,6 +3934,8 @@
             "codex-worktrees",
             "codex-review",
             "openai-agents-sdk",
+            "anthropic-eng-agents",
+            "anthropic-eng-multiagent",
             "github-git",
             "github-pull-requests"
           ],
@@ -3631,37 +3965,57 @@
           "visualScene": {
             "id": "codex-06-release",
             "type": "release",
-            "title": "Codex 작업이 검증 가능한 소프트웨어 릴리즈로",
+            "title": "GitHub Actions Release·버전 일치 검증",
+            "layout": "codex-release-version-pipeline",
+            "normalFlow": [
+              "Hook 정책",
+              "Automation 후보",
+              "CI 검증",
+              "PR 승인",
+              "Tag 생성",
+              "Release 자산"
+            ],
+            "failureFlow": [
+              "tag v3 / package 2.0.0",
+              "태그·package 버전 불일치",
+              "이전 실행 파일 업로드"
+            ],
+            "recoveryFlow": [
+              "tag와 package.version 비교",
+              "빌드 산출물명 검증",
+              "SHA-256 생성",
+              "Release 업로드 차단"
+            ],
             "steps": [
               {
                 "label": "HOOK",
-                "title": "정책·반복 후보 선정",
-                "detail": "도구 사용 전후와 세션 이벤트에 정책을 실행합니다."
+                "title": "위험 행동 정책을 Hook으로 제한",
+                "detail": "비밀값, 파괴적 명령, 검증 누락처럼 즉시 막아야 할 행동만 정책화합니다."
               },
               {
                 "label": "AUTOMATION",
-                "title": "Hook·Automation 경계",
-                "detail": "정해진 시간이나 반복 조건에서 작업을 실행합니다."
+                "title": "반복 후보를 안정성 기준으로 선별",
+                "detail": "수동으로 안정화된 작업만 자동화하고 비용·재시도·알림을 함께 둡니다."
               },
               {
                 "label": "CI",
-                "title": "CI 검증 명령",
-                "detail": "저장소 이벤트마다 빌드·테스트·배포를 수행합니다."
+                "title": "GitHub Actions 검증 세트 실행",
+                "detail": "build, audit, smoke, print QA 같은 릴리즈 전 필수 검사를 묶습니다."
               },
               {
                 "label": "PR",
-                "title": "PR 승인과 태그",
-                "detail": "버전·변경 기록·실행 파일·체크섬을 배포합니다."
+                "title": "승인 가능한 변경 기록 작성",
+                "detail": "diff, 검증, 위험, 롤백 방법이 PR에서 확인되어야 합니다."
               },
               {
                 "label": "TAG",
-                "title": "Release 자산·체크섬·복구",
-                "detail": "도구 사용 전후와 세션 이벤트에 정책을 실행합니다."
+                "title": "태그와 package 버전 일치 검사",
+                "detail": "tag v3 / package 2.0.0 같은 불일치가 있으면 빌드를 중단합니다."
               },
               {
                 "label": "RELEASE",
-                "title": "RELEASE",
-                "detail": "정해진 시간이나 반복 조건에서 작업을 실행합니다."
+                "title": "자산명·체크섬까지 확인 후 배포",
+                "detail": "EXE 파일명, version, SHA-256, 릴리즈 노트가 같은 버전을 가리켜야 합니다."
               }
             ]
           },
@@ -3715,7 +4069,8 @@
             "github-actions",
             "github-actions-secrets",
             "github-releases",
-            "vercel-rollback"
+            "vercel-rollback",
+            "owasp-llm-top10"
           ],
           "pathway": null
         }
@@ -3843,6 +4198,775 @@
             "file": "appendix/instructor-codex-professional-research.html",
             "audience": "instructor",
             "courseId": "codex"
+          }
+        ]
+      }
+    },
+    {
+      "id": "advanced",
+      "title": "AI 심화 통합과정 · V3 파일럿",
+      "shortTitle": "심화 통합 S",
+      "code": "S50",
+      "family": "심화 통합",
+      "track": "심화 통합 · PILOT",
+      "level": "ARCHITECT+",
+      "status": "preview",
+      "visibility": "preview",
+      "audience": [
+        "studio"
+      ],
+      "curriculumVersion": "V3-S1-PILOT",
+      "description": "Claude Code와 Codex 사용법을 반복하지 않고, 두 도구를 비교·결합·계측하는 상위 설계 파일럿입니다.",
+      "color": "#2dd4bf",
+      "route": "도구 선택 → 컨텍스트 → Skill → MCP → Agent → 오케스트레이션 → 신뢰성 → 캡스톤",
+      "outcomes": [
+        "작업별 도구·표면 선택",
+        "크로스툴 워크플로 설계",
+        "실패·복구 기준 수립",
+        "도구 조합 운영 판단"
+      ],
+      "visualMode": "advanced",
+      "modules": [
+        {
+          "id": "S1",
+          "title": "S1 · SURFACE STRATEGY",
+          "weeks": [
+            1
+          ]
+        },
+        {
+          "id": "S2",
+          "title": "S2 · CONTEXT & MEMORY",
+          "weeks": [
+            2
+          ]
+        },
+        {
+          "id": "S3",
+          "title": "S3 · SKILL REUSE",
+          "weeks": [
+            3
+          ]
+        },
+        {
+          "id": "S4",
+          "title": "S4 · MCP & GRANTS",
+          "weeks": [
+            4
+          ]
+        },
+        {
+          "id": "S5",
+          "title": "S5 · PARALLEL AGENTS",
+          "weeks": [
+            5
+          ]
+        },
+        {
+          "id": "S6",
+          "title": "S6 · ORCHESTRATION",
+          "weeks": [
+            6
+          ]
+        },
+        {
+          "id": "S7",
+          "title": "S7 · EVAL & RELIABILITY",
+          "weeks": [
+            7
+          ]
+        },
+        {
+          "id": "S8",
+          "title": "S8 · INTEGRATION CAPSTONE",
+          "weeks": [
+            8
+          ]
+        }
+      ],
+      "sessions": [
+        {
+          "id": "advanced-01",
+          "title": "S1 · 도구 선택·CLI/표면 전략",
+          "subtitle": "Claude Code · Codex · IDE/App 표면을 작업 기준으로 고르는 법",
+          "description": "같은 작업을 세 표면에서 비교하고, 작업 성격과 검증 증거를 기준으로 도구 선택표를 작성합니다.",
+          "duration": "120분",
+          "type": "practice",
+          "slideCount": 9,
+          "file": "v3/deck.html?course=advanced&lesson=1",
+          "moduleId": "S1",
+          "revision": "3.0.0-beta.3-review",
+          "status": "review",
+          "sourceKeys": [
+            "claude-overview",
+            "codex-overview",
+            "claude-quickstart",
+            "node-download"
+          ],
+          "preparation": [
+            "Claude Code 또는 Codex 실행 가능 환경",
+            "비교할 실제 작업 1건",
+            "브라우저 또는 IDE 화면 캡처 준비"
+          ],
+          "deliverables": [
+            "작업→도구·표면 결정표",
+            "선택 근거 메모",
+            "실행 1건의 캡처 또는 로그",
+            "실패 시 재선택 기준"
+          ],
+          "demoProject": {
+            "root": "v3/projects/advanced/01",
+            "starter": "v3/projects/advanced/01/starter",
+            "broken": "v3/projects/advanced/01/broken",
+            "complete": "v3/projects/advanced/01/complete",
+            "manifest": "v3/projects/advanced/01/lab.json"
+          },
+          "fallbackMedia": {
+            "image": "assets/v3/fallbacks/advanced-01.png",
+            "slide": "v3/deck.html?course=advanced&lesson=1&slide=4&motion=low"
+          }
+        },
+        {
+          "id": "advanced-02",
+          "title": "S2 · Workflow·컨텍스트·메모리 설계",
+          "subtitle": "CLAUDE.md·AGENTS.md 작성법이 아니라, 두 도구가 공유할 컨텍스트·메모리 정책",
+          "description": "필요한 컨텍스트만 적시에 투입하고 메모리에 범위·유효기간·근거를 남겨, Claude와 Codex가 같은 정책을 공유하도록 설계합니다.",
+          "duration": "120분",
+          "type": "practice",
+          "slideCount": 9,
+          "file": "v3/deck.html?course=advanced&lesson=2",
+          "moduleId": "S2",
+          "revision": "3.0.0-beta.3-review",
+          "status": "review",
+          "sourceKeys": [
+            "anthropic-eng-context",
+            "claude-memory",
+            "codex-agents-md",
+            "anthropic-eng-agents"
+          ],
+          "preparation": [
+            "Claude Code 또는 Codex 실행 가능 환경",
+            "컨텍스트·메모리를 정리할 실제 작업 1건",
+            "현재 CLAUDE.md 또는 AGENTS.md(있다면)"
+          ],
+          "deliverables": [
+            "컨텍스트 예산표",
+            "메모리 정책표(범위·유효기간·근거)",
+            "크로스툴 동기화 체크",
+            "stale 발생 시 복구 기준"
+          ],
+          "demoProject": {
+            "root": "v3/projects/advanced/02",
+            "starter": "v3/projects/advanced/02/starter",
+            "broken": "v3/projects/advanced/02/broken",
+            "complete": "v3/projects/advanced/02/complete",
+            "manifest": "v3/projects/advanced/02/lab.json"
+          },
+          "fallbackMedia": {
+            "image": "assets/v3/fallbacks/advanced-02.png",
+            "slide": "v3/deck.html?course=advanced&lesson=2&slide=4&motion=low"
+          }
+        },
+        {
+          "id": "advanced-03",
+          "title": "S3 · Skill·재사용 자산 크로스툴",
+          "subtitle": "SKILL.md·Codex Skill 문법이 아니라, 반복 작업을 두 도구가 공유하는 자산으로",
+          "description": "반복 작업을 트리거·절차·예시로 캡슐화해 Claude와 Codex에서 같은 결과로 재사용되는 자산으로 만듭니다.",
+          "duration": "120분",
+          "type": "practice",
+          "slideCount": 9,
+          "file": "v3/deck.html?course=advanced&lesson=3",
+          "moduleId": "S3",
+          "revision": "3.0.0-beta.3-review",
+          "status": "review",
+          "sourceKeys": [
+            "claude-skills",
+            "anthropic-eng-skills",
+            "codex-overview",
+            "openai-tools"
+          ],
+          "preparation": [
+            "Claude Code 또는 Codex 실행 가능 환경",
+            "반복하는 작업 1건",
+            "기존 SKILL.md 또는 재사용 절차(있다면)"
+          ],
+          "deliverables": [
+            "재사용 자산(트리거·절차·예시)",
+            "통과 검증 기준",
+            "크로스툴 이식 체크",
+            "drift 발생 시 복구 기준"
+          ],
+          "demoProject": {
+            "root": "v3/projects/advanced/03",
+            "starter": "v3/projects/advanced/03/starter",
+            "broken": "v3/projects/advanced/03/broken",
+            "complete": "v3/projects/advanced/03/complete",
+            "manifest": "v3/projects/advanced/03/lab.json"
+          },
+          "fallbackMedia": {
+            "image": "assets/v3/fallbacks/advanced-03.png",
+            "slide": "v3/deck.html?course=advanced&lesson=3&slide=4&motion=low"
+          }
+        },
+        {
+          "id": "advanced-04",
+          "title": "S4 · MCP·커넥터·권한 크로스툴",
+          "subtitle": "MCP 설치법이 아니라, 두 도구의 외부 연결을 최소 권한·승인·감사로",
+          "description": "외부 능력을 Claude MCP와 Codex Connectors 양쪽에서 최소 권한·승인·감사로 연결하고 인젝션을 방어합니다.",
+          "duration": "120분",
+          "type": "practice",
+          "slideCount": 9,
+          "file": "v3/deck.html?course=advanced&lesson=4",
+          "moduleId": "S4",
+          "revision": "3.0.0-beta.3-review",
+          "status": "review",
+          "sourceKeys": [
+            "mcp-architecture",
+            "mcp-security",
+            "claude-mcp",
+            "owasp-llm-top10"
+          ],
+          "preparation": [
+            "Claude Code 또는 Codex 실행 가능 환경",
+            "연결할 외부 서비스 1건",
+            "권한·승인 정책 메모"
+          ],
+          "deliverables": [
+            "권한 설계표(범위·읽기/쓰기)",
+            "승인 게이트·감사 설정",
+            "인젝션 방어 체크",
+            "과권한 발생 시 복구 기준"
+          ],
+          "demoProject": {
+            "root": "v3/projects/advanced/04",
+            "starter": "v3/projects/advanced/04/starter",
+            "broken": "v3/projects/advanced/04/broken",
+            "complete": "v3/projects/advanced/04/complete",
+            "manifest": "v3/projects/advanced/04/lab.json"
+          },
+          "fallbackMedia": {
+            "image": "assets/v3/fallbacks/advanced-04.png",
+            "slide": "v3/deck.html?course=advanced&lesson=4&slide=4&motion=low"
+          }
+        },
+        {
+          "id": "advanced-05",
+          "title": "S5 · Agent·SubAgent·Worktree 병렬",
+          "subtitle": "서브에이전트 기능이 아니라, 두 도구의 병렬 작업을 소유권으로",
+          "description": "작업을 병렬 단위로 분해해 Claude 서브에이전트와 Codex worktree에서 진행하되, 소유권이 겹치지 않게 하고 리뷰 게이트로 병합합니다.",
+          "duration": "120분",
+          "type": "practice",
+          "slideCount": 9,
+          "file": "v3/deck.html?course=advanced&lesson=5",
+          "moduleId": "S5",
+          "revision": "3.0.0-beta.3-review",
+          "status": "review",
+          "sourceKeys": [
+            "anthropic-eng-multiagent",
+            "claude-subagents",
+            "openai-agents-sdk",
+            "anthropic-eng-agents"
+          ],
+          "preparation": [
+            "Claude Code 또는 Codex 실행 가능 환경",
+            "병렬로 나눌 작업 1건",
+            "Git worktree 사용 가능 저장소"
+          ],
+          "deliverables": [
+            "작업 분해·소유권 맵",
+            "병렬 분담 계획",
+            "리뷰 게이트·병합 순서",
+            "충돌 발생 시 복구 기준"
+          ],
+          "demoProject": {
+            "root": "v3/projects/advanced/05",
+            "starter": "v3/projects/advanced/05/starter",
+            "broken": "v3/projects/advanced/05/broken",
+            "complete": "v3/projects/advanced/05/complete",
+            "manifest": "v3/projects/advanced/05/lab.json"
+          },
+          "fallbackMedia": {
+            "image": "assets/v3/fallbacks/advanced-05.png",
+            "slide": "v3/deck.html?course=advanced&lesson=5&slide=4&motion=low"
+          }
+        },
+        {
+          "id": "advanced-06",
+          "title": "S6 · 오케스트레이션 실전",
+          "subtitle": "자동화 기능이 아니라, 결정적 뼈대 + 에이전틱을 하나의 흐름으로",
+          "description": "결정적 워크플로 뼈대에 에이전틱 보강을 더해 Claude·Codex 작업을 하나의 흐름으로 굴리고 정지조건·복구를 설계합니다.",
+          "duration": "120분",
+          "type": "practice",
+          "slideCount": 9,
+          "file": "v3/deck.html?course=advanced&lesson=6",
+          "moduleId": "S6",
+          "revision": "3.0.0-beta.3-review",
+          "status": "review",
+          "sourceKeys": [
+            "anthropic-eng-multiagent",
+            "anthropic-eng-agents",
+            "github-actions",
+            "openai-agents-sdk"
+          ],
+          "preparation": [
+            "Claude Code 또는 Codex 실행 가능 환경",
+            "반복 업무 1건",
+            "트리거·단계 메모"
+          ],
+          "deliverables": [
+            "오케스트레이션 흐름도",
+            "결정적/에이전틱 경계 표시",
+            "핸드오프 산출물 형식",
+            "정지조건·복구 경로"
+          ],
+          "demoProject": {
+            "root": "v3/projects/advanced/06",
+            "starter": "v3/projects/advanced/06/starter",
+            "broken": "v3/projects/advanced/06/broken",
+            "complete": "v3/projects/advanced/06/complete",
+            "manifest": "v3/projects/advanced/06/lab.json"
+          },
+          "fallbackMedia": {
+            "image": "assets/v3/fallbacks/advanced-06.png",
+            "slide": "v3/deck.html?course=advanced&lesson=6&slide=4&motion=low"
+          }
+        },
+        {
+          "id": "advanced-07",
+          "title": "S7 · 평가·신뢰성·관측성·비용",
+          "subtitle": "종이 운영안이 아니라, 측정 가능한 신뢰성으로",
+          "description": "평가 하니스·회귀 테스트·관측성·비용 거버넌스로 측정해 Claude·Codex 결과를 같은 스코어카드로 운영합니다.",
+          "duration": "120분",
+          "type": "practice",
+          "slideCount": 9,
+          "file": "v3/deck.html?course=advanced&lesson=7",
+          "moduleId": "S7",
+          "revision": "3.0.0-beta.3-review",
+          "status": "review",
+          "sourceKeys": [
+            "anthropic-eng-multiagent",
+            "anthropic-eng-context",
+            "owasp-llm-top10",
+            "github-actions"
+          ],
+          "preparation": [
+            "Claude Code 또는 Codex 실행 가능 환경",
+            "평가할 작업 1건",
+            "변경 전후 비교용 입력 세트"
+          ],
+          "deliverables": [
+            "평가 기준·하니스",
+            "회귀 비교 결과",
+            "트레이스·지표 목록",
+            "토큰·시간 비용 가드"
+          ],
+          "demoProject": {
+            "root": "v3/projects/advanced/07",
+            "starter": "v3/projects/advanced/07/starter",
+            "broken": "v3/projects/advanced/07/broken",
+            "complete": "v3/projects/advanced/07/complete",
+            "manifest": "v3/projects/advanced/07/lab.json"
+          },
+          "fallbackMedia": {
+            "image": "assets/v3/fallbacks/advanced-07.png",
+            "slide": "v3/deck.html?course=advanced&lesson=7&slide=4&motion=low"
+          }
+        },
+        {
+          "id": "advanced-08",
+          "title": "S8 · 통합 캡스톤",
+          "subtitle": "새 개념이 아니라, S1~S7을 하나의 실제 제품으로 두 도구로 끝까지",
+          "description": "작업별 도구 선택·공유 정책·병렬·오케스트레이션·신뢰성을 하나의 제품에 통합해 재현 가능한 릴리즈까지 완성합니다.",
+          "duration": "120분",
+          "type": "practice",
+          "slideCount": 9,
+          "file": "v3/deck.html?course=advanced&lesson=8",
+          "moduleId": "S8",
+          "revision": "3.0.0-beta.3-review",
+          "status": "review",
+          "sourceKeys": [
+            "github-releases",
+            "vercel-deploy",
+            "github-pull-requests",
+            "anthropic-eng-agents"
+          ],
+          "preparation": [
+            "Claude Code와 Codex 실행 가능 환경",
+            "통합할 실제 제품 1건",
+            "S1~S7 산출물"
+          ],
+          "deliverables": [
+            "통합 계획(S1~S7 적용)",
+            "크로스툴 빌드·검증 기록",
+            "재현 가능한 릴리즈 증거",
+            "통합 실패 시 복구 기준"
+          ],
+          "demoProject": {
+            "root": "v3/projects/advanced/08",
+            "starter": "v3/projects/advanced/08/starter",
+            "broken": "v3/projects/advanced/08/broken",
+            "complete": "v3/projects/advanced/08/complete",
+            "manifest": "v3/projects/advanced/08/lab.json"
+          },
+          "fallbackMedia": {
+            "image": "assets/v3/fallbacks/advanced-08.png",
+            "slide": "v3/deck.html?course=advanced&lesson=8&slide=4&motion=low"
+          }
+        }
+      ],
+      "materials": {
+        "student": [
+          {
+            "id": "advanced-workbook",
+            "title": "통합 실습 워크북",
+            "description": "심화 통합 S1 작업지와 메모",
+            "file": "v3/material.html?course=advanced&kind=workbook&audience=student",
+            "audience": "student",
+            "courseId": "advanced"
+          },
+          {
+            "id": "advanced-commands",
+            "title": "Windows·Mac 명령어 및 설정집",
+            "description": "도구 실행·검증·복구 명령",
+            "file": "v3/material.html?course=advanced&kind=commands&audience=student",
+            "audience": "student",
+            "courseId": "advanced"
+          },
+          {
+            "id": "advanced-examples",
+            "title": "예제·설정·복구 파일",
+            "description": "S1 시작본과 실패 복구 예시",
+            "file": "v3/material.html?course=advanced&kind=examples&audience=student",
+            "audience": "student",
+            "courseId": "advanced"
+          },
+          {
+            "id": "advanced-errors",
+            "title": "오류 사례와 해결 훈련",
+            "description": "표면 선택 실패와 복구 시나리오",
+            "file": "v3/material.html?course=advanced&kind=errors&audience=student",
+            "audience": "student",
+            "courseId": "advanced"
+          },
+          {
+            "id": "advanced-assessment",
+            "title": "프로젝트 체크·평가표",
+            "description": "선택 근거와 검증 증거 평가",
+            "file": "v3/material.html?course=advanced&kind=assessment&audience=student",
+            "audience": "student",
+            "courseId": "advanced"
+          },
+          {
+            "id": "advanced-practice",
+            "title": "개인 실습 기록지",
+            "description": "작업 성격·위험도·증거·추천 표면 기록",
+            "file": "v3/material.html?course=advanced&kind=practice&audience=student",
+            "audience": "student",
+            "courseId": "advanced"
+          }
+        ],
+        "instructor": [
+          {
+            "id": "advanced-script",
+            "title": "슬라이드별 상세 대본",
+            "description": "SAY·DO·ASK·예상 답변·복구·시간 조정",
+            "file": "v3/material.html?course=advanced&kind=script&audience=instructor",
+            "audience": "instructor",
+            "courseId": "advanced"
+          },
+          {
+            "id": "advanced-source-study",
+            "title": "공식자료 연구노트",
+            "description": "Claude Code와 Codex 공식 문서 기반 연구자료",
+            "file": "v3/material.html?course=advanced&kind=source-study&audience=instructor",
+            "audience": "instructor",
+            "courseId": "advanced"
+          },
+          {
+            "id": "advanced-demo-runbook",
+            "title": "시연 운영 매뉴얼",
+            "description": "표면 비교 정상·실패·복구 운영",
+            "file": "v3/material.html?course=advanced&kind=demo-runbook&audience=instructor",
+            "audience": "instructor",
+            "courseId": "advanced"
+          },
+          {
+            "id": "advanced-deep-dive",
+            "title": "강사용 심화 개념집",
+            "description": "C/O 사용법과 S1 판단 수업의 경계",
+            "file": "v3/material.html?course=advanced&kind=deep-dive&audience=instructor",
+            "audience": "instructor",
+            "courseId": "advanced"
+          },
+          {
+            "id": "advanced-qa-bank",
+            "title": "질문·답변·오류 복구집",
+            "description": "도구 선택 예상 질문과 복구 답변",
+            "file": "v3/material.html?course=advanced&kind=qa-bank&audience=instructor",
+            "audience": "instructor",
+            "courseId": "advanced"
+          },
+          {
+            "id": "advanced-fallback",
+            "title": "오프라인 대체 화면",
+            "description": "캡처·인터넷 실패 시 사용할 대체 자료",
+            "file": "v3/material.html?course=advanced&kind=fallback&audience=instructor",
+            "audience": "instructor",
+            "courseId": "advanced"
+          },
+          {
+            "id": "advanced-rehearsal",
+            "title": "현장 리허설 체크리스트",
+            "description": "프로젝터·캡처·수동 진행 QA",
+            "file": "v3/material.html?course=advanced&kind=rehearsal&audience=instructor",
+            "audience": "instructor",
+            "courseId": "advanced"
+          }
+        ]
+      }
+    },
+    {
+      "id": "onepass",
+      "title": "AI 한방 이해하기 · 4주 집중",
+      "shortTitle": "AI 한방",
+      "code": "ONE",
+      "family": "원샷 집중",
+      "track": "원샷 집중 · 4주 (1주 플래그십)",
+      "level": "ALL-IN-ONE",
+      "status": "preview",
+      "visibility": "preview",
+      "audience": [
+        "studio"
+      ],
+      "curriculumVersion": "ONEPASS-W1-PILOT",
+      "description": "바이브코딩의 원리부터 CLI·MCP·Skill, 나만의 자동화, 그리고 나만의 AI 사무실까지 4주에 압축한 원샷 집중 트랙입니다.",
+      "color": "#a78bfa",
+      "route": "원리 → CLI·MCP·Skill 이해 → 나만의 MCP·Skill·Workflow 제작 → 오케스트레이션·AI 사무실",
+      "outcomes": [
+        "AI에게 일을 시키고 검증·복구하는 사고법",
+        "CLI·MCP·Skill의 개념과 사용",
+        "나만의 MCP·Skill·SubAgent·Workflow 제작",
+        "오케스트레이션으로 나만의 AI 사무실 구성"
+      ],
+      "visualMode": "onepass",
+      "modules": [
+        {
+          "id": "W1",
+          "title": "W1 · WHY IT WORKS",
+          "weeks": [
+            1
+          ]
+        },
+        {
+          "id": "W2",
+          "title": "W2 · CLI · MCP · SKILL",
+          "weeks": [
+            2
+          ]
+        },
+        {
+          "id": "W3",
+          "title": "W3 · BUILD · PARALLEL",
+          "weeks": [
+            3
+          ]
+        },
+        {
+          "id": "W4",
+          "title": "W4 · ORCHESTRATION · AI OFFICE",
+          "weeks": [
+            4
+          ]
+        }
+      ],
+      "sessions": [
+        {
+          "id": "onepass-01",
+          "title": "W1 · 바이브코딩의 원리 — 왜 AI에게 맡겨도 되는가",
+          "subtitle": "도구 사용법이 아니라, AI에게 일을 시키고 결과를 신뢰·검증·복구하는 사고법",
+          "description": "도구 사용법을 외우기 전에, AI에게 무엇을·어디까지 맡기고 결과를 어떻게 검증·복구하는지 판단 기준을 만듭니다.",
+          "duration": "180분",
+          "type": "practice",
+          "slideCount": 9,
+          "file": "sessions/onepass-week1.html",
+          "moduleId": "W1",
+          "revision": "3.0.0-beta.1",
+          "status": "preview",
+          "sourceKeys": [
+            "claude-overview",
+            "claude-quickstart",
+            "anthropic-eng-agents",
+            "node-download"
+          ],
+          "preparation": [
+            "개인 노트북",
+            "AI 코딩 도구 실행 환경",
+            "만들어보고 싶은 작은 아이디어 1건"
+          ],
+          "deliverables": [
+            "한 문장 목표와 완료 기준",
+            "맥락·예시 메모",
+            "직접 실행한 검증 기록",
+            "실패 시 복구 한 단계"
+          ],
+          "demoProject": {
+            "root": "v3/projects/onepass/01",
+            "starter": "v3/projects/onepass/01/starter",
+            "broken": "v3/projects/onepass/01/broken",
+            "complete": "v3/projects/onepass/01/complete",
+            "manifest": "v3/projects/onepass/01/lab.json"
+          },
+          "fallbackMedia": {
+            "image": "assets/v3/fallbacks/onepass-01.png",
+            "slide": "v3/deck.html?course=onepass&lesson=1&slide=4&motion=low"
+          }
+        },
+        {
+          "id": "onepass-02",
+          "title": "W2 · CLI로 바이브코딩 + MCP·Skill 이해",
+          "subtitle": "터미널 작업 흐름과 외부 능력(MCP)·반복 자산(Skill)의 개념·사용",
+          "description": "터미널에서 일하는 법, AI에 외부 능력을 끼우는 MCP, 반복을 자산으로 만드는 Skill을 한 흐름으로 이해합니다.",
+          "duration": "180분",
+          "type": "practice",
+          "slideCount": 11,
+          "file": "sessions/onepass-week2.html",
+          "moduleId": "W2",
+          "revision": "3.0.0-beta.1",
+          "status": "preview",
+          "sourceKeys": [
+            "claude-overview",
+            "claude-mcp",
+            "claude-skills",
+            "codex-overview"
+          ],
+          "preparation": [
+            "개인 노트북",
+            "AI 코딩 도구 실행 환경"
+          ],
+          "deliverables": [
+            "CLI로 작은 변경 1건",
+            "필요한 MCP 1개 연결",
+            "반복 작업 1개 Skill 후보 메모"
+          ]
+        },
+        {
+          "id": "onepass-03",
+          "title": "W3 · 나만의 MCP·Skill 만들기 + SubAgent·Workflow",
+          "subtitle": "직접 제작 — Skill·MCP 제작, 작업을 나누는 SubAgent, 반복 자동화 Workflow",
+          "description": "반복 작업을 나만의 Skill·MCP로 만들고, SubAgent로 병렬 처리하며, Workflow로 자동화합니다.",
+          "duration": "180분",
+          "type": "practice",
+          "slideCount": 10,
+          "file": "sessions/onepass-week3.html",
+          "moduleId": "W3",
+          "revision": "3.0.0-beta.1",
+          "status": "preview",
+          "sourceKeys": [
+            "claude-skills",
+            "claude-mcp",
+            "claude-subagents",
+            "anthropic-eng-multiagent"
+          ],
+          "preparation": [
+            "개인 노트북",
+            "AI 코딩 도구 실행 환경"
+          ],
+          "deliverables": [
+            "나만의 Skill 1개",
+            "연결한 MCP 1개",
+            "작업 분해·병렬 계획",
+            "자동화 Workflow 초안"
+          ]
+        },
+        {
+          "id": "onepass-04",
+          "title": "W4 · 오케스트레이션 + 나만의 AI 사무실",
+          "subtitle": "만든 조각을 하나의 흐름으로 — 결정적+에이전틱, 핸드오프·정지조건, 역할별 에이전트",
+          "description": "Skill·MCP·SubAgent·Workflow를 하나의 흐름으로 묶고, 역할을 나눈 나만의 AI 사무실을 운영합니다.",
+          "duration": "180분",
+          "type": "practice",
+          "slideCount": 9,
+          "file": "sessions/onepass-week4.html",
+          "moduleId": "W4",
+          "revision": "3.0.0-beta.1",
+          "status": "preview",
+          "sourceKeys": [
+            "anthropic-eng-agents",
+            "anthropic-eng-multiagent",
+            "github-actions",
+            "openai-agents-sdk"
+          ],
+          "preparation": [
+            "개인 노트북",
+            "AI 코딩 도구 실행 환경"
+          ],
+          "deliverables": [
+            "오케스트레이션 흐름도",
+            "정지조건·복구 경로",
+            "역할별 AI 사무실 구성",
+            "4주 통합 적용 계획"
+          ]
+        }
+      ],
+      "materials": {
+        "student": [
+          {
+            "id": "onepass-workbook",
+            "title": "원샷 실습 워크북",
+            "description": "주차별 작업지와 메모",
+            "file": "v3/material.html?course=onepass&kind=workbook&audience=student",
+            "audience": "student",
+            "courseId": "onepass"
+          },
+          {
+            "id": "onepass-practice",
+            "title": "개인 실습 기록지",
+            "description": "목표·맥락·검증·복구 기록",
+            "file": "v3/material.html?course=onepass&kind=practice&audience=student",
+            "audience": "student",
+            "courseId": "onepass"
+          }
+        ],
+        "instructor": [
+          {
+            "id": "onepass-script",
+            "title": "슬라이드별 상세 대본",
+            "description": "SAY·DO·ASK·예상 답변·복구",
+            "file": "v3/material.html?course=onepass&kind=script&audience=instructor",
+            "audience": "instructor",
+            "courseId": "onepass"
+          },
+          {
+            "id": "onepass-source-study",
+            "title": "공식자료 연구노트",
+            "description": "원리 회차 공식 문서 기반 연구자료",
+            "file": "v3/material.html?course=onepass&kind=source-study&audience=instructor",
+            "audience": "instructor",
+            "courseId": "onepass"
+          },
+          {
+            "id": "onepass-deep-dive",
+            "title": "강사용 심화 개념집",
+            "description": "사고법 중심 배경지식",
+            "file": "v3/material.html?course=onepass&kind=deep-dive&audience=instructor",
+            "audience": "instructor",
+            "courseId": "onepass"
+          },
+          {
+            "id": "onepass-qa-bank",
+            "title": "질문·답변·오류 복구집",
+            "description": "바이브코더 예상 질문과 복구 답변",
+            "file": "v3/material.html?course=onepass&kind=qa-bank&audience=instructor",
+            "audience": "instructor",
+            "courseId": "onepass"
+          },
+          {
+            "id": "onepass-rehearsal",
+            "title": "현장 리허설 체크리스트",
+            "description": "프로젝터·수동 진행 QA",
+            "file": "v3/material.html?course=onepass&kind=rehearsal&audience=instructor",
+            "audience": "instructor",
+            "courseId": "onepass"
           }
         ]
       }
@@ -4000,6 +5124,8 @@
             "rehearsal"
           ],
           "sourceKeys": [
+            "vibe-coding-origin",
+            "vibe-coding-ibm",
             "github-git",
             "node-download",
             "vscode-download"

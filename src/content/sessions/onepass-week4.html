@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 한방 이해하기 · 4주차 — 오케스트레이션·AI 사무실</title>
+<link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+<style>
+
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#070b11;color:#eaf2f6;font-family:Pretendard,"Malgun Gothic",sans-serif;-webkit-font-smoothing:antialiased}
+.app{position:fixed;inset:0}
+.nav-bar{position:fixed;top:0;left:0;right:0;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(8,12,18,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.1);z-index:100}
+.nav-title{font-weight:700;font-size:13px;color:#cdd8de;letter-spacing:.01em}
+.nav-controls{display:flex;align-items:center;gap:8px}
+.nav-btn{width:32px;height:32px;border-radius:8px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#eaf2f6;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+.nav-btn:disabled{opacity:.3;cursor:default}
+#counter{min-width:58px;text-align:center;color:#9fb0bd;font:700 13px ui-monospace,SFMono-Regular,Consolas,monospace}
+.deck{position:absolute;top:48px;left:0;right:0;bottom:0;overflow:hidden}
+.src-scope{display:contents}
+.app .deck .slide{position:absolute;inset:0;overflow-y:auto}
+.app .deck .slide:not(.active){display:none!important}
+.app .deck .slide.active{display:flex!important;flex-direction:column;opacity:1!important;transform:none!important;pointer-events:all!important;transition:none!important;animation:none!important}
+/* entrance animations on REUSED content use both-fill (start opacity:0); force visible.
+   op-slides (custom 고도화) keep their intentional animations. */
+.app .deck .slide.active:not(.op-slide) *{animation:none!important;opacity:1!important}
+.app .deck .slide.cover{justify-content:center}
+/* op-enhanced (고도화): clean visual-first custom slides */
+.op-slide{padding:clamp(30px,4.2vw,64px) clamp(40px,6vw,96px)!important;gap:18px;justify-content:center}
+.op-eyebrow{color:#34d399;font:800 12px/1 ui-monospace,SFMono-Regular,monospace;letter-spacing:.16em}
+.op-title{margin:6px 0 4px;font-size:clamp(27px,3.3vw,46px);font-weight:800;line-height:1.14;letter-spacing:-.01em;word-break:keep-all}
+.op-title .g{color:#34d399}.op-title .a{color:#fbbf24}
+.op-visual{margin:6px 0;display:flex;flex-direction:column;gap:16px}
+.op-cap{margin:0;color:#aebcc4;font-size:clamp(14px,1.3vw,18px);line-height:1.55;word-break:keep-all}
+.op-cap b,.op-cap .g{color:#eaf2f6}
+.op-flow{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.op-node{display:flex;flex-direction:column;gap:4px;padding:15px 19px;min-width:118px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:rgba(255,255,255,.04)}
+.op-node b{color:#eaf2f6;font-size:clamp(15px,1.5vw,19px)}
+.op-node span{color:#9fb0bd;font:700 12px ui-monospace,monospace}
+.op-node.a{border-color:rgba(251,191,36,.4);background:rgba(251,191,36,.08)}.op-node.a b{color:#fbbf24}
+.op-node.g{border-color:rgba(52,211,153,.4);background:rgba(52,211,153,.08)}.op-node.g b{color:#34d399}
+.op-arrow{color:#6b7a85;font-size:22px;font-weight:800}
+.op-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.op-card{display:flex;flex-direction:column;gap:12px;padding:22px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(255,255,255,.03)}
+.op-card-h{color:#eaf2f6;font-weight:800;font-size:clamp(16px,1.6vw,21px)}
+.op-card-h.g{color:#34d399}.op-card-h.a{color:#fbbf24}
+.op-card small{color:#9fb0bd;font-size:13px;line-height:1.5}.op-card small b{color:#eaf2f6}
+.op-merge{color:#6b7a85;font:800 13px ui-monospace,monospace;text-align:center}
+.op-page,.op-ui-mock{display:flex;flex-direction:column;gap:7px;padding:14px;border:1px solid rgba(255,255,255,.12);border-radius:10px;background:#0c1320}
+.op-page-bar{height:9px;border-radius:5px;background:rgba(255,255,255,.16)}.op-page-bar.s{width:60%}
+.op-page-btn{align-self:flex-start;margin-top:4px;padding:6px 14px;border-radius:7px;background:#1c7d5e;color:#fff;font:800 12px ui-monospace,monospace}
+.op-anim{display:flex;align-items:center}
+.op-track{flex:1;height:3px;margin:0 14px;border-radius:3px;background:linear-gradient(90deg,rgba(255,255,255,.12),rgba(52,211,153,.55));position:relative}
+.op-dot{position:absolute;right:0;top:50%;width:12px;height:12px;border-radius:50%;background:#34d399;box-shadow:0 0 14px #34d399;transform:translateY(-50%)}
+.op-legend{color:#9fb0bd;font-size:13px}
+.op-db{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.op-db-in{padding:16px 18px;border:1px dashed rgba(255,255,255,.22);border-radius:12px;color:#cdd8de;font-weight:700}
+.op-shelves{display:grid;gap:8px}
+.op-shelves div{padding:11px 16px;border:1px solid rgba(52,211,153,.3);border-radius:9px;background:rgba(52,211,153,.07);color:#d9f3e8;font:700 13px ui-monospace,monospace}
+.op-check{display:flex;flex-direction:column;gap:12px}
+.op-url{align-self:flex-start;padding:9px 16px;border:1px solid rgba(52,211,153,.4);border-radius:8px;background:rgba(52,211,153,.08);color:#34d399;font:800 14px ui-monospace,monospace}
+.op-check ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}
+.op-check li{color:#d9e3e6;font-size:clamp(14px,1.4vw,18px)}
+/* elevated React/Next — realistic mockups + build animation */
+.op-rn-stage{display:flex;align-items:center;gap:clamp(14px,2vw,30px)}
+.op-rn-parts{display:grid;gap:9px}
+.op-comp{display:flex;align-items:center;gap:12px;padding:10px 13px;border:1px solid rgba(255,255,255,.12);border-radius:10px;background:rgba(255,255,255,.03)}
+.op-comp code{color:#7dd3fc;font:800 12px ui-monospace,SFMono-Regular,monospace;min-width:80px}
+.mk-nav{display:flex;gap:5px;width:118px}.mk-nav i{flex:1;height:8px;border-radius:3px;background:rgba(255,255,255,.24)}
+.mk-card{width:118px;display:grid;gap:4px}.mk-img{height:24px;border-radius:5px;background:linear-gradient(120deg,#34d399,#60a5fa)}.mk-l{height:6px;border-radius:3px;background:rgba(255,255,255,.22)}.mk-l.s{width:60%}
+.mk-btn{display:inline-block;padding:6px 14px;border-radius:7px;background:#1c7d5e;color:#fff;font:800 12px ui-monospace,monospace}
+.op-rn-arrow{display:flex;flex-direction:column;align-items:center;color:#6b7a85;font:800 16px ui-monospace,monospace}.op-rn-arrow span{font-size:10px;letter-spacing:.1em}
+.op-browser{flex:1;max-width:430px;border:1px solid rgba(255,255,255,.16);border-radius:12px;overflow:hidden;background:#0c1320;box-shadow:0 30px 60px -24px rgba(0,0,0,.72)}
+.op-bchrome{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#172230;border-bottom:1px solid rgba(255,255,255,.08)}
+.op-bchrome i{width:9px;height:9px;border-radius:50%;background:#46505c}.op-bchrome i:nth-child(1){background:#ed6a5e}.op-bchrome i:nth-child(2){background:#f4bf4f}.op-bchrome i:nth-child(3){background:#61c554}
+.op-bchrome small{margin-left:6px;color:#9fb0bd;font:700 11px ui-monospace,monospace}
+.op-bbody{padding:18px;display:grid;gap:13px;min-height:172px;align-content:start}
+.op-bbody .bd{opacity:0;animation:rnBuild 4.8s ease infinite}
+.op-bbody .b1{animation-delay:.2s}.op-bbody .b2{animation-delay:1s}.op-bbody .b3{animation-delay:1.8s}
+.op-bbody .mk-nav,.op-bbody .mk-card{width:auto}
+@keyframes rnBuild{0%,3%{opacity:0;transform:translateY(9px)}11%,88%{opacity:1;transform:none}97%,100%{opacity:0;transform:translateY(-4px)}}
+.op-rn-next{margin-top:8px;padding:11px 16px;border-left:3px solid #fbbf24;background:rgba(251,191,36,.08);border-radius:0 8px 8px 0;color:#d9e3e6;font-size:14px}.op-rn-next b{color:#fbbf24}
+/* elevated API — phone mockup + request/response packet */
+.op-api-stage{display:flex;align-items:center;gap:clamp(16px,3vw,46px);justify-content:center;padding:6px 0}
+.op-phone{width:142px;border:2px solid rgba(255,255,255,.18);border-radius:22px;overflow:hidden;background:#0a1118;box-shadow:0 26px 52px -20px rgba(0,0,0,.72)}
+.ph-top{padding:9px;text-align:center;color:#9fb0bd;font:700 11px ui-monospace,monospace;border-bottom:1px solid rgba(255,255,255,.08)}
+.ph-body{padding:28px 16px;text-align:center;background:linear-gradient(160deg,#0f3a4d,#0a1118)}
+.ph-temp{font:800 46px/1 Pretendard,sans-serif;color:#7dd3fc}.ph-city{margin-top:8px;color:#aebcc4;font-size:13px}
+.op-wire{flex:1;max-width:360px;display:grid;gap:9px}
+.op-wlabel{font:700 12px ui-monospace,monospace;padding:6px 11px;border-radius:6px}
+.op-wlabel.req{color:#fbbf24;background:rgba(251,191,36,.1);justify-self:start}
+.op-wlabel.res{color:#34d399;background:rgba(52,211,153,.1);justify-self:end}
+.op-wtrack{position:relative;height:3px;border-radius:3px;background:linear-gradient(90deg,rgba(251,191,36,.45),rgba(52,211,153,.45))}
+.op-packet{position:absolute;top:50%;left:0;width:14px;height:14px;border-radius:50%;background:#fbbf24;box-shadow:0 0 14px #fbbf24;transform:translateY(-50%);animation:apiPacket 3.6s ease-in-out infinite}
+@keyframes apiPacket{0%{left:0;opacity:0;background:#fbbf24;box-shadow:0 0 14px #fbbf24}9%{opacity:1}44%{left:calc(100% - 14px);background:#fbbf24;box-shadow:0 0 14px #fbbf24}53%{left:calc(100% - 14px);background:#34d399;box-shadow:0 0 14px #34d399}92%{left:0;background:#34d399;box-shadow:0 0 14px #34d399;opacity:1}100%{left:0;opacity:0}}
+.op-cloud{width:140px;text-align:center;padding:22px 14px;border:1px solid rgba(255,255,255,.16);border-radius:16px;background:rgba(255,255,255,.04)}
+.op-cloud b{display:block;color:#eaf2f6;font-size:16px}.op-cloud span{color:#9fb0bd;font:700 11px ui-monospace,monospace}
+/* UI/UX — screen mockup + animated flow */
+.op-screen{display:grid;gap:9px;padding:14px;border:1px solid rgba(255,255,255,.12);border-radius:10px;background:#0c1320}
+.sc-img{height:66px;border-radius:7px;background:linear-gradient(120deg,#34d399,#60a5fa)}
+.sc-row{display:flex;align-items:center;justify-content:space-between}.sc-l{width:50%;height:8px;border-radius:4px;background:rgba(255,255,255,.2)}.sc-row b{color:#eaf2f6;font-size:15px}
+.op-screen .mk-btn{text-align:center}
+.op-ux{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ux-step{padding:11px 14px;border:1px solid rgba(251,191,36,.35);border-radius:9px;background:rgba(251,191,36,.07);color:#fbe6a8;font:700 13px Pretendard,sans-serif}
+.ux-step.done{border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.12);color:#7ee8b0;animation:uxPulse 2.6s ease-in-out infinite}
+.ux-line{flex:1;min-width:22px;height:3px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden;position:relative}
+.ux-line i{position:absolute;inset:0;background:linear-gradient(90deg,#fbbf24,#34d399);transform-origin:left;animation:uxFill 2.6s ease-in-out infinite}
+.ux-line i.d2{animation-delay:.5s}
+@keyframes uxFill{0%,10%{transform:scaleX(0)}45%,100%{transform:scaleX(1)}}
+@keyframes uxPulse{0%,40%{box-shadow:0 0 0 0 rgba(52,211,153,0)}60%{box-shadow:0 0 18px 2px rgba(52,211,153,.4)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+/* ANIM — real micro-interaction demos */
+.op-demos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.op-demo{display:flex;flex-direction:column;align-items:center;gap:14px;padding:26px 16px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.03)}
+.op-demo small{color:#9fb0bd;font-size:12px}
+.dm-heart{font-size:40px;color:#3a4450;animation:dmHeart 2.4s ease-in-out infinite}
+@keyframes dmHeart{0%,30%{color:#3a4450;transform:scale(1)}45%{color:#ff5a7a;transform:scale(1.25)}70%,100%{color:#ff5a7a;transform:scale(1)}}
+.dm-toggle{width:56px;height:30px;border-radius:99px;position:relative;animation:dmTrack 2.6s ease-in-out infinite}
+.dm-toggle i{position:absolute;top:3px;width:24px;height:24px;border-radius:50%;background:#fff;animation:dmKnob 2.6s ease-in-out infinite}
+@keyframes dmKnob{0%,40%{left:3px}60%,100%{left:29px}}
+@keyframes dmTrack{0%,40%{background:#3a4450}60%,100%{background:#1c7d5e}}
+.dm-load{width:60px;height:60px;border-radius:50%;border:4px solid rgba(255,255,255,.12);border-top-color:#34d399;animation:dmSpin 1.1s linear infinite}
+@keyframes dmSpin{to{transform:rotate(360deg)}}
+/* BACKEND login form */
+.ph-body.lg{display:grid;gap:9px;padding:22px 16px}
+.lg-f{padding:9px 12px;border:1px solid rgba(255,255,255,.14);border-radius:7px;color:#9fb0bd;font:700 12px ui-monospace,monospace;text-align:left}
+.ph-body.lg .mk-btn{text-align:center}
+/* DB — record into table (animated) */
+.op-dbx{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center}
+.dbx-item{padding:18px 22px;border:1px dashed rgba(52,211,153,.45);border-radius:12px;color:#cdd8de;text-align:center;animation:dbxIn 3s ease-in-out infinite}
+.dbx-item b{color:#34d399;font-size:18px}
+.dbx-arrow{color:#6b7a85;font-size:24px;font-weight:800}
+.dbx-tables{display:grid;gap:9px}
+.dbx-t{padding:12px 18px;border:1px solid rgba(255,255,255,.12);border-radius:9px;background:rgba(255,255,255,.03);color:#aebcc4;font:700 13px ui-monospace,monospace;min-width:240px}
+.dbx-t.active{border-color:rgba(52,211,153,.45);background:rgba(52,211,153,.08);color:#d9f3e8}
+.dbx-row{display:block;margin-top:6px;color:#34d399;font-size:12px;animation:dbxRow 3s ease-in-out infinite}
+@keyframes dbxIn{0%,12%{opacity:.4;transform:translateX(-8px)}30%,100%{opacity:1;transform:none}}
+@keyframes dbxRow{0%,22%{opacity:0}40%,100%{opacity:1}}
+/* RELEASE pipeline (animated progress) */
+.op-pipe{position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 4px}
+.pipe-step{position:relative;z-index:2;flex:1;text-align:center;padding:16px 8px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:#0c1320;color:#cdd8de;font:800 15px Pretendard,sans-serif;opacity:.45;animation:pipeLit 4.4s ease-in-out infinite}
+.pipe-step span{display:block;margin-top:4px;color:#9fb0bd;font:700 11px ui-monospace,monospace}
+.pipe-step.live{border-color:rgba(52,211,153,.5);color:#7ee8b0}
+.pipe-step.p1{animation-delay:.2s}.pipe-step.p2{animation-delay:1s}.pipe-step.p3{animation-delay:1.8s}.pipe-step.p4{animation-delay:2.6s}
+@keyframes pipeLit{0%,7%{opacity:.4}16%,92%{opacity:1}100%{opacity:.4}}
+.pipe-beam{position:absolute;left:0;top:50%;height:3px;width:0;border-radius:3px;background:linear-gradient(90deg,#fbbf24,#34d399);z-index:1;animation:pipeBeam 4.4s ease-in-out infinite}
+@keyframes pipeBeam{0%,7%{width:0}82%,100%{width:100%}}
+.op-rel-card{margin-top:8px;padding:12px 16px;border:1px solid rgba(52,211,153,.3);border-radius:10px;background:rgba(52,211,153,.06);color:#d9e3e6;font-size:14px}.op-rel-card b{color:#34d399}
+/* LAUNCH — live URL + animated checklist */
+.op-launch{display:flex;align-items:center;gap:clamp(18px,3vw,44px)}
+.op-launch .op-browser{flex:0 0 auto;width:300px}
+.lc-body{padding:16px;display:grid;gap:9px}.lc-hero{height:78px;border-radius:8px;background:linear-gradient(120deg,#1c7d5e,#2563eb)}
+.op-checks{flex:1;margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.op-checks li{position:relative;padding-left:34px;color:#d9e3e6;font-size:clamp(14px,1.4vw,18px)}
+.op-checks li::before{content:'';position:absolute;left:0;top:50%;width:22px;height:22px;margin-top:-11px;border-radius:6px;border:1px solid rgba(52,211,153,.5);background:rgba(52,211,153,.08)}
+.op-checks li::after{content:'✓';position:absolute;left:5px;top:50%;margin-top:-12px;color:#34d399;font-weight:800;opacity:0;animation:lcCheck 4.6s ease-in-out infinite}
+.op-checks li.lc1::after{animation-delay:.4s}.op-checks li.lc2::after{animation-delay:1.1s}.op-checks li.lc3::after{animation-delay:1.8s}.op-checks li.lc4::after{animation-delay:2.5s}
+@keyframes lcCheck{0%,5%{opacity:0;transform:scale(.5)}13%,92%{opacity:1;transform:none}100%{opacity:0}}
+
+.op-cover{justify-content:center;gap:18px;padding:0 clamp(40px,7vw,120px)!important}
+.op-cover .op-eyebrow{color:#34d399}
+.op-cover-title{margin:0;font-size:clamp(40px,5.4vw,82px);font-weight:800;line-height:1.05;letter-spacing:-.02em;background:linear-gradient(180deg,#fff 40%,#9fb0bd);-webkit-background-clip:text;background-clip:text;color:transparent}
+.op-cover-title .g{-webkit-text-fill-color:#34d399}.op-cover-title .a{-webkit-text-fill-color:#fbbf24}
+.op-cover-sub{max-width:42em;color:#aebcc4;font-size:clamp(15px,1.5vw,21px);line-height:1.6;word-break:keep-all}.op-cover-sub b{color:#eaf2f6}
+.op-cover-flow{display:flex;flex-wrap:wrap;gap:9px;margin-top:8px}
+.op-cover-flow span{padding:8px 14px;border:1px solid rgba(255,255,255,.12);border-radius:8px;color:#aebcc4;font:750 12px ui-monospace,monospace}
+.op-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.op-cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.op-gate{display:flex;align-items:center;gap:16px;justify-content:center;flex-wrap:wrap}
+.op-gate-req{padding:14px 18px;border:1px solid rgba(251,113,133,.4);border-radius:11px;background:rgba(251,113,133,.08);color:#fda4af;font:700 14px Pretendard,sans-serif}
+.op-gate-door{padding:14px 18px;border:1px dashed rgba(251,191,36,.5);border-radius:11px;color:#fbbf24;font:800 13px ui-monospace,monospace;animation:gateGlow 2.4s ease-in-out infinite}
+@keyframes gateGlow{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,0)}50%{box-shadow:0 0 20px 2px rgba(251,191,36,.35)}}
+.op-gate-res{padding:14px 18px;border:1px solid rgba(52,211,153,.45);border-radius:11px;background:rgba(52,211,153,.08);color:#7ee8b0;font:700 14px Pretendard,sans-serif}
+.op-office{display:flex;flex-direction:column;align-items:center;gap:0}
+.of-boss{padding:14px 30px;border:2px solid rgba(52,211,153,.45);border-radius:14px;background:rgba(52,211,153,.08);color:#34d399;font:800 18px Pretendard,sans-serif;text-align:center;box-shadow:0 0 36px -10px rgba(52,211,153,.4)}
+.of-boss span{display:block;color:#9fb0bd;font:700 11px ui-monospace,monospace}
+.of-conn{width:2px;height:22px;background:rgba(255,255,255,.2)}
+.of-team{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative}
+.of-team::before{content:'';position:absolute;top:-12px;left:12%;right:12%;height:2px;background:rgba(255,255,255,.18)}
+.of-role{padding:18px 16px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:rgba(255,255,255,.04);color:#eaf2f6;font:800 15px Pretendard,sans-serif;text-align:center;animation:roleIn 3.6s ease-in-out infinite}
+.of-role span{display:block;margin-top:4px;color:#9fb0bd;font:700 11px ui-monospace,monospace}
+.of-role.r2{animation-delay:.4s}.of-role.r3{animation-delay:.8s}.of-role.r4{animation-delay:1.2s}
+@keyframes roleIn{0%,8%{opacity:.5;transform:translateY(6px)}24%,100%{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="nav-bar">
+    <span class="nav-title">AI 한방 이해하기 · 4주차 · 오케스트레이션·AI 사무실</span>
+    <div class="nav-controls">
+      <button class="nav-btn" id="btn-prev" onclick="move(-1)">←</button>
+      <span id="counter">1 / 10</span>
+      <button class="nav-btn" id="btn-next" onclick="move(1)">→</button>
+    </div>
+  </nav>
+  <div class="deck">
+<div class="slide op-cover active">
+  <div class="op-eyebrow">AI 한방 이해하기 · 4주차 (4주 집중)</div>
+  <h1 class="op-cover-title">오케스트레이션<br>+ 나만의 <span class="g">AI 사무실</span></h1>
+  <p class="op-cover-sub">만든 조각들(Skill·MCP·SubAgent·Workflow)을 <b>하나의 흐름</b>으로 묶고, 역할을 나눈 <b>나만의 AI 사무실</b>로 일을 굴립니다.</p>
+  <div class="op-cover-flow"><span>결정적 + 에이전틱</span><span>핸드오프</span><span>정지조건</span><span>AI 사무실</span></div>
+</div>
+<div class="slide op-slide"><div class="op-eyebrow">CONCEPT · ORCHESTRATION</div><h2 class="op-title">오케스트레이션 — 여러 도구를 <span class="g">하나의 흐름</span>으로</h2><div class="op-visual"><div class="op-cols">
+      <div class="op-card"><div class="op-card-h">지휘자 없이</div><small>좋은 연주자(도구)가 많아도 따로 놀면 곡이 안 됩니다.</small></div>
+      <div class="op-card"><div class="op-card-h g">지휘자(오케스트레이션)</div><small>각 도구·에이전트가 <b>언제·무엇을</b> 할지 하나의 악보로 묶입니다.</small></div>
+    </div></div><p class="op-cap">도구를 많이 모으는 게 아니라, <b>언제 무엇을 거치는지 흐름</b>을 설계하는 일입니다.</p></div>
+<div class="slide op-slide"><div class="op-eyebrow">PRINCIPLE</div><h2 class="op-title"><span class="g">결정적 뼈대</span> + <span class="a">막히는 곳만 에이전틱</span></h2><div class="op-visual"><div class="op-flow"><div class="op-node "><b>계획</b><span>결정적</span></div><span class="op-arrow">→</span><div class="op-node "><b>빌드</b><span>결정적</span></div><span class="op-arrow">→</span><div class="op-node a"><b>판단 지점</b><span>에이전틱</span></div><span class="op-arrow">→</span><div class="op-node g"><b>검증</b><span>결정적</span></div></div></div><p class="op-cap">대부분은 <b>정해진 단계(결정적)</b>로 싸고 안정적으로, 예측이 어려운 곳에만 AI 판단을 더합니다.</p></div>
+<div class="slide op-slide"><div class="op-eyebrow">HANDOFF</div><h2 class="op-title">핸드오프 — <span class="g">산출물 형식</span>을 고정해 넘긴다</h2><div class="op-visual"><div class="op-flow"><div class="op-node "><b>도구 A</b><span>결과 생성</span></div><span class="op-arrow">→</span><div class="op-node a"><b>형식 고정</b><span>JSON·문서</span></div><span class="op-arrow">→</span><div class="op-node g"><b>도구 B</b><span>그대로 인수</span></div></div></div><p class="op-cap">말로 전달하면 빠지고 겹칩니다 — <b>정해진 형식</b>으로 넘겨야 중복·누락이 없습니다.</p></div>
+<div class="slide op-slide"><div class="op-eyebrow">SAFETY · STOP</div><h2 class="op-title">정지조건·복구 — <span class="a">무한 루프</span>를 막는다</h2><div class="op-visual"><div class="op-gate">
+      <div class="op-gate-req">끝없이 도는 작업</div>
+      <div class="op-gate-door"><span>한도 도달</span></div>
+      <div class="op-gate-res a">반복·시간·토큰 한도 → 멈추고 복구</div>
+    </div></div><p class="op-cap">자동화일수록 <b>멈추는 조건과 되돌릴 경로</b>를 먼저 정해야 안전합니다.</p></div>
+<div class="slide op-slide"><div class="op-eyebrow">YOUR AI OFFICE</div><h2 class="op-title">나만의 <span class="g">AI 사무실</span> — 역할을 나눈 팀</h2><div class="op-visual"><div class="op-office">
+      <div class="of-boss">나 (오너)<span>목표 · 승인</span></div>
+      <div class="of-conn"></div>
+      <div class="of-team">
+        <div class="of-role r1">PM 에이전트<span>계획·분배</span></div>
+        <div class="of-role r2">개발 에이전트<span>구현</span></div>
+        <div class="of-role r3">리뷰 에이전트<span>검증</span></div>
+        <div class="of-role r4">배포 에이전트<span>릴리즈</span></div>
+      </div>
+    </div></div><p class="op-cap">한 AI에게 다 시키지 않고, <b>역할별 에이전트</b>가 분담합니다 — 내가 목표·승인을 쥡니다.</p></div>
+<div class="slide op-slide"><div class="op-eyebrow">HOW · AI OFFICE</div><h2 class="op-title">AI 사무실 작동 — 작업이 <span class="g">부서를 거쳐</span> 완성</h2><div class="op-visual"><div class="op-pipe">
+      <div class="pipe-step p1">PM<span>작업 분해</span></div>
+      <div class="pipe-step p2">개발<span>병렬 구현</span></div>
+      <div class="pipe-step p3">리뷰<span>검증 게이트</span></div>
+      <div class="pipe-step p4 live">배포<span>릴리즈</span></div>
+      <div class="pipe-beam"></div>
+    </div></div><p class="op-cap">하나의 작업이 <b>계획 → 구현 → 검증 → 배포</b> 부서를 순서대로 거쳐 완성됩니다.</p></div>
+<div class="slide op-slide"><div class="op-eyebrow">RELIABILITY</div><h2 class="op-title">느낌이 아니라 <span class="g">측정</span>으로 운영</h2><div class="op-visual"><div class="op-cols3">
+      <div class="op-card"><div class="op-card-h g">평가</div><small>결과를 정한 기준으로 채점</small></div>
+      <div class="op-card"><div class="op-card-h g">관측</div><small>단계·시간·토큰을 추적</small></div>
+      <div class="op-card"><div class="op-card-h a">비용</div><small>예산 가드로 폭주 방지</small></div>
+    </div></div><p class="op-cap">AI 사무실이 커질수록 <b>채점·추적·비용 가드</b>로 품질과 비용을 눈으로 확인합니다.</p></div>
+<div class="slide op-slide"><div class="op-eyebrow">CAPSTONE</div><h2 class="op-title">4주 통합 — <span class="g">하나의 제품</span>으로</h2><div class="op-visual"><div class="op-flow"><div class="op-node "><b>W1 원리</b><span>사고법</span></div><span class="op-arrow">→</span><div class="op-node a"><b>W2 CLI·MCP·Skill</b><span>도구</span></div><span class="op-arrow">→</span><div class="op-node a"><b>W3 제작·병렬</b><span>자산</span></div><span class="op-arrow">→</span><div class="op-node g"><b>W4 사무실</b><span>운영</span></div></div></div><p class="op-cap">4주가 따로가 아니라, <b>원리 → 도구 → 제작 → 운영</b>이 하나의 제품으로 이어집니다.</p></div>
+<div class="slide op-slide"><div class="op-eyebrow">수료 · NEXT</div><h2 class="op-title">이제 <span class="g">나만의 AI 사무실</span>을 운영하세요</h2><div class="op-visual"><div class="op-cols">
+      <div class="op-card"><div class="op-card-h">수료 후 첫 적용</div><small>본인 실제 작업 1건을 — 목표는 내가, 실행은 AI 사무실이.</small></div>
+      <div class="op-card"><div class="op-card-h a">계속 키우기</div><small>자주 하는 일을 Skill·Workflow로 늘리고, 역할 에이전트를 추가합니다.</small></div>
+    </div></div><p class="op-cap">강의는 끝나도 <b>AI 사무실은 매일 조금씩 커집니다</b> — 오늘 한 가지부터 적용하세요.</p></div>
+  </div><!-- .deck -->
+</div><!-- .app -->
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+function render(){slides.forEach(function(s,i){s.classList.remove('active','prev');if(i===cur)s.classList.add('active');else if(i<cur)s.classList.add('prev');});var a=slides[cur];if(a)a.scrollTop=0;document.getElementById('counter').textContent=(cur+1)+' / '+slides.length;document.getElementById('btn-prev').disabled=cur===0;document.getElementById('btn-next').disabled=cur===slides.length-1;}
+function move(d){cur=Math.max(0,Math.min(slides.length-1,cur+d));render();}
+window.move=move;
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();move(1);}if(e.key==='ArrowLeft'){e.preventDefault();move(-1);}});
+render();
+</script>
+</body>
+</html>
