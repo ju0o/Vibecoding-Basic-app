@@ -20,7 +20,10 @@ const allowedHosts = [
   'modelcontextprotocol.io',
   'docs.anthropic.com',
   'code.claude.com',
+  'platform.claude.com',
+  'www.anthropic.com',
   'developers.openai.com',
+  'platform.openai.com',
   'docs.stripe.com',
   'supabase.com',
   'docs.tosspayments.com',
@@ -29,6 +32,9 @@ const allowedHosts = [
   'www.ycombinator.com',
   'm2.material.io',
   'm3.material.io',
+  'www.ibm.com',
+  'x.com',
+  'genai.owasp.org',
 ];
 
 const additionalSources = {
@@ -192,6 +198,134 @@ const additionalSources = {
     summaryKo: 'MCP 서버와 웹 컴포넌트를 연결해 ChatGPT 안에서 도구와 UI를 함께 제공하는 앱 개발 경로입니다.',
     instructorNote: 'MCP와 UI가 함께 움직이는 고급 예시로, Tool 결과와 사용자 인터페이스가 어떻게 연결되는지 설명합니다.',
   },
+  'claude-skills-cc': {
+    publisher: 'Anthropic',
+    title: 'Claude Code의 Skills',
+    url: 'https://code.claude.com/docs/en/skills',
+    maturity: 'stable',
+    summaryKo: 'Claude Code에서 파일시스템 기반 커스텀 Skill을 만들고 프로젝트 또는 사용자 범위에서 재사용하는 방법입니다.',
+    instructorNote: 'Claude 3강에서 Skill을 긴 프롬프트가 아니라 호출 조건, 자료, 절차, 검증을 가진 재사용 작업 단위로 설명합니다.',
+  },
+  'claude-agent-sdk': {
+    publisher: 'Anthropic',
+    title: 'Claude Agent SDK',
+    url: 'https://code.claude.com/docs/en/agent-sdk/overview',
+    maturity: 'stable',
+    summaryKo: 'Claude Code의 도구와 능력을 기반으로 커스텀 Agent를 코드로 구성하는 개발 경로입니다.',
+    instructorNote: 'Claude 자동화 회차에서 Claude Code를 단일 세션 도구에서 운영 가능한 Agent 작업공간으로 확장할 때 사용합니다.',
+  },
+  'mcp-architecture': {
+    publisher: 'Model Context Protocol',
+    title: 'MCP Architecture',
+    url: 'https://modelcontextprotocol.io/docs/learn/architecture',
+    maturity: 'stable',
+    summaryKo: 'Host, Client, Server, 데이터층, 전송층, tools·resources·prompts 같은 MCP 구성요소를 설명합니다.',
+    instructorNote: 'MCP를 추상 연결선이 아니라 Host/Client/Server와 권한 경계가 있는 시스템 장면으로 설명할 때 사용합니다.',
+  },
+  'mcp-spec': {
+    publisher: 'Model Context Protocol',
+    title: 'MCP Specification',
+    url: 'https://modelcontextprotocol.io/specification/latest',
+    maturity: 'stable',
+    summaryKo: 'MCP 클라이언트와 서버 구현이 따라야 하는 최신 프로토콜 규격입니다.',
+    instructorNote: '직접 구현까지 들어가지 않더라도, MCP가 제품별 기능명이 아니라 표준 계약이라는 사실을 강사용 배경으로 잡습니다.',
+  },
+  'anthropic-eng-agents': {
+    publisher: 'Anthropic Engineering',
+    title: 'Building effective agents',
+    url: 'https://www.anthropic.com/engineering/building-effective-agents',
+    maturity: 'secondary',
+    summaryKo: '워크플로와 Agent를 구분하고, 단순하게 시작하며, 오케스트레이터·라우팅·병렬화 같은 패턴을 설명합니다.',
+    instructorNote: 'Agent를 마법처럼 말하지 않고 언제 워크플로로 충분하고 언제 Agent가 필요한지 판단하는 기준으로 사용합니다.',
+  },
+  'anthropic-eng-context': {
+    publisher: 'Anthropic Engineering',
+    title: 'Effective context engineering for AI agents',
+    url: 'https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents',
+    maturity: 'secondary',
+    summaryKo: '컨텍스트 설계, context rot, 지침의 고도, JIT 검색, 압축, 메모리와 Subagent 분리를 다룹니다.',
+    instructorNote: 'Workflow 2강과 도구 전문과정에서 “많이 넣기”보다 범위, 유효기간, 필요한 시점의 정보 로딩을 가르칠 때 사용합니다.',
+  },
+  'anthropic-eng-multiagent': {
+    publisher: 'Anthropic Engineering',
+    title: 'How we built our multi-agent research system',
+    url: 'https://www.anthropic.com/engineering/multi-agent-research-system',
+    maturity: 'secondary',
+    summaryKo: '오케스트레이터-워커 구조, 멀티 Agent의 장점과 비용, 적합·부적합 조건을 설명합니다.',
+    instructorNote: 'Agent Team이 항상 좋은 것이 아니라 비용과 통합 책임을 요구한다는 점을 강조할 때 사용합니다.',
+  },
+  'anthropic-eng-skills': {
+    publisher: 'Anthropic Engineering',
+    title: 'Equipping agents for the real world with Agent Skills',
+    url: 'https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills',
+    maturity: 'secondary',
+    summaryKo: 'Agent Skills의 설계 철학과 실제 업무 적용 방식을 설명하는 심화 자료입니다.',
+    instructorNote: 'Skill을 프롬프트 저장소가 아니라 필요한 순간 로딩되는 절차·자료·검증 패키지로 설명할 때 사용합니다.',
+  },
+  'vibe-coding-origin': {
+    publisher: 'Andrej Karpathy',
+    title: 'vibe coding 용어 첫 사용',
+    url: 'https://x.com/karpathy/status/1886192184808149383',
+    maturity: 'secondary',
+    summaryKo: 'vibe coding이라는 표현이 대중적으로 퍼진 출발점으로, 자연어로 만들고 실행하며 반복하는 개발 감각을 설명하는 보조 자료입니다.',
+    instructorNote: '기초 1강에서 용어 유래를 길게 설명하지 않고, 코딩 문법 암기보다 AI와 반복하는 작업 방식으로 연결할 때만 짧게 사용합니다.',
+  },
+  'vibe-coding-ibm': {
+    publisher: 'IBM',
+    title: 'What is Vibe Coding?',
+    url: 'https://www.ibm.com/think/topics/vibe-coding',
+    maturity: 'secondary',
+    summaryKo: 'vibe coding의 정의와 맥락을 정리한 보조 설명 자료입니다.',
+    instructorNote: 'X 원문 접근이 막힐 수 있으므로 강의에서는 용어 설명의 보조 출처로 함께 확인합니다.',
+  },
+  'claude-vision': {
+    publisher: 'Anthropic',
+    title: 'Claude Vision',
+    url: 'https://platform.claude.com/docs/en/build-with-claude/vision',
+    maturity: 'stable',
+    summaryKo: 'Claude에서 이미지와 문서를 입력으로 이해하고 분석하는 멀티모달 기능입니다.',
+    instructorNote: '제품·수익화와 도구 전문과정에서 스크린샷·시각 QA·문서 분석 예시를 설명할 때 사용합니다.',
+  },
+  'openai-images-vision': {
+    publisher: 'OpenAI',
+    title: 'Images and vision',
+    url: 'https://platform.openai.com/docs/guides/images-vision',
+    maturity: 'stable',
+    summaryKo: 'OpenAI 모델의 이미지 이해와 이미지 생성 관련 공식 가이드입니다.',
+    instructorNote: '멀티모달 결과물을 제품 온보딩, UX 리뷰, 브라우저 QA와 연결할 때 사용합니다.',
+  },
+  'openai-audio': {
+    publisher: 'OpenAI',
+    title: 'Audio and speech',
+    url: 'https://developers.openai.com/api/docs/guides/audio',
+    maturity: 'stable',
+    summaryKo: '음성 입력, 음성 출력, 실시간 오디오 같은 AI 오디오 기능의 공식 가이드입니다.',
+    instructorNote: '제품 아이디어가 텍스트·이미지 밖으로 확장될 때 필요한 입력/출력 채널로 설명합니다.',
+  },
+  'openai-models': {
+    publisher: 'OpenAI',
+    title: 'Models',
+    url: 'https://developers.openai.com/api/docs/models',
+    maturity: 'stable',
+    summaryKo: 'OpenAI의 사용 가능한 모델과 용도, 제약을 확인하는 공식 기준 페이지입니다.',
+    instructorNote: '모델명과 최신 여부는 변동이 잦으므로 수업 당일 확인하고, 슬라이드에는 특정 모델보다 선택 기준을 남깁니다.',
+  },
+  'claude-models': {
+    publisher: 'Anthropic',
+    title: 'Claude Models overview',
+    url: 'https://platform.claude.com/docs/en/about-claude/models/overview',
+    maturity: 'stable',
+    summaryKo: 'Claude 모델의 종류와 특성, 사용 조건을 확인하는 공식 기준 페이지입니다.',
+    instructorNote: 'Claude 관련 수업에서 모델 이름을 외우게 하지 말고 작업 특성, 비용, 한도, 지원 기능을 확인하게 합니다.',
+  },
+  'owasp-llm-top10': {
+    publisher: 'OWASP Gen AI Security Project',
+    title: 'Top 10 for LLM Applications',
+    url: 'https://genai.owasp.org/llm-top-10/',
+    maturity: 'secondary',
+    summaryKo: '프롬프트 인젝션, 민감정보 노출, 공급망, 과도한 권한, 무제한 소비 등 LLM 앱의 주요 위험을 정리한 점검표입니다.',
+    instructorNote: 'AI 자동화와 MCP·Agent 수업에서 “연결과 자동화는 보안 책임도 함께 늘린다”는 기준으로 사용합니다.',
+  },
 };
 
 function sourceFocus(key, source) {
@@ -199,6 +333,9 @@ function sourceFocus(key, source) {
   if (key.startsWith('codex-')) return 'Codex';
   if (key.startsWith('github-')) return 'GitHub';
   if (key.startsWith('openai-')) return 'OpenAI';
+  if (key.startsWith('anthropic-eng-')) return 'Anthropic Engineering';
+  if (key.startsWith('vibe-coding-')) return 'Vibe Coding';
+  if (key.startsWith('owasp-')) return 'OWASP';
   if (key.startsWith('firebase-')) return 'Firebase';
   if (key.startsWith('vercel-')) return 'Vercel';
   if (key.startsWith('mcp-')) return 'MCP';

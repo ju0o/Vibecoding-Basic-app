@@ -1,173 +1,132 @@
 'use strict';
 
-// onepass Week 3 — "나만의 MCP·Skill 제작 + SubAgent·Workflow". All-custom op-enhanced
-// tutorial slides reusing the shared shell (chrome + op-* CSS) from the week-1 builder.
-
 const fs = require('fs');
 const path = require('path');
-const { chrome } = require('./build-onepass-week1.js');
+const { buildLectureDeck, flow, pair, sequence, slide, terminal } = require('./onepass-lecture-kit.js');
+const { agentControl, capabilityMap, documentaryCss, mcpNetwork, officeControl, recoveryRoom, skillStudio } = require('./onepass-documentary-scenes.js');
 
-const OUT = path.join(__dirname, '..', 'src', 'content', 'sessions', 'onepass-week3.html');
+const output = path.join(__dirname, '..', 'src', 'content', 'sessions', 'onepass-week3.html');
+const surface = (title, body) => `<h3>${title}</h3>${body}`;
+const evidence = (title, status, body, tone = '') => `<div class="op-evidence-top"><b>${title}</b><span class="op-evidence-status ${tone}">${status}</span></div><div class="op-evidence-body">${body}</div>`;
 
-const flow = (steps) => `<div class="op-flow">${steps.map((s, i) => `${i ? '<span class="op-arrow">→</span>' : ''}<div class="op-node ${s.tone || ''}"><b>${s.t}</b>${s.d ? `<span>${s.d}</span>` : ''}</div>`).join('')}</div>`;
-const slide = (eyebrow, title, visual, cap) => `<div class="slide op-slide"><div class="op-eyebrow">${eyebrow}</div><h2 class="op-title">${title}</h2><div class="op-visual">${visual}</div><p class="op-cap">${cap}</p></div>`;
-const term = (label, lines) => `<div class="op-term"><div class="op-tbar"><i></i><i></i><i></i><small>${label}</small></div><div class="op-tbody">${lines.map(([t, x]) => `<span class="tl ${t}">${x}</span>`).join('')}<span class="tl-cursor"></span></div></div>`;
+const slides = [
+  slide('WEEK 03 · EXTEND', 'AI의 능력을 늘리는 법은<br><span class="g">더 많이 시키는 것</span>이 아닙니다',
+    officeControl(),
+    '이번 주는 네 개념을 섞지 않고, <b>각각의 역할과 연결 순서</b>를 분명히 합니다.'),
 
-const COVER = `<div class="slide op-cover active">
-  <div class="op-eyebrow">AI 한방 이해하기 · 3주차 (4주 집중)</div>
-  <h1 class="op-cover-title">나만의 <span class="g">MCP·Skill</span> 만들기<br>+ <span class="a">SubAgent·Workflow</span></h1>
-  <p class="op-cover-sub">이해했으면 이제 <b>직접 만듭니다</b> — 나만의 Skill·MCP, 작업을 나눠 병렬 처리하는 SubAgent, 반복을 자동화하는 Workflow까지.</p>
-  <div class="op-cover-flow"><span>Skill 제작</span><span>MCP 연결</span><span>SubAgent 병렬</span><span>Workflow 자동화</span></div>
-</div>`;
+  slide('BOUNDARY MAP', '<span class="g">능력 · 절차 · 역할 · 흐름</span>은 서로 다른 설계 대상입니다',
+    capabilityMap(),
+    '한 단어로 뭉뚱그리면 설계가 꼬입니다. <b>무엇을 확장하는지</b>부터 구분합니다.'),
 
-const SLIDES = [
-  slide('UNDERSTAND → BUILD', '이번 주는 <span class="g">이해에서 제작으로</span>',
-    flow([{ t: '2주차', d: '개념 이해' }, { t: '3주차', d: '직접 제작', tone: 'g' }, { t: '4주차', d: '하나로 통합', tone: 'a' }]),
-    '남이 만든 걸 쓰는 단계에서, <b>내 작업에 맞는 자산을 직접 만드는</b> 단계로 넘어갑니다.'),
+  slide('MCP', 'MCP는 AI가 <span class="g">밖의 도구와 약속된 방식으로 연결</span>되는 통로입니다',
+    mcpNetwork(),
+    'AI가 DB나 브라우저를 직접 “소유”하는 것이 아니라, <b>연결된 도구에 요청하고 결과를 받는 구조</b>입니다.'),
 
-  slide('BUILD · SKILL', '나만의 Skill — <span class="g">SKILL.md</span>로 절차를 저장',
-    `<div class="op-file">
-      <div class="of-h">📄 SKILL.md</div>
-      <div class="of-body">
-        <span class="of-key">## 트리거</span><span>"PR 요약해줘"라고 하면</span>
-        <span class="of-key">## 절차</span><span>1. 변경 파일 수집 → 2. diff 요약 → 3. 체크리스트</span>
-        <span class="of-key">## 예시</span><span>입력/출력 샘플 1개</span>
-        <span class="of-key">## 검증</span><span>요약에 변경 의도·위험이 포함됐는가</span>
-      </div>
-    </div>`,
-    '반복 작업의 <b>트리거·절차·예시·검증</b>을 파일로 적어두면, 누가·언제 불러도 같은 결과가 나옵니다.'),
+  slide('MCP PERMISSION', 'MCP를 연결할 때 첫 질문은 <span class="a">“무엇을 할 수 있나?”</span>가 아니라 <span class="g">“어디까지 허용할까?”</span>입니다',
+    mcpNetwork(),
+    '연결의 품질은 개수가 아니라, <b>권한 경계와 승인 규칙</b>에서 결정됩니다.'),
 
-  slide('BUILD · SKILL', 'Skill 제작 — <span class="g">4단계</span>로 만든다',
-    flow([{ t: '신호 발견', d: '반복 작업' }, { t: '절차화', d: '단계·예시', tone: 'a' }, { t: '검증 기준', d: '통과 조건', tone: 'a' }, { t: '재사용', d: '트리거로 호출', tone: 'g' }]),
-    '거창하게가 아니라 <b>자주 반복하는 작업 하나</b>부터 절차로 굳히면 됩니다.'),
+  slide('MANUAL SCENE · MCP', '수동 시연 1 — <span class="g">MCP 연결의 안전한 순서</span>',
+    sequence([
+      { title: '도구 목적', detail: '프로젝트 문서만 검색해야 한다는 목표를 정합니다.', visual: evidence('MCP · CONNECTION PLAN', 'PURPOSE', '<div class="op-evidence-grid"><span class="live">AI Host<br>질문 정리</span><span class="live">Docs Search<br>문서만</span><span>외부 쓰기<br>사용 안 함</span></div>') },
+      { title: '권한 범위', detail: '읽기 전용·docs 폴더로 범위를 좁힙니다.', visual: evidence('MCP · PERMISSION', 'MINIMUM', '<div class="op-evidence-code"><span class="key">path</span>: <span class="ok">/project/docs</span><br><span class="key">mode</span>: <span class="ok">read-only</span><br><span class="key">network</span>: <span class="amber">off</span></div>') },
+      { title: '작은 요청', detail: '문서 제목만 목록으로 가져오는 요청을 해봅니다.', visual: evidence('MCP · FIRST CALL', 'READ ONLY', '<div class="op-evidence-row"><i class="ok"></i><code>request</code> docs 제목만 검색</div><div class="op-evidence-row"><i class="ok"></i><code>response</code> setup.md · rules.md</div><div class="op-evidence-row"><i></i><code>write / delete</code> 호출 없음</div>') },
+      { title: '기록·승인', detail: '연결 목적과 권한을 팀 기록에 남깁니다.', visual: evidence('MCP · AUDIT RECORD', 'APPROVED', '<div class="op-evidence-row"><i class="ok"></i><code>purpose</code> 문서 검색</div><div class="op-evidence-row"><i class="ok"></i><code>scope</code> docs · read-only</div><div class="op-evidence-row"><i class="warn"></i><code>write access</code> 별도 승인</div>') },
+    ]),
+    '처음부터 강한 명령을 실행하지 말고 <b>작은 읽기 요청으로 연결을 검증</b>합니다.'),
 
-  slide('BUILD · MCP', '나만의 MCP 연결 — <span class="g">설정 → 권한 → 테스트</span>',
-    `${term('terminal — mcp', [['p', '$ claude mcp add filesystem'], ['o', '✓ connected · scope: read-only'], ['p', '$ claude'], ['d', '> 이 폴더 구조 정리해줘'], ['o', '✓ 파일 읽기 권한으로 안전하게 처리']])}
-     ${flow([{ t: '설정', d: '서버 등록' }, { t: '권한', d: '최소 범위', tone: 'a' }, { t: '테스트', d: '동작 확인', tone: 'g' }])}`,
-    '연결할 때 <b>읽기/쓰기 범위를 좁게</b> 잡고, 민감한 작업은 승인을 거치게 합니다.'),
+  slide('PLUGIN LANGUAGE', '<span class="g">플러그인</span>이라는 말은 제품마다 구현이 다릅니다',
+    pair(surface('공통으로 이해할 것', '<p><span class="teal">연결</span> : 외부 능력을 붙인다</p><p><span class="teal">절차</span> : 반복 작업을 저장한다</p><p><span class="teal">배포</span> : 다른 사람도 재사용한다</p>'), surface('수업 전 확인할 것', '<p><span class="amber">제품별 형식</span> : 설치 경로·설정 파일·메뉴</p><p><span class="amber">안정성</span> : 정식·베타·실험 기능</p><p><span class="amber">권한</span> : 어떤 데이터에 접근하는가</p>')),
+    '이름이 같아도 포맷은 다를 수 있습니다. 제품별 형식은 <b>수업 전 공식 문서 기준</b>으로 확인합니다.'),
 
-  slide('PARALLEL · SUBAGENT', 'SubAgent — 큰 작업을 <span class="g">나눠서 병렬</span>로',
-    `<div class="op-agents">
-      <div class="ag-main">큰 작업<span>로그인 기능</span></div>
-      <div class="ag-fan">
-        <div class="ag-sub a1">서브 A<span>UI</span></div>
-        <div class="ag-sub a2">서브 B<span>API</span></div>
-        <div class="ag-sub a3">서브 C<span>테스트</span></div>
-      </div>
-      <div class="ag-merge">리뷰 후 통합 ✓</div>
-    </div>`,
-    '한 작업을 <b>겹치지 않는 단위로 나눠</b> 동시에 진행하고, 검증한 것만 합칩니다.'),
+  slide('SKILL ANATOMY', 'Skill은 잘 쓴 프롬프트가 아니라 <span class="g">반복 작업의 운영 문서</span>입니다',
+    skillStudio(),
+    '좋은 Skill에는 <b>언제 쓰는지, 어떤 순서인지, 무엇을 통과해야 하는지</b>가 들어 있습니다.'),
 
-  slide('ISOLATE · WORKTREE', 'Worktree — <span class="g">격리된 작업 공간</span>으로 충돌 방지',
-    `<div class="op-tree">
-      <div class="tr-main">main<span>안정 버전</span></div>
-      <div class="tr-branches">
-        <div class="tr-b">worktree-1 · 기능 A</div>
-        <div class="tr-b">worktree-2 · 기능 B</div>
-      </div>
-    </div>`,
-    '각 작업을 <b>분리된 공간</b>에서 진행하면, 동시에 여러 기능을 만들어도 서로 안 섞입니다.'),
+  slide('SKILL DISCOVERY', 'Skill은 <span class="g">반복되는 불편</span>에서 시작합니다',
+    skillStudio(),
+    '거창한 자동화보다 “매번 빠지는 한 단계”를 잡는 것이 좋은 첫 Skill입니다.'),
 
-  slide('AUTOMATE · WORKFLOW', 'Workflow — 반복 흐름을 <span class="g">자동화</span>',
-    `<div class="op-pipe">
-      <div class="pipe-step p1">트리거<span>PR 생성</span></div>
-      <div class="pipe-step p2">검토<span>diff 분석</span></div>
-      <div class="pipe-step p3">테스트<span>자동 실행</span></div>
-      <div class="pipe-step p4 live">리포트<span>요약 게시</span></div>
-      <div class="pipe-beam"></div>
-    </div>`,
-    '매번 손으로 하던 <b>정해진 단계</b>를 트리거 한 번으로 자동 실행합니다.'),
+  slide('MANUAL SCENE · SKILL', '수동 시연 2 — <span class="g">PR 요약 Skill을 설계</span>',
+    sequence([
+      { title: '트리거', detail: '“PR 요약해줘”라는 요청을 Skill의 시작 신호로 정합니다.', visual: evidence('SKILL.md · TRIGGER', 'DEFINED', '<div class="op-evidence-code"><span class="key">when</span>: PR 요약 요청<br><span class="amber">not for</span>: 회의록 · 일반 글 요약</div>') },
+      { title: '입력', detail: 'PR 링크, 변경 파일, 테스트 결과를 받도록 정합니다.', visual: evidence('SKILL.md · INPUT', 'REQUIRED', '<div class="op-evidence-row"><i class="ok"></i><code>pull request URL</code></div><div class="op-evidence-row"><i class="ok"></i><code>changed files</code></div><div class="op-evidence-row"><i class="ok"></i><code>test result</code></div>') },
+      { title: '절차', detail: '변경 의도·영향·위험을 순서대로 요약합니다.', visual: evidence('SKILL.md · PROCEDURE', 'RUNNING', '<div class="op-evidence-grid"><span class="live">의도<br>무엇을 바꿈</span><span class="live">영향<br>어디가 달라짐</span><span class="gate">위험<br>무엇을 볼까</span></div>') },
+      { title: '검증', detail: '사람이 승인할 정보가 빠지지 않았는지 검사합니다.', visual: evidence('SKILL.md · CHECK', 'PASS', '<div class="op-evidence-row"><i class="ok"></i><code>목적</code> 포함</div><div class="op-evidence-row"><i class="ok"></i><code>영향 범위</code> 포함</div><div class="op-evidence-row"><i class="ok"></i><code>남은 위험</code> 포함</div>') },
+    ]),
+    'Skill은 한번에 완성되지 않습니다. <b>작은 결과를 검증하면서 절차를 다듬는 자산</b>입니다.'),
 
-  slide('EXAMPLE · WORKFLOW', 'Workflow 예시 — <span class="g">PR 자동 리뷰</span>',
-    `${term('workflow — pr-review', [['p', '# PR이 열리면 자동 실행'], ['d', '› 변경 파일 수집'], ['d', '› 위험 지점 표시'], ['o', '✓ 리뷰 요약 코멘트 게시'], ['o', '✓ 사람은 판단만']])}`,
-    '사람은 <b>판단·승인</b>에 집중하고, 반복 수집·정리는 Workflow가 대신합니다.'),
+  slide('SKILL FAILURE', '넓은 트리거는 <span class="a">엉뚱한 순간에 Skill을 호출</span>합니다',
+    `<div class="op-incident"><header>FAILURE · broad trigger</header><p>“요약”이라는 단어가 들어간 모든 요청에 PR 요약 Skill이 실행됩니다.<br>사용자는 회의록 요약을 원했는데, 코드 변경을 찾기 시작합니다.</p><footer>복구: 트리거·입력 조건·사용하지 않는 경우를 명확히 적습니다.</footer></div>`,
+    'Skill은 편해질수록 오작동도 커집니다. <b>언제 쓰지 않는지</b>까지 설계합니다.'),
 
-  slide('PRACTICE · NEXT', '오늘 실습과 <span class="g">다음 주</span>',
-    `<div class="op-cols">
-      <div class="op-card"><div class="op-card-h">오늘 실습</div><small>① 반복 작업 1개를 Skill로 · ② MCP 1개 연결 · ③ 작업 하나를 SubAgent로 나눠보기</small></div>
-      <div class="op-card"><div class="op-card-h a">다음 주 (W4)</div><small><b>오케스트레이션 + 나만의 AI 사무실</b> — 만든 조각들을 하나의 흐름으로 묶습니다</small></div>
-    </div>`,
-    '제작까지 됐으면, 다음 주엔 이 조각들을 <b>하나의 AI 사무실</b>로 묶습니다.'),
+  slide('SUBAGENT', 'SubAgent는 “AI를 여러 명 쓰는 것”이 아니라 <span class="g">작업 계약을 나누는 것</span>입니다',
+    agentControl(),
+    '역할 이름보다 중요한 것은 <b>입력·출력·범위·완료 기준</b>을 계약으로 고정하는 일입니다.'),
+
+  slide('WORKTREE', '동시에 움직일 때는 <span class="g">작업 공간도 분리</span>합니다',
+    agentControl(),
+    '같은 파일을 여러 작업자가 동시에 만지면 충돌합니다. <b>작업 공간과 담당 범위</b>를 함께 나눕니다.'),
+
+  slide('MANUAL SCENE · SUBAGENT', '수동 시연 3 — <span class="g">로그인 개선 작업을 분배</span>',
+    sequence([
+      { title: '작업 분해', detail: 'UI 문구·서버 검증·모바일 QA로 겹치지 않게 나눕니다.', visual: evidence('TASK BOARD · OWNERSHIP', 'SPLIT', '<div class="op-evidence-grid"><span class="live">UI<br>LoginForm</span><span class="live">Server<br>validation</span><span class="live">QA<br>375px screen</span></div>') },
+      { title: '계약 전달', detail: '각 담당자에게 파일 범위와 완료 기준을 줍니다.', visual: evidence('TASK CONTRACT · UI', 'ASSIGNED', '<div class="op-evidence-code"><span class="key">owner</span>: UI agent<br><span class="key">files</span>: LoginForm.tsx<br><span class="key">done</span>: 오류 문구·여백 검증<br><span class="amber">do not touch</span>: API</div>') },
+      { title: '병렬 진행', detail: '각 작업자는 자기 공간에서 변경과 검증을 남깁니다.', visual: evidence('WORKTREE · ISOLATED', 'PARALLEL', '<div class="op-evidence-row"><i class="ok"></i><code>worktree-ui</code> 문구·레이아웃</div><div class="op-evidence-row"><i class="ok"></i><code>worktree-api</code> 검증 메시지</div><div class="op-evidence-row"><i class="ok"></i><code>worktree-qa</code> 화면 검사</div>') },
+      { title: '리뷰 통합', detail: '리뷰 게이트를 통과한 변경만 main에 합칩니다.', visual: evidence('REVIEW GATE · MAIN', 'MERGE READY', '<div class="op-evidence-grid"><span class="live">Diff<br>expected</span><span class="live">check<br>passed</span><span class="gate">owner<br>approve</span></div>') },
+    ]),
+    '병렬 작업의 속도는 에이전트 수가 아니라 <b>충돌 없는 계약</b>에서 나옵니다.'),
+
+  slide('HANDOFF', '핸드오프는 “끝났습니다”가 아니라 <span class="g">다음 사람이 바로 판단할 수 있는 결과</span>입니다',
+    pair(surface('나쁜 전달', '<p>“로그인 쪽 수정했습니다.”</p><p class="amber">무엇을 · 왜 · 어디까지 바꿨는지 알 수 없습니다.</p>'), surface('좋은 전달', '<p><code>변경</code> LoginForm 오류 문구</p><p><code>검증</code> 모바일 375px·check 통과</p><p><code>주의</code> 서버 오류 문구는 미변경</p>')),
+    '작업을 넘길 때는 <b>변경·검증·남은 위험</b>을 같은 형식으로 남깁니다.'),
+
+  slide('WORKFLOW', 'Workflow는 <span class="g">트리거에서 결과까지의 길</span>을 고정합니다',
+    officeControl(),
+    'Workflow는 AI가 생각하는 흐름과, 항상 같은 순서로 해야 하는 흐름을 연결합니다.'),
+
+  slide('WORKFLOW GATE', '좋은 Workflow는 <span class="a">승인 없이 넘어가면 안 되는 지점</span>을 가집니다',
+    officeControl(),
+    '모든 것을 자동화하면 빠른 것이 아니라 위험해집니다. <b>사람의 승인 지점</b>을 명시합니다.'),
+
+  slide('RECOVERY', 'Workflow가 멈추면 <span class="g">어느 단계에서 멈췄는지</span>부터 읽습니다',
+    recoveryRoom(),
+    '복구는 처음부터 다시 하는 일이 아닙니다. <b>실패한 단계와 마지막 정상 상태</b>를 찾는 일입니다.'),
+
+  slide('ASSEMBLY', 'MCP·Skill·SubAgent·Workflow는 <span class="g">서로를 대체하지 않습니다</span>',
+    `<div class="op-map"><div><b>MCP</b><span>문서·DB·브라우저에<br>접근하는 능력</span></div><div><b>Skill</b><span>PR 요약처럼<br>반복하는 절차</span></div><div><b>SubAgent</b><span>계약을 받고<br>독립 실행하는 역할</span></div><div><b>Workflow</b><span>누가 언제 무엇을<br>거치는지 정의</span></div></div>`,
+    '도구를 하나 더 설치하기 전에 <b>지금 비어 있는 층이 능력·절차·역할·흐름 중 무엇인지</b> 봅니다.'),
+
+  slide('FIRST ASSET', '첫 개인 자산은 <span class="g">가장 자주 반복되고, 가장 자주 빠지는 일</span>에서 고릅니다',
+    pair(surface('좋은 시작', '<p><span class="teal">PR 요약</span> · 회의록 정리 · QA 체크 · 프로젝트 시작 정리</p><p>반복되며, 입력과 완료 기준을 설명할 수 있습니다.</p>'), surface('나중에 할 것', '<p><span class="amber">모든 업무를 처리하는 만능 에이전트</span></p><p>범위가 넓고, 권한·비용·복구 기준이 아직 없습니다.</p>')),
+    '처음에는 범위를 작게 잡아 <b>재사용 가능한 한 가지</b>를 남기는 편이 좋습니다.'),
+
+  slide('MIDPOINT', '90분 지점 — <span class="g">AI의 손발을 설계한다는 것</span>',
+    `<div class="op-break"><strong>무엇을 연결하고,<br>어떤 절차로, 누구에게 맡기고,<br>어디서 멈출지 정하는 일.</strong><span>다음 장면부터는 이 네 가지를 하나의 운영 흐름으로 묶습니다.</span></div>`,
+    '개념을 외우는 시간이 아니라, 내 작업을 네 층으로 분해하는 시간을 만듭니다.'),
+
+  slide('CONFIG CONTRACT', '연결 설정에는 <span class="g">공개해도 되는 구조</span>와 <span class="a">절대 남기면 안 되는 비밀값</span>이 함께 있습니다',
+    pair(surface('공유 가능한 예시', '<div class="op-codeboard"><span class="key">name</span>: <span class="str">docs-search</span><br><span class="key">command</span>: <span class="str">node server.js</span><br><span class="key">scope</span>: <span class="str">read-only</span></div><p>동료가 같은 구조를 재현할 수 있게 남깁니다.</p>'), surface('환경변수로 분리할 값', '<div class="op-codeboard"><span class="bad">TOKEN=...</span><br><span class="bad">API_KEY=...</span><br><span class="good">.env.example에는 이름만</span></div><p>키는 코드·Git·Skill 본문에 직접 넣지 않습니다.</p>')),
+    '연결 도구를 만들수록 설정 파일의 구조와 <b>비밀값의 경계</b>를 함께 설계해야 합니다.'),
+
+  slide('DESIGN REVIEW', '확장 도구를 만들기 전, <span class="g">네 질문</span>으로 과한 자동화를 걸러냅니다',
+    `<div class="op-map"><div><b>반복되는가</b><span>한 번만 할 일인가</span></div><div><b>입력이 분명한가</b><span>누구나 같은 정보를 주는가</span></div><div><b>완료 기준이 있는가</b><span>통과 여부를 판단할 수 있는가</span></div><div><b>복구 가능한가</b><span>실패하면 어디로 돌아가는가</span></div></div>`,
+    '네 질문에 답하기 어렵다면, 아직은 자동화보다 <b>작업 흐름을 관찰</b>할 때입니다.'),
+
+  slide('CLOSE', '다음 주에는 이 조각들을 <span class="g">나만의 AI 사무실</span>로 묶습니다',
+    flow([{ title: '능력', detail: 'MCP' }, { title: '절차', detail: 'Skill', tone: 'a' }, { title: '역할', detail: 'SubAgent', tone: 'a' }, { title: '운영', detail: 'Orchestration', tone: 'g' }]),
+    '다음 주는 자동화를 더 늘리는 시간이 아니라, <b>안전하게 운영되는 하나의 시스템</b>을 설계하는 시간입니다.'),
 ];
 
-const total = SLIDES.length + 1;
+const html = buildLectureDeck({
+  week: 3,
+  navTitle: 'MCP · Skill · SubAgent · Workflow',
+  coverTitle: 'AI의 손발을 직접 설계하는 법<br><span class="g">MCP · Skill · SubAgent · Workflow</span>',
+  coverSubtitle: '외부 능력, 반복 절차, 역할 분배, 자동 흐름을 구분하고 연결해 나만의 재사용 가능한 작업 자산을 설계합니다.',
+  coverFlow: ['MCP', 'Skill', 'SubAgent', 'Workflow', 'Permission', 'Recovery'],
+  slides,
+  extraCss: documentaryCss,
+});
 
-const extraCss = `
-.op-cover{justify-content:center;gap:18px;padding:0 clamp(40px,7vw,120px)!important}
-.op-cover .op-eyebrow{color:#34d399}
-.op-cover-title{margin:0;font-size:clamp(38px,5vw,76px);font-weight:800;line-height:1.06;letter-spacing:-.02em;background:linear-gradient(180deg,#fff 40%,#9fb0bd);-webkit-background-clip:text;background-clip:text;color:transparent}
-.op-cover-title .g{-webkit-text-fill-color:#34d399}.op-cover-title .a{-webkit-text-fill-color:#fbbf24}
-.op-cover-sub{max-width:42em;color:#aebcc4;font-size:clamp(15px,1.5vw,21px);line-height:1.6;word-break:keep-all}.op-cover-sub b{color:#eaf2f6}
-.op-cover-flow{display:flex;flex-wrap:wrap;gap:9px;margin-top:8px}
-.op-cover-flow span{padding:8px 14px;border:1px solid rgba(255,255,255,.12);border-radius:8px;color:#aebcc4;font:750 12px ui-monospace,monospace}
-.op-term{max-width:600px;border:1px solid rgba(255,255,255,.16);border-radius:12px;overflow:hidden;background:#0a0f17;box-shadow:0 26px 54px -24px rgba(0,0,0,.7)}
-.op-tbar{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#161f2c;border-bottom:1px solid rgba(255,255,255,.08)}
-.op-tbar i{width:9px;height:9px;border-radius:50%;background:#46505c}.op-tbar i:nth-child(1){background:#ed6a5e}.op-tbar i:nth-child(2){background:#f4bf4f}.op-tbar i:nth-child(3){background:#61c554}
-.op-tbar small{margin-left:6px;color:#9fb0bd;font:700 11px ui-monospace,monospace}
-.op-tbody{padding:16px 18px;display:grid;gap:8px;font:600 13.5px/1.4 ui-monospace,SFMono-Regular,monospace}
-.op-tbody .tl{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tl.p{color:#34d399}.tl.d{color:#c4d2dc}.tl.o{color:#7ce4a6}
-.tl-cursor{width:9px;height:16px;background:#34d399;animation:tcur 1s steps(1) infinite}
-@keyframes tcur{50%{opacity:0}}
-.op-file{max-width:540px;border:1px solid rgba(125,211,252,.3);border-radius:12px;overflow:hidden;background:#0a0f17}
-.of-h{padding:12px 18px;background:rgba(125,211,252,.1);color:#7dd3fc;font:800 14px ui-monospace,monospace;border-bottom:1px solid rgba(125,211,252,.18)}
-.of-body{padding:16px 18px;display:grid;grid-template-columns:auto 1fr;gap:9px 14px;align-items:baseline}
-.of-key{color:#7dd3fc;font:800 13px ui-monospace,monospace}
-.of-body span:not(.of-key){color:#d9e3e6;font-size:13.5px}
-.op-agents{display:flex;flex-direction:column;align-items:center;gap:14px}
-.ag-main{padding:14px 24px;border:1px solid rgba(255,255,255,.16);border-radius:12px;background:rgba(255,255,255,.04);color:#eaf2f6;font:800 16px Pretendard,sans-serif;text-align:center}.ag-main span{display:block;color:#9fb0bd;font:700 11px ui-monospace,monospace}
-.ag-fan{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
-.ag-sub{padding:16px 22px;border:1px solid rgba(52,211,153,.4);border-radius:12px;background:rgba(52,211,153,.07);color:#7ee8b0;font:800 15px Pretendard,sans-serif;text-align:center;animation:agWork 2.4s ease-in-out infinite}
-.ag-sub span{display:block;color:#9fb0bd;font:700 11px ui-monospace,monospace}
-.ag-sub.a2{animation-delay:.3s}.ag-sub.a3{animation-delay:.6s}
-@keyframes agWork{0%,100%{transform:translateY(0);box-shadow:0 0 0 0 rgba(52,211,153,0)}50%{transform:translateY(-5px);box-shadow:0 0 18px 1px rgba(52,211,153,.3)}}
-.ag-merge{padding:11px 20px;border:1px solid rgba(251,191,36,.4);border-radius:10px;background:rgba(251,191,36,.08);color:#fbbf24;font:800 14px Pretendard,sans-serif}
-.op-tree{display:flex;align-items:center;gap:24px;justify-content:center;flex-wrap:wrap}
-.tr-main{padding:18px 26px;border:2px solid rgba(125,211,252,.4);border-radius:14px;background:rgba(125,211,252,.07);color:#7dd3fc;font:800 18px ui-monospace,monospace;text-align:center}.tr-main span{display:block;color:#9fb0bd;font:700 11px ui-monospace,monospace}
-.tr-branches{display:grid;gap:12px}
-.tr-b{position:relative;padding:13px 20px 13px 28px;border:1px solid rgba(52,211,153,.35);border-radius:10px;background:rgba(52,211,153,.06);color:#d9f3e8;font:700 14px ui-monospace,monospace}
-.tr-b::before{content:'';position:absolute;left:-24px;top:50%;width:24px;height:1px;background:rgba(255,255,255,.2)}
-.op-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}`;
-
-const html = `<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI 한방 이해하기 · 3주차 — 나만의 MCP·Skill·Workflow</title>
-<link rel="stylesheet" href="../../assets/fonts/pretendard.css">
-<style>
-${chrome}
-${extraCss}
-</style>
-</head>
-<body>
-<div class="app">
-  <nav class="nav-bar">
-    <span class="nav-title">AI 한방 이해하기 · 3주차 · 제작·병렬·자동화</span>
-    <div class="nav-controls">
-      <button class="nav-btn" id="btn-prev" onclick="move(-1)">←</button>
-      <span id="counter">1 / ${total}</span>
-      <button class="nav-btn" id="btn-next" onclick="move(1)">→</button>
-    </div>
-  </nav>
-  <div class="deck">
-${COVER}
-${SLIDES.join('\n')}
-  </div><!-- .deck -->
-</div><!-- .app -->
-<script>
-const slides=[...document.querySelectorAll('.slide')];
-let cur=0;
-function render(){slides.forEach(function(s,i){s.classList.remove('active','prev');if(i===cur)s.classList.add('active');else if(i<cur)s.classList.add('prev');});var a=slides[cur];if(a)a.scrollTop=0;document.getElementById('counter').textContent=(cur+1)+' / '+slides.length;document.getElementById('btn-prev').disabled=cur===0;document.getElementById('btn-next').disabled=cur===slides.length-1;}
-function move(d){cur=Math.max(0,Math.min(slides.length-1,cur+d));render();}
-window.move=move;
-document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();move(1);}if(e.key==='ArrowLeft'){e.preventDefault();move(-1);}});
-render();
-</script>
-</body>
-</html>
-`;
-
-fs.writeFileSync(OUT, html, 'utf-8');
-console.log(`onepass-week3.html: ${SLIDES.length} custom slides + cover (total ${total})`);
+fs.writeFileSync(output, html, 'utf-8');
+console.log(`onepass-week3.html: ${slides.length} lecture slides + cover`);

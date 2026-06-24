@@ -11,13 +11,13 @@ module.exports = {
   "level": "ALL-IN-ONE",
   "color": "#a78bfa",
   "visualMode": "onepass",
-  "description": "바이브코딩의 원리부터 CLI·MCP·Skill, 나만의 자동화, 그리고 나만의 AI 사무실까지 4주에 압축한 원샷 집중 트랙입니다.",
-  "route": "원리 → CLI·MCP·Skill 이해 → 나만의 MCP·Skill·Workflow 제작 → 오케스트레이션·AI 사무실",
+  "description": "프로젝트 흐름 이해부터 Claude Code·Codex 운용, AI 확장 도구 설계, 오케스트레이션까지 180분 강의형으로 압축한 4주 집중 트랙입니다.",
+  "route": "프로젝트 흐름 → Claude Code·Codex 운용 → MCP·Skill·SubAgent·Workflow → 오케스트레이션·AI 사무실",
   "outcomes": [
     "AI에게 일을 시키고 검증·복구하는 사고법",
-    "CLI·MCP·Skill의 개념과 사용",
-    "나만의 MCP·Skill·SubAgent·Workflow 제작",
-    "오케스트레이션으로 나만의 AI 사무실 구성"
+    "Claude Code·Codex와 Desktop·IDE·CLI의 작업 표면 선택",
+    "MCP·Skill·SubAgent·Workflow의 경계와 운영 설계",
+    "오케스트레이션으로 나만의 AI 사무실 운영 기준 수립"
   ],
   "sessions": [
     {

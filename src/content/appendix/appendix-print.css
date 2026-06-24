@@ -234,4 +234,54 @@
   .appendix-guide-panel {
     display: none !important;
   }
+
+  /* Force light backgrounds and dark text for dark containers to prevent invisible text in PDFs/prints */
+  .cover,
+  .cover-index div,
+  .terminal-room,
+  .command-room,
+  .room-pane,
+  .surface-map div,
+  .flow div,
+  .gate div,
+  .loop div,
+  .fallback-frame {
+    background: #f8fafc !important; /* light slate background */
+    border: 1px solid #cbd5e1 !important; /* slate-300 border */
+    color: #0f172a !important; /* slate-900 text */
+  }
+
+  /* Reset text and headings inside forced light containers */
+  .cover h1,
+  .cover h2,
+  .cover p,
+  .cover b,
+  .cover span,
+  .eyebrow,
+  .cover-index span,
+  .cover-index b,
+  .room-label,
+  .terminal-line,
+  .terminal-line strong,
+  .terminal-line span,
+  .file-row,
+  .file-row b,
+  .log-row,
+  .log-row strong,
+  .log-row span,
+  .surface-map b,
+  .surface-map span,
+  .flow b,
+  .flow span,
+  .gate b,
+  .gate span,
+  .loop b,
+  .loop span {
+    color: #0f172a !important;
+  }
+
+  /* Darken card top borders/accents for print readability */
+  .card, .scene, .flow div, .surface-map div, .gate div, .loop div {
+    border-top-color: #1e3a8a !important; /* dark blue print accent */
+  }
 }

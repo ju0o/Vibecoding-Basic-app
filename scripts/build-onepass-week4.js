@@ -1,158 +1,132 @@
 'use strict';
 
-// onepass Week 4 — "오케스트레이션 + 나만의 AI 사무실". All-custom op-enhanced tutorial
-// slides reusing the shared shell (chrome + op-* CSS) from the week-1 builder. Capstone week.
-
 const fs = require('fs');
 const path = require('path');
-const { chrome } = require('./build-onepass-week1.js');
+const { buildLectureDeck, flow, pair, sequence, slide, terminal } = require('./onepass-lecture-kit.js');
+const { agentControl, browserProof, decisionControl, documentaryCss, officeControl, recoveryRoom } = require('./onepass-documentary-scenes.js');
 
-const OUT = path.join(__dirname, '..', 'src', 'content', 'sessions', 'onepass-week4.html');
+const output = path.join(__dirname, '..', 'src', 'content', 'sessions', 'onepass-week4.html');
+const surface = (title, body) => `<h3>${title}</h3>${body}`;
+const evidence = (title, status, body, tone = '') => `<div class="op-evidence-top"><b>${title}</b><span class="op-evidence-status ${tone}">${status}</span></div><div class="op-evidence-body">${body}</div>`;
 
-const flow = (steps) => `<div class="op-flow">${steps.map((s, i) => `${i ? '<span class="op-arrow">→</span>' : ''}<div class="op-node ${s.tone || ''}"><b>${s.t}</b>${s.d ? `<span>${s.d}</span>` : ''}</div>`).join('')}</div>`;
-const slide = (eyebrow, title, visual, cap) => `<div class="slide op-slide"><div class="op-eyebrow">${eyebrow}</div><h2 class="op-title">${title}</h2><div class="op-visual">${visual}</div><p class="op-cap">${cap}</p></div>`;
+const slides = [
+  slide('WEEK 04 · ORCHESTRATE', '오케스트레이션은 AI를 많이 붙이는 기술이 아니라<br><span class="g">일이 끝까지 흐르게 만드는 설계</span>입니다',
+    officeControl(),
+    '오늘은 여러 AI가 함께 일해도 산만해지지 않도록 <b>역할·승인·복구</b>를 설계합니다.'),
 
-const COVER = `<div class="slide op-cover active">
-  <div class="op-eyebrow">AI 한방 이해하기 · 4주차 (4주 집중)</div>
-  <h1 class="op-cover-title">오케스트레이션<br>+ 나만의 <span class="g">AI 사무실</span></h1>
-  <p class="op-cover-sub">만든 조각들(Skill·MCP·SubAgent·Workflow)을 <b>하나의 흐름</b>으로 묶고, 역할을 나눈 <b>나만의 AI 사무실</b>로 일을 굴립니다.</p>
-  <div class="op-cover-flow"><span>결정적 + 에이전틱</span><span>핸드오프</span><span>정지조건</span><span>AI 사무실</span></div>
-</div>`;
+  slide('WHY ORCHESTRATE', '도구가 늘수록 필요한 것은 <span class="g">중앙의 통제 규칙</span>입니다',
+    officeControl(),
+    '오케스트레이션의 목표는 “더 빨리”보다 <b>중복·누락·폭주를 줄이는 것</b>입니다.'),
 
-const SLIDES = [
-  slide('CONCEPT · ORCHESTRATION', '오케스트레이션 — 여러 도구를 <span class="g">하나의 흐름</span>으로',
-    `<div class="op-cols">
-      <div class="op-card"><div class="op-card-h">지휘자 없이</div><small>좋은 연주자(도구)가 많아도 따로 놀면 곡이 안 됩니다.</small></div>
-      <div class="op-card"><div class="op-card-h g">지휘자(오케스트레이션)</div><small>각 도구·에이전트가 <b>언제·무엇을</b> 할지 하나의 악보로 묶입니다.</small></div>
-    </div>`,
-    '도구를 많이 모으는 게 아니라, <b>언제 무엇을 거치는지 흐름</b>을 설계하는 일입니다.'),
+  slide('DETERMINISTIC', '<span class="g">결정적인 단계</span>와 <span class="a">AI 판단 단계</span>를 나눕니다',
+    decisionControl(),
+    '항상 같은 결과가 필요한 곳은 규칙으로 고정하고, <b>판단이 필요한 곳에만 AI의 추론</b>을 씁니다.'),
 
-  slide('PRINCIPLE', '<span class="g">결정적 뼈대</span> + <span class="a">막히는 곳만 에이전틱</span>',
-    flow([{ t: '계획', d: '결정적' }, { t: '빌드', d: '결정적' }, { t: '판단 지점', d: '에이전틱', tone: 'a' }, { t: '검증', d: '결정적', tone: 'g' }]),
-    '대부분은 <b>정해진 단계(결정적)</b>로 싸고 안정적으로, 예측이 어려운 곳에만 AI 판단을 더합니다.'),
+  slide('OFFICE MAP', '나만의 AI 사무실은 <span class="g">역할이 다른 작은 부서</span>로 시작합니다',
+    officeControl(),
+    '오너는 일을 전부 하지 않습니다. <b>목표와 승인권을 유지</b>하며 흐름을 조정합니다.'),
 
-  slide('HANDOFF', '핸드오프 — <span class="g">산출물 형식</span>을 고정해 넘긴다',
-    flow([{ t: '도구 A', d: '결과 생성' }, { t: '형식 고정', d: 'JSON·문서', tone: 'a' }, { t: '도구 B', d: '그대로 인수', tone: 'g' }]),
-    '말로 전달하면 빠지고 겹칩니다 — <b>정해진 형식</b>으로 넘겨야 중복·누락이 없습니다.'),
+  slide('INTAKE', '좋은 AI 사무실은 <span class="g">좋은 접수 문장</span>에서 시작합니다',
+    officeControl(),
+    '“예쁘게 고쳐줘” 대신 <b>목표·범위·완료·금지</b>를 적어야 좋은 분배가 가능합니다.'),
 
-  slide('SAFETY · STOP', '정지조건·복구 — <span class="a">무한 루프</span>를 막는다',
-    `<div class="op-gate">
-      <div class="op-gate-req">끝없이 도는 작업</div>
-      <div class="op-gate-door"><span>한도 도달</span></div>
-      <div class="op-gate-res a">반복·시간·토큰 한도 → 멈추고 복구</div>
-    </div>`,
-    '자동화일수록 <b>멈추는 조건과 되돌릴 경로</b>를 먼저 정해야 안전합니다.'),
+  slide('MANUAL SCENE · DISPATCH', '수동 시연 1 — <span class="g">요청을 사무실에 접수</span>',
+    sequence([
+      { title: '오너 접수', detail: '목표와 완료 기준을 한 문장으로 고정합니다.', visual: evidence('CONTROL ROOM · INTAKE', 'OWNER', '<div class="op-evidence-code"><span class="key">goal</span>: 모바일 로그인 오류를 이해하기 쉽게<br><span class="key">done</span>: 375px · check · browser QA</div>') },
+      { title: 'PM 분해', detail: '조사·구현·QA를 겹치지 않는 업무로 나눕니다.', visual: evidence('CONTROL ROOM · PLAN', 'SPLIT', '<div class="op-evidence-grid"><span class="live">조사<br>문구 근거</span><span class="live">구현<br>UI만 수정</span><span class="gate">QA<br>화면 확인</span></div>') },
+      { title: '담당 배정', detail: '각 담당자에게 입력·출력·금지 범위를 전달합니다.', visual: evidence('CONTROL ROOM · HANDOFF', 'ASSIGNED', '<div class="op-evidence-row"><i class="ok"></i><code>input</code> 목표 · 파일 범위</div><div class="op-evidence-row"><i class="ok"></i><code>output</code> diff · 검증 기록</div><div class="op-evidence-row"><i class="warn"></i><code>blocked</code> 배포·권한 변경</div>') },
+      { title: '리뷰 대기', detail: '모든 변경은 승인 전까지 공개하지 않습니다.', visual: evidence('CONTROL ROOM · RELEASE', 'HELD', '<div class="op-evidence-grid"><span class="live">변경<br>완료</span><span class="gate">리뷰<br>대기</span><span>공개<br>잠김</span></div>', 'warn') },
+    ]),
+    '분배 전에 작업을 잘게 나누는 것이 아니라, <b>누가 무엇을 책임지는지</b>를 먼저 정합니다.'),
 
-  slide('YOUR AI OFFICE', '나만의 <span class="g">AI 사무실</span> — 역할을 나눈 팀',
-    `<div class="op-office">
-      <div class="of-boss">나 (오너)<span>목표 · 승인</span></div>
-      <div class="of-conn"></div>
-      <div class="of-team">
-        <div class="of-role r1">PM 에이전트<span>계획·분배</span></div>
-        <div class="of-role r2">개발 에이전트<span>구현</span></div>
-        <div class="of-role r3">리뷰 에이전트<span>검증</span></div>
-        <div class="of-role r4">배포 에이전트<span>릴리즈</span></div>
-      </div>
-    </div>`,
-    '한 AI에게 다 시키지 않고, <b>역할별 에이전트</b>가 분담합니다 — 내가 목표·승인을 쥡니다.'),
+  slide('HANDOFF FORMAT', '핸드오프에는 <span class="g">다음 사람이 판단할 수 있는 다섯 줄</span>이 필요합니다',
+    agentControl(),
+    '“완료했습니다”는 전달이 아닙니다. <b>변경·이유·검증·위험·다음 행동</b>이 필요합니다.'),
 
-  slide('HOW · AI OFFICE', 'AI 사무실 작동 — 작업이 <span class="g">부서를 거쳐</span> 완성',
-    `<div class="op-pipe">
-      <div class="pipe-step p1">PM<span>작업 분해</span></div>
-      <div class="pipe-step p2">개발<span>병렬 구현</span></div>
-      <div class="pipe-step p3">리뷰<span>검증 게이트</span></div>
-      <div class="pipe-step p4 live">배포<span>릴리즈</span></div>
-      <div class="pipe-beam"></div>
-    </div>`,
-    '하나의 작업이 <b>계획 → 구현 → 검증 → 배포</b> 부서를 순서대로 거쳐 완성됩니다.'),
+  slide('REVIEW GATE', '<span class="g">리뷰 게이트</span>는 빨간불을 만드는 절차가 아니라, 공개 전에 사고를 막는 장치입니다',
+    browserProof(),
+    '리뷰는 결과가 마음에 드는지 보는 것이 아니라 <b>완료 기준을 통과했는지</b> 확인하는 일입니다.'),
 
-  slide('RELIABILITY', '느낌이 아니라 <span class="g">측정</span>으로 운영',
-    `<div class="op-cols3">
-      <div class="op-card"><div class="op-card-h g">평가</div><small>결과를 정한 기준으로 채점</small></div>
-      <div class="op-card"><div class="op-card-h g">관측</div><small>단계·시간·토큰을 추적</small></div>
-      <div class="op-card"><div class="op-card-h a">비용</div><small>예산 가드로 폭주 방지</small></div>
-    </div>`,
-    'AI 사무실이 커질수록 <b>채점·추적·비용 가드</b>로 품질과 비용을 눈으로 확인합니다.'),
+  slide('MANUAL SCENE · GATE', '수동 시연 2 — <span class="g">리뷰 게이트를 통과시키는 순서</span>',
+    sequence([
+      { title: 'Diff 검사', detail: '요청과 관계없는 파일이 바뀌지 않았는지 확인합니다.', visual: evidence('REVIEW GATE · DIFF', 'CHECKING', '<div class="op-evidence-row"><i class="ok"></i><code>LoginForm.tsx</code> 예상 변경</div><div class="op-evidence-row"><i class="ok"></i><code>login.css</code> 예상 변경</div><div class="op-evidence-row"><i></i><code>API / DB</code> 변경 없음</div>') },
+      { title: '자동 검사', detail: 'check와 테스트가 현재 변경에서 통과하는지 봅니다.', visual: evidence('REVIEW GATE · TEST', 'PASS', '<div class="op-evidence-code"><span class="key">$</span> npm run check<br><span class="ok">passed · 0 errors</span><br><span class="key">$</span> test:login<br><span class="ok">passed · 4 assertions</span></div>') },
+      { title: '사용자 화면', detail: '실제 브라우저에서 사용자가 보는 결과를 확인합니다.', visual: evidence('REVIEW GATE · BROWSER QA', 'VISIBLE', '<div class="op-evidence-grid"><span class="live">375px<br>글자 안 잘림</span><span class="live">버튼<br>클릭 가능</span><span class="live">오류<br>원인 명확</span></div>') },
+      { title: '승인·기록', detail: '승인 이유와 검증 결과를 release 기록에 남깁니다.', visual: evidence('REVIEW GATE · RELEASE', 'APPROVED', '<div class="op-evidence-row"><i class="ok"></i><code>review</code> 통과</div><div class="op-evidence-row"><i class="ok"></i><code>owner</code> 승인</div><div class="op-evidence-row"><i class="ok"></i><code>release note</code> 기록</div>') },
+    ]),
+    '리뷰 게이트는 AI를 믿지 않는 절차가 아니라, <b>누구도 기억에만 의존하지 않게 하는 장치</b>입니다.'),
 
-  slide('CAPSTONE', '4주 통합 — <span class="g">하나의 제품</span>으로',
-    flow([{ t: 'W1 원리', d: '사고법' }, { t: 'W2 CLI·MCP·Skill', d: '도구', tone: 'a' }, { t: 'W3 제작·병렬', d: '자산', tone: 'a' }, { t: 'W4 사무실', d: '운영', tone: 'g' }]),
-    '4주가 따로가 아니라, <b>원리 → 도구 → 제작 → 운영</b>이 하나의 제품으로 이어집니다.'),
+  slide('AUTHORITY', '권한과 승인은 <span class="a">역할마다 다르게</span> 줍니다',
+    agentControl(),
+    '전부에게 전체 권한을 주면 속도가 아니라 위험이 늘어납니다. <b>역할별 최소 권한</b>이 기본입니다.'),
 
-  slide('수료 · NEXT', '이제 <span class="g">나만의 AI 사무실</span>을 운영하세요',
-    `<div class="op-cols">
-      <div class="op-card"><div class="op-card-h">수료 후 첫 적용</div><small>본인 실제 작업 1건을 — 목표는 내가, 실행은 AI 사무실이.</small></div>
-      <div class="op-card"><div class="op-card-h a">계속 키우기</div><small>자주 하는 일을 Skill·Workflow로 늘리고, 역할 에이전트를 추가합니다.</small></div>
-    </div>`,
-    '강의는 끝나도 <b>AI 사무실은 매일 조금씩 커집니다</b> — 오늘 한 가지부터 적용하세요.'),
+  slide('OBSERVABILITY', 'AI 사무실은 <span class="g">무엇을 했는지 다시 볼 수 있어야</span> 운영됩니다',
+    terminal('office run log', [['cmd', '09:12 intake accepted'], ['cmd', '09:13 PM → ui-agent assigned'], ['cmd', '09:18 ui-agent → review queue'], ['warn', '09:19 browser QA blocked'], ['ok', '09:24 recovery verified · approval requested']]),
+    '로그는 감시용이 아니라 <b>막힌 위치·비용·복구 경로</b>를 찾기 위한 운영 기록입니다.'),
+
+  slide('COST', '비용은 나중에 계산하지 말고 <span class="g">작업 흐름 안에서 제한</span>합니다',
+    `<div class="op-map"><div><b>예산</b><span>작업당 최대 호출·시간</span></div><div><b>중단</b><span>반복 횟수·실패 횟수 제한</span></div><div><b>축소</b><span>작은 모델·작은 범위 우선</span></div><div><b>기록</b><span>무엇이 비용을 만들었나</span></div></div>`,
+    '비용 가드는 AI를 덜 쓰자는 말이 아니라, <b>필요한 곳에 충분히 쓰기 위한 기준</b>입니다.'),
+
+  slide('STOP CONDITION', '자동화에는 <span class="a">멈춰야 하는 조건</span>이 반드시 있어야 합니다',
+    `<div class="op-incident"><header>STOP CONDITION</header><p>같은 오류가 두 번 반복됨<br>허용된 파일 범위를 벗어남<br>권한이 필요한 외부 행동이 발생함<br>테스트는 통과했지만 화면 QA가 실패함</p><footer>자동 실행을 멈추고, 현재 로그와 마지막 정상 상태를 오너에게 전달합니다.</footer></div>`,
+    '계속 시도하는 AI는 성실한 것이 아닐 수 있습니다. <b>정지·보고·복구</b>가 더 안전한 행동입니다.'),
+
+  slide('RECOVERY', '복구는 <span class="g">마지막 정상 상태에서 작은 범위로 다시 시작</span>합니다',
+    recoveryRoom(),
+    '전체를 다시 만들지 말고, <b>실패 단계와 마지막 정상 결과</b> 사이의 차이를 좁힙니다.'),
+
+  slide('MANUAL SCENE · RECOVERY', '수동 시연 3 — <span class="g">브라우저 QA 실패를 복구</span>',
+    sequence([
+      { title: '실패 확인', detail: 'DOM에는 있지만 모바일 화면에서 결제 버튼이 잘렸습니다.', visual: evidence('BROWSER QA · 375px', 'FAIL', '<div class="op-evidence-grid"><span>장바구니</span><span>배송지</span><span class="bad">결제하기<br>화면 밖</span></div>', 'fail') },
+      { title: '배포 중지', detail: '릴리즈를 열지 않고, QA 실패 상태를 기록합니다.', visual: evidence('RELEASE · GUARD', 'HELD', '<div class="op-evidence-row"><i class="fail"></i><code>browser QA</code> viewport clipped</div><div class="op-evidence-row"><i class="warn"></i><code>release</code> stop · not public</div>') },
+      { title: '작은 수정', detail: '버튼 레이아웃과 대표 화면 폭만 수정 대상으로 좁힙니다.', visual: evidence('FIX · MINIMUM CHANGE', 'PATCH', '<div class="op-evidence-code"><span class="bad">- grid-template-columns: 1fr 1fr</span><br><span class="ok">+ grid-template-columns: 1fr</span><br><span class="key">scope</span>: CheckoutFooter.css only</div>') },
+      { title: '같은 기준 재검증', detail: '동일한 화면 폭에서 클릭 가능 여부까지 다시 확인합니다.', visual: evidence('BROWSER QA · 375px', 'RECOVERED', '<div class="op-evidence-grid"><span>장바구니</span><span>배송지</span><span class="live">결제하기<br>클릭 가능</span></div>') },
+    ]),
+    '“테스트는 통과했어요”로 끝내지 않습니다. <b>사용자 화면 기준</b>을 통과해야 복구가 끝납니다.'),
+
+  slide('REAL WORK', 'AI 사무실은 <span class="g">실제 업무 한 건</span>을 끝까지 통과시킬 때 완성됩니다',
+    officeControl(),
+    '사무실의 성능은 멋진 역할표가 아니라 <b>하나의 실제 요청을 안전하게 끝낸 기록</b>으로 평가합니다.'),
+
+  slide('OFFICE TEMPLATE', '내 AI 사무실의 첫 구조는 <span class="g">작고 명확하게</span> 시작합니다',
+    pair(surface('첫 주', '<p><span class="teal">오너</span> 목표·승인</p><p><span class="teal">제작</span> 한 가지 작업</p><p><span class="teal">리뷰</span> Diff·브라우저 확인</p>'), surface('나중에 확장', '<p><span class="amber">조사·문서·배포</span> 역할 추가</p><p>작업량과 검증 기록이 쌓일 때만 역할을 늘립니다.</p>')),
+    '처음부터 큰 조직을 만들지 않습니다. <b>자주 반복되는 실제 흐름 하나</b>부터 운영합니다.'),
+
+  slide('ANTI-PATTERN', '피해야 할 AI 사무실 — <span class="a">빠르게 보이지만 통제되지 않는 구조</span>',
+    `<div class="op-incident"><header>ANTI-PATTERN</header><p>모든 권한을 한 AI에게 준다<br>여러 에이전트가 같은 파일을 동시에 고친다<br>리뷰 없이 자동 배포한다<br>로그·비용·정지조건이 없다</p><footer>대안: 작은 역할, 명확한 핸드오프, 승인 게이트, 복구 가능한 기록</footer></div>`,
+    'AI 사무실은 사람을 지우는 시스템이 아닙니다. <b>사람의 판단을 더 강하게 만드는 운영 구조</b>입니다.'),
+
+  slide('MIDPOINT', '90분 지점 — <span class="g">AI를 관리하는 것이 아니라 흐름을 관리합니다</span>',
+    `<div class="op-break"><strong>목표는 사람이 정하고,<br>반복은 시스템이 맡고,<br>승인은 사람이 쥔다.</strong><span>이 원칙을 기준으로 도구·권한·비용·복구를 정렬합니다.</span></div>`,
+    '이후의 모든 심화 과정은 이 운영 원리 위에서 도구별 구현을 깊게 다룹니다.'),
+
+  slide('OPERATING CADENCE', 'AI 사무실은 한 번 만들고 끝나지 않습니다. <span class="g">짧은 운영 리듬</span>이 필요합니다',
+    officeControl(),
+    'AI 사무실은 대단한 자동화보다 <b>작은 운영 규칙을 꾸준히 지키는 것</b>에서 안정됩니다.'),
+
+  slide('RELEASE CONTRACT', '공개는 마지막 버튼이 아니라 <span class="g">검증 기록을 가진 승인 행위</span>입니다',
+    recoveryRoom(),
+    '문제가 생겨도 복구할 수 있도록, 공개 전에는 <b>변경·검증·승인의 흔적</b>을 남깁니다.'),
+
+  slide('FOUR WEEK', '4주를 지나며 얻는 것은 <span class="g">도구 목록</span>이 아니라 <span class="a">작업 시스템</span>입니다',
+    flow([{ title: 'W1', detail: '프로젝트 흐름 이해' }, { title: 'W2', detail: '도구 표면 통제', tone: 'a' }, { title: 'W3', detail: '능력·절차 확장', tone: 'a' }, { title: 'W4', detail: '운영 시스템 설계', tone: 'g' }]),
+    '다음 프로젝트에서도 반복할 수 있도록, <b>판단·기록·검증</b>을 남기고 제품 세부는 수업 전 공식 문서 기준으로 확인합니다.'),
+
+  slide('CLOSE', '마지막 한 문장 — <span class="g">AI 사무실의 책임자는 나</span>입니다',
+    `<div class="op-note"><b>AI는 제안하고, 실행하고, 기록할 수 있습니다.</b><br>하지만 무엇을 만들지, 어떤 위험을 감수할지, 언제 공개할지는 여전히 오너가 판단합니다.</div>`,
+    '이제 기초 과정 이후의 전문 과정에서는 Claude Code·Codex·Workflow를 각각 더 깊게 구현합니다.'),
 ];
 
-const total = SLIDES.length + 1;
+const html = buildLectureDeck({
+  week: 4,
+  navTitle: 'Orchestration · AI Office',
+  coverTitle: '오케스트레이션과<br><span class="g">나만의 AI 사무실</span>',
+  coverSubtitle: 'Skill·MCP·SubAgent·Workflow를 하나의 운영 흐름으로 묶고, 사람의 목표·승인·복구 권한을 중심에 둔 AI 작업실을 설계합니다.',
+  coverFlow: ['Intake', 'Dispatch', 'Review Gate', 'Recovery', 'Logs', 'Release'],
+  slides,
+  extraCss: documentaryCss,
+});
 
-const extraCss = `
-.op-cover{justify-content:center;gap:18px;padding:0 clamp(40px,7vw,120px)!important}
-.op-cover .op-eyebrow{color:#34d399}
-.op-cover-title{margin:0;font-size:clamp(40px,5.4vw,82px);font-weight:800;line-height:1.05;letter-spacing:-.02em;background:linear-gradient(180deg,#fff 40%,#9fb0bd);-webkit-background-clip:text;background-clip:text;color:transparent}
-.op-cover-title .g{-webkit-text-fill-color:#34d399}.op-cover-title .a{-webkit-text-fill-color:#fbbf24}
-.op-cover-sub{max-width:42em;color:#aebcc4;font-size:clamp(15px,1.5vw,21px);line-height:1.6;word-break:keep-all}.op-cover-sub b{color:#eaf2f6}
-.op-cover-flow{display:flex;flex-wrap:wrap;gap:9px;margin-top:8px}
-.op-cover-flow span{padding:8px 14px;border:1px solid rgba(255,255,255,.12);border-radius:8px;color:#aebcc4;font:750 12px ui-monospace,monospace}
-.op-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.op-cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.op-gate{display:flex;align-items:center;gap:16px;justify-content:center;flex-wrap:wrap}
-.op-gate-req{padding:14px 18px;border:1px solid rgba(251,113,133,.4);border-radius:11px;background:rgba(251,113,133,.08);color:#fda4af;font:700 14px Pretendard,sans-serif}
-.op-gate-door{padding:14px 18px;border:1px dashed rgba(251,191,36,.5);border-radius:11px;color:#fbbf24;font:800 13px ui-monospace,monospace;animation:gateGlow 2.4s ease-in-out infinite}
-@keyframes gateGlow{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,0)}50%{box-shadow:0 0 20px 2px rgba(251,191,36,.35)}}
-.op-gate-res{padding:14px 18px;border:1px solid rgba(52,211,153,.45);border-radius:11px;background:rgba(52,211,153,.08);color:#7ee8b0;font:700 14px Pretendard,sans-serif}
-.op-office{display:flex;flex-direction:column;align-items:center;gap:0}
-.of-boss{padding:14px 30px;border:2px solid rgba(52,211,153,.45);border-radius:14px;background:rgba(52,211,153,.08);color:#34d399;font:800 18px Pretendard,sans-serif;text-align:center;box-shadow:0 0 36px -10px rgba(52,211,153,.4)}
-.of-boss span{display:block;color:#9fb0bd;font:700 11px ui-monospace,monospace}
-.of-conn{width:2px;height:22px;background:rgba(255,255,255,.2)}
-.of-team{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative}
-.of-team::before{content:'';position:absolute;top:-12px;left:12%;right:12%;height:2px;background:rgba(255,255,255,.18)}
-.of-role{padding:18px 16px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:rgba(255,255,255,.04);color:#eaf2f6;font:800 15px Pretendard,sans-serif;text-align:center;animation:roleIn 3.6s ease-in-out infinite}
-.of-role span{display:block;margin-top:4px;color:#9fb0bd;font:700 11px ui-monospace,monospace}
-.of-role.r2{animation-delay:.4s}.of-role.r3{animation-delay:.8s}.of-role.r4{animation-delay:1.2s}
-@keyframes roleIn{0%,8%{opacity:.5;transform:translateY(6px)}24%,100%{opacity:1;transform:none}}`;
-
-const html = `<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI 한방 이해하기 · 4주차 — 오케스트레이션·AI 사무실</title>
-<link rel="stylesheet" href="../../assets/fonts/pretendard.css">
-<style>
-${chrome}
-${extraCss}
-</style>
-</head>
-<body>
-<div class="app">
-  <nav class="nav-bar">
-    <span class="nav-title">AI 한방 이해하기 · 4주차 · 오케스트레이션·AI 사무실</span>
-    <div class="nav-controls">
-      <button class="nav-btn" id="btn-prev" onclick="move(-1)">←</button>
-      <span id="counter">1 / ${total}</span>
-      <button class="nav-btn" id="btn-next" onclick="move(1)">→</button>
-    </div>
-  </nav>
-  <div class="deck">
-${COVER}
-${SLIDES.join('\n')}
-  </div><!-- .deck -->
-</div><!-- .app -->
-<script>
-const slides=[...document.querySelectorAll('.slide')];
-let cur=0;
-function render(){slides.forEach(function(s,i){s.classList.remove('active','prev');if(i===cur)s.classList.add('active');else if(i<cur)s.classList.add('prev');});var a=slides[cur];if(a)a.scrollTop=0;document.getElementById('counter').textContent=(cur+1)+' / '+slides.length;document.getElementById('btn-prev').disabled=cur===0;document.getElementById('btn-next').disabled=cur===slides.length-1;}
-function move(d){cur=Math.max(0,Math.min(slides.length-1,cur+d));render();}
-window.move=move;
-document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();move(1);}if(e.key==='ArrowLeft'){e.preventDefault();move(-1);}});
-render();
-</script>
-</body>
-</html>
-`;
-
-fs.writeFileSync(OUT, html, 'utf-8');
-console.log(`onepass-week4.html: ${SLIDES.length} custom slides + cover (total ${total})`);
+fs.writeFileSync(output, html, 'utf-8');
+console.log(`onepass-week4.html: ${slides.length} lecture slides + cover`);

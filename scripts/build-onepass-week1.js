@@ -20,9 +20,15 @@ const SESS = path.join(__dirname, '..', 'src', 'content', 'sessions');
 const OUT = path.join(SESS, 'onepass-week1.html');
 const read = (file) => fs.readFileSync(path.join(SESS, file), 'utf-8');
 
-function extractStyle(html) {
-  const m = html.match(/<style>([\s\S]*?)<\/style>/);
-  return m ? m[1] : '';
+function extractStyle(html, sourceFile) {
+  const inline = [...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((match) => match[1]);
+  const linked = [...html.matchAll(/<link[^>]+rel=["']stylesheet["'][^>]+href=["']([^"']+\.css)(?:\?[^"']*)?["'][^>]*>/gi)].flatMap((match) => {
+    const href = match[1];
+    if (/^(https?:|\/)/i.test(href)) return [];
+    const cssPath = path.resolve(path.dirname(path.join(SESS, sourceFile)), href);
+    return fs.existsSync(cssPath) ? [fs.readFileSync(cssPath, 'utf-8')] : [];
+  });
+  return [...inline, ...linked].join('\n');
 }
 
 // Find each top-level slide element (<div|section> whose class list includes the exact
@@ -121,6 +127,12 @@ const SOURCES = [
 ];
 
 // ── 고도화/삽입: clean, visual-first custom slides (op-* style) ───────────────
+//
+// Important: the Session 03 scenes below are intentionally *not* used as visual
+// replacements. The source deck already has the richer building, restaurant,
+// storefront, UX, animation, backend, DB, and API scenes. Replacing them here
+// made Week 1 look like a static summary. They now stay in the deck and are
+// reactivated by renderer/onepass-week1-runtime.js.
 // flow(steps) draws a left-to-right block diagram with arrows; chips()/box() helpers.
 const flow = (steps) => `<div class="op-flow">${steps.map((s, i) => `${i ? '<span class="op-arrow">→</span>' : ''}<div class="op-node ${s.tone || ''}"><b>${s.t}</b>${s.d ? `<span>${s.d}</span>` : ''}</div>`).join('')}</div>`;
 const opSlide = (eyebrow, title, visual, cap) => `<div class="slide op-slide">
@@ -129,28 +141,52 @@ const opSlide = (eyebrow, title, visual, cap) => `<div class="slide op-slide">
   <div class="op-visual">${visual}</div>
   <p class="op-cap">${cap}</p>
 </div>`;
-
-const REACT_NEXT = `<div class="slide op-slide op-rn">
-  <div class="op-eyebrow">FRAMEWORK · REACT / NEXT.JS</div>
-  <h2 class="op-title">React·Next.js — 화면을 <span class="g">조각</span>으로 만들어 <span class="a">사이트</span>로 묶는다</h2>
-  <div class="op-rn-stage">
-    <div class="op-rn-parts">
-      <div class="op-comp"><code>&lt;Header/&gt;</code><div class="mk-nav"><i></i><i></i><i></i></div></div>
-      <div class="op-comp"><code>&lt;Card/&gt;</code><div class="mk-card"><div class="mk-img"></div><div class="mk-l"></div><div class="mk-l s"></div></div></div>
-      <div class="op-comp"><code>&lt;Button/&gt;</code><div class="mk-btn">시작하기</div></div>
-    </div>
-    <div class="op-rn-arrow"><span>조립</span>→</div>
-    <div class="op-browser">
-      <div class="op-bchrome"><i></i><i></i><i></i><small>my-app.vercel.app</small></div>
-      <div class="op-bbody">
-        <div class="bd b1 mk-nav"><i></i><i></i><i></i></div>
-        <div class="bd b2 mk-card"><div class="mk-img"></div><div class="mk-l"></div><div class="mk-l s"></div></div>
-        <div class="bd b3"><span class="mk-btn">시작하기</span></div>
-      </div>
-    </div>
+const sequence = (steps) => `<div class="op-seq" data-seq-current="0">
+  <div class="op-seq-rail">${steps.map((step, index) => `<span class="${index === 0 ? 'is-active' : ''}" data-seq-marker="${index}"><i>0${index + 1}</i><b>${step.title}</b></span>`).join('')}</div>
+  <div class="op-seq-stage">
+    ${steps.map((step, index) => `<div class="op-seq-step${index === 0 ? ' is-active' : ''}" data-seq-step="${index}"><strong>${step.title}</strong><span>${step.detail}</span></div>`).join('')}
   </div>
-  <div class="op-rn-next"><b>Next.js</b> — 이 조각들을 묶어 <span class="a">주소·페이지·배포</span>를 자동으로 처리하는 틀</div>
-  <p class="op-cap">한 줄: <b>React는 화면 조각, Next.js는 그 조각들을 사이트로 묶는 틀</b>입니다.</p>
+  <div class="op-seq-controls" aria-label="발표자 진행 제어">
+    <button type="button" data-seq-action="start">시작</button>
+    <button type="button" data-seq-action="previous">이전</button>
+    <button type="button" data-seq-action="next">다음</button>
+    <button type="button" data-seq-action="pause">일시정지</button>
+    <button type="button" data-seq-action="reset">초기화</button>
+  </div>
+</div>`;
+
+const REACT_NEXT = `<div class="slide op-slide op-rn" data-react-scene="parts">
+  <div class="op-eyebrow">FRAMEWORK · REACT / NEXT.JS</div>
+  <h2 class="op-title">React·Next.js — React는 <span class="g">화면 부품</span>을 만들고, Next.js는 부품을 <span class="a">실제 주소</span>에 올립니다</h2>
+  <div class="op-rn-workbench">
+    <section class="op-rn-library" aria-label="React 컴포넌트 라이브러리">
+      <div class="op-rn-window-head"><span>src/components</span><b>3 reusable parts</b></div>
+      <button type="button" class="op-rn-part active" data-react-stage="parts"><code>Header.tsx</code><span class="rn-nav"><i></i><i></i><i></i></span><small>공통 메뉴</small></button>
+      <button type="button" class="op-rn-part" data-react-stage="parts"><code>SpaceCard.tsx</code><span class="rn-card"><i></i><b>작업 공간</b><em>129,000원</em></span><small>반복 카드</small></button>
+      <button type="button" class="op-rn-part" data-react-stage="parts"><code>ReserveButton.tsx</code><span class="rn-button">예약하기</span><small>공통 행동</small></button>
+    </section>
+    <div class="op-rn-route" aria-hidden="true"><span>import</span><i></i><b>assemble</b></div>
+    <section class="op-rn-page" aria-label="Next.js 주소와 페이지">
+      <div class="op-rn-window-head"><span>app/reserve/page.tsx</span><b>route</b></div>
+      <pre><i>01</i><span class="kw">import</span> { Header } <span class="kw">from</span> <em>"@/components"</em>;
+<i>02</i><span class="kw">export default function</span> Page() {
+<i>03</i>  <span class="kw">return</span> &lt;<b>ReservePage</b> /&gt;;
+<i>04</i>}</pre>
+      <div class="op-rn-route-chip"><span>/reserve</span><i></i><b>page.tsx</b></div>
+    </section>
+    <div class="op-rn-route op-rn-route-live" aria-hidden="true"><span>render</span><i></i><b>live</b></div>
+    <section class="op-rn-browser" aria-label="브라우저의 실제 예약 화면">
+      <div class="op-bchrome"><i></i><i></i><i></i><small>class-project.vercel.app/reserve</small><b>LIVE</b></div>
+      <div class="op-rn-browser-body">
+        <nav><strong>VIBE SPACE</strong><span>공간</span><span>예약</span><span>내 기록</span></nav>
+        <article><small>JUNE 2026 · SEOUL</small><h3>집중할 수 있는<br>작업 공간</h3><p>원하는 시간과 좌석을 선택해 바로 예약합니다.</p><button type="button">자리 확인</button></article>
+        <div class="op-rn-browser-cards"><span><i></i><b>Studio A</b><small>오늘 3자리</small></span><span><i></i><b>Quiet Room</b><small>오늘 1자리</small></span></div>
+      </div>
+    </section>
+  </div>
+  <div class="op-rn-console"><span>React · 부품을 한 번 만들고 여러 화면에서 재사용</span><span>Next.js · <b>/reserve</b> 주소와 페이지, build를 연결</span></div>
+  <div class="op-rn-controls" aria-label="React Next 설명 단계"><button type="button" class="active" data-react-stage="parts">부품</button><button type="button" data-react-stage="route">주소</button><button type="button" data-react-stage="live">화면</button></div>
+  <p class="op-cap">한 줄: <b>React는 화면 조각, Next.js는 그 조각을 주소와 서비스로 묶는 틀</b>입니다. <span class="op-source-cue">React·Next 공식 문서 기준 확인</span></p>
 </div>`;
 
 const UI_UX = `<div class="slide op-slide">
@@ -184,15 +220,12 @@ const ANIM = `<div class="slide op-slide">
 const BACKEND = `<div class="slide op-slide op-api">
   <div class="op-eyebrow">CONCEPT · BACKEND ROUND TRIP</div>
   <h2 class="op-title">백엔드 — 로그인은 <span class="g">뒤에서 이렇게 처리</span>됩니다</h2>
-  <div class="op-api-stage">
-    <div class="op-phone"><div class="ph-top">로그인</div><div class="ph-body lg"><span class="lg-f">아이디</span><span class="lg-f">••••••••</span><span class="mk-btn">로그인</span></div></div>
-    <div class="op-wire">
-      <div class="op-wlabel req">서버: 비밀번호 확인 → DB: 회원 조회</div>
-      <div class="op-wtrack"><span class="op-packet"></span></div>
-      <div class="op-wlabel res">응답: 로그인 성공 ✓</div>
-    </div>
-    <div class="op-cloud"><b>서버 · DB</b><span>처리·판단</span></div>
-  </div>
+  ${sequence([
+    { title: '화면', detail: '브라우저에서 로그인 버튼을 누릅니다.' },
+    { title: '처리', detail: '서버가 비밀번호와 권한을 확인합니다.' },
+    { title: '저장', detail: 'DB에서 회원 기록과 상태를 조회합니다.' },
+    { title: '응답', detail: '브라우저에 로그인 결과가 돌아옵니다.' },
+  ])}
   <p class="op-cap">눈에 안 보이지만 <b>요청을 받아 확인·처리하고 결과를 돌려주는</b> 곳이 백엔드입니다.</p>
 </div>`;
 
@@ -214,28 +247,24 @@ const DB = `<div class="slide op-slide">
 const API = `<div class="slide op-slide op-api">
   <div class="op-eyebrow">CONCEPT · SERVICE CONNECTION (API)</div>
   <h2 class="op-title">API — 내 서비스가 <span class="g">다른 서비스에 부탁</span>하는 창구</h2>
-  <div class="op-api-stage">
-    <div class="op-phone"><div class="ph-top">내 날씨 앱</div><div class="ph-body"><div class="ph-temp">23°</div><div class="ph-city">서울 · 맑음</div></div></div>
-    <div class="op-wire">
-      <div class="op-wlabel req">GET /weather?city=seoul</div>
-      <div class="op-wtrack"><span class="op-packet"></span></div>
-      <div class="op-wlabel res">{ "temp": 23, "sky": "맑음" }</div>
-    </div>
-    <div class="op-cloud"><b>날씨 API</b><span>외부 서비스</span></div>
-  </div>
+  ${sequence([
+    { title: '요청', detail: '내 날씨 앱이 서울 날씨를 요청합니다.' },
+    { title: '전달', detail: 'API 주소와 약속된 형식으로 요청을 보냅니다.' },
+    { title: '외부 서비스', detail: '날씨 서비스가 최신 데이터를 찾습니다.' },
+    { title: '표시', detail: '받은 결과를 내 화면에 보여줍니다.' },
+  ])}
   <p class="op-cap">날씨를 직접 재지 않고, <b>이미 있는 날씨 API에 요청해 결과를 받아</b> 화면에 보여줍니다.</p>
 </div>`;
 
 const RELEASE = `<div class="slide op-slide">
   <div class="op-eyebrow">OPERATION · RELEASE</div>
   <h2 class="op-title">검증한 버전을 <span class="g">기준점(태그)</span>으로 공개</h2>
-  <div class="op-pipe">
-    <div class="pipe-step p1">빌드<span>결과물</span></div>
-    <div class="pipe-step p2">검증 ✓<span>정상 확인</span></div>
-    <div class="pipe-step p3">v1.0 태그<span>기준점</span></div>
-    <div class="pipe-step p4 live">공개<span>배포</span></div>
-    <div class="pipe-beam"></div>
-  </div>
+  ${sequence([
+    { title: '기준점', detail: '검증한 commit을 v1.0 release로 고정합니다.' },
+    { title: '빌드', detail: 'Vercel이 같은 소스에서 공개용 결과물을 만듭니다.' },
+    { title: '연결', detail: '환경변수와 Firebase 권한 규칙을 확인합니다.' },
+    { title: '공개', detail: '사용자가 접속할 production URL을 엽니다.' },
+  ])}
   <div class="op-rel-card"><b>GitHub Release · v1.0</b> — 검증됨 · 체크섬 · 되돌릴 수 있는 기준점</div>
   <p class="op-cap">아무 때나가 아니라 <b>검증된 시점을 기준점으로 묶어</b> 공개합니다.</p>
 </div>`;
@@ -257,7 +286,6 @@ const LAUNCH = `<div class="slide op-slide">
 
 // scope:n keys map to the reused slide that gets replaced (override) or followed (insert).
 const OVERRIDES = {
-  'src-s3:5': UI_UX, 'src-s3:6': ANIM, 'src-s3:7': BACKEND, 'src-s3:8': DB, 'src-s3:9': API,
   'src-s5:10': RELEASE, 'src-s5:11': LAUNCH,
 };
 const INSERTS = { 'src-s4:7': REACT_NEXT };
@@ -266,7 +294,7 @@ const styleBlocks = [];
 const slideBlocks = [];
 for (const src of SOURCES) {
   const html = read(src.file);
-  styleBlocks.push(`/* ===== ${src.label} (${src.file}) ===== */\n${scopeCss(extractStyle(html), src.scope)}`);
+  styleBlocks.push(`/* ===== ${src.label} (${src.file}) ===== */\n${scopeCss(extractStyle(html, src.file), src.scope)}`);
   const slides = extractSlides(html);
   for (const n of src.pick) {
     const key = `${src.scope}:${n}`;
@@ -280,6 +308,74 @@ for (const src of SOURCES) {
     if (INSERTS[key]) slideBlocks.push(INSERTS[key]);
   }
 }
+
+// The source sessions are authored for a full-height standalone window. Onepass keeps
+// a permanent navigation rail, so only the two dense Session 05 documentary scenes get
+// a small, scoped height adjustment at projector height.
+const onepassSourceTightening = `
+/* Week 1 keeps source scenes intact but gives the two AI workbenches enough projector scale. */
+.src-s2 .slide:has(.ide-tour-sim),
+.src-s2 .slide:has(.ai-chat-sim){padding:clamp(18px,2.6vh,34px) clamp(38px,4.7vw,74px);}
+.src-s2 .slide:has(.ide-tour-sim) h2,
+.src-s2 .slide:has(.ai-chat-sim) h2{font-size:clamp(28px,3vw,46px);line-height:1.12;margin-bottom:10px;}
+.src-s2 .slide:has(.ide-tour-sim) .edu-sim,
+.src-s2 .slide:has(.ai-chat-sim) .edu-sim{width:min(100%,1220px);margin-inline:auto;}
+.src-s2 .ide-tour-sim .idt-panel{padding:clamp(15px,1.7vw,24px);}
+.src-s2 .ide-tour-sim .ide-main-row{grid-template-columns:52px 208px minmax(0,1fr) 228px;min-height:286px;}
+.src-s2 .ide-tour-sim .ide-titlebar{height:36px;padding-inline:18px;}
+.src-s2 .ide-tour-sim .ide-menubar{height:31px;padding-inline:16px;}
+.src-s2 .ide-tour-sim .ide-act-ico{width:42px;height:39px;font-size:16px;}
+.src-s2 .ide-tour-sim .ide-tree-item,.src-s2 .ide-tour-sim .ide-sr-file{font-size:11px;padding-block:4px;}
+.src-s2 .ide-tour-sim .ide-code,.src-s2 .ide-tour-sim .ide-term-body{font-size:clamp(10px,.88vw,14px);line-height:1.65;}
+.src-s2 .ide-tour-sim .ide-ac-msg{font-size:clamp(10px,.82vw,13px);padding:8px 10px;}
+.src-s2 .ide-tour-sim .edu-btn{min-height:36px;padding-inline:14px;font-size:12px;}
+.src-s2 .ai-chat-sim .ai-chat-panel{padding:clamp(18px,2.2vw,30px);}
+.src-s2 .ai-chat-sim .ai-chat-layout{gap:18px;}
+.src-s2 .ai-chat-sim .ai-chat-window,.src-s2 .ai-chat-sim .ai-code-window,.src-s2 .ai-chat-sim .ai-preview{min-height:368px;border-radius:16px;}
+.src-s2 .ai-chat-sim .ai-message{font-size:clamp(12px,.96vw,15px);padding:12px 14px;}
+.src-s2 .ai-chat-sim .ai-file-list span,.src-s2 .ai-chat-sim .ai-code-window pre{font-size:clamp(11px,.9vw,14px);line-height:1.72;}
+.src-s2 .ai-chat-sim .edu-btn{min-height:38px;padding-inline:15px;font-size:12px;}
+/* Preserve the documentary scenes from 3강, then lift the evidence surface instead of replacing it. */
+.src-s3 .slide:has(#ux-race) .ux-race,.src-s3 .slide:has(#animation-preview) .animation-lab,.src-s3 .slide:has(#order-journey) .order-journey,.src-s3 .slide:has(#warehouse-scene) .warehouse-scene,.src-s3 .slide:has(#api-stage) .api-stage{box-shadow:0 28px 68px rgba(0,0,0,.28);}
+.src-s3 .slide:has(#ux-race) .ux-race,.src-s3 .slide:has(#animation-preview) .animation-lab{transform:scale(1.025);transform-origin:center;}
+.src-s3 .slide:has(#order-journey) .journey-stage,.src-s3 .slide:has(#warehouse-scene) .warehouse-stage{min-height:clamp(410px,58vh,620px);}
+@media (max-height:720px){
+  .src-s2 .slide{padding-top:calc(4% - 3px);padding-bottom:calc(4% - 3px);}
+  .src-s2 .slide.cover{padding-top:2%;padding-bottom:2%;}
+  .src-s2 .slide.cover h1{font-size:clamp(32px,4.7vw,70px);margin-bottom:14px;}
+  .src-s2 .slide.cover .deck-meta,.src-s2 .slide.cover .lead{margin-bottom:10px;}
+  .src-s5 #github-record-slide .github-documentary{height:calc(100% - 228px);margin-top:8px}
+  .src-s5 #github-record-slide .record-legend{margin-top:6px}
+  .src-s5 #devtools-slide .devtools-documentary{height:calc(100% - 198px);margin-top:8px}
+  .src-s2 .slide:has(.ide-tour-sim),.src-s2 .slide:has(.ai-chat-sim){padding:13px 36px}
+  .src-s2 .ide-tour-sim .ide-main-row{height:240px;min-height:240px!important;}
+  .src-s2 .slide:has(.ide-tour-sim) h2{font-size:clamp(26px,2.7vw,40px);}
+  .src-s2 .ide-tour-sim .idt-panel{padding:12px;}
+  .src-s2 .ide-tour-sim .idt-header{margin-bottom:6px;}
+  .src-s2 .ide-tour-sim .idt-strip{padding:8px 10px;gap:6px;}
+  .src-s2 .ide-tour-sim .idt-strip-body{gap:7px;}
+  .src-s2 .ide-tour-sim .idt-strip-nav{gap:7px;}
+  .src-s2 .ai-chat-sim .ai-chat-panel{padding:12px 16px;}
+  .src-s2 .ai-chat-sim .ai-chat-head{margin-bottom:8px;}
+  .src-s2 .ai-chat-sim .ai-chat-window,.src-s2 .ai-chat-sim .ai-code-window,.src-s2 .ai-chat-sim .ai-preview{min-height:270px;}
+  .src-s2 .ai-chat-sim .ai-message{margin-bottom:6px;padding:9px 11px;}
+  .op-rn-workbench{min-height:250px;}
+  .op-rn-library,.op-rn-page,.op-rn-browser{min-height:240px;}
+  .op-rn-page pre{padding:15px 14px;line-height:1.64;}
+  .op-rn-browser-body{padding:11px 13px 12px;}
+  .op-rn-browser-body article{padding:15px 0 11px;}
+  .op-rn-browser-body article h3{margin-block:5px;font-size:22px;}
+  .op-rn-console{margin-top:5px;padding:7px 10px;}
+  .op-rn-controls{margin-top:5px;}
+  .op-rn{zoom:.96;width:104.17%;}
+  .src-s4 .slide:has(#root-tree) .root-layout{gap:14px;}
+  .src-s4 .slide:has(#root-tree) .content.root-layout{zoom:.92;width:108.7%;}
+  .src-s4 .slide:has(#root-tree) .tree-shell{grid-template-rows:40px minmax(0,1fr);}
+  .src-s4 .slide:has(#root-tree) .window-bar{padding-inline:12px;font-size:12px;}
+  .src-s4 .slide:has(#root-tree) .file-tree{padding:10px 12px;}
+  .src-s4 .slide:has(#root-tree) .file-tree.root-siblings{gap:4px;}
+  .src-s4 .slide:has(#root-tree) .tree-row{min-height:34px;padding-block:3px;font-size:14px;}
+}`;
 
 const cover = `<div class="src-scope src-s2"><div class="slide cover active">
   <div class="deco-grid"></div><div class="deco-orb deco-orb-1"></div><div class="deco-orb deco-orb-2"></div>
@@ -307,10 +403,9 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#070b11;col
 .src-scope{display:contents}
 .app .deck .slide{position:absolute;inset:0;overflow-y:auto}
 .app .deck .slide:not(.active){display:none!important}
-.app .deck .slide.active{display:flex!important;flex-direction:column;opacity:1!important;transform:none!important;pointer-events:all!important;transition:none!important;animation:none!important}
-/* entrance animations on REUSED content use both-fill (start opacity:0); force visible.
-   op-slides (custom 고도화) keep their intentional animations. */
-.app .deck .slide.active:not(.op-slide) *{animation:none!important;opacity:1!important}
+.app .deck .slide.active{display:flex!important;flex-direction:column;opacity:1!important;transform:none!important;pointer-events:all!important;transition:none!important}
+/* Reused source scenes own their motion. Do not globally freeze descendants here:
+   their visual state is the teaching material, not decorative entrance motion. */
 .app .deck .slide.cover{justify-content:center}
 /* op-enhanced (고도화): clean visual-first custom slides */
 .op-slide{padding:clamp(30px,4.2vw,64px) clamp(40px,6vw,96px)!important;gap:18px;justify-content:center}
@@ -348,25 +443,20 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#070b11;col
 .op-url{align-self:flex-start;padding:9px 16px;border:1px solid rgba(52,211,153,.4);border-radius:8px;background:rgba(52,211,153,.08);color:#34d399;font:800 14px ui-monospace,monospace}
 .op-check ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}
 .op-check li{color:#d9e3e6;font-size:clamp(14px,1.4vw,18px)}
-/* elevated React/Next — realistic mockups + build animation */
-.op-rn-stage{display:flex;align-items:center;gap:clamp(14px,2vw,30px)}
-.op-rn-parts{display:grid;gap:9px}
-.op-comp{display:flex;align-items:center;gap:12px;padding:10px 13px;border:1px solid rgba(255,255,255,.12);border-radius:10px;background:rgba(255,255,255,.03)}
-.op-comp code{color:#7dd3fc;font:800 12px ui-monospace,SFMono-Regular,monospace;min-width:80px}
-.mk-nav{display:flex;gap:5px;width:118px}.mk-nav i{flex:1;height:8px;border-radius:3px;background:rgba(255,255,255,.24)}
-.mk-card{width:118px;display:grid;gap:4px}.mk-img{height:24px;border-radius:5px;background:linear-gradient(120deg,#34d399,#60a5fa)}.mk-l{height:6px;border-radius:3px;background:rgba(255,255,255,.22)}.mk-l.s{width:60%}
-.mk-btn{display:inline-block;padding:6px 14px;border-radius:7px;background:#1c7d5e;color:#fff;font:800 12px ui-monospace,monospace}
-.op-rn-arrow{display:flex;flex-direction:column;align-items:center;color:#6b7a85;font:800 16px ui-monospace,monospace}.op-rn-arrow span{font-size:10px;letter-spacing:.1em}
-.op-browser{flex:1;max-width:430px;border:1px solid rgba(255,255,255,.16);border-radius:12px;overflow:hidden;background:#0c1320;box-shadow:0 30px 60px -24px rgba(0,0,0,.72)}
-.op-bchrome{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#172230;border-bottom:1px solid rgba(255,255,255,.08)}
-.op-bchrome i{width:9px;height:9px;border-radius:50%;background:#46505c}.op-bchrome i:nth-child(1){background:#ed6a5e}.op-bchrome i:nth-child(2){background:#f4bf4f}.op-bchrome i:nth-child(3){background:#61c554}
-.op-bchrome small{margin-left:6px;color:#9fb0bd;font:700 11px ui-monospace,monospace}
-.op-bbody{padding:18px;display:grid;gap:13px;min-height:172px;align-content:start}
-.op-bbody .bd{opacity:0;animation:rnBuild 4.8s ease infinite}
-.op-bbody .b1{animation-delay:.2s}.op-bbody .b2{animation-delay:1s}.op-bbody .b3{animation-delay:1.8s}
-.op-bbody .mk-nav,.op-bbody .mk-card{width:auto}
-@keyframes rnBuild{0%,3%{opacity:0;transform:translateY(9px)}11%,88%{opacity:1;transform:none}97%,100%{opacity:0;transform:translateY(-4px)}}
-.op-rn-next{margin-top:8px;padding:11px 16px;border-left:3px solid #fbbf24;background:rgba(251,191,36,.08);border-radius:0 8px 8px 0;color:#d9e3e6;font-size:14px}.op-rn-next b{color:#fbbf24}
+/* elevated React/Next — a real project assembly desk, not an abstract diagram */
+.op-rn-workbench{display:grid;grid-template-columns:minmax(205px,.8fr) 70px minmax(230px,.95fr) 70px minmax(300px,1.12fr);align-items:center;gap:clamp(8px,1.15vw,18px);min-height:310px}
+.op-rn-library,.op-rn-page,.op-rn-browser{min-height:300px;border:1px solid rgba(224,235,240,.16);border-radius:12px;overflow:hidden;background:#101820;box-shadow:0 30px 70px -42px rgba(0,0,0,.9)}
+.op-rn-window-head{display:flex;align-items:center;justify-content:space-between;min-height:36px;padding:0 12px;border-bottom:1px solid rgba(224,235,240,.12);background:#131e28;color:#aab7bc;font:700 10px ui-monospace,SFMono-Regular,monospace;letter-spacing:.03em}.op-rn-window-head b{color:#37d4c1;font-size:9px;letter-spacing:.08em}
+.op-rn-library{display:grid;grid-template-rows:auto repeat(3,1fr);gap:0}.op-rn-part{position:relative;display:grid;grid-template-columns:1fr;align-content:center;gap:8px;margin:0;padding:13px 14px;border:0;border-bottom:1px solid rgba(224,235,240,.09);background:transparent;color:#eaf2f6;text-align:left;cursor:pointer;transition:background 180ms ease,transform 180ms ease}.op-rn-part:last-child{border-bottom:0}.op-rn-part:hover,.op-rn-part.active{background:rgba(55,212,193,.08)}.op-rn-part.active{box-shadow:inset 3px 0 #37d4c1}.op-rn-part:focus-visible,.op-rn-controls button:focus-visible{outline:2px solid #f5b951;outline-offset:-2px}.op-rn-part code{color:#9cc4ff;font:800 11px ui-monospace,SFMono-Regular,monospace}.op-rn-part small{color:#aab7bc;font-size:11px}
+.rn-nav{display:flex;gap:5px}.rn-nav i{height:7px;flex:1;border-radius:2px;background:rgba(224,235,240,.3)}.rn-nav i:first-child{background:#37d4c1}.rn-card{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:7px;color:#dce7eb;font-size:10px}.rn-card i{width:34px;height:24px;border-radius:4px;background:linear-gradient(135deg,#194652,#283c70)}.rn-card em{color:#f5b951;font-style:normal}.rn-button{width:max-content;padding:6px 11px;border-radius:5px;background:#277d72;color:#fff;font:800 10px Pretendard,sans-serif}
+.op-rn-route{position:relative;display:grid;place-items:center;gap:7px;color:#aab7bc;font:800 10px ui-monospace,SFMono-Regular,monospace;letter-spacing:.04em}.op-rn-route i{position:relative;display:block;width:100%;height:1px;background:rgba(55,212,193,.45);overflow:hidden}.op-rn-route i::after{content:"";position:absolute;top:50%;left:0;width:10px;height:10px;border-radius:50%;background:#37d4c1;box-shadow:0 0 14px rgba(55,212,193,.8);transform:translateY(-50%);animation:rnPacket 2.8s ease-in-out infinite}.op-rn-route b{color:#37d4c1;font-size:9px}.op-rn-route-live i{background:rgba(245,185,81,.45)}.op-rn-route-live i::after{background:#f5b951;box-shadow:0 0 14px rgba(245,185,81,.8);animation-delay:.65s}.op-rn-route-live b{color:#f5b951}@keyframes rnPacket{0%,12%{left:0;opacity:0}24%,72%{opacity:1}88%,100%{left:calc(100% - 10px);opacity:0}}
+.op-rn-page{display:grid;grid-template-rows:auto 1fr auto}.op-rn-page pre{margin:0;padding:22px 16px;overflow:hidden;color:#cad7df;font:12px/1.8 ui-monospace,SFMono-Regular,monospace;white-space:pre-wrap}.op-rn-page pre i{display:inline-block;width:24px;color:#58707c;font-style:normal}.op-rn-page pre .kw{color:#9cc4ff}.op-rn-page pre em{color:#f5b951;font-style:normal}.op-rn-page pre b{color:#37d4c1}.op-rn-route-chip{display:flex;align-items:center;gap:7px;margin:0 14px 16px;padding:8px 10px;border:1px solid rgba(55,212,193,.28);border-radius:6px;background:rgba(55,212,193,.06);color:#37d4c1;font:800 10px ui-monospace,SFMono-Regular,monospace}.op-rn-route-chip i{width:14px;height:1px;background:#37d4c1}.op-rn-route-chip b{color:#eaf2f6}
+.op-rn-browser{background:#f4f7f8;color:#14202a}.op-bchrome{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#dfe6ea;border-bottom:1px solid #ccd7dc}.op-bchrome i{width:9px;height:9px;border-radius:50%;background:#9eaeb7}.op-bchrome i:nth-child(1){background:#ed6a5e}.op-bchrome i:nth-child(2){background:#f4bf4f}.op-bchrome i:nth-child(3){background:#61c554}.op-bchrome small{margin-left:6px;overflow:hidden;color:#667981;font:700 10px ui-monospace,SFMono-Regular,monospace;text-overflow:ellipsis;white-space:nowrap}.op-bchrome b{margin-left:auto;color:#137266;font:800 9px ui-monospace,SFMono-Regular,monospace;letter-spacing:.05em}
+.op-rn-browser-body{padding:14px 15px 15px}.op-rn-browser-body nav{display:flex;align-items:center;gap:13px;color:#6a7b84;font-size:10px}.op-rn-browser-body nav strong{margin-right:auto;color:#14202a;font-size:12px;letter-spacing:.04em}.op-rn-browser-body article{padding:22px 0 15px;border-bottom:1px solid #d7e0e3}.op-rn-browser-body article small{color:#637680;font:700 9px ui-monospace,SFMono-Regular,monospace;letter-spacing:.07em}.op-rn-browser-body article h3{margin:7px 0;color:#14202a;font-size:clamp(20px,1.9vw,28px);line-height:1.12;letter-spacing:0}.op-rn-browser-body article p{margin:0 0 13px;color:#62747d;font-size:11px;line-height:1.55}.op-rn-browser-body article button{border:0;border-radius:5px;padding:9px 12px;background:#137266;color:#fff;font:800 11px Pretendard,sans-serif;cursor:pointer;transition:transform 180ms ease,background 180ms ease}.op-rn-browser-body article button:hover{background:#0d6258;transform:scale(1.02)}.op-rn-browser-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-top:13px}.op-rn-browser-cards span{display:grid;grid-template-columns:20px 1fr;gap:3px 7px;padding:8px;border:1px solid #d7e0e3;border-radius:6px;background:#fff}.op-rn-browser-cards i{grid-row:span 2;width:20px;height:20px;border-radius:4px;background:#b6d5cb}.op-rn-browser-cards b{font-size:10px}.op-rn-browser-cards small{color:#698078;font-size:9px}
+.op-rn-console{display:flex;justify-content:space-between;gap:18px;margin-top:12px;padding:10px 13px;border-left:2px solid #37d4c1;background:rgba(55,212,193,.06);color:#b7c6cb;font-size:12px;line-height:1.4}.op-rn-console b{color:#f5b951}.op-rn-controls{display:flex;justify-content:center;gap:7px;margin-top:10px}.op-rn-controls button{min-width:74px;border:1px solid rgba(224,235,240,.16);border-radius:5px;padding:7px 10px;background:#131e28;color:#aab7bc;font:700 11px Pretendard,sans-serif;cursor:pointer;transition:background 180ms ease,transform 180ms ease,color 180ms ease}.op-rn-controls button:hover{transform:translateY(-1px);background:#1a2b35}.op-rn-controls button.active{border-color:rgba(55,212,193,.62);background:rgba(55,212,193,.12);color:#eaf2f6}
+.op-rn[data-react-scene="route"] .op-rn-page{box-shadow:0 0 0 1px rgba(55,212,193,.7),0 20px 60px -32px rgba(55,212,193,.5)}.op-rn[data-react-scene="live"] .op-rn-browser{box-shadow:0 0 0 1px rgba(245,185,81,.7),0 20px 60px -32px rgba(245,185,81,.5)}.op-rn[data-react-scene="parts"] .op-rn-library{box-shadow:0 0 0 1px rgba(55,212,193,.7),0 20px 60px -32px rgba(55,212,193,.5)}
+@media(max-width:1040px){.op-rn-workbench{grid-template-columns:minmax(180px,.85fr) 42px minmax(200px,1fr) 42px minmax(260px,1.1fr)}.op-rn-browser-body article h3{font-size:20px}.op-rn-console{font-size:11px}}
+.op-source-cue{display:inline-block;margin-left:8px;color:#90a2ab;font:700 10px ui-monospace,SFMono-Regular,monospace;letter-spacing:.04em}
 /* elevated API — phone mockup + request/response packet */
 .op-api-stage{display:flex;align-items:center;gap:clamp(16px,3vw,46px);justify-content:center;padding:6px 0}
 .op-phone{width:142px;border:2px solid rgba(255,255,255,.18);border-radius:22px;overflow:hidden;background:#0a1118;box-shadow:0 26px 52px -20px rgba(0,0,0,.72)}
@@ -432,6 +522,15 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#070b11;col
 .pipe-beam{position:absolute;left:0;top:50%;height:3px;width:0;border-radius:3px;background:linear-gradient(90deg,#fbbf24,#34d399);z-index:1;animation:pipeBeam 4.4s ease-in-out infinite}
 @keyframes pipeBeam{0%,7%{width:0}82%,100%{width:100%}}
 .op-rel-card{margin-top:8px;padding:12px 16px;border:1px solid rgba(52,211,153,.3);border-radius:10px;background:rgba(52,211,153,.06);color:#d9e3e6;font-size:14px}.op-rel-card b{color:#34d399}
+/* Manual explanation scene: state advances only when the presenter chooses. */
+.op-seq{width:min(100%,980px);border:1px solid rgba(255,255,255,.15);border-radius:14px;overflow:hidden;background:#0b121b;box-shadow:0 22px 48px -30px rgba(0,0,0,.85)}
+.op-seq-rail{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border-bottom:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.08)}.op-seq-rail span{min-height:56px;padding:11px 13px;background:#101820;color:#71818a;display:grid;gap:4px;align-content:center}.op-seq-rail i{font:700 9px ui-monospace,Consolas,monospace;font-style:normal;letter-spacing:.08em}.op-seq-rail b{font-size:12px}.op-seq-rail span.is-active{background:rgba(52,211,153,.1);color:#75e7bb}.op-seq-rail span.is-complete{color:#b5cfca}
+.op-seq-stage{min-height:170px;display:grid;place-items:center;padding:26px;background:radial-gradient(circle at 15% 20%,rgba(52,211,153,.12),transparent 40%),#0b121b}
+.op-seq-step{display:none;max-width:580px;text-align:center;animation:opSeqIn .38s cubic-bezier(.16,1,.3,1)}
+.op-seq-step.is-active{display:grid;gap:9px}.op-seq-step strong{color:#34d399;font:800 clamp(22px,2.5vw,34px)/1 Pretendard,"Malgun Gothic",sans-serif}.op-seq-step span{color:#d7e2e5;font-size:clamp(14px,1.5vw,18px);line-height:1.5}
+.op-seq-controls{display:flex;gap:8px;justify-content:flex-end;padding:10px 12px;border-top:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.025)}
+.op-seq-controls button{min-height:32px;padding:0 11px;border:1px solid rgba(255,255,255,.17);border-radius:6px;background:#121d28;color:#dce8eb;font:700 12px Pretendard,"Malgun Gothic",sans-serif;cursor:pointer;transition:transform .15s ease,background .15s ease}.op-seq-controls button:hover{transform:translateY(-1px);background:#1a2a38}.op-seq-controls button:first-child{border-color:rgba(52,211,153,.45);color:#69e8b8}
+@keyframes opSeqIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 /* LAUNCH — live URL + animated checklist */
 .op-launch{display:flex;align-items:center;gap:clamp(18px,3vw,44px)}
 .op-launch .op-browser{flex:0 0 auto;width:300px}
@@ -455,9 +554,10 @@ const html = `<!doctype html>
 ${chrome}
 
 ${styleBlocks.join('\n\n')}
+${onepassSourceTightening}
 </style>
 </head>
-<body>
+<body data-onepass-mode="lecture">
 <div class="app">
   <nav class="nav-bar">
     <span class="nav-title">AI 한방 이해하기 · 1주차 · 바이브코딩의 원리</span>
@@ -483,8 +583,10 @@ document.querySelectorAll('.card[data-hl]').forEach(function(c){c.addEventListen
 document.querySelectorAll('.workbench-node[data-step]').forEach(function(node){node.addEventListener('click',function(){var all=node.closest('.vibe-workbench').querySelectorAll('[data-step]');var was=node.classList.contains('is-live');all.forEach(function(i){i.classList.remove('is-live');});if(!was)node.classList.add('is-live');});});
 document.querySelectorAll('.visual-loop .ln').forEach(function(node){node.addEventListener('click',function(){var all=node.closest('.visual-loop').querySelectorAll('.ln');var was=node.classList.contains('is-active');all.forEach(function(n){n.classList.remove('is-active');});if(!was)node.classList.add('is-active');});});
 document.querySelectorAll('.check-item[data-check]').forEach(function(item){item.addEventListener('click',function(){item.classList.toggle('done');var ind=item.querySelector('.check-indicator');if(ind)ind.textContent=item.classList.contains('done')?'✓':'';});});
+document.addEventListener('click',function(event){var button=event.target.closest('[data-seq-action]');if(!button)return;var scene=button.closest('.op-seq');if(!scene)return;var action=button.dataset.seqAction;if(action==='pause'){var paused=scene.dataset.seqPaused==='true';scene.dataset.seqPaused=paused?'false':'true';button.textContent=paused?'일시정지':'계속';return;}if(scene.dataset.seqPaused==='true')return;var steps=[].slice.call(scene.querySelectorAll('[data-seq-step]'));var current=Number(scene.dataset.seqCurrent||0);if(action==='start')current=0;if(action==='previous')current=Math.max(0,current-1);if(action==='next')current=Math.min(steps.length-1,current+1);if(action==='reset'){current=0;scene.dataset.seqPaused='false';var pauseButton=scene.querySelector('[data-seq-action="pause"]');if(pauseButton)pauseButton.textContent='일시정지';}scene.dataset.seqCurrent=String(current);steps.forEach(function(step,index){step.classList.toggle('is-active',index===current);});scene.querySelectorAll('[data-seq-marker]').forEach(function(marker,index){marker.classList.toggle('is-active',index===current);marker.classList.toggle('is-complete',index<current);});});
 render();
 </script>
+<script type="module" src="../../renderer/onepass-week1-runtime.js"></script>
 </body>
 </html>
 `;

@@ -38,6 +38,8 @@ const state = {
   schedule: JSON.parse(localStorage.getItem('vibe-v3-schedule') || '{}'),
   revisionOverrides: JSON.parse(localStorage.getItem('vibe-v3-revision-overrides') || '{}'),
   revisionSelection: {},
+  lessonStep: JSON.parse(localStorage.getItem('vibe-v3-lesson-step') || '{}'),
+  libFilter: 'all',
   lowMotion: localStorage.getItem('vibe-v3-low-motion') === 'true',
   programNote: localStorage.getItem('vibe-v3-program-note') || '',
   commandIndex: 0,
@@ -51,6 +53,18 @@ const $$ = (selector) => [...document.querySelectorAll(selector)];
 const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (character) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 }[character]));
+
+function lineIcon(name) {
+  const icons = {
+    play: '<path d="M8 5v14l11-7z"></path>',
+    script: '<path d="M7 4h8l4 4v12H7z"></path><path d="M15 4v5h5"></path><path d="M10 13h7"></path><path d="M10 16h5"></path>',
+    print: '<path d="M7 9V4h10v5"></path><path d="M6 14H5a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1"></path><path d="M7 13h10v7H7z"></path>',
+    source: '<path d="M12 4v16"></path><path d="M5 8h14"></path><path d="M5 16h14"></path><path d="M8 4c-2 3-2 13 0 16"></path><path d="M16 4c2 3 2 13 0 16"></path>',
+    library: '<path d="M4 6h6v14H4z"></path><path d="M14 4h6v16h-6z"></path><path d="M7 9h0"></path><path d="M17 8h0"></path>',
+    note: '<path d="M6 4h12v16H6z"></path><path d="M9 8h6"></path><path d="M9 12h6"></path><path d="M9 16h4"></path>',
+  };
+  return `<svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">${icons[name] || icons.note}</svg>`;
+}
 
 function persist(key, value) {
   localStorage.setItem(key, typeof value === 'string' ? value : JSON.stringify(value));
@@ -142,16 +156,19 @@ function renderStudio() {
   const course = getCourse();
   setAccent(course);
   renderCourseRail();
+  // Navigation reduced to two modes. Official source study notes are now part of the course library.
+  const validTabs = ['lessons', 'library'];
+  if (!validTabs.includes(state.tab)) {
+    state.tab = ['instructor', 'student', 'labs', 'sources'].includes(state.tab) ? 'library' : 'lessons';
+  }
   $('#course-kicker').textContent = `${course.code} · ${course.track || course.family}`;
   $('#course-title').textContent = course.title;
   $('#course-route').textContent = course.route;
   $('#detail-course-code').textContent = course.code;
   $$('#course-tabs button').forEach((button) => button.classList.toggle('active', button.dataset.tab === state.tab));
 
-  if (state.tab === 'lessons') renderLessons(course);
-  else if (state.tab === 'labs') renderLabs(course);
-  else if (state.tab === 'sources') renderSources(course);
-  else renderMaterials(course, state.tab);
+  if (state.tab === 'library') renderLibrary(course);
+  else renderLessons(course);
 }
 
 function renderLessons(course) {
@@ -190,10 +207,69 @@ function renderLessons(course) {
   renderLessonDetail(course, sessions.find((session) => session.id === state.selectionId));
 }
 
+function courseProgress(course) {
+  const total = course.sessions?.length || 0;
+  const done = (course.sessions || []).filter((session) => state.completed.has(session.id)).length;
+  return { total, done, pct: total ? Math.round((done / total) * 100) : 0 };
+}
+
+function sessionSources(session) {
+  return (session.sourceKeys || [])
+    .map((key) => ({ key, source: state.sources?.sources?.[key] }))
+    .filter((item) => item.source);
+}
+
+function sessionRecovery(session) {
+  const drill = session.professional?.failureDrill || [];
+  const firstDrill = drill[0] || '';
+  const error = session.error || {};
+  return {
+    symptom: error.symptom || firstDrill || '현장 시연 또는 실습이 막히는 상황',
+    trace: error.trace || '로그·화면·권한·설정 중 첫 단서를 확인',
+    fix: error.fix || drill[drill.length - 1] || '오류를 복사해 AI에게 원인 분석을 맡기고, 수정 후 다시 실행',
+  };
+}
+
+const LESSON_STEPS = ['준비', '도입', '실습', 'Q&A', '마무리'];
+
+// Course-level materials, re-pointed for the current lesson. Instructor scripts
+// carry "N강" in their titles, so the matching lesson's 대본 is surfaced first.
+function lessonMaterials(course, lessonNo) {
+  const tag = (arr) => (arr || []).map((material) => ({ ...material, courseId: course.id, courseCode: course.code }));
+  const instructor = tag(course.materials?.instructor);
+  const student = tag(course.materials?.student);
+  const isLesson = (material) => material.title.includes(`${lessonNo}강`);
+  const byLesson = (arr) => [...arr].sort((a, b) => (isLesson(b) ? 1 : 0) - (isLesson(a) ? 1 : 0));
+  return {
+    instructor,
+    student,
+    instructorSorted: byLesson(instructor),
+    studentSorted: byLesson(student),
+    script: instructor.find(isLesson) || instructor.find((m) => m.title.includes('대본')) || instructor[0] || null,
+    print: student.find((m) => m.title.includes('워크북')) || student[0] || null,
+  };
+}
+
 function renderLessonDetail(course, session) {
   const index = course.sessions.findIndex((item) => item.id === session.id);
+  const lessonNo = index + 1;
   const selected = getSessionRevision(session);
   const revisions = session.revisions || [];
+  const progress = courseProgress(course);
+  const currentSchedule = state.schedule[course.id] || {};
+  const notePreview = state.programNote || currentSchedule.note || '오늘 수업에서 강조할 포인트와 현장 변수를 기록하세요.';
+  const sources = sessionSources(session);
+  const recovery = sessionRecovery(session);
+  const mats = lessonMaterials(course, lessonNo);
+  const preparation = session.preparation || ['개인 노트북', '현재 프로젝트'];
+  const deliverables = session.deliverables || ['수업 실습 결과'];
+  const cleanTitle = session.title.replace(/^\d+강\s*·\s*/, '');
+  const completed = state.completed.has(session.id);
+  const lastStep = LESSON_STEPS.length - 1;
+  const supplementMaterials = mats.studentSorted.filter(isSupplementMaterial);
+  // A completed lesson reads as "마무리"(last step); otherwise use the stored step.
+  const currentStep = completed ? lastStep : Math.min(lastStep, Math.max(0, state.lessonStep[session.id] ?? 0));
+
   const revisionControl = revisions.length > 1
     ? `
       <section class="revision-panel">
@@ -207,37 +283,137 @@ function renderLessonDetail(course, session) {
         <button id="btn-promote-revision" class="secondary-action" type="button">${selected.revisionId === selected.activeRevisionId ? '현재 활성본' : '이 버전을 운영본으로 승격'}</button>
       </section>`
     : '';
-  $('#detail-position').textContent = `LESSON ${String(index + 1).padStart(2, '0')} / ${String(course.sessions.length).padStart(2, '0')}`;
-  const preparation = session.preparation || ['개인 노트북', '현재 프로젝트'];
-  const deliverables = session.deliverables || ['수업 실습 결과'];
+
+  $('#detail-position').textContent = `LESSON ${String(lessonNo).padStart(2, '0')} / ${String(course.sessions.length).padStart(2, '0')}`;
+
+  const resourceItem = (attrs, icon, title, sub, disabled = false) => `
+    <button type="button" class="resource-item${disabled ? ' disabled' : ''}"${disabled ? ' disabled' : ` ${attrs}`}>
+      <i>${lineIcon(icon)}</i><span><b>${escapeHtml(title)}</b><small>${escapeHtml(sub)}</small></span><em>열기</em>
+    </button>`;
+
+  const resourceGroups = `
+    <div class="resource-group">
+      <h4>강의자료</h4>
+      ${resourceItem('data-res-deck', 'play', cleanTitle, '슬라이드 · 강의 실행')}
+    </div>
+    <div class="resource-group">
+      <h4>강사용 연구자료<button type="button" class="group-more" data-dashboard-tab="library">전체</button></h4>
+      ${mats.instructorSorted.slice(0, 3).map((m) => resourceItem(`data-res-material="${escapeHtml(m.id)}" data-res-audience="instructor"`, 'script', m.title, m.description)).join('') || '<p class="empty-state">아직 연결된 강사용 연구자료가 없습니다. 공식자료 요약에서 먼저 확인하세요.</p>'}
+    </div>
+    <div class="resource-group">
+      <h4>강의 보충자료<button type="button" class="group-more" data-dashboard-tab="library">전체</button></h4>
+      ${supplementMaterials.slice(0, 3).map((m) => resourceItem(`data-res-material="${escapeHtml(m.id)}" data-res-audience="student"`, 'print', m.title, m.description)).join('') || '<p class="empty-state">수강생에게 추가로 설명할 보충자료가 아직 없습니다.</p>'}
+    </div>
+    <div class="resource-group">
+      <h4>공식자료 요약<button type="button" class="group-more" data-dashboard-tab="library">전체</button></h4>
+      ${sources.slice(0, 4).map(({ key, source }) => resourceItem(`data-res-source="${escapeHtml(key)}"`, 'source', source.title, `${source.publisher} · ${source.maturity || 'study note'}`)).join('') || '<p class="empty-state">이 강의에 연결된 공식자료가 없습니다.</p>'}
+    </div>`;
+
   $('#detail-content').innerHTML = `
-    <div class="detail-hero">
-      <span class="detail-number">LESSON ${String(index + 1).padStart(2, '0')}</span>
-      <h2>${escapeHtml(session.title.replace(/^\d+강\s*·\s*/, ''))}</h2>
-      <p class="detail-subtitle">${escapeHtml(session.subtitle || '')}</p>
-    </div>
-    <div class="objective-box">
-      <span>THIS LESSON</span>
-      <p>${escapeHtml(session.description)}</p>
-    </div>
-    ${revisionControl}
-    <div class="detail-grid">
-      <section class="info-panel"><h3>준비물</h3><ul>${preparation.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></section>
-      <section class="info-panel"><h3>수업 결과물</h3><ul>${deliverables.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></section>
-    </div>
-    <div class="lesson-actions">
-      <button class="primary-action" id="btn-open-lesson" type="button">강의 실행</button>
-      <button class="secondary-action" id="btn-toggle-complete" type="button">${state.completed.has(session.id) ? '완료 취소' : '완료로 표시'}</button>
-    </div>
-    <div class="detail-meta">
-      <span>${escapeHtml(session.duration || '120분')}</span>
-      <span>${escapeHtml(selected.revision || course.curriculumVersion || '')}</span>
-      <span>${escapeHtml(statusLabel(selected.status))}</span>
-      <span>${session.sourceKeys?.length || 0} OFFICIAL SOURCES</span>
+    <div class="lesson-workspace">
+      <section class="workspace-hero">
+        <div class="wh-main">
+          <span class="detail-number">TODAY · LESSON ${String(lessonNo).padStart(2, '0')}</span>
+          <h2>${escapeHtml(cleanTitle)}</h2>
+          <p class="detail-subtitle">${escapeHtml(session.subtitle || session.description)}</p>
+          <div class="wh-meta">
+            <span>${escapeHtml(session.duration || '120분')}</span>
+            <span>${escapeHtml(statusLabel(selected.status))}</span>
+            <span>${escapeHtml(currentSchedule.cohort || course.cohort || course.curriculumVersion || '')}</span>
+          </div>
+          <div class="wh-progress" title="${progress.done}/${progress.total} 완료">
+            <div class="wh-bar"><i style="width:${progress.pct}%"></i></div>
+            <span>${progress.done}/${progress.total}강 완료 · ${progress.pct}%</span>
+          </div>
+        </div>
+        <div class="wh-actions">
+          <button class="primary-action" id="btn-open-lesson" type="button"><i>${lineIcon('play')}</i> 강의 시작</button>
+          <button class="secondary-action" id="btn-open-script" type="button"${mats.script ? '' : ' disabled'}>대본 열기</button>
+          <button class="secondary-action" id="btn-open-print" type="button"${mats.print ? '' : ' disabled'}>출력물 열기</button>
+          <button class="ghost-action${completed ? ' is-complete' : ''}" id="btn-toggle-complete" type="button">${completed ? '✓ 완료됨' : '완료로 표시'}</button>
+        </div>
+      </section>
+
+      <section class="lesson-stepper" aria-label="수업 진행 단계">
+        <span class="stepper-label">수업 진행 단계</span>
+        <ol>
+          ${LESSON_STEPS.map((label, i) => `<li class="${i < currentStep ? 'done' : ''}${i === currentStep ? ' current' : ''}"><button type="button" data-step="${i}">${escapeHtml(label)}</button>${i === currentStep ? `<em>${completed && i === lastStep ? '완료' : '진행중'}</em>` : ''}</li>`).join('')}
+        </ol>
+      </section>
+
+      <section class="lesson-resources">
+        <div class="card-head"><span>이 강의의 자료</span><b>탭 이동 없이 한 화면에서</b></div>
+        <div class="resource-groups">
+          ${resourceGroups}
+        </div>
+      </section>
+
+      <section class="workspace-aux">
+        <article class="aux-card">
+          <div class="card-head"><span>최근 메모</span><b>${escapeHtml(currentSchedule.cohort || course.cohort || '현재 기수')}</b></div>
+          <p class="note-copy">${escapeHtml(notePreview)}</p>
+          <button class="secondary-action compact" id="btn-open-planner-card" type="button">메모 열기</button>
+        </article>
+        <article class="aux-card">
+          <div class="card-head"><span>주의사항</span><b>막혔을 때</b></div>
+          <div class="recovery-card">
+            <strong>${escapeHtml(recovery.symptom)}</strong>
+            <p>${escapeHtml(recovery.fix)}</p>
+          </div>
+        </article>
+        <article class="aux-card">
+          <div class="card-head"><span>준비물 · 결과물</span><b>수업 전후</b></div>
+          <div class="split-lists">
+            <div><h4>준비물</h4><ul class="clean-list">${preparation.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></div>
+            <div><h4>결과물</h4><ul class="clean-list">${deliverables.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></div>
+          </div>
+        </article>
+      </section>
+
+      ${revisionControl}
+
+      <div class="detail-meta">
+        <span>${escapeHtml(selected.revision || course.curriculumVersion || '')}</span>
+        <span>${escapeHtml(course.route || '')}</span>
+        <span>${escapeHtml(course.status || '')}</span>
+      </div>
     </div>
   `;
+
   $('#btn-open-lesson').addEventListener('click', () => openPlayer(course, selected));
   $('#btn-toggle-complete').addEventListener('click', () => toggleComplete(session.id));
+  if (mats.script) $('#btn-open-script').addEventListener('click', () => openPlayer(course, mats.script, true));
+  if (mats.print) $('#btn-open-print').addEventListener('click', () => openPlayer(course, mats.print, true));
+  $('#btn-open-planner-card')?.addEventListener('click', () => openDrawer('planner'));
+
+  $$('#detail-content [data-step]').forEach((button) => button.addEventListener('click', () => {
+    const step = Number(button.dataset.step);
+    state.lessonStep[session.id] = step;
+    persist('vibe-v3-lesson-step', state.lessonStep);
+    // Keep completion in sync: reaching 마무리 completes the lesson, stepping back un-completes it.
+    const shouldComplete = step === LESSON_STEPS.length - 1;
+    if (shouldComplete !== state.completed.has(session.id)) toggleComplete(session.id);
+    else renderLessonDetail(course, session);
+  }));
+  $('#detail-content [data-res-deck]')?.addEventListener('click', () => openPlayer(course, selected));
+  $$('#detail-content [data-res-material]').forEach((button) => button.addEventListener('click', () => {
+    const pool = button.dataset.resAudience === 'instructor' ? mats.instructor : mats.student;
+    const material = pool.find((m) => m.id === button.dataset.resMaterial);
+    if (material) openPlayer(course, material, true);
+  }));
+  $$('#detail-content [data-res-source]').forEach((button) => button.addEventListener('click', () => {
+    state.tab = 'library';
+    state.libFilter = 'all';
+    state.selectionId = button.dataset.resSource;
+    renderStudio();
+  }));
+  $$('#detail-content [data-dashboard-tab]').forEach((button) => button.addEventListener('click', (event) => {
+    event.stopPropagation();
+    state.tab = button.dataset.dashboardTab;
+    state.selectionId = null;
+    renderStudio();
+  }));
+
   if ($('#revision-select')) {
     $('#revision-select').addEventListener('change', (event) => {
       state.revisionSelection[session.id] = event.target.value;
@@ -252,57 +428,160 @@ function renderLessonDetail(course, session) {
   }
 }
 
-function renderMaterials(course, audience) {
-  const materials = audience === 'instructor'
-    ? visibleCourses().flatMap((item) => (item.materials?.instructor || []).map((material) => ({ ...material, courseId: item.id, courseTitle: item.shortTitle, courseCode: item.code })))
-    : (course.materials?.student || []).map((material) => ({ ...material, courseId: course.id, courseTitle: course.shortTitle, courseCode: course.code }));
-  if (!state.selectionId || !materials.some((material) => material.id === state.selectionId)) {
-    const courseFirst = materials.find((material) => material.courseId === course.id);
-    state.selectionId = (courseFirst || materials[0])?.id;
-  }
-  $('#list-summary').textContent = audience === 'instructor'
-    ? `${materials.length} INSTRUCTOR LIBRARY · ALL COURSES`
-    : `${materials.length} STUDENT PRINTS · ${course.shortTitle}`;
-  $('#lesson-list').innerHTML = materials.map((material, index) => `
-    <button class="lesson-row material-row${material.id === state.selectionId ? ' active' : ''}" type="button" data-material="${escapeHtml(material.id)}" data-course="${escapeHtml(material.courseId)}">
-      <span class="lesson-no">${String(index + 1).padStart(2, '0')}</span>
-      <span class="lesson-copy"><b>${escapeHtml(material.title)}</b><span>${escapeHtml(material.description)}</span><span class="material-audience">${escapeHtml(material.courseCode)} · ${audience === 'instructor' ? '강사자료실' : '수강생 출력물'}</span></span>
-      <span class="lesson-state">›</span>
-    </button>
-  `).join('') || '<div class="command-empty">이 과정에 연결된 자료가 없습니다.</div>';
+// Combined course library: extra explanations, instructor research notes, and
+// official-source summaries. Executable lab folders stay in the project but are
+// intentionally not surfaced here because they read like file management.
+function lessonNoFromTitle(title) {
+  const match = String(title || '').match(/(\d+)\s*강/);
+  return match ? Number(match[1]) : null;
+}
 
-  $$('#lesson-list [data-material]').forEach((button) => {
-    button.addEventListener('click', () => {
-      state.courseId = button.dataset.course || state.courseId;
-      state.selectionId = button.dataset.material;
-      renderStudio();
-    });
+function isSupplementMaterial(material) {
+  return !/(워크북|작업지|기록|평가표|제출|체크리스트|practice)/i.test(`${material.id || ''} ${material.title || ''}`);
+}
+
+function libraryEntries(course) {
+  const entries = [];
+  (course.materials?.student || []).filter(isSupplementMaterial).forEach((m) => entries.push({
+    kind: 'material',
+    audience: 'student',
+    id: m.id,
+    group: '강의 보충자료',
+    lessonNo: lessonNoFromTitle(m.title),
+    material: { ...m, courseId: course.id, courseCode: course.code },
+  }));
+  (course.materials?.instructor || []).forEach((m) => entries.push({
+    kind: 'material',
+    audience: 'instructor',
+    id: m.id,
+    group: '강사용 연구자료',
+    lessonNo: lessonNoFromTitle(m.title),
+    material: { ...m, courseId: course.id, courseCode: course.code },
+  }));
+  const sourceKeys = [...new Set((course.sessions || []).flatMap((session) => session.sourceKeys || []))];
+  sourceKeys.forEach((key) => {
+    const source = state.sources?.sources?.[key];
+    if (source) {
+      entries.push({
+        kind: 'source',
+        id: key,
+        group: '공식자료 요약',
+        lessonNo: null,
+        source,
+        usage: sourceUsageRows(key),
+      });
+    }
   });
-  const material = materials.find((item) => item.id === state.selectionId);
-  renderMaterialDetail(getCourse(material?.courseId) || course, material, audience);
+  return entries;
+}
+
+function renderLibrary(course) {
+  const entries = libraryEntries(course);
+  $('#detail-position').textContent = 'COURSE LIBRARY';
+  if (!entries.length) {
+    state.libFilter = 'all';
+    $('#list-summary').textContent = `0 RESOURCES · ${course.shortTitle}`;
+    $('#lesson-list').innerHTML = '<div class="command-empty">이 과정에 연결된 자료가 없습니다.</div>';
+    $('#detail-content').innerHTML = '<div class="command-empty">선택할 자료가 없습니다.</div>';
+    return;
+  }
+
+  // Filter set: 전체 · 공통(회차 미지정) · 회차별(자료가 있는 회차만).
+  const lessonNos = [...new Set(entries.map((entry) => entry.lessonNo).filter((n) => n != null))].sort((a, b) => a - b);
+  const hasCommon = entries.some((entry) => entry.lessonNo == null);
+  const filters = ['all', ...(hasCommon ? ['common'] : []), ...lessonNos.map((n) => `lesson-${n}`)];
+  if (!filters.includes(state.libFilter)) state.libFilter = 'all';
+  const filterLabel = (filter) => (filter === 'all' ? '전체' : filter === 'common' ? '공통' : `${filter.replace('lesson-', '')}강`);
+  const inFilter = (entry) => {
+    if (state.libFilter === 'all') return true;
+    if (state.libFilter === 'common') return entry.lessonNo == null;
+    return `lesson-${entry.lessonNo}` === state.libFilter;
+  };
+  const filtered = entries.filter(inFilter);
+  if (!state.selectionId || !filtered.some((entry) => entry.id === state.selectionId)) state.selectionId = filtered[0]?.id;
+  $('#list-summary').textContent = `${filtered.length} LIBRARY NOTES · ${course.shortTitle}`;
+
+  const chips = `<div class="lib-filter">${filters.map((filter) => `<button type="button" class="lib-chip${filter === state.libFilter ? ' active' : ''}" data-lib-filter="${escapeHtml(filter)}">${escapeHtml(filterLabel(filter))}</button>`).join('')}</div>`;
+
+  let lastGroup = null;
+  let position = 0;
+  const rows = [];
+  filtered.forEach((entry) => {
+    if (entry.group !== lastGroup) {
+      rows.push(`<div class="module-label">${escapeHtml(entry.group)}</div>`);
+      lastGroup = entry.group;
+    }
+    position += 1;
+    const lessonTag = entry.lessonNo != null ? `${entry.lessonNo}강` : '공통';
+    if (entry.kind === 'material') {
+      rows.push(`
+        <button class="lesson-row material-row${entry.id === state.selectionId ? ' active' : ''}" type="button" data-lib-material="${escapeHtml(entry.id)}" data-lib-audience="${entry.audience}">
+          <span class="lesson-no">${String(position).padStart(2, '0')}</span>
+          <span class="lesson-copy"><b>${escapeHtml(entry.material.title)}</b><span>${escapeHtml(entry.material.description)}</span><span class="material-audience">${entry.audience === 'instructor' ? '강사용 연구자료' : '강의 보충자료'} · ${escapeHtml(lessonTag)}</span></span>
+          <span class="lesson-state">›</span>
+        </button>`);
+    } else if (entry.kind === 'source') {
+      rows.push(`
+        <button class="lesson-row source-row${entry.id === state.selectionId ? ' active' : ''}" type="button" data-lib-source="${escapeHtml(entry.id)}">
+          <span class="lesson-no">${String(position).padStart(2, '0')}</span>
+          <span class="lesson-copy"><b>${escapeHtml(entry.source.title)}</b><span>${escapeHtml(entry.source.coreConceptKo || entry.source.summaryKo || entry.source.publisher)}</span><span class="material-audience">${escapeHtml(entry.source.publisher)} · 공식자료 요약</span></span>
+          <span class="lesson-state">›</span>
+        </button>`);
+    }
+  });
+  $('#lesson-list').innerHTML = chips + (rows.join('') || '<div class="empty-panel"><b>표시할 자료가 없습니다.</b><span>이 회차에는 아직 보충자료가 없습니다. 공식자료 요약이나 강사용 연구자료를 먼저 연결하세요.</span></div>');
+  $$('#lesson-list [data-lib-filter]').forEach((button) => button.addEventListener('click', () => {
+    state.libFilter = button.dataset.libFilter;
+    renderLibrary(course);
+  }));
+  $$('#lesson-list [data-lib-material]').forEach((button) => button.addEventListener('click', () => {
+    state.selectionId = button.dataset.libMaterial;
+    renderLibrary(course);
+  }));
+  $$('#lesson-list [data-lib-source]').forEach((button) => button.addEventListener('click', () => {
+    state.selectionId = button.dataset.libSource;
+    renderLibrary(course);
+  }));
+
+  const selected = filtered.find((entry) => entry.id === state.selectionId);
+  if (!selected) {
+    $('#detail-content').innerHTML = '<div class="command-empty">선택할 자료가 없습니다.</div>';
+    return;
+  }
+  if (selected.kind === 'material') renderMaterialDetail(course, selected.material, selected.audience);
+  else renderSourceDetail(selected);
 }
 
 function renderMaterialDetail(course, material, audience) {
-  $('#detail-position').textContent = audience === 'student' ? 'STUDENT PRINT' : 'INSTRUCTOR LIBRARY';
+  $('#detail-position').textContent = audience === 'student' ? 'SUPPLEMENT NOTE' : 'INSTRUCTOR RESEARCH';
   if (!material) {
     $('#detail-content').innerHTML = '<div class="command-empty">선택할 자료가 없습니다.</div>';
     return;
   }
-  const instructorCopy = audience === 'instructor'
-    ? ['공식자료 연구노트', '심화 개념과 예상 오해', '시연·오류 복구 운영']
-    : ['단계별 작업지', '메모와 체크리스트', '밝은 A4 인쇄 레이아웃'];
+  const materialKind = audience === 'instructor' ? '강사용 연구자료' : '강의 보충자료';
+  const supportPoints = audience === 'instructor'
+    ? ['공식 문서를 강의 언어로 바꾸는 연구노트', '슬라이드에 넣지 않는 심화 배경과 예상 오해', '현장 시연·오류 복구·질문 대응 기준']
+    : ['슬라이드에 다 담지 못한 추가 설명', '명령어·개념·체크리스트를 한 번에 확인', '수업 후 다시 읽을 수 있는 밝은 A4 자료'];
   $('#detail-content').innerHTML = `
     <div class="material-preview">
-      <span class="detail-number">${escapeHtml(course.code)} · ${audience === 'student' ? 'STUDENT PRINT' : 'INSTRUCTOR LIBRARY'}</span>
+      <span class="detail-number">${escapeHtml(course.code)} · ${escapeHtml(materialKind)}</span>
       <h2>${escapeHtml(material.title)}</h2>
       <p>${escapeHtml(material.description)}</p>
-      <div class="paper-preview">
-        <div class="paper-sheet">${Array.from({ length: 13 }, (_, index) => `<i style="width:${index % 4 === 0 ? 85 : 100 - (index % 3) * 12}%"></i>`).join('')}</div>
-        <div class="paper-copy">
-          <h3>수업과 함께 사용하는 실제 자료</h3>
-          <p>선택한 과정의 회차와 결과물을 기준으로 구성됩니다. 화면 보기와 인쇄용 스타일은 분리되어 있습니다.</p>
-          <ul>${instructorCopy.map((item) => `<li>✓ ${escapeHtml(item)}</li>`).join('')}</ul>
+      <div class="paper-preview clean">
+        <div class="paper-sheet">
+          <header></header>
+          ${Array.from({ length: 9 }, (_, index) => `<i style="width:${index % 4 === 0 ? 72 : 96 - (index % 3) * 14}%"></i>`).join('')}
         </div>
+        <div class="paper-copy">
+          <h3>수강생이 작성하는 빈 양식이 아니라, 강의를 보충하는 설명 자료입니다.</h3>
+          <p>슬라이드에서는 흐름과 장면을 보여주고, 자료실에서는 수업 후 다시 읽을 수 있는 설명·근거·체크 기준을 제공합니다.</p>
+          <ul>${supportPoints.map((item) => `<li>${lineIcon('note')} ${escapeHtml(item)}</li>`).join('')}</ul>
+        </div>
+      </div>
+      <div class="material-note-grid">
+        <section><span>역할</span><b>${escapeHtml(materialKind)}</b><p>강의 화면에 넣으면 복잡해지는 설명을 별도 자료로 정리합니다.</p></section>
+        <section><span>사용 시점</span><b>수업 전후</b><p>수업 중에는 핵심만 보여주고, 복습과 준비는 자료실에서 확인합니다.</p></section>
+        <section><span>출력 기준</span><b>A4 / PDF</b><p>인쇄와 핸드폰 저장에서 읽기 쉬운 밝은 배경을 기준으로 엽니다.</p></section>
       </div>
       <div class="lesson-actions">
         <button class="primary-action" id="btn-open-material" type="button">자료 열기</button>
@@ -391,28 +670,6 @@ function renderSourceDetail(row) {
     }, true);
   });
   $('#btn-open-source-url').addEventListener('click', () => appApi.openExternal?.(source.url));
-}
-
-function renderLabs(course) {
-  const sessions = (course.sessions || []).filter((session) => session.demoProject);
-  if (!state.selectionId || !sessions.some((session) => session.id === state.selectionId)) {
-    state.selectionId = sessions[0]?.id;
-  }
-  $('#list-summary').textContent = `${sessions.length} LESSON LABS · STARTER / BROKEN / COMPLETE`;
-  $('#lesson-list').innerHTML = sessions.map((session, index) => `
-    <button class="lesson-row lab-row${session.id === state.selectionId ? ' active' : ''}" type="button" data-lab="${escapeHtml(session.id)}">
-      <span class="lesson-no">${String(index + 1).padStart(2, '0')}</span>
-      <span class="lesson-copy"><b>${escapeHtml(session.title.replace(/^\d+강\s*·\s*/, ''))}</b><span>시작본 · 오류본 · 완성본 · 복구 파일</span><em class="readiness ready">실행 가능</em></span>
-      <span class="lesson-state">›</span>
-    </button>
-  `).join('') || '<div class="command-empty">이 과정에 연결된 실습 파일이 없습니다.</div>';
-  $$('#lesson-list [data-lab]').forEach((button) => {
-    button.addEventListener('click', () => {
-      state.selectionId = button.dataset.lab;
-      renderLabs(course);
-    });
-  });
-  renderLabDetail(course, sessions.find((session) => session.id === state.selectionId));
 }
 
 function renderLabDetail(course, session) {
@@ -549,15 +806,11 @@ function renderCommandResults(query = '') {
       type: 'LESSON', title: session.title, subtitle: `${course.shortTitle} · ${session.subtitle || ''}`,
       courseId: course.id, id: session.id,
     }));
-    course.sessions.filter((session) => session.demoProject).forEach((session) => items.push({
-      type: 'LAB', title: `${session.title} 실습 파일`, subtitle: `${course.shortTitle} · starter / broken / complete`,
-      courseId: course.id, id: session.id, tab: 'labs',
-    }));
     ['student', 'instructor'].forEach((audience) => {
       (course.materials?.[audience] || []).forEach((material) => items.push({
-        type: audience === 'student' ? 'PRINT' : 'LIBRARY',
-        title: material.title, subtitle: `${course.shortTitle} · ${audience === 'student' ? '수강생 출력물' : '강사자료실'}`,
-        courseId: course.id, id: material.id, tab: audience,
+        type: audience === 'student' ? 'NOTE' : 'RESEARCH',
+        title: material.title, subtitle: `${course.shortTitle} · ${audience === 'student' ? '강의 보충자료' : '강사용 연구자료'}`,
+        courseId: course.id, id: material.id, tab: 'library',
       }));
     });
     course.sessions.flatMap((session) => session.sourceKeys || []).forEach((key) => {
@@ -566,10 +819,10 @@ function renderCommandResults(query = '') {
         items.push({
           type: 'SOURCE',
           title: source.title,
-          subtitle: `${source.publisher} · ${course.shortTitle}`,
+          subtitle: `${source.publisher} · 공식자료 요약`,
           courseId: course.id,
           id: key,
-          tab: 'sources',
+          tab: 'library',
         });
       }
     });
@@ -593,7 +846,10 @@ function executeCommand(index = state.commandIndex) {
   if (!item) return;
   state.courseId = item.courseId;
   state.selectionId = item.id;
-  state.tab = item.tab || (item.type === 'LESSON' || item.type === 'COURSE' ? 'lessons' : 'student');
+  let nextTab = item.tab || (item.type === 'LESSON' || item.type === 'COURSE' ? 'lessons' : 'library');
+  if (['instructor', 'student', 'labs'].includes(nextTab)) nextTab = 'library';
+  state.tab = nextTab;
+  if (nextTab === 'library') state.libFilter = 'all';
   persist('vibe-v3-course', item.courseId);
   closeCommandPalette();
   renderStudio();
@@ -756,6 +1012,15 @@ function bindEvents() {
     state.selectionId = null;
     renderStudio();
   }));
+  // Vertical wheel / shift-wheel scrolls the tab strip horizontally if it ever overflows.
+  const tabsEl = $('#course-tabs');
+  tabsEl.addEventListener('wheel', (event) => {
+    if (tabsEl.scrollWidth <= tabsEl.clientWidth) return;
+    const delta = Math.abs(event.deltaY) > Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+    if (!delta) return;
+    event.preventDefault();
+    tabsEl.scrollLeft += delta;
+  }, { passive: false });
   ['btn-search', 'btn-quick-search'].forEach((id) => $(`#${id}`).addEventListener('click', openCommandPalette));
   $('#command-input').addEventListener('input', (event) => { state.commandIndex = 0; renderCommandResults(event.target.value); });
   $('#command-palette').addEventListener('click', (event) => { if (event.target === $('#command-palette')) closeCommandPalette(); });

@@ -42,6 +42,7 @@ const expectedCounts = {
   workflow: 4,
   claude: 6,
   codex: 6,
+  advanced: 1,
   'foundation-next': 4,
 };
 
@@ -53,7 +54,11 @@ for (const [courseId, expected] of Object.entries(expectedCounts)) {
   const expectedStudent = courseId === 'basic-current' ? 7 : 6;
   const expectedInstructor = courseId === 'basic-current'
     ? 9
-    : ['workflow', 'claude', 'codex'].includes(courseId)
+    : courseId === 'workflow'
+      ? 10
+      : courseId === 'advanced'
+      ? 7
+      : ['claude', 'codex'].includes(courseId)
       ? 9
       : courseId === 'product'
         ? 8
@@ -135,8 +140,8 @@ for (const [courseId, course] of Object.entries(v3CourseData)) {
     if (!fs.existsSync(fallback)) failures.push(`${courseId}-${index + 1} missing fallback image`);
   }
 }
-pass(sceneLessons === 34, '34 revised lessons have scene and teaching data');
-pass(sceneIds.size === 34, 'all 34 revised lessons have unique scene ids');
+pass(sceneLessons === 35, '35 revised lessons have scene and teaching data');
+pass(sceneIds.size === 35, 'all 35 revised lessons have unique scene ids');
 
 const titles = new Map();
 for (const course of v3Courses) {

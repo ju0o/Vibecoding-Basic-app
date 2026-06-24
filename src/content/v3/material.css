@@ -112,6 +112,17 @@ th { background: var(--wash); font-size: 9.5pt; }
   .sheet { width: 210mm; height: 297mm; min-height: 0; margin: 0; overflow: hidden; box-shadow: none; break-after: page; page-break-after: always; }
   .sheet:last-child { break-after: auto; page-break-after: auto; }
   a { color: #1a4f79; text-decoration: none; }
+
+  /* Force light backgrounds and dark text for terminal blocks and frames on print */
+  .terminal {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+  .fallback-frame {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+  }
 }
 
 @media screen and (max-width: 900px) {

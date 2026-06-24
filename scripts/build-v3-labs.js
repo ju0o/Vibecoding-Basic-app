@@ -212,6 +212,9 @@ npm run dev:complete
 const courses = loadCourses();
 let lessonCount = 0;
 for (const [courseId, course] of Object.entries(courses)) {
+  // Advanced (심화 통합) ships hand-authored, theme-specific lab packages that are not
+  // regenerated here; its course-data/manifest are injected pre-built upstream.
+  if (courseId === 'advanced') continue;
   for (const [index, lesson] of course.sessions.entries()) {
     const lessonNumber = String(index + 1).padStart(2, '0');
     const lessonRoot = path.join(outputRoot, courseId, lessonNumber);

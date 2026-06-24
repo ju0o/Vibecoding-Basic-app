@@ -19,6 +19,7 @@
     "build:slides": "esbuild src/content/sessions/session-03-direction.js --bundle --format=iife --target=chrome120 --minify --outfile=src/content/sessions/session-03-direction.bundle.js",
     "sources:refresh": "node scripts/refresh-official-sources.js",
     "audit:curriculum": "node scripts/audit-v3-curriculum.js",
+    "audit:v3:s1": "node scripts/audit-v3-advanced-s1.js",
     "qa:print": "electron scripts/qa-v3-print.js",
     "export:script3": "electron scripts/export-session3-script-pdf.js",
     "export:review3": "electron scripts/export-mobile-review-pdf.js docs/reviews/session-03-mobile-review.html release/3강-모바일-검토자료.pdf",

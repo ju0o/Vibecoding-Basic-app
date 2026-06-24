@@ -4738,15 +4738,15 @@
       "audience": [
         "studio"
       ],
-      "curriculumVersion": "ONEPASS-W1-PILOT",
-      "description": "바이브코딩의 원리부터 CLI·MCP·Skill, 나만의 자동화, 그리고 나만의 AI 사무실까지 4주에 압축한 원샷 집중 트랙입니다.",
+      "curriculumVersion": "ONEPASS-180-LECTURE",
+      "description": "프로젝트 흐름 이해부터 Claude Code·Codex 운용, AI 확장 도구 설계, 오케스트레이션까지 180분 강의형으로 압축한 4주 집중 트랙입니다.",
       "color": "#a78bfa",
-      "route": "원리 → CLI·MCP·Skill 이해 → 나만의 MCP·Skill·Workflow 제작 → 오케스트레이션·AI 사무실",
+      "route": "프로젝트 흐름 → Claude Code·Codex 운용 → MCP·Skill·SubAgent·Workflow → 오케스트레이션·AI 사무실",
       "outcomes": [
         "AI에게 일을 시키고 검증·복구하는 사고법",
-        "CLI·MCP·Skill의 개념과 사용",
-        "나만의 MCP·Skill·SubAgent·Workflow 제작",
-        "오케스트레이션으로 나만의 AI 사무실 구성"
+        "Claude Code·Codex와 Desktop·IDE·CLI의 작업 표면 선택",
+        "MCP·Skill·SubAgent·Workflow의 경계와 운영 설계",
+        "오케스트레이션으로 나만의 AI 사무실 운영 기준 수립"
       ],
       "visualMode": "onepass",
       "modules": [
@@ -4759,14 +4759,14 @@
         },
         {
           "id": "W2",
-          "title": "W2 · CLI · MCP · SKILL",
+          "title": "W2 · CLAUDE CODE · CODEX · CLI",
           "weeks": [
             2
           ]
         },
         {
           "id": "W3",
-          "title": "W3 · BUILD · PARALLEL",
+          "title": "W3 · MCP · SKILL · SUBAGENT · WORKFLOW",
           "weeks": [
             3
           ]
@@ -4786,7 +4786,7 @@
           "subtitle": "도구 사용법이 아니라, AI에게 일을 시키고 결과를 신뢰·검증·복구하는 사고법",
           "description": "도구 사용법을 외우기 전에, AI에게 무엇을·어디까지 맡기고 결과를 어떻게 검증·복구하는지 판단 기준을 만듭니다.",
           "duration": "180분",
-          "type": "practice",
+          "type": "lecture",
           "slideCount": 9,
           "file": "sessions/onepass-week1.html",
           "moduleId": "W1",
@@ -4823,40 +4823,40 @@
         },
         {
           "id": "onepass-02",
-          "title": "W2 · CLI로 바이브코딩 + MCP·Skill 이해",
-          "subtitle": "터미널 작업 흐름과 외부 능력(MCP)·반복 자산(Skill)의 개념·사용",
-          "description": "터미널에서 일하는 법, AI에 외부 능력을 끼우는 MCP, 반복을 자산으로 만드는 Skill을 한 흐름으로 이해합니다.",
+          "title": "W2 · Claude Code와 Codex — 도구를 직접 운영하는 법",
+          "subtitle": "Desktop App·IDE·CLI의 차이, 저장소 경계, Diff·Git·브라우저 검증",
+          "description": "Claude Code와 Codex를 작업 표면별로 비교하고, 계획·수정·검증·기록을 통제하는 공통 작업 규율을 이해합니다.",
           "duration": "180분",
-          "type": "practice",
-          "slideCount": 11,
+          "type": "lecture",
+          "slideCount": 25,
           "file": "sessions/onepass-week2.html",
           "moduleId": "W2",
           "revision": "3.0.0-beta.1",
           "status": "preview",
           "sourceKeys": [
             "claude-overview",
-            "claude-mcp",
-            "claude-skills",
-            "codex-overview"
+            "codex-overview",
+            "github-git",
+            "github-pull-requests"
           ],
           "preparation": [
             "개인 노트북",
             "AI 코딩 도구 실행 환경"
           ],
           "deliverables": [
-            "CLI로 작은 변경 1건",
-            "필요한 MCP 1개 연결",
-            "반복 작업 1개 Skill 후보 메모"
+            "강의형 과정: 별도 실습 산출물 없음",
+            "도구 표면 선택 기준",
+            "안전한 저장소 작업 흐름"
           ]
         },
         {
           "id": "onepass-03",
-          "title": "W3 · 나만의 MCP·Skill 만들기 + SubAgent·Workflow",
-          "subtitle": "직접 제작 — Skill·MCP 제작, 작업을 나누는 SubAgent, 반복 자동화 Workflow",
-          "description": "반복 작업을 나만의 Skill·MCP로 만들고, SubAgent로 병렬 처리하며, Workflow로 자동화합니다.",
+          "title": "W3 · MCP·Skill·SubAgent·Workflow — AI의 손발을 설계하는 법",
+          "subtitle": "외부 능력·반복 절차·역할 계약·자동 흐름을 구분하고 연결",
+          "description": "MCP, Skill, SubAgent, Workflow의 경계를 이해하고 권한·검증·복구를 포함한 개인 확장 구조를 설계합니다.",
           "duration": "180분",
-          "type": "practice",
-          "slideCount": 10,
+          "type": "lecture",
+          "slideCount": 24,
           "file": "sessions/onepass-week3.html",
           "moduleId": "W3",
           "revision": "3.0.0-beta.1",
@@ -4872,20 +4872,19 @@
             "AI 코딩 도구 실행 환경"
           ],
           "deliverables": [
-            "나만의 Skill 1개",
-            "연결한 MCP 1개",
-            "작업 분해·병렬 계획",
-            "자동화 Workflow 초안"
+            "강의형 과정: 별도 실습 산출물 없음",
+            "개인 확장 구조 참고도",
+            "권한·복구 설계 기준"
           ]
         },
         {
           "id": "onepass-04",
-          "title": "W4 · 오케스트레이션 + 나만의 AI 사무실",
-          "subtitle": "만든 조각을 하나의 흐름으로 — 결정적+에이전틱, 핸드오프·정지조건, 역할별 에이전트",
-          "description": "Skill·MCP·SubAgent·Workflow를 하나의 흐름으로 묶고, 역할을 나눈 나만의 AI 사무실을 운영합니다.",
+          "title": "W4 · 오케스트레이션과 나만의 AI 사무실",
+          "subtitle": "접수·분배·리뷰 게이트·권한·복구·로그·릴리즈를 하나의 운영 구조로",
+          "description": "확장 도구를 오케스트레이션으로 묶고, 사람의 목표·승인·복구 권한을 중심에 둔 AI 사무실을 설계합니다.",
           "duration": "180분",
-          "type": "practice",
-          "slideCount": 9,
+          "type": "lecture",
+          "slideCount": 24,
           "file": "sessions/onepass-week4.html",
           "moduleId": "W4",
           "revision": "3.0.0-beta.1",
@@ -4901,10 +4900,9 @@
             "AI 코딩 도구 실행 환경"
           ],
           "deliverables": [
-            "오케스트레이션 흐름도",
-            "정지조건·복구 경로",
-            "역할별 AI 사무실 구성",
-            "4주 통합 적용 계획"
+            "강의형 과정: 별도 실습 산출물 없음",
+            "AI 사무실 운영 기준",
+            "승인·복구·릴리즈 관제 구조"
           ]
         }
       ],

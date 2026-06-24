@@ -134,6 +134,13 @@ const commandSets = {
     ['환경변수 확인', 'Windows', '$env:NAME', 'Mac', 'echo $NAME'],
     ['로그 저장', '공통', 'npm run dev > app.log 2>&1', '주의', '비밀값이 포함되지 않았는지 확인'],
   ],
+  advanced: [
+    ['Claude 실행 확인', '공통', 'claude --version', '시작', 'claude'],
+    ['Codex 실행 확인', '공통', 'codex --version', '시작', 'codex'],
+    ['변경 증거 확인', 'Git', 'git diff --stat', '세부 diff', 'git diff'],
+    ['검증 명령', '프로젝트 기준', 'npm run check', '테스트', 'npm test'],
+    ['시각 QA 기록', '브라우저/App', 'screenshot + viewport note', '주의', 'DOM 통과만으로 완료 처리 금지'],
+  ],
   claude: [
     ['설치 확인', '터미널', 'claude --version', '시작', 'claude'],
     ['프로젝트 상태', 'Git', 'git status', '변경 비교', 'git diff'],
