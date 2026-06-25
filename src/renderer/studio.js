@@ -1081,7 +1081,18 @@ function bindEvents() {
   });
 
   appApi?.onShortcut?.((key) => {
-    if (key === 'home' || key === 'escape') closePlayer();
+    if (key === 'home') { closePlayer(); return; }
+    if (key === 'escape') {
+      const webview = $('#lecture-webview');
+      if (webview && !$('#player').classList.contains('hidden') && typeof webview.executeJavaScript === 'function') {
+        // If the lesson deck has an open overlay (e.g. live demo sandbox), let ESC close that first.
+        webview.executeJavaScript("(window.demoStage && document.body.classList.contains('demo-open')) ? (window.demoStage.close(), true) : false")
+          .then((closedOverlay) => { if (!closedOverlay) closePlayer(); })
+          .catch(() => closePlayer());
+        return;
+      }
+      closePlayer();
+    }
   });
 }
 

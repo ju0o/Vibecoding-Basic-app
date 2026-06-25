@@ -80,6 +80,7 @@
       </div>
       <div class="demo-body">
         <section class="demo-pane" data-demo-pane="terminal">
+          <div class="demo-os-toggle"><span>OS</span><button type="button" data-os="mac">macOS · zsh</button><button type="button" data-os="windows">Windows · PowerShell</button></div>
           <div class="demo-term-wrap" id="demo-term-wrap">
             <div class="demo-term" id="demo-term"></div>
             <div class="demo-term-input-row">
@@ -149,16 +150,41 @@
     el.innerHTML = `<span class="pfx">${esc(promptStr())}</span>${esc(cmd)}`;
     term.appendChild(el); term.scrollTop = term.scrollHeight;
   }
-  function promptStr() { return (pathStr(cwd) || '/') + ' $'; }
+  let osMode = (() => { try { return localStorage.getItem('demo-os') || 'mac'; } catch (e) { return 'mac'; } })();
+  function promptStr() {
+    const p = pathStr(cwd) || '/';
+    if (osMode === 'windows') return 'PS C:' + p.replace(/\//g, '\\') + '>';
+    return p + ' %';
+  }
   function refreshPrompt() { $('demo-prompt').textContent = promptStr(); }
+  function setOs(mode) {
+    osMode = mode;
+    try { localStorage.setItem('demo-os', mode); } catch (e) { /* ignore */ }
+    stage.querySelectorAll('[data-os]').forEach((b) => b.classList.toggle('active', b.dataset.os === mode));
+    refreshPrompt();
+    const input = $('demo-term-input');
+    if (input) input.placeholder = mode === 'windows' ? 'PowerShell 명령 입력 후 Enter ( help )' : 'zsh 명령 입력 후 Enter ( help )';
+  }
 
   function tokenize(line) { return (line.match(/"[^"]*"|'[^']*'|\S+/g) || []).map((t) => t.replace(/^['"]|['"]$/g, '')); }
 
   const COMMANDS = {
     help() {
       print('사용 가능한 명령:', 'sys');
-      print('  pwd  ls  cd  mkdir  touch  rm [-r]  mv  cp  cat  echo  open  tree  clear  git  npm  help', 'sys');
+      print(osMode === 'windows'
+        ? '  pwd  ls/dir  cd  mkdir/md  ni/touch  rm/del [-r]  mv/move  cp/copy  cat/type  echo  tree  clear/cls  git  npm  open  help'
+        : '  pwd  ls  cd  mkdir  touch  rm [-r]  mv  cp  cat  echo  tree  clear  git  npm  open  help', 'sys');
     },
+    dir(a) { return this.ls(a); },
+    type(a) { return this.cat(a); },
+    del(a) { return this.rm(a); },
+    erase(a) { return this.rm(a); },
+    copy(a) { return this.cp(a); },
+    move(a) { return this.mv(a); },
+    ren(a) { return this.mv(a); },
+    md(a) { return this.mkdir(a); },
+    ni(a) { return this.touch(a); },
+    cls() { return this.clear(); },
     pwd() { print(pathStr(cwd) || '/'); },
     ls(args) {
       const target = nodeAt(resolve(cwd, args[0]));
@@ -397,6 +423,7 @@
   $('demo-close').addEventListener('click', close);
   $('demo-scrim').addEventListener('click', close);
   stage.querySelectorAll('[data-demo-tab]').forEach((b) => b.addEventListener('click', () => setTab(b.dataset.demoTab)));
+  stage.querySelectorAll('[data-os]').forEach((b) => b.addEventListener('click', () => setOs(b.dataset.os)));
   // keep all keystrokes inside the stage from reaching the deck's slide navigation
   stage.addEventListener('keydown', (e) => e.stopPropagation());
 
@@ -411,7 +438,7 @@
   }, true);
 
   /* ---------- init ---------- */
-  refreshPrompt();
+  setOs(osMode);
   print('가상 샌드박스입니다. 실제 디스크에는 영향이 없습니다. help 입력으로 명령을 확인하세요.', 'sys');
   renderTree();
   if (cfg.open) { const p = normalize(segs(cfg.open)); if (nodeAt(p)) { selectedPath = p; loadEditor(p); } }
