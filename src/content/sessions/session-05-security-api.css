@@ -600,3 +600,17 @@ html,body{background:#0c0a1f}
 .url-card-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,1.8vw,26px)}
 .dns-note{margin:14px 0 0;color:var(--muted);font-size:clamp(14px,1.15vw,19px);line-height:1.45}
 .dns-note b{color:var(--live);font-weight:800}
+
+/* ===== live build log (logs slide) ===== */
+.live-log{padding:clamp(14px,1.7vw,22px);border:1px solid var(--line);border-radius:14px;background:#0a0f17;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.live-log .ll-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;color:#9fb0b7;font-size:13px}
+.live-log .ll-dot{width:8px;height:8px;border-radius:50%;background:var(--coral);box-shadow:0 0 10px var(--coral);animation:ll-blink 1.4s steps(1) infinite}
+.live-log .ll-body{line-height:1.95;font-size:14px}
+.live-log .ll-line{color:#cfd8e6;border-radius:4px}
+.live-log .ll-line.dim{color:#8fb0a8}
+.live-log .ll-line.err{color:#ff8b98;animation:ll-err 3s ease-in-out infinite}
+.live-log .ll-line.warn{color:#ffce7a}
+.live-log .ll-cursor{display:inline-block;width:8px;height:14px;margin-left:5px;background:#ffce7a;vertical-align:-2px;animation:ll-blink 1s steps(1) infinite}
+@keyframes ll-blink{50%{opacity:0}}
+@keyframes ll-err{0%,100%{background:transparent}50%{background:rgba(255,93,143,.12)}}
+@media (prefers-reduced-motion:reduce){.live-log .ll-dot,.live-log .ll-line.err,.live-log .ll-cursor{animation:none!important}}

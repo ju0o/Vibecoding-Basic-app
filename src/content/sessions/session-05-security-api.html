@@ -263,17 +263,17 @@
     <section class="slide" data-title="에러와 로그 읽는 법" id="logs-slide">
       <header class="slide-head"><div><div class="eyebrow danger">14 · READ THE LOGS</div><h2>배포가 실패하면<br>로그의 '빨간 줄'부터 봅니다</h2></div><span>17</span></header>
       <div class="lesson lesson-split">
-        <div class="lesson-panel" style="background:#0a0f17;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">
-          <div style="color:#9fb0b7;font-size:13px;margin-bottom:12px">▌ build.log</div>
-          <div style="line-height:1.95;font-size:14px">
-            <div style="color:#cfd8e6">$ npm run build</div>
-            <div style="color:#8fb0a8">Installing dependencies… done</div>
-            <div style="color:#8fb0a8">Building…</div>
-            <div style="color:#ff8b98">Error: Module not found:</div>
-            <div style="color:#ff8b98">&nbsp;&nbsp;'./componets/Button'&nbsp;&nbsp;← 오타</div>
-            <div style="color:#ffce7a">Build failed. Deployment canceled.</div>
+        <article class="live-log" aria-label="배포 빌드 로그 예시">
+          <div class="ll-head">▌ build.log <span class="ll-dot"></span><span style="margin-left:auto;color:var(--coral)">FAILED</span></div>
+          <div class="ll-body">
+            <div class="ll-line">$ npm run build</div>
+            <div class="ll-line dim">Installing dependencies… done</div>
+            <div class="ll-line dim">Building…</div>
+            <div class="ll-line err">Error: Module not found:</div>
+            <div class="ll-line err">&nbsp;&nbsp;'./componets/Button'&nbsp;&nbsp;← 오타</div>
+            <div class="ll-line warn">Build failed. Deployment canceled.<span class="ll-cursor"></span></div>
           </div>
-        </div>
+        </article>
         <div class="lesson-panel">
           <ul class="lesson-kv">
             <li><code>1 멈춤</code><span>어느 단계에서 멈췄는지 확인합니다</span></li>
