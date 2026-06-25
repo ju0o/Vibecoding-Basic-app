@@ -6,6 +6,7 @@
   <title>5강 - 배포와 보안 그리고 데이터</title>
   <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
   <link rel="stylesheet" href="./session-05-security-api.css">
+  <link rel="stylesheet" href="./_shared/demo-stage.css">
 </head>
 <body>
   <main class="deck documentary-deck">
@@ -28,23 +29,64 @@
       <div class="cover-number">05</div>
     </section>
 
+    <section class="slide" data-title="오늘의 지도" id="overview-slide">
+      <header class="slide-head"><div><div class="eyebrow">00 · TODAY'S MAP</div><h2>오늘은 세 가지를<br>하나의 흐름으로 배웁니다</h2></div><span>02</span></header>
+      <div class="lesson">
+        <div class="lesson-cards" style="--n:3">
+          <article class="a-live"><div class="badge">1</div><h3>배포</h3><p>내 노트북의 프로젝트를 빌드해 인터넷에 올리고, 주소로 공개합니다.</p></article>
+          <article class="a-pink"><div class="badge">2</div><h3>보안</h3><p>브라우저에 내려가는 것과 서버에 숨길 것을 나누고, 비밀값을 지킵니다.</p></article>
+          <article class="a-amber"><div class="badge">3</div><h3>데이터</h3><p>새로고침해도 남는 정보를 저장하고, 누가 무엇을 볼 수 있는지 정합니다.</p></article>
+        </div>
+        <div class="lesson-lead">한 문장으로: <em>배포는 공개, 보안은 보호, 데이터는 기억.</em> 이 세 가지가 '내 프로그램을 링크로 공유하기 전' 꼭 챙길 것들입니다.</div>
+      </div>
+    </section>
+
     <section class="slide" data-title="내 컴퓨터와 공개 URL" id="local-live-slide">
       <header class="slide-head"><div><div class="eyebrow">01 · LOCAL TO LIVE</div><h2>같은 화면이라도<br>접속할 수 있는 사람은 달라집니다</h2></div><span>02</span></header>
       <div class="local-live-scene deployment-theater" data-local-state="local">
         <section class="deployment-device local-browser">
           <div class="deployment-device-head"><span>LOCALHOST</span><b>내 노트북</b><i>localhost:3000</i></div>
           <div class="deployment-laptop"><div class="deployment-screen"><div class="course-site"><nav><b>VIBE CLASS</b><span>소개&nbsp;&nbsp;커리큘럼&nbsp;&nbsp;신청</span></nav><div class="course-site-hero"><small>BUILD YOUR FIRST SERVICE</small><h3>아이디어를<br>서비스로 만듭니다.</h3><p>실습 중심 바이브코딩 클래스</p><button>수강 신청</button></div><div class="course-site-building"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div><div class="deployment-laptop-base"></div></div>
-          <div class="deployment-state local-state"><b>외부에서 접속 차단</b><span>내 노트북이 켜져 있어야만 보입니다.</span></div>
+          <div class="deployment-state local-state"><b>내 노트북을 끄면 사라짐</b><span>나만 볼 수 있고, 지금 접속 가능한 사람은 0명입니다.</span></div>
         </section>
         <section class="deployment-gateway"><div class="gateway-signal"><i></i><i></i><i></i></div><small>DEPLOY</small><b>인터넷 실행 환경</b><p id="local-live-copy">지금은 내 노트북 안에서만 열립니다.</p><div class="gateway-actions"><button type="button" id="local-live-next">공개 URL 만들기</button><button type="button" class="quiet-button" id="local-live-reset">초기화</button></div></section>
         <section class="deployment-device public-browser">
           <div class="deployment-device-head"><span>PUBLIC URL</span><b>공개 서비스</b><i>vibe-class.vercel.app</i></div>
           <div class="deployment-public-stage"><div class="public-site-card"><div class="public-site-top"><b>VIBE CLASS</b><span>LIVE</span></div><h3>아이디어를<br>서비스로 만듭니다.</h3><p>누구나 주소로 접속하는 같은 프로젝트</p><button>수강 신청</button></div><div class="visitor-grid"><div><i class="visitor-phone"></i><span>휴대폰</span></div><div><i class="visitor-laptop"></i><span>노트북</span></div><div><i class="visitor-desktop"></i><span>데스크톱</span></div></div></div>
-          <div class="deployment-state public-state"><b>외부 접속 허용</b><span>서버가 켜져 있으면 누구나 같은 주소로 들어옵니다.</span></div>
+          <div class="deployment-state public-state"><b>내 노트북을 꺼도 접속됨</b><span>서버가 대신 켜져 있어, 서울·부산·LA 어디서나 같은 주소로 들어옵니다.</span></div>
         </section>
         <i class="deployment-packet" aria-hidden="true"></i>
       </div>
       <div class="slide-takeaway"><b>핵심</b><p>배포는 화면을 바꾸는 일이 아닙니다. 같은 프로젝트를 내 노트북 밖의 실행 환경으로 옮겨, 주소를 가진 사람이 접속하게 만드는 일입니다.</p></div>
+    </section>
+
+    <section class="slide" data-title="배포는 빌드해서 올리는 과정" id="build-pipeline-slide">
+      <header class="slide-head"><div><div class="eyebrow">02 · BUILD PIPELINE</div><h2>배포는 복사가 아니라<br>'빌드해서 올리는' 과정입니다</h2></div><span>03</span></header>
+      <div class="book-journey" aria-label="원고가 책으로 만들어져 서점에 배본되고 독자가 읽는 과정">
+        <div class="bj-rail"></div>
+        <i class="bj-token" aria-hidden="true"></i>
+        <div class="bj-stations">
+          <div class="bj-st"><div class="bj-art ms" aria-hidden="true"><i></i><i></i><i></i></div><b>원고</b><small>소스 코드 .jsx</small></div>
+          <div class="bj-st"><div class="bj-art book" aria-hidden="true"><span></span></div><b>인쇄·제작</b><small>npm run build</small></div>
+          <div class="bj-st"><div class="bj-art shop" aria-hidden="true"><i></i><i></i><i></i><i></i></div><b>서점 배본</b><small>서버에 올리기</small></div>
+          <div class="bj-st"><div class="bj-art readers" aria-hidden="true"><i></i><i></i></div><b>독자 이용</b><small>사용자 접속</small></div>
+        </div>
+      </div>
+      <div class="slide-takeaway"><b>핵심</b><p>"배포가 안 돼요"의 절반은 <strong>빌드 단계</strong>에서 막힙니다. 내 PC에서 <strong>npm run build</strong>가 먼저 통과하는지 확인하세요.</p></div>
+    </section>
+
+    <section class="slide" data-title="로컬과 서버는 다른 환경" id="local-server-slide">
+      <header class="slide-head"><div><div class="eyebrow">03 · LOCAL ≠ SERVER</div><h2>"내 컴퓨터에선 되는데"<br>배포하면 안 되는 이유</h2></div><span>04</span></header>
+      <div class="lesson">
+        <div class="lesson-compare">
+          <div><h3>내 컴퓨터 · 개발 <span class="tag" style="background:var(--blue);color:#0c0a1f">LOCAL</span></h3>
+            <ul><li><b>·</b>환경변수가 이미 다 있음 (.env.local)</li><li><b>·</b>dev 서버가 즉석에서 변환</li><li><b>·</b>내 Node 버전 · 내 OS</li><li><b>·</b>경로·대소문자에 관대</li></ul></div>
+          <div><h3>배포 서버 · 운영 <span class="tag" style="background:var(--amber);color:#3a2402">SERVER</span></h3>
+            <ul><li><b>·</b>환경변수를 따로 넣어줘야 함</li><li><b>·</b>미리 빌드된 결과만 실행</li><li><b>·</b>정해진 Node 버전 · 리눅스</li><li><b>·</b>경로·대소문자에 엄격</li></ul></div>
+        </div>
+        <div class="lesson-cards"><article class="a-pink"><div class="badge">1</div><h3>환경변수 누락</h3><p>.env.local은 GitHub에 안 올라갑니다. 배포 서비스 설정에 따로 넣어야 합니다.</p></article><article class="a-amber"><div class="badge">2</div><h3>대소문자 불일치</h3><p>Button.jsx ↔ button.jsx. 내 PC는 통과해도 리눅스 서버는 구분합니다.</p></article><article class="a-indigo"><div class="badge">3</div><h3>빌드에서만 나는 오류</h3><p>dev에선 숨겨지던 타입·import 오류가 build에서 드러납니다.</p></article></div>
+      </div>
+      <div class="slide-takeaway"><b>확인 순서</b><p>로컬에서 <strong>npm run build</strong> → 환경변수 채우기 → 배포 로그 확인. 이 순서가 "되는데 안 돼요"를 대부분 해결합니다.</p></div>
     </section>
 
     <section class="slide" data-title="Git 명령어와 GitHub 확인" id="git-command-slide">
@@ -57,51 +99,64 @@
       <div class="slide-takeaway"><b>확인 순서</b><p><strong>status</strong>는 내 PC의 변경, <strong>commit</strong>은 저장 지점, <strong>push</strong> 뒤에는 GitHub의 Commits 탭에서 그 기록을 확인합니다.</p></div>
     </section>
 
-    <section class="slide" data-title="GitHub에 남는 변경 기록" id="github-record-slide">
-      <header class="slide-head"><div><div class="eyebrow">03 · VERSION HISTORY</div><h2>GitHub에서는<br>변경 기록과 배포 기준점을 확인합니다</h2></div><span>04</span></header>
-      <div class="github-documentary">
-        <div class="github-operations" data-github-state="0">
-          <div class="gh-window-top"><span class="gh-mark">◉</span><b>vibe-team / class-project</b><span class="gh-branch">main</span><span class="gh-status" id="github-operation-status">작업 전</span></div>
-          <div class="gh-tabs"><span class="active">Code</span><span>Issues <b>4</b></span><span id="github-commit-tab">Commits <b>13</b></span><span id="github-release-tab">Releases <b>v1.0.0</b></span><span id="github-deployment-tab">Deployments <b>LIVE</b></span></div>
-          <div class="gh-workspace">
-            <aside class="gh-tree"><b>PROJECT FILES</b><span>▾ src</span><span class="selected">&nbsp;&nbsp;▾ components</span><span>&nbsp;&nbsp;&nbsp;&nbsp;ApplyButton.jsx</span><span>&nbsp;&nbsp;&nbsp;&nbsp;ApplyButton.css</span><span>▸ public</span><span>package.json</span></aside>
-            <section class="gh-code"><div class="gh-code-head"><b id="github-operation-file">ApplyButton.jsx</b><span id="github-operation-branch">main</span></div><pre id="github-operation-code"><i>01</i> export function ApplyButton() {
-<i>02</i>   return &lt;button&gt;수강 신청&lt;/button&gt;
-<i>03</i> }</pre><div class="release-deployment-map" id="release-deployment-map"><small id="github-page-check-title">확인 위치 · Releases + Deployments</small><div class="release-chain"><b>a8f21c3</b><i></i><b>v1.0.0</b><i></i><b>Production</b></div><p id="github-page-check-copy">모든 commit을 바로 배포하지 않습니다. 검증한 commit에 release 이름을 붙이고, 그 버전을 Production으로 올려야 되돌릴 기준도 남습니다.</p></div><div class="gh-diff" id="github-operation-diff"><span>변경 전</span><b>수강 신청 버튼의 색상을 수정했습니다.</b></div></section>
-            <aside class="gh-history"><div class="history-head"><b id="github-history-title">최근 commit</b><span id="github-history-count">13 commits</span></div><div class="history-item active" id="github-commit-card"><i></i><b>수강 신청 버튼 수정</b><span>a8f21c3 · just now</span></div><div class="history-item"><i></i><b>홈 화면 문구 정리</b><span>7a0e117 · yesterday</span></div><div class="release-item" id="github-release-card"><small>LATEST RELEASE</small><b>v1.0.0</b><span>배포 가능한 기준점</span></div><div class="release-version-meta"><span><b>v1.0.1</b> 버그 수정</span><span><b>v1.1.0</b> 기능 추가</span></div></aside>
-          </div>
-          <div class="github-operation-footer"><div><b id="github-operation-title">변경 사항 확인</b><span id="github-operation-copy">먼저 어떤 파일이 바뀌었는지 확인합니다.</span></div><div><button type="button" id="github-operation-next">다음 기록</button><button type="button" class="quiet-button" id="github-operation-reset">초기화</button></div></div>
-          <i class="github-signal" id="github-signal"></i>
+
+
+    <section class="slide" data-title="push 한 번이 자동 배포로" id="auto-deploy-slide">
+      <header class="slide-head"><div><div class="eyebrow">04 · AUTO DEPLOY</div><h2>git push 한 번이<br>자동으로 새 배포를 만듭니다</h2></div><span>06</span></header>
+      <div class="conveyor" aria-label="코드 상자가 컨베이어 벨트를 타고 빌드 공장을 지나 공개 URL이 되는 과정">
+        <div class="cv-scene" aria-hidden="true">
+          <div class="cv-belt"></div>
+          <div class="cv-rollers"></div>
+          <div class="cv-machine"><i></i><b>Vercel<br>BUILD</b></div>
+          <div class="cv-box">&lt;/&gt;</div>
         </div>
-        <figure class="documentary-frame github-capture"><img src="../assets/session-05/github-repo-reference.png" alt="GitHub 저장소의 Code, Commit, Release 영역"><figcaption><b>실제 GitHub 저장소 화면</b><span>Code, Commits, Pull requests, Releases가 하나의 프로젝트 기록으로 모입니다.</span></figcaption><div class="capture-pin pin-code">1 · Code</div><div class="capture-pin pin-commit">2 · Commits</div><div class="capture-pin pin-release">3 · Releases</div></figure>
-        <aside class="record-console"><div class="console-title"><span></span><span></span><span></span><b>project / history</b></div><div class="record-lines" id="record-lines"><p>수강 신청 버튼의 색상을 수정했습니다.</p></div><div class="record-status" id="record-status"><b>기록 전</b><span>먼저 현재 변경을 확인합니다.</span></div><div class="record-controls"><button type="button" id="git-record-next">다음 기록</button><button type="button" class="quiet-button" id="git-record-reset">초기화</button></div></aside>
+        <div class="cv-stations">
+          <div class="cv-st"><small>PUSH</small><b>git push</b><span>벨트에 올리기</span></div>
+          <div class="cv-st"><small>DETECT</small><b>GitHub</b><span>변경 감지</span></div>
+          <div class="cv-st"><small>BUILD</small><b>Vercel 공장</b><span>자동 빌드·검사</span></div>
+          <div class="cv-st"><small>LIVE</small><b>공개 URL</b><span>매대에 진열</span></div>
+        </div>
       </div>
-      <div class="record-legend"><span><b>commit</b> 변경 이유가 적힌 저장 지점</span><span><b>push</b> 내 컴퓨터의 commit을 GitHub로 전송</span><span><b>release</b> 배포 가능한 기준점</span></div>
+      <div class="slide-takeaway"><b>안전</b><p>실패한 배포는 공개되지 않고 <strong>직전 버전</strong>이 그대로 살아 있습니다. 그래서 <strong>자주, 작게</strong> push하는 것이 안전합니다.</p></div>
     </section>
 
-    <section class="slide" data-title="GitHub 협업과 프로젝트 내려받기" id="github-team-slide">
-      <header class="slide-head"><div><div class="eyebrow">04 · CLONE / REVIEW / RELEASE</div><h2>협업은 파일을 주고받는 일이 아니라<br>같은 기준점을 유지하는 일입니다</h2></div><span>05</span></header>
-      <div class="collaboration-documentary">
-        <div class="collab-command-stage" data-collab-mode="clone">
-          <section class="collab-repository"><div class="collab-label">REMOTE REPOSITORY</div><b>vibe-team / class-project</b><span>main · shared source of truth</span><div class="repo-commit"><i></i><span>main</span><b>수강 신청 버튼 수정</b></div></section>
-          <div class="collab-flow"><div class="flow-line"></div><i class="collab-parcel" id="collab-parcel">CHANGE</i><div class="collab-workbench left"><small>내 컴퓨터</small><b id="collab-local-title">프로젝트 없음</b><span id="collab-local-copy">clone으로 저장소를 복제합니다.</span></div><div class="collab-workbench right"><small>팀 작업</small><b id="collab-team-title">공통 기준점</b><span id="collab-team-copy">GitHub가 최신 기록을 보관합니다.</span></div></div>
-          <aside class="collab-command-panel"><div class="command-panel-head"><b id="collab-command-title">clone · 원격 저장소 복제</b><span id="collab-step-count">01 / 06</span></div><code id="collab-command-code">git clone https://github.com/vibe-team/class-project.git</code><p id="collab-command-copy">내 컴퓨터에 GitHub 저장소의 연결된 복사본을 만듭니다. 단순 다운로드와 달리 이후 push와 pull이 가능합니다.</p><div class="collab-controls"><button type="button" data-collab-step="clone">clone</button><button type="button" data-collab-step="pull">pull</button><button type="button" data-collab-step="branch">checkout</button><button type="button" data-collab-step="push">push</button><button type="button" data-collab-step="pr">PR</button><button type="button" data-collab-step="merge">merge</button></div><div class="collab-analogy"><b id="collab-analogy-title">비유 · 작업실 계약</b><span id="collab-analogy-copy">clone은 본사 창고의 물건을 내 작업실에 옮기는 것이 아니라, 본사와 계속 연결된 내 작업실을 여는 일입니다.</span></div></aside>
+    <section class="slide" data-title="주소(도메인)와 HTTPS" id="domain-slide">
+      <header class="slide-head"><div><div class="eyebrow">05 · DOMAIN / HTTPS</div><h2>무료 주소로 시작하고<br>내 도메인과 자물쇠를 더합니다</h2></div><span>07</span></header>
+      <div class="lesson tight">
+        <div class="url-card-row">
+          <div class="url-card"><div class="bar"><span class="lock">🔒</span> 보안 연결됨</div><div class="addr"><span class="scheme">https://</span>my-project.vercel.app</div><div class="note">배포하면 자동으로 받는 무료 주소</div></div>
+          <div class="url-card" style="border-color:rgba(229,70,139,.4)"><div class="bar"><span class="lock" style="color:var(--magenta)">🔒</span> 내 도메인 연결</div><div class="addr"><span class="scheme" style="color:var(--magenta)">https://</span>my-shop.com</div><div class="note">도메인을 사서 DNS로 연결하면 내 주소가 됩니다</div></div>
         </div>
-        <article class="clone-surface"><div class="clone-top"><b>github.com / vibe-team / class-project</b><span>Code</span></div><div class="clone-main"><div><small>HTTPS</small><code>https://github.com/vibe-team/class-project.git</code><button type="button" data-collab-step="clone">clone URL 복사</button></div><button type="button" data-collab-step="zip">Download ZIP</button></div><p><b>처음 한 번만 받을 때</b>는 ZIP도 가능하지만, 계속 수정하고 팀원 변경을 받으려면 clone이 기준입니다.</p></article>
-        <div class="team-rail" id="team-rail">
-          <button type="button" data-collab-step="clone"><b>01</b><code>git clone</code><span>처음 프로젝트 내려받기</span></button>
-          <button type="button" data-collab-step="pull"><b>02</b><code>git pull</code><span>최신 기준 먼저 받기</span></button>
-          <button type="button" data-collab-step="branch"><b>03</b><code>git checkout -b</code><span>내 작업선 만들기</span></button>
-          <button type="button" data-collab-step="push"><b>04</b><code>git push</code><span>내 작업 공유하기</span></button>
-          <button type="button" data-collab-step="pr"><b>05</b><code>Pull Request</code><span>변경 검토 요청</span></button>
-          <button type="button" data-collab-step="merge"><b>06</b><code>merge / release</code><span>기준점 반영 후 배포</span></button>
+        <div class="dns-resolve" aria-hidden="true">
+          <div class="dns-head">도메인 → 서버를 찾아가는 길 (DNS)</div>
+          <div class="dns-row">
+            <div class="dns-node"><small>DOMAIN</small><b>my-shop.com</b></div>
+            <div class="dns-mid"><span>DNS 조회</span><div class="dns-track"><div class="dns-packet"></div></div></div>
+            <div class="dns-node"><small>SERVER</small><b>76.76.21.21</b></div>
+          </div>
+          <p class="dns-note">도메인은 <b>간판 이름</b>, DNS는 <b>내비게이션</b>입니다. <b>HTTPS</b> 자물쇠와 인증서는 배포 서비스가 <b>무료로 자동</b> 붙여줍니다.</p>
         </div>
-        <article class="team-map"><div class="team-map-title"><span>shared repository</span><b id="team-map-title">모두가 같은 기준점을 봅니다</b></div><div class="team-branches"><div class="branch branch-main"><b>main</b><span>강사/팀장</span></div><div class="branch branch-a"><b>feature/login</b><span>수강생 A</span></div><div class="branch branch-b"><b>feature/design</b><span>수강생 B</span></div></div><p id="team-map-copy">한 사람이 만든 변경은 GitHub라는 공통 기준점을 통해 다른 사람에게 전달됩니다.</p></article>
+      </div>
+      <div class="slide-takeaway"><b>비유</b><p>도메인은 <strong>간판</strong>, DNS는 <strong>내비게이션</strong>, HTTPS는 <strong>봉인된 택배</strong>입니다.</p></div>
+    </section>
+
+    <section class="slide" data-title="프론트엔드는 모두에게 열려있다" id="trust-boundary-slide">
+      <header class="slide-head"><div><div class="eyebrow danger">06 · TRUST BOUNDARY</div><h2>브라우저로 내려간 것은<br>누구나 열어볼 수 있습니다</h2></div><span>08</span></header>
+      <div class="lesson">
+        <div class="lesson-compare">
+          <div class="neg"><h3>프론트엔드 · 브라우저 <span class="tag">OPEN</span></h3>
+            <ul><li><b>·</b>사용자 컴퓨터에서 실행됨</li><li><b>·</b>F12로 코드·요청이 다 보임</li><li><b>·</b>누구나 저장·복사·수정 가능</li></ul>
+            <div class="foot">→ 비밀값을 <b style="color:var(--coral)">절대 두면 안 되는</b> 곳</div></div>
+          <div class="pos"><h3>백엔드 · 서버 <span class="tag">CONTROLLED</span></h3>
+            <ul><li><b>·</b>내가 통제하는 서버에서 실행</li><li><b>·</b>사용자는 '결과'만 받음</li><li><b>·</b>비밀값을 안전하게 보관</li></ul>
+            <div class="foot">→ 비밀값·중요 로직이 <b style="color:var(--teal)">사는</b> 곳</div></div>
+        </div>
+        <div class="lesson-lead">그래서 보안의 첫 질문은 항상 <em>"이건 어디에서 실행되지?"</em> 입니다. 브라우저에서 실행된다면, 그건 이미 공개된 것입니다.</div>
       </div>
     </section>
 
     <section class="slide" data-title="브라우저에서 확인하는 공개 요청" id="devtools-slide">
-      <header class="slide-head"><div><div class="eyebrow danger">05 · BROWSER / F12</div><h2>브라우저에서는 공개된 요청과<br>내려온 코드를 확인할 수 있습니다</h2></div><span>06</span></header>
+      <header class="slide-head"><div><div class="eyebrow danger">04 · BROWSER / F12</div><h2>브라우저에서는 공개된 요청과<br>내려온 코드를 확인할 수 있습니다</h2></div><span>05</span></header>
       <div class="devtools-documentary" data-devtools-state="0">
         <div class="devtools-workbench">
           <div class="devtools-browser-top"><span></span><span></span><span></span><b>my-project.vercel.app / checkout</b><em>PUBLIC URL</em></div>
@@ -111,14 +166,11 @@
           <aside class="devtools-director"><span id="devtools-step">STEP 1 / 4</span><b id="devtools-title">F12로 개발자도구 열기</b><p id="devtools-copy">공개된 사이트에서 브라우저가 주고받는 요청을 확인할 수 있습니다.</p><div><button type="button" id="devtools-next">다음 확인</button><button type="button" class="quiet-button" id="devtools-reset">초기화</button></div></aside>
           <div class="devtools-alert" id="leak-warning"><b>비밀값이 브라우저에 노출되었습니다</b><span>파일을 지우는 것으로 끝나지 않습니다. 해당 키를 폐기하고 새 키를 발급해야 합니다.</span></div>
         </div>
-        <article class="browser-with-tools"><div class="browser-chrome light"><i></i><i></i><i></i><small>my-project.vercel.app/checkout</small><b>PUBLIC URL</b></div><div class="checkout-screen"><nav><b>VIBE MARKET</b><span>장바구니 1</span></nav><div><small>ONLINE CLASS</small><h3>바이브코딩 기초반</h3><p>₩ 39,000 · 1인 1회 신청</p><button>결제하기</button></div></div><div class="tools-drawer"><div class="tools-tabs"><b>Elements</b><b class="active">Network</b><b>Console</b></div><div class="network-list"><span><i></i> app.js <b>200</b></span><span><i></i> payment.css <b>200</b></span><span class="request-row"><i></i> /api/checkout <b>POST</b></span></div><div class="request-detail"><small>REQUEST HEADERS</small><p id="request-detail">요청을 선택하면 전송 내용이 보입니다.</p></div></div></article>
-        <aside class="devtools-guide"><figure class="mini-documentary-frame"><img src="../assets/session-05/chrome-devtools-network-reference.png" alt="Chrome DevTools Network 공식 문서"><figcaption>Chrome DevTools의 Network 패널</figcaption></figure><div class="guide-step"><span id="devtools-step">STEP 1 / 4</span><b id="devtools-title">F12로 개발자도구 열기</b><p id="devtools-copy">웹사이트를 쓰는 사람도 F12를 눌러 브라우저가 주고받는 요청을 확인할 수 있습니다.</p></div><div class="guide-controls"><button type="button" id="devtools-next">다음 확인</button><button type="button" class="quiet-button" id="devtools-reset">초기화</button></div></aside>
-        <div class="leak-warning" id="leak-warning"><b>비밀값이 브라우저에 노출되었습니다</b><span>파일만 지우지 말고 키를 폐기한 뒤 새 키를 발급해야 합니다.</span></div>
       </div>
     </section>
 
     <section class="slide" data-title="비밀값과 배포 환경" id="environment-slide">
-      <header class="slide-head"><div><div class="eyebrow warning">06 · ENVIRONMENT HANDOFF</div><h2>비밀값은 코드에 넣지 않고,<br>실행되는 환경에 따로 전달합니다</h2></div><span>07</span></header>
+      <header class="slide-head"><div><div class="eyebrow warning">05 · ENVIRONMENT HANDOFF</div><h2>비밀값은 코드에 넣지 않고,<br>실행되는 환경에 따로 전달합니다</h2></div><span>06</span></header>
       <div class="environment-documentary" data-env-state="0">
         <article class="env-file"><div class="file-tab"><span>.env.local</span><b>LOCAL ONLY</b></div><pre><span>VITE_API_BASE_URL</span>=https://api.example.com
 <strong>PAYMENT_SECRET</strong>=sk_live_••••••••
@@ -129,8 +181,38 @@
       <div class="env-bottom"><b>.env</b><span>팀 규칙에 따라 쓰는 공통 기본값</span><b>.env.local</b><span>내 PC의 실제 비밀값</span><b>.env.example</b><span>값 없이 이름만 공유하는 견본</span></div>
     </section>
 
+    <section class="slide" data-title="공개해도 되는 값 vs 절대 안 되는 값" id="public-secret-slide">
+      <header class="slide-head"><div><div class="eyebrow warning">08 · PUBLIC vs SECRET</div><h2>같은 '키'라도<br>공개용과 비밀용은 다릅니다</h2></div><span>10</span></header>
+      <div class="lesson">
+        <div class="lesson-compare">
+          <div class="pos"><h3>공개해도 되는 값 <span class="tag">PUBLIC</span></h3>
+            <ul><li><b>·</b>공개 API 주소 (api.example.com)</li><li><b>·</b>지도·분석용 공개키</li><li><b>·</b>VITE_ / NEXT_PUBLIC_ 붙은 값</li></ul>
+            <div class="foot">어차피 브라우저로 내려가도 되는 값</div></div>
+          <div class="neg"><h3>절대 비공개 <span class="tag">SECRET</span></h3>
+            <ul><li><b>·</b>결제 비밀키 (sk_live_…)</li><li><b>·</b>DB 비밀번호 · 접속 주소</li><li><b>·</b>관리자 토큰 · 외부 서비스 시크릿</li></ul>
+            <div class="foot">노출되면 즉시 폐기·재발급해야 함</div></div>
+        </div>
+        <div class="scene"><div class="house" aria-hidden="true"><div class="roof"></div><div class="body"></div><div class="door"></div><div class="sign">주소 공개</div><div class="keypad">••••</div></div><div class="scene-cap"><b>비유 · 집</b><p><strong>주소</strong>(공개)는 알려줘도 되지만, <strong>현관 비밀번호</strong>(비밀)는 절대 안 됩니다. 둘 다 정보지만 성격이 다릅니다.</p></div></div>
+      </div>
+      <div class="slide-takeaway"><b>구분법</b><p>"이 값이 브라우저에 보여도 괜찮은가?" — <strong>아니오</strong>면 무조건 서버 환경변수로 옮깁니다.</p></div>
+    </section>
+
+    <section class="slide" data-title="인증과 인가는 다른 질문" id="auth-slide">
+      <header class="slide-head"><div><div class="eyebrow warning">09 · AUTH</div><h2>로그인(인증)과 권한(인가)은<br>다른 질문에 답합니다</h2></div><span>11</span></header>
+      <div class="lesson">
+        <div class="lesson-compare">
+          <div><h3>인증 · Authentication <span class="tag" style="background:var(--blue);color:#0c0a1f">WHO</span></h3>
+            <ul><li><b>?</b>"너 누구야?"</li><li><b>·</b>아이디·비밀번호, 소셜 로그인</li><li><b>·</b>신원을 확인하는 단계</li></ul></div>
+          <div><h3>인가 · Authorization <span class="tag" style="background:var(--live);color:#142a05">WHAT</span></h3>
+            <ul><li><b>?</b>"넌 뭘 할 수 있어?"</li><li><b>·</b>수강생 / 관리자 권한 구분</li><li><b>·</b>행동을 허용·차단하는 단계</li></ul></div>
+        </div>
+        <div class="scene"><div class="building" aria-hidden="true"><div class="floor deny"><span>3F · 운영 데이터</span><span class="tag">권한</span></div><div class="floor deny"><span>2F · 타인 주문</span><span class="tag">권한</span></div><div class="floor allow"><span>1F · 내 정보</span><span class="tag">권한</span></div></div><div class="scene-cap"><b>비유 · 건물</b><p>출입증으로 <strong>들어오는 것</strong>(인증)과, <strong>갈 수 있는 층</strong>(인가)은 다릅니다. 로그인했다고 모든 층에 가는 건 아닙니다.</p></div></div>
+      </div>
+      <div class="slide-takeaway"><b>핵심</b><p>로그인만 확인하고 <strong>권한 검사를 빠뜨리면</strong>, 로그인한 누구나 남의 데이터를 볼 수 있게 됩니다.</p></div>
+    </section>
+
     <section class="slide" data-title="데이터 접근 규칙" id="rules-slide">
-      <header class="slide-head"><div><div class="eyebrow warning">07 · DATA / PERMISSIONS</div><h2>데이터 보안은 역할에 따라<br>접근을 나누는 일입니다</h2></div><span>08</span></header>
+      <header class="slide-head"><div><div class="eyebrow warning">06 · DATA / PERMISSIONS</div><h2>데이터 보안은 역할에 따라<br>접근을 나누는 일입니다</h2></div><span>07</span></header>
       <div class="rules-documentary">
         <article class="firestore-console" data-firestore-role="guest">
           <div class="firestore-top"><span class="firebase-mark">◆</span><b>Firebase console</b><span>class-project</span><em id="firestore-publish">PUBLISHED</em></div>
@@ -144,8 +226,27 @@
       </div>
     </section>
 
+    <section class="slide" data-title="데이터는 표처럼 쌓이고 네 가지로 다룬다" id="crud-slide">
+      <header class="slide-head"><div><div class="eyebrow">11 · DATA / CRUD</div><h2>데이터는 '표'처럼 쌓이고<br>네 가지 동작으로 다룹니다</h2></div><span>13</span></header>
+      <div class="lesson tight">
+        <div class="lesson-lead">새로고침해도 사라지지 않는 정보는 <em>데이터베이스</em>에 저장됩니다. 표(테이블)의 행을 <em>추가·조회·수정·삭제</em>하는 것이 데이터 작업의 전부입니다. 버튼을 눌러보세요.</div>
+        <div class="crud2">
+          <div class="crud2-controls">
+            <button type="button" data-crud2="create">추가<small>CREATE</small></button>
+            <button type="button" data-crud2="read">조회<small>READ</small></button>
+            <button type="button" data-crud2="update">수정<small>UPDATE</small></button>
+            <button type="button" data-crud2="delete">삭제<small>DELETE</small></button>
+          </div>
+          <div class="crud2-table" id="crud2-table">
+            <div class="crud2-row head"><span>id</span><span>name</span><span>role</span></div>
+          </div>
+          <div class="crud2-status" id="crud2-status"></div>
+        </div>
+      </div>
+    </section>
+
     <section class="slide" data-title="Vercel과 Firebase의 역할" id="platform-slide">
-      <header class="slide-head"><div><div class="eyebrow">08 · PLATFORM DECISION</div><h2>Vercel과 Firebase는<br>맡는 역할이 다릅니다</h2></div><span>09</span></header>
+      <header class="slide-head"><div><div class="eyebrow">07 · PLATFORM DECISION</div><h2>Vercel과 Firebase는<br>맡는 역할이 다릅니다</h2></div><span>08</span></header>
       <div class="platform-documentary">
         <div class="platform-console" data-platform-mode="vercel">
           <section class="platform-app vercel-console"><div class="platform-app-top"><b>▲ Vercel</b><span>vibe-team</span><em>Production</em></div><div class="platform-side"><span class="active">Overview</span><span>Deployments</span><span>Logs</span><span>Settings</span></div><div class="platform-app-body"><small>PROJECT</small><b>class-project</b><div class="deployment-line"><i></i><span>main</span><b>Ready</b></div><div class="deployment-url">class-project.vercel.app</div><div class="mini-log"><span>Build completed</span><span>Deployment ready</span></div></div></section>
@@ -159,8 +260,48 @@
       <div class="platform-combo"><b>Vercel + Firebase</b><span>웹 화면은 Vercel에서 공개하고, 로그인과 데이터는 Firebase에 연결할 수 있습니다.</span></div>
     </section>
 
+    <section class="slide" data-title="에러와 로그 읽는 법" id="logs-slide">
+      <header class="slide-head"><div><div class="eyebrow danger">14 · READ THE LOGS</div><h2>배포가 실패하면<br>로그의 '빨간 줄'부터 봅니다</h2></div><span>17</span></header>
+      <div class="lesson lesson-split">
+        <div class="lesson-panel" style="background:#0a0f17;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">
+          <div style="color:#9fb0b7;font-size:13px;margin-bottom:12px">▌ build.log</div>
+          <div style="line-height:1.95;font-size:14px">
+            <div style="color:#cfd8e6">$ npm run build</div>
+            <div style="color:#8fb0a8">Installing dependencies… done</div>
+            <div style="color:#8fb0a8">Building…</div>
+            <div style="color:#ff8b98">Error: Module not found:</div>
+            <div style="color:#ff8b98">&nbsp;&nbsp;'./componets/Button'&nbsp;&nbsp;← 오타</div>
+            <div style="color:#ffce7a">Build failed. Deployment canceled.</div>
+          </div>
+        </div>
+        <div class="lesson-panel">
+          <ul class="lesson-kv">
+            <li><code>1 멈춤</code><span>어느 단계에서 멈췄는지 확인합니다</span></li>
+            <li><code>2 복사</code><span>빨간 <b>Error</b> 줄과 파일 경로 전체</span></li>
+            <li><code>3 질문</code><span>AI에게: 상황 + 명령어 + 에러 전문</span></li>
+            <li><code>4 수정</code><span>제안된 파일을 확인하고 적용</span></li>
+            <li><code>5 재배포</code><span>다시 push → 로그가 통과하는지 확인</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-takeaway"><b>관점</b><p>에러 메시지는 혼내는 말이 아니라 <strong>어디가 막혔는지 알려주는 이정표</strong>입니다. 그대로 복사해서 AI에게 주세요.</p></div>
+    </section>
+
+    <section class="slide" data-title="무료 한도와 책임" id="limits-slide">
+      <header class="slide-head"><div><div class="eyebrow">15 · LIMITS & CARE</div><h2>무료로 시작하되<br>한도와 책임을 압니다</h2></div><span>18</span></header>
+      <div class="lesson">
+        <div class="lesson-cards" style="--n:4">
+          <article class="a-live"><div class="badge">₩</div><h3>무료로 시작</h3><p>Vercel·Firebase 모두 개인 프로젝트는 무료 한도로 충분히 시작할 수 있습니다.</p></article>
+          <article class="a-amber"><div class="badge">↑</div><h3>비용 신호</h3><p>방문자·DB 읽기쓰기·저장 용량이 무료 한도를 넘으면 그때부터 과금됩니다.</p></article>
+          <article class="a-pink"><div class="badge">!</div><h3>개인정보 최소</h3><p>꼭 필요한 정보만 받고, 비밀번호는 직접 저장하지 말고 로그인 서비스에 맡깁니다.</p></article>
+          <article class="a-indigo"><div class="badge">↓</div><h3>백업</h3><p>중요한 데이터는 내보내기로 주기적으로 백업해 둡니다.</p></article>
+        </div>
+        <div class="lesson-lead">무료라고 무한이 아닙니다. <em>한도·비용·개인정보</em>는 서비스를 공개하는 순간부터 내 책임입니다.</div>
+      </div>
+    </section>
+
     <section class="slide" data-title="한 번의 release가 공개 URL이 되기까지" id="release-slide">
-      <header class="slide-head"><div><div class="eyebrow">09 · RELEASE TO LIVE</div><h2>검증한 release로<br>서비스를 공개합니다</h2></div><span>10</span></header>
+      <header class="slide-head"><div><div class="eyebrow">08 · RELEASE TO LIVE</div><h2>검증한 release로<br>서비스를 공개합니다</h2></div><span>09</span></header>
       <div class="release-documentary" data-release-state="0">
         <article class="release-log"><div class="console-title"><span></span><span></span><span></span><b>release / production</b><em id="release-badge">WAITING</em></div><div class="release-lines" id="release-lines"><p>시작을 누르면 release 기준점부터 공개 URL까지 진행됩니다.</p></div><div class="release-domain" id="release-domain"><span>https://</span><b>my-project.vercel.app</b><em>대기</em></div></article>
         <aside class="release-map"><div class="release-track"><button type="button" data-release-node="0"><b>01</b><span>Release</span></button><button type="button" data-release-node="1"><b>02</b><span>Build</span></button><button type="button" data-release-node="2"><b>03</b><span>Connect</span></button><button type="button" data-release-node="3"><b>04</b><span>Live URL</span></button><i id="release-packet"></i></div><div class="release-stack"><span>GitHub · version source</span><span>Vercel · web build</span><span>Firebase · auth / data</span></div><div class="release-explain"><b id="release-title">release 기준점 선택</b><p id="release-copy">검증한 버전 하나를 기준으로 build와 공개를 진행합니다.</p></div><div class="release-controls"><button type="button" id="release-start">시작</button><button type="button" id="release-next">다음</button><button type="button" class="quiet-button" id="release-pause">일시정지</button><button type="button" class="quiet-button" id="release-reset">초기화</button></div></aside>
@@ -168,15 +309,40 @@
     </section>
 
     <section class="slide" data-title="공개 전 최종 점검" id="launch-slide">
-      <header class="slide-head"><div><div class="eyebrow warning">10 · LAUNCH CHECK</div><h2>공개 URL에서는<br>사용자처럼 다시 확인합니다</h2></div><span>11</span></header>
+      <header class="slide-head"><div><div class="eyebrow warning">09 · LAUNCH CHECK</div><h2>공개 URL에서는<br>사용자처럼 다시 확인합니다</h2></div><span>10</span></header>
       <div class="launch-documentary"><div class="launch-browser-action" data-launch-state="start"><section class="live-site-shell"><div class="live-site-top"><span></span><span></span><span></span><b>class-project.vercel.app</b><em>LIVE</em></div><nav><b>VIBE CLASS</b><span id="launch-user-chip">로그인</span></nav><div class="live-site-hero"><small>2026 SUMMER</small><h3>AI로 만드는<br>나만의 서비스</h3><p id="launch-hero-copy">공개 URL에서 실제 기능을 확인합니다.</p><button type="button" id="launch-action-button">로그인하기</button></div><div class="live-site-card" id="launch-data-card"><span>내 수강 신청</span><b>아직 저장된 신청이 없습니다.</b><em>READY</em></div><div class="live-site-toast" id="launch-toast">저장 완료 · Firestore에 기록되었습니다.</div></section><aside class="launch-control-room"><div class="launch-meter"><span>PUBLIC URL QA</span><b id="launch-score">0 / 4</b></div><button type="button" data-launch-check="login"><i></i><span>로그인과 로그아웃</span><b>실행</b></button><button type="button" data-launch-check="data"><i></i><span>저장과 데이터 읽기</span><b>실행</b></button><button type="button" data-launch-check="mobile"><i></i><span>모바일 화면</span><b>실행</b></button><button type="button" data-launch-check="secret"><i></i><span>비밀값과 권한</span><b>실행</b></button><p id="launch-copy">각 항목을 누르면 왼쪽 공개 사이트에서 실제 사용자 동작이 재연됩니다.</p><div class="launch-actions"><button type="button" id="launch-play">전체 재생</button><button type="button" class="quiet-button" id="launch-reset">초기화</button></div></aside></div><article class="launch-browser"><div class="browser-chrome light"><i></i><i></i><i></i><small>my-project.vercel.app</small><b id="launch-live">LIVE</b></div><div class="browser-content korean-site"><span>VIBE CLASS</span><div><small>2026 SUMMER</small><strong>AI로 만드는<br>나만의 서비스</strong><p>실제 공개 URL에서 다시 확인합니다.</p><button>수강 신청</button></div><ul><li>개발 환경</li><li>프로젝트</li><li>배포</li></ul></div></article><article class="launch-checks"><div class="check-head"><span>PUBLIC URL CHECK</span><b>0 / 4</b></div></article></div>
     </section>
 
-    <section class="slide timer-slide" data-title="30분 실습"><header class="slide-head"><div><div class="eyebrow">PRACTICE · 30 MINUTES</div><h2>지금부터 실습 시간입니다</h2></div><span>12</span></header><div class="timer-stage"><div><p>오늘 배운 흐름을 내 프로젝트에 적용해 보세요.</p><ul><li>현재 작업을 GitHub에 기록하기</li><li>.env.local과 .gitignore 확인하기</li><li>release 기준점에서 환경변수와 공개 URL 점검하기</li></ul></div><div class="timer-clock"><b id="timer-display">30:00</b><div><button type="button" id="timer-toggle">시작</button><button type="button" class="quiet-button" id="timer-reset">초기화</button></div></div></div><div class="timer-progress"><i id="timer-fill"></i></div></section>
+    <section class="slide timer-slide" data-title="30분 실습"><header class="slide-head"><div><div class="eyebrow">PRACTICE · 30 MINUTES</div><h2>지금부터 실습 시간입니다</h2></div><span>11</span></header><div class="timer-stage"><div><p>오늘 배운 흐름을 내 프로젝트에 적용해 보세요.</p><ul><li>현재 작업을 GitHub에 기록하기</li><li>.env.local과 .gitignore 확인하기</li><li>release 기준점에서 환경변수와 공개 URL 점검하기</li></ul></div><div class="timer-clock"><b id="timer-display">30:00</b><div><button type="button" id="timer-toggle">시작</button><button type="button" class="quiet-button" id="timer-reset">초기화</button></div></div></div><div class="timer-progress"><i id="timer-fill"></i></div></section>
 
-    <section class="slide next-slide" data-title="다음 강의 예고"><div class="next-scene"><div><div class="eyebrow">NEXT · SESSION 06</div><h2>쇼케이스 및<br><em>Q&amp;A</em></h2><p>완성한 프로젝트를 함께 보고, 서로의 요청 방식과 결과물을 피드백합니다.</p></div><div class="next-grid"><span>PROJECT</span><span>DEMO</span><span>FEEDBACK</span><span>SHOWCASE</span></div></div><span class="next-number">13</span></section>
+    <section class="slide next-slide" data-title="다음 강의 예고"><div class="next-scene"><div><div class="eyebrow">NEXT · SESSION 06</div><h2>쇼케이스 및<br><em>Q&amp;A</em></h2><p>완성한 프로젝트를 함께 보고, 서로의 요청 방식과 결과물을 피드백합니다.</p></div><div class="next-grid"><span>PROJECT</span><span>DEMO</span><span>FEEDBACK</span><span>SHOWCASE</span></div></div><span class="next-number">12</span></section>
   </main>
   <nav class="deck-nav"><button type="button" id="prev-slide" aria-label="이전 슬라이드">‹</button><span id="slide-count">1 / 13</span><button type="button" id="next-slide" aria-label="다음 슬라이드">›</button></nav>
+  <script type="application/json" id="demo-stage-config">
+  {
+    "title": "class-project",
+    "cwd": "/class-project",
+    "open": "/class-project/src/components/ApplyButton.jsx",
+    "fs": [
+      { "name": "class-project", "type": "dir", "children": [
+        { "name": "src", "type": "dir", "children": [
+          { "name": "components", "type": "dir", "children": [
+            { "name": "ApplyButton.jsx", "type": "file", "content": "// 수강 신청 버튼 컴포넌트\nexport function ApplyButton() {\n  return (\n    <button className=\"apply\">\n      수강 신청\n    </button>\n  );\n}\n" },
+            { "name": "ApplyButton.css", "type": "file", "content": ".apply {\n  background: #c6ff4a;\n  color: #142a05;\n  border-radius: 8px;\n  padding: 12px 18px;\n}\n" }
+          ] },
+          { "name": "App.jsx", "type": "file", "content": "import { ApplyButton } from './components/ApplyButton';\n\nexport default function App() {\n  return (\n    <main>\n      <h1>VIBE CLASS</h1>\n      <ApplyButton />\n    </main>\n  );\n}\n" }
+        ] },
+        { "name": "public", "type": "dir", "children": [
+          { "name": "index.html", "type": "file", "content": "<!doctype html>\n<html lang=\"ko\">\n  <body><div id=\"root\"></div></body>\n</html>\n" }
+        ] },
+        { "name": ".env.local", "type": "file", "content": "PAYMENT_SECRET=sk_live_여기에_비밀값\nDATABASE_URL=postgres://...\n" },
+        { "name": ".gitignore", "type": "file", "content": "node_modules\n.env.local\ndist\n" },
+        { "name": "package.json", "type": "file", "content": "{\n  \"name\": \"class-project\",\n  \"scripts\": {\n    \"dev\": \"vite\"\n  }\n}\n" }
+      ] }
+    ]
+  }
+  </script>
+  <script src="./_shared/demo-stage.js"></script>
   <script src="./session-05-security-api.js"></script>
 </body>
 </html>

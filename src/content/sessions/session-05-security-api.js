@@ -13,7 +13,8 @@ function showSlide(index) {
 document.getElementById('prev-slide').addEventListener('click', () => showSlide(currentSlide - 1));
 document.getElementById('next-slide').addEventListener('click', () => showSlide(currentSlide + 1));
 document.addEventListener('keydown', (event) => {
-  if (event.target.closest('button')) return;
+  if (document.body.classList.contains('demo-open')) return;
+  if (event.target.closest('button, input, textarea')) return;
   if (event.key === 'ArrowLeft') showSlide(currentSlide - 1);
   if (event.key === 'ArrowRight' || event.key === ' ') showSlide(currentSlide + 1);
 });
@@ -22,33 +23,13 @@ const localScene = document.getElementById('local-live-slide').querySelector('.l
 const localCopy = document.getElementById('local-live-copy');
 document.getElementById('local-live-next').addEventListener('click', () => {
   localScene.classList.add('is-live');
-  localCopy.textContent = '공개 URL을 통해 외부 사용자의 접속이 허용되었습니다.';
+  localCopy.textContent = '공개 URL이 생겼습니다. 이제 내 노트북을 꺼도 사람들이 접속합니다.';
 });
 document.getElementById('local-live-reset').addEventListener('click', () => {
   localScene.classList.remove('is-live');
   localCopy.textContent = '지금은 내 노트북 안에서만 열립니다.';
 });
 
-const recordSteps = [
-  { title: '변경 확인', copy: '어떤 파일이 바뀌었는지 먼저 확인합니다.', lines: ['<span class="command">$ git status</span>', 'modified: src/ApplyButton.jsx', 'modified: src/ApplyButton.css'] },
-  { title: '저장 지점 생성', copy: '바뀐 파일과 변경 이유를 commit으로 남깁니다.', lines: ['<span class="command">$ git add src/ApplyButton.jsx src/ApplyButton.css</span>', '<span class="command">$ git commit -m "수강 신청 버튼 수정"</span>', '<span class="success">[main a8f21c3] 수강 신청 버튼 수정</span>'] },
-  { title: 'GitHub 전송', copy: '내 컴퓨터의 commit이 GitHub 저장소에 기록됩니다.', lines: ['<span class="command">$ git push origin main</span>', 'Writing objects: 100%', '<span class="success">main -> main · GitHub updated</span>'] }
-];
-let recordIndex = -1;
-const recordLines = document.getElementById('record-lines');
-const recordStatus = document.getElementById('record-status');
-function renderRecord() {
-  if (recordIndex < 0) {
-    recordLines.innerHTML = '<p>수강 신청 버튼의 색상을 수정했습니다.</p>';
-    recordStatus.innerHTML = '<b>기록 전</b><span>먼저 현재 변경을 확인합니다.</span>';
-    return;
-  }
-  const step = recordSteps[recordIndex];
-  recordLines.innerHTML = step.lines.map((line) => `<p>${line}</p>`).join('');
-  recordStatus.innerHTML = `<b>${step.title}</b><span>${step.copy}</span>`;
-}
-document.getElementById('git-record-next').addEventListener('click', () => { recordIndex = Math.min(recordSteps.length - 1, recordIndex + 1); renderRecord(); });
-document.getElementById('git-record-reset').addEventListener('click', () => { recordIndex = -1; renderRecord(); });
 
 const gitCommandSteps = {
   status: {
@@ -124,21 +105,6 @@ function renderGitCommand(mode) {
 }
 document.querySelectorAll('[data-git-command]').forEach((button) => button.addEventListener('click', () => renderGitCommand(button.dataset.gitCommand)));
 
-const collabCopy = {
-  clone: ['처음 프로젝트 내려받기', 'GitHub의 프로젝트를 내 컴퓨터에 복제합니다. 이후 같은 저장소와 연결된 상태로 작업합니다.'],
-  zip: ['ZIP으로 한 번 받아보기', 'ZIP은 빠르게 결과물을 확인할 때는 편하지만, pull과 push를 통한 지속 협업에는 맞지 않습니다.'],
-  branch: ['내 작업선을 분리하기', '로그인 기능처럼 별도 작업을 할 때는 branch를 만들어 main 작업을 안전하게 지킵니다.'],
-  push: ['내 작업을 공유하기', 'commit한 변경을 GitHub에 올리면 팀의 공통 기준점에 새 기록이 생깁니다.'],
-  pull: ['팀원의 변경 받기', '작업을 시작하거나 합치기 전에는 pull로 팀의 최신 기준을 먼저 받습니다.'],
-  pr: ['변경 검토 요청', 'Pull Request에서 바뀐 파일과 이유를 보고, 팀원이 확인한 뒤 main에 합칩니다.'],
-  merge: ['검증한 변경만 main과 release로', 'merge 뒤에도 모든 commit을 바로 배포하지 않습니다. 확인한 기준점에 release를 붙여 배포하고, 문제가 생기면 이전 release로 되돌아갑니다.']
-};
-document.querySelectorAll('[data-collab-step]').forEach((button) => button.addEventListener('click', () => {
-  const [title, copy] = collabCopy[button.dataset.collabStep];
-  document.querySelectorAll('[data-collab-step]').forEach((item) => item.classList.toggle('active', item.dataset.collabStep === button.dataset.collabStep));
-  document.getElementById('team-map-title').textContent = title;
-  document.getElementById('team-map-copy').textContent = copy;
-}));
 
 const devtoolsSteps = [
   ['F12로 개발자도구 열기', '웹사이트를 쓰는 사람도 F12를 눌러 브라우저가 주고받는 요청을 확인할 수 있습니다.', '요청을 선택하면 전송 내용이 보입니다.'],
@@ -154,7 +120,6 @@ function renderDevtools() {
   document.getElementById('devtools-step').textContent = `STEP ${devtoolsIndex + 1} / ${devtoolsSteps.length}`;
   document.getElementById('devtools-title').textContent = step[0];
   document.getElementById('devtools-copy').textContent = step[1];
-  document.getElementById('request-detail').textContent = step[2];
 }
 document.getElementById('devtools-next').addEventListener('click', () => { devtoolsIndex = Math.min(devtoolsSteps.length - 1, devtoolsIndex + 1); renderDevtools(); });
 document.getElementById('devtools-reset').addEventListener('click', () => { devtoolsIndex = 0; renderDevtools(); });
@@ -250,150 +215,12 @@ document.getElementById('timer-toggle').addEventListener('click', () => {
 });
 document.getElementById('timer-reset').addEventListener('click', () => { clearInterval(timerHandle); timerHandle = null; timerSeconds = 1800; document.getElementById('timer-toggle').textContent = '시작'; renderTimer(); });
 
-renderRecord();
 renderDevtools();
 renderEnv();
 renderRelease();
 renderTimer();
 const requestedSlide = Number(new URLSearchParams(location.search).get('slide'));
 showSlide(Number.isFinite(requestedSlide) && requestedSlide > 0 ? requestedSlide - 1 : 0);
-
-// Advanced scene controls keep the visual state tied to the explanation.
-const githubOperationSteps = [
-  {
-    status: '변경 확인',
-    title: '변경 사항 확인',
-    copy: '수강 신청 버튼과 디자인 파일이 바뀌었습니다. 아직 GitHub 기록에는 없습니다.',
-    file: 'ApplyButton.jsx',
-    branch: 'main · working tree',
-    code: '<i>01</i> export function ApplyButton() {\n<i>02</i>   return &lt;button className="apply accent"&gt;수강 신청&lt;/button&gt;\n<i>03</i> }',
-    diff: 'src/components/ApplyButton.jsx · modified',
-    pageTitle: '확인 위치 · Code / working tree',
-    pageCopy: '아직 release나 배포는 없습니다. 먼저 파일을 확인하고 기록을 만듭니다.',
-    deployState: 'NOT DEPLOYED'
-  },
-  {
-    status: 'commit 생성',
-    title: '설명과 함께 저장',
-    copy: '현재 상태를 되돌아올 수 있는 commit으로 저장합니다.',
-    file: 'Commit a8f21c3',
-    branch: 'main · local commit',
-    code: '<i>01</i> $ git add src/components/ApplyButton.jsx\n<i>02</i> $ git commit -m "수강 신청 버튼 수정"\n<i>03</i> [main a8f21c3] 수강 신청 버튼 수정',
-    diff: 'commit a8f21c3 · local history created',
-    pageTitle: '확인 위치 · Commits 탭',
-    pageCopy: 'commit은 변경 이유가 적힌 저장 지점입니다. push 뒤 GitHub의 Commits 탭에서 확인합니다.',
-    deployState: 'WAITING FOR PUSH'
-  },
-  {
-    status: 'GitHub push',
-    title: '원격 저장소로 전송',
-    copy: '내 컴퓨터의 commit이 GitHub 저장소의 변경 기록에 도착했습니다.',
-    file: 'origin / main',
-    branch: 'main · GitHub synced',
-    code: '<i>01</i> $ git push origin main\n<i>02</i> Writing objects: 100%\n<i>03</i> main -&gt; main',
-    diff: 'GitHub history updated · deployment can start',
-    pageTitle: '확인 위치 · Commits / main',
-    pageCopy: 'GitHub의 main에 도착한 commit입니다. 협업 검토와 배포의 출발점이 됩니다.',
-    deployState: 'READY FOR REVIEW'
-  },
-  {
-    status: 'release 기준점',
-    title: '배포 가능한 버전 표시',
-    copy: '기록 중 검증된 버전에 release tag를 붙이면 배포 기준점을 팀과 공유할 수 있습니다.',
-    file: 'Release v1.0.0',
-    branch: 'main · release candidate',
-    code: '<i>01</i> $ git tag v1.0.0\n<i>02</i> $ git push origin v1.0.0\n<i>03</i> Release v1.0.0 created',
-    diff: 'v1.0.0 · deployable release baseline',
-    pageTitle: '확인 위치 · Releases + Deployments',
-    pageCopy: 'release는 검증한 버전에 붙이는 이름입니다. Production은 이 버전을 가리켜야 무엇을 되돌릴지 분명해집니다.',
-    deployState: 'PRODUCTION · v1.0.0'
-  }
-];
-let githubOperationIndex = 0;
-function renderGithubOperations() {
-  const state = githubOperationSteps[githubOperationIndex];
-  const root = document.querySelector('.github-operations');
-  root.dataset.githubState = String(githubOperationIndex);
-  document.getElementById('github-operation-status').textContent = state.status;
-  document.getElementById('github-operation-title').textContent = state.title;
-  document.getElementById('github-operation-copy').textContent = state.copy;
-  document.getElementById('github-operation-file').textContent = state.file;
-  document.getElementById('github-operation-branch').textContent = state.branch;
-  document.getElementById('github-operation-code').innerHTML = state.code;
-  document.getElementById('github-operation-diff').innerHTML = `<span>${state.status}</span><b>${state.diff}</b>`;
-  document.getElementById('github-page-check-title').textContent = state.pageTitle;
-  document.getElementById('github-page-check-copy').textContent = state.pageCopy;
-  document.getElementById('github-deployment-tab').classList.toggle('active', githubOperationIndex === 3);
-  document.getElementById('release-deployment-map').dataset.deployState = state.deployState;
-  document.getElementById('github-commit-card').classList.toggle('active', githubOperationIndex >= 1);
-  document.getElementById('github-release-card').classList.toggle('is-ready', githubOperationIndex === 3);
-  document.getElementById('github-commit-tab').classList.toggle('active', githubOperationIndex >= 1 && githubOperationIndex < 3);
-  document.getElementById('github-release-tab').classList.toggle('active', githubOperationIndex === 3);
-}
-document.getElementById('github-operation-next').addEventListener('click', () => {
-  githubOperationIndex = Math.min(githubOperationSteps.length - 1, githubOperationIndex + 1);
-  renderGithubOperations();
-});
-document.getElementById('github-operation-reset').addEventListener('click', () => {
-  githubOperationIndex = 0;
-  renderGithubOperations();
-});
-
-const collabOperationSteps = {
-  clone: {
-    count: '01 / 06', title: 'clone · 연결된 작업실 열기', code: 'git clone https://github.com/vibe-team/class-project.git',
-    copy: '원격 저장소의 연결된 복사본을 내 컴퓨터에 만듭니다. ZIP과 달리 이후 변경을 보내고 받을 수 있습니다.',
-    analogyTitle: '비유 · 본사와 연결된 작업실', analogy: 'clone은 본사 창고의 물건을 한 번 빌리는 일이 아니라, 본사와 계속 연결되는 내 작업실을 여는 일입니다.',
-    localTitle: 'class-project 생성', localCopy: 'GitHub와 연결된 프로젝트가 내 작업대에 생깁니다.', teamTitle: '원격 저장소 연결', teamCopy: '같은 저장소의 최신 기록을 기준으로 시작합니다.'
-  },
-  branch: {
-    count: '03 / 06', title: 'checkout · 내 작업선 만들기', code: 'git checkout -b feature/login',
-    copy: 'main을 바로 흔들지 않고 로그인 기능을 위한 독립 작업선을 만듭니다.',
-    analogyTitle: '비유 · 공용 도로 옆 공사 구간', analogy: 'checkout은 모두가 쓰는 main 도로를 막지 않고, 내 공사 구간을 따로 여는 일입니다.',
-    localTitle: 'feature/login', localCopy: '로그인 기능을 안전하게 수정합니다.', teamTitle: 'main은 안정 유지', teamCopy: '다른 사람의 기준 작업은 계속 진행됩니다.'
-  },
-  push: {
-    count: '04 / 06', title: 'push · 내 변경을 공통 기준점으로 보내기', code: 'git push origin feature/login',
-    copy: '내 컴퓨터의 commit을 GitHub 원격 저장소로 보냅니다. 팀원이 검토할 수 있는 기록이 생깁니다.',
-    analogyTitle: '비유 · 완성한 부품을 본사 창고로 보내기', analogy: 'push는 내 작업실에서 끝난 부품을 본사 창고에 보내 다른 팀원이 확인하고 조립할 수 있게 하는 일입니다.',
-    localTitle: 'commit ready', localCopy: '내 변경에 설명을 붙여 보낼 준비를 마칩니다.', teamTitle: 'review available', teamCopy: 'GitHub에서 팀원이 변경을 확인할 수 있습니다.'
-  },
-  pull: {
-    count: '02 / 06', title: 'pull · 팀의 최신 변경을 받아오기', code: 'git pull origin main',
-    copy: '팀원이 올린 최신 기록을 내 작업실로 가져와 기준점을 맞춥니다.',
-    analogyTitle: '비유 · 본사에서 바뀐 설계도를 받기', analogy: 'pull은 내 작업실이 낡은 설계도로 일하지 않도록, 본사에서 바뀐 설계도를 받아오는 일입니다.',
-    localTitle: 'latest main synced', localCopy: '팀의 최신 변경을 반영합니다.', teamTitle: 'same source of truth', teamCopy: '모두가 같은 설계도를 기준으로 작업합니다.'
-  },
-  pr: {
-    count: '05 / 06', title: 'Pull Request · 바뀐 이유를 함께 검토하기', code: 'GitHub → Compare & pull request',
-    copy: 'GitHub에서 파일 차이와 변경 이유를 함께 보고, 다른 사람이 확인한 뒤에만 main에 합칩니다.',
-    analogyTitle: '비유 · 준공 전 검수대', analogy: 'PR은 공사를 끝냈다고 바로 본 건물에 연결하는 대신, 도면과 결과를 함께 검사하는 검수대입니다.',
-    localTitle: 'feature/login ready', localCopy: '내 작업선에서 변경을 끝냈습니다.', teamTitle: 'review gate open', teamCopy: '팀원이 diff와 동작을 검토합니다.'
-  },
-  merge: {
-    count: '06 / 06', title: 'merge / release · 검증한 버전만 공개하기', code: 'Merge pull request → tag v1.0.0 → deploy',
-    copy: '검토를 통과한 변경을 main에 합친 뒤, 배포할 기준점에 release 이름을 붙여 Production으로 보냅니다.',
-    analogyTitle: '비유 · 승인된 설계도만 준공', analogy: '모든 초안이 바로 문을 여는 것은 아닙니다. 확인한 설계도에만 준공 번호를 붙이고 공개합니다.',
-    localTitle: 'main merged', localCopy: '검증한 변경이 공통 기준점에 합쳐졌습니다.', teamTitle: 'v1.0.0 deployed', teamCopy: '문제가 나면 이전 release로 되돌릴 기준도 남습니다.'
-  }
-};
-function renderCollabOperation(mode) {
-  const state = collabOperationSteps[mode];
-  const root = document.querySelector('.collab-command-stage');
-  root.dataset.collabMode = mode;
-  document.getElementById('collab-command-title').textContent = state.title;
-  document.getElementById('collab-step-count').textContent = state.count;
-  document.getElementById('collab-command-code').textContent = state.code;
-  document.getElementById('collab-command-copy').textContent = state.copy;
-  document.getElementById('collab-analogy-title').textContent = state.analogyTitle;
-  document.getElementById('collab-analogy-copy').textContent = state.analogy;
-  document.getElementById('collab-local-title').textContent = state.localTitle;
-  document.getElementById('collab-local-copy').textContent = state.localCopy;
-  document.getElementById('collab-team-title').textContent = state.teamTitle;
-  document.getElementById('collab-team-copy').textContent = state.teamCopy;
-  document.querySelectorAll('.collab-command-stage [data-collab-step]').forEach((button) => button.classList.toggle('active', button.dataset.collabStep === mode));
-}
-document.querySelectorAll('.collab-command-stage [data-collab-step]').forEach((button) => button.addEventListener('click', () => renderCollabOperation(button.dataset.collabStep)));
 
 function renderDevtoolsWorkbench() {
   const step = devtoolsSteps[devtoolsIndex];
@@ -499,9 +326,70 @@ document.getElementById('launch-reset').addEventListener('click', () => {
   document.getElementById('launch-copy').textContent = '각 항목을 누르면 왼쪽 공개 사이트에서 실제 사용자 동작이 재연됩니다.';
 });
 
-renderGithubOperations();
 renderGitCommand('status');
-renderCollabOperation('clone');
 renderDevtoolsWorkbench();
 renderFirestoreConsole('guest');
 renderPlatformConsole('vercel');
+
+// Auto-number content slides so inserted slides stay sequential.
+function numberSlides() {
+  let section = 0;
+  slides.forEach((slide, index) => {
+    const corner = slide.querySelector('.slide-head > span');
+    if (corner && /^\d+$/.test(corner.textContent.trim())) corner.textContent = String(index + 1).padStart(2, '0');
+    const eyebrow = slide.querySelector('.eyebrow');
+    if (eyebrow && /^\d{2}\s·\s/.test(eyebrow.textContent)) {
+      section += 1;
+      eyebrow.textContent = eyebrow.textContent.replace(/^\d{2}/, String(section).padStart(2, '0'));
+    }
+  });
+  const nextNumber = document.querySelector('.next-number');
+  if (nextNumber) nextNumber.textContent = String(slides.length);
+}
+numberSlides();
+
+// Interactive CRUD table (data section) — each op makes a clear visible change
+const crudBase = [
+  { id: 1, name: '지민', role: '관리자' },
+  { id: 2, name: '서연', role: '수강생' },
+  { id: 3, name: '도윤', role: '수강생' },
+  { id: 4, name: '하린', role: '수강생' },
+];
+function buildCrudRow(record, cls) {
+  const row = document.createElement('div');
+  row.className = 'crud2-row' + (cls ? ' ' + cls : '');
+  row.innerHTML = `<span>${record.id}</span><span>${record.name}</span><span>${record.role}</span>`;
+  return row;
+}
+function selectCrud2(operation) {
+  const table = document.getElementById('crud2-table');
+  if (!table) return;
+  const status = document.getElementById('crud2-status');
+  document.querySelectorAll('[data-crud2]').forEach((button) => button.classList.toggle('active', button.dataset.crud2 === operation));
+  table.querySelectorAll('.crud2-row:not(.head)').forEach((row) => row.remove());
+  const rows = crudBase.map((record) => ({ ...record }));
+  let statusHTML = '';
+  if (operation === 'create') {
+    rows.forEach((record) => table.appendChild(buildCrudRow(record)));
+    table.appendChild(buildCrudRow({ id: 5, name: '민준', role: '수강생' }, 'created'));
+    statusHTML = '<span class="op c">CREATE</span><span class="msg">새 행 <b>5 · 민준</b>을 추가했습니다 — 행이 하나 늘었습니다.</span>';
+  } else if (operation === 'read') {
+    rows.forEach((record, index) => { const row = buildCrudRow(record, 'reading'); row.style.animationDelay = (index * 0.14) + 's'; table.appendChild(row); });
+    statusHTML = '<span class="op r">READ</span><span class="msg">저장된 <b>4명</b>을 그대로 불러옵니다 — 데이터는 바뀌지 않습니다.</span>';
+  } else if (operation === 'update') {
+    rows[1].role = '관리자';
+    rows.forEach((record, index) => table.appendChild(buildCrudRow(record, index === 1 ? 'updated' : '')));
+    statusHTML = '<span class="op u">UPDATE</span><span class="msg"><b>서연</b>의 role을 수강생 → <b>관리자</b>로 바꿨습니다.</span>';
+  } else if (operation === 'delete') {
+    const els = rows.map((record) => { const row = buildCrudRow(record); table.appendChild(row); return row; });
+    requestAnimationFrame(() => requestAnimationFrame(() => els[3].classList.add('removing')));
+    statusHTML = '<span class="op d">DELETE</span><span class="msg"><b>4 · 하린</b> 행을 삭제했습니다 — 행이 사라집니다.</span>';
+  }
+  if (status) status.innerHTML = statusHTML;
+}
+document.querySelectorAll('[data-crud2]').forEach((button) => button.addEventListener('click', () => selectCrud2(button.dataset.crud2)));
+if (document.getElementById('crud2-table')) {
+  crudBase.forEach((record) => document.getElementById('crud2-table').appendChild(buildCrudRow(record)));
+  const crudStatus = document.getElementById('crud2-status');
+  if (crudStatus) crudStatus.innerHTML = '<span class="op n">CRUD</span><span class="msg">버튼을 눌러 추가·조회·수정·삭제가 표를 어떻게 바꾸는지 확인하세요.</span>';
+}
