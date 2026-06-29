@@ -1023,6 +1023,8 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();move(1)}
   if(e.key==='ArrowLeft'){e.preventDefault();move(-1)}
 });
+// Deep-link for 6강 recap embed: ?slide=N pins a slide, ?embed=1 hides chrome. No effect during normal playback.
+(()=>{const p=new URLSearchParams(location.search);const n=Number(p.get('slide'));if(n>0){cur=Math.max(0,Math.min(slides.length-1,n-1));render()}if(p.get('embed')==='1'){const st=document.createElement('style');st.textContent='.nav-bar,.kb-hint,.edu-presenter-hud,.edu-laser-dot{display:none!important}';document.head.appendChild(st)}})();
 document.querySelectorAll('.card[data-hl]').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('lit')));
 document.querySelectorAll('.workbench-node[data-step]').forEach(node=>{
   node.addEventListener('click',()=>{

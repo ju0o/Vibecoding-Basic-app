@@ -2989,6 +2989,14 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') { e.preventDefault(); move(-1); }
 });
 
+// Deep-link for 6강 recap embed: ?slide=N pins a slide, ?embed=1 hides chrome. No effect during normal playback.
+(() => {
+  const p = new URLSearchParams(location.search);
+  const n = Number(p.get('slide'));
+  if (n > 0) { cur = Math.max(0, Math.min(slides.length - 1, n - 1)); render(); }
+  if (p.get('embed') === '1') { const st = document.createElement('style'); st.textContent = '.nav-bar,.kb-hint,.edu-presenter-hud,.edu-laser-dot{display:none!important}'; document.head.appendChild(st); }
+})();
+
 // ── 카드 클릭 강조 (수업 중 포인트 표시용) ──
 document.querySelectorAll('.card[data-hl]').forEach(card => {
   card.addEventListener('click', () => card.classList.toggle('lit'));

@@ -507,5 +507,17 @@
   </nav>
 
   <script src="./session-03-direction.bundle.js?v=20260612"></script>
+  <script>
+  // Deep-link for 6강 recap embed: ?slide=N pins a slide, ?embed=1 hides chrome. No effect during normal playback.
+  (function () {
+    var p = new URLSearchParams(location.search);
+    var n = Number(p.get('slide'));
+    if (n > 0) {
+      var pin = function () { var sl = document.querySelectorAll('.slide'); if (sl.length) sl.forEach(function (s, i) { s.classList.toggle('active', i === n - 1); }); };
+      window.addEventListener('load', function () { pin(); setTimeout(pin, 300); });
+    }
+    if (p.get('embed') === '1') { var st = document.createElement('style'); st.textContent = '.deck-nav{display:none!important}'; document.head.appendChild(st); }
+  })();
+  </script>
 </body>
 </html>
