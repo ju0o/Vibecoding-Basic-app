@@ -3,18 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>6강 - AI와 더 잘 일하기, 그리고 다음 단계</title>
+  <title>6강 - 5주의 여정 복기</title>
   <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
   <style>
-    /* ===== 6강 GROWTH theme (warm gold / sage — 5강 LAUNCH와 분리) ===== */
     :root{
-      --bg:#16110a; --panel:#211a10; --panel-2:#2a2114; --line:rgba(246,241,231,.13);
-      --ink:#f6f1e7; --muted:#b6a98f;
-      --gold:#f4b740; --gold-soft:rgba(244,183,64,.13);
-      --coral:#ff8b6b; --coral-soft:rgba(255,139,107,.13);
-      --sage:#a8cf9c; --sage-soft:rgba(168,207,156,.13);
-      --shadow:0 28px 80px rgba(0,0,0,.45);
-      font-family:Pretendard,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+      --bg:#16110a; --ink:#f6f1e7; --muted:#b6a98f;
+      --gold:#f4b740; --coral:#ff8b6b; --sage:#a8cf9c; --line:rgba(246,241,231,.13);
+      font-family:Pretendard,"Apple SD Gothic Neo",system-ui,sans-serif;
     }
     *{box-sizing:border-box}
     html,body{width:100%;height:100%;margin:0;overflow:hidden;color:var(--ink);
@@ -22,301 +17,148 @@
     button{font:inherit;cursor:pointer}
     h1,h2,h3,p{margin:0}
     .deck{position:relative;width:100%;height:100%;overflow:hidden}
-    .slide{display:none;position:absolute;inset:0;flex-direction:column;padding:clamp(30px,4vw,62px);background:linear-gradient(180deg,#16110a,#1a140b 70%,#1f1810)}
-    .slide.active{display:flex;animation:enter .5s ease both}
-    .slide.cover.active{display:grid}
-    .slide.closing.active{display:grid}
-    @keyframes enter{from{opacity:.4;transform:translateY(14px)}to{opacity:1;transform:none}}
-    .slide-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex:0 0 auto}
-    .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--gold);font:800 clamp(11px,1vw,14px) ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:1px}
-    .eyebrow span{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px var(--gold)}
-    h2{margin-top:12px;max-width:980px;font-size:clamp(32px,3.4vw,52px);line-height:1.1;font-weight:800}
-    h2 em{font-style:normal;color:var(--gold)}
-    .slide-head>span{color:rgba(246,241,231,.16);font:800 clamp(46px,6vw,90px) ui-monospace,Consolas,monospace;line-height:.75}
-    .body{display:grid;gap:clamp(16px,2vw,28px);flex:1 1 auto;align-content:center;min-height:0;margin-top:clamp(10px,2vh,26px)}
-    .lead{max-width:1040px;color:#e7ddca;font-size:clamp(20px,1.9vw,30px);line-height:1.42}
-    .lead em{font-style:normal;color:var(--gold);font-weight:800}
-    .takeaway{display:flex;align-items:center;gap:16px;flex:0 0 auto;margin-top:auto;padding:14px 18px;border-left:3px solid var(--gold);border-radius:0 12px 12px 0;background:rgba(33,26,16,.7);color:var(--muted);font-size:clamp(14px,1.15vw,18px)}
-    .takeaway b{color:var(--gold);white-space:nowrap}
-    .takeaway strong{color:var(--ink)}
-
-    /* cover */
-    .cover{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:center;gap:clamp(24px,3vw,48px)}
-    .cover-copy h1{margin:18px 0 18px;font-size:clamp(46px,5.4vw,86px);line-height:1.02;font-weight:850}
-    .cover-copy h1 em{font-style:normal;color:var(--gold)}
-    .cover-copy p{max-width:520px;color:var(--muted);font-size:clamp(18px,1.5vw,24px);line-height:1.55}
-    .cover-number{position:absolute;right:5%;bottom:4%;color:rgba(246,241,231,.14);font:800 clamp(64px,9vw,120px) ui-monospace,Consolas,monospace}
-
-    /* cards */
-    .cards{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:clamp(13px,1.5vw,22px)}
-    .cards article{display:flex;flex-direction:column;padding:clamp(18px,2vw,28px);border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.015))}
-    .cards .badge{display:grid;place-items:center;width:clamp(44px,3.8vw,56px);height:clamp(44px,3.8vw,56px);border-radius:14px;margin-bottom:14px;background:var(--gold-soft);color:var(--gold);font:900 clamp(16px,1.4vw,22px) ui-monospace,Consolas,monospace}
-    .cards h3{font-size:clamp(20px,1.7vw,28px)}
-    .cards h3 small{display:block;margin-top:3px;color:var(--muted);font:700 clamp(11px,.95vw,14px) ui-monospace,Consolas,monospace}
-    .cards p{margin-top:9px;color:var(--muted);font-size:clamp(15px,1.2vw,20px);line-height:1.45}
-    .cards .a-coral .badge{background:var(--coral-soft);color:var(--coral)}
-    .cards .a-sage .badge{background:var(--sage-soft);color:var(--sage)}
-
-    /* compare */
-    .compare{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,1.7vw,24px)}
-    .compare>div{display:flex;flex-direction:column;padding:clamp(18px,2.1vw,30px);border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.04)}
-    .compare .neg{border-color:rgba(255,139,107,.42);background:var(--coral-soft)}
-    .compare .pos{border-color:rgba(168,207,156,.5);background:var(--sage-soft)}
-    .compare h3{display:flex;align-items:center;gap:11px;font-size:clamp(21px,1.9vw,31px)}
-    .compare .tag{padding:4px 11px;border-radius:999px;font:800 12px ui-monospace,Consolas,monospace}
-    .compare .neg .tag{background:var(--coral);color:#3a160c}
-    .compare .pos .tag{background:var(--sage);color:#13280f}
-    .compare ul{margin:15px 0 0;padding:0;list-style:none;display:grid;gap:11px}
-    .compare li{display:grid;grid-template-columns:18px 1fr;gap:10px;color:#e7ddca;font-size:clamp(15px,1.25vw,20px);line-height:1.4}
-    .compare li b{color:var(--sage);font-weight:900}
-    .compare .neg li b{color:var(--coral)}
-    .compare .foot{margin-top:auto;padding-top:14px;color:var(--muted);font-size:clamp(14px,1.1vw,18px)}
-
-    /* journey rail */
-    .journey{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(8px,1vw,16px)}
-    .j-step{position:relative;padding:clamp(16px,1.8vw,26px) clamp(12px,1.2vw,18px);border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.04)}
-    .j-step b{color:var(--gold);font:800 clamp(12px,1vw,15px) ui-monospace,Consolas,monospace}
-    .j-step h3{margin-top:8px;font-size:clamp(17px,1.45vw,24px)}
-    .j-step p{margin-top:6px;color:var(--muted);font-size:clamp(13px,1.05vw,17px);line-height:1.35}
-    .j-step:not(:last-child)::after{content:"→";position:absolute;right:-11px;top:50%;transform:translateY(-50%);z-index:2;color:var(--gold);font-size:18px}
-
-    /* loop / flow strip */
-    .flow{display:flex;align-items:stretch;gap:clamp(7px,.9vw,13px)}
-    .flow .node{flex:1;display:grid;gap:7px;align-content:center;padding:clamp(15px,1.7vw,24px) clamp(10px,1.1vw,16px);border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.04);text-align:center}
-    .flow .node small{color:var(--gold);font:800 11px ui-monospace,Consolas,monospace}
-    .flow .node b{font-size:clamp(17px,1.5vw,24px)}
-    .flow .node span{color:var(--muted);font-size:clamp(13px,1.05vw,17px);line-height:1.32}
-    .flow .arr{display:grid;place-items:center;flex:0 0 auto;color:var(--coral);font-size:clamp(18px,1.6vw,26px)}
-    .loop-badge{justify-self:center;margin-top:6px;padding:7px 16px;border:1px solid var(--gold);border-radius:999px;color:var(--gold);font:800 13px Pretendard,sans-serif}
-
-    /* art slot (다른 AI가 생성) */
-    .art-slot{display:grid;gap:14px;min-height:0}
-    .art-tag{justify-self:start;display:inline-flex;align-items:center;gap:8px;padding:5px 13px;border:1px solid var(--gold);border-radius:999px;color:var(--gold);font:800 11px ui-monospace,Consolas,monospace;letter-spacing:.06em}
-    .art-tag::before{content:"●";color:var(--gold)}
-    .art-frame{position:relative;flex:1;min-height:clamp(180px,34vh,360px);display:grid;place-items:center;border:2px dashed rgba(244,183,64,.5);border-radius:18px;
-      background:repeating-linear-gradient(45deg,rgba(244,183,64,.045) 0 14px,transparent 14px 28px)}
-    .art-frame span{color:var(--gold);font:800 clamp(14px,1.3vw,20px) Pretendard,sans-serif;letter-spacing:.04em;opacity:.85}
-    .art-brief{padding:clamp(14px,1.6vw,22px);border:1px solid var(--line);border-radius:14px;background:rgba(33,26,16,.6)}
-    .art-brief b{color:var(--gold);font:800 clamp(12px,1vw,15px) ui-monospace,Consolas,monospace}
-    .art-brief p{margin-top:8px;color:#e7ddca;font-size:clamp(14px,1.2vw,19px);line-height:1.5}
-    .art-brief .motion{margin-top:8px;color:var(--sage);font-size:clamp(13px,1.05vw,17px)}
-    .art-split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,1.7vw,24px)}
-    .art-split .art-frame{min-height:clamp(150px,26vh,280px)}
-    .art-cap{margin-top:10px;text-align:center;color:var(--muted);font-size:clamp(14px,1.15vw,18px)}
-    .art-cap b{color:var(--ink)}
-
-    /* closing */
-    .closing{grid-template-rows:1fr auto;gap:clamp(18px,2.5vh,34px)}
-    .closing .art-frame{min-height:0}
-    .closing-copy{text-align:center}
-    .closing-copy h2{margin:0 auto;max-width:none;font-size:clamp(34px,4vw,60px)}
-    .closing-copy p{margin-top:14px;color:var(--muted);font-size:clamp(18px,1.5vw,24px)}
-
+    .slide{display:none;position:absolute;inset:0;background:#16110a}
+    .slide.active{display:flex}
+    /* intro slides */
+    .slide.intro{flex-direction:column;justify-content:center;padding:clamp(34px,5vw,80px);
+      background:radial-gradient(120% 90% at 80% -8%,rgba(244,183,64,.18),transparent 52%),linear-gradient(160deg,#16110a,#1f1810);animation:fade .5s ease both}
+    @keyframes fade{from{opacity:.3}to{opacity:1}}
+    .intro .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--gold);font:800 clamp(12px,1.1vw,15px) ui-monospace,Consolas,monospace;letter-spacing:1px}
+    .intro .eyebrow span{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px var(--gold)}
+    .intro h1{margin:22px 0 18px;font-size:clamp(44px,5.6vw,92px);line-height:1.04;font-weight:850}
+    .intro h1 em{font-style:normal;color:var(--gold)}
+    .intro p{max-width:760px;color:var(--muted);font-size:clamp(19px,1.7vw,28px);line-height:1.5}
+    .intro .arc{display:flex;align-items:center;gap:14px;margin-top:34px;color:#e7ddca;font:800 clamp(15px,1.5vw,24px) ui-monospace,Consolas,monospace}
+    .intro .arc i{width:34px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+    .intro .arc b:nth-child(3){color:var(--coral)} .intro .arc b:nth-child(5){color:var(--sage)}
+    .intro .map{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:38px;max-width:1000px}
+    .intro .map div{padding:16px 14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.04)}
+    .intro .map b{color:var(--gold);font:800 12px ui-monospace,Consolas,monospace}
+    .intro .map span{display:block;margin-top:7px;color:#e7ddca;font-size:clamp(14px,1.1vw,18px)}
+    /* recap frames */
+    .slide.recap{flex-direction:column}
+    .recap-bar{flex:0 0 auto;display:flex;align-items:center;gap:14px;padding:12px clamp(18px,2.4vw,40px);background:linear-gradient(180deg,#1f1810,#16110a);border-bottom:1px solid var(--line)}
+    .recap-tag{padding:5px 13px;border-radius:999px;background:var(--gold);color:#3a2a08;font:800 13px Pretendard,sans-serif}
+    .recap-bar b{font-size:clamp(17px,1.6vw,24px);font-weight:800}
+    .recap-bar .meta{margin-left:auto;color:var(--muted);font:800 11px ui-monospace,Consolas,monospace;letter-spacing:1px}
+    .recap-frame{flex:1;min-height:0;position:relative;background:#0c0a07}
+    .recap-iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+    .recap-frame .loading{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font:700 14px ui-monospace,Consolas,monospace}
     /* nav */
-    .deck-nav{position:fixed;right:22px;bottom:22px;z-index:40;display:flex;align-items:center;gap:10px;padding:9px;border:1px solid var(--line);border-radius:999px;background:rgba(22,17,10,.85);backdrop-filter:blur(14px)}
-    .deck-nav button{width:50px;height:50px;border:0;border-radius:50%;color:var(--ink);background:rgba(255,255,255,.08);font-size:22px}
-    .deck-nav span{min-width:66px;text-align:center;color:var(--muted);font:800 16px Pretendard,sans-serif}
-    .slide.active .cards article,.slide.active .compare>div,.slide.active .j-step,.slide.active .flow .node{animation:rise .5s cubic-bezier(.16,1,.3,1) both}
-    .slide.active .cards article:nth-child(2),.slide.active .compare>div:nth-child(2){animation-delay:.08s}
-    .slide.active .cards article:nth-child(3){animation-delay:.16s}.slide.active .cards article:nth-child(4){animation-delay:.24s}
-    @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-    @media (max-width:1000px){.cover,.compare,.cards,.journey,.art-split,.flow{grid-template-columns:1fr}}
+    .deck-nav{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:12px;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(22,17,10,.92);backdrop-filter:blur(14px)}
+    .deck-nav button{width:48px;height:48px;border:0;border-radius:50%;color:var(--ink);background:rgba(255,255,255,.1);font-size:22px}
+    .deck-nav span{min-width:78px;text-align:center;color:var(--muted);font:800 15px Pretendard,sans-serif}
   </style>
 </head>
 <body>
   <main class="deck">
 
-    <section class="slide cover active" data-title="여정 그 다음">
-      <div class="cover-copy">
-        <div class="eyebrow"><span></span>SESSION 06 · LECTURE</div>
-        <h1>5주의 여정 끝,<br><em>그 다음 길</em>로</h1>
-        <p>이제 ‘만드는 법’을 넘어, AI와 더 잘 일하는 법과 내 프로젝트를 계속 키우는 법을 봅니다.</p>
-      </div>
-      <div class="art-slot">
-        <div class="art-tag">CINEMATIC · 16:9 · 모션</div>
-        <div class="art-frame"><span>이미지 / 영상 생성 영역</span></div>
-        <div class="art-brief"><b>아트디렉션 (생성 요청)</b><p>1~5강의 여정을 압축한 시네마틱 몽타주. 어두운 1인 작업실 → 코드가 빛으로 조립되며 빌드 → 창밖 도시의 불빛(공개된 서비스)으로 번지는 따뜻한 새벽빛. 인물의 뒷모습이 앞으로 걷는 실루엣으로 ‘다음 길’을 암시.<span class="motion">모션: 느린 dolly-in + 빛 번짐(bloom), 6~8초 루프.</span></p></div>
-      </div>
-      <div class="cover-number">06</div>
-    </section>
-
-    <section class="slide" data-title="우리가 만든 것">
-      <header class="slide-head"><div><div class="eyebrow"><span></span>01 · LOOK BACK</div><h2>여기까지, <em>당신이 만든 것</em></h2></div><span>02</span></header>
-      <div class="body">
-        <div class="journey">
-          <div class="j-step"><b>1강</b><h3>AI 이해</h3><p>AI를 도구로 보는 관점</p></div>
-          <div class="j-step"><b>2강</b><h3>바이브코딩</h3><p>코딩을 몰라도 만드는 방식</p></div>
-          <div class="j-step"><b>3강</b><h3>개발 용어</h3><p>프론트·백·API·DB 이해</p></div>
-          <div class="j-step"><b>4강</b><h3>파일 구조</h3><p>수정 위치를 찾는 법</p></div>
-          <div class="j-step"><b>5강</b><h3>배포·보안·데이터</h3><p>링크로 공유하는 서비스</p></div>
-        </div>
-        <div class="lead">코딩을 몰라도, 아이디어를 ‘공개된 서비스’까지 만들었습니다. 오늘은 그 힘을 <em>더 잘 쓰는 법</em>입니다.</div>
+    <section class="slide intro active" data-title="5주의 여정">
+      <div class="eyebrow"><span></span>SESSION 06 · LOOK BACK</div>
+      <h1>지금까지 고생하셨습니다.<br><em>5주의 여정</em>입니다</h1>
+      <p>바이브코딩의 개념부터 원리, 이해까지 — 오늘은 우리가 함께 지나온 길을 그 장면 그대로 되짚어 봅니다.</p>
+      <div class="arc"><b>개념</b><i></i><b>원리</b><i></i><b>이해</b></div>
+      <div class="map">
+        <div><b>1강</b><span>AI 이해</span></div>
+        <div><b>2강</b><span>바이브코딩</span></div>
+        <div><b>3강</b><span>개발 용어</span></div>
+        <div><b>4강</b><span>파일 구조</span></div>
+        <div><b>5강</b><span>배포·보안·데이터</span></div>
       </div>
     </section>
 
-    <section class="slide" data-title="요청이 결과를 만든다">
-      <header class="slide-head"><div><div class="eyebrow"><span></span>02 · PROMPTING</div><h2>같은 AI인데<br>결과가 다른 이유</h2></div><span>03</span></header>
-      <div class="body">
-        <div class="compare">
-          <div class="neg"><h3>모호한 요청 <span class="tag">VAGUE</span></h3>
-            <ul><li><b>·</b>“예쁘게 해줘”</li><li><b>·</b>“로그인 만들어줘”</li><li><b>·</b>“안 돼, 고쳐줘”</li></ul>
-            <div class="foot">→ AI가 추측으로 채움 · 엉뚱한 결과</div></div>
-          <div class="pos"><h3>구체적인 요청 <span class="tag">CLEAR</span></h3>
-            <ul><li><b>·</b>“신청 버튼을 라임색·둥근 모서리로”</li><li><b>·</b>“이메일 로그인, 비번 8자 이상”</li><li><b>·</b>“이 에러(전문) 났어, 이 파일에서”</li></ul>
-            <div class="foot">→ AI가 정확히 이해 · 원하는 결과</div></div>
-        </div>
-        <div class="lead">AI의 실력은 같습니다. <em>요청의 구체성</em>이 결과를 가릅니다.</div>
-      </div>
+    <section class="slide intro" data-title="무엇을 만들 수 있는가">
+      <div class="eyebrow"><span></span>NOW</div>
+      <h1>이제 여러분은<br><em>무엇을 만들 수 있나요?</em></h1>
+      <p>코딩을 몰라도 시작했고, 아이디어를 공개된 서비스까지 만들었습니다. 그 출발점이었던 장면부터 다시 봅니다.</p>
     </section>
 
-    <section class="slide" data-title="좋은 요청의 4요소">
-      <header class="slide-head"><div><div class="eyebrow"><span></span>03 · GOOD REQUEST</div><h2>좋은 요청에는<br>네 가지가 들어갑니다</h2></div><span>04</span></header>
-      <div class="body">
-        <div class="cards" style="--n:4">
-          <article><div class="badge">1</div><h3>맥락<small>CONTEXT</small></h3><p>지금 무엇을 만들고 있는지, 어떤 화면·파일에 대한 이야기인지.</p></article>
-          <article class="a-sage"><div class="badge">2</div><h3>목표<small>GOAL</small></h3><p>끝나면 무엇이 달라져 있어야 하는지(완성의 모습).</p></article>
-          <article class="a-coral"><div class="badge">3</div><h3>제약<small>LIMITS</small></h3><p>쓰면 안 되는 것, 꼭 지켜야 할 것(예산·범위·규칙).</p></article>
-          <article><div class="badge">4</div><h3>예시<small>EXAMPLE</small></h3><p>원하는 결과의 구체 예시(문구·색·동작 한두 개).</p></article>
-        </div>
-        <div class="takeaway"><b>한 줄 요령</b><p>이 네 가지를 한 문장에 담으면, 다시 묻고 고치는 횟수가 <strong>확</strong> 줄어듭니다.</p></div>
-      </div>
-    </section>
+    <!-- 1강 · 무엇을 만들 수 있는가 -->
+    <section class="slide recap" data-title="1강 복기" data-src="./session-01-ai-understanding.html" data-slide="5"><div class="recap-bar"><span class="recap-tag">1강 복기</span><b>이제 여러분은 무엇을 만들 수 있는가</b><span class="meta">1강 · SLIDE 5</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
+    <section class="slide recap" data-title="1강 복기" data-src="./session-01-ai-understanding.html" data-slide="6"><div class="recap-bar"><span class="recap-tag">1강 복기</span><b>AI로 만들 수 있는 것들</b><span class="meta">1강 · SLIDE 6</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
 
-    <section class="slide" data-title="요청 → 결과">
-      <header class="slide-head"><div><div class="eyebrow"><span></span>04 · BEFORE / AFTER</div><h2>같은 목표, 다른 요청,<br><em>다른 결과</em></h2></div><span>05</span></header>
-      <div class="body">
-        <div class="art-split">
-          <div><div class="art-tag">CINEMATIC · 모호</div><div class="art-frame"><span>이미지 생성 영역 · A</span></div><div class="art-cap"><b>“예쁘게 해줘”</b> → 의도와 다른 엉뚱한 화면</div></div>
-          <div><div class="art-tag">CINEMATIC · 구체</div><div class="art-frame"><span>이미지 생성 영역 · B</span></div><div class="art-cap"><b>“라임색 둥근 신청 버튼”</b> → 정확히 원하던 화면</div></div>
-        </div>
-        <div class="art-brief"><b>아트디렉션 (생성 요청)</b><p>왼쪽: 안개처럼 흐릿하고 무작위로 흩어진 UI 조각(혼란). 오른쪽: 또렷하고 정돈된 같은 화면(명료). 같은 구도, 디테일·선명도만 대비.<span class="motion">모션: 왼쪽은 미세한 흔들림·노이즈, 오른쪽은 또렷하게 스냅인.</span></p></div>
-      </div>
-    </section>
+    <!-- 2강 · 바이브코딩이란 -->
+    <section class="slide recap" data-title="2강 복기" data-src="./session-02-vibe-coding.html" data-slide="2"><div class="recap-bar"><span class="recap-tag">2강 복기</span><b>바이브코딩이란? — 코드를 외우지 않아도</b><span class="meta">2강 · SLIDE 2</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
+    <section class="slide recap" data-title="2강 복기" data-src="./session-02-vibe-coding.html" data-slide="3"><div class="recap-bar"><span class="recap-tag">2강 복기</span><b>바이브코딩의 방식</b><span class="meta">2강 · SLIDE 3</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
 
-    <section class="slide" data-title="에러 루프">
-      <header class="slide-head"><div><div class="eyebrow"><span></span>05 · DEBUG LOOP</div><h2>에러는 끝이 아니라<br><em>한 바퀴 도는 루프</em>입니다</h2></div><span>06</span></header>
-      <div class="body">
-        <div class="flow">
-          <div class="node"><small>1</small><b>멈춤</b><span>어느 단계서 멈췄나</span></div><div class="arr">→</div>
-          <div class="node"><small>2</small><b>복사</b><span>에러 전문 + 파일 경로</span></div><div class="arr">→</div>
-          <div class="node"><small>3</small><b>질문</b><span>상황 + 명령 + 에러</span></div><div class="arr">→</div>
-          <div class="node"><small>4</small><b>수정</b><span>제안 변경 확인</span></div><div class="arr">→</div>
-          <div class="node"><small>5</small><b>재실행</b><span>통과까지 반복</span></div>
-        </div>
-        <div class="loop-badge">↺ 막히면 당황 말고 한 바퀴</div>
-        <div class="takeaway"><b>관점</b><p>에러 메시지는 혼내는 말이 아니라 <strong>이정표</strong>입니다. 한 줄만 던지지 말고 ‘상황째로’ AI에게 주세요.</p></div>
-      </div>
-    </section>
+    <!-- 2강 · 워크플로우 -->
+    <section class="slide recap" data-title="2강 복기" data-src="./session-02-vibe-coding.html" data-slide="10"><div class="recap-bar"><span class="recap-tag">2강 복기</span><b>바이브코딩 워크플로우</b><span class="meta">2강 · SLIDE 10</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
 
-    <section class="slide" data-title="잘게 쪼개기">
-      <header class="slide-head"><div><div class="eyebrow"><span></span>06 · SLICE IT</div><h2>큰 일은 <em>한 번에 하나</em>로<br>쪼갭니다</h2></div><span>07</span></header>
-      <div class="body">
-        <div class="compare">
-          <div class="neg"><h3>한꺼번에 <span class="tag">TOO BIG</span></h3>
-            <ul><li><b>·</b>“쇼핑몰 전체 만들어줘”</li><li><b>·</b>어디서 막혔는지 알기 어려움</li><li><b>·</b>고치면 다른 데가 깨짐</li></ul>
-            <div class="foot">→ 한 번에 거대한 변경 = 디버깅 지옥</div></div>
-          <div class="pos"><h3>한 조각씩 <span class="tag">ONE STEP</span></h3>
-            <ul><li><b>·</b>상품 목록 → 장바구니 → 결제 → 주문 확인</li><li><b>·</b>조각마다 바로 실행해 확인</li><li><b>·</b>되면 커밋하고 다음으로</li></ul>
-            <div class="foot">→ 작게 가면 막혀도 빨리 복구</div></div>
-        </div>
-        <div class="lead">“다음 한 조각은 무엇일까?” — 이 질문이 막힘을 푸는 가장 빠른 길입니다.</div>
-      </div>
-    </section>
+    <!-- 3강 · 개발 원리 -->
+    <section class="slide recap" data-title="3강 복기" data-src="./session-03-direction.html" data-slide="2"><div class="recap-bar"><span class="recap-tag">3강 복기</span><b>개발의 원리 — 앱을 건물처럼</b><span class="meta">3강 · SLIDE 2</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
+    <!-- 3강 · 프론트/백/DB/API -->
+    <section class="slide recap" data-title="3강 복기" data-src="./session-03-direction.html" data-slide="3"><div class="recap-bar"><span class="recap-tag">3강 복기</span><b>프론트엔드 · 백엔드 · 데이터베이스 · API</b><span class="meta">3강 · SLIDE 3</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
 
-    <section class="slide" data-title="검토하는 법">
-      <header class="slide-head"><div><div class="eyebrow"><span></span>07 · TRUST BUT VERIFY</div><h2>AI가 틀릴 때를<br>대비합니다</h2></div><span>08</span></header>
-      <div class="body">
-        <div class="cards" style="--n:3">
-          <article class="a-coral"><div class="badge">!</div><h3>의심</h3><p>AI는 확신에 차서 틀리기도 합니다. 중요한 값·로직은 그대로 믿지 말고 다시 확인.</p></article>
-          <article><div class="badge">⤳</div><h3>변경 내역 읽기</h3><p>무엇이 바뀌었는지 diff(변경 전후)를 보고, 의도한 파일·범위인지 확인합니다.</p></article>
-          <article class="a-sage"><div class="badge">✓</div><h3>작게 검증</h3><p>한 번에 하나씩 적용하고, 바로 실행해 결과를 눈으로 확인합니다.</p></article>
-        </div>
-        <div class="takeaway"><b>역할 분담</b><p>작성은 AI가 빠르게, <strong>판단과 검증</strong>은 사람이. 이 경계가 사고를 막습니다.</p></div>
-      </div>
-    </section>
+    <!-- 4강 · 파일 구조 (2~8) -->
+    <section class="slide recap" data-title="4강 복기" data-src="./session-04-revenue.html" data-slide="2"><div class="recap-bar"><span class="recap-tag">4강 복기</span><b>파일 구조 이해</b><span class="meta">4강 · SLIDE 2</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
+    <section class="slide recap" data-title="4강 복기" data-src="./session-04-revenue.html" data-slide="3"><div class="recap-bar"><span class="recap-tag">4강 복기</span><b>파일 구조 이해</b><span class="meta">4강 · SLIDE 3</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
+    <section class="slide recap" data-title="4강 복기" data-src="./session-04-revenue.html" data-slide="4"><div class="recap-bar"><span class="recap-tag">4강 복기</span><b>파일 구조 이해</b><span class="meta">4강 · SLIDE 4</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
+    <section class="slide recap" data-title="4강 복기" data-src="./session-04-revenue.html" data-slide="5"><div class="recap-bar"><span class="recap-tag">4강 복기</span><b>파일 구조 이해</b><span class="meta">4강 · SLIDE 5</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
+    <section class="slide recap" data-title="4강 복기" data-src="./session-04-revenue.html" data-slide="6"><div class="recap-bar"><span class="recap-tag">4강 복기</span><b>파일 구조 이해</b><span class="meta">4강 · SLIDE 6</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
+    <section class="slide recap" data-title="4강 복기" data-src="./session-04-revenue.html" data-slide="7"><div class="recap-bar"><span class="recap-tag">4강 복기</span><b>파일 구조 이해</b><span class="meta">4강 · SLIDE 7</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
+    <section class="slide recap" data-title="4강 복기" data-src="./session-04-revenue.html" data-slide="8"><div class="recap-bar"><span class="recap-tag">4강 복기</span><b>파일 구조 이해</b><span class="meta">4강 · SLIDE 8</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
 
-    <section class="slide" data-title="안전하게 더하기">
-      <header class="slide-head"><div><div class="eyebrow"><span></span>08 · SAFE CHANGE</div><h2>기능 하나를 <em>안전하게</em><br>더하는 사이클</h2></div><span>09</span></header>
-      <div class="body">
-        <div class="flow">
-          <div class="node"><small>STEP 1</small><b>작은 요청</b><span>한 기능만 콕</span></div><div class="arr">→</div>
-          <div class="node"><small>STEP 2</small><b>결과 확인</b><span>브라우저에서 직접</span></div><div class="arr">→</div>
-          <div class="node"><small>STEP 3</small><b>커밋</b><span>되돌릴 지점 저장</span></div><div class="arr">→</div>
-          <div class="node"><small>STEP 4</small><b>다음 기능</b><span>또 작게</span></div>
-        </div>
-        <div class="takeaway"><b>핵심</b><p>한 번에 큰 변경 ✕. <strong>작게 바꾸고 · 확인하고 · 커밋.</strong> 문제가 생기면 직전 커밋으로 되돌립니다(5강 release/rollback).</p></div>
-      </div>
-    </section>
+    <!-- 5강 · 배포·보안·데이터 (3,6,8,9,13,14) -->
+    <section class="slide recap" data-title="5강 복기" data-src="./session-05-security-api.html" data-slide="3"><div class="recap-bar"><span class="recap-tag">5강 복기</span><b>내 컴퓨터와 공개 URL</b><span class="meta">5강 · SLIDE 3</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
+    <section class="slide recap" data-title="5강 복기" data-src="./session-05-security-api.html" data-slide="6"><div class="recap-bar"><span class="recap-tag">5강 복기</span><b>Git 명령어와 GitHub</b><span class="meta">5강 · SLIDE 6</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
+    <section class="slide recap" data-title="5강 복기" data-src="./session-05-security-api.html" data-slide="8"><div class="recap-bar"><span class="recap-tag">5강 복기</span><b>브라우저에서 보이는 공개 요청 (F12)</b><span class="meta">5강 · SLIDE 8</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
+    <section class="slide recap" data-title="5강 복기" data-src="./session-05-security-api.html" data-slide="9"><div class="recap-bar"><span class="recap-tag">5강 복기</span><b>비밀값과 배포 환경</b><span class="meta">5강 · SLIDE 9</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
+    <section class="slide recap" data-title="5강 복기" data-src="./session-05-security-api.html" data-slide="13"><div class="recap-bar"><span class="recap-tag">5강 복기</span><b>Vercel과 Firebase의 역할</b><span class="meta">5강 · SLIDE 13</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
+    <section class="slide recap" data-title="5강 복기" data-src="./session-05-security-api.html" data-slide="14"><div class="recap-bar"><span class="recap-tag">5강 복기</span><b>push 한 번이 자동 배포로</b><span class="meta">5강 · SLIDE 14</span></div><div class="recap-frame"><div class="loading">불러오는 중…</div></div></section>
 
-    <section class="slide" data-title="배울 것 vs 맡길 것">
-      <header class="slide-head"><div><div class="eyebrow"><span></span>09 · LEARN / DELEGATE</div><h2>직접 배울 것과<br>AI에 맡길 것</h2></div><span>10</span></header>
-      <div class="body">
-        <div class="compare">
-          <div class="pos"><h3>직접 배우면 좋은 것 <span class="tag">YOU</span></h3>
-            <ul><li><b>·</b>내 프로젝트 구조 읽기(어디에 뭐가 있나)</li><li><b>·</b>에러 메시지 읽고 상황 설명하기</li><li><b>·</b>원하는 걸 말로 또렷이 표현</li><li><b>·</b>결과가 맞는지 검증</li></ul></div>
-          <div><h3>AI에 맡겨도 되는 것 <span class="tag" style="background:var(--gold);color:#3a2a08">AI</span></h3>
-            <ul><li><b>·</b>반복되는 코드 작성</li><li><b>·</b>문법·보일러플레이트</li><li><b>·</b>초안·아이디어 빠르게 뽑기</li><li><b>·</b>리팩터링·정리 제안</li></ul></div>
-        </div>
-        <div class="lead"><em>판단과 검증은 나</em>, 손이 많이 가는 작성은 AI. 그래서 도구에 끌려가지 않습니다.</div>
-      </div>
-    </section>
-
-    <section class="slide" data-title="막혔을 때">
-      <header class="slide-head"><div><div class="eyebrow"><span></span>10 · GET UNSTUCK</div><h2>막혔을 때, 도움은<br><em>가까이</em> 있습니다</h2></div><span>11</span></header>
-      <div class="body">
-        <div class="art-slot">
-          <div class="art-tag">CINEMATIC · 16:9</div>
-          <div class="art-frame"><span>이미지 생성 영역</span></div>
-          <div class="art-brief"><b>아트디렉션 (생성 요청)</b><p>책상 앞 인물에게서 세 갈래의 따뜻한 빛줄기가 뻗어 나가는 장면 — 각각 ‘공식 문서’(책/문서 아이콘), ‘커뮤니티’(사람들), ‘AI’(빛나는 대화창). 길을 잃지 않는다는 안정감.<span class="motion">모션: 세 빛줄기가 순서대로 차오르며 연결.</span></p></div>
-        </div>
-        <div class="lead">① <em>공식 문서</em> — 정확한 사실 · ② <em>커뮤니티</em> — 비슷한 경험 · ③ <em>AI</em> — 상황째로 묻기. 셋을 함께 씁니다.</div>
-      </div>
-    </section>
-
-    <section class="slide" data-title="다음 트랙">
-      <header class="slide-head"><div><div class="eyebrow"><span></span>11 · WHAT'S NEXT</div><h2>여기서 멈추지<br>않아도 됩니다</h2></div><span>12</span></header>
-      <div class="body">
-        <div class="cards" style="--n:2">
-          <article class="a-coral"><div class="badge">💡</div><h3>응용 · 수익화반<small>PRODUCT & BUSINESS</small></h3><p>만든 것을 고객이 쓰는 ‘상품’으로. 문제 정의 · MVP · 가격 · 결제 · 출시까지 작은 사업 흐름으로 연결합니다.</p></article>
-          <article class="a-sage"><div class="badge">⚡</div><h3>AI 워크스페이스 심화반<small>AGENTIC WORKFLOW</small></h3><p>MCP · Skill · Agent로 반복 업무를 자동화하는 나만의 AI 작업 시스템을 설계합니다.</p></article>
-        </div>
-        <div class="lead">기초반은 <em>‘만들 수 있다’</em>를, 다음 트랙은 <em>‘계속 키운다’</em>를 다룹니다.</div>
-      </div>
-    </section>
-
-    <section class="slide" data-title="작은 습관">
-      <header class="slide-head"><div><div class="eyebrow"><span></span>12 · HABITS</div><h2>실력은 <em>작은 습관</em>에서<br>자랍니다</h2></div><span>13</span></header>
-      <div class="body">
-        <div class="cards" style="--n:3">
-          <article><div class="badge">10’</div><h3>매일 10분</h3><p>크게 몰아치지 말고, 작게 자주. 손이 기억하게 만듭니다.</p></article>
-          <article class="a-sage"><div class="badge">✎</div><h3>기록</h3><p>막힌 점과 해결 방법을 한 줄씩 메모. 다음에 같은 데서 안 막힙니다.</p></article>
-          <article class="a-coral"><div class="badge">↗</div><h3>공유</h3><p>만든 걸 누군가에게 보여주기. 피드백이 가장 빠른 성장입니다.</p></article>
-        </div>
-        <div class="takeaway"><b>오늘 할 일</b><p>오늘 만든 것 하나를 <strong>링크로 공유</strong>하고, 막혔던 한 가지를 적어두세요.</p></div>
-      </div>
-    </section>
-
-    <section class="slide closing" data-title="마무리">
-      <div class="art-slot">
-        <div class="art-tag">CINEMATIC · 16:9 · 엔딩 영상</div>
-        <div class="art-frame"><span>엔딩 영상 영역 · 새벽 지평선을 향해 앞으로 걸어가는 인물의 따뜻한 실루엣 (빛 번짐 · 느린 전진 · 6초 루프)</span></div>
-      </div>
-      <div class="closing-copy">
-        <h2>이제 당신은<br>AI와 함께 <em>만드는 사람</em>입니다</h2>
-        <p>코딩을 몰라도 시작했고, 공개된 서비스를 만들었고, 계속 키울 수 있습니다.</p>
-      </div>
-      <span class="cover-number">06</span>
+    <section class="slide intro" data-title="마무리">
+      <div class="eyebrow"><span></span>THE END</div>
+      <h1>이제 당신은<br>AI와 함께 <em>만드는 사람</em>입니다</h1>
+      <p>5주의 여정을 끝까지 함께해 주셔서 고맙습니다. 오늘 본 장면들이, 앞으로 무엇이든 만들어 갈 당신의 출발점입니다.</p>
     </section>
 
   </main>
-
-  <nav class="deck-nav"><button type="button" id="prev-slide" aria-label="이전">‹</button><span id="slide-count">1 / 14</span><button type="button" id="next-slide" aria-label="다음">›</button></nav>
-
+  <nav class="deck-nav"><button type="button" id="prev-slide" aria-label="이전">‹</button><span id="slide-count">1 / 1</span><button type="button" id="next-slide" aria-label="다음">›</button></nav>
   <script>
     const slides = [...document.querySelectorAll('.slide')];
     const counter = document.getElementById('slide-count');
     let current = 0;
-    function show(i){ current = Math.max(0, Math.min(slides.length - 1, i)); slides.forEach((s, n) => s.classList.toggle('active', n === current)); counter.textContent = `${current + 1} / ${slides.length}`; }
+    counter.textContent = `1 / ${slides.length}`;
+
+    function pin(frame, n) {
+      try {
+        const doc = frame.contentDocument;
+        if (!doc) return;
+        if (!doc.getElementById('recap-style')) {
+          const st = doc.createElement('style');
+          st.id = 'recap-style';
+          st.textContent = '.deck-nav,.nav-bar,.kb-hint,.edu-presenter-hud,.edu-laser-dot,.demo-fab{display:none!important}';
+          (doc.head || doc.documentElement).appendChild(st);
+        }
+        const inner = doc.querySelectorAll('.slide');
+        if (inner.length) inner.forEach((s, i) => s.classList.toggle('active', i === n - 1));
+      } catch (e) { /* cross-origin guard (shouldn't happen on file://) */ }
+    }
+
+    function loadRecap(slide) {
+      const host = slide.querySelector('.recap-frame');
+      const src = slide.dataset.src;
+      const n = Number(slide.dataset.slide);
+      let frame = host.querySelector('iframe');
+      if (!frame) {
+        frame = document.createElement('iframe');
+        frame.className = 'recap-iframe';
+        frame.setAttribute('loading', 'eager');
+        frame.src = src + '?slide=' + n;
+        frame.addEventListener('load', () => { const l = host.querySelector('.loading'); if (l) l.remove(); setTimeout(() => pin(frame, n), 180); });
+        host.appendChild(frame);
+      } else {
+        pin(frame, n);
+      }
+    }
+
+    function show(i) {
+      current = Math.max(0, Math.min(slides.length - 1, i));
+      slides.forEach((s, n) => s.classList.toggle('active', n === current));
+      counter.textContent = `${current + 1} / ${slides.length}`;
+      const s = slides[current];
+      if (s.classList.contains('recap')) loadRecap(s);
+    }
     document.getElementById('prev-slide').addEventListener('click', () => show(current - 1));
     document.getElementById('next-slide').addEventListener('click', () => show(current + 1));
     document.addEventListener('keydown', (e) => {
@@ -324,9 +166,7 @@
       if (e.key === 'ArrowLeft') show(current - 1);
       if (e.key === 'ArrowRight' || e.key === ' ') show(current + 1);
     });
-    const params = new URLSearchParams(location.search);
-    const s = Number(params.get('slide'));
-    show(Number.isFinite(s) && s > 0 ? s - 1 : 0);
+    show(0);
   </script>
 </body>
 </html>
