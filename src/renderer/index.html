@@ -19,21 +19,51 @@
         </div>
       </header>
 
-      <div class="rail-label">
-        <span>COURSES</span>
-        <button id="btn-search" class="icon-button" type="button" title="과정·회차·자료 검색 (Ctrl+K)" aria-label="검색">⌕</button>
-      </div>
-      <nav id="course-list" class="course-list" aria-label="강의 과정"></nav>
+      <button id="btn-search" class="rail-search" type="button" title="과정·회차·자료 검색 (Ctrl+K)" aria-label="과정·회차·자료 검색">
+        <span class="rail-search-icon" aria-hidden="true">
+          <svg viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="4.5"></circle><path d="M12 12l4 4"></path></svg>
+        </span>
+        <span class="rail-search-copy">과정, 회차, 자료 검색</span>
+        <kbd>Ctrl K</kbd>
+      </button>
 
-      <div class="rail-tools">
-        <button id="btn-planner" class="rail-tool" type="button">
-          <span class="tool-icon">▦</span>
-          <span><b>일정 및 메모</b><small>수업 운영 기록</small></span>
+      <div class="rail-section">
+        <button class="rail-label rail-toggle active" type="button" data-rail-section="courses" aria-expanded="true">
+          <span class="rail-toggle-copy">
+            <span class="rail-toggle-chevron">▾</span>
+            <span>COURSES</span>
+          </span>
+          <span id="course-count-badge" class="rail-count">00</span>
         </button>
-        <button id="btn-settings" class="rail-tool" type="button">
-          <span class="tool-icon">⚙</span>
-          <span><b>화면 설정</b><small>표시 모드와 배율</small></span>
+        <div id="rail-section-courses" class="rail-section-body">
+          <nav id="course-list" class="course-list" aria-label="강의 과정"></nav>
+        </div>
+      </div>
+
+      <div class="rail-section rail-section-secondary">
+        <button class="rail-label rail-toggle active" type="button" data-rail-section="workspace" aria-expanded="true">
+          <span class="rail-toggle-copy">
+            <span class="rail-toggle-chevron">▾</span>
+            <span>WORKSPACE</span>
+          </span>
         </button>
+        <div id="rail-section-workspace" class="rail-section-body rail-tools">
+          <div id="workspace-overview" class="workspace-overview"></div>
+          <button id="btn-planner" class="rail-tool" type="button">
+            <span class="tool-icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20"><rect x="3" y="4" width="14" height="12" rx="2"></rect><path d="M6 2v4"></path><path d="M14 2v4"></path><path d="M3 8h14"></path></svg>
+            </span>
+            <span><b>일정 및 메모</b><small id="planner-status">수업 운영 기록</small></span>
+            <em id="planner-badge" class="tool-badge">기록</em>
+          </button>
+          <button id="btn-settings" class="rail-tool" type="button">
+            <span class="tool-icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="2.8"></circle><path d="M10 3.2v2.1"></path><path d="M10 14.7v2.1"></path><path d="M3.2 10h2.1"></path><path d="M14.7 10h2.1"></path><path d="M5.2 5.2l1.5 1.5"></path><path d="M13.3 13.3l1.5 1.5"></path><path d="M14.8 5.2l-1.5 1.5"></path><path d="M6.7 13.3l-1.5 1.5"></path></svg>
+            </span>
+            <span><b>화면 설정</b><small id="settings-status">표시 모드와 배율</small></span>
+            <em id="settings-badge" class="tool-badge">기본</em>
+          </button>
+        </div>
       </div>
 
       <footer class="rail-footer">
@@ -60,6 +90,10 @@
       </div>
 
       <div id="list-summary" class="list-summary"></div>
+      <div id="list-view-tabs" class="list-view-tabs" aria-hidden="true"></div>
+      <div id="list-db-toolbar" class="list-db-toolbar" aria-hidden="true"></div>
+      <div id="list-columns" class="list-columns" aria-hidden="true"></div>
+      <div id="db-popover" class="db-popover hidden" aria-hidden="true"></div>
       <div id="lesson-list" class="lesson-list"></div>
     </section>
 
@@ -70,8 +104,9 @@
           <i></i>
           <span id="detail-position">LESSON</span>
         </div>
+        <div id="topbar-context" class="topbar-context"></div>
         <div class="topbar-actions">
-          <button id="btn-quick-search" class="topbar-button" type="button"><kbd>Ctrl K</kbd><span>빠른 검색</span></button>
+          <button id="btn-quick-search" class="topbar-button compact" type="button"><span>검색</span><kbd>Ctrl K</kbd></button>
           <button id="btn-fullscreen" class="icon-button" type="button" title="전체화면 (Ctrl+F)" aria-label="전체화면">⛶</button>
         </div>
       </header>
@@ -102,9 +137,15 @@
         <webview id="lecture-webview" class="lecture-webview"></webview>
       </div>
       <aside id="notes-panel" class="notes-panel">
-        <header><strong>발표자 메모</strong><button id="btn-notes-close" type="button">×</button></header>
+        <header>
+          <div class="notes-heading">
+            <span class="notes-kicker">SAY · DO · ASK</span>
+            <strong>발표자 메모</strong>
+          </div>
+          <button id="btn-notes-close" type="button">×</button>
+        </header>
         <textarea id="notes-input" placeholder="이 회차에서 강조할 말, 질문, 현장 변수를 기록하세요."></textarea>
-        <small>이 컴퓨터에 자동 저장됩니다.</small>
+        <small>핵심 멘트, 시연 순서, 학생 질문을 짧게 나눠 적으면 발표 흐름을 유지하기 쉽습니다.</small>
       </aside>
     </div>
     <footer class="player-footer">

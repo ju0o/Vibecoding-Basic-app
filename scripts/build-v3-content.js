@@ -1703,7 +1703,7 @@ const currentBasic = {
   cohort: '2기',
   description: '현재 수업 중인 6주 운영본입니다. 기존 강의 파일과 진행 상태를 그대로 유지합니다.',
   color: '#d8ff66',
-  route: 'AI 이해 → 바이브코딩 → 개발 용어 → 파일 구조 → 배포·보안 → 쇼케이스',
+  route: 'AI 이해 → 바이브코딩 → 개발 용어 → 파일 구조 → 배포·보안 → 복기·심화 예고',
   outcomes: ['현재 기수 운영 유지', '기존 진행률 보존', '프로젝트 배포', '6주 수업 마무리'],
   modules: [{ id: 'current', title: '현재 2기 수업', weeks: [1, 2, 3, 4, 5, 6] }],
   sessions: [
@@ -1712,21 +1712,36 @@ const currentBasic = {
     ['basic-03', '3강 · 개발 용어 이해', 'AI에게 일을 시키기 전에', '프론트엔드, UI/UX, 애니메이션, 백엔드, 데이터베이스, API를 실제 서비스 장면으로 이해', '30분 이론 + 30분 실습', 'practice', 'sessions/session-03-direction.html'],
     ['basic-04', '4강 · 파일 구조 이해', 'AI가 만든 프로젝트를 읽는 법', 'VS Code 파일 트리에서 수정 위치와 영향 범위, AI diff와 브라우저 결과를 확인', '20분 이론 + 40분 실습', 'practice', 'sessions/session-04-revenue.html'],
     ['basic-05', '5강 · 배포와 보안 그리고 데이터', '내 프로그램을 링크로 공유하기 전', 'GitHub, 배포, 환경변수, API 키, 데이터 권한과 재배포를 이해하고 실습', '25분 이론 + 35분 실습', 'practice', 'sessions/session-05-security-api.html'],
-    ['basic-06', '6강 · 쇼케이스 및 Q&A', '발표 · 피드백 · 다음 단계', '현재 2기 수강생의 프로젝트 발표, 피드백과 다음 고도화 방향 정리', '발표 + Q&A', 'showcase', 'sessions/session-06-showcase.html'],
-  ].map(([id, title, subtitle, description, duration, type, file], index) => ({
-    id, title, subtitle, description, duration, type, file, moduleId: 'current',
-    revision: '2기-6주-active',
-    status: 'active',
-    activeRevision: 'v2-active',
-    revisions: [
-      { id: 'v2-active', label: '현재 운영본', revision: '2기-6주', status: 'active', file },
-      { id: 'v3-work', label: 'V3 개편 작업본', revision: '3.0.0-beta.3-review', status: 'review', file: `v3/deck.html?course=basic-current-work&lesson=${index + 1}` },
-    ],
-    preparation: ['개인 노트북', '현재 프로젝트'],
-    deliverables: type === 'showcase' ? ['프로젝트 발표', '피드백 기록'] : ['수업별 실습 결과'],
-    demoProject: curricula['basic-current-work'].sessions[index].demoProject,
-    fallbackMedia: curricula['basic-current-work'].sessions[index].fallbackMedia,
-  })),
+    ['basic-06', '6강 · 5주의 여정 복기', '복기 · 심화과정 예고', '1강부터 5강까지의 핵심 장면을 다시 보고, 바이브코딩 자동화와 심화 과정으로 이어지는 흐름을 안내', '40~50분 복습', 'theory', 'sessions/session-06-lecture.html'],
+  ].map(([id, title, subtitle, description, duration, type, file], index) => {
+    const isSixthLesson = id === 'basic-06';
+    return {
+      id, title, subtitle, description, duration, type, file, moduleId: 'current',
+      revision: '2기-6주-active',
+      status: 'active',
+      activeRevision: isSixthLesson ? 'v3-work' : 'v2-active',
+      revisions: [
+        {
+          id: 'v2-active',
+          label: isSixthLesson ? '이전 쇼케이스본' : '현재 운영본',
+          revision: '2기-6주',
+          status: isSixthLesson ? 'archived' : 'active',
+          file: isSixthLesson ? 'sessions/session-06-showcase.html' : file,
+        },
+        {
+          id: 'v3-work',
+          label: isSixthLesson ? '현재 운영본' : 'V3 개편 작업본',
+          revision: '3.0.0-beta.3-review',
+          status: isSixthLesson ? 'active' : 'review',
+          file: isSixthLesson ? file : `v3/deck.html?course=basic-current-work&lesson=${index + 1}`,
+        },
+      ],
+      preparation: ['개인 노트북', '현재 프로젝트'],
+      deliverables: isSixthLesson ? ['5주 핵심 복기', '심화 과정 안내'] : ['수업별 실습 결과'],
+      demoProject: curricula['basic-current-work'].sessions[index].demoProject,
+      fallbackMedia: curricula['basic-current-work'].sessions[index].fallbackMedia,
+    };
+  }),
   materials: {
     student: [
       ['basic-current-curriculum', '과정 안내·실습 기록', '현재 6주 흐름과 매주 실습 기록', 'appendix/practice-log.html'],

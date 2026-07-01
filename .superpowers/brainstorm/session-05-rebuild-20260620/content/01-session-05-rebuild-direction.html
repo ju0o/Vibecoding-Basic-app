@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>5강 재설계 방향</title>
+  <style>
+    :root { --bg:#080c14; --panel:#101722; --line:#273344; --text:#f4f7fb; --muted:#9ba9bc; --teal:#35d4c7; --amber:#f6ba53; --red:#fa6b77; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; background:var(--bg); color:var(--text); font-family:"Pretendard","Segoe UI",sans-serif; letter-spacing:0; }
+    main { width:min(1220px, calc(100% - 80px)); margin:0 auto; padding:56px 0 72px; }
+    .eyebrow { color:var(--teal); font-size:13px; font-weight:800; letter-spacing:1.6px; }
+    h1 { margin:12px 0 12px; font-size:42px; line-height:1.16; letter-spacing:0; }
+    .intro { margin:0; max-width:760px; color:var(--muted); font-size:18px; line-height:1.7; }
+    .flow { display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; margin:40px 0 26px; }
+    .stage { min-height:168px; padding:22px; border:1px solid var(--line); background:var(--panel); border-radius:16px; position:relative; }
+    .stage:after { content:"→"; position:absolute; right:-18px; top:68px; color:#526174; font-size:24px; z-index:2; }
+    .stage:last-child:after { display:none; }
+    .num { color:var(--teal); font-size:13px; font-weight:800; }
+    .stage h2 { font-size:22px; margin:18px 0 10px; letter-spacing:0; }
+    .stage p { color:var(--muted); font-size:14px; line-height:1.55; margin:0; }
+    .rule { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:18px; }
+    .panel { border-top:1px solid var(--line); padding:24px 4px 4px; }
+    .panel h3 { margin:0 0 10px; font-size:17px; letter-spacing:0; }
+    .panel p { margin:0; color:var(--muted); line-height:1.7; }
+    .yes { color:var(--teal); font-weight:700; }
+    .no { color:var(--red); font-weight:700; }
+    .choice { margin-top:36px; padding:20px 24px; border:1px solid #35666c; border-radius:16px; background:linear-gradient(90deg, rgba(53,212,199,.12), rgba(53,212,199,0)); }
+    .choice strong { color:var(--teal); }
+    @media (max-width:800px){ main{width:min(100% - 36px, 1220px);padding-top:34px}.flow{grid-template-columns:1fr 1fr}.stage:after{display:none}h1{font-size:32px}.rule{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">BASIC 05 · REBUILD DIRECTION</div>
+    <h1>5강은 “배포 도구 소개”가 아니라<br>내 프로젝트가 공개 서비스가 되는 한 번의 여정으로 다시 만듭니다.</h1>
+    <p class="intro">지금의 문제는 요소를 조금 추가한 것이 아니라, 실제 화면과 핵심 장면이 한 이야기로 연결되지 않았다는 점입니다. 그래서 카드와 생성형 이미지를 줄이고, 실제 브라우저·GitHub·개발자도구·배포 콘솔을 중심으로 재조립합니다.</p>
+    <section class="flow" aria-label="강의 흐름">
+      <article class="stage"><div class="num">01</div><h2>내 컴퓨터</h2><p>localhost는 왜 나만 볼 수 있는가.<br>실제 서비스 화면으로 시작합니다.</p></article>
+      <article class="stage"><div class="num">02</div><h2>기록과 협업</h2><p>Git commit · GitHub push · clone이 실제 화면과 로그로 이어집니다.</p></article>
+      <article class="stage"><div class="num">03</div><h2>공개 전 보안</h2><p>F12 Network · 환경변수 · Firestore 규칙을 한 번의 위험/복구 흐름으로 보여줍니다.</p></article>
+      <article class="stage"><div class="num">04</div><h2>실제 공개</h2><p>Vercel 또는 Firebase를 선택하고, 배포 로그와 공개 URL까지 확인합니다.</p></article>
+    </section>
+    <section class="rule">
+      <div class="panel"><h3><span class="yes">유지할 것</span></h3><p>발표자 수동 진행, 명령어 실습, 프로젝트 공개 전 점검, 30분 타이머와 다음 강의 예고.</p></div>
+      <div class="panel"><h3><span class="no">걷어낼 것</span></h3><p>의미 없는 카드 전환, 잘린 캡처, 화면 없이 텍스트로만 설명하는 슬라이드, 기능이 보이지 않는 “흐름 보기” 버튼.</p></div>
+    </section>
+    <div class="choice"><strong>권장:</strong> 5강을 “실제 화면 1개 + 강사가 누르는 변화 1개 + 한 문장 결론” 구조로 재편합니다. 이 방향으로 바로 재구성해도 될까요?</div>
+  </main>
+</body>
+</html>

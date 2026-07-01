@@ -2,12 +2,14 @@
 
 const slides = [...document.querySelectorAll('.slide')];
 const slideCount = document.getElementById('slide-count');
+const deck = document.querySelector('.deck');
 let currentSlide = 0;
 
 function showSlide(index) {
   currentSlide = Math.max(0, Math.min(slides.length - 1, index));
   slides.forEach((slide, slideIndex) => slide.classList.toggle('active', slideIndex === currentSlide));
   slideCount.textContent = `${currentSlide + 1} / ${slides.length}`;
+  syncCrossSlideState();
 }
 
 document.getElementById('prev-slide').addEventListener('click', () => showSlide(currentSlide - 1));
@@ -30,8 +32,53 @@ document.getElementById('local-live-reset').addEventListener('click', () => {
   localCopy.textContent = '지금은 내 노트북 안에서만 열립니다.';
 });
 
+const bookJourney = document.getElementById('build-pipeline-slide').querySelector('.book-journey');
+let bookIndex = 0;
+document.getElementById('book-next').addEventListener('click', () => {
+  bookIndex = (bookIndex + 1) % 4;
+  bookJourney.dataset.bookState = String(bookIndex);
+});
+document.getElementById('book-reset').addEventListener('click', () => {
+  bookIndex = 0;
+  bookJourney.dataset.bookState = '0';
+});
+
+const trustRoot = document.querySelector('#trust-boundary-slide .lesson');
+document.getElementById('trust-browser').addEventListener('click', () => {
+  trustRoot.dataset.trustMode = 'browser';
+});
+document.getElementById('trust-server').addEventListener('click', () => {
+  trustRoot.dataset.trustMode = 'server';
+});
+
 
 const gitCommandSteps = {
+  init: {
+    status: 'GIT STARTED',
+    command: '$ git init',
+    output: 'Initialized empty Git repository in /class-project/.git/',
+    title: '먼저 이 폴더를 Git이 기록할 프로젝트로 시작합니다',
+    copy: '처음 한 번만 실행합니다. 이 단계가 있어야 이후의 add, commit, push가 모두 의미를 가집니다.',
+    location: '확인 위치 · 프로젝트 루트 /.git 생성',
+    pageTitle: 'Local repository initialized',
+    pageCopy: '아직 GitHub와는 연결되지 않았습니다. 내 컴퓨터 안에서 기록을 시작한 상태입니다.',
+    record: '.git directory created',
+    footer: '다음은 GitHub 저장소 주소를 이 프로젝트에 연결하는 단계입니다.',
+    tab: 'code'
+  },
+  remote: {
+    status: 'REMOTE CONNECTED',
+    command: '$ git remote add origin https://github.com/vibe-team/class-project.git',
+    output: '$ git branch -M main\n$ git remote -v\norigin  https://github.com/vibe-team/class-project.git (fetch)\norigin  https://github.com/vibe-team/class-project.git (push)',
+    title: '내 프로젝트와 GitHub 저장소 주소를 연결합니다',
+    copy: '이제부터 push를 하면 어디로 보낼지가 정해집니다. 처음 프로젝트를 GitHub에 올릴 때 꼭 필요한 연결입니다.',
+    location: '확인 위치 · terminal / remote -v',
+    pageTitle: 'origin connected',
+    pageCopy: '아직 파일은 올라가지 않았지만, 이 로컬 프로젝트가 어떤 GitHub 저장소와 연결될지는 정해졌습니다.',
+    record: 'origin → github.com/vibe-team/class-project.git',
+    footer: '이후부터는 바뀐 파일을 확인하고, add → commit → push 순서로 보냅니다.',
+    tab: 'code'
+  },
   status: {
     status: 'WORKING TREE',
     command: '$ git status',
@@ -73,8 +120,8 @@ const gitCommandSteps = {
   },
   push: {
     status: 'GITHUB SYNCED',
-    command: '$ git push origin main',
-    output: 'Writing objects: 100% (8/8)\nTo github.com:vibe-team/class-project.git\n   7a0e117..a8f21c3  main -> main',
+    command: '$ git push -u origin main',
+    output: 'Enumerating objects: 8, done.\nWriting objects: 100% (8/8)\nTo github.com:vibe-team/class-project.git\n   7a0e117..a8f21c3  main -> main\nbranch \'main\' set up to track \'origin/main\'.',
     title: 'GitHub의 공통 기록에 도착했습니다',
     copy: '이제 팀원은 Commits에서 변경을 확인하고, 배포 서비스는 이 commit을 기준으로 build를 시작할 수 있습니다.',
     location: '확인 위치 · GitHub Commits / main',
@@ -107,10 +154,10 @@ document.querySelectorAll('[data-git-command]').forEach((button) => button.addEv
 
 
 const devtoolsSteps = [
-  ['F12로 개발자도구 열기', '웹사이트를 쓰는 사람도 F12를 눌러 브라우저가 주고받는 요청을 확인할 수 있습니다.', '요청을 선택하면 전송 내용이 보입니다.'],
-  ['Network에서 요청 선택', '결제하기를 누르면 /api/checkout 같은 요청이 Network 목록에 남습니다.', 'POST /api/checkout · status 200'],
-  ['요청 헤더 확인', '브라우저 코드에 넣은 값은 요청과 함께 보이거나, 번들 파일에서 발견될 수 있습니다.', 'Authorization: sk_live_••••'],
-  ['노출되었다면 폐기하고 교체', '파일만 지우는 것으로 끝나지 않습니다. 해당 키를 폐기하고 새 키를 발급해야 합니다.', 'Key revoked · new secret required']
+  ['F12로 개발자도구 열기', '공개된 사이트는 사용자도 F12를 눌러 브라우저에 내려온 파일과 요청을 직접 볼 수 있습니다.', '요청을 선택하면 전송 내용이 보입니다.'],
+  ['Network에서 결제 요청 선택', '결제하기를 누르면 /api/checkout 같은 요청이 Network 목록에 남습니다. 이때 공개된 프론트 코드와 요청 헤더를 함께 확인합니다.', 'POST /api/checkout · status 200'],
+  ['번들 파일에서 비밀값 노출 확인', '만약 프론트 코드 안에 PAYMENT_SECRET 같은 값이 들어 있으면, app.js를 보는 것만으로도 유출됩니다.', 'VITE_PAYMENT_SECRET = sk_live_••••'],
+  ['노출되었다면 폐기하고 서버로 이동', '파일에서 지우는 것으로 끝나지 않습니다. 기존 키는 폐기하고, 새 값은 Vercel 또는 Firebase 환경변수로만 넣어 다시 배포해야 합니다.', 'Key revoked · new secret required']
 ];
 let devtoolsIndex = 0;
 const devtoolsRoot = document.getElementById('devtools-slide').querySelector('.devtools-documentary');
@@ -126,11 +173,32 @@ document.getElementById('devtools-reset').addEventListener('click', () => { devt
 
 const envRoot = document.getElementById('environment-slide').querySelector('.environment-documentary');
 const envCaption = document.getElementById('env-caption');
-const envCopies = ['실제 값은 배포 서비스 설정에서 별도로 입력합니다.', '.gitignore가 실제 값이 GitHub 기록에 들어가지 않게 막습니다.', '배포 환경은 필요한 값을 암호화된 설정으로 받아 실행합니다.'];
+const secretPackage = document.getElementById('secret-package');
+const envCopies = ['실제 값은 Vercel 또는 Firebase 설정에서 별도로 입력합니다.', '.gitignore가 실제 값이 GitHub 기록에 들어가지 않게 막습니다.', '배포 환경은 필요한 값을 암호화된 설정으로 받아 실행합니다.'];
 let envIndex = 0;
-function renderEnv() { envRoot.dataset.envState = String(envIndex); envCaption.textContent = envCopies[envIndex]; }
+function renderEnv() {
+  envRoot.dataset.envState = String(envIndex);
+  envCaption.textContent = envCopies[envIndex];
+  secretPackage.dataset.secretState = ['local', 'blocked', 'locked'][envIndex];
+  secretPackage.innerHTML = [
+    '<span>KEY</span><small>LOCAL</small>',
+    '<span>STOP</span><small>IGNORE</small>',
+    '<span>LOCK</span><small>DEPLOY</small>'
+  ][envIndex];
+}
 document.getElementById('env-next').addEventListener('click', () => { envIndex = Math.min(2, envIndex + 1); renderEnv(); });
 document.getElementById('env-reset').addEventListener('click', () => { envIndex = 0; renderEnv(); });
+
+const deployScene = document.querySelector('.auto-deploy-cinematic');
+let deployStep = 0;
+document.getElementById('deploy-next').addEventListener('click', () => {
+  deployStep = (deployStep + 1) % 4;
+  deployScene.dataset.deployStep = String(deployStep);
+});
+document.getElementById('deploy-reset').addEventListener('click', () => {
+  deployStep = 0;
+  deployScene.dataset.deployStep = '0';
+});
 
 const roles = {
   guest: { text: '공개 안내만 읽을 수 있습니다', allowed: ['public'], caption: '비회원은 모두가 봐도 되는 정보만 볼 수 있습니다.' },
@@ -159,15 +227,17 @@ document.querySelectorAll('[data-platform]').forEach((button) => button.addEvent
 }));
 
 const releaseSteps = [
-  ['release 기준점 선택', 'GitHub의 검증된 v1.0.0을 이번 공개의 기준으로 고정합니다. 그래서 문제가 생기면 되돌릴 버전도 분명합니다.', 'Release selected: v1.0.0 · commit a8f21c3', 'success'],
-  ['웹 build 실행', 'Vercel이 해당 release의 의존성을 설치하고 공개용 웹 파일을 만듭니다. 첫 오류가 있으면 이 단계에서 멈춥니다.', '$ npm run build', 'success'],
-  ['환경·기능 연결 확인', '브라우저 비밀값은 제외하고, Vercel 환경변수와 Firebase 로그인·데이터 규칙이 필요한 기능을 연결합니다.', 'Environment variables + Firebase rules verified', 'success'],
-  ['공개 URL 활성화', '웹 build와 필요한 연결이 준비되면 공개 URL이 활성화됩니다. 다음 장에서 실제 사용자처럼 확인합니다.', 'Production: https://my-project.vercel.app', 'success']
+  ['release 기준점 선택', 'GitHub의 검증된 v1.0.0을 이번 공개의 기준으로 고정합니다. 문제가 생기면 되돌릴 버전도 이 지점으로 명확해집니다.', 'git tag v1.0.0 · commit a8f21c3', 'success'],
+  ['Vercel build 실행', 'Vercel이 해당 commit으로 의존성을 설치하고 공개용 정적 파일을 만듭니다. 첫 오류가 있으면 이 단계에서 멈춥니다.', '$ npm run build', 'success'],
+  ['환경변수와 Firebase 연결', '브라우저 비밀값은 제외하고, Vercel 환경변수와 Firebase 인증·데이터 규칙이 필요한 기능을 연결합니다.', 'Vercel env + Firebase rules verified', 'success'],
+  ['공개 URL 활성화', 'build와 연결 검사가 끝나면 공개 URL이 새 버전으로 바뀝니다. 마지막엔 꼭 사용자처럼 다시 확인합니다.', 'Production ready: https://my-project.vercel.app', 'success']
 ];
 let releaseIndex = -1;
 let releaseTimer = null;
 let releasePaused = false;
 function renderRelease() {
+  document.querySelector('#release-slide .release-documentary').dataset.releaseState = String(releaseIndex);
+  deck.dataset.releaseReady = releaseIndex === 3 ? 'true' : 'false';
   const completed = releaseSteps.slice(0, releaseIndex + 1);
   document.getElementById('release-lines').innerHTML = completed.length ? completed.map((step) => `<p class="command">${step[2]}</p><p class="${step[3]}">${step[0]} · 완료</p>`).join('') : '<p>시작을 누르면 release 기준점부터 공개 URL까지 진행됩니다.</p>';
   document.querySelectorAll('[data-release-node]').forEach((node) => {
@@ -184,6 +254,7 @@ function renderRelease() {
   const domain = document.getElementById('release-domain');
   domain.querySelector('em').textContent = releaseIndex === 3 ? 'LIVE' : '대기';
   if (releaseIndex === 3) domain.querySelector('b').textContent = 'my-project.vercel.app';
+  syncCrossSlideState();
 }
 function stopRelease() { clearInterval(releaseTimer); releaseTimer = null; }
 function advanceRelease() { releaseIndex = Math.min(releaseSteps.length - 1, releaseIndex + 1); renderRelease(); if (releaseIndex === releaseSteps.length - 1) stopRelease(); }
@@ -224,6 +295,7 @@ showSlide(Number.isFinite(requestedSlide) && requestedSlide > 0 ? requestedSlide
 
 function renderDevtoolsWorkbench() {
   const step = devtoolsSteps[devtoolsIndex];
+  document.querySelector('#devtools-slide .devtools-documentary').dataset.devtoolsState = String(devtoolsIndex);
   const headerText = [
     '요청을 선택하면 전송 내용이 보입니다.',
     'POST /api/checkout · status 200',
@@ -234,6 +306,11 @@ function renderDevtoolsWorkbench() {
   document.getElementById('devtools-header-line').innerHTML = `<b>${headerLabel}</b> ${headerText}`;
   document.getElementById('devtools-status').textContent = devtoolsIndex === 3 ? '401 REVOKED' : '200 OK';
   document.getElementById('devtools-user-state').textContent = devtoolsIndex === 0 ? '비회원' : '결제 요청 확인';
+  const requestButtons = document.querySelectorAll('#devtools-slide .network-request');
+  requestButtons.forEach((button, index) => {
+    button.classList.toggle('active', (devtoolsIndex < 2 && index === 2) || (devtoolsIndex >= 2 && index === 0));
+    button.classList.toggle('focus', (devtoolsIndex < 2 && index === 2) || (devtoolsIndex >= 2 && index === 0));
+  });
   const secretLine = document.getElementById('secret-source-line');
   secretLine.classList.toggle('visible', devtoolsIndex >= 2);
   const alert = document.querySelector('.devtools-workbench .devtools-alert');
@@ -325,6 +402,22 @@ document.getElementById('launch-reset').addEventListener('click', () => {
   document.querySelector('#launch-data-card b').textContent = '아직 저장된 신청이 없습니다.';
   document.getElementById('launch-copy').textContent = '각 항목을 누르면 왼쪽 공개 사이트에서 실제 사용자 동작이 재연됩니다.';
 });
+
+function syncCrossSlideState() {
+  const launchRoot = document.querySelector('.launch-browser-action');
+  if (!launchRoot) return;
+  const releaseReady = deck.dataset.releaseReady === 'true';
+  launchRoot.classList.toggle('release-ready', releaseReady);
+  if (releaseReady && slides[currentSlide]?.id === 'launch-slide' && launchRoot.dataset.launchState === 'start') {
+    document.getElementById('launch-copy').textContent = '방금 공개된 URL을 실제 사용자처럼 다시 확인합니다. release가 끝났다고 끝이 아니라, 공개 URL QA가 마지막입니다.';
+    document.getElementById('launch-hero-copy').textContent = '방금 활성화된 공개 URL에서 실제 기능을 확인합니다.';
+    document.getElementById('launch-action-button').textContent = '공개 URL 점검 시작';
+  } else if (launchRoot.dataset.launchState === 'start') {
+    document.getElementById('launch-copy').textContent = '각 항목을 누르면 왼쪽 공개 사이트에서 실제 사용자 동작이 재연됩니다.';
+    document.getElementById('launch-hero-copy').textContent = '공개 URL에서 실제 기능을 확인합니다.';
+    document.getElementById('launch-action-button').textContent = '로그인하기';
+  }
+}
 
 renderGitCommand('status');
 renderDevtoolsWorkbench();

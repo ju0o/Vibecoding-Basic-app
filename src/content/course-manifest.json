@@ -51,7 +51,7 @@
       "cohort": "2기",
       "description": "현재 수업 중인 6주 운영본입니다. 기존 강의 파일과 진행 상태를 그대로 유지합니다.",
       "color": "#d8ff66",
-      "route": "AI 이해 → 바이브코딩 → 개발 용어 → 파일 구조 → 배포·보안 → 쇼케이스",
+      "route": "AI 이해 → 바이브코딩 → 개발 용어 → 파일 구조 → 배포·보안 → 복기·심화 예고",
       "outcomes": [
         "현재 기수 운영 유지",
         "기존 진행률 보존",
@@ -265,8 +265,8 @@
           "id": "basic-05",
           "title": "5강 · 배포와 보안 그리고 데이터",
           "subtitle": "내 프로그램을 링크로 공유하기 전",
-          "description": "빌드·배포, Git/GitHub, 자동배포, 도메인·HTTPS, 프론트/백 신뢰 경계, 비밀값과 환경변수, 인증·인가, 데이터·CRUD·흐름, 로그 읽기를 이해하고 실습",
-          "duration": "70분 이론 + 30분 실습",
+          "description": "GitHub, 배포, 환경변수, API 키, 데이터 권한과 재배포를 이해하고 실습",
+          "duration": "25분 이론 + 35분 실습",
           "type": "practice",
           "file": "sessions/session-05-security-api.html",
           "moduleId": "current",
@@ -311,29 +311,29 @@
         {
           "id": "basic-06",
           "title": "6강 · 5주의 여정 복기",
-          "subtitle": "1~5강 핵심 장면 다시 보기",
-          "description": "쇼케이스를 대신하는 복습 강의. 1강부터 5강까지의 핵심 슬라이드를 모션·애니메이션 그대로 모아, 바이브코딩 개념·원리·이해를 자연스러운 순서로 한 번에 되짚습니다.",
+          "subtitle": "복기 · 심화과정 예고",
+          "description": "1강부터 5강까지의 핵심 장면을 다시 보고, 바이브코딩 자동화와 심화 과정으로 이어지는 흐름을 안내",
           "duration": "40~50분 복습",
           "type": "theory",
           "file": "sessions/session-06-lecture.html",
           "moduleId": "current",
           "revision": "2기-6주-active",
           "status": "active",
-          "activeRevision": "v2-active",
+          "activeRevision": "v3-work",
           "revisions": [
             {
               "id": "v2-active",
-              "label": "현재 운영본",
+              "label": "이전 쇼케이스본",
               "revision": "2기-6주",
-              "status": "active",
+              "status": "archived",
               "file": "sessions/session-06-showcase.html"
             },
             {
               "id": "v3-work",
-              "label": "V3 개편 작업본",
+              "label": "현재 운영본",
               "revision": "3.0.0-beta.3-review",
-              "status": "review",
-              "file": "v3/deck.html?course=basic-current-work&lesson=6"
+              "status": "active",
+              "file": "sessions/session-06-lecture.html"
             }
           ],
           "preparation": [
@@ -341,8 +341,8 @@
             "현재 프로젝트"
           ],
           "deliverables": [
-            "프로젝트 발표",
-            "피드백 기록"
+            "5주 핵심 복기",
+            "심화 과정 안내"
           ],
           "demoProject": {
             "root": "v3/projects/basic-current-work/06",

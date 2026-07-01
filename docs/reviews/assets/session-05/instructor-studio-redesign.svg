@@ -1,0 +1,147 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="210" y1="20" x2="1380" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#171238"/>
+      <stop offset="1" stop-color="#0C0A1F"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#211A4F"/>
+      <stop offset="1" stop-color="#15112E"/>
+    </linearGradient>
+    <linearGradient id="hero" x1="915" y1="95" x2="1360" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5CF0A8" stop-opacity=".34"/>
+      <stop offset=".45" stop-color="#8A7BFF" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#0C0A1F" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1600" height="900" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="26" stdDeviation="28" flood-color="#040212" flood-opacity=".36"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" rx="36" fill="url(#bg)"/>
+  <circle cx="1328" cy="102" r="252" fill="url(#hero)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="48" y="52" width="1504" height="796" rx="28" fill="#0F0D22" stroke="rgba(206,198,255,0.14)"/>
+  </g>
+
+  <rect x="72" y="76" width="316" height="748" rx="24" fill="url(#panel)" stroke="rgba(206,198,255,0.12)"/>
+  <rect x="416" y="76" width="488" height="748" rx="24" fill="#13112B" stroke="rgba(206,198,255,0.12)"/>
+  <rect x="930" y="76" width="598" height="748" rx="24" fill="#111026" stroke="rgba(206,198,255,0.12)"/>
+
+  <g opacity=".94">
+    <rect x="98" y="102" width="52" height="52" rx="16" fill="#5CF0A8"/>
+    <path d="M116 117.5H132.5L123.5 139L116 117.5Z" fill="#0C0A1F"/>
+    <text x="168" y="126" fill="#F4F1FF" font-size="22" font-weight="700" font-family="Pretendard, Arial, sans-serif">VIBE STUDIO</text>
+    <text x="168" y="153" fill="#A99FCE" font-size="12" font-weight="700" letter-spacing="2" font-family="Pretendard, Arial, sans-serif">INSTRUCTOR FLOW REDESIGN</text>
+  </g>
+
+  <rect x="98" y="190" width="264" height="50" rx="14" fill="#0F1530" stroke="rgba(92,240,168,.32)"/>
+  <circle cx="128" cy="215" r="8" fill="#5CF0A8"/>
+  <text x="150" y="221" fill="#F4F1FF" font-size="18" font-weight="700" font-family="Pretendard, Arial, sans-serif">과정 · 회차 · 자료 통합 검색</text>
+
+  <text x="98" y="282" fill="#A99FCE" font-size="12" font-weight="700" letter-spacing="2" font-family="Pretendard, Arial, sans-serif">COURSE RAIL</text>
+  <g>
+    <rect x="98" y="304" width="264" height="96" rx="18" fill="#151636" stroke="rgba(92,240,168,.34)"/>
+    <rect x="114" y="320" width="44" height="44" rx="12" fill="#5CF0A8" fill-opacity=".16"/>
+    <text x="173" y="338" fill="#F4F1FF" font-size="20" font-weight="700" font-family="Pretendard, Arial, sans-serif">기초 강의</text>
+    <text x="173" y="366" fill="#A99FCE" font-size="14" font-family="Pretendard, Arial, sans-serif">5강 · 배포와 보안 그리고 데이터</text>
+    <rect x="173" y="381" width="104" height="10" rx="5" fill="#251E53"/>
+    <rect x="173" y="381" width="72" height="10" rx="5" fill="#5CF0A8"/>
+    <text x="291" y="390" fill="#5CF0A8" font-size="12" font-weight="700" font-family="Pretendard, Arial, sans-serif">68%</text>
+  </g>
+  <g opacity=".92">
+    <rect x="98" y="420" width="264" height="68" rx="16" fill="#120F2A"/>
+    <text x="122" y="448" fill="#F4F1FF" font-size="18" font-weight="600" font-family="Pretendard, Arial, sans-serif">슬라이드</text>
+    <text x="122" y="472" fill="#A99FCE" font-size="14" font-family="Pretendard, Arial, sans-serif">22장 · 핵심 구간 북마크</text>
+    <circle cx="334" cy="454" r="10" fill="#FFB14E"/>
+  </g>
+  <g opacity=".84">
+    <rect x="98" y="500" width="264" height="68" rx="16" fill="#120F2A"/>
+    <text x="122" y="528" fill="#F4F1FF" font-size="18" font-weight="600" font-family="Pretendard, Arial, sans-serif">강사 대본</text>
+    <text x="122" y="552" fill="#A99FCE" font-size="14" font-family="Pretendard, Arial, sans-serif">SAY · DO · ASK 구조</text>
+    <circle cx="334" cy="534" r="10" fill="#8A7BFF"/>
+  </g>
+  <g opacity=".74">
+    <rect x="98" y="580" width="264" height="68" rx="16" fill="#120F2A"/>
+    <text x="122" y="608" fill="#F4F1FF" font-size="18" font-weight="600" font-family="Pretendard, Arial, sans-serif">출력자료</text>
+    <text x="122" y="632" fill="#A99FCE" font-size="14" font-family="Pretendard, Arial, sans-serif">배포 체크리스트 · 실습 가이드</text>
+    <circle cx="334" cy="614" r="10" fill="#FF5D8F"/>
+  </g>
+
+  <text x="442" y="128" fill="#A99FCE" font-size="12" font-weight="700" letter-spacing="2" font-family="Pretendard, Arial, sans-serif">LESSON TIMELINE</text>
+  <text x="442" y="170" fill="#F4F1FF" font-size="34" font-weight="800" font-family="Pretendard, Arial, sans-serif">강의 흐름과 포인트를 한 줄로 관리</text>
+  <text x="442" y="204" fill="#A99FCE" font-size="18" font-family="Pretendard, Arial, sans-serif">좌측은 과정, 중앙은 회차 진행, 우측은 강사용 플레이어로 역할을 분리합니다.</text>
+
+  <rect x="442" y="244" width="436" height="112" rx="22" fill="#18153A" stroke="rgba(206,198,255,.1)"/>
+  <text x="468" y="278" fill="#5CF0A8" font-size="14" font-weight="700" letter-spacing="1.5" font-family="Pretendard, Arial, sans-serif">SESSION 05 TRACK</text>
+  <g>
+    <line x1="496" y1="320" x2="822" y2="320" stroke="rgba(206,198,255,.22)" stroke-width="8" stroke-linecap="round"/>
+    <line x1="496" y1="320" x2="682" y2="320" stroke="#5CF0A8" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="496" cy="320" r="18" fill="#5CF0A8"/>
+    <circle cx="588" cy="320" r="18" fill="#5CF0A8"/>
+    <circle cx="682" cy="320" r="18" fill="#5CF0A8"/>
+    <circle cx="752" cy="320" r="18" fill="#FFB14E"/>
+    <circle cx="822" cy="320" r="18" fill="#251E53" stroke="rgba(206,198,255,.24)"/>
+    <text x="473" y="352" fill="#F4F1FF" font-size="14" font-family="Pretendard, Arial, sans-serif">도입</text>
+    <text x="550" y="352" fill="#F4F1FF" font-size="14" font-family="Pretendard, Arial, sans-serif">배포</text>
+    <text x="646" y="352" fill="#F4F1FF" font-size="14" font-family="Pretendard, Arial, sans-serif">보안</text>
+    <text x="733" y="352" fill="#F4F1FF" font-size="14" font-family="Pretendard, Arial, sans-serif">데이터</text>
+    <text x="800" y="352" fill="#A99FCE" font-size="14" font-family="Pretendard, Arial, sans-serif">실습</text>
+  </g>
+
+  <rect x="442" y="386" width="436" height="166" rx="22" fill="#18153A" stroke="rgba(206,198,255,.1)"/>
+  <text x="468" y="420" fill="#FFB14E" font-size="14" font-weight="700" letter-spacing="1.5" font-family="Pretendard, Arial, sans-serif">LIVE CUES</text>
+  <g>
+    <rect x="468" y="446" width="182" height="34" rx="11" fill="#211C48"/>
+    <text x="488" y="468" fill="#F4F1FF" font-size="15" font-weight="600" font-family="Pretendard, Arial, sans-serif">질문 포인트 03</text>
+    <rect x="664" y="446" width="190" height="34" rx="11" fill="#211C48"/>
+    <text x="684" y="468" fill="#F4F1FF" font-size="15" font-weight="600" font-family="Pretendard, Arial, sans-serif">실습 전환 04</text>
+    <rect x="468" y="494" width="386" height="40" rx="13" fill="#120F2A" stroke="rgba(92,240,168,.28)"/>
+    <text x="488" y="520" fill="#A99FCE" font-size="15" font-family="Pretendard, Arial, sans-serif">발표자 메모, 예상 질문, 모션 타이밍을 한 구획에서 확인</text>
+  </g>
+
+  <text x="956" y="128" fill="#A99FCE" font-size="12" font-weight="700" letter-spacing="2" font-family="Pretendard, Arial, sans-serif">PRESENTER PLAYER</text>
+  <rect x="956" y="154" width="548" height="610" rx="26" fill="#0D1221" stroke="rgba(206,198,255,.12)"/>
+  <rect x="980" y="178" width="500" height="54" rx="16" fill="#151B2D"/>
+  <text x="1006" y="212" fill="#A99FCE" font-size="14" font-weight="700" letter-spacing="1.2" font-family="Pretendard, Arial, sans-serif">SESSION 05 · PRESENTER MODE</text>
+  <rect x="998" y="252" width="332" height="366" rx="22" fill="#131832" stroke="rgba(206,198,255,.12)"/>
+  <rect x="1020" y="276" width="288" height="20" rx="10" fill="#5CF0A8" fill-opacity=".18"/>
+  <rect x="1020" y="314" width="220" height="16" rx="8" fill="#F4F1FF" fill-opacity=".86"/>
+  <rect x="1020" y="340" width="176" height="12" rx="6" fill="#A99FCE" fill-opacity=".56"/>
+  <rect x="1020" y="382" width="112" height="112" rx="18" fill="#191F3E"/>
+  <rect x="1144" y="382" width="164" height="112" rx="18" fill="#191F3E"/>
+  <rect x="1020" y="510" width="288" height="84" rx="18" fill="#0D1022" stroke="rgba(255,177,78,.26)"/>
+  <circle cx="1052" cy="552" r="10" fill="#FFB14E"/>
+  <text x="1076" y="547" fill="#F4F1FF" font-size="18" font-weight="700" font-family="Pretendard, Arial, sans-serif">지금 강조할 개념</text>
+  <text x="1076" y="572" fill="#A99FCE" font-size="14" font-family="Pretendard, Arial, sans-serif">로컬과 서버는 같은 코드여도 실행 환경이 다름</text>
+
+  <rect x="1350" y="252" width="130" height="366" rx="22" fill="#14182B"/>
+  <text x="1376" y="288" fill="#5CF0A8" font-size="13" font-weight="700" letter-spacing="1.2" font-family="Pretendard, Arial, sans-serif">QUICK TOOLS</text>
+  <g fill="#F4F1FF">
+    <rect x="1372" y="312" width="86" height="54" rx="14" fill="#1C2240"/>
+    <rect x="1372" y="382" width="86" height="54" rx="14" fill="#1C2240"/>
+    <rect x="1372" y="452" width="86" height="54" rx="14" fill="#1C2240"/>
+    <rect x="1372" y="522" width="86" height="54" rx="14" fill="#1C2240"/>
+  </g>
+  <text x="1392" y="345" fill="#F4F1FF" font-size="14" font-weight="700" font-family="Pretendard, Arial, sans-serif">메모</text>
+  <text x="1387" y="415" fill="#F4F1FF" font-size="14" font-weight="700" font-family="Pretendard, Arial, sans-serif">판서</text>
+  <text x="1393" y="485" fill="#F4F1FF" font-size="14" font-weight="700" font-family="Pretendard, Arial, sans-serif">인쇄</text>
+  <text x="1389" y="555" fill="#F4F1FF" font-size="14" font-weight="700" font-family="Pretendard, Arial, sans-serif">PDF</text>
+
+  <rect x="998" y="642" width="482" height="98" rx="18" fill="#161B31"/>
+  <rect x="1018" y="664" width="112" height="54" rx="16" fill="#5CF0A8"/>
+  <rect x="1146" y="664" width="112" height="54" rx="16" fill="#1E2342"/>
+  <rect x="1274" y="664" width="186" height="54" rx="16" fill="#1E2342"/>
+  <text x="1047" y="697" fill="#0C0A1F" font-size="18" font-weight="800" font-family="Pretendard, Arial, sans-serif">이전</text>
+  <text x="1174" y="697" fill="#F4F1FF" font-size="18" font-weight="700" font-family="Pretendard, Arial, sans-serif">다음</text>
+  <text x="1310" y="687" fill="#F4F1FF" font-size="18" font-weight="700" font-family="Pretendard, Arial, sans-serif">6 / 22</text>
+  <text x="1310" y="709" fill="#A99FCE" font-size="13" font-family="Pretendard, Arial, sans-serif">핵심 개념 · 데모 구간</text>
+
+  <g opacity=".92">
+    <rect x="72" y="772" width="1456" height="52" rx="18" fill="#0F1530" stroke="rgba(206,198,255,.08)"/>
+    <circle cx="106" cy="798" r="8" fill="#5CF0A8"/>
+    <text x="126" y="804" fill="#F4F1FF" font-size="18" font-weight="700" font-family="Pretendard, Arial, sans-serif">개선 포인트</text>
+    <text x="250" y="804" fill="#A99FCE" font-size="16" font-family="Pretendard, Arial, sans-serif">과정 탐색, 회차 진행, 강사용 제어를 3분할하면 시선 이동이 줄고 수업 전환 속도가 빨라집니다.</text>
+  </g>
+</svg>
