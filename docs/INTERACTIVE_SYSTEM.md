@@ -115,7 +115,7 @@ src/
 ## Electron 연동
 
 - Electron 구조는 유지한다.
-- 런처는 `src/renderer/index.html`과 `src/renderer/app.js`가 담당한다.
+- 런처는 `src/renderer/index.html`과 `src/renderer/studio.js`가 담당한다.
 - 세션은 `webview`로 `src/content/sessions/*.html`을 연다.
 - PDF/인쇄/발표자 모드는 기존 Electron IPC 흐름을 그대로 사용한다.
 
