@@ -224,7 +224,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#070b11;col
 .le-gate i{width:26px;height:1px;background:linear-gradient(90deg,transparent,rgba(251,191,36,.7))}
 @media(max-height:720px){.le-ring{width:min(228px,44vw)}.le-panel{padding:14px;gap:9px}}
 @media(max-width:1100px){.le-wrap{grid-template-columns:1fr}}
-</style></head><body data-onepass-mode="lecture"><div class="app"><nav class="nav-bar"><span class="nav-title">AI 한방 이해하기 · 3주차 · MCP · Skill · SubAgent · Workflow</span><div class="nav-controls"><button class="nav-btn" id="btn-prev" onclick="move(-1)">←</button><span id="counter">1 / 26</span><button class="nav-btn" id="btn-next" onclick="move(1)">→</button></div></nav><div class="deck"><div class="slide op-cover active"><div class="op-eyebrow">AI 한방 이해하기 · 3주차 · 180분 강의</div><h1 class="op-cover-title">AI의 손발을 직접 설계하는 법<br><span class="g">MCP · Skill · SubAgent · Workflow</span></h1><p class="op-cover-sub">외부 능력, 반복 절차, 역할 분배, 자동 흐름을 구분하고 연결해 나만의 재사용 가능한 작업 자산을 설계합니다.</p><div class="op-cover-flow"><span>MCP</span><span>Skill</span><span>SubAgent</span><span>Workflow</span><span>Permission</span><span>Recovery</span></div></div><div class="slide op-slide">
+</style></head><body data-onepass-mode="lecture"><div class="app"><nav class="nav-bar"><span class="nav-title">AI 한방 이해하기 · 3주차 · MCP · Skill · SubAgent · Workflow</span><div class="nav-controls"><button class="nav-btn" id="btn-prev" onclick="move(-1)">←</button><span id="counter">1 / 40</span><button class="nav-btn" id="btn-next" onclick="move(1)">→</button></div></nav><div class="deck"><div class="slide op-cover active"><div class="op-eyebrow">AI 한방 이해하기 · 3주차 · 180분 강의</div><h1 class="op-cover-title">AI의 손발을 직접 설계하는 법<br><span class="g">MCP · Skill · SubAgent · Workflow</span></h1><p class="op-cover-sub">외부 능력, 반복 절차, 역할 분배, 자동 흐름을 구분하고 연결해 나만의 재사용 가능한 작업 자산을 설계합니다.</p><div class="op-cover-flow"><span>MCP</span><span>Skill</span><span>SubAgent</span><span>Workflow</span><span>Permission</span><span>Recovery</span></div></div><div class="slide op-slide">
   <div class="op-eyebrow">WEEK 03 · EXTEND</div>
   <h2 class="op-title">AI의 능력을 늘리는 법은<br><span class="g">더 많이 시키는 것</span>이 아닙니다</h2>
   <div class="op-visual"><div class="doc-scene doc-office-control">
@@ -310,6 +310,24 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#070b11;col
   <p class="op-cap">처음부터 강한 명령을 실행하지 말고 <b>작은 읽기 요청으로 연결을 검증</b>합니다.</p>
 </div>
 <div class="slide op-slide">
+  <div class="op-eyebrow">MCP CATALOG</div>
+  <h2 class="op-title">현장에서 실제로 연결하는 <span class="g">MCP의 네 갈래</span></h2>
+  <div class="op-visual"><div class="op-map"><div><b>문서 · 지식</b><span>사내 위키 · 노션<br>규정과 맥락을 읽기</span></div><div><b>브라우저</b><span>실제 화면 열기<br>클릭 · 폼 · 검증</span></div><div><b>데이터</b><span>DB · 스프레드시트<br>실시간 조회</span></div><div><b>디자인 · 협업</b><span>Figma · 메신저<br>디자인 읽기 · 알림 보내기</span></div></div></div>
+  <p class="op-cap">제품마다 제공 목록과 설치법이 다르므로 <b>수업 전 공식 문서 기준</b>으로 오늘 쓸 서버를 확정합니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">MCP OR NOT</div>
+  <h2 class="op-title">MCP가 답인 경우와 <span class="a">아닌 경우</span>를 구분합니다</h2>
+  <div class="op-visual"><div class="op-compare"><section><h3>MCP가 답인 경우</h3><p>AI가 <span class="teal">외부 시스템에 직접 접근</span>해야 할 때 — 실시간 데이터, 실제 브라우저 확인, 사내 문서.</p><p>복사·붙여넣기가 반복되고 있다면 연결할 때입니다.</p></section><section><h3>MCP가 답이 아닌 경우</h3><p><span class="amber">한 번뿐인 정보</span>는 그냥 붙여넣는 것이 빠릅니다.</p><p>문제가 “절차의 반복”이라면 연결이 아니라 <span class="amber">Skill</span>의 일입니다.</p></section></div></div>
+  <p class="op-cap">연결부터 늘리면 관리 대상만 늘어납니다. <b>반복되는 접근</b>이 확인된 곳에만 답니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">MCP SECURITY</div>
+  <h2 class="op-title">연결을 늘릴 때는 <span class="a">권한 최소화 3원칙</span>을 지킵니다</h2>
+  <div class="op-visual"><ul class="op-checks"><li>처음에는 읽기 전용으로 연결하고, 쓰기 권한은 필요해질 때 연다</li><li>전체 드라이브가 아니라 필요한 폴더 · 테이블만 연결한다</li><li>처음 보는 MCP 서버는 만든 곳과 권한 범위를 확인한 뒤에 설치한다</li></ul></div>
+  <p class="op-cap">연결은 능력이자 <b>공격 표면</b>입니다. 편의보다 경계를 먼저 정합니다.</p>
+</div>
+<div class="slide op-slide">
   <div class="op-eyebrow">PLUGIN LANGUAGE</div>
   <h2 class="op-title"><span class="g">플러그인</span>이라는 말은 제품마다 구현이 다릅니다</h2>
   <div class="op-visual"><div class="op-compare"><section><h3>공통으로 이해할 것</h3><p><span class="teal">연결</span> : 외부 능력을 붙인다</p><p><span class="teal">절차</span> : 반복 작업을 저장한다</p><p><span class="teal">배포</span> : 다른 사람도 재사용한다</p></section><section><h3>수업 전 확인할 것</h3><p><span class="amber">제품별 형식</span> : 설치 경로·설정 파일·메뉴</p><p><span class="amber">안정성</span> : 정식·베타·실험 기능</p><p><span class="amber">권한</span> : 어떤 데이터에 접근하는가</p></section></div></div>
@@ -350,6 +368,18 @@ PR URL · changed files · test result
   <p class="op-cap">거창한 자동화보다 “매번 빠지는 한 단계”를 잡는 것이 좋은 첫 Skill입니다.</p>
 </div>
 <div class="slide op-slide">
+  <div class="op-eyebrow">SKILL EXAMPLES</div>
+  <h2 class="op-title">좋은 첫 Skill은 이미 <span class="g">매주 반복하는 일</span> 안에 있습니다</h2>
+  <div class="op-visual"><div class="op-map"><div><b>회의록 정리</b><span>녹취 → 결정사항 ·<br>할 일 · 담당자 표</span></div><div><b>PR 요약</b><span>변경 내용 →<br>검토 포인트 3줄</span></div><div><b>배포 전 QA</b><span>핵심 화면 점검<br>체크리스트 실행</span></div><div><b>주간 보고</b><span>커밋 로그 →<br>이번 주 요약</span></div></div></div>
+  <p class="op-cap">넷 다 공통점은 <b>입력과 완료 기준을 설명할 수 있다</b>는 것입니다. 그것이 Skill의 자격입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">SKILL VS PROMPT</div>
+  <h2 class="op-title">긴 프롬프트를 잘 쓰는 것과 <span class="g">Skill로 저장하는 것</span>은 다릅니다</h2>
+  <div class="op-visual"><div class="op-compare"><section><h3>매번 긴 프롬프트</h3><p>품질이 <span class="amber">그날의 기억력</span>에 달려 있습니다.</p><p>사람마다, 날마다 결과가 조금씩 다릅니다.</p></section><section><h3>Skill로 저장</h3><p>트리거 · 입력 · 절차 · 검증이 <span class="teal">파일로 고정</span>됩니다.</p><p>나 혼자의 요령이 <span class="teal">팀의 자산</span>이 됩니다.</p></section></div></div>
+  <p class="op-cap">프롬프트는 소비되고 사라지지만, Skill은 <b>쌓입니다.</b></p>
+</div>
+<div class="slide op-slide">
   <div class="op-eyebrow">MANUAL SCENE · SKILL</div>
   <h2 class="op-title">수동 시연 2 — <span class="g">PR 요약 Skill을 설계</span></h2>
   <div class="op-visual"><div class="op-seq" data-seq-current="0">
@@ -386,6 +416,18 @@ PR URL · changed files · test result
   <div class="doc-agent-stream"><i></i><i></i><i></i><span>각 작업은 분리되고, 검증된 결과만 main으로 이동합니다.</span></div>
 </div></div>
   <p class="op-cap">같은 파일을 여러 작업자가 동시에 만지면 충돌합니다. <b>작업 공간과 담당 범위</b>를 함께 나눕니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">AGENT CONTRACT</div>
+  <h2 class="op-title">위임은 부탁이 아니라 <span class="g">네 줄짜리 계약</span>입니다</h2>
+  <div class="op-visual"><div class="op-cols"><div class="op-card"><div class="op-card-h g">위임 계약서</div><div class="op-codeboard"><span class="key">역할</span>: 로그인 화면 UI 담당<br><span class="key">범위</span>: LoginForm.tsx · login.css만<br><span class="key">완료 기준</span>: <span class="good">375px에서 버튼 보임 · check 통과</span><br><span class="key">보고 형식</span>: 변경 · 검증 · 주의 3줄</div></div><div class="op-card"><div class="op-card-h a">계약이 없으면</div><small>범위가 없으면 <b>옆 파일까지 수정</b>하고, 완료 기준이 없으면 “다 했다”는 말만 돌아옵니다.</small><small>계약서의 네 줄이 곧 리뷰 게이트의 <b>검사 항목</b>이 됩니다.</small></div></div></div>
+  <p class="op-cap">사람 신입에게 일을 맡길 때 적어 주는 것과 <b>정확히 같은 문서</b>입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">PARALLEL</div>
+  <h2 class="op-title">역할이 나뉘면 <span class="g">동시에 진행</span>할 수 있습니다</h2>
+  <div class="op-visual"><div class="op-compare"><section><h3>순차 — 90분</h3><p>UI 수정이 끝나야 검증 규칙을, 그것이 끝나야 QA를 시작합니다.</p><p>내가 <span class="amber">전 과정에 붙어</span> 있어야 합니다.</p></section><section><h3>병렬 — 35분</h3><p>UI · 검증 · QA 담당이 <span class="teal">각자의 worktree에서 동시에</span> 진행합니다.</p><p>나는 <span class="teal">리뷰 게이트에서 합류 지점만</span> 봅니다.</p></section></div></div>
+  <p class="op-cap">병렬의 조건은 속도가 아니라 <b>겹치지 않는 범위</b>입니다. 범위 설계가 먼저입니다.</p>
 </div>
 <div class="slide op-slide">
   <div class="op-eyebrow">MANUAL SCENE · SUBAGENT</div>
@@ -426,6 +468,18 @@ PR URL · changed files · test result
   <p class="op-cap">모든 것을 자동화하면 빠른 것이 아니라 위험해집니다. <b>사람의 승인 지점</b>을 명시합니다.</p>
 </div>
 <div class="slide op-slide">
+  <div class="op-eyebrow">GATE DESIGN</div>
+  <h2 class="op-title">게이트는 아무 데나 두지 않고 <span class="g">네 지점</span>에 둡니다</h2>
+  <div class="op-visual"><div class="op-map"><div><b>공개 직전</b><span>배포 · 발송 · 게시 —<br>바깥으로 나가는 문</span></div><div><b>돈이 움직일 때</b><span>결제 · 구독 · 광고 —<br>비용이 발생하는 순간</span></div><div><b>지우기 직전</b><span>삭제 · 덮어쓰기 —<br>되돌리기 어려운 변경</span></div><div><b>판단이 갈릴 때</b><span>문구 톤 · 디자인 —<br>기계가 정할 수 없는 것</span></div></div></div>
+  <p class="op-cap">게이트가 많으면 자동화의 의미가 없고, 없으면 사고가 납니다. <b>이 네 지점만</b> 지킵니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">NO-GATE ACCIDENT</div>
+  <h2 class="op-title">게이트 없는 자동화는 <span class="a">이렇게 사고가 납니다</span></h2>
+  <div class="op-visual"><div class="op-console"><div class="op-console-bar"><i></i><i></i><i></i><small>workflow.log · 새벽 자동 발송</small></div><div class="op-console-body"><span class="cmd">[02:00] weekly-mail workflow 시작</span><span class="ok">[02:01] 지난주 주문 데이터 로드</span><span class="warn">[02:03] 수신자 목록: 전체 회원 (필터 누락)</span><span class="fail">[02:05] 3,000명에게 테스트 문구 발송 완료</span><span class="fail">[08:30] 아침에야 발견 — 사과 공지 발송</span><span class="op-console-cursor"></span></div></div></div>
+  <p class="op-cap">실행은 완벽했고 <b>판단이 없었습니다.</b> 발송 직전 게이트 하나면 멈출 사고였습니다.</p>
+</div>
+<div class="slide op-slide">
   <div class="op-eyebrow">RECOVERY</div>
   <h2 class="op-title">Workflow가 멈추면 <span class="g">어느 단계에서 멈췄는지</span>부터 읽습니다</h2>
   <div class="op-visual"><div class="doc-scene doc-recovery-room">
@@ -441,10 +495,28 @@ PR URL · changed files · test result
   <p class="op-cap">도구를 하나 더 설치하기 전에 <b>지금 비어 있는 층이 능력·절차·역할·흐름 중 무엇인지</b> 봅니다.</p>
 </div>
 <div class="slide op-slide">
+  <div class="op-eyebrow">ONE JOURNEY</div>
+  <h2 class="op-title">실제 요청 하나는 <span class="g">네 층을 차례로 통과</span>합니다</h2>
+  <div class="op-visual"><div class="op-flow"><div class="op-node "><b>요청</b><span>리뷰 페이지 개선</span></div><span class="op-arrow">→</span><div class="op-node a"><b>Workflow</b><span>흐름 시작 · 게이트 예약</span></div><span class="op-arrow">→</span><div class="op-node a"><b>SubAgent</b><span>UI · QA 역할 분배</span></div><span class="op-arrow">→</span><div class="op-node a"><b>Skill · MCP</b><span>절차 실행 · 외부 확인</span></div><span class="op-arrow">→</span><div class="op-node g"><b>게이트</b><span>내가 보고 승인</span></div></div></div>
+  <p class="op-cap">넷은 경쟁하는 선택지가 아니라 <b>한 작업 안의 층</b>입니다. 무엇이 빠졌는지가 보이면 설계할 수 있습니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">WHEN NOT TO</div>
+  <h2 class="op-title">도입하지 <span class="a">말아야 할 때</span>를 아는 것도 설계입니다</h2>
+  <div class="op-visual"><div class="op-compare"><section><h3>아직 이르다는 신호</h3><p><span class="amber">한 번뿐인 작업</span> — 자동화 비용이 더 큽니다.</p><p>완료 기준을 말로 설명하지 못합니다.</p><p>검증 루틴(2주차)이 아직 몸에 붙지 않았습니다.</p></section><section><h3>도입할 때가 된 신호</h3><p>같은 작업을 <span class="teal">세 번째</span> 반복하고 있습니다.</p><p>사람 손 전달이 병목이 되고 있습니다.</p><p>게이트에서 볼 검사 항목이 명확합니다.</p></section></div></div>
+  <p class="op-cap">순서는 언제나 <b>수동으로 잘하기 → 반복 확인 → 그다음 자동화</b>입니다.</p>
+</div>
+<div class="slide op-slide">
   <div class="op-eyebrow">FIRST ASSET</div>
   <h2 class="op-title">첫 개인 자산은 <span class="g">가장 자주 반복되고, 가장 자주 빠지는 일</span>에서 고릅니다</h2>
   <div class="op-visual"><div class="op-compare"><section><h3>좋은 시작</h3><p><span class="teal">PR 요약</span> · 회의록 정리 · QA 체크 · 프로젝트 시작 정리</p><p>반복되며, 입력과 완료 기준을 설명할 수 있습니다.</p></section><section><h3>나중에 할 것</h3><p><span class="amber">모든 업무를 처리하는 만능 에이전트</span></p><p>범위가 넓고, 권한·비용·복구 기준이 아직 없습니다.</p></section></div></div>
   <p class="op-cap">처음에는 범위를 작게 잡아 <b>재사용 가능한 한 가지</b>를 남기는 편이 좋습니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">GLOSSARY</div>
+  <h2 class="op-title">오늘의 네 단어를 <span class="g">한 문장씩</span>으로 고정합니다</h2>
+  <div class="op-visual"><div class="op-map"><div><b>MCP</b><span>외부 능력을 연결하는 규격<br>— AI의 <b>손</b></span></div><div><b>Skill</b><span>반복 절차의 저장<br>— AI의 <b>습관</b></span></div><div><b>SubAgent</b><span>범위가 있는 작은 담당자<br>— AI의 <b>직원</b></span></div><div><b>Workflow</b><span>게이트가 있는 자동 흐름<br>— AI의 <b>동선</b></span></div></div></div>
+  <p class="op-cap">수강생이 이 네 문장을 자기 말로 바꿔 말할 수 있으면 오늘 수업은 성공입니다.</p>
 </div>
 <div class="slide op-slide">
   <div class="op-eyebrow">MIDPOINT</div>
@@ -463,6 +535,18 @@ PR URL · changed files · test result
   <h2 class="op-title">확장 도구를 만들기 전, <span class="g">네 질문</span>으로 과한 자동화를 걸러냅니다</h2>
   <div class="op-visual"><div class="op-map"><div><b>반복되는가</b><span>한 번만 할 일인가</span></div><div><b>입력이 분명한가</b><span>누구나 같은 정보를 주는가</span></div><div><b>완료 기준이 있는가</b><span>통과 여부를 판단할 수 있는가</span></div><div><b>복구 가능한가</b><span>실패하면 어디로 돌아가는가</span></div></div></div>
   <p class="op-cap">네 질문에 답하기 어렵다면, 아직은 자동화보다 <b>작업 흐름을 관찰</b>할 때입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">SELF CHECK</div>
+  <h2 class="op-title">이 문제는 <span class="g">어느 층의 문제</span>일까요?</h2>
+  <div class="op-visual"><ul class="op-checks"><li>매주 같은 형식의 보고서를 매번 다시 설명한다 → <b>Skill</b></li><li>AI가 사내 위키를 읽지 못해 매번 붙여넣는다 → <b>MCP</b></li><li>두 작업이 같은 파일을 건드려 서로 덮어쓴다 → <b>SubAgent · Worktree</b></li><li>완성물이 확인 없이 바로 공개된다 → <b>Workflow 게이트</b></li></ul></div>
+  <p class="op-cap">문제를 층으로 번역할 수 있으면, 해결책은 <b>오늘 배운 네 단어 중 하나</b>입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">HOMEWORK</div>
+  <h2 class="op-title">다음 주까지 <span class="g">세 줄</span>만 준비해 오세요</h2>
+  <div class="op-visual"><ul class="op-checks"><li>매주 반복하는 작업 하나를 골라 Skill 후보로 적어 오기</li><li>내 프로젝트에 필요한 외부 연결(MCP) 하나 찾아 오기</li><li>위임하고 싶은 작업의 완료 기준을 3줄로 써 오기</li></ul></div>
+  <p class="op-cap">다음 주에는 이 세 줄이 그대로 <b>나만의 AI 사무실의 첫 부서</b>가 됩니다.</p>
 </div>
 <div class="slide op-slide">
   <div class="op-eyebrow">CLOSE</div>
