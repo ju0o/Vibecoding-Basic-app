@@ -2,6 +2,28 @@
 
 이 프로젝트는 [Semantic Versioning](https://semver.org/)을 사용합니다.
 
+## [Unreleased] - 2026-07-02
+
+### 추가
+
+- 6강 슬라이드 16(React/Next.js 실서비스 목업), 21(VSCode workbench 비밀값 장면), 28(수료식 커튼 연출) 재설계와 해상도별 검증 캡처
+- AI 한방 3주차에 `AI LANDSCAPE`(모델→MCP/Skill→SubAgent→Workflow→오케스트레이션 5층 지형도), `LOOP ENGINEERING`(원샷 대비 계획-실행-검증-개선 루프) 개념 슬라이드
+- AI 한방 4주차 엔딩 시퀀스: 다음 과정 경로 지도(NEXT STEP)와 수강 후기 QR(THANK YOU)
+- 스튜디오 강의 즐겨찾기(상세 패널 토글 + 목록 별표)와 최근 열람 자료 6건 기록
+- `Ctrl+K` 빈 검색 상태에서 즐겨찾기·최근 자료를 카탈로그 위에 고정 노출
+- onepass 오프라인 대체 화면 `onepass-01.png` 캡처
+
+### 변경
+
+- onepass 4주 덱을 수작업 유지 파일로 확정 — `build-onepass-week*.js` 생성기는 `FORCE_ONEPASS_REBUILD=1` 없이 덮어쓰기 거부
+- `audit-v3-curriculum` 기대값을 현재 커리큘럼에 맞게 갱신(advanced 8강, onepass 180분, 쇼케이스는 아카이브 리비전으로 검사, 43개 회차 장면 데이터)
+- `basic-v2-freeze.json`을 검수 완료된 1~6강 리빌드 기준으로 재고정
+
+### 제거
+
+- 사용처가 없는 V2 레거시 셸 `src/renderer/app.js`, `src/renderer/styles.css`
+- 루트의 떠돌이 중복 파일 `reviewQR.jpg` (실사용본은 `src/content/assets/`)
+
 ## [3.0.0-beta.3] - 2026-06-16
 
 ### 추가

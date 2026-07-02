@@ -13,7 +13,11 @@
 3. AI Workflow Architect 4주
 4. Claude Code Professional 6주
 5. Codex Professional 6주
-6. 바이브코딩 기초반 · 다음 기수 4주 개편본
+6. AI 심화 통합과정 · V3 파일럿 8주 (preview)
+7. AI 한방 이해하기 · 4주 집중 (preview)
+8. 바이브코딩 기초반 · 다음 기수 4주 개편본 (preview)
+
+`AI 한방 이해하기` 4주 덱(`src/content/sessions/onepass-week1~4.html`)은 생성 후 수작업으로 고도화한 파일입니다. `scripts/build-onepass-week*.js` 생성기는 기본적으로 덮어쓰기를 거부하며, 정말 재생성하려면 `FORCE_ONEPASS_REBUILD=1`을 설정해야 합니다.
 
 수강생에게 나눠줄 자료는 별도 모드가 아니라 `수강생 출력물` 탭에서 미리보기, 인쇄, PDF 저장으로 관리합니다.
 
