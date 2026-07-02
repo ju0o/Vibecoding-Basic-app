@@ -15,7 +15,7 @@
 5. Codex Professional 6주
 6. AI 심화 통합과정 · V3 파일럿 8주 (preview)
 7. AI 한방 이해하기 · 4주 집중 (preview)
-8. 특강 라이브러리 · 스페셜 렉처 (preview) — 첫 특강: AI 엔지니어링의 진화 90분
+8. 특강 라이브러리 · 스페셜 렉처 (preview) — AI 엔지니어링의 진화 90분, AI 안전 운전 60분
 9. 바이브코딩 기초반 · 다음 기수 4주 개편본 (preview)
 
 `AI 한방 이해하기` 4주 덱(`src/content/sessions/onepass-week1~4.html`)은 생성 후 수작업으로 고도화한 파일입니다. `scripts/build-onepass-week*.js` 생성기는 기본적으로 덮어쓰기를 거부하며, 정말 재생성하려면 `FORCE_ONEPASS_REBUILD=1`을 설정해야 합니다.

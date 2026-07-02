@@ -144,6 +144,7 @@ function sidebarSymbol(name) {
     terminal: '<rect x="3.5" y="4.5" width="13" height="11" rx="2"></rect><path d="M6.5 8l2 2-2 2"></path><path d="M9.8 12h3.2"></path>',
     doc: '<path d="M6 3.5h5.8l2.7 2.7v9.8H6z"></path><path d="M11.8 3.5v2.9h2.7"></path><path d="M8.3 9.4h4.8"></path><path d="M8.3 12.2h4.8"></path>',
     grid: '<rect x="4" y="4" width="4.8" height="4.8" rx="1.2"></rect><rect x="11.2" y="4" width="4.8" height="4.8" rx="1.2"></rect><rect x="4" y="11.2" width="4.8" height="4.8" rx="1.2"></rect><rect x="11.2" y="11.2" width="4.8" height="4.8" rx="1.2"></rect>',
+    spark: '<path d="M10 3.5l1.7 4.3 4.3 1.7-4.3 1.7-1.7 4.3-1.7-4.3-4.3-1.7 4.3-1.7z"></path><circle cx="15.4" cy="4.6" r="1.1"></circle>',
   };
   return `<svg class="sidebar-symbol" viewBox="0 0 20 20" aria-hidden="true">${icons[name] || icons.stack}</svg>`;
 }
@@ -332,6 +333,7 @@ function simplifyListChrome() {
 
 function courseSidebarIcon(course) {
   const key = `${course.track || ''} ${course.family || ''} ${course.code || ''}`.toLowerCase();
+  if (/특강|special/.test(key)) return 'spark';
   if (/react|node|fullstack|dev/.test(key)) return 'terminal';
   if (/ai|data|ml|prompt/.test(key)) return 'grid';
   if (/design|ui|ux|brand|product/.test(key)) return 'doc';

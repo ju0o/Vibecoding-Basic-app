@@ -57,6 +57,31 @@
         "4세대 자가 진단 결과",
         "다음 계단의 이번 주 최소 행동 1가지"
       ]
+    },
+    {
+      "id": "special-02",
+      "title": "특강 · AI 안전 운전 — 비용 · 비밀값 · 개인정보",
+      "subtitle": "사고가 나는 세 지점(돈 · 유출 · 파괴)과 이를 막는 구조를 60분에 정리",
+      "description": "비용 폭주의 구조와 3규칙, 비밀값 금고(.env · .gitignore), 개인정보 가명화 · 최소화, 권한 3등급, 유출 첫 15분 대응 시연, 팀 안전 점검표 7문항을 다루는 60분 특강입니다.",
+      "duration": "60분",
+      "type": "lecture",
+      "slideCount": 16,
+      "file": "sessions/special-ai-safety.html",
+      "moduleId": "SP",
+      "revision": "3.0.0-beta.3",
+      "status": "preview",
+      "sourceKeys": [
+        "owasp-llm-top10"
+      ],
+      "preparation": [
+        "빔프로젝터 · 발표용 노트북",
+        "안전 점검표 인쇄본 (수강 인원수)",
+        "후기 QR 폼 연결 확인"
+      ],
+      "deliverables": [
+        "우리 팀 안전 점검표 7문항 결과",
+        "오늘 밤 적용할 안전벨트 1가지"
+      ]
     }
   ],
   "materials": {
@@ -66,6 +91,13 @@
         "title": "특강 배포자료 · 4세대 지도와 자가 진단",
         "description": "프롬프트 → 컨텍스트 → 루프 → 하네스 요약표, 세대별 한계와 해결, 자가 진단, 이번 주 실행 계획을 담은 A4 2장.",
         "file": "appendix/handout-special-engineering-eras.html",
+        "type": "print"
+      },
+      {
+        "id": "special-handout-safety",
+        "title": "특강 배포자료 · AI 안전 점검표",
+        "description": "비용 · 비밀값 · 개인정보 3대 사고 지점, 안전벨트 규칙, 유출 대응 순서, 팀 점검표 7문항을 담은 A4 1장.",
+        "file": "appendix/handout-special-ai-safety.html",
         "type": "print"
       }
     ],

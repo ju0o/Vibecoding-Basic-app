@@ -101,9 +101,9 @@ const v3Courses = manifest.courses.filter((course) => course.id !== 'basic-curre
 for (const course of v3Courses) {
   for (const session of course.sessions) {
     // onepass runs as 180-minute intensive lectures, the special-lecture library
-    // as 90-minute one-offs; every other V3 track stays at 120 minutes.
-    const expectedDuration = course.id === 'onepass' ? '180분' : course.id === 'special' ? '90분' : '120분';
-    pass(session.duration === expectedDuration, `${session.id} uses the ${expectedDuration} format`);
+    // as 60-90 minute one-offs; every other V3 track stays at 120 minutes.
+    const allowedDurations = course.id === 'onepass' ? ['180분'] : course.id === 'special' ? ['60분', '90분'] : ['120분'];
+    pass(allowedDurations.includes(session.duration), `${session.id} uses the ${allowedDurations.join('/')} format`);
     for (const sourceKey of session.sourceKeys || []) {
       if (!sourceCatalog.sources[sourceKey]) failures.push(`${session.id} references unknown source: ${sourceKey}`);
     }
