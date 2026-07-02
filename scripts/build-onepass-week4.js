@@ -128,5 +128,12 @@ const html = buildLectureDeck({
   extraCss: documentaryCss,
 });
 
-fs.writeFileSync(output, html, 'utf-8');
-console.log(`onepass-week4.html: ${slides.length} lecture slides + cover`);
+// The checked-in onepass HTML decks have been hand-enhanced after generation
+// (op-enhanced slides, landscape/loop/ending sequences). Regenerating silently
+// discards that work, so overwriting now requires an explicit opt-in.
+if (process.env.FORCE_ONEPASS_REBUILD === '1') {
+  fs.writeFileSync(output, html, 'utf-8');
+  console.log(`onepass-week4.html: ${slides.length} lecture slides + cover`);
+} else {
+  console.log('onepass-week4.html: skipped (hand-maintained deck; set FORCE_ONEPASS_REBUILD=1 to overwrite)');
+}

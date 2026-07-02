@@ -181,7 +181,50 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#070b11;col
 }
 
 .doc-capability-grid{display:grid;grid-template-columns:1fr 34px 1fr 34px 1fr 34px 1fr;align-items:stretch;padding:22px 20px 16px}.doc-capability-grid section{min-height:150px;padding:15px;display:grid;align-content:center;gap:9px;border:1px solid rgba(255,255,255,.12);border-radius:9px;background:#101b25}.doc-capability-grid small,.doc-decision-grid small{font:800 10px ui-monospace,Consolas,monospace;letter-spacing:.09em;color:#879da4}.doc-capability-grid b{font-size:15px;line-height:1.35}.doc-capability-grid span{color:#a9bdc3;font-size:11px;line-height:1.45}.doc-capability-grid i{position:relative;align-self:center;height:1px;background:linear-gradient(90deg,#37d4c1,#f5b951)}.doc-capability-grid i:after{content:'';position:absolute;top:-3px;right:-1px;border:4px solid transparent;border-left-color:#f5b951}.doc-capability-grid .capability-mcp{border-top:2px solid #7cc5ff}.doc-capability-grid .capability-skill{border-top:2px solid #37d4c1}.doc-capability-grid .capability-agent{border-top:2px solid #f5b951}.doc-capability-grid .capability-flow{border-top:2px solid #b49bff}.doc-capability-map footer{display:grid;grid-template-columns:repeat(4,1fr);padding:12px 20px;border-top:1px solid rgba(255,255,255,.08);color:#a6bac0;text-align:center;font-size:11px}.doc-decision-grid{display:grid;grid-template-columns:1fr 1.15fr 1fr;min-height:265px}.doc-decision-lane{padding:20px;display:grid;align-content:center;gap:10px}.doc-decision-lane.fixed{background:linear-gradient(145deg,rgba(245,185,81,.09),#101a22);border-right:1px solid rgba(255,255,255,.08)}.doc-decision-lane.agentic{background:linear-gradient(215deg,rgba(124,197,255,.1),#101a22);border-left:1px solid rgba(255,255,255,.08)}.doc-decision-lane b{font-size:16px;line-height:1.35}.doc-decision-lane span{padding:8px 10px;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#bed0d5;font-size:11px}.doc-decision-core{display:grid;place-content:center;justify-items:center;gap:11px;padding:20px;text-align:center;background:radial-gradient(circle at 50% 45%,rgba(55,212,193,.16),transparent 45%),#0c151d}.doc-decision-core b{font-size:19px;line-height:1.4}.doc-decision-core i{width:74px;height:74px;border:1px solid rgba(55,212,193,.45);border-radius:50%;position:relative;box-shadow:0 0 30px rgba(55,212,193,.18);animation:docControl 3.2s ease-in-out infinite}.doc-decision-core i:after{content:'✓';position:absolute;inset:0;display:grid;place-items:center;color:#37d4c1;font-size:28px}.doc-decision-core span{color:#f5d58d;font-size:11px}.doc-decision-control footer{padding:11px 18px;border-top:1px solid rgba(255,255,255,.08);text-align:center;color:#c2d2d5;font-size:12px}.doc-decision-control footer b{color:#93e7ce}@keyframes docControl{50%{transform:scale(1.07);box-shadow:0 0 46px rgba(55,212,193,.34)}}@media(max-height:720px){.doc-capability-grid{padding:16px}.doc-capability-grid section{min-height:122px;padding:12px}.doc-decision-grid{min-height:215px}.doc-decision-lane{padding:14px;gap:7px}.doc-decision-core{padding:13px}.doc-decision-core i{width:56px;height:56px}}@media(max-width:840px){.doc-capability-grid{grid-template-columns:1fr 1fr}.doc-capability-grid i{display:none}.doc-capability-map footer{grid-template-columns:1fr 1fr}.doc-decision-grid{grid-template-columns:1fr}.doc-decision-lane{border:0!important;border-bottom:1px solid rgba(255,255,255,.08)!important}.doc-decision-lane span{display:none}}
-</style></head><body data-onepass-mode="lecture"><div class="app"><nav class="nav-bar"><span class="nav-title">AI 한방 이해하기 · 3주차 · MCP · Skill · SubAgent · Workflow</span><div class="nav-controls"><button class="nav-btn" id="btn-prev" onclick="move(-1)">←</button><span id="counter">1 / 24</span><button class="nav-btn" id="btn-next" onclick="move(1)">→</button></div></nav><div class="deck"><div class="slide op-cover active"><div class="op-eyebrow">AI 한방 이해하기 · 3주차 · 180분 강의</div><h1 class="op-cover-title">AI의 손발을 직접 설계하는 법<br><span class="g">MCP · Skill · SubAgent · Workflow</span></h1><p class="op-cover-sub">외부 능력, 반복 절차, 역할 분배, 자동 흐름을 구분하고 연결해 나만의 재사용 가능한 작업 자산을 설계합니다.</p><div class="op-cover-flow"><span>MCP</span><span>Skill</span><span>SubAgent</span><span>Workflow</span><span>Permission</span><span>Recovery</span></div></div><div class="slide op-slide">
+/* AI landscape stack — 지형도 슬라이드 (수작업 유지 구간) */
+.lm-stack{display:flex;flex-direction:column;gap:11px;max-width:1200px;margin:0 auto;width:100%}
+.lm-layer{display:grid;grid-template-columns:112px 1fr auto;gap:16px;align-items:center;padding:12px 18px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.03);position:relative}
+.lm-layer small{color:#6b7a85;font:800 11px ui-monospace,SFMono-Regular,monospace;letter-spacing:.12em}
+.lm-layer b{display:block;color:#eaf2f6;font-size:clamp(15px,1.5vw,19px);line-height:1.3}
+.lm-layer p{margin:2px 0 0;color:#9fb0bd;font-size:12.5px;line-height:1.45;word-break:keep-all}
+.lm-chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.lm-chips span{padding:5px 10px;border:1px solid rgba(255,255,255,.14);border-radius:7px;color:#aebcc4;font:750 11px ui-monospace,monospace;white-space:nowrap}
+.lm-layer.today{border-color:rgba(52,211,153,.45);background:rgba(52,211,153,.06)}
+.lm-layer.today small{color:#34d399}
+.lm-layer.next{border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.05)}
+.lm-layer.next small{color:#fbbf24}
+.lm-badge{position:absolute;top:-9px;right:14px;padding:3px 9px;border-radius:6px;font:800 10px ui-monospace,monospace;letter-spacing:.1em}
+.lm-badge.g{background:#0e2b22;border:1px solid rgba(52,211,153,.5);color:#34d399}
+.lm-badge.a{background:#2b220e;border:1px solid rgba(251,191,36,.5);color:#fbbf24}
+.lm-base{opacity:.78}
+@media(max-height:720px){.lm-layer{padding:9px 16px}.lm-layer p{font-size:11.5px}.lm-stack{gap:7px}}
+/* Loop engineering — one-shot 대비 루프 설계 */
+.le-wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:24px;max-width:1200px;margin:0 auto;width:100%;align-items:stretch}
+.le-panel{border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.03);padding:18px;display:flex;flex-direction:column;gap:12px}
+.le-panel>small{font:800 11px ui-monospace,SFMono-Regular,monospace;letter-spacing:.14em;color:#9fb0bd}
+.le-panel.loop{border-color:rgba(52,211,153,.4);background:rgba(52,211,153,.05)}
+.le-panel.loop>small{color:#34d399}
+.le-shot{display:flex;flex-direction:column;gap:9px}
+.le-shot span{padding:10px 13px;border-radius:9px;border:1px solid rgba(255,255,255,.12);color:#cdd8de;font-size:13px;word-break:keep-all}
+.le-shot .q{align-self:flex-start;background:rgba(125,211,252,.08);border-color:rgba(125,211,252,.3)}
+.le-shot .a{align-self:flex-end;background:rgba(255,255,255,.05)}
+.le-shot .x{align-self:center;border-style:dashed;color:#fbbf24;border-color:rgba(251,191,36,.4);font-weight:700}
+.le-verdict{margin-top:auto;color:#9fb0bd;font-size:12.5px;line-height:1.5;word-break:keep-all}
+.le-verdict b{color:#eaf2f6}
+.le-ring{position:relative;width:min(280px,52vw);aspect-ratio:1;margin:22px auto 34px;border:2px dashed rgba(52,211,153,.35);border-radius:50%}
+.le-node{position:absolute;min-width:84px;text-align:center;padding:8px 12px;border-radius:9px;border:1px solid rgba(255,255,255,.16);background:#0c1320;color:#eaf2f6;font-weight:800;font-size:13px}
+.le-node small{display:block;color:#9fb0bd;font:700 10px ui-monospace,monospace;margin-top:2px}
+.le-node.n{top:0;left:50%;transform:translate(-50%,-50%)}
+.le-node.e{top:50%;right:0;transform:translate(50%,-50%)}
+.le-node.s{bottom:0;left:50%;transform:translate(-50%,50%)}
+.le-node.w{top:50%;left:0;transform:translate(-50%,-50%)}
+.le-core{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:#34d399;font:800 11px ui-monospace,monospace;letter-spacing:.1em}
+.le-core b{display:block;color:#eaf2f6;font-size:15px;letter-spacing:0;margin-top:3px}
+.le-gate{display:flex;align-items:center;justify-content:center;gap:9px;color:#fbbf24;font:750 12px ui-monospace,monospace}
+.le-gate i{width:26px;height:1px;background:linear-gradient(90deg,transparent,rgba(251,191,36,.7))}
+@media(max-height:720px){.le-ring{width:min(228px,44vw)}.le-panel{padding:14px;gap:9px}}
+@media(max-width:1100px){.le-wrap{grid-template-columns:1fr}}
+</style></head><body data-onepass-mode="lecture"><div class="app"><nav class="nav-bar"><span class="nav-title">AI 한방 이해하기 · 3주차 · MCP · Skill · SubAgent · Workflow</span><div class="nav-controls"><button class="nav-btn" id="btn-prev" onclick="move(-1)">←</button><span id="counter">1 / 26</span><button class="nav-btn" id="btn-next" onclick="move(1)">→</button></div></nav><div class="deck"><div class="slide op-cover active"><div class="op-eyebrow">AI 한방 이해하기 · 3주차 · 180분 강의</div><h1 class="op-cover-title">AI의 손발을 직접 설계하는 법<br><span class="g">MCP · Skill · SubAgent · Workflow</span></h1><p class="op-cover-sub">외부 능력, 반복 절차, 역할 분배, 자동 흐름을 구분하고 연결해 나만의 재사용 가능한 작업 자산을 설계합니다.</p><div class="op-cover-flow"><span>MCP</span><span>Skill</span><span>SubAgent</span><span>Workflow</span><span>Permission</span><span>Recovery</span></div></div><div class="slide op-slide">
   <div class="op-eyebrow">WEEK 03 · EXTEND</div>
   <h2 class="op-title">AI의 능력을 늘리는 법은<br><span class="g">더 많이 시키는 것</span>이 아닙니다</h2>
   <div class="op-visual"><div class="doc-scene doc-office-control">
@@ -190,6 +233,39 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#070b11;col
   <footer><span>owner: 목표·승인</span><span>system: 반복·기록</span><b>release: locked</b></footer>
 </div></div>
   <p class="op-cap">이번 주는 네 개념을 섞지 않고, <b>각각의 역할과 연결 순서</b>를 분명히 합니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">AI LANDSCAPE</div>
+  <h2 class="op-title">지금의 AI 개발은 <span class="g">모델 위에 층을 쌓는 일</span>이 되었습니다</h2>
+  <div class="op-visual"><div class="lm-stack">
+    <div class="lm-layer next"><small>L5 · OPERATE</small><div><b>오케스트레이션</b><p>여러 흐름을 하나의 사무실처럼 접수 · 분배 · 승인 · 복구로 운영합니다</p></div><div class="lm-chips"><span>Multi-Agent</span><span>운영 규칙</span></div><span class="lm-badge a">NEXT · W4</span></div>
+    <div class="lm-layer today"><small>L4 · FLOW</small><div><b>Workflow</b><p>시작 조건부터 승인 게이트까지, 작업이 흐르는 길을 미리 설계합니다</p></div><div class="lm-chips"><span>게이트</span><span>복구</span></div><span class="lm-badge g">TODAY</span></div>
+    <div class="lm-layer today"><small>L3 · ROLE</small><div><b>SubAgent</b><p>범위와 완료 기준이 있는 작은 담당자에게 일을 계약처럼 분배합니다</p></div><div class="lm-chips"><span>역할 계약</span><span>Worktree</span></div><span class="lm-badge g">TODAY</span></div>
+    <div class="lm-layer today"><small>L2 · ABILITY</small><div><b>MCP · Skill</b><p>외부 능력을 연결하고(MCP), 반복 절차를 재사용 자산으로 저장합니다(Skill)</p></div><div class="lm-chips"><span>도구 연결</span><span>절차 저장</span></div><span class="lm-badge g">TODAY</span></div>
+    <div class="lm-layer lm-base"><small>L1 · MODEL</small><div><b>언어 모델</b><p>이해하고 생성하는 기반 — 이제 경쟁력은 모델 위의 층에서 갈립니다</p></div><div class="lm-chips"><span>Claude</span><span>GPT</span><span>Gemini</span></div></div>
+  </div></div>
+  <p class="op-cap">좋은 모델을 고르는 안목보다 <b>모델 위에 어떤 층을 쌓는가</b>가 결과를 가릅니다. 오늘은 L2–L4를 직접 설계합니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">LOOP ENGINEERING</div>
+  <h2 class="op-title">잘 묻는 사람에서 <span class="g">검증 루프를 설계하는 사람</span>으로</h2>
+  <div class="op-visual"><div class="le-wrap">
+    <div class="le-panel"><small>BEFORE · ONE-SHOT</small>
+      <div class="le-shot"><span class="q">로그인 페이지 만들어줘</span><span class="a">완성했습니다!</span><span class="x">품질은 복불복 — 확인·수정·기록은 전부 사람 몫</span></div>
+      <p class="le-verdict">한 번의 요청에 모든 것을 걸면, 결과가 좋아도 <b>다음에 같은 품질을 재현할 수 없습니다.</b></p>
+    </div>
+    <div class="le-panel loop"><small>NOW · ENGINEERED LOOP</small>
+      <div class="le-ring">
+        <div class="le-node n">계획<small>PLAN</small></div>
+        <div class="le-node e">실행<small>BUILD</small></div>
+        <div class="le-node s">검증<small>VERIFY</small></div>
+        <div class="le-node w">개선<small>REFINE</small></div>
+        <div class="le-core">GOAL<b>완료 기준</b></div>
+      </div>
+      <div class="le-gate"><i></i>기준을 통과했을 때만 오너 승인으로 종료<i></i></div>
+    </div>
+  </div></div>
+  <p class="op-cap">MCP · Skill · SubAgent · Workflow는 결국 <b>이 루프를 안정적으로 돌리기 위한 부품</b>입니다. 오늘 이 넷을 배우는 이유입니다.</p>
 </div>
 <div class="slide op-slide">
   <div class="op-eyebrow">BOUNDARY MAP</div>

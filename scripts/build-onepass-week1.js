@@ -594,8 +594,15 @@ render();
 // check.js counts `<div class="slide` by prefix, which false-matches `.slide-takeaway`.
 // Rename it consistently (markup + scoped CSS) so the static slide counter stays accurate.
 const finalHtml = html.replace(/slide-takeaway/g, 'op-takeaway');
-fs.writeFileSync(OUT, finalHtml, 'utf-8');
-console.log(`onepass-week1.html: ${slideBlocks.length} reused slides + cover from ${SOURCES.length} sources (total ${total})`);
+// The checked-in onepass HTML decks have been hand-enhanced after generation
+// (op-enhanced slides, landscape/loop/ending sequences). Regenerating silently
+// discards that work, so overwriting now requires an explicit opt-in.
+if (process.env.FORCE_ONEPASS_REBUILD === '1') {
+  fs.writeFileSync(OUT, finalHtml, 'utf-8');
+  console.log(`onepass-week1.html: ${slideBlocks.length} reused slides + cover from ${SOURCES.length} sources (total ${total})`);
+} else {
+  console.log('onepass-week1.html: skipped (hand-maintained deck; set FORCE_ONEPASS_REBUILD=1 to overwrite)');
+}
 
 // Shared shell (chrome + op-enhanced CSS) reused by week 2-4 builders.
 module.exports = { chrome, scopeCss, extractSlides };
