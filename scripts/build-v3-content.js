@@ -1885,6 +1885,10 @@ preserveV2Sources();
 // emit, so its manifest entry is pre-built and injected verbatim (already normalized).
 const advancedManifestCourse = require('./data/advanced-course.manifest.json');
 const onepassManifestCourse = require('./data/onepass-course.manifest.json');
+// The special-lecture library (단발 특강) is defined the same way: a verbatim
+// manifest entry whose deck (sessions/special-engineering-eras.html) is a
+// hand-maintained standalone lecture file, not a generated 13-scene deck.
+const specialManifestCourse = require('./data/special-course.manifest.json');
 const courses = [
   normalizeMaterials(currentBasic),
   normalizeMaterials(makeCourse('product', curricula.product)),
@@ -1893,6 +1897,7 @@ const courses = [
   normalizeMaterials(makeCourse('codex', curricula.codex)),
   advancedManifestCourse,
   onepassManifestCourse,
+  specialManifestCourse,
   normalizeMaterials(makeCourse('foundation-next', curricula['foundation-next'], 'preview')),
 ];
 

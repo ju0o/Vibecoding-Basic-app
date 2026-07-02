@@ -342,7 +342,7 @@ function demo() {
       <h2>${escapeHtml(lesson.demo.title)}</h2>
       <p class="objective">발표자는 시작, 다음, 일시정지, 초기화를 직접 제어합니다. 수강생이 결과를 예측할 시간을 확보합니다.</p>
       ${professionalBlock(lesson)}
-      <h3>시연 전 준비</h3>${list([...lesson.preparation, '정상 상태 캡처', '실패 상태 캡처', '복구 명령 또는 되돌릴 커밋'])}
+      <h3>시연 전 준비</h3>${list([...(lesson.preparation || []), '정상 상태 캡처', '실패 상태 캡처', '복구 명령 또는 되돌릴 커밋'])}
       <h3>정상 시연 순서</h3>${list(lesson.demo.stages.map((stage, step) => `${step + 1}. ${stage}: 화면 변화와 확인 기준을 말한 뒤 다음 단계로 이동`), 'numbered')}
       ${lesson.professional?.demoRun ? `<h3>전문 시연 운영 순서</h3>${list(lesson.professional.demoRun, 'numbered')}` : ''}
       ${lesson.professional?.motionStoryboard ? `<h3>모션 스토리보드</h3>${list(lesson.professional.motionStoryboard, 'numbered')}` : ''}

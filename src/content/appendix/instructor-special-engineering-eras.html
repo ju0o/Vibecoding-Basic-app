@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>강사 노트 · 특강 — AI 엔지니어링의 진화</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  background: #f0f2f8; color: #111; padding: 32px 24px; line-height: 1.6;
+}
+.page-wrap { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
+.print-btn {
+  background: #b45309; color: #fff; border: 0; border-radius: 8px; padding: 12px 24px;
+  font-size: 15px; font-weight: 700; cursor: pointer; align-self: flex-end;
+}
+.sheet { background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,.1); overflow: hidden; }
+.sheet-header {
+  background: linear-gradient(135deg, #451a03, #92400e); color: #fff;
+  padding: 18px 28px 16px; display: flex; align-items: center; justify-content: space-between;
+}
+.sh-course { font-size: 11px; font-weight: 700; letter-spacing: .15em; color: rgba(255,255,255,.65); text-transform: uppercase; margin-bottom: 4px; }
+.sh-title { font-size: 20px; font-weight: 900; line-height: 1.2; }
+.sh-right { text-align: right; font-size: 11px; color: rgba(255,255,255,.55); line-height: 1.8; }
+.sheet-body { padding: 22px 28px 24px; }
+.sec { margin-bottom: 18px; }
+.sec-title {
+  font-size: 11px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase;
+  color: #b45309; border-left: 3px solid #b45309; padding-left: 8px; margin-bottom: 10px;
+}
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+th { background: #fffbeb; color: #92400e; font-weight: 800; font-size: 10.5px; letter-spacing: .06em; padding: 7px 10px; text-align: left; border-bottom: 2px solid #fde68a; }
+td { padding: 7px 10px; border-bottom: 1px solid #f3f4f6; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+td b { color: #92400e; }
+.qa { border: 1px solid #fde68a; background: #fffdf5; border-radius: 8px; padding: 10px 13px; margin-bottom: 8px; font-size: 12.5px; }
+.qa b { display: block; color: #92400e; margin-bottom: 2px; }
+.note-box { border: 1px solid #fde68a; background: #fffbeb; border-radius: 8px; padding: 12px 14px; font-size: 12.5px; }
+.note-box b { color: #92400e; }
+ul.plain { list-style: none; }
+ul.plain li { padding-left: 18px; position: relative; font-size: 12.5px; margin-bottom: 6px; }
+ul.plain li::before { content: ''; position: absolute; left: 0; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: #b45309; }
+@media print {
+  body { background: #fff; padding: 0; }
+  .print-btn { display: none; }
+  .page-wrap { gap: 0; }
+  .sheet { border-radius: 0; box-shadow: none; page-break-after: always; }
+  .sheet:last-child { page-break-after: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+  <button class="print-btn" onclick="window.print()">🖨️ 인쇄 / PDF 저장</button>
+
+  <!-- 시트 1: 운영 타임라인 -->
+  <div class="sheet">
+    <div class="sheet-header">
+      <div>
+        <div class="sh-course">INSTRUCTOR ONLY · 강사 노트 1/2</div>
+        <div class="sh-title">특강 90분 운영 타임라인</div>
+      </div>
+      <div class="sh-right">AI 엔지니어링의 진화<br>덱: special-engineering-eras.html · 24장</div>
+    </div>
+    <div class="sheet-body">
+      <div class="sec">
+        <div class="sec-title">시간 배분 (90분)</div>
+        <table>
+          <tr><th style="width:80px">시간</th><th style="width:150px">구간 (슬라이드)</th><th>운영 포인트</th></tr>
+          <tr><td><b>00–10</b></td><td>오프닝 (1–4)</td><td>"모델은 좋아지는데 왜 내 결과는 그대로일까"로 시작. 사다리 슬라이드에서 오늘의 지도를 미리 보여주고 출발</td></tr>
+          <tr><td><b>10–25</b></td><td>1세대 프롬프트 (5–7)</td><td>주문 잘하는 손님 비유에 시간 투자. "여러분 이미 1세대는 하고 계십니다"로 자신감 부여</td></tr>
+          <tr><td><b>25–40</b></td><td>2세대 컨텍스트 (8–11)</td><td>규칙 파일 실물 슬라이드가 핵심. "개발자 전유물이 아니다"를 반드시 말로 강조</td></tr>
+          <tr><td><b>40–55</b></td><td>3세대 루프 (12–15)</td><td>완료 기준이 핵심 부품임을 반복. 새벽 사고 로그에서 웃음이 나오면 성공</td></tr>
+          <tr><td><b>55–70</b></td><td>4세대 하네스 (16–18)</td><td>마구(harness) 비유 + "여러분이 쓰는 승인 창이 이미 하네스"로 체감 연결</td></tr>
+          <tr><td><b>70–80</b></td><td>수동 시연 (19)</td><td>EVOLUTION 장면을 버튼으로 한 단계씩. 각 단계에서 "지금 여러분은 여기"를 청중에게 묻기</td></tr>
+          <tr><td><b>80–90</b></td><td>정리 + QR (20–24)</td><td>자가 진단은 손들기로 진행. 마지막은 "내일 할 일 하나"로 구체적으로 착지</td></tr>
+        </table>
+      </div>
+      <div class="sec">
+        <div class="sec-title">이 특강의 단 하나의 목표</div>
+        <div class="note-box">청중이 돌아가서 <b>"반복 지시 하나를 파일로 옮기는 것"</b>(2세대의 첫 계단)을 실제로 하게 만드는 것.
+        네 세대를 다 외우게 하는 것이 아닙니다. 사다리의 존재와 자기 위치, 그리고 다음 한 계단만 남기면 됩니다.</div>
+      </div>
+      <div class="sec">
+        <div class="sec-title">수업 전 체크</div>
+        <ul class="plain">
+          <li>덱 19번 수동 시연의 시작/다음/초기화 버튼 동작 확인</li>
+          <li>마지막 QR 슬라이드가 실제 후기 폼으로 연결되는지 스캔 테스트</li>
+          <li>제품별 세부 기능·요금은 변동이 잦으므로 수업 전 공식 문서 기준으로 재확인</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 시트 2: 예상 질문 + 흔한 오해 -->
+  <div class="sheet">
+    <div class="sheet-header">
+      <div>
+        <div class="sh-course">INSTRUCTOR ONLY · 강사 노트 2/2</div>
+        <div class="sh-title">예상 질문 · 답변 예시 · 흔한 오해</div>
+      </div>
+      <div class="sh-right">Q&amp;A 대비 자료</div>
+    </div>
+    <div class="sheet-body">
+      <div class="sec">
+        <div class="sec-title">예상 질문과 답변 예시</div>
+        <div class="qa"><b>Q. 프롬프트 엔지니어링은 이제 필요 없는 건가요?</b>
+        A. 아닙니다. 세대는 대체가 아니라 축적입니다. 좋은 질문은 모든 세대의 바닥에 깔려 있고, 위층이 생겼을 뿐입니다. 다만 "질문만으로 승부하는 시대"가 끝난 것은 맞습니다.</div>
+        <div class="qa"><b>Q. 비개발자도 규칙 파일을 만들 수 있나요?</b>
+        A. 규칙 파일은 코드가 아니라 한국어 업무 지침입니다. "톤은 다정하게, 할인 표현 금지" 같은 문장을 파일에 적는 것뿐입니다. 오늘 슬라이드의 예시가 전부 비개발자용입니다.</div>
+        <div class="qa"><b>Q. 하네스는 대기업에나 필요한 것 아닌가요?</b>
+        A. 반대입니다. 1인일수록 게이트가 유일한 검토자라서 더 필요합니다. 규모가 아니라 실수 방지를 위한 구조입니다.</div>
+        <div class="qa"><b>Q. 순서를 건너뛰고 4세대부터 하면 안 되나요?</b>
+        A. 완료 기준(3세대)을 못 쓰면 게이트(4세대)에서 무엇을 검사할지 정할 수 없습니다. 계단은 겹쳐 쌓이기 때문에 건너뛰면 바닥이 빕니다.</div>
+      </div>
+      <div class="sec">
+        <div class="sec-title">청중이 자주 하는 오해 — 교정 멘트</div>
+        <table>
+          <tr><th>오해</th><th>교정</th></tr>
+          <tr><td>"새 모델이 나오면 해결된다"</td><td>같은 모델로도 팀마다 결과가 다릅니다 — 격차는 구조에서 납니다</td></tr>
+          <tr><td>"루프 = 자동화 = 위험하다"</td><td>위험한 것은 루프가 아니라 게이트 없는 루프입니다</td></tr>
+          <tr><td>"세대가 높을수록 우월하다"</td><td>자기 일의 반복 정도에 맞는 계단이 정답입니다. 한 번뿐인 일은 1세대로 충분합니다</td></tr>
+          <tr><td>"용어를 다 외워야 한다"</td><td>남길 것은 네 단어가 아니라 자기 위치와 다음 한 계단입니다</td></tr>
+        </table>
+      </div>
+      <div class="sec">
+        <div class="sec-title">시연 팁</div>
+        <ul class="plain">
+          <li>19번 수동 시연에서 단계마다 잠깐 멈추고 "여기까지 해보신 분?" 손들기 — 자가 진단의 예열이 됩니다</li>
+          <li>새벽 사고 로그(15번)는 읽어주지 말고 청중이 읽게 두세요. 스스로 발견할 때 효과가 큽니다</li>
+          <li>시간이 밀리면 6번(이어쓰기 원리)과 20번(축적)을 접습니다. 사다리(4번)와 시연(19번)은 접지 않습니다</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
