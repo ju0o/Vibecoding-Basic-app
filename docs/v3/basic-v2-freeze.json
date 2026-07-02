@@ -1,7 +1,7 @@
 {
   "label": "기초반 2기 6주 운영본",
-  "frozenAt": "2026-06-17",
-  "note": "2기 운영본은 자동 교체하지 않는다. 2026-06-17에 4강 파일 구조와 5강 환경변수 설명 오류를 검수 수정한 뒤 다시 고정했다.",
+  "frozenAt": "2026-07-02",
+  "note": "2기 운영본은 자동 교체하지 않는다. 2026-07 회차 리빌드(5강 documentary 재구축, 6강 복기 강의 전환 + 슬라이드 16/21/28 재설계) 검수 후 다시 고정했다.",
   "hashMode": "text-lf-normalized",
   "files": [
     {
@@ -11,8 +11,8 @@
     },
     {
       "file": "src/content/sessions/session-01-ai-understanding.html",
-      "bytes": 185771,
-      "sha256": "a019f2937a01d7ed06220a9dc1519506e4a5f0d1d58c6db3f26c3aaac5546d17"
+      "bytes": 186275,
+      "sha256": "ca3661b3ba52f47ae05df29a16f4cc90a3fc8095e53ebb0d948295c4246ff1a1"
     },
     {
       "file": "src/content/sessions/session-02-handout.html",
@@ -21,8 +21,8 @@
     },
     {
       "file": "src/content/sessions/session-02-vibe-coding.html",
-      "bytes": 112570,
-      "sha256": "82cac2c841bd3d6546defeaefa811cdf22021a05853735dd3efdef4e74144989"
+      "bytes": 113000,
+      "sha256": "229c82b1778c63f42586ca7b33aadd05eedaa61fe68a7e90c0425db43aac649c"
     },
     {
       "file": "src/content/sessions/session-03-direction.bundle.js",
@@ -36,8 +36,8 @@
     },
     {
       "file": "src/content/sessions/session-03-direction.html",
-      "bytes": 46776,
-      "sha256": "782d9cc92f6e0030a13c0ea7a7c1062fa49790923cfb29dec86efc509687a4ae"
+      "bytes": 47468,
+      "sha256": "45a100d76a4a9e38e5c2452789f67071377d168a31987ad30d4d04c657d9a366"
     },
     {
       "file": "src/content/sessions/session-03-direction.js",
@@ -46,23 +46,23 @@
     },
     {
       "file": "src/content/sessions/session-04-revenue.html",
-      "bytes": 195273,
-      "sha256": "126827ab73372a604f131841e8b40688761df2ab5f1b99f6346178153bf34819"
+      "bytes": 234230,
+      "sha256": "a0b59e7eddfea51f4e84aba0deac797d2b0a0a74c633398fa153b518defe9f3d"
     },
     {
       "file": "src/content/sessions/session-05-security-api.css",
-      "bytes": 44232,
-      "sha256": "e135b46609e72f0fdba6312870c82a34eef23215f14ae691a9f22e9019153071"
+      "bytes": 141545,
+      "sha256": "86d9a3996d4aec8f8cebfda8caa8b0a0615347295fa1632b5cebe2a58940a5fc"
     },
     {
       "file": "src/content/sessions/session-05-security-api.html",
-      "bytes": 28482,
-      "sha256": "894980e6b56b0cd7dbecc6537e2b572e0ad0cbd0d0d56c990d8c395f66633c0a"
+      "bytes": 44250,
+      "sha256": "63f8c3545378a8d8b78050ea9d32646afa8c202889053b1a372f165ca00201ce"
     },
     {
       "file": "src/content/sessions/session-05-security-api.js",
-      "bytes": 18185,
-      "sha256": "b8cfa3258a7a7770b583ba547e8b4d8d827c324a7dcebe16d950895dae818774"
+      "bytes": 33820,
+      "sha256": "2ef106fe2381f8167942bc2d138ac9b204d9608a7f45e197151059815a2133d6"
     },
     {
       "file": "src/content/sessions/session-06-showcase.html",

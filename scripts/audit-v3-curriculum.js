@@ -42,7 +42,7 @@ const expectedCounts = {
   workflow: 4,
   claude: 6,
   codex: 6,
-  advanced: 1,
+  advanced: 8,
   'foundation-next': 4,
 };
 
@@ -74,7 +74,11 @@ pass(!preview.sessions.some((session) => /AI 이해|쇼케이스/.test(session.t
 
 const current = manifest.courses.find((course) => course.id === 'basic-current');
 pass(current.curriculumVersion === '2기-6주', 'current six-week cohort keeps its curriculum version');
-pass(current.sessions.some((session) => session.type === 'showcase'), 'current cohort still contains its showcase');
+// 6강 was rebuilt as a recap lecture; the original showcase must survive as an archived revision.
+pass(
+  current.sessions.some((session) => (session.revisions || []).some((revision) => revision.file?.includes('session-06-showcase'))),
+  'current cohort keeps its showcase archived as a revision',
+);
 pass(current.sessions.every((session) => session.revisions?.length === 2), 'current cohort has active and V3 work revisions');
 
 for (const record of freeze.files) {
@@ -96,7 +100,9 @@ if (!failures.some((failure) => failure.startsWith('frozen current-course'))) {
 const v3Courses = manifest.courses.filter((course) => course.id !== 'basic-current');
 for (const course of v3Courses) {
   for (const session of course.sessions) {
-    pass(session.duration === '120분', `${session.id} uses the 120-minute format`);
+    // onepass runs as 180-minute intensive lectures; every other V3 track stays at 120 minutes.
+    const expectedDuration = course.id === 'onepass' ? '180분' : '120분';
+    pass(session.duration === expectedDuration, `${session.id} uses the ${expectedDuration} format`);
     for (const sourceKey of session.sourceKeys || []) {
       if (!sourceCatalog.sources[sourceKey]) failures.push(`${session.id} references unknown source: ${sourceKey}`);
     }
@@ -109,7 +115,9 @@ for (const [courseId, course] of Object.entries(v3CourseData)) {
   for (const [index, session] of course.sessions.entries()) {
     sceneLessons += 1;
     pass(Boolean(session.revision), `${courseId}-${index + 1} has a revision`);
-    pass(['review', 'ready'].includes(session.status), `${courseId}-${index + 1} has a production status`);
+    const parentCourse = manifest.courses.find((item) => item.id === courseId);
+    const allowedStatuses = parentCourse?.visibility === 'preview' ? ['review', 'ready', 'preview'] : ['review', 'ready'];
+    pass(allowedStatuses.includes(session.status), `${courseId}-${index + 1} has a production status`);
     pass(Boolean(session.visualScene?.id), `${courseId}-${index + 1} has a visual scene`);
     pass(session.visualScene?.type !== 'generic', `${courseId}-${index + 1} does not use a generic scene`);
     if (sceneIds.has(session.visualScene?.id)) failures.push(`duplicate scene id: ${session.visualScene.id}`);
@@ -140,8 +148,8 @@ for (const [courseId, course] of Object.entries(v3CourseData)) {
     if (!fs.existsSync(fallback)) failures.push(`${courseId}-${index + 1} missing fallback image`);
   }
 }
-pass(sceneLessons === 35, '35 revised lessons have scene and teaching data');
-pass(sceneIds.size === 35, 'all 35 revised lessons have unique scene ids');
+pass(sceneLessons === 43, '43 revised lessons have scene and teaching data');
+pass(sceneIds.size === sceneLessons, 'all revised lessons have unique scene ids');
 
 const titles = new Map();
 for (const course of v3Courses) {
