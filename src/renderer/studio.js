@@ -34,6 +34,8 @@ const state = {
   tab: 'lessons',
   selectionId: null,
   completed: new Set(JSON.parse(localStorage.getItem('vibe-v3-completed') || '[]')),
+  favorites: new Set(JSON.parse(localStorage.getItem('vibe-v3-favorites') || '[]')),
+  recents: JSON.parse(localStorage.getItem('vibe-v3-recents') || '[]'),
   notes: JSON.parse(localStorage.getItem('vibe-v3-notes') || '{}'),
   schedule: JSON.parse(localStorage.getItem('vibe-v3-schedule') || '{}'),
   revisionOverrides: JSON.parse(localStorage.getItem('vibe-v3-revision-overrides') || '{}'),
@@ -596,7 +598,7 @@ function renderLessons(course) {
           <span class="lesson-no">${String(index + 1).padStart(2, '0')}</span>
         </span>
         <span class="lesson-copy lesson-cell lesson-cell-title">
-          <b class="lesson-title">${escapeHtml(title)}</b>
+          <b class="lesson-title">${state.favorites.has(session.id) ? '<i class="fav-star" title="즐겨찾기">★</i> ' : ''}${escapeHtml(title)}</b>
           <span class="lesson-subtitle">${escapeHtml(subtitle)}</span>
         </span>
         <span class="lesson-cell lesson-cell-time">${escapeHtml(session.duration || '120분')}</span>
@@ -790,6 +792,7 @@ function renderLessonDetail(course, session) {
               <button class="secondary-action" id="btn-open-script" type="button"${mats.script ? '' : ' disabled'}>대본 열기</button>
               <button class="secondary-action" id="btn-open-print" type="button"${mats.print ? '' : ' disabled'}>출력물 열기</button>
               <button class="ghost-action${completed ? ' is-complete' : ''}" id="btn-toggle-complete" type="button">${completed ? '✓ 완료 처리됨' : '수업 완료 처리'}</button>
+              <button class="ghost-action${state.favorites.has(session.id) ? ' is-favorite' : ''}" id="btn-toggle-favorite" type="button">${state.favorites.has(session.id) ? '★ 즐겨찾기됨' : '☆ 즐겨찾기'}</button>
             </div>
           </section>
           <section class="quick-note-card">
@@ -841,6 +844,10 @@ function renderLessonDetail(course, session) {
 
   $('#btn-open-lesson').addEventListener('click', () => openPlayer(course, selected));
   $('#btn-toggle-complete').addEventListener('click', () => toggleComplete(session.id));
+  $('#btn-toggle-favorite').addEventListener('click', () => {
+    toggleFavorite(session.id);
+    renderLessons(course);
+  });
   if (mats.script) $('#btn-open-script').addEventListener('click', () => openPlayer(course, mats.script, true));
   if (mats.print) $('#btn-open-print').addEventListener('click', () => openPlayer(course, mats.print, true));
   $('#btn-open-planner-card')?.addEventListener('click', () => openDrawer('planner'));
@@ -1319,6 +1326,25 @@ function toggleComplete(sessionId) {
   renderStudio();
 }
 
+function toggleFavorite(sessionId) {
+  if (state.favorites.has(sessionId)) state.favorites.delete(sessionId);
+  else state.favorites.add(sessionId);
+  persist('vibe-v3-favorites', [...state.favorites]);
+}
+
+function recordRecent(course, item, isMaterial) {
+  const entry = {
+    courseId: course.id,
+    id: item.id,
+    isMaterial: Boolean(isMaterial),
+    title: item.title,
+    courseTitle: course.shortTitle || course.title,
+    ts: Date.now(),
+  };
+  state.recents = [entry, ...state.recents.filter((recent) => recent.id !== item.id)].slice(0, 6);
+  persist('vibe-v3-recents', state.recents);
+}
+
 function buildContentUrl(file) {
   const separator = file.includes('?') ? '&' : '?';
   const motion = file.startsWith('v3/deck.html') && state.lowMotion ? `${separator}motion=low` : '';
@@ -1328,6 +1354,7 @@ function buildContentUrl(file) {
 function openPlayer(course, item, isMaterial = false) {
   state.playerSession = { course, item, isMaterial };
   state.selectionId = item.id;
+  recordRecent(course, item, isMaterial);
   if (!isMaterial) {
     localStorage.setItem(`vibe-v3-last-${course.id}`, item.id);
     persist('vibe-v3-course', course.id);
@@ -1414,7 +1441,32 @@ function renderCommandResults(query = '') {
       }
     });
   });
-  state.commandItems = items.filter((item) => !term || `${item.title} ${item.subtitle} ${item.type}`.toLowerCase().includes(term)).slice(0, 30);
+  let ranked = items;
+  if (!term) {
+    // Empty palette shows the instructor's working set first: favorites, then recents.
+    const keyOf = (entry) => `${entry.courseId}:${entry.id}`;
+    const pinned = [];
+    const pinnedKeys = new Set();
+    visibleCourses().forEach((course) => {
+      (course.sessions || []).forEach((session) => {
+        if (!state.favorites.has(session.id)) return;
+        pinned.push({ type: 'FAVORITE', title: session.title, subtitle: `${course.shortTitle} · 즐겨찾기한 강의`, courseId: course.id, id: session.id });
+        pinnedKeys.add(`${course.id}:${session.id}`);
+      });
+    });
+    const courseIds = new Set(visibleCourses().map((course) => course.id));
+    state.recents.forEach((recent) => {
+      const key = `${recent.courseId}:${recent.id}`;
+      if (pinnedKeys.has(key) || !courseIds.has(recent.courseId)) return;
+      pinned.push({
+        type: 'RECENT', title: recent.title, subtitle: `${recent.courseTitle} · 최근 열람`,
+        courseId: recent.courseId, id: recent.id, ...(recent.isMaterial ? { tab: 'library' } : {}),
+      });
+      pinnedKeys.add(key);
+    });
+    ranked = [...pinned, ...items.filter((item) => !pinnedKeys.has(keyOf(item)))];
+  }
+  state.commandItems = ranked.filter((item) => !term || `${item.title} ${item.subtitle} ${item.type}`.toLowerCase().includes(term)).slice(0, 30);
   state.commandIndex = Math.min(state.commandIndex, Math.max(0, state.commandItems.length - 1));
   $('#command-results').innerHTML = state.commandItems.length ? state.commandItems.map((item, index) => `
     <button type="button" class="command-item${index === state.commandIndex ? ' active' : ''}" data-command="${index}">
