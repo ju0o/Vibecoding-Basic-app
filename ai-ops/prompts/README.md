@@ -22,3 +22,18 @@
 | P-09-site-integration.md | Site Integration | WF-01 §5 |
 | P-10-release.md | Release | WF-01 §6 |
 | P-11-fix-loop.md | Lesson Writer (수정) | WF-01 §3 FIX 루프 |
+| P-12-source-collection.md | Source Collector | WF-00 §2 |
+| P-13-final-editorial.md | Final Editorial | WF-05 §2 |
+
+## Executor별 표준 시작 프롬프트 (배정표 기준)
+
+프롬프트는 Agent 기준으로 하나만 존재하고, Executor는 배정만 받는다 (Executor 전용 프롬프트 분기 금지 원칙 유지).
+
+| 용도 | Executor (기본 배정) | 사용 프롬프트 |
+|---|---|---|
+| 자료 수집 | Trae | P-12-source-collection.md |
+| 강의 작성 | Claude Fable 5 | P-03-lesson-writer.md |
+| 사실 검증 | GPT-5.5 | P-06-fact-check.md |
+| 사이트 반영 | Codex | P-09-site-integration.md |
+| 빌드 검증 | Cline | P-10-release.md |
+| 최종 편집·통합 | Claude Fable 5 | P-13-final-editorial.md |

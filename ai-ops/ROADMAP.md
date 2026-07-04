@@ -11,15 +11,17 @@
 
 목표: **강의 1개가 아이디어→배포를 완주**하고, 이후 배치 운영이 반복 가능해지는 것.
 
-| # | 작업 | 담당 | 산출 |
-|---|---|---|---|
-| 1 | **git 저장소 초기화** (현재 미사용 — 병렬 운영의 안전망) | 운영자 + Codex | git init, .gitignore 정리, 첫 커밋 |
-| 2 | 파일럿 1강 선정 (기존 backlog 없으므로 Curriculum Agent 첫 실행: P-02로 ai-system-design 모듈 분해) | Claude | BACKLOG.md |
-| 3 | 파일럿 1강을 WF-01 전 단계로 완주 — 각 단계에서 프롬프트·규격의 문제를 발견하면 즉시 ai-ops 문서 수정 | 배정표대로 | 강의 1개 배포 + 문서 개정 |
-| 4 | QA Gate 3의 기계 검사 스크립트화 (13섹션 제목, quiz answer 일치, slug 중복) | Cline/Codex | `ai-ops/qa/scripts/validate-content.mjs` |
-| 5 | 배치 3~5개 운영 시작 (EXECUTORS.md의 하루 사이클) | 전체 | 주당 강의 3~5개 |
+| # | 작업 | 담당 | 산출 | 상태 |
+|---|---|---|---|---|
+| 1 | **git 저장소 초기화** | 운영자 + Codex | git init, 첫 커밋 | ✅ 2026-07-03 |
+| 2 | Curriculum Agent 첫 실행: ai-system-design 모듈 분해 | Claude | BACKLOG.md 12강 | ✅ 승인됨 |
+| 3 | 파일럿 1강(from-prompt-to-system)을 WF-01 완주 | 배정표대로 | 강의 1개 + 발견 사항 4건 반영 | ⏳ Gate 4(verify) 운영자 승인 대기 — reports/2026-07-04-pilot-report.md |
+| 4 | **자료 수집 개시 (WF-00)**: T10·T09·T08 우선 | Trae (P-12) | sources/notes/ 3건 | 신규 |
+| 5 | M10 개정(RAG·Tool Calling 2강) + M08 모듈 분해 (WF-04) | Claude (P-02) | BACKLOG 갱신 | 신규 |
+| 6 | QA Gate 3의 기계 검사 스크립트화 (13섹션 제목, quiz answer 일치, slug 중복) | Cline/Codex | `ai-ops/qa/scripts/validate-content.mjs` | |
+| 7 | 배치 3~5개 운영 시작 (EXECUTORS.md의 하루 사이클) | 전체 | 주당 강의 3~5개 | |
 
-완료 기준: 강의 20개 배포, FIX 루프·에스컬레이션 경험 1회 이상 문서에 반영됨.
+완료 기준: 강의 20개 배포, FIX 루프·에스컬레이션 경험 1회 이상 문서에 반영됨, 수집 노트 3건 이상.
 
 ## Phase 2 — 대량 생산 체제 (강의 20 ~ 100개, 용어 ~1,000개)
 

@@ -12,7 +12,7 @@ Research·Fact Check Agent가 사용하는 허용 출처 목록. 새 출처는 R
 | Git | Git Documentation / Pro Git | https://git-scm.com/doc |
 | PostgreSQL | PostgreSQL Docs | https://www.postgresql.org/docs |
 | Node.js | Node.js Docs | https://nodejs.org/docs |
-| Anthropic/Claude | Claude Docs | https://docs.anthropic.com |
+| Anthropic/Claude | Claude Docs | https://platform.claude.com/docs (구 docs.anthropic.com — 2026-07 이전 확인) |
 | Claude Code | Claude Code Docs | https://code.claude.com/docs |
 | OpenAI | OpenAI Platform Docs | https://platform.openai.com/docs |
 | MCP | Model Context Protocol | https://modelcontextprotocol.io |

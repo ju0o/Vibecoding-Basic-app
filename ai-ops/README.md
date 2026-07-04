@@ -20,8 +20,8 @@
 │   - 우선순위 결정, Executor 배정, 게이트 승인                 │
 ├─────────────────────────────────────────────────────────────┤
 │ Planning Layer                                              │
-│   Curriculum Agent ──── Research Agent                      │
-│   (무엇을, 어떤 순서로)   (근거 자료 수집)                     │
+│   Source Collector ── Curriculum Agent ── Research Agent    │
+│   (주제 단위 수집)     (무엇을, 어떤 순서로)  (강의 단위 브리프)  │
 ├─────────────────────────────────────────────────────────────┤
 │ Production Layer (강의 단위 병렬 실행 가능)                    │
 │   Lesson Writer Agent ── Quiz Agent ── Terminology Agent    │
@@ -32,10 +32,12 @@
 │   (사실/출처 검증)      (교육 품질/난이도)       (규격/중복/일관성)│
 ├─────────────────────────────────────────────────────────────┤
 │ Release Layer (순차 실행 전용)                                │
-│   Site Integration Agent ──→ Release Agent                  │
-│   (src/content 반영)          (verify + 배포)                │
+│   Site Integration ──→ Release ──→ Final Editorial          │
+│   (src/content 반영)    (verify+배포)  (사이트 전역 편집·주기 실행)│
 └─────────────────────────────────────────────────────────────┘
 ```
+
+전체 운영 계획과 문서 지도: [MASTER-PLAN.md](MASTER-PLAN.md)
 
 ## 폴더 구조
 

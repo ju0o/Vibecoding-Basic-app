@@ -18,28 +18,42 @@ Executor = 실제로 프롬프트를 실행하는 AI 도구. **Agent(역할)와 
 | Site Integration | GPT-5.5 (Codex) | Cline | TypeScript 편집 + 커맨드 실행 |
 | Release | GPT-5.5 (Codex) | Cline | 빌드·테스트 실행과 로그 해석 |
 | Illustration (Ph2) | Claude Fable 5 | — | SVG/다이어그램 코드 생성 |
+| Source Collector | Trae | GPT-5.5 | 주제 단위 대량 수집 — 판단 최소화 작업이라 저비용 Executor 적합 |
+| Final Editorial | Claude Fable 5 | — | 사이트 전체를 한 컨텍스트에 놓는 통독 판단 |
 
-## Executor별 강점과 한계
+## Executor별 상세 (강점 / 맡기면 안 되는 작업 / 프롬프트 / 출력 / 핸드오프)
 
 ### Claude Fable 5 (Claude Code)
 - 강점: 장문 컨텍스트 유지, 한국어 글쓰기 품질, 웹 리서치·검증 규율, 서브에이전트로 자체 병렬화 가능, 파일 시스템 직접 접근
-- 한계: 고급 모델이라 비용이 높음 — 규격 생성(퀴즈·용어) 같은 단순 작업에 쓰면 낭비
-- 적합: 판단이 필요한 작업 (커리큘럼, 집필, 교육 검토)
+- 맡기기 좋은 작업: 커리큘럼 설계, 강의 집필, 교육 검토, 최종 편집(사이트 통독), 리서치 브리프
+- **맡기면 안 되는 작업**: 자기가 쓴 강의의 사실 검증(교차 원칙 위반), 퀴즈·용어 대량 생산(비용 낭비)
+- 프롬프트: P-01, P-02, P-03, P-07, P-11, P-13
+- 출력 형식: 각 프롬프트가 지정한 outputs/·reports/ 경로의 md 파일
+- 핸드오프: 산출물 저장 → PIPELINE.md 자기 slug 행 갱신 → 다음 담당 Executor에 프롬프트 전달은 운영자(또는 오케스트레이터 세션)가 수행
 
 ### GPT-5.5 (Codex)
 - 강점: 코드 편집·실행 신뢰성, 규격 준수 생성, 병렬 외주(여러 인스턴스) 운용 용이
-- 한계: 한국어 교육 문체가 Claude 대비 균질하지 않을 수 있음 — Writer로 쓸 때는 Education Review를 반드시 통과시킬 것
-- 적합: Site Integration, Release, Quiz/Terminology 대량 생산, Claude 산출물의 교차 Fact Check
+- 맡기기 좋은 작업: 사실 검증(Claude 작성분 교차), 사이트 반영(TS 편집), 릴리스, 퀴즈·용어 생산
+- **맡기면 안 되는 작업**: 자기가 쓴 콘텐츠의 검증, 한국어 문체가 중요한 본문 집필의 단독 수행(Education Review 없이), 커리큘럼 전체 판단
+- 프롬프트: P-04, P-05, P-06, P-09, P-10
+- 출력 형식: 검증 보고서 md / src·content 코드 변경 + 04-integrated 반영 기록
+- 핸드오프: 반영 기록·보고서 저장 후 lint/typecheck 로그를 기록에 첨부 → PIPELINE.md 갱신
 
 ### Trae
-- 강점: IDE 통합 에이전트 — 프로젝트 열어놓고 반복적 파일 작업, 저비용 배치 작업
-- 한계: 장문 추론·리서치 규율은 상위 모델 대비 약함. 검증 계층에 배정하지 말 것
-- 적합: Terminology 배치, 산출물 파일 정리, 단순 반복 수정
+- 강점: IDE 통합 에이전트 — 반복적 파일 작업, 저비용 배치 작업
+- 맡기기 좋은 작업: 자료 수집(P-12 — 출처 지도 작성), 용어 배치 생산, 산출물 파일 정리
+- **맡기면 안 되는 작업**: 검증 계층 전체(Fact Check·Edu Review·QA), 커리큘럼 판단, 강의 본문 집필
+- 프롬프트: P-12, P-05
+- 출력 형식: `sources/notes/{topic}.md`, `outputs/02-drafts/glossary-batch-{n}/terms.md`
+- 핸드오프: 수집 노트 저장 → 운영자가 Curriculum/Research에 노트 경로를 다음 프롬프트에 채워 전달
 
 ### Cline
-- 강점: VS Code 내 파일 접근 + 커맨드 실행, 모델 교체 가능(백엔드 모델을 골라 붙일 수 있어 비용 조절 용이)
-- 한계: 성능이 연결한 백엔드 모델에 의존 — QA·통합처럼 절차가 명확한 작업에 쓰고, 창의 작업은 피할 것
-- 적합: QA 게이트(체크리스트 수행·스크립트 실행), Site Integration 대체
+- 강점: VS Code 내 파일 접근 + 커맨드 실행, 백엔드 모델 교체 가능(비용 조절 용이)
+- 맡기기 좋은 작업: 빌드 검증(P-10 — npm run verify 실행·로그 해석), QA 게이트 체크리스트·스크립트 실행, Site Integration 대체
+- **맡기면 안 되는 작업**: 창의 작업(집필·비유), 교육 판단, 사실 검증(백엔드 모델 편차 위험)
+- 프롬프트: P-08, P-10
+- 출력 형식: qa-report.md, RELEASE-{date}.md (verify 로그 포함)
+- 핸드오프: 릴리스 노트 저장 → 배포 여부는 운영자 승인 대기로 종료
 
 ## 배정 원칙 (Executor가 바뀌어도 유지)
 
