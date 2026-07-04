@@ -1,5 +1,35 @@
 # Executor 배정 문서
 
+## 운영 체크리스트 (매 호출 시 이대로 — 고민 없이)
+
+### ☐ Trae를 호출할 때
+- 언제: 새 배치 시작(O-01 완료 직후) 또는 재수집 요청서 발생 시
+- 프롬프트: 신규 → **P-01** / 재수집 → **P-03**
+- 입력 확인: P-01은 COLLECTION-PLAN의 주제군·개념 목록 / P-03은 `knowledge-base/reviews/{id}/recollection-request-{n}.md` 존재 (**n=3이면 호출 금지, 에스컬레이션**)
+- 출력 확인: `knowledge-base/entries/{Txx}/{id}.md` 존재 + 13섹션 + 변경 이력
+- 다음: KB 파일 경로 목록을 받아 → Codex P-02에 채워 전달
+- 실패 시: 없음(시작점). 산출물 미달은 P-02가 잡음
+
+### ☐ Codex를 호출할 때
+- 언제: ① Trae가 KB를 냈을 때(P-02) ② approved KB가 쌓였을 때(P-04) ③ 강의 세트 완성 후 통합 창(P-05) ④ BUILD-FAIL 발생(P-07)
+- 프롬프트: 검증 **P-02** / 생성 **P-04** / 반영 **P-05** (단일 세션만!) / 빌드 수정 **P-07**
+- 입력 확인: P-02는 draft KB / P-04는 **frontmatter status: approved 확인** / P-05는 02-drafts 4종 / P-07은 BUILD-FAIL-{date}-{n}.md (**n=3이면 호출 금지, revert**)
+- 출력 확인: verification-report(판정 첫 줄) / 02-drafts 4종+자가 QA표 / 04-integrated 기록+lint·typecheck 로그 / 수정 내역 append
+- 다음: P-02 통과→P-04, 미달→Trae P-03 / P-04→P-05 / P-05→Cline P-06 / P-07→Cline P-06 재검증
+- 실패 시: P-04에서 KB 부족 → P-02(KB 보강)로 / P-05 lint 실패 → 변경 되돌리고 보고
+
+### ☐ Cline을 호출할 때
+- 언제: ① P-05 통합 완료 직후(P-06) ② P-07 수정 완료 직후(P-06 재검증) ③ VERIFIED 확인 후(P-08)
+- 프롬프트: 검증 **P-06** / 릴리스 **P-08**
+- 입력 확인: P-06은 통합 완료된 워킹 트리 / P-08은 직전 P-06의 VERIFIED 보고
+- 출력 확인: VERIFIED 보고 또는 BUILD-FAIL-{date}-{n}.md / RELEASE-{date}.md + 커밋 해시
+- 다음: VERIFIED→P-08 / FAILED→Codex P-07 / P-08 완료→운영자 배포 승인
+- 실패 시: Cline은 수정하지 않는다 — 판정·보고만. 수정은 항상 Codex
+
+공통: 호출 후 완료 보고 확인 → 산출물 파일 실존 확인 → [MASTER_PROGRESS.md](../MASTER_PROGRESS.md) 갱신.
+
+---
+
 Executor = 실제로 프롬프트를 실행하는 AI 도구. **Agent(역할)와 Executor(도구)는 분리된다** — Agent 정의와 프롬프트는 Executor 이름을 모른 채 동작하고, 이 문서만이 "지금 누가 무엇을 맡는가"를 기록한다. Executor를 바꾸려면 이 문서의 표만 고치면 된다.
 
 ## 현재 배정표 (KB 체제, 2026-07-04 개편)

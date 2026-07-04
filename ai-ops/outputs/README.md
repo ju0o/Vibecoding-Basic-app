@@ -13,7 +13,7 @@
 | `03-reviewed/` | 검증 보고서 + 최종본 | `{slug}/fact-check-report.md, edu-review-report.md, qa-report.md, final/` | Fact Check·Edu Review·QA (파일별 분리) |
 | `04-integrated/` | 반영·릴리스 기록 | `{slug}.md`, `RELEASE-{date}.md` | Site Integration·Release |
 | `../reports/` | 파일럿·편집·대시보드 보고서 | `{date}-{이름}.md`, `editorial-{date}.md`, `completeness-dashboard.md` | Final Editorial·운영자 |
-| `PIPELINE.md` | 상태 보드 | 자기 slug 행만 수정 | 전 Agent |
+| `../MASTER_PROGRESS.md` | 유일한 상태 매트릭스 (구 PIPELINE.md 대체) | 자기 작업 칸만 수정, 행 추가는 오케스트레이터 | 전 Agent |
 
 ## 요청 명칭 ↔ 실제 폴더 매핑
 

@@ -103,10 +103,10 @@
 | 출력 | `outputs/04-integrated/RELEASE-{date}.md`, git 커밋. 배포는 운영자 승인 후 |
 | 품질 기준 | verify 로그 첨부, 포함 콘텐츠 목록 정확 |
 
-## 상태 값 (PIPELINE.md)
+## 상태 추적 ([MASTER_PROGRESS.md](../MASTER_PROGRESS.md) — 유일한 상태 파일)
 
-- KB: `draft → reviewing → recollect(n) → approved | escalated | stale`
-- 강의: `planned → generated → integrated → build_fail(n) → verified → released`
+- KB 매트릭스: 수집(P-01)·검증(P-02) 열 / 강의 매트릭스: Lesson·Site·Verify·Release 열
+- 기호: `—` 미착수, `▶` 진행 중, `↻n` 루프 n회차, `✓` 완료, `✗` 실패·에스컬레이션
 
 ## 병렬/순차 요약
 

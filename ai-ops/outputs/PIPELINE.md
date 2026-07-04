@@ -1,6 +1,6 @@
 # 파이프라인 상태 보드
 
-각 Agent는 작업 완료 시 자기 행만 갱신한다. (KB 체제 — WF-06)
+> **status: superseded (2026-07-04)** — 상태 추적은 [../MASTER_PROGRESS.md](../MASTER_PROGRESS.md)로 일원화됨 (요약은 ../DASHBOARD.md). 이 파일은 파일럿 이력 보존용 — 더 이상 갱신하지 않는다.
 
 ## Knowledge Base 보드
 상태: `draft → reviewing → recollect(n) → approved` (예외: `escalated`, `stale`)

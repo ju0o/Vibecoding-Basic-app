@@ -20,7 +20,7 @@ verify 통과 상태를 릴리스 노트와 커밋으로 고정한다. 실제 �
    ## verify 결과 (4단계 요약, P-06 보고 인용)
    ## 포함 콘텐츠: 강의 slug 목록, 추가 용어, 사용된 KB id 목록
    ## 개정 사항 (있으면)
-3. ai-ops/outputs/PIPELINE.md에서 이번 배치 slug들의 상태를 released로 갱신
+3. ai-ops/MASTER_PROGRESS.md에서 이번 배치 slug들의 Release 열을 ✓로, 집계 표를 갱신
 4. git 커밋 생성 (src/content 변경 + ai-ops 산출물, 커밋 메시지에 배치 내용 요약)
 5. 배포(push/hosting)는 하지 말 것 — "운영자 승인 대기"로 종료
 

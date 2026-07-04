@@ -45,11 +45,24 @@
 | O-01 | orchestrator/O-01-curriculum.md | Curriculum | **Fable (오케스트레이터)** | curriculum.ts, CURRICULUM-MAP | BACKLOG.md | P-01 착수 근거 |
 | O-02 | orchestrator/O-02-final-editorial.md | Final Editorial | **Fable (오케스트레이터)** | src/content 전체, FINAL-SITE-STRATEGY | `reports/editorial-{date}.md`, REVISION-BACKLOG | WF-03 개정 |
 
+## 최종 실행 순서 (운영자 기준 — 이 순서 그대로)
+
+1. **O-01** (Fable) — 배치의 backlog·KB id 확정 (새 배치 시작 시에만)
+2. **P-01** (Trae) — KB 수집·생성
+3. **P-02** (Codex) — KB 검증·Score
+4. **P-03** (Trae) — Loop A: Score 미달 시에만 → 3번 재실행
+5. **P-04** (Codex) — Lesson 생성
+6. **P-05** (Codex) — 사이트 반영
+7. **P-06** (Cline) — Build·verify
+8. **P-07** (Codex) — Loop B: verify 실패 시에만 → 7번 재실행
+9. **P-08** (Cline) — Release
+10. **O-02** (Fable) — 강의 10개 릴리스마다 최종 편집
+
 ## 다음 단계로 넘기는 방법 (공통 규칙)
 
 1. Executor의 완료 보고에서 **완료 기준 체크 결과**와 **산출물 파일 경로**를 확인한다
 2. 산출물 파일이 실제로 존재하는지 확인한다 (보고만 있고 파일이 없으면 무효)
-3. `outputs/PIPELINE.md`의 해당 행 상태를 갱신한다
+3. [../MASTER_PROGRESS.md](../MASTER_PROGRESS.md)의 해당 칸을 갱신한다
 4. 다음 프롬프트 파일을 열어 `{중괄호}` 값을 채우고 다음 Executor에 붙여넣는다
 5. 루프 프롬프트(P-03, P-07)는 요청서/보고서의 `{n}`을 반드시 확인 — n=3이면 프롬프트를 실행하지 말고 에스컬레이션
 

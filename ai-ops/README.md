@@ -1,5 +1,7 @@
 # ai-ops — AI Vibe Coding Master 콘텐츠 운영 시스템
 
+> **DESIGN FREEZE (2026-07-04)** — 설계 종료. 새 Agent·Workflow·Skill·Prompt 추가 금지. 운영은 [OPERATION_MANUAL.md](OPERATION_MANUAL.md), 현황은 [DASHBOARD.md](DASHBOARD.md) / [MASTER_PROGRESS.md](MASTER_PROGRESS.md), 변경은 [reports/DESIGN-FREEZE.md](reports/DESIGN-FREEZE.md)의 규칙으로만.
+
 이 폴더는 **AI 조직(Agents)이 강의·용어·퀴즈 콘텐츠를 대량 생산하고 유지보수하기 위한 운영 문서**입니다.
 사람(운영자)은 Chief AI Orchestrator 역할을 하고, 실제 작업은 여러 AI Executor(Claude Fable 5, GPT-5.5 Codex, Trae, Cline)에게 분배합니다.
 
