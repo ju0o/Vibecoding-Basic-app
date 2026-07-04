@@ -26,19 +26,28 @@ Curriculum Agent만 이 파일을 수정한다. (단일 작성자 구역)
 
 | 우선순위 | slug | moduleId | order | 제목 | 레벨 | 선행 slug | 상태 |
 |---|---|---|---|---|---|---|---|
-| 1 | from-prompt-to-system | ai-system-design | 1 | 프롬프트에서 시스템으로 | 기초 | ai-vibe-coding-orientation | proposed |
-| 2 | context-engineering-basics | ai-system-design | 2 | Context Engineering 기초: AI가 판단할 재료 설계 | 기초 | from-prompt-to-system | proposed |
-| 3 | context-window-and-memory | ai-system-design | 3 | 컨텍스트 윈도와 메모리 관리 | 기초 | context-engineering-basics | proposed |
-| 4 | system-prompts-and-instruction-layers | ai-system-design | 4 | 시스템 프롬프트와 지침 계층 | 기초 | context-engineering-basics | proposed |
-| 5 | ai-workflow-design | ai-system-design | 5 | AI Workflow 설계: 단계 분해와 품질 게이트 | 중급 | context-engineering-basics | proposed |
+| 1 | from-prompt-to-system | ai-system-design | 1 | 프롬프트에서 시스템으로 | 기초 | ai-vibe-coding-orientation | **integrated (verify 대기)** |
+| 2 | context-engineering-basics | ai-system-design | 2 | Context Engineering 기초: AI가 판단할 재료 설계 | 기초 | from-prompt-to-system | approved |
+| 3 | context-window-and-memory | ai-system-design | 3 | 컨텍스트 윈도와 메모리 관리 | 기초 | context-engineering-basics | approved |
+| 4 | system-prompts-and-instruction-layers | ai-system-design | 4 | 시스템 프롬프트와 지침 계층 | 기초 | context-engineering-basics | approved |
+| 5 | ai-workflow-design | ai-system-design | 5 | AI Workflow 설계: 단계 분해와 품질 게이트 | 중급 | context-engineering-basics | approved |
 | — | (기존) context-engineering-mcp-skills | ai-system-design | 6 | Context Engineering, MCP, Skills의 관계 | 중급 | — | released(기존) |
-| 6 | mcp-architecture-basics | ai-system-design | 7 | MCP 구조: 서버, 클라이언트, 도구, 리소스 | 중급 | context-engineering-mcp-skills | proposed |
-| 7 | designing-reusable-skills | ai-system-design | 8 | Skill 설계: 재사용 절차 만들기 | 중급 | context-engineering-mcp-skills | proposed |
-| 8 | agent-loop-anatomy | ai-system-design | 9 | Agent의 구조: 도구 루프와 관찰-행동 사이클 | 중급 | mcp-architecture-basics, designing-reusable-skills | proposed |
-| 9 | subagents-and-delegation | ai-system-design | 10 | SubAgent와 위임 패턴 | 중급 | agent-loop-anatomy | proposed |
-| 10 | multi-agent-orchestration | ai-system-design | 11 | Orchestration: 여러 Agent의 협업 설계 | 중급 | subagents-and-delegation | proposed |
-| 11 | loop-engineering-basics | ai-system-design | 12 | Loop Engineering: 반복 실행과 종료 조건 | 중급 | agent-loop-anatomy | proposed |
-| 12 | harness-engineering-basics | ai-system-design | 13 | Harness Engineering: 실행 환경, 권한, 검증 장치 | 중급 | loop-engineering-basics | proposed |
+| 6 | **tool-calling-basics** | ai-system-design | 7 | Tool Calling: AI가 도구를 부르는 방식 | 중급 | context-engineering-basics | approved (2026-07-04 추가) |
+| 7 | **rag-fundamentals** | ai-system-design | 8 | RAG: 모델이 모르는 것을 알려주는 방법 | 중급 | context-window-and-memory | approved (2026-07-04 추가) |
+| 8 | mcp-architecture-basics | ai-system-design | 9 | MCP 구조: 서버, 클라이언트, 도구, 리소스 | 중급 | tool-calling-basics, context-engineering-mcp-skills | approved (선행·order 갱신) |
+| 9 | designing-reusable-skills | ai-system-design | 10 | Skill 설계: 재사용 절차 만들기 | 중급 | context-engineering-mcp-skills | approved |
+| 10 | agent-loop-anatomy | ai-system-design | 11 | Agent의 구조: 도구 루프와 관찰-행동 사이클 | 중급 | tool-calling-basics, mcp-architecture-basics | approved (선행 갱신) |
+| 11 | subagents-and-delegation | ai-system-design | 12 | SubAgent와 위임 패턴 | 중급 | agent-loop-anatomy | approved |
+| 12 | multi-agent-orchestration | ai-system-design | 13 | Orchestration: 여러 Agent의 협업 설계 | 중급 | subagents-and-delegation | approved |
+| 13 | loop-engineering-basics | ai-system-design | 14 | Loop Engineering: 반복 실행과 종료 조건 | 중급 | agent-loop-anatomy | approved |
+| 14 | harness-engineering-basics | ai-system-design | 15 | Harness Engineering: 실행 환경, 권한, 검증 장치 | 중급 | loop-engineering-basics | approved |
+
+### O-01 개정 기록 (2026-07-04)
+- 추가: tool-calling-basics(order 7 — MCP의 선행 개념이므로 MCP 앞), rag-fundamentals(order 8 — 컨텍스트 한계가 동기이므로 선행 = order 3)
+- order 이동: 구 7~13 → 9~15 (미통합 backlog라 사이트 영향 없음. 기존 order 6 강의는 불변)
+- 선행 갱신: mcp-architecture-basics와 agent-loop-anatomy에 tool-calling-basics 추가, agent-loop의 선행에서 designing-reusable-skills 제거(도구 루프 이해에 Skill 설계는 불필요 — 과잉 선행)
+- 강의별 KB 근거(1차 배치): order 2·3·4 ← context-engineering / 7 ← tool-calling / 8 ← rag / 9 ← mcp, tool-calling / 11·12·14 ← agent-loop
+- SK-03 검증: order 중복 없음, 선행이 항상 앞 순서(최대 선행 order 7 < 대상 9·11 ✓), 레벨 곡선 유지(기초 4 → 중급 10), slug 규칙 준수
 
 ### 강의별 모듈 goal 기여 (한 줄씩)
 1. `from-prompt-to-system` → goal 1: 일회성 프롬프트의 한계를 사례로 보이고, 시스템 구성요소(컨텍스트/도구/절차/에이전트) 지도를 그린다

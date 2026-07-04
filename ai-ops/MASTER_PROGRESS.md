@@ -10,11 +10,11 @@
 
 | KB id (개념) | 주제군 | 수집(P-01) | 검증·Score(P-02) | 비고 |
 |---|---|---|---|---|
-| context-engineering | T10 | — | — | 1차 배치 후보 |
-| tool-calling | T09 | — | — | 1차 배치 후보 |
-| mcp | T09 | — | — | 1차 배치 후보 |
-| rag | T09 | — | — | 1차 배치 후보 |
-| agent-loop | T10 | — | — | 1차 배치 후보 |
+| context-engineering | T10 | — | — | **1차 배치 확정 (O-01, 2026-07-04)** — 강의 order 2·3·4 근거 |
+| tool-calling | T09 | — | — | 1차 배치 확정 — order 7·9·11 근거 |
+| mcp | T09 | — | — | 1차 배치 확정 — order 9 근거 |
+| rag | T09 | — | — | 1차 배치 확정 — order 8 근거 |
+| agent-loop | T10 | — | — | 1차 배치 확정 — order 11·12·14 근거 |
 
 ## Lesson 매트릭스
 
@@ -25,25 +25,25 @@
 | context-window-and-memory | M10 | context-engineering | — | — | — | — | order 3 |
 | system-prompts-and-instruction-layers | M10 | context-engineering | — | — | — | — | order 4 |
 | ai-workflow-design | M10 | agent-loop | — | — | — | — | order 5 |
-| mcp-architecture-basics | M10 | mcp, tool-calling | — | — | — | — | order 7 |
-| designing-reusable-skills | M10 | (skills KB 필요) | — | — | — | — | order 8 |
-| agent-loop-anatomy | M10 | agent-loop, tool-calling | — | — | — | — | order 9 |
-| subagents-and-delegation | M10 | agent-loop | — | — | — | — | order 10 |
-| multi-agent-orchestration | M10 | (orchestration KB 필요) | — | — | — | — | order 11 |
-| loop-engineering-basics | M10 | agent-loop | — | — | — | — | order 12 |
-| harness-engineering-basics | M10 | (harness KB 필요) | — | — | — | — | order 13 |
-
-(RAG·Tool Calling 신규 2강은 O-01 개정 승인 후 행 추가)
+| tool-calling-basics | M10 | tool-calling | — | — | — | — | order 7 (O-01 추가) |
+| rag-fundamentals | M10 | rag | — | — | — | — | order 8 (O-01 추가) |
+| mcp-architecture-basics | M10 | mcp, tool-calling | — | — | — | — | order 9 |
+| designing-reusable-skills | M10 | (skills KB — 2차 배치) | — | — | — | — | order 10 |
+| agent-loop-anatomy | M10 | agent-loop, tool-calling | — | — | — | — | order 11 |
+| subagents-and-delegation | M10 | agent-loop | — | — | — | — | order 12 |
+| multi-agent-orchestration | M10 | (orchestration KB — 2차 배치) | — | — | — | — | order 13 |
+| loop-engineering-basics | M10 | agent-loop | — | — | — | — | order 14 |
+| harness-engineering-basics | M10 | (harness KB — 2차 배치) | — | — | — | — | order 15 |
 
 ## 집계 (Executor가 행 갱신 시 함께 갱신)
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
 | Knowledge Base (approved) | 0 / 5 | 0% |
-| Lesson 생성 | 1 / 12 | 8% |
-| Site 반영 | 1 / 12 | 8% |
-| Verify 통과 | 0 / 12 | 0% |
-| Release | 0 / 12 | 0% |
+| Lesson 생성 | 1 / 14 | 7% |
+| Site 반영 | 1 / 14 | 7% |
+| Verify 통과 | 0 / 14 | 0% |
+| Release | 0 / 14 | 0% |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 

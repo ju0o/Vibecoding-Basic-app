@@ -70,8 +70,8 @@
 - 관련 용어: ~12개 / 출처: T11 (노후화 내성 구조 필수 — 원리 중심 + 현황 링크) / 난이도: ★★
 
 ## M10 AI 시스템 설계 (ai-system-design) — 중급 [주제: Context Engineering, RAG, Tool Calling, MCP, Skills, Workflow, Agent, SubAgent, Multi-Agent, Orchestration, Loop/Harness Engineering]
-- 포함 강의: **승인된 backlog 12강 + 기존 1강** (BACKLOG.md 참조)
-- **개정 제안**: RAG·Tool Calling 강의가 승인분에 없음 → `tool-calling-basics`(order 7로, MCP 앞), `rag-fundamentals`(order 8) 추가, 이후 order 재조정. Curriculum Agent 승인 필요 → 총 15강
+- 포함 강의: **승인된 backlog 14강 + 기존 1강 = 15강** (BACKLOG.md 참조)
+- ~~개정 제안~~ → **승인 완료 (O-01, 2026-07-04)**: tool-calling-basics(order 7), rag-fundamentals(order 8) 추가, 구 7~13은 9~15로 이동
 - 선행 지식: M08 (M09 권장)
 - 학습 목표: AI 기능을 시스템으로 설계
 - 설명 문장: "에이전트는 루프 안에서 자율적으로 도구를 사용하는 LLM이다"
