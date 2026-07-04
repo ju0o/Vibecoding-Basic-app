@@ -1,5 +1,7 @@
 # WF-00 자료 수집 Workflow (주제군 → 수집 노트 → 커리큘럼 재료)
 
+> **status: superseded (2026-07-04)** — [WF-06 Knowledge Pipeline](WF-06-knowledge-pipeline.md)로 대체됨. 수집 산출물이 "수집 노트"에서 "KB 문서(knowledge-base/entries/)"로 승격. 이 문서는 이력 보존용.
+
 강의 파이프라인(WF-01)보다 앞선 상류 공정. COLLECTION-PLAN의 주제군 12개를 수집 노트로 만든다.
 
 ```

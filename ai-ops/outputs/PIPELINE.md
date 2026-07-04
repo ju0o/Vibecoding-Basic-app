@@ -1,7 +1,16 @@
 # 파이프라인 상태 보드
 
-각 Agent는 작업 완료 시 자기 slug의 행만 갱신한다.
-상태: `backlog → briefed → drafting → drafted → reviewing → fix_loop → qa → final → integrated → released` (예외: `blocked`, `escalated`)
+각 Agent는 작업 완료 시 자기 행만 갱신한다. (KB 체제 — WF-06)
+
+## Knowledge Base 보드
+상태: `draft → reviewing → recollect(n) → approved` (예외: `escalated`, `stale`)
+
+| KB id | 주제군 | 상태 | Score | 갱신일 | 비고 |
+|---|---|---|---|---|---|
+
+## 강의 보드
+상태: `planned → generated → integrated → build_fail(n) → verified → released` (예외: `escalated`)
+(구 체제 상태값 `backlog → briefed → ... → released`는 파일럿 기록에만 남음)
 
 | slug | 모듈 | 상태 | 현재 담당 | 갱신일 | 비고 |
 |---|---|---|---|---|---|

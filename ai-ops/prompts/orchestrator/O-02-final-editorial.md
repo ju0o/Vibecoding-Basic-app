@@ -1,5 +1,6 @@
-# P-13 Final Editorial 프롬프트 (기본 배정: Claude Fable 5)
+# O-02 Final Editorial 프롬프트 (오케스트레이터 전용 — Executor: Claude Fable 5)
 
+사이트 전역 편집 검토. WF-05 담당. 구 번호: P-13.
 채울 값: `{검토 범위}` (모듈 id 목록 또는 "전체")
 
 ```

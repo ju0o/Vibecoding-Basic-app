@@ -2,12 +2,17 @@
 
 AI Vibe Coding Master를 "컴퓨터 기초 → 최신 AI 엔지니어링"을 순서대로 공부해 **남에게 설명할 수 있는 수준**에 도달하는 교육 사이트로 완성하기 위한 운영 계획. 이 문서는 모든 운영 문서의 지도다.
 
-## 전체 흐름 (자료 → 사이트)
+## 전체 흐름 (자료 → 사이트) — 2026-07-04 KB 체제로 개편
 
 ```
-[A 자료 수집]──[B 출처·용어 정리]──[C 커리큘럼 배치]──[D 강의 기획·작성]──[E 검증]──[F 사이트 반영]──[G 빌드 검증]──[H 릴리스]──[I 최종 편집]
-   WF-00           WF-00·WF-02          WF-04              WF-01 §1~2       WF-01 §3~4   WF-01 §5      WF-01 §6      WF-01 §6     WF-05
+[A 자료 수집]─[B Knowledge Base 생성·검증·Score]─[C 커리큘럼 배치]─[D Lesson 생성]─[E 사이트 반영]─[F 빌드 검증]─[G 릴리스]─[H 최종 편집]
+  WF-06 §1        WF-06 §2~3 (Loop A)               WF-04            WF-06 §4       WF-06 §5      WF-06 §6~7    WF-06 §8    WF-05
+                                                                                                   (Loop B)
 ```
+
+**Knowledge Base가 Single Source of Truth** — 강의·용어·검색·PDF·AI Tutor·영상은 전부 approved KB에서 파생된다. 설계: [knowledge-base/README.md](knowledge-base/README.md), 마스터 워크플로: [workflows/WF-06-knowledge-pipeline.md](workflows/WF-06-knowledge-pipeline.md), 품질 기준: [qa/KNOWLEDGE-SCORE.md](qa/KNOWLEDGE-SCORE.md)
+
+> 아래 단계 정의표는 구 체제(WF-00/WF-01) 기준의 상세 기록이다. 현행 단계·입출력·루프는 WF-06이 우선한다.
 
 ## 단계 정의표
 

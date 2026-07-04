@@ -44,42 +44,42 @@
 ```
 ai-ops/
   README.md               ← 이 문서 (조직도 + 원칙)
+  MASTER-PLAN.md          전체 운영 계획 (문서 지도)
   PARALLEL-STRATEGY.md    병렬/순차 작업 전략
-  ROADMAP.md              Phase별 로드맵 + 구현 우선순위
-  agents/                 Agent 정의서 (목적/책임/입출력/DoD)
-  workflows/              단계별 Workflow 정의
-  skills/                 재사용 가능한 작업 단위 (Skill)
-  prompts/                복붙용 프롬프트 라이브러리
-  executors/              Executor 배정, 강점/한계, 교체 설계
-  qa/                     품질 게이트, 검수 체크리스트
-  outputs/                파이프라인 작업 산출물 (핸드오프 파일)
-    00-backlog/           강의 아이디어 대기열
-    01-briefs/            리서치 브리프 (Research Agent 산출)
-    02-drafts/            강의 초안 (Writer/Quiz/Terminology 산출)
-    03-reviewed/          검증 통과본 (Verification Layer 산출)
-    04-integrated/        사이트 반영 완료 기록
-    PIPELINE.md           전체 파이프라인 상태 보드
-  sources/                공식 출처 등록부 (허용 출처 목록)
+  ROADMAP.md              Phase별 로드맵
+  knowledge-base/         ★ Single Source of Truth — 모든 콘텐츠의 원천
+    entries/{Txx}/        KB 문서 (개념 1개 = 파일 1개)
+    reviews/              검증 보고서, Knowledge Score, 재수집 요청서
+  agents/                 Agent 정의서
+  workflows/              WF-06(마스터), WF-02~05 (WF-00·01은 superseded)
+  skills/                 재사용 작업 단위 (SK-01~08)
+  prompts/                ★ 운영 순서대로 번호 부여 (P-01~08 + O-01·02, 구판은 archive/)
+  executors/              Executor 배정 (Trae/Codex/Cline + Fable=오케스트레이터)
+  qa/                     QA-GATES, KNOWLEDGE-SCORE
+  outputs/                강의 산출물 (00-backlog ~ 04-integrated, PIPELINE.md)
+  sources/                출처 등록부, 수집 계획
+  roadmap/                커리큘럼 지도, 최종 완성 전략
+  reports/                파일럿·편집·대시보드 보고서
 ```
 
-## 강의 1개의 생애주기 (요약)
+## 콘텐츠 생애주기 (KB 체제 — 요약)
 
 ```
-아이디어(00-backlog)
-  → Research Agent가 브리프 작성(01-briefs/{slug}.md)
-  → Lesson Writer가 13섹션 초안(02-drafts/{slug}/lesson.md)
-    + Quiz Agent가 퀴즈(02-drafts/{slug}/quiz.md)          ← 병렬
-    + Terminology Agent가 용어(02-drafts/{slug}/terms.md)   ← 병렬
-  → Fact Check + Education Review + QA (03-reviewed/{slug}/)
-  → Site Integration Agent가 src/content 반영               ← 순차(단일 작성자)
-  → Release Agent가 npm run verify 후 배포
+O-01 커리큘럼 결정 (Fable)
+  → P-01 KB 수집·생성 (Trae, 개념 간 병렬)
+  → P-02 검증·Knowledge Score (Codex) ⇄ P-03 재수집 루프 (Trae, 최대 2회)
+  → P-04 Lesson 생성 (Codex, approved KB만 입력)
+  → P-05 사이트 반영 (Codex, 순차 전용)
+  → P-06 빌드 검증 (Cline) ⇄ P-07 수정 루프 (Codex, 최대 2회)
+  → P-08 릴리스 (Cline) → 운영자 배포 승인
+  → O-02 최종 편집 (Fable, 강의 10개마다)
 ```
 
-상세 절차: [workflows/WF-01-lesson-production.md](workflows/WF-01-lesson-production.md)
+상세: [workflows/WF-06-knowledge-pipeline.md](workflows/WF-06-knowledge-pipeline.md) / 실행 매뉴얼: [prompts/README.md](prompts/README.md)
 
 ## 시작하는 법
 
-1. `outputs/00-backlog/`에 강의 아이디어를 한 줄씩 추가한다.
-2. `prompts/P-01-research.md`를 열어 slug를 채우고, 배정된 Executor에 붙여넣는다.
-3. 산출물이 나오면 `outputs/PIPELINE.md`의 해당 행 상태를 갱신한다.
-4. 이후 단계도 같은 방식: 프롬프트 복사 → Executor 실행 → 산출물 저장 → 보드 갱신.
+1. [prompts/README.md](prompts/README.md)의 실행 순서를 연다 — 프롬프트 번호가 곧 운영 순서다.
+2. 프롬프트의 `{중괄호}`를 채워 표에 지정된 Executor에 붙여넣는다.
+3. 완료 보고에서 산출물 파일 존재를 확인하고 `outputs/PIPELINE.md`를 갱신한다.
+4. 다음 번호의 프롬프트로 넘어간다 (루프 발생 시 P-03/P-07).

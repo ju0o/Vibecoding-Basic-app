@@ -2,58 +2,52 @@
 
 Executor = 실제로 프롬프트를 실행하는 AI 도구. **Agent(역할)와 Executor(도구)는 분리된다** — Agent 정의와 프롬프트는 Executor 이름을 모른 채 동작하고, 이 문서만이 "지금 누가 무엇을 맡는가"를 기록한다. Executor를 바꾸려면 이 문서의 표만 고치면 된다.
 
-## 현재 배정표
+## 현재 배정표 (KB 체제, 2026-07-04 개편)
 
-| Agent | 1순위 Executor | 2순위(대체) | 배정 이유 |
+작업 Executor는 **Trae / Codex / Cline** 3원 체제. Claude Fable 5는 작업자가 아니라 **오케스트레이터**(운영자 보좌 — 커리큘럼 결정, 프롬프트 전달, 에스컬레이션 판단, 최종 편집)다.
+
+| Executor | 담당 단계 | 프롬프트 | 교차 검증 관계 |
 |---|---|---|---|
-| Chief Orchestrator 보좌 | Claude Fable 5 | — | 전체 파이프라인 맥락 유지, 파일 오케스트레이션 |
-| Curriculum | Claude Fable 5 | GPT-5.5 | 커리큘럼 전체를 한 컨텍스트에 놓는 장문 추론 |
-| Research | Claude Fable 5 | GPT-5.5 | 웹 리서치 + 긴 문서 요약 + 출처 규율 |
-| Lesson Writer | Claude Fable 5 | GPT-5.5 | 한국어 교육 문체, 비유 생성 품질 |
-| Quiz | GPT-5.5 (Codex) | Cline | 규격이 명확한 생성 — 상위 모델 불필요 |
-| Terminology | GPT-5.5 (Codex) | Trae | 대량 규격 생성, 배치 처리 |
-| Fact Check | **작성자와 반대** (기본 GPT-5.5) | Claude Fable 5 | 교차 검증 원칙 — 같은 모델의 같은 오류 방지 |
-| Education Review | Claude Fable 5 (새 세션) | GPT-5.5 | 교육적 판단·한국어 뉘앙스. 단 작성 세션과 분리 |
-| QA | Cline | GPT-5.5 | 기계적 규격 검사 + 로컬 파일 접근, 스크립트화 유리 |
-| Site Integration | GPT-5.5 (Codex) | Cline | TypeScript 편집 + 커맨드 실행 |
-| Release | GPT-5.5 (Codex) | Cline | 빌드·테스트 실행과 로그 해석 |
-| Illustration (Ph2) | Claude Fable 5 | — | SVG/다이어그램 코드 생성 |
-| Source Collector | Trae | GPT-5.5 | 주제 단위 대량 수집 — 판단 최소화 작업이라 저비용 Executor 적합 |
-| Final Editorial | Claude Fable 5 | — | 사이트 전체를 한 컨텍스트에 놓는 통독 판단 |
+| **Trae** | KB 수집·생성, 재수집 루프 | P-01, P-03 | Trae가 만든 KB를 Codex가 검증 (작성자≠검증자 충족) |
+| **Codex (GPT-5.5)** | KB 검증·Score, Lesson 생성, 사이트 반영, 빌드 수정 | P-02, P-04, P-05, P-07 | Codex가 만든 강의·통합을 Cline이 빌드로 검증 |
+| **Cline** | 빌드 검증, 릴리스 | P-06, P-08 | 판정 전담 — 수정 권한 없음 (수정은 Codex) |
+| **Claude Fable 5** (오케스트레이터) | 커리큘럼, 최종 편집, 파이프라인 조율 | O-01, O-02 | 파이프라인 밖에서 전체 품질 감독 |
+
+구 배정표(강의별 브리프 체제)는 git 이력 참조. 2순위 대체: Trae↔Codex(수집), Codex↔Cline(통합·릴리스)은 상호 대체 가능 — 교차 검증 관계만 유지할 것.
 
 ## Executor별 상세 (강점 / 맡기면 안 되는 작업 / 프롬프트 / 출력 / 핸드오프)
 
 ### Claude Fable 5 (Claude Code)
 - 강점: 장문 컨텍스트 유지, 한국어 글쓰기 품질, 웹 리서치·검증 규율, 서브에이전트로 자체 병렬화 가능, 파일 시스템 직접 접근
-- 맡기기 좋은 작업: 커리큘럼 설계, 강의 집필, 교육 검토, 최종 편집(사이트 통독), 리서치 브리프
-- **맡기면 안 되는 작업**: 자기가 쓴 강의의 사실 검증(교차 원칙 위반), 퀴즈·용어 대량 생산(비용 낭비)
-- 프롬프트: P-01, P-02, P-03, P-07, P-11, P-13
+- 역할 (KB 체제): **오케스트레이터** — 커리큘럼 결정(O-01), 최종 편집(O-02), Executor 간 프롬프트 전달·산출물 확인, 에스컬레이션 판단
+- **맡기면 안 되는 작업**: 파이프라인 내 생산·검증 작업 (오케스트레이터가 생산에 참여하면 감독 기능 상실 + 비용 낭비)
+- 프롬프트: O-01, O-02
 - 출력 형식: 각 프롬프트가 지정한 outputs/·reports/ 경로의 md 파일
 - 핸드오프: 산출물 저장 → PIPELINE.md 자기 slug 행 갱신 → 다음 담당 Executor에 프롬프트 전달은 운영자(또는 오케스트레이터 세션)가 수행
 
 ### GPT-5.5 (Codex)
 - 강점: 코드 편집·실행 신뢰성, 규격 준수 생성, 병렬 외주(여러 인스턴스) 운용 용이
-- 맡기기 좋은 작업: 사실 검증(Claude 작성분 교차), 사이트 반영(TS 편집), 릴리스, 퀴즈·용어 생산
-- **맡기면 안 되는 작업**: 자기가 쓴 콘텐츠의 검증, 한국어 문체가 중요한 본문 집필의 단독 수행(Education Review 없이), 커리큘럼 전체 판단
-- 프롬프트: P-04, P-05, P-06, P-09, P-10
-- 출력 형식: 검증 보고서 md / src·content 코드 변경 + 04-integrated 반영 기록
-- 핸드오프: 반영 기록·보고서 저장 후 lint/typecheck 로그를 기록에 첨부 → PIPELINE.md 갱신
+- 맡기기 좋은 작업: KB 검증·Knowledge Score(Trae 산출물 교차 검증), Lesson 생성(KB 파생), 사이트 반영(TS 편집), 빌드 수정
+- **맡기면 안 되는 작업**: 자기가 검증한 KB의 재검증 생략, KB 없는 강의 생성(재조사 금지 원칙), 빌드 판정(Cline 소관 — 수정자가 판정하면 안 됨)
+- 프롬프트: P-02, P-04, P-05, P-07
+- 출력 형식: verification-report.md / 02-drafts 4종 / src·content 변경 + 04-integrated 기록
+- 핸드오프: 보고서·기록 저장 + PIPELINE.md 갱신 → 운영자가 다음 프롬프트 전달
 
 ### Trae
 - 강점: IDE 통합 에이전트 — 반복적 파일 작업, 저비용 배치 작업
-- 맡기기 좋은 작업: 자료 수집(P-12 — 출처 지도 작성), 용어 배치 생산, 산출물 파일 정리
-- **맡기면 안 되는 작업**: 검증 계층 전체(Fact Check·Edu Review·QA), 커리큘럼 판단, 강의 본문 집필
-- 프롬프트: P-12, P-05
-- 출력 형식: `sources/notes/{topic}.md`, `outputs/02-drafts/glossary-batch-{n}/terms.md`
-- 핸드오프: 수집 노트 저장 → 운영자가 Curriculum/Research에 노트 경로를 다음 프롬프트에 채워 전달
+- 맡기기 좋은 작업: KB 수집·생성(P-01 — 템플릿 규격의 대량 작성), 재수집 루프(P-03 — 요청서 지시 이행)
+- **맡기면 안 되는 작업**: 검증·Score 평가(자기 산출물 검증 금지), 커리큘럼 판단, Lesson 생성
+- 프롬프트: P-01, P-03
+- 출력 형식: `knowledge-base/entries/{Txx}/{id}.md` (frontmatter + 13섹션)
+- 핸드오프: KB 파일 경로 목록 보고 → 운영자가 Codex에 P-02 전달
 
 ### Cline
 - 강점: VS Code 내 파일 접근 + 커맨드 실행, 백엔드 모델 교체 가능(비용 조절 용이)
-- 맡기기 좋은 작업: 빌드 검증(P-10 — npm run verify 실행·로그 해석), QA 게이트 체크리스트·스크립트 실행, Site Integration 대체
-- **맡기면 안 되는 작업**: 창의 작업(집필·비유), 교육 판단, 사실 검증(백엔드 모델 편차 위험)
-- 프롬프트: P-08, P-10
-- 출력 형식: qa-report.md, RELEASE-{date}.md (verify 로그 포함)
-- 핸드오프: 릴리스 노트 저장 → 배포 여부는 운영자 승인 대기로 종료
+- 맡기기 좋은 작업: 빌드 검증(P-06 — npm run verify 실행·로그 발췌·판정), 릴리스(P-08 — 노트 작성·커밋)
+- **맡기면 안 되는 작업**: 코드·콘텐츠 수정(판정자와 수정자 분리 — 수정은 Codex P-07), 창의 작업, 교육 판단
+- 프롬프트: P-06, P-08
+- 출력 형식: VERIFIED 보고 또는 BUILD-FAIL-{date}-{n}.md, RELEASE-{date}.md
+- 핸드오프: 판정 보고 → 실패 시 운영자가 Codex에 P-07 전달, 통과 시 P-08 연속 실행 후 운영자 배포 승인 대기
 
 ## 배정 원칙 (Executor가 바뀌어도 유지)
 
@@ -80,15 +74,14 @@ Executor = 실제로 프롬프트를 실행하는 AI 도구. **Agent(역할)와 
 2. 새 Executor로 **파일럿 1건** 실행 → 담당 Agent DoD + QA 게이트 통과 확인
 3. 통과하면 정식 전환. 프롬프트·Workflow·Agent 문서는 수정할 필요가 없어야 정상 — 수정이 필요했다면 그 내용은 Executor 종속이었다는 뜻이므로 프롬프트를 중립적으로 고친다
 
-## 실행 예시 (강의 5개 배치, 하루 사이클)
+## 실행 예시 (KB 5개 → 강의 3개 배치, 하루 사이클)
 
 ```
-오전  Claude:   리서치 5건 (서브에이전트 병렬)
-      Claude:   본문 5건 집필 시작 (브리프 완료분부터)
-      Codex×2:  퀴즈 5건 + 용어 5건 병렬
-오후  Codex:    Fact Check 5건 (Claude 작성분 교차 검증)
-      Claude(새 세션): Education Review 5건
-      Claude/Writer: FIX 루프 처리
-저녁  Cline:    QA 게이트 배치 1회
-      Codex:    Site Integration 순차 1세션 → Release 1회
+오전  Trae×2:  P-01 KB 수집 5건 (개념 간 병렬 — 세션 나눠 배정 가능)
+      Codex:   P-02 검증·Score (완성분부터 순차 처리)
+오후  Trae:    P-03 재수집 (미달분 루프)  →  Codex: P-02 재평가
+      Codex×2: P-04 Lesson 생성 3건 (approved KB 확보분, slug 간 병렬)
+저녁  Codex:   P-05 사이트 반영 (단일 세션 순차)
+      Cline:   P-06 verify → (실패 시 Codex P-07 → Cline P-06) → P-08 릴리스
+      Fable:   산출물 확인, PIPELINE 갱신, 익일 배치 계획
 ```

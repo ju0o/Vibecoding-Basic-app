@@ -1,5 +1,6 @@
-# P-02 Curriculum Agent 프롬프트
+# O-01 Curriculum 프롬프트 (오케스트레이터 전용 — Executor: Claude Fable 5)
 
+모듈 분해·backlog 관리. WF-04 담당. 구 번호: P-02.
 채울 값: `{모듈 id 또는 지시}`
 
 ```
