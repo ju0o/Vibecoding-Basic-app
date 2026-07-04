@@ -20,7 +20,7 @@
 
 | 강의 slug | 모듈 | 근거 KB | Lesson(P-04) | Site(P-05) | Verify(P-06) | Release(P-08) | 비고 |
 |---|---|---|---|---|---|---|---|
-| from-prompt-to-system | M10 | n/a (구 체제 파일럿) | ✓ | ✓ | ✓ (2026-07-04, VERIFIED-2026-07-04-1) | **▶ P-08 대기** | src/content 커밋은 P-08에서 |
+| from-prompt-to-system | M10 | n/a (구 체제 파일럿) | ✓ | ✓ | ✓ (2026-07-04, VERIFIED-2026-07-04-1) | ✓ | P-08 완료, RELEASE-2026-07-04.md |
 | context-engineering-basics | M10 | context-engineering | — | — | — | — | backlog 승인분 (order 2) |
 | context-window-and-memory | M10 | context-engineering | — | — | — | — | order 3 |
 | system-prompts-and-instruction-layers | M10 | context-engineering | — | — | — | — | order 4 |
@@ -43,7 +43,7 @@
 | Lesson 생성 | 1 / 14 | 7% |
 | Site 반영 | 1 / 14 | 7% |
 | Verify 통과 | 1 / 14 | 7% |
-| Release | 0 / 14 | 0% |
+| Release | 1 / 14 | 7% |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
