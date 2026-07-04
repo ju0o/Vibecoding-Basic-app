@@ -1,8 +1,9 @@
 # P-03 Knowledge 재수집 (Loop A)
 
-| Agent | Source Collector | **Executor** | **Trae** |
+| Agent | Source Collector | **Primary Executor** | **Codex (수집 세션)** |
 |---|---|---|---|
-| 단계 | WF-06 §3 | 다음 | P-02 재평가 (Codex) |
+| Allowed | Fable (예외 승인 시) | 단계 | WF-06 §3 |
+| 세션 규칙 | **P-02를 수행한 세션과 다른 세션** | 다음 | P-02 재평가 (검증 세션) |
 
 채울 값: `{KB id}`, `{n}` (요청서 번호)
 
@@ -24,7 +25,7 @@
 ## 수행할 작업
 1. 요청서의 지시를 항목별로 이행 (지정된 섹션에, 지정된 종류의 출처/예시를 보강)
 2. 새로 추가하는 모든 주장에 URL + 확인 날짜
-3. KB 문서의 "## 변경 이력"에 append: `- YYYY-MM-DD: 재수집 {n}회차 — {보강 요약} (Trae, P-03)`
+3. KB 문서의 "## 변경 이력"에 append: `- YYYY-MM-DD: 재수집 {n}회차 — {보강 요약} (Codex, P-03)`
 4. frontmatter updated 갱신
 
 ## 규칙

@@ -3,7 +3,7 @@
 | 항목 | 내용 |
 |---|---|
 | 계층 | Production |
-| 기본 Executor | GPT-5.5 Codex 또는 Trae (대량 규격 생성) |
+| 기본 Executor | GPT-5.5 Codex (대량 규격 생성 — P-04에 통합 실행) |
 | 사용 Skill | SK-08 용어 집필 |
 | 사용 Prompt | prompts/P-05-terminology.md |
 

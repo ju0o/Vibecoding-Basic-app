@@ -3,7 +3,7 @@
 | 항목 | 내용 |
 |---|---|
 | 계층 | Planning (자료 수집 전담) |
-| 기본 Executor | Trae (대량 수집·정리 — 저비용 반복 작업) / 2순위 GPT-5.5 |
+| 기본 Executor | Codex 수집 세션 (2026-07-04 Trae 제외 — 검증 세션과 분리 필수) / 예외 시 Fable |
 | 사용 Skill | SK-01 공식 문서 리서치 (수집 파트) |
 | 사용 Prompt | prompts/P-12-source-collection.md |
 

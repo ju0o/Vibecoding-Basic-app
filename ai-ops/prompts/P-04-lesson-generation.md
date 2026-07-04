@@ -1,8 +1,9 @@
 # P-04 Lesson 생성 (KB → 강의)
 
-| Agent | Lesson Writer + Quiz + Terminology (통합) | **Executor** | **Codex (GPT-5.5)** |
+| Agent | Lesson Writer + Quiz + Terminology (통합) | **Primary Executor** | **Codex** |
 |---|---|---|---|
-| 단계 | WF-06 §4 | 다음 | P-05 (Codex) |
+| Allowed | Fable (문체 민감 강의 예외 시) | 단계 | WF-06 §4 |
+| 착수 조건 | KB approved + **Fable의 P-02 보고서 승인** | 다음 | P-05 (Codex) |
 
 채울 값: `{slug}`, `{KB id 목록}` (BACKLOG 항목에 지정된 것)
 

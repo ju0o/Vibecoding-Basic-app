@@ -3,7 +3,7 @@
 > **DESIGN FREEZE (2026-07-04)** — 설계 종료. 새 Agent·Workflow·Skill·Prompt 추가 금지. 운영은 [OPERATION_MANUAL.md](OPERATION_MANUAL.md), 현황은 [DASHBOARD.md](DASHBOARD.md) / [MASTER_PROGRESS.md](MASTER_PROGRESS.md), 변경은 [reports/DESIGN-FREEZE.md](reports/DESIGN-FREEZE.md)의 규칙으로만.
 
 이 폴더는 **AI 조직(Agents)이 강의·용어·퀴즈 콘텐츠를 대량 생산하고 유지보수하기 위한 운영 문서**입니다.
-사람(운영자)은 Chief AI Orchestrator 역할을 하고, 실제 작업은 여러 AI Executor(Claude Fable 5, GPT-5.5 Codex, Trae, Cline)에게 분배합니다.
+사람(운영자)은 Chief AI Orchestrator 역할을 하고, 실제 작업은 3개 Executor — **Codex(수집·검증·생성·반영), Cline(빌드 판정·릴리스), Fable(기획·QA·최종 검토)** — 에게 분배합니다. (2026-07-04 정책: Trae 제외 확정)
 
 ## 핵심 원칙
 
@@ -56,7 +56,7 @@ ai-ops/
   workflows/              WF-06(마스터), WF-02~05 (WF-00·01은 superseded)
   skills/                 재사용 작업 단위 (SK-01~08)
   prompts/                ★ 운영 순서대로 번호 부여 (P-01~08 + O-01·02, 구판은 archive/)
-  executors/              Executor 배정 (Trae/Codex/Cline + Fable=오케스트레이터)
+  executors/              Executor 배정 (Codex/Cline/Fable 3원 체제)
   qa/                     QA-GATES, KNOWLEDGE-SCORE
   outputs/                강의 산출물 (00-backlog ~ 04-integrated, PIPELINE.md)
   sources/                출처 등록부, 수집 계획
@@ -68,8 +68,9 @@ ai-ops/
 
 ```
 O-01 커리큘럼 결정 (Fable)
-  → P-01 KB 수집·생성 (Trae, 개념 간 병렬)
-  → P-02 검증·Knowledge Score (Codex) ⇄ P-03 재수집 루프 (Trae, 최대 2회)
+  → P-01 KB 수집·생성 (Codex 수집 세션, 개념 간 병렬)
+  → P-02 검증·Knowledge Score (Codex 검증 세션 — 수집과 분리) ⇄ P-03 재수집 루프 (최대 2회)
+  → Fable: 검증 보고서 승인 (QA 게이트)
   → P-04 Lesson 생성 (Codex, approved KB만 입력)
   → P-05 사이트 반영 (Codex, 순차 전용)
   → P-06 빌드 검증 (Cline) ⇄ P-07 수정 루프 (Codex, 최대 2회)

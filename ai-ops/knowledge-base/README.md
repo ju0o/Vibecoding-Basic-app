@@ -91,9 +91,9 @@ updated: 2026-07-04
 
 | 단계 | Agent | Executor | 프롬프트 |
 |---|---|---|---|
-| KB 수집·작성 | Source Collector (확장: Knowledge Collector) | Trae | P-01 |
-| KB 검증·스코어 | Fact Check + Education Review + QA (통합 실행) | Codex | P-02 |
-| KB 재수집 루프 | Source Collector | Trae | P-03 |
+| KB 수집·작성 | Source Collector (확장: Knowledge Collector) | Codex (수집 세션) | P-01 |
+| KB 검증·스코어 | Fact Check + Education Review + QA (통합 실행) | Codex (검증 세션 — 수집과 분리) + **Fable 승인** | P-02 |
+| KB 재수집 루프 | Source Collector | Codex (수집 세션) | P-03 |
 | Lesson 생성 | Lesson Writer + Quiz + Terminology (통합 실행) | Codex | P-04 |
 | 사이트 반영 | Site Integration | Codex | P-05 |
 | 빌드 검증 | Release (Build QA) | Cline | P-06 |

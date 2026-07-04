@@ -16,7 +16,7 @@
 | 1 | **git 저장소 초기화** | 운영자 + Codex | git init, 첫 커밋 | ✅ 2026-07-03 |
 | 2 | Curriculum Agent 첫 실행: ai-system-design 모듈 분해 | Claude | BACKLOG.md 12강 | ✅ 승인됨 |
 | 3 | 파일럿 1강(from-prompt-to-system)을 WF-01 완주 | 배정표대로 | 강의 1개 + 발견 사항 4건 반영 | ⏳ Gate 4(verify) 운영자 승인 대기 — reports/2026-07-04-pilot-report.md |
-| 4 | **자료 수집 개시 (WF-00)**: T10·T09·T08 우선 | Trae (P-12) | sources/notes/ 3건 | 신규 |
+| 4 | **KB 수집 개시 (WF-06)**: 1차 배치 5개 개념 | Codex (P-01) | knowledge-base/entries/ 5건 | 진행 예정 |
 | 5 | M10 개정(RAG·Tool Calling 2강) + M08 모듈 분해 (WF-04) | Claude (P-02) | BACKLOG 갱신 | 신규 |
 | 6 | QA Gate 3의 기계 검사 스크립트화 (13섹션 제목, quiz answer 일치, slug 중복) | Cline/Codex | `ai-ops/qa/scripts/validate-content.mjs` | |
 | 7 | 배치 3~5개 운영 시작 (EXECUTORS.md의 하루 사이클) | 전체 | 주당 강의 3~5개 | |

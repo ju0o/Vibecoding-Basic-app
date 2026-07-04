@@ -1,8 +1,9 @@
 # P-07 빌드 수정 (Loop B)
 
-| Agent | Site Integration (수정 모드) | **Executor** | **Codex (GPT-5.5)** |
+| Agent | Site Integration (수정 모드) | **Primary Executor** | **Codex** |
 |---|---|---|---|
-| 단계 | WF-06 §7 | 다음 | P-06 재검증 (Cline) |
+| Allowed | 없음 (수정자 고정 — Cline은 판정만) | 단계 | WF-06 §7 |
+| | | 다음 | P-06 재검증 (Cline) |
 
 채울 값: `{BUILD-FAIL 파일명}`
 

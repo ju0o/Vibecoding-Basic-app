@@ -1,8 +1,9 @@
 # P-06 빌드 검증
 
-| Agent | Release (Build QA) | **Executor** | **Cline** |
+| Agent | Release (Build QA) | **Primary Executor** | **Cline** |
 |---|---|---|---|
-| 단계 | WF-06 §6 | 다음 | 통과: P-08 / 실패: P-07 (Loop B) |
+| Allowed | 없음 (판정자 독립 — 수정 권한 있는 Executor에 배정 금지) | 단계 | WF-06 §6 |
+| 통과 보고서 경로 | `outputs/06-build-verification/VERIFIED-{date}-{n}.md` (2026-07-04 운영 확정) | 다음 | 통과: P-08 / 실패: P-07 (Loop B) |
 
 채울 값: `{n}` (이번 배치의 검증 회차, 1부터)
 

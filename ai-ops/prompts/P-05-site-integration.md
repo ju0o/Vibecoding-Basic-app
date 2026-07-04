@@ -1,8 +1,9 @@
 # P-05 사이트 반영
 
-| Agent | Site Integration | **Executor** | **Codex (GPT-5.5)** |
+| Agent | Site Integration | **Primary Executor** | **Codex** |
 |---|---|---|---|
-| 단계 | WF-06 §5 | 다음 | P-06 (Cline) |
+| Allowed | 없음 (단일 작성자 구역 — 대체 시 역할표 개정 필요) | 단계 | WF-06 §5 |
+| 세션 규칙 | 항상 단독 세션, 병렬 금지 | 다음 | P-06 (Cline) |
 
 채울 값: `{slug 목록}`
 **병렬 금지 — 항상 단일 세션에서 순차 실행.**

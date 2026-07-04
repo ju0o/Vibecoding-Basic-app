@@ -1,8 +1,9 @@
 # P-01 Knowledge 수집·KB 생성
 
-| Agent | Source Collector | **Executor** | **Trae** |
+| Agent | Source Collector | **Primary Executor** | **Codex (수집 세션)** |
 |---|---|---|---|
-| 단계 | WF-06 §1 | 다음 | P-02 (Codex) |
+| Allowed | Fable (예외 승인 시) | 단계 | WF-06 §1 |
+| 세션 규칙 | **P-02와 다른 세션에서 실행** (자기 검증 금지) | 다음 | P-02 (Codex 새 세션) |
 
 채울 값: `{개념 목록}` (예: `T09: mcp, rag, tool-calling`)
 
@@ -45,7 +46,7 @@
 - FAQ 3개 이상, 자주 하는 실수 3개 이상
 
 ## 다음 단계
-- 완료 보고에 생성한 파일 경로 목록을 나열 → 운영자가 Codex에 P-02를 전달
+- 완료 보고에 생성한 파일 경로 목록을 나열 → 운영자가 **새 Codex 세션**에 P-02를 전달 (이 세션에서 P-02 실행 금지)
 
 ## 실패 시 되돌아갈 Workflow
 - 없음 (파이프라인 시작점). 규격 미달은 P-02가 게이트로 잡아 P-03 재수집으로 돌아옴

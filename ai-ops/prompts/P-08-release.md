@@ -1,8 +1,9 @@
 # P-08 릴리스
 
-| Agent | Release | **Executor** | **Cline** |
+| Agent | Release | **Primary Executor** | **Cline** |
 |---|---|---|---|
-| 단계 | WF-06 §8 | 다음 | 운영자 승인 (배포) |
+| Allowed | Codex (Cline 불가 시) | 단계 | WF-06 §8 |
+| 주의 | **커밋에 src/content 변경 포함 필수** — git show --stat으로 확인 (2026-07-04 누락 사례) | 다음 | 운영자 승인 (배포) |
 
 ```
 당신은 교육 프로젝트의 Release Agent입니다. 검증이 통과된 배치를 릴리스로 정리하세요.

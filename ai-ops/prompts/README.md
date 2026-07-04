@@ -5,38 +5,36 @@
 ## 실행 순서 한눈에
 
 ```
-운영자(Fable) O-01 커리큘럼: 무엇을 만들지 결정 (backlog + 필요한 KB id 지정)
+Fable  O-01 커리큘럼: 무엇을 만들지 결정 (backlog + 필요한 KB id 지정)
    │
    ▼
-┌ Trae ────────────────────────────────────────────┐
-│ P-01 Knowledge 수집·KB 생성  (개념 간 병렬 가능)     │
-└──────────────────────────────────────────────────┘
+┌ Codex ────────────────────────────────────────────────┐
+│ [수집 세션]  P-01 Knowledge 수집·KB 생성 (개념 간 병렬)    │
+│      ▼                                                │
+│ [검증 세션]  P-02 KB 검증·Knowledge Score (수집과 다른 세션)│
+│   ├─ 미달 → [수집 세션] P-03 재수집 → P-02 재평가 (최대 2회)│
+│   └─ 통과(approved) → Fable: 보고서 승인 ▼              │
+│ P-04 Lesson 생성  (slug 간 병렬 가능)                    │
+│ P-05 사이트 반영  (병렬 금지 — 단일 세션 순차)             │
+└───────────────────────────────────────────────────────┘
    ▼
-┌ Codex ───────────────────────────────────────────┐
-│ P-02 KB 검증·Knowledge Score                      │
-│   ├─ 미달 → Trae P-03 재수집 → P-02 재평가 (최대 2회)│
-│   └─ 통과(approved) ▼                             │
-│ P-04 Lesson 생성  (slug 간 병렬 가능)               │
-│ P-05 사이트 반영  (병렬 금지 — 단일 세션 순차)        │
-└──────────────────────────────────────────────────┘
+┌ Cline ────────────────────────────────────────────────┐
+│ P-06 Build·Lint·Test·verify (판정만 — 수정 금지)         │
+│   ├─ 실패 → Codex P-07 수정 → P-06 재검증 (최대 2회)      │
+│   └─ 통과 ▼                                            │
+│ P-08 Release (커밋에 src/content 포함, 배포는 운영자 승인) │
+└───────────────────────────────────────────────────────┘
    ▼
-┌ Cline ───────────────────────────────────────────┐
-│ P-06 Build·Lint·Test·verify                       │
-│   ├─ 실패 → Codex P-07 수정 → P-06 재검증 (최대 2회) │
-│   └─ 통과 ▼                                       │
-│ P-08 Release (배포는 운영자 승인 후)                 │
-└──────────────────────────────────────────────────┘
-   ▼
-운영자(Fable) O-02 최종 편집: 강의 10개 릴리스마다 전역 검토
+Fable  O-02 최종 편집: 강의 10개 릴리스마다 전역 검토
 ```
 
 ## 프롬프트 목록표
 
 | 순서 | 파일 | Agent | Executor | 입력 파일 | 출력 파일 | 다음 단계 |
 |---|---|---|---|---|---|---|
-| P-01 | P-01-knowledge-collection.md | Source Collector | **Trae** | COLLECTION-PLAN, KB 템플릿 | `knowledge-base/entries/{Txx}/{id}.md` (draft) | P-02 |
-| P-02 | P-02-knowledge-verification.md | FactCheck+EduReview+QA | **Codex** | draft KB, KNOWLEDGE-SCORE.md | `reviews/{id}/verification-report.md`, approved 갱신 또는 재수집 요청서 | 통과→P-04 / 미달→P-03 |
-| P-03 | P-03-knowledge-recollection.md | Source Collector | **Trae** | recollection-request-{n}.md | 보강된 KB 문서 | P-02 재평가 |
+| P-01 | P-01-knowledge-collection.md | Source Collector | **Codex (수집 세션)** | COLLECTION-PLAN, KB 템플릿 | `knowledge-base/entries/{Txx}/{id}.md` (draft) | P-02 (새 세션) |
+| P-02 | P-02-knowledge-verification.md | FactCheck+EduReview+QA | **Codex (검증 세션)** | draft KB, KNOWLEDGE-SCORE.md | `reviews/{id}/verification-report.md`, approved 갱신 또는 재수집 요청서 | 통과→**Fable 승인**→P-04 / 미달→P-03 |
+| P-03 | P-03-knowledge-recollection.md | Source Collector | **Codex (수집 세션)** | recollection-request-{n}.md | 보강된 KB 문서 | P-02 재평가 |
 | P-04 | P-04-lesson-generation.md | Writer+Quiz+Terminology | **Codex** | approved KB, BACKLOG 항목 | `outputs/02-drafts/{slug}/` 4종 | P-05 |
 | P-05 | P-05-site-integration.md | Site Integration | **Codex** | 02-drafts | `src/content/` 변경, 04-integrated 기록, KB consumers | P-06 |
 | P-06 | P-06-build-verification.md | Release (Build QA) | **Cline** | 워킹 트리 | VERIFIED 보고 또는 BUILD-FAIL-{date}-{n}.md | 통과→P-08 / 실패→P-07 |
@@ -48,15 +46,16 @@
 ## 최종 실행 순서 (운영자 기준 — 이 순서 그대로)
 
 1. **O-01** (Fable) — 배치의 backlog·KB id 확정 (새 배치 시작 시에만)
-2. **P-01** (Trae) — KB 수집·생성
-3. **P-02** (Codex) — KB 검증·Score
-4. **P-03** (Trae) — Loop A: Score 미달 시에만 → 3번 재실행
-5. **P-04** (Codex) — Lesson 생성
-6. **P-05** (Codex) — 사이트 반영
-7. **P-06** (Cline) — Build·verify
-8. **P-07** (Codex) — Loop B: verify 실패 시에만 → 7번 재실행
-9. **P-08** (Cline) — Release
-10. **O-02** (Fable) — 강의 10개 릴리스마다 최종 편집
+2. **P-01** (Codex 수집 세션) — KB 수집·생성
+3. **P-02** (Codex 검증 세션 — 2번과 다른 세션 필수) — KB 검증·Score
+4. **P-03** (Codex 수집 세션) — Loop A: Score 미달 시에만 → 3번 재실행
+5. **Fable 승인** — P-02 verification-report 검토 (프롬프트 없음, 승인 기록 남김)
+6. **P-04** (Codex) — Lesson 생성
+7. **P-05** (Codex 단독 세션) — 사이트 반영
+8. **P-06** (Cline) — Build·verify
+9. **P-07** (Codex) — Loop B: verify 실패 시에만 → 8번 재실행
+10. **P-08** (Cline) — Release (src/content 커밋 포함 확인)
+11. **O-02** (Fable) — 강의 10개 릴리스마다 최종 편집
 
 ## 다음 단계로 넘기는 방법 (공통 규칙)
 
