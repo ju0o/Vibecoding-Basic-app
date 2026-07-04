@@ -80,6 +80,14 @@ export const GLOSSARY_TERMS = [
     related: ["도구", "Agent", "Workflow"],
   },
   {
+    term: "RAG",
+    category: "AI 시스템",
+    shortDefinition: "검색한 외부 지식을 AI 답변 컨텍스트에 넣어 근거를 보강하는 방식",
+    explanation:
+      "문서나 지식베이스를 작은 단위로 나누고 질문과 관련 있는 내용을 찾아 모델 입력에 함께 넣습니다.",
+    related: ["Context Engineering", "MCP", "검색", "출처"],
+  },
+  {
     term: "Skills",
     category: "AI 시스템",
     shortDefinition: "반복 작업을 잘 수행하기 위한 재사용 가능한 절차와 지식 묶음",

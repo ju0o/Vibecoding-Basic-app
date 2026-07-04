@@ -11,11 +11,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | KB id (개념) | 주제군 | 수집(P-01) | 검증·Score(P-02) | 비고 |
 |---|---|---|---|---|
-| context-engineering | T10 | — | — | **1차 배치 확정 (O-01, 2026-07-04)** — 강의 order 2·3·4 근거 |
-| tool-calling | T09 | — | — | 1차 배치 확정 — order 7·9·11 근거 |
-| mcp | T09 | — | — | 1차 배치 확정 — order 9 근거 |
-| rag | T09 | — | — | 1차 배치 확정 — order 8 근거 |
-| agent-loop | T10 | — | — | 1차 배치 확정 — order 11·12·14 근거 |
+| context-engineering | T10 | ✓ | ✓ 91 (Fable 승인 2026-07-05, QA-01) | 강의 order 2·3·4 근거 |
+| tool-calling | T09 | ✓ | ✓ 88 (Fable 승인 2026-07-05, QA-01) | order 7·9·11 근거 |
+| mcp | T09 | ✓ | ✓ 92 (Fable 승인 2026-07-05, QA-01) | order 9 근거 |
+| rag | T09 | ✓ | ✓ 90 (Loop A 1회 후, Fable 승인 2026-07-05, QA-01) | order 8 근거 |
+| agent-loop | T10 | ✓ | ✓ 91 (Fable 승인 2026-07-05, QA-01) | order 11·12·14 근거 |
 
 ## Lesson 매트릭스
 
@@ -40,7 +40,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
-| Knowledge Base (approved) | 0 / 5 | 0% |
+| Knowledge Base (approved + QA 승인) | 5 / 5 | 100% (1차 배치) |
 | Lesson 생성 | 1 / 14 | 7% |
 | Site 반영 | 1 / 14 | 7% |
 | Verify 통과 | 1 / 14 | 7% |
@@ -54,3 +54,5 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-04 | P-06 보고서 경로 | ~~프로세스 편차~~ **해소** | Cline의 신규 경로 `outputs/06-build-verification/`를 표준으로 확정, P-06 프롬프트에 명시 (Executor 리팩토링에 포함) |
 | 2026-07-04 | P-08 커밋 누락 | **해소** | Cline P-08 커밋(45fd9e6)에 src/content 3파일 누락 → 후속 커밋 a389dee로 보완, P-08 프롬프트에 확인 규칙 추가 |
 | 2026-07-04 | Executor 정책 변경 | 완료 | **Trae 완전 제외** — Codex/Cline/Fable 3원 체제. 작성자≠검증자는 "Codex 세션 분리 + Fable 승인"으로 대체 (freeze 개정 1호) |
+| 2026-07-05 | rag Loop A | 해소 (↻1 → ✓) | 76점(S1 미등록 출처, S7 용어 부재) → 재수집 → 90점. 루프 메커니즘 첫 실전 작동 |
+| 2026-07-05 | glossary.ts Loop A 중 직접 수정 | 관찰 (경미) | 재수집 요청서 지시로 RAG 용어가 P-05 밖에서 추가됨 — lint/typecheck 통과 확인, QA-01 커밋에 포함. 개선안: 재수집 중 src/content 수정 금지 + 용어 예약 목록 (운영자 승인 대기) |
