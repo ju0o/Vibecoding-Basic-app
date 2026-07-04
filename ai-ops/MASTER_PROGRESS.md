@@ -20,7 +20,7 @@
 
 | 강의 slug | 모듈 | 근거 KB | Lesson(P-04) | Site(P-05) | Verify(P-06) | Release(P-08) | 비고 |
 |---|---|---|---|---|---|---|---|
-| from-prompt-to-system | M10 | n/a (구 체제 파일럿) | ✓ | ✓ | **▶ 대기** | — | verify 미실행 — 운영 첫 작업 |
+| from-prompt-to-system | M10 | n/a (구 체제 파일럿) | ✓ | ✓ | ✓ (2026-07-04, VERIFIED-2026-07-04-1) | **▶ P-08 대기** | src/content 커밋은 P-08에서 |
 | context-engineering-basics | M10 | context-engineering | — | — | — | — | backlog 승인분 (order 2) |
 | context-window-and-memory | M10 | context-engineering | — | — | — | — | order 3 |
 | system-prompts-and-instruction-layers | M10 | context-engineering | — | — | — | — | order 4 |
@@ -42,11 +42,12 @@
 | Knowledge Base (approved) | 0 / 5 | 0% |
 | Lesson 생성 | 1 / 14 | 7% |
 | Site 반영 | 1 / 14 | 7% |
-| Verify 통과 | 0 / 14 | 0% |
+| Verify 통과 | 1 / 14 | 7% |
 | Release | 0 / 14 | 0% |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
 | 날짜 | 대상 | 상태 | 조치 |
 |---|---|---|---|
-| 2026-07-04 | from-prompt-to-system | Verify 대기 | 운영자 P-06 승인 필요 (구 체제 파일럿 잔여) |
+| 2026-07-04 | from-prompt-to-system | ~~Verify 대기~~ **해소** | Cline P-06 실행, VERIFIED (커밋 739640b). P-08 릴리스만 남음 |
+| 2026-07-04 | P-06 보고서 경로 | 프로세스 편차 (경미) | Cline이 VERIFIED 보고서를 신규 경로 `outputs/06-build-verification/`에 저장 — P-06 프롬프트에 통과 보고서의 지정 경로가 없었던 설계 공백. 개선안: 운영자 승인 시 P-06에 경로 명시 추가 |
