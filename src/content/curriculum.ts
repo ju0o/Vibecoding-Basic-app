@@ -155,10 +155,11 @@ export const LESSON_META = [
     moduleId: "ai-system-design",
     order: 1,
     title: "프롬프트에서 시스템으로",
-    summary: "일회성 프롬프트의 한계를 이해하고, AI 시스템 설계의 다섯 구성요소 지도를 그립니다.",
+    summary:
+      "일회성 프롬프트의 한계를 이해하고, 컨텍스트·도구·루프·검증을 갖춘 AI 시스템 설계로 확장합니다.",
     level: "기초",
     type: "deep-dive",
-    minutes: 40,
+    minutes: 55,
     tags: ["AI 시스템 설계", "Context Engineering", "Workflow", "Agent"],
   },
   {
@@ -170,7 +171,7 @@ export const LESSON_META = [
       "AI가 추론할 때 받는 정보 묶음을 목표, 제약, 근거, 도구 결과로 선별하고 유지하는 방법을 배웁니다.",
     level: "기초",
     type: "deep-dive",
-    minutes: 40,
+    minutes: 55,
     tags: ["Context Engineering", "컨텍스트", "AI 시스템 설계", "에이전트"],
   },
   {
@@ -182,7 +183,7 @@ export const LESSON_META = [
       "컨텍스트 창의 한계, 토큰 누적, context rot, compaction과 상태 산출물로 긴 AI 작업을 유지하는 법을 배웁니다.",
     level: "기초",
     type: "deep-dive",
-    minutes: 40,
+    minutes: 55,
     tags: ["Context Window", "Context Engineering", "메모리 관리", "Compaction"],
   },
   {
@@ -194,7 +195,7 @@ export const LESSON_META = [
       "시스템 프롬프트, 사용자 메시지, 도구 정의, 예시가 함께 컨텍스트를 이루는 방식을 배우고 명확한 지침 설계법을 익힙니다.",
     level: "기초",
     type: "deep-dive",
-    minutes: 40,
+    minutes: 55,
     tags: ["System Prompt", "Instruction", "Context Engineering", "도구 정의"],
   },
   {
@@ -206,7 +207,7 @@ export const LESSON_META = [
       "Workflow와 Agent의 차이를 구분하고, AI 작업을 단계와 품질 게이트로 나누어 예측 가능하게 만드는 방법을 배웁니다.",
     level: "중급",
     type: "deep-dive",
-    minutes: 45,
+    minutes: 60,
     tags: ["Workflow", "Agent", "품질 게이트", "AI 시스템 설계"],
   },
   {
@@ -229,7 +230,7 @@ export const LESSON_META = [
       "AI가 외부 함수나 도구를 구조화된 호출 요청으로 선택하고, 애플리케이션이 실행하는 경계를 배웁니다.",
     level: "중급",
     type: "deep-dive",
-    minutes: 40,
+    minutes: 55,
     tags: ["Tool Calling", "Function Calling", "API", "AI 도구"],
   },
   {
@@ -241,7 +242,7 @@ export const LESSON_META = [
       "검색된 외부 지식을 모델 입력에 넣어 최신 정보와 도메인 지식에 근거한 답변을 만드는 흐름을 배웁니다.",
     level: "중급",
     type: "deep-dive",
-    minutes: 40,
+    minutes: 55,
     tags: ["RAG", "Retrieval", "Embedding", "Context Engineering"],
   },
   {
@@ -253,7 +254,7 @@ export const LESSON_META = [
       "MCP의 host, client, server 구조와 tools, resources의 차이를 배우고 Tool Calling과의 관계를 정리합니다.",
     level: "중급",
     type: "deep-dive",
-    minutes: 40,
+    minutes: 60,
     tags: ["MCP", "Tool Calling", "Resources", "AI 시스템 설계"],
   },
   {
@@ -265,7 +266,7 @@ export const LESSON_META = [
       "Agent Loop가 평가, 도구 호출, 결과 반영, 반복으로 움직이는 구조를 배우고 Tool Calling과의 차이를 정리합니다.",
     level: "중급",
     type: "deep-dive",
-    minutes: 45,
+    minutes: 60,
     tags: ["Agent", "Agent Loop", "Tool Calling", "도구 루프"],
   },
 ] satisfies readonly LessonMeta[]

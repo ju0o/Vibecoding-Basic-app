@@ -10,7 +10,7 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 |---|---|
 | P | Pillar: A 코딩 기반, B 바이브코딩 본체, C AI 엔지니어링, D 레퍼런스 |
 | type | `deep-dive` or `reference` |
-| status | `v2-regenerate`, `planned`, `kb_needed`, `blocked` |
+| status | `v2-regenerate`, `v2-released`, `planned`, `kb_needed`, `blocked` |
 
 ## Lesson Queue
 
@@ -20,7 +20,7 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 2 | A | development-environment-map | getting-started | 2 | deep-dive | 개발 환경 지도: IDE, 터미널, 브라우저, Git | 입문 | ai-vibe-coding-orientation | dev-environment-map | kb_needed |
 | 3 | B | vibe-coding-origin-karpathy | getting-started | 3 | deep-dive | 바이브코딩 용어의 기원과 Karpathy 2025 | 기초 | ai-vibe-coding-orientation | vibe-coding-origin-karpathy | kb_needed |
 | 4 | A | learning-with-ai-verification | getting-started | 4 | deep-dive | AI와 배울 때 검증이 먼저인 이유 | 기초 | ai-vibe-coding-orientation | ai-learning-verification | kb_needed |
-| 5 | C | from-prompt-to-system | getting-started | 5 | deep-dive | 프롬프트에서 시스템으로 | 기초 | ai-vibe-coding-orientation | agent-loop,context-engineering | v2-regenerate |
+| 5 | C | from-prompt-to-system | getting-started | 5 | deep-dive | 프롬프트에서 시스템으로 | 기초 | ai-vibe-coding-orientation | agent-loop,context-engineering | v2-released |
 | 6 | A | files-folders-and-paths | development-basics | 1 | deep-dive | 파일, 폴더, 경로를 정확히 이해하기 | 입문 | development-environment-map | files-folders-paths | kb_needed |
 | 7 | D | terminal-shell-basics-reference | development-basics | 2 | reference | 터미널·셸 기본 명령 레퍼런스 | 기초 | files-folders-and-paths | terminal-shell-commands | kb_needed |
 | 8 | A | variables-types-and-data-shapes | development-basics | 3 | deep-dive | 변수, 타입, 데이터 모양 | 입문 | files-folders-and-paths | variables-types-data | kb_needed |
@@ -79,16 +79,16 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 61 | A | tool-permissions-sandboxes | ai-coding-tools | 5 | deep-dive | AI 도구 권한과 sandbox | 중급 | ide-agent-era | tool-permissions-sandboxes | kb_needed |
 | 62 | B | human-ai-collaboration-patterns | ai-coding-tools | 6 | deep-dive | 사람-AI 협업 패턴 | 기초 | chat-coding-era | human-ai-collaboration-patterns | kb_needed |
 | 63 | B | ai-code-review-tools | ai-coding-tools | 7 | deep-dive | AI 코드 리뷰 도구와 한계 | 중급 | frontend-testing-basics | ai-code-review-tools | kb_needed |
-| 64 | C | context-engineering-basics | ai-system-design | 1 | deep-dive | Context Engineering 기초 | 기초 | from-prompt-to-system | context-engineering | v2-regenerate |
-| 65 | C | context-window-and-memory | ai-system-design | 2 | deep-dive | 컨텍스트 윈도와 메모리 관리 | 기초 | context-engineering-basics | context-engineering | v2-regenerate |
-| 66 | C | system-prompts-and-instruction-layers | ai-system-design | 3 | deep-dive | 시스템 프롬프트와 지침 계층 | 기초 | context-engineering-basics | context-engineering | v2-regenerate |
-| 67 | C | ai-workflow-design | ai-system-design | 4 | deep-dive | AI Workflow 설계: 단계 분해와 품질 게이트 | 중급 | context-engineering-basics | agent-loop | v2-regenerate |
+| 64 | C | context-engineering-basics | ai-system-design | 1 | deep-dive | Context Engineering 기초 | 기초 | from-prompt-to-system | context-engineering | v2-released |
+| 65 | C | context-window-and-memory | ai-system-design | 2 | deep-dive | 컨텍스트 윈도와 메모리 관리 | 기초 | context-engineering-basics | context-engineering | v2-released |
+| 66 | C | system-prompts-and-instruction-layers | ai-system-design | 3 | deep-dive | 시스템 프롬프트와 지침 계층 | 기초 | context-engineering-basics | context-engineering | v2-released |
+| 67 | C | ai-workflow-design | ai-system-design | 4 | deep-dive | AI Workflow 설계: 단계 분해와 품질 게이트 | 중급 | context-engineering-basics | agent-loop | v2-released |
 | 68 | C | context-engineering-mcp-skills | ai-system-design | 5 | deep-dive | Context Engineering, MCP, Skills의 관계 | 중급 | ai-workflow-design | context-engineering,mcp | v2-regenerate |
-| 69 | C | tool-calling-basics | ai-system-design | 6 | deep-dive | Tool Calling: AI가 도구를 부르는 방식 | 중급 | context-engineering-basics | tool-calling | v2-regenerate |
-| 70 | C | rag-fundamentals | ai-system-design | 7 | deep-dive | RAG: 모델이 모르는 것을 알려주는 방법 | 중급 | context-window-and-memory | rag | v2-regenerate |
-| 71 | C | mcp-architecture-basics | ai-system-design | 8 | deep-dive | MCP 구조: 서버, 클라이언트, 도구, 리소스 | 중급 | tool-calling-basics | mcp,tool-calling | v2-regenerate |
+| 69 | C | tool-calling-basics | ai-system-design | 6 | deep-dive | Tool Calling: AI가 도구를 부르는 방식 | 중급 | context-engineering-basics | tool-calling | v2-released |
+| 70 | C | rag-fundamentals | ai-system-design | 7 | deep-dive | RAG: 모델이 모르는 것을 알려주는 방법 | 중급 | context-window-and-memory | rag | v2-released |
+| 71 | C | mcp-architecture-basics | ai-system-design | 8 | deep-dive | MCP 구조: 서버, 클라이언트, 도구, 리소스 | 중급 | tool-calling-basics | mcp,tool-calling | v2-released |
 | 72 | C | designing-reusable-skills | ai-system-design | 9 | deep-dive | Skill 설계: 재사용 절차 만들기 | 중급 | context-engineering-mcp-skills | skills | kb_needed |
-| 73 | C | agent-loop-anatomy | ai-system-design | 10 | deep-dive | Agent의 구조: 도구 루프와 관찰-행동 사이클 | 중급 | tool-calling-basics | agent-loop,tool-calling | v2-regenerate |
+| 73 | C | agent-loop-anatomy | ai-system-design | 10 | deep-dive | Agent의 구조: 도구 루프와 관찰-행동 사이클 | 중급 | tool-calling-basics | agent-loop,tool-calling | v2-released |
 | 74 | C | subagents-and-delegation | ai-system-design | 11 | deep-dive | SubAgent와 위임 패턴 | 중급 | agent-loop-anatomy | agent-loop,subagents | kb_needed |
 | 75 | C | multi-agent-orchestration | ai-system-design | 12 | deep-dive | Orchestration: 여러 Agent의 협업 설계 | 중급 | subagents-and-delegation | orchestration | kb_needed |
 | 76 | C | loop-engineering-basics | ai-system-design | 13 | deep-dive | Loop Engineering: 반복 실행과 종료 조건 | 중급 | agent-loop-anatomy | agent-loop,loop-engineering | kb_needed |

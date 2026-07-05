@@ -24,16 +24,16 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 강의 slug | 모듈 | 근거 KB | Lesson(P-04) | Site(P-05) | Verify(P-06) | Release(P-08) | 비고 |
 |---|---|---|---|---|---|---|---|
-| from-prompt-to-system | M10 | n/a (구 체제 파일럿) | ✓ | ✓ | ✓ (2026-07-04, VERIFIED-2026-07-04-1) | ✓ | Batch 1 포함, RELEASE-2026-07-05.md |
-| context-engineering-basics | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, VERIFIED-2026-07-05-2) | ✓ | Batch 1 Final, RELEASE-2026-07-05.md |
-| context-window-and-memory | M10 | context-engineering | ✓ | ✓ | — | — | order 3 |
-| system-prompts-and-instruction-layers | M10 | context-engineering | ✓ | ✓ | — | — | order 4 |
-| ai-workflow-design | M10 | agent-loop | ✓ | ✓ | — | — | order 5 |
-| tool-calling-basics | M10 | tool-calling | ✓ | ✓ | ✓ (2026-07-05, VERIFIED-2026-07-05-2) | ✓ | Batch 1 Final, RELEASE-2026-07-05.md |
-| rag-fundamentals | M10 | rag | ✓ | ✓ | ✓ (2026-07-05, VERIFIED-2026-07-05-2) | ✓ | Batch 1 Final, RELEASE-2026-07-05.md |
-| mcp-architecture-basics | M10 | mcp, tool-calling | ✓ | ✓ | ✓ (2026-07-05, VERIFIED-2026-07-05-2) | ✓ | Batch 1 Final, RELEASE-2026-07-05.md |
+| from-prompt-to-system | M10 | n/a (구 체제 파일럿) | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
+| context-engineering-basics | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
+| context-window-and-memory | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
+| system-prompts-and-instruction-layers | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
+| ai-workflow-design | M10 | agent-loop | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
+| tool-calling-basics | M10 | tool-calling | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
+| rag-fundamentals | M10 | rag | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
+| mcp-architecture-basics | M10 | mcp, tool-calling | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | designing-reusable-skills | M10 | (skills KB — 2차 배치) | — | — | — | — | order 10 |
-| agent-loop-anatomy | M10 | agent-loop, tool-calling | ✓ | ✓ | — | — | order 11 |
+| agent-loop-anatomy | M10 | agent-loop, tool-calling | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | subagents-and-delegation | M10 | agent-loop | — | — | — | — | order 12 |
 | multi-agent-orchestration | M10 | (orchestration KB — 2차 배치) | — | — | — | — | order 13 |
 | loop-engineering-basics | M10 | agent-loop | — | — | — | — | order 14 |
@@ -45,10 +45,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 |---|---|---|
 | Knowledge Base (approved + QA 승인) | 5 / 5 | 100% (1차 배치) |
 | KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
+| V2 regeneration Wave 1 | 9 / 9 | 100% |
 | Lesson 생성 | 9 / 14 | 64% |
 | Site 반영 | 9 / 14 | 64% |
-| Verify 통과 | 5 / 14 | 36% |
-| Release | 5 / 14 | 36% (Batch 1 Final) |
+| Verify 통과 | 9 / 14 | 64% |
+| Release | 9 / 14 | 64% (V2 Wave 1) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 

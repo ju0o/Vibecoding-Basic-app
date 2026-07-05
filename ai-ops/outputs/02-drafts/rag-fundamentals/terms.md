@@ -1,6 +1,6 @@
 # 용어 초안: rag-fundamentals
 
-기존 `src/content/glossary.ts` 대조 완료 (2026-07-05): `RAG`, `Context Engineering`, `MCP` 기등재. 중복 용어를 생성하지 않습니다.
+기존 glossary.ts 대조 완료: RAG가 이미 등록되어 있어 신규 용어를 추가하지 않는다.
 
 ## 생성 용어
 
