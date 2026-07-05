@@ -29,11 +29,11 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 11 | D | regex-for-code-search | development-basics | 6 | reference | 코드 검색을 위한 정규식 레퍼런스 | 중급 | debugging-error-reading | regex-code-search | v2-released |
 | 12 | D | package-json-and-semver | development-basics | 7 | reference | package.json과 Semantic Versioning | 기초 | terminal-shell-basics-reference | package-json-semver | v2-released |
 | 13 | A | web-screen-anatomy | web-basics | 1 | deep-dive | 웹 화면은 어떻게 만들어지는가 | 입문 | files-folders-and-paths | html-css-js-browser | v2-regenerate |
-| 14 | A | html-semantic-elements | web-basics | 2 | deep-dive | HTML 의미 구조와 접근성 | 기초 | web-screen-anatomy | html-semantic-elements | kb_needed |
-| 15 | A | css-cascade-layout-responsive | web-basics | 3 | deep-dive | CSS cascade, layout, responsive | 기초 | web-screen-anatomy | css-cascade-layout | kb_needed |
-| 16 | A | javascript-dom-events | web-basics | 4 | deep-dive | JavaScript, DOM, 이벤트 흐름 | 기초 | web-screen-anatomy | javascript-dom-events | kb_needed |
-| 17 | A | browser-rendering-network | web-basics | 5 | deep-dive | 브라우저 렌더링과 네트워크 탭 읽기 | 중급 | javascript-dom-events | browser-rendering-network | kb_needed |
-| 18 | A | http-request-response | web-basics | 6 | deep-dive | HTTP 요청과 응답의 실제 구조 | 기초 | browser-rendering-network | http-request-response | kb_needed |
+| 14 | A | html-semantic-elements | web-basics | 2 | deep-dive | HTML 의미 구조와 접근성 | 기초 | web-screen-anatomy | html-semantic-elements | draft |
+| 15 | A | css-cascade-layout-responsive | web-basics | 3 | deep-dive | CSS cascade, layout, responsive | 기초 | web-screen-anatomy | css-cascade-layout | draft |
+| 16 | A | javascript-dom-events | web-basics | 4 | deep-dive | JavaScript, DOM, 이벤트 흐름 | 기초 | web-screen-anatomy | javascript-dom-events | draft |
+| 17 | A | browser-rendering-network | web-basics | 5 | deep-dive | 브라우저 렌더링과 네트워크 탭 읽기 | 중급 | javascript-dom-events | browser-rendering-network | draft |
+| 18 | A | http-request-response | web-basics | 6 | deep-dive | HTTP 요청과 응답의 실제 구조 | 기초 | browser-rendering-network | http-request-response | draft |
 | 19 | A | json-data-contracts | web-basics | 7 | deep-dive | JSON과 데이터 계약 | 기초 | http-request-response | json-data-contracts | kb_needed |
 | 20 | A | web-security-basics | web-basics | 8 | deep-dive | 웹 보안 기초: XSS, CSRF, CORS | 중급 | http-request-response | web-security-basics | kb_needed |
 | 21 | A | typescript-react-nextjs | frontend-frameworks | 1 | deep-dive | TypeScript, React, Next.js는 왜 함께 쓰는가 | 기초 | javascript-dom-events | typescript-react-nextjs | v2-regenerate |

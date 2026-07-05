@@ -38,6 +38,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | debugging-error-reading | T01 | ✓ | ✓ 89 (2026-07-06) | order 10 근거 |
 | regex-code-search | T01 | ✓ | ✓ 87 (2026-07-06) | order 11 근거 |
 | package-json-semver | T01 | ✓ | ✓ 85 (2026-07-06) | order 12 근거 / npm·SemVer registry 명시 권고 |
+| html-semantic-elements | T02 | ✓ | — | CODEX-PLAN Phase 2 KB 7차 draft, P-02 대기 |
+| css-cascade-layout | T02 | ✓ | — | CODEX-PLAN Phase 2 KB 7차 draft, P-02 대기 |
+| javascript-dom-events | T02 | ✓ | — | CODEX-PLAN Phase 2 KB 7차 draft, P-02 대기 |
+| browser-rendering-network | T02 | ✓ | — | CODEX-PLAN Phase 2 KB 7차 draft, P-02 대기 |
+| http-request-response | T02 | ✓ | — | CODEX-PLAN Phase 2 KB 7차 draft, P-02 대기 |
 
 ## Lesson 매트릭스
 
@@ -88,6 +93,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | KB Quote Bank (4차 approved KB) | 5 / 5 | 100% (tokenization-context Loop A 후 승인) |
 | KB Quote Bank (5차 approved KB) | 5 / 5 | 100% (vibe-coding-origin-karpathy Loop A 후 승인) |
 | KB Quote Bank (6차 approved KB) | 5 / 5 | 100% |
+| KB Quote Bank (7차 draft KB) | 5 / 5 | 100% (P-02 검증 대기) |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
 | Lesson 생성 | 32 / 32 | 100% (CODEX-PLAN 확정 32강 V2 generated) |
 | Site 반영 | 32 / 32 | 100% (CODEX-PLAN 확정 32강 integrated) |
@@ -148,3 +154,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-06 | CODEX-PLAN Phase 3 P-05 T01 Wave 3 | 완료 | package-json-and-semver 사이트 반영 + glossary/KB consumers/diagram 통합, `npm run lint`·`npm run typecheck` PASS |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-06 T01 Wave 3 | 완료 | `npm run verify` PASS, package-json-and-semver 검증 통과 |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-08 T01 Wave 3 | 완료 | package-json-and-semver V2 Wave 10 릴리스, deployment HOLD |
+| 2026-07-06 | CODEX-PLAN Phase 2 KB 7차 P-01 | 완료 | html-semantic-elements·css-cascade-layout·javascript-dom-events·browser-rendering-network·http-request-response draft 생성, P-02 대기 |
