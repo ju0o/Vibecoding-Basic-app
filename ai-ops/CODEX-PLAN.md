@@ -63,7 +63,7 @@
 배치(KB 5~8 → 강의 3~5) 물결로 반복. 각 물결:
 1. **KB 수집**: [knowledge-base/_TEMPLATE.md](knowledge-base/_TEMPLATE.md) — 13섹션 + Quote Bank 5+. 공식 출처만([sources/SOURCE-REGISTRY.md](sources/SOURCE-REGISTRY.md)), 전 주장 URL+확인 날짜, 오늘 연 문서만
 2. **KB 검증**: [qa/KNOWLEDGE-SCORE.md](qa/KNOWLEDGE-SCORE.md) 게이트 4+기준 7. **검증은 수집과 별도 단계로, 원문 재접속 대조를 기록으로 남긴다** (같은 실행 내 자기 검증임을 인지하고 더 엄격하게 — 대조 기록 없는 PASS 금지). 80 미달 → 재수집 루프(최대 2회) → 그래도 미달이면 해당 항목 BLOCKED 기록 후 다음 항목 진행
-3. **강의 생성**: [prompts/P-04-lesson-generation.md](prompts/P-04-lesson-generation.md) — V2 규격 전부 (≥8,000자, 인용 3+ Quote Bank에서만, 하이라이트 상한, KB 외 사실 0건). 레퍼런스형은 명령어별 예시 완결성이 기준. **모든 인용은 [qa/CITATION-POLICY.md](qa/CITATION-POLICY.md) 준수** (짧은 인용+출처 링크 필수+해설, 문서당 3건 상한, 이미지 복사 금지·SVG 재작성). 애매한 인용은 멈추지 말고 `reports/citation-review.md`에 기록 후 계속
+3. **강의 생성**: [prompts/P-04-lesson-generation.md](prompts/P-04-lesson-generation.md) — V2 규격 전부 (≥8,000자, 인용 3+ Quote Bank에서만, 하이라이트 상한, KB 외 사실 0건). 레퍼런스형은 명령어별 예시 완결성이 기준. **인용은 [qa/CITATION-POLICY.md](qa/CITATION-POLICY.md) 모드 A** — 길이 상한 없이 이해에 필요한 만큼 인용 가능 (출처 링크+해설은 필수), 단 **긴 인용(2~3문장 초과)은 전부 `reports/citation-review.md`에 자동 기록** (공개 전환 시 운영자의 정리 목록). 이미지 복사 금지·SVG 재작성
 4. **다이어그램**: 필요처에 SVG
 5. **용어**: 강의에서 파생되는 모든 용어를 상세 서술로 glossary에 (명사형 종결, 중복 대조)
 6. **반영 + verify**: src/content 반영 → `npm run verify` → 실패 시 통합 실수 수정 후 재검증 → 통과 시 커밋(src/content 포함 — git show --stat 확인) + 릴리스 기록
@@ -84,9 +84,10 @@
 2. **STOP — NEXT_ACTION으로 운영자에게 보고**: "개발 서버 http://localhost:3000 에서 확인 요청" + 완성 요약(강의 수/용어 수/BLOCKED 목록/셀프 편집 결과/`reports/citation-review.md` 인용 검토 목록)
 3. 운영자 확인 + **Fable 사후 감사([qa/FABLE-AUDIT-PLAN.md](qa/FABLE-AUDIT-PLAN.md) — 표본 재검증, 배포 승인 권고)** 대기. 감사 협조: 요청 시 표본 목록의 원문 대조 기록 제공
 
-## 9. 배포 (운영자 승인 후에만)
+## 9. 배포 (운영자 승인 후에만 — **비공개 학습용 배포**)
 
-- 운영자가 배포 환경 지정(Vercel 권장) → 배포 설정 → 배포 → 배포 URL 페이지 확인 → `outputs/06-deployment/` 보고서
+- 운영자가 배포 환경 지정(Vercel 권장) → 배포 설정 + **비공개 조건 구현 필수** ([qa/CITATION-POLICY.md](qa/CITATION-POLICY.md) §0-1: robots.txt 전체 차단 + 전 페이지 noindex + Basic Auth 등 접근 보호 — 이것 없이 배포 금지) → 배포 → 접근 보호·noindex 동작 확인 → `outputs/06-deployment/` 보고서
+- 이 배포는 운영자 개인 학습용이다. **일반 공개는 별도의 나중 단계** (운영자가 citation-review 목록 정리 후 선언 — 정책 §4)
 - 운영자가 Reject 시: 지적 항목을 수정 물결로 처리 후 §8 재실행
 
 ## 10. 시작 지시 (Codex 세션에 이 한 줄)
