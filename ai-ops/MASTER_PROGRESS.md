@@ -33,6 +33,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | ai-learning-verification | T08 | ✓ | ✓ 92 (2026-07-06) | order 4 근거 |
 | files-folders-paths | T01 | ✓ | ✓ 90 (2026-07-06) | order 6 근거 |
 | terminal-shell-commands | T01 | ✓ | ✓ 88 (2026-07-06) | order 7 근거 |
+| variables-types-data | T01 | ✓ | — | CODEX-PLAN Phase 2 KB 6차 draft, order 8 근거 |
+| control-flow-functions-errors | T01 | ✓ | — | CODEX-PLAN Phase 2 KB 6차 draft, order 9 근거 |
+| debugging-error-reading | T01 | ✓ | — | CODEX-PLAN Phase 2 KB 6차 draft, order 10 근거 |
+| regex-code-search | T01 | ✓ | — | CODEX-PLAN Phase 2 KB 6차 draft, order 11 근거 |
+| package-json-semver | T01 | ✓ | — | CODEX-PLAN Phase 2 KB 6차 draft, order 12 근거 |
 
 ## Lesson 매트릭스
 
@@ -70,13 +75,14 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
-| Knowledge Base 수집(P-01) | 22 / 22 | 100% (5차 T01/T08 5건 approved) |
-| Knowledge Base (approved 이상) | 22 / 22 | 100% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건 + 4차 approved 5건 + 5차 approved 5건) |
+| Knowledge Base 수집(P-01) | 27 / 27 | 100% (6차 T01 5건 draft, P-02 대기) |
+| Knowledge Base (approved 이상) | 22 / 27 | 81% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건 + 4차 approved 5건 + 5차 approved 5건) |
 | KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (2차 approved KB) | 3 / 3 | 100% |
 | KB Quote Bank (3차 approved KB) | 4 / 4 | 100% |
 | KB Quote Bank (4차 approved KB) | 5 / 5 | 100% (tokenization-context Loop A 후 승인) |
 | KB Quote Bank (5차 approved KB) | 5 / 5 | 100% (vibe-coding-origin-karpathy Loop A 후 승인) |
+| KB Quote Bank (6차 draft KB) | 5 / 5 | 100% (P-01 draft, P-02 대기) |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
 | Lesson 생성 | 27 / 27 | 100% (5차 approved KB 기반 planned 전건 generated 이상) |
 | Site 반영 | 27 / 27 | 100% (5차 approved KB 기반 generated 전건 integrated) |
@@ -127,3 +133,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-06 | CODEX-PLAN Phase 3 P-05 Terminal Reference | 완료 | terminal-shell-basics-reference 사이트 반영 + glossary/KB consumers/diagram 통합, `npm run lint`·`npm run typecheck` PASS |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-06 Terminal Reference | 완료 | `npm run verify` PASS, terminal-shell-basics-reference verified |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-08 Terminal Reference | 완료 | terminal-shell-basics-reference V2 Wave 8 릴리스, deployment HOLD |
+| 2026-07-06 | CODEX-PLAN Phase 2 KB 6차 P-01 | 완료 | variables-types-data·control-flow-functions-errors·debugging-error-reading·regex-code-search·package-json-semver draft 생성, P-02 대기 |

@@ -11,27 +11,27 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | CODEX-PLAN Phase 3 P-08 Terminal Reference 완료: terminal-shell-basics-reference released / 다음 needed KB 물결 P-01 대기 |
-| Last Completed Step | Codex P-08 terminal-shell-basics-reference V2 Wave 8 released (2026-07-06) |
+| Current State | CODEX-PLAN Phase 2 KB 6차 P-01 완료: T01 개발 기초 KB draft 5건 / P-02 verification 대기 |
+| Last Completed Step | Codex P-01 variables-types-data·control-flow-functions-errors·debugging-error-reading·regex-code-search·package-json-semver draft 생성 (2026-07-06) |
 | Next Executor | Codex |
-| Next Prompt File | `prompts/P-01-knowledge-collection.md` |
+| Next Prompt File | `prompts/P-02-knowledge-verification.md` |
 | Blocker | 없음 |
-| Required Human Action | None — 같은 Codex 흐름에서 다음 KB 물결 수집 |
+| Required Human Action | None — 같은 Codex 흐름에서 P-02 원문 재접속 검증 |
 | Release Status | V2 27강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 3 P-08 Terminal Reference 완료 — 27강 released, deployment HOLD
-- Verdict: RELEASED
+- Current State: CODEX-PLAN Phase 2 KB 6차 P-01 완료 — T01 개발 기초 KB draft 5건 생성
+- Verdict: DONE
 - Next Executor: Codex
-- Next Prompt File: prompts/P-01-knowledge-collection.md
-- Why: generated/integrated/recollect/build_fail/planned 없음, BACKLOG에 kb_needed 항목이 남아 있으므로 다음 CODEX-PLAN 단계는 P-01 KB 수집
-- Required Operator Action: None — 같은 Codex 흐름에서 다음 KB 물결 수집
-- If Approved: draft KB 발생 후 P-02 verification
-- If Rejected: release 항목은 verified로 회귀하고 P-08 재작성
-- Files to Check: ai-ops/outputs/04-integrated/RELEASE-2026-07-06-v2-wave8.md, ai-ops/MASTER_PROGRESS.md, ai-ops/outputs/00-backlog/BACKLOG.md
+- Next Prompt File: prompts/P-02-knowledge-verification.md
+- Why: draft KB가 발생했으므로 다음 단계는 P-02 원문 재접속 검증
+- Required Operator Action: None — 같은 Codex 흐름에서 P-02를 연속 수행
+- If Approved: 승인된 KB를 근거로 planned lesson P-04 진행
+- If Rejected: score 미달 또는 source rule 위반 항목은 recollect(n)로 전환하고 P-03 재수집
+- Files to Check: ai-ops/knowledge-base/entries/T01/variables-types-data.md, ai-ops/knowledge-base/entries/T01/debugging-error-reading.md, ai-ops/knowledge-base/entries/T01/package-json-semver.md
 - Stop Condition: Phase 5 개발 서버 확인 보고에서만 정지
 ```
 
@@ -68,13 +68,14 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
-- KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved** / KB 5차 T01/T08: dev-environment-map·vibe-coding-origin-karpathy·ai-learning-verification·files-folders-paths·terminal-shell-commands = **approved** / D-02 플랫폼 증분 = **완료**
+- KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved** / KB 5차 T01/T08: dev-environment-map·vibe-coding-origin-karpathy·ai-learning-verification·files-folders-paths·terminal-shell-commands = **approved** / KB 6차 T01: variables-types-data·control-flow-functions-errors·debugging-error-reading·regex-code-search·package-json-semver = **draft** / D-02 플랫폼 증분 = **완료**
 - 강의: **V2 released 27강** (deployment HOLD, 다음 needed KB 물결 P-01 대기)
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-06 | KB variables-types-data·control-flow-functions-errors·debugging-error-reading·regex-code-search·package-json-semver | needed → draft | Codex P-01 T01 KB 6차 |
 | 2026-07-06 | terminal-shell-basics-reference | verified → released | Codex P-08 Terminal Reference |
 | 2026-07-06 | terminal-shell-basics-reference | integrated → verified | Codex P-06 Terminal Reference |
 | 2026-07-06 | terminal-shell-basics-reference | generated → integrated | Codex P-05 Terminal Reference |
