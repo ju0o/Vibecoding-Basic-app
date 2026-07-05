@@ -9,8 +9,8 @@ prerequisites: [context-engineering]
 successors: [harness, ai-system-evaluation]
 related: [context-engineering, agent-loop, skills]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [context-caching-and-state]
+  glossary: [Context Caching, Prompt Caching, Cache Hit, Cache Breakpoint, Cache Diagnostics]
 sources:
   - { title: "Prompt caching", url: "https://developers.openai.com/api/docs/guides/prompt-caching", checked: 2026-07-05 }
   - { title: "Using GPT-5.5", url: "https://developers.openai.com/api/docs/guides/latest-model", checked: 2026-07-05 }

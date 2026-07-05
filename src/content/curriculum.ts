@@ -330,4 +330,28 @@ export const LESSON_META = [
     minutes: 70,
     tags: ["Harness Engineering", "Sandbox", "Guardrails", "Observability"],
   },
+  {
+    slug: "context-caching-and-state",
+    moduleId: "ai-system-design",
+    order: 16,
+    title: "Context Caching과 상태 재사용",
+    summary:
+      "Prompt caching을 memory가 아니라 반복 prefix 재사용으로 이해하고, stable content와 dynamic context를 나누어 비용과 지연을 줄이는 법을 배웁니다.",
+    level: "중급",
+    type: "deep-dive",
+    minutes: 65,
+    tags: ["Context Caching", "Prompt Caching", "Context Engineering", "AI 시스템 설계"],
+  },
+  {
+    slug: "ai-system-evaluation",
+    moduleId: "ai-system-design",
+    order: 17,
+    title: "AI 시스템 평가와 eval 레퍼런스",
+    summary:
+      "AI 시스템 품질을 success criteria, traces, graders, datasets, outcomes, runtime resource budget으로 평가하는 방법을 정리합니다.",
+    level: "중급",
+    type: "reference",
+    minutes: 70,
+    tags: ["AI Evaluation", "Evals", "Trace Grading", "Agent"],
+  },
 ] satisfies readonly LessonMeta[]

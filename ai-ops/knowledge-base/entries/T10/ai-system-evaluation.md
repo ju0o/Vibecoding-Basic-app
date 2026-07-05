@@ -9,8 +9,8 @@ prerequisites: [agent-loop, harness]
 successors: []
 related: [loop-engineering, harness, orchestration]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [ai-system-evaluation]
+  glossary: [AI System Evaluation, Success Criteria, Trace Grading, Grader, Eval Run]
 sources:
   - { title: "Evaluate agent workflows", url: "https://developers.openai.com/api/docs/guides/agent-evals", checked: 2026-07-05 }
   - { title: "Working with evals", url: "https://developers.openai.com/api/docs/guides/evals", checked: 2026-07-05 }

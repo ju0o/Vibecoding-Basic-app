@@ -331,4 +331,90 @@ export const GLOSSARY_TERMS = [
       "Evaluation Harness는 단일 답변이 아니라 agent가 여러 turn 동안 환경을 바꾸는 작업을 평가하기 위한 구조입니다. transcript와 final environment outcome을 구분해 agent의 실제 성공 여부를 판단합니다.",
     related: ["Harness Engineering", "Agent Evaluation", "Trace"],
   },
+  {
+    term: "Context Caching",
+    category: "AI 시스템",
+    shortDefinition:
+      "반복 요청에서 변하지 않는 prompt prefix를 재사용해 비용과 지연을 줄이는 컨텍스트 운용 방식",
+    explanation:
+      "Context Caching은 모델이 의미를 기억하는 기능이 아니라, system instructions, tool definitions, examples 같은 안정적인 prefix 처리를 재사용하는 runtime 최적화입니다.",
+    related: ["Context Engineering", "Prompt Caching", "Context Window"],
+  },
+  {
+    term: "Prompt Caching",
+    category: "AI 시스템",
+    shortDefinition: "같은 또는 호환되는 prompt prefix 처리 결과를 재사용하는 API/runtime 기능",
+    explanation:
+      "Prompt Caching은 exact prefix match를 기반으로 반복되는 prompt 부분의 처리 비용과 latency를 줄입니다. stable content를 앞쪽에, dynamic content를 뒤쪽에 두는 구조가 중요합니다.",
+    related: ["Context Caching", "Cache Hit", "Context Engineering"],
+  },
+  {
+    term: "Cache Hit",
+    category: "AI 시스템",
+    shortDefinition:
+      "이전에 처리한 prompt prefix와 현재 요청의 prefix가 맞아 재사용이 일어나는 상태",
+    explanation:
+      "Cache Hit은 exact prefix matches에 의존합니다. system prompt timestamp, tool order, earlier message edit처럼 prefix 안의 변화가 생기면 hit이 줄어들 수 있습니다.",
+    related: ["Prompt Caching", "Cache Diagnostics"],
+  },
+  {
+    term: "Cache Breakpoint",
+    category: "AI 시스템",
+    shortDefinition: "prompt에서 어느 지점까지를 cacheable prefix로 볼지 정하는 경계",
+    explanation:
+      "Cache Breakpoint는 automatic caching이나 explicit cache control에서 반복 prefix의 경계를 잡는 개념입니다. 긴 multi-turn conversation에서는 cache point가 forward될 수 있습니다.",
+    related: ["Prompt Caching", "Context Caching"],
+  },
+  {
+    term: "Cache Diagnostics",
+    category: "AI 시스템",
+    shortDefinition: "cache miss가 어디서 발생했는지 prefix divergence point를 찾는 진단 방식",
+    explanation:
+      "Cache Diagnostics는 previous response id와 새 request fingerprint를 비교해 model, system prompt, tools, message history 중 어디가 달라졌는지 확인하는 데 사용됩니다.",
+    related: ["Cache Hit", "Observability", "Context Caching"],
+  },
+  {
+    term: "AI System Evaluation",
+    category: "AI 시스템",
+    shortDefinition:
+      "모델 출력, trace, 도구 사용, 환경 상태, 성공 기준을 함께 측정해 AI 애플리케이션 품질을 판단하는 평가 체계",
+    explanation:
+      "AI System Evaluation은 단일 답변 채점이 아니라 agent workflow의 tool calls, guardrails, handoffs, final environment outcome까지 포함해 품질을 측정하는 구조입니다.",
+    related: ["Trace Grading", "Grader", "Success Criteria", "Evaluation Harness"],
+  },
+  {
+    term: "Success Criteria",
+    category: "AI 시스템",
+    shortDefinition:
+      "AI 시스템이 성공했다고 판단하기 위해 미리 정의하는 구체적이고 측정 가능한 기준",
+    explanation:
+      "Success Criteria는 eval과 grader가 무엇을 측정해야 하는지 정하는 출발점입니다. 좋은 기준은 specific, measurable, achievable, relevant해야 합니다.",
+    related: ["AI System Evaluation", "Grader"],
+  },
+  {
+    term: "Trace Grading",
+    category: "AI 시스템",
+    shortDefinition:
+      "agent workflow trace를 보고 tool call, handoff, guardrail 같은 실행 경로 문제를 평가하는 방식",
+    explanation:
+      "Trace Grading은 최종 답변만 보는 대신 model calls, tool calls, guardrails, handoffs의 end-to-end record를 검토해 workflow-level issue를 찾습니다.",
+    related: ["Trace", "AI System Evaluation", "Agent"],
+  },
+  {
+    term: "Grader",
+    category: "AI 시스템",
+    shortDefinition: "success criteria를 출력, trace, outcome에 적용해 평가 신호를 만드는 장치",
+    explanation:
+      "Grader는 자동 평가나 사람 판단과 결합해 AI 시스템 품질을 측정합니다. 기준이 모호하면 grader의 점수도 의미가 약해집니다.",
+    related: ["Success Criteria", "AI System Evaluation"],
+  },
+  {
+    term: "Eval Run",
+    category: "AI 시스템",
+    shortDefinition:
+      "정해진 dataset과 평가 기준으로 AI 시스템을 반복 실행해 품질을 측정하는 평가 실행 단위",
+    explanation:
+      "Eval Run은 prompt change, model migration, regression tracking처럼 반복 가능한 비교가 필요할 때 사용합니다.",
+    related: ["AI System Evaluation", "Dataset", "Grader"],
+  },
 ] satisfies readonly GlossaryTerm[]
