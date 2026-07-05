@@ -9,8 +9,8 @@ prerequisites: []
 successors: [prompt-engineering, context-engineering]
 related: [context-caching, agent-loop]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [tokenization-and-context]
+  glossary: [Tokenization, Token Counting, Context Budget, Context Rot]
 sources:
   - { title: "Counting tokens", url: "https://developers.openai.com/api/docs/guides/token-counting", checked: 2026-07-05 }
   - { title: "Token counting", url: "https://platform.claude.com/docs/en/build-with-claude/token-counting", checked: 2026-07-05 }

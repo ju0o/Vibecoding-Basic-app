@@ -9,8 +9,8 @@ prerequisites: [tokenization-context]
 successors: [grounding-citations, hallucination-verification]
 related: [context-engineering, tool-calling]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [prompt-engineering-foundations]
+  glossary: [Prompt Contract, Evidence Policy, Output Format Control, XML Prompt Tags, Evidence Missing Behavior]
 sources:
   - { title: "Prompt engineering", url: "https://developers.openai.com/api/docs/guides/prompt-engineering", checked: 2026-07-05 }
   - { title: "Prompt guidance", url: "https://developers.openai.com/api/docs/guides/prompt-guidance", checked: 2026-07-05 }

@@ -9,8 +9,8 @@ prerequisites: [prompt-engineering]
 successors: [hallucination-verification, rag]
 related: [rag, context-engineering]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [grounding-and-citations]
+  glossary: [Grounding, Citation, Citable Unit, Stable Source ID, Source Locator]
 sources:
   - { title: "Prompt guidance", url: "https://developers.openai.com/api/docs/guides/prompt-guidance", checked: 2026-07-05 }
   - { title: "Citation Formatting", url: "https://developers.openai.com/api/docs/guides/citation-formatting", checked: 2026-07-05 }

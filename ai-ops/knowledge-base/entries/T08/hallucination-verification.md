@@ -9,8 +9,8 @@ prerequisites: [grounding-citations]
 successors: [ai-system-evaluation]
 related: [prompt-engineering, agent-loop]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [hallucination-and-verification]
+  glossary: [Hallucination, Verification, Claim Audit, Uncertainty Permission, Evaluation Set]
 sources:
   - { title: "Reduce hallucinations", url: "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations", checked: 2026-07-05 }
   - { title: "Citation Formatting", url: "https://developers.openai.com/api/docs/guides/citation-formatting", checked: 2026-07-05 }

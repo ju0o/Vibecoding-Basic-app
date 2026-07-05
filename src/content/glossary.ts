@@ -66,6 +66,160 @@ export const GLOSSARY_TERMS = [
     related: ["Context Engineering", "검증", "AI 코딩 도구"],
   },
   {
+    term: "Tokenization",
+    category: "AI 시스템",
+    shortDefinition: "모델 입력 텍스트를 토큰이라는 처리 단위로 나누는 방식",
+    explanation:
+      "Tokenization은 글자 수나 단어 수를 그대로 세는 것이 아니라 모델별 tokenizer가 입력을 내부 처리 단위로 쪼개는 과정입니다. 같은 문장도 모델 tokenizer에 따라 토큰 수가 달라질 수 있으므로 비용과 context fit을 판단할 때 실제 사용할 모델 기준으로 다시 세어야 합니다.",
+    related: ["Token Counting", "Context Window", "Context Engineering"],
+  },
+  {
+    term: "Token Counting",
+    category: "AI 시스템",
+    shortDefinition: "요청을 보내기 전에 입력이 차지할 토큰 수를 추정하는 절차",
+    explanation:
+      "Token Counting은 system prompt, messages, tools, images, PDFs 같은 구조화 입력이 context window와 비용에 어떤 영향을 주는지 미리 확인하는 운영 절차입니다. 추정값과 실제 message creation의 input tokens는 작게 차이날 수 있으므로 사전 점검과 실제 usage 확인을 함께 봅니다.",
+    related: ["Tokenization", "Context Budget", "Context Window"],
+  },
+  {
+    term: "Context Budget",
+    category: "AI 시스템",
+    shortDefinition: "제한된 context window 안에 어떤 근거와 출력 여유를 넣을지 정하는 입력 예산",
+    explanation:
+      "Context Budget은 모델에 넣을 파일, 로그, 도구 정의, 문서, 출력 예약량을 선별하는 기준입니다. 많이 넣는 것이 목표가 아니라 현재 작업에 필요한 high-signal evidence를 남기고 낮은 신호는 요약하거나 제외하는 것이 핵심입니다.",
+    related: ["Context Window", "Context Engineering", "Context Rot"],
+  },
+  {
+    term: "Context Rot",
+    category: "AI 시스템",
+    shortDefinition:
+      "context window의 토큰 수가 커질수록 회상 정확도와 활용 품질이 떨어질 수 있는 현상",
+    explanation:
+      "Context Rot은 긴 context가 항상 더 좋은 답변을 만든다는 오해를 교정하는 개념입니다. 토큰 수가 증가하면 모델이 context 안의 정보를 정확히 회상하는 능력이 낮아질 수 있으므로, 긴 입력에는 선별, 요약, 검색, 검증 기준이 함께 필요합니다.",
+    related: ["Context Window", "Context Budget", "RAG"],
+  },
+  {
+    term: "Prompt Contract",
+    category: "AI 시스템",
+    shortDefinition: "모델이 수행할 목표, 범위, 제약, 검증 기준, 출력 형식을 묶은 작업 계약",
+    explanation:
+      "Prompt Contract는 프롬프트를 부탁 문장으로 보지 않고 실행 조건과 성공 기준을 담은 계약으로 보는 관점입니다. 목표와 범위가 없으면 모델은 성공 기준을 추론하고, 근거 정책이 없으면 어떤 문장을 증거로 뒷받침해야 하는지 일관되게 판단하기 어렵습니다.",
+    related: ["Prompt Engineering", "Evidence Policy", "Output Format Control"],
+  },
+  {
+    term: "Evidence Policy",
+    category: "AI 시스템",
+    shortDefinition: "어떤 주장에 근거가 필요한지와 근거가 없을 때 어떻게 행동할지 정한 규칙",
+    explanation:
+      "Evidence Policy는 grounded answer에서 citation behavior와 evidence missing behavior를 prompt 안에 명시하는 규칙입니다. 어떤 주장이 support를 필요로 하는지, 충분한 evidence란 무엇인지, 증거가 없을 때 모름 또는 추가 확인으로 남길지를 정합니다.",
+    related: ["Grounding", "Citation", "Verification"],
+  },
+  {
+    term: "Output Format Control",
+    category: "AI 시스템",
+    shortDefinition: "모델 응답의 구조, 길이, 문체, 위치별 내용을 명시적으로 지정하는 방법",
+    explanation:
+      "Output Format Control은 원하는 결과를 모델이 추론하게 두지 않고 직접 지정하는 prompt 설계입니다. 금지문만 나열하기보다 무엇을 해야 하는지 긍정 지시로 쓰고, 필요한 경우 tag나 예시로 구조를 분리합니다.",
+    related: ["Prompt Contract", "XML Prompt Tags"],
+  },
+  {
+    term: "XML Prompt Tags",
+    category: "AI 시스템",
+    shortDefinition:
+      "프롬프트의 목표, 자료, 제약, 출력 형식을 XML 형태의 구획으로 나누는 구조화 방식",
+    explanation:
+      "XML Prompt Tags는 `<goal>`, `<scope>`, `<evidence>`, `<format>`처럼 입력 요소를 명확한 이름의 구획으로 분리하는 방식입니다. 긴 작업에서 모델이 어떤 부분을 지시, 자료, 형식으로 읽어야 하는지 구분하게 도와줍니다.",
+    related: ["Prompt Engineering", "Output Format Control", "Context Engineering"],
+  },
+  {
+    term: "Evidence Missing Behavior",
+    category: "AI 시스템",
+    shortDefinition: "충분한 근거가 없을 때 모델이 답변을 제한하거나 모른다고 말하게 하는 규칙",
+    explanation:
+      "Evidence Missing Behavior는 검색 실패나 근거 부족을 사실 부정으로 오해하지 않게 만드는 guardrail입니다. 근거가 없으면 단정하지 않고 모름, 추가 확인 필요, 제한된 답변처럼 상태를 분리합니다.",
+    related: ["Evidence Policy", "Grounding", "Hallucination"],
+  },
+  {
+    term: "Grounding",
+    category: "AI 시스템",
+    shortDefinition: "모델 답변의 주장을 제공된 근거에 묶어 해석 가능하게 만드는 설계",
+    explanation:
+      "Grounding은 답변이 현재 제공된 문서, 검색 결과, 저장소 사실에 의해 support되는지 관리하는 방식입니다. 단순히 링크를 붙이는 것이 아니라 어떤 claim이 어떤 citable unit으로 뒷받침되는지 연결해야 합니다.",
+    related: ["Citation", "RAG", "Evidence Policy"],
+  },
+  {
+    term: "Citation",
+    category: "AI 시스템",
+    shortDefinition: "답변 문장이나 문단이 의존한 출처 위치를 표시하는 형식",
+    explanation:
+      "Citation은 참고문헌 목록과 다르게 특정 response text를 직접 support하는 source location을 가리킵니다. 문장 또는 문단 뒤에 놓이며, returned context에 없는 source ID나 locator를 만들어내면 안 됩니다.",
+    related: ["Grounding", "Citable Unit", "Source Locator"],
+  },
+  {
+    term: "Citable Unit",
+    category: "AI 시스템",
+    shortDefinition: "답변 claim을 뒷받침할 수 있도록 나눈 인용 가능한 근거 단위",
+    explanation:
+      "Citable Unit은 line-level, paragraph-level, document-level처럼 use case의 precision에 맞춰 나눈 근거 조각입니다. 너무 큰 단위는 검증이 느슨해지고, 너무 작은 단위는 관리가 복잡해지므로 목적에 맞게 정해야 합니다.",
+    related: ["Citation", "Stable Source ID", "Grounding"],
+  },
+  {
+    term: "Stable Source ID",
+    category: "AI 시스템",
+    shortDefinition: "검색 결과나 주입된 context 안에서 출처를 일관되게 식별하는 고정 ID",
+    explanation:
+      "Stable Source ID는 모델이 citation을 만들 때 사용할 수 있는 출처 식별자입니다. ID가 안정적이지 않거나 context에 제공되지 않으면 모델이 source ID를 invent할 위험이 커집니다.",
+    related: ["Citation", "Source Locator", "Citable Unit"],
+  },
+  {
+    term: "Source Locator",
+    category: "AI 시스템",
+    shortDefinition: "출처 문서 안의 페이지, 줄, 문자 범위처럼 근거 위치를 가리키는 정보",
+    explanation:
+      "Source Locator는 citation이 단순 URL이 아니라 문서 내부의 어느 위치를 참조하는지 알려주는 장치입니다. PDF page range, plain text character index range처럼 문서 형식에 따라 locator가 달라질 수 있습니다.",
+    related: ["Citation", "Citable Unit", "Grounding"],
+  },
+  {
+    term: "Hallucination",
+    category: "AI 시스템",
+    shortDefinition: "모델 출력이 사실과 맞지 않거나 제공된 context와 일치하지 않는 상태",
+    explanation:
+      "Hallucination은 자연스럽고 자신감 있는 문장처럼 보여도 원문, 제공 context, 테스트 결과와 맞지 않는 output을 가리킵니다. 운영에서는 모델 버그 하나가 아니라 prompt, grounding, verification, evaluation으로 관리해야 하는 품질 위험입니다.",
+    related: ["Verification", "Grounding", "Citation"],
+  },
+  {
+    term: "Verification",
+    category: "AI 시스템",
+    shortDefinition: "AI 출력의 claim을 원문, citation, test, review 기준과 대조하는 절차",
+    explanation:
+      "Verification은 모델의 confidence가 아니라 claim을 support하는 evidence와 실행 결과를 기준으로 판단합니다. quote가 없으면 claim을 철회하고, 코드 변경은 테스트와 human review로 확인하는 식의 루틴을 포함합니다.",
+    related: ["Hallucination", "Claim Audit", "Evaluation Set"],
+  },
+  {
+    term: "Claim Audit",
+    category: "AI 시스템",
+    shortDefinition: "AI 출력의 문장을 claim 단위로 나누고 각 claim의 근거를 대조하는 검증 방식",
+    explanation:
+      "Claim Audit은 요약이나 설명을 문장 단위로 쪼개 supporting quote, source, test result가 있는지 확인합니다. citation 링크 개수만 세는 것이 아니라 cited claim을 source가 직접 support하는지 보는 것이 핵심입니다.",
+    related: ["Verification", "Citation", "Grounding"],
+  },
+  {
+    term: "Uncertainty Permission",
+    category: "AI 시스템",
+    shortDefinition: "근거가 부족할 때 모델이 모른다고 말하거나 답변을 제한하도록 허용하는 규칙",
+    explanation:
+      "Uncertainty Permission은 근거 부족 상태에서 모델이 그럴듯한 단정을 만들지 않게 하는 기본 guardrail입니다. 충분한 evidence가 없으면 모름, 추가 확인 필요, 제한된 답변으로 상태를 분리합니다.",
+    related: ["Hallucination", "Evidence Missing Behavior", "Verification"],
+  },
+  {
+    term: "Evaluation Set",
+    category: "AI 시스템",
+    shortDefinition: "자주 틀리는 질문과 edge case를 모아 반복적으로 품질을 측정하는 테스트 묶음",
+    explanation:
+      "Evaluation Set은 generative AI 출력의 variability와 nondeterminism을 관리하기 위한 반복 검증 자료입니다. prompt나 model을 바꿀 때 같은 사례를 다시 실행해 회귀를 확인할 수 있습니다.",
+    related: ["Verification", "AI System Evaluation", "Eval Run"],
+  },
+  {
     term: "Context Engineering",
     category: "AI 시스템",
     shortDefinition: "AI가 일할 때 필요한 배경 정보와 도구 상태를 설계하는 일",
