@@ -11,27 +11,27 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | CODEX-PLAN Phase 3 P-08 T01/T08 Wave 완료: 4강 released / terminal-shell-basics-reference P-04 대기 |
-| Last Completed Step | Codex P-08 development-environment-map·vibe-coding-origin-karpathy·learning-with-ai-verification·files-folders-and-paths V2 Wave 7 released (2026-07-06) |
+| Current State | CODEX-PLAN Phase 3 P-04 Terminal Reference 완료: terminal-shell-basics-reference generated / P-05 대기 |
+| Last Completed Step | Codex P-04 terminal-shell-basics-reference V2 Reference draft+diagram 생성 (2026-07-06) |
 | Next Executor | Codex |
-| Next Prompt File | `prompts/P-04-lesson-generation.md` |
+| Next Prompt File | `prompts/P-05-site-integration.md` |
 | Blocker | 없음 |
-| Required Human Action | None — 같은 Codex 흐름에서 남은 planned 1건 P-04 생성 |
+| Required Human Action | None — 같은 Codex 흐름에서 terminal-shell-basics-reference P-05 사이트 반영 |
 | Release Status | V2 26강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 3 P-08 T01/T08 Wave 완료 — 4강 released, deployment HOLD
-- Verdict: RELEASED
+- Current State: CODEX-PLAN Phase 3 P-04 Terminal Reference 완료 — terminal-shell-basics-reference generated
+- Verdict: DONE
 - Next Executor: Codex
-- Next Prompt File: prompts/P-04-lesson-generation.md
-- Why: generated/integrated/recollect/build_fail 없음, planned `terminal-shell-basics-reference`의 KB가 approved이므로 다음 CODEX-PLAN 단계는 P-04
-- Required Operator Action: None — 같은 Codex 흐름에서 terminal-shell-basics-reference 생성
-- If Approved: generated 상태가 생기면 P-05 사이트 반영
-- If Rejected: P-04 반려 항목은 planned로 회귀하고 재생성
-- Files to Check: ai-ops/outputs/04-integrated/RELEASE-2026-07-06-v2-wave7.md, ai-ops/outputs/06-build-verification/VERIFIED-2026-07-06-1.md, ai-ops/MASTER_PROGRESS.md
+- Next Prompt File: prompts/P-05-site-integration.md
+- Why: generated 강의가 있으므로 다음 CODEX-PLAN 단계는 P-05 Site Integration이며 단독 실행
+- Required Operator Action: None — 같은 Codex 흐름에서 P-05만 수행
+- If Approved: P-05 완료 후 `npm run verify` 및 release 흐름으로 진행
+- If Rejected: generated 항목은 planned로 회귀하고 P-04 재생성
+- Files to Check: ai-ops/outputs/02-drafts/P-04-2026-07-06-terminal-reference.md, ai-ops/outputs/02-drafts/terminal-shell-basics-reference/lesson.md, ai-ops/outputs/02-drafts/terminal-shell-basics-reference/diagrams/terminal-command-flow.svg
 - Stop Condition: Phase 5 개발 서버 확인 보고에서만 정지
 ```
 
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved** / KB 5차 T01/T08: dev-environment-map·vibe-coding-origin-karpathy·ai-learning-verification·files-folders-paths·terminal-shell-commands = **approved** / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 26강 + planned 1강** (terminal-shell-basics-reference P-04 대기, 배포는 HOLD)
+- 강의: **V2 released 26강 + generated 1강** (terminal-shell-basics-reference P-05 대기, 배포는 HOLD)
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-06 | terminal-shell-basics-reference | planned → generated | Codex P-04 Terminal Reference |
 | 2026-07-06 | development-environment-map·vibe-coding-origin-karpathy·learning-with-ai-verification·files-folders-and-paths | verified → released | Codex P-08 T01/T08 Wave |
 | 2026-07-06 | development-environment-map·vibe-coding-origin-karpathy·learning-with-ai-verification·files-folders-and-paths | integrated → verified | Codex P-06 T01/T08 Wave |
 | 2026-07-06 | development-environment-map·vibe-coding-origin-karpathy·learning-with-ai-verification·files-folders-and-paths | generated → integrated | Codex P-05 T01/T08 Wave |
