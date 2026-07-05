@@ -2,33 +2,44 @@
 
 **운영자는 아래 "## NEXT" 블록만 보면 된다.** 갱신 주체: 각 RUN이 종료 시 NEXT_ACTION 블록을 이 파일에 덮어쓴다 (규격: [OPERATION_MANUAL.md](OPERATION_MANUAL.md) — 보고 끝 블록과 이 파일은 항상 동일).
 
+## ⏸ 파이프라인 정지 중 (O-04, 2026-07-05) — V2 전환 롤아웃만 진행
+
+운영자 결정: 콘텐츠 형식 V2 (심층·인용·하이라이트, 퀴즈·체크리스트·설명연습 제거), V1 콘텐츠 9강 전량 재생성. **R1~R3 완료 전 P-04~P-08 일반 실행 금지, 배포 금지.** 규격: [roadmap/CONTENT-FORMAT-V2.md](roadmap/CONTENT-FORMAT-V2.md)
+
+| 롤아웃 | 작업 | 상태 |
+|---|---|---|
+| R1 | D-01 개발 (스키마·파서·UI) + verify | **▶ NEXT** |
+| R2 | KB 5건 Quote Bank 보강 → 경량 재검증 → Fable 승인 | 대기 |
+| R3 | 9강 V2 재생성 → 반영 → verify → 릴리스 | 대기 |
+| R4 | 파이프라인 재개 + V1 규격 문서 정리 | 대기 |
+
 ## 현황판 (O-03.1 필수 필드)
 
 | 필드 | 값 |
 |---|---|
-| Current Batch | Batch 2 (강의 order 3·4·5·11 integrated, P-06 대기) + Batch 1 배포 대기 |
-| Current State | 강의 4건 `integrated` / KB 2차 3건 `needed` / Batch 1 5강 `released`(배포 HOLD) |
-| Last Completed Step | Codex P-05 (Batch 2 사이트 반영, 2026-07-05) |
-| Next Executor | Cline |
-| Next Prompt File | `prompts/RUN-CLINE.md` |
-| Blocker | 없음 (파이프라인) / 배포만 환경 미정 |
-| Required Human Action | 배포 환경 결정 (병행 가능 — 파이프라인은 막지 않음) |
-| Release Status | 5/14 released, 0 deployed (HOLD — 인프라 미정) |
+| Current Batch | **V2 전환 롤아웃 (R1~R4)** — Batch 2는 V2 재생성 대상으로 흡수 |
+| Current State | 강의: released 5 + integrated 4 = **9강 전부 V1, 재생성 대상** / KB 5건 qa_approved (Quote Bank 없음 — R2 대상) / KB 2차 3건 needed |
+| Last Completed Step | Fable O-04 (V2 규격 확정, 2026-07-05) |
+| Next Executor | Codex |
+| Next Prompt File | `prompts/D-01-format-v2.md` |
+| Blocker | V1 형식 (전량 재생성 전까지 릴리스·배포 무의미) |
+| Required Human Action | None (배포 환경 결정은 R3 완료 후로 연기) |
+| Release Status | V1 5강 released·미배포 — **V2 완료 전 배포 금지** |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: 강의 4건 integrated (order 3·4·5·11)
-- Verdict: DONE (P-05)
-- Next Executor: Cline
-- Next Prompt File: prompts/RUN-CLINE.md
-- Why: 상태 기계 — integrated 존재 시 Cline이 P-06 verify를 수행하고 통과 시 P-08 릴리스 연속
-- Required Operator Action: None (병행: 배포 환경 결정은 별도 대기 — Vercel 권장)
-- If Approved: (해당 없음 — 운영자 게이트 아님)
-- If Rejected: P-06 FAILED 시 build_fail(n)으로 전이 → Codex 생산 세션 / RUN-CODEX-PRODUCE.md (P-07)
-- Files to Check: outputs/04-integrated/context-window-and-memory.md, outputs/04-integrated/system-prompts-and-instruction-layers.md, outputs/04-integrated/ai-workflow-design.md
-- Stop Condition: P-06 FAILED 시 Cline은 build_fail(n) 기록 후 중단; n=3이면 에스컬레이션
+- Current State: 파이프라인 정지, V2 롤아웃 R1
+- Verdict: DONE (O-04 규격 확정)
+- Next Executor: Codex (개발 — 아무 세션)
+- Next Prompt File: prompts/D-01-format-v2.md
+- Why: V2 형식은 스키마·파서·UI 변경이 선행돼야 콘텐츠 재생성이 가능 (롤아웃 R1)
+- Required Operator Action: None
+- If Approved: (해당 없음)
+- If Rejected: V2 규격에 이의 시 "Reject: {항목}" → Fable이 CONTENT-FORMAT-V2.md 개정
+- Files to Check: ai-ops/roadmap/CONTENT-FORMAT-V2.md (V2 규격 — 원하시면 검토)
+- Stop Condition: D-01의 verify 실패 시 Codex 자체 수정 (개발 작업 — Loop B 미적용)
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)

@@ -29,6 +29,7 @@
 |---|---|---|---|
 | 1 | 2026-07-04 | **Trae 완전 제외** — Codex/Cline/Fable 3원 체제로 전환. 작성자≠검증자 원칙을 "Codex 세션 분리 + Fable QA 승인"으로 대체. P-06 통과 보고서 경로 `outputs/06-build-verification/` 확정 | 운영자 정책 변경 (O-02 지시), [2026-07-04-executor-refactor.md](2026-07-04-executor-refactor.md) |
 | 2 | 2026-07-05 | **Autopilot 전환 (O-03)** — STATE.md 상태 기계 신설, 파라미터 없는 상시 프롬프트(RUN×3) 도입, P-01~08은 작업 명세 모듈로 강등, 운영자 역할을 "확인 + 승인/반려"로 축소. 품질 게이트는 전부 불변 | 운영자 정책 변경 (O-03 지시), [2026-07-05-o03-automation-refactor.md](2026-07-05-o03-automation-refactor.md) |
+| 3 | 2026-07-05 | **콘텐츠 형식 V2 "Deep Dive" (O-04)** — 13섹션·분량 상한·퀴즈·체크리스트·설명연습 폐지 → 8섹션 심층 구조(하한 8,000자), 원문 인용(Quote Bank)·형광 하이라이트 도입. V1 콘텐츠 9강 전량 재생성, 완료 전 파이프라인 정지·배포 금지. SK-07(퀴즈 설계)은 obsolete | 운영자 품질 피드백 ("얕다, 전문가 수준 깊이 + 원문 인용·하이라이트"), [../roadmap/CONTENT-FORMAT-V2.md](../roadmap/CONTENT-FORMAT-V2.md) |
 
 ## 알려진 이월 항목 (freeze 시점의 미결)
 

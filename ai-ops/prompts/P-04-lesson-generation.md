@@ -1,58 +1,43 @@
-# P-04 Lesson 생성 (KB → 강의)
+# P-04 Lesson 생성 (KB → Deep Dive 강의) — V2 (O-04 전면 개정)
 
-| Agent | Lesson Writer + Quiz + Terminology (통합) | **Primary Executor** | **Codex** |
+| Agent | Lesson Writer + Terminology (통합) | **Primary Executor** | **Codex** |
 |---|---|---|---|
 | Allowed | Fable (문체 민감 강의 예외 시) | 단계 | WF-06 §4 |
-| 착수 조건 | KB approved + **Fable의 P-02 보고서 승인** | 다음 | P-05 (Codex) |
-
-채울 값: `{slug}`, `{KB id 목록}` (BACKLOG 항목에 지정된 것)
+| 착수 조건 | KB qa_approved + **Quote Bank 존재** + Fable의 P-02 보고서 승인 | 다음 | P-05 (Codex) |
 
 ```
-당신은 교육 프로젝트의 Lesson Generator입니다. 검증된 Knowledge Base 문서를 재료로 강의 세트(본문·메타·퀴즈·용어)를 생성하세요. 독자는 "처음 배우지만 나중에 남에게 설명해야 하는 사람"입니다.
+당신은 심층 교육 콘텐츠의 Lesson Generator입니다. 검증된 Knowledge Base에서 Deep Dive 강의를 생성하세요. 목표는 요약이 아니라 전개입니다 — 독자가 전문가의 이해에 도달하고, 공식 문서 원문을 직접 읽을 수 있게 되는 것.
 
-## 목적
-approved KB에서 13섹션 강의를 파생한다. 재조사는 하지 않는다 — KB가 유일한 사실 원천이다.
-
-## 작업 대상
-- slug: {slug}
-- 입력 KB: {KB id 목록}
+## 작업 대상 (RUN이 STATE에서 지정)
+- slug: {slug} / 입력 KB: {KB id 목록}
 
 ## 먼저 읽을 파일
-1. ai-ops/knowledge-base/entries/ 의 입력 KB 문서들 — **frontmatter status가 approved인지 먼저 확인. 아니면 즉시 중단하고 보고**
-2. ai-ops/knowledge-base/README.md — "본문 13개 필수 섹션" 표의 KB→강의 파생 매핑
-3. ai-ops/skills/SK-02-educational-writing.md — 문체 규칙, 섹션별 분량
-4. src/content/schema.ts — 13섹션 제목, LessonMeta·LessonExercise 타입
-5. src/content/lessons/markdown/ 기존 강의 1개 — 문체 기준
-6. src/content/glossary.ts — 용어 중복 확인
+1. ai-ops/roadmap/CONTENT-FORMAT-V2.md — V2 8섹션 구조, 인용·하이라이트 규격 (이것이 형식의 전부)
+2. ai-ops/skills/SK-02-educational-writing.md — 심층 집필 규칙
+3. 입력 KB 문서들 — frontmatter status: qa_approved 확인 + **Quote Bank 섹션 존재 확인** (없으면 즉시 중단, "KB Quote Bank 보강 필요" 보고)
+4. src/content/schema.ts — V2 섹션 정의(LESSON_SECTION_DEFINITIONS)
+5. src/content/glossary.ts — 용어 중복 확인
 
 ## 수행할 작업
-1. lesson.md: KB의 각 섹션을 매핑표대로 강의 13섹션으로 변환. 비유는 새로 창작 가능하되(KB의 "자주 하는 실수"로 오개념 회피 확인) 사실은 KB에 있는 것만
-2. meta.md: slug/moduleId/order/title/summary/level/minutes/tags/checklist (BACKLOG 항목과 일치)
-3. quiz.md: KB의 "자주 하는 실수"에서 오답 2개, "핵심 개념"에서 정답 근거. options 3개, answer는 options와 문자열 완전 일치
-4. terms.md: KB "정의" 첫 문장 → shortDefinition(명사형 종결). glossary.ts와 중복 시 생성하지 않음
-5. 자가 QA (Gate 3 축소판): 13섹션 제목 일치 / answer-options 일치 / 분량 4,000~5,500자 / slug 중복 없음 / 모든 문장이 KB로 역추적 가능
+1. lesson.md — V2 8섹션 (한 줄 정의 / 왜 존재하는가 / 작동 원리 / 스펙과 세부 / 원문으로 읽기 / 실전에서 / 한계와 트레이드오프 / 더 읽기):
+   - 분량 ≥ 8,000자 (상한 없음, 늘리기 수사 금지)
+   - 인용 ≥ 3개 — 전부 KB Quote Bank에서, 규격(원어+번역+링크+해설) 준수
+   - 하이라이트 `==...==` — 문단당 1, 섹션당 3 상한
+   - "작동 원리"가 최대 비중(~30%) — 단계별 메커니즘, 내부 구조
+   - KB에 없는 사실 절대 금지 (부족하면 중단하고 KB 보강 요청)
+2. meta.md — slug/moduleId/order/title/summary/level/minutes/tags (**checklist·exercise 없음** — V2 스키마)
+3. terms.md — glossary 신규 용어 (기존 규칙 유지, SK-08)
+4. 자가 QA — CONTENT-FORMAT-V2.md §7 체크리스트 전 항목
 
-## 규칙
-- KB에 없는 사실 추가 절대 금지. 필요하면 강의 생성을 중단하고 "KB 보강 필요: {내용}"을 보고 (재조사 금지)
-- 경어체, 새 용어 즉시 한 줄 풀이, 코드 주석 한국어
-- 참고 출처 섹션은 KB의 공식 출처에서 그대로 가져옴
-
-## 입력 파일
-- approved KB 문서들, BACKLOG.md의 해당 slug 행
-
-## 출력 파일
-- ai-ops/outputs/02-drafts/{slug}/lesson.md, meta.md, quiz.md, terms.md
-- 자가 QA 결과를 완료 보고에 표로 첨부
+## 산출물
+- ai-ops/outputs/02-drafts/{slug}/lesson.md, meta.md, terms.md (quiz.md 없음)
+- 자가 QA 표를 완료 보고에 첨부
 
 ## 완료 기준
-- 자가 QA 전 항목 PASS
-- 강의의 모든 사실 문장이 입력 KB의 섹션으로 역추적 가능 (보고에 "KB 외 사실 0건" 명시)
-
-## 다음 단계
-- 운영자가 Codex에 P-05 전달 (배치를 모아 하루 1회 권장)
+- V2 체크리스트 전 항목 PASS, "KB 외 사실 0건" 명시, 인용이 Quote Bank와 글자 단위 일치
 
 ## 실패 시 되돌아갈 Workflow
-- KB 정보 부족 → WF-06 §2 (KB 보강: P-02가 재수집 요청서 작성 → P-03)
+- KB 정보·인용 부족 → KB 보강 (P-02 재수집 요청서 경로)
 ```
 
 ## 종료 규격 (O-03.1)
