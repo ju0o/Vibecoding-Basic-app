@@ -11,11 +11,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | KB id (개념) | 주제군 | 수집(P-01) | 검증·Score(P-02) | 비고 |
 |---|---|---|---|---|
-| context-engineering | T10 | ✓ | ✓ 91 (Fable 승인 2026-07-05, QA-01) | 강의 order 2·3·4 근거 |
-| tool-calling | T09 | ✓ | ✓ 88 (Fable 승인 2026-07-05, QA-01) | order 7·9·11 근거 |
-| mcp | T09 | ✓ | ✓ 92 (Fable 승인 2026-07-05, QA-01) | order 9 근거 |
-| rag | T09 | ✓ | ✓ 90 (Loop A 1회 후, Fable 승인 2026-07-05, QA-01) | order 8 근거 |
-| agent-loop | T10 | ✓ | ✓ 91 (Fable 승인 2026-07-05, QA-01) | order 11·12·14 근거 |
+| context-engineering | T10 | ✓ | ✓ 91 (Fable 승인 2026-07-05, QA-01) | 강의 order 2·3·4 근거 / Quote Bank 6개 보강 |
+| tool-calling | T09 | ✓ | ✓ 88 (Fable 승인 2026-07-05, QA-01) | order 7·9·11 근거 / Quote Bank 6개 보강 |
+| mcp | T09 | ✓ | ✓ 92 (Fable 승인 2026-07-05, QA-01) | order 9 근거 / Quote Bank 6개 보강 |
+| rag | T09 | ✓ | ✓ 90 (Loop A 1회 후, Fable 승인 2026-07-05, QA-01) | order 8 근거 / Quote Bank 6개 보강 |
+| agent-loop | T10 | ✓ | ✓ 91 (Fable 승인 2026-07-05, QA-01) | order 11·12·14 근거 / Quote Bank 6개 보강 |
 | skills | T10 | — (needed) | — | 2차 배치 (O-01 등록 2026-07-05) — order 10 근거 |
 | orchestration | T10 | — (needed) | — | 2차 배치 — order 13 근거 |
 | harness | T10 | — (needed) | — | 2차 배치 — order 15 근거 |
@@ -44,6 +44,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
 | Knowledge Base (approved + QA 승인) | 5 / 5 | 100% (1차 배치) |
+| KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
 | Lesson 생성 | 9 / 14 | 64% |
 | Site 반영 | 9 / 14 | 64% |
 | Verify 통과 | 5 / 14 | 36% |

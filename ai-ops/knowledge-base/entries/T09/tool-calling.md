@@ -98,5 +98,25 @@ A: 아니다. Claude 문서는 기본 auto 모드에서 요청과 도구 설명�
 - Claude tool use는 structured call과 tool_result 왕복으로 설명된다 — [Tool use with Claude](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) (확인: 2026-07-05)
 - Claude client tool 정의에는 name, description, input_schema가 포함된다 — [Define tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools) (확인: 2026-07-05)
 
+## Quote Bank
+- > "Tool use lets Claude call functions"
+  - 출처: [Tool use with Claude](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) (확인: 2026-07-05)
+  - 맥락: tool calling을 모델과 함수 연결 방식으로 정의할 때 사용한다.
+- > "Claude determines when to call a tool"
+  - 출처: [Tool use with Claude](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) (확인: 2026-07-05)
+  - 맥락: 모델이 도구 호출 여부를 선택한다는 점을 설명할 때 사용한다.
+- > "returns a structured call"
+  - 출처: [Tool use with Claude](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) (확인: 2026-07-05)
+  - 맥락: 자연어 답변과 구조화된 도구 호출의 차이를 설명할 때 사용한다.
+- > "Each tool definition includes"
+  - 출처: [Define tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools) (확인: 2026-07-05)
+  - 맥락: 도구 정의의 구성요소를 소개할 때 사용한다.
+- > "A detailed plaintext description of what the tool does"
+  - 출처: [Define tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools) (확인: 2026-07-05)
+  - 맥락: 도구 설명이 호출 품질에 영향을 준다는 점을 설명할 때 사용한다.
+- > "function calls reliably adhere to the function schema"
+  - 출처: [Function calling](https://developers.openai.com/api/docs/guides/function-calling) (확인: 2026-07-05)
+  - 맥락: strict mode와 JSON Schema 검증 필요성을 설명할 때 사용한다.
+
 ## 변경 이력
 - 2026-07-05: 최초 작성 (Codex, P-01)

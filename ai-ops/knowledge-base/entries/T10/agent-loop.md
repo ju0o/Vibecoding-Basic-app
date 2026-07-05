@@ -90,5 +90,25 @@ A: 아니다. Claude Agent SDK는 max_turns와 max_budget_usd로 루프를 제�
 - agent eval은 transcript, outcome, grader, harness를 구분해야 한다 — [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) (확인: 2026-07-05)
 - Claude Agent SDK는 Claude Code의 도구, agent loop, context management를 Python·TypeScript로 제공한다 — [Agent SDK overview](https://code.claude.com/docs/en/agent-sdk/overview) (확인: 2026-07-05)
 
+## Quote Bank
+- > "autonomous agent loop"
+  - 출처: [How the agent loop works](https://code.claude.com/docs/en/agent-sdk/agent-loop) (확인: 2026-07-05)
+  - 맥락: agent loop를 Claude Code 실행 구조와 연결해 설명할 때 사용한다.
+- > "Claude evaluates your prompt"
+  - 출처: [How the agent loop works](https://code.claude.com/docs/en/agent-sdk/agent-loop) (확인: 2026-07-05)
+  - 맥락: 루프의 첫 판단 단계를 설명할 때 사용한다.
+- > "Every agent session follows the same cycle"
+  - 출처: [How the agent loop works](https://code.claude.com/docs/en/agent-sdk/agent-loop) (확인: 2026-07-05)
+  - 맥락: 에이전트 루프가 반복 가능한 실행 사이클이라는 점을 설명할 때 사용한다.
+- > "Workflows are systems"
+  - 출처: [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) (확인: 2026-07-05)
+  - 맥락: workflow와 agent의 구조적 차이를 시작할 때 사용한다.
+- > "dynamically direct their own processes"
+  - 출처: [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) (확인: 2026-07-05)
+  - 맥락: agent가 미리 정한 경로가 아니라 모델 주도 흐름을 따른다는 점을 설명할 때 사용한다.
+- > "mistakes can propagate and compound"
+  - 출처: [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) (확인: 2026-07-05)
+  - 맥락: agent loop 검증에서 루프 누적 오류를 설명할 때 사용한다.
+
 ## 변경 이력
 - 2026-07-05: 최초 작성 (Codex, P-01)

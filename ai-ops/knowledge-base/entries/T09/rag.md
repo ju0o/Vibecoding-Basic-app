@@ -94,6 +94,26 @@ A: OpenAI 문서는 vector store가 Retrieval API와 file search tool의 semanti
 - MCP resources는 서버가 모델용 컨텍스트 데이터를 노출하는 primitive다 — [MCP Resources](https://modelcontextprotocol.io/specification/2025-11-25/server/resources) (확인: 2026-07-05)
 - 검색된 chunk를 어떤 형식으로 컨텍스트에 넣을지 결정하는 일은 context engineering으로 이어진다 — [Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) (확인: 2026-07-05)
 
+## Quote Bank
+- > "combines information retrieval with language model generation"
+  - 출처: [Claude glossary](https://platform.claude.com/docs/en/about-claude/glossary) (확인: 2026-07-05)
+  - 맥락: RAG의 한 줄 정의를 구성할 때 사용한다.
+- > "external knowledge base or a set of documents"
+  - 출처: [Claude glossary](https://platform.claude.com/docs/en/about-claude/glossary) (확인: 2026-07-05)
+  - 맥락: RAG가 모델 외부 지식을 연결한다는 점을 설명할 때 사용한다.
+- > "retrieved at run time"
+  - 출처: [Claude glossary](https://platform.claude.com/docs/en/about-claude/glossary) (확인: 2026-07-05)
+  - 맥락: 사전 학습 지식과 런타임 검색을 구분할 때 사용한다.
+- > "often destroy context"
+  - 출처: [Introducing Contextual Retrieval](https://www.anthropic.com/engineering/contextual-retrieval) (확인: 2026-07-05)
+  - 맥락: 전통적 RAG chunking의 한계를 설명할 때 사용한다.
+- > "documents are typically split into smaller chunks"
+  - 출처: [Introducing Contextual Retrieval](https://www.anthropic.com/engineering/contextual-retrieval) (확인: 2026-07-05)
+  - 맥락: chunking이 왜 필요한지 설명할 때 사용한다.
+- > "automatically chunked, embedded, and indexed"
+  - 출처: [Retrieval](https://developers.openai.com/api/docs/guides/retrieval) (확인: 2026-07-05)
+  - 맥락: vector store 기반 검색 파이프라인의 자동 처리 단계를 설명할 때 사용한다.
+
 ## 변경 이력
 - 2026-07-05: 최초 작성 (Codex, P-01)
 - 2026-07-05: P-01 Loop A 재수집 - Meta AI Research 미등록 출처 제거, 등록부 내 공식 출처로 역사·문제 정의·공식 출처 보강 (Codex, P-01 Loop A)

@@ -90,5 +90,25 @@ A: tools는 외부 시스템 행동을 호출하는 기능이고, resources는 �
 - MCP resources는 서버가 모델용 컨텍스트 데이터를 노출하는 primitive다 — [MCP Resources](https://modelcontextprotocol.io/specification/2025-11-25/server/resources) (확인: 2026-07-05)
 - MCP 서버는 resources, tools, prompts를 주요 capability로 제공할 수 있다 — [Build an MCP server](https://modelcontextprotocol.io/docs/develop/build-server) (확인: 2026-07-05)
 
+## Quote Bank
+- > "Version 2025-11-25 (latest)"
+  - 출처: [MCP Tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) (확인: 2026-07-05)
+  - 맥락: MCP spec 기준 버전의 최신성을 명시할 때 사용한다.
+- > "allows servers to expose tools"
+  - 출처: [MCP Tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) (확인: 2026-07-05)
+  - 맥락: MCP tools primitive의 목적을 설명할 때 사용한다.
+- > "Tools enable models to interact with external systems"
+  - 출처: [MCP Tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) (확인: 2026-07-05)
+  - 맥락: 도구가 외부 시스템 연결 계층이라는 점을 설명할 때 사용한다.
+- > "designed to be model-controlled"
+  - 출처: [MCP Tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) (확인: 2026-07-05)
+  - 맥락: MCP tool 호출 주체와 사용자 승인 경계를 설명할 때 사용한다.
+- > "Resources allow servers to share data"
+  - 출처: [MCP Resources](https://modelcontextprotocol.io/specification/2025-11-25/server/resources) (확인: 2026-07-05)
+  - 맥락: resources와 tools의 차이를 설명할 때 사용한다.
+- > "maintaining clear security boundaries"
+  - 출처: [MCP Architecture](https://modelcontextprotocol.io/specification/2025-11-25/architecture) (확인: 2026-07-05)
+  - 맥락: host-client-server 분리가 왜 필요한지 설명할 때 사용한다.
+
 ## 변경 이력
 - 2026-07-05: 최초 작성 (Codex, P-01)

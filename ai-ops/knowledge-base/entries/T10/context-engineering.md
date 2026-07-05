@@ -92,5 +92,25 @@ A: 아니다. RAG는 검색된 정보를 가져오는 방법이고, context engi
 - Claude Agent SDK의 루프에서는 도구 정의, 대화 이력, 도구 입력·출력이 컨텍스트를 소비한다 — [How the agent loop works](https://code.claude.com/docs/en/agent-sdk/agent-loop) (확인: 2026-07-05)
 - agentic systems는 복잡도를 늘리기 전에 단순한 솔루션을 우선 검토해야 한다 — [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) (확인: 2026-07-05)
 
+## Quote Bank
+- > "Context is a critical but finite resource for AI agents."
+  - 출처: [Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) (확인: 2026-07-05)
+  - 맥락: 컨텍스트를 무한한 입력 공간이 아니라 제한된 자원으로 설명할 때 사용한다.
+- > "Context refers to the set of tokens included when sampling"
+  - 출처: [Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) (확인: 2026-07-05)
+  - 맥락: 컨텍스트의 기술적 범위를 토큰 집합으로 정의할 때 사용한다.
+- > "Context engineering refers to the set of strategies"
+  - 출처: [Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) (확인: 2026-07-05)
+  - 맥락: 프롬프트 작성과 컨텍스트 설계를 구분하는 정의 문장에 사용한다.
+- > "more context isn't automatically better"
+  - 출처: [Context windows](https://platform.claude.com/docs/en/build-with-claude/context-windows) (확인: 2026-07-05)
+  - 맥락: 긴 컨텍스트가 항상 더 좋은 답을 만들지 않는다는 오개념을 교정할 때 사용한다.
+- > "finding the smallest possible set of high-signal tokens"
+  - 출처: [Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) (확인: 2026-07-05)
+  - 맥락: 컨텍스트 최적화의 실무 원칙을 설명할 때 사용한다.
+- > "compaction, structured note-taking, and multi-agent architectures"
+  - 출처: [Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) (확인: 2026-07-05)
+  - 맥락: 장기 작업에서 컨텍스트 한계를 우회하는 대표 전략을 소개할 때 사용한다.
+
 ## 변경 이력
 - 2026-07-05: 최초 작성 (Codex, P-01)

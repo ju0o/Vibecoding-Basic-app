@@ -11,8 +11,8 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | Phase 1 완료: 100강 V2 커리큘럼·백로그 확정 / Phase 2 KB 물결 진행 |
-| Last Completed Step | Codex Phase 1 (100-lesson curriculum map and backlog, 2026-07-05) |
+| Current State | Phase 2 진행: 1차 qa_approved KB 5건 Quote Bank 보강 완료 / V1 9강 V2 재생성 준비 |
+| Last Completed Step | Codex Phase 2 Quote Bank Batch 1 (5 KB, 2026-07-05) |
 | Next Executor | Codex |
 | Next Prompt File | `CODEX-PLAN.md` §10 시작 지시 한 줄 |
 | Blocker | 없음 |
@@ -23,16 +23,16 @@
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 1 완료, Phase 2 진행
-- Verdict: DONE (Phase 1)
+- Current State: CODEX-PLAN Phase 2 진행 — 1차 qa_approved KB 5건 Quote Bank 보강 완료
+- Verdict: DONE (Phase 2 Quote Bank Batch 1)
 - Next Executor: Codex
 - Next Prompt File: CODEX-PLAN.md — 세션에 §10의 시작 지시 한 줄을 전달:
   "ai-ops/CODEX-PLAN.md를 읽고 Phase 0부터 Phase 5(개발 서버 확인 보고)까지 멈춤 없이 실행하라."
-- Why: CODEX-PLAN — 100강 백로그와 KB inventory 확정 후 Phase 2 KB·강의 물결로 자동 진행
+- Why: CODEX-PLAN — 기존 V1 9강 재생성 첫 물결 전에 승인 KB 5건의 Quote Bank 5+ 보강 필요
 - Required Operator Action: None — 다음 개입은 Codex의 Phase 5 보고 때 (개발 서버 확인 + 배포 승인)
 - If Approved: (Phase 5 보고 후) 배포 환경 지정 → Codex가 §9 배포 수행
 - If Rejected: (Phase 5 보고 후) "Reject: {항목}" → Codex가 수정 물결 후 §8 재실행
-- Files to Check: ai-ops/roadmap/CURRICULUM-MAP.md, ai-ops/outputs/00-backlog/BACKLOG.md, ai-ops/outputs/04-integrated/D-01-format-v2.md
+- Files to Check: ai-ops/outputs/01-briefs/phase-2-quote-bank-batch1.md, ai-ops/knowledge-base/entries/T10/context-engineering.md, ai-ops/knowledge-base/entries/T09/rag.md
 - Stop Condition: Codex는 Phase 5에서만 정지. 품질 불변 조건(§1) 우회 금지
 ```
 
@@ -69,13 +69,14 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
-- KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved** / KB 2차: skills·orchestration·harness = **needed** (O-01 등록 2026-07-05)
+- KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **needed** (O-01 등록 2026-07-05)
 - 강의: **released 5강** (파일럿 + Batch 1 Final 4강 — 배포는 HOLD, 운영자 게이트) / **integrated 4강** (order 3·4·5·11 — Cline P-06 대기) / **planned + KB 충족 2강** (order 12·14) / KB 대기 3강 (order 10·13·15)
 - 루프 카운터: 없음 (rag Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-05 | KB 5건 | qa_approved → qa_approved + Quote Bank 5+ | Codex Phase 2 |
 | 2026-07-05 | context-window-and-memory·system-prompts-and-instruction-layers·ai-workflow-design·agent-loop-anatomy | generated → integrated | Codex P-05 |
 | 2026-07-05 | context-window-and-memory·system-prompts-and-instruction-layers·ai-workflow-design·agent-loop-anatomy | planned → generated | Codex P-04 |
 | 2026-07-05 | KB skills·orchestration·harness | (등록) → needed | Fable O-01 |
