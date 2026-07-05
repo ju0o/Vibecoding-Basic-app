@@ -9,8 +9,8 @@ prerequisites: [agent-loop, context-engineering]
 successors: [orchestration, harness]
 related: [agent-loop, orchestration, skills]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [subagents-and-delegation]
+  glossary: [SubAgent, Delegation, Dynamic Workflow]
 sources:
   - { title: "Create custom subagents", url: "https://code.claude.com/docs/en/sub-agents", checked: 2026-07-05 }
   - { title: "Subagents in the SDK", url: "https://code.claude.com/docs/en/agent-sdk/subagents", checked: 2026-07-05 }

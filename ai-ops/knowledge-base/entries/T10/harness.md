@@ -10,7 +10,7 @@ successors: []
 related: [agent-loop, orchestration, tool-calling]
 consumers:
   lessons: [harness-engineering-basics]
-  glossary: [Harness Engineering]
+  glossary: [Harness Engineering, Sandbox, Guardrails, Human Review, Trace, Evaluation Harness]
 sources:
   - { title: "Sandbox Agents", url: "https://developers.openai.com/api/docs/guides/agents/sandboxes", checked: 2026-07-05 }
   - { title: "Guardrails and human review", url: "https://developers.openai.com/api/docs/guides/agents/guardrails-approvals", checked: 2026-07-05 }

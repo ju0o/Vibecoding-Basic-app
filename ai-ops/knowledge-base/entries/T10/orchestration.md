@@ -10,7 +10,7 @@ successors: [harness]
 related: [agent-loop, skills, mcp]
 consumers:
   lessons: [multi-agent-orchestration]
-  glossary: [Orchestration]
+  glossary: [Orchestration, Handoff, Agents as Tools, Orchestrator-Workers]
 sources:
   - { title: "Orchestration and handoffs", url: "https://developers.openai.com/api/docs/guides/agents/orchestration", checked: 2026-07-05 }
   - { title: "Agent definitions", url: "https://developers.openai.com/api/docs/guides/agents/define-agents", checked: 2026-07-05 }

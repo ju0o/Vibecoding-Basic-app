@@ -9,7 +9,7 @@ prerequisites: [context-engineering, tool-calling]
 successors: []
 related: [context-engineering, tool-calling, mcp]
 consumers:
-  lessons: [ai-workflow-design, agent-loop-anatomy]
+  lessons: [ai-workflow-design, agent-loop-anatomy, subagents-and-delegation, loop-engineering-basics]
   glossary: [Agent Loop]
 sources:
   - { title: "How the agent loop works", url: "https://code.claude.com/docs/en/agent-sdk/agent-loop", checked: 2026-07-05 }

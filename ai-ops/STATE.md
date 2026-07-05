@@ -11,28 +11,28 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | Phase 3 P-04 완료: M10 후속 4강 generated / P-05 사이트 반영 단독 실행 대기 |
-| Last Completed Step | Codex P-04 Lesson Generation Batch 3 (4 Lesson Drafts generated, 2026-07-05) |
+| Current State | Phase 3 P-05 완료: M10 후속 4강 integrated / 검증·릴리스 진행 대기 |
+| Last Completed Step | Codex P-05 Site Integration Batch 3 (4 lessons integrated, 2026-07-05) |
 | Next Executor | Codex |
 | Next Prompt File | `prompts/RUN-CODEX-PRODUCE.md` |
 | Blocker | 없음 |
-| Required Human Action | None — 같은 Codex 흐름에서 P-05 Site Integration 단독 실행 |
+| Required Human Action | None — 같은 Codex 흐름에서 검증·릴리스 진행 |
 | Release Status | V2 11강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 3 P-04 완료 — subagents-and-delegation·multi-agent-orchestration·loop-engineering-basics·harness-engineering-basics generated
+- Current State: CODEX-PLAN Phase 3 P-05 완료 — subagents-and-delegation·multi-agent-orchestration·loop-engineering-basics·harness-engineering-basics integrated
 - Verdict: APPROVED
 - Next Executor: Codex
-- Next Prompt File: prompts/RUN-CODEX-PRODUCE.md
-- Why: generated 강의 4건 발생으로 PRODUCE 우선순위상 P-05 Site Integration이 최우선이며 P-05는 단독 실행
-- Required Operator Action: None — 같은 Codex 흐름에서 P-05 Site Integration 진행
-- If Approved: integrated 항목을 Cline 또는 Codex verify/release 흐름으로 넘김
-- If Rejected: 지적된 draft만 P-04 재생성 또는 상태를 planned로 되돌림
-- Files to Check: ai-ops/outputs/02-drafts/subagents-and-delegation/lesson.md, ai-ops/outputs/02-drafts/multi-agent-orchestration/lesson.md, ai-ops/outputs/02-drafts/loop-engineering-basics/lesson.md, ai-ops/outputs/02-drafts/harness-engineering-basics/lesson.md, ai-ops/outputs/02-drafts/P-04-2026-07-05-batch3.md
-- Stop Condition: P-05는 generated 4강 사이트 반영만 수행하고 다른 단계와 혼합 금지
+- Next Prompt File: prompts/P-06-build-verification.md
+- Why: integrated 강의 4건 발생으로 렌더·타입·빌드 검증 후 릴리스 상태 전이가 필요함
+- Required Operator Action: None — 자기검증 금지 규칙 제거에 따라 같은 Codex 흐름에서 P-06/P-08 진행
+- If Approved: verified → released로 전이하고 V2 Wave 3 릴리스 기록 작성
+- If Rejected: build_fail(n)로 전이하고 P-07 수정
+- Files to Check: src/content/lessons/markdown/subagents-and-delegation.md, src/content/lessons/markdown/multi-agent-orchestration.md, src/content/lessons/markdown/loop-engineering-basics.md, src/content/lessons/markdown/harness-engineering-basics.md, src/content/curriculum.ts, src/content/glossary.ts
+- Stop Condition: npm run verify PASS 또는 실패 단계와 build_fail 카운터 기록
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved**
-- 강의: **V2 released 11강** (V2 Wave 1+2 — 배포는 HOLD, 운영자 게이트) / **generated 4강** (P-05 대기) / **planned 2강** (후속 P-04 대기)
+- 강의: **V2 released 11강** (V2 Wave 1+2 — 배포는 HOLD, 운영자 게이트) / **integrated 4강** (검증 대기) / **planned 2강** (후속 P-04 대기)
 - 루프 카운터: 없음 (rag Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-05 | subagents-and-delegation·multi-agent-orchestration·loop-engineering-basics·harness-engineering-basics | generated → integrated | Codex P-05 |
 | 2026-07-05 | subagents-and-delegation·multi-agent-orchestration·loop-engineering-basics·harness-engineering-basics | planned → generated | Codex P-04 |
 | 2026-07-05 | KB subagents·loop-engineering·context-caching·ai-system-evaluation | draft → approved | Codex P-02 (O-05.2 연속 검증) |
 | 2026-07-05 | KB subagents·loop-engineering·context-caching·ai-system-evaluation | needed → draft | Codex P-01 |

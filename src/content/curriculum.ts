@@ -282,4 +282,52 @@ export const LESSON_META = [
     minutes: 60,
     tags: ["Agent", "Agent Loop", "Tool Calling", "도구 루프"],
   },
+  {
+    slug: "subagents-and-delegation",
+    moduleId: "ai-system-design",
+    order: 12,
+    title: "SubAgent와 위임 패턴",
+    summary:
+      "SubAgent를 별도 컨텍스트, 권한, 도구 제한, 결과 계약으로 이해하고 main agent가 무엇을 위임해야 하는지 배웁니다.",
+    level: "중급",
+    type: "deep-dive",
+    minutes: 65,
+    tags: ["SubAgent", "Delegation", "Context Engineering", "Agent"],
+  },
+  {
+    slug: "multi-agent-orchestration",
+    moduleId: "ai-system-design",
+    order: 13,
+    title: "Orchestration: 여러 Agent의 협업 설계",
+    summary:
+      "Handoff와 agents-as-tools를 기준으로 여러 specialist agent의 소유권, 라우팅, 최종 답변 책임을 설계하는 법을 배웁니다.",
+    level: "중급",
+    type: "deep-dive",
+    minutes: 65,
+    tags: ["Orchestration", "Handoff", "Agents as Tools", "AI 시스템 설계"],
+  },
+  {
+    slug: "loop-engineering-basics",
+    moduleId: "ai-system-design",
+    order: 14,
+    title: "Loop Engineering: 반복 실행과 종료 조건",
+    summary:
+      "Agent loop를 turn, tool result, 권한, 비용, context, hook, 종료 조건으로 나누어 반복 실행을 통제하는 방법을 배웁니다.",
+    level: "중급",
+    type: "deep-dive",
+    minutes: 70,
+    tags: ["Loop Engineering", "Agent Loop", "Hooks", "AI 시스템 설계"],
+  },
+  {
+    slug: "harness-engineering-basics",
+    moduleId: "ai-system-design",
+    order: 15,
+    title: "Harness Engineering: 실행 환경, 권한, 검증 장치",
+    summary:
+      "Agent 실행의 control plane과 execution plane을 나누고 sandbox, guardrails, hooks, traces, eval harness로 결과를 통제하는 법을 배웁니다.",
+    level: "중급",
+    type: "deep-dive",
+    minutes: 70,
+    tags: ["Harness Engineering", "Sandbox", "Guardrails", "Observability"],
+  },
 ] satisfies readonly LessonMeta[]

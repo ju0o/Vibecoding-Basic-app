@@ -197,4 +197,138 @@ export const GLOSSARY_TERMS = [
       "프롬프트 한 번으로 얻는 결과는 매번 달라질 수 있습니다. AI 시스템 설계는 AI가 판단에 쓸 컨텍스트, 외부 도구 연결, 재사용 절차, 완료 검증까지 구조로 만들어 결과의 품질을 반복 가능하게 합니다. Context Engineering, MCP, Skills, Agent가 모두 이 설계의 부품입니다.",
     related: ["Context Engineering", "MCP", "Skills", "Agent", "Workflow"],
   },
+  {
+    term: "SubAgent",
+    category: "AI 시스템",
+    shortDefinition: "주 에이전트가 특정 하위 작업을 맡기는 별도 컨텍스트의 전문 에이전트",
+    explanation:
+      "SubAgent는 own context window, custom prompt, tool access, permissions를 가진 worker입니다. 긴 탐색 결과나 로그를 main conversation에 모두 넣지 않고, focused task를 수행한 뒤 summary나 structured result만 되돌려주는 데 사용합니다.",
+    related: ["Agent", "Agent Loop", "Orchestration", "Context Engineering"],
+  },
+  {
+    term: "Delegation",
+    category: "AI 시스템",
+    shortDefinition: "주 에이전트가 특정 작업 범위와 결과 계약을 정해 다른 실행 주체에 맡기는 방식",
+    explanation:
+      "Delegation은 단순 병렬 실행이 아니라 어떤 task를 어떤 권한으로 맡기고, 어떤 결과를 돌려받아 최종 판단에 쓸지 정하는 설계입니다.",
+    related: ["SubAgent", "Orchestration", "Harness Engineering"],
+  },
+  {
+    term: "Dynamic Workflow",
+    category: "AI 시스템",
+    shortDefinition: "많은 subagent를 script로 조정해 반복 실행 가능한 대규모 위임 흐름",
+    explanation:
+      "Dynamic Workflow는 개별 subagent 호출을 넘어, 여러 worker를 배치하고 결과를 모아 cross-check하는 script 기반 orchestration 방식입니다.",
+    related: ["SubAgent", "Orchestration", "Workflow"],
+  },
+  {
+    term: "Orchestration",
+    category: "AI 시스템",
+    shortDefinition: "여러 agent, tool, handoff 사이의 작업 소유권과 흐름을 조정하는 설계",
+    explanation:
+      "Orchestration은 specialist가 대화를 넘겨받는지, manager가 최종 답변 책임을 유지하는지, worker 결과를 어떻게 합성하는지 정하는 구조입니다.",
+    related: ["Agent", "SubAgent", "Handoff", "Harness Engineering"],
+  },
+  {
+    term: "Handoff",
+    category: "AI 시스템",
+    shortDefinition: "대화나 작업 제어권이 specialist agent로 이동하는 위임 방식",
+    explanation:
+      "Handoff는 specialist가 다음 user-facing response를 소유해야 할 때 쓰는 orchestration 패턴입니다.",
+    related: ["Orchestration", "Agent", "SubAgent"],
+  },
+  {
+    term: "Agents as Tools",
+    category: "AI 시스템",
+    shortDefinition:
+      "manager agent가 specialist agent를 내부 도구처럼 호출하고 최종 답변 책임을 유지하는 패턴",
+    explanation:
+      "Agents as Tools에서는 specialist가 bounded capability로 작동하고, manager가 결과를 받아 최종 응답을 합성합니다.",
+    related: ["Orchestration", "Tool Calling", "Agent"],
+  },
+  {
+    term: "Orchestrator-Workers",
+    category: "AI 시스템",
+    shortDefinition: "central LLM이 작업을 동적으로 쪼개 worker LLMs에 맡기고 결과를 합성하는 구조",
+    explanation:
+      "Orchestrator-Workers는 subtasks를 미리 예측하기 어려운 복잡한 작업에서 central agent가 worker를 구성하고 결과를 모아 판단하는 workflow입니다.",
+    related: ["Orchestration", "SubAgent", "Workflow"],
+  },
+  {
+    term: "Loop Engineering",
+    category: "AI 시스템",
+    shortDefinition:
+      "Agent가 판단과 도구 호출을 반복하는 루프의 종료 조건, 권한, 비용, 검증 기준을 설계하는 일",
+    explanation:
+      "Loop Engineering은 agent loop를 무작정 오래 돌리는 것이 아니라 max turns, budget, allowed tools, hooks, success signals, blocked signals를 함께 설계해 반복을 통제하는 관점입니다.",
+    related: ["Agent Loop", "Tool Calling", "Harness Engineering", "Context Engineering"],
+  },
+  {
+    term: "Stop Condition",
+    category: "AI 시스템",
+    shortDefinition: "Agent loop가 성공, 실패, 막힘, 사람 승인 등의 이유로 멈추는 기준",
+    explanation:
+      "Stop Condition은 테스트 통과, 공식 출처 확인, 최대 반복 도달, 같은 실패 반복처럼 루프 종료를 판단하는 신호입니다. 명확한 종료 기준이 없으면 agent는 오래 반복하면서도 실제 완료 상태를 보장하지 못할 수 있습니다.",
+    related: ["Loop Engineering", "Agent Loop", "Harness Engineering"],
+  },
+  {
+    term: "Hook",
+    category: "AI 시스템",
+    shortDefinition: "Agent 실행 중 특정 이벤트에서 차단, 기록, 승인, 변환 같은 결정을 넣는 제어점",
+    explanation:
+      "Hook은 PreToolUse, PostToolUse, Stop 같은 실행 단계에서 위험 행동을 막거나 결과를 기록하는 장치입니다. 반복 루프에서는 작은 위험 행동이 누적될 수 있으므로 hook이 중요한 통제점이 됩니다.",
+    related: ["Loop Engineering", "Harness Engineering", "Tool Calling"],
+  },
+  {
+    term: "Compaction",
+    category: "AI 시스템",
+    shortDefinition:
+      "긴 작업에서 커진 context를 요약하거나 압축해 다음 판단에 필요한 정보만 남기는 방식",
+    explanation:
+      "Compaction은 context limit에 가까워질 때 긴 history와 tool output을 줄여 루프를 계속 가능하게 하는 context management 기법입니다. 중요한 목표, 시도 내역, 실패 원인, 남은 불확실성이 보존되어야 합니다.",
+    related: ["Context Engineering", "Loop Engineering", "Context Window"],
+  },
+  {
+    term: "Sandbox",
+    category: "AI 시스템",
+    shortDefinition:
+      "Agent가 파일, shell, package, port 같은 실행 자원을 격리해 사용하는 작업 환경",
+    explanation:
+      "Sandbox는 agent가 실제 작업을 수행하는 execution plane입니다. 파일 시스템, shell, installed packages, snapshots 같은 실행 자원을 제공하지만, tool routing, approvals, tracing 같은 control plane은 harness가 담당합니다.",
+    related: ["Harness Engineering", "Agent", "Tool Calling"],
+  },
+  {
+    term: "Guardrails",
+    category: "AI 시스템",
+    shortDefinition: "Agent의 입력, 출력, 도구 행동을 자동으로 검증하는 안전 경계",
+    explanation:
+      "Guardrails는 input, output, tool behavior를 자동 검증하고 run을 계속할지, 멈출지, 사람 승인으로 넘길지 판단하는 데 쓰입니다. harness 안의 validation boundary로 이해할 수 있습니다.",
+    related: ["Harness Engineering", "Human Review", "Tool Calling"],
+  },
+  {
+    term: "Human Review",
+    category: "AI 시스템",
+    shortDefinition: "민감한 agent 행동을 잠시 멈추고 사람이 approve 또는 reject하는 승인 절차",
+    explanation:
+      "Human Review는 배포, 삭제, 민감 데이터 수정처럼 자동 진행이 위험한 행동에서 run을 pause하고 사람의 결정을 받는 approval boundary입니다.",
+    related: ["Guardrails", "Harness Engineering", "Approval"],
+  },
+  {
+    term: "Trace",
+    category: "AI 시스템",
+    shortDefinition:
+      "Agent workflow run의 model call, tool call, approval, 결과 흐름을 따라갈 수 있는 실행 기록",
+    explanation:
+      "Trace는 agent 실패를 디버깅하고, 안정화된 뒤 agent workflow evaluation의 high-signal example로 활용할 수 있는 관찰 기록입니다.",
+    related: ["Harness Engineering", "Observability", "Evaluation Harness"],
+  },
+  {
+    term: "Evaluation Harness",
+    category: "AI 시스템",
+    shortDefinition:
+      "Agent task를 end-to-end로 실행하고 trial, transcript, outcome, grader 결과를 모아 평가하는 infrastructure",
+    explanation:
+      "Evaluation Harness는 단일 답변이 아니라 agent가 여러 turn 동안 환경을 바꾸는 작업을 평가하기 위한 구조입니다. transcript와 final environment outcome을 구분해 agent의 실제 성공 여부를 판단합니다.",
+    related: ["Harness Engineering", "Agent Evaluation", "Trace"],
+  },
 ] satisfies readonly GlossaryTerm[]

@@ -9,8 +9,8 @@ prerequisites: [agent-loop, tool-calling]
 successors: [harness]
 related: [agent-loop, orchestration, harness]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [loop-engineering-basics]
+  glossary: [Loop Engineering, Stop Condition, Hook, Compaction]
 sources:
   - { title: "How the agent loop works", url: "https://code.claude.com/docs/en/agent-sdk/agent-loop", checked: 2026-07-05 }
   - { title: "How Claude Code works", url: "https://code.claude.com/docs/en/how-claude-code-works", checked: 2026-07-05 }
