@@ -9,8 +9,16 @@ prerequisites: [vibe-coding-origin-karpathy]
 successors: [prompt-engineering, grounding-citations, hallucination-verification]
 related: [vibe-coding-origin-karpathy, prompt-engineering, grounding-citations, hallucination-verification]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [learning-with-ai-verification]
+  glossary:
+    [
+      "AI Learning Verification",
+      "Direct Quote Grounding",
+      "Source Invention",
+      "Direct Support",
+      "Structured Test",
+      "Code Review Boundary",
+    ]
 sources:
   - { title: "Reduce hallucinations", url: "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations", checked: 2026-07-05 }
   - { title: "Citation Formatting", url: "https://developers.openai.com/api/docs/guides/citation-formatting", checked: 2026-07-05 }

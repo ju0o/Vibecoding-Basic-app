@@ -613,4 +613,231 @@ export const GLOSSARY_TERMS = [
       "Eval Run은 prompt change, model migration, regression tracking처럼 반복 가능한 비교가 필요할 때 사용합니다.",
     related: ["AI System Evaluation", "Dataset", "Grader"],
   },
+  {
+    term: "Development Environment",
+    category: "개발 기초",
+    shortDefinition: "코드를 작성, 실행, 확인, 기록하기 위해 함께 쓰는 도구들의 작업 구조",
+    explanation:
+      "Development Environment는 code editor, terminal, browser, local testing server, version control처럼 개발자가 하나의 프로젝트를 다룰 때 사용하는 도구 묶음입니다. 핵심은 설치 목록이 아니라 역할 분리입니다. 파일은 editor에서 수정하고, 명령은 terminal에서 실행하고, 웹 결과는 browser에서 확인하고, 변경 기록은 Git 같은 version control로 남깁니다.",
+    related: ["Code Editor", "Integrated Terminal", "Version Control"],
+  },
+  {
+    term: "Code Editor",
+    category: "개발 기초",
+    shortDefinition: "코드 파일의 내용을 읽고 수정하는 편집 도구",
+    explanation:
+      "Code Editor는 프로젝트 파일을 열고 텍스트를 수정하는 도구입니다. VS Code 문서는 자신을 핵심적으로 code editor라고 설명합니다. Terminal, Source Control 같은 기능이 함께 있어도 editor의 기본 역할은 열린 파일의 내용을 바꾸는 것입니다.",
+    related: ["Development Environment", "VS Code Explorer", "Source Control View"],
+  },
+  {
+    term: "VS Code Explorer",
+    category: "개발 기초",
+    shortDefinition: "VS Code에서 프로젝트의 파일과 폴더 구조를 보여주는 탐색 영역",
+    explanation:
+      "VS Code Explorer는 접근 가능한 files and folders를 보여주는 UI입니다. Explorer에서 파일을 찾는 일과 editor에서 파일 내용을 고치는 일은 다릅니다. AI에게 파일 수정을 요청할 때도 Explorer 기준 경로를 정확히 말하면 혼란이 줄어듭니다.",
+    related: ["Code Editor", "File Path", "Development Environment"],
+  },
+  {
+    term: "Integrated Terminal",
+    category: "개발 기초",
+    shortDefinition: "에디터 안에서 shell command를 실행할 수 있게 하는 터미널 영역",
+    explanation:
+      "Integrated Terminal은 VS Code 같은 편집기 안에서 standalone terminal처럼 명령을 실행하는 공간입니다. 빌드, 테스트, 배포, Git 명령은 terminal에서 실행될 수 있으며, 현재 작업 폴더가 어디인지가 결과에 영향을 줍니다.",
+    related: ["Terminal", "Shell Command", "Development Environment"],
+  },
+  {
+    term: "Local Testing Server",
+    category: "웹 개발",
+    shortDefinition: "개발 중인 웹 결과를 로컬 환경에서 확인하기 위한 테스트 서버",
+    explanation:
+      "Local Testing Server는 개발자의 컴퓨터에서 웹 결과를 확인하기 위해 쓰는 서버입니다. 브라우저에 화면이 보인다는 사실이 공개 배포를 뜻하지는 않습니다. 로컬 확인과 운영 배포를 구분하는 입문 기준입니다.",
+    related: ["Browser", "Development Environment", "Deployment"],
+  },
+  {
+    term: "Version Control",
+    category: "Git & 협업",
+    shortDefinition:
+      "시간에 따른 파일 변경 기록을 남기고 특정 버전을 다시 불러올 수 있게 하는 시스템",
+    explanation:
+      "Version Control은 파일 또는 파일 집합의 변경을 기록하는 시스템입니다. 저장은 현재 파일 내용을 디스크에 쓰는 행위이고, version control의 commit은 변경 이력에 의미 있는 묶음을 남기는 행위입니다.",
+    related: ["Git", "Source Control View", "Commit"],
+  },
+  {
+    term: "Source Control View",
+    category: "Git & 협업",
+    shortDefinition:
+      "편집기 안에서 Git 변경, staging, commit 같은 source control 작업을 보여주는 UI",
+    explanation:
+      "Source Control View는 Git 같은 version control 시스템의 상태를 편집기 UI로 보여주는 영역입니다. VS Code는 staging, committing, branching, merge conflict resolution 같은 작업을 Source Control 기능으로 제공합니다. UI를 쓰더라도 underlying Git 개념을 이해해야 합니다.",
+    related: ["Version Control", "Git", "Code Editor"],
+  },
+  {
+    term: "Vibe Coding",
+    category: "AI 코딩",
+    shortDefinition: "자연어로 AI에게 코딩을 맡기고 결과를 보며 조정하는 개발 방식",
+    explanation:
+      "Vibe Coding은 AI에게 자연어로 만들 것을 말하고, AI가 생성한 코드나 변경 결과를 사람이 보며 다시 지시하는 작업 방식입니다. Karpathy 2025 맥락에서는 코드 자체를 깊게 읽지 않고 결과와 대화 흐름으로 진행하는 강한 뉘앙스가 있어, 빠른 prototype 가능성과 검증 없는 수용 위험을 함께 다루어야 합니다.",
+    related: ["Natural Language to Code", "AI-Assisted Steering", "Human Review"],
+  },
+  {
+    term: "Natural Language to Code",
+    category: "AI 코딩",
+    shortDefinition: "사람이 자연어로 의도를 말하고 AI가 computer code로 변환하는 흐름",
+    explanation:
+      "Natural Language to Code는 Collins가 vibe coding을 설명할 때 쓴 핵심 방향입니다. 사용자는 함수명이나 문법보다 만들고 싶은 결과를 말하고, AI는 그 의도를 코드 변경으로 바꿉니다. 다만 자연어 입력이 검증을 대체하지는 않으므로 결과 코드에는 review와 test가 필요합니다.",
+    related: ["Vibe Coding", "Prompt Engineering", "Code Generation"],
+  },
+  {
+    term: "AI-Assisted Steering",
+    category: "AI 코딩",
+    shortDefinition: "사람이 AI 생성 결과를 보며 다음 요청과 수정 방향을 조정하는 작업 방식",
+    explanation:
+      "AI-Assisted Steering은 사람이 모든 줄을 직접 쓰기보다 AI가 만든 결과, 오류 메시지, 화면 변화를 보고 다음 지시를 정하는 흐름입니다. Karpathy 사례의 error message 복사와 대화식 수정은 이런 steering의 예로 볼 수 있습니다.",
+    related: ["Vibe Coding", "Development Environment", "Verification"],
+  },
+  {
+    term: "Prototype Boundary",
+    category: "AI 코딩",
+    shortDefinition: "빠른 실험과 운영 품질이 필요한 작업을 구분하는 위험 경계",
+    explanation:
+      "Prototype Boundary는 throwaway, learning, production 같은 작업 위험도를 나누어 AI 생성 코드의 검증 강도를 달리하는 기준입니다. 학습용 prototype에서는 빠른 반복이 유용할 수 있지만, production feature에서는 human review, test, diff review 같은 안전 장치가 필요합니다.",
+    related: ["Human Review", "Technical Debt", "Verification"],
+  },
+  {
+    term: "Material Disengagement",
+    category: "AI 코딩",
+    shortDefinition: "AI 코딩 과정에서 코드 자체를 직접 다루는 감각이 약해지는 현상",
+    explanation:
+      "Material Disengagement는 vibe coding 연구 문맥에서 코드 물질과의 거리두기를 설명하는 관점입니다. 사람이 코드 줄을 직접 읽고 쓰기보다 자연어, 화면 결과, 오류 메시지를 통해 작업을 조정할 때 생길 수 있습니다. 이 현상은 빠른 산출을 가능하게 하지만 검토 부족 위험도 만듭니다.",
+    related: ["Vibe Coding", "AI-Assisted Steering", "Human Review"],
+  },
+  {
+    term: "Dynamic Trust",
+    category: "AI 시스템",
+    shortDefinition: "AI 도구에 대한 신뢰를 작업 위험도와 검증 결과에 따라 계속 조정하는 태도",
+    explanation:
+      "Dynamic Trust는 바이브코딩에서 AI 도구에 대한 신뢰가 고정값이 아니라는 관점입니다. 작업이 학습용인지 운영용인지, 테스트가 실행됐는지, 사람이 diff를 검토했는지에 따라 신뢰 수준과 검증 강도를 바꿔야 합니다.",
+    related: ["Vibe Coding", "Human Review", "Evaluation"],
+  },
+  {
+    term: "AI Learning Verification",
+    category: "AI 학습",
+    shortDefinition: "AI 설명과 생성물을 근거, 실행, 평가, 사람 검토로 확인하며 배우는 절차",
+    explanation:
+      "AI Learning Verification은 AI가 말한 내용을 claim 단위로 나누고, direct quote와 citation이 실제로 주장을 support하는지 확인하며, 코드에는 실행과 human review를 붙이는 학습 방식입니다. 목표는 AI를 불신하는 것이 아니라 빠른 설명을 검증 가능한 이해로 바꾸는 것입니다.",
+    related: ["Verification", "Citation", "Human Review"],
+  },
+  {
+    term: "Direct Quote Grounding",
+    category: "AI 시스템",
+    shortDefinition: "사실 주장에 원문 직접 인용을 붙여 claim과 source의 거리를 줄이는 방식",
+    explanation:
+      "Direct Quote Grounding은 AI 설명의 핵심 claim을 원문 문장과 직접 연결하는 검증 방식입니다. 링크만 제시하면 요약과 해석이 섞일 수 있으므로, 원문 구절을 함께 읽어 claim이 실제 source로 뒷받침되는지 확인합니다.",
+    related: ["Citation", "Grounding", "Claim Audit"],
+  },
+  {
+    term: "Source Invention",
+    category: "AI 위험",
+    shortDefinition: "AI가 실제로 제공되지 않은 source ID, 줄 번호, locator를 만들어내는 오류",
+    explanation:
+      "Source Invention은 citation처럼 보이지만 검증을 방해하는 hallucination 유형입니다. OpenAI citation formatting은 source IDs, line ranges, block locators를 invent하지 말라고 설명합니다. 검증 가능한 출처 위치만 사용해야 합니다.",
+    related: ["Citation", "Hallucination", "Source Locator"],
+  },
+  {
+    term: "Direct Support",
+    category: "AI 시스템",
+    shortDefinition: "citation source가 답변 문장의 핵심 claim을 실제로 뒷받침하는 관계",
+    explanation:
+      "Direct Support는 출처가 답변 주변 주제를 말하는 수준이 아니라 cited text의 핵심 의미를 실제로 support하는 상태입니다. Citation audit에서는 링크 존재보다 direct support 여부가 더 중요합니다.",
+    related: ["Citation", "Citable Unit", "Claim Audit"],
+  },
+  {
+    term: "Structured Test",
+    category: "AI 평가",
+    shortDefinition: "같은 기준을 반복 적용해 AI 답변이나 시스템 성능을 확인하는 테스트",
+    explanation:
+      "Structured Test는 OpenAI evals 설명과 연결되는 개념입니다. 학습에서는 큰 평가 플랫폼 없이도 direct quote 존재, citation direct support, invented source 없음 같은 기준을 여러 사례에 반복 적용하는 작은 eval로 사용할 수 있습니다.",
+    related: ["Evaluation Set", "Eval Run", "Verification"],
+  },
+  {
+    term: "Code Review Boundary",
+    category: "AI 코딩",
+    shortDefinition:
+      "AI 생성 코드가 실행 결과만으로 승인되지 않고 사람이 diff와 위험을 검토해야 하는 경계",
+    explanation:
+      "Code Review Boundary는 code generation에서 human review가 특히 중요하다는 원칙을 학습 절차로 바꾼 것입니다. 실행 성공, 테스트 결과, 변경 파일, 사람 검토를 분리해 보며 production에 가까울수록 검토 강도를 높입니다.",
+    related: ["Human Review", "Vibe Coding", "Verification"],
+  },
+  {
+    term: "File Path",
+    category: "개발 기초",
+    shortDefinition: "파일이나 폴더의 위치를 나타내는 문자열",
+    explanation:
+      "File Path는 컴퓨터 안에서 특정 파일이나 폴더가 어디에 있는지 가리키는 문자열입니다. Node.js Learn 문서는 모든 file이 path를 가진다고 설명합니다. AI에게 파일 수정을 요청할 때 파일 이름만이 아니라 folder structure를 포함한 path를 말하면 모호성이 줄어듭니다.",
+    related: ["Folder", "Path Separator", "File System"],
+  },
+  {
+    term: "Folder",
+    category: "개발 기초",
+    shortDefinition: "파일과 다른 폴더를 묶어 계층 구조를 만드는 단위",
+    explanation:
+      "Folder는 프로젝트 파일을 구조화하고 맥락을 만드는 단위입니다. VS Code Explorer는 files and folders를 보여주며, Node.js packages 문서는 package를 folder tree로 설명합니다. 모든 folder가 package는 아니지만 package는 folder tree로 나타날 수 있습니다.",
+    related: ["File Path", "Package Folder Tree", "VS Code Explorer"],
+  },
+  {
+    term: "Path Separator",
+    category: "개발 기초",
+    shortDefinition: "경로 안에서 폴더 이름들을 구분하는 문자",
+    explanation:
+      "Path Separator는 경로 문자열에서 폴더 계층을 나누는 구분자입니다. Windows와 Linux/macOS path는 다르게 생길 수 있으므로 문자열을 직접 이어 붙이기보다 `node:path` 같은 utility를 사용하는 편이 안전합니다.",
+    related: ["File Path", "Node Path Module", "Operating System"],
+  },
+  {
+    term: "Directory Name",
+    category: "개발 기초",
+    shortDefinition: "경로에서 파일이 들어 있는 폴더 구조 부분",
+    explanation:
+      "Directory Name은 `path.dirname()`으로 얻을 수 있는 경로의 폴더 부분입니다. 파일 이름이 같아도 directory가 다르면 다른 파일일 수 있으므로, AI 요청과 오류 분석에서 directory를 함께 확인해야 합니다.",
+    related: ["File Path", "Base Name", "Node Path Module"],
+  },
+  {
+    term: "Base Name",
+    category: "개발 기초",
+    shortDefinition: "경로의 마지막 파일 이름 또는 폴더 이름 부분",
+    explanation:
+      "Base Name은 `path.basename()`으로 얻을 수 있는 경로의 마지막 이름입니다. 파일 이름을 말할 때 유용하지만, 같은 basename이 여러 folder에 있을 수 있으므로 full path와 함께 보는 것이 안전합니다.",
+    related: ["Directory Name", "File Extension", "File Path"],
+  },
+  {
+    term: "File Extension",
+    category: "개발 기초",
+    shortDefinition: "파일 이름 끝에서 파일 형식이나 용도를 나타내는 접미 부분",
+    explanation:
+      "File Extension은 `.ts`, `.md`, `.json`처럼 파일 이름 끝에 붙는 부분입니다. Node.js Learn 문서는 `path.extname()`으로 extension을 얻는 예를 제시합니다. Extension은 파일의 용도 추정에 도움을 주지만, 위치 정보인 path와 함께 봐야 합니다.",
+    related: ["Base Name", "File Path", "Node Path Module"],
+  },
+  {
+    term: "Node Path Module",
+    category: "Node.js",
+    shortDefinition: "file and directory paths를 다루는 Node.js utility module",
+    explanation:
+      "Node Path Module은 `node:path`로 import하며 file and directory paths를 조작하는 utility를 제공합니다. 경로 문자열을 직접 이어 붙이는 대신 `path.join`, `path.dirname`, `path.basename`, `path.extname` 같은 함수를 사용해 OS 차이를 고려할 수 있습니다.",
+    related: ["File Path", "Path Separator", "Node File System Module"],
+  },
+  {
+    term: "Node File System Module",
+    category: "Node.js",
+    shortDefinition: "Node.js에서 file system과 상호작용하게 하는 module",
+    explanation:
+      "Node File System Module은 `node:fs` 또는 `node:fs/promises`로 사용하며 파일 읽기와 쓰기 같은 file system interaction을 담당합니다. `node:path`가 경로 문자열을 다룬다면 `node:fs`는 그 경로의 실제 파일 시스템 작업을 수행합니다.",
+    related: ["Node Path Module", "File System", "File Path"],
+  },
+  {
+    term: "Package Folder Tree",
+    category: "Node.js",
+    shortDefinition: "`package.json` file로 described되는 package의 폴더 계층",
+    explanation:
+      "Package Folder Tree는 Node.js packages 문서가 package를 설명할 때 쓰는 구조입니다. JavaScript 프로젝트에서는 `package.json`이 있는 folder tree가 package 경계를 나타낼 수 있습니다. 모든 folder가 package는 아니므로 `package.json`과 함께 확인해야 합니다.",
+    related: ["Folder", "package.json", "Node.js"],
+  },
 ] satisfies readonly GlossaryTerm[]

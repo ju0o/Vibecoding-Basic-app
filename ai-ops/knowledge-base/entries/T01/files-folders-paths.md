@@ -9,8 +9,19 @@ prerequisites: [dev-environment-map]
 successors: [terminal-shell-commands, variables-types-data]
 related: [dev-environment-map, terminal-shell-commands]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [files-folders-and-paths]
+  glossary:
+    [
+      "File Path",
+      "Folder",
+      "Path Separator",
+      "Directory Name",
+      "Base Name",
+      "File Extension",
+      "Node Path Module",
+      "Node File System Module",
+      "Package Folder Tree",
+    ]
 sources:
   - { title: "Node.js File Paths", url: "https://nodejs.org/learn/manipulating-files/nodejs-file-paths", checked: 2026-07-05 }
   - { title: "Path", url: "https://nodejs.org/api/path.html", checked: 2026-07-05 }

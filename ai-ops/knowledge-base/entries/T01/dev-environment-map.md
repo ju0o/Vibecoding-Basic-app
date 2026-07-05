@@ -9,8 +9,17 @@ prerequisites: []
 successors: [files-folders-paths, terminal-shell-commands]
 related: [files-folders-paths, terminal-shell-commands]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [development-environment-map]
+  glossary:
+    [
+      "Development Environment",
+      "Code Editor",
+      "VS Code Explorer",
+      "Integrated Terminal",
+      "Local Testing Server",
+      "Version Control",
+      "Source Control View",
+    ]
 sources:
   - { title: "Installing basic software", url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Environment_setup/Installing_software", checked: 2026-07-05 }
   - { title: "User interface", url: "https://code.visualstudio.com/docs/getstarted/userinterface", checked: 2026-07-05 }

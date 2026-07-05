@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-labelledby="title desc">
+  <title id="title">Development environment workflow</title>
+  <desc id="desc">A four-step loop: edit files, run commands, inspect in browser, record changes.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f7f5; }
+      .card { fill: #ffffff; stroke: #deded8; stroke-width: 2; rx: 12; }
+      .text { fill: #171717; font-family: Arial, sans-serif; }
+      .muted { fill: #5f5f5b; font-family: Arial, sans-serif; }
+      .arrow { fill: none; stroke: #0568d8; stroke-width: 4; marker-end: url(#arrowhead); }
+      .accent { fill: #eef6ff; stroke: #0568d8; stroke-width: 2; }
+      @media (prefers-color-scheme: dark) {
+        .bg { fill: #111111; }
+        .card { fill: #202020; stroke: #363632; }
+        .text { fill: #f7f7f5; }
+        .muted { fill: #b8b8b0; }
+        .accent { fill: #102840; stroke: #62a8ff; }
+        .arrow { stroke: #62a8ff; }
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0568d8" />
+    </marker>
+  </defs>
+  <rect class="bg" width="920" height="520" rx="18" />
+  <text class="text" x="460" y="48" font-size="28" font-weight="700" text-anchor="middle">개발 환경 지도</text>
+  <text class="muted" x="460" y="78" font-size="16" text-anchor="middle">같은 프로젝트 폴더를 네 가지 도구가 다른 관점으로 다룹니다.</text>
+
+  <rect class="card" x="85" y="130" width="260" height="110" />
+  <circle class="accent" cx="125" cy="168" r="22" />
+  <text class="text" x="125" y="174" font-size="16" font-weight="700" text-anchor="middle">1</text>
+  <text class="text" x="165" y="164" font-size="20" font-weight="700">Editor</text>
+  <text class="muted" x="165" y="192" font-size="15">파일 내용을 작성하고 수정</text>
+
+  <rect class="card" x="575" y="130" width="260" height="110" />
+  <circle class="accent" cx="615" cy="168" r="22" />
+  <text class="text" x="615" y="174" font-size="16" font-weight="700" text-anchor="middle">2</text>
+  <text class="text" x="655" y="164" font-size="20" font-weight="700">Terminal</text>
+  <text class="muted" x="655" y="192" font-size="15">명령을 실행하고 로그 확인</text>
+
+  <rect class="card" x="575" y="320" width="260" height="110" />
+  <circle class="accent" cx="615" cy="358" r="22" />
+  <text class="text" x="615" y="364" font-size="16" font-weight="700" text-anchor="middle">3</text>
+  <text class="text" x="655" y="354" font-size="20" font-weight="700">Browser</text>
+  <text class="muted" x="655" y="382" font-size="15">웹 결과와 동작 확인</text>
+
+  <rect class="card" x="85" y="320" width="260" height="110" />
+  <circle class="accent" cx="125" cy="358" r="22" />
+  <text class="text" x="125" y="364" font-size="16" font-weight="700" text-anchor="middle">4</text>
+  <text class="text" x="165" y="354" font-size="20" font-weight="700">Git</text>
+  <text class="muted" x="165" y="382" font-size="15">변경 기록과 diff 검토</text>
+
+  <path class="arrow" d="M350 185 H560" />
+  <path class="arrow" d="M705 245 V305" />
+  <path class="arrow" d="M570 375 H360" />
+  <path class="arrow" d="M215 315 V255" />
+
+  <rect class="accent" x="330" y="238" width="260" height="54" rx="10" />
+  <text class="text" x="460" y="260" font-size="16" font-weight="700" text-anchor="middle">Project Folder</text>
+  <text class="muted" x="460" y="280" font-size="13" text-anchor="middle">Explorer, terminal, browser, Git이 같은 기준을 공유</text>
+</svg>

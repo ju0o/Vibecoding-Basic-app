@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="560" viewBox="0 0 920 560" role="img" aria-labelledby="title desc">
+  <title id="title">AI learning verification loop</title>
+  <desc id="desc">A loop that moves from AI output to claims, quotes, citations, execution, human review, and revised prompts.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f7f5; }
+      .card { fill: #ffffff; stroke: #deded8; stroke-width: 2; }
+      .check { fill: #f1fbf5; stroke: #36a66c; stroke-width: 2; }
+      .warn { fill: #fff8e8; stroke: #df9b22; stroke-width: 2; }
+      .text { fill: #171717; font-family: Arial, sans-serif; }
+      .muted { fill: #5f5f5b; font-family: Arial, sans-serif; }
+      .arrow { fill: none; stroke: #0568d8; stroke-width: 3; marker-end: url(#arrowhead); }
+      @media (prefers-color-scheme: dark) {
+        .bg { fill: #111111; }
+        .card { fill: #202020; stroke: #363632; }
+        .check { fill: #13291d; stroke: #45c779; }
+        .warn { fill: #31240d; stroke: #f0b44b; }
+        .text { fill: #f7f7f5; }
+        .muted { fill: #b8b8b0; }
+        .arrow { stroke: #62a8ff; }
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0568d8" />
+    </marker>
+  </defs>
+  <rect class="bg" width="920" height="560" rx="18" />
+  <text class="text" x="460" y="48" font-size="28" font-weight="700" text-anchor="middle">AI 학습 검증 루프</text>
+  <text class="muted" x="460" y="78" font-size="16" text-anchor="middle">빠른 AI 답변을 검증 가능한 이해로 바꾸는 순서</text>
+
+  <rect class="card" x="70" y="135" width="210" height="84" rx="10" />
+  <text class="text" x="175" y="166" font-size="18" font-weight="700" text-anchor="middle">AI Output</text>
+  <text class="muted" x="175" y="192" font-size="13" text-anchor="middle">설명 또는 코드 생성물</text>
+
+  <rect class="card" x="355" y="135" width="210" height="84" rx="10" />
+  <text class="text" x="460" y="166" font-size="18" font-weight="700" text-anchor="middle">Claim Split</text>
+  <text class="muted" x="460" y="192" font-size="13" text-anchor="middle">확인 가능한 주장으로 분리</text>
+
+  <rect class="check" x="640" y="135" width="210" height="84" rx="10" />
+  <text class="text" x="745" y="166" font-size="18" font-weight="700" text-anchor="middle">Quote + Citation</text>
+  <text class="muted" x="745" y="192" font-size="13" text-anchor="middle">direct support 확인</text>
+
+  <rect class="warn" x="640" y="325" width="210" height="84" rx="10" />
+  <text class="text" x="745" y="356" font-size="18" font-weight="700" text-anchor="middle">Run + Review</text>
+  <text class="muted" x="745" y="382" font-size="13" text-anchor="middle">코드 실행과 human review</text>
+
+  <rect class="check" x="355" y="325" width="210" height="84" rx="10" />
+  <text class="text" x="460" y="356" font-size="18" font-weight="700" text-anchor="middle">Structured Tests</text>
+  <text class="muted" x="460" y="382" font-size="13" text-anchor="middle">반복 기준으로 평가</text>
+
+  <rect class="card" x="70" y="325" width="210" height="84" rx="10" />
+  <text class="text" x="175" y="356" font-size="18" font-weight="700" text-anchor="middle">Prompt Update</text>
+  <text class="muted" x="175" y="382" font-size="13" text-anchor="middle">검증 실패를 다음 입력에 반영</text>
+
+  <path class="arrow" d="M280 177 H345" />
+  <path class="arrow" d="M565 177 H630" />
+  <path class="arrow" d="M745 222 V315" />
+  <path class="arrow" d="M640 367 H575" />
+  <path class="arrow" d="M355 367 H290" />
+  <path class="arrow" d="M175 325 V230" />
+</svg>

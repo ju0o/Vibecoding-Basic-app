@@ -9,8 +9,16 @@ prerequisites: []
 successors: [ai-era-timeline]
 related: [ai-learning-verification, prompt-engineering]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [vibe-coding-origin-karpathy]
+  glossary:
+    [
+      "Vibe Coding",
+      "Natural Language to Code",
+      "AI-Assisted Steering",
+      "Prototype Boundary",
+      "Material Disengagement",
+      "Dynamic Trust",
+    ]
 sources:
   - { title: "Karpathy X post: vibe coding", url: "https://x.com/karpathy/status/1886192184808149383", checked: 2026-07-05 }
   - { title: "Wayback snapshot of Karpathy X post", url: "https://web.archive.org/web/20250206155957id_/https://x.com/karpathy/status/1886192184808149383", checked: 2026-07-06 }
