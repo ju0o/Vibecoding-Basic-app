@@ -23,10 +23,10 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 5 | C | from-prompt-to-system | getting-started | 5 | deep-dive | 프롬프트에서 시스템으로 | 기초 | ai-vibe-coding-orientation | agent-loop,context-engineering | v2-released |
 | 6 | A | files-folders-and-paths | development-basics | 1 | deep-dive | 파일, 폴더, 경로를 정확히 이해하기 | 입문 | development-environment-map | files-folders-paths | v2-released |
 | 7 | D | terminal-shell-basics-reference | development-basics | 2 | reference | 터미널·셸 기본 명령 레퍼런스 | 기초 | files-folders-and-paths | terminal-shell-commands | v2-released |
-| 8 | A | variables-types-and-data-shapes | development-basics | 3 | deep-dive | 변수, 타입, 데이터 모양 | 입문 | files-folders-and-paths | variables-types-data | integrated |
-| 9 | A | control-flow-functions-errors | development-basics | 4 | deep-dive | 조건문, 반복문, 함수, 오류 | 입문 | variables-types-and-data-shapes | control-flow-functions-errors | integrated |
-| 10 | A | debugging-error-reading | development-basics | 5 | deep-dive | 오류 메시지를 읽고 디버깅하는 법 | 기초 | control-flow-functions-errors | debugging-error-reading | integrated |
-| 11 | D | regex-for-code-search | development-basics | 6 | reference | 코드 검색을 위한 정규식 레퍼런스 | 중급 | debugging-error-reading | regex-code-search | integrated |
+| 8 | A | variables-types-and-data-shapes | development-basics | 3 | deep-dive | 변수, 타입, 데이터 모양 | 입문 | files-folders-and-paths | variables-types-data | v2-released |
+| 9 | A | control-flow-functions-errors | development-basics | 4 | deep-dive | 조건문, 반복문, 함수, 오류 | 입문 | variables-types-and-data-shapes | control-flow-functions-errors | v2-released |
+| 10 | A | debugging-error-reading | development-basics | 5 | deep-dive | 오류 메시지를 읽고 디버깅하는 법 | 기초 | control-flow-functions-errors | debugging-error-reading | v2-released |
+| 11 | D | regex-for-code-search | development-basics | 6 | reference | 코드 검색을 위한 정규식 레퍼런스 | 중급 | debugging-error-reading | regex-code-search | v2-released |
 | 12 | D | package-json-and-semver | development-basics | 7 | reference | package.json과 Semantic Versioning | 기초 | terminal-shell-basics-reference | package-json-semver | planned |
 | 13 | A | web-screen-anatomy | web-basics | 1 | deep-dive | 웹 화면은 어떻게 만들어지는가 | 입문 | files-folders-and-paths | html-css-js-browser | v2-regenerate |
 | 14 | A | html-semantic-elements | web-basics | 2 | deep-dive | HTML 의미 구조와 접근성 | 기초 | web-screen-anatomy | html-semantic-elements | kb_needed |
