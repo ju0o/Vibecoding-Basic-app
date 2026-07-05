@@ -11,8 +11,8 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | Phase 2 진행: KB 2차 skills·orchestration·harness P-02 APPROVED / P-04 강의 생성 대기 |
-| Last Completed Step | Codex P-02 Knowledge Verification Batch 2 (3 KB approved, 2026-07-05) |
+| Current State | Phase 3 진행: context-engineering-mcp-skills·designing-reusable-skills P-04 generated / P-05 사이트 반영 대기 |
+| Last Completed Step | Codex P-04 Lesson Generation Batch 2 (2 lesson drafts, 2026-07-05) |
 | Next Executor | Codex |
 | Next Prompt File | `prompts/RUN-CODEX-PRODUCE.md` |
 | Blocker | 없음 |
@@ -23,16 +23,16 @@
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 2 P-02 완료 — skills·orchestration·harness KB approved
-- Verdict: APPROVED
+- Current State: CODEX-PLAN Phase 3 P-04 완료 — 2개 Lesson Draft generated
+- Verdict: DONE
 - Next Executor: Codex
 - Next Prompt File: prompts/RUN-CODEX-PRODUCE.md
-- Why: draft KB가 모두 approved 되었고 planned 항목 중 근거 KB가 approved 이상인 강의가 있음 → P-04 우선
-- Required Operator Action: None — 같은 Codex 흐름에서 P-04 강의 생성 진행
-- If Approved: 생성된 Lesson Draft를 P-05로 사이트 반영
+- Why: generated 항목 있음 → PRODUCE 우선순위상 P-05 사이트 반영이 최우선이며 단독 실행
+- Required Operator Action: None — 같은 Codex 흐름에서 P-05 사이트 반영 진행
+- If Approved: P-05 완료 후 Cline P-06 대신 O-05.2 흐름에서는 Codex가 verify/build 확인을 연속 수행하고 Phase 5 전까지 계속 진행
 - If Rejected: 해당 강의 planned로 회귀 후 필요한 KB 보강 또는 P-04 재생성
-- Files to Check: ai-ops/knowledge-base/reviews/skills/verification-report.md, ai-ops/knowledge-base/reviews/orchestration/verification-report.md, ai-ops/knowledge-base/reviews/harness/verification-report.md
-- Stop Condition: KB 외 사실로 강의 생성 금지, `npm run verify` 실패 시 다음 배치 진행 금지
+- Files to Check: ai-ops/outputs/02-drafts/context-engineering-mcp-skills/lesson.md, ai-ops/outputs/02-drafts/designing-reusable-skills/lesson.md, ai-ops/outputs/02-drafts/P-04-2026-07-05-batch2.md
+- Stop Condition: P-05는 단독 반영. 콘텐츠 문장 수정 금지, 통합 중 규격 문제 발견 시 P-04로 회귀
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** (P-02 연속 검증 2026-07-05)
-- 강의: **V2 released 9강** (V2 Wave 1 — 배포는 HOLD, 운영자 게이트) / **planned + KB 충족 5강** (order 10·12·13·14·15)
+- 강의: **V2 released 9강** (V2 Wave 1 — 배포는 HOLD, 운영자 게이트) / **generated 2강** (context-engineering-mcp-skills·designing-reusable-skills) / KB 대기 3강 (subagents·loop-engineering 계열)
 - 루프 카운터: 없음 (rag Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-05 | context-engineering-mcp-skills·designing-reusable-skills | planned → generated | Codex P-04 |
 | 2026-07-05 | KB skills·orchestration·harness | draft → approved | Codex P-02 (O-05.2 연속 검증) |
 | 2026-07-05 | KB skills·orchestration·harness | needed → draft | Codex P-01 |
 | 2026-07-05 | V1 9강 | v2-regenerate → V2 released | Codex Phase 2+3 |

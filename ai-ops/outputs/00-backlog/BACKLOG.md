@@ -83,11 +83,11 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 65 | C | context-window-and-memory | ai-system-design | 2 | deep-dive | 컨텍스트 윈도와 메모리 관리 | 기초 | context-engineering-basics | context-engineering | v2-released |
 | 66 | C | system-prompts-and-instruction-layers | ai-system-design | 3 | deep-dive | 시스템 프롬프트와 지침 계층 | 기초 | context-engineering-basics | context-engineering | v2-released |
 | 67 | C | ai-workflow-design | ai-system-design | 4 | deep-dive | AI Workflow 설계: 단계 분해와 품질 게이트 | 중급 | context-engineering-basics | agent-loop | v2-released |
-| 68 | C | context-engineering-mcp-skills | ai-system-design | 5 | deep-dive | Context Engineering, MCP, Skills의 관계 | 중급 | ai-workflow-design | context-engineering,mcp | v2-regenerate |
+| 68 | C | context-engineering-mcp-skills | ai-system-design | 6 | deep-dive | Context Engineering, MCP, Skills의 관계 | 중급 | ai-workflow-design | context-engineering,mcp,skills | generated |
 | 69 | C | tool-calling-basics | ai-system-design | 6 | deep-dive | Tool Calling: AI가 도구를 부르는 방식 | 중급 | context-engineering-basics | tool-calling | v2-released |
 | 70 | C | rag-fundamentals | ai-system-design | 7 | deep-dive | RAG: 모델이 모르는 것을 알려주는 방법 | 중급 | context-window-and-memory | rag | v2-released |
 | 71 | C | mcp-architecture-basics | ai-system-design | 8 | deep-dive | MCP 구조: 서버, 클라이언트, 도구, 리소스 | 중급 | tool-calling-basics | mcp,tool-calling | v2-released |
-| 72 | C | designing-reusable-skills | ai-system-design | 9 | deep-dive | Skill 설계: 재사용 절차 만들기 | 중급 | context-engineering-mcp-skills | skills | kb_needed |
+| 72 | C | designing-reusable-skills | ai-system-design | 10 | deep-dive | Skill 설계: 재사용 절차 만들기 | 중급 | context-engineering-mcp-skills | skills | generated |
 | 73 | C | agent-loop-anatomy | ai-system-design | 10 | deep-dive | Agent의 구조: 도구 루프와 관찰-행동 사이클 | 중급 | tool-calling-basics | agent-loop,tool-calling | v2-released |
 | 74 | C | subagents-and-delegation | ai-system-design | 11 | deep-dive | SubAgent와 위임 패턴 | 중급 | agent-loop-anatomy | agent-loop,subagents | kb_needed |
 | 75 | C | multi-agent-orchestration | ai-system-design | 12 | deep-dive | Orchestration: 여러 Agent의 협업 설계 | 중급 | subagents-and-delegation | orchestration | kb_needed |
