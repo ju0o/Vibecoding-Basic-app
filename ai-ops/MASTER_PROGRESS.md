@@ -53,7 +53,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | control-flow-functions-errors | development-basics | control-flow-functions-errors | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 9, RELEASE-2026-07-06-v2-wave9.md |
 | debugging-error-reading | development-basics | debugging-error-reading | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 9, RELEASE-2026-07-06-v2-wave9.md |
 | regex-for-code-search | development-basics | regex-code-search | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 9, RELEASE-2026-07-06-v2-wave9.md |
-| package-json-and-semver | development-basics | package-json-semver | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | — | CODEX-PLAN Phase 3 P-06 T01 Wave 3 verified, diagram included |
+| package-json-and-semver | development-basics | package-json-semver | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 10, RELEASE-2026-07-06-v2-wave10.md |
 | context-engineering-basics | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | context-window-and-memory | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | system-prompts-and-instruction-layers | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
@@ -91,8 +91,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
 | Lesson 생성 | 32 / 32 | 100% (CODEX-PLAN 확정 32강 V2 generated) |
 | Site 반영 | 32 / 32 | 100% (CODEX-PLAN 확정 32강 integrated) |
-| Verify 통과 | 32 / 32 | 100% (`npm run verify` PASS, package-json-and-semver P-08 대기) |
-| Release | 31 / 32 | 97% (V2 Wave 1+2+3+4+5+6+7+8+9 released, deployment HOLD) |
+| Verify 통과 | 32 / 32 | 100% (`npm run verify` PASS) |
+| Release | 32 / 32 | 100% (V2 Wave 1+2+3+4+5+6+7+8+9+10 released, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
@@ -147,3 +147,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-06 | CODEX-PLAN Phase 3 P-04 T01 Wave 3 | 완료 | package-json-and-semver V2 Reference Draft + diagram 생성, P-05 대기 |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-05 T01 Wave 3 | 완료 | package-json-and-semver 사이트 반영 + glossary/KB consumers/diagram 통합, `npm run lint`·`npm run typecheck` PASS |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-06 T01 Wave 3 | 완료 | `npm run verify` PASS, package-json-and-semver 검증 통과 |
+| 2026-07-06 | CODEX-PLAN Phase 3 P-08 T01 Wave 3 | 완료 | package-json-and-semver V2 Wave 10 릴리스, deployment HOLD |

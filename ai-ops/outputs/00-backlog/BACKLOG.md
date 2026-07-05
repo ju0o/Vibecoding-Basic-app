@@ -27,7 +27,7 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 9 | A | control-flow-functions-errors | development-basics | 4 | deep-dive | 조건문, 반복문, 함수, 오류 | 입문 | variables-types-and-data-shapes | control-flow-functions-errors | v2-released |
 | 10 | A | debugging-error-reading | development-basics | 5 | deep-dive | 오류 메시지를 읽고 디버깅하는 법 | 기초 | control-flow-functions-errors | debugging-error-reading | v2-released |
 | 11 | D | regex-for-code-search | development-basics | 6 | reference | 코드 검색을 위한 정규식 레퍼런스 | 중급 | debugging-error-reading | regex-code-search | v2-released |
-| 12 | D | package-json-and-semver | development-basics | 7 | reference | package.json과 Semantic Versioning | 기초 | terminal-shell-basics-reference | package-json-semver | integrated |
+| 12 | D | package-json-and-semver | development-basics | 7 | reference | package.json과 Semantic Versioning | 기초 | terminal-shell-basics-reference | package-json-semver | v2-released |
 | 13 | A | web-screen-anatomy | web-basics | 1 | deep-dive | 웹 화면은 어떻게 만들어지는가 | 입문 | files-folders-and-paths | html-css-js-browser | v2-regenerate |
 | 14 | A | html-semantic-elements | web-basics | 2 | deep-dive | HTML 의미 구조와 접근성 | 기초 | web-screen-anatomy | html-semantic-elements | kb_needed |
 | 15 | A | css-cascade-layout-responsive | web-basics | 3 | deep-dive | CSS cascade, layout, responsive | 기초 | web-screen-anatomy | css-cascade-layout | kb_needed |
