@@ -11,27 +11,27 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | Phase 3 P-05 T08 Wave 2 완료: embeddings-and-similarity integrated / verify 대기 |
-| Last Completed Step | Codex P-05 Site Integration T08 Wave 2 (1 lesson integrated, lint/typecheck PASS, 2026-07-05) |
+| Current State | Phase 3 Verify/Release T08 Wave 2 완료: embeddings-and-similarity released / 다음 needed KB 수집 대기 |
+| Last Completed Step | Codex Verify/Release T08 Wave 2 (`npm run verify` PASS, 1 lesson released, 2026-07-05) |
 | Next Executor | Codex |
 | Next Prompt File | `prompts/RUN-CODEX-PRODUCE.md` |
 | Blocker | 없음 |
-| Required Human Action | None — 같은 Codex 흐름에서 integrated lesson 1건 verify/release 진행 |
+| Required Human Action | None — 같은 Codex 흐름에서 다음 needed KB P-01 수집 진행 |
 | Release Status | V2 17강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 3 P-05 T08 Wave 2 완료 — embeddings-and-similarity integrated, verify 대기
+- Current State: CODEX-PLAN Phase 3 Verify/Release T08 Wave 2 완료 — embeddings-and-similarity released, generated·recollect·planned 없음
 - Verdict: APPROVED
 - Next Executor: Codex
-- Next Prompt File: CODEX-PLAN.md
-- Why: integrated 항목이 있어 무정지 흐름상 verify/release 확인이 다음 단계
-- Required Operator Action: None — 같은 Codex 흐름에서 `npm run verify` 및 릴리스 기록 진행
-- If Approved: verify 통과 시 embeddings-and-similarity released 처리 후 다음 needed KB 수집으로 계속 진행
-- If Rejected: 실패 로그를 build_fail로 기록하고 P-07 수정 루프로 진행
-- Files to Check: src/content/curriculum.ts, src/content/glossary.ts, src/content/lessons/markdown/embeddings-and-similarity.md
+- Next Prompt File: prompts/RUN-CODEX-PRODUCE.md
+- Why: build_fail·generated·recollect·planned 없음, needed 상태 KB가 있어 P-01 KB 수집이 다음 단계
+- Required Operator Action: None — 같은 Codex 흐름에서 BACKLOG 순서상 needed KB 최대 5건 수집
+- If Approved: draft 발생 시 P-02 원문 재접속 검증을 같은 흐름에서 진행
+- If Rejected: 해당 KB needed로 유지하고 수집 범위 재조정
+- Files to Check: ai-ops/outputs/00-backlog/BACKLOG.md, ai-ops/MASTER_PROGRESS.md
 - Stop Condition: Phase 5 개발 서버 확인 후 배포 승인 전까지 운영자 입력 없이 계속 진행
 ```
 
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved**
-- 강의: **V2 released 21강** (V2 Wave 1+2+3+4+5 — 배포는 HOLD, 운영자 게이트) / T08 integrated 1강 verify 대기
+- 강의: **V2 released 22강** (V2 Wave 1+2+3+4+5+6 — 배포는 HOLD, 운영자 게이트)
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-05 | embeddings-and-similarity | integrated → verified → released | Codex Verify/Release T08 Wave 2 |
 | 2026-07-05 | embeddings-and-similarity | generated → integrated | Codex P-05 T08 Wave 2 |
 | 2026-07-05 | embeddings-and-similarity | planned → generated | Codex P-04 T08 Wave 2 |
 | 2026-07-05 | tokenization-and-context·prompt-engineering-foundations·grounding-and-citations·hallucination-and-verification | integrated → verified → released | Codex Verify/Release T08 Wave 1 |
