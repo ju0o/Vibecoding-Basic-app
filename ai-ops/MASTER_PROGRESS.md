@@ -43,8 +43,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | multi-agent-orchestration | M10 | orchestration | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 3, RELEASE-2026-07-05-v2-wave3.md |
 | loop-engineering-basics | M10 | agent-loop, loop-engineering | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 3, RELEASE-2026-07-05-v2-wave3.md |
 | harness-engineering-basics | M10 | harness | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 3, RELEASE-2026-07-05-v2-wave3.md |
-| context-caching-and-state | M10 | context-caching | ✓ | ✓ | — | — | P-05 integrated, 검증 대기 |
-| ai-system-evaluation | M10 | ai-system-evaluation | ✓ | ✓ | — | — | P-05 integrated, 검증 대기 |
+| context-caching-and-state | M10 | context-caching | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 4, RELEASE-2026-07-05-v2-wave4.md |
+| ai-system-evaluation | M10 | ai-system-evaluation | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 4, RELEASE-2026-07-05-v2-wave4.md |
 
 ## 집계 (Executor가 행 갱신 시 함께 갱신)
 
@@ -58,8 +58,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
 | Lesson 생성 | 17 / 17 | 100% |
 | Site 반영 | 17 / 17 | 100% |
-| Verify 통과 | 15 / 17 | 88% |
-| Release | 15 / 17 | 88% (V2 Wave 1+2+3, deployment HOLD) |
+| Verify 통과 | 17 / 17 | 100% |
+| Release | 17 / 17 | 100% (V2 Wave 1+2+3+4, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
@@ -85,3 +85,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-05 | CODEX-PLAN Phase 3 P-06/P-08 Batch 3 | 완료 | `npm run verify` PASS, V2 Wave 3 릴리스 |
 | 2026-07-05 | CODEX-PLAN Phase 3 P-04 Batch 4 | 완료 | context-caching-and-state·ai-system-evaluation V2 Lesson Draft 생성, P-05 대기 |
 | 2026-07-05 | CODEX-PLAN Phase 3 P-05 Batch 4 | 완료 | context-caching-and-state·ai-system-evaluation 사이트 반영, 검증 대기 |
+| 2026-07-05 | CODEX-PLAN Phase 3 P-06/P-08 Batch 4 | 완료 | `npm run verify` PASS, V2 Wave 4 릴리스 |

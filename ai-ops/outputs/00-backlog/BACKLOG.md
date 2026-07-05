@@ -93,8 +93,8 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 75 | C | multi-agent-orchestration | ai-system-design | 12 | deep-dive | Orchestration: 여러 Agent의 협업 설계 | 중급 | subagents-and-delegation | orchestration | v2-released |
 | 76 | C | loop-engineering-basics | ai-system-design | 13 | deep-dive | Loop Engineering: 반복 실행과 종료 조건 | 중급 | agent-loop-anatomy | agent-loop,loop-engineering | v2-released |
 | 77 | C | harness-engineering-basics | ai-system-design | 14 | deep-dive | Harness Engineering: 실행 환경, 권한, 검증 장치 | 중급 | loop-engineering-basics | harness | v2-released |
-| 78 | C | context-caching-and-state | ai-system-design | 15 | deep-dive | Context Caching과 상태 재사용 | 중급 | context-window-and-memory | context-caching | integrated |
-| 79 | D | ai-system-evaluation | ai-system-design | 16 | reference | AI 시스템 평가와 eval 레퍼런스 | 중급 | harness-engineering-basics | ai-system-evaluation | integrated |
+| 78 | C | context-caching-and-state | ai-system-design | 15 | deep-dive | Context Caching과 상태 재사용 | 중급 | context-window-and-memory | context-caching | v2-released |
+| 79 | D | ai-system-evaluation | ai-system-design | 16 | reference | AI 시스템 평가와 eval 레퍼런스 | 중급 | harness-engineering-basics | ai-system-evaluation | v2-released |
 | 80 | B | requirement-to-task-breakdown | practical-vibe-coding | 1 | deep-dive | 요구사항을 작업 단위로 쪼개기 | 기초 | human-ai-collaboration-patterns | requirement-task-breakdown | kb_needed |
 | 81 | B | prompt-to-implementation-loop | practical-vibe-coding | 2 | deep-dive | 프롬프트에서 구현 루프까지 | 중급 | requirement-to-task-breakdown | prompt-implementation-loop | kb_needed |
 | 82 | A | code-change-risk-analysis | practical-vibe-coding | 3 | deep-dive | 코드 변경 위험 분석 | 중급 | debugging-error-reading | code-change-risk-analysis | kb_needed |

@@ -11,28 +11,28 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | Phase 3 P-05 완료: 마지막 2강 integrated / 검증·릴리스 진행 대기 |
-| Last Completed Step | Codex P-05 Site Integration Batch 4 (2 lessons integrated, 2026-07-05) |
+| Current State | Phase 3 P-08 완료: M10 17강 released / 다음 KB needed 수집 대기 |
+| Last Completed Step | Codex P-06/P-08 Verification and Release Batch 4 (2 lessons released, 2026-07-05) |
 | Next Executor | Codex |
 | Next Prompt File | `prompts/RUN-CODEX-PRODUCE.md` |
 | Blocker | 없음 |
-| Required Human Action | None — 같은 Codex 흐름에서 검증·릴리스 진행 |
-| Release Status | V2 15강 released·미배포 — 배포는 Phase 5 승인 후에만 |
+| Required Human Action | None — 같은 Codex 흐름에서 다음 KB 수집 물결 진행 |
+| Release Status | V2 17강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 3 P-05 완료 — context-caching-and-state·ai-system-evaluation integrated
+- Current State: CODEX-PLAN Phase 3 P-08 완료 — M10 17강 released, 다음 backlog KB needed 다수 존재
 - Verdict: APPROVED
 - Next Executor: Codex
-- Next Prompt File: prompts/P-06-build-verification.md
-- Why: integrated 강의 2건 발생으로 렌더·타입·빌드 검증 후 릴리스 상태 전이가 필요함
-- Required Operator Action: None — 같은 Codex 흐름에서 P-06/P-08 진행
-- If Approved: verified → released로 전이하고 V2 Wave 4 릴리스 기록 작성
-- If Rejected: build_fail(n)로 전이하고 P-07 수정
-- Files to Check: src/content/lessons/markdown/context-caching-and-state.md, src/content/lessons/markdown/ai-system-evaluation.md, src/content/curriculum.ts, src/content/glossary.ts
-- Stop Condition: npm run verify PASS 또는 실패 단계와 build_fail 카운터 기록
+- Next Prompt File: prompts/RUN-CODEX-PRODUCE.md
+- Why: build_fail·generated·recollect·planned 없음, BACKLOG에 kb_needed 항목이 남아 있어 P-01 Knowledge Collection이 다음 PRODUCE 우선순위
+- Required Operator Action: None — 같은 Codex 흐름에서 P-01 최대 5건 수집 진행
+- If Approved: draft KB를 다음 검증 흐름에서 P-02로 처리
+- If Rejected: 지적된 KB만 P-03 재수집 또는 BLOCKED 기록
+- Files to Check: ai-ops/outputs/04-integrated/RELEASE-2026-07-05-v2-wave4.md, ai-ops/outputs/06-build-verification/VERIFIED-2026-07-05-5.md, ai-ops/MASTER_PROGRESS.md, ai-ops/outputs/00-backlog/BACKLOG.md
+- Stop Condition: P-01은 BACKLOG의 kb_needed 중 우선순위 상위 최대 5건만 수집
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved**
-- 강의: **V2 released 15강** (V2 Wave 1+2+3 — 배포는 HOLD, 운영자 게이트) / **integrated 2강** (검증 대기)
+- 강의: **V2 released 17강** (V2 Wave 1+2+3+4 — 배포는 HOLD, 운영자 게이트) / 다음 물결 KB 수집 대기
 - 루프 카운터: 없음 (rag Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-05 | context-caching-and-state·ai-system-evaluation | integrated → verified → released | Codex P-06/P-08 |
 | 2026-07-05 | context-caching-and-state·ai-system-evaluation | generated → integrated | Codex P-05 |
 | 2026-07-05 | context-caching-and-state·ai-system-evaluation | planned → generated | Codex P-04 |
 | 2026-07-05 | subagents-and-delegation·multi-agent-orchestration·loop-engineering-basics·harness-engineering-basics | integrated → verified → released | Codex P-06/P-08 |
