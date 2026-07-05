@@ -11,27 +11,27 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | CODEX-PLAN Phase 3 P-08 T01 Wave 2 완료: 4강 released / package-json-and-semver P-04 대기 |
-| Last Completed Step | Codex P-08 variables-types-and-data-shapes·control-flow-functions-errors·debugging-error-reading·regex-for-code-search released (2026-07-06) |
+| Current State | CODEX-PLAN Phase 3 P-04 T01 Wave 3 완료: package-json-and-semver generated / P-05 site integration 대기 |
+| Last Completed Step | Codex P-04 package-json-and-semver generated (2026-07-06) |
 | Next Executor | Codex |
-| Next Prompt File | `prompts/P-04-lesson-generation.md` |
+| Next Prompt File | `prompts/P-05-site-integration.md` |
 | Blocker | 없음 |
-| Required Human Action | None — approved KB `package-json-semver` 기반 P-04 생성 계속 |
+| Required Human Action | None — P-05는 generated 항목 단독 사이트 반영 |
 | Release Status | V2 31강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 3 P-08 T01 Wave 2 완료 — 4강 released, deployment HOLD
+- Current State: CODEX-PLAN Phase 3 P-04 T01 Wave 3 완료 — `package-json-and-semver` generated
 - Verdict: DONE
 - Next Executor: Codex
-- Next Prompt File: prompts/P-04-lesson-generation.md
-- Why: generated/integrated/recollect/build_fail 항목이 없고 approved KB를 가진 planned 항목 `package-json-and-semver`가 남아 있음
-- Required Operator Action: None — 같은 Codex 흐름에서 P-04로 `package-json-and-semver` 생성
-- If Approved: P-05 단독 사이트 반영
-- If Rejected: revise/recollect 상태로 전환하고 원인 기록
-- Files to Check: ai-ops/knowledge-base/entries/T01/package-json-semver.md, ai-ops/outputs/00-backlog/BACKLOG.md
+- Next Prompt File: prompts/P-05-site-integration.md
+- Why: generated 항목이 있으므로 RUN 우선순위상 P-05가 최우선이며 이 단계는 단독 실행
+- Required Operator Action: None — 같은 Codex 흐름에서 generated 강의 사이트 반영
+- If Approved: integrated 상태로 전환 후 P-06 verify
+- If Rejected: generated 항목은 planned로 회귀하고 P-04 재작성
+- Files to Check: ai-ops/outputs/02-drafts/P-04-2026-07-06-t01-wave3.md, ai-ops/outputs/02-drafts/package-json-and-semver/lesson.md
 - Stop Condition: Phase 5 개발 서버 확인 보고에서만 정지
 ```
 
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved** / KB 5차 T01/T08: dev-environment-map·vibe-coding-origin-karpathy·ai-learning-verification·files-folders-paths·terminal-shell-commands = **approved** / KB 6차 T01: variables-types-data·control-flow-functions-errors·debugging-error-reading·regex-code-search·package-json-semver = **approved** / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 31강 + planned 1강** (deployment HOLD, P-04 대기)
+- 강의: **V2 released 31강 + generated 1강** (deployment HOLD, P-05 대기)
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-06 | package-json-and-semver | planned → generated | Codex P-04 T01 Wave 3 |
 | 2026-07-06 | variables-types-and-data-shapes·control-flow-functions-errors·debugging-error-reading·regex-for-code-search | verified → released | Codex P-08 T01 Wave 2 |
 | 2026-07-06 | variables-types-and-data-shapes·control-flow-functions-errors·debugging-error-reading·regex-for-code-search | integrated → verified | Codex P-06 T01 Wave 2 |
 | 2026-07-06 | variables-types-and-data-shapes·control-flow-functions-errors·debugging-error-reading·regex-for-code-search | generated → integrated | Codex P-05 T01 Wave 2 |
