@@ -48,7 +48,8 @@
 - SVG 다이어그램 렌더링 (`src/content/lessons/diagrams/{slug}/`, 다크모드 안전)
 - **레퍼런스형 강의 지원**: D 기둥(명령어 사전식)은 8섹션이 안 맞음 — 레퍼런스 레이아웃(명령어별 소절: 문법/옵션/예시/주의) 허용하도록 스키마에 lesson type(`deep-dive` | `reference`) 추가
 - 용어 사전 상세화 지원: explanation 장문 렌더링 확인
-- 완료 기준: `npm run verify` 통과 + 렌더링 3종(마크·인용·SVG) 확인
+- **읽기 경험 기준 준수**: [roadmap/READING-UX-BRIEF.md](roadmap/READING-UX-BRIEF.md) §1~8 (장문 타이포, 인용 블록 3층 구분, 스크롤 추적 목차, 읽기 진행 바, 레퍼런스형 명령어 인덱스, 모바일·다크모드)
+- 완료 기준: `npm run verify` 통과 + UX 브리프의 완료 판정(샘플 2강 자가 점검 기록)
 
 ## 5. Phase 1 — 전체 커리큘럼 설계 (승인 없이 확정)
 
@@ -62,7 +63,7 @@
 배치(KB 5~8 → 강의 3~5) 물결로 반복. 각 물결:
 1. **KB 수집**: [knowledge-base/_TEMPLATE.md](knowledge-base/_TEMPLATE.md) — 13섹션 + Quote Bank 5+. 공식 출처만([sources/SOURCE-REGISTRY.md](sources/SOURCE-REGISTRY.md)), 전 주장 URL+확인 날짜, 오늘 연 문서만
 2. **KB 검증**: [qa/KNOWLEDGE-SCORE.md](qa/KNOWLEDGE-SCORE.md) 게이트 4+기준 7. **검증은 수집과 별도 단계로, 원문 재접속 대조를 기록으로 남긴다** (같은 실행 내 자기 검증임을 인지하고 더 엄격하게 — 대조 기록 없는 PASS 금지). 80 미달 → 재수집 루프(최대 2회) → 그래도 미달이면 해당 항목 BLOCKED 기록 후 다음 항목 진행
-3. **강의 생성**: [prompts/P-04-lesson-generation.md](prompts/P-04-lesson-generation.md) — V2 규격 전부 (≥8,000자, 인용 3+ Quote Bank에서만, 하이라이트 상한, KB 외 사실 0건). 레퍼런스형은 명령어별 예시 완결성이 기준
+3. **강의 생성**: [prompts/P-04-lesson-generation.md](prompts/P-04-lesson-generation.md) — V2 규격 전부 (≥8,000자, 인용 3+ Quote Bank에서만, 하이라이트 상한, KB 외 사실 0건). 레퍼런스형은 명령어별 예시 완결성이 기준. **모든 인용은 [qa/CITATION-POLICY.md](qa/CITATION-POLICY.md) 준수** (짧은 인용+출처 링크 필수+해설, 문서당 3건 상한, 이미지 복사 금지·SVG 재작성). 애매한 인용은 멈추지 말고 `reports/citation-review.md`에 기록 후 계속
 4. **다이어그램**: 필요처에 SVG
 5. **용어**: 강의에서 파생되는 모든 용어를 상세 서술로 glossary에 (명사형 종결, 중복 대조)
 6. **반영 + verify**: src/content 반영 → `npm run verify` → 실패 시 통합 실수 수정 후 재검증 → 통과 시 커밋(src/content 포함 — git show --stat 확인) + 릴리스 기록
@@ -80,8 +81,8 @@
 ## 8. Phase 5 — 개발 서버 확인 (여기서 처음이자 마지막으로 멈춘다)
 
 1. `npm run dev`로 개발 서버 기동, 주요 페이지(홈/커리큘럼/강의 3종 유형별/용어/검색) 자가 점검 + 점검 기록 작성
-2. **STOP — NEXT_ACTION으로 운영자에게 보고**: "개발 서버 http://localhost:3000 에서 확인 요청" + 완성 요약(강의 수/용어 수/BLOCKED 목록/셀프 편집 결과)
-3. 운영자 확인·승인 대기
+2. **STOP — NEXT_ACTION으로 운영자에게 보고**: "개발 서버 http://localhost:3000 에서 확인 요청" + 완성 요약(강의 수/용어 수/BLOCKED 목록/셀프 편집 결과/`reports/citation-review.md` 인용 검토 목록)
+3. 운영자 확인 + **Fable 사후 감사([qa/FABLE-AUDIT-PLAN.md](qa/FABLE-AUDIT-PLAN.md) — 표본 재검증, 배포 승인 권고)** 대기. 감사 협조: 요청 시 표본 목록의 원문 대조 기록 제공
 
 ## 9. 배포 (운영자 승인 후에만)
 
