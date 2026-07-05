@@ -2,8 +2,8 @@
 id: vibe-coding-origin-karpathy
 title: "Vibe Coding Origin and Karpathy 2025 (바이브코딩 용어의 기원)"
 topicGroup: T08
-status: draft
-score: null
+status: approved
+score: 86
 level: 기초
 prerequisites: []
 successors: [ai-era-timeline]

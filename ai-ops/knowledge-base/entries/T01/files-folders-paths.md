@@ -2,8 +2,8 @@
 id: files-folders-paths
 title: "Files, Folders, and Paths (파일, 폴더, 경로)"
 topicGroup: T01
-status: draft
-score: null
+status: approved
+score: 90
 level: 입문
 prerequisites: [dev-environment-map]
 successors: [terminal-shell-commands, variables-types-data]
@@ -122,4 +122,3 @@ A: path는 위치 정보이고, 실제 file system interaction은 API가 필요�
 
 ## 변경 이력
 - 2026-07-05: 최초 작성 (Codex, P-01)
-

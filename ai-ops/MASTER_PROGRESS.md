@@ -28,11 +28,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | grounding-citations | T08 | ✓ | ✓ 91 (2026-07-05, O-05.2 연속 검증) | order 52 근거 |
 | hallucination-verification | T08 | ✓ | ✓ 90 (2026-07-05, O-05.2 연속 검증) | order 53 근거 |
 | embeddings-similarity | T08 | ✓ | ✓ 88 (2026-07-05, O-05.2 연속 검증) | order 54 근거 |
-| dev-environment-map | T01 | ✓ | — (draft, P-02 대기) | order 2 근거 |
-| vibe-coding-origin-karpathy | T08 | ✓ | — (draft, P-02 대기) | order 3 근거 / registry 적합성 확인 필요 |
-| ai-learning-verification | T08 | ✓ | — (draft, P-02 대기) | order 4 근거 |
-| files-folders-paths | T01 | ✓ | — (draft, P-02 대기) | order 6 근거 |
-| terminal-shell-commands | T01 | ✓ | — (draft, P-02 대기) | order 7 근거 |
+| dev-environment-map | T01 | ✓ | ✓ 88 (2026-07-06) | order 2 근거 |
+| vibe-coding-origin-karpathy | T08 | ✓ | ✓ 86 (Loop A 1회 후, 2026-07-06) | order 3 근거 / 특수 출처 승인 반영 |
+| ai-learning-verification | T08 | ✓ | ✓ 92 (2026-07-06) | order 4 근거 |
+| files-folders-paths | T01 | ✓ | ✓ 90 (2026-07-06) | order 6 근거 |
+| terminal-shell-commands | T01 | ✓ | ✓ 88 (2026-07-06) | order 7 근거 |
 
 ## Lesson 매트릭스
 
@@ -65,18 +65,18 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
-| Knowledge Base 수집(P-01) | 22 / 22 | 100% (5차 T01/T08 5건 draft, P-02 대기) |
-| Knowledge Base (approved 이상) | 17 / 22 | 77% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건 + 4차 approved 5건 / 5차 draft 5건) |
+| Knowledge Base 수집(P-01) | 22 / 22 | 100% (5차 T01/T08 5건 approved) |
+| Knowledge Base (approved 이상) | 22 / 22 | 100% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건 + 4차 approved 5건 + 5차 approved 5건) |
 | KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (2차 approved KB) | 3 / 3 | 100% |
 | KB Quote Bank (3차 approved KB) | 4 / 4 | 100% |
 | KB Quote Bank (4차 approved KB) | 5 / 5 | 100% (tokenization-context Loop A 후 승인) |
-| KB Quote Bank (5차 draft KB) | 5 / 5 | 100% (P-02 대기) |
+| KB Quote Bank (5차 approved KB) | 5 / 5 | 100% (vibe-coding-origin-karpathy Loop A 후 승인) |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
-| Lesson 생성 | 22 / 22 | 100% (T08 Wave 2 embeddings-and-similarity generated) |
-| Site 반영 | 22 / 22 | 100% (generated 이상 전건 반영) |
-| Verify 통과 | 22 / 22 | 100% (`npm run verify` PASS, 33 static pages) |
-| Release | 22 / 22 | 100% (V2 Wave 1+2+3+4+5+6 released, deployment HOLD) |
+| Lesson 생성 | 22 / 27 | 81% (5차 approved KB 기반 planned 5건 P-04 대기) |
+| Site 반영 | 22 / 27 | 81% (generated 이상 전건 반영, planned 5건 대기) |
+| Verify 통과 | 22 / 27 | 81% (`npm run verify` PASS 기준은 D-02 후 갱신 예정) |
+| Release | 22 / 27 | 81% (V2 Wave 1+2+3+4+5+6 released, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
@@ -112,3 +112,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-05 | CODEX-PLAN Phase 3 P-04 T08 Wave 2 | 완료 | embeddings-and-similarity V2 Lesson Draft 생성, P-05 대기 |
 | 2026-07-05 | CODEX-PLAN Phase 3 P-05 T08 Wave 2 | 완료 | embeddings-and-similarity 사이트 반영, `npm run lint`/`npm run typecheck` PASS |
 | 2026-07-05 | CODEX-PLAN Phase 3 Verify/Release T08 Wave 2 | 완료 | `npm run verify` PASS, embeddings-and-similarity V2 Wave 6 릴리스 |
+| 2026-07-06 | CODEX-PLAN Phase 2 KB 5차 P-02 | 완료 | dev-environment-map 88·vibe-coding-origin-karpathy 86(Loop A)·ai-learning-verification 92·files-folders-paths 90·terminal-shell-commands 88 APPROVED |

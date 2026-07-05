@@ -2,8 +2,8 @@
 id: terminal-shell-commands
 title: "Terminal, Shell, and Basic Commands (터미널·셸 기본 명령)"
 topicGroup: T01
-status: draft
-score: null
+status: approved
+score: 88
 level: 기초
 prerequisites: [files-folders-paths]
 successors: [package-json-semver, git-basics]

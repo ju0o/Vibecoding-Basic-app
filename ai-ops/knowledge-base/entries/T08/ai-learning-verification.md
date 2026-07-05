@@ -2,8 +2,8 @@
 id: ai-learning-verification
 title: "AI Learning Verification (AI 학습 검증)"
 topicGroup: T08
-status: draft
-score: null
+status: approved
+score: 92
 level: 기초
 prerequisites: [vibe-coding-origin-karpathy]
 successors: [prompt-engineering, grounding-citations, hallucination-verification]
@@ -122,4 +122,3 @@ A: 아니다. OpenAI safety best practices는 code generation에서 human review
 
 ## 변경 이력
 - 2026-07-05: 최초 작성 (Codex, P-01)
-

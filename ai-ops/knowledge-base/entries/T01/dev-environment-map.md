@@ -2,8 +2,8 @@
 id: dev-environment-map
 title: "Development Environment Map (개발 환경 지도)"
 topicGroup: T01
-status: draft
-score: null
+status: approved
+score: 88
 level: 입문
 prerequisites: []
 successors: [files-folders-paths, terminal-shell-commands]
@@ -125,4 +125,3 @@ A: VS Code 문서는 terminal이 build, test, deploy를 위한 shell commands를
 
 ## 변경 이력
 - 2026-07-05: 최초 작성 (Codex, P-01)
-
