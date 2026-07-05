@@ -49,10 +49,10 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | from-prompt-to-system | M10 | n/a (구 체제 파일럿) | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | files-folders-and-paths | development-basics | files-folders-paths | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 7, RELEASE-2026-07-06-v2-wave7.md |
 | terminal-shell-basics-reference | development-basics | terminal-shell-commands | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 8, RELEASE-2026-07-06-v2-wave8.md |
-| variables-types-and-data-shapes | development-basics | variables-types-data | — | — | — | — | CODEX-PLAN Phase 2 KB 6차 approved, P-04 planned |
-| control-flow-functions-errors | development-basics | control-flow-functions-errors | — | — | — | — | CODEX-PLAN Phase 2 KB 6차 approved, P-04 planned |
-| debugging-error-reading | development-basics | debugging-error-reading | — | — | — | — | CODEX-PLAN Phase 2 KB 6차 approved, P-04 planned |
-| regex-for-code-search | development-basics | regex-code-search | — | — | — | — | CODEX-PLAN Phase 2 KB 6차 approved, P-04 planned |
+| variables-types-and-data-shapes | development-basics | variables-types-data | ✓ | — | — | — | CODEX-PLAN Phase 3 P-04 T01 Wave 2 generated, diagram included |
+| control-flow-functions-errors | development-basics | control-flow-functions-errors | ✓ | — | — | — | CODEX-PLAN Phase 3 P-04 T01 Wave 2 generated, diagram included |
+| debugging-error-reading | development-basics | debugging-error-reading | ✓ | — | — | — | CODEX-PLAN Phase 3 P-04 T01 Wave 2 generated, diagram included |
+| regex-for-code-search | development-basics | regex-code-search | ✓ | — | — | — | CODEX-PLAN Phase 3 P-04 T01 Wave 2 generated, diagram included |
 | package-json-and-semver | development-basics | package-json-semver | — | — | — | — | CODEX-PLAN Phase 2 KB 6차 approved, P-04 planned |
 | context-engineering-basics | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | context-window-and-memory | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
@@ -89,9 +89,9 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | KB Quote Bank (5차 approved KB) | 5 / 5 | 100% (vibe-coding-origin-karpathy Loop A 후 승인) |
 | KB Quote Bank (6차 approved KB) | 5 / 5 | 100% |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
-| Lesson 생성 | 27 / 32 | 84% (6차 approved KB 5건 planned, P-04 대기) |
-| Site 반영 | 27 / 32 | 84% (6차 approved KB 5건 planned, P-04 대기) |
-| Verify 통과 | 27 / 32 | 84% (`npm run verify` PASS, 6차 approved KB 5건 planned) |
+| Lesson 생성 | 31 / 32 | 97% (6차 approved KB 4건 generated, package-json-and-semver planned) |
+| Site 반영 | 27 / 32 | 84% (generated 4건 P-05 대기) |
+| Verify 통과 | 27 / 32 | 84% (`npm run verify` PASS, generated 4건 P-05 대기) |
 | Release | 27 / 32 | 84% (V2 Wave 1+2+3+4+5+6+7+8 released, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
@@ -140,3 +140,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-06 | CODEX-PLAN Phase 3 P-08 Terminal Reference | 완료 | terminal-shell-basics-reference V2 Wave 8 릴리스, deployment HOLD |
 | 2026-07-06 | CODEX-PLAN Phase 2 KB 6차 P-01 | 완료 | variables-types-data·control-flow-functions-errors·debugging-error-reading·regex-code-search·package-json-semver draft 생성, P-02 대기 |
 | 2026-07-06 | CODEX-PLAN Phase 2 KB 6차 P-02 | 완료 | variables-types-data 92·control-flow-functions-errors 92·debugging-error-reading 89·regex-code-search 87·package-json-semver 85 APPROVED |
+| 2026-07-06 | CODEX-PLAN Phase 3 P-04 T01 Wave 2 | 완료 | variables-types-and-data-shapes·control-flow-functions-errors·debugging-error-reading·regex-for-code-search V2 Lesson Draft + diagrams 생성, P-05 대기 |

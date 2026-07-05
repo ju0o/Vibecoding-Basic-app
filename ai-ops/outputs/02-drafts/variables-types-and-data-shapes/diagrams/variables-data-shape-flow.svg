@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="360" viewBox="0 0 960 360" role="img" aria-labelledby="title desc">
+  <title id="title">Variables, Types, and Data Shapes</title>
+  <desc id="desc">Variable names point to runtime values; values have types; objects and arrays create data shapes used by UI, API, and AI review.</desc>
+  <style>
+    .bg { fill: #fffdf7; }
+    .box { fill: #ffffff; stroke: #c9b46a; stroke-width: 2; rx: 18; }
+    .label { fill: #2d2610; font: 700 22px system-ui, sans-serif; }
+    .text { fill: #4b4325; font: 16px system-ui, sans-serif; }
+    .arrow { stroke: #9a7b16; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #14120b; }
+      .box { fill: #1f1b10; stroke: #d6b94e; }
+      .label { fill: #fff3bf; }
+      .text { fill: #e8dca8; }
+      .arrow { stroke: #d6b94e; }
+    }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#9a7b16" />
+    </marker>
+  </defs>
+  <rect class="bg" width="960" height="360" />
+  <rect class="box" x="40" y="92" width="180" height="120" />
+  <text class="label" x="72" y="138">Variable</text>
+  <text class="text" x="72" y="168">name binding</text>
+  <text class="text" x="72" y="192">let / const</text>
+  <path class="arrow" d="M225 152 H330" />
+  <rect class="box" x="340" y="72" width="220" height="160" />
+  <text class="label" x="390" y="125">Value</text>
+  <text class="text" x="382" y="156">runtime data</text>
+  <text class="text" x="382" y="182">has the type</text>
+  <path class="arrow" d="M565 152 H670" />
+  <rect class="box" x="680" y="52" width="230" height="200" />
+  <text class="label" x="728" y="105">Data Shape</text>
+  <text class="text" x="724" y="138">object properties</text>
+  <text class="text" x="724" y="164">array elements</text>
+  <text class="text" x="724" y="190">UI / API contract</text>
+  <path class="arrow" d="M795 255 V310 H450 V238" />
+  <text class="text" x="318" y="322">AI review checks the actual value type and shape, not only the variable name.</text>
+</svg>
