@@ -11,8 +11,8 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | Phase 0 완료: V2 플랫폼 구현·verify PASS / Phase 1 커리큘럼 확장 진행 |
-| Last Completed Step | Codex D-01 (Content Format V2 platform, 2026-07-05) |
+| Current State | Phase 1 완료: 100강 V2 커리큘럼·백로그 확정 / Phase 2 KB 물결 진행 |
+| Last Completed Step | Codex Phase 1 (100-lesson curriculum map and backlog, 2026-07-05) |
 | Next Executor | Codex |
 | Next Prompt File | `CODEX-PLAN.md` §10 시작 지시 한 줄 |
 | Blocker | 없음 |
@@ -23,16 +23,16 @@
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 0 완료, Phase 1 진행
-- Verdict: DONE (D-01 Phase 0)
+- Current State: CODEX-PLAN Phase 1 완료, Phase 2 진행
+- Verdict: DONE (Phase 1)
 - Next Executor: Codex
 - Next Prompt File: CODEX-PLAN.md — 세션에 §10의 시작 지시 한 줄을 전달:
   "ai-ops/CODEX-PLAN.md를 읽고 Phase 0부터 Phase 5(개발 서버 확인 보고)까지 멈춤 없이 실행하라."
-- Why: CODEX-PLAN — Phase 0 완료 기준(`npm run verify` + UX 자가 점검) 충족 후 Phase 1로 자동 진행
+- Why: CODEX-PLAN — 100강 백로그와 KB inventory 확정 후 Phase 2 KB·강의 물결로 자동 진행
 - Required Operator Action: None — 다음 개입은 Codex의 Phase 5 보고 때 (개발 서버 확인 + 배포 승인)
 - If Approved: (Phase 5 보고 후) 배포 환경 지정 → Codex가 §9 배포 수행
 - If Rejected: (Phase 5 보고 후) "Reject: {항목}" → Codex가 수정 물결 후 §8 재실행
-- Files to Check: ai-ops/outputs/04-integrated/D-01-format-v2.md, src/content/schema.ts, src/lib/lesson-content.ts
+- Files to Check: ai-ops/roadmap/CURRICULUM-MAP.md, ai-ops/outputs/00-backlog/BACKLOG.md, ai-ops/outputs/04-integrated/D-01-format-v2.md
 - Stop Condition: Codex는 Phase 5에서만 정지. 품질 불변 조건(§1) 우회 금지
 ```
 

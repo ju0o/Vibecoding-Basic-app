@@ -1,121 +1,73 @@
-# 전체 커리큘럼 분해 계획서 (Curriculum Map)
+# Curriculum Map V2 — 100-Lesson Deep Archive
 
-13개 모듈(schema.ts MODULE_IDS 고정)에 프로젝트 전체 주제를 배치한 지도. 모듈별 강의 목록은 **후보**이며, 정식 확정은 WF-04(모듈 분해) → BACKLOG 승인으로 진행한다. 현재 정식 분해 완료: ai-system-design (12강 승인됨).
+Updated: 2026-07-05
+Executor: Codex Phase 1
+Status: 확정. CODEX-PLAN v2에 따라 운영자 승인 없이 Phase 2로 진행한다.
 
-출처 표기 T01~T12 = [sources/COLLECTION-PLAN.md](../sources/COLLECTION-PLAN.md)의 주제군.
+## Goal
 
----
+AI Vibe Coding Master는 개요형 블로그가 아니라 바이브코딩을 깊게 이해하기 위한 지식 아카이브다. 기존 13개 `MODULE_IDS`는 유지하고, 4개 지식 기둥과 자가 확장 주제를 총 100강으로 배치한다.
 
-## M01 시작하기 (getting-started) — 입문
-- 포함 강의 후보 (3): 사이트 사용법과 학습 루틴 / AI 바이브코딩이란(기존 1강) / 설명할 수 있어야 아는 것이다(학습법)
-- 선행 지식: 없음
-- 학습 목표: 학습 준비와 검증 습관 형성
-- 설명 문장: "바이브코딩은 자동완성이 아니라 요청-결과-검증을 반복하는 협업이다"
-- 관련 용어: 바이브코딩, 검증, 프롬프트 / 출처: T08 일부 / 난이도: ★
+## Four Pillars
 
-## M02 개발 기초 (development-basics) — 입문 [주제: 컴퓨터 기초]
-- 포함 강의 후보 (8): 컴퓨터가 일하는 방식(CPU·메모리·저장소) / 파일·폴더·경로·확장자 / 프로그램과 실행 / 터미널과 명령어 / 변수와 자료형 / 조건문과 반복문 / 함수 / 오류 읽는 법
-- 선행 지식: M01
-- 학습 목표: 코드가 제품 행동이 되는 과정을 설명
-- 설명 문장: "프로그램은 파일에 적힌 지시를 컴퓨터가 순서대로 실행하는 것이다"
-- 관련 용어: ~15개 / 출처: T01 / 난이도: ★
+| Pillar | Target | Lesson Count | Curriculum Role |
+|---|---:|---:|---|
+| A. 코딩 기반 | IDE, 터미널, 웹, 프론트엔드, API/DB, 배포, 보안 | 40 | 바이브코딩을 검증할 수 있는 개발 언어를 만든다. |
+| B. 바이브코딩 본체 | Karpathy 2025, 자동완성→챗 코딩→에이전트 시대, 도구·문화 변화 | 15 | 용어의 등장 배경과 흐름을 이해하게 한다. |
+| C. AI 엔지니어링 | Context/Prompt/Loop/Harness Engineering, Tool Calling, RAG, MCP, Agent, Orchestration | 25 | AI 기능을 시스템으로 설계하는 핵심 축이다. |
+| D. 레퍼런스 | Git/GitHub, 터미널, npm, 배포 명령 | 20 | 실무 중 바로 찾아보는 명령어 지식 기반이다. |
 
-## M03 웹 개발 기초 (web-basics) — 입문~기초 [주제: 웹의 원리, HTML, CSS, JavaScript]
-- 포함 강의 후보 (14): URL을 치면 일어나는 일 / 브라우저의 역할 / 요청과 응답·상태 코드 / 웹 화면 해부(기존 1강) / HTML 뼈대 / 폼과 입력 / CSS 기초 / 레이아웃(Flex·Grid) / 반응형 / JS 기초 / DOM 조작 / 이벤트 / 비동기와 fetch / 개발자 도구
-- 선행 지식: M02
-- 학습 목표: 화면의 뼈대·스타일·행동 분리 이해
-- 설명 문장: "웹 페이지는 브라우저가 HTML·CSS·JS를 받아 그린 결과다"
-- 관련 용어: ~30개 / 출처: T02 / 난이도: ★~★★
+Total: 100 lessons.
 
-## M04 프론트엔드 프레임워크 (frontend-frameworks) — 기초 [주제: TypeScript, React, Next.js]
-- 포함 강의 후보 (12): 왜 프레임워크인가 / TS는 왜 타입을 얹었나 / TS 핵심 문법 / 컴포넌트 사고 / props와 state / 렌더링과 훅 / 리스트와 조건 렌더 / TS+React+Next 관계(기존 1강) / Next.js 라우팅 / 서버·클라이언트 컴포넌트 / 데이터 가져오기 / 빌드와 최적화
-- 선행 지식: M03
-- 학습 목표: 화면을 재사용 가능한 조각으로 설계
-- 설명 문장: "컴포넌트는 데이터를 받아 화면 조각을 돌려주는 함수다"
-- 관련 용어: ~25개 / 출처: T03 (버전 고정 필수) / 난이도: ★★
+## Module Distribution
 
-## M05 Git & 협업 (git-collaboration) — 기초 [주제: Git, GitHub]
-- 포함 강의 후보 (7): 버전 기록의 원리 / 커밋 잘 만들기 / 브랜치와 머지 / 충돌 해결 / 되돌리기 3종 / GitHub와 PR·리뷰(기존 1강 개정 포함) / AI와 협업할 때의 Git 루틴
-- 선행 지식: M02
-- 학습 목표: 작업 이력을 안전하게 남기고 공유
-- 설명 문장: "커밋은 저장이 아니라 '되돌아갈 수 있는 스냅숏'이다"
-- 관련 용어: ~15개 / 출처: T04 / 난이도: ★★
+| Module ID | Title | Pillars | Lesson Count | Notes |
+|---|---|---|---:|---|
+| getting-started | 시작하기 | A, B | 5 | 학습법, 바이브코딩 기원, 개발 환경 개요 |
+| development-basics | 개발 기초 | A, D | 7 | 파일, 터미널, 변수, 오류, 명령 기초 |
+| web-basics | 웹 개발 기초 | A | 8 | HTML/CSS/JS, 브라우저, HTTP/JSON |
+| frontend-frameworks | 프론트엔드 프레임워크 | A | 7 | TypeScript, React, Next.js, 상태와 렌더링 |
+| git-collaboration | Git & 협업 | A, D | 8 | Git/GitHub 레퍼런스 핵심 |
+| data-backend | 데이터와 백엔드 | A | 7 | API, DB, 인증, 환경변수, 보안 |
+| deployment-ops | 배포와 운영 | A, D | 7 | 빌드, CI/CD, 로그, 패키지 명령 |
+| ai-basics | AI 활용 기초 | B, C | 7 | 토큰, 모델, 프롬프트, 검증 |
+| ai-coding-tools | AI 코딩 도구 | B, C | 7 | 자동완성, 챗 코딩, IDE 에이전트 |
+| ai-system-design | AI 시스템 설계 | C | 16 | 기존 M10 전체를 V2 심층 트랙으로 확장 |
+| practical-vibe-coding | 실전 바이브코딩 | A, B, C | 7 | 요구사항→구현→검증 루틴 |
+| explanation-practice | 설명 연습 | B, C | 5 | 남에게 설명하기 위한 개념 연결 |
+| project-textbook | 실전 프로젝트 교재 | A, C, D | 9 | SaaS, 챗봇, 자동화, 관리자 도구, 레퍼런스 묶음 |
 
-## M06 데이터와 백엔드 (data-backend) — 기초~중급 [주제: API, Database, Firebase, Supabase, 인증]
-- 포함 강의 후보 (12): API는 계약이다 / REST와 상태 코드 / 화면→API→DB 왕복(기존 1강) / 관계형 DB와 테이블 설계 / SQL 기본 / 인덱스와 성능 감각 / 인증의 원리(세션·토큰) / 권한과 인가 / BaaS란 무엇인가 / Firebase 구조 / Supabase 구조 / BaaS 선택 기준
-- 선행 지식: M03 (M04 권장)
-- 학습 목표: 화면 뒤 데이터 경로를 설명
-- 설명 문장: "API는 프론트와 서버가 미리 약속한 대화 규칙이다"
-- 관련 용어: ~25개 / 출처: T05, T06 (T06은 최신성 높음) / 난이도: ★★~★★★
+## Self-Discovered Topics
 
-## M07 배포와 운영 (deployment-ops) — 기초~중급 [주제: Vercel, 배포, 보안]
-- 포함 강의 후보 (8): 빌드란 무엇인가 / 배포의 원리 / Vercel 배포 모델 / 환경 변수와 시크릿 / 도메인과 HTTPS / 로그와 모니터링 / 웹 보안 기초(OWASP 입문) / 장애 대응과 롤백
-- 선행 지식: M04, M05
-- 학습 목표: 내 코드가 사용자에게 도달하는 과정 이해
-- 설명 문장: "배포는 빌드 결과물을 사용자가 접근할 수 있는 서버에 올리는 일이다"
-- 관련 용어: ~18개 / 출처: T07 / 난이도: ★★
+CODEX-PLAN §2의 자가 확장 기준에 따라 다음 주제를 포함한다.
 
-## M08 AI 활용 기초 (ai-basics) — 기초 [주제: LLM, Prompt Engineering]
-- 포함 강의 후보 (7): LLM은 무엇을 하는 기계인가 / 토큰과 컨텍스트 윈도 / 환각은 왜 생기나 / 좋은 프롬프트의 구조 / 예시의 힘 / 결과 검증 루틴 / 모델 선택 기준
-- 선행 지식: M01 (개발 지식 불필요 — 조기 수강 가능 트랙)
-- 학습 목표: 좋은 작업 지시를 만들고 결과를 검증
-- 설명 문장: "LLM은 다음에 올 말을 예측하는 모델이라 그럴듯한 거짓을 만들 수 있다"
-- 관련 용어: ~15개 / 출처: T08 (최신성 매우 높음) / 난이도: ★★
+| Topic | Why It Belongs |
+|---|---|
+| HTTP / JSON | API, Tool Calling, RAG 결과 전달 모두 구조화된 요청·응답 위에 선다. |
+| 환경변수 | API 키, 배포, AI 도구 보안의 최소 단위다. |
+| 정규식 | 검색, 로그 분석, 텍스트 전처리, 코드 수정 요청에 자주 등장한다. |
+| 토큰화 | 컨텍스트 윈도, 비용, RAG chunking을 이해하는 바닥 개념이다. |
+| 임베딩 | RAG, 검색, 의미 기반 분류의 핵심이다. |
+| Context Caching | 긴 컨텍스트 비용과 재사용 전략을 설명하는 데 필요하다. |
+| Semantic Versioning | 패키지 설치, API 변경, 배포 위험을 이해하는 기준이다. |
+| CI/CD | AI가 만든 코드를 검증하고 배포하는 안전장치다. |
+| Observability | 로그, 모니터링, eval 결과를 해석하는 운영 언어다. |
 
-## M09 AI 코딩 도구 (ai-coding-tools) — 기초~중급 [주제: AI IDE, Codex, Claude Code, Cline, Trae]
-- 포함 강의 후보 (7): AI 코딩 도구의 세 유형 / Claude Code의 구조 / Codex의 구조 / Cline·Trae와 IDE 에이전트 / 권한과 안전장치 비교 / 도구가 바뀌어도 남는 역량 / 도구 조합 전략
-- 선행 지식: M05, M08
-- 학습 목표: 도구를 믿는 대신 검증하며 협업
-- 설명 문장: "도구는 바뀌지만 요청 설계와 검증 습관은 이식된다"
-- 관련 용어: ~12개 / 출처: T11 (노후화 내성 구조 필수 — 원리 중심 + 현황 링크) / 난이도: ★★
+## Learning Graph Rules
 
-## M10 AI 시스템 설계 (ai-system-design) — 중급 [주제: Context Engineering, RAG, Tool Calling, MCP, Skills, Workflow, Agent, SubAgent, Multi-Agent, Orchestration, Loop/Harness Engineering]
-- 포함 강의: **승인된 backlog 14강 + 기존 1강 = 15강** (BACKLOG.md 참조)
-- ~~개정 제안~~ → **승인 완료 (O-01, 2026-07-04)**: tool-calling-basics(order 7), rag-fundamentals(order 8) 추가, 구 7~13은 9~15로 이동
-- 선행 지식: M08 (M09 권장)
-- 학습 목표: AI 기능을 시스템으로 설계
-- 설명 문장: "에이전트는 루프 안에서 자율적으로 도구를 사용하는 LLM이다"
-- 관련 용어: ~25개 / 출처: T09, T10 (최신성 매우 높음) / 난이도: ★★★
+- 모든 신규 강의는 `type: deep-dive` 또는 `type: reference`를 가진다.
+- reference 강의는 명령어별 `###` 소절을 사용한다.
+- V2 강의 본문은 8섹션이다: definition, why, how-it-works, spec, primary-sources, in-practice, limits, further-reading.
+- KB id는 backlog의 `KB ids` 열을 기준으로 생성한다.
+- 선행 그래프는 같은 모듈 안에서 앞 order를 우선하고, cross-module 선행은 이미 등장한 기본 개념만 지정한다.
 
-## M11 실전 바이브코딩 (practical-vibe-coding) — 중급 [주제: 실전 프로젝트 운영법]
-- 포함 강의 후보 (8): 요구사항을 AI에게 전달하는 법 / 작업 분해 / 구현 세션 운영 / 검증과 리뷰 루틴 / 리팩터링 요청법 / 디버깅 협업 / 문서화(CLAUDE.md류 지침 파일) / 실패 복구 루틴
-- 선행 지식: M09, M10
-- 학습 목표: AI와 작은 기능을 끝까지 완성
-- 설명 문장: "좋은 요청은 목표·재료·제약·완료 기준을 담은 작업 명세다"
-- 관련 용어: ~12개 / 출처: T12 + 이 프로젝트의 ai-ops 실물 / 난이도: ★★★
+## Phase 2 Wave Order
 
-## M12 설명 연습 (explanation-practice) — 전 레벨
-- 포함 강의 후보 (5): 설명은 왜 최고의 학습인가 / 정의→비유→예시→한계 틀 / 청자별 설명 조절 / 면접식 질문 대응 / 비유 만들기 연습
-- 선행 지식: 없음 (모든 모듈과 병행)
-- 학습 목표: 아는 것을 말로 구조화
-- 설명 문장: "설명하지 못하면 아직 모르는 것이다"
-- 관련 용어: 소수 / 출처: 교육 방법론(보조) / 난이도: ★~★★★
+1. V1 9강 V2 재생성: 기존 KB 5건 Quote Bank 보강 후 진행.
+2. C 기둥 완성: AI 시스템 설계 M10 나머지 + agent/subagent/orchestration/harness.
+3. B 기둥: 바이브코딩 역사와 도구 시대 흐름.
+4. A 기둥: 코딩 기반 심층.
+5. D 기둥: Git/GitHub/터미널/npm 레퍼런스.
+6. 자가 확장분: HTTP/JSON, env, regex, tokenization, embeddings, CI/CD, observability 보강.
 
-## M13 실전 프로젝트 교재 (project-textbook) — 중급 [주제: SaaS]
-- 포함 프로젝트 후보 (4): 미니 SaaS(인증+결제 구조 설계) / 관리자 도구 / AI 챗봇(RAG 적용) / 자동화 워크플로
-- 선행 지식: M06, M07, M10
-- 학습 목표: 개념을 묶어 실제 서비스 설계로 확장
-- 설명 문장: "SaaS는 기능이 아니라 인증·데이터·결제·운영이 맞물린 시스템이다"
-- 관련 용어: 종합 / 출처: T12 / 난이도: ★★★
-- **주의**: 13섹션 강의 형식과 다른 스키마 필요 (ROADMAP Phase 3 — schema 확장 승인 후 착수)
-
----
-
-## 집계와 난이도 곡선
-
-| 트랙 | 모듈 | 강의 수(후보) |
-|---|---|---|
-| 입문 | M01, M02 | 11 |
-| 웹 기초 | M03, M04, M05 | 33 |
-| 백엔드·배포 | M06, M07 | 20 |
-| AI | M08, M09, M10 | 27~29 |
-| 실전 | M11, M12, M13 | 17 |
-| **합계** | | **약 108~110강 + 프로젝트 4** (1차 완성 기준. 300강은 각 모듈 심화 확장분) |
-
-- 학습 경로: M01→M02→M03→M04→M05→M06→M07 (개발 트랙), M08은 M01 직후부터 병행 가능, M09→M10→M11→M13 (AI 트랙), M12는 상시 병행
-- 요청 주제 38개 전부 위 모듈에 배치됨 (SaaS→M13, 인증→M06, 보안→M07, RAG·Tool Calling→M10 개정 제안)
-
-## 다음 액션
-1. M10 개정(RAG·Tool Calling 2강 추가) — Curriculum Agent, 운영자 승인
-2. WF-04로 M08 정식 분해 (M10의 선행 모듈 — 두 번째 분해 대상)
-3. 이후 M02→M03 순 (입문 트랙 확보)
+See `ai-ops/outputs/00-backlog/BACKLOG.md` for the canonical 100-row lesson queue.
