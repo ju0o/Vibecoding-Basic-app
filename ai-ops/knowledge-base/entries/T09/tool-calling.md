@@ -9,8 +9,8 @@ prerequisites: []
 successors: [mcp, agent-loop]
 related: [mcp, agent-loop, context-engineering]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [tool-calling-basics, mcp-architecture-basics]
+  glossary: [Tool Calling]
 sources:
   - { title: "Function calling", url: "https://developers.openai.com/api/docs/guides/function-calling", checked: 2026-07-05 }
   - { title: "Using tools", url: "https://developers.openai.com/api/docs/guides/tools", checked: 2026-07-05 }

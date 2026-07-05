@@ -1,6 +1,21 @@
-# Prompt Library — 운영 매뉴얼
+# Prompt Library
 
-프롬프트 번호 = **실제 운영 순서**다. P-01부터 순서대로 실행하면 자료 수집에서 릴리스까지 한 배치가 완주된다. 마스터 워크플로: [WF-06 Knowledge Pipeline](../workflows/WF-06-knowledge-pipeline.md)
+> **O-03 (2026-07-05) 이후 운영자는 RUN 프롬프트만 사용한다.** RUN은 파라미터가 없다 — 채울 값 없이 그대로 복사해 붙여넣으면 Executor가 STATE.md를 읽고 할 일을 스스로 찾는다. P-01~P-08은 RUN이 참조하는 **작업 명세 모듈**로 강등됐다 (품질 규칙은 그대로 유효 — 직접 붙여넣지 않을 뿐).
+
+## 상시 프롬프트 (운영자가 쓰는 것 전부)
+
+| 파일 | 세션 | 언제 |
+|---|---|---|
+| [RUN-CODEX-PRODUCE.md](RUN-CODEX-PRODUCE.md) | Codex 생산 세션 | STATE.md NEXT가 지시할 때 |
+| [RUN-CODEX-VERIFY.md](RUN-CODEX-VERIFY.md) | Codex 검증 세션 | STATE.md NEXT가 지시할 때 |
+| [RUN-CLINE.md](RUN-CLINE.md) | Cline | STATE.md NEXT가 지시할 때 |
+| (프롬프트 없음 — Fable에게 "run") | 이 대화 | 승인 대기·에스컬레이션·기획 |
+
+---
+
+## 이하: 작업 명세 모듈 (참고용 — RUN이 참조)
+
+프롬프트 번호 = 파이프라인 순서. 마스터 워크플로: [WF-06 Knowledge Pipeline](../workflows/WF-06-knowledge-pipeline.md)
 
 ## 실행 순서 한눈에
 

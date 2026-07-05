@@ -1,7 +1,7 @@
 # MASTER_PROGRESS — 프로젝트 전체 진행 매트릭스
 
-**유일한 상태 추적 파일** (구 outputs/PIPELINE.md 대체). 이 파일 하나로 전체 진행률을 파악한다.
-갱신 규칙: 각 Executor는 자기 작업이 끝난 행의 해당 열만 갱신한다. 행 추가는 오케스트레이터(O-01 실행 시)만.
+**항목별 상태 매트릭스** (구 outputs/PIPELINE.md 대체). 실행 큐와 전이 규칙은 [STATE.md](STATE.md), 요약은 [DASHBOARD.md](DASHBOARD.md).
+갱신 규칙 (O-03): **RUN 프롬프트의 종료 절차가 자동 갱신** — 사람이 편집하지 않는다. 행 추가는 O-01(Fable)만. 상태 값은 STATE.md 상태 기계의 명칭을 따른다.
 Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집(P-03)·Lesson(P-04)·반영(P-05)·빌드수정(P-07) / **Cline** = Verify(P-06)·Release(P-08) / **Fable** = O-01·O-02·P-02 승인. Trae 제외.
 
 ## 상태 기호

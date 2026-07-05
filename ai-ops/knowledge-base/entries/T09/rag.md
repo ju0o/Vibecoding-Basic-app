@@ -9,7 +9,7 @@ prerequisites: []
 successors: [context-engineering]
 related: [context-engineering, tool-calling, mcp]
 consumers:
-  lessons: []
+  lessons: [rag-fundamentals]
   glossary: []
 sources:
   - { title: "Claude glossary", url: "https://platform.claude.com/docs/en/about-claude/glossary", checked: 2026-07-05 }

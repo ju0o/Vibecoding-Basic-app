@@ -9,7 +9,7 @@ prerequisites: [tool-calling]
 successors: [agent-loop]
 related: [tool-calling, context-engineering, rag, agent-loop]
 consumers:
-  lessons: []
+  lessons: [mcp-architecture-basics]
   glossary: []
 sources:
   - { title: "What is the Model Context Protocol (MCP)?", url: "https://modelcontextprotocol.io/docs/getting-started/intro", checked: 2026-07-05 }

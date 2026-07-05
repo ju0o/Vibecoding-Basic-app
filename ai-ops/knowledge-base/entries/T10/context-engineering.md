@@ -9,7 +9,7 @@ prerequisites: []
 successors: [agent-loop, tool-calling, rag]
 related: [agent-loop, tool-calling, mcp, rag]
 consumers:
-  lessons: []
+  lessons: [context-engineering-basics]
   glossary: []
 sources:
   - { title: "Effective context engineering for AI agents", url: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents", checked: 2026-07-05 }
