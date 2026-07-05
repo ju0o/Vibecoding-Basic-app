@@ -30,6 +30,16 @@ Research·Fact Check Agent가 사용하는 허용 출처 목록. 새 출처는 R
 - OpenAI Blog, React Blog, Next.js Blog, GitHub Blog
 - 각 도구의 GitHub Releases / CHANGELOG
 
+## 특수 출처 (2026-07-05 운영자 승인)
+
+| 분야 | 출처 | URL | 용도 제한 |
+|---|---|---|---|
+| 사전 | Merriam-Webster | https://www.merriam-webster.com | 용어의 등재·정의 기록 (용어 역사 KB 전용) |
+| 사전 | Collins Dictionary | https://www.collinsdictionary.com | 동일 |
+| 1차 사료 | X(트위터) 원게시물 | x.com | **역사적 1차 사료로만** (예: Karpathy의 vibe coding 명명). 본문 수집이 차단되므로 **web.archive.org 아카이브 스냅샷으로 원문 대조** + 주요 언론 2차 보도 병기 필수 |
+
+- 아카이브 검증 규칙: 원문 fetch가 기술적으로 차단된 출처는 web.archive.org 스냅샷을 대조 수단으로 인정 (스냅샷 URL과 캡처 날짜를 기록)
+
 ## 사용 규칙
 - 개인 블로그·번역 요약글: 사실의 유일한 근거로 사용 금지 (비유·설명 아이디어 참고만 가능, 브리프에 인용하지 않음)
 - 위키백과: 출발점으로만. 인용은 위키가 참조한 원출처로

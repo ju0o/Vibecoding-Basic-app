@@ -23,16 +23,30 @@
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 2 KB 5차 P-01 완료 — T01/T08 신규 KB draft 5건 생성
-- Verdict: DRAFT
+- Current State: 운영자 승인 완료 (2026-07-05) — ① MW·Collins 등록 + X는 archive.org 대조 ② 콜아웃 4종 추가 ③ 비공개 접근 보호 기능화
+- Verdict: APPROVED (재개 준비 완료)
 - Next Executor: Codex
-- Next Prompt File: prompts/P-02-knowledge-verification.md
-- Why: P-01 완료로 draft KB 5건이 발생했으며, CODEX-PLAN v2와 P-01 연속 실행 규칙에 따라 같은 흐름에서 원문 URL 재접속 대조 검증 진행
-- Required Operator Action: None — 같은 Codex 흐름에서 P-02 수행
-- If Approved: 승인 KB를 근거로 BACKLOG 해당 강의 planned 전환 후 P-04 가능 여부 재계산
-- If Rejected: 점수 미달 KB는 recollect(n)로 전환하고 P-03 재수집
-- Files to Check: ai-ops/knowledge-base/entries/T01/dev-environment-map.md, ai-ops/knowledge-base/entries/T08/vibe-coding-origin-karpathy.md, ai-ops/knowledge-base/entries/T08/ai-learning-verification.md, ai-ops/knowledge-base/entries/T01/files-folders-paths.md, ai-ops/knowledge-base/entries/T01/terminal-shell-commands.md
-- Stop Condition: Phase 5 개발 서버 확인 후 배포 승인 전까지 운영자 입력 없이 계속 진행
+- Next Prompt File: 아래 "재개 지시"를 Codex 세션에 그대로 전달
+- Why: 5차 KB 검증이 출처 정책 승인 대기로 걸려 있었음 — 해소됨
+- Required Operator Action: None — 다음 개입은 Phase 5
+- If Approved: (완료)
+- If Rejected: —
+- Files to Check: sources/SOURCE-REGISTRY.md(특수 출처), roadmap/CONTENT-FORMAT-V2.md §3.5(콜아웃)
+- Stop Condition: Phase 5 개발 서버 확인 보고에서만 정지
+```
+
+### 재개 지시 (Codex에 그대로 붙여넣기)
+
+```
+운영자 승인이 반영됐다. ai-ops/CODEX-PLAN.md 실행을 재개하라.
+1. vibe-coding-origin-karpathy: SOURCE-REGISTRY의 "특수 출처"가 갱신됨 — Merriam-Webster·Collins 사용 가능,
+   X 원문은 web.archive.org 스냅샷으로 대조(스냅샷 URL+캡처 날짜 기록). P-03 재수집 → P-02 재검증으로 이 KB를 통과시켜라.
+2. 플랫폼 증분 D-02: roadmap/CONTENT-FORMAT-V2.md §3.5 콜아웃 4종(예시/핵심/주의/팁) 렌더링 +
+   READING-UX-BRIEF §4.6 비공개 접근 보호(전 페이지 noindex, robots.txt 차단, Basic Auth 미들웨어 —
+   비밀번호는 SITE_PASSWORD 환경변수, 코드에 하드코딩 금지, 프로덕션에서만 활성) 구현 후 verify.
+3. 다이어그램이 계획(§3) 대비 0개다 — 이후 물결부터 필요처에 SVG를 포함하고, 기존 22강 중
+   작동 원리 설명이 다이어그램을 요구하는 강의에 소급 추가하라 (별도 물결로).
+4. 이후 남은 물결(기둥 A·B·D, 용어)을 계획대로 계속 — Phase 5에서만 정지.
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
