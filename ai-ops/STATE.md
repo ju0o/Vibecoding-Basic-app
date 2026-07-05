@@ -11,28 +11,28 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | Phase 2 P-03 완료: tokenization-context 재수집 완료 / P-02 재평가 대기 |
-| Last Completed Step | Codex P-03 Knowledge Recollection tokenization-context Loop A (citation URL 보정, 2026-07-05) |
+| Current State | Phase 2 P-02 Loop A 완료: T08 5개 KB approved / P-04 생성 대기 |
+| Last Completed Step | Codex P-02 Knowledge Verification Loop A tokenization-context (approved 90, 2026-07-05) |
 | Next Executor | Codex |
-| Next Prompt File | `prompts/RUN-CODEX-VERIFY.md` |
+| Next Prompt File | `prompts/RUN-CODEX-PRODUCE.md` |
 | Blocker | 없음 |
-| Required Human Action | None — 같은 Codex 흐름에서 tokenization-context P-02 재평가 진행 |
+| Required Human Action | None — 같은 Codex 흐름에서 planned lesson 최대 4건 P-04 생성 진행 |
 | Release Status | V2 17강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 2 P-03 완료 — tokenization-context 재수집 완료, P-02 재평가 대기
-- Verdict: DONE
+- Current State: CODEX-PLAN Phase 2 P-02 Loop A 완료 — T08 KB 5건 approved, planned lesson 5건 대기
+- Verdict: APPROVED
 - Next Executor: Codex
-- Next Prompt File: prompts/RUN-CODEX-VERIFY.md
-- Why: P-03 완료로 tokenization-context가 재평가 대상 draft가 되었으므로 VERIFY 세션 규칙에 따라 P-02 Loop A 재평가가 다음 단계
-- Required Operator Action: None — 같은 Codex 흐름에서 수정된 citation만 중심으로 원문 재대조
-- If Approved: BACKLOG #50을 planned로 전환하고 T08 5개 lesson 후보가 P-04 대기
-- If Rejected: tokenization-context recollect(2) 또는 escalated 규칙 적용
-- Files to Check: ai-ops/knowledge-base/entries/T08/tokenization-context.md, ai-ops/knowledge-base/reviews/tokenization-context/recollection-request-1.md
-- Stop Condition: P-02 Loop A는 tokenization-context만 재평가하고 강의 생성(P-04)은 수행하지 않음
+- Next Prompt File: prompts/RUN-CODEX-PRODUCE.md
+- Why: build_fail·generated·recollect 없음, planned lesson 중 근거 KB가 모두 approved인 항목이 있어 PRODUCE 우선순위상 P-04가 다음 단계
+- Required Operator Action: None — 같은 Codex 흐름에서 ai-basics planned lesson 중 최대 4건 생성
+- If Approved: generated 발생 시 다음 RUN-CODEX-PRODUCE에서 P-05 사이트 반영 단독 실행
+- If Rejected: 해당 lesson planned로 되돌리고 지적 사항 반영 후 P-04 재실행
+- Files to Check: ai-ops/knowledge-base/reviews/tokenization-context/verification-report.md, ai-ops/outputs/00-backlog/BACKLOG.md, ai-ops/MASTER_PROGRESS.md
+- Stop Condition: P-04는 planned lesson 최대 4건만 생성하고 P-05는 같은 런에서 수행하지 않음
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -68,13 +68,14 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
-- KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved**, tokenization-context = **P-03 완료, P-02 재평가 대기**
-- 강의: **V2 released 17강** (V2 Wave 1+2+3+4 — 배포는 HOLD, 운영자 게이트) / 다음 물결 KB 수집 대기
-- 루프 카운터: tokenization-context Loop A ↻1 재평가 대기 (rag Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
+- KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved**
+- 강의: **V2 released 17강** (V2 Wave 1+2+3+4 — 배포는 HOLD, 운영자 게이트) / T08 planned 5강 생성 대기
+- 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-05 | KB tokenization-context | draft → approved | Codex P-02 Loop A |
 | 2026-07-05 | KB tokenization-context | recollect(1) → draft | Codex P-03 |
 | 2026-07-05 | KB prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity | draft → approved | Codex P-02 |
 | 2026-07-05 | KB tokenization-context | draft → recollect(1) | Codex P-02 |

@@ -2,8 +2,8 @@
 id: tokenization-context
 title: "Tokenization and Context (토큰화와 컨텍스트)"
 topicGroup: T08
-status: draft
-score: null
+status: approved
+score: 90
 level: 기초
 prerequisites: []
 successors: [prompt-engineering, context-engineering]
