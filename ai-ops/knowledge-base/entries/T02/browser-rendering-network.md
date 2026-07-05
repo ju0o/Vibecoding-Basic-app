@@ -2,8 +2,8 @@
 id: browser-rendering-network
 title: "Browser Rendering and Network Flow (브라우저 렌더링과 네트워크 흐름)"
 topicGroup: T02
-status: draft
-score: null
+status: approved
+score: 89
 level: 중급
 prerequisites: [html-semantic-elements, css-cascade-layout, javascript-dom-events, http-request-response]
 successors: [web-performance-basics, frontend-debugging-devtools]

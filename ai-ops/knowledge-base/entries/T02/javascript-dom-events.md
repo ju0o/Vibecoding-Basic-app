@@ -2,8 +2,8 @@
 id: javascript-dom-events
 title: "JavaScript, DOM, and Events (JavaScript·DOM·이벤트)"
 topicGroup: T02
-status: draft
-score: null
+status: approved
+score: 88
 level: 기초
 prerequisites: [html-semantic-elements, variables-types-data, control-flow-functions-errors]
 successors: [browser-rendering-network, react-component-state]

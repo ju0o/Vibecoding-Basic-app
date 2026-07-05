@@ -38,11 +38,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | debugging-error-reading | T01 | ✓ | ✓ 89 (2026-07-06) | order 10 근거 |
 | regex-code-search | T01 | ✓ | ✓ 87 (2026-07-06) | order 11 근거 |
 | package-json-semver | T01 | ✓ | ✓ 85 (2026-07-06) | order 12 근거 / npm·SemVer registry 명시 권고 |
-| html-semantic-elements | T02 | ✓ | — | CODEX-PLAN Phase 2 KB 7차 draft, P-02 대기 |
-| css-cascade-layout | T02 | ✓ | — | CODEX-PLAN Phase 2 KB 7차 draft, P-02 대기 |
-| javascript-dom-events | T02 | ✓ | — | CODEX-PLAN Phase 2 KB 7차 draft, P-02 대기 |
-| browser-rendering-network | T02 | ✓ | — | CODEX-PLAN Phase 2 KB 7차 draft, P-02 대기 |
-| http-request-response | T02 | ✓ | — | CODEX-PLAN Phase 2 KB 7차 draft, P-02 대기 |
+| html-semantic-elements | T02 | ✓ | ✓ 88 (2026-07-06) | order 14 근거 / Semantic HTML glossary 보강 권고 |
+| css-cascade-layout | T02 | ✓ | ✓ 87 (2026-07-06) | order 15 근거 / responsive 관련 예약 id 정리 권고 |
+| javascript-dom-events | T02 | ✓ | ✓ 88 (2026-07-06) | order 16 근거 / DOM·Event glossary 보강 권고 |
+| browser-rendering-network | T02 | ✓ | ✓ 89 (2026-07-06) | order 17 근거 / DevTools UI 예시는 후속 보강 권고 |
+| http-request-response | T02 | ✓ | ✓ 90 (2026-07-06) | order 18·19 근거 / HTTP 세부 용어 보강 권고 |
 
 ## Lesson 매트릭스
 
@@ -85,20 +85,20 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
-| Knowledge Base 수집(P-01) | 27 / 27 | 100% (6차 T01 5건 approved) |
-| Knowledge Base (approved 이상) | 27 / 27 | 100% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건 + 4차 approved 5건 + 5차 approved 5건 + 6차 approved 5건) |
+| Knowledge Base 수집(P-01) | 32 / 32 | 100% (7차 T02 5건 approved) |
+| Knowledge Base (approved 이상) | 32 / 32 | 100% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건 + 4차 approved 5건 + 5차 approved 5건 + 6차 approved 5건 + 7차 approved 5건) |
 | KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (2차 approved KB) | 3 / 3 | 100% |
 | KB Quote Bank (3차 approved KB) | 4 / 4 | 100% |
 | KB Quote Bank (4차 approved KB) | 5 / 5 | 100% (tokenization-context Loop A 후 승인) |
 | KB Quote Bank (5차 approved KB) | 5 / 5 | 100% (vibe-coding-origin-karpathy Loop A 후 승인) |
 | KB Quote Bank (6차 approved KB) | 5 / 5 | 100% |
-| KB Quote Bank (7차 draft KB) | 5 / 5 | 100% (P-02 검증 대기) |
+| KB Quote Bank (7차 approved KB) | 5 / 5 | 100% |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
-| Lesson 생성 | 32 / 32 | 100% (CODEX-PLAN 확정 32강 V2 generated) |
-| Site 반영 | 32 / 32 | 100% (CODEX-PLAN 확정 32강 integrated) |
-| Verify 통과 | 32 / 32 | 100% (`npm run verify` PASS) |
-| Release | 32 / 32 | 100% (V2 Wave 1+2+3+4+5+6+7+8+9+10 released, deployment HOLD) |
+| Lesson 생성 | 32 / 37 | 86% (T02 5강 planned) |
+| Site 반영 | 32 / 37 | 86% (T02 5강 planned) |
+| Verify 통과 | 32 / 37 | 86% (`npm run verify` PASS, T02 planned 대기) |
+| Release | 32 / 37 | 86% (V2 Wave 1+2+3+4+5+6+7+8+9+10 released, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
@@ -155,3 +155,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-06 | CODEX-PLAN Phase 3 P-06 T01 Wave 3 | 완료 | `npm run verify` PASS, package-json-and-semver 검증 통과 |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-08 T01 Wave 3 | 완료 | package-json-and-semver V2 Wave 10 릴리스, deployment HOLD |
 | 2026-07-06 | CODEX-PLAN Phase 2 KB 7차 P-01 | 완료 | html-semantic-elements·css-cascade-layout·javascript-dom-events·browser-rendering-network·http-request-response draft 생성, P-02 대기 |
+| 2026-07-06 | CODEX-PLAN Phase 2 KB 7차 P-02 | 완료 | html-semantic-elements 88·css-cascade-layout 87·javascript-dom-events 88·browser-rendering-network 89·http-request-response 90 APPROVED |

@@ -2,8 +2,8 @@
 id: css-cascade-layout
 title: "CSS Cascade, Layout, and Responsive Design (CSS 캐스케이드·레이아웃·반응형)"
 topicGroup: T02
-status: draft
-score: null
+status: approved
+score: 87
 level: 기초
 prerequisites: [html-semantic-elements]
 successors: [browser-rendering-network, responsive-ui-patterns]

@@ -2,8 +2,8 @@
 id: http-request-response
 title: "HTTP Request and Response (HTTP 요청과 응답)"
 topicGroup: T02
-status: draft
-score: null
+status: approved
+score: 90
 level: 기초
 prerequisites: [files-folders-paths]
 successors: [json-data-contracts, web-security-basics, api-rest-basics]

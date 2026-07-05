@@ -2,8 +2,8 @@
 id: html-semantic-elements
 title: "HTML Semantic Elements (HTML 의미 요소)"
 topicGroup: T02
-status: draft
-score: null
+status: approved
+score: 88
 level: 기초
 prerequisites: [files-folders-paths]
 successors: [css-cascade-layout, javascript-dom-events, accessibility-basics]
