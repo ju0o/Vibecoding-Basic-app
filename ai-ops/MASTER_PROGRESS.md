@@ -19,6 +19,10 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | skills | T10 | ✓ | ✓ 93 (2026-07-05, O-05.2 연속 검증) | order 10 근거 |
 | orchestration | T10 | ✓ | ✓ 89 (2026-07-05, O-05.2 연속 검증) | order 13 근거 |
 | harness | T10 | ✓ | ✓ 90 (2026-07-05, O-05.2 연속 검증) | order 15 근거 |
+| subagents | T10 | ✓ | ▶ (draft, 2026-07-05, P-02 대기) | order 12 근거 |
+| loop-engineering | T10 | ✓ | ▶ (draft, 2026-07-05, P-02 대기) | order 14 근거 |
+| context-caching | T10 | ✓ | ▶ (draft, 2026-07-05, P-02 대기) | order 15 근거 |
+| ai-system-evaluation | T10 | ✓ | ▶ (draft, 2026-07-05, P-02 대기) | order 16 근거 |
 
 ## Lesson 매트릭스
 
@@ -35,24 +39,27 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | mcp-architecture-basics | M10 | mcp, tool-calling | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | designing-reusable-skills | M10 | skills | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 2, RELEASE-2026-07-05-v2-wave2.md |
 | agent-loop-anatomy | M10 | agent-loop, tool-calling | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
-| subagents-and-delegation | M10 | agent-loop | — | — | — | — | order 12 |
+| subagents-and-delegation | M10 | agent-loop, subagents | — | — | — | — | order 12 |
 | multi-agent-orchestration | M10 | (orchestration KB — 2차 배치) | — | — | — | — | order 13 |
-| loop-engineering-basics | M10 | agent-loop | — | — | — | — | order 14 |
+| loop-engineering-basics | M10 | agent-loop, loop-engineering | — | — | — | — | order 14 |
 | harness-engineering-basics | M10 | (harness KB — 2차 배치) | — | — | — | — | order 15 |
+| context-caching-and-state | M10 | context-caching | — | — | — | — | order 15 |
+| ai-system-evaluation | M10 | ai-system-evaluation | — | — | — | — | order 16 |
 
 ## 집계 (Executor가 행 갱신 시 함께 갱신)
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
-| Knowledge Base 수집(P-01) | 8 / 8 | 100% (2차 3건 draft/P-02 대기) |
-| Knowledge Base (approved 이상) | 8 / 8 | 100% (1차 qa_approved 5건 + 2차 approved 3건) |
+| Knowledge Base 수집(P-01) | 12 / 12 | 100% (3차 4건 draft/P-02 대기) |
+| Knowledge Base (approved 이상) | 8 / 12 | 67% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 draft 4건) |
 | KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
-| KB Quote Bank (2차 draft KB) | 3 / 3 | 100% |
+| KB Quote Bank (2차 approved KB) | 3 / 3 | 100% |
+| KB Quote Bank (3차 draft KB) | 4 / 4 | 100% |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
-| Lesson 생성 | 11 / 15 | 73% |
-| Site 반영 | 11 / 15 | 73% |
-| Verify 통과 | 11 / 15 | 73% |
-| Release | 11 / 15 | 73% (V2 Wave 1+2, deployment HOLD) |
+| Lesson 생성 | 11 / 17 | 65% |
+| Site 반영 | 11 / 17 | 65% |
+| Verify 통과 | 11 / 17 | 65% |
+| Release | 11 / 17 | 65% (V2 Wave 1+2, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
@@ -71,3 +78,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-05 | CODEX-PLAN Phase 2 KB 2차 | 완료 | skills 93·orchestration 89·harness 90 APPROVED, O-05.2 연속 검증 첫 적용 |
 | 2026-07-05 | CODEX-PLAN Phase 3 P-04 | 완료 | context-engineering-mcp-skills·designing-reusable-skills V2 Lesson Draft 생성, P-05 대기 |
 | 2026-07-05 | CODEX-PLAN Phase 3 P-05/verify/release | 완료 | context-engineering-mcp-skills·designing-reusable-skills 사이트 반영, `npm run verify` PASS, V2 Wave 2 릴리스 |
+| 2026-07-05 | CODEX-PLAN Phase 2 KB 3차 | 진행 | subagents·loop-engineering·context-caching·ai-system-evaluation P-01 draft 생성, P-02 대기 |
