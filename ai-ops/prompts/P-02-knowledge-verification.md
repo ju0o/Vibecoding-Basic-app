@@ -1,9 +1,9 @@
 # P-02 Knowledge 검증·스코어 평가
 
-| Agent | Fact Check + Education Review + QA (통합) | **Primary Executor** | **Codex (검증 세션)** |
+| Agent | Fact Check + Education Review + QA (통합) | **Primary Executor** | **Codex** |
 |---|---|---|---|
 | Allowed | Fable | 단계 | WF-06 §2 |
-| 세션 규칙 | **P-01을 수행한 세션과 다른 세션에서 실행** | 다음 | 통과: **Fable 보고서 승인** → P-04 / 미달: P-03 (Loop A) |
+| 연속 실행 규칙 | P-01 직후 같은 흐름에서 실행 가능. 원문 URL 재접속 대조와 점수 근거 기록 필수 | 다음 | 통과: P-04 / 미달: P-03 (Loop A) |
 
 채울 값: `{KB id 목록}`
 
@@ -47,8 +47,8 @@ draft 상태 KB 문서를 검증하고 점수화한다. 통과 시 approved, 미
 - 게이트 4개·기준 7개 전부에 판정 근거 기록
 
 ## 다음 단계
-- APPROVED → **Fable이 verification-report를 승인한 후에만** 운영자가 Codex에 P-04 전달
-- RECOLLECT → 운영자가 Codex(수집 계열 세션)에 P-03 + 요청서 경로 전달
+- APPROVED → Codex가 P-04로 이어서 진행 가능
+- RECOLLECT → Codex가 P-03 + 요청서 경로로 이어서 재수집
 - ESCALATED → 운영자 판단 대기
 
 ## 실패 시 되돌아갈 Workflow

@@ -71,7 +71,7 @@ updated: 2026-07-04
 ## SSOT 운영 규칙
 
 1. **파생물은 KB를 인용하지, 재조사하지 않는다.** Lesson 생성 프롬프트의 입력은 KB 문서다. KB에 없는 사실이 필요하면 강의를 쓰지 말고 KB 보강(재수집 루프)을 먼저 한다.
-2. **approved만 소비 가능.** status가 approved가 아닌 KB에서 강의를 생성할 수 없다 (Knowledge Score 80+ 필수).
+2. **approved 이상만 소비 가능.** status가 approved 또는 qa_approved가 아닌 KB에서 강의를 생성할 수 없다 (Knowledge Score 80+ 필수).
 3. **KB 수정 = 파생물 점검.** KB 문서가 갱신되면 frontmatter `consumers`에 나열된 강의·용어가 자동으로 개정 후보(REVISION-BACKLOG)가 된다.
 4. **변경 이력은 삭제 금지** (append 전용). 노후화 점검은 sources의 `checked` 날짜 기준.
 5. **id는 불변.** 한 번 참조된 KB id는 이름을 바꾸지 않는다 (consumers 추적이 깨짐).
@@ -92,7 +92,7 @@ updated: 2026-07-04
 | 단계 | Agent | Executor | 프롬프트 |
 |---|---|---|---|
 | KB 수집·작성 | Source Collector (확장: Knowledge Collector) | Codex (수집 세션) | P-01 |
-| KB 검증·스코어 | Fact Check + Education Review + QA (통합 실행) | Codex (검증 세션 — 수집과 분리) + **Fable 승인** | P-02 |
+| KB 검증·스코어 | Fact Check + Education Review + QA (통합 실행) | Codex (P-01 직후 연속 실행 가능, 원문 재접속 대조 필수) | P-02 |
 | KB 재수집 루프 | Source Collector | Codex (수집 세션) | P-03 |
 | Lesson 생성 | Lesson Writer + Quiz + Terminology (통합 실행) | Codex | P-04 |
 | 사이트 반영 | Site Integration | Codex | P-05 |

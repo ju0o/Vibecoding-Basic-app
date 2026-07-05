@@ -22,7 +22,7 @@
 NEXT_ACTION:
 - Current State: {방금 전이된 상태 — 상태 기계 명칭}
 - Verdict: {DONE | APPROVED | RECOLLECT | VERIFIED | FAILED | RELEASED | ESCALATED | HOLD}
-- Next Executor: {Codex 생산 세션 | Codex 검증 세션 | Cline | Fable | 운영자}
+- Next Executor: {Codex | Cline | Fable | 운영자}
 - Next Prompt File: {prompts/RUN-*.md 경로 | "없음 (운영자 결정)"}
 - Why: {상태 기계의 어느 전이 규칙 때문인지 한 줄}
 - Required Operator Action: {None | Approve/Reject 대상과 판단 기준 한 줄}
@@ -41,10 +41,10 @@ NEXT_ACTION:
 
 | 프롬프트 | 세션 | 하는 일 |
 |---|---|---|
-| [RUN-CODEX-PRODUCE](prompts/RUN-CODEX-PRODUCE.md) | Codex 생산 세션 | 상태를 읽고 P-07>P-05>P-03>P-04>P-01 중 최우선 1단계 실행 |
-| [RUN-CODEX-VERIFY](prompts/RUN-CODEX-VERIFY.md) | Codex 검증 세션 (생산과 분리) | draft KB 전건 P-02 검증·Score |
+| [RUN-CODEX-PRODUCE](prompts/RUN-CODEX-PRODUCE.md) | Codex | 상태를 읽고 P-07>P-05>P-03>P-04>P-01 중 최우선 1단계 실행 |
+| [RUN-CODEX-VERIFY](prompts/RUN-CODEX-VERIFY.md) | Codex 검증 단계 (생산 흐름에서 연속 실행 가능) | draft KB 전건 P-02 검증·Score |
 | [RUN-CLINE](prompts/RUN-CLINE.md) | Cline | P-06 verify → 통과 시 P-08 릴리스 연속, deploy_ready면 P-09 배포 |
-| [RUN-FABLE](prompts/RUN-FABLE.md) (또는 Fable에게 "run") | 이 대화 | 재대사, P-02 승인, 에스컬레이션 정리, O-01/O-02, DASHBOARD, **운영자 Approve/Reject 처리** |
+| [RUN-FABLE](prompts/RUN-FABLE.md) (또는 Fable에게 "run") | 이 대화 | 재대사, 사후 표본 감사, 에스컬레이션 정리, O-01/O-02, DASHBOARD, **운영자 Approve/Reject 처리** |
 
 모든 RUN은 **NEXT_ACTION 블록**으로 끝난다 — Codex가 끝나면 다음이 Cline인지 Fable인지 스스로 지정하고, Cline이 verify를 끝내면 P-07행인지 P-08행인지 스스로 판단하며, 실패는 되돌아갈 Loop를 명시한다. 운영자는 이 판단에 관여하지 않는다.
 
@@ -58,7 +58,7 @@ P-01~P-08은 이제 직접 붙여넣는 프롬프트가 아니라 **RUN이 참�
 | Executor 선택 | RUN 프롬프트 = Executor 고정 매핑 (고를 것이 없음) |
 | 프롬프트 파라미터 채우기 | RUN이 STATE/MASTER_PROGRESS에서 스스로 채움 |
 | Loop 판단 (A·B) | 요청서/보고서 파일명의 {n} 카운터 — RUN이 자체 확인, n=3이면 자동 에스컬레이션 |
-| 병렬 판단 | 상태 기계 우선순위에 내장 (P-05 단독 규칙 포함). 병렬을 원하면 생산 세션을 하나 더 여는 것뿐 |
+| 병렬 판단 | 상태 기계 우선순위에 내장 (P-05 단독 규칙 포함). 병렬을 원하면 Codex 작업 흐름을 하나 더 여는 것뿐 |
 | 상태 파일 갱신 | 각 RUN의 종료 절차에 의무화 (생략 시 런 무효) |
 | 커밋 | RUN 종료 절차에 포함 + git show --stat 자기 확인 |
 | Release 판단 | VERIFIED → P-08 자동 연속 (Cline 런 내부) |
@@ -72,11 +72,11 @@ P-01~P-08은 이제 직접 붙여넣는 프롬프트가 아니라 **RUN이 참�
 
 ## 품질 게이트 (변경 없음 — 자동화는 게이트를 우회하지 않는다)
 
-Knowledge Score 80+ / Fable QA 승인 / 세션 분리 / npm run verify / 판정자·수정자 분리 — 전부 유지. 달라진 것은 게이트 사이의 **이동**이 자동이라는 것뿐이다.
+Knowledge Score 80+ / 원문 URL 재접속 대조 기록 / Phase 5 Fable 사후 표본 감사 / npm run verify / 판정자·수정자 분리 — 전부 유지. 달라진 것은 게이트 사이의 **이동**이 자동이라는 것뿐이다.
 
 ## 배치 리듬 (권장)
 
-- 생산 세션과 검증 세션을 아침에 하나씩 열고, STATE NEXT를 따라 번갈아 실행
+- Codex는 STATE NEXT를 따라 생산·검증 단계를 끊기지 않게 연속 실행
 - P-05(통합)가 NEXT에 뜨면 그 런은 통합만 — 직후 RUN-CLINE
 - Fable "run"은 하루 1~2회면 충분 (승인 대기가 쌓였을 때)
 

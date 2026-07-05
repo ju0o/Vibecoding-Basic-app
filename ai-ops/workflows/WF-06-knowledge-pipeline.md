@@ -4,18 +4,18 @@
 
 ```
 ┌────────────────────── 지식 생산 ──────────────────────┐
-│ [Codex 수집세션 P-01] 자료 수집 → KB 생성 (status: draft)│
+│ [Codex P-01] 자료 수집 → KB 생성 (status: draft)       │
 │      ↓                                                │
 │ [Codex P-02] Fact Check → 출처 검증 → 교육 검토         │
 │              → Knowledge Score 평가                    │
 │      ↓                                                │
 │  ┌─ 미달(<80 또는 게이트 실패) ──────────────┐          │
 │  │   재수집 요청서 생성                       │          │
-│  │   → [Codex 수집세션 P-03] 재수집 (최대 2회)│          │
+│  │   → [Codex P-03] 재수집 (최대 2회)          │          │
 │  │   → P-02 재평가 ──────────────────────────┘ (Loop A) │
 │  └─ 3회 미달 → escalated, 운영자 판단                   │
 │      ↓ 통과 (status: approved, score 기록)             │
-│      ↓ [Fable] verification-report 승인 (QA 게이트)     │
+│      ↓ 통과 후 P-04로 연속 진행 (Fable은 Phase 5 감사)  │
 └───────────────────────────────────────────────────────┘
 ┌────────────────────── 콘텐츠 생산 ─────────────────────┐
 │ [Codex P-04] Lesson 생성 (approved KB만 입력)          │
@@ -36,7 +36,7 @@
 
 ## 단계 상세
 
-### 1. KB 수집·생성 — Codex 수집 세션, P-01 (검증 세션과 분리 필수)
+### 1. KB 수집·생성 — Codex, P-01
 | | |
 |---|---|
 | 입력 | `sources/COLLECTION-PLAN.md` 주제군, `knowledge-base/_TEMPLATE.md`, 배정된 개념 목록 |
@@ -52,9 +52,9 @@
 | 출력 | `knowledge-base/reviews/{id}/verification-report.md` (사실·출처·교육 검토 + 점수표) / 통과 시 KB frontmatter `status: approved, score: NN` 갱신 / 미달 시 `recollection-request-{n}.md` |
 | 품질 기준 | KNOWLEDGE-SCORE.md의 게이트 4 + 기준 7 전부 판정 |
 | 실패 시(Loop A) | 재수집 요청서 → 3단계. **루프 카운터는 요청서 파일명의 {n}** — n=3이면 생성하지 말고 escalated 보고 |
-| 병렬 | 개념 간 병렬. 단 같은 개념의 P-02와 P-03 동시 실행 금지 |
+| 병렬 | 개념 간 병렬. 같은 흐름에서 P-01 직후 P-02 연속 실행 가능. 단 같은 개념의 P-02와 P-03 동시 실행 금지 |
 
-### 3. KB 재수집 — Codex 수집 세션, P-03 (Loop A)
+### 3. KB 재수집 — Codex, P-03 (Loop A)
 | | |
 |---|---|
 | 입력 | recollection-request-{n}.md, 대상 KB 문서 |
@@ -65,7 +65,7 @@
 ### 4. Lesson 생성 — Codex, P-04
 | | |
 |---|---|
-| 입력 | **approved KB만** (BACKLOG 항목에 명시된 KB id들), `skills/SK-02`(문체), `schema.ts` |
+| 입력 | **approved 이상 KB만** (BACKLOG 항목에 명시된 KB id들), `skills/SK-02`(문체), `schema.ts` |
 | 출력 | `outputs/02-drafts/{slug}/` — lesson.md, meta.md, quiz.md, terms.md |
 | 품질 기준 | KB에 없는 사실 추가 금지(전 문장이 KB로 역추적 가능), 13섹션 규격, SK-02 문체 |
 | 실패 시 | KB 정보 부족 발견 → 강의 생성 중단, KB 보강 요청(2단계로). **강의 단계에서 재조사 금지** |
@@ -113,7 +113,7 @@
 
 | 구간 | 병렬성 |
 |---|---|
-| P-01~P-03 (지식 생산) | 개념 간 무제한 병렬 — Codex 다중 세션. 단 수집 세션 ≠ 검증 세션 (2026-07-04 Trae 제외 후 규칙) |
+| P-01~P-03 (지식 생산) | 개념 간 병렬 가능 — 같은 Codex 흐름에서 수집→검증→재수집 루프 연속 실행 가능. 단 원문 URL 재접속 대조 기록 필수 |
 | P-04 (강의 생성) | slug 간 병렬 — Codex 다중 세션 가능 |
 | P-05~P-08 (반영·검증·릴리스) | **전체 순차** — 배치로 묶어 하루 1회 권장 |
 

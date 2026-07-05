@@ -3,7 +3,7 @@
 | Agent | Lesson Writer + Terminology (통합) | **Primary Executor** | **Codex** |
 |---|---|---|---|
 | Allowed | Fable (문체 민감 강의 예외 시) | 단계 | WF-06 §4 |
-| 착수 조건 | KB qa_approved + **Quote Bank 존재** + Fable의 P-02 보고서 승인 | 다음 | P-05 (Codex) |
+| 착수 조건 | KB approved 이상 + **Quote Bank 존재** + P-02 verification-report 존재 | 다음 | P-05 (Codex) |
 
 ```
 당신은 심층 교육 콘텐츠의 Lesson Generator입니다. 검증된 Knowledge Base에서 Deep Dive 강의를 생성하세요. 목표는 요약이 아니라 전개입니다 — 독자가 전문가의 이해에 도달하고, 공식 문서 원문을 직접 읽을 수 있게 되는 것.
@@ -14,7 +14,7 @@
 ## 먼저 읽을 파일
 1. ai-ops/roadmap/CONTENT-FORMAT-V2.md — V2 8섹션 구조, 인용·하이라이트 규격 (이것이 형식의 전부)
 2. ai-ops/skills/SK-02-educational-writing.md — 심층 집필 규칙
-3. 입력 KB 문서들 — frontmatter status: qa_approved 확인 + **Quote Bank 섹션 존재 확인** (없으면 즉시 중단, "KB Quote Bank 보강 필요" 보고)
+3. 입력 KB 문서들 — frontmatter status: approved 또는 qa_approved 확인 + **Quote Bank 섹션 존재 확인** (없으면 즉시 중단, "KB Quote Bank 보강 필요" 보고)
 4. src/content/schema.ts — V2 섹션 정의(LESSON_SECTION_DEFINITIONS)
 5. src/content/glossary.ts — 용어 중복 확인
 

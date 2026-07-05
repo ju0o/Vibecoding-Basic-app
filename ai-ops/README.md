@@ -9,7 +9,7 @@
 
 1. **Executor 독립성** — Agent와 Workflow는 특정 AI에 종속되지 않는다. 모든 지시는 `prompts/`의 표준 프롬프트로 전달하고, 모든 산출물은 `outputs/`의 파일로 주고받는다. Executor가 바뀌어도 프롬프트와 파일 규격은 그대로다.
 2. **파일 기반 핸드오프** — Agent 간 통신은 대화가 아니라 파일이다. 각 단계의 산출물 파일이 다음 단계의 입력이 된다.
-3. **작성자 ≠ 검증자** — 강의를 쓴 Executor가 그 강의를 검증하지 않는다. 반드시 다른 Executor(또는 다른 세션)가 검증한다.
+3. **검증은 원문 대조로 증명** — 같은 Codex 흐름에서 수집과 검증을 이어서 할 수 있지만, 검증 단계는 반드시 원문 URL 재접속 대조와 보고서 기록으로 증명한다.
 4. **단일 작성자 구역(Single-Writer Zone)** — `curriculum.ts`, `glossary.ts` 같은 공유 파일은 한 번에 하나의 Agent만 수정한다. 병렬 생산은 강의 단위(slug 단위)로만 한다.
 5. **품질 게이트 통과 전 사이트 반영 금지** — `qa/QA-GATES.md`의 게이트를 통과하지 못한 콘텐츠는 `src/content/`에 들어갈 수 없다.
 
@@ -69,7 +69,7 @@ ai-ops/
 ```
 O-01 커리큘럼 결정 (Fable)
   → P-01 KB 수집·생성 (Codex 수집 세션, 개념 간 병렬)
-  → P-02 검증·Knowledge Score (Codex 검증 세션 — 수집과 분리) ⇄ P-03 재수집 루프 (최대 2회)
+  → P-02 검증·Knowledge Score (Codex 연속 실행 가능 — 원문 재접속 대조 필수) ⇄ P-03 재수집 루프 (최대 2회)
   → Fable: 검증 보고서 승인 (QA 게이트)
   → P-04 Lesson 생성 (Codex, approved KB만 입력)
   → P-05 사이트 반영 (Codex, 순차 전용)

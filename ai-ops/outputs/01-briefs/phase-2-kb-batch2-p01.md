@@ -53,11 +53,11 @@ Scope: T10 skills, orchestration, harness
 
 ## 검증 필요 사항
 
-- P-02에서 Citation Rule, 사실 정확성, Quote Bank 원문 일치, Knowledge Score를 별도 세션에서 검증해야 한다.
+- P-02에서 Citation Rule, 사실 정확성, Quote Bank 원문 일치, Knowledge Score를 검증해야 한다.
 - `SOURCE-REGISTRY.md`에는 OpenAI 출처가 `https://platform.openai.com/docs`로 등록되어 있으나, 이번 수집은 최신 공식 API 문서 URL인 `https://developers.openai.com/api/docs/...`를 사용했다. P-02에서 동일 공식 문서 계열로 인정 가능한지 확인해야 한다.
 - OpenAI Sandbox Agents 문서는 beta 상태라고 명시하므로, P-02에서 버전 의존/변경 가능성 표기 충분성을 확인해야 한다.
 
 ## 다음 단계
 
-- P-01 명세상 자기 검증 금지: 이번 세션에서 P-02를 수행하지 않는다.
-- 새 Codex 검증 세션에서 `prompts/RUN-CODEX-VERIFY.md`를 실행해 draft 3건을 검증한다.
+- 2026-07-05 운영 정책 변경으로 P-01 직후 같은 Codex 흐름에서 P-02를 연속 수행할 수 있다.
+- `prompts/RUN-CODEX-VERIFY.md`를 실행해 draft 3건을 검증한다.

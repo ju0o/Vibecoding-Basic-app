@@ -11,12 +11,12 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | Phase 2 진행: KB 2차 skills·orchestration·harness P-01 수집 완료 / P-02 별도 검증 대기 |
+| Current State | Phase 2 진행: KB 2차 skills·orchestration·harness P-01 수집 완료 / P-02 연속 검증 대기 |
 | Last Completed Step | Codex P-01 Knowledge Collection Batch 2 (3 KB drafts, 2026-07-05) |
-| Next Executor | Codex 검증 세션 |
+| Next Executor | Codex |
 | Next Prompt File | `prompts/RUN-CODEX-VERIFY.md` |
-| Blocker | P-01 자기 검증 금지 — P-02는 새 Codex 검증 세션에서 수행 |
-| Required Human Action | None — 새 Codex 검증 세션에서 RUN-CODEX-VERIFY 실행 |
+| Blocker | 없음 |
+| Required Human Action | None — 같은 Codex 흐름에서 RUN-CODEX-VERIFY 실행 |
 | Release Status | V1 9강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
@@ -25,11 +25,11 @@
 NEXT_ACTION:
 - Current State: CODEX-PLAN Phase 2 P-01 완료 — skills·orchestration·harness KB draft 생성
 - Verdict: DONE (P-01)
-- Next Executor: Codex 검증 세션
+- Next Executor: Codex
 - Next Prompt File: prompts/RUN-CODEX-VERIFY.md
-- Why: P-01 명세 — 수집 세션과 P-02 검증 세션 분리(자기 검증 금지), draft KB 발생
-- Required Operator Action: None — 새 Codex 검증 세션에서 RUN-CODEX-VERIFY.md 실행
-- If Approved: P-02 승인 후 Fable QA 승인 경로를 거쳐 qa_approved가 되면 CODEX-PLAN Phase 2+3 강의 물결 재개
+- Why: P-01 완료 후 draft KB 발생 — 같은 Codex 흐름에서 P-02 원문 재접속 검증 진행
+- Required Operator Action: None — RUN-CODEX-VERIFY.md 실행
+- If Approved: approved KB 기반으로 CODEX-PLAN Phase 2+3 강의 물결 재개
 - If Rejected: RECOLLECT 판정 항목만 RUN-CODEX-PRODUCE(P-03)로 재수집
 - Files to Check: ai-ops/knowledge-base/entries/T10/skills.md, ai-ops/knowledge-base/entries/T10/orchestration.md, ai-ops/knowledge-base/entries/T10/harness.md
 - Stop Condition: P-02 승인 전 skills·orchestration·harness 기반 P-04/P-05 진행 금지
@@ -42,12 +42,12 @@ NEXT_ACTION:
 (없음) ──backlog에 KB 필요──▶ needed ──[PRODUCE: P-01]──▶ draft
 draft ──[VERIFY: P-02]──▶ 점수≥80+게이트 → approved / 미달 → recollect(n)
 recollect(n) ──[PRODUCE: P-03]──▶ draft (재평가 대상 표시)   ※ n=3 → escalated
-approved ──[FABLE: 보고서 승인]──▶ qa_approved   ← 강의 생성의 전제
+approved ──[선택: FABLE 사후 감사]──▶ qa_approved   ← 감사 표식(강의 생성의 필수 전제는 아님)
 ```
 
 ### 강의 항목
 ```
-planned(backlog 승인 + 근거 KB 전부 qa_approved) ──[PRODUCE: P-04]──▶ generated
+planned(backlog 승인 + 근거 KB 전부 approved 이상) ──[PRODUCE: P-04]──▶ generated
 generated ──[PRODUCE: P-05, 단독 실행]──▶ integrated
 integrated ──[CLINE: P-06]──▶ VERIFIED → verified / FAILED → build_fail(n)
 build_fail(n) ──[PRODUCE: P-07]──▶ integrated (재검증 대상)   ※ n=3 → 통합 revert + escalated

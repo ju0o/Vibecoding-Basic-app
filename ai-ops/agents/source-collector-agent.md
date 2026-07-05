@@ -3,7 +3,7 @@
 | 항목 | 내용 |
 |---|---|
 | 계층 | Planning (자료 수집 전담) |
-| 기본 Executor | Codex 수집 세션 (2026-07-04 Trae 제외 — 검증 세션과 분리 필수) / 예외 시 Fable |
+| 기본 Executor | Codex (2026-07-04 Trae 제외, 2026-07-05 연속 검증 허용) / 예외 시 Fable |
 | 사용 Skill | SK-01 공식 문서 리서치 (수집 파트) |
 | 사용 Prompt | prompts/P-12-source-collection.md |
 

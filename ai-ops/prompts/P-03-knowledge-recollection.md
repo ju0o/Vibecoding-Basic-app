@@ -1,9 +1,9 @@
 # P-03 Knowledge 재수집 (Loop A)
 
-| Agent | Source Collector | **Primary Executor** | **Codex (수집 세션)** |
+| Agent | Source Collector | **Primary Executor** | **Codex** |
 |---|---|---|---|
 | Allowed | Fable (예외 승인 시) | 단계 | WF-06 §3 |
-| 세션 규칙 | **P-02를 수행한 세션과 다른 세션** | 다음 | P-02 재평가 (검증 세션) |
+| 연속 실행 규칙 | P-02 미달 직후 같은 흐름에서 실행 가능 | 다음 | P-02 재평가 |
 
 채울 값: `{KB id}`, `{n}` (요청서 번호)
 
@@ -44,7 +44,7 @@
 - 변경 이력 기록 존재
 
 ## 다음 단계
-- 운영자가 Codex에 P-02 재평가를 전달 (미달 항목 중심 재평가)
+- Codex가 P-02 재평가를 이어서 수행한다 (미달 항목 중심 재평가).
 
 ## 실패 시 되돌아갈 Workflow
 - 이행 불가 항목이 핵심이면 운영자 판단 (주제 범위 재정의 — WF-06 에스컬레이션)
