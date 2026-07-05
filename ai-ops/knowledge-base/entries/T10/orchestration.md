@@ -2,8 +2,8 @@
 id: orchestration
 title: "Orchestration (에이전트 오케스트레이션)"
 topicGroup: T10
-status: draft
-score: null
+status: approved
+score: 89
 level: 중급
 prerequisites: [agent-loop, tool-calling]
 successors: [harness]

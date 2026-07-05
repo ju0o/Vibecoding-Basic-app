@@ -2,8 +2,8 @@
 id: harness
 title: "Harness Engineering (하네스 엔지니어링)"
 topicGroup: T10
-status: draft
-score: null
+status: approved
+score: 90
 level: 중급
 prerequisites: [agent-loop, orchestration]
 successors: []

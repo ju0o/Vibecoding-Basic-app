@@ -2,8 +2,8 @@
 id: skills
 title: "Skills (Agent Skills)"
 topicGroup: T10
-status: draft
-score: null
+status: approved
+score: 93
 level: 중급
 prerequisites: [context-engineering]
 successors: [orchestration, harness]
