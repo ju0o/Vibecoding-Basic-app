@@ -2,8 +2,8 @@
 id: grounding-citations
 title: "Grounding and Citations (근거화와 인용)"
 topicGroup: T08
-status: draft
-score: null
+status: approved
+score: 91
 level: 기초
 prerequisites: [prompt-engineering]
 successors: [hallucination-verification, rag]

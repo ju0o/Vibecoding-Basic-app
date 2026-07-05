@@ -2,8 +2,8 @@
 id: hallucination-verification
 title: "Hallucination and Verification (환각과 검증)"
 topicGroup: T08
-status: draft
-score: null
+status: approved
+score: 90
 level: 기초
 prerequisites: [grounding-citations]
 successors: [ai-system-evaluation]

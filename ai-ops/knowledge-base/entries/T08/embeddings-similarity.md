@@ -2,8 +2,8 @@
 id: embeddings-similarity
 title: "Embeddings and Similarity (임베딩과 의미 유사도)"
 topicGroup: T08
-status: draft
-score: null
+status: approved
+score: 88
 level: 중급
 prerequisites: [tokenization-context]
 successors: [rag]

@@ -66,10 +66,10 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 48 | A | monitoring-errors-rollbacks | deployment-ops | 6 | deep-dive | 모니터링, 오류 추적, 롤백 | 중급 | ci-cd-pipeline-basics | monitoring-errors-rollbacks | kb_needed |
 | 49 | D | deployment-cli-reference | deployment-ops | 7 | reference | 배포 CLI 명령 레퍼런스 | 중급 | deployment-platforms | deployment-cli-reference | kb_needed |
 | 50 | C | tokenization-and-context | ai-basics | 1 | deep-dive | 토큰화와 컨텍스트 비용 | 기초 | ai-vibe-coding-orientation | tokenization-context | kb_needed |
-| 51 | C | prompt-engineering-foundations | ai-basics | 2 | deep-dive | Prompt Engineering의 기본 원리 | 기초 | tokenization-and-context | prompt-engineering | kb_needed |
-| 52 | D | grounding-and-citations | ai-basics | 3 | reference | Grounding과 citation 레퍼런스 | 기초 | prompt-engineering-foundations | grounding-citations | kb_needed |
-| 53 | C | hallucination-and-verification | ai-basics | 4 | deep-dive | 환각과 검증 루틴 | 기초 | grounding-and-citations | hallucination-verification | kb_needed |
-| 54 | C | embeddings-and-similarity | ai-basics | 5 | deep-dive | 임베딩과 의미 유사도 | 중급 | tokenization-and-context | embeddings-similarity | kb_needed |
+| 51 | C | prompt-engineering-foundations | ai-basics | 2 | deep-dive | Prompt Engineering의 기본 원리 | 기초 | tokenization-and-context | prompt-engineering | planned |
+| 52 | D | grounding-and-citations | ai-basics | 3 | reference | Grounding과 citation 레퍼런스 | 기초 | prompt-engineering-foundations | grounding-citations | planned |
+| 53 | C | hallucination-and-verification | ai-basics | 4 | deep-dive | 환각과 검증 루틴 | 기초 | grounding-and-citations | hallucination-verification | planned |
+| 54 | C | embeddings-and-similarity | ai-basics | 5 | deep-dive | 임베딩과 의미 유사도 | 중급 | tokenization-and-context | embeddings-similarity | planned |
 | 55 | C | model-selection-tradeoffs | ai-basics | 6 | deep-dive | 모델 선택과 trade-off | 중급 | hallucination-and-verification | model-selection-tradeoffs | kb_needed |
 | 56 | B | ai-era-timeline | ai-basics | 7 | deep-dive | 자동완성에서 에이전트까지 AI 개발 시대 구분 | 기초 | vibe-coding-origin-karpathy | ai-era-timeline | kb_needed |
 | 57 | B | autocomplete-era | ai-coding-tools | 1 | deep-dive | 자동완성 시대: Copilot 이전과 이후 | 기초 | ai-era-timeline | autocomplete-era | kb_needed |

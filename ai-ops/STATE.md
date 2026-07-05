@@ -11,28 +11,28 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | Phase 2 P-01 완료: T08 5개 KB draft 생성 / P-02 검증 대기 |
-| Last Completed Step | Codex P-01 Knowledge Collection T08 Batch 4 (5 KB drafts, 2026-07-05) |
+| Current State | Phase 2 P-02 완료: T08 4개 KB approved / tokenization-context recollect(1) |
+| Last Completed Step | Codex P-02 Knowledge Verification T08 Batch 4 (4 approved, 1 recollect, 2026-07-05) |
 | Next Executor | Codex |
-| Next Prompt File | `prompts/RUN-CODEX-VERIFY.md` |
+| Next Prompt File | `prompts/RUN-CODEX-PRODUCE.md` |
 | Blocker | 없음 |
-| Required Human Action | None — 같은 Codex 흐름에서 P-02 원문 재접속 검증 진행 |
+| Required Human Action | None — 같은 Codex 흐름에서 P-03 tokenization-context 재수집 진행 |
 | Release Status | V2 17강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 2 P-01 완료 — T08 KB 5건 draft 생성, P-02 검증 대기
-- Verdict: DONE
+- Current State: CODEX-PLAN Phase 2 P-02 완료 — T08 KB 4건 approved, tokenization-context recollect(1)
+- Verdict: RECOLLECT
 - Next Executor: Codex
-- Next Prompt File: prompts/RUN-CODEX-VERIFY.md
-- Why: P-01 완료로 draft KB가 발생했으므로 VERIFY 세션 규칙에 따라 P-02 Knowledge Verification이 다음 단계
-- Required Operator Action: None — 같은 Codex 흐름에서 원문 URL 재접속 대조와 Knowledge Score 산정 진행
-- If Approved: approved KB를 근거로 BACKLOG #50-#54를 planned로 전환하고 P-04 생성 후보로 이동
-- If Rejected: 지적된 KB만 recollect(n)로 전환하고 RUN-CODEX-PRODUCE(P-03)로 재수집
-- Files to Check: ai-ops/knowledge-base/entries/T08/tokenization-context.md, ai-ops/knowledge-base/entries/T08/prompt-engineering.md, ai-ops/knowledge-base/entries/T08/grounding-citations.md
-- Stop Condition: P-02는 draft KB 5건만 검증하고 강의 생성(P-04)은 수행하지 않음
+- Next Prompt File: prompts/RUN-CODEX-PRODUCE.md
+- Why: VERIFY 결과 tokenization-context가 recollect(1)이며, PRODUCE 우선순위에서 recollect가 planned보다 먼저 처리됨
+- Required Operator Action: None — 같은 Codex 흐름에서 recollection-request-1.md의 3개 citation 위치만 수정
+- If Approved: P-03 완료 후 RUN-CODEX-VERIFY.md로 tokenization-context 재평가
+- If Rejected: tokenization-context escalated 또는 재수집 요청서 보완
+- Files to Check: ai-ops/knowledge-base/reviews/tokenization-context/verification-report.md, ai-ops/knowledge-base/reviews/tokenization-context/recollection-request-1.md, ai-ops/MASTER_PROGRESS.md
+- Stop Condition: P-03은 tokenization-context의 지정된 citation 위치만 수정하고 강의 생성(P-04)은 수행하지 않음
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -68,13 +68,15 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
-- KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **draft, P-02 대기**
+- KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved**, tokenization-context = **recollect(1)**
 - 강의: **V2 released 17강** (V2 Wave 1+2+3+4 — 배포는 HOLD, 운영자 게이트) / 다음 물결 KB 수집 대기
-- 루프 카운터: 없음 (rag Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
+- 루프 카운터: tokenization-context Loop A ↻1 진행 중 (rag Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-05 | KB prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity | draft → approved | Codex P-02 |
+| 2026-07-05 | KB tokenization-context | draft → recollect(1) | Codex P-02 |
 | 2026-07-05 | KB tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity | needed → draft | Codex P-01 |
 | 2026-07-05 | context-caching-and-state·ai-system-evaluation | integrated → verified → released | Codex P-06/P-08 |
 | 2026-07-05 | context-caching-and-state·ai-system-evaluation | generated → integrated | Codex P-05 |

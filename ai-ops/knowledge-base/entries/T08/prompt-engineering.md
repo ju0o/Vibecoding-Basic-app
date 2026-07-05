@@ -2,8 +2,8 @@
 id: prompt-engineering
 title: "Prompt Engineering (프롬프트 엔지니어링)"
 topicGroup: T08
-status: draft
-score: null
+status: approved
+score: 89
 level: 기초
 prerequisites: [tokenization-context]
 successors: [grounding-citations, hallucination-verification]
