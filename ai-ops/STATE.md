@@ -6,9 +6,10 @@
 
 | # | 붙여넣을 프롬프트 | 어디에 | 이유 (자동 계산 근거) |
 |---|---|---|---|
-| 1 | `prompts/RUN-CODEX-PRODUCE.md` | Codex 생산 세션 | 강의 4건이 `planned` (context-engineering-basics, tool-calling-basics, rag-fundamentals, mcp-architecture-basics — KB qa_approved 충족) → P-04 생성 |
+| 1 | `prompts/RUN-CODEX-PRODUCE.md` | Codex 생산 세션 | 강의 4건 `planned` + 근거 KB qa_approved (context-window-and-memory, system-prompts-and-instruction-layers, ai-workflow-design, agent-loop-anatomy) → P-04. 같은 세션의 다음 런에서 2차 KB 3건(`needed`: skills, orchestration, harness) P-01 |
+| 2 | **운영자 결정** | — | Batch 1 배포 HOLD 해제: 배포 환경 선택 필요 (Vercel 권장 — `outputs/06-deployment/DEPLOY-REPORT-2026-07-05.md` 참조) |
 
-승인 대기 (운영자 결정 필요): 없음
+승인 대기 (운영자 결정 필요): 배포 환경 (NEXT #2)
 에스컬레이션: 없음
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -43,13 +44,17 @@ verified ──[CLINE: P-08, 같은 런에서 연속]──▶ released
 
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
-- KB: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved** (QA-01, 2026-07-05)
-- 강의: from-prompt-to-system = **released** / 4강 = **planned** (위 NEXT #1) / 5강 = planned이나 KB 대기 (skills·orchestration·harness KB는 2차 배치) / 나머지 backlog = planned(KB 확보분)
-- 루프 카운터: 없음 (rag Loop A는 종결)
+- KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved** / KB 2차: skills·orchestration·harness = **needed** (O-01 등록 2026-07-05)
+- 강의: **released 5강** (파일럿 + Batch 1 Final 4강 — 배포는 HOLD, 운영자 게이트) / **planned + KB 충족 6강** (order 3·4·5·11·12·14 — P-04 런당 4건 제한) / KB 대기 3강 (order 10·13·15)
+- 루프 카운터: 없음 (rag Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-05 | KB skills·orchestration·harness | (등록) → needed | Fable O-01 |
+| 2026-07-05 | Batch 1 4강 | verified → released (배포 HOLD) | Cline P-08 (5bafba1, 콘텐츠 커밋 보완 a0b6849) |
+| 2026-07-05 | Batch 1 4강 | integrated → verified | Cline P-06 ×2 (93ca776, e69fb4b) |
+| 2026-07-05 | Batch 1 4강 | planned → generated → integrated | Codex P-04/P-05 |
 | 2026-07-05 | KB 5건 | approved → qa_approved | Fable QA-01 |
 | 2026-07-05 | rag | recollect(1) → draft → approved | Codex P-03/P-02 |
 | 2026-07-05 | KB 5건 | needed → draft → approved | Codex P-01/P-02 |

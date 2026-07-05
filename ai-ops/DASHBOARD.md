@@ -9,16 +9,15 @@
 
 | 단계 | 현황 |
 |---|---|
-| KB (qa_approved) | 5 / 5 (1차 배치 100%) — 평균 Score 90.4 |
-| Lesson 생성 | 1 / 14 |
-| Site 반영 | 1 / 14 |
-| Verify · Release | 1 / 14 · 1 / 14 |
+| KB (qa_approved) | 5 / 8 (2차 배치 3건 needed 등록) |
+| Lesson 생성 · Site 반영 | 5 / 14 · 5 / 14 |
+| Verify · Release | 5 / 14 · 5 / 14 (**M10 진도 36%**) |
 
 ## 실행 상태
 
-- **NEXT**: RUN-CODEX-PRODUCE → P-04 강의 4건 생성 (STATE.md 참조)
-- 승인 대기: 없음 / 에스컬레이션: 없음 / 진행 중 루프: 없음
-- 병목: P-04 미착수 (approved KB 9강 분량 대기). 구조 병목: Codex 세션 수 = 처리량 상한
+- **NEXT**: ① RUN-CODEX-PRODUCE → P-04 강의 4건 (order 3·4·5·11) ② **운영자: 배포 환경 결정 (Batch 1 HOLD 해제)**
+- 승인 대기: 배포 환경 / 에스컬레이션: 없음 / 진행 중 루프: 없음
+- 병목: 배포 HOLD (콘텐츠는 5강 릴리스됐으나 사용자 도달 경로 미정), 2차 KB 미수집(order 10·13·15 차단)
 
 ## 최근 완료 (최신 5)
 
