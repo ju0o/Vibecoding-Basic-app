@@ -38,7 +38,12 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 강의 slug | 모듈 | 근거 KB | Lesson(P-04) | Site(P-05) | Verify(P-06) | Release(P-08) | 비고 |
 |---|---|---|---|---|---|---|---|
+| development-environment-map | getting-started | dev-environment-map | ✓ | — | — | — | T01/T08 Wave P-04, diagram draft 포함 |
+| vibe-coding-origin-karpathy | getting-started | vibe-coding-origin-karpathy | ✓ | — | — | — | T01/T08 Wave P-04, 특수 출처 승인 반영 |
+| learning-with-ai-verification | getting-started | ai-learning-verification | ✓ | — | — | — | T01/T08 Wave P-04, diagram draft 포함 |
 | from-prompt-to-system | M10 | n/a (구 체제 파일럿) | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
+| files-folders-and-paths | development-basics | files-folders-paths | ✓ | — | — | — | T01/T08 Wave P-04, diagram draft 포함 |
+| terminal-shell-basics-reference | development-basics | terminal-shell-commands | — | — | — | — | planned, P-04 다음 런 대상 |
 | context-engineering-basics | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | context-window-and-memory | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | system-prompts-and-instruction-layers | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
@@ -73,8 +78,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | KB Quote Bank (4차 approved KB) | 5 / 5 | 100% (tokenization-context Loop A 후 승인) |
 | KB Quote Bank (5차 approved KB) | 5 / 5 | 100% (vibe-coding-origin-karpathy Loop A 후 승인) |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
-| Lesson 생성 | 22 / 27 | 81% (5차 approved KB 기반 planned 5건 P-04 대기) |
-| Site 반영 | 22 / 27 | 81% (generated 이상 전건 반영, planned 5건 대기) |
+| Lesson 생성 | 26 / 27 | 96% (T01/T08 Wave 4건 generated, terminal-shell-basics-reference planned) |
+| Site 반영 | 22 / 27 | 81% (generated 4건 P-05 대기, planned 1건 대기) |
 | Verify 통과 | 22 / 27 | 81% (D-02 플랫폼 증분 후 `npm run verify` PASS) |
 | Release | 22 / 27 | 81% (V2 Wave 1+2+3+4+5+6 released, deployment HOLD) |
 
@@ -114,3 +119,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-05 | CODEX-PLAN Phase 3 Verify/Release T08 Wave 2 | 완료 | `npm run verify` PASS, embeddings-and-similarity V2 Wave 6 릴리스 |
 | 2026-07-06 | CODEX-PLAN Phase 2 KB 5차 P-02 | 완료 | dev-environment-map 88·vibe-coding-origin-karpathy 86(Loop A)·ai-learning-verification 92·files-folders-paths 90·terminal-shell-commands 88 APPROVED |
 | 2026-07-06 | CODEX-PLAN D-02 플랫폼 증분 | 완료 | 콜아웃 4종 렌더링 + noindex/robots/Basic Auth(SITE_PASSWORD) 구현, `npm run verify` PASS |
+| 2026-07-06 | CODEX-PLAN Phase 3 P-04 T01/T08 Wave | 완료 | development-environment-map·vibe-coding-origin-karpathy·learning-with-ai-verification·files-folders-and-paths V2 Lesson Draft + diagrams 생성, P-05 대기 |

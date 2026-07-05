@@ -11,27 +11,27 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | CODEX-PLAN D-02 플랫폼 증분 완료: 콜아웃 4종 렌더링 + 비공개 접근 보호 verify PASS / planned 5건 P-04 대기 |
-| Last Completed Step | Codex D-02 callouts/private access 구현·런타임 확인·`npm run verify` PASS (2026-07-06) |
+| Current State | CODEX-PLAN Phase 3 P-04 T01/T08 Wave 완료: 4강 generated / P-05 사이트 반영 대기 |
+| Last Completed Step | Codex P-04 development-environment-map·vibe-coding-origin-karpathy·learning-with-ai-verification·files-folders-and-paths draft+diagram 생성 (2026-07-06) |
 | Next Executor | Codex |
-| Next Prompt File | `prompts/P-04-lesson-generation.md` |
+| Next Prompt File | `prompts/P-05-site-integration.md` |
 | Blocker | 없음 |
-| Required Human Action | None — 같은 Codex 흐름에서 planned 5건 중 최대 4건 P-04 생성 |
+| Required Human Action | None — 같은 Codex 흐름에서 generated 4건 P-05 사이트 반영 |
 | Release Status | V2 22강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN D-02 플랫폼 증분 완료 — 콜아웃 4종 렌더링 + noindex/robots/Basic Auth 구현, `npm run verify` PASS
+- Current State: CODEX-PLAN Phase 3 P-04 T01/T08 Wave 완료 — 4강 generated, terminal-shell-basics-reference는 planned 유지
 - Verdict: DONE
 - Next Executor: Codex
-- Next Prompt File: prompts/P-04-lesson-generation.md
-- Why: 상태 기계상 planned 강의 5건의 근거 KB가 모두 approved이므로 다음 CODEX-PLAN 물결은 P-04 Lesson Generation
-- Required Operator Action: None — 같은 Codex 흐름에서 최대 4건 생성
-- If Approved: generated 상태가 생기면 다음 런 우선순위에 따라 P-05 사이트 반영
-- If Rejected: P-04 반려 항목은 planned로 회귀하고 재생성
-- Files to Check: ai-ops/outputs/04-integrated/D-02-callouts-private-access.md, src/components/lesson/LessonMarkdown.tsx, middleware.ts
+- Next Prompt File: prompts/P-05-site-integration.md
+- Why: 상태 기계상 generated 강의가 있으므로 다음 CODEX-PLAN 단계는 P-05 Site Integration이며 단독 실행
+- Required Operator Action: None — 같은 Codex 흐름에서 P-05만 수행
+- If Approved: P-05 완료 후 `npm run verify` 및 release 흐름으로 진행
+- If Rejected: generated 항목은 planned로 회귀하고 P-04 재생성
+- Files to Check: ai-ops/outputs/02-drafts/P-04-2026-07-06-t01-t08-wave.md, ai-ops/outputs/02-drafts/development-environment-map/lesson.md, ai-ops/outputs/02-drafts/files-folders-and-paths/lesson.md
 - Stop Condition: Phase 5 개발 서버 확인 보고에서만 정지
 ```
 
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved** / KB 5차 T01/T08: dev-environment-map·vibe-coding-origin-karpathy·ai-learning-verification·files-folders-paths·terminal-shell-commands = **approved** / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 22강** (V2 Wave 1+2+3+4+5+6 — 배포는 HOLD, 운영자 게이트)
+- 강의: **V2 released 22강 + generated 4강 + planned 1강** (generated 4강 P-05 대기, 배포는 HOLD)
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-06 | development-environment-map·vibe-coding-origin-karpathy·learning-with-ai-verification·files-folders-and-paths | planned → generated | Codex P-04 T01/T08 Wave |
 | 2026-07-06 | CODEX-PLAN D-02 플랫폼 증분 | 대기 → 완료 | Codex, 콜아웃 4종 + 비공개 접근 보호, verify PASS |
 | 2026-07-06 | KB vibe-coding-origin-karpathy | draft → recollect(1) → draft → approved | Codex P-03/P-02, 특수 출처 승인 반영 |
 | 2026-07-06 | KB dev-environment-map·ai-learning-verification·files-folders-paths·terminal-shell-commands | draft → approved | Codex P-02 T01/T08 KB 5차 |
