@@ -40,12 +40,12 @@ Anthropic은 Claude Opus 4.7 이후 Opus 계열, Claude Fable 5, Claude Mythos 5
 3. Context window는 모델이 응답 생성 중 참조할 수 있는 텍스트 전체이며, response 자체도 window에 포함된다. (출처: https://platform.claude.com/docs/en/build-with-claude/context-windows, 확인: 2026-07-05)
 4. 모든 요청 요소가 context window를 차지한다. Claude 문서는 system prompt, messages, documents, images, tool definitions, tool results가 window에 포함될 수 있다고 설명한다. (출처: https://platform.claude.com/docs/en/build-with-claude/context-windows, 확인: 2026-07-05)
 5. Model별 tokenizer 차이가 있으므로, Anthropic은 사용하려는 model로 prompt를 다시 세라고 권장한다. (출처: https://platform.claude.com/docs/en/build-with-claude/token-counting, 확인: 2026-07-05)
-6. Prompt caching은 반복 prefix의 처리 비용과 latency를 줄일 수 있지만, cached prompt prefixes도 context window를 계속 차지한다고 Anthropic 문서는 설명한다. (출처: https://platform.claude.com/docs/en/build-with-claude/prompt-caching, 확인: 2026-07-05)
+6. Prompt caching은 반복 prefix의 처리 비용과 latency를 줄일 수 있지만, cached prompt prefixes도 context window를 계속 차지한다고 Anthropic 문서는 설명한다. (출처: https://platform.claude.com/docs/en/build-with-claude/context-windows, 확인: 2026-07-05)
 
 ## 관련 기술
 - Tokenization vs Character Count: token count는 문자 수와 동일하지 않으며, Anthropic 문서는 model tokenizer 변화에 따라 같은 입력의 token count가 달라질 수 있다고 설명한다. (출처: https://platform.claude.com/docs/en/build-with-claude/token-counting, 확인: 2026-07-05)
 - Context Window vs Memory: context window는 요청에 포함된 작업 메모리이고, model이 요청 사이의 정보를 자동으로 기억한다는 뜻이 아니다. Claude Code prompt caching 문서는 model이 requests 사이에서 아무것도 기억하지 않는다고 설명한다. (출처: https://code.claude.com/docs/en/prompt-caching, 확인: 2026-07-05)
-- Context Window vs Prompt Caching: context window는 현재 요청의 참조 가능 범위이고, prompt caching은 반복 prefix 처리 비용과 지연을 줄이는 기능이다. Anthropic은 cached prefix도 context window를 차지한다고 설명한다. (출처: https://platform.claude.com/docs/en/build-with-claude/prompt-caching, 확인: 2026-07-05)
+- Context Window vs Prompt Caching: context window는 현재 요청의 참조 가능 범위이고, prompt caching은 반복 prefix 처리 비용과 지연을 줄이는 기능이다. Anthropic은 cached prefix도 context window를 차지한다고 설명한다. (출처: https://platform.claude.com/docs/en/build-with-claude/context-windows, 확인: 2026-07-05)
 - Token Counting vs Context Engineering: token counting은 양을 측정하고, context engineering은 어떤 정보를 넣고 뺄지 설계한다. Claude context window 문서의 context rot 설명은 양만 늘리는 전략의 한계를 보여준다. (출처: https://platform.claude.com/docs/en/build-with-claude/context-windows, 확인: 2026-07-05)
 
 ## 선행 개념
@@ -82,7 +82,7 @@ Q: Context window가 크면 항상 더 좋은가?
 A: 아니다. Claude 문서는 token count가 커질수록 accuracy와 recall이 떨어질 수 있으며, 더 많은 context가 자동으로 더 좋은 결과를 뜻하지 않는다고 설명한다. (출처: https://platform.claude.com/docs/en/build-with-claude/context-windows, 확인: 2026-07-05)
 
 Q: Prompt caching을 쓰면 context window 한계가 사라지는가?
-A: 아니다. Anthropic 문서는 cached prompt prefixes도 context window를 차지한다고 설명한다. Caching은 비용과 latency를 줄이는 기능이지 window 용량을 없애는 기능이 아니다. (출처: https://platform.claude.com/docs/en/build-with-claude/prompt-caching, 확인: 2026-07-05)
+A: 아니다. Anthropic 문서는 cached prompt prefixes도 context window를 차지한다고 설명한다. Caching은 비용과 latency를 줄이는 기능이지 window 용량을 없애는 기능이 아니다. (출처: https://platform.claude.com/docs/en/build-with-claude/context-windows, 확인: 2026-07-05)
 
 ## 자주 하는 실수
 1. 실수: 글자 수가 짧으면 token count도 작다고 본다. 왜 생기나: 토큰화를 문자 단위 자르기로 오해한다. 교정: 실제 사용할 model의 token counting 도구로 다시 계산한다. (출처: https://platform.claude.com/docs/en/build-with-claude/token-counting, 확인: 2026-07-05)
@@ -93,7 +93,7 @@ A: 아니다. Anthropic 문서는 cached prompt prefixes도 context window를 �
 - Token counting은 비용, rate limit, model routing, prompt length 관리를 돕는다 — [Token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting) (확인: 2026-07-05)
 - Context window는 응답 생성 시 모델이 참조할 수 있는 작업 메모리이며, 더 많은 context가 자동으로 더 좋은 결과를 뜻하지 않는다 — [Context windows](https://platform.claude.com/docs/en/build-with-claude/context-windows) (확인: 2026-07-05)
 - Anthropic은 모델 tokenizer 차이 때문에 목표 모델 기준으로 prompt를 다시 세라고 설명한다 — [Token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting) (확인: 2026-07-05)
-- Cached prompt prefixes는 context window를 계속 차지한다 — [Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) (확인: 2026-07-05)
+- Cached prompt prefixes는 context window를 계속 차지한다 — [Context windows](https://platform.claude.com/docs/en/build-with-claude/context-windows) (확인: 2026-07-05)
 - OpenAI는 context management 영역에서 token counting을 별도 운영 주제로 제공한다 — [Counting tokens](https://developers.openai.com/api/docs/guides/token-counting) (확인: 2026-07-05)
 
 ## Quote Bank
@@ -110,8 +110,9 @@ A: 아니다. Anthropic 문서는 cached prompt prefixes도 context window를 �
   - 출처: [Token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting) (확인: 2026-07-05)
   - 맥락: model별 tokenizer 차이를 설명할 때 사용한다.
 - > "Cached prompt prefixes still occupy the context window"
-  - 출처: [Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) (확인: 2026-07-05)
+  - 출처: [Context windows](https://platform.claude.com/docs/en/build-with-claude/context-windows) (확인: 2026-07-05)
   - 맥락: caching과 context capacity를 구분할 때 사용한다.
 
 ## 변경 이력
 - 2026-07-05: 최초 작성 (Codex, P-01)
+- 2026-07-05: 재수집 1회차 — cached prompt prefixes 관련 citation URL을 Claude Context windows 문서로 보정 (Codex, P-03)

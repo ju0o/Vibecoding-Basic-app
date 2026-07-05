@@ -23,7 +23,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | loop-engineering | T10 | ✓ | ✓ 88 (2026-07-05, O-05.2 연속 검증) | order 14 근거 |
 | context-caching | T10 | ✓ | ✓ 89 (2026-07-05, O-05.2 연속 검증) | order 15 근거 |
 | ai-system-evaluation | T10 | ✓ | ✓ 90 (2026-07-05, O-05.2 연속 검증) | order 16 근거 |
-| tokenization-context | T08 | ✓ | ↻1 (78, 2026-07-05) | order 50 근거 / Quote Bank 출처 URL 불일치, P-03 대기 |
+| tokenization-context | T08 | ✓ | ↻1 (P-03 완료, P-02 재평가 대기) | order 50 근거 / Quote Bank 출처 URL 보정 |
 | prompt-engineering | T08 | ✓ | ✓ 89 (2026-07-05, O-05.2 연속 검증) | order 51 근거 |
 | grounding-citations | T08 | ✓ | ✓ 91 (2026-07-05, O-05.2 연속 검증) | order 52 근거 |
 | hallucination-verification | T08 | ✓ | ✓ 90 (2026-07-05, O-05.2 연속 검증) | order 53 근거 |
