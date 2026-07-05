@@ -39,10 +39,10 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | mcp-architecture-basics | M10 | mcp, tool-calling | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | designing-reusable-skills | M10 | skills | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 2, RELEASE-2026-07-05-v2-wave2.md |
 | agent-loop-anatomy | M10 | agent-loop, tool-calling | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
-| subagents-and-delegation | M10 | agent-loop, subagents | ✓ | ✓ | — | — | P-05 integrated, 검증 대기 |
-| multi-agent-orchestration | M10 | orchestration | ✓ | ✓ | — | — | P-05 integrated, 검증 대기 |
-| loop-engineering-basics | M10 | agent-loop, loop-engineering | ✓ | ✓ | — | — | P-05 integrated, 검증 대기 |
-| harness-engineering-basics | M10 | harness | ✓ | ✓ | — | — | P-05 integrated, 검증 대기 |
+| subagents-and-delegation | M10 | agent-loop, subagents | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 3, RELEASE-2026-07-05-v2-wave3.md |
+| multi-agent-orchestration | M10 | orchestration | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 3, RELEASE-2026-07-05-v2-wave3.md |
+| loop-engineering-basics | M10 | agent-loop, loop-engineering | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 3, RELEASE-2026-07-05-v2-wave3.md |
+| harness-engineering-basics | M10 | harness | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 3, RELEASE-2026-07-05-v2-wave3.md |
 | context-caching-and-state | M10 | context-caching | — | — | — | — | order 15, planned |
 | ai-system-evaluation | M10 | ai-system-evaluation | — | — | — | — | order 16, planned |
 
@@ -58,8 +58,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
 | Lesson 생성 | 15 / 17 | 88% |
 | Site 반영 | 15 / 17 | 88% |
-| Verify 통과 | 11 / 17 | 65% |
-| Release | 11 / 17 | 65% (V2 Wave 1+2, deployment HOLD) |
+| Verify 통과 | 15 / 17 | 88% |
+| Release | 15 / 17 | 88% (V2 Wave 1+2+3, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
@@ -82,3 +82,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-05 | CODEX-PLAN Phase 2 KB 3차 P-02 | 완료 | subagents 91·loop-engineering 88·context-caching 89·ai-system-evaluation 90 APPROVED |
 | 2026-07-05 | CODEX-PLAN Phase 3 P-04 Batch 3 | 완료 | subagents-and-delegation·multi-agent-orchestration·loop-engineering-basics·harness-engineering-basics V2 Lesson Draft 생성, P-05 대기 |
 | 2026-07-05 | CODEX-PLAN Phase 3 P-05 Batch 3 | 완료 | subagents-and-delegation·multi-agent-orchestration·loop-engineering-basics·harness-engineering-basics 사이트 반영, 검증 대기 |
+| 2026-07-05 | CODEX-PLAN Phase 3 P-06/P-08 Batch 3 | 완료 | `npm run verify` PASS, V2 Wave 3 릴리스 |
