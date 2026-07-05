@@ -2,8 +2,8 @@
 id: subagents
 title: "SubAgents (하위 에이전트)"
 topicGroup: T10
-status: draft
-score: null
+status: approved
+score: 91
 level: 중급
 prerequisites: [agent-loop, context-engineering]
 successors: [orchestration, harness]

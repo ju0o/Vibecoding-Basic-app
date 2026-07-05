@@ -2,8 +2,8 @@
 id: context-caching
 title: "Context Caching (컨텍스트 캐싱)"
 topicGroup: T10
-status: draft
-score: null
+status: approved
+score: 89
 level: 중급
 prerequisites: [context-engineering]
 successors: [harness, ai-system-evaluation]

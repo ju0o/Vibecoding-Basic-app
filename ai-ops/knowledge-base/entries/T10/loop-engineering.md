@@ -2,8 +2,8 @@
 id: loop-engineering
 title: "Loop Engineering (루프 엔지니어링)"
 topicGroup: T10
-status: draft
-score: null
+status: approved
+score: 88
 level: 중급
 prerequisites: [agent-loop, tool-calling]
 successors: [harness]

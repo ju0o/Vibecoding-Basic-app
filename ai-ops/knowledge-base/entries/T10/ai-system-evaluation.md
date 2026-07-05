@@ -2,8 +2,8 @@
 id: ai-system-evaluation
 title: "AI System Evaluation (AI 시스템 평가)"
 topicGroup: T10
-status: draft
-score: null
+status: approved
+score: 90
 level: 중급
 prerequisites: [agent-loop, harness]
 successors: []

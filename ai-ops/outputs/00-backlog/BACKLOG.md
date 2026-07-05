@@ -89,12 +89,12 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 71 | C | mcp-architecture-basics | ai-system-design | 8 | deep-dive | MCP 구조: 서버, 클라이언트, 도구, 리소스 | 중급 | tool-calling-basics | mcp,tool-calling | v2-released |
 | 72 | C | designing-reusable-skills | ai-system-design | 10 | deep-dive | Skill 설계: 재사용 절차 만들기 | 중급 | context-engineering-mcp-skills | skills | v2-released |
 | 73 | C | agent-loop-anatomy | ai-system-design | 10 | deep-dive | Agent의 구조: 도구 루프와 관찰-행동 사이클 | 중급 | tool-calling-basics | agent-loop,tool-calling | v2-released |
-| 74 | C | subagents-and-delegation | ai-system-design | 11 | deep-dive | SubAgent와 위임 패턴 | 중급 | agent-loop-anatomy | agent-loop,subagents | kb_needed |
-| 75 | C | multi-agent-orchestration | ai-system-design | 12 | deep-dive | Orchestration: 여러 Agent의 협업 설계 | 중급 | subagents-and-delegation | orchestration | kb_needed |
-| 76 | C | loop-engineering-basics | ai-system-design | 13 | deep-dive | Loop Engineering: 반복 실행과 종료 조건 | 중급 | agent-loop-anatomy | agent-loop,loop-engineering | kb_needed |
-| 77 | C | harness-engineering-basics | ai-system-design | 14 | deep-dive | Harness Engineering: 실행 환경, 권한, 검증 장치 | 중급 | loop-engineering-basics | harness | kb_needed |
-| 78 | C | context-caching-and-state | ai-system-design | 15 | deep-dive | Context Caching과 상태 재사용 | 중급 | context-window-and-memory | context-caching | kb_needed |
-| 79 | D | ai-system-evaluation | ai-system-design | 16 | reference | AI 시스템 평가와 eval 레퍼런스 | 중급 | harness-engineering-basics | ai-system-evaluation | kb_needed |
+| 74 | C | subagents-and-delegation | ai-system-design | 11 | deep-dive | SubAgent와 위임 패턴 | 중급 | agent-loop-anatomy | agent-loop,subagents | planned |
+| 75 | C | multi-agent-orchestration | ai-system-design | 12 | deep-dive | Orchestration: 여러 Agent의 협업 설계 | 중급 | subagents-and-delegation | orchestration | planned |
+| 76 | C | loop-engineering-basics | ai-system-design | 13 | deep-dive | Loop Engineering: 반복 실행과 종료 조건 | 중급 | agent-loop-anatomy | agent-loop,loop-engineering | planned |
+| 77 | C | harness-engineering-basics | ai-system-design | 14 | deep-dive | Harness Engineering: 실행 환경, 권한, 검증 장치 | 중급 | loop-engineering-basics | harness | planned |
+| 78 | C | context-caching-and-state | ai-system-design | 15 | deep-dive | Context Caching과 상태 재사용 | 중급 | context-window-and-memory | context-caching | planned |
+| 79 | D | ai-system-evaluation | ai-system-design | 16 | reference | AI 시스템 평가와 eval 레퍼런스 | 중급 | harness-engineering-basics | ai-system-evaluation | planned |
 | 80 | B | requirement-to-task-breakdown | practical-vibe-coding | 1 | deep-dive | 요구사항을 작업 단위로 쪼개기 | 기초 | human-ai-collaboration-patterns | requirement-task-breakdown | kb_needed |
 | 81 | B | prompt-to-implementation-loop | practical-vibe-coding | 2 | deep-dive | 프롬프트에서 구현 루프까지 | 중급 | requirement-to-task-breakdown | prompt-implementation-loop | kb_needed |
 | 82 | A | code-change-risk-analysis | practical-vibe-coding | 3 | deep-dive | 코드 변경 위험 분석 | 중급 | debugging-error-reading | code-change-risk-analysis | kb_needed |
