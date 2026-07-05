@@ -2,7 +2,7 @@
 
 **항목별 상태 매트릭스** (구 outputs/PIPELINE.md 대체). 실행 큐와 전이 규칙은 [STATE.md](STATE.md), 요약은 [DASHBOARD.md](DASHBOARD.md).
 갱신 규칙 (O-03): **RUN 프롬프트의 종료 절차가 자동 갱신** — 사람이 편집하지 않는다. 행 추가는 O-01(Fable)만. 상태 값은 STATE.md 상태 기계의 명칭을 따른다.
-Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집(P-03)·Lesson(P-04)·반영(P-05)·빌드수정(P-07) / **Cline** = Verify(P-06)·Release(P-08) / **Fable** = O-01·O-02·P-02 승인. Trae 제외.
+Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집(P-03)·Lesson(P-04)·반영(P-05)·빌드수정(P-07) / **Cline** = Verify(P-06)·Release(P-08) / **Fable** = O-01·O-02·Phase 5 사후 표본 감사. Trae 제외.
 
 ## 상태 기호
 `—` 미착수 / `▶` 진행 중 / `↻n` 루프 n회차 / `✓` 완료 / `✗` 실패·에스컬레이션 / `n/a` 해당 없음
@@ -50,22 +50,26 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | harness-engineering-basics | M10 | harness | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 3, RELEASE-2026-07-05-v2-wave3.md |
 | context-caching-and-state | M10 | context-caching | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 4, RELEASE-2026-07-05-v2-wave4.md |
 | ai-system-evaluation | M10 | ai-system-evaluation | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 4, RELEASE-2026-07-05-v2-wave4.md |
+| tokenization-and-context | ai-basics | tokenization-context | ✓ | — | — | — | T08 Wave 1, P-05 대기 |
+| prompt-engineering-foundations | ai-basics | prompt-engineering | ✓ | — | — | — | T08 Wave 1, P-05 대기 |
+| grounding-and-citations | ai-basics | grounding-citations | ✓ | — | — | — | T08 Wave 1, P-05 대기 |
+| hallucination-and-verification | ai-basics | hallucination-verification | ✓ | — | — | — | T08 Wave 1, P-05 대기 |
 
 ## 집계 (Executor가 행 갱신 시 함께 갱신)
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
-| Knowledge Base 수집(P-01) | 17 / 17 | 100% (4차 T08 5건 draft, P-02 대기) |
+| Knowledge Base 수집(P-01) | 17 / 17 | 100% (4차 T08 5건 approved) |
 | Knowledge Base (approved 이상) | 17 / 17 | 100% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건 + 4차 approved 5건) |
 | KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (2차 approved KB) | 3 / 3 | 100% |
 | KB Quote Bank (3차 approved KB) | 4 / 4 | 100% |
 | KB Quote Bank (4차 approved KB) | 5 / 5 | 100% (tokenization-context Loop A 후 승인) |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
-| Lesson 생성 | 17 / 17 | 100% |
-| Site 반영 | 17 / 17 | 100% |
-| Verify 통과 | 17 / 17 | 100% |
-| Release | 17 / 17 | 100% (V2 Wave 1+2+3+4, deployment HOLD) |
+| Lesson 생성 | 21 / 22 | 95% (T08 Wave 1 4건 generated, embeddings-and-similarity planned) |
+| Site 반영 | 17 / 21 | 81% (신규 generated 4건 P-05 대기) |
+| Verify 통과 | 17 / 21 | 81% (신규 generated 4건 P-05 대기) |
+| Release | 17 / 21 | 81% (V2 Wave 1+2+3+4 released, 신규 generated 4건 P-05 대기, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
@@ -95,3 +99,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-05 | CODEX-PLAN Phase 2 KB 4차 P-01 | 완료 | tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity draft 생성, P-02 대기 |
 | 2026-07-05 | CODEX-PLAN Phase 2 KB 4차 P-02 | 부분 완료 | prompt-engineering 89·grounding-citations 91·hallucination-verification 90·embeddings-similarity 88 APPROVED / tokenization-context 78 RECOLLECT ↻1 |
 | 2026-07-05 | CODEX-PLAN Phase 2 KB 4차 Loop A | 완료 | tokenization-context P-03 citation 보정 후 P-02 재평가 90 APPROVED |
+| 2026-07-05 | CODEX-PLAN Phase 3 P-04 T08 Wave 1 | 완료 | tokenization-and-context·prompt-engineering-foundations·grounding-and-citations·hallucination-and-verification V2 Lesson Draft 생성, P-05 대기 |
