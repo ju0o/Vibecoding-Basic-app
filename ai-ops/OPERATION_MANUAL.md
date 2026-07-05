@@ -5,14 +5,37 @@
 ## 운영자의 하루 (전체 절차)
 
 ```
-1. ai-ops/STATE.md 를 연다 → "지금 할 일(NEXT)" 표를 본다
-2. 표가 시키는 프롬프트 파일을 열어 → 그대로 복사 → 지정된 세션에 붙여넣는다
-   (채울 값 없음 — RUN 프롬프트는 파라미터가 없다)
-3. Executor가 끝나면 마지막 줄 "다음 → ..."을 따라 2를 반복한다
-4. NEXT에 "운영자: ..." 항목이 나타나면 그때만 결정한다 (승인/반려)
+1. 직전 Executor 보고의 맨 끝 NEXT_ACTION 블록을 본다 (또는 ai-ops/STATE.md의 NEXT 블록 — 같은 내용)
+2. Required Operator Action이 "None"이면: Next Prompt File을 열어 그대로 복사 → Next Executor 세션에 붙여넣는다
+3. Required Operator Action이 있으면: Files to Check의 파일을 열어 확인 → "Approve" 또는 "Reject: {사유}"만 말한다
+   → Approve면 If Approved에 적힌 프롬프트를, Reject면 If Rejected에 적힌 경로를 따른다
+4. 반복
 ```
 
-**"Codex에게 뭐라고 보내죠?"라는 질문은 없다** — 답은 항상 STATE.md NEXT에 이미 적혀 있다.
+**"다음에 뭐 하지?"라는 질문은 존재하지 않는다** — 모든 작업의 마지막이 다음 행동 지정으로 끝나기 때문이다.
+
+## NEXT_ACTION 블록 규격 (O-03.1 — 모든 RUN·Fable 보고의 의무 종결부)
+
+모든 Executor는 작업 보고를 반드시 아래 블록으로 끝내고, **같은 블록을 STATE.md의 "## NEXT" 섹션에 그대로 덮어쓴다** (보고와 STATE가 항상 일치).
+
+```
+NEXT_ACTION:
+- Current State: {방금 전이된 상태 — 상태 기계 명칭}
+- Verdict: {DONE | APPROVED | RECOLLECT | VERIFIED | FAILED | RELEASED | ESCALATED | HOLD}
+- Next Executor: {Codex 생산 세션 | Codex 검증 세션 | Cline | Fable | 운영자}
+- Next Prompt File: {prompts/RUN-*.md 경로 | "없음 (운영자 결정)"}
+- Why: {상태 기계의 어느 전이 규칙 때문인지 한 줄}
+- Required Operator Action: {None | Approve/Reject 대상과 판단 기준 한 줄}
+- If Approved: {승인 시 다음 프롬프트/경로}
+- If Rejected: {반려 시 되돌아갈 상태와 Loop (예: P-04 반려 → planned로 회귀, RUN-CODEX-PRODUCE 재실행)}
+- Files to Check: {운영자가 열어볼 산출물 경로 1~3개}
+- Stop Condition: {이 방향으로 진행을 멈춰야 하는 조건 (예: 루프 n=3, verify 실패)}
+```
+
+작성 규칙:
+1. **Next Executor·Next Prompt File은 빈칸 금지** — 대기 상태가 없으면 "Fable / RUN-FABLE.md (기획)"이 기본값
+2. 실패 시 If Rejected가 아니라 Verdict=FAILED + Next가 해당 Loop를 가리킨다 (Loop A→RUN-CODEX-PRODUCE(P-03), Loop B→RUN-CODEX-PRODUCE(P-07))
+3. Required Operator Action은 진짜 결정만 적는다 — "확인해 주세요" 같은 의례적 요청 금지 (그건 None)
 
 ## 상시 프롬프트 4개 (전체 목록)
 
@@ -20,8 +43,10 @@
 |---|---|---|
 | [RUN-CODEX-PRODUCE](prompts/RUN-CODEX-PRODUCE.md) | Codex 생산 세션 | 상태를 읽고 P-07>P-05>P-03>P-04>P-01 중 최우선 1단계 실행 |
 | [RUN-CODEX-VERIFY](prompts/RUN-CODEX-VERIFY.md) | Codex 검증 세션 (생산과 분리) | draft KB 전건 P-02 검증·Score |
-| [RUN-CLINE](prompts/RUN-CLINE.md) | Cline | P-06 verify → 통과 시 P-08 릴리스 연속 |
-| Fable에게 "run" | 이 대화 | approved 승인 검토, 에스컬레이션, backlog 소진 시 O-01, 강의 10개마다 O-02, DASHBOARD 갱신 |
+| [RUN-CLINE](prompts/RUN-CLINE.md) | Cline | P-06 verify → 통과 시 P-08 릴리스 연속, deploy_ready면 P-09 배포 |
+| [RUN-FABLE](prompts/RUN-FABLE.md) (또는 Fable에게 "run") | 이 대화 | 재대사, P-02 승인, 에스컬레이션 정리, O-01/O-02, DASHBOARD, **운영자 Approve/Reject 처리** |
+
+모든 RUN은 **NEXT_ACTION 블록**으로 끝난다 — Codex가 끝나면 다음이 Cline인지 Fable인지 스스로 지정하고, Cline이 verify를 끝내면 P-07행인지 P-08행인지 스스로 판단하며, 실패는 되돌아갈 Loop를 명시한다. 운영자는 이 판단에 관여하지 않는다.
 
 P-01~P-08은 이제 직접 붙여넣는 프롬프트가 아니라 **RUN이 참조하는 작업 명세 모듈**이다 (품질 규칙은 그대로 유효).
 

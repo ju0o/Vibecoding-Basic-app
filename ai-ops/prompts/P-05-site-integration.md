@@ -50,3 +50,6 @@ outputs/02-drafts의 완성 강의를 src/content에 반영하고, KB의 consume
 ## 실패 시 되돌아갈 Workflow
 - 규격 문제 → WF-06 §4 (P-04 반려) / lint·typecheck 실패 → 변경 되돌리고 원인 보고
 ```
+
+## 종료 규격 (O-03.1)
+RUN 계층에서 이 명세를 실행한 경우, 보고는 반드시 NEXT_ACTION 블록으로 끝낸다 (규격·라우팅: OPERATION_MANUAL.md / 호출한 RUN 프롬프트).

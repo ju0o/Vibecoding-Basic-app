@@ -1,16 +1,35 @@
 # STATE — 실행 큐 + 상태 기계
 
-**운영자는 이 파일의 "지금 할 일"만 보면 된다.** 갱신 주체: 각 RUN 프롬프트가 종료 시 재계산 (사람이 계산하지 않는다).
+**운영자는 아래 "## NEXT" 블록만 보면 된다.** 갱신 주체: 각 RUN이 종료 시 NEXT_ACTION 블록을 이 파일에 덮어쓴다 (규격: [OPERATION_MANUAL.md](OPERATION_MANUAL.md) — 보고 끝 블록과 이 파일은 항상 동일).
 
-## 지금 할 일 (NEXT)
+## 현황판 (O-03.1 필수 필드)
 
-| # | 붙여넣을 프롬프트 | 어디에 | 이유 (자동 계산 근거) |
-|---|---|---|---|
-| 1 | `prompts/RUN-CODEX-PRODUCE.md` | Codex 생산 세션 | 강의 4건 `generated` (context-window-and-memory, system-prompts-and-instruction-layers, ai-workflow-design, agent-loop-anatomy) → P-05 사이트 반영. P-05는 단독 실행이므로 다른 작업 혼합 금지 |
-| 2 | **운영자 결정** | — | Batch 1 배포 HOLD 해제: 배포 환경 선택 필요 (Vercel 권장 — `outputs/06-deployment/DEPLOY-REPORT-2026-07-05.md` 참조) |
+| 필드 | 값 |
+|---|---|
+| Current Batch | Batch 2 (강의 order 3·4·5·11) + Batch 1 배포 대기 |
+| Current State | 강의 4건 `generated` / KB 2차 3건 `needed` / Batch 1 5강 `released`(배포 HOLD) |
+| Last Completed Step | Codex P-04 (Batch 2 강의 4건 생성, 2026-07-05) |
+| Next Executor | Codex 생산 세션 |
+| Next Prompt File | `prompts/RUN-CODEX-PRODUCE.md` |
+| Blocker | 없음 (파이프라인) / 배포만 환경 미정 |
+| Required Human Action | 배포 환경 결정 (병행 가능 — 파이프라인은 막지 않음) |
+| Release Status | 5/14 released, 0 deployed (HOLD — 인프라 미정) |
 
-승인 대기 (운영자 결정 필요): 배포 환경 (NEXT #2)
-에스컬레이션: 없음
+## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
+
+```
+NEXT_ACTION:
+- Current State: 강의 4건 generated (order 3·4·5·11)
+- Verdict: DONE (P-04)
+- Next Executor: Codex 생산 세션
+- Next Prompt File: prompts/RUN-CODEX-PRODUCE.md
+- Why: 상태 기계 — generated 존재 시 P-05(사이트 반영)가 PRODUCE 최우선, 단독 실행
+- Required Operator Action: None (병행: 배포 환경 결정은 별도 대기 — Vercel 권장)
+- If Approved: (해당 없음 — 운영자 게이트 아님)
+- If Rejected: 강의 초안 반려 시 "Reject: {slug, 사유}" → 해당 slug planned로 회귀, RUN-CODEX-PRODUCE(P-04 재생성)
+- Files to Check: outputs/02-drafts/{context-window-and-memory, system-prompts-and-instruction-layers, ai-workflow-design, agent-loop-anatomy}/lesson.md (선택 스팟체크)
+- Stop Condition: P-05 중 lint/typecheck 실패 시 변경 되돌리고 보고
+```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
 
@@ -29,6 +48,7 @@ generated ──[PRODUCE: P-05, 단독 실행]──▶ integrated
 integrated ──[CLINE: P-06]──▶ VERIFIED → verified / FAILED → build_fail(n)
 build_fail(n) ──[PRODUCE: P-07]──▶ integrated (재검증 대상)   ※ n=3 → 통합 revert + escalated
 verified ──[CLINE: P-08, 같은 런에서 연속]──▶ released
+released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[CLINE: P-09]──▶ deployed
 ```
 
 ### RUN 우선순위 (한 런 = 최고 우선순위 단계 하나만 수행)

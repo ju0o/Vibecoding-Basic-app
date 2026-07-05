@@ -17,9 +17,13 @@ Executor: **Codex 검증 세션 전용** (생산 세션에서 실행 금지 — 
 
 ## 3단계: 종료 절차 (생략 시 이 런은 무효)
 1. verification-report 경로 전부 나열, 각 첫 줄 판정 명시
-2. MASTER_PROGRESS 갱신 + STATE.md 상태·이력·**NEXT 재계산** (approved 발생 시 NEXT에 "Fable: 보고서 승인" 추가)
+2. MASTER_PROGRESS 갱신 + STATE.md 상태·이력 갱신
 3. git 커밋 ("P-02: {요약}") + git show --stat 확인
-4. 마지막 줄: "다음 → {NEXT 1번}"
+4. **NEXT_ACTION 블록 작성** (규격: ai-ops/OPERATION_MANUAL.md) — 보고 맨 끝 + STATE.md "## NEXT"에 동일하게. 라우팅 규칙:
+   - approved 발생 → Next: **Fable / RUN-FABLE.md**, Required Operator Action: None (Fable이 보고서 승인 수행), Files to Check: verification-report 경로들
+   - recollect만 발생 → Next: **Codex 생산 세션 / RUN-CODEX-PRODUCE.md** (P-03이 최우선), If Rejected(운영자가 요청서에 이의) → 해당 KB escalated
+   - escalated 발생 → Next: **운영자 / 없음**, Required Operator Action: 에스컬레이션 결정 (주제 범위/출처 정책)
+   - 혼재 시 approved 라우팅을 우선 기재하고 Why에 병행 경로 명시
 
 ## 금지
 - KB 본문 수정 (frontmatter status/score만 가능)

@@ -54,3 +54,6 @@ draft 상태 KB 문서를 검증하고 점수화한다. 통과 시 approved, 미
 ## 실패 시 되돌아갈 Workflow
 - WF-06 §3 (재수집 Loop A)
 ```
+
+## 종료 규격 (O-03.1)
+RUN 계층에서 이 명세를 실행한 경우, 보고는 반드시 NEXT_ACTION 블록으로 끝낸다 (규격·라우팅: OPERATION_MANUAL.md / 호출한 RUN 프롬프트).

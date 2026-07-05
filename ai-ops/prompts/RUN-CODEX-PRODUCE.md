@@ -24,9 +24,16 @@ Executor: **Codex 생산 세션 전용** (검증 세션에서 실행 금지)
 ## 4단계: 종료 절차 (생략 시 이 런은 무효)
 1. 산출물 파일 경로 전부를 완료 보고에 나열
 2. ai-ops/MASTER_PROGRESS.md — 처리한 행의 상태 칸 갱신 (기호: ✓, ▶, ↻n, ✗)
-3. ai-ops/STATE.md — "항목별 현재 상태" 갱신 + "이력"에 전이 append + **"지금 할 일(NEXT)"을 상태 기계 규칙으로 재계산해 다시 쓰기** (다음에 누가 무엇을 붙여넣어야 하는지)
-4. git 커밋: 이번 런의 모든 변경 (메시지: "P-XX: {요약}"). 커밋 후 git show --stat으로 누락 확인
-5. 완료 보고 마지막 줄: "다음 → {STATE.md NEXT의 1번 항목}"
+3. ai-ops/STATE.md — "항목별 현재 상태" 갱신 + "이력"에 전이 append
+4. git 커밋 (메시지: "P-XX: {요약}") 후 git show --stat으로 누락 확인
+5. **NEXT_ACTION 블록 작성** (규격: ai-ops/OPERATION_MANUAL.md의 "NEXT_ACTION 블록 규격") — 보고 맨 끝에 출력하고, 같은 내용을 STATE.md의 "## NEXT" 섹션에 덮어쓴다. 라우팅 규칙:
+   - P-01 완료 → Next: **Codex 검증 세션 / RUN-CODEX-VERIFY.md** (draft 발생)
+   - P-03 완료 → Next: **Codex 검증 세션 / RUN-CODEX-VERIFY.md** (재평가)
+   - P-04 완료 → Next: **Codex 생산 세션 / RUN-CODEX-PRODUCE.md** (generated → P-05가 다음 런의 최우선)
+   - P-05 완료 → Next: **Cline / RUN-CLINE.md** (integrated → verify)
+   - P-07 완료 → Next: **Cline / RUN-CLINE.md** (재검증, Loop B 카운터 명시)
+   - 에스컬레이션 → Next: **운영자 / 없음**, Required Operator Action에 결정 내용 명시
+   - 대기 상태 없음 → Next: **Fable / RUN-FABLE.md** (기획·감사)
 
 ## 금지
 - 한 런에 두 단계 혼합 (P-05는 반드시 단독)

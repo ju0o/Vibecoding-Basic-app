@@ -6,10 +6,12 @@
 
 | 파일 | 세션 | 언제 |
 |---|---|---|
-| [RUN-CODEX-PRODUCE.md](RUN-CODEX-PRODUCE.md) | Codex 생산 세션 | STATE.md NEXT가 지시할 때 |
-| [RUN-CODEX-VERIFY.md](RUN-CODEX-VERIFY.md) | Codex 검증 세션 | STATE.md NEXT가 지시할 때 |
-| [RUN-CLINE.md](RUN-CLINE.md) | Cline | STATE.md NEXT가 지시할 때 |
-| (프롬프트 없음 — Fable에게 "run") | 이 대화 | 승인 대기·에스컬레이션·기획 |
+| [RUN-CODEX-PRODUCE.md](RUN-CODEX-PRODUCE.md) | Codex 생산 세션 | NEXT_ACTION이 지시할 때 |
+| [RUN-CODEX-VERIFY.md](RUN-CODEX-VERIFY.md) | Codex 검증 세션 | NEXT_ACTION이 지시할 때 |
+| [RUN-CLINE.md](RUN-CLINE.md) | Cline | NEXT_ACTION이 지시할 때 (P-06→08, deploy_ready면 P-09) |
+| [RUN-FABLE.md](RUN-FABLE.md) (또는 Fable에게 "run") | 이 대화 | 승인·에스컬레이션·기획·Approve/Reject 처리 |
+
+**O-03.1**: 모든 RUN은 NEXT_ACTION 블록(다음 Executor·프롬프트·승인 필요 여부·실패 경로 지정)으로 끝난다 — 규격은 [OPERATION_MANUAL.md](../OPERATION_MANUAL.md). 운영자는 다음 판단을 하지 않는다.
 
 ---
 
@@ -55,6 +57,7 @@ Fable  O-02 최종 편집: 강의 10개 릴리스마다 전역 검토
 | P-06 | P-06-build-verification.md | Release (Build QA) | **Cline** | 워킹 트리 | VERIFIED 보고 또는 BUILD-FAIL-{date}-{n}.md | 통과→P-08 / 실패→P-07 |
 | P-07 | P-07-build-fix.md | Site Integration (수정) | **Codex** | BUILD-FAIL 보고서 | 통합 코드 수정 | P-06 재검증 |
 | P-08 | P-08-release.md | Release | **Cline** | VERIFIED 보고, 04-integrated | RELEASE-{date}.md, 커밋 | 운영자 배포 승인 |
+| P-09 | P-09-deployment.md | Release (Deployment) | **Cline** | deploy_ready 상태 + 배포 설정 | 실제 배포 + DEPLOY-REPORT-{date}.md | Fable (배치 마감) |
 | O-01 | orchestrator/O-01-curriculum.md | Curriculum | **Fable (오케스트레이터)** | curriculum.ts, CURRICULUM-MAP | BACKLOG.md | P-01 착수 근거 |
 | O-02 | orchestrator/O-02-final-editorial.md | Final Editorial | **Fable (오케스트레이터)** | src/content 전체, FINAL-SITE-STRATEGY | `reports/editorial-{date}.md`, REVISION-BACKLOG | WF-03 개정 |
 
