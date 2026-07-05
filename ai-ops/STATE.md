@@ -2,37 +2,38 @@
 
 **운영자는 아래 "## NEXT" 블록만 보면 된다.** 갱신 주체: 각 RUN이 종료 시 NEXT_ACTION 블록을 이 파일에 덮어쓴다 (규격: [OPERATION_MANUAL.md](OPERATION_MANUAL.md) — 보고 끝 블록과 이 파일은 항상 동일).
 
-## 🔄 체제 전환 (O-05, 2026-07-05): CODEX 전체 위임
+## 🔄 체제 (O-05.1, 2026-07-05): CODEX 무정지 전체 실행
 
-운영 방식 변경 — RUN 릴레이 대신 **[CODEX-PLAN.md](CODEX-PLAN.md) 단일 계획서**로 Codex가 커리큘럼→수집→검증→강의→시각자료→구현 전체 수행. 운영자는 Phase 게이트 3곳(커리큘럼 승인 / 첫 V2 배치 품질 확인 / 배포)에서만 결정. Fable은 게이트 감사 보좌. O-04의 V2 규격·품질 게이트는 계획서에 그대로 내장됨. 구 RUN 프롬프트는 유효하나 CODEX-PLAN이 우선.
+**[CODEX-PLAN.md](CODEX-PLAN.md) v2** — Codex가 커리큘럼(100강+)→수집→검증(Score 루프)→강의(V2 심층)→다이어그램→용어(300+)→Git 레퍼런스→사이트 완성→개발 서버 자가 점검까지 **멈춤 없이 실행**. 유일한 운영자 게이트 = 개발 서버 확인 후 배포 승인 (Phase 5). 막힌 항목은 BLOCKED 기록 후 계속 (전체 정지 금지). Fable은 사후 표본 감사.
 
 ## 현황판 (O-03.1 필수 필드)
 
 | 필드 | 값 |
 |---|---|
-| Current Batch | CODEX-PLAN Phase 0 (플랫폼 구현: V2 스키마·파서·UI + SVG 다이어그램 렌더링) |
-| Current State | 강의 9강 V1 released·미배포 (전량 V2 재생성 대상) / KB 5건 qa_approved(Quote Bank 보강 필요) + 3건 needed |
-| Last Completed Step | Fable O-05 (CODEX-PLAN 작성, 2026-07-05) |
+| Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
+| Current State | 강의 9강 V1 released·미배포 (첫 물결에서 V2 재생성) / KB 5건 qa_approved(Quote Bank 보강 필요) + 3건 needed |
+| Last Completed Step | Fable O-05.1 (무정지 계획서 v2 확정, 2026-07-05) |
 | Next Executor | Codex |
-| Next Prompt File | `CODEX-PLAN.md` (§8 시작 지시 그대로) |
+| Next Prompt File | `CODEX-PLAN.md` §10 시작 지시 한 줄 |
 | Blocker | 없음 |
-| Required Human Action | None (다음 게이트: Phase 1 커리큘럼 승인) |
-| Release Status | V1 9강 released·미배포 — V2 재생성 완료 전 배포 금지 |
+| Required Human Action | None — 다음 개입 시점: Phase 5 (개발 서버 확인 → 배포 승인) |
+| Release Status | V1 9강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN 체제 시작, Phase 0 대기
-- Verdict: DONE (O-05 계획서 확정)
+- Current State: CODEX-PLAN v2 확정, Phase 0 대기
+- Verdict: DONE (O-05.1)
 - Next Executor: Codex
-- Next Prompt File: CODEX-PLAN.md — 세션에 "ai-ops/CODEX-PLAN.md를 읽고 Phase 0부터 시작하라"고 전달
-- Why: 운영자 결정 — 단일 계획서 전체 위임 체제 (Phase 0 플랫폼 구현이 모든 콘텐츠 작업의 선행 조건)
-- Required Operator Action: None (원하면 CODEX-PLAN.md 검토 후 "Reject: {항목}"으로 수정 지시)
-- If Approved: (게이트 아님 — 바로 진행 가능)
-- If Rejected: Fable이 CODEX-PLAN.md 개정
-- Files to Check: ai-ops/CODEX-PLAN.md
-- Stop Condition: Phase 게이트 1(커리큘럼)·2(첫 V2 배치 품질)·3(배포)에서 운영자 승인 없이 다음 Phase 진행 금지
+- Next Prompt File: CODEX-PLAN.md — 세션에 §10의 시작 지시 한 줄을 전달:
+  "ai-ops/CODEX-PLAN.md를 읽고 Phase 0부터 Phase 5(개발 서버 확인 보고)까지 멈춤 없이 실행하라."
+- Why: 운영자 결정 — Codex는 한 명령을 끝까지 완주하는 구조이므로 대규모 무정지 지시가 최적
+- Required Operator Action: None — 다음 개입은 Codex의 Phase 5 보고 때 (개발 서버 확인 + 배포 승인)
+- If Approved: (Phase 5 보고 후) 배포 환경 지정 → Codex가 §9 배포 수행
+- If Rejected: (Phase 5 보고 후) "Reject: {항목}" → Codex가 수정 물결 후 §8 재실행
+- Files to Check: ai-ops/CODEX-PLAN.md (실행 전 최종 검토 — 특히 §3 규모 하한)
+- Stop Condition: Codex는 Phase 5에서만 정지. 품질 불변 조건(§1) 우회 금지
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
