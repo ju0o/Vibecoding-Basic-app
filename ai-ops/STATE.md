@@ -2,44 +2,37 @@
 
 **운영자는 아래 "## NEXT" 블록만 보면 된다.** 갱신 주체: 각 RUN이 종료 시 NEXT_ACTION 블록을 이 파일에 덮어쓴다 (규격: [OPERATION_MANUAL.md](OPERATION_MANUAL.md) — 보고 끝 블록과 이 파일은 항상 동일).
 
-## ⏸ 파이프라인 정지 중 (O-04, 2026-07-05) — V2 전환 롤아웃만 진행
+## 🔄 체제 전환 (O-05, 2026-07-05): CODEX 전체 위임
 
-운영자 결정: 콘텐츠 형식 V2 (심층·인용·하이라이트, 퀴즈·체크리스트·설명연습 제거), V1 콘텐츠 9강 전량 재생성. **R1~R3 완료 전 P-04~P-08 일반 실행 금지, 배포 금지.** 규격: [roadmap/CONTENT-FORMAT-V2.md](roadmap/CONTENT-FORMAT-V2.md)
-
-| 롤아웃 | 작업 | 상태 |
-|---|---|---|
-| R1 | D-01 개발 (스키마·파서·UI) + verify | **▶ NEXT** |
-| R2 | KB 5건 Quote Bank 보강 → 경량 재검증 → Fable 승인 | 대기 |
-| R3 | 9강 V2 재생성 → 반영 → verify → 릴리스 | 대기 |
-| R4 | 파이프라인 재개 + V1 규격 문서 정리 | 대기 |
+운영 방식 변경 — RUN 릴레이 대신 **[CODEX-PLAN.md](CODEX-PLAN.md) 단일 계획서**로 Codex가 커리큘럼→수집→검증→강의→시각자료→구현 전체 수행. 운영자는 Phase 게이트 3곳(커리큘럼 승인 / 첫 V2 배치 품질 확인 / 배포)에서만 결정. Fable은 게이트 감사 보좌. O-04의 V2 규격·품질 게이트는 계획서에 그대로 내장됨. 구 RUN 프롬프트는 유효하나 CODEX-PLAN이 우선.
 
 ## 현황판 (O-03.1 필수 필드)
 
 | 필드 | 값 |
 |---|---|
-| Current Batch | **V2 전환 롤아웃 (R1~R4)** — Batch 2는 V2 재생성 대상으로 흡수 |
-| Current State | 강의: **released 9강 전부 V1, 재생성 대상** (Batch 2도 정지 직전 Cline이 P-06·P-08 완료 — VERIFIED-2026-07-05-3, RELEASE-batch2) / KB 5건 qa_approved (Quote Bank 없음 — R2 대상) / KB 2차 3건 needed |
-| Last Completed Step | Fable O-04 (V2 규격 확정, 2026-07-05) |
+| Current Batch | CODEX-PLAN Phase 0 (플랫폼 구현: V2 스키마·파서·UI + SVG 다이어그램 렌더링) |
+| Current State | 강의 9강 V1 released·미배포 (전량 V2 재생성 대상) / KB 5건 qa_approved(Quote Bank 보강 필요) + 3건 needed |
+| Last Completed Step | Fable O-05 (CODEX-PLAN 작성, 2026-07-05) |
 | Next Executor | Codex |
-| Next Prompt File | `prompts/D-01-format-v2.md` |
-| Blocker | V1 형식 (전량 재생성 전까지 릴리스·배포 무의미) |
-| Required Human Action | None (배포 환경 결정은 R3 완료 후로 연기) |
-| Release Status | V1 5강 released·미배포 — **V2 완료 전 배포 금지** |
+| Next Prompt File | `CODEX-PLAN.md` (§8 시작 지시 그대로) |
+| Blocker | 없음 |
+| Required Human Action | None (다음 게이트: Phase 1 커리큘럼 승인) |
+| Release Status | V1 9강 released·미배포 — V2 재생성 완료 전 배포 금지 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: 파이프라인 정지, V2 롤아웃 R1
-- Verdict: DONE (O-04 규격 확정)
-- Next Executor: Codex (개발 — 아무 세션)
-- Next Prompt File: prompts/D-01-format-v2.md
-- Why: V2 형식은 스키마·파서·UI 변경이 선행돼야 콘텐츠 재생성이 가능 (롤아웃 R1)
-- Required Operator Action: None
-- If Approved: (해당 없음)
-- If Rejected: V2 규격에 이의 시 "Reject: {항목}" → Fable이 CONTENT-FORMAT-V2.md 개정
-- Files to Check: ai-ops/roadmap/CONTENT-FORMAT-V2.md (V2 규격 — 원하시면 검토)
-- Stop Condition: D-01의 verify 실패 시 Codex 자체 수정 (개발 작업 — Loop B 미적용)
+- Current State: CODEX-PLAN 체제 시작, Phase 0 대기
+- Verdict: DONE (O-05 계획서 확정)
+- Next Executor: Codex
+- Next Prompt File: CODEX-PLAN.md — 세션에 "ai-ops/CODEX-PLAN.md를 읽고 Phase 0부터 시작하라"고 전달
+- Why: 운영자 결정 — 단일 계획서 전체 위임 체제 (Phase 0 플랫폼 구현이 모든 콘텐츠 작업의 선행 조건)
+- Required Operator Action: None (원하면 CODEX-PLAN.md 검토 후 "Reject: {항목}"으로 수정 지시)
+- If Approved: (게이트 아님 — 바로 진행 가능)
+- If Rejected: Fable이 CODEX-PLAN.md 개정
+- Files to Check: ai-ops/CODEX-PLAN.md
+- Stop Condition: Phase 게이트 1(커리큘럼)·2(첫 V2 배치 품질)·3(배포)에서 운영자 승인 없이 다음 Phase 진행 금지
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
