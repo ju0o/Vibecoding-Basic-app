@@ -1,14 +1,16 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { notFound } from "next/navigation"
+import { BackToTopButton } from "@/components/lesson/BackToTopButton"
 import { LessonMarkdown } from "@/components/lesson/LessonMarkdown"
 import { LessonSidebar } from "@/components/lesson/LessonSidebar"
+import { ReadingProgressBar } from "@/components/lesson/ReadingProgressBar"
 import { Badge } from "@/components/ui/Badge"
-import { LessonChecklist } from "@/features/progress/LessonChecklist"
-import { LessonPracticePanel } from "@/features/progress/LessonPracticePanel"
 import {
   getLessonBySlug,
   getModuleById,
   getPreviousNextLessons,
+  getRelatedLessons,
   getSortedLessonMeta,
 } from "@/lib/lesson-content"
 
@@ -51,48 +53,101 @@ export default async function LessonPage({ params }: LessonPageProps) {
   const module = getModuleById(lesson.moduleId)
   const moduleTitle = module?.title ?? "커리큘럼"
   const { previous, next } = getPreviousNextLessons(slug)
+  const relatedLessons = getRelatedLessons(slug)
+  const referenceItems = lesson.sections.flatMap((section) => section.subheadings)
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-8">
-      <article className="min-w-0">
-        <div className="rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5 sm:p-8">
-          <div className="flex flex-wrap gap-2">
-            <Badge variant="accent">{moduleTitle}</Badge>
-            <Badge>{lesson.level}</Badge>
-            <Badge>{lesson.minutes}분</Badge>
+    <>
+      <ReadingProgressBar />
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-8">
+        <article className="min-w-0">
+          <div className="mx-auto max-w-[78ch] rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5 sm:p-8">
+            <div className="flex flex-wrap gap-2">
+              <Badge variant="accent">{moduleTitle}</Badge>
+              <Badge>{lesson.level}</Badge>
+              <Badge>{lesson.type === "reference" ? "Reference" : "Deep Dive"}</Badge>
+              <Badge>{lesson.minutes}분</Badge>
+            </div>
+            <h1 className="mt-5 text-4xl font-extrabold leading-tight text-[var(--text-primary)]">
+              {lesson.title}
+            </h1>
+            <p className="mt-4 text-lg leading-8 text-[var(--text-secondary)]">{lesson.summary}</p>
           </div>
-          <h1 className="mt-5 text-4xl font-extrabold leading-tight text-[var(--text-primary)]">
-            {lesson.title}
-          </h1>
-          <p className="mt-4 text-lg leading-8 text-[var(--text-secondary)]">{lesson.summary}</p>
-        </div>
 
-        <div className="mt-6 space-y-5">
-          {lesson.sections.map((section) => (
-            <section
-              className="scroll-mt-24 rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5 sm:p-8"
-              id={section.id}
-              key={section.id}
-            >
-              <h2 className="text-2xl font-extrabold text-[var(--text-primary)]">
-                {section.title}
-              </h2>
-              <div className="mt-4">
-                <LessonMarkdown content={section.content} />
+          {lesson.type === "reference" && referenceItems.length > 0 ? (
+            <div className="mx-auto mt-6 max-w-[78ch] rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5">
+              <h2 className="text-lg font-extrabold text-[var(--text-primary)]">명령어 인덱스</h2>
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                {referenceItems.map((item) => (
+                  <a
+                    className="rounded-lg border border-[var(--border-subtle)] px-3 py-2 font-mono text-sm text-[var(--text-secondary)] transition hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)]"
+                    href={`#${item.id}`}
+                    key={item.id}
+                  >
+                    {item.title}
+                  </a>
+                ))}
               </div>
-              {section.id === "checklist" ? (
-                <LessonChecklist items={lesson.checklist} lessonSlug={lesson.slug} />
-              ) : null}
-            </section>
-          ))}
+            </div>
+          ) : null}
+
+          <div className="mx-auto mt-6 max-w-[78ch] space-y-6">
+            {lesson.sections.map((section) => (
+              <section
+                className="scroll-mt-24 rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5 sm:p-8"
+                id={section.id}
+                key={section.id}
+              >
+                <h2 className="group text-2xl font-extrabold text-[var(--text-primary)]">
+                  <a
+                    aria-label={`${section.title} 섹션으로 이동`}
+                    className="mr-2 opacity-0 transition group-hover:opacity-100"
+                    href={`#${section.id}`}
+                  >
+                    #
+                  </a>
+                  {section.title}
+                </h2>
+                <div className="mt-4">
+                  <LessonMarkdown content={section.content} />
+                </div>
+              </section>
+            ))}
+          </div>
+
+          {relatedLessons.length > 0 ? (
+            <div className="mx-auto mt-6 max-w-[78ch] rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5 sm:p-6">
+              <h2 className="text-xl font-extrabold text-[var(--text-primary)]">관련 강의</h2>
+              <div className="mt-4 grid gap-3">
+                {relatedLessons.map((relatedLesson) => (
+                  <Link
+                    className="rounded-lg border border-[var(--border-subtle)] p-3 transition hover:border-[var(--accent-primary)]"
+                    href={`/lessons/${relatedLesson.slug}`}
+                    key={relatedLesson.slug}
+                  >
+                    <span className="block font-bold text-[var(--text-primary)]">
+                      {relatedLesson.title}
+                    </span>
+                    <span className="mt-1 block text-sm text-[var(--text-secondary)]">
+                      {relatedLesson.summary}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : null}
+        </article>
+
+        <div className="mt-6 lg:mt-0">
+          <LessonSidebar
+            lesson={lesson}
+            moduleTitle={moduleTitle}
+            next={next}
+            previous={previous}
+          />
         </div>
-
-        <LessonPracticePanel exercise={lesson.exercise} lessonSlug={lesson.slug} />
-      </article>
-
-      <div className="mt-6 lg:mt-0">
-        <LessonSidebar lesson={lesson} moduleTitle={moduleTitle} next={next} previous={previous} />
       </div>
-    </div>
+      <BackToTopButton />
+    </>
   )
 }

@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { LessonTableOfContents } from "@/components/lesson/LessonTableOfContents"
 import { Badge } from "@/components/ui/Badge"
 import type { Lesson, LessonMeta } from "@/content/schema"
 import { BookmarkButton } from "@/features/progress/BookmarkButton"
@@ -23,20 +24,7 @@ export function LessonSidebar({ lesson, moduleTitle, next, previous }: LessonSid
           <LessonCompleteButton lessonSlug={lesson.slug} />
           <BookmarkButton lessonSlug={lesson.slug} />
         </div>
-        <nav className="mt-5" aria-label="강의 목차">
-          <p className="mb-2 text-xs font-bold text-[var(--text-tertiary)]">사이드바 목차</p>
-          <div className="grid gap-1">
-            {lesson.sections.map((section) => (
-              <a
-                className="rounded-md px-2 py-1.5 text-sm text-[var(--text-secondary)] transition hover:bg-[var(--surface-secondary)] hover:text-[var(--accent-primary)]"
-                href={`#${section.id}`}
-                key={section.id}
-              >
-                {section.title}
-              </a>
-            ))}
-          </div>
-        </nav>
+        <LessonTableOfContents sections={lesson.sections} />
         <div className="mt-5 grid gap-2 border-t border-[var(--border-subtle)] pt-4">
           {previous === undefined ? null : (
             <Link

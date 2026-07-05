@@ -61,3 +61,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-05 | glossary.ts Loop A 중 직접 수정 | 관찰 (경미) | 재수집 요청서 지시로 RAG 용어가 P-05 밖에서 추가됨 — lint/typecheck 통과 확인, QA-01 커밋에 포함. 개선안: 재수집 중 src/content 수정 금지 + 용어 예약 목록 (운영자 승인 대기) |
 | 2026-07-05 | P-08 커밋 누락 **재발** (Batch 1, 5bafba1) | 해소 | src/content 미포함 — 후속 커밋 a0b6849로 보완. 파일럿과 동일 패턴 2회째 → RUN-CLINE 종료 절차의 git show --stat 확인이 Batch 2부터 방지 |
 | 2026-07-05 | Batch 1 배포 | **HOLD (운영자 게이트)** | 배포 인프라 미정 (vercel.json 등 부재) — 운영자의 배포 환경 결정 대기. `outputs/06-deployment/DEPLOY-REPORT-2026-07-05.md` |
+| 2026-07-05 | CODEX-PLAN Phase 0 | 완료 | D-01 Content Format V2 구현, V1 fallback 전환기 규칙, `npm run verify` PASS |

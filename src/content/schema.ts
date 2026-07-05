@@ -17,22 +17,18 @@ export const MODULE_IDS = [
 export type ModuleId = (typeof MODULE_IDS)[number]
 
 export const LESSON_SECTION_DEFINITIONS = [
-  { id: "today", title: "오늘 배울 것" },
-  { id: "one-line", title: "한 줄 정의" },
-  { id: "analogy", title: "쉬운 비유" },
-  { id: "origin", title: "왜 생겼는가" },
-  { id: "problem", title: "어떤 문제를 해결하는가" },
-  { id: "core", title: "핵심 개념" },
-  { id: "real-example", title: "실제 예시" },
-  { id: "code-example", title: "코드 예시" },
-  { id: "ai-meaning", title: "AI 시대에서의 의미" },
-  { id: "confusions", title: "자주 헷갈리는 것" },
-  { id: "practice", title: "실무에서 쓰는 방식" },
-  { id: "checklist", title: "공부 체크리스트" },
-  { id: "references", title: "참고 출처" },
+  { id: "definition", title: "한 줄 정의" },
+  { id: "why", title: "왜 존재하는가" },
+  { id: "how-it-works", title: "작동 원리" },
+  { id: "spec", title: "스펙과 세부" },
+  { id: "primary-sources", title: "원문으로 읽기" },
+  { id: "in-practice", title: "실전에서" },
+  { id: "limits", title: "한계와 트레이드오프" },
+  { id: "further-reading", title: "더 읽기" },
 ] as const
 
 export type LessonSectionId = (typeof LESSON_SECTION_DEFINITIONS)[number]["id"]
+export type LessonType = "deep-dive" | "reference"
 
 export type CurriculumModule = {
   readonly id: ModuleId
@@ -48,40 +44,28 @@ export type LessonMeta = {
   readonly slug: string
   readonly moduleId: ModuleId
   readonly order: number
+  readonly type: LessonType
   readonly title: string
   readonly summary: string
   readonly level: LessonLevel
   readonly minutes: number
   readonly tags: readonly string[]
-  readonly checklist: readonly string[]
-  readonly exercise: LessonExercise
+}
+
+export type LessonSubheading = {
+  readonly id: string
+  readonly title: string
 }
 
 export type LessonSection = {
-  readonly id: LessonSectionId
+  readonly id: string
   readonly title: string
   readonly content: string
+  readonly subheadings: readonly LessonSubheading[]
 }
 
 export type Lesson = LessonMeta & {
   readonly sections: readonly LessonSection[]
-}
-
-export type LessonQuizQuestion = {
-  readonly question: string
-  readonly options: readonly string[]
-  readonly answer: string
-  readonly explanation: string
-}
-
-export type ExplanationPrompt = {
-  readonly prompt: string
-  readonly guide: readonly string[]
-}
-
-export type LessonExercise = {
-  readonly quiz: LessonQuizQuestion
-  readonly explanationPrompt: ExplanationPrompt
 }
 
 export type GlossaryTerm = {
