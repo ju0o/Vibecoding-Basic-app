@@ -28,6 +28,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | grounding-citations | T08 | ✓ | ✓ 91 (2026-07-05, O-05.2 연속 검증) | order 52 근거 |
 | hallucination-verification | T08 | ✓ | ✓ 90 (2026-07-05, O-05.2 연속 검증) | order 53 근거 |
 | embeddings-similarity | T08 | ✓ | ✓ 88 (2026-07-05, O-05.2 연속 검증) | order 54 근거 |
+| dev-environment-map | T01 | ✓ | — (draft, P-02 대기) | order 2 근거 |
+| vibe-coding-origin-karpathy | T08 | ✓ | — (draft, P-02 대기) | order 3 근거 / registry 적합성 확인 필요 |
+| ai-learning-verification | T08 | ✓ | — (draft, P-02 대기) | order 4 근거 |
+| files-folders-paths | T01 | ✓ | — (draft, P-02 대기) | order 6 근거 |
+| terminal-shell-commands | T01 | ✓ | — (draft, P-02 대기) | order 7 근거 |
 
 ## Lesson 매트릭스
 
@@ -60,12 +65,13 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
-| Knowledge Base 수집(P-01) | 17 / 17 | 100% (4차 T08 5건 approved) |
-| Knowledge Base (approved 이상) | 17 / 17 | 100% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건 + 4차 approved 5건) |
+| Knowledge Base 수집(P-01) | 22 / 22 | 100% (5차 T01/T08 5건 draft, P-02 대기) |
+| Knowledge Base (approved 이상) | 17 / 22 | 77% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건 + 4차 approved 5건 / 5차 draft 5건) |
 | KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (2차 approved KB) | 3 / 3 | 100% |
 | KB Quote Bank (3차 approved KB) | 4 / 4 | 100% |
 | KB Quote Bank (4차 approved KB) | 5 / 5 | 100% (tokenization-context Loop A 후 승인) |
+| KB Quote Bank (5차 draft KB) | 5 / 5 | 100% (P-02 대기) |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
 | Lesson 생성 | 22 / 22 | 100% (T08 Wave 2 embeddings-and-similarity generated) |
 | Site 반영 | 22 / 22 | 100% (generated 이상 전건 반영) |

@@ -11,27 +11,27 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | Phase 3 Verify/Release T08 Wave 2 완료: embeddings-and-similarity released / 다음 needed KB 수집 대기 |
-| Last Completed Step | Codex Verify/Release T08 Wave 2 (`npm run verify` PASS, 1 lesson released, 2026-07-05) |
+| Current State | Phase 2 KB 5차 P-01 완료: dev-environment-map·vibe-coding-origin-karpathy·ai-learning-verification·files-folders-paths·terminal-shell-commands draft / P-02 원문 재접속 검증 대기 |
+| Last Completed Step | Codex P-01 T01/T08 KB 5차 draft 5건 생성 (2026-07-05) |
 | Next Executor | Codex |
-| Next Prompt File | `prompts/RUN-CODEX-PRODUCE.md` |
+| Next Prompt File | `prompts/P-02-knowledge-verification.md` |
 | Blocker | 없음 |
-| Required Human Action | None — 같은 Codex 흐름에서 다음 needed KB P-01 수집 진행 |
-| Release Status | V2 17강 released·미배포 — 배포는 Phase 5 승인 후에만 |
+| Required Human Action | None — 같은 Codex 흐름에서 P-02 원문 재접속 검증 진행 |
+| Release Status | V2 22강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 3 Verify/Release T08 Wave 2 완료 — embeddings-and-similarity released, generated·recollect·planned 없음
-- Verdict: APPROVED
+- Current State: CODEX-PLAN Phase 2 KB 5차 P-01 완료 — T01/T08 신규 KB draft 5건 생성
+- Verdict: DRAFT
 - Next Executor: Codex
-- Next Prompt File: prompts/RUN-CODEX-PRODUCE.md
-- Why: build_fail·generated·recollect·planned 없음, needed 상태 KB가 있어 P-01 KB 수집이 다음 단계
-- Required Operator Action: None — 같은 Codex 흐름에서 BACKLOG 순서상 needed KB 최대 5건 수집
-- If Approved: draft 발생 시 P-02 원문 재접속 검증을 같은 흐름에서 진행
-- If Rejected: 해당 KB needed로 유지하고 수집 범위 재조정
-- Files to Check: ai-ops/outputs/00-backlog/BACKLOG.md, ai-ops/MASTER_PROGRESS.md
+- Next Prompt File: prompts/P-02-knowledge-verification.md
+- Why: P-01 완료로 draft KB 5건이 발생했으며, CODEX-PLAN v2와 P-01 연속 실행 규칙에 따라 같은 흐름에서 원문 URL 재접속 대조 검증 진행
+- Required Operator Action: None — 같은 Codex 흐름에서 P-02 수행
+- If Approved: 승인 KB를 근거로 BACKLOG 해당 강의 planned 전환 후 P-04 가능 여부 재계산
+- If Rejected: 점수 미달 KB는 recollect(n)로 전환하고 P-03 재수집
+- Files to Check: ai-ops/knowledge-base/entries/T01/dev-environment-map.md, ai-ops/knowledge-base/entries/T08/vibe-coding-origin-karpathy.md, ai-ops/knowledge-base/entries/T08/ai-learning-verification.md, ai-ops/knowledge-base/entries/T01/files-folders-paths.md, ai-ops/knowledge-base/entries/T01/terminal-shell-commands.md
 - Stop Condition: Phase 5 개발 서버 확인 후 배포 승인 전까지 운영자 입력 없이 계속 진행
 ```
 
@@ -68,13 +68,14 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
-- KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved**
+- KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved** / KB 5차 T01/T08: dev-environment-map·vibe-coding-origin-karpathy·ai-learning-verification·files-folders-paths·terminal-shell-commands = **draft, P-02 대기**
 - 강의: **V2 released 22강** (V2 Wave 1+2+3+4+5+6 — 배포는 HOLD, 운영자 게이트)
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-05 | KB dev-environment-map·vibe-coding-origin-karpathy·ai-learning-verification·files-folders-paths·terminal-shell-commands | needed → draft | Codex P-01 T01/T08 KB 5차 |
 | 2026-07-05 | embeddings-and-similarity | integrated → verified → released | Codex Verify/Release T08 Wave 2 |
 | 2026-07-05 | embeddings-and-similarity | generated → integrated | Codex P-05 T08 Wave 2 |
 | 2026-07-05 | embeddings-and-similarity | planned → generated | Codex P-04 T08 Wave 2 |
