@@ -11,28 +11,28 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | Phase 3 P-08 완료: V2 Wave 3 4강 released / 남은 planned 2강 생성 대기 |
-| Last Completed Step | Codex P-06/P-08 Verification and Release Batch 3 (4 lessons released, 2026-07-05) |
+| Current State | Phase 3 P-04 완료: 마지막 2강 generated / P-05 사이트 반영 단독 실행 대기 |
+| Last Completed Step | Codex P-04 Lesson Generation Batch 4 (2 Lesson Drafts generated, 2026-07-05) |
 | Next Executor | Codex |
 | Next Prompt File | `prompts/RUN-CODEX-PRODUCE.md` |
 | Blocker | 없음 |
-| Required Human Action | None — 같은 Codex 흐름에서 검증·릴리스 진행 |
+| Required Human Action | None — 같은 Codex 흐름에서 P-05 Site Integration 단독 실행 |
 | Release Status | V2 15강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 3 P-08 완료 — V2 Wave 3 released, context-caching-and-state·ai-system-evaluation planned
+- Current State: CODEX-PLAN Phase 3 P-04 완료 — context-caching-and-state·ai-system-evaluation generated
 - Verdict: APPROVED
 - Next Executor: Codex
 - Next Prompt File: prompts/RUN-CODEX-PRODUCE.md
-- Why: build_fail·generated·recollect 없음, planned 항목 2건의 근거 KB가 approved 상태라 P-04 Lesson Generation이 다음 우선순위
-- Required Operator Action: None — 같은 Codex 흐름에서 남은 planned 2강 P-04 진행
-- If Approved: generated 항목을 다음 PRODUCE 런에서 P-05 사이트 반영
-- If Rejected: 지적된 draft만 P-04 재생성 또는 상태를 planned로 유지
-- Files to Check: ai-ops/outputs/04-integrated/RELEASE-2026-07-05-v2-wave3.md, ai-ops/outputs/06-build-verification/VERIFIED-2026-07-05-4.md, ai-ops/MASTER_PROGRESS.md, ai-ops/outputs/00-backlog/BACKLOG.md
-- Stop Condition: P-04는 context-caching-and-state·ai-system-evaluation 최대 2건만 생성
+- Why: generated 강의 2건 발생으로 PRODUCE 우선순위상 P-05 Site Integration이 최우선이며 P-05는 단독 실행
+- Required Operator Action: None — 같은 Codex 흐름에서 P-05 Site Integration 진행
+- If Approved: integrated 항목을 검증·릴리스 흐름으로 넘김
+- If Rejected: 지적된 draft만 P-04 재생성 또는 상태를 planned로 되돌림
+- Files to Check: ai-ops/outputs/02-drafts/context-caching-and-state/lesson.md, ai-ops/outputs/02-drafts/ai-system-evaluation/lesson.md, ai-ops/outputs/02-drafts/P-04-2026-07-05-batch4.md
+- Stop Condition: P-05는 generated 2강 사이트 반영만 수행하고 다른 단계와 혼합 금지
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved**
-- 강의: **V2 released 15강** (V2 Wave 1+2+3 — 배포는 HOLD, 운영자 게이트) / **planned 2강** (후속 P-04 대기)
+- 강의: **V2 released 15강** (V2 Wave 1+2+3 — 배포는 HOLD, 운영자 게이트) / **generated 2강** (P-05 대기)
 - 루프 카운터: 없음 (rag Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-05 | context-caching-and-state·ai-system-evaluation | planned → generated | Codex P-04 |
 | 2026-07-05 | subagents-and-delegation·multi-agent-orchestration·loop-engineering-basics·harness-engineering-basics | integrated → verified → released | Codex P-06/P-08 |
 | 2026-07-05 | subagents-and-delegation·multi-agent-orchestration·loop-engineering-basics·harness-engineering-basics | generated → integrated | Codex P-05 |
 | 2026-07-05 | subagents-and-delegation·multi-agent-orchestration·loop-engineering-basics·harness-engineering-basics | planned → generated | Codex P-04 |
