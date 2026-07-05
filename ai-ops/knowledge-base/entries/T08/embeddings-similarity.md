@@ -9,8 +9,8 @@ prerequisites: [tokenization-context]
 successors: [rag]
 related: [context-engineering, grounding-citations]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [embeddings-and-similarity]
+  glossary: [Embeddings, Semantic Similarity, Vector Store, BM25, Hybrid Retrieval]
 sources:
   - { title: "Vector embeddings", url: "https://developers.openai.com/api/docs/guides/embeddings", checked: 2026-07-05 }
   - { title: "Embeddings", url: "https://platform.claude.com/docs/en/build-with-claude/embeddings", checked: 2026-07-05 }

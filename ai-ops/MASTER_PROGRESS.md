@@ -54,7 +54,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | prompt-engineering-foundations | ai-basics | prompt-engineering | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 5, RELEASE-2026-07-05-v2-wave5.md |
 | grounding-and-citations | ai-basics | grounding-citations | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 5, RELEASE-2026-07-05-v2-wave5.md |
 | hallucination-and-verification | ai-basics | hallucination-verification | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 5, RELEASE-2026-07-05-v2-wave5.md |
-| embeddings-and-similarity | ai-basics | embeddings-similarity | ✓ | — | — | — | T08 Wave 2, P-05 대기 |
+| embeddings-and-similarity | ai-basics | embeddings-similarity | ✓ | ✓ | — | — | T08 Wave 2, P-06 대기 |
 
 ## 집계 (Executor가 행 갱신 시 함께 갱신)
 
@@ -68,9 +68,9 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | KB Quote Bank (4차 approved KB) | 5 / 5 | 100% (tokenization-context Loop A 후 승인) |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
 | Lesson 생성 | 22 / 22 | 100% (T08 Wave 2 embeddings-and-similarity generated) |
-| Site 반영 | 21 / 22 | 95% (신규 generated 1건 P-05 대기) |
-| Verify 통과 | 21 / 21 | 100% (`npm run verify` PASS, 32 static pages) |
-| Release | 21 / 21 | 100% (V2 Wave 1+2+3+4+5 released, deployment HOLD) |
+| Site 반영 | 22 / 22 | 100% (generated 이상 전건 반영) |
+| Verify 통과 | 21 / 22 | 95% (신규 integrated 1건 P-06 대기) |
+| Release | 21 / 22 | 95% (V2 Wave 1+2+3+4+5 released, 신규 integrated 1건 P-06 대기, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
@@ -104,3 +104,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-05 | CODEX-PLAN Phase 3 P-05 T08 Wave 1 | 완료 | tokenization-and-context·prompt-engineering-foundations·grounding-and-citations·hallucination-and-verification 사이트 반영, `npm run lint`/`npm run typecheck` PASS |
 | 2026-07-05 | CODEX-PLAN Phase 3 Verify/Release T08 Wave 1 | 완료 | `npm run verify` PASS, tokenization-and-context·prompt-engineering-foundations·grounding-and-citations·hallucination-and-verification V2 Wave 5 릴리스 |
 | 2026-07-05 | CODEX-PLAN Phase 3 P-04 T08 Wave 2 | 완료 | embeddings-and-similarity V2 Lesson Draft 생성, P-05 대기 |
+| 2026-07-05 | CODEX-PLAN Phase 3 P-05 T08 Wave 2 | 완료 | embeddings-and-similarity 사이트 반영, `npm run lint`/`npm run typecheck` PASS |
