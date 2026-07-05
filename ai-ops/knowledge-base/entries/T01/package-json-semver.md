@@ -9,8 +9,8 @@ prerequisites: [terminal-shell-commands, variables-types-data]
 successors: [npm-scripts-reference, npm-debugging-playbook]
 related: [files-folders-paths, deployment-platforms]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [package-json-and-semver]
+  glossary: [package.json, Semantic Versioning, Dependency, Version Range, npm scripts, Package Specifier]
 sources:
   - { title: "Modules: Packages", url: "https://nodejs.org/api/packages.html", checked: 2026-07-06 }
   - { title: "About semantic versioning", url: "https://docs.npmjs.com/about-semantic-versioning", checked: 2026-07-06 }
