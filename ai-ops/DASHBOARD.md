@@ -3,30 +3,30 @@
 운영자용 한눈 현황판. **원본 데이터는 [MASTER_PROGRESS.md](MASTER_PROGRESS.md)** — 이 파일은 거기서 파생된 요약이다.
 갱신 주체·주기: 오케스트레이터(Fable)가 배치 종료 시(P-08 후 또는 하루 끝) 1회 갱신. 수동 편집 열은 없음 — 전부 MASTER_PROGRESS와 실행 기록에서 집계.
 
-## 마지막 갱신: 2026-07-05 (QA-01: Knowledge Batch 1 승인 — P-04 진행 가능)
+## 마지막 갱신: 2026-07-05 (Batch 1 Final 릴리스 준비 완료)
 
 ## 단계별 진행률
 
 | 단계 | 진행률 | 상세 |
 |---|---|---|
 | Knowledge Base | `██████████` 100% (5/5, 1차 배치) | 평균 Score 90.4, QA-01 승인 완료 |
-| Lesson 생성 | `█░░░░░░░░░` 7% (1/14) | 파일럿 1강만 — **P-04 착수 가능 (9강의 KB 확보)** |
+| Lesson 생성 | `██████░░░░` 36% (5/14) | Batch 1 Final 5강 완료 |
 | Fact Check (KB 검증) | `██████████` 100% (5/5) | rag는 Loop A 1회 후 통과 |
-| Site Integration | `█░░░░░░░░░` 8% (1/12) | |
-| Build / Verify | `█░░░░░░░░░` 7% (1/14) | 파일럿 VERIFIED (Cline P-06, 커밋 739640b) |
-| Release | `█░░░░░░░░░` 7% (1/14) | **파일럿 릴리스 완료** (Cline P-08, 45fd9e6 + 콘텐츠 커밋 a389dee) |
+| Site Integration | `██████░░░░` 36% (5/14) | Batch 1 Final 5강 반영 |
+| Build / Verify | `██████░░░░` 36% (5/14) | Batch 1 Final VERIFIED (Cline P-06, 커밋 e69fb4b) |
+| Release | `██████░░░░` 36% (5/14) | **Batch 1 Final 릴리스 완료** (Cline P-08, RELEASE-2026-07-05.md) |
 
 ## Executor별 현재 작업
 
 | Executor | 현재 작업 | 상태 |
 |---|---|---|
-| Codex | P-01·P-02 완료 (KB 5건) | **호출 준비 완료 — P-04 (권장 1차: context-engineering-basics, tool-calling-basics, rag-fundamentals, mcp-architecture-basics)** |
-| Cline | (없음) | 대기 — 이번 배치 P-05 후 P-06 |
-| Fable | QA-01 완료 (Batch 1 APPROVED) | 다음: P-04 산출물의 통합 창 관리, 강의 10개 시 O-02 |
+| Codex | P-01~P-05 Batch 1 완료 | **대기 — 다음 배치(Batch 2) P-01 착수 가능** |
+| Cline | P-06·P-08 Batch 1 완료 | **대기** |
+| Fable | QA-01·Batch 1 Final 승인 | **대기 — 다음 배치 계획 수립 시 O-02** |
 
 ## 현재 병목 (Bottleneck)
 
-1. ~~KB 0건~~ 해소 (5/5 승인). 현재 병목: **P-04 미착수** — approved KB 9강 분량이 대기 중
+1. Batch 1 Final 릴리스 완료. 다음 병목: **Batch 2 계획 및 승인**
 2. 구조적: Codex가 수집~반영을 전담하므로 **Codex 세션 수 = 처리량 상한** (병목 시 우선순위: P-02 > P-05 > P-01 > P-04)
 
 ## 실패한 작업
@@ -39,6 +39,8 @@
 
 | 날짜 | 작업 | 담당 |
 |---|---|---|
+| 2026-07-05 | **Batch 1 Final Release** — P-08 완료, READY FOR DEPLOYMENT | Cline |
+| 2026-07-05 | **Batch 1 Final Re-verification** — P-06 VERIFIED (17 pages) | Cline |
 | 2026-07-05 | **QA-01: Knowledge Batch 1 승인** (5건, 평균 90.4) — P-04 Proceed | Fable |
 | 2026-07-05 | KB 1차 배치 P-01 수집 + P-02 검증 (rag Loop A 1회 포함) | Codex |
 | 2026-07-04 | Executor 리팩토링 — Trae 제외, 3원 체제 (freeze 개정 1호) | Fable |

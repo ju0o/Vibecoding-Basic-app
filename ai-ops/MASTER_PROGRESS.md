@@ -21,14 +21,14 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 강의 slug | 모듈 | 근거 KB | Lesson(P-04) | Site(P-05) | Verify(P-06) | Release(P-08) | 비고 |
 |---|---|---|---|---|---|---|---|
-| from-prompt-to-system | M10 | n/a (구 체제 파일럿) | ✓ | ✓ | ✓ (2026-07-04, VERIFIED-2026-07-04-1) | ✓ | P-08 완료, RELEASE-2026-07-04.md |
-| context-engineering-basics | M10 | context-engineering | — | — | — | — | backlog 승인분 (order 2) |
+| from-prompt-to-system | M10 | n/a (구 체제 파일럿) | ✓ | ✓ | ✓ (2026-07-04, VERIFIED-2026-07-04-1) | ✓ | Batch 1 포함, RELEASE-2026-07-05.md |
+| context-engineering-basics | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, VERIFIED-2026-07-05-2) | ✓ | Batch 1 Final, RELEASE-2026-07-05.md |
 | context-window-and-memory | M10 | context-engineering | — | — | — | — | order 3 |
 | system-prompts-and-instruction-layers | M10 | context-engineering | — | — | — | — | order 4 |
 | ai-workflow-design | M10 | agent-loop | — | — | — | — | order 5 |
-| tool-calling-basics | M10 | tool-calling | — | — | — | — | order 7 (O-01 추가) |
-| rag-fundamentals | M10 | rag | — | — | — | — | order 8 (O-01 추가) |
-| mcp-architecture-basics | M10 | mcp, tool-calling | — | — | — | — | order 9 |
+| tool-calling-basics | M10 | tool-calling | ✓ | ✓ | ✓ (2026-07-05, VERIFIED-2026-07-05-2) | ✓ | Batch 1 Final, RELEASE-2026-07-05.md |
+| rag-fundamentals | M10 | rag | ✓ | ✓ | ✓ (2026-07-05, VERIFIED-2026-07-05-2) | ✓ | Batch 1 Final, RELEASE-2026-07-05.md |
+| mcp-architecture-basics | M10 | mcp, tool-calling | ✓ | ✓ | ✓ (2026-07-05, VERIFIED-2026-07-05-2) | ✓ | Batch 1 Final, RELEASE-2026-07-05.md |
 | designing-reusable-skills | M10 | (skills KB — 2차 배치) | — | — | — | — | order 10 |
 | agent-loop-anatomy | M10 | agent-loop, tool-calling | — | — | — | — | order 11 |
 | subagents-and-delegation | M10 | agent-loop | — | — | — | — | order 12 |
@@ -41,10 +41,10 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
 | Knowledge Base (approved + QA 승인) | 5 / 5 | 100% (1차 배치) |
-| Lesson 생성 | 1 / 14 | 7% |
-| Site 반영 | 1 / 14 | 7% |
-| Verify 통과 | 1 / 14 | 7% |
-| Release | 1 / 14 | 7% |
+| Lesson 생성 | 5 / 14 | 36% |
+| Site 반영 | 5 / 14 | 36% |
+| Verify 통과 | 5 / 14 | 36% |
+| Release | 5 / 14 | 36% (Batch 1 Final) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
