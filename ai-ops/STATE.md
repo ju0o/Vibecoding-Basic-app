@@ -18,7 +18,7 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **V2 전환 롤아웃 (R1~R4)** — Batch 2는 V2 재생성 대상으로 흡수 |
-| Current State | 강의: released 5 + integrated 4 = **9강 전부 V1, 재생성 대상** / KB 5건 qa_approved (Quote Bank 없음 — R2 대상) / KB 2차 3건 needed |
+| Current State | 강의: **released 9강 전부 V1, 재생성 대상** (Batch 2도 정지 직전 Cline이 P-06·P-08 완료 — VERIFIED-2026-07-05-3, RELEASE-batch2) / KB 5건 qa_approved (Quote Bank 없음 — R2 대상) / KB 2차 3건 needed |
 | Last Completed Step | Fable O-04 (V2 규격 확정, 2026-07-05) |
 | Next Executor | Codex |
 | Next Prompt File | `prompts/D-01-format-v2.md` |
