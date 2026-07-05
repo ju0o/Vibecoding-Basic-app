@@ -88,6 +88,14 @@ export const GLOSSARY_TERMS = [
     related: ["도구", "Agent", "Workflow"],
   },
   {
+    term: "MCP Resource",
+    category: "AI 시스템",
+    shortDefinition: "MCP server가 URI로 식별해 제공하는 컨텍스트 데이터",
+    explanation:
+      "MCP Resource는 파일, DB schema, 앱별 정보처럼 모델 판단에 필요한 데이터를 서버가 표준 방식으로 공유하는 primitive입니다. Tool이 외부 시스템 행동을 호출하는 기능이라면 Resource는 모델에게 읽힐 수 있는 컨텍스트 데이터를 제공하는 쪽에 가깝습니다.",
+    related: ["MCP", "Context Engineering", "RAG"],
+  },
+  {
     term: "RAG",
     category: "AI 시스템",
     shortDefinition: "검색한 외부 지식을 AI 답변 컨텍스트에 넣어 근거를 보강하는 방식",
@@ -117,6 +125,38 @@ export const GLOSSARY_TERMS = [
     shortDefinition: "반복 작업을 잘 수행하기 위한 재사용 가능한 절차와 지식 묶음",
     explanation: "특정 도메인의 기준, 스크립트, 체크리스트를 담아 AI가 일관되게 일하게 합니다.",
     related: ["Context Engineering", "Workflow", "Codex"],
+  },
+  {
+    term: "Progressive Disclosure",
+    category: "AI 시스템",
+    shortDefinition: "필요한 정보만 단계적으로 로드해 컨텍스트 비용을 줄이는 방식",
+    explanation:
+      "Progressive Disclosure는 시스템이 모든 자료를 처음부터 모델 컨텍스트에 넣지 않고, metadata나 description처럼 작은 발견 정보만 먼저 노출한 뒤 실제 본문과 리소스는 필요할 때 로드하는 설계입니다. Skills의 metadata-first loading과 MCP의 on-demand tool/resource 사용을 이해할 때 핵심이 되는 용어입니다.",
+    related: ["Context Engineering", "Skills", "MCP"],
+  },
+  {
+    term: "SKILL.md",
+    category: "AI 시스템",
+    shortDefinition: "Skill의 metadata와 실행 지침을 담는 필수 entrypoint 파일",
+    explanation:
+      "SKILL.md는 Skill 디렉터리의 중심 파일입니다. YAML frontmatter는 모델이 Skill을 언제 사용할지 발견하는 metadata를 제공하고, Markdown 본문은 Skill이 실행될 때 따라야 할 절차, 출력 형식, supporting files 안내를 담습니다.",
+    related: ["Skills", "Context Engineering", "Progressive Disclosure"],
+  },
+  {
+    term: "Skill Discovery",
+    category: "AI 시스템",
+    shortDefinition: "모델이 요청과 description을 비교해 사용할 Skill을 찾는 과정",
+    explanation:
+      "Skill Discovery는 Skill 본문이 아니라 이름과 description 같은 가벼운 metadata를 통해 어떤 Skill이 현재 요청에 적합한지 판단하는 과정입니다. description이 모호하거나 서로 겹치면 잘못된 Skill이 선택되거나 필요한 Skill이 누락될 수 있습니다.",
+    related: ["Skills", "Context Engineering"],
+  },
+  {
+    term: "Supporting Files",
+    category: "AI 시스템",
+    shortDefinition: "Skill 본문 밖에 두는 예시, 템플릿, 스크립트, 참고 자료",
+    explanation:
+      "Supporting Files는 SKILL.md에 모든 내용을 넣지 않고, examples, templates, scripts, references처럼 필요할 때만 읽거나 실행할 자료를 분리하는 방식입니다. Skill을 간결하게 유지하면서도 깊은 작업 자료를 제공할 수 있게 합니다.",
+    related: ["Skills", "Progressive Disclosure"],
   },
   {
     term: "Agent",

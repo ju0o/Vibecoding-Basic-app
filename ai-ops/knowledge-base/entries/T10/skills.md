@@ -10,7 +10,7 @@ successors: [orchestration, harness]
 related: [context-engineering, agent-loop, mcp]
 consumers:
   lessons: [designing-reusable-skills, context-engineering-mcp-skills]
-  glossary: [Skills]
+  glossary: [Skills, Progressive Disclosure, SKILL.md, Skill Discovery, Supporting Files]
 sources:
   - { title: "Agent Skills", url: "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview", checked: 2026-07-05 }
   - { title: "Skill authoring best practices", url: "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices", checked: 2026-07-05 }

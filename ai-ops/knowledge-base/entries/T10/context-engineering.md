@@ -9,8 +9,8 @@ prerequisites: []
 successors: [agent-loop, tool-calling, rag]
 related: [agent-loop, tool-calling, mcp, rag]
 consumers:
-  lessons: [context-engineering-basics, context-window-and-memory, system-prompts-and-instruction-layers]
-  glossary: [Context Window, System Prompt]
+  lessons: [context-engineering-basics, context-window-and-memory, system-prompts-and-instruction-layers, context-engineering-mcp-skills]
+  glossary: [Context Window, System Prompt, Progressive Disclosure]
 sources:
   - { title: "Effective context engineering for AI agents", url: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents", checked: 2026-07-05 }
   - { title: "Context windows", url: "https://platform.claude.com/docs/en/build-with-claude/context-windows", checked: 2026-07-05 }

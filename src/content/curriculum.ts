@@ -215,11 +215,12 @@ export const LESSON_META = [
     moduleId: "ai-system-design",
     order: 6,
     title: "Context Engineering, MCP, Skills의 관계",
-    summary: "AI가 일을 잘하게 만드는 맥락, 도구 연결, 재사용 절차를 시스템 관점에서 배웁니다.",
+    summary:
+      "AI가 일을 잘하게 만드는 정보 상태, 외부 연결 표준, 재사용 절차를 구분해 시스템 관점에서 이해합니다.",
     level: "중급",
     type: "deep-dive",
-    minutes: 50,
-    tags: ["Context Engineering", "MCP", "Skills", "Agent"],
+    minutes: 60,
+    tags: ["Context Engineering", "MCP", "Skills", "AI 시스템 설계"],
   },
   {
     slug: "tool-calling-basics",
@@ -256,6 +257,18 @@ export const LESSON_META = [
     type: "deep-dive",
     minutes: 60,
     tags: ["MCP", "Tool Calling", "Resources", "AI 시스템 설계"],
+  },
+  {
+    slug: "designing-reusable-skills",
+    moduleId: "ai-system-design",
+    order: 10,
+    title: "Skill 설계: 재사용 절차 만들기",
+    summary:
+      "반복되는 AI 작업 절차를 SKILL.md, description, supporting files로 패키징하고 컨텍스트 비용과 신뢰 경계를 함께 설계하는 법을 배웁니다.",
+    level: "중급",
+    type: "deep-dive",
+    minutes: 60,
+    tags: ["Skills", "SKILL.md", "Progressive Disclosure", "AI 시스템 설계"],
   },
   {
     slug: "agent-loop-anatomy",
