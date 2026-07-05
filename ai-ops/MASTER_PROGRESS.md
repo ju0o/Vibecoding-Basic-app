@@ -16,9 +16,9 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | mcp | T09 | ✓ | ✓ 92 (Fable 승인 2026-07-05, QA-01) | order 9 근거 / Quote Bank 6개 보강 |
 | rag | T09 | ✓ | ✓ 90 (Loop A 1회 후, Fable 승인 2026-07-05, QA-01) | order 8 근거 / Quote Bank 6개 보강 |
 | agent-loop | T10 | ✓ | ✓ 91 (Fable 승인 2026-07-05, QA-01) | order 11·12·14 근거 / Quote Bank 6개 보강 |
-| skills | T10 | — (needed) | — | 2차 배치 (O-01 등록 2026-07-05) — order 10 근거 |
-| orchestration | T10 | — (needed) | — | 2차 배치 — order 13 근거 |
-| harness | T10 | — (needed) | — | 2차 배치 — order 15 근거 |
+| skills | T10 | ✓ (draft 2026-07-05) | — | 2차 배치 P-02 대기 — order 10 근거 |
+| orchestration | T10 | ✓ (draft 2026-07-05) | — | 2차 배치 P-02 대기 — order 13 근거 |
+| harness | T10 | ✓ (draft 2026-07-05) | — | 2차 배치 P-02 대기 — order 15 근거 |
 
 ## Lesson 매트릭스
 
@@ -43,8 +43,10 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
-| Knowledge Base (approved + QA 승인) | 5 / 5 | 100% (1차 배치) |
+| Knowledge Base 수집(P-01) | 8 / 8 | 100% (2차 3건 draft/P-02 대기) |
+| Knowledge Base (approved + QA 승인) | 5 / 8 | 63% (1차 배치 승인, 2차 P-02 대기) |
 | KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
+| KB Quote Bank (2차 draft KB) | 3 / 3 | 100% |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
 | Lesson 생성 | 9 / 14 | 64% |
 | Site 반영 | 9 / 14 | 64% |
@@ -65,3 +67,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-05 | Batch 1 배포 | **HOLD (운영자 게이트)** | 배포 인프라 미정 (vercel.json 등 부재) — 운영자의 배포 환경 결정 대기. `outputs/06-deployment/DEPLOY-REPORT-2026-07-05.md` |
 | 2026-07-05 | CODEX-PLAN Phase 0 | 완료 | D-01 Content Format V2 구현, V1 fallback 전환기 규칙, `npm run verify` PASS |
 | 2026-07-05 | CODEX-PLAN Phase 1 | 완료 | 100강 V2 커리큘럼·백로그 확정, Pillar 분포 A40/B15/C25/D20 |
+| 2026-07-05 | CODEX-PLAN Phase 2 KB 2차 | 진행 | skills·orchestration·harness P-01 수집 완료, P-02 별도 검증 대기 |
