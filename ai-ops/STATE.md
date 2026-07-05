@@ -11,28 +11,28 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | Phase 3 P-08 완료: M10 17강 released / 다음 KB needed 수집 대기 |
-| Last Completed Step | Codex P-06/P-08 Verification and Release Batch 4 (2 lessons released, 2026-07-05) |
+| Current State | Phase 2 P-01 완료: T08 5개 KB draft 생성 / P-02 검증 대기 |
+| Last Completed Step | Codex P-01 Knowledge Collection T08 Batch 4 (5 KB drafts, 2026-07-05) |
 | Next Executor | Codex |
-| Next Prompt File | `prompts/RUN-CODEX-PRODUCE.md` |
+| Next Prompt File | `prompts/RUN-CODEX-VERIFY.md` |
 | Blocker | 없음 |
-| Required Human Action | None — 같은 Codex 흐름에서 다음 KB 수집 물결 진행 |
+| Required Human Action | None — 같은 Codex 흐름에서 P-02 원문 재접속 검증 진행 |
 | Release Status | V2 17강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 3 P-08 완료 — M10 17강 released, 다음 backlog KB needed 다수 존재
-- Verdict: APPROVED
+- Current State: CODEX-PLAN Phase 2 P-01 완료 — T08 KB 5건 draft 생성, P-02 검증 대기
+- Verdict: DONE
 - Next Executor: Codex
-- Next Prompt File: prompts/RUN-CODEX-PRODUCE.md
-- Why: build_fail·generated·recollect·planned 없음, BACKLOG에 kb_needed 항목이 남아 있어 P-01 Knowledge Collection이 다음 PRODUCE 우선순위
-- Required Operator Action: None — 같은 Codex 흐름에서 P-01 최대 5건 수집 진행
-- If Approved: draft KB를 다음 검증 흐름에서 P-02로 처리
-- If Rejected: 지적된 KB만 P-03 재수집 또는 BLOCKED 기록
-- Files to Check: ai-ops/outputs/04-integrated/RELEASE-2026-07-05-v2-wave4.md, ai-ops/outputs/06-build-verification/VERIFIED-2026-07-05-5.md, ai-ops/MASTER_PROGRESS.md, ai-ops/outputs/00-backlog/BACKLOG.md
-- Stop Condition: P-01은 BACKLOG의 kb_needed 중 우선순위 상위 최대 5건만 수집
+- Next Prompt File: prompts/RUN-CODEX-VERIFY.md
+- Why: P-01 완료로 draft KB가 발생했으므로 VERIFY 세션 규칙에 따라 P-02 Knowledge Verification이 다음 단계
+- Required Operator Action: None — 같은 Codex 흐름에서 원문 URL 재접속 대조와 Knowledge Score 산정 진행
+- If Approved: approved KB를 근거로 BACKLOG #50-#54를 planned로 전환하고 P-04 생성 후보로 이동
+- If Rejected: 지적된 KB만 recollect(n)로 전환하고 RUN-CODEX-PRODUCE(P-03)로 재수집
+- Files to Check: ai-ops/knowledge-base/entries/T08/tokenization-context.md, ai-ops/knowledge-base/entries/T08/prompt-engineering.md, ai-ops/knowledge-base/entries/T08/grounding-citations.md
+- Stop Condition: P-02는 draft KB 5건만 검증하고 강의 생성(P-04)은 수행하지 않음
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -68,13 +68,14 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
-- KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved**
+- KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **draft, P-02 대기**
 - 강의: **V2 released 17강** (V2 Wave 1+2+3+4 — 배포는 HOLD, 운영자 게이트) / 다음 물결 KB 수집 대기
 - 루프 카운터: 없음 (rag Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-05 | KB tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity | needed → draft | Codex P-01 |
 | 2026-07-05 | context-caching-and-state·ai-system-evaluation | integrated → verified → released | Codex P-06/P-08 |
 | 2026-07-05 | context-caching-and-state·ai-system-evaluation | generated → integrated | Codex P-05 |
 | 2026-07-05 | context-caching-and-state·ai-system-evaluation | planned → generated | Codex P-04 |

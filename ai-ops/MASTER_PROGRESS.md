@@ -23,6 +23,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | loop-engineering | T10 | ✓ | ✓ 88 (2026-07-05, O-05.2 연속 검증) | order 14 근거 |
 | context-caching | T10 | ✓ | ✓ 89 (2026-07-05, O-05.2 연속 검증) | order 15 근거 |
 | ai-system-evaluation | T10 | ✓ | ✓ 90 (2026-07-05, O-05.2 연속 검증) | order 16 근거 |
+| tokenization-context | T08 | ✓ | — | order 50 근거 / P-01 draft, P-02 대기 |
+| prompt-engineering | T08 | ✓ | — | order 51 근거 / P-01 draft, P-02 대기 |
+| grounding-citations | T08 | ✓ | — | order 52 근거 / P-01 draft, P-02 대기 |
+| hallucination-verification | T08 | ✓ | — | order 53 근거 / P-01 draft, P-02 대기 |
+| embeddings-similarity | T08 | ✓ | — | order 54 근거 / P-01 draft, P-02 대기 |
 
 ## Lesson 매트릭스
 
@@ -50,11 +55,12 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
-| Knowledge Base 수집(P-01) | 12 / 12 | 100% (3차 4건 P-02 승인 완료) |
-| Knowledge Base (approved 이상) | 12 / 12 | 100% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건) |
+| Knowledge Base 수집(P-01) | 17 / 17 | 100% (4차 T08 5건 draft, P-02 대기) |
+| Knowledge Base (approved 이상) | 12 / 17 | 71% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건 + 4차 draft 5건) |
 | KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (2차 approved KB) | 3 / 3 | 100% |
 | KB Quote Bank (3차 approved KB) | 4 / 4 | 100% |
+| KB Quote Bank (4차 draft KB) | 5 / 5 | 100% (P-02 대기) |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
 | Lesson 생성 | 17 / 17 | 100% |
 | Site 반영 | 17 / 17 | 100% |
@@ -86,3 +92,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-05 | CODEX-PLAN Phase 3 P-04 Batch 4 | 완료 | context-caching-and-state·ai-system-evaluation V2 Lesson Draft 생성, P-05 대기 |
 | 2026-07-05 | CODEX-PLAN Phase 3 P-05 Batch 4 | 완료 | context-caching-and-state·ai-system-evaluation 사이트 반영, 검증 대기 |
 | 2026-07-05 | CODEX-PLAN Phase 3 P-06/P-08 Batch 4 | 완료 | `npm run verify` PASS, V2 Wave 4 릴리스 |
+| 2026-07-05 | CODEX-PLAN Phase 2 KB 4차 P-01 | 완료 | tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity draft 생성, P-02 대기 |
