@@ -339,6 +339,125 @@ export const LESSON_META = [
     },
   },
   {
+    slug: "context-window-and-memory",
+    moduleId: "ai-system-design",
+    order: 3,
+    title: "컨텍스트 윈도와 메모리 관리",
+    summary:
+      "컨텍스트 창의 한계, 토큰 누적, context rot, compaction과 상태 산출물로 긴 AI 작업을 유지하는 법을 배웁니다.",
+    level: "기초",
+    minutes: 40,
+    tags: ["Context Window", "Context Engineering", "메모리 관리", "Compaction"],
+    checklist: [
+      "컨텍스트 윈도를 유한한 작업 메모리라고 설명한다.",
+      "시스템 프롬프트, 메시지, 문서, 도구 결과가 모두 컨텍스트를 차지한다고 말한다.",
+      "context rot 때문에 정보가 많을수록 항상 좋은 것은 아니라고 설명한다.",
+      "긴 AI 작업에서 compaction과 상태 산출물이 필요한 이유를 예로 든다.",
+    ],
+    exercise: {
+      quiz: {
+        question:
+          "긴 AI 작업에서 컨텍스트 창이 커지고 오래된 로그가 쌓일 때 가장 적절한 행동은 무엇인가요?",
+        options: [
+          "모든 파일과 로그를 계속 붙여 넣어 모델이 직접 고르게 한다",
+          "현재 목표, 확인된 근거, 실패한 시도, 다음 행동을 작은 상태로 요약한다",
+          "처음 작성한 프롬프트를 유지하고 이후 컨텍스트는 절대 바꾸지 않는다",
+        ],
+        answer: "현재 목표, 확인된 근거, 실패한 시도, 다음 행동을 작은 상태로 요약한다",
+        explanation:
+          "KB는 컨텍스트 창이 유한하며 도구 결과와 대화 이력이 누적된다고 설명합니다. 또한 토큰 수가 늘수록 context rot이 생길 수 있으므로, 오래된 로그를 계속 붙이기보다 compaction과 상태 산출물로 신호를 유지해야 합니다.",
+      },
+      explanationPrompt: {
+        prompt: '"컨텍스트가 길면 AI가 더 잘하지 않나요?"라고 묻는 동료에게 설명해보세요.',
+        guide: [
+          "컨텍스트 창은 유한한 작업 메모리라고 말하기",
+          "시스템 지시, 메시지, 문서, 도구 결과가 모두 토큰을 쓴다고 설명하기",
+          "context rot 때문에 많은 정보가 항상 좋은 것은 아니라고 말하기",
+          "compaction과 상태 산출물 예시로 마무리하기",
+        ],
+      },
+    },
+  },
+  {
+    slug: "system-prompts-and-instruction-layers",
+    moduleId: "ai-system-design",
+    order: 4,
+    title: "시스템 프롬프트와 지침 계층",
+    summary:
+      "시스템 프롬프트, 사용자 메시지, 도구 정의, 예시가 함께 컨텍스트를 이루는 방식을 배우고 명확한 지침 설계법을 익힙니다.",
+    level: "기초",
+    minutes: 40,
+    tags: ["System Prompt", "Instruction", "Context Engineering", "도구 정의"],
+    checklist: [
+      "시스템 프롬프트를 모델의 행동 기준 지시라고 설명한다.",
+      "시스템 지시, 메시지, 도구 정의, 예시가 모두 컨텍스트에 들어간다는 점을 말한다.",
+      "brittle한 조건문 목록과 모호한 일반론이 왜 위험한지 설명한다.",
+      "도구 정의가 지침 계층의 일부인 이유를 예로 든다.",
+    ],
+    exercise: {
+      quiz: {
+        question: "시스템 프롬프트와 지침 계층을 설계할 때 가장 적절한 방식은 무엇인가요?",
+        options: [
+          "가능한 모든 예외 조건을 길게 나열해 모델이 스스로 우선순위를 찾게 한다",
+          "원하는 행동 기준을 분명히 쓰고, 도구 정의와 예시는 겹치지 않게 선별한다",
+          "시스템 프롬프트를 처음에 한 번 정하면 도구 설명과 대화 이력은 컨텍스트로 보지 않는다",
+        ],
+        answer: "원하는 행동 기준을 분명히 쓰고, 도구 정의와 예시는 겹치지 않게 선별한다",
+        explanation:
+          "KB는 시스템 프롬프트가 원하는 행동을 분명히 제시해야 하며 brittle한 조건문 목록과 모호한 일반론을 피해야 한다고 설명합니다. 또한 도구 정의와 예시도 컨텍스트를 이루므로 함께 설계해야 합니다.",
+      },
+      explanationPrompt: {
+        prompt: '"시스템 프롬프트를 길게 쓰면 더 안전한가요?"라고 묻는 동료에게 설명해보세요.',
+        guide: [
+          "시스템 프롬프트도 컨텍스트를 소비한다고 말하기",
+          "원하는 행동은 분명히 제시해야 한다고 설명하기",
+          "brittle한 조건문 목록과 모호한 일반론의 위험 말하기",
+          "도구 정의와 예시까지 함께 설계해야 한다고 마무리하기",
+        ],
+      },
+    },
+  },
+  {
+    slug: "ai-workflow-design",
+    moduleId: "ai-system-design",
+    order: 5,
+    title: "AI Workflow 설계: 단계 분해와 품질 게이트",
+    summary:
+      "Workflow와 Agent의 차이를 구분하고, AI 작업을 단계와 품질 게이트로 나누어 예측 가능하게 만드는 방법을 배웁니다.",
+    level: "중급",
+    minutes: 45,
+    tags: ["Workflow", "Agent", "품질 게이트", "AI 시스템 설계"],
+    checklist: [
+      "Workflow를 미리 정의된 코드 경로로 LLM과 도구를 조정하는 방식이라고 설명한다.",
+      "Workflow와 Agent의 차이를 한 문장으로 구분한다.",
+      "단계 분해와 품질 게이트가 왜 필요한지 예로 든다.",
+      "outcome, grader, harness를 성공 판단과 연결해 설명한다.",
+    ],
+    exercise: {
+      quiz: {
+        question: "반복되는 AI 작업을 Workflow로 설계할 때 가장 적절한 설명은 무엇인가요?",
+        options: [
+          "모델이 매번 다음 행동을 자유롭게 정하게 하면 항상 더 안정적이다",
+          "사람이 실행 경로와 품질 게이트를 정해 LLM과 도구가 그 흐름을 따르게 한다",
+          "AI가 생성한 transcript가 길면 outcome 검증은 생략해도 된다",
+        ],
+        answer: "사람이 실행 경로와 품질 게이트를 정해 LLM과 도구가 그 흐름을 따르게 한다",
+        explanation:
+          "KB는 workflow를 미리 정의된 코드 경로로 LLM과 도구를 조정하는 방식으로 설명합니다. 또한 agent eval에서는 transcript와 outcome, grader를 구분해야 하므로 긴 실행 기록만으로 성공을 판단하면 안 됩니다.",
+      },
+      explanationPrompt: {
+        prompt:
+          '"이 작업은 Agent로 만들면 되지 왜 Workflow가 필요하죠?"라고 묻는 동료에게 설명해보세요.',
+        guide: [
+          "Workflow는 미리 정의된 경로, Agent는 모델 주도 경로라고 구분하기",
+          "반복 작업에서는 예측 가능성이 중요하다고 말하기",
+          "단계 분해와 품질 게이트 예시 들기",
+          "복잡도를 늘리기 전에 단순한 해결책을 먼저 검토한다는 점으로 마무리하기",
+        ],
+      },
+    },
+  },
+  {
     slug: "context-engineering-mcp-skills",
     moduleId: "ai-system-design",
     order: 6,
@@ -487,6 +606,46 @@ export const LESSON_META = [
           "MCP는 host, client, server 사이의 표준 프로토콜이라고 설명하기",
           "tools와 resources 차이를 예로 들기",
           "host가 권한과 사용자 승인을 조정한다는 점으로 마무리하기",
+        ],
+      },
+    },
+  },
+  {
+    slug: "agent-loop-anatomy",
+    moduleId: "ai-system-design",
+    order: 11,
+    title: "Agent의 구조: 도구 루프와 관찰-행동 사이클",
+    summary:
+      "Agent Loop가 평가, 도구 호출, 결과 반영, 반복으로 움직이는 구조를 배우고 Tool Calling과의 차이를 정리합니다.",
+    level: "중급",
+    minutes: 45,
+    tags: ["Agent", "Agent Loop", "Tool Calling", "도구 루프"],
+    checklist: [
+      "Agent Loop를 평가, 도구 호출, 결과 반영, 반복 구조로 설명한다.",
+      "한 turn이 모델 출력과 도구 결과의 왕복이라는 점을 말한다.",
+      "Tool Calling과 Agent Loop의 차이를 구분한다.",
+      "max_turns, budget, allowed_tools가 왜 필요한지 예로 든다.",
+    ],
+    exercise: {
+      quiz: {
+        question: "Agent Loop를 가장 정확하게 설명한 것은 무엇인가요?",
+        options: [
+          "모델이 한 번 답변을 생성하면 작업이 끝나는 구조이다",
+          "모델이 상태를 평가하고 도구를 호출한 뒤 결과를 받아 다시 판단하는 반복 실행 구조이다",
+          "도구 이름과 입력값을 사람이 직접 코드로만 작성하므로 모델 판단은 필요 없는 구조이다",
+        ],
+        answer:
+          "모델이 상태를 평가하고 도구를 호출한 뒤 결과를 받아 다시 판단하는 반복 실행 구조이다",
+        explanation:
+          "KB는 Agent Loop를 프롬프트 평가, 도구 호출, 결과 수신, 반복, 최종 결과 반환으로 설명합니다. 단일 답변과 다르며, Tool Calling은 루프 안에서 쓰이는 한 행동 단위입니다.",
+      },
+      explanationPrompt: {
+        prompt: '"Agent Loop는 그냥 while 반복문 아닌가요?"라고 묻는 동료에게 설명해보세요.',
+        guide: [
+          "루프가 모델 판단, 도구 호출, 결과 반영을 포함한다고 말하기",
+          "한 turn이 모델 출력과 도구 결과의 왕복이라고 설명하기",
+          "Tool Calling과 Agent Loop의 차이를 구분하기",
+          "max_turns, budget, 권한 제한이 필요한 이유로 마무리하기",
         ],
       },
     },

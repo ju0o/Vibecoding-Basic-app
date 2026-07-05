@@ -6,11 +6,11 @@
 
 | 필드 | 값 |
 |---|---|
-| Current Batch | Batch 2 (강의 order 3·4·5·11) + Batch 1 배포 대기 |
-| Current State | 강의 4건 `generated` / KB 2차 3건 `needed` / Batch 1 5강 `released`(배포 HOLD) |
-| Last Completed Step | Codex P-04 (Batch 2 강의 4건 생성, 2026-07-05) |
-| Next Executor | Codex 생산 세션 |
-| Next Prompt File | `prompts/RUN-CODEX-PRODUCE.md` |
+| Current Batch | Batch 2 (강의 order 3·4·5·11 integrated, P-06 대기) + Batch 1 배포 대기 |
+| Current State | 강의 4건 `integrated` / KB 2차 3건 `needed` / Batch 1 5강 `released`(배포 HOLD) |
+| Last Completed Step | Codex P-05 (Batch 2 사이트 반영, 2026-07-05) |
+| Next Executor | Cline |
+| Next Prompt File | `prompts/RUN-CLINE.md` |
 | Blocker | 없음 (파이프라인) / 배포만 환경 미정 |
 | Required Human Action | 배포 환경 결정 (병행 가능 — 파이프라인은 막지 않음) |
 | Release Status | 5/14 released, 0 deployed (HOLD — 인프라 미정) |
@@ -19,16 +19,16 @@
 
 ```
 NEXT_ACTION:
-- Current State: 강의 4건 generated (order 3·4·5·11)
-- Verdict: DONE (P-04)
-- Next Executor: Codex 생산 세션
-- Next Prompt File: prompts/RUN-CODEX-PRODUCE.md
-- Why: 상태 기계 — generated 존재 시 P-05(사이트 반영)가 PRODUCE 최우선, 단독 실행
+- Current State: 강의 4건 integrated (order 3·4·5·11)
+- Verdict: DONE (P-05)
+- Next Executor: Cline
+- Next Prompt File: prompts/RUN-CLINE.md
+- Why: 상태 기계 — integrated 존재 시 Cline이 P-06 verify를 수행하고 통과 시 P-08 릴리스 연속
 - Required Operator Action: None (병행: 배포 환경 결정은 별도 대기 — Vercel 권장)
 - If Approved: (해당 없음 — 운영자 게이트 아님)
-- If Rejected: 강의 초안 반려 시 "Reject: {slug, 사유}" → 해당 slug planned로 회귀, RUN-CODEX-PRODUCE(P-04 재생성)
-- Files to Check: outputs/02-drafts/{context-window-and-memory, system-prompts-and-instruction-layers, ai-workflow-design, agent-loop-anatomy}/lesson.md (선택 스팟체크)
-- Stop Condition: P-05 중 lint/typecheck 실패 시 변경 되돌리고 보고
+- If Rejected: P-06 FAILED 시 build_fail(n)으로 전이 → Codex 생산 세션 / RUN-CODEX-PRODUCE.md (P-07)
+- Files to Check: outputs/04-integrated/context-window-and-memory.md, outputs/04-integrated/system-prompts-and-instruction-layers.md, outputs/04-integrated/ai-workflow-design.md
+- Stop Condition: P-06 FAILED 시 Cline은 build_fail(n) 기록 후 중단; n=3이면 에스컬레이션
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -65,12 +65,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved** / KB 2차: skills·orchestration·harness = **needed** (O-01 등록 2026-07-05)
-- 강의: **released 5강** (파일럿 + Batch 1 Final 4강 — 배포는 HOLD, 운영자 게이트) / **generated 4강** (order 3·4·5·11 — P-05 단독 실행 대기) / **planned + KB 충족 2강** (order 12·14) / KB 대기 3강 (order 10·13·15)
+- 강의: **released 5강** (파일럿 + Batch 1 Final 4강 — 배포는 HOLD, 운영자 게이트) / **integrated 4강** (order 3·4·5·11 — Cline P-06 대기) / **planned + KB 충족 2강** (order 12·14) / KB 대기 3강 (order 10·13·15)
 - 루프 카운터: 없음 (rag Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-05 | context-window-and-memory·system-prompts-and-instruction-layers·ai-workflow-design·agent-loop-anatomy | generated → integrated | Codex P-05 |
 | 2026-07-05 | context-window-and-memory·system-prompts-and-instruction-layers·ai-workflow-design·agent-loop-anatomy | planned → generated | Codex P-04 |
 | 2026-07-05 | KB skills·orchestration·harness | (등록) → needed | Fable O-01 |
 | 2026-07-05 | Batch 1 4강 | verified → released (배포 HOLD) | Cline P-08 (5bafba1, 콘텐츠 커밋 보완 a0b6849) |

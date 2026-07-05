@@ -73,6 +73,14 @@ export const GLOSSARY_TERMS = [
     related: ["MCP", "Skills", "Agent"],
   },
   {
+    term: "Context Window",
+    category: "AI 시스템",
+    shortDefinition: "모델이 응답을 만들 때 참조할 수 있는 유한한 작업 메모리",
+    explanation:
+      "Context Window는 모델이 현재 응답을 만들 때 함께 볼 수 있는 토큰 범위입니다. 시스템 프롬프트, 메시지, 문서, 도구 정의, 도구 결과가 모두 이 범위를 차지할 수 있으므로 긴 작업에서는 필요한 정보를 선별하고 오래된 내용은 요약해야 합니다.",
+    related: ["Context Engineering", "Agent", "Tool Calling"],
+  },
+  {
     term: "MCP",
     category: "AI 시스템",
     shortDefinition: "AI가 외부 도구와 데이터를 표준 방식으로 연결하게 해주는 프로토콜",
@@ -96,6 +104,14 @@ export const GLOSSARY_TERMS = [
     related: ["MCP", "Agent", "API", "Context Engineering"],
   },
   {
+    term: "System Prompt",
+    category: "AI 시스템",
+    shortDefinition: "모델에게 원하는 행동을 분명히 제시하는 상위 지시",
+    explanation:
+      "System Prompt는 모델이 어떤 방식으로 행동해야 하는지 알려주는 지시입니다. Context Engineering 관점에서는 시스템 프롬프트도 컨텍스트를 차지하므로, 모호한 일반론이나 깨지기 쉬운 조건문 목록보다 작고 신호가 높은 행동 기준으로 설계해야 합니다.",
+    related: ["Context Engineering", "Tool Calling", "Agent"],
+  },
+  {
     term: "Skills",
     category: "AI 시스템",
     shortDefinition: "반복 작업을 잘 수행하기 위한 재사용 가능한 절차와 지식 묶음",
@@ -108,6 +124,15 @@ export const GLOSSARY_TERMS = [
     shortDefinition: "목표를 받고 도구를 사용하며 여러 단계를 수행하는 AI 작업자",
     explanation: "단순 답변을 넘어 계획, 실행, 검증, 수정 루프를 돌 수 있는 구조입니다.",
     related: ["SubAgent", "Orchestration", "Loop Engineering"],
+  },
+  {
+    term: "Agent Loop",
+    category: "AI 시스템",
+    shortDefinition:
+      "모델이 상태를 평가하고 도구를 호출하며 결과를 받아 다시 판단하는 반복 실행 구조",
+    explanation:
+      "Agent Loop는 모델이 프롬프트를 평가하고, 필요한 도구를 호출하고, 도구 결과를 다시 받아 작업이 끝날 때까지 반복하는 구조입니다. 한 turn은 모델 출력과 도구 실행 결과가 오가는 왕복이며, 루프에는 max_turns, budget, allowed_tools 같은 제한 장치가 필요합니다.",
+    related: ["Agent", "Tool Calling", "Workflow", "Context Engineering"],
   },
   {
     term: "Harness Engineering",
