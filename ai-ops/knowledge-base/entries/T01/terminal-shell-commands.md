@@ -9,8 +9,18 @@ prerequisites: [files-folders-paths]
 successors: [package-json-semver, git-basics]
 related: [dev-environment-map, files-folders-paths]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [terminal-shell-basics-reference]
+  glossary:
+    [
+      "Terminal",
+      "Shell",
+      "Command Line",
+      "Current Directory",
+      "Shell Profile",
+      "Basic Commands",
+      "PowerShell Cmdlet",
+      "Command Output",
+    ]
 sources:
   - { title: "Command line crash course", url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Environment_setup/Command_line", checked: 2026-07-05 }
   - { title: "Terminal Basics", url: "https://code.visualstudio.com/docs/terminal/basics", checked: 2026-07-05 }
