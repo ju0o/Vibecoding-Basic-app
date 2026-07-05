@@ -11,27 +11,27 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | CODEX-PLAN Phase 3 P-06 Terminal Reference 완료: terminal-shell-basics-reference verified / P-08 release 대기 |
-| Last Completed Step | Codex P-06 `npm run verify` PASS, terminal-shell-basics-reference verified (2026-07-06) |
+| Current State | CODEX-PLAN Phase 3 P-08 Terminal Reference 완료: terminal-shell-basics-reference released / 다음 needed KB 물결 P-01 대기 |
+| Last Completed Step | Codex P-08 terminal-shell-basics-reference V2 Wave 8 released (2026-07-06) |
 | Next Executor | Codex |
-| Next Prompt File | `prompts/P-08-release.md` |
+| Next Prompt File | `prompts/P-01-knowledge-collection.md` |
 | Blocker | 없음 |
-| Required Human Action | None — 같은 Codex 흐름에서 P-08 release |
-| Release Status | V2 26강 released·미배포 — 배포는 Phase 5 승인 후에만 |
+| Required Human Action | None — 같은 Codex 흐름에서 다음 KB 물결 수집 |
+| Release Status | V2 27강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 3 P-06 Terminal Reference 완료 — terminal-shell-basics-reference verified, `npm run verify` PASS
-- Verdict: VERIFIED
+- Current State: CODEX-PLAN Phase 3 P-08 Terminal Reference 완료 — 27강 released, deployment HOLD
+- Verdict: RELEASED
 - Next Executor: Codex
-- Next Prompt File: prompts/P-08-release.md
-- Why: verify가 통과했으므로 상태 기계상 P-08 release로 진행
-- Required Operator Action: None — 릴리스 노트 작성 후 released 상태 전환, 배포는 Phase 5 전까지 HOLD
-- If Approved: 다음 RUN 우선순위에 따라 needed KB 수집 또는 Phase 4 조건 점검으로 진행
-- If Rejected: verified 항목은 integrated로 회귀하고 P-06 재검증
-- Files to Check: ai-ops/outputs/06-build-verification/VERIFIED-2026-07-06-2.md, ai-ops/outputs/04-integrated/terminal-shell-basics-reference.md, src/content/lessons/markdown/terminal-shell-basics-reference.md
+- Next Prompt File: prompts/P-01-knowledge-collection.md
+- Why: generated/integrated/recollect/build_fail/planned 없음, BACKLOG에 kb_needed 항목이 남아 있으므로 다음 CODEX-PLAN 단계는 P-01 KB 수집
+- Required Operator Action: None — 같은 Codex 흐름에서 다음 KB 물결 수집
+- If Approved: draft KB 발생 후 P-02 verification
+- If Rejected: release 항목은 verified로 회귀하고 P-08 재작성
+- Files to Check: ai-ops/outputs/04-integrated/RELEASE-2026-07-06-v2-wave8.md, ai-ops/MASTER_PROGRESS.md, ai-ops/outputs/00-backlog/BACKLOG.md
 - Stop Condition: Phase 5 개발 서버 확인 보고에서만 정지
 ```
 
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved** / KB 5차 T01/T08: dev-environment-map·vibe-coding-origin-karpathy·ai-learning-verification·files-folders-paths·terminal-shell-commands = **approved** / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 26강 + verified 1강** (terminal-shell-basics-reference P-08 대기, 배포는 HOLD)
+- 강의: **V2 released 27강** (deployment HOLD, 다음 needed KB 물결 P-01 대기)
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-06 | terminal-shell-basics-reference | verified → released | Codex P-08 Terminal Reference |
 | 2026-07-06 | terminal-shell-basics-reference | integrated → verified | Codex P-06 Terminal Reference |
 | 2026-07-06 | terminal-shell-basics-reference | generated → integrated | Codex P-05 Terminal Reference |
 | 2026-07-06 | terminal-shell-basics-reference | planned → generated | Codex P-04 Terminal Reference |

@@ -43,7 +43,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | learning-with-ai-verification | getting-started | ai-learning-verification | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 7, RELEASE-2026-07-06-v2-wave7.md |
 | from-prompt-to-system | M10 | n/a (구 체제 파일럿) | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | files-folders-and-paths | development-basics | files-folders-paths | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 7, RELEASE-2026-07-06-v2-wave7.md |
-| terminal-shell-basics-reference | development-basics | terminal-shell-commands | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | — | Terminal Reference P-06, diagram integrated |
+| terminal-shell-basics-reference | development-basics | terminal-shell-commands | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 8, RELEASE-2026-07-06-v2-wave8.md |
 | context-engineering-basics | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | context-window-and-memory | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | system-prompts-and-instruction-layers | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
@@ -81,7 +81,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | Lesson 생성 | 27 / 27 | 100% (5차 approved KB 기반 planned 전건 generated 이상) |
 | Site 반영 | 27 / 27 | 100% (5차 approved KB 기반 generated 전건 integrated) |
 | Verify 통과 | 27 / 27 | 100% (`npm run verify` PASS, 5차 approved KB 기반 전건 verified 이상) |
-| Release | 26 / 27 | 96% (V2 Wave 1+2+3+4+5+6+7 released, deployment HOLD) |
+| Release | 27 / 27 | 100% (V2 Wave 1+2+3+4+5+6+7+8 released, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
@@ -126,3 +126,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-06 | CODEX-PLAN Phase 3 P-04 Terminal Reference | 완료 | terminal-shell-basics-reference V2 Reference Draft + diagram 생성, P-05 대기 |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-05 Terminal Reference | 완료 | terminal-shell-basics-reference 사이트 반영 + glossary/KB consumers/diagram 통합, `npm run lint`·`npm run typecheck` PASS |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-06 Terminal Reference | 완료 | `npm run verify` PASS, terminal-shell-basics-reference verified |
+| 2026-07-06 | CODEX-PLAN Phase 3 P-08 Terminal Reference | 완료 | terminal-shell-basics-reference V2 Wave 8 릴리스, deployment HOLD |

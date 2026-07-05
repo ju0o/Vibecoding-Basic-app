@@ -22,7 +22,7 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 4 | A | learning-with-ai-verification | getting-started | 4 | deep-dive | AI와 배울 때 검증이 먼저인 이유 | 기초 | ai-vibe-coding-orientation | ai-learning-verification | v2-released |
 | 5 | C | from-prompt-to-system | getting-started | 5 | deep-dive | 프롬프트에서 시스템으로 | 기초 | ai-vibe-coding-orientation | agent-loop,context-engineering | v2-released |
 | 6 | A | files-folders-and-paths | development-basics | 1 | deep-dive | 파일, 폴더, 경로를 정확히 이해하기 | 입문 | development-environment-map | files-folders-paths | v2-released |
-| 7 | D | terminal-shell-basics-reference | development-basics | 2 | reference | 터미널·셸 기본 명령 레퍼런스 | 기초 | files-folders-and-paths | terminal-shell-commands | integrated |
+| 7 | D | terminal-shell-basics-reference | development-basics | 2 | reference | 터미널·셸 기본 명령 레퍼런스 | 기초 | files-folders-and-paths | terminal-shell-commands | v2-released |
 | 8 | A | variables-types-and-data-shapes | development-basics | 3 | deep-dive | 변수, 타입, 데이터 모양 | 입문 | files-folders-and-paths | variables-types-data | kb_needed |
 | 9 | A | control-flow-functions-errors | development-basics | 4 | deep-dive | 조건문, 반복문, 함수, 오류 | 입문 | variables-types-and-data-shapes | control-flow-functions-errors | kb_needed |
 | 10 | A | debugging-error-reading | development-basics | 5 | deep-dive | 오류 메시지를 읽고 디버깅하는 법 | 기초 | control-flow-functions-errors | debugging-error-reading | kb_needed |
