@@ -13,6 +13,7 @@ import {
 const LESSON_CONTENT_DIR = join(process.cwd(), "src", "content", "lessons", "markdown")
 const HEADING_PATTERN = /^##\s+(.+?)\s*$/gm
 const SUBHEADING_PATTERN = /^###\s+(.+?)\s*$/gm
+const CALLOUT_MARKER_PATTERN = /^>\s*\[!(EXAMPLE|KEY|WARNING|TIP)\]\s*$/u
 
 const LEGACY_LESSON_SECTION_DEFINITIONS = [
   { id: "today", title: "오늘 배울 것" },
@@ -170,6 +171,12 @@ export function preprocessLessonMarkdown(markdown: string): string {
 
       if (inCodeFence) {
         return line
+      }
+
+      const calloutMarker = line.match(CALLOUT_MARKER_PATTERN)
+
+      if (calloutMarker?.[1] !== undefined) {
+        return `> <span data-callout="${calloutMarker[1]}"></span>`
       }
 
       return line.replaceAll(/==([^=\n]+)==/g, "<mark>$1</mark>")

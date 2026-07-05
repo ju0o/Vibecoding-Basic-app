@@ -28,11 +28,21 @@ export const metadata: Metadata = {
     template: "%s | AI Vibe Coding Master",
   },
   description:
-    "개발 기초부터 최신 AI 엔지니어링 개념까지 읽고, 퀴즈처럼 점검하고, 설명 연습으로 익히는 교재형 학습 사이트입니다.",
+    "개발 기초부터 최신 AI 엔지니어링 개념까지 읽고, 인용으로 확인하고, 설명 연습으로 익히는 교재형 학습 사이트입니다.",
   openGraph: {
     title: "AI Vibe Coding Master",
     description: "HTML부터 Agent, MCP, Harness Engineering까지 이어지는 AI 바이브코딩 교재.",
     type: "website",
+  },
+  robots: {
+    follow: false,
+    googleBot: {
+      follow: false,
+      index: false,
+      noimageindex: true,
+    },
+    index: false,
+    nocache: true,
   },
 }
 

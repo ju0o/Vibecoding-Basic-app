@@ -21,6 +21,25 @@ describe("lesson content", () => {
     expect(preprocessLessonMarkdown(markdown)).toContain("const value = '==raw=='")
   })
 
+  it("marks supported callout blockquotes outside code fences only", () => {
+    const markdown = [
+      "> [!EXAMPLE]",
+      "> 예시 본문",
+      "",
+      "> [!KEY]",
+      "> 핵심 본문",
+      "",
+      "```md",
+      "> [!WARNING]",
+      "```",
+    ].join("\n")
+    const transformed = preprocessLessonMarkdown(markdown)
+
+    expect(transformed).toContain('<span data-callout="EXAMPLE"></span>')
+    expect(transformed).toContain('<span data-callout="KEY"></span>')
+    expect(transformed).toContain("> [!WARNING]")
+  })
+
   it("loads transition-period V1 sample lessons with fallback sections", () => {
     const lessons = getAllLessons()
 

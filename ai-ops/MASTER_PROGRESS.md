@@ -75,7 +75,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
 | Lesson 생성 | 22 / 27 | 81% (5차 approved KB 기반 planned 5건 P-04 대기) |
 | Site 반영 | 22 / 27 | 81% (generated 이상 전건 반영, planned 5건 대기) |
-| Verify 통과 | 22 / 27 | 81% (`npm run verify` PASS 기준은 D-02 후 갱신 예정) |
+| Verify 통과 | 22 / 27 | 81% (D-02 플랫폼 증분 후 `npm run verify` PASS) |
 | Release | 22 / 27 | 81% (V2 Wave 1+2+3+4+5+6 released, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
@@ -113,3 +113,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-05 | CODEX-PLAN Phase 3 P-05 T08 Wave 2 | 완료 | embeddings-and-similarity 사이트 반영, `npm run lint`/`npm run typecheck` PASS |
 | 2026-07-05 | CODEX-PLAN Phase 3 Verify/Release T08 Wave 2 | 완료 | `npm run verify` PASS, embeddings-and-similarity V2 Wave 6 릴리스 |
 | 2026-07-06 | CODEX-PLAN Phase 2 KB 5차 P-02 | 완료 | dev-environment-map 88·vibe-coding-origin-karpathy 86(Loop A)·ai-learning-verification 92·files-folders-paths 90·terminal-shell-commands 88 APPROVED |
+| 2026-07-06 | CODEX-PLAN D-02 플랫폼 증분 | 완료 | 콜아웃 4종 렌더링 + noindex/robots/Basic Auth(SITE_PASSWORD) 구현, `npm run verify` PASS |

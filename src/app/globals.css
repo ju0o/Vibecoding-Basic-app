@@ -18,6 +18,18 @@
   --mark-background: #fff2a8;
   --quote-background: #f8fbff;
   --quote-border: #9cc8ff;
+  --callout-example-background: #f3f8ff;
+  --callout-example-border: #5c9ee6;
+  --callout-example-label: #0757a6;
+  --callout-key-background: #f1fbf5;
+  --callout-key-border: #36a66c;
+  --callout-key-label: #146b3a;
+  --callout-warning-background: #fff8e8;
+  --callout-warning-border: #df9b22;
+  --callout-warning-label: #8a5300;
+  --callout-tip-background: #f4fbf9;
+  --callout-tip-border: #2aa79b;
+  --callout-tip-label: #0b6d64;
   --status-success: #168348;
   --status-warning: #ad6a00;
   --status-error: #c73535;
@@ -40,6 +52,18 @@
   --mark-background: #5f4b12;
   --quote-background: #162131;
   --quote-border: #62a8ff;
+  --callout-example-background: #12283f;
+  --callout-example-border: #62a8ff;
+  --callout-example-label: #9dcbff;
+  --callout-key-background: #13291d;
+  --callout-key-border: #45c779;
+  --callout-key-label: #91e7b2;
+  --callout-warning-background: #31240d;
+  --callout-warning-border: #f0b44b;
+  --callout-warning-label: #ffd58a;
+  --callout-tip-background: #102a27;
+  --callout-tip-border: #50d0c4;
+  --callout-tip-label: #9de9e0;
   --status-success: #45c779;
   --status-warning: #f0b44b;
   --status-error: #ff7777;
@@ -154,6 +178,69 @@ pre {
   font-size: 0.92rem;
 }
 
+.lesson-callout {
+  margin: 1.5rem 0;
+  border: 1px solid var(--callout-border);
+  border-left-width: 4px;
+  border-radius: 8px;
+  background: var(--callout-background);
+  padding: 1rem 1.1rem;
+  color: var(--text-primary);
+}
+
+.lesson-callout-example {
+  --callout-background: var(--callout-example-background);
+  --callout-border: var(--callout-example-border);
+  --callout-label: var(--callout-example-label);
+}
+
+.lesson-callout-key {
+  --callout-background: var(--callout-key-background);
+  --callout-border: var(--callout-key-border);
+  --callout-label: var(--callout-key-label);
+}
+
+.lesson-callout-warning {
+  --callout-background: var(--callout-warning-background);
+  --callout-border: var(--callout-warning-border);
+  --callout-label: var(--callout-warning-label);
+}
+
+.lesson-callout-tip {
+  --callout-background: var(--callout-tip-background);
+  --callout-border: var(--callout-tip-border);
+  --callout-label: var(--callout-tip-label);
+}
+
+.lesson-callout-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+  color: var(--callout-label);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.lesson-callout-icon {
+  display: inline-flex;
+  min-width: 2rem;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--callout-border) 70%, transparent);
+  border-radius: 999px;
+  padding: 0.1rem 0.35rem;
+  background: color-mix(in srgb, var(--callout-background) 75%, var(--surface-elevated));
+  color: var(--callout-label);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+.lesson-callout-body > :last-child {
+  margin-bottom: 0;
+}
+
 .lesson-markdown pre {
   margin: 1.25rem 0;
   border: 1px solid var(--border-default);
@@ -220,6 +307,11 @@ pre {
   }
 
   .lesson-markdown blockquote {
+    margin-inline: -0.25rem;
+    padding: 0.85rem;
+  }
+
+  .lesson-callout {
     margin-inline: -0.25rem;
     padding: 0.85rem;
   }
