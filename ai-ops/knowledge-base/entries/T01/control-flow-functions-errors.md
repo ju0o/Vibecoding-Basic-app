@@ -2,8 +2,8 @@
 id: control-flow-functions-errors
 title: "Control Flow, Functions, and Errors (조건·반복·함수·오류)"
 topicGroup: T01
-status: draft
-score: null
+status: approved
+score: 92
 level: 입문
 prerequisites: [variables-types-data]
 successors: [debugging-error-reading, javascript-dom-events]

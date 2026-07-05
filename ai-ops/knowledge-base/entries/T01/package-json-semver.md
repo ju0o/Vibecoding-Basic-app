@@ -2,8 +2,8 @@
 id: package-json-semver
 title: "package.json and Semantic Versioning (package.json과 시맨틱 버저닝)"
 topicGroup: T01
-status: draft
-score: null
+status: approved
+score: 85
 level: 기초
 prerequisites: [terminal-shell-commands, variables-types-data]
 successors: [npm-scripts-reference, npm-debugging-playbook]

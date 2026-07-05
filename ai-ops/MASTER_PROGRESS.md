@@ -33,11 +33,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | ai-learning-verification | T08 | ✓ | ✓ 92 (2026-07-06) | order 4 근거 |
 | files-folders-paths | T01 | ✓ | ✓ 90 (2026-07-06) | order 6 근거 |
 | terminal-shell-commands | T01 | ✓ | ✓ 88 (2026-07-06) | order 7 근거 |
-| variables-types-data | T01 | ✓ | — | CODEX-PLAN Phase 2 KB 6차 draft, order 8 근거 |
-| control-flow-functions-errors | T01 | ✓ | — | CODEX-PLAN Phase 2 KB 6차 draft, order 9 근거 |
-| debugging-error-reading | T01 | ✓ | — | CODEX-PLAN Phase 2 KB 6차 draft, order 10 근거 |
-| regex-code-search | T01 | ✓ | — | CODEX-PLAN Phase 2 KB 6차 draft, order 11 근거 |
-| package-json-semver | T01 | ✓ | — | CODEX-PLAN Phase 2 KB 6차 draft, order 12 근거 |
+| variables-types-data | T01 | ✓ | ✓ 92 (2026-07-06) | order 8 근거 |
+| control-flow-functions-errors | T01 | ✓ | ✓ 92 (2026-07-06) | order 9 근거 |
+| debugging-error-reading | T01 | ✓ | ✓ 89 (2026-07-06) | order 10 근거 |
+| regex-code-search | T01 | ✓ | ✓ 87 (2026-07-06) | order 11 근거 |
+| package-json-semver | T01 | ✓ | ✓ 85 (2026-07-06) | order 12 근거 / npm·SemVer registry 명시 권고 |
 
 ## Lesson 매트릭스
 
@@ -49,6 +49,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | from-prompt-to-system | M10 | n/a (구 체제 파일럿) | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | files-folders-and-paths | development-basics | files-folders-paths | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 7, RELEASE-2026-07-06-v2-wave7.md |
 | terminal-shell-basics-reference | development-basics | terminal-shell-commands | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 8, RELEASE-2026-07-06-v2-wave8.md |
+| variables-types-and-data-shapes | development-basics | variables-types-data | — | — | — | — | CODEX-PLAN Phase 2 KB 6차 approved, P-04 planned |
+| control-flow-functions-errors | development-basics | control-flow-functions-errors | — | — | — | — | CODEX-PLAN Phase 2 KB 6차 approved, P-04 planned |
+| debugging-error-reading | development-basics | debugging-error-reading | — | — | — | — | CODEX-PLAN Phase 2 KB 6차 approved, P-04 planned |
+| regex-for-code-search | development-basics | regex-code-search | — | — | — | — | CODEX-PLAN Phase 2 KB 6차 approved, P-04 planned |
+| package-json-and-semver | development-basics | package-json-semver | — | — | — | — | CODEX-PLAN Phase 2 KB 6차 approved, P-04 planned |
 | context-engineering-basics | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | context-window-and-memory | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | system-prompts-and-instruction-layers | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
@@ -75,19 +80,19 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
-| Knowledge Base 수집(P-01) | 27 / 27 | 100% (6차 T01 5건 draft, P-02 대기) |
-| Knowledge Base (approved 이상) | 22 / 27 | 81% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건 + 4차 approved 5건 + 5차 approved 5건) |
+| Knowledge Base 수집(P-01) | 27 / 27 | 100% (6차 T01 5건 approved) |
+| Knowledge Base (approved 이상) | 27 / 27 | 100% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건 + 4차 approved 5건 + 5차 approved 5건 + 6차 approved 5건) |
 | KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (2차 approved KB) | 3 / 3 | 100% |
 | KB Quote Bank (3차 approved KB) | 4 / 4 | 100% |
 | KB Quote Bank (4차 approved KB) | 5 / 5 | 100% (tokenization-context Loop A 후 승인) |
 | KB Quote Bank (5차 approved KB) | 5 / 5 | 100% (vibe-coding-origin-karpathy Loop A 후 승인) |
-| KB Quote Bank (6차 draft KB) | 5 / 5 | 100% (P-01 draft, P-02 대기) |
+| KB Quote Bank (6차 approved KB) | 5 / 5 | 100% |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
-| Lesson 생성 | 27 / 27 | 100% (5차 approved KB 기반 planned 전건 generated 이상) |
-| Site 반영 | 27 / 27 | 100% (5차 approved KB 기반 generated 전건 integrated) |
-| Verify 통과 | 27 / 27 | 100% (`npm run verify` PASS, 5차 approved KB 기반 전건 verified 이상) |
-| Release | 27 / 27 | 100% (V2 Wave 1+2+3+4+5+6+7+8 released, deployment HOLD) |
+| Lesson 생성 | 27 / 32 | 84% (6차 approved KB 5건 planned, P-04 대기) |
+| Site 반영 | 27 / 32 | 84% (6차 approved KB 5건 planned, P-04 대기) |
+| Verify 통과 | 27 / 32 | 84% (`npm run verify` PASS, 6차 approved KB 5건 planned) |
+| Release | 27 / 32 | 84% (V2 Wave 1+2+3+4+5+6+7+8 released, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
@@ -134,3 +139,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-06 | CODEX-PLAN Phase 3 P-06 Terminal Reference | 완료 | `npm run verify` PASS, terminal-shell-basics-reference verified |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-08 Terminal Reference | 완료 | terminal-shell-basics-reference V2 Wave 8 릴리스, deployment HOLD |
 | 2026-07-06 | CODEX-PLAN Phase 2 KB 6차 P-01 | 완료 | variables-types-data·control-flow-functions-errors·debugging-error-reading·regex-code-search·package-json-semver draft 생성, P-02 대기 |
+| 2026-07-06 | CODEX-PLAN Phase 2 KB 6차 P-02 | 완료 | variables-types-data 92·control-flow-functions-errors 92·debugging-error-reading 89·regex-code-search 87·package-json-semver 85 APPROVED |

@@ -2,8 +2,8 @@
 id: variables-types-data
 title: "Variables, Types, and Data Shapes (변수·타입·데이터 모양)"
 topicGroup: T01
-status: draft
-score: null
+status: approved
+score: 92
 level: 입문
 prerequisites: [files-folders-paths]
 successors: [control-flow-functions-errors, json-data-contracts, typescript-type-system]

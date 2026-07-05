@@ -2,8 +2,8 @@
 id: debugging-error-reading
 title: "Debugging and Error Reading (디버깅과 오류 메시지 읽기)"
 topicGroup: T01
-status: draft
-score: null
+status: approved
+score: 89
 level: 기초
 prerequisites: [control-flow-functions-errors]
 successors: [regex-code-search, frontend-testing-basics, code-change-risk-analysis]

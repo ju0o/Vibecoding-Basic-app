@@ -2,8 +2,8 @@
 id: regex-code-search
 title: "Regular Expressions for Code Search (코드 검색을 위한 정규식)"
 topicGroup: T01
-status: draft
-score: null
+status: approved
+score: 87
 level: 중급
 prerequisites: [debugging-error-reading]
 successors: [git-log-diff-show, code-change-risk-analysis]
