@@ -299,6 +299,46 @@ export const LESSON_META = [
     },
   },
   {
+    slug: "context-engineering-basics",
+    moduleId: "ai-system-design",
+    order: 2,
+    title: "Context Engineering 기초: AI가 판단할 재료 설계",
+    summary:
+      "AI가 추론할 때 받는 정보 묶음을 목표, 제약, 근거, 도구 결과로 선별하고 유지하는 방법을 배웁니다.",
+    level: "기초",
+    minutes: 40,
+    tags: ["Context Engineering", "컨텍스트", "AI 시스템 설계", "에이전트"],
+    checklist: [
+      "Context Engineering을 추론 시점 정보 상태 관리라고 설명한다.",
+      "컨텍스트가 길수록 항상 좋은 것이 아닌 이유를 말한다.",
+      "시스템 프롬프트, 도구 정의, 대화 이력이 컨텍스트를 소비한다는 점을 설명한다.",
+      "긴 AI 작업에서 compaction과 상태 산출물이 필요한 이유를 예로 든다.",
+    ],
+    exercise: {
+      quiz: {
+        question: "긴 AI 작업에서 Context Engineering 관점으로 가장 적절한 행동은 무엇인가요?",
+        options: [
+          "모든 파일과 로그를 계속 붙여 넣어 AI가 빠뜨리는 정보가 없게 한다",
+          "현재 목표, 제약, 근거, 다음 행동을 작은 상태로 정리하고 오래된 로그는 요약한다",
+          "처음에 완벽한 프롬프트를 한 번 작성한 뒤 이후 컨텍스트는 바꾸지 않는다",
+        ],
+        answer: "현재 목표, 제약, 근거, 다음 행동을 작은 상태로 정리하고 오래된 로그는 요약한다",
+        explanation:
+          "KB는 컨텍스트가 많을수록 항상 좋은 것이 아니며, 긴 세션에서는 compaction과 상태 산출물이 필요하다고 설명합니다. 모든 자료를 계속 넣는 것은 context rot 위험을 키우고, 초기 프롬프트 한 번으로 장기 작업을 끝내려는 것도 오개념입니다.",
+      },
+      explanationPrompt: {
+        prompt:
+          '"AI에게 자료를 많이 줄수록 안전하다"고 말하는 동료에게 Context Engineering을 설명해보세요.',
+        guide: [
+          "컨텍스트는 모델이 추론할 때 받는 토큰 집합임을 말하기",
+          "시스템 프롬프트, 메시지, 도구 결과, 문서가 모두 창을 차지한다고 설명하기",
+          "context rot 때문에 선별과 요약이 필요하다는 점 말하기",
+          "작은 상태 문서나 체크리스트 예시로 연결하기",
+        ],
+      },
+    },
+  },
+  {
     slug: "context-engineering-mcp-skills",
     moduleId: "ai-system-design",
     order: 6,
@@ -327,6 +367,127 @@ export const LESSON_META = [
       explanationPrompt: {
         prompt: "MCP와 Skill이 AI 에이전트에게 왜 필요한지 신입 개발자에게 설명해보세요.",
         guide: ["도구 연결", "반복 절차", "검증 가능한 작업 흐름"],
+      },
+    },
+  },
+  {
+    slug: "tool-calling-basics",
+    moduleId: "ai-system-design",
+    order: 7,
+    title: "Tool Calling: AI가 도구를 부르는 방식",
+    summary:
+      "AI가 외부 함수나 도구를 구조화된 호출 요청으로 선택하고, 애플리케이션이 실행하는 경계를 배웁니다.",
+    level: "중급",
+    minutes: 40,
+    tags: ["Tool Calling", "Function Calling", "API", "AI 도구"],
+    checklist: [
+      "Tool Calling이 모델의 직접 실행이 아니라 구조화된 호출 요청임을 설명한다.",
+      "JSON Schema가 도구 입력 구조를 약속하는 역할을 말한다.",
+      "client tool과 server tool의 실행 책임 차이를 구분한다.",
+      "Tool Calling과 MCP의 층위 차이를 한 문장으로 설명한다.",
+    ],
+    exercise: {
+      quiz: {
+        question: "Tool Calling을 가장 정확하게 설명한 것은 무엇인가요?",
+        options: [
+          "모델이 외부 함수를 직접 실행하고 결과까지 스스로 보장하는 방식이다",
+          "모델이 호출할 도구와 인자를 구조화해 반환하고, 애플리케이션이나 제공자 인프라가 실행하는 방식이다",
+          "모든 API 호출을 사람이 직접 코드로 작성하므로 모델은 도구 선택에 관여하지 않는 방식이다",
+        ],
+        answer:
+          "모델이 호출할 도구와 인자를 구조화해 반환하고, 애플리케이션이나 제공자 인프라가 실행하는 방식이다",
+        explanation:
+          "KB는 client tool에서 모델이 `tool_use` 같은 구조화된 호출을 반환하고 애플리케이션이 실행한다고 설명합니다. 모델이 직접 실행한다고 보는 것은 실행 책임을 혼동한 것이고, 모델이 도구 선택에 관여하지 않는다는 설명도 Tool Calling의 핵심과 맞지 않습니다.",
+      },
+      explanationPrompt: {
+        prompt: '"Tool Calling은 그냥 API 호출 아닌가요?"라고 묻는 동료에게 차이를 설명해보세요.',
+        guide: [
+          "API 호출은 애플리케이션 코드의 네트워크 요청이라고 설명하기",
+          "Tool Calling은 모델이 어떤 호출이 필요한지 구조화해 제안하는 인터페이스라고 설명하기",
+          "JSON Schema와 description이 왜 필요한지 덧붙이기",
+          "실제 영향이 있는 작업은 사용자 확인이 필요하다고 마무리하기",
+        ],
+      },
+    },
+  },
+  {
+    slug: "rag-fundamentals",
+    moduleId: "ai-system-design",
+    order: 8,
+    title: "RAG: 모델이 모르는 것을 알려주는 방법",
+    summary:
+      "검색된 외부 지식을 모델 입력에 넣어 최신 정보와 도메인 지식에 근거한 답변을 만드는 흐름을 배웁니다.",
+    level: "중급",
+    minutes: 40,
+    tags: ["RAG", "Retrieval", "Embedding", "Context Engineering"],
+    checklist: [
+      "RAG를 retrieval과 generation을 결합한 방식으로 설명한다.",
+      "chunk, embedding, vector database, retrieval의 흐름을 순서대로 말한다.",
+      "RAG와 long context가 항상 우열 관계가 아니라는 점을 설명한다.",
+      "embedding 검색과 BM25 검색의 차이를 예로 든다.",
+    ],
+    exercise: {
+      quiz: {
+        question: "RAG를 실무에 적용할 때 가장 적절한 설명은 무엇인가요?",
+        options: [
+          "검색된 chunk를 많이 넣을수록 항상 답변 품질이 좋아진다",
+          "문서를 chunk로 나누고 관련 chunk를 검색해 모델 입력에 넣되, reranking과 top-K로 품질을 조절한다",
+          "embedding 검색만 쓰면 고유명사나 오류 코드 검색 문제도 항상 해결된다",
+        ],
+        answer:
+          "문서를 chunk로 나누고 관련 chunk를 검색해 모델 입력에 넣되, reranking과 top-K로 품질을 조절한다",
+        explanation:
+          "KB는 RAG 흐름을 chunking, embedding, vector database, runtime retrieval, prompt insertion으로 설명하고, reranking을 관련 chunk만 전달하기 위한 filtering 단계로 설명합니다. 많은 chunk가 항상 좋은 것은 아니며, embedding만으로 exact match 문제를 모두 해결한다고 보는 것도 오개념입니다.",
+      },
+      explanationPrompt: {
+        prompt:
+          '"RAG는 그냥 검색 결과를 프롬프트에 붙이는 것 아닌가요?"라고 묻는 동료에게 설명해보세요.',
+        guide: [
+          "RAG가 retrieval과 generation을 결합하는 방식임을 말하기",
+          "chunk, embedding, vector database, retrieval 순서로 설명하기",
+          "long context와 RAG의 선택 기준을 간단히 말하기",
+          "BM25와 reranking이 왜 필요한지 오개념과 함께 설명하기",
+        ],
+      },
+    },
+  },
+  {
+    slug: "mcp-architecture-basics",
+    moduleId: "ai-system-design",
+    order: 9,
+    title: "MCP 구조: 서버, 클라이언트, 도구, 리소스",
+    summary:
+      "MCP의 host, client, server 구조와 tools, resources의 차이를 배우고 Tool Calling과의 관계를 정리합니다.",
+    level: "중급",
+    minutes: 40,
+    tags: ["MCP", "Tool Calling", "Resources", "AI 시스템 설계"],
+    checklist: [
+      "MCP를 AI 애플리케이션과 외부 시스템을 연결하는 프로토콜로 설명한다.",
+      "host, client, server의 책임을 구분한다.",
+      "tools와 resources의 차이를 예로 든다.",
+      "MCP와 Tool Calling의 층위 차이를 한 문장으로 설명한다.",
+    ],
+    exercise: {
+      quiz: {
+        question: "MCP에서 tools와 resources의 차이를 가장 정확하게 설명한 것은 무엇인가요?",
+        options: [
+          "tools는 외부 행동을 호출하는 기능이고, resources는 모델에 제공할 컨텍스트 데이터를 URI로 노출하는 기능이다",
+          "tools와 resources는 모두 모델이 자동으로 항상 읽는 문서이며 차이가 없다",
+          "resources는 서버의 권한을 정하고, tools는 전체 대화 이력을 서버에 전달하는 기능이다",
+        ],
+        answer:
+          "tools는 외부 행동을 호출하는 기능이고, resources는 모델에 제공할 컨텍스트 데이터를 URI로 노출하는 기능이다",
+        explanation:
+          "KB는 MCP tools를 외부 시스템과 상호작용하도록 서버가 노출하는 호출 가능한 기능으로, resources를 파일·DB schema·앱별 정보 같은 컨텍스트 데이터를 URI로 식별해 제공하는 primitive로 설명합니다. resources를 자동 첨부 문서로 보거나 서버가 전체 대화를 본다고 생각하는 것은 오개념입니다.",
+      },
+      explanationPrompt: {
+        prompt: '"MCP는 Tool Calling이랑 같은 거 아닌가요?"라고 묻는 동료에게 차이를 설명해보세요.',
+        guide: [
+          "Tool Calling은 모델이 도구 호출을 만드는 메커니즘이라고 설명하기",
+          "MCP는 host, client, server 사이의 표준 프로토콜이라고 설명하기",
+          "tools와 resources 차이를 예로 들기",
+          "host가 권한과 사용자 승인을 조정한다는 점으로 마무리하기",
+        ],
       },
     },
   },
