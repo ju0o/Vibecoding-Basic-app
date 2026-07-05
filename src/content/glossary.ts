@@ -907,4 +907,164 @@ export const GLOSSARY_TERMS = [
       "Command Output은 명령 실행의 증거입니다. AI에게 오류를 물어볼 때는 command, current directory, shell, output summary를 함께 제공해야 문제 원인을 더 잘 나눌 수 있습니다.",
     related: ["Terminal", "Verification", "Shell Command"],
   },
+  {
+    term: "Variable",
+    category: "개발 기초",
+    shortDefinition: "값을 이름으로 저장하고 다시 참조하게 하는 JavaScript 이름표",
+    explanation:
+      "Variable은 value를 담는 container로 설명될 수 있지만, JavaScript에서는 variable 자체가 type을 갖는 것이 아니라 지금 연결된 value가 type을 가집니다. `let`은 재할당 가능한 이름을 만들고 `const`는 같은 binding에 새 값을 다시 할당하지 않겠다는 의도를 나타냅니다.",
+    related: ["Value", "Data Type", "JavaScript"],
+  },
+  {
+    term: "Value",
+    category: "개발 기초",
+    shortDefinition: "변수에 담기거나 표현식에서 만들어지는 실제 데이터",
+    explanation:
+      "Value는 string, number, boolean, object, array처럼 runtime에서 동작하는 데이터입니다. JavaScript는 dynamically typed language이므로 variable 이름보다 그 이름에 현재 연결된 value의 type을 확인하는 것이 중요합니다.",
+    related: ["Variable", "Primitive Value", "Object Shape"],
+  },
+  {
+    term: "Primitive Value",
+    category: "개발 기초",
+    shortDefinition: "JavaScript에서 object가 아닌 기본 value 분류",
+    explanation:
+      "Primitive Value는 MDN이 JavaScript data structures에서 object와 구분해 설명하는 기본 값 분류입니다. string, number, boolean, undefined, symbol, bigint, null 같은 값이 여기에 속하며, object property collection과 구분해 읽어야 합니다.",
+    related: ["Data Type", "Value", "Object"],
+  },
+  {
+    term: "Object Shape",
+    category: "개발 기초",
+    shortDefinition: "object가 가진 property 이름과 각 property value의 구조",
+    explanation:
+      "Object Shape는 object의 key-value property 구성을 읽는 방식입니다. API 응답, UI state, AI가 생성한 코드의 데이터 계약을 검토할 때 어떤 property가 있고 그 value가 어떤 type인지 확인하는 기준이 됩니다.",
+    related: ["Object", "Property", "Data Contract"],
+  },
+  {
+    term: "Array",
+    category: "개발 기초",
+    shortDefinition: "여러 값을 순서와 index로 다루는 list-like object",
+    explanation:
+      "Array는 순서가 있는 값 목록입니다. 검색 결과, 강의 목록, 태그 목록처럼 개수가 변할 수 있는 데이터를 다룰 때 사용하며, 각 element의 shape를 함께 확인해야 안전하게 렌더링하거나 반복 처리할 수 있습니다.",
+    related: ["Indexed Collection", "Loop", "Object Shape"],
+  },
+  {
+    term: "Control Flow",
+    category: "개발 기초",
+    shortDefinition: "코드가 어떤 순서와 조건으로 실행될지 정하는 흐름",
+    explanation:
+      "Control Flow는 조건문, 반복문, 함수 호출, 오류 처리처럼 코드의 가능한 실행 경로를 만드는 구조입니다. AI가 생성한 코드를 검토할 때는 문법뿐 아니라 어떤 입력이 어떤 branch와 return value로 이어지는지 확인해야 합니다.",
+    related: ["Conditional", "Loop", "Exception Handling"],
+  },
+  {
+    term: "Conditional",
+    category: "개발 기초",
+    shortDefinition: "test result에 따라 다른 code path를 실행하는 구조",
+    explanation:
+      "Conditional은 `if...else`, `switch`, ternary처럼 조건이 true인지 false인지 또는 어떤 case인지에 따라 실행할 code block을 고르는 구조입니다. 빈 값, 권한, 응답 상태, array length 같은 판단 기준을 코드 흐름으로 바꿉니다.",
+    related: ["Control Flow", "Boolean", "Branch"],
+  },
+  {
+    term: "Loop",
+    category: "개발 기초",
+    shortDefinition: "같은 작업을 여러 항목이나 조건에 대해 반복 실행하는 구조",
+    explanation:
+      "Loop는 목록의 각 항목을 처리하거나 특정 조건이 유지되는 동안 같은 규칙을 적용하는 control flow입니다. 시작점, 계속 조건, 갱신, 종료 조건을 함께 읽어야 무한 반복이나 누락을 피할 수 있습니다.",
+    related: ["Array", "Control Flow", "Iteration"],
+  },
+  {
+    term: "Function",
+    category: "개발 기초",
+    shortDefinition: "입력과 처리를 이름 있는 재사용 가능한 코드 블록으로 묶은 단위",
+    explanation:
+      "Function은 reusable blocks of code로, parameter를 받고 내부 body를 실행한 뒤 return value를 낼 수 있습니다. 함수 이름, parameter, return value는 AI에게 작업을 맡기거나 코드 변경을 검토할 때 가장 좋은 경계가 됩니다.",
+    related: ["Parameter", "Return Value", "Scope"],
+  },
+  {
+    term: "Exception Handling",
+    category: "개발 기초",
+    shortDefinition: "정상 흐름으로 처리할 수 없는 실패를 던지고 잡아 다루는 구조",
+    explanation:
+      "Exception Handling은 `throw`와 `try...catch` 같은 흐름으로 실패를 드러내고 처리합니다. 오류를 숨기는 것이 아니라 사용자 메시지, 로그, fallback, 재시도 같은 의미 있는 후속 행동으로 연결해야 합니다.",
+    related: ["Error Message", "Debugging", "Control Flow"],
+  },
+  {
+    term: "Debugging",
+    category: "개발 기초",
+    shortDefinition: "코드가 기대와 다르게 동작하는 원인을 찾아 수정하는 활동",
+    explanation:
+      "Debugging은 오류 메시지, console output, breakpoint, variables, call stack 같은 단서를 이용해 실패 원인을 좁히는 절차입니다. AI와 협업할 때는 원인 추측보다 재현 가능한 evidence packet을 만드는 것이 중요합니다.",
+    related: ["Error Message", "Breakpoint", "Verification"],
+  },
+  {
+    term: "Error Message",
+    category: "개발 기초",
+    shortDefinition: "코드 실행 실패의 종류와 위치를 설명하는 텍스트 단서",
+    explanation:
+      "Error Message는 error type, message, file, line 같은 정보를 포함할 수 있습니다. 메시지를 일부만 요약하지 말고 원문으로 보존하면 MDN error reference나 AI 디버깅 요청에서 더 정확하게 대조할 수 있습니다.",
+    related: ["Debugging", "JavaScript Error Reference", "Command Output"],
+  },
+  {
+    term: "Breakpoint",
+    category: "개발 기초",
+    shortDefinition: "debugger가 코드 실행을 멈추도록 지정한 위치",
+    explanation:
+      "Breakpoint는 특정 line에서 실행을 멈추고 현재 variables, watch expression, call stack을 확인하게 합니다. 오류가 특정 branch나 반복 중에만 발생할 때 실제 runtime state를 보는 데 유용합니다.",
+    related: ["Debugger", "Call Stack", "Variable Inspection"],
+  },
+  {
+    term: "Call Stack",
+    category: "개발 기초",
+    shortDefinition: "현재 실행 지점까지 이어진 함수 호출 경로",
+    explanation:
+      "Call Stack은 오류가 드러난 line뿐 아니라 어떤 함수들이 그 지점까지 호출되었는지 보여줍니다. 오류 location과 실제 원인이 다를 수 있으므로 call stack은 원인을 거슬러 올라가는 중요한 단서입니다.",
+    related: ["Function", "Debugging", "Breakpoint"],
+  },
+  {
+    term: "Evidence Packet",
+    category: "AI 코딩",
+    shortDefinition: "AI에게 오류 분석을 맡길 때 함께 제공하는 실행 증거 묶음",
+    explanation:
+      'Evidence Packet은 command, current directory, shell, error message, file path, expected result, actual result, 최근 변경 사항을 묶은 디버깅 입력입니다. "안 돼요"를 원인 분석 가능한 기술적 질문으로 바꿉니다.',
+    related: ["Command Output", "Debugging", "AI Learning Verification"],
+  },
+  {
+    term: "Regular Expression",
+    category: "개발 기초",
+    shortDefinition: "문자열에서 특정 character pattern을 찾기 위한 표현식",
+    explanation:
+      "Regular Expression은 character combinations를 match하는 pattern입니다. 코드 검색에서는 함수명, import문, prop 이름, console 호출처럼 반복되는 텍스트 모양을 찾아 검토 후보를 줄이는 데 쓰입니다.",
+    related: ["RegExp", "Code Search", "Pattern Matching"],
+  },
+  {
+    term: "RegExp",
+    category: "JavaScript",
+    shortDefinition: "JavaScript에서 regular expression pattern을 표현하는 object",
+    explanation:
+      "RegExp는 text를 pattern으로 matching하는 JavaScript object입니다. literal notation과 constructor 방식이 있으며, flags로 matching behavior를 바꿀 수 있습니다. editor search와 JavaScript RegExp는 비슷하지만 도구별 차이를 확인해야 합니다.",
+    related: ["Regular Expression", "Flags", "Pattern Matching"],
+  },
+  {
+    term: "Character Class",
+    category: "개발 기초",
+    shortDefinition: "정규식에서 가능한 문자 집합을 표현하는 요소",
+    explanation:
+      "Character Class는 `[A-Z]`, `[0-9]`처럼 여러 문자 후보 중 하나를 match하게 합니다. 코드 검색에서는 naming pattern, 숫자 suffix, 특정 문자 범위를 찾을 때 사용합니다.",
+    related: ["Regular Expression", "Pattern Matching", "Code Search"],
+  },
+  {
+    term: "Assertion",
+    category: "개발 기초",
+    shortDefinition: "정규식에서 줄 시작, 줄 끝, 단어 경계 같은 위치 조건을 표현하는 요소",
+    explanation:
+      "Assertion은 문자를 소비하기보다 match 위치를 제한합니다. `^import`처럼 줄 시작 조건을 사용하면 일반 문자열 검색보다 후보를 줄일 수 있습니다.",
+    related: ["Regular Expression", "Search Scope", "Code Search"],
+  },
+  {
+    term: "Search Scope",
+    category: "개발 도구",
+    shortDefinition: "코드 검색이 적용될 파일과 폴더 범위",
+    explanation:
+      "Search Scope는 VS Code Search view 같은 도구에서 어떤 파일을 포함하거나 제외할지 정하는 범위입니다. 정규식 pattern과 scope를 함께 지정해야 주석, 문서, fixture 같은 불필요한 결과를 줄일 수 있습니다.",
+    related: ["Code Search", "Regular Expression", "File Path"],
+  },
 ] satisfies readonly GlossaryTerm[]

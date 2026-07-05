@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="370" viewBox="0 0 960 370" role="img" aria-labelledby="title desc">
+  <title id="title">Regex Code Search Flow</title>
+  <desc id="desc">A regex code search flow: define a pattern, restrict file scope, review candidates, then apply small verified changes.</desc>
+  <style>
+    .bg { fill: #fffaf7; }
+    .box { fill: #fff; stroke: #b76c42; stroke-width: 2; rx: 16; }
+    .label { fill: #422414; font: 700 20px system-ui, sans-serif; }
+    .text { fill: #6b432d; font: 15px system-ui, sans-serif; }
+    .arrow { stroke: #b76c42; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #170f0b; }
+      .box { fill: #26170f; stroke: #f0a16d; }
+      .label { fill: #ffe2cf; }
+      .text { fill: #efc3a5; }
+      .arrow { stroke: #f0a16d; }
+    }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#b76c42" />
+    </marker>
+  </defs>
+  <rect class="bg" width="960" height="370" />
+  <rect class="box" x="55" y="100" width="170" height="105" />
+  <text class="label" x="98" y="138">Pattern</text>
+  <text class="text" x="82" y="166">literal + class</text>
+  <text class="text" x="82" y="188">assertion + repeat</text>
+  <path class="arrow" d="M230 152 H330" />
+  <rect class="box" x="340" y="100" width="170" height="105" />
+  <text class="label" x="393" y="138">Scope</text>
+  <text class="text" x="376" y="166">files include</text>
+  <text class="text" x="376" y="188">files exclude</text>
+  <path class="arrow" d="M515 152 H615" />
+  <rect class="box" x="625" y="100" width="170" height="105" />
+  <text class="label" x="674" y="138">Search</text>
+  <text class="text" x="654" y="166">candidate list</text>
+  <text class="text" x="654" y="188">false positives</text>
+  <path class="arrow" d="M710 210 V285 H455" />
+  <rect class="box" x="340" y="260" width="230" height="80" />
+  <text class="label" x="407" y="293">Review First</text>
+  <text class="text" x="375" y="318">then make small changes</text>
+  <text class="text" x="270" y="55">Regex narrows candidates. It does not replace parser-aware code review.</text>
+</svg>

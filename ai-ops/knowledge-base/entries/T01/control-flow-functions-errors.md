@@ -9,8 +9,8 @@ prerequisites: [variables-types-data]
 successors: [debugging-error-reading, javascript-dom-events]
 related: [variables-types-data, regex-code-search]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [control-flow-functions-errors]
+  glossary: [Control Flow, Conditional, Loop, Function, Exception Handling]
 sources:
   - { title: "Making decisions in your code — Conditionals", url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Conditionals", checked: 2026-07-06 }
   - { title: "Looping code", url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Loops", checked: 2026-07-06 }

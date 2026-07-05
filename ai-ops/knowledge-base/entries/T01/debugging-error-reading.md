@@ -9,8 +9,8 @@ prerequisites: [control-flow-functions-errors]
 successors: [regex-code-search, frontend-testing-basics, code-change-risk-analysis]
 related: [terminal-shell-commands, variables-types-data]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [debugging-error-reading]
+  glossary: [Debugging, Error Message, Breakpoint, Call Stack, Evidence Packet]
 sources:
   - { title: "What went wrong? Troubleshooting JavaScript", url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/What_went_wrong", checked: 2026-07-06 }
   - { title: "JavaScript error reference", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors", checked: 2026-07-06 }

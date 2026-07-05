@@ -9,8 +9,8 @@ prerequisites: [debugging-error-reading]
 successors: [git-log-diff-show, code-change-risk-analysis]
 related: [variables-types-data, terminal-shell-commands]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [regex-for-code-search]
+  glossary: [Regular Expression, RegExp, Character Class, Assertion, Search Scope]
 sources:
   - { title: "Regular expressions", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Regular_expressions", checked: 2026-07-06 }
   - { title: "RegExp", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp", checked: 2026-07-06 }

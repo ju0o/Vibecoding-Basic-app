@@ -9,8 +9,8 @@ prerequisites: [files-folders-paths]
 successors: [control-flow-functions-errors, json-data-contracts, typescript-type-system]
 related: [debugging-error-reading, package-json-semver]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [variables-types-and-data-shapes]
+  glossary: [Variable, Value, Primitive Value, Object Shape, Array]
 sources:
   - { title: "Storing the information you need — Variables", url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Variables", checked: 2026-07-06 }
   - { title: "JavaScript data types and data structures", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures", checked: 2026-07-06 }
