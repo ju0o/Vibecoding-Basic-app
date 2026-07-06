@@ -73,7 +73,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | web-security-basics | web-basics | web-security-basics | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 13, RELEASE-2026-07-06-v2-wave13.md |
 | typescript-type-system | frontend-frameworks | typescript-type-system | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 13, RELEASE-2026-07-06-v2-wave13.md |
 | react-component-mental-model | frontend-frameworks | react-component-model | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 13, RELEASE-2026-07-06-v2-wave13.md |
-| react-state-and-effects | frontend-frameworks | react-state-effects | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | — | V2 Wave 14 verified, P-08 대기 |
+| react-state-and-effects | frontend-frameworks | react-state-effects | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 14, RELEASE-2026-07-06-v2-wave14.md |
 | context-engineering-basics | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | context-window-and-memory | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | system-prompts-and-instruction-layers | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
@@ -114,7 +114,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | Lesson 생성 | 42 / 42 | 100% (react-state-and-effects generated, P-05 대기) |
 | Site 반영 | 42 / 42 | 100% (react-state-and-effects integrated) |
 | Verify 통과 | 42 / 42 | 100% (`npm run verify` PASS, V2 Wave 14 P-08 대기) |
-| Release | 41 / 42 | 98% (V2 Wave 1+2+3+4+5+6+7+8+9+10+11+12+13 released, deployment HOLD) |
+| Release | 42 / 42 | 100% (V2 Wave 1+2+3+4+5+6+7+8+9+10+11+12+13+14 released, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
@@ -189,3 +189,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-06 | CODEX-PLAN Phase 3 P-04 T03 Wave 2 | 완료 | react-state-and-effects V2 Lesson Draft + diagram 생성, P-05 대기 |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-05 T03 Wave 2 | 완료 | react-state-and-effects 사이트 반영 + glossary/KB consumers/diagram 통합, `npm run lint`·`npm run typecheck` PASS |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-06 T03 Wave 2 | 완료 | `npm run verify` PASS, react-state-and-effects 검증 통과 |
+| 2026-07-06 | CODEX-PLAN Phase 3 P-08 T03 Wave 2 | 완료 | react-state-and-effects V2 Wave 14 릴리스, deployment HOLD |
