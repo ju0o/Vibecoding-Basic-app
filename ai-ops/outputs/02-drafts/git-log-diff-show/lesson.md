@@ -106,6 +106,21 @@ git show a3cf62b        # 특정 커밋의 전체 내용
 
 **주의**: `--stat`은 diff 본문 없이 파일 목록만 보여줍니다 — 커밋 누락 점검에 가장 빠른 형태입니다.
 
+### 상황별 빠른 참조
+
+| 알고 싶은 것 | 명령 |
+|---|---|
+| 최근에 무슨 일이 있었나 | `git log --oneline -10` |
+| 이 파일은 언제 누가 바꿨나 | `git log -- <경로>` |
+| feature에만 있는 커밋은 | `git log main..feature` |
+| 아직 add 안 한 변경은 | `git diff` |
+| 마지막 커밋 이후 모든 변경은 | `git diff HEAD` |
+| 두 브랜치의 코드 차이는 | `git diff main feature` |
+| 방금 커밋에 뭐가 들어갔나 | `git show --stat HEAD` |
+| 그 커밋의 정체는 | `git show <해시>` |
+
+이 표의 왼쪽 열이 곧 학습 순서입니다 — 조회 명령은 "명령을 외우는" 것이 아니라 **"질문을 명령으로 번역하는"** 기술이고, 질문이 정확해지면 명령은 표에서 찾으면 됩니다. 여덟 질문 모두 저장소를 바꾸지 않으므로, 이 표 전체가 연습장처럼 안전합니다.
+
 ## 원문으로 읽기
 
 > "List commits that are reachable by following the parent links from the given commit(s), but exclude commits that are reachable from the one(s) given with a ^ in front of them."
@@ -162,6 +177,19 @@ merge 전 마지막 점검으로 두 질의를 조합합니다: `git log main..f
 
 > [!TIP]
 > `git log -- <파일경로>`는 "이 파일, 언제 누가 왜 바꿨지?"에 답하는 파일 단위 연대기입니다. 낯선 코드를 만났을 때 그 파일의 log부터 읽으면 변경의 맥락이 따라옵니다.
+
+### 시나리오: "어제는 됐는데 오늘 깨졌다"
+
+조회 3형제가 함께 일하는 가장 흔한 실전 상황입니다:
+
+```bash
+git log --oneline -10        # 1) 어제 이후 어떤 커밋들이 들어왔나
+git show --stat <의심 해시>   # 2) 그중 문제 영역 파일을 건드린 커밋은
+git show <의심 해시>          # 3) 그 커밋이 정확히 무엇을 바꿨나
+git diff <정상 해시> HEAD -- src/문제파일.ts   # 4) 정상 시점과 현재의 그 파일 차이만
+```
+
+범인 후보를 이력에서 좁히고(log), 각 후보를 심문하고(show), 정상 시점과의 정확한 차이를 확정하는(diff) 순서 — 디버깅 강의에서 배운 "증거 수집"의 Git 버전입니다. 이 진단이 끝난 뒤에야 다음 강의의 복구 명령(restore/reset/revert)을 안전하게 선택할 수 있습니다.
 
 ## 한계와 트레이드오프
 
