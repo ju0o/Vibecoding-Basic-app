@@ -10,14 +10,14 @@
 
 | 필드 | 값 |
 |---|---|
-| Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | CODEX-PLAN Phase 3 P-08 T03 Wave 2 완료: react-state-and-effects released / 다음 KB 수집 물결 대기 |
-| Last Completed Step | Codex P-08 react-state-and-effects release (2026-07-06) |
-| Next Executor | Codex |
-| Next Prompt File | `prompts/P-01-knowledge-collection.md` |
+| Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) — **Codex 토큰 소진, 운영자 승인으로 Fable이 Executor 대행 중** |
+| Current State | KB 9차 P-01 완료: nextjs-routing-rendering + Git 레퍼런스 4건 draft (원문 재접속 채집: git-scm man 13종, Next.js docs v16.2.10) / P-02 검증 대기 |
+| Last Completed Step | Fable(대행) P-01 T03/T04 KB 9차 draft 5건 (2026-07-06) |
+| Next Executor | Fable (대행) 또는 Codex (토큰 복구 시) |
+| Next Prompt File | `prompts/P-02-knowledge-verification.md` |
 | Blocker | 없음 |
-| Required Human Action | None — 운영자 승인에 따라 같은 Codex 흐름에서 needed KB 수집 계속 |
-| Release Status | V2 37강 released·미배포 — 배포는 Phase 5 승인 후에만 |
+| Required Human Action | None — 같은 흐름에서 P-02 계속 |
+| Release Status | V2 42강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
@@ -75,6 +75,7 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-06 | KB nextjs-routing-rendering·git-init-add-commit-status·git-branch-switch-merge·git-log-diff-show·git-restore-reset-revert | needed → draft | **Fable(대행)** P-01 T03/T04 KB 9차 — Codex 토큰 소진, 운영자 승인 |
 | 2026-07-06 | KB json-data-contracts·web-security-basics·typescript-type-system·react-component-model·react-state-effects | needed → draft | Codex P-01 T02/T03/T07 KB 8차 |
 | 2026-07-06 | KB json-data-contracts·web-security-basics·typescript-type-system·react-component-model·react-state-effects | draft → approved | Codex P-02 T02/T03/T07 KB 8차 |
 | 2026-07-06 | json-data-contracts·web-security-basics·typescript-type-system·react-component-mental-model | planned → generated | Codex P-04 T02/T03 Wave 1 |

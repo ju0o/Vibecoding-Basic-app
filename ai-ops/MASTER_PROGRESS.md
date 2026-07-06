@@ -48,6 +48,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | typescript-type-system | T03 | ✓ | ✓ 90 (2026-07-06) | order 22 근거 / TypeScript type 용어 보강 권고 |
 | react-component-model | T03 | ✓ | ✓ 90 (2026-07-06) | order 23 근거 / React component 용어 보강 권고 |
 | react-state-effects | T03 | ✓ | ✓ 91 (2026-07-06) | order 24 근거 / React state/effect 용어 보강 권고 |
+| nextjs-routing-rendering | T03 | ✓ (draft) | — | order 25 근거 / Fable 대행 P-01 (KB 9차) |
+| git-init-add-commit-status | T04 | ✓ (draft) | — | git-collaboration order 2 근거 / Fable 대행 P-01 |
+| git-branch-switch-merge | T04 | ✓ (draft) | — | order 3 근거 / Fable 대행 P-01 |
+| git-log-diff-show | T04 | ✓ (draft) | — | order 4 근거 / Fable 대행 P-01 |
+| git-restore-reset-revert | T04 | ✓ (draft) | — | order 5 근거 / Fable 대행 P-01 |
 
 ## Lesson 매트릭스
 
