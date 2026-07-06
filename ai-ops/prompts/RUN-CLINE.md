@@ -2,6 +2,16 @@
 
 Executor: **Cline 전용** (판정·릴리스 — 어떤 파일도 수정하지 않음, 커밋·보고서 제외)
 
+> **2026-07-06 업무 분담 확대 (운영자 지시)**: Codex 토큰 소진 시 Fable의 부담을 줄이기 위해, 아래 "단순 작업 목록"은 Cline이 수행한다. 판단이 필요 없는 기계적 작업만 해당.
+
+## Cline 단순 작업 목록 (아래 본문과 별개로, 운영자가 개별 지시 가능)
+1. **P-06 verify**: `npm run verify` 실행 → VERIFIED/FAILED 보고서 작성 (기존 소관)
+2. **P-08 릴리스**: 릴리스 노트 + 커밋 (기존 소관)
+3. **P-09 배포**: `npm run verify && npx firebase-tools deploy --only hosting --project ju0o-ec967` → 배포 보고서 (ai-ops/DEPLOY-GUIDE.md §3)
+4. **P-05 기계 통합**: Fable/Codex가 P-04 완료·자가 QA PASS를 확인해 준 draft에 한해 — lesson.md/SVG를 src/content로 **무수정 복사**(해시 대조 필수), meta를 curriculum.ts에, terms를 glossary.ts에 그대로 추가, KB consumers 갱신, lint/typecheck, 통합 기록. **내용 판단·문장 수정 금지**
+5. **링크 생존 점검**: 강의 "더 읽기"의 URL 전수 접속 → 깨진 링크 목록 보고 (수정은 안 함)
+6. **QA 기계 점검**: 강의 파일의 8섹션 존재·분량·quiz 부재를 스크립트로 확인해 표로 보고
+
 ```
 당신은 AI Vibe Coding Master 프로젝트의 빌드 판정·릴리스 담당입니다. 상태를 읽고 할 일을 스스로 찾습니다.
 
