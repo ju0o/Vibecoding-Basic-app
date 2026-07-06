@@ -11,13 +11,13 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) — **Codex 토큰 소진, 운영자 승인으로 Fable이 Executor 대행 중** |
-| Current State | **🌐 배포됨(모드 A)**: https://ju0o-ec967.web.app — 47강 + 화면 비밀번호 게이트(D-03) / Git 레퍼런스 4강 P-04 진행 중 (draft 4건 완성·커밋됨, 분량 보강 2/4 완료 — git-log-diff-show·git-restore-reset-revert 보강 남음) |
-| Last Completed Step | Fable(대행) D-03(정적 export + PasswordGate) + Firebase 첫 배포 + Cline 분담 목록 (2026-07-06, 커밋 c7ec9f4·b83f63d) |
-| Next Executor | Fable(대행)/Codex(토큰 복구 시). 단순 작업은 **Cline** (RUN-CLINE "단순 작업 목록") |
-| Next Prompt File | P-04 마무리: git-log-diff-show·git-restore-reset-revert lesson.md 분량 보강(≥8,000자, 빠른 참조 표 방식) → QA 재실행 → generated 전이·커밋 → P-05(Cline 위임 가능) → P-06 → P-08 → Cline P-09 재배포 |
+| Current State | **🌐 51강 deployed**: https://ju0o-ec967.web.app — Git 레퍼런스 4강(Wave 15) 포함, 용어 216개, 다이어그램 24개 |
+| Last Completed Step | Fable(대행) Wave 15 완주: P-04 보강→P-05 통합→P-06 verify→P-08 릴리스→P-09 재배포 (2026-07-06, 커밋 d2d6532~86cf7ab) |
+| Next Executor | Codex(토큰 복구 시) 또는 Fable(대행). 병렬: **Cline — CLINE-AUDIT-RUN(전수 기계 감사 5종, 장시간)** |
+| Next Prompt File | 다음 물결: ① nextjs-routing-rendering P-04 (planned, KB 준비됨) ② 이후 P-01 kb_needed 순서(git-rebase-cherry-pick-stash, github-pr-review-flow, gh-cli-reference, tailwind, frontend-testing...) — CODEX-PLAN 계속 |
 | Blocker | 없음 |
-| Required Human Action | None — **배포 사이트에서 지금 학습 가능** (비밀번호: DEPLOY-GUIDE.md §1~2) |
-| Release Status | **V2 47강 deployed (비공개, noindex+robots+게이트)** — 릴리스마다 Cline P-09 재배포 |
+| Required Human Action | None — 사이트에서 학습 계속. Cline에 CLINE-AUDIT-RUN 붙여넣기 권장 |
+| Release Status | **V2 51강 deployed (비공개 모드 A)** — 51/100 (51%) |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
