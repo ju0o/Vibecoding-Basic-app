@@ -9,8 +9,8 @@ prerequisites: [react-component-model, http-request-response]
 successors: []
 related: [react-state-effects, browser-rendering-network]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [nextjs-routing-rendering]
+  glossary: ["Server Component", "Client Component", "RSC Payload", "Hydration", "Dynamic Route Segment"]
 sources:
   - { title: "Layouts and Pages — Next.js Docs (v16.2.10)", url: "https://nextjs.org/docs/app/getting-started/layouts-and-pages", checked: 2026-07-06 }
   - { title: "Server and Client Components — Next.js Docs (v16.2.10)", url: "https://nextjs.org/docs/app/getting-started/server-and-client-components", checked: 2026-07-06 }

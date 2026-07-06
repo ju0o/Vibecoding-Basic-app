@@ -106,6 +106,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | git-log-diff-show | git-collaboration | git-log-diff-show | v | v | v | v | Wave 15 (Fable), reference |
 | git-restore-reset-revert | git-collaboration | git-restore-reset-revert | v | v | v | v | Wave 15 (Fable), reference |
 
+| nextjs-routing-rendering | frontend-frameworks | nextjs-routing-rendering | v | v | - | - | Wave 16 (Fable), deep-dive |
+
 ## 집계 (Executor가 행 갱신 시 함께 갱신)
 
 | 단계 | 완료 / 전체 | 진행률 |

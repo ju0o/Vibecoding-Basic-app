@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" role="img" aria-label="Next.js 서버-클라이언트 렌더링 흐름">
+  <style>
+    .zone { fill: none; stroke: #94a3b8; stroke-width: 1; stroke-dasharray: 5 4; rx: 12; }
+    .box-s { fill: #ccfbf1; stroke: #0f766e; stroke-width: 1.5; rx: 8; }
+    .box-c { fill: #fef3c7; stroke: #b45309; stroke-width: 1.5; rx: 8; }
+    .label { font: 600 13px sans-serif; fill: #334155; }
+    .sub { font: 11px sans-serif; fill: #64748b; }
+    .step { font: 600 11px monospace; fill: #0f766e; }
+    .arrow { stroke: #0f766e; stroke-width: 1.5; fill: none; marker-end: url(#na); }
+    @media (prefers-color-scheme: dark) {
+      .box-s { fill: #134e4a; stroke: #5eead4; } .box-c { fill: #451a03; stroke: #fbbf24; }
+      .label { fill: #e2e8f0; } .sub { fill: #94a3b8; } .step { fill: #5eead4; }
+      .arrow { stroke: #5eead4; } .zone { stroke: #64748b; }
+    }
+  </style>
+  <defs>
+    <marker id="na" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#0f766e"/>
+    </marker>
+  </defs>
+  <rect class="zone" x="15" y="30" width="330" height="250"/>
+  <text class="label" x="30" y="55">서버</text>
+  <rect class="zone" x="375" y="30" width="330" height="250"/>
+  <text class="label" x="390" y="55">클라이언트 (브라우저)</text>
+
+  <rect class="box-s" x="40" y="80" width="130" height="52"/>
+  <text class="label" x="105" y="102" text-anchor="middle">Server</text>
+  <text class="label" x="105" y="120" text-anchor="middle">Components</text>
+
+  <rect class="box-s" x="200" y="80" width="120" height="52"/>
+  <text class="label" x="260" y="102" text-anchor="middle">RSC Payload</text>
+  <text class="sub" x="260" y="120" text-anchor="middle">+ HTML 프리렌더</text>
+
+  <rect class="box-c" x="410" y="72" width="130" height="40"/>
+  <text class="label" x="475" y="97" text-anchor="middle">① HTML 표시</text>
+  <rect class="box-c" x="410" y="128" width="130" height="40"/>
+  <text class="label" x="475" y="153" text-anchor="middle">② 트리 조정</text>
+  <rect class="box-c" x="410" y="184" width="150" height="40"/>
+  <text class="label" x="485" y="209" text-anchor="middle">③ 하이드레이션</text>
+
+  <path class="arrow" d="M170 106 L 197 106"/>
+  <path class="arrow" d="M320 92 L 407 92"/>
+  <path class="arrow" d="M320 118 C 370 118, 380 148, 407 148"/>
+  <path class="arrow" d="M475 112 L 475 126"/>
+  <path class="arrow" d="M475 168 L 475 182"/>
+
+  <text class="sub" x="475" y="250" text-anchor="middle">③ 이후에야 클릭·입력이 동작</text>
+  <text class="step" x="40" y="260">"use client" 경계가 어느 조각을 ③으로 보낼지 결정</text>
+</svg>
