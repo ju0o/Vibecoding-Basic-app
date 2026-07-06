@@ -5,6 +5,7 @@ import type { ReactNode } from "react"
 import "./globals.css"
 import { SiteFooter } from "@/components/layout/SiteFooter"
 import { SiteHeader } from "@/components/layout/SiteHeader"
+import { PasswordGate } from "@/components/site/PasswordGate"
 import { LearningStateProvider } from "@/features/progress/LearningStateProvider"
 import { getSearchIndex } from "@/lib/search-index"
 
@@ -76,11 +77,13 @@ export default function RootLayout({ children }: { readonly children: ReactNode 
       <body
         className={`${notoSansKr.className} ${geistMono.variable} min-h-[100dvh] bg-[var(--surface-primary)] text-[var(--text-primary)] antialiased`}
       >
-        <LearningStateProvider>
-          <SiteHeader searchEntries={searchEntries} />
-          <main>{children}</main>
-          <SiteFooter />
-        </LearningStateProvider>
+        <PasswordGate>
+          <LearningStateProvider>
+            <SiteHeader searchEntries={searchEntries} />
+            <main>{children}</main>
+            <SiteFooter />
+          </LearningStateProvider>
+        </PasswordGate>
       </body>
     </html>
   )
