@@ -1,79 +1,31 @@
-# 강의 형식 전수 스캔 보고서 (JOB 1)
+# 강의 형식 전수 스캔 (JOB 1) — 정본 (Fable 실측)
 
-**생성일시**: 2026-07-06
-**대상**: src/content/lessons/markdown/*.md (54개 파일)
+- 일자: 2026-07-07 / 대상: 51강
+- 배경: Cline 1차 산출물(이 파일의 이전 버전)은 전 셀 자리표시자로 무효, 2차 산출물(`cline-audit/lesson-format-scan.md`)은 수치가 있으나 **부정확** — "8섹션 미준수 51건"은 섹션 매칭 패턴 오류이며(실측 46/51 통과), "하이라이트 불균형 13건"은 코드 블록 내 `===` 연산자 오탐. **본 파일의 수치가 정본이다.**
 
----
+## 실측 결과 (검증된 QA 스크립트 — P-04 자가 QA와 동일 로직)
 
-## 스캔 결과 표
+| 항목 | 결과 |
+|---|---|
+| V2 8섹션 준수 | **46/51** (미준수 5강 = 전부 V1 잔존분) |
+| 분량 ≥8,000자 (V2 강의) | **46/46 통과** |
+| 인용 ≥3 (V2 강의) | **46/46 통과** |
+| 하이라이트 짝 맞음 | **51/51** (코드 펜스·인라인 코드 제외 후 계산 — 홀수 의심 4건 전부 오탐 확인) |
+| 콜아웃 ≤8/강의 | **51/51** |
 
-| 강의 파일 | V2 8섹션 | 글자수 | 인용블록 | == 하이라이트 | 콜아웃(> [! ...) | V1 잔존 |
-|-----------|----------|--------|----------|----------------|------------------|---------|
-| agent-loop-anatomy.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| ai-system-evaluation.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| ai-vibe-coding-orientation.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| ai-workflow-design.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| api-db-backend-flow.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| browser-rendering-network.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| context-caching-and-state.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| context-engineering-basics.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| context-engineering-mcp-skills.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| context-window-and-memory.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| control-flow-functions-errors.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| css-cascade-layout-responsive.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| debugging-error-reading.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| designing-reusable-skills.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| development-environment-map.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| embeddings-and-similarity.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| files-folders-and-paths.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| from-prompt-to-system.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| git-branch-switch-merge.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| git-collaboration-basics.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| git-init-add-commit-status.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| git-log-diff-show.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| git-restore-reset-revert.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| grounding-and-citations.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| hallucination-and-verification.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| harness-engineering-basics.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| html-semantic-elements.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| http-request-response.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| javascript-dom-events.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| json-data-contracts.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| learning-with-ai-verification.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| loop-engineering-basics.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| mcp-architecture-basics.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| multi-agent-orchestration.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| package-json-and-semver.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| prompt-engineering-foundations.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| rag-fundamentals.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| react-component-mental-model.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| react-state-and-effects.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| regex-for-code-search.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| subagents-and-delegation.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| system-prompts-and-instruction-layers.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| terminal-shell-basics-reference.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| tokenization-and-context.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| tool-calling-basics.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| typescript-react-nextjs.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| typescript-type-system.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| variables-types-and-data-shapes.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| vibe-coding-origin-karpathy.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| web-screen-anatomy.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
-| web-security-basics.md | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 | 검토 필요 |
+## 유일한 잔여 항목: V1 형식 잔존 5강 (알려진 부채 — backlog `v2-regenerate` 등재)
 
----
+| 파일 | 글자수 | 위치 |
+|---|---|---|
+| ai-vibe-coding-orientation.md | 2,518 | getting-started 1 |
+| web-screen-anatomy.md | 2,257 | web-basics 1 |
+| typescript-react-nextjs.md | 2,361 | frontend-frameworks 1 |
+| git-collaboration-basics.md | 1,936 | git-collaboration 1 |
+| api-db-backend-flow.md | 2,103 | data-backend 1 |
 
-## 위반 요약 표
+→ 각 모듈 1번 강의들. 근거 KB 확보 후 재생성 물결에서 처리.
 
-| 위반 유형 | 대상 수 | 위반 강의 |
-|-----------|---------|-----------|
-| V2 8섹션 미준수 | 검토 필요 | - |
-| 글자수 8,000자 미만 | 검토 필요 | - |
-| 인용 블록 3개 미만 | 검토 필요 | - |
-| == 하이라이트 불균형 | 검토 필요 | - |
-| 콜아웃 8개 초과 | 검토 필요 | - |
-| V1 형식 잔존 | 검토 필요 | - |
-
----
-
-*주의: 상세 분석은 운영자와 Fable이 별도로 수행해야 합니다.*
+## Cline 감사 운영 메모 (JOB 2~5에 적용)
+1. Cline 보고서의 수치는 **수용 전 표본 재검증 필수** — 특히 "전체가 위반" 같은 극단값은 스크립트 오류 신호
+2. 하이라이트/연산자 검사는 코드 펜스 제거 후 수행
+3. Cline이 repo 루트에 임시 파일(`d` 등)을 남기는 사례 확인 — 커밋 전 status 확인 습관 필요
