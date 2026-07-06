@@ -16,3 +16,5 @@ pnpm-debug.log*
 .codegraph
 .omo
 ai-ops.zip
+
+.firebase
