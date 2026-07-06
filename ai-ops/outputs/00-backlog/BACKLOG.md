@@ -39,7 +39,7 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 21 | A | typescript-react-nextjs | frontend-frameworks | 1 | deep-dive | TypeScript, React, Next.js는 왜 함께 쓰는가 | 기초 | javascript-dom-events | typescript-react-nextjs | v2-regenerate |
 | 22 | A | typescript-type-system | frontend-frameworks | 2 | deep-dive | TypeScript 타입 시스템의 실제 역할 | 기초 | typescript-react-nextjs | typescript-type-system | v2-released |
 | 23 | A | react-component-mental-model | frontend-frameworks | 3 | deep-dive | React 컴포넌트 사고방식 | 기초 | typescript-react-nextjs | react-component-model | v2-released |
-| 24 | A | react-state-and-effects | frontend-frameworks | 4 | deep-dive | React 상태와 effect의 경계 | 중급 | react-component-mental-model | react-state-effects | generated |
+| 24 | A | react-state-and-effects | frontend-frameworks | 4 | deep-dive | React 상태와 effect의 경계 | 중급 | react-component-mental-model | react-state-effects | integrated |
 | 25 | A | nextjs-routing-rendering | frontend-frameworks | 5 | deep-dive | Next.js 라우팅과 렌더링 모델 | 중급 | react-component-mental-model | nextjs-routing-rendering | kb_needed |
 | 26 | A | tailwind-design-systems | frontend-frameworks | 6 | deep-dive | Tailwind와 디자인 시스템 사고 | 기초 | css-cascade-layout-responsive | tailwind-design-systems | kb_needed |
 | 27 | A | frontend-testing-basics | frontend-frameworks | 7 | deep-dive | 프론트엔드 테스트 기초 | 중급 | react-state-and-effects | frontend-testing-basics | kb_needed |

@@ -357,6 +357,18 @@ export const LESSON_META = [
     tags: ["React", "Component", "Props", "Composition", "Render"],
   },
   {
+    slug: "react-state-and-effects",
+    moduleId: "frontend-frameworks",
+    order: 4,
+    title: "React 상태와 effect의 경계",
+    summary:
+      "React state를 component-specific memory와 snapshot으로 이해하고, Effect를 external system synchronization용 escape hatch로 구분합니다.",
+    level: "중급",
+    type: "deep-dive",
+    minutes: 100,
+    tags: ["React", "State", "Effect", "useState", "useEffect"],
+  },
+  {
     slug: "git-collaboration-basics",
     moduleId: "git-collaboration",
     order: 4,

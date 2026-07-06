@@ -9,8 +9,8 @@ prerequisites: [react-component-model, javascript-dom-events]
 successors: [nextjs-routing-rendering, frontend-testing-basics]
 related: [typescript-type-system]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [react-state-and-effects]
+  glossary: [React State, useState, Hook, State Snapshot, Batching, Effect, useEffect, Effect Dependency]
 sources:
   - { title: "State: A Component's Memory", url: "https://react.dev/learn/state-a-components-memory", checked: 2026-07-06 }
   - { title: "State as a Snapshot", url: "https://react.dev/learn/state-as-a-snapshot", checked: 2026-07-06 }
