@@ -2,8 +2,8 @@
 id: react-component-model
 title: "React Component Model (React 컴포넌트 모델)"
 topicGroup: T03
-status: draft
-score: null
+status: approved
+score: 90
 level: 기초
 prerequisites: [javascript-dom-events, typescript-type-system]
 successors: [react-state-effects, nextjs-routing-rendering]

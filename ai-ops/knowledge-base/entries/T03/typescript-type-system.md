@@ -2,8 +2,8 @@
 id: typescript-type-system
 title: "TypeScript Type System (TypeScript 타입 시스템)"
 topicGroup: T03
-status: draft
-score: null
+status: approved
+score: 90
 level: 기초
 prerequisites: [variables-types-data, control-flow-functions-errors]
 successors: [react-component-model, nextjs-routing-rendering]

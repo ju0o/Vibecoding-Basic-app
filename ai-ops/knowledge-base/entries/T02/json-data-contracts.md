@@ -2,8 +2,8 @@
 id: json-data-contracts
 title: "JSON Data Contracts (JSON 데이터 계약)"
 topicGroup: T02
-status: draft
-score: null
+status: approved
+score: 89
 level: 기초
 prerequisites: [http-request-response]
 successors: [web-security-basics, rest-api-design]

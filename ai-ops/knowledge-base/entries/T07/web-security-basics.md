@@ -2,8 +2,8 @@
 id: web-security-basics
 title: "Web Security Basics (웹 보안 기초)"
 topicGroup: T07
-status: draft
-score: null
+status: approved
+score: 91
 level: 중급
 prerequisites: [http-request-response]
 successors: [auth-session-token, api-security-rate-limits]

@@ -2,8 +2,8 @@
 id: react-state-effects
 title: "React State and Effects (React 상태와 Effect)"
 topicGroup: T03
-status: draft
-score: null
+status: approved
+score: 91
 level: 중급
 prerequisites: [react-component-model, javascript-dom-events]
 successors: [nextjs-routing-rendering, frontend-testing-basics]

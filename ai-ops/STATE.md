@@ -11,27 +11,27 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | CODEX-PLAN Phase 2 KB 8차 P-01 완료: T02/T03/T07 5건 draft / P-02 verification 대기 |
-| Last Completed Step | Codex P-01 json-data-contracts·web-security-basics·typescript-type-system·react-component-model·react-state-effects draft 생성 (2026-07-06) |
+| Current State | CODEX-PLAN Phase 2 KB 8차 P-02 완료: T02/T03/T07 5건 approved / P-04 lesson generation 대기 |
+| Last Completed Step | Codex P-02 json-data-contracts 89·web-security-basics 91·typescript-type-system 90·react-component-model 90·react-state-effects 91 APPROVED (2026-07-06) |
 | Next Executor | Codex |
-| Next Prompt File | `prompts/P-02-knowledge-verification.md` |
+| Next Prompt File | `prompts/P-04-lesson-generation.md` |
 | Blocker | 없음 |
-| Required Human Action | None — 운영자 승인에 따라 같은 Codex 흐름에서 draft KB 검증 계속 |
+| Required Human Action | None — 운영자 승인에 따라 같은 Codex 흐름에서 planned lesson 생성 계속 |
 | Release Status | V2 37강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 2 KB 8차 P-01 완료 — T02/T03/T07 5건 draft
+- Current State: CODEX-PLAN Phase 2 KB 8차 P-02 완료 — T02/T03/T07 5건 approved
 - Verdict: DONE
 - Next Executor: Codex
-- Next Prompt File: prompts/P-02-knowledge-verification.md
-- Why: draft KB 5건이 있으므로 다음 단계는 P-02 knowledge verification
-- Required Operator Action: None — 같은 Codex 흐름에서 원문 재접속 대조 후 검증
-- If Approved: 승인 KB 기반 lesson rows planned 전환
-- If Rejected: 해당 KB 또는 Lesson을 Loop A로 전환
-- Files to Check: ai-ops/knowledge-base/entries/T02/json-data-contracts.md, ai-ops/knowledge-base/entries/T07/web-security-basics.md, ai-ops/knowledge-base/entries/T03/typescript-type-system.md, ai-ops/knowledge-base/entries/T03/react-component-model.md, ai-ops/knowledge-base/entries/T03/react-state-effects.md
+- Next Prompt File: prompts/P-04-lesson-generation.md
+- Why: 승인 KB 5건 기반 planned lesson이 있으므로 다음 단계는 P-04 lesson generation (최대 4건/런)
+- Required Operator Action: None — 같은 Codex 흐름에서 강의 생성 계속
+- If Approved: generated lesson을 P-05 site integration으로 반영
+- If Rejected: 해당 Lesson을 수정 또는 KB 보강 루프로 전환
+- Files to Check: ai-ops/outputs/00-backlog/BACKLOG.md rows 19,20,22,23,24
 - Stop Condition: Phase 5 개발 서버 확인 보고에서만 정지
 ```
 
@@ -68,14 +68,15 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
-- KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved** / KB 5차 T01/T08: dev-environment-map·vibe-coding-origin-karpathy·ai-learning-verification·files-folders-paths·terminal-shell-commands = **approved** / KB 6차 T01: variables-types-data·control-flow-functions-errors·debugging-error-reading·regex-code-search·package-json-semver = **approved** / KB 7차 T02: html-semantic-elements·css-cascade-layout·javascript-dom-events·browser-rendering-network·http-request-response = **approved** / KB 8차: json-data-contracts·web-security-basics·typescript-type-system·react-component-model·react-state-effects = **draft** / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 37강** (deployment HOLD, 다음 P-02 KB 검증 대기)
+- KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved** / KB 5차 T01/T08: dev-environment-map·vibe-coding-origin-karpathy·ai-learning-verification·files-folders-paths·terminal-shell-commands = **approved** / KB 6차 T01: variables-types-data·control-flow-functions-errors·debugging-error-reading·regex-code-search·package-json-semver = **approved** / KB 7차 T02: html-semantic-elements·css-cascade-layout·javascript-dom-events·browser-rendering-network·http-request-response = **approved** / KB 8차: json-data-contracts·web-security-basics·typescript-type-system·react-component-model·react-state-effects = **approved** / D-02 플랫폼 증분 = **완료**
+- 강의: **V2 released 37강 + planned 5강** (deployment HOLD, 다음 P-04 lesson generation 대기)
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
 | 2026-07-06 | KB json-data-contracts·web-security-basics·typescript-type-system·react-component-model·react-state-effects | needed → draft | Codex P-01 T02/T03/T07 KB 8차 |
+| 2026-07-06 | KB json-data-contracts·web-security-basics·typescript-type-system·react-component-model·react-state-effects | draft → approved | Codex P-02 T02/T03/T07 KB 8차 |
 | 2026-07-06 | http-request-response | verified → released | Codex P-08 T02 Wave 2 |
 | 2026-07-06 | http-request-response | integrated → verified | Codex P-06 T02 Wave 2 |
 | 2026-07-06 | http-request-response | generated → integrated | Codex P-05 T02 Wave 2 |

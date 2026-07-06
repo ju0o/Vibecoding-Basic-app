@@ -43,11 +43,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | javascript-dom-events | T02 | ✓ | ✓ 88 (2026-07-06) | order 16 근거 / DOM·Event glossary 보강 권고 |
 | browser-rendering-network | T02 | ✓ | ✓ 89 (2026-07-06) | order 17 근거 / DevTools UI 예시는 후속 보강 권고 |
 | http-request-response | T02 | ✓ | ✓ 90 (2026-07-06) | order 18·19 근거 / HTTP 세부 용어 보강 권고 |
-| json-data-contracts | T02 | ✓ | — | order 19 근거 / P-02 검증 대기 |
-| web-security-basics | T07 | ✓ | — | order 20 근거 / P-02 검증 대기 |
-| typescript-type-system | T03 | ✓ | — | order 22 근거 / P-02 검증 대기 |
-| react-component-model | T03 | ✓ | — | order 23 근거 / P-02 검증 대기 |
-| react-state-effects | T03 | ✓ | — | order 24 근거 / P-02 검증 대기 |
+| json-data-contracts | T02 | ✓ | ✓ 89 (2026-07-06) | order 19 근거 / JSON·data contract glossary 보강 권고 |
+| web-security-basics | T07 | ✓ | ✓ 91 (2026-07-06) | order 20 근거 / CORS·XSS·CSRF glossary 보강 권고 |
+| typescript-type-system | T03 | ✓ | ✓ 90 (2026-07-06) | order 22 근거 / TypeScript type 용어 보강 권고 |
+| react-component-model | T03 | ✓ | ✓ 90 (2026-07-06) | order 23 근거 / React component 용어 보강 권고 |
+| react-state-effects | T03 | ✓ | ✓ 91 (2026-07-06) | order 24 근거 / React state/effect 용어 보강 권고 |
 
 ## Lesson 매트릭스
 
@@ -95,8 +95,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
-| Knowledge Base 수집(P-01) | 37 / 37 | 100% (8차 T02/T03/T07 5건 draft, P-02 대기) |
-| Knowledge Base (approved 이상) | 32 / 37 | 86% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건 + 4차 approved 5건 + 5차 approved 5건 + 6차 approved 5건 + 7차 approved 5건) |
+| Knowledge Base 수집(P-01) | 37 / 37 | 100% (8차 T02/T03/T07 5건 approved) |
+| Knowledge Base (approved 이상) | 37 / 37 | 100% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건 + 4차 approved 5건 + 5차 approved 5건 + 6차 approved 5건 + 7차 approved 5건 + 8차 approved 5건) |
 | KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (2차 approved KB) | 3 / 3 | 100% |
 | KB Quote Bank (3차 approved KB) | 4 / 4 | 100% |
@@ -104,11 +104,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | KB Quote Bank (5차 approved KB) | 5 / 5 | 100% (vibe-coding-origin-karpathy Loop A 후 승인) |
 | KB Quote Bank (6차 approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (7차 approved KB) | 5 / 5 | 100% |
-| KB Quote Bank (8차 draft KB) | 5 / 5 | 100% (P-02 대기) |
+| KB Quote Bank (8차 approved KB) | 5 / 5 | 100% |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
-| Lesson 생성 | 37 / 37 | 100% (T02 http-request-response generated, P-05 대기) |
-| Site 반영 | 37 / 37 | 100% (http-request-response integrated, P-06 대기) |
-| Verify 통과 | 37 / 37 | 100% (`npm run verify` PASS, http-request-response verified) |
+| Lesson 생성 | 37 / 42 | 88% (KB 8차 승인으로 5강 planned 전환, P-04 대기) |
+| Site 반영 | 37 / 42 | 88% (KB 8차 승인으로 5강 planned 전환, P-04 대기) |
+| Verify 통과 | 37 / 42 | 88% (`npm run verify`는 직전 release 기준 PASS, 신규 5강 P-04 대기) |
 | Release | 37 / 37 | 100% (V2 Wave 1+2+3+4+5+6+7+8+9+10+11+12 released, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
@@ -176,3 +176,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-06 | CODEX-PLAN Phase 3 P-06 T02 Wave 2 | 완료 | `npm run verify` PASS, http-request-response 검증 통과 |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-08 T02 Wave 2 | 완료 | http-request-response V2 Wave 12 릴리스, deployment HOLD |
 | 2026-07-06 | CODEX-PLAN Phase 2 KB 8차 P-01 | 완료 | json-data-contracts·web-security-basics·typescript-type-system·react-component-model·react-state-effects draft 생성, P-02 대기 |
+| 2026-07-06 | CODEX-PLAN Phase 2 KB 8차 P-02 | 완료 | json-data-contracts 89·web-security-basics 91·typescript-type-system 90·react-component-model 90·react-state-effects 91 APPROVED |
