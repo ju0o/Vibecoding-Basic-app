@@ -11,27 +11,27 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | CODEX-PLAN Phase 2 KB 7차 P-02 완료: T02 5개 KB approved / P-04 lesson generation 대기 |
-| Last Completed Step | Codex P-02 html-semantic-elements 88·css-cascade-layout 87·javascript-dom-events 88·browser-rendering-network 89·http-request-response 90 APPROVED (2026-07-06) |
+| Current State | CODEX-PLAN Phase 3 P-04 T02 Wave 1 완료: T02 4강 generated / P-05 site integration 대기 |
+| Last Completed Step | Codex P-04 html-semantic-elements·css-cascade-layout-responsive·javascript-dom-events·browser-rendering-network generated (2026-07-06) |
 | Next Executor | Codex |
-| Next Prompt File | `prompts/P-04-lesson-generation.md` |
+| Next Prompt File | `prompts/P-05-site-integration.md` |
 | Blocker | 없음 |
-| Required Human Action | None — 운영자 승인에 따라 같은 Codex 흐름에서 P-04 강의 생성 계속 |
+| Required Human Action | None — 운영자 승인에 따라 같은 Codex 흐름에서 P-05 사이트 반영 계속 |
 | Release Status | V2 32강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 2 KB 7차 P-02 완료 — T02 5개 KB approved
+- Current State: CODEX-PLAN Phase 3 P-04 T02 Wave 1 완료 — T02 4강 generated
 - Verdict: DONE
 - Next Executor: Codex
-- Next Prompt File: prompts/P-04-lesson-generation.md
-- Why: T02 KB 5건이 approved 되었고 backlog에 planned 강의 5건이 있으므로 다음 단계는 최대 4건 P-04 강의 생성
-- Required Operator Action: None — 같은 Codex 흐름에서 T02 planned 강의 생성
-- If Approved: generated 강의 P-05 단독 사이트 반영
-- If Rejected: 해당 KB 또는 Lesson을 Loop A로 전환
-- Files to Check: ai-ops/knowledge-base/reviews/html-semantic-elements/verification-report.md, ai-ops/outputs/00-backlog/BACKLOG.md
+- Next Prompt File: prompts/P-05-site-integration.md
+- Why: generated 강의 4건이 있으므로 RUN 우선순위상 P-05 사이트 반영이 다음 단계
+- Required Operator Action: None — 같은 Codex 흐름에서 P-05 단독 반영
+- If Approved: integrated 강의 P-06 verify 후 P-08 release
+- If Rejected: 해당 Lesson 수정 후 P-05 재반영
+- Files to Check: ai-ops/outputs/02-drafts/html-semantic-elements/lesson.md, ai-ops/outputs/02-drafts/browser-rendering-network/lesson.md
 - Stop Condition: Phase 5 개발 서버 확인 보고에서만 정지
 ```
 
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved** / KB 5차 T01/T08: dev-environment-map·vibe-coding-origin-karpathy·ai-learning-verification·files-folders-paths·terminal-shell-commands = **approved** / KB 6차 T01: variables-types-data·control-flow-functions-errors·debugging-error-reading·regex-code-search·package-json-semver = **approved** / KB 7차 T02: html-semantic-elements·css-cascade-layout·javascript-dom-events·browser-rendering-network·http-request-response = **approved** / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 32강 + T02 planned 5강** (deployment HOLD, 다음 P-04 대기)
+- 강의: **V2 released 32강 + T02 generated 4강 + T02 planned 1강** (deployment HOLD, 다음 P-05 대기)
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-06 | html-semantic-elements·css-cascade-layout-responsive·javascript-dom-events·browser-rendering-network | planned → generated | Codex P-04 T02 Wave 1 |
 | 2026-07-06 | KB html-semantic-elements·css-cascade-layout·javascript-dom-events·browser-rendering-network·http-request-response | draft → approved | Codex P-02 T02 KB 7차 |
 | 2026-07-06 | KB html-semantic-elements·css-cascade-layout·javascript-dom-events·browser-rendering-network·http-request-response | needed → draft | Codex P-01 T02 KB 7차 |
 | 2026-07-06 | package-json-and-semver | verified → released | Codex P-08 T01 Wave 3 |

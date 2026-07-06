@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">JavaScript DOM Event Flow</title>
+  <desc id="desc">HTML becomes a DOM tree, JavaScript selects elements, registers listeners, and handles events through bubbling and delegation.</desc>
+  <style>
+    .bg { fill: #f8fafc; }
+    .panel { fill: #ffffff; stroke: #334155; stroke-width: 2; rx: 22; }
+    .html { fill: #fee2e2; stroke: #dc2626; stroke-width: 2; rx: 16; }
+    .dom { fill: #dbeafe; stroke: #2563eb; stroke-width: 2; rx: 16; }
+    .js { fill: #fef3c7; stroke: #d97706; stroke-width: 2; rx: 16; }
+    .event { fill: #dcfce7; stroke: #16a34a; stroke-width: 2; rx: 16; }
+    .arrow { stroke: #475569; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    .title { font: 700 23px system-ui, -apple-system, Segoe UI, sans-serif; fill: #0f172a; }
+    .label { font: 700 18px system-ui, -apple-system, Segoe UI, sans-serif; fill: #111827; }
+    .small { font: 500 14px system-ui, -apple-system, Segoe UI, sans-serif; fill: #334155; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="960" height="560"/>
+  <rect class="panel" x="44" y="36" width="872" height="488" rx="24"/>
+  <text class="title" x="76" y="78">DOM event 흐름</text>
+
+  <rect class="html" x="80" y="132" width="170" height="100" rx="16"/>
+  <text class="label" x="118" y="166">HTML</text>
+  <text class="small" x="112" y="196">document source</text>
+
+  <rect class="dom" x="300" y="132" width="170" height="100" rx="16"/>
+  <text class="label" x="338" y="166">DOM tree</text>
+  <text class="small" x="328" y="196">logical nodes</text>
+
+  <rect class="js" x="520" y="132" width="170" height="100" rx="16"/>
+  <text class="label" x="548" y="166">JavaScript</text>
+  <text class="small" x="548" y="196">querySelector</text>
+
+  <rect class="event" x="740" y="132" width="150" height="100" rx="16"/>
+  <text class="label" x="772" y="166">Event</text>
+  <text class="small" x="766" y="196">click, input</text>
+
+  <path class="arrow" d="M250 182 H300"/>
+  <path class="arrow" d="M470 182 H520"/>
+  <path class="arrow" d="M690 182 H740"/>
+
+  <rect class="event" x="210" y="330" width="540" height="100" rx="18"/>
+  <text class="label" x="244" y="366">Bubbling + Delegation</text>
+  <text class="small" x="244" y="394">child event가 parent listener로 올라가고, parent는 target을 확인해 처리합니다.</text>
+  <path class="arrow" d="M810 232 C810 300 730 314 650 330"/>
+</svg>
