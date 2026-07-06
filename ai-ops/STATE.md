@@ -11,27 +11,27 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | CODEX-PLAN Phase 3 P-05 T02 Wave 1 완료: T02 4강 integrated / P-06 verify 대기 |
-| Last Completed Step | Codex P-05 html-semantic-elements·css-cascade-layout-responsive·javascript-dom-events·browser-rendering-network integrated, lint/typecheck PASS (2026-07-06) |
+| Current State | CODEX-PLAN Phase 3 P-06 T02 Wave 1 완료: T02 4강 verified / P-08 release 대기 |
+| Last Completed Step | Codex P-06 html-semantic-elements·css-cascade-layout-responsive·javascript-dom-events·browser-rendering-network VERIFIED, `npm run verify` PASS (2026-07-06) |
 | Next Executor | Codex |
-| Next Prompt File | `prompts/P-06-build-verification.md` |
+| Next Prompt File | `prompts/P-08-release.md` |
 | Blocker | 없음 |
-| Required Human Action | None — 운영자 승인에 따라 같은 Codex 흐름에서 P-06 verify 계속 |
+| Required Human Action | None — 운영자 승인에 따라 같은 Codex 흐름에서 P-08 release 계속 |
 | Release Status | V2 32강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 3 P-05 T02 Wave 1 완료 — T02 4강 integrated
+- Current State: CODEX-PLAN Phase 3 P-06 T02 Wave 1 완료 — T02 4강 verified
 - Verdict: DONE
 - Next Executor: Codex
-- Next Prompt File: prompts/P-06-build-verification.md
-- Why: integrated 강의 4건이 있으므로 P-06 build/content verification이 다음 단계
-- Required Operator Action: None — 같은 Codex 흐름에서 `npm run verify`와 렌더 가능성 확인
-- If Approved: P-08 release 연속 진행
+- Next Prompt File: prompts/P-08-release.md
+- Why: P-06 VERIFIED 상태이므로 같은 흐름에서 P-08 release 기록과 released 전이를 진행
+- Required Operator Action: None — 배포는 Phase 5 승인 전까지 HOLD
+- If Approved: 남은 planned/http-request-response P-04 또는 다음 needed KB 물결로 계속
 - If Rejected: build_fail(n)로 전환하고 P-07 수정
-- Files to Check: src/content/curriculum.ts, src/content/lessons/markdown/html-semantic-elements.md
+- Files to Check: ai-ops/outputs/06-build-verification/VERIFIED-2026-07-06-5.md
 - Stop Condition: Phase 5 개발 서버 확인 보고에서만 정지
 ```
 
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved** / KB 5차 T01/T08: dev-environment-map·vibe-coding-origin-karpathy·ai-learning-verification·files-folders-paths·terminal-shell-commands = **approved** / KB 6차 T01: variables-types-data·control-flow-functions-errors·debugging-error-reading·regex-code-search·package-json-semver = **approved** / KB 7차 T02: html-semantic-elements·css-cascade-layout·javascript-dom-events·browser-rendering-network·http-request-response = **approved** / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 32강 + T02 integrated 4강 + T02 planned 1강** (deployment HOLD, 다음 P-06 대기)
+- 강의: **V2 released 32강 + T02 verified 4강 + T02 planned 1강** (deployment HOLD, 다음 P-08 대기)
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-06 | html-semantic-elements·css-cascade-layout-responsive·javascript-dom-events·browser-rendering-network | integrated → verified | Codex P-06 T02 Wave 1 |
 | 2026-07-06 | html-semantic-elements·css-cascade-layout-responsive·javascript-dom-events·browser-rendering-network | generated → integrated | Codex P-05 T02 Wave 1 |
 | 2026-07-06 | html-semantic-elements·css-cascade-layout-responsive·javascript-dom-events·browser-rendering-network | planned → generated | Codex P-04 T02 Wave 1 |
 | 2026-07-06 | KB html-semantic-elements·css-cascade-layout·javascript-dom-events·browser-rendering-network·http-request-response | draft → approved | Codex P-02 T02 KB 7차 |
