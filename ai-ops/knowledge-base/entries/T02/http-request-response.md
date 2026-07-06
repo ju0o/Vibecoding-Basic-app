@@ -9,8 +9,8 @@ prerequisites: [files-folders-paths]
 successors: [json-data-contracts, web-security-basics, api-rest-basics]
 related: [browser-rendering-network]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [http-request-response]
+  glossary: [HTTP Request, HTTP Response, HTTP Method, HTTP Header, HTTP Body, Status Code]
 sources:
   - { title: "Overview of HTTP", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview", checked: 2026-07-06 }
   - { title: "HTTP messages", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Messages", checked: 2026-07-06 }

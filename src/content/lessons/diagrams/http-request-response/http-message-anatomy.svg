@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620" role="img" aria-labelledby="title desc">
+  <title id="title">HTTP Request Response Anatomy</title>
+  <desc id="desc">HTTP flow showing client request with method, path, headers, body and server response with status, headers, body.</desc>
+  <style>
+    .bg { fill: #f8fafc; }
+    .panel { fill: #ffffff; stroke: #334155; stroke-width: 2; rx: 24; }
+    .client { fill: #dbeafe; stroke: #2563eb; stroke-width: 2; rx: 18; }
+    .server { fill: #dcfce7; stroke: #16a34a; stroke-width: 2; rx: 18; }
+    .message { fill: #fef3c7; stroke: #d97706; stroke-width: 2; rx: 16; }
+    .response { fill: #ede9fe; stroke: #7c3aed; stroke-width: 2; rx: 16; }
+    .arrow { stroke: #475569; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    .title { font: 700 24px system-ui, -apple-system, Segoe UI, sans-serif; fill: #0f172a; }
+    .label { font: 700 18px system-ui, -apple-system, Segoe UI, sans-serif; fill: #111827; }
+    .small { font: 500 14px system-ui, -apple-system, Segoe UI, sans-serif; fill: #334155; }
+    .mono { font: 600 14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1e293b; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1000" height="620"/>
+  <rect class="panel" x="44" y="36" width="912" height="548" rx="24"/>
+  <text class="title" x="80" y="82">HTTP request / response 구조</text>
+
+  <rect class="client" x="80" y="136" width="170" height="90" rx="18"/>
+  <text class="label" x="130" y="172">Client</text>
+  <text class="small" x="118" y="200">browser / app</text>
+
+  <rect class="server" x="750" y="136" width="170" height="90" rx="18"/>
+  <text class="label" x="806" y="172">Server</text>
+  <text class="small" x="792" y="200">resource owner</text>
+
+  <rect class="message" x="300" y="110" width="390" height="160" rx="16"/>
+  <text class="label" x="326" y="144">Request</text>
+  <text class="mono" x="326" y="176">GET /lessons/http-request-response HTTP/1.1</text>
+  <text class="small" x="326" y="206">headers: Host, Accept, Content-Type</text>
+  <text class="small" x="326" y="232">optional body: JSON, form payload, ...</text>
+
+  <path class="arrow" d="M250 180 H300"/>
+  <path class="arrow" d="M690 180 H750"/>
+
+  <rect class="response" x="300" y="350" width="390" height="160" rx="16"/>
+  <text class="label" x="326" y="384">Response</text>
+  <text class="mono" x="326" y="416">HTTP/1.1 200 OK</text>
+  <text class="small" x="326" y="446">headers: Content-Type, Set-Cookie, ...</text>
+  <text class="small" x="326" y="472">optional body: HTML, JSON, error message</text>
+
+  <path class="arrow" d="M750 430 H690"/>
+  <path class="arrow" d="M300 430 H250"/>
+
+  <rect class="panel" x="108" y="356" width="118" height="60" rx="14"/>
+  <text class="small" x="126" y="382">debug evidence</text>
+  <text class="small" x="126" y="404">method + status</text>
+</svg>
