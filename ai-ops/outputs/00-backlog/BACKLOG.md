@@ -33,7 +33,7 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 15 | A | css-cascade-layout-responsive | web-basics | 3 | deep-dive | CSS cascade, layout, responsive | 기초 | web-screen-anatomy | css-cascade-layout | v2-released |
 | 16 | A | javascript-dom-events | web-basics | 4 | deep-dive | JavaScript, DOM, 이벤트 흐름 | 기초 | web-screen-anatomy | javascript-dom-events | v2-released |
 | 17 | A | browser-rendering-network | web-basics | 5 | deep-dive | 브라우저 렌더링과 네트워크 탭 읽기 | 중급 | javascript-dom-events | browser-rendering-network | v2-released |
-| 18 | A | http-request-response | web-basics | 6 | deep-dive | HTTP 요청과 응답의 실제 구조 | 기초 | browser-rendering-network | http-request-response | integrated |
+| 18 | A | http-request-response | web-basics | 6 | deep-dive | HTTP 요청과 응답의 실제 구조 | 기초 | browser-rendering-network | http-request-response | verified |
 | 19 | A | json-data-contracts | web-basics | 7 | deep-dive | JSON과 데이터 계약 | 기초 | http-request-response | json-data-contracts | kb_needed |
 | 20 | A | web-security-basics | web-basics | 8 | deep-dive | 웹 보안 기초: XSS, CSRF, CORS | 중급 | http-request-response | web-security-basics | kb_needed |
 | 21 | A | typescript-react-nextjs | frontend-frameworks | 1 | deep-dive | TypeScript, React, Next.js는 왜 함께 쓰는가 | 기초 | javascript-dom-events | typescript-react-nextjs | v2-regenerate |

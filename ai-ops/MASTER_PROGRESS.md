@@ -63,7 +63,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | css-cascade-layout-responsive | web-basics | css-cascade-layout | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 11, RELEASE-2026-07-06-v2-wave11.md |
 | javascript-dom-events | web-basics | javascript-dom-events | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 11, RELEASE-2026-07-06-v2-wave11.md |
 | browser-rendering-network | web-basics | browser-rendering-network | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 11, RELEASE-2026-07-06-v2-wave11.md |
-| http-request-response | web-basics | http-request-response | ✓ | ✓ | — | — | T02 Wave 2 integrated, P-06 대기 |
+| http-request-response | web-basics | http-request-response | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | — | T02 Wave 2 verified, P-08 대기 |
 | context-engineering-basics | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | context-window-and-memory | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | system-prompts-and-instruction-layers | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
@@ -102,8 +102,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
 | Lesson 생성 | 37 / 37 | 100% (T02 http-request-response generated, P-05 대기) |
 | Site 반영 | 37 / 37 | 100% (http-request-response integrated, P-06 대기) |
-| Verify 통과 | 36 / 37 | 97% (`npm run verify` PASS, http-request-response integrated) |
-| Release | 36 / 37 | 97% (V2 Wave 1+2+3+4+5+6+7+8+9+10+11 released, deployment HOLD) |
+| Verify 통과 | 37 / 37 | 100% (`npm run verify` PASS, http-request-response verified) |
+| Release | 36 / 37 | 97% (http-request-response verified, P-08 대기; deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
@@ -167,3 +167,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-06 | CODEX-PLAN Phase 3 P-08 T02 Wave 1 | 완료 | html-semantic-elements·css-cascade-layout-responsive·javascript-dom-events·browser-rendering-network V2 Wave 11 릴리스, deployment HOLD |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-04 T02 Wave 2 | 완료 | http-request-response V2 Lesson Draft + diagram 생성, P-05 대기 |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-05 T02 Wave 2 | 완료 | http-request-response 사이트 반영 + glossary/KB consumers/diagram 통합, `npm run lint`·`npm run typecheck` PASS |
+| 2026-07-06 | CODEX-PLAN Phase 3 P-06 T02 Wave 2 | 완료 | `npm run verify` PASS, http-request-response 검증 통과 |
