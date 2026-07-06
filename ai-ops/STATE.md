@@ -11,27 +11,27 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) |
-| Current State | CODEX-PLAN Phase 3 P-05 T03 Wave 2 완료: react-state-and-effects integrated / P-06 build verification 대기 |
-| Last Completed Step | Codex P-05 react-state-and-effects site integration (2026-07-06) |
+| Current State | CODEX-PLAN Phase 3 P-06 T03 Wave 2 완료: react-state-and-effects verified / P-08 release 대기 |
+| Last Completed Step | Codex P-06 react-state-and-effects `npm run verify` PASS (2026-07-06) |
 | Next Executor | Codex |
-| Next Prompt File | `prompts/P-06-build-verification.md` |
+| Next Prompt File | `prompts/P-08-release.md` |
 | Blocker | 없음 |
-| Required Human Action | None — 운영자 승인에 따라 같은 Codex 흐름에서 build verification 계속 |
+| Required Human Action | None — 운영자 승인에 따라 같은 Codex 흐름에서 release 기록 계속 |
 | Release Status | V2 37강 released·미배포 — 배포는 Phase 5 승인 후에만 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 3 P-05 T03 Wave 2 완료 — react-state-and-effects integrated
+- Current State: CODEX-PLAN Phase 3 P-06 T03 Wave 2 완료 — react-state-and-effects verified
 - Verdict: DONE
 - Next Executor: Codex
-- Next Prompt File: prompts/P-06-build-verification.md
-- Why: integrated lesson 1건이 있으므로 다음 단계는 P-06 build verification
-- Required Operator Action: None — 같은 Codex 흐름에서 `npm run verify` 후 P-08 release까지 계속
-- If Approved: P-08 release 기록 작성
+- Next Prompt File: prompts/P-08-release.md
+- Why: verified lesson 1건이 있으므로 다음 단계는 P-08 release
+- Required Operator Action: None — 같은 Codex 흐름에서 release note 작성 후 다음 우선순위 계산
+- If Approved: released 처리 후 다음 needed KB 물결 진행
 - If Rejected: build_fail 또는 P-07 build fix로 전환
-- Files to Check: src/content/lessons/markdown/react-state-and-effects.md
+- Files to Check: ai-ops/outputs/06-build-verification/VERIFIED-2026-07-06-8.md
 - Stop Condition: Phase 5 개발 서버 확인 보고에서만 정지
 ```
 
@@ -69,7 +69,7 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved** / KB 5차 T01/T08: dev-environment-map·vibe-coding-origin-karpathy·ai-learning-verification·files-folders-paths·terminal-shell-commands = **approved** / KB 6차 T01: variables-types-data·control-flow-functions-errors·debugging-error-reading·regex-code-search·package-json-semver = **approved** / KB 7차 T02: html-semantic-elements·css-cascade-layout·javascript-dom-events·browser-rendering-network·http-request-response = **approved** / KB 8차: json-data-contracts·web-security-basics·typescript-type-system·react-component-model·react-state-effects = **approved** / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 41강 + integrated 1강** (deployment HOLD, 다음 P-06 build verification 대기)
+- 강의: **V2 released 41강 + verified 1강** (deployment HOLD, 다음 P-08 release 대기)
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
@@ -83,6 +83,7 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 | 2026-07-06 | json-data-contracts·web-security-basics·typescript-type-system·react-component-mental-model | verified → released | Codex P-08 T02/T03 Wave 1 |
 | 2026-07-06 | react-state-and-effects | planned → generated | Codex P-04 T03 Wave 2 |
 | 2026-07-06 | react-state-and-effects | generated → integrated | Codex P-05 T03 Wave 2 |
+| 2026-07-06 | react-state-and-effects | integrated → verified | Codex P-06 T03 Wave 2 |
 | 2026-07-06 | http-request-response | verified → released | Codex P-08 T02 Wave 2 |
 | 2026-07-06 | http-request-response | integrated → verified | Codex P-06 T02 Wave 2 |
 | 2026-07-06 | http-request-response | generated → integrated | Codex P-05 T02 Wave 2 |
