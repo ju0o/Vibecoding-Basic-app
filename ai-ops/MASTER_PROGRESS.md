@@ -54,6 +54,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | git-log-diff-show | T04 | ✓ | ✓ 92 (2026-07-06, Fable 대행) | order 4 근거 |
 | git-restore-reset-revert | T04 | ✓ | ✓ 92 (2026-07-06, Fable 대행) | order 5 근거 |
 
+| git-rebase-cherry-pick-stash | T04 | v | v 91 (2026-07-07, Fable 대행) | git-collaboration order 6 근거 |
+
 ## Lesson 매트릭스
 
 | 강의 slug | 모듈 | 근거 KB | Lesson(P-04) | Site(P-05) | Verify(P-06) | Release(P-08) | 비고 |
