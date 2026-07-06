@@ -11,13 +11,13 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) — **Codex 토큰 소진, 운영자 승인으로 Fable이 Executor 대행 중** |
-| Current State | KB 9차 P-02 완료: 5건 전건 approved (89~92) / 강의 5건 planned — P-04 대기 |
-| Last Completed Step | Fable(대행) P-02 KB 9차 검증 — nextjs 89, git-init 91, git-branch 90, git-log 92, git-restore 92 (2026-07-06) |
-| Next Executor | Fable (대행) 또는 Codex (토큰 복구 시) |
-| Next Prompt File | `prompts/P-04-lesson-generation.md` — planned: git-init-add-commit-status, git-branch-switch-merge, git-log-diff-show, git-restore-reset-revert (레퍼런스 4강 우선, nextjs는 다음 물결) |
+| Current State | **🌐 배포됨(모드 A)**: https://ju0o-ec967.web.app — 47강 + 화면 비밀번호 게이트(D-03) / Git 레퍼런스 4강 P-04 진행 중 (draft 4건 완성·커밋됨, 분량 보강 2/4 완료 — git-log-diff-show·git-restore-reset-revert 보강 남음) |
+| Last Completed Step | Fable(대행) D-03(정적 export + PasswordGate) + Firebase 첫 배포 + Cline 분담 목록 (2026-07-06, 커밋 c7ec9f4·b83f63d) |
+| Next Executor | Fable(대행)/Codex(토큰 복구 시). 단순 작업은 **Cline** (RUN-CLINE "단순 작업 목록") |
+| Next Prompt File | P-04 마무리: git-log-diff-show·git-restore-reset-revert lesson.md 분량 보강(≥8,000자, 빠른 참조 표 방식) → QA 재실행 → generated 전이·커밋 → P-05(Cline 위임 가능) → P-06 → P-08 → Cline P-09 재배포 |
 | Blocker | 없음 |
-| Required Human Action | None — 같은 흐름에서 P-02 계속 |
-| Release Status | V2 42강 released·미배포 — 배포는 Phase 5 승인 후에만 |
+| Required Human Action | None — **배포 사이트에서 지금 학습 가능** (비밀번호: DEPLOY-GUIDE.md §1~2) |
+| Release Status | **V2 47강 deployed (비공개, noindex+robots+게이트)** — 릴리스마다 Cline P-09 재배포 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
