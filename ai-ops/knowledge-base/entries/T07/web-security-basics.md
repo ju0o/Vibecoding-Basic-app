@@ -9,8 +9,8 @@ prerequisites: [http-request-response]
 successors: [auth-session-token, api-security-rate-limits]
 related: [json-data-contracts]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [web-security-basics]
+  glossary: [Same-Origin Policy, Origin, CORS, Preflight Request, XSS, CSRF, CSP]
 sources:
   - { title: "Same-origin policy", url: "https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Same-origin_policy", checked: 2026-07-06 }
   - { title: "Cross-Origin Resource Sharing (CORS)", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS", checked: 2026-07-06 }

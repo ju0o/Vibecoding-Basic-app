@@ -9,8 +9,8 @@ prerequisites: [javascript-dom-events, typescript-type-system]
 successors: [react-state-effects, nextjs-routing-rendering]
 related: [typescript-type-system]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [react-component-mental-model]
+  glossary: [React Component, Props, Composition, Component Boundary, Pure Component, Render, Commit]
 sources:
   - { title: "Your First Component", url: "https://react.dev/learn/your-first-component", checked: 2026-07-06 }
   - { title: "Importing and Exporting Components", url: "https://react.dev/learn/importing-and-exporting-components", checked: 2026-07-06 }

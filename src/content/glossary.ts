@@ -1329,4 +1329,235 @@ export const GLOSSARY_TERMS = [
       "Status Code는 2xx, 3xx, 4xx, 5xx 같은 class로 request 결과를 분류합니다. status code는 중요한 evidence이지만 오류 원인을 단독으로 확정하지 않으므로 method, path, headers, body와 함께 봐야 합니다.",
     related: ["HTTP Response", "API", "Debugging"],
   },
+  {
+    term: "JSON",
+    category: "웹 개발",
+    shortDefinition:
+      "structured data를 string으로 표현해 network나 파일로 주고받는 text-based data format",
+    explanation:
+      "JSON은 JavaScript object syntax를 따르는 text-based data format이지만 JavaScript runtime object 자체는 아닙니다. API에서는 request/response body의 data shape를 표현하는 데 자주 쓰이며, parsing과 stringifying 단계를 분리해서 이해해야 합니다.",
+    related: ["JSON.parse", "JSON.stringify", "Data Contract"],
+  },
+  {
+    term: "Data Contract",
+    category: "웹 개발",
+    shortDefinition: "API가 주고받을 data field와 value shape를 명시한 프로젝트 수준 약속",
+    explanation:
+      "Data Contract는 JSON 표준 자체가 아니라 endpoint별 request/response body가 어떤 field, type, optionality, error shape를 가져야 하는지 기록하는 운영 관점입니다. AI가 생성한 API client code를 검토할 때 실제 body가 계약과 맞는지 확인하는 기준이 됩니다.",
+    related: ["JSON", "API", "TypeScript"],
+  },
+  {
+    term: "JSON.parse",
+    category: "JavaScript",
+    shortDefinition: "JSON string을 JavaScript value나 object로 바꾸는 static method",
+    explanation:
+      "JSON.parse는 syntax가 맞는 JSON text를 JavaScript value로 deserialization하는 단계입니다. parsing 성공은 field와 type이 API contract에 맞다는 뜻이 아니므로, 외부 JSON은 parse 이후 별도 확인이 필요합니다.",
+    related: ["JSON", "Data Contract", "Validation"],
+  },
+  {
+    term: "JSON.stringify",
+    category: "JavaScript",
+    shortDefinition: "JavaScript value를 JSON string으로 변환하는 static method",
+    explanation:
+      "JSON.stringify는 JavaScript object나 value를 network body로 보낼 수 있는 JSON string representation으로 바꿉니다. API request body를 만들 때 Content-Type header와 함께 확인해야 합니다.",
+    related: ["JSON", "HTTP Body", "Content-Type"],
+  },
+  {
+    term: "Content-Type",
+    category: "HTTP",
+    shortDefinition: "HTTP message body의 media type을 알려 주는 representation header",
+    explanation:
+      "Content-Type은 response body나 POST/PUT request body가 어떤 media type인지 알려 줍니다. JSON body를 다룰 때 `application/json` 여부는 server와 client가 body를 어떻게 해석할지 결정하는 중요한 evidence입니다.",
+    related: ["HTTP Header", "JSON", "HTTP Body"],
+  },
+  {
+    term: "API Response Shape",
+    category: "백엔드",
+    shortDefinition: "API response body가 갖는 field, type, nesting, array/object 구조",
+    explanation:
+      "API Response Shape는 status code만으로 알 수 없는 body의 실제 구조입니다. JSON syntax가 valid해도 expected response shape와 다르면 UI code와 TypeScript type, AI-generated client가 실패할 수 있습니다.",
+    related: ["Data Contract", "JSON", "API"],
+  },
+  {
+    term: "Same-Origin Policy",
+    category: "웹 보안",
+    shortDefinition:
+      "한 origin의 document나 script가 다른 origin resource와 상호작용하는 방식을 제한하는 browser security mechanism",
+    explanation:
+      "Same-Origin Policy는 malicious document가 사용자가 로그인한 다른 origin의 sensitive data를 읽는 위험을 줄이는 기본 browser 방어선입니다. CORS는 이 기본 제한 위에서 server가 허용할 cross-origin access를 HTTP headers로 표현하는 mechanism입니다.",
+    related: ["Origin", "CORS", "Browser Security"],
+  },
+  {
+    term: "Origin",
+    category: "웹 보안",
+    shortDefinition: "URL의 protocol, host, port 조합으로 browser가 출처를 판단하는 기준",
+    explanation:
+      "Origin은 domain 느낌이 아니라 scheme, host, port tuple입니다. path가 같아 보여도 port나 scheme이 다르면 cross-origin일 수 있으므로 CORS debugging에서는 page origin과 target origin을 정확히 기록해야 합니다.",
+    related: ["Same-Origin Policy", "CORS", "HTTP"],
+  },
+  {
+    term: "CORS",
+    category: "웹 보안",
+    shortDefinition: "server가 허용할 cross-origin access를 HTTP headers로 표현하는 mechanism",
+    explanation:
+      "CORS는 browser의 same-origin policy 아래에서 cross-origin response를 calling script가 읽을 수 있는지 판단하게 하는 HTTP-header based mechanism입니다. client fetch option 하나가 아니라 request origin, preflight, response CORS headers를 함께 확인해야 합니다.",
+    related: ["Same-Origin Policy", "Preflight Request", "HTTP Header"],
+  },
+  {
+    term: "Preflight Request",
+    category: "웹 보안",
+    shortDefinition:
+      "browser가 actual cross-origin request 전에 server 허용 여부를 확인하기 위해 보내는 request",
+    explanation:
+      "Preflight Request는 actual request의 method와 headers를 담아 server가 cross-origin request를 허용할지 확인합니다. Network tab에서 OPTIONS request가 먼저 보일 수 있으며, CORS 문제를 분석할 때 중요한 evidence입니다.",
+    related: ["CORS", "HTTP Method", "HTTP Header"],
+  },
+  {
+    term: "XSS",
+    category: "웹 보안",
+    shortDefinition:
+      "malicious script가 trusted website output에 injected되어 실행될 수 있는 injection 공격",
+    explanation:
+      "XSS는 untrusted input이 validation이나 encoding 없이 generated output에 포함될 때 발생할 수 있습니다. 핵심 검토 지점은 문자열 자체보다 그 data가 어떤 rendering context로 들어가 browser에서 실행될 수 있는지입니다.",
+    related: ["CSP", "Input Validation", "Rendering Context"],
+  },
+  {
+    term: "CSRF",
+    category: "웹 보안",
+    shortDefinition:
+      "authenticated browser가 trusted site에 unwanted action을 보내도록 속이는 공격",
+    explanation:
+      "CSRF는 사용자의 browser가 이미 인증된 상태일 때 forged authenticated request와 legitimate request를 server가 구분하지 못하는 문제입니다. mutation request에서는 anti-CSRF token, same-site cookie 정책, server-side intent validation을 확인해야 합니다.",
+    related: ["Authentication", "Cookie", "HTTP Request"],
+  },
+  {
+    term: "CSP",
+    category: "웹 보안",
+    shortDefinition:
+      "browser에게 site code가 할 수 있는 일을 제한하라고 지시하는 Content Security Policy",
+    explanation:
+      "CSP는 certain security threats risk를 줄이기 위해 website가 browser에 restrictions를 instruct하는 방어 계층입니다. XSS를 대체하는 단일 해결책은 아니지만 script source, inline execution, resource loading을 제한하는 signal로 활용됩니다.",
+    related: ["XSS", "HTTP Header", "Browser Security"],
+  },
+  {
+    term: "Static Type Checking",
+    category: "TypeScript",
+    shortDefinition: "code가 실행되기 전에 value shape와 operation 가능성을 검사하는 방식",
+    explanation:
+      "Static Type Checking은 JavaScript runtime에서 실제 값을 실행하기 전에 TypeScript가 code의 expected behavior를 예측하고 mismatch를 알려 주는 체계입니다. AI가 만든 code를 검토할 때 type error는 중요한 evidence가 됩니다.",
+    related: ["TypeScript", "Type Annotation", "Type Inference"],
+  },
+  {
+    term: "Type Annotation",
+    category: "TypeScript",
+    shortDefinition: "variable, parameter, return value 등에 expected type을 명시하는 문법",
+    explanation:
+      "Type Annotation은 모든 줄에 붙이는 장식이 아니라 API boundary, function signature, component props처럼 다른 코드와 만나는 지점에 shape contract를 남기는 장치입니다.",
+    related: ["Static Type Checking", "Object Type", "Function"],
+  },
+  {
+    term: "Type Inference",
+    category: "TypeScript",
+    shortDefinition: "TypeScript가 code 흐름과 initializer를 보고 type을 자동 추론하는 기능",
+    explanation:
+      "Type Inference는 명백한 local value에 annotation을 반복하지 않아도 TypeScript가 type을 이해하게 해 줍니다. 중요한 경계는 명시하고 내부 계산은 inference를 활용하면 code가 읽기 쉬워집니다.",
+    related: ["Type Annotation", "TypeScript", "Static Type Checking"],
+  },
+  {
+    term: "Object Type",
+    category: "TypeScript",
+    shortDefinition: "object가 가질 property 이름과 각 property type을 나열한 type",
+    explanation:
+      "Object Type은 API response, component props, settings object처럼 field shape가 중요한 값을 표현합니다. JSON data contract를 code 안으로 옮길 때 가장 먼저 사용하는 TypeScript 구조입니다.",
+    related: ["Data Contract", "Optional Property", "TypeScript"],
+  },
+  {
+    term: "Union Type",
+    category: "TypeScript",
+    shortDefinition: "value가 둘 이상의 type 중 하나일 수 있음을 나타내는 type",
+    explanation:
+      "Union Type은 success/error result처럼 여러 가능성 중 하나인 값을 표현합니다. TypeScript는 union의 모든 member에서 유효한 operation만 바로 허용하므로 branch별 property를 쓰려면 narrowing이 필요합니다.",
+    related: ["Narrowing", "Type Guard", "API Response Shape"],
+  },
+  {
+    term: "Narrowing",
+    category: "TypeScript",
+    shortDefinition:
+      "control flow나 type guard를 통해 넓은 type을 더 구체적인 type으로 좁히는 과정",
+    explanation:
+      "Narrowing은 `if`, `typeof`, discriminant field 같은 조건을 바탕으로 TypeScript가 value의 가능한 shape를 줄이는 방식입니다. union type을 안전하게 다루는 핵심 메커니즘입니다.",
+    related: ["Union Type", "Type Guard", "Control Flow"],
+  },
+  {
+    term: "Generic",
+    category: "TypeScript",
+    shortDefinition: "reusable type이나 function에서 변하는 data type을 parameter로 받는 방식",
+    explanation:
+      "Generic은 공통 구조는 유지하고 내부 data shape만 바뀌는 API wrapper나 reusable helper를 만들 때 사용합니다. 느슨함이 아니라 구조화된 재사용을 표현하는 도구입니다.",
+    related: ["TypeScript", "Reusable Component", "API"],
+  },
+  {
+    term: "any",
+    category: "TypeScript",
+    shortDefinition: "TypeScript type-checking을 대부분 우회하게 하는 special type",
+    explanation:
+      "any는 property access, function call, assignment 등을 typechecking error 없이 허용해 빠른 탈출구처럼 보입니다. 하지만 AI output 검토에서는 TypeScript의 검증 신호를 지울 수 있으므로 사용 이유를 반드시 확인해야 합니다.",
+    related: ["Static Type Checking", "unknown", "Verification"],
+  },
+  {
+    term: "React Component",
+    category: "React",
+    shortDefinition: "JSX를 return해 UI 조각을 설명하는 reusable JavaScript function",
+    explanation:
+      "React Component는 markup, CSS, JavaScript를 custom UI element boundary로 묶는 기본 단위입니다. browser가 직접 보는 HTML tag와 달리 capitalized JSX tag로 사용되며 props를 input으로 받아 UI description을 계산합니다.",
+    related: ["Props", "Composition", "Render"],
+  },
+  {
+    term: "Props",
+    category: "React",
+    shortDefinition: "parent component가 child component에 전달하는 information",
+    explanation:
+      "Props는 React components가 서로 communicate하는 기본 방식입니다. string, object, array, function 등 JavaScript value를 전달할 수 있으며, TypeScript와 함께 쓰면 component의 input contract를 명확히 표현할 수 있습니다.",
+    related: ["React Component", "TypeScript", "Component Boundary"],
+  },
+  {
+    term: "Composition",
+    category: "React",
+    shortDefinition: "여러 component를 order, nest, combine해서 page나 UI section을 만드는 방식",
+    explanation:
+      "Composition은 component를 HTML tags처럼 조합해 whole page를 설계하는 React 사고방식입니다. 재사용뿐 아니라 책임 분리와 수정 범위를 선명하게 만드는 데 중요합니다.",
+    related: ["React Component", "Props", "Component Tree"],
+  },
+  {
+    term: "Component Boundary",
+    category: "React",
+    shortDefinition: "component가 책임지는 UI, input props, rendering 범위를 나누는 경계",
+    explanation:
+      "Component Boundary는 AI에게 UI 수정을 맡길 때 특히 중요합니다. 어떤 component의 props와 rendering만 바꿀지, parent data flow를 바꿀지 구분하는 기준이 됩니다.",
+    related: ["React Component", "Props", "AI Code Review"],
+  },
+  {
+    term: "Pure Component",
+    category: "React",
+    shortDefinition: "같은 input에 같은 JSX를 return한다고 가정할 수 있는 component",
+    explanation:
+      "Pure Component 관점은 render 중 외부 값을 변경하거나 unpredictable side effect를 만들지 않는 것을 의미합니다. React는 component를 pure function으로 가정하므로 render logic은 current props/state에서 UI를 계산하는 데 집중해야 합니다.",
+    related: ["Render", "Effect", "React Component"],
+  },
+  {
+    term: "Render",
+    category: "React",
+    shortDefinition: "React가 component를 호출해 screen에 표시할 UI description을 계산하는 단계",
+    explanation:
+      "Render는 DOM을 직접 조작하는 것이 아니라 component function을 실행해 어떤 UI를 보여줄지 계산하는 흐름입니다. commit 단계와 구분하면 React debugging과 performance 이해가 쉬워집니다.",
+    related: ["Commit", "React Component", "Pure Component"],
+  },
+  {
+    term: "Commit",
+    category: "React",
+    shortDefinition: "React가 계산된 UI 변경을 DOM에 반영하는 단계",
+    explanation:
+      "Commit은 render로 계산된 결과가 실제 screen update로 이어지는 단계입니다. component function 호출과 DOM update를 구분하면 React가 직접 DOM 조작 코드와 어떻게 다른지 이해할 수 있습니다.",
+    related: ["Render", "DOM", "React Component"],
+  },
 ] satisfies readonly GlossaryTerm[]

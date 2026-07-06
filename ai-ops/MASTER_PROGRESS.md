@@ -69,10 +69,10 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | javascript-dom-events | web-basics | javascript-dom-events | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 11, RELEASE-2026-07-06-v2-wave11.md |
 | browser-rendering-network | web-basics | browser-rendering-network | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 11, RELEASE-2026-07-06-v2-wave11.md |
 | http-request-response | web-basics | http-request-response | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 12, RELEASE-2026-07-06-v2-wave12.md |
-| json-data-contracts | web-basics | json-data-contracts | ✓ | — | — | — | V2 Wave 13 P-04 generated, P-05 대기 |
-| web-security-basics | web-basics | web-security-basics | ✓ | — | — | — | V2 Wave 13 P-04 generated, P-05 대기 |
-| typescript-type-system | frontend-frameworks | typescript-type-system | ✓ | — | — | — | V2 Wave 13 P-04 generated, P-05 대기 |
-| react-component-mental-model | frontend-frameworks | react-component-model | ✓ | — | — | — | V2 Wave 13 P-04 generated, P-05 대기 |
+| json-data-contracts | web-basics | json-data-contracts | ✓ | ✓ | — | — | V2 Wave 13 P-05 integrated, P-06 대기 |
+| web-security-basics | web-basics | web-security-basics | ✓ | ✓ | — | — | V2 Wave 13 P-05 integrated, P-06 대기 |
+| typescript-type-system | frontend-frameworks | typescript-type-system | ✓ | ✓ | — | — | V2 Wave 13 P-05 integrated, P-06 대기 |
+| react-component-mental-model | frontend-frameworks | react-component-model | ✓ | ✓ | — | — | V2 Wave 13 P-05 integrated, P-06 대기 |
 | context-engineering-basics | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | context-window-and-memory | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | system-prompts-and-instruction-layers | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
@@ -111,8 +111,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | KB Quote Bank (8차 approved KB) | 5 / 5 | 100% |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
 | Lesson 생성 | 41 / 42 | 98% (json-data-contracts·web-security-basics·typescript-type-system·react-component-mental-model generated, react-state-and-effects planned) |
-| Site 반영 | 37 / 42 | 88% (V2 Wave 13 P-05 대기) |
-| Verify 통과 | 37 / 42 | 88% (`npm run verify`는 직전 release 기준 PASS, V2 Wave 13 P-05 대기) |
+| Site 반영 | 41 / 42 | 98% (json-data-contracts·web-security-basics·typescript-type-system·react-component-mental-model integrated) |
+| Verify 통과 | 37 / 42 | 88% (`npm run verify`는 직전 release 기준 PASS, V2 Wave 13 P-06 대기) |
 | Release | 37 / 42 | 88% (V2 Wave 1+2+3+4+5+6+7+8+9+10+11+12 released, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
@@ -182,3 +182,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-06 | CODEX-PLAN Phase 2 KB 8차 P-01 | 완료 | json-data-contracts·web-security-basics·typescript-type-system·react-component-model·react-state-effects draft 생성, P-02 대기 |
 | 2026-07-06 | CODEX-PLAN Phase 2 KB 8차 P-02 | 완료 | json-data-contracts 89·web-security-basics 91·typescript-type-system 90·react-component-model 90·react-state-effects 91 APPROVED |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-04 T02/T03 Wave 1 | 완료 | json-data-contracts·web-security-basics·typescript-type-system·react-component-mental-model V2 Lesson Draft + diagrams 생성, P-05 대기 |
+| 2026-07-06 | CODEX-PLAN Phase 3 P-05 T02/T03 Wave 1 | 완료 | 4강 사이트 반영 + glossary/KB consumers/diagrams 통합, `npm run lint`·`npm run typecheck` PASS |

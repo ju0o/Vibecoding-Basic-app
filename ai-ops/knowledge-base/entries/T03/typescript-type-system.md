@@ -9,8 +9,8 @@ prerequisites: [variables-types-data, control-flow-functions-errors]
 successors: [react-component-model, nextjs-routing-rendering]
 related: [json-data-contracts, react-state-effects]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [typescript-type-system]
+  glossary: [Static Type Checking, Type Annotation, Type Inference, Object Type, Union Type, Narrowing, Generic, any]
 sources:
   - { title: "The Basics", url: "https://www.typescriptlang.org/docs/handbook/2/basic-types.html", checked: 2026-07-06 }
   - { title: "Everyday Types", url: "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html", checked: 2026-07-06 }

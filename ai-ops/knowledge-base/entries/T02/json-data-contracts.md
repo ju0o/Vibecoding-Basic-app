@@ -9,8 +9,8 @@ prerequisites: [http-request-response]
 successors: [web-security-basics, rest-api-design]
 related: [web-security-basics, typescript-type-system]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [json-data-contracts]
+  glossary: [JSON, Data Contract, JSON.parse, JSON.stringify, Content-Type, API Response Shape]
 sources:
   - { title: "Working with JSON", url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/JSON", checked: 2026-07-06 }
   - { title: "JSON.parse()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse", checked: 2026-07-06 }
