@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="650" viewBox="0 0 1000 650" role="img" aria-labelledby="title desc">
+  <title id="title">Web Security Boundary Map</title>
+  <desc id="desc">Map showing browser origin boundary, CORS headers, XSS rendering path, CSRF authenticated request, and CSP restrictions.</desc>
+  <style>
+    .bg { fill: #f8fafc; }
+    .panel { fill: #ffffff; stroke: #334155; stroke-width: 2; }
+    .origin { fill: #dbeafe; stroke: #2563eb; stroke-width: 2; }
+    .api { fill: #dcfce7; stroke: #16a34a; stroke-width: 2; }
+    .attack { fill: #fee2e2; stroke: #dc2626; stroke-width: 2; }
+    .policy { fill: #ede9fe; stroke: #7c3aed; stroke-width: 2; }
+    .arrow { stroke: #475569; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    .block { stroke: #dc2626; stroke-width: 4; fill: none; }
+    .title { font: 700 24px system-ui, -apple-system, Segoe UI, sans-serif; fill: #0f172a; }
+    .label { font: 700 18px system-ui, -apple-system, Segoe UI, sans-serif; fill: #111827; }
+    .small { font: 500 14px system-ui, -apple-system, Segoe UI, sans-serif; fill: #334155; }
+    .mono { font: 600 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1e293b; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1000" height="650"/>
+  <rect class="panel" x="48" y="38" width="904" height="574" rx="24"/>
+  <text class="title" x="82" y="82">웹 보안은 서로 다른 경계를 분리해서 읽는다</text>
+
+  <rect class="origin" x="84" y="132" width="260" height="150" rx="18"/>
+  <text class="label" x="132" y="166">Browser Origin A</text>
+  <text class="mono" x="112" y="198">https://app.example.com</text>
+  <text class="small" x="112" y="226">same-origin policy applies</text>
+  <text class="small" x="112" y="252">script wants to read data</text>
+
+  <rect class="api" x="656" y="132" width="260" height="150" rx="18"/>
+  <text class="label" x="736" y="166">API Origin B</text>
+  <text class="mono" x="688" y="198">https://api.example.com</text>
+  <text class="small" x="688" y="226">CORS response headers</text>
+  <text class="small" x="688" y="252">allow or deny readable access</text>
+
+  <path class="arrow" d="M344 204 H656"/>
+  <text class="small" x="418" y="190">cross-origin request</text>
+  <path class="arrow" d="M656 246 H344"/>
+  <text class="small" x="418" y="270">response + CORS headers</text>
+
+  <rect class="attack" x="84" y="382" width="260" height="130" rx="18"/>
+  <text class="label" x="166" y="416">XSS</text>
+  <text class="small" x="112" y="446">untrusted input enters output</text>
+  <text class="small" x="112" y="472">script executes in trusted page</text>
+
+  <rect class="attack" x="370" y="382" width="260" height="130" rx="18"/>
+  <text class="label" x="452" y="416">CSRF</text>
+  <text class="small" x="398" y="446">authenticated browser sends</text>
+  <text class="small" x="398" y="472">unwanted state-changing request</text>
+
+  <rect class="policy" x="656" y="382" width="260" height="130" rx="18"/>
+  <text class="label" x="742" y="416">CSP</text>
+  <text class="small" x="688" y="446">browser restrictions from site</text>
+  <text class="small" x="688" y="472">minimize selected threat risks</text>
+
+  <path class="block" d="M486 302 L526 342 M526 302 L486 342"/>
+  <text class="small" x="420" y="332">do not mix failure modes</text>
+</svg>

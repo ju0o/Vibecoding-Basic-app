@@ -34,11 +34,11 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 16 | A | javascript-dom-events | web-basics | 4 | deep-dive | JavaScript, DOM, 이벤트 흐름 | 기초 | web-screen-anatomy | javascript-dom-events | v2-released |
 | 17 | A | browser-rendering-network | web-basics | 5 | deep-dive | 브라우저 렌더링과 네트워크 탭 읽기 | 중급 | javascript-dom-events | browser-rendering-network | v2-released |
 | 18 | A | http-request-response | web-basics | 6 | deep-dive | HTTP 요청과 응답의 실제 구조 | 기초 | browser-rendering-network | http-request-response | v2-released |
-| 19 | A | json-data-contracts | web-basics | 7 | deep-dive | JSON과 데이터 계약 | 기초 | http-request-response | json-data-contracts | planned |
-| 20 | A | web-security-basics | web-basics | 8 | deep-dive | 웹 보안 기초: XSS, CSRF, CORS | 중급 | http-request-response | web-security-basics | planned |
+| 19 | A | json-data-contracts | web-basics | 7 | deep-dive | JSON과 데이터 계약 | 기초 | http-request-response | json-data-contracts | generated |
+| 20 | A | web-security-basics | web-basics | 8 | deep-dive | 웹 보안 기초: XSS, CSRF, CORS | 중급 | http-request-response | web-security-basics | generated |
 | 21 | A | typescript-react-nextjs | frontend-frameworks | 1 | deep-dive | TypeScript, React, Next.js는 왜 함께 쓰는가 | 기초 | javascript-dom-events | typescript-react-nextjs | v2-regenerate |
-| 22 | A | typescript-type-system | frontend-frameworks | 2 | deep-dive | TypeScript 타입 시스템의 실제 역할 | 기초 | typescript-react-nextjs | typescript-type-system | planned |
-| 23 | A | react-component-mental-model | frontend-frameworks | 3 | deep-dive | React 컴포넌트 사고방식 | 기초 | typescript-react-nextjs | react-component-model | planned |
+| 22 | A | typescript-type-system | frontend-frameworks | 2 | deep-dive | TypeScript 타입 시스템의 실제 역할 | 기초 | typescript-react-nextjs | typescript-type-system | generated |
+| 23 | A | react-component-mental-model | frontend-frameworks | 3 | deep-dive | React 컴포넌트 사고방식 | 기초 | typescript-react-nextjs | react-component-model | generated |
 | 24 | A | react-state-and-effects | frontend-frameworks | 4 | deep-dive | React 상태와 effect의 경계 | 중급 | react-component-mental-model | react-state-effects | planned |
 | 25 | A | nextjs-routing-rendering | frontend-frameworks | 5 | deep-dive | Next.js 라우팅과 렌더링 모델 | 중급 | react-component-mental-model | nextjs-routing-rendering | kb_needed |
 | 26 | A | tailwind-design-systems | frontend-frameworks | 6 | deep-dive | Tailwind와 디자인 시스템 사고 | 기초 | css-cascade-layout-responsive | tailwind-design-systems | kb_needed |
