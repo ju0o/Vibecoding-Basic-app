@@ -2,8 +2,8 @@
 id: nextjs-routing-rendering
 title: "Next.js 라우팅과 렌더링 모델 (App Router)"
 topicGroup: T03
-status: draft
-score: null
+status: approved
+score: 89
 level: 중급
 prerequisites: [react-component-model, http-request-response]
 successors: []

@@ -2,8 +2,8 @@
 id: git-log-diff-show
 title: "git log / diff / show — 이력을 읽는 3개 명령"
 topicGroup: T04
-status: draft
-score: null
+status: approved
+score: 92
 level: 기초
 prerequisites: [git-init-add-commit-status]
 successors: [git-restore-reset-revert]

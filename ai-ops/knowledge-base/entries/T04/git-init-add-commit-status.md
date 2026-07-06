@@ -2,8 +2,8 @@
 id: git-init-add-commit-status
 title: "git init / add / commit / status — 기록 사이클의 4개 명령"
 topicGroup: T04
-status: draft
-score: null
+status: approved
+score: 91
 level: 기초
 prerequisites: [files-folders-paths, terminal-shell-commands]
 successors: [git-branch-switch-merge, git-log-diff-show]

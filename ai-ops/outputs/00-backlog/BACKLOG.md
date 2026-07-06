@@ -40,14 +40,14 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 22 | A | typescript-type-system | frontend-frameworks | 2 | deep-dive | TypeScript 타입 시스템의 실제 역할 | 기초 | typescript-react-nextjs | typescript-type-system | v2-released |
 | 23 | A | react-component-mental-model | frontend-frameworks | 3 | deep-dive | React 컴포넌트 사고방식 | 기초 | typescript-react-nextjs | react-component-model | v2-released |
 | 24 | A | react-state-and-effects | frontend-frameworks | 4 | deep-dive | React 상태와 effect의 경계 | 중급 | react-component-mental-model | react-state-effects | v2-released |
-| 25 | A | nextjs-routing-rendering | frontend-frameworks | 5 | deep-dive | Next.js 라우팅과 렌더링 모델 | 중급 | react-component-mental-model | nextjs-routing-rendering | kb_needed |
+| 25 | A | nextjs-routing-rendering | frontend-frameworks | 5 | deep-dive | Next.js 라우팅과 렌더링 모델 | 중급 | react-component-mental-model | nextjs-routing-rendering | planned |
 | 26 | A | tailwind-design-systems | frontend-frameworks | 6 | deep-dive | Tailwind와 디자인 시스템 사고 | 기초 | css-cascade-layout-responsive | tailwind-design-systems | kb_needed |
 | 27 | A | frontend-testing-basics | frontend-frameworks | 7 | deep-dive | 프론트엔드 테스트 기초 | 중급 | react-state-and-effects | frontend-testing-basics | kb_needed |
 | 28 | D | git-collaboration-basics | git-collaboration | 1 | reference | Git은 왜 개발자의 타임머신인가 | 기초 | terminal-shell-basics-reference | git-basics | v2-regenerate |
-| 29 | D | git-init-add-commit-status | git-collaboration | 2 | reference | git init/add/commit/status 레퍼런스 | 기초 | git-collaboration-basics | git-init-add-commit-status | kb_needed |
-| 30 | D | git-branch-switch-merge | git-collaboration | 3 | reference | git branch/switch/merge 레퍼런스 | 기초 | git-init-add-commit-status | git-branch-switch-merge | kb_needed |
-| 31 | D | git-log-diff-show | git-collaboration | 4 | reference | git log/diff/show 레퍼런스 | 기초 | git-init-add-commit-status | git-log-diff-show | kb_needed |
-| 32 | D | git-restore-reset-revert | git-collaboration | 5 | reference | git restore/reset/revert 복구 레퍼런스 | 중급 | git-log-diff-show | git-restore-reset-revert | kb_needed |
+| 29 | D | git-init-add-commit-status | git-collaboration | 2 | reference | git init/add/commit/status 레퍼런스 | 기초 | git-collaboration-basics | git-init-add-commit-status | planned |
+| 30 | D | git-branch-switch-merge | git-collaboration | 3 | reference | git branch/switch/merge 레퍼런스 | 기초 | git-init-add-commit-status | git-branch-switch-merge | planned |
+| 31 | D | git-log-diff-show | git-collaboration | 4 | reference | git log/diff/show 레퍼런스 | 기초 | git-init-add-commit-status | git-log-diff-show | planned |
+| 32 | D | git-restore-reset-revert | git-collaboration | 5 | reference | git restore/reset/revert 복구 레퍼런스 | 중급 | git-log-diff-show | git-restore-reset-revert | planned |
 | 33 | D | git-rebase-cherry-pick-stash | git-collaboration | 6 | reference | git rebase/cherry-pick/stash 레퍼런스 | 중급 | git-branch-switch-merge | git-rebase-cherry-pick-stash | kb_needed |
 | 34 | D | github-pr-review-flow | git-collaboration | 7 | reference | GitHub PR, review, merge 전략 | 중급 | git-branch-switch-merge | github-pr-review-flow | kb_needed |
 | 35 | D | gh-cli-reference | git-collaboration | 8 | reference | GitHub CLI 실무 레퍼런스 | 중급 | github-pr-review-flow | gh-cli-reference | kb_needed |

@@ -11,10 +11,10 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) — **Codex 토큰 소진, 운영자 승인으로 Fable이 Executor 대행 중** |
-| Current State | KB 9차 P-01 완료: nextjs-routing-rendering + Git 레퍼런스 4건 draft (원문 재접속 채집: git-scm man 13종, Next.js docs v16.2.10) / P-02 검증 대기 |
-| Last Completed Step | Fable(대행) P-01 T03/T04 KB 9차 draft 5건 (2026-07-06) |
+| Current State | KB 9차 P-02 완료: 5건 전건 approved (89~92) / 강의 5건 planned — P-04 대기 |
+| Last Completed Step | Fable(대행) P-02 KB 9차 검증 — nextjs 89, git-init 91, git-branch 90, git-log 92, git-restore 92 (2026-07-06) |
 | Next Executor | Fable (대행) 또는 Codex (토큰 복구 시) |
-| Next Prompt File | `prompts/P-02-knowledge-verification.md` |
+| Next Prompt File | `prompts/P-04-lesson-generation.md` — planned: git-init-add-commit-status, git-branch-switch-merge, git-log-diff-show, git-restore-reset-revert (레퍼런스 4강 우선, nextjs는 다음 물결) |
 | Blocker | 없음 |
 | Required Human Action | None — 같은 흐름에서 P-02 계속 |
 | Release Status | V2 42강 released·미배포 — 배포는 Phase 5 승인 후에만 |
@@ -75,6 +75,7 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-06 | KB nextjs-routing-rendering·git-init-add-commit-status·git-branch-switch-merge·git-log-diff-show·git-restore-reset-revert | draft → approved (89·91·90·92·92) | **Fable(대행)** P-02 KB 9차 — 인용 전건 세션 내 fetch 원문 대조 |
 | 2026-07-06 | KB nextjs-routing-rendering·git-init-add-commit-status·git-branch-switch-merge·git-log-diff-show·git-restore-reset-revert | needed → draft | **Fable(대행)** P-01 T03/T04 KB 9차 — Codex 토큰 소진, 운영자 승인 |
 | 2026-07-06 | KB json-data-contracts·web-security-basics·typescript-type-system·react-component-model·react-state-effects | needed → draft | Codex P-01 T02/T03/T07 KB 8차 |
 | 2026-07-06 | KB json-data-contracts·web-security-basics·typescript-type-system·react-component-model·react-state-effects | draft → approved | Codex P-02 T02/T03/T07 KB 8차 |

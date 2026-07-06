@@ -2,8 +2,8 @@
 id: git-restore-reset-revert
 title: "git restore / reset / revert — 되돌리기 3형제의 정확한 구분"
 topicGroup: T04
-status: draft
-score: null
+status: approved
+score: 92
 level: 중급
 prerequisites: [git-log-diff-show, git-branch-switch-merge]
 successors: []

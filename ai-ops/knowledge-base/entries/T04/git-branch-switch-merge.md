@@ -2,8 +2,8 @@
 id: git-branch-switch-merge
 title: "git branch / switch / merge — 흐름을 나누고 합치는 명령"
 topicGroup: T04
-status: draft
-score: null
+status: approved
+score: 90
 level: 기초
 prerequisites: [git-init-add-commit-status]
 successors: [git-restore-reset-revert]
