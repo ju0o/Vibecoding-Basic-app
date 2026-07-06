@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" role="img" aria-label="log, diff, show의 조회 범위">
+  <style>
+    .node { fill: #e2e8f0; stroke: #64748b; stroke-width: 1.5; }
+    .edge { stroke: #64748b; stroke-width: 1.5; fill: none; }
+    .scope-log { stroke: #0f766e; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .scope-diff { stroke: #b45309; stroke-width: 2; fill: none; }
+    .scope-show { stroke: #7c3aed; stroke-width: 2; fill: none; }
+    .label { font: 600 13px sans-serif; fill: #334155; }
+    .t-log { font: 600 12px monospace; fill: #0f766e; }
+    .t-diff { font: 600 12px monospace; fill: #b45309; }
+    .t-show { font: 600 12px monospace; fill: #7c3aed; }
+    @media (prefers-color-scheme: dark) {
+      .node { fill: #1e293b; stroke: #94a3b8; } .edge { stroke: #94a3b8; }
+      .label { fill: #e2e8f0; } .t-log { fill: #5eead4; } .t-diff { fill: #fbbf24; } .t-show { fill: #c4b5fd; }
+      .scope-log { stroke: #5eead4; } .scope-diff { stroke: #fbbf24; } .scope-show { stroke: #c4b5fd; }
+    }
+  </style>
+  <line class="edge" x1="80" y1="140" x2="640" y2="140"/>
+  <circle class="node" cx="100" cy="140" r="14"/>
+  <circle class="node" cx="220" cy="140" r="14"/>
+  <circle class="node" cx="340" cy="140" r="14"/>
+  <circle class="node" cx="460" cy="140" r="14"/>
+  <circle class="node" cx="580" cy="140" r="14"/>
+  <text class="label" x="100" y="145" text-anchor="middle">A</text>
+  <text class="label" x="220" y="145" text-anchor="middle">B</text>
+  <text class="label" x="340" y="145" text-anchor="middle">C</text>
+  <text class="label" x="460" y="145" text-anchor="middle">D</text>
+  <text class="label" x="580" y="145" text-anchor="middle">E</text>
+  <text class="label" x="640" y="120">HEAD</text>
+
+  <!-- log: 범위 (여러 커밋) -->
+  <rect class="scope-log" x="70" y="105" width="540" height="70" rx="12"/>
+  <text class="t-log" x="80" y="90">git log — parent 링크로 도달 가능한 커밋들의 나열</text>
+
+  <!-- diff: 두 지점 비교 -->
+  <path class="scope-diff" d="M220 175 C 220 225, 460 225, 460 175"/>
+  <text class="t-diff" x="255" y="245">git diff B D — 두 상태의 차이</text>
+
+  <!-- show: 한 지점 -->
+  <circle class="scope-show" cx="580" cy="140" r="24"/>
+  <text class="t-show" x="500" y="55">git show E — 한 객체의 상세</text>
+  <path class="scope-show" d="M560 62 L 576 116" fill="none"/>
+</svg>

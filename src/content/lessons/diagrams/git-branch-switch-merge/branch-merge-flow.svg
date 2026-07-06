@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" role="img" aria-label="브랜치 분기와 머지 흐름">
+  <style>
+    .node { fill: #e2e8f0; stroke: #64748b; stroke-width: 1.5; }
+    .node-f { fill: #ccfbf1; stroke: #0f766e; stroke-width: 1.5; }
+    .node-m { fill: #fef3c7; stroke: #b45309; stroke-width: 1.5; }
+    .edge { stroke: #64748b; stroke-width: 1.5; fill: none; }
+    .label { font: 600 13px sans-serif; fill: #334155; }
+    .sub { font: 11px sans-serif; fill: #64748b; }
+    .cmd { font: 600 12px monospace; fill: #0f766e; }
+    @media (prefers-color-scheme: dark) {
+      .node { fill: #1e293b; stroke: #94a3b8; } .node-f { fill: #134e4a; stroke: #5eead4; }
+      .node-m { fill: #451a03; stroke: #fbbf24; }
+      .label { fill: #e2e8f0; } .sub { fill: #94a3b8; } .cmd { fill: #5eead4; } .edge { stroke: #94a3b8; }
+    }
+  </style>
+  <!-- main line -->
+  <line class="edge" x1="80" y1="100" x2="600" y2="100"/>
+  <circle class="node" cx="80" cy="100" r="14"/>
+  <circle class="node" cx="180" cy="100" r="14"/>
+  <circle class="node" cx="280" cy="100" r="14"/>
+  <circle class="node-m" cx="600" cy="100" r="16"/>
+  <text class="label" x="80" y="70" text-anchor="middle">A</text>
+  <text class="label" x="180" y="70" text-anchor="middle">B</text>
+  <text class="label" x="280" y="70" text-anchor="middle">C</text>
+  <text class="label" x="600" y="66" text-anchor="middle">M</text>
+  <text class="sub" x="600" y="140" text-anchor="middle">병합 커밋</text>
+  <text class="label" x="40" y="104">main</text>
+
+  <!-- feature line -->
+  <path class="edge" d="M280 100 C 330 100, 340 180, 390 180 L 490 180 C 545 180, 555 108, 596 102"/>
+  <circle class="node-f" cx="390" cy="180" r="14"/>
+  <circle class="node-f" cx="490" cy="180" r="14"/>
+  <text class="label" x="390" y="215" text-anchor="middle">D</text>
+  <text class="label" x="490" y="215" text-anchor="middle">E</text>
+  <text class="cmd" x="330" y="150">switch -c feature</text>
+  <text class="cmd" x="520" y="60">git merge feature</text>
+  <text class="sub" x="360" y="40">merge가 가져오는 것 = 분기점 C 이후의 변경(D·E)만</text>
+</svg>

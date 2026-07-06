@@ -1,0 +1,207 @@
+## 한 줄 정의
+
+git branch·switch·merge는 커밋 이력을 갈래로 나누고(branch), 작업 위치를 그 갈래로 옮기고(switch), 갈라진 이력을 다시 하나로 합치는(merge) — **작업 흐름을 분리하고 재통합하는** 세 개의 명령입니다.
+
+공식 요약은 각각: branch는 "List, create, or delete branches", switch는 "Switch branches", merge는 "Join two or more development histories together". 이 강의의 목표는 세 명령의 옵션 암기가 아니라, ==브랜치가 "복사본"이 아니라 "포인터"라는 사실== 하나에서 나머지 동작 전부를 유도할 수 있게 만드는 것입니다.
+
+> [!KEY]
+> 브랜치를 만들 때 파일은 단 하나도 복사되지 않습니다. 커밋 그래프의 특정 지점을 가리키는 이름표 하나가 생길 뿐입니다. 이 사실을 받아들이면 "브랜치가 무겁지 않을까"라는 걱정과 "브랜치를 지우면 코드가 사라질까"라는 공포가 동시에 해소됩니다.
+
+## 왜 존재하는가
+
+기록 사이클(init/add/commit/status)만 있는 세계를 상상해 봅시다. 이력은 한 줄로만 자랍니다. 그러면 두 가지가 불가능합니다.
+
+첫째, **안전한 실험**이 불가능합니다. 새 기능을 시도하다가 망치면, 그 커밋들이 본 이력에 그대로 섞입니다. 둘째, **동시 진행**이 불가능합니다. 기능 A를 만들다가 급한 버그 B를 고쳐야 할 때, A의 미완성 커밋 위에 B 수정이 얹히는 뒤엉킨 이력이 만들어집니다.
+
+브랜치는 이 문제를 "이력의 갈래"로 풉니다. 실험은 실험 브랜치에서, 버그 수정은 수정 브랜치에서 — 그리고 검증이 끝난 것만 merge로 본 이력에 편입합니다. merge가 편입하는 범위는 정확히 정의되어 있습니다: 두 이력이 **갈라진 시점 이후**의 변경입니다. 그래서 공통 조상까지 거슬러 올라가 다시 합치는 일이 안전하게 성립합니다.
+
+## 작동 원리
+
+### 브랜치 = 움직이는 포인터
+
+branch 명령으로 새 브랜치를 만들면, 현재 HEAD(또는 지정한 시작점)를 가리키는 새 branch head가 생깁니다. 그게 전부입니다. 이후 그 브랜치에서 커밋할 때마다 포인터가 새 커밋으로 한 칸씩 전진합니다 — 1강에서 본 "커밋 시 브랜치가 갱신된다"는 규칙이 바로 이 전진입니다.
+
+### switch가 실제로 바꾸는 세 가지
+
+브랜치 전환은 이름표만 바꾸는 것이 아닙니다. switch를 실행하면 (1) 워킹 트리가 대상 브랜치의 내용으로 갱신되고, (2) 인덱스도 그에 맞게 갱신되며, (3) 이후의 새 커밋이 그 브랜치의 끝에 쌓이게 됩니다. ==전환 = 세 영역 전체의 기준점 이동==입니다. 그래서 커밋하지 않은 변경을 든 채 전환하면 작업이 섞이는 사고가 납니다.
+
+### merge의 방향과 충돌
+
+merge는 대칭 연산이 아닙니다. "지정한 커밋들의 변경"이 "**현재 브랜치로**" 들어옵니다. main에 서서 feature를 merge하면 main이 바뀌고, feature는 그대로입니다. 어디에 서 있는가가 결과를 결정합니다.
+
+합치는 도중 양쪽이 **같은 영역을 다르게** 수정한 경우 — 이때만 충돌이 발생합니다. Git은 임의로 한쪽을 고르지 않고, 양쪽의 내용을 모두 남긴 채 사람에게 해결을 요구합니다. 충돌은 오류가 아니라 "기계가 판단할 수 없으니 사람이 판단하라"는 정직한 신호입니다.
+
+> [!EXAMPLE]
+> main과 feature가 같은 함수의 다른 줄을 고쳤다면? 충돌 없이 자동으로 합쳐집니다. 같은 줄을 서로 다르게 고쳤다면? 그 지점만 충돌로 표시되고, 나머지는 이미 합쳐진 상태로 여러분의 결정을 기다립니다.
+
+## 스펙과 세부
+
+명령어 인덱스: [git branch](#git-branch) · [git switch](#git-switch) · [git merge](#git-merge)
+
+### `git branch`
+
+**문법**: `git branch [브랜치명] [시작점]`
+
+| 형태 | 의미 |
+|---|---|
+| `git branch` | 브랜치 나열 — 현재 브랜치가 강조 표시됨 |
+| `git branch <이름>` | 현재 HEAD를 가리키는 새 브랜치 생성 (전환은 안 함) |
+| `git branch <이름> <시작점>` | 지정 커밋에서 시작하는 브랜치 생성 |
+| `git branch -d <이름>` | 브랜치 삭제 |
+
+**사용 예시**:
+
+```bash
+git branch                 # * 표시가 현재 위치
+git branch feature-search  # 만들기만 — 여전히 원래 브랜치에 있음
+```
+
+**주의**: `git branch <이름>`은 만들기만 하고 옮겨가지 않습니다. "브랜치 만들었는데 커밋이 엉뚱한 데 쌓여요"의 원인 1순위입니다.
+
+### `git switch`
+
+**문법**: `git switch <브랜치>` / `git switch -c <새 브랜치> [시작점]`
+
+| 옵션 | 의미 |
+|---|---|
+| (없음) | 기존 브랜치로 전환 — 워킹 트리·인덱스 갱신 |
+| `-c <이름>` | 시작점에서 새 브랜치를 만든 뒤 전환 (생성+이동 한 번에) |
+
+**사용 예시**:
+
+```bash
+git switch -c fix-login-redirect   # 만들고 바로 이동
+git switch main                    # 본 브랜치로 복귀
+```
+
+**주의**: 전환 전 `git status`로 미커밋 변경을 확인하세요. 변경을 든 채 전환하면 그 변경이 새 브랜치로 따라오거나 전환이 거부됩니다.
+
+### `git merge`
+
+**문법**: `git merge <브랜치>`
+
+**절차** — 항상 이 순서입니다:
+
+1. 결과를 받을 브랜치로 이동: `git switch main`
+2. 합치기: `git merge feature-search`
+3. 충돌 시: 충돌 파일 수정 → `git add <파일>` → `git commit`
+
+**사용 예시**:
+
+```bash
+git switch main
+git merge feature-search
+# 충돌이 나면:
+#   CONFLICT (content): Merge conflict in src/search.ts
+# 파일을 열어 <<<<<<< ======= >>>>>>> 사이를 정리한 뒤
+git add src/search.ts
+git commit
+```
+
+**주의**: merge는 **현재 브랜치를** 바꿉니다. 방향이 헷갈리면 "결과를 받을 곳에 서서 실행"만 기억하세요.
+
+### 상황별 빠른 참조
+
+| 하고 싶은 것 | 명령 |
+|---|---|
+| 지금 어느 브랜치인지 확인 | `git branch` (강조 표시 = 현재) |
+| 브랜치 만들기만 (이동 없이) | `git branch <이름>` |
+| 만들고 바로 이동 | `git switch -c <이름>` |
+| 기존 브랜치로 이동 | `git switch <이름>` |
+| 특정 커밋에서 갈래 시작 | `git switch -c <이름> <시작점>` |
+| 검증 끝난 브랜치를 본 이력에 편입 | `git switch main` → `git merge <이름>` |
+| 다 쓴 브랜치 정리 | `git branch -d <이름>` |
+
+브랜치 삭제(-d)에 대한 공포도 포인터 모델이 해소합니다 — 지워지는 것은 이름표이지 커밋이 아닙니다. 이미 merge된 브랜치의 커밋들은 본 이력에서 도달 가능하므로, 이름표를 지워도 이력은 그대로 남습니다. 오히려 다 쓴 브랜치를 정리하지 않아 수십 개의 이름표가 쌓이는 쪽이 "지금 무엇이 진행 중인가"를 읽기 어렵게 만드는 실무 비용입니다.
+
+## 원문으로 읽기
+
+> "The command's second form creates a new branch head named <branch-name> which points to the current HEAD, or <start-point> if given."
+>
+> — 이 명령의 두 번째 형태는 현재 HEAD(또는 주어진 시작점)를 가리키는, <브랜치명>이라는 새 branch head를 만든다.
+> [git-branch — Git Documentation](https://git-scm.com/docs/git-branch)
+
+"branch head를 만든다" — 파일 복사나 스냅숏 생성이 아니라 포인터 하나의 생성입니다. 브랜치가 사실상 공짜인 이유, 그리고 수십 개를 만들어도 저장소가 무거워지지 않는 이유가 이 한 문장에 있습니다.
+
+> "Switch to a specified branch. The working tree and the index are updated to match the branch. All new commits will be added to the tip of this branch."
+>
+> — 지정한 브랜치로 전환한다. 워킹 트리와 인덱스가 그 브랜치에 맞게 갱신된다. 모든 새 커밋은 이 브랜치의 끝에 추가된다.
+> [git-switch — Git Documentation](https://git-scm.com/docs/git-switch)
+
+세 문장이 전환의 전 효과를 빠짐없이 나열합니다 — 파일 내용(워킹 트리), 스테이징 상태(인덱스), 미래 커밋의 목적지까지. 전환이 "가벼운 이동"이 아니라 작업 환경 전체의 교체임을 문서가 명시하는 것입니다.
+
+> "Incorporates changes from the named commits (since the time their histories diverged from the current branch) into the current branch."
+>
+> — 이름 붙인 커밋들의 변경을 (그 이력이 현재 브랜치에서 갈라진 시점 이후부터) 현재 브랜치로 편입한다.
+> [git-merge — Git Documentation](https://git-scm.com/docs/git-merge)
+
+merge의 방향("into the current branch")과 범위("since ... diverged")가 모두 이 문장에 있습니다. 괄호 안이 특히 중요합니다 — merge는 상대 브랜치의 전체 이력이 아니라 **갈라진 이후의 차이**만 가져오므로, 공통 조상은 두 번 적용되지 않습니다.
+
+> "When both sides made changes to the same area, however, Git cannot randomly pick one side over the other, and asks you to resolve it by leaving what both sides did to that area."
+>
+> — 그러나 양쪽이 같은 영역을 수정했다면, Git은 어느 한쪽을 임의로 고를 수 없으므로 그 영역에 양쪽이 한 일을 남겨두고 당신에게 해결을 요청한다.
+> [git-merge — Git Documentation](https://git-scm.com/docs/git-merge)
+
+충돌의 정의이자 충돌 마커(<<<<<<< =======)의 존재 이유입니다. "Git cannot randomly pick" — 충돌은 Git의 실패가 아니라, 의미 판단을 기계가 대신하지 않겠다는 설계 결정입니다.
+
+## 실전에서
+
+### AI 작업은 브랜치에서
+
+AI에게 규모 있는 변경을 맡길 때의 표준 루틴입니다:
+
+```bash
+git switch -c ai/refactor-search    # AI 전용 작업 브랜치
+# ... AI 작업 + 검토 + 커밋 반복 ...
+git switch main
+git merge ai/refactor-search        # 검증 끝난 결과만 본 이력으로
+```
+
+결과가 나쁘면? main으로 돌아와 브랜치를 버리면 본 이력은 처음부터 오염된 적이 없습니다. 이 프로젝트처럼 AI가 대량 커밋을 만드는 환경에서, 브랜치는 "되돌리기"가 아니라 **애초에 섞이지 않게 하는** 예방 장치입니다.
+
+### 충돌 해결의 실무 순서
+
+충돌 파일을 열면 세 부분이 보입니다: `<<<<<<<`와 `=======` 사이(현재 브랜치의 내용), `=======`와 `>>>>>>>` 사이(들어오는 브랜치의 내용). 해결은 기계적 삭제가 아니라 **의미의 병합**입니다 — 두 변경의 의도를 모두 살릴 수 있는지 먼저 판단하고, 마커를 제거한 최종 형태를 만든 뒤 add·commit으로 마무리합니다.
+
+> [!TIP]
+> 충돌 해결이 끝났는지 확신이 없으면 `git status`가 알려줍니다 — 해결되지 않은 파일은 "Unmerged paths"로 남아 있습니다. 마커(<<<<<<<)를 검색해 잔여물이 없는지 확인하는 것도 좋은 습관입니다.
+
+### 현재 위치 확인을 습관으로
+
+모든 사고의 공통 원인은 "내가 어디 있는지 몰랐다"입니다. 작업 시작 전 `git branch`의 강조 표시(현재 브랜치) 확인 — 3초짜리 습관이 잘못된 브랜치에 쌓인 커밋을 옮기는 30분짜리 수습을 대체합니다.
+
+### 시나리오: 작업 중 급한 수정이 끼어들 때
+
+기능 브랜치에서 작업하다가 본 이력의 급한 버그를 고쳐야 하는 상황 — 브랜치 전환의 가장 현실적인 시험대입니다:
+
+```bash
+# feature-search에서 작업 중, 급한 수정 요청 도착
+git status                         # 미커밋 변경 확인
+git add -A && git commit -m "wip: 검색 필터 중간 저장"   # 일단 기록
+git switch main                    # 본 이력으로
+git switch -c fix-broken-link      # 수정 전용 갈래
+# ... 수정 · 커밋 ...
+git switch main && git merge fix-broken-link   # 수정 편입
+git switch feature-search          # 원래 작업으로 복귀
+```
+
+핵심은 두 가지입니다. 전환 전에 커밋해서 작업이 브랜치를 따라다니지 않게 하는 것(switch가 워킹 트리를 갱신하므로), 그리고 급한 수정조차 main에 직접 하지 않고 갈래를 거치는 것 — 수정이 잘못됐을 때 버릴 수 있는 단위를 유지하는 습관입니다.
+
+## 한계와 트레이드오프
+
+**브랜치는 격리를 주지만 통합 비용을 미룹니다.** 오래 살아있는 브랜치일수록 본 이력과의 차이가 커지고 충돌 확률이 올라갑니다. 작게 만들고 빨리 합치는 것 — 브랜치 전략의 대원칙은 이 트레이드오프에서 나옵니다.
+
+**merge는 이력을 보존하는 대신 그래프를 복잡하게 만듭니다.** 합류 지점마다 병합 커밋이 생겨 이력이 다이아몬드 모양으로 얽힙니다. 이를 평평하게 만드는 rebase라는 대안이 있지만(후속 레퍼런스에서 다룹니다), 이력을 다시 쓰는 비용을 치릅니다.
+
+**충돌 해결은 자동화할 수 없는 판단입니다.** 도구는 어디가 충돌인지 알려줄 뿐, 어느 쪽이 옳은지는 코드의 의미를 아는 사람만 결정할 수 있습니다. AI에게 충돌 해결을 맡길 때도 "양쪽 변경의 의도"를 설명해 주지 않으면 기계적으로 한쪽을 고르는 위험한 해결이 나옵니다.
+
+> [!WARNING]
+> 전환 방향을 착각한 merge — 기능 브랜치에 서서 main을 merge하면, main은 그대로이고 기능 브랜치에 main이 섞입니다. 그 상태로 "main에 반영됐다"고 믿으면 릴리스에서 기능이 통째로 빠집니다. merge 후에는 반드시 결과 브랜치의 log를 확인하세요.
+
+## 더 읽기
+
+- [git-branch — Git Documentation](https://git-scm.com/docs/git-branch) — 나열/생성/삭제, branch head의 의미
+- [git-switch — Git Documentation](https://git-scm.com/docs/git-switch) — 전환의 3중 효과, -c 옵션
+- [git-merge — Git Documentation](https://git-scm.com/docs/git-merge) — 편입 방향·범위, 충돌 규칙, pull과의 관계
+
+이전 순서: [git init/add/commit/status 레퍼런스](/lessons/git-init-add-commit-status) — 이 강의의 전제인 커밋 그래프. 다음 순서: [git log/diff/show 레퍼런스](/lessons/git-log-diff-show) — 갈라지고 합쳐진 이력을 읽는 법.

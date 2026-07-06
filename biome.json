@@ -45,6 +45,8 @@
       "**",
       "!node_modules",
       "!.next",
+      "!out",
+      "!.firebase",
       "!.omo",
       "!dist",
       "!coverage",

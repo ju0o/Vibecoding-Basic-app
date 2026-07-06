@@ -13,8 +13,8 @@ sources:
   - { title: "git-switch — Git Documentation", url: "https://git-scm.com/docs/git-switch", checked: 2026-07-06 }
   - { title: "git-merge — Git Documentation", url: "https://git-scm.com/docs/git-merge", checked: 2026-07-06 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [git-branch-switch-merge]
+  glossary: ["Branch", "Merge", "Merge Conflict", "Switch"]
 updated: 2026-07-06
 ---
 

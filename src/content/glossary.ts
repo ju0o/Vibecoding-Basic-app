@@ -1626,4 +1626,132 @@ export const GLOSSARY_TERMS = [
       "Effect Dependency는 Effect 안에서 사용하는 props/state 변화 중 external synchronization을 다시 수행해야 하는 조건을 나타냅니다. lint error를 숨기는 장치가 아니라 Effect의 re-run 기준을 설명하는 계약입니다.",
     related: ["Effect", "useEffect", "External System"],
   },
+  {
+    term: "Repository (저장소)",
+    category: "Git",
+    shortDefinition: "프로젝트의 전체 이력이 저장되는 공간 — 실체는 프로젝트 안의 .git 디렉터리",
+    explanation:
+      "git init이 만드는 .git 디렉터리가 저장소의 실체이며, objects(내용물)·refs/heads(브랜치 포인터) 등이 그 안에 있습니다. 서버가 아니라 로컬 폴더이므로, 저장소 문제는 결국 파일 시스템 문제로 접근할 수 있습니다.",
+    related: ["Working Tree", "Index (Staging Area)", "HEAD"],
+  },
+  {
+    term: "Working Tree",
+    category: "Git",
+    shortDefinition: "편집기로 실제 수정하는, 눈에 보이는 프로젝트 파일들의 영역",
+    explanation:
+      "Git의 세 영역 중 첫 번째로, 아직 기록되지 않은 진행 중 작업이 머무는 곳입니다. git status의 Changes not staged와 Untracked files가 이 영역과 인덱스의 차이를 보여줍니다.",
+    related: ["Index (Staging Area)", "HEAD", "Repository (저장소)"],
+  },
+  {
+    term: "Index (Staging Area)",
+    category: "Git",
+    shortDefinition: "다음 커밋에 들어갈 내용을 골라 담아두는 준비 공간",
+    explanation:
+      "공식 문서가 index와 staging area를 같은 것으로 병기합니다. git add가 워킹 트리의 내용을 이곳에 올리고, git commit은 이곳의 내용만 기록합니다 — 이 분리가 부분 커밋을 가능하게 합니다.",
+    related: ["Working Tree", "Commit (Git)", "Repository (저장소)"],
+  },
+  {
+    term: "HEAD",
+    category: "Git",
+    shortDefinition: "현재 작업의 기준이 되는 커밋 — 보통 현재 브랜치의 끝",
+    explanation:
+      "새 커밋은 HEAD의 직계 자식으로 만들어지고 브랜치가 그것을 가리키도록 갱신됩니다. status가 보여주는 커밋될 것은 HEAD와 인덱스의 차이입니다.",
+    related: ["Commit (Git)", "Branch", "Index (Staging Area)"],
+  },
+  {
+    term: "Commit (Git)",
+    category: "Git",
+    shortDefinition: "인덱스의 내용과 메시지로 만들어지는, 되돌아갈 수 있는 기록 지점",
+    explanation:
+      "커밋은 저장 버튼이 아니라 이력 그래프에 노드를 추가하는 행위입니다. 부모-자식으로 연결된 커밋들이 이력을 이루며, 이 연결 덕분에 조회(log)·분기(branch)·복구(reset)가 가능해집니다. React 렌더 단계의 Commit과는 다른 개념입니다.",
+    related: ["HEAD", "Index (Staging Area)", "Repository (저장소)"],
+  },
+  {
+    term: "Untracked File",
+    category: "Git",
+    shortDefinition: "워킹 트리에 있지만 Git이 아직 관리하지 않는 파일",
+    explanation:
+      "git status의 세 번째 묶음으로 표시되며, git add를 거쳐야 추적이 시작됩니다. 실험 파일이나 비밀 키가 무심코 add되지 않도록, 반복 제외 대상은 .gitignore에 등록합니다.",
+    related: ["Working Tree", "Index (Staging Area)"],
+  },
+  {
+    term: "Branch",
+    category: "Git",
+    shortDefinition: "커밋 그래프의 특정 지점을 가리키는 움직이는 포인터 — 파일 복사본이 아님",
+    explanation:
+      "새 브랜치는 현재 HEAD를 가리키는 이름표로 생성되며, 그 브랜치에서 커밋할 때마다 포인터가 전진합니다. 복사가 없으므로 생성 비용이 사실상 없고, 실험·기능·수정 작업을 본 이력과 격리하는 기본 수단이 됩니다.",
+    related: ["HEAD", "Commit (Git)", "Merge"],
+  },
+  {
+    term: "Merge",
+    category: "Git",
+    shortDefinition: "갈라진 이력의 변경을 — 분기 시점 이후분만 — 현재 브랜치로 편입하는 작업",
+    explanation:
+      "merge는 대칭이 아니라 방향이 있습니다: 결과를 받을 브랜치에 서서 실행해야 합니다. 편입 범위는 두 이력이 갈라진 시점 이후의 차이이며, git pull도 내부적으로 merge를 사용합니다.",
+    related: ["Branch", "Merge Conflict", "Commit (Git)"],
+  },
+  {
+    term: "Merge Conflict",
+    category: "Git",
+    shortDefinition: "양쪽 브랜치가 같은 영역을 다르게 수정해 Git이 사람의 판단을 요구하는 상태",
+    explanation:
+      "Git은 임의로 한쪽을 고르지 않고 양쪽 내용을 충돌 마커와 함께 남깁니다. 해결은 마커 삭제가 아니라 두 변경의 의도를 살리는 의미의 병합이며, 정리 후 add·commit으로 마무리합니다.",
+    related: ["Merge", "Branch", "Working Tree"],
+  },
+  {
+    term: "Switch",
+    category: "Git",
+    shortDefinition: "워킹 트리·인덱스·미래 커밋의 목적지를 지정 브랜치 기준으로 옮기는 작업",
+    explanation:
+      "git switch는 파일 내용과 스테이징 상태를 대상 브랜치에 맞게 갱신하고, 이후 커밋이 그 브랜치 끝에 쌓이게 합니다. -c 옵션은 생성과 전환을 한 번에 수행합니다. 미커밋 변경을 든 채 전환하면 작업이 섞일 수 있습니다.",
+    related: ["Branch", "Working Tree", "Index (Staging Area)"],
+  },
+  {
+    term: "Diff",
+    category: "Git",
+    shortDefinition: "두 상태 사이의 내용 차이 — 비교쌍을 골라 보는 조회 도구",
+    explanation:
+      "git diff는 인자에 따라 비교쌍이 달라지므로 지금 무엇과 무엇을 비교 중인가가 항상 첫 질문입니다. 인자가 없으면 아직 add하지 않은 변경(워킹 트리와 인덱스의 차이)을 보여줍니다. AI 변경 검토의 핵심 도구입니다.",
+    related: ["Index (Staging Area)", "Working Tree", "Commit (Git)"],
+  },
+  {
+    term: "Reachability",
+    category: "Git",
+    shortDefinition: "커밋에서 parent 링크를 따라 거슬러 올라가 닿을 수 있는 커밋들의 집합",
+    explanation:
+      "git log의 나열 기준이 바로 이것입니다 — 지정한 커밋에서 도달 가능한 것을 포함하고, ^ 표시 커밋에서 도달 가능한 것을 제외합니다. main..feature 같은 범위 문법은 이 포함/제외의 표기법입니다.",
+    related: ["Commit (Git)", "Branch", "HEAD"],
+  },
+  {
+    term: "Git Object",
+    category: "Git",
+    shortDefinition: "저장소 내용물의 저장 단위 — blob, tree, tag, commit 네 종류",
+    explanation:
+      ".git/objects에 저장되는 모든 것이 이 네 타입 중 하나이며, git show는 이들 모두를 열람합니다. 커밋도 특별한 존재가 아니라 객체 저장소의 한 시민이라는 것이 Git 내부 모델의 핵심입니다.",
+    related: ["Repository (저장소)", "Commit (Git)", "Diff"],
+  },
+  {
+    term: "Reset",
+    category: "Git",
+    shortDefinition: "HEAD와 인덱스를 지정 커밋 상태로 옮기는 이력 재작성 — soft/mixed/hard 3모드",
+    explanation:
+      "soft는 HEAD만, mixed(기본)는 HEAD+인덱스, hard는 워킹 트리까지 되감습니다. hard는 미추적 파일도 덮어쓸 수 있는 유일한 파괴 모드입니다. 공유(push) 이전의 로컬 이력에만 쓰는 것이 안전 경계입니다.",
+    related: ["HEAD", "Revert", "Index (Staging Area)"],
+  },
+  {
+    term: "Revert",
+    category: "Git",
+    shortDefinition: "기존 커밋의 반대 변경을 새 커밋으로 기록하는 이력 보존형 취소",
+    explanation:
+      "이력을 지우지 않고 오히려 한 칸 늘리므로 공유된 이력에서 안전하며, 취소했다는 사실이 감사 가능한 기록으로 남습니다. 실행 전 워킹 트리가 깨끗해야 합니다. 이미 배포·공유된 결함의 표준 취소 수단입니다.",
+    related: ["Commit (Git)", "Reset", "Merge Conflict"],
+  },
+  {
+    term: "Restore",
+    category: "Git",
+    shortDefinition: "파일 내용을 복원 소스에서 되살리는 명령 — 스테이징 취소 포함",
+    explanation:
+      "기본은 워킹 트리 복원(미커밋 수정 폐기), --staged는 스테이징 취소(내용 유지), --source는 과거 시점 파일 추출입니다. 워킹 트리 복원으로 버린 미커밋 수정은 되돌릴 수 없으므로 실행 전 diff 확인이 필수입니다.",
+    related: ["Working Tree", "Index (Staging Area)", "Reset"],
+  },
 ] satisfies readonly GlossaryTerm[]

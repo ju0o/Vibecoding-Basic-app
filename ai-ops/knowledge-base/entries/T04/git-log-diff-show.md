@@ -13,8 +13,8 @@ sources:
   - { title: "git-diff — Git Documentation", url: "https://git-scm.com/docs/git-diff", checked: 2026-07-06 }
   - { title: "git-show — Git Documentation", url: "https://git-scm.com/docs/git-show", checked: 2026-07-06 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [git-log-diff-show]
+  glossary: ["Diff", "Reachability", "Git Object"]
 updated: 2026-07-06
 ---
 

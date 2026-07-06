@@ -14,8 +14,8 @@ sources:
   - { title: "git-commit — Git Documentation", url: "https://git-scm.com/docs/git-commit", checked: 2026-07-06 }
   - { title: "git-status — Git Documentation", url: "https://git-scm.com/docs/git-status", checked: 2026-07-06 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [git-init-add-commit-status]
+  glossary: ["Repository (저장소)", "Working Tree", "Index (Staging Area)", "HEAD", "Commit (Git)", "Untracked File"]
 updated: 2026-07-06
 ---
 

@@ -13,8 +13,8 @@ sources:
   - { title: "git-reset — Git Documentation", url: "https://git-scm.com/docs/git-reset", checked: 2026-07-06 }
   - { title: "git-revert — Git Documentation", url: "https://git-scm.com/docs/git-revert", checked: 2026-07-06 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [git-restore-reset-revert]
+  glossary: ["Reset", "Revert", "Restore"]
 updated: 2026-07-06
 ---
 
