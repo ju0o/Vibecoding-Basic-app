@@ -101,10 +101,10 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | hallucination-and-verification | ai-basics | hallucination-verification | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 5, RELEASE-2026-07-05-v2-wave5.md |
 | embeddings-and-similarity | ai-basics | embeddings-similarity | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 6, RELEASE-2026-07-05-v2-wave6.md |
 
-| git-init-add-commit-status | git-collaboration | git-init-add-commit-status | v | v | - | - | Wave 15 (Fable), reference |
-| git-branch-switch-merge | git-collaboration | git-branch-switch-merge | v | v | - | - | Wave 15 (Fable), reference |
-| git-log-diff-show | git-collaboration | git-log-diff-show | v | v | - | - | Wave 15 (Fable), reference |
-| git-restore-reset-revert | git-collaboration | git-restore-reset-revert | v | v | - | - | Wave 15 (Fable), reference |
+| git-init-add-commit-status | git-collaboration | git-init-add-commit-status | v | v | v | v | Wave 15 (Fable), reference |
+| git-branch-switch-merge | git-collaboration | git-branch-switch-merge | v | v | v | v | Wave 15 (Fable), reference |
+| git-log-diff-show | git-collaboration | git-log-diff-show | v | v | v | v | Wave 15 (Fable), reference |
+| git-restore-reset-revert | git-collaboration | git-restore-reset-revert | v | v | v | v | Wave 15 (Fable), reference |
 
 ## 집계 (Executor가 행 갱신 시 함께 갱신)
 
