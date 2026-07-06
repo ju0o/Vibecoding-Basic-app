@@ -59,10 +59,10 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | debugging-error-reading | development-basics | debugging-error-reading | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 9, RELEASE-2026-07-06-v2-wave9.md |
 | regex-for-code-search | development-basics | regex-code-search | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 9, RELEASE-2026-07-06-v2-wave9.md |
 | package-json-and-semver | development-basics | package-json-semver | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 10, RELEASE-2026-07-06-v2-wave10.md |
-| html-semantic-elements | web-basics | html-semantic-elements | ✓ | — | — | — | T02 Wave 1 generated, P-05 대기 |
-| css-cascade-layout-responsive | web-basics | css-cascade-layout | ✓ | — | — | — | T02 Wave 1 generated, P-05 대기 |
-| javascript-dom-events | web-basics | javascript-dom-events | ✓ | — | — | — | T02 Wave 1 generated, P-05 대기 |
-| browser-rendering-network | web-basics | browser-rendering-network | ✓ | — | — | — | T02 Wave 1 generated, P-05 대기 |
+| html-semantic-elements | web-basics | html-semantic-elements | ✓ | ✓ | — | — | T02 Wave 1 integrated, P-06 대기 |
+| css-cascade-layout-responsive | web-basics | css-cascade-layout | ✓ | ✓ | — | — | T02 Wave 1 integrated, P-06 대기 |
+| javascript-dom-events | web-basics | javascript-dom-events | ✓ | ✓ | — | — | T02 Wave 1 integrated, P-06 대기 |
+| browser-rendering-network | web-basics | browser-rendering-network | ✓ | ✓ | — | — | T02 Wave 1 integrated, P-06 대기 |
 | context-engineering-basics | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | context-window-and-memory | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
 | system-prompts-and-instruction-layers | M10 | context-engineering | ✓ | ✓ | ✓ (2026-07-05, CODEX-PLAN V2 verify) | ✓ | V2 Wave 1, RELEASE-2026-07-05-v2-wave1.md |
@@ -100,8 +100,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | KB Quote Bank (7차 approved KB) | 5 / 5 | 100% |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
 | Lesson 생성 | 36 / 37 | 97% (T02 4강 generated, http-request-response planned) |
-| Site 반영 | 32 / 37 | 86% (T02 generated 4강 P-05 대기) |
-| Verify 통과 | 32 / 37 | 86% (`npm run verify` PASS, T02 generated 대기) |
+| Site 반영 | 36 / 37 | 97% (T02 4강 integrated, http-request-response planned) |
+| Verify 통과 | 32 / 37 | 86% (`npm run verify` PASS, T02 integrated 대기) |
 | Release | 32 / 37 | 86% (V2 Wave 1+2+3+4+5+6+7+8+9+10 released, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
@@ -161,3 +161,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-06 | CODEX-PLAN Phase 2 KB 7차 P-01 | 완료 | html-semantic-elements·css-cascade-layout·javascript-dom-events·browser-rendering-network·http-request-response draft 생성, P-02 대기 |
 | 2026-07-06 | CODEX-PLAN Phase 2 KB 7차 P-02 | 완료 | html-semantic-elements 88·css-cascade-layout 87·javascript-dom-events 88·browser-rendering-network 89·http-request-response 90 APPROVED |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-04 T02 Wave 1 | 완료 | html-semantic-elements·css-cascade-layout-responsive·javascript-dom-events·browser-rendering-network V2 Lesson Draft + diagrams 생성, P-05 대기 |
+| 2026-07-06 | CODEX-PLAN Phase 3 P-05 T02 Wave 1 | 완료 | html-semantic-elements·css-cascade-layout-responsive·javascript-dom-events·browser-rendering-network 사이트 반영 + glossary/KB consumers/diagrams 통합, `npm run lint`·`npm run typecheck` PASS |

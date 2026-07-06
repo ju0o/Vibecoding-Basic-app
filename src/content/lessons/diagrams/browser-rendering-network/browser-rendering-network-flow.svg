@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="620" viewBox="0 0 1040 620" role="img" aria-labelledby="title desc">
+  <title id="title">Browser Rendering and Network Flow</title>
+  <desc id="desc">Browser navigation flow from URL to network request, parsing, DOM and CSSOM, render tree, layout, paint, and timing evidence.</desc>
+  <style>
+    .bg { fill: #f8fafc; }
+    .panel { fill: #ffffff; stroke: #334155; stroke-width: 2; rx: 24; }
+    .network { fill: #dbeafe; stroke: #2563eb; stroke-width: 2; rx: 15; }
+    .parse { fill: #fef3c7; stroke: #d97706; stroke-width: 2; rx: 15; }
+    .render { fill: #dcfce7; stroke: #16a34a; stroke-width: 2; rx: 15; }
+    .timing { fill: #ede9fe; stroke: #7c3aed; stroke-width: 2; rx: 15; }
+    .arrow { stroke: #475569; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    .title { font: 700 24px system-ui, -apple-system, Segoe UI, sans-serif; fill: #0f172a; }
+    .label { font: 700 17px system-ui, -apple-system, Segoe UI, sans-serif; fill: #111827; }
+    .small { font: 500 13px system-ui, -apple-system, Segoe UI, sans-serif; fill: #334155; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1040" height="620"/>
+  <rect class="panel" x="40" y="36" width="960" height="548" rx="24"/>
+  <text class="title" x="76" y="80">Browser flow: network에서 pixels까지</text>
+
+  <rect class="network" x="76" y="130" width="150" height="88" rx="15"/>
+  <text class="label" x="106" y="164">Navigation</text>
+  <text class="small" x="100" y="192">URL / link / form</text>
+
+  <rect class="network" x="264" y="130" width="150" height="88" rx="15"/>
+  <text class="label" x="296" y="164">Connection</text>
+  <text class="small" x="292" y="192">DNS / TCP / TLS</text>
+
+  <rect class="network" x="452" y="130" width="150" height="88" rx="15"/>
+  <text class="label" x="484" y="164">HTTP</text>
+  <text class="small" x="480" y="192">GET / response</text>
+
+  <rect class="parse" x="640" y="130" width="150" height="88" rx="15"/>
+  <text class="label" x="672" y="164">Parsing</text>
+  <text class="small" x="666" y="192">HTML / CSS</text>
+
+  <rect class="parse" x="828" y="130" width="130" height="88" rx="15"/>
+  <text class="label" x="856" y="164">Trees</text>
+  <text class="small" x="850" y="192">DOM + CSSOM</text>
+
+  <path class="arrow" d="M226 174 H264"/>
+  <path class="arrow" d="M414 174 H452"/>
+  <path class="arrow" d="M602 174 H640"/>
+  <path class="arrow" d="M790 174 H828"/>
+
+  <rect class="render" x="188" y="316" width="160" height="90" rx="15"/>
+  <text class="label" x="226" y="350">Render tree</text>
+  <text class="small" x="222" y="378">DOM + styles</text>
+
+  <rect class="render" x="440" y="316" width="160" height="90" rx="15"/>
+  <text class="label" x="492" y="350">Layout</text>
+  <text class="small" x="478" y="378">box geometry</text>
+
+  <rect class="render" x="692" y="316" width="160" height="90" rx="15"/>
+  <text class="label" x="748" y="350">Paint</text>
+  <text class="small" x="726" y="378">pixels on screen</text>
+
+  <path class="arrow" d="M893 218 C893 270 290 270 268 316"/>
+  <path class="arrow" d="M348 361 H440"/>
+  <path class="arrow" d="M600 361 H692"/>
+
+  <rect class="timing" x="246" y="476" width="548" height="56" rx="15"/>
+  <text class="label" x="280" y="508">Evidence: PerformanceNavigationTiming + PerformanceResourceTiming</text>
+</svg>

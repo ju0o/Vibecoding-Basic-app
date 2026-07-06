@@ -9,8 +9,8 @@ prerequisites: [files-folders-paths]
 successors: [css-cascade-layout, javascript-dom-events, accessibility-basics]
 related: [browser-rendering-network]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [html-semantic-elements]
+  glossary: [Semantic HTML, Content Sectioning, Main Element, Nav Element, Article Element]
 sources:
   - { title: "HTML elements reference", url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements", checked: 2026-07-06 }
   - { title: "<main>: The Main element", url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/main", checked: 2026-07-06 }

@@ -9,8 +9,8 @@ prerequisites: [html-semantic-elements]
 successors: [browser-rendering-network, responsive-ui-patterns]
 related: [javascript-dom-events]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [css-cascade-layout-responsive]
+  glossary: [CSS Cascade, Specificity, Normal Flow, Responsive Design, Media Query]
 sources:
   - { title: "Introduction to the CSS cascade", url: "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Introduction", checked: 2026-07-06 }
   - { title: "Introduction to CSS layout", url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Introduction", checked: 2026-07-06 }

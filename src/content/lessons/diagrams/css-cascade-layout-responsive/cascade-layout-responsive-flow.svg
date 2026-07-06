@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">CSS Cascade Layout Responsive Flow</title>
+  <desc id="desc">CSS flow from selectors through cascade algorithm, layout tools, and responsive media conditions.</desc>
+  <style>
+    .bg { fill: #f8fafc; }
+    .box { fill: #ffffff; stroke: #334155; stroke-width: 2; rx: 18; }
+    .step1 { fill: #dbeafe; stroke: #2563eb; stroke-width: 2; rx: 16; }
+    .step2 { fill: #ede9fe; stroke: #7c3aed; stroke-width: 2; rx: 16; }
+    .step3 { fill: #dcfce7; stroke: #16a34a; stroke-width: 2; rx: 16; }
+    .step4 { fill: #fef3c7; stroke: #d97706; stroke-width: 2; rx: 16; }
+    .arrow { stroke: #475569; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    .title { font: 700 23px system-ui, -apple-system, Segoe UI, sans-serif; fill: #0f172a; }
+    .label { font: 700 18px system-ui, -apple-system, Segoe UI, sans-serif; fill: #111827; }
+    .small { font: 500 14px system-ui, -apple-system, Segoe UI, sans-serif; fill: #334155; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="960" height="560"/>
+  <rect class="box" x="40" y="36" width="880" height="488" rx="24"/>
+  <text class="title" x="72" y="78">CSS가 화면으로 이어지는 4단계</text>
+
+  <rect class="step1" x="80" y="128" width="180" height="120" rx="16"/>
+  <text class="label" x="110" y="164">Selector match</text>
+  <text class="small" x="110" y="194">HTML element와</text>
+  <text class="small" x="110" y="216">CSS rule 후보 연결</text>
+
+  <rect class="step2" x="300" y="128" width="200" height="120" rx="16"/>
+  <text class="label" x="330" y="164">Cascade</text>
+  <text class="small" x="330" y="194">origin, importance,</text>
+  <text class="small" x="330" y="216">specificity, order</text>
+
+  <rect class="step3" x="540" y="128" width="180" height="120" rx="16"/>
+  <text class="label" x="570" y="164">Layout</text>
+  <text class="small" x="570" y="194">normal flow, flex,</text>
+  <text class="small" x="570" y="216">grid, positioning</text>
+
+  <rect class="step4" x="760" y="128" width="120" height="120" rx="16"/>
+  <text class="label" x="786" y="164">Responsive</text>
+  <text class="small" x="786" y="194">media query</text>
+  <text class="small" x="786" y="216">viewport 조건</text>
+
+  <path class="arrow" d="M260 188 H300"/>
+  <path class="arrow" d="M500 188 H540"/>
+  <path class="arrow" d="M720 188 H760"/>
+
+  <rect class="step2" x="168" y="324" width="624" height="92" rx="18"/>
+  <text class="label" x="204" y="362">Debug question</text>
+  <text class="small" x="204" y="390">이 property는 어떤 selector에서 왔고, 어떤 cascade 단계에서 이겼으며, 어떤 viewport 조건에서 layout을 바꾸는가?</text>
+</svg>

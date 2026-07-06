@@ -1115,4 +1115,168 @@ export const GLOSSARY_TERMS = [
       "Package Specifier는 npm package spec 문서가 설명하는 package 식별 표기입니다. dependency나 install command를 검토할 때 package name만 보지 않고 어떤 specifier 형태로 지정됐는지 확인해야 합니다.",
     related: ["Dependency", "Version Range", "package.json"],
   },
+  {
+    term: "Semantic HTML",
+    category: "웹 개발",
+    shortDefinition:
+      "화면의 모양이 아니라 콘텐츠의 역할과 구조가 드러나도록 HTML 요소를 고르는 방식",
+    explanation:
+      "Semantic HTML은 `main`, `nav`, `article`, `section`처럼 요소 이름 자체가 문서 안에서의 역할을 말하게 하는 작성 방식입니다. CSS class나 시각적 배치만으로 구조를 추측하게 두지 않고, DOM tree와 접근성 해석, AI 코드 수정 범위가 읽을 수 있는 의미를 HTML에 남깁니다.",
+    related: ["HTML", "DOM", "Accessibility"],
+  },
+  {
+    term: "Content Sectioning",
+    category: "웹 개발",
+    shortDefinition: "문서 내용을 논리적인 조각으로 조직하는 HTML 요소 범주",
+    explanation:
+      "Content Sectioning은 `article`, `section`, `nav`, `aside`, heading처럼 페이지 내용을 logical pieces로 나누는 HTML 요소 흐름입니다. 강의 본문, 목차, 독립 카드처럼 서로 다른 역할을 가진 영역을 분리해 문서 구조를 읽기 쉽게 만듭니다.",
+    related: ["Semantic HTML", "HTML", "Heading"],
+  },
+  {
+    term: "Main Element",
+    category: "HTML",
+    shortDefinition: "문서 body에서 중심 주제나 핵심 기능과 직접 연결된 dominant content 영역",
+    explanation:
+      "Main Element는 `<main>`으로 작성하며, 페이지에서 반복되는 navigation이나 footer가 아니라 해당 문서의 중심 내용을 나타냅니다. 학습 사이트에서는 강의 본문이나 실제 작업 영역을 main으로 잡으면 AI에게 변경 범위를 설명할 때 기준점이 됩니다.",
+    related: ["Semantic HTML", "HTML", "DOM"],
+  },
+  {
+    term: "Nav Element",
+    category: "HTML",
+    shortDefinition: "현재 문서나 다른 문서로 이동하는 navigation links를 제공하는 영역",
+    explanation:
+      "Nav Element는 `<nav>`로 작성하며 메뉴, 목차, index처럼 이동을 담당하는 링크 묶음을 나타냅니다. 모든 링크를 nav에 넣는 것이 아니라, 사용자가 길을 찾는 데 쓰는 navigation section을 명확히 표시하는 데 사용합니다.",
+    related: ["Semantic HTML", "Navigation", "Accessibility"],
+  },
+  {
+    term: "Article Element",
+    category: "HTML",
+    shortDefinition: "독립적으로 배포되거나 재사용될 수 있는 콘텐츠 단위",
+    explanation:
+      "Article Element는 `<article>`로 작성하며 글, forum post, product card, 강의 preview처럼 따로 떼어도 의미가 남는 구성에 적합합니다. 리스트 안의 카드나 학습 콘텐츠 단위를 AI가 수정할 때 article boundary는 재사용 가능한 단위를 알려 줍니다.",
+    related: ["Semantic HTML", "Content Sectioning", "HTML"],
+  },
+  {
+    term: "CSS Cascade",
+    category: "CSS",
+    shortDefinition: "여러 출처에서 온 CSS 선언 중 최종 property value를 고르는 알고리즘",
+    explanation:
+      'CSS Cascade는 user agent, author, user style과 selector, importance, specificity, order 같은 조건을 종합해 어떤 CSS declaration이 실제 값이 되는지 결정합니다. 스타일이 적용되지 않을 때는 "왜 안 먹지"보다 cascade 단계에서 어떤 선언이 이겼는지 확인해야 합니다.',
+    related: ["CSS", "Specificity", "CSS Declaration"],
+  },
+  {
+    term: "Specificity",
+    category: "CSS",
+    shortDefinition: "selector가 얼마나 구체적인지 비교해 cascade 판단에 쓰는 기준",
+    explanation:
+      "Specificity는 cascade algorithm의 한 단계이며, style 충돌에서 어떤 selector의 declaration이 더 강하게 적용될지 판단하는 데 사용됩니다. 다만 cascade는 specificity만으로 끝나지 않고 relevance, origin and importance, scoping proximity, order of appearance와 함께 작동합니다.",
+    related: ["CSS Cascade", "Selector", "CSS Declaration"],
+  },
+  {
+    term: "Normal Flow",
+    category: "CSS",
+    shortDefinition: "별도 layout intervention이 없을 때 HTML 요소가 기본적으로 배치되는 흐름",
+    explanation:
+      "Normal Flow는 CSS layout을 이해하는 출발점입니다. 요소는 기본 display와 document order에 따라 먼저 배치되고, flexbox, grid, positioning 같은 layout tools는 이 기본 흐름을 필요한 방식으로 바꿉니다.",
+    related: ["CSS Layout", "Display", "HTML"],
+  },
+  {
+    term: "Responsive Design",
+    category: "CSS",
+    shortDefinition: "특정 화면 하나가 아니라 다양한 device 조건에 반응하는 layout 접근법",
+    explanation:
+      'Responsive Design은 별도의 단일 기술이 아니라 fluid layout, flexible media, media queries 같은 best practices를 조합하는 접근입니다. AI가 "반응형으로 만들었다"고 할 때 실제로 viewport와 unknown screen sizes에 대응하는 CSS 구조가 있는지 확인해야 합니다.',
+    related: ["Media Query", "CSS Layout", "Viewport"],
+  },
+  {
+    term: "Media Query",
+    category: "CSS",
+    shortDefinition: "media type이나 feature 조건에 따라 CSS style을 조건부로 적용하는 문법",
+    explanation:
+      "Media Query는 `@media` 규칙으로 viewport width 같은 조건을 검사해 특정 CSS 선언을 적용합니다. 화면 크기만이 전부는 아니지만, responsive layout에서 breakpoints와 mobile-first 흐름을 만들 때 자주 사용됩니다.",
+    related: ["Responsive Design", "CSS Cascade", "Viewport"],
+  },
+  {
+    term: "DOM",
+    category: "웹 개발",
+    shortDefinition:
+      "웹 문서 구조를 scripts와 programming languages가 다룰 수 있게 memory 안의 logical tree로 표현하는 Web API",
+    explanation:
+      "DOM은 HTML document를 node와 object로 이루어진 tree로 나타내며, JavaScript가 structure, style, content를 읽고 바꾸는 통로가 됩니다. JavaScript 언어 자체의 일부가 아니라 browser가 제공하는 Web API이므로 언어 문법과 DOM API를 구분해 읽어야 합니다.",
+    related: ["JavaScript", "HTML", "Event"],
+  },
+  {
+    term: "Event",
+    category: "웹 개발",
+    shortDefinition: "EventTarget에서 발생한 사용자 행동이나 API 진행 상태를 나타내는 객체",
+    explanation:
+      "Event는 click, keyboard input, async task progress처럼 target에서 일어난 변화를 코드가 다룰 수 있게 표현합니다. event handler는 event object를 받아 target, propagation, type 같은 정보를 기준으로 후속 동작을 결정합니다.",
+    related: ["EventTarget", "addEventListener", "Event Delegation"],
+  },
+  {
+    term: "addEventListener",
+    category: "Web API",
+    shortDefinition: "지정한 event가 target에 전달될 때 호출할 function을 등록하는 DOM API method",
+    explanation:
+      "addEventListener는 Element, Document, Window 같은 EventTarget에 listener function을 연결합니다. 버튼 click, form submit, list item 선택처럼 사용자 interaction을 JavaScript control flow로 이어 주는 핵심 method입니다.",
+    related: ["Event", "EventTarget", "JavaScript"],
+  },
+  {
+    term: "Event Bubbling",
+    category: "Web API",
+    shortDefinition:
+      "child element에서 발생한 event가 parent 쪽으로 전파되는 event propagation 흐름",
+    explanation:
+      "Event Bubbling은 child를 click했을 때 parent listener도 event를 받을 수 있게 하는 흐름입니다. 이 특성 때문에 target과 currentTarget을 구분해야 하며, 많은 child에 listener를 붙이는 대신 parent listener로 처리하는 event delegation이 가능해집니다.",
+    related: ["Event", "Event Delegation", "DOM"],
+  },
+  {
+    term: "Event Delegation",
+    category: "웹 개발",
+    shortDefinition:
+      "child마다 listener를 붙이지 않고 parent listener와 bubbling을 이용해 event를 처리하는 패턴",
+    explanation:
+      "Event Delegation은 list나 table처럼 반복되는 child element가 많을 때 parent에 하나의 listener를 두고 event target을 확인하는 방식입니다. AI가 생성한 반복 handler를 검토할 때 listener 수와 propagation 경로를 줄이는 실무 기준이 됩니다.",
+    related: ["Event Bubbling", "addEventListener", "DOM"],
+  },
+  {
+    term: "Browser Rendering",
+    category: "웹 개발",
+    shortDefinition: "browser가 HTML, CSS, JavaScript와 network data를 화면의 pixels로 바꾸는 과정",
+    explanation:
+      "Browser Rendering은 navigation과 HTTP response 이후 parsing, DOM/CSSOM construction, render tree, style, layout, paint, compositing 같은 단계를 거쳐 page를 표시하는 흐름입니다. 화면이 느리거나 비어 보일 때 원인을 network와 rendering 단계로 나누는 기준이 됩니다.",
+    related: ["DOM", "CSSOM", "Layout"],
+  },
+  {
+    term: "Critical Rendering Path",
+    category: "웹 성능",
+    shortDefinition: "browser가 HTML, CSS, JavaScript를 화면 pixels로 바꾸기 위해 거치는 핵심 순서",
+    explanation:
+      "Critical Rendering Path는 visible page가 만들어지기까지 필요한 browser 내부 처리 흐름을 설명하는 performance 개념입니다. HTML parsing, CSSOM construction, render tree, layout, paint의 관계를 이해하면 blank page와 slow render 문제를 단계별로 볼 수 있습니다.",
+    related: ["Browser Rendering", "DOM", "CSSOM"],
+  },
+  {
+    term: "CSSOM",
+    category: "웹 개발",
+    shortDefinition: "CSS rules를 browser가 이해할 수 있는 style map tree로 표현한 구조",
+    explanation:
+      "CSSOM은 DOM이 document content를 tree로 나타내는 것처럼 CSS rules를 browser가 계산 가능한 구조로 표현합니다. DOM과 CSSOM은 render tree와 layout으로 이어지므로 CSS cascade/layout 지식과 browser rendering 지식 사이의 연결점입니다.",
+    related: ["CSS", "DOM", "Render Tree"],
+  },
+  {
+    term: "Render Tree",
+    category: "웹 개발",
+    shortDefinition: "DOM과 CSSOM을 결합해 화면에 그릴 대상과 style 정보를 만든 tree",
+    explanation:
+      "Render Tree는 document content와 CSS style 정보를 연결해 layout과 paint의 입력이 됩니다. DOM node가 모두 화면에 그려지는 것은 아니므로, render tree는 browser가 실제 표시할 구조를 계산하는 중간 단계로 이해할 수 있습니다.",
+    related: ["DOM", "CSSOM", "Layout"],
+  },
+  {
+    term: "Performance Timing",
+    category: "웹 성능",
+    shortDefinition: "navigation과 resource loading의 timing data를 browser API로 관찰하는 방식",
+    explanation:
+      "PerformanceNavigationTiming과 PerformanceResourceTiming은 page navigation과 resource loading의 timing evidence를 제공합니다. AI에게 성능 문제를 맡길 때 URL, response status, resource list와 함께 timing data를 주면 network와 rendering 원인을 분리하기 쉬워집니다.",
+    related: ["Network", "Browser Rendering", "Performance"],
+  },
 ] satisfies readonly GlossaryTerm[]

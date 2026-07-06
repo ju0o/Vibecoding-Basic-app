@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="560" viewBox="0 0 920 560" role="img" aria-labelledby="title desc">
+  <title id="title">HTML Semantic Elements Document Map</title>
+  <desc id="desc">Semantic HTML elements map page roles to navigation, main content, article, and section boundaries.</desc>
+  <style>
+    .bg { fill: #f8fafc; }
+    .panel { fill: #ffffff; stroke: #334155; stroke-width: 2; rx: 18; }
+    .header { fill: #dbeafe; stroke: #2563eb; stroke-width: 2; rx: 14; }
+    .nav { fill: #dcfce7; stroke: #16a34a; stroke-width: 2; rx: 14; }
+    .main { fill: #fef3c7; stroke: #d97706; stroke-width: 2; rx: 14; }
+    .article { fill: #ede9fe; stroke: #7c3aed; stroke-width: 2; rx: 14; }
+    .section { fill: #fee2e2; stroke: #dc2626; stroke-width: 2; rx: 12; }
+    .footer { fill: #e2e8f0; stroke: #475569; stroke-width: 2; rx: 14; }
+    .text { font: 700 22px system-ui, -apple-system, Segoe UI, sans-serif; fill: #0f172a; }
+    .small { font: 500 15px system-ui, -apple-system, Segoe UI, sans-serif; fill: #334155; }
+    .note { font: 600 17px system-ui, -apple-system, Segoe UI, sans-serif; fill: #1e293b; }
+  </style>
+  <rect class="bg" width="920" height="560"/>
+  <rect class="panel" x="40" y="32" width="840" height="496" rx="22"/>
+  <text class="text" x="68" y="72">HTML 문서 역할 지도</text>
+  <text class="small" x="68" y="100">element 이름이 화면의 의미 경계를 남깁니다.</text>
+
+  <rect class="header" x="80" y="128" width="760" height="76" rx="16"/>
+  <text class="note" x="112" y="158">&lt;header&gt;</text>
+  <text class="small" x="112" y="184">반복되는 상단 정보와 주요 메뉴를 담는 영역</text>
+
+  <rect class="nav" x="520" y="146" width="280" height="40" rx="12"/>
+  <text class="small" x="544" y="172">&lt;nav&gt; navigation links</text>
+
+  <rect class="main" x="80" y="230" width="760" height="218" rx="16"/>
+  <text class="note" x="112" y="262">&lt;main&gt; dominant content</text>
+
+  <rect class="article" x="140" y="286" width="640" height="132" rx="16"/>
+  <text class="note" x="172" y="318">&lt;article&gt; reusable composition</text>
+
+  <rect class="section" x="190" y="344" width="240" height="48" rx="12"/>
+  <text class="small" x="212" y="374">&lt;section&gt; heading 필요</text>
+  <rect class="section" x="490" y="344" width="240" height="48" rx="12"/>
+  <text class="small" x="512" y="374">logical piece</text>
+
+  <rect class="footer" x="80" y="470" width="760" height="38" rx="14"/>
+  <text class="small" x="112" y="494">&lt;footer&gt; 반복 정보와 보조 링크</text>
+</svg>

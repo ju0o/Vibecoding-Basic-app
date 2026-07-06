@@ -9,8 +9,8 @@ prerequisites: [html-semantic-elements, variables-types-data, control-flow-funct
 successors: [browser-rendering-network, react-component-state]
 related: [css-cascade-layout]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [javascript-dom-events]
+  glossary: [DOM, Event, addEventListener, Event Bubbling, Event Delegation]
 sources:
   - { title: "Document Object Model (DOM)", url: "https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model", checked: 2026-07-06 }
   - { title: "EventTarget: addEventListener() method", url: "https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener", checked: 2026-07-06 }

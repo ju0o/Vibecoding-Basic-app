@@ -9,8 +9,8 @@ prerequisites: [html-semantic-elements, css-cascade-layout, javascript-dom-event
 successors: [web-performance-basics, frontend-debugging-devtools]
 related: [http-request-response]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [browser-rendering-network]
+  glossary: [Browser Rendering, Critical Rendering Path, CSSOM, Render Tree, Performance Timing]
 sources:
   - { title: "Populating the page: how browsers work", url: "https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/How_browsers_work", checked: 2026-07-06 }
   - { title: "Critical rendering path", url: "https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Critical_rendering_path", checked: 2026-07-06 }
