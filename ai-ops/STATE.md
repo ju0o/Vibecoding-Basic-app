@@ -11,13 +11,13 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) — **Codex 토큰 소진, 운영자 승인으로 Fable이 Executor 대행 중** |
-| Current State | **🌐 55강 deployed** / KB 42건 approved (신규: rest-api-design 90, database-tables-indexes 90 — data-backend T05, planned로 강의 대기) |
-| Last Completed Step | Fable(대행) P-01+P-02: rest-api-design·database-tables-indexes KB 수집·검증·승인 (2026-07-07) |
+| Current State | **🌐 57강 deployed** (Wave 19: rest-api-design + database-tables-indexes) — 용어 235, 다이어그램 30 / KB 42건 approved. data-backend 모듈 착수 |
+| Last Completed Step | Fable(대행) Wave 19 완주(P-04~P-09) — REST API + DB 테이블/인덱스 심층 강의 (2026-07-07) |
 | Next Executor | Codex(토큰 복구 시) 또는 Fable(대행). 병렬: **Cline — CLINE-AUDIT-RUN(전수 기계 감사 5종, 장시간)** |
-| Next Prompt File | 다음: P-04 강의 2건 — rest-api-design(data-backend order 2), database-tables-indexes(order 3) deep-dive. KB 준비 완료 |
+| Next Prompt File | 다음: P-01 KB 수집 — auth-session-token(data-backend order 4, MDN 인증/쿠키), 이어서 environment-variables-secrets, api-security-rate-limits |
 | Blocker | 없음 |
 | Required Human Action | None — 사이트에서 학습 계속. Cline에 CLINE-AUDIT-RUN 붙여넣기 권장 |
-| Release Status | **V2 55강 deployed (비공개 모드 A)** — 55/100 |
+| Release Status | **V2 57강 deployed (비공개 모드 A)** — 57/100 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
