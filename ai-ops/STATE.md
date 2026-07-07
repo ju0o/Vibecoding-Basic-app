@@ -11,13 +11,13 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) — **Codex 토큰 소진, 운영자 승인으로 Fable이 Executor 대행 중** |
-| Current State | **🌐 57강 deployed** / KB 44건 approved (신규: auth-session-token 89, environment-variables-secrets 90 — data-backend T05, planned로 강의 대기) |
-| Last Completed Step | Fable(대행) P-01+P-02: auth-session-token·environment-variables-secrets KB 수집·검증·승인 (2026-07-07) |
+| Current State | **🌐 59강 deployed** (Wave 20: auth-session-token + environment-variables-secrets) — 용어 241, 다이어그램 32 / KB 46건 approved. data-backend order 1~5 완성 + rate-limits·observability KB 준비 |
+| Last Completed Step | Fable(대행) Wave 20 완주(P-04~P-09) + api-security-rate-limits·backend-observability-logs KB 승인 (2026-07-08) |
 | Next Executor | Codex(토큰 복구 시) 또는 Fable(대행). 병렬: **Cline — CLINE-AUDIT-RUN(전수 기계 감사 5종, 장시간)** |
-| Next Prompt File | 다음: P-04 강의 2건 — auth-session-token(order 4), environment-variables-secrets(order 5) deep-dive. KB 준비 완료 |
+| Next Prompt File | 다음: P-04 강의 2건 — api-security-rate-limits(order 6), backend-observability-logs(order 7) deep-dive. KB 준비 완료 |
 | Blocker | 없음 |
 | Required Human Action | None — 사이트에서 학습 계속. Cline에 CLINE-AUDIT-RUN 붙여넣기 권장 |
-| Release Status | **V2 57강 deployed (비공개 모드 A)** — 57/100 |
+| Release Status | **V2 59강 deployed (비공개 모드 A)** — 59/100 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 

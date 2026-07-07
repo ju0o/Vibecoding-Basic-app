@@ -2,8 +2,8 @@
 id: api-security-rate-limits
 title: "API 보안과 rate limit — 남용을 막는 설계"
 topicGroup: T05
-status: draft
-score: 0
+status: approved
+score: 88
 level: 중급
 prerequisites: [rest-api-design, auth-session-token]
 successors: []

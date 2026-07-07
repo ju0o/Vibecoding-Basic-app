@@ -2,8 +2,8 @@
 id: backend-observability-logs
 title: "백엔드 로그와 관찰 가능성 — 서버가 무엇을 하는지 보기"
 topicGroup: T05
-status: draft
-score: 0
+status: approved
+score: 88
 level: 중급
 prerequisites: [rest-api-design]
 successors: []
