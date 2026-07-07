@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="rebase의 이식 모델: topic 브랜치 A-B-C가 새 기반 G 위에 A'-B'-C'로 다시 만들어짐">
+  <style>
+    .base { fill: #e2e8f0; stroke: #64748b; stroke-width: 1.5; }
+    .topic { fill: #fef3c7; stroke: #b45309; stroke-width: 1.5; }
+    .prime { fill: #ccfbf1; stroke: #0f766e; stroke-width: 1.5; }
+    .cm { font: 600 12px monospace; fill: #0f172a; }
+    .lb { font: 600 12px sans-serif; fill: #334155; }
+    .sub { font: 11px sans-serif; fill: #64748b; }
+    .edge { stroke: #64748b; stroke-width: 1.5; fill: none; }
+    .move { stroke: #0f766e; stroke-width: 2; fill: none; stroke-dasharray: 6 4; marker-end: url(#am); }
+    @media (prefers-color-scheme: dark) {
+      .base { fill: #1e293b; stroke: #94a3b8; }
+      .topic { fill: #451a03; stroke: #fbbf24; }
+      .prime { fill: #134e4a; stroke: #5eead4; }
+      .cm { fill: #f1f5f9; } .lb { fill: #e2e8f0; } .sub { fill: #94a3b8; }
+      .edge { stroke: #94a3b8; }
+    }
+  </style>
+  <defs>
+    <marker id="am" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#0f766e"/></marker>
+  </defs>
+
+  <text class="lb" x="20" y="26">rebase 전</text>
+  <!-- base line D-E-F-G -->
+  <line class="edge" x1="52" y1="150" x2="290" y2="150"/>
+  <circle class="base" cx="52" cy="150" r="16"/><text class="cm" x="52" y="155" text-anchor="middle">D</text>
+  <circle class="base" cx="132" cy="150" r="16"/><text class="cm" x="132" y="155" text-anchor="middle">E</text>
+  <circle class="base" cx="212" cy="150" r="16"/><text class="cm" x="212" y="155" text-anchor="middle">F</text>
+  <circle class="base" cx="290" cy="150" r="16"/><text class="cm" x="290" y="155" text-anchor="middle">G</text>
+  <text class="sub" x="290" y="184" text-anchor="middle">master</text>
+  <!-- topic branch A-B-C from E, going up -->
+  <line class="edge" x1="132" y1="150" x2="150" y2="82"/>
+  <line class="edge" x1="150" y1="72" x2="290" y2="72"/>
+  <circle class="topic" cx="150" cy="72" r="16"/><text class="cm" x="150" y="77" text-anchor="middle">A</text>
+  <circle class="topic" cx="220" cy="72" r="16"/><text class="cm" x="220" y="77" text-anchor="middle">B</text>
+  <circle class="topic" cx="290" cy="72" r="16"/><text class="cm" x="290" y="77" text-anchor="middle">C</text>
+  <text class="sub" x="290" y="48" text-anchor="middle">topic</text>
+
+  <!-- transition arrow -->
+  <path class="move" d="M330 110 L 400 110"/>
+  <text class="sub" x="365" y="98" text-anchor="middle">rebase master</text>
+
+  <text class="lb" x="424" y="26">rebase 후</text>
+  <!-- base line D-E-F-G -->
+  <line class="edge" x1="440" y1="150" x2="670" y2="150"/>
+  <circle class="base" cx="440" cy="150" r="16"/><text class="cm" x="440" y="155" text-anchor="middle">D</text>
+  <circle class="base" cx="516" cy="150" r="16"/><text class="cm" x="516" y="155" text-anchor="middle">E</text>
+  <circle class="base" cx="592" cy="150" r="16"/><text class="cm" x="592" y="155" text-anchor="middle">F</text>
+  <circle class="base" cx="668" cy="150" r="16"/><text class="cm" x="668" y="155" text-anchor="middle">G</text>
+  <text class="sub" x="440" y="184" text-anchor="middle">master</text>
+  <!-- primed A'-B'-C' chained on top of G, going up -->
+  <line class="edge" x1="668" y1="150" x2="668" y2="82"/>
+  <line class="edge" x1="668" y1="72" x2="528" y2="72"/>
+  <circle class="prime" cx="668" cy="72" r="16"/><text class="cm" x="668" y="77" text-anchor="middle">A'</text>
+  <circle class="prime" cx="598" cy="72" r="16"/><text class="cm" x="598" y="77" text-anchor="middle">B'</text>
+  <circle class="prime" cx="528" cy="72" r="16"/><text class="cm" x="528" y="77" text-anchor="middle">C'</text>
+  <text class="sub" x="528" y="48" text-anchor="middle">topic (새 커밋)</text>
+
+  <text class="sub" x="360" y="230" text-anchor="middle">A ≠ A' — 같은 변경, 다른 해시</text>
+  <text class="sub" x="360" y="252" text-anchor="middle">이력이 바뀌므로 공유(push) 전에만 안전</text>
+</svg>

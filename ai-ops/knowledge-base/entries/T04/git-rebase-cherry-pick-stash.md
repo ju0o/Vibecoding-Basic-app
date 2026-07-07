@@ -13,8 +13,8 @@ sources:
   - { title: "git-cherry-pick — Git Documentation", url: "https://git-scm.com/docs/git-cherry-pick", checked: 2026-07-07 }
   - { title: "git-stash — Git Documentation", url: "https://git-scm.com/docs/git-stash", checked: 2026-07-07 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [git-rebase-cherry-pick-stash]
+  glossary: [Rebase, Cherry-pick, Stash]
 updated: 2026-07-07
 ---
 
