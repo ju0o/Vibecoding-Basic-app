@@ -113,6 +113,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | nextjs-routing-rendering | frontend-frameworks | nextjs-routing-rendering | v | v | v | v | Wave 16 (Fable), deep-dive |
 
 | git-rebase-cherry-pick-stash | git-collaboration | git-rebase-cherry-pick-stash | v | v | v | v | Wave 17 (Fable), reference |
+| github-pr-review-flow | git-collaboration | github-pr-review-flow | v | v | v | v | Wave 18 (Fable), reference |
+| gh-cli-reference | git-collaboration | gh-cli-reference | v | v | v | v | Wave 18 (Fable), reference |
 
 ## 집계 (Executor가 행 갱신 시 함께 갱신)
 

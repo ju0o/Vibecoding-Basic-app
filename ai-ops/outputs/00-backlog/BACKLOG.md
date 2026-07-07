@@ -49,8 +49,8 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 31 | D | git-log-diff-show | git-collaboration | 4 | reference | git log/diff/show 레퍼런스 | 기초 | git-init-add-commit-status | git-log-diff-show | v2-released |
 | 32 | D | git-restore-reset-revert | git-collaboration | 5 | reference | git restore/reset/revert 복구 레퍼런스 | 중급 | git-log-diff-show | git-restore-reset-revert | v2-released |
 | 33 | D | git-rebase-cherry-pick-stash | git-collaboration | 6 | reference | git rebase/cherry-pick/stash 레퍼런스 | 중급 | git-branch-switch-merge | git-rebase-cherry-pick-stash | released |
-| 34 | D | github-pr-review-flow | git-collaboration | 7 | reference | GitHub PR, review, merge 전략 | 중급 | git-branch-switch-merge | github-pr-review-flow | planned |
-| 35 | D | gh-cli-reference | git-collaboration | 8 | reference | GitHub CLI 실무 레퍼런스 | 중급 | github-pr-review-flow | gh-cli-reference | planned |
+| 34 | D | github-pr-review-flow | git-collaboration | 7 | reference | GitHub PR, review, merge 전략 | 중급 | git-branch-switch-merge | github-pr-review-flow | released |
+| 35 | D | gh-cli-reference | git-collaboration | 8 | reference | GitHub CLI 실무 레퍼런스 | 중급 | github-pr-review-flow | gh-cli-reference | released |
 | 36 | A | api-db-backend-flow | data-backend | 1 | deep-dive | API와 DB는 제품 뒤에서 무엇을 하는가 | 기초 | http-request-response | api-db-backend-flow | v2-regenerate |
 | 37 | A | rest-api-design | data-backend | 2 | deep-dive | REST API 설계와 상태 코드 | 기초 | api-db-backend-flow | rest-api-design | kb_needed |
 | 38 | A | database-tables-indexes | data-backend | 3 | deep-dive | DB 테이블, 인덱스, 쿼리 기초 | 기초 | api-db-backend-flow | database-tables-indexes | kb_needed |
