@@ -11,13 +11,13 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) — **Codex 토큰 소진, 운영자 승인으로 Fable이 Executor 대행 중** |
-| Current State | **🌐 52강 deployed** (Wave 16: nextjs-routing-rendering 포함) — 용어 221, 다이어그램 25 / KB 38건 approved (신규: git-rebase-cherry-pick-stash 91) |
-| Last Completed Step | Fable(대행) Wave 16 완주(P-04~P-09) + git-rebase-cherry-pick-stash KB P-01/P-02 (2026-07-07) |
+| Current State | **🌐 53강 deployed** (Wave 17: git-rebase-cherry-pick-stash 포함) — 용어 224, 다이어그램 26 / KB 38건 approved |
+| Last Completed Step | Fable(대행) Wave 17 완주(P-04~P-09) + orphaned 다이어그램 5개 참조 수정 (2026-07-07) |
 | Next Executor | Codex(토큰 복구 시) 또는 Fable(대행). 병렬: **Cline — CLINE-AUDIT-RUN(전수 기계 감사 5종, 장시간)** |
-| Next Prompt File | 다음: ① git-rebase-cherry-pick-stash 강의 P-04 (planned·KB 준비됨) ② 이후 P-01: github-pr-review-flow, gh-cli-reference (docs.github.com·cli.github.com 채집) |
+| Next Prompt File | 다음: P-01 KB 수집 — github-pr-review-flow, gh-cli-reference (docs.github.com·cli.github.com 채집) → git-collaboration 모듈 협업 흐름 확장 |
 | Blocker | 없음 |
 | Required Human Action | None — 사이트에서 학습 계속. Cline에 CLINE-AUDIT-RUN 붙여넣기 권장 |
-| Release Status | **V2 52강 deployed (비공개 모드 A)** — 52/100 |
+| Release Status | **V2 53강 deployed (비공개 모드 A)** — 53/100 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
