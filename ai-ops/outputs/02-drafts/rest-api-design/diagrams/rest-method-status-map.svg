@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" role="img" aria-label="REST API: HTTP 메서드의 safe/idempotent 성질과 상태 코드 5클래스">
+  <style>
+    .hd { font: 600 13px sans-serif; fill: #334155; }
+    .cell { font: 12px sans-serif; fill: #334155; }
+    .cm { font: 600 12px monospace; fill: #0f172a; }
+    .safe { fill: #ccfbf1; stroke: #0f766e; stroke-width: 1.2; }
+    .idem { fill: #dbeafe; stroke: #1d4ed8; stroke-width: 1.2; }
+    .none { fill: #fee2e2; stroke: #b91c1c; stroke-width: 1.2; }
+    .box { fill: #e2e8f0; stroke: #64748b; stroke-width: 1.2; }
+    .c2 { fill: #ccfbf1; stroke: #0f766e; stroke-width: 1.2; }
+    .c4 { fill: #fef3c7; stroke: #b45309; stroke-width: 1.2; }
+    .c5 { fill: #fee2e2; stroke: #b91c1c; stroke-width: 1.2; }
+    .sub { font: 11px sans-serif; fill: #64748b; }
+    @media (prefers-color-scheme: dark) {
+      .hd { fill: #e2e8f0; } .cell { fill: #e2e8f0; } .cm { fill: #f1f5f9; } .sub { fill: #94a3b8; }
+      .safe { fill: #134e4a; stroke: #5eead4; } .idem { fill: #172554; stroke: #93c5fd; } .none { fill: #450a0a; stroke: #fca5a5; }
+      .box { fill: #1e293b; stroke: #94a3b8; } .c2 { fill: #134e4a; stroke: #5eead4; } .c4 { fill: #451a03; stroke: #fbbf24; } .c5 { fill: #450a0a; stroke: #fca5a5; }
+    }
+  </style>
+
+  <text class="hd" x="20" y="26">메서드 × 성질</text>
+  <!-- table header -->
+  <text class="hd" x="30" y="60">메서드</text>
+  <text class="hd" x="150" y="60">safe</text>
+  <text class="hd" x="230" y="60">idempotent</text>
+  <text class="hd" x="345" y="60">역할</text>
+
+  <!-- rows -->
+  <g>
+    <rect class="safe" x="24" y="72" width="90" height="30" rx="6"/><text class="cm" x="69" y="92" text-anchor="middle">GET</text>
+    <text class="cell" x="150" y="92">✓</text><text class="cell" x="255" y="92">✓</text><text class="cell" x="345" y="92">조회</text>
+  </g>
+  <g>
+    <rect class="none" x="24" y="108" width="90" height="30" rx="6"/><text class="cm" x="69" y="128" text-anchor="middle">POST</text>
+    <text class="cell" x="150" y="128">✗</text><text class="cell" x="255" y="128">✗</text><text class="cell" x="345" y="128">생성</text>
+  </g>
+  <g>
+    <rect class="idem" x="24" y="144" width="90" height="30" rx="6"/><text class="cm" x="69" y="164" text-anchor="middle">PUT</text>
+    <text class="cell" x="150" y="164">✗</text><text class="cell" x="255" y="164">✓</text><text class="cell" x="345" y="164">전체 교체</text>
+  </g>
+  <g>
+    <rect class="idem" x="24" y="180" width="90" height="30" rx="6"/><text class="cm" x="69" y="200" text-anchor="middle">DELETE</text>
+    <text class="cell" x="150" y="200">✗</text><text class="cell" x="255" y="200">✓</text><text class="cell" x="345" y="200">삭제</text>
+  </g>
+  <text class="sub" x="24" y="232">safe=읽기전용 · idempotent=1회와 n회 결과 동일 · POST만 둘 다 아님(재시도 주의)</text>
+
+  <!-- status classes -->
+  <text class="hd" x="450" y="26">상태 코드 5클래스</text>
+  <rect class="box" x="450" y="44" width="240" height="26" rx="6"/><text class="cell" x="460" y="62">1xx 정보</text>
+  <rect class="c2" x="450" y="76" width="240" height="26" rx="6"/><text class="cell" x="460" y="94">2xx 성공 — 200 OK, 201 Created</text>
+  <rect class="box" x="450" y="108" width="240" height="26" rx="6"/><text class="cell" x="460" y="126">3xx 리다이렉션</text>
+  <rect class="c4" x="450" y="140" width="240" height="26" rx="6"/><text class="cell" x="460" y="158">4xx 클라이언트 오류 — 400/401/404</text>
+  <rect class="c5" x="450" y="172" width="240" height="26" rx="6"/><text class="cell" x="460" y="190">5xx 서버 오류 — 500</text>
+  <text class="sub" x="450" y="222">앞자리가 "누구 잘못인가"를 먼저 말한다</text>
+
+  <text class="sub" x="360" y="300" text-anchor="middle">경로=자원(무엇을) · 메서드=동작(어떻게) · 상태 코드=결과(어땠는가)</text>
+</svg>

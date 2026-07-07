@@ -1379,6 +1379,56 @@ export const GLOSSARY_TERMS = [
     related: ["Data Contract", "JSON", "API"],
   },
   {
+    term: "REST API",
+    category: "백엔드",
+    shortDefinition:
+      "서버 기능을 자원으로 보고 HTTP 메서드로 다루며 결과를 상태 코드로 알리는 API 설계 방식",
+    explanation:
+      "경로가 자원(무엇을), 메서드가 동작(어떻게), 상태 코드가 결과(어땠는가)를 담당합니다. 새 규칙을 만드는 게 아니라 HTTP가 이미 정한 메서드·상태 코드의 의미를 일관되게 지키는 것이 본질이라, 잘 설계된 REST API는 문서 없이도 동작을 짐작하게 합니다.",
+    related: ["HTTP", "Idempotent", "HTTP 상태 코드"],
+  },
+  {
+    term: "Idempotent",
+    category: "백엔드",
+    shortDefinition: "같은 요청을 여러 번 보내도 한 번 보낸 것과 서버 효과가 같은 성질",
+    explanation:
+      "MDN 정의는 '한 번 요청한 효과가 동일한 요청을 여러 번 한 효과와 같으면 idempotent'. GET·PUT·DELETE가 멱등이고 POST는 아닙니다. 네트워크 오류로 응답을 못 받았을 때 재시도해도 되는지를 판정하는 근거로, POST 재시도는 중복 생성 위험이 있어 멱등 키 같은 방어가 필요합니다. safe(읽기 전용)와는 다른 성질입니다.",
+    related: ["REST API", "HTTP", "HTTP 상태 코드"],
+  },
+  {
+    term: "HTTP 상태 코드",
+    category: "백엔드",
+    shortDefinition:
+      "응답 결과를 5클래스(1xx~5xx)로 알리는 세 자리 코드 — 앞자리가 결과 종류를 말함",
+    explanation:
+      "2xx 성공(200 OK, 201 Created), 3xx 리다이렉션, 4xx 클라이언트 오류(400/401/404), 5xx 서버 오류(500). 앞자리 하나가 '누구 잘못인가'(4xx=클라이언트, 5xx=서버)를 먼저 말해 디버깅 방향을 정합니다. 오류를 200+본문으로 감추면 모니터링·재시도 도구가 감지하지 못하므로 반드시 코드로 알려야 합니다.",
+    related: ["REST API", "HTTP", "Idempotent"],
+  },
+  {
+    term: "Database Table",
+    category: "백엔드",
+    shortDefinition: "관계형 데이터베이스에서 데이터를 행과 열로 담는 저장 단위 — 종이 표와 유사",
+    explanation:
+      "PostgreSQL 문서는 '종이 위의 표와 매우 비슷하다: 행과 열로 이루어진다'고 정의합니다. 열의 수·순서는 고정이고 각 열은 이름과 데이터 타입을 가지며(구조), 행의 수는 저장된 데이터 양에 따라 변합니다(내용). 엑셀 시트를 떠올리면 되고, 이 단순 모델이 수십 년 데이터 저장의 표준입니다.",
+    related: ["Database Index", "Data Type (DB)", "JSON"],
+  },
+  {
+    term: "Database Index",
+    category: "백엔드",
+    shortDefinition: "테이블에서 특정 행을 빠르게 찾기 위한 보조 구조 — 책 뒤 색인과 같은 역할",
+    explanation:
+      "인덱스가 있으면 전수 스캔 대신 탐색 트리를 몇 단계만 내려가 목표 행을 찾고, 조건 조회·UPDATE·DELETE·조인까지 가속합니다. 단 테이블과 동기화되어야 해서 쓰기(INSERT/UPDATE/DELETE)마다 갱신되어 오버헤드를 더합니다. '읽기에서 벌고 쓰기에서 낸다'가 핵심이라, 조회에 실제로 쓰이는 열에만 만들고 안 쓰는 것은 제거합니다.",
+    related: ["Database Table", "Data Type (DB)"],
+  },
+  {
+    term: "Data Type (DB)",
+    category: "백엔드",
+    shortDefinition: "열에 들어올 값의 범위를 제한하고 데이터에 의미를 부여하는 열의 타입 지정",
+    explanation:
+      "PostgreSQL 정의로 '값의 집합을 제한하고 저장된 데이터에 의미를 부여해 계산에 쓸 수 있게' 합니다. 정수 열에 문자열이 못 들어오게 막고(제한), 동시에 합계·평균 계산을 가능하게 합니다(의미). '모두 문자열로 저장'은 제한과 계산 능력을 모두 포기하는 선택이며, DB 열 타입과 코드(TypeScript)의 타입을 맞추는 것이 데이터 안전의 기본입니다.",
+    related: ["Database Table", "Database Index", "TypeScript"],
+  },
+  {
     term: "Same-Origin Policy",
     category: "웹 보안",
     shortDefinition:

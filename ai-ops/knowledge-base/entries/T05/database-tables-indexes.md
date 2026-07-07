@@ -12,8 +12,8 @@ sources:
   - { title: "Table Basics — PostgreSQL Documentation", url: "https://www.postgresql.org/docs/current/ddl-basics.html", checked: 2026-07-07 }
   - { title: "Indexes / Introduction — PostgreSQL Documentation", url: "https://www.postgresql.org/docs/current/indexes-intro.html", checked: 2026-07-07 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [database-tables-indexes]
+  glossary: [Database Table, Database Index, Data Type (DB)]
 updated: 2026-07-07
 ---
 

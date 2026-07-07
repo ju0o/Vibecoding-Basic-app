@@ -476,6 +476,30 @@ export const LESSON_META = [
     tags: ["Git", "GitHub", "CLI", "레퍼런스", "gh"],
   },
   {
+    slug: "rest-api-design",
+    moduleId: "data-backend",
+    order: 2,
+    title: "REST API 설계 — 자원, 메서드, 상태 코드",
+    summary:
+      "경로는 자원, 메서드는 동작, 상태 코드는 결과 — HTTP가 정한 의미를 일관되게 지키는 것이 REST이며, safe/idempotent 성질이 재시도 안전성을 결정합니다.",
+    level: "기초",
+    type: "deep-dive",
+    minutes: 50,
+    tags: ["API", "REST", "HTTP", "상태 코드", "백엔드"],
+  },
+  {
+    slug: "database-tables-indexes",
+    moduleId: "data-backend",
+    order: 3,
+    title: "데이터베이스 — 테이블, 데이터 타입, 인덱스",
+    summary:
+      "테이블은 행×열, 데이터 타입은 값을 제한하고 의미를 부여하며, 인덱스는 조회를 빠르게 하되 쓰기마다 갱신 비용을 냅니다 — 읽기 이득과 쓰기 비용의 저울질이 핵심입니다.",
+    level: "기초",
+    type: "deep-dive",
+    minutes: 50,
+    tags: ["데이터베이스", "SQL", "테이블", "인덱스", "PostgreSQL"],
+  },
+  {
     slug: "api-db-backend-flow",
     moduleId: "data-backend",
     order: 5,

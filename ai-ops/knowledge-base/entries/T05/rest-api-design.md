@@ -14,8 +14,8 @@ sources:
   - { title: "Idempotent — MDN Glossary", url: "https://developer.mozilla.org/en-US/docs/Glossary/Idempotent", checked: 2026-07-07 }
   - { title: "Safe (HTTP Methods) — MDN Glossary", url: "https://developer.mozilla.org/en-US/docs/Glossary/Safe/HTTP", checked: 2026-07-07 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [rest-api-design]
+  glossary: [REST API, Idempotent, HTTP 상태 코드]
 updated: 2026-07-07
 ---
 
