@@ -54,8 +54,8 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 36 | A | api-db-backend-flow | data-backend | 1 | deep-dive | API와 DB는 제품 뒤에서 무엇을 하는가 | 기초 | http-request-response | api-db-backend-flow | v2-regenerate |
 | 37 | A | rest-api-design | data-backend | 2 | deep-dive | REST API 설계와 상태 코드 | 기초 | api-db-backend-flow | rest-api-design | released |
 | 38 | A | database-tables-indexes | data-backend | 3 | deep-dive | DB 테이블, 인덱스, 쿼리 기초 | 기초 | api-db-backend-flow | database-tables-indexes | released |
-| 39 | A | auth-session-token | data-backend | 4 | deep-dive | 인증, 세션, 토큰 | 중급 | rest-api-design | auth-session-token | planned |
-| 40 | A | environment-variables-secrets | data-backend | 5 | deep-dive | 환경변수와 secret 관리 | 기초 | auth-session-token | environment-variables-secrets | planned |
+| 39 | A | auth-session-token | data-backend | 4 | deep-dive | 인증, 세션, 토큰 | 중급 | rest-api-design | auth-session-token | released |
+| 40 | A | environment-variables-secrets | data-backend | 5 | deep-dive | 환경변수와 secret 관리 | 기초 | auth-session-token | environment-variables-secrets | released |
 | 41 | A | api-security-rate-limits | data-backend | 6 | deep-dive | API 보안과 rate limit | 중급 | auth-session-token | api-security-rate-limits | kb_needed |
 | 42 | A | backend-observability-logs | data-backend | 7 | deep-dive | 백엔드 로그와 관찰 가능성 | 중급 | rest-api-design | backend-observability-logs | kb_needed |
 | 43 | A | build-and-runtime | deployment-ops | 1 | deep-dive | build time과 runtime 구분 | 기초 | nextjs-routing-rendering | build-runtime | kb_needed |
