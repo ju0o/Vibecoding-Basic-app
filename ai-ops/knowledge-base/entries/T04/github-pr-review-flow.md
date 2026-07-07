@@ -13,8 +13,8 @@ sources:
   - { title: "About pull request reviews — GitHub Docs", url: "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews", checked: 2026-07-07 }
   - { title: "About pull request merges — GitHub Docs", url: "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges", checked: 2026-07-07 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [github-pr-review-flow]
+  glossary: [Pull Request, Code Review, Merge Strategy]
 updated: 2026-07-07
 ---
 

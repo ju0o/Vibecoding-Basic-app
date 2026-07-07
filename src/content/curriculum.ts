@@ -452,6 +452,30 @@ export const LESSON_META = [
     tags: ["Git", "레퍼런스", "rebase", "cherry-pick", "stash"],
   },
   {
+    slug: "github-pr-review-flow",
+    moduleId: "git-collaboration",
+    order: 7,
+    title: "GitHub Pull Request · Review · Merge 흐름",
+    summary:
+      "PR은 head→base 변경 제안이고, 리뷰는 Comment/Approve/Request changes 3상태로 병합 게이트를 여닫으며, 병합은 merge/squash/rebase 3전략으로 이력 모양을 정합니다.",
+    level: "중급",
+    type: "reference",
+    minutes: 50,
+    tags: ["Git", "GitHub", "레퍼런스", "Pull Request", "코드 리뷰"],
+  },
+  {
+    slug: "gh-cli-reference",
+    moduleId: "git-collaboration",
+    order: 8,
+    title: "GitHub CLI (gh) — PR을 터미널에서",
+    summary:
+      "gh pr create/review/merge/checkout으로 PR 흐름 전체를 터미널에서 수행합니다 — 플래그(--base, --approve, --squash…)가 웹 PR 개념의 직역이라 개념을 알면 명령이 읽힙니다.",
+    level: "중급",
+    type: "reference",
+    minutes: 50,
+    tags: ["Git", "GitHub", "CLI", "레퍼런스", "gh"],
+  },
+  {
     slug: "api-db-backend-flow",
     moduleId: "data-backend",
     order: 5,

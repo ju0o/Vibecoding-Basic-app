@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" role="img" aria-label="gh pr 명령 생애주기: create로 제안, list·view·checkout으로 조회·검토, review로 판정, merge로 병합">
+  <style>
+    .step { fill: #e2e8f0; stroke: #64748b; stroke-width: 1.5; }
+    .create { fill: #fef3c7; stroke: #b45309; stroke-width: 1.5; }
+    .review { fill: #dbeafe; stroke: #1d4ed8; stroke-width: 1.5; }
+    .merge { fill: #ede9fe; stroke: #7c3aed; stroke-width: 1.5; }
+    .cmd { font: 600 13px monospace; fill: #0f172a; }
+    .sub { font: 11px sans-serif; fill: #64748b; }
+    .edge { stroke: #64748b; stroke-width: 1.5; fill: none; marker-end: url(#a); }
+    @media (prefers-color-scheme: dark) {
+      .step { fill: #1e293b; stroke: #94a3b8; }
+      .create { fill: #451a03; stroke: #fbbf24; }
+      .review { fill: #172554; stroke: #93c5fd; }
+      .merge { fill: #2e1065; stroke: #c4b5fd; }
+      .cmd { fill: #f1f5f9; } .sub { fill: #94a3b8; } .edge { stroke: #94a3b8; }
+    }
+  </style>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#64748b"/></marker>
+  </defs>
+
+  <rect class="create" x="20" y="70" width="150" height="60" rx="10"/>
+  <text class="cmd" x="95" y="96" text-anchor="middle">gh pr create</text>
+  <text class="sub" x="95" y="116" text-anchor="middle">제안 (head→base)</text>
+
+  <rect class="step" x="200" y="70" width="160" height="60" rx="10"/>
+  <text class="cmd" x="280" y="92" text-anchor="middle">gh pr list / view</text>
+  <text class="cmd" x="280" y="110" text-anchor="middle">gh pr checkout</text>
+  <text class="sub" x="280" y="126" text-anchor="middle">조회·로컬 검토</text>
+
+  <rect class="review" x="390" y="70" width="150" height="60" rx="10"/>
+  <text class="cmd" x="465" y="96" text-anchor="middle">gh pr review</text>
+  <text class="sub" x="465" y="116" text-anchor="middle">-a / -c / -r</text>
+
+  <rect class="merge" x="570" y="70" width="130" height="60" rx="10"/>
+  <text class="cmd" x="635" y="96" text-anchor="middle">gh pr merge</text>
+  <text class="sub" x="635" y="116" text-anchor="middle">-m / -s / -r</text>
+
+  <path class="edge" d="M170 100 L 196 100"/>
+  <path class="edge" d="M360 100 L 386 100"/>
+  <path class="edge" d="M540 100 L 566 100"/>
+
+  <text class="sub" x="95" y="170" text-anchor="middle">Create a PR</text>
+  <text class="sub" x="280" y="170" text-anchor="middle">Check out / read diff</text>
+  <text class="sub" x="465" y="170" text-anchor="middle">approve·comment·request</text>
+  <text class="sub" x="635" y="170" text-anchor="middle">merge·squash·rebase</text>
+
+  <text class="sub" x="360" y="220" text-anchor="middle">웹 PR 흐름(제안→리뷰→병합)을 그대로 터미널 명령으로 — 플래그는 웹 개념의 직역</text>
+</svg>

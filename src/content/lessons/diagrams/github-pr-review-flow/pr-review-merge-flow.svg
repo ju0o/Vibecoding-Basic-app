@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" role="img" aria-label="Pull Request 흐름: head 브랜치가 base로 제안되고, 리뷰 3상태가 병합 게이트를 여닫으며, 병합은 3전략으로 나뉜다">
+  <style>
+    .box { fill: #e2e8f0; stroke: #64748b; stroke-width: 1.5; }
+    .head { fill: #fef3c7; stroke: #b45309; stroke-width: 1.5; }
+    .approve { fill: #ccfbf1; stroke: #0f766e; stroke-width: 1.5; }
+    .reject { fill: #fee2e2; stroke: #b91c1c; stroke-width: 1.5; }
+    .comment { fill: #e2e8f0; stroke: #64748b; stroke-width: 1.5; }
+    .merge { fill: #ede9fe; stroke: #7c3aed; stroke-width: 1.5; }
+    .lb { font: 600 13px sans-serif; fill: #334155; }
+    .cm { font: 600 12px monospace; fill: #0f172a; }
+    .sub { font: 11px sans-serif; fill: #64748b; }
+    .edge { stroke: #64748b; stroke-width: 1.5; fill: none; marker-end: url(#a); }
+    @media (prefers-color-scheme: dark) {
+      .box { fill: #1e293b; stroke: #94a3b8; } .comment { fill: #1e293b; stroke: #94a3b8; }
+      .head { fill: #451a03; stroke: #fbbf24; }
+      .approve { fill: #134e4a; stroke: #5eead4; }
+      .reject { fill: #450a0a; stroke: #fca5a5; }
+      .merge { fill: #2e1065; stroke: #c4b5fd; }
+      .lb { fill: #e2e8f0; } .cm { fill: #f1f5f9; } .sub { fill: #94a3b8; } .edge { stroke: #94a3b8; }
+    }
+  </style>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#64748b"/></marker>
+  </defs>
+
+  <!-- 1. propose -->
+  <rect class="head" x="20" y="30" width="150" height="54" rx="10"/>
+  <text class="cm" x="95" y="52" text-anchor="middle">head 브랜치</text>
+  <text class="sub" x="95" y="70" text-anchor="middle">내 커밋</text>
+  <rect class="box" x="20" y="150" width="150" height="54" rx="10"/>
+  <text class="cm" x="95" y="172" text-anchor="middle">base (main)</text>
+  <text class="sub" x="95" y="190" text-anchor="middle">합칠 대상</text>
+  <path class="edge" d="M110 84 C 130 110, 130 124, 118 148"/>
+  <text class="sub" x="150" y="120" text-anchor="middle">PR: 제안</text>
+
+  <!-- 2. Files changed / review -->
+  <rect class="box" x="250" y="86" width="180" height="46" rx="10"/>
+  <text class="lb" x="340" y="114" text-anchor="middle">Files changed (diff)</text>
+  <path class="edge" d="M170 70 C 210 82, 230 92, 248 100"/>
+
+  <text class="lb" x="340" y="160" text-anchor="middle">리뷰 3상태</text>
+  <rect class="comment" x="250" y="172" width="180" height="34" rx="8"/>
+  <text class="sub" x="340" y="193" text-anchor="middle">Comment — 게이트 영향 없음</text>
+  <rect class="reject" x="250" y="214" width="180" height="34" rx="8"/>
+  <text class="sub" x="340" y="235" text-anchor="middle">Request changes — 잠금</text>
+  <rect class="approve" x="250" y="256" width="180" height="34" rx="8"/>
+  <text class="sub" x="340" y="277" text-anchor="middle">Approve — 게이트 열림</text>
+  <path class="edge" d="M340 132 L 340 168"/>
+
+  <!-- 3. merge strategies -->
+  <rect class="merge" x="510" y="120" width="190" height="120" rx="10"/>
+  <text class="lb" x="605" y="146" text-anchor="middle">병합 3전략</text>
+  <text class="sub" x="605" y="172" text-anchor="middle">merge commit — 이력 보존</text>
+  <text class="sub" x="605" y="196" text-anchor="middle">squash — 하나로 압축</text>
+  <text class="sub" x="605" y="220" text-anchor="middle">rebase — 평평하게 얹기</text>
+  <path class="edge" d="M430 273 C 480 273, 490 250, 508 236"/>
+  <text class="sub" x="470" y="262" text-anchor="middle">승인 후</text>
+
+  <text class="sub" x="360" y="330" text-anchor="middle">head → base 제안 → diff 리뷰 → 승인 게이트 통과 → 전략 선택 병합</text>
+</svg>

@@ -16,8 +16,8 @@ sources:
   - { title: "gh pr list — GitHub CLI manual", url: "https://cli.github.com/manual/gh_pr_list", checked: 2026-07-07 }
   - { title: "gh pr view — GitHub CLI manual", url: "https://cli.github.com/manual/gh_pr_view", checked: 2026-07-07 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [gh-cli-reference]
+  glossary: [GitHub CLI (gh), gh pr checkout]
 updated: 2026-07-07
 ---
 
