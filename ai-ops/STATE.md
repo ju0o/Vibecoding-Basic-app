@@ -11,10 +11,10 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) — **Codex 토큰 소진, 운영자 승인으로 Fable이 Executor 대행 중** |
-| Current State | **🌐 53강 deployed** (Wave 17: git-rebase-cherry-pick-stash 포함) — 용어 224, 다이어그램 26 / KB 38건 approved |
-| Last Completed Step | Fable(대행) Wave 17 완주(P-04~P-09) + orphaned 다이어그램 5개 참조 수정 (2026-07-07) |
+| Current State | **🌐 53강 deployed** / KB 40건 approved (신규: github-pr-review-flow 88, gh-cli-reference 89 — 둘 다 planned로 강의 대기) |
+| Last Completed Step | Fable(대행) P-01+P-02: github-pr-review-flow·gh-cli-reference KB 수집·검증·승인 (2026-07-07) |
 | Next Executor | Codex(토큰 복구 시) 또는 Fable(대행). 병렬: **Cline — CLINE-AUDIT-RUN(전수 기계 감사 5종, 장시간)** |
-| Next Prompt File | 다음: P-01 KB 수집 — github-pr-review-flow, gh-cli-reference (docs.github.com·cli.github.com 채집) → git-collaboration 모듈 협업 흐름 확장 |
+| Next Prompt File | 다음: P-04 강의 2건 — github-pr-review-flow(order 7), gh-cli-reference(order 8) reference형. KB 준비 완료 |
 | Blocker | 없음 |
 | Required Human Action | None — 사이트에서 학습 계속. Cline에 CLINE-AUDIT-RUN 붙여넣기 권장 |
 | Release Status | **V2 53강 deployed (비공개 모드 A)** — 53/100 |

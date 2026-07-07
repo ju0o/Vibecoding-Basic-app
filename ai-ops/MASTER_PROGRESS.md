@@ -55,6 +55,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | git-restore-reset-revert | T04 | ✓ | ✓ 92 (2026-07-06, Fable 대행) | order 5 근거 |
 
 | git-rebase-cherry-pick-stash | T04 | v | v 91 (2026-07-07, Fable 대행) | git-collaboration order 6 근거 |
+| github-pr-review-flow | T04 | v | v 88 (2026-07-07, Fable 대행) | order 7 근거 / docs.github.com, 리뷰 3상태 2회 fetch 대조 |
+| gh-cli-reference | T04 | v | v 89 (2026-07-07, Fable 대행) | order 8 근거 / cli.github.com gh_pr_* 매뉴얼 |
 
 ## Lesson 매트릭스
 

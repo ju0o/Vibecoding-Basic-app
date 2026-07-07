@@ -2,8 +2,8 @@
 id: github-pr-review-flow
 title: "GitHub Pull Request · Review · Merge 흐름"
 topicGroup: T04
-status: draft
-score: 0
+status: approved
+score: 88
 level: 중급
 prerequisites: [git-branch-switch-merge, git-log-diff-show]
 successors: [gh-cli-reference]

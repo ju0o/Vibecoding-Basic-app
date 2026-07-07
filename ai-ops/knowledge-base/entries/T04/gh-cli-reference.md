@@ -2,8 +2,8 @@
 id: gh-cli-reference
 title: "GitHub CLI (gh) 실무 레퍼런스 — PR을 터미널에서"
 topicGroup: T04
-status: draft
-score: 0
+status: approved
+score: 89
 level: 중급
 prerequisites: [github-pr-review-flow]
 successors: []
