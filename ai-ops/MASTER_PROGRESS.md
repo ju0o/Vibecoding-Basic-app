@@ -59,6 +59,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | gh-cli-reference | T04 | v | v 89 (2026-07-07, Fable 대행) | order 8 근거 / cli.github.com gh_pr_* 매뉴얼 |
 | rest-api-design | T05 | v | v 90 (2026-07-07, Fable 대행) | data-backend order 2 근거 / MDN Methods·Status·Glossary |
 | database-tables-indexes | T05 | v | v 90 (2026-07-07, Fable 대행) | order 3 근거 / PostgreSQL Table Basics·Indexes |
+| auth-session-token | T05 | v | v 89 (2026-07-07, Fable 대행) | order 4 근거 / MDN Authentication·Cookies |
+| environment-variables-secrets | T05 | v | v 90 (2026-07-07, Fable 대행) | order 5 근거 / Node.js process.env·12factor Config |
 
 ## Lesson 매트릭스
 

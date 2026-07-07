@@ -2,8 +2,8 @@
 id: environment-variables-secrets
 title: "환경변수와 secret 관리 — 코드에서 설정을 분리하기"
 topicGroup: T05
-status: draft
-score: 0
+status: approved
+score: 90
 level: 기초
 prerequisites: [auth-session-token]
 successors: []

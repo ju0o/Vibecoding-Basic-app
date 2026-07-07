@@ -2,8 +2,8 @@
 id: auth-session-token
 title: "인증, 세션, 토큰 — 로그인은 어떻게 유지되는가"
 topicGroup: T05
-status: draft
-score: 0
+status: approved
+score: 89
 level: 중급
 prerequisites: [rest-api-design, http-request-response]
 successors: [environment-variables-secrets]
