@@ -7,6 +7,8 @@ git branch·switch·merge는 커밋 이력을 갈래로 나누고(branch), 작�
 > [!KEY]
 > 브랜치를 만들 때 파일은 단 하나도 복사되지 않습니다. 커밋 그래프의 특정 지점을 가리키는 이름표 하나가 생길 뿐입니다. 이 사실을 받아들이면 "브랜치가 무겁지 않을까"라는 걱정과 "브랜치를 지우면 코드가 사라질까"라는 공포가 동시에 해소됩니다.
 
+![브랜치 생성과 병합 흐름](/lesson-diagrams/git-branch-switch-merge/branch-merge-flow.svg)
+
 ## 왜 존재하는가
 
 기록 사이클(init/add/commit/status)만 있는 세계를 상상해 봅시다. 이력은 한 줄로만 자랍니다. 그러면 두 가지가 불가능합니다.

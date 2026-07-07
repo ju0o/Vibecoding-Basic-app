@@ -7,6 +7,8 @@ React가 "화면을 어떻게 조립하는가"를 답한다면, Next.js는 두 �
 > [!KEY]
 > 지금 읽고 있는 이 사이트가 곧 실습 예제입니다 — `app/lessons/[slug]/page.tsx` 파일 하나가 51개 강의 페이지 전부를 만들고, 페이지는 서버 컴포넌트로 렌더링됩니다. 이 강의를 읽고 나면 이 사이트의 폴더 구조를 열어 직접 확인할 수 있습니다.
 
+![Next.js 라우팅과 렌더링 흐름](/lesson-diagrams/nextjs-routing-rendering/nextjs-render-flow.svg)
+
 ## 왜 존재하는가
 
 React만으로 여러 페이지의 앱을 만들면 두 가지 문제를 스스로 해결해야 합니다.

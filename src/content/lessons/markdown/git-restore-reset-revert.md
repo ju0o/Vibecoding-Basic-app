@@ -7,6 +7,8 @@ git restore·reset·revert는 모두 "되돌리기"지만 **되돌리는 대상�
 > [!KEY]
 > 선택 기준은 한 줄입니다: **커밋 전 실수는 restore, 커밋했지만 공유 전이면 reset, 이미 공유된 이력이면 revert.** 이 문장만 기억하면 세 명령의 옵션은 각자의 자리에서 자연스럽게 따라옵니다.
 
+![되돌리기 3형제 선택 기준](/lesson-diagrams/git-restore-reset-revert/undo-decision-tree.svg)
+
 ## 왜 존재하는가
 
 되돌리기가 하나의 명령이 아닌 이유는, "잘못"이 사는 곳이 세 군데이기 때문입니다.

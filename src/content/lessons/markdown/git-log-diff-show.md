@@ -7,6 +7,8 @@ git log·diff·show는 이력을 **바꾸지 않고 읽기만 하는** 세 개�
 > [!KEY]
 > 복구 명령(restore/reset/revert)을 배우기 전에 조회 명령부터 배우는 데는 이유가 있습니다 — 무엇이 잘못됐는지 정확히 읽을 수 있어야, 어디까지 되돌릴지 정확히 결정할 수 있기 때문입니다.
 
+![log/diff/show의 조회 범위](/lesson-diagrams/git-log-diff-show/log-diff-show-scopes.svg)
+
 ## 왜 존재하는가
 
 커밋이 쌓이기 시작하면 세 가지 질문이 반복적으로 생깁니다.
