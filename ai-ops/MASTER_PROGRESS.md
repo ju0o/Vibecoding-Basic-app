@@ -125,6 +125,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | database-tables-indexes | data-backend | database-tables-indexes | v | v | v | v | Wave 19 (Fable), deep-dive |
 | auth-session-token | data-backend | auth-session-token | v | v | v | v | Wave 20 (Fable), deep-dive |
 | environment-variables-secrets | data-backend | environment-variables-secrets | v | v | v | v | Wave 20 (Fable), deep-dive |
+| api-security-rate-limits | data-backend | api-security-rate-limits | v | v | v | v | Wave 21 (Fable), deep-dive |
+| backend-observability-logs | data-backend | backend-observability-logs | v | v | v | v | Wave 21 (Fable), deep-dive |
 
 ## 집계 (Executor가 행 갱신 시 함께 갱신)
 
