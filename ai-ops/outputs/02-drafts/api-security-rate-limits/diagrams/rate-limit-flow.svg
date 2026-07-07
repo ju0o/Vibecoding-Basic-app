@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="rate limit 흐름: 한도 내 요청은 200, 한도 초과는 429와 Retry-After, 클라이언트는 대기 후 재시도">
+  <style>
+    .lb { font: 600 13px sans-serif; fill: #334155; }
+    .actor { fill: #e2e8f0; stroke: #64748b; stroke-width: 1.5; }
+    .ok { fill: #ccfbf1; stroke: #0f766e; stroke-width: 1.5; }
+    .limit { fill: #fee2e2; stroke: #b91c1c; stroke-width: 1.5; }
+    .wait { fill: #fef3c7; stroke: #b45309; stroke-width: 1.5; }
+    .cm { font: 600 11px monospace; fill: #0f172a; }
+    .sub { font: 11px sans-serif; fill: #64748b; }
+    .edge { stroke: #64748b; stroke-width: 1.5; fill: none; marker-end: url(#a); }
+    @media (prefers-color-scheme: dark) {
+      .lb { fill: #e2e8f0; } .actor { fill: #1e293b; stroke: #94a3b8; } .cm { fill: #f1f5f9; } .sub { fill: #94a3b8; }
+      .ok { fill: #134e4a; stroke: #5eead4; } .limit { fill: #450a0a; stroke: #fca5a5; } .wait { fill: #451a03; stroke: #fbbf24; } .edge { stroke: #94a3b8; }
+    }
+  </style>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#64748b"/></marker>
+  </defs>
+
+  <rect class="actor" x="30" y="130" width="130" height="50" rx="10"/>
+  <text class="lb" x="95" y="160" text-anchor="middle">클라이언트</text>
+  <rect class="actor" x="560" y="130" width="130" height="50" rx="10"/>
+  <text class="lb" x="625" y="160" text-anchor="middle">서버 (카운터)</text>
+
+  <!-- within limit -->
+  <path class="edge" d="M162 145 L 558 110"/>
+  <text class="sub" x="360" y="112" text-anchor="middle">한도 내 요청</text>
+  <rect class="ok" x="300" y="60" width="120" height="30" rx="8"/>
+  <text class="cm" x="360" y="80" text-anchor="middle">200 OK</text>
+  <path class="edge" d="M558 100 L 422 78"/>
+
+  <!-- exceed -->
+  <path class="edge" d="M162 165 L 558 175"/>
+  <text class="sub" x="360" y="200" text-anchor="middle">한도 초과 (너무 잦음)</text>
+  <rect class="limit" x="280" y="212" width="160" height="34" rx="8"/>
+  <text class="cm" x="360" y="233" text-anchor="middle">429 + Retry-After: 3</text>
+  <path class="edge" d="M558 190 L 442 224"/>
+
+  <!-- wait then retry -->
+  <rect class="wait" x="30" y="220" width="200" height="50" rx="10"/>
+  <text class="cm" x="130" y="242" text-anchor="middle">Retry-After만큼 대기</text>
+  <text class="sub" x="130" y="260" text-anchor="middle">(없으면 지수 백오프)</text>
+  <path class="edge" d="M230 245 C 340 275, 470 270, 558 200"/>
+  <text class="sub" x="400" y="285" text-anchor="middle">대기 후 재시도 (멱등 요청만 자동)</text>
+
+  <text class="sub" x="360" y="305" text-anchor="middle">429=4xx 클라이언트 책임 · 서버에서 강제 · 즉시 재시도 금지</text>
+</svg>

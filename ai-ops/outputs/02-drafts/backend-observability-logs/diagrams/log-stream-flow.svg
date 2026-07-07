@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="로그 흐름: 앱 프로세스가 이벤트를 unbuffered stdout으로 흘려보내고, 실행 환경이 수집·저장·검색하며, 429·5xx 급증이 신호로 드러난다">
+  <style>
+    .lb { font: 600 13px sans-serif; fill: #334155; }
+    .app { fill: #dbeafe; stroke: #1d4ed8; stroke-width: 1.5; }
+    .env { fill: #e2e8f0; stroke: #64748b; stroke-width: 1.5; }
+    .signal { fill: #fee2e2; stroke: #b91c1c; stroke-width: 1.5; }
+    .ev { fill: #ccfbf1; stroke: #0f766e; stroke-width: 1.2; }
+    .cm { font: 600 11px monospace; fill: #0f172a; }
+    .sub { font: 11px sans-serif; fill: #64748b; }
+    .edge { stroke: #0f766e; stroke-width: 1.5; fill: none; marker-end: url(#a); }
+    @media (prefers-color-scheme: dark) {
+      .lb { fill: #e2e8f0; } .cm { fill: #f1f5f9; } .sub { fill: #94a3b8; }
+      .app { fill: #172554; stroke: #93c5fd; } .env { fill: #1e293b; stroke: #94a3b8; }
+      .signal { fill: #450a0a; stroke: #fca5a5; } .ev { fill: #134e4a; stroke: #5eead4; } .edge { stroke: #5eead4; }
+    }
+  </style>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#0f766e"/></marker>
+  </defs>
+
+  <!-- app -->
+  <rect class="app" x="24" y="90" width="150" height="120" rx="10"/>
+  <text class="lb" x="99" y="114" text-anchor="middle">앱 프로세스</text>
+  <rect class="ev" x="38" y="126" width="122" height="20" rx="4"/><text class="cm" x="46" y="141">req user=42</text>
+  <rect class="ev" x="38" y="150" width="122" height="20" rx="4"/><text class="cm" x="46" y="165">db 320ms</text>
+  <rect class="ev" x="38" y="174" width="122" height="20" rx="4"/><text class="cm" x="46" y="189">429 user=42</text>
+
+  <!-- stream arrow -->
+  <path class="edge" d="M174 150 L 300 150"/>
+  <text class="sub" x="237" y="140" text-anchor="middle">stdout (unbuffered)</text>
+  <text class="sub" x="237" y="168" text-anchor="middle">이벤트 스트림</text>
+
+  <!-- env -->
+  <rect class="env" x="300" y="100" width="200" height="100" rx="10"/>
+  <text class="lb" x="400" y="126" text-anchor="middle">실행 환경</text>
+  <text class="sub" x="400" y="150" text-anchor="middle">수집 · 저장 · 검색</text>
+  <text class="sub" x="400" y="172" text-anchor="middle">(앱은 관여 안 함)</text>
+
+  <!-- signals -->
+  <path class="edge" d="M500 150 L 556 150"/>
+  <rect class="signal" x="558" y="110" width="140" height="80" rx="10"/>
+  <text class="lb" x="628" y="134" text-anchor="middle">신호</text>
+  <text class="sub" x="628" y="156" text-anchor="middle">429 급증 → 남용</text>
+  <text class="sub" x="628" y="176" text-anchor="middle">5xx 급증 → 장애</text>
+
+  <text class="sub" x="360" y="250" text-anchor="middle">"로그를 이벤트 스트림으로 다루라" — 앱은 내보내고, 환경이 보관, 관찰이 신호를 읽는다</text>
+  <text class="sub" x="360" y="272" text-anchor="middle">시간 · 요청 ID · 상태 코드를 담되, secret은 남기지 않는다</text>
+</svg>

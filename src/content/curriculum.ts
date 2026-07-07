@@ -524,6 +524,30 @@ export const LESSON_META = [
     tags: ["환경변수", "secret", "설정", "보안", "Twelve-Factor"],
   },
   {
+    slug: "api-security-rate-limits",
+    moduleId: "data-backend",
+    order: 6,
+    title: "API 보안과 rate limit — 남용을 막는 설계",
+    summary:
+      'rate limit은 요청 수에 상한을 둬 남용을 막고, 초과 시 429+Retry-After로 "속도를 늦추라"고 안내합니다 — 429는 4xx(클라이언트 책임)이며 재시도는 Retry-After를 존중해야 합니다.',
+    level: "중급",
+    type: "deep-dive",
+    minutes: 45,
+    tags: ["API 보안", "rate limit", "429", "Retry-After", "백엔드"],
+  },
+  {
+    slug: "backend-observability-logs",
+    moduleId: "data-backend",
+    order: 7,
+    title: "백엔드 로그와 관찰 가능성 — 서버가 무엇을 하는지 보기",
+    summary:
+      "로그는 집계·시간순 이벤트 스트림이며, 앱은 unbuffered stdout으로 내보내고 저장·검색은 실행 환경이 담당합니다 — 요청 ID·상태 코드를 담되 secret은 남기지 않는 것이 원칙입니다.",
+    level: "중급",
+    type: "deep-dive",
+    minutes: 45,
+    tags: ["로그", "관찰 가능성", "observability", "Twelve-Factor", "백엔드"],
+  },
+  {
     slug: "api-db-backend-flow",
     moduleId: "data-backend",
     order: 1,

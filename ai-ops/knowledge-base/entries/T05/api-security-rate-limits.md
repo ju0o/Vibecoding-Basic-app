@@ -12,8 +12,8 @@ sources:
   - { title: "429 Too Many Requests — MDN", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429", checked: 2026-07-08 }
   - { title: "Retry-After — MDN", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After", checked: 2026-07-08 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [api-security-rate-limits]
+  glossary: [Rate Limit, Retry-After]
 updated: 2026-07-08
 ---
 

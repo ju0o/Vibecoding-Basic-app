@@ -12,8 +12,8 @@ sources:
   - { title: "The Twelve-Factor App: Logs", url: "https://12factor.net/logs", checked: 2026-07-08 }
   - { title: "429 Too Many Requests — MDN", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429", checked: 2026-07-08 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [backend-observability-logs]
+  glossary: [Observability, Log]
 updated: 2026-07-08
 ---
 

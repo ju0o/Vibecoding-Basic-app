@@ -1,0 +1,158 @@
+## 한 줄 정의
+
+rate limit(요청 제한)은 **클라이언트가 일정 시간에 보낼 수 있는 요청 수를 제한**해 API 남용을 막는 장치입니다. 한도를 넘으면 서버는 429 상태 코드로 응답하는데, MDN은 이를 ==클라이언트가 주어진 시간에 너무 많은 요청을 보냈음을 나타낸다==고 정의하고 이 방식을 "rate limiting"이라 부릅니다.
+
+429와 함께 오는 **Retry-After** 헤더가 "얼마나 기다렸다 다시 보내라"를 알립니다. 앞 강의(REST API)에서 배운 "4xx는 클라이언트 책임"이 여기서 429(너무 많은 요청)로 구체화되고, 인증(auth-session-token)이 "누구인가"였다면 rate limit은 "그 누군가가 얼마나 자주 요청할 수 있는가"입니다.
+
+> [!KEY]
+> 429의 핵심은 **책임 주체**입니다. 429는 5xx(서버 잘못)가 아니라 4xx(클라이언트가 속도를 늦춰야 함)입니다. 그래서 429를 받은 클라이언트가 할 일은 "서버를 탓하며 즉시 재시도"가 아니라 "Retry-After만큼 기다렸다 다시 보내기"입니다 — 즉시 재시도하면 제한을 더 오래 받습니다.
+
+![rate limit: 한도 초과 시 429+Retry-After, 클라이언트는 대기 후 재시도](/lesson-diagrams/api-security-rate-limits/rate-limit-flow.svg)
+
+## 왜 존재하는가
+
+API를 열어두면 세 가지 위험이 따라옵니다.
+
+첫째, **남용과 과부하.** 한 클라이언트가 초당 수천 번 요청을 퍼부으면 서버가 마비되고, 정상 사용자까지 피해를 봅니다. 악의가 없어도 문제입니다 — 버그로 무한 루프에 빠진 클라이언트 하나가 서버를 무너뜨릴 수 있습니다. rate limit은 "한 클라이언트가 쓸 수 있는 몫"에 상한을 두어, 의도적 공격과 우발적 폭주를 모두 막습니다.
+
+둘째, **무작정 재시도의 악순환.** 요청이 실패했을 때 클라이언트가 즉시·반복 재시도하면 서버 부하가 눈덩이처럼 커집니다. Retry-After는 "언제 다시 오라"를 명시해 이 악순환을 끊습니다.
+
+셋째, **자원의 불공정 독점.** 소수의 헤비 유저가 전체 자원을 독점하면 다수가 느려집니다. 사용자·API 키 단위의 한도가 자원을 공정하게 나눕니다 — 그리고 이 "단위"를 세려면 요청자가 누구인지 알아야 하므로, rate limit은 인증 위에서 동작합니다.
+
+## 작동 원리
+
+### 429의 자리
+
+상태 코드 체계에서 429는 4xx(클라이언트 오류)에 속합니다:
+
+```
+2xx 성공        — 잘 처리됨
+4xx 클라이언트   — 400 잘못된 요청, 401 미인증, 429 너무 많은 요청  ← 여기
+5xx 서버        — 500 서버 예외, 503 서비스 불가
+```
+
+429가 4xx라는 사실이 대응을 결정합니다 — "서버가 고장 난 것"이 아니라 "내가(클라이언트가) 너무 많이 보낸 것"이므로, 해결책은 서버 재시작이 아니라 **속도 조절**입니다.
+
+### Retry-After — 언제 다시 올까
+
+429는 "그만 보내라"만 말하지 않고, Retry-After 헤더로 "언제 다시 오라"까지 알려줍니다. MDN은 이 헤더가 ==user agent가 후속 요청 전에 얼마나 기다려야 하는지==를 나타낸다고 정의합니다.
+
+같은 Retry-After가 429와 503 양쪽에 쓰이지만 의미가 다릅니다:
+
+| 응답 | 책임 | Retry-After의 뜻 |
+|---|---|---|
+| 429 Too Many Requests | 클라이언트 | 다시 요청하기까지 대기 시간 |
+| 503 Service Unavailable | 서버 | 서비스 불가 예상 시간 |
+
+### 서버는 어떻게 세는가 — 창(window)
+
+서버가 "너무 많이"를 판정하려면 요청 수를 세어야 합니다. 가장 단순한 방식은 시간을 창(window)으로 나눠 "이 창에서 몇 번 왔는가"를 세는 것입니다 — 예를 들어 "1분에 60번"이면, 1분 창마다 카운터를 세고 60을 넘으면 429를 반환합니다. 창의 경계 처리, 창을 미끄러뜨리는 방식(sliding window) 등 정교한 변형이 있지만, 핵심은 언제나 ==요청자별로 시간 단위 카운터를 유지==한다는 것입니다. 그래서 "요청자가 누구인가"(인증)와 "그 카운터를 어디에 저장하는가"(서버 여러 대면 공유 저장소)가 rate limit 구현의 두 축이 됩니다.
+
+### 지수 백오프
+
+Retry-After가 없거나 반복 실패할 때, 클라이언트는 재시도 간격을 점점 늘리는 **지수 백오프(exponential backoff)**를 씁니다 — 1초, 2초, 4초… 이렇게 늘리면 서버가 회복할 시간을 주면서도 결국 재시도가 성공합니다. 여기에 약간의 무작위(jitter)를 더하면, 여러 클라이언트가 동시에 같은 간격으로 재시도해 다시 몰리는 것을 막습니다. 여기서 rest-api-design의 교훈이 다시 나옵니다: ==재시도가 안전하려면 그 요청이 idempotent해야== 합니다. POST를 무턱대고 재시도하면 중복 생성이 나므로, 재시도 로직은 멱등성과 함께 설계해야 합니다.
+
+> [!EXAMPLE]
+> AI가 만든 코드가 외부 번역 API를 호출하는데 429를 받았습니다. 잘못된 코드는 `catch`에서 곧바로 다시 호출해 429를 더 많이 유발하고 결국 차단됩니다. 올바른 코드는 응답의 Retry-After를 읽어 그만큼 기다린 뒤(없으면 지수 백오프로) 재시도합니다 — "실패하면 바로 다시"가 아니라 "실패하면 서버가 말한 만큼 기다렸다 다시"입니다.
+
+## 스펙과 세부
+
+### 서버 측 설계
+
+| 항목 | 원칙 |
+|---|---|
+| 한도 단위 | 사용자·IP·API 키별 (인증 전제) |
+| 한도 초과 응답 | 429 + Retry-After |
+| 창(window) | 시간당·분당 요청 수 등 |
+| 안내 | 남은 한도를 헤더로 노출(선택) |
+
+### 클라이언트 측 대응
+
+| 상황 | 대응 |
+|---|---|
+| 429 수신 | Retry-After만큼 대기 후 재시도 |
+| Retry-After 없음 | 지수 백오프(1s→2s→4s…) |
+| 재시도 대상 판단 | idempotent 요청만 자동 재시도 |
+| 503 수신 | Retry-After로 복구 시간 확인 |
+
+### 상황별 빠른 참조
+
+| 상황 | 처방 |
+|---|---|
+| 남용으로 서버가 느려진다 | 사용자·키 단위 rate limit 도입 |
+| 클라이언트가 429를 무시하고 폭주 | Retry-After 존중 + 지수 백오프 |
+| 429인데 재시도 대상인지 모르겠다 | 멱등 메서드(GET/PUT/DELETE)만 자동 재시도 |
+| 429 급증이 관찰된다 | 로그·알림으로 남용·버그 조사 |
+| 서비스 점검 중 | 503 + Retry-After로 복구 예상 시간 안내 |
+
+## 원문으로 읽기
+
+> "The HTTP 429 Too Many Requests status code indicates the client has sent too many requests in a given amount of time."
+>
+> — HTTP 429 Too Many Requests 상태 코드는 클라이언트가 주어진 시간에 너무 많은 요청을 보냈음을 나타낸다.
+> [MDN 429 Too Many Requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429)
+
+"the client has sent too many requests" — 주어가 클라이언트입니다. 429는 서버의 고장이 아니라 클라이언트의 과속을 알리는 신호이며, 그래서 4xx입니다. 이 한 문장이 "429를 받으면 누가 무엇을 해야 하는가"의 답(클라이언트가 속도를 줄인다)을 담고 있습니다.
+
+> "This mechanism of asking the client to slow down the rate of requests is commonly called \"rate limiting\"."
+>
+> — 클라이언트에게 요청 속도를 늦추라고 요청하는 이 메커니즘을 흔히 "rate limiting"이라 부른다.
+> [MDN 429 Too Many Requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429)
+
+rate limiting의 본질이 "asking the client to slow down"이라는 점이 중요합니다. 완전히 차단(block)하는 게 아니라 ==속도를 늦추라고 요청==하는 것이므로, 클라이언트가 협조하면(기다렸다 다시 오면) 다시 정상 서비스를 받습니다. 영구 차단과 일시적 제한은 다릅니다.
+
+> "A Retry-After header may be included to this response to indicate how long a client should wait before making the request again."
+>
+> — 이 응답에 Retry-After 헤더가 포함되어, 클라이언트가 다시 요청하기까지 얼마나 기다려야 하는지를 나타낼 수 있다.
+> [MDN 429 Too Many Requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429)
+
+서버가 "그만"만이 아니라 "언제 다시 오라"까지 알려준다는 점이 rate limit을 협조 가능한 것으로 만듭니다. 잘 설계된 서버는 429에 Retry-After를 함께 담고, 잘 만든 클라이언트는 그 값을 존중합니다 — 둘의 협조가 서버를 지킵니다.
+
+> "The HTTP Retry-After response header indicates how long the user agent should wait before making a follow-up request."
+>
+> — HTTP Retry-After 응답 헤더는 user agent가 후속 요청 전에 얼마나 기다려야 하는지를 나타낸다.
+> [MDN Retry-After](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After)
+
+Retry-After의 정의가 명확합니다 — "how long to wait". 클라이언트의 재시도 로직은 이 값을 추측이 아니라 서버의 지시로 받아야 합니다. 서버가 3초를 기다리라 했는데 1초 만에 재시도하면, 또 429를 받고 제한만 길어집니다.
+
+> "In a 429 Too Many Requests response, this indicates how long to wait before making a new request."
+>
+> — 429 Too Many Requests 응답에서 이것은 새 요청을 하기까지 얼마나 기다려야 하는지를 나타낸다.
+> [MDN Retry-After](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After)
+
+같은 Retry-After라도 429에서는 "네 요청 속도를 늦추기 위한 대기"입니다(503의 "서버 복구 대기"와 대비). 응답 코드와 함께 읽어야 이 헤더의 정확한 의미가 잡힙니다.
+
+## 실전에서
+
+### AI 재시도 로직의 Retry-After 존중 확인
+
+AI에게 "외부 API 호출에 재시도를 넣어줘"라고 하면, 흔히 "실패하면 N번 다시 시도"라는 단순 반복을 만듭니다. 이 코드가 429를 만나면 Retry-After를 무시하고 즉시 재시도해 제한을 악화시킵니다. AI 결과에서 ==429 응답의 Retry-After를 읽어 대기하는지==, 그리고 재시도 대상이 멱등 요청인지를 사람이 확인해야 합니다.
+
+### rate limit은 명시하지 않으면 빠진다
+
+AI에게 API 서버를 맡기면 "동작하는 엔드포인트"는 잘 만들지만, rate limit 같은 비기능 요구는 명시하지 않으면 빠뜨립니다. 남용 방어는 "기능"이 아니라 "안전장치"라 요구사항에 적히지 않으면 구현되지 않습니다 — API를 공개하기 전에 "이 API에 rate limit이 있는가"를 반드시 물어야 합니다. 특히 로그인·비밀번호 재설정·결제처럼 남용이 곧바로 피해로 이어지는 엔드포인트는 rate limit의 1순위 대상이며, AI가 이런 민감 엔드포인트에 방어를 넣었는지는 눈으로 확인해야 합니다.
+
+### 429 급증은 로그로 관찰
+
+429가 갑자기 늘면 세 가지 중 하나입니다 — 남용 공격이거나, 클라이언트 버그(재시도 폭주)이거나, 한도 설정이 너무 빡빡한 것입니다. 이 셋은 대응이 완전히 다릅니다(차단 / 버그 수정 / 한도 완화). 어느 것인지 가리려면 "누가, 언제, 어떤 엔드포인트에" 429를 받았는지의 시간순 로그가 필요합니다 — 다음 강의(백엔드 로그·관찰 가능성)가 바로 이 관찰을 다룹니다. rate limit과 로그는 짝입니다: 제한을 걸어도 관찰하지 못하면 그 제한이 정상 사용자를 막는지 남용을 막는지 알 수 없습니다.
+
+> [!TIP]
+> 429를 처리할 때 ==Retry-After가 있으면 그 값을, 없으면 지수 백오프를 쓰되 상한(예: 최대 대기 60초)과 최대 재시도 횟수를 두세요==. 무한 재시도는 클라이언트가 스스로를 영원히 대기시키는 또 다른 버그가 됩니다. "기다리되 포기할 줄도 아는" 재시도가 좋은 재시도이며, 포기할 때는 사용자에게 명확히 알려 무엇이 지연되는지 보이게 해야 합니다.
+
+## 한계와 트레이드오프
+
+**한도 설정은 관용과 보호의 줄다리기입니다.** 한도가 너무 빡빡하면 정상 사용자도 429를 만나 서비스가 불편해지고, 너무 느슨하면 남용을 못 막습니다. "정상 사용 패턴"을 관찰해 그보다 넉넉하되 남용은 걸리는 선을 찾아야 하며, 이 선은 로그 관찰로 조정하는 살아있는 값입니다.
+
+**rate limit은 인증만큼만 정확합니다.** 사용자·키 단위 한도는 요청자를 정확히 식별할 때만 유효합니다. 인증이 없어 IP로만 제한하면, 같은 IP를 공유하는 정상 사용자들이 함께 막히거나, IP를 바꾸는 공격자를 못 막습니다 — rate limit의 정밀도는 인증(auth-session-token)의 정밀도에 묶입니다.
+
+**이 강의는 남용 방어의 한 축입니다.** rate limit은 "너무 잦은 요청"을 막지만, 인젝션·XSS·CSRF 같은 다른 공격은 각자의 방어(입력 검증, HttpOnly, SameSite 등)가 필요합니다. 429는 "양"의 문제를 다루고, 다른 보안 주제는 "내용"의 문제를 다룹니다 — 하나의 방어가 모든 위협을 막지 않습니다. 예컨대 로그인 엔드포인트는 rate limit으로 무차별 대입(brute force)의 속도를 늦출 수 있지만, 애초에 약한 비밀번호를 막는 것은 또 다른 정책입니다. 보안은 겹겹의 방어(defense in depth)이며 rate limit은 그중 "빈도"를 담당하는 한 겹입니다.
+
+> [!WARNING]
+> rate limit을 클라이언트 측 코드로만 구현하는 것은 방어가 아닙니다. 악의적 클라이언트는 그 제한 코드를 무시하고 요청을 보냅니다. rate limit은 반드시 ==서버에서== 강제해야 합니다 — 클라이언트 측 제한은 정상 사용자의 편의(불필요한 요청 줄이기)일 뿐, 남용 방어가 아닙니다.
+
+## 더 읽기
+
+- [MDN 429 Too Many Requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) — 429 정의, rate limiting, Retry-After
+- [MDN Retry-After](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After) — 429/503에서의 대기 시간 안내
+
+이전 순서: [인증, 세션, 토큰](/lessons/auth-session-token) — rate limit의 "누구의 한도인가"가 인증 위에서 셉니다. 다음 순서: [백엔드 로그와 관찰 가능성](/lessons/backend-observability-logs) — 429 급증 같은 남용 패턴을 관찰하는 방법. 제한을 거는 것(rate limit)과 그 결과를 지켜보는 것(관찰)이 함께 있어야 남용 방어가 완성됩니다.
