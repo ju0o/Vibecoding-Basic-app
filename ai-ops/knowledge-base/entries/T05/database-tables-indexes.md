@@ -2,8 +2,8 @@
 id: database-tables-indexes
 title: "데이터베이스 — 테이블, 데이터 타입, 인덱스"
 topicGroup: T05
-status: draft
-score: 0
+status: approved
+score: 90
 level: 기초
 prerequisites: [api-db-backend-flow]
 successors: []

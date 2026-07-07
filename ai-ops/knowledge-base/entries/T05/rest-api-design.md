@@ -2,8 +2,8 @@
 id: rest-api-design
 title: "REST API 설계 — 자원, 메서드, 상태 코드"
 topicGroup: T05
-status: draft
-score: 0
+status: approved
+score: 90
 level: 기초
 prerequisites: [http-request-response, api-db-backend-flow]
 successors: [auth-session-token]
