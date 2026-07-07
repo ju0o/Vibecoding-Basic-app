@@ -12,8 +12,8 @@ sources:
   - { title: "HTTP authentication — MDN", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication", checked: 2026-07-07 }
   - { title: "Using HTTP cookies — MDN", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies", checked: 2026-07-07 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [auth-session-token]
+  glossary: [Authentication, Session, Session Cookie]
 updated: 2026-07-07
 ---
 

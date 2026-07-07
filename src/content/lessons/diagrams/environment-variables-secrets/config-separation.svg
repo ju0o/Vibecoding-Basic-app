@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" role="img" aria-label="환경변수로 설정을 코드에서 분리: 코드는 process.env 이름만, 값은 바깥에서 주입, secret은 gitignore로 격리">
+  <style>
+    .lb { font: 600 13px sans-serif; fill: #334155; }
+    .code { fill: #dbeafe; stroke: #1d4ed8; stroke-width: 1.5; }
+    .env { fill: #ccfbf1; stroke: #0f766e; stroke-width: 1.5; }
+    .secret { fill: #fee2e2; stroke: #b91c1c; stroke-width: 1.5; }
+    .repo { fill: #e2e8f0; stroke: #64748b; stroke-width: 1.5; }
+    .cm { font: 600 11px monospace; fill: #0f172a; }
+    .sub { font: 11px sans-serif; fill: #64748b; }
+    .edge { stroke: #0f766e; stroke-width: 1.5; fill: none; marker-end: url(#a); stroke-dasharray: 5 4; }
+    .cut { stroke: #b91c1c; stroke-width: 2; fill: none; }
+    @media (prefers-color-scheme: dark) {
+      .lb { fill: #e2e8f0; } .cm { fill: #f1f5f9; } .sub { fill: #94a3b8; }
+      .code { fill: #172554; stroke: #93c5fd; } .env { fill: #134e4a; stroke: #5eead4; }
+      .secret { fill: #450a0a; stroke: #fca5a5; } .repo { fill: #1e293b; stroke: #94a3b8; }
+    }
+  </style>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#0f766e"/></marker>
+  </defs>
+
+  <!-- repo box -->
+  <rect class="repo" x="20" y="40" width="330" height="180" rx="12"/>
+  <text class="lb" x="35" y="64">저장소 (공개 가능)</text>
+  <rect class="code" x="40" y="80" width="290" height="60" rx="8"/>
+  <text class="cm" x="55" y="104">const key =</text>
+  <text class="cm" x="55" y="122">  process.env.API_KEY   ← 이름만</text>
+  <rect class="repo" x="40" y="150" width="290" height="30" rx="8"/>
+  <text class="cm" x="55" y="170">.env.example  (값 비움, 커밋 O)</text>
+  <text class="sub" x="35" y="205">코드에는 secret 없음 → 리트머스 테스트 통과</text>
+
+  <!-- env injection -->
+  <rect class="env" x="430" y="70" width="260" height="60" rx="10"/>
+  <text class="lb" x="560" y="94" text-anchor="middle">환경변수 (주입)</text>
+  <text class="cm" x="560" y="116" text-anchor="middle">API_KEY=sk-abc123  (배포마다 다름)</text>
+  <path class="edge" d="M430 100 L 335 108"/>
+  <text class="sub" x="392" y="90" text-anchor="middle">process.env</text>
+
+  <!-- secret gitignored -->
+  <rect class="secret" x="430" y="160" width="260" height="60" rx="10"/>
+  <text class="lb" x="560" y="184" text-anchor="middle">.env.local  (secret)</text>
+  <text class="cm" x="560" y="206" text-anchor="middle">.gitignore로 커밋 제외 ✕</text>
+  <line class="cut" x1="360" y1="230" x2="425" y2="185"/>
+  <text class="sub" x="360" y="250" text-anchor="middle">secret은 저장소로 들어가지 않음</text>
+
+  <text class="sub" x="360" y="300" text-anchor="middle">"설정은 배포마다 달라지고 코드는 그렇지 않다" — 달라지는 값만 바깥으로</text>
+</svg>

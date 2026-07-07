@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" role="img" aria-label="인증 흐름: 서버가 401로 인증을 요구하고, 클라이언트가 Authorization으로 응답하며, 세션은 Set-Cookie와 Cookie로 왕복한다">
+  <style>
+    .lb { font: 600 13px sans-serif; fill: #334155; }
+    .actor { fill: #e2e8f0; stroke: #64748b; stroke-width: 1.5; }
+    .cm { font: 600 11px monospace; fill: #0f172a; }
+    .sub { font: 11px sans-serif; fill: #64748b; }
+    .req { stroke: #1d4ed8; stroke-width: 1.5; fill: none; marker-end: url(#b); }
+    .res { stroke: #b45309; stroke-width: 1.5; fill: none; marker-end: url(#o); }
+    .ok { stroke: #0f766e; stroke-width: 1.5; fill: none; marker-end: url(#t); }
+    @media (prefers-color-scheme: dark) {
+      .lb { fill: #e2e8f0; } .actor { fill: #1e293b; stroke: #94a3b8; } .cm { fill: #f1f5f9; } .sub { fill: #94a3b8; }
+    }
+  </style>
+  <defs>
+    <marker id="b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1d4ed8"/></marker>
+    <marker id="o" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#b45309"/></marker>
+    <marker id="t" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#0f766e"/></marker>
+  </defs>
+
+  <rect class="actor" x="40" y="40" width="150" height="44" rx="10"/>
+  <text class="lb" x="115" y="67" text-anchor="middle">클라이언트</text>
+  <rect class="actor" x="530" y="40" width="150" height="44" rx="10"/>
+  <text class="lb" x="605" y="67" text-anchor="middle">서버</text>
+  <line x1="115" y1="84" x2="115" y2="315" stroke="#94a3b8" stroke-dasharray="4 4"/>
+  <line x1="605" y1="84" x2="605" y2="315" stroke="#94a3b8" stroke-dasharray="4 4"/>
+
+  <!-- 1 request no auth -->
+  <path class="req" d="M120 110 L 600 110"/>
+  <text class="sub" x="360" y="103" text-anchor="middle">① 요청 (자격 증명 없음)</text>
+  <!-- 2 401 -->
+  <path class="res" d="M600 140 L 120 140"/>
+  <text class="sub" x="360" y="133" text-anchor="middle">② 401 + WWW-Authenticate</text>
+  <!-- 3 authorization -->
+  <path class="req" d="M120 172 L 600 172"/>
+  <text class="cm" x="360" y="165" text-anchor="middle">③ Authorization: Bearer &lt;토큰&gt;</text>
+  <!-- 4 set-cookie -->
+  <path class="ok" d="M600 204 L 120 204"/>
+  <text class="cm" x="360" y="197" text-anchor="middle">④ 200 + Set-Cookie: session=…; HttpOnly</text>
+  <!-- 5 later request -->
+  <path class="req" d="M120 250 L 600 250"/>
+  <text class="cm" x="360" y="243" text-anchor="middle">⑤ 이후 요청 — Cookie: session=… (자동)</text>
+  <!-- 6 -->
+  <path class="ok" d="M600 280 L 120 280"/>
+  <text class="sub" x="360" y="273" text-anchor="middle">⑥ 200 — "이미 인증된 사람"으로 인식</text>
+
+  <text class="sub" x="360" y="312" text-anchor="middle">인증=①~③ 1회 확인 · 세션=④~⑥ 이어가기 · HttpOnly로 탈취 방어</text>
+</svg>

@@ -1429,6 +1429,57 @@ export const GLOSSARY_TERMS = [
     related: ["Database Table", "Database Index", "TypeScript"],
   },
   {
+    term: "Authentication",
+    category: "백엔드",
+    shortDefinition:
+      "요청을 보낸 사람이 누구인지 확인하는 절차 — HTTP의 challenge-response 프레임워크",
+    explanation:
+      "MDN은 'HTTP가 접근 제어와 인증을 위한 일반 프레임워크를 제공한다'고 정의합니다. 서버가 401 + WWW-Authenticate로 인증을 요구하면 클라이언트가 Authorization 헤더에 자격 증명을 담아 응답합니다. 인증은 '누구인지 1회 확인'이고, 그 결과를 이어가는 것이 세션·토큰입니다. 인증(누구인가)과 인가(권한이 있는가, 403)는 다릅니다.",
+    related: ["Session", "HTTP 상태 코드", "Session Cookie"],
+  },
+  {
+    term: "Session",
+    category: "백엔드",
+    shortDefinition: "인증 결과를 이후 요청에도 이어가는 지속 상태 — stateless HTTP에 얹는 기억",
+    explanation:
+      "HTTP는 stateless라 각 요청이 이전을 기억하지 못하므로, 로그인 상태를 유지하려면 세션이 필요합니다. 서버가 Set-Cookie로 세션 식별자를 심으면 브라우저가 이후 요청마다 Cookie 헤더로 자동 첨부해 '이미 인증된 사람'으로 인식됩니다. 서버가 세션 상태를 보관하는 방식이라, 토큰(정보를 토큰 자체에 담음)과 대비됩니다.",
+    related: ["Authentication", "Session Cookie", "Secret"],
+  },
+  {
+    term: "Session Cookie",
+    category: "백엔드",
+    shortDefinition: "세션 식별자를 담아 로그인 상태를 유지하는 쿠키 — HttpOnly로 탈취를 방어",
+    explanation:
+      "쿠키는 '서버가 브라우저에 보내는 작은 데이터 조각'으로 Set-Cookie로 심기고 Cookie로 되돌아옵니다. Max-Age/Expires가 없으면 세션 종료 시 삭제(세션 쿠키), 있으면 만료까지 유지(영구 쿠키)됩니다. 세션을 지속하는 쿠키는 HttpOnly를 설정해 JavaScript 접근을 막아 XSS 세션 탈취를 완화해야 합니다.",
+    related: ["Session", "Authentication", "Same-Origin Policy"],
+  },
+  {
+    term: "Environment Variable",
+    category: "백엔드",
+    shortDefinition:
+      "코드 바깥에서 프로그램에 값을 전달하는 설정 통로 — Node.js에서 process.env로 읽음",
+    explanation:
+      "Node.js는 'process.env가 사용자 환경을 담은 객체를 반환한다'고 정의하며 process.env.API_KEY처럼 읽습니다. 값은 근본적으로 문자열이라 숫자·불리언은 코드에서 파싱해야 합니다. 같은 코드가 환경변수만 바꿔 개발·운영에서 다르게 동작하므로, 배포마다 달라지는 값을 코드에서 분리하는 표준 통로입니다.",
+    related: ["Secret", "Twelve-Factor App", "Data Type (DB)"],
+  },
+  {
+    term: "Secret",
+    category: "백엔드",
+    shortDefinition:
+      "유출되면 안 되는 자격 증명 — API 키, DB 비밀번호, 토큰. 코드가 아닌 환경변수로 관리",
+    explanation:
+      "secret을 코드에 하드코딩하면 Git 이력에 영구히 남아, 나중에 지워도 과거 커밋에 남습니다. 환경변수로 분리하고 .env는 .gitignore로 제외하며, 실수로 커밋됐다면 이력 제거와 별개로 키를 회전(폐기·재발급)해야 합니다. 클라이언트에 노출되는 변수(NEXT_PUBLIC_ 등)에는 담으면 안 됩니다.",
+    related: ["Environment Variable", "Twelve-Factor App", "Authentication"],
+  },
+  {
+    term: "Twelve-Factor App",
+    category: "백엔드",
+    shortDefinition: "설정을 코드에서 분리해 환경변수에 저장하는 것을 포함한 앱 설계 12원칙",
+    explanation:
+      "핵심 통찰은 '설정은 배포마다 크게 달라지지만 코드는 그렇지 않다'이며, 설정을 환경변수에 저장할 것을 권합니다. 분리가 잘 됐는지의 리트머스 테스트는 '지금 코드베이스를 오픈소스로 공개해도 자격 증명이 새지 않는가'입니다 — AI 코드의 하드코딩 검토 기준으로도 실용적입니다.",
+    related: ["Environment Variable", "Secret"],
+  },
+  {
     term: "Same-Origin Policy",
     category: "웹 보안",
     shortDefinition:

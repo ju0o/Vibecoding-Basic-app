@@ -12,8 +12,8 @@ sources:
   - { title: "process.env — Node.js Documentation", url: "https://nodejs.org/api/process.html", checked: 2026-07-07 }
   - { title: "The Twelve-Factor App: Config", url: "https://12factor.net/config", checked: 2026-07-07 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [environment-variables-secrets]
+  glossary: [Environment Variable, Secret, Twelve-Factor App]
 updated: 2026-07-07
 ---
 
