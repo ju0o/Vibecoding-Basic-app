@@ -11,13 +11,13 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) — **Codex 토큰 소진, 운영자 승인으로 Fable이 Executor 대행 중** |
-| Current State | **🌐 65강 deployed** (Wave 23: deployment-platforms + ci-cd) — 용어 255, 다이어그램 38 / KB 51건 approved (신규 강의대기: monitoring-errors-rollbacks 88). deployment-ops order 1~4 배포 |
-| Last Completed Step | Fable(대행) Wave 23 완주(P-04~P-09) + monitoring-errors-rollbacks KB 승인 (2026-07-08) |
+| Current State | **🌐 67강 deployed** (Wave 24·25: monitoring + CLI) — 용어 259, 다이어그램 40 / KB 52건 approved. **deployment-ops order 1~7 완성**(order 5만 미착수) |
+| Last Completed Step | Fable(대행) Wave 24·25 완주 — monitoring-errors-rollbacks·deployment-cli-reference 강의 (2026-07-08) |
 | Next Executor | Codex(토큰 복구 시) 또는 Fable(대행). 병렬: **Cline — CLINE-AUDIT-RUN(전수 기계 감사 5종, 장시간)** |
-| Next Prompt File | 다음: P-04 monitoring-errors-rollbacks 강의(order 6); 이후 P-01: production-env-and-secrets(order 5), deployment-cli-reference(order 7) KB 채집 |
+| Next Prompt File | 다음: P-01 KB 수집 — ai-basics 모듈(model-selection-tradeoffs, ai-era-timeline) 또는 production-env-and-secrets(소싱 확보 시) |
 | Blocker | 없음 |
 | Required Human Action | None — 사이트에서 학습 계속. Cline에 CLINE-AUDIT-RUN 붙여넣기 권장 |
-| Release Status | **V2 65강 deployed (비공개 모드 A)** — 65/100 |
+| Release Status | **V2 67강 deployed (비공개 모드 A)** — 67/100 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 

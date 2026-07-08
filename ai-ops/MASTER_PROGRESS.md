@@ -138,6 +138,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | deployment-platforms | deployment-ops | deployment-platforms | v | v | v | v | Wave 23 (Fable), deep-dive |
 | ci-cd-pipeline-basics | deployment-ops | ci-cd-pipeline-basics | v | v | v | v | Wave 23 (Fable), deep-dive |
 | monitoring-errors-rollbacks | deployment-ops | monitoring-errors-rollbacks | v | v | v | v | Wave 24 (Fable), deep-dive |
+| deployment-cli-reference | deployment-ops | deployment-cli-reference | v | v | v | v | Wave 25 (Fable), reference |
 
 ## 집계 (Executor가 행 갱신 시 함께 갱신)
 
