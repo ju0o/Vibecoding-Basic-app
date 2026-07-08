@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="배포 CLI 명령 지도: 배포·롤백/승격·조회·인증 네 묶음과, CI에서 토큰을 환경변수로 주입하는 안전 원칙">
+  <style>
+    .lb { font: 600 13px sans-serif; fill: #334155; }
+    .deploy { fill: #ccfbf1; stroke: #0f766e; stroke-width: 1.5; }
+    .recover { fill: #ede9fe; stroke: #7c3aed; stroke-width: 1.5; }
+    .view { fill: #dbeafe; stroke: #1d4ed8; stroke-width: 1.5; }
+    .auth { fill: #fef3c7; stroke: #b45309; stroke-width: 1.5; }
+    .warn { fill: #fee2e2; stroke: #b91c1c; stroke-width: 1.5; }
+    .cm { font: 600 11px monospace; fill: #0f172a; }
+    .sub { font: 11px sans-serif; fill: #64748b; }
+    @media (prefers-color-scheme: dark) {
+      .lb { fill: #e2e8f0; } .cm { fill: #f1f5f9; } .sub { fill: #94a3b8; }
+      .deploy { fill: #134e4a; stroke: #5eead4; } .recover { fill: #2e1065; stroke: #c4b5fd; }
+      .view { fill: #172554; stroke: #93c5fd; } .auth { fill: #451a03; stroke: #fbbf24; } .warn { fill: #450a0a; stroke: #fca5a5; }
+    }
+  </style>
+
+  <text class="lb" x="30" y="28">배포 CLI — 네 가지 동작</text>
+
+  <rect class="deploy" x="24" y="44" width="160" height="70" rx="10"/>
+  <text class="lb" x="104" y="66" text-anchor="middle">배포</text>
+  <text class="cm" x="104" y="86" text-anchor="middle">vercel deploy --prod</text>
+  <text class="sub" x="104" y="104" text-anchor="middle">firebase deploy</text>
+
+  <rect class="recover" x="196" y="44" width="160" height="70" rx="10"/>
+  <text class="lb" x="276" y="66" text-anchor="middle">롤백 · 승격</text>
+  <text class="cm" x="276" y="86" text-anchor="middle">vercel rollback</text>
+  <text class="cm" x="276" y="104" text-anchor="middle">vercel promote</text>
+
+  <rect class="view" x="368" y="44" width="160" height="70" rx="10"/>
+  <text class="lb" x="448" y="66" text-anchor="middle">조회</text>
+  <text class="cm" x="448" y="86" text-anchor="middle">vercel list</text>
+  <text class="cm" x="448" y="104" text-anchor="middle">vercel logs</text>
+
+  <rect class="auth" x="540" y="44" width="156" height="70" rx="10"/>
+  <text class="lb" x="618" y="66" text-anchor="middle">인증</text>
+  <text class="cm" x="618" y="86" text-anchor="middle">vercel login</text>
+  <text class="sub" x="618" y="104" text-anchor="middle">(수동)</text>
+
+  <text class="sub" x="360" y="150" text-anchor="middle">터미널에서 직접 · 또는 자동화 시스템(CI/CD)이 대신 실행</text>
+
+  <!-- CI token -->
+  <rect class="warn" x="120" y="180" width="480" height="90" rx="12"/>
+  <text class="lb" x="360" y="206" text-anchor="middle">CI/CD 인증 — 토큰은 환경변수로</text>
+  <text class="cm" x="360" y="230" text-anchor="middle">VERCEL_TOKEN=… (환경변수)  ✓ 권장</text>
+  <text class="cm" x="360" y="250" text-anchor="middle">--token abc123 (인자)  ✕ 프로세스·로그 노출</text>
+
+  <text class="sub" x="360" y="296" text-anchor="middle">플랫폼 달라도 배포·롤백·조회·인증 패턴은 공통 · npm run deploy로 감싸 표준화</text>
+</svg>

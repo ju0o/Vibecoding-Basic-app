@@ -11,8 +11,8 @@ related: [monitoring-errors-rollbacks, environment-variables-secrets]
 sources:
   - { title: "Vercel CLI Overview — Vercel Documentation", url: "https://vercel.com/docs/cli", checked: 2026-07-08 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [deployment-cli-reference]
+  glossary: [Deployment CLI, Deploy Token]
 updated: 2026-07-08
 ---
 

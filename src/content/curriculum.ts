@@ -619,6 +619,18 @@ export const LESSON_META = [
     tags: ["모니터링", "롤백", "오류 추적", "운영", "deployment"],
   },
   {
+    slug: "deployment-cli-reference",
+    moduleId: "deployment-ops",
+    order: 7,
+    title: "배포 CLI 레퍼런스 — 터미널에서 배포·롤백",
+    summary:
+      "배포 CLI(vercel·firebase)로 터미널·CI에서 배포·롤백·조회를 명령으로 실행하며, 인증 토큰은 인자가 아니라 환경변수로 주입해 로그 노출을 막습니다.",
+    level: "중급",
+    type: "reference",
+    minutes: 45,
+    tags: ["배포", "CLI", "vercel", "firebase", "레퍼런스"],
+  },
+  {
     slug: "tokenization-and-context",
     moduleId: "ai-basics",
     order: 1,
