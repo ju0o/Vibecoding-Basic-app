@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="빌드 릴리스 실행 3단계의 한 방향 흐름과, 빌드 타임 값 대 런타임 값의 구분">
+  <style>
+    .lb { font: 600 13px sans-serif; fill: #334155; }
+    .src { fill: #e2e8f0; stroke: #64748b; stroke-width: 1.5; }
+    .build { fill: #fef3c7; stroke: #b45309; stroke-width: 1.5; }
+    .release { fill: #dbeafe; stroke: #1d4ed8; stroke-width: 1.5; }
+    .run { fill: #ccfbf1; stroke: #0f766e; stroke-width: 1.5; }
+    .cm { font: 600 11px monospace; fill: #0f172a; }
+    .sub { font: 11px sans-serif; fill: #64748b; }
+    .edge { stroke: #64748b; stroke-width: 2; fill: none; marker-end: url(#a); }
+    .no { stroke: #b91c1c; stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; marker-end: url(#x); }
+    @media (prefers-color-scheme: dark) {
+      .lb { fill: #e2e8f0; } .cm { fill: #f1f5f9; } .sub { fill: #94a3b8; }
+      .src { fill: #1e293b; stroke: #94a3b8; } .build { fill: #451a03; stroke: #fbbf24; }
+      .release { fill: #172554; stroke: #93c5fd; } .run { fill: #134e4a; stroke: #5eead4; } .edge { stroke: #94a3b8; }
+    }
+  </style>
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#64748b"/></marker>
+    <marker id="x" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#b91c1c"/></marker>
+  </defs>
+
+  <rect class="src" x="20" y="60" width="130" height="52" rx="10"/>
+  <text class="cm" x="85" y="82" text-anchor="middle">소스 코드</text>
+  <text class="sub" x="85" y="100" text-anchor="middle">repo</text>
+
+  <rect class="build" x="190" y="60" width="130" height="52" rx="10"/>
+  <text class="cm" x="255" y="82" text-anchor="middle">build</text>
+  <text class="sub" x="255" y="100" text-anchor="middle">번들로 변환</text>
+
+  <rect class="release" x="360" y="60" width="130" height="52" rx="10"/>
+  <text class="cm" x="425" y="82" text-anchor="middle">release</text>
+  <text class="sub" x="425" y="100" text-anchor="middle">빌드 + 설정</text>
+
+  <rect class="run" x="530" y="60" width="150" height="52" rx="10"/>
+  <text class="cm" x="605" y="82" text-anchor="middle">run (runtime)</text>
+  <text class="sub" x="605" y="100" text-anchor="middle">실행 환경 구동</text>
+
+  <path class="edge" d="M150 86 L 188 86"/>
+  <path class="edge" d="M320 86 L 358 86"/>
+  <path class="edge" d="M490 86 L 528 86"/>
+
+  <!-- no back propagation -->
+  <path class="no" d="M600 130 C 400 175, 300 175, 258 118"/>
+  <text class="sub" x="430" y="172" text-anchor="middle" fill="#b91c1c">✕ 런타임 변경은 빌드로 전파되지 않음</text>
+
+  <!-- value distinction -->
+  <rect class="build" x="150" y="215" width="240" height="60" rx="10"/>
+  <text class="lb" x="270" y="238" text-anchor="middle">빌드 타임 값</text>
+  <text class="sub" x="270" y="258" text-anchor="middle">번들에 박힘 → 바꾸려면 재빌드</text>
+
+  <rect class="run" x="410" y="215" width="240" height="60" rx="10"/>
+  <text class="lb" x="530" y="238" text-anchor="middle">런타임 값</text>
+  <text class="sub" x="530" y="258" text-anchor="middle">환경에서 읽음 → 재시작으로 반영</text>
+
+  <text class="sub" x="360" y="300" text-anchor="middle">빌드 1회 · 릴리스는 환경마다 · 실행은 여러 번 — 방향은 언제나 한쪽</text>
+</svg>

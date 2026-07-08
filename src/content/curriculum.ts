@@ -559,6 +559,30 @@ export const LESSON_META = [
     tags: ["API", "DB", "백엔드", "HTTP"],
   },
   {
+    slug: "build-and-runtime",
+    moduleId: "deployment-ops",
+    order: 1,
+    title: "빌드 타임과 런타임 — 코드가 실행되기까지의 세 단계",
+    summary:
+      'build는 코드를 실행 가능한 번들로 변환하고, release는 설정을 결합하며, run(런타임)은 실행 환경에서 구동합니다 — 빌드 타임 값과 런타임 값을 구분하면 "왜 반영이 안 되지"가 풀립니다.',
+    level: "기초",
+    type: "deep-dive",
+    minutes: 45,
+    tags: ["빌드", "런타임", "배포", "Twelve-Factor", "deployment"],
+  },
+  {
+    slug: "npm-scripts-reference",
+    moduleId: "deployment-ops",
+    order: 3,
+    title: "npm scripts 레퍼런스 — 프로젝트 명령의 표준 통로",
+    summary:
+      "package.json의 scripts에 긴 명령을 짧은 이름으로 등록해 npm run으로 실행하며, pre/post 규칙이 앞뒤 작업을 자동으로 엮습니다 — scripts 필드는 그 프로젝트의 실행법 목차입니다.",
+    level: "기초",
+    type: "reference",
+    minutes: 45,
+    tags: ["npm", "scripts", "레퍼런스", "빌드", "자동화"],
+  },
+  {
     slug: "tokenization-and-context",
     moduleId: "ai-basics",
     order: 1,

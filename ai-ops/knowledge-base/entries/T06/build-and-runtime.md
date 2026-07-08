@@ -11,8 +11,8 @@ related: [package-json-and-semver]
 sources:
   - { title: "The Twelve-Factor App: Build, release, run", url: "https://12factor.net/build-release-run", checked: 2026-07-08 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [build-and-runtime]
+  glossary: [Build Time, Runtime, Release (배포 단계)]
 updated: 2026-07-08
 ---
 

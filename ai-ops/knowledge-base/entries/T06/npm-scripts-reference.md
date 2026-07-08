@@ -11,8 +11,8 @@ related: [build-and-runtime]
 sources:
   - { title: "scripts — npm Docs (CLI v10)", url: "https://docs.npmjs.com/cli/v10/using-npm/scripts", checked: 2026-07-08 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [npm-scripts-reference]
+  glossary: [pre/post script]
 updated: 2026-07-08
 ---
 

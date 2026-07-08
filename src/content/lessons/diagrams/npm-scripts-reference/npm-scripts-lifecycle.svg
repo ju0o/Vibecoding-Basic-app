@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="npm scripts: package.json의 이름-명령 매핑과 npm run 실행 시 pre 스크립트, 본 스크립트, post 스크립트가 순서대로 실행되는 흐름">
+  <style>
+    .lb { font: 600 13px sans-serif; fill: #334155; }
+    .pkg { fill: #e2e8f0; stroke: #64748b; stroke-width: 1.5; }
+    .pre { fill: #fef3c7; stroke: #b45309; stroke-width: 1.5; }
+    .main { fill: #dbeafe; stroke: #1d4ed8; stroke-width: 1.5; }
+    .post { fill: #ccfbf1; stroke: #0f766e; stroke-width: 1.5; }
+    .cm { font: 600 11px monospace; fill: #0f172a; }
+    .sub { font: 11px sans-serif; fill: #64748b; }
+    .edge { stroke: #64748b; stroke-width: 2; fill: none; marker-end: url(#a); }
+    @media (prefers-color-scheme: dark) {
+      .lb { fill: #e2e8f0; } .cm { fill: #f1f5f9; } .sub { fill: #94a3b8; }
+      .pkg { fill: #1e293b; stroke: #94a3b8; } .pre { fill: #451a03; stroke: #fbbf24; }
+      .main { fill: #172554; stroke: #93c5fd; } .post { fill: #134e4a; stroke: #5eead4; } .edge { stroke: #94a3b8; }
+    }
+  </style>
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#64748b"/></marker>
+  </defs>
+
+  <!-- package.json -->
+  <rect class="pkg" x="24" y="60" width="210" height="160" rx="10"/>
+  <text class="lb" x="129" y="84" text-anchor="middle">package.json "scripts"</text>
+  <text class="cm" x="40" y="112">"predeploy": "npm run verify"</text>
+  <text class="cm" x="40" y="140">"deploy": "firebase deploy"</text>
+  <text class="cm" x="40" y="168">"postdeploy": "echo done"</text>
+  <text class="sub" x="129" y="200" text-anchor="middle">이름 → 명령 매핑</text>
+
+  <!-- npm run deploy trigger -->
+  <text class="cm" x="300" y="50" text-anchor="middle">npm run deploy</text>
+  <path class="edge" d="M234 140 L 286 96"/>
+
+  <!-- lifecycle chain -->
+  <rect class="pre" x="290" y="110" width="120" height="46" rx="8"/>
+  <text class="cm" x="350" y="130" text-anchor="middle">predeploy</text>
+  <text class="sub" x="350" y="147" text-anchor="middle">먼저 (검증)</text>
+
+  <rect class="main" x="430" y="110" width="120" height="46" rx="8"/>
+  <text class="cm" x="490" y="130" text-anchor="middle">deploy</text>
+  <text class="sub" x="490" y="147" text-anchor="middle">본 명령</text>
+
+  <rect class="post" x="570" y="110" width="120" height="46" rx="8"/>
+  <text class="cm" x="630" y="130" text-anchor="middle">postdeploy</text>
+  <text class="sub" x="630" y="147" text-anchor="middle">나중 (후처리)</text>
+
+  <path class="edge" d="M410 133 L 428 133"/>
+  <path class="edge" d="M550 133 L 568 133"/>
+
+  <text class="sub" x="490" y="210" text-anchor="middle">pre → 본 → post 자동 순서 · 앞 단계 실패 시 뒤는 실행 안 됨</text>
+  <text class="sub" x="360" y="250" text-anchor="middle">긴 명령을 짧은 이름으로 표준화 · scripts 필드 = 프로젝트 실행법의 목차</text>
+  <text class="sub" x="360" y="272" text-anchor="middle">생명주기 훅(prepare·postinstall)은 설치·배포 시 자동 실행 — 낯선 저장소는 먼저 확인</text>
+</svg>
