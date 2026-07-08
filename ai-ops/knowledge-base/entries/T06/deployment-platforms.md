@@ -12,8 +12,8 @@ sources:
   - { title: "Firebase Hosting — Firebase Documentation", url: "https://firebase.google.com/docs/hosting", checked: 2026-07-08 }
   - { title: "Deploying to Vercel — Vercel Documentation", url: "https://vercel.com/docs/deployments", checked: 2026-07-08 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [deployment-platforms]
+  glossary: [Deployment Platform, CDN, Static Hosting]
 updated: 2026-07-08
 ---
 

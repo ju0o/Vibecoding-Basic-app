@@ -11,8 +11,8 @@ related: [npm-scripts-reference]
 sources:
   - { title: "Understanding GitHub Actions — GitHub Docs", url: "https://docs.github.com/en/actions/about-github-actions/understanding-github-actions", checked: 2026-07-08 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [ci-cd-pipeline-basics]
+  glossary: [CI/CD, Workflow (CI/CD), Runner]
 updated: 2026-07-08
 ---
 

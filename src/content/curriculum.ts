@@ -583,6 +583,30 @@ export const LESSON_META = [
     tags: ["npm", "scripts", "레퍼런스", "빌드", "자동화"],
   },
   {
+    slug: "deployment-platforms",
+    moduleId: "deployment-ops",
+    order: 2,
+    title: "배포 플랫폼 — Firebase, Vercel과 정적·서버 모델",
+    summary:
+      "배포 플랫폼은 빌드 산출물을 사용자에게 서빙하는 실행 환경입니다 — 정적 CDN 호스팅(엣지 캐시·기본 SSL)과 서버·함수 모델을 구분하고, 배포마다 고유 URL로 미리보기·롤백합니다.",
+    level: "기초",
+    type: "deep-dive",
+    minutes: 45,
+    tags: ["배포", "Firebase", "Vercel", "CDN", "deployment"],
+  },
+  {
+    slug: "ci-cd-pipeline-basics",
+    moduleId: "deployment-ops",
+    order: 4,
+    title: "CI/CD 파이프라인 기초 — 커밋에서 배포까지 자동화",
+    summary:
+      "CI/CD는 커밋을 이벤트로 워크플로를 트리거해 잡·스텝(테스트·빌드·배포)을 자동 실행합니다 — 검증 통과에만 배포가 실행되어 깨진 코드 배포를 구조적으로 막습니다.",
+    level: "중급",
+    type: "deep-dive",
+    minutes: 50,
+    tags: ["CI/CD", "GitHub Actions", "자동화", "배포", "파이프라인"],
+  },
+  {
     slug: "tokenization-and-context",
     moduleId: "ai-basics",
     order: 1,
