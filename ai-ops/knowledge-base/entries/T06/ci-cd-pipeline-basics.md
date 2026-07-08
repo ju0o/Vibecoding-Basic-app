@@ -2,8 +2,8 @@
 id: ci-cd-pipeline-basics
 title: "CI/CD 파이프라인 기초 — 커밋에서 배포까지 자동화"
 topicGroup: T06
-status: draft
-score: 0
+status: approved
+score: 89
 level: 중급
 prerequisites: [github-pr-review-flow, build-and-runtime]
 successors: [monitoring-errors-rollbacks]

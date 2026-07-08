@@ -2,8 +2,8 @@
 id: deployment-platforms
 title: "배포 플랫폼 — Firebase, Vercel과 정적·서버 모델"
 topicGroup: T06
-status: draft
-score: 0
+status: approved
+score: 89
 level: 기초
 prerequisites: [build-and-runtime]
 successors: [deployment-cli-reference]
