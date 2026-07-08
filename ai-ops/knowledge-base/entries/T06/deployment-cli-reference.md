@@ -2,8 +2,8 @@
 id: deployment-cli-reference
 title: "배포 CLI 레퍼런스 — 터미널에서 배포·롤백"
 topicGroup: T06
-status: draft
-score: 0
+status: approved
+score: 88
 level: 중급
 prerequisites: [deployment-platforms, npm-scripts-reference]
 successors: []

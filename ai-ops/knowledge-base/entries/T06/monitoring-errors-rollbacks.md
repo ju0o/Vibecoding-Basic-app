@@ -12,8 +12,8 @@ sources:
   - { title: "Performing an Instant Rollback on a Deployment — Vercel Documentation", url: "https://vercel.com/docs/instant-rollback", checked: 2026-07-08 }
   - { title: "The Twelve-Factor App: Logs", url: "https://12factor.net/logs", checked: 2026-07-08 }
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [monitoring-errors-rollbacks]
+  glossary: [Monitoring, Rollback]
 updated: 2026-07-08
 ---
 
