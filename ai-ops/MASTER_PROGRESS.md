@@ -67,6 +67,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | npm-scripts-reference | T06 | v | v 89 (2026-07-08, Fable 대행) | order 3 근거 / npm Docs scripts |
 | deployment-platforms | T06 | v | v 89 (2026-07-08, Fable 대행) | order 2 근거 / Firebase Hosting·Vercel Deployments |
 | ci-cd-pipeline-basics | T06 | v | v 89 (2026-07-08, Fable 대행) | order 4 근거 / GitHub Actions Understanding |
+| monitoring-errors-rollbacks | T06 | v | v 88 (2026-07-08, Fable 대행) | order 6 근거 / Vercel Instant Rollback·12factor Logs |
 
 ## Lesson 매트릭스
 

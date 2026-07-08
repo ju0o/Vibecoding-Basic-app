@@ -2,8 +2,8 @@
 id: monitoring-errors-rollbacks
 title: "모니터링, 오류 추적, 롤백 — 배포 후를 지키기"
 topicGroup: T06
-status: draft
-score: 0
+status: approved
+score: 88
 level: 중급
 prerequisites: [ci-cd-pipeline-basics, backend-observability-logs]
 successors: []

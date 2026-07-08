@@ -11,13 +11,13 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) — **Codex 토큰 소진, 운영자 승인으로 Fable이 Executor 대행 중** |
-| Current State | **🌐 63강 deployed** / KB 50건 approved (신규: deployment-platforms 89, ci-cd-pipeline-basics 89 — deployment-ops T06, planned로 강의 대기) |
-| Last Completed Step | Fable(대행) P-01+P-02: deployment-platforms·ci-cd-pipeline-basics KB 수집·검증·승인 (2026-07-08) |
+| Current State | **🌐 65강 deployed** (Wave 23: deployment-platforms + ci-cd) — 용어 255, 다이어그램 38 / KB 51건 approved (신규 강의대기: monitoring-errors-rollbacks 88). deployment-ops order 1~4 배포 |
+| Last Completed Step | Fable(대행) Wave 23 완주(P-04~P-09) + monitoring-errors-rollbacks KB 승인 (2026-07-08) |
 | Next Executor | Codex(토큰 복구 시) 또는 Fable(대행). 병렬: **Cline — CLINE-AUDIT-RUN(전수 기계 감사 5종, 장시간)** |
-| Next Prompt File | 다음: P-04 강의 2건 — deployment-platforms(order 2), ci-cd-pipeline-basics(order 4) deep-dive. KB 준비 완료 |
+| Next Prompt File | 다음: P-04 monitoring-errors-rollbacks 강의(order 6); 이후 P-01: production-env-and-secrets(order 5), deployment-cli-reference(order 7) KB 채집 |
 | Blocker | 없음 |
 | Required Human Action | None — 사이트에서 학습 계속. Cline에 CLINE-AUDIT-RUN 붙여넣기 권장 |
-| Release Status | **V2 63강 deployed (비공개 모드 A)** — 63/100 |
+| Release Status | **V2 65강 deployed (비공개 모드 A)** — 65/100 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
