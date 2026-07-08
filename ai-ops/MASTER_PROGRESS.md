@@ -63,6 +63,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | environment-variables-secrets | T05 | v | v 90 (2026-07-07, Fable 대행) | order 5 근거 / Node.js process.env·12factor Config |
 | api-security-rate-limits | T05 | v | v 88 (2026-07-08, Fable 대행) | order 6 근거 / MDN 429·Retry-After |
 | backend-observability-logs | T05 | v | v 88 (2026-07-08, Fable 대행) | order 7 근거 / 12factor Logs·MDN 429 |
+| build-and-runtime | T06 | v | v 89 (2026-07-08, Fable 대행) | deployment-ops order 1 근거 / 12factor Build-release-run |
+| npm-scripts-reference | T06 | v | v 89 (2026-07-08, Fable 대행) | order 3 근거 / npm Docs scripts |
 
 ## Lesson 매트릭스
 

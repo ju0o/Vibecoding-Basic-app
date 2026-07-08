@@ -2,8 +2,8 @@
 id: npm-scripts-reference
 title: "npm scripts 레퍼런스 — 프로젝트 명령의 표준 통로"
 topicGroup: T06
-status: draft
-score: 0
+status: approved
+score: 89
 level: 기초
 prerequisites: [package-json-and-semver]
 successors: []

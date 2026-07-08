@@ -2,8 +2,8 @@
 id: build-and-runtime
 title: "빌드 타임과 런타임 — 코드가 실행되기까지의 세 단계"
 topicGroup: T06
-status: draft
-score: 0
+status: approved
+score: 89
 level: 기초
 prerequisites: [nextjs-routing-rendering, environment-variables-secrets]
 successors: [deployment-platforms]
