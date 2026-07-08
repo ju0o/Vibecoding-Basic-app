@@ -133,6 +133,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | backend-observability-logs | data-backend | backend-observability-logs | v | v | v | v | Wave 21 (Fable), deep-dive |
 | build-and-runtime | deployment-ops | build-and-runtime | v | v | v | v | Wave 22 (Fable), deep-dive |
 | npm-scripts-reference | deployment-ops | npm-scripts-reference | v | v | v | v | Wave 22 (Fable), reference |
+| deployment-platforms | deployment-ops | deployment-platforms | v | v | v | v | Wave 23 (Fable), deep-dive |
+| ci-cd-pipeline-basics | deployment-ops | ci-cd-pipeline-basics | v | v | v | v | Wave 23 (Fable), deep-dive |
 
 ## 집계 (Executor가 행 갱신 시 함께 갱신)
 

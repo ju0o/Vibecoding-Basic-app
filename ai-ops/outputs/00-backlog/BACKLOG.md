@@ -59,9 +59,9 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 41 | A | api-security-rate-limits | data-backend | 6 | deep-dive | API 보안과 rate limit | 중급 | auth-session-token | api-security-rate-limits | released |
 | 42 | A | backend-observability-logs | data-backend | 7 | deep-dive | 백엔드 로그와 관찰 가능성 | 중급 | rest-api-design | backend-observability-logs | released |
 | 43 | A | build-and-runtime | deployment-ops | 1 | deep-dive | build time과 runtime 구분 | 기초 | nextjs-routing-rendering | build-runtime | kb_needed |
-| 44 | A | deployment-platforms | deployment-ops | 2 | deep-dive | Vercel, Firebase, 서버 배포 모델 | 기초 | build-and-runtime | deployment-platforms | planned |
+| 44 | A | deployment-platforms | deployment-ops | 2 | deep-dive | Vercel, Firebase, 서버 배포 모델 | 기초 | build-and-runtime | deployment-platforms | released |
 | 45 | D | npm-scripts-reference | deployment-ops | 3 | reference | npm scripts와 package manager 명령 | 기초 | package-json-and-semver | npm-scripts-reference | released |
-| 46 | A | ci-cd-pipeline-basics | deployment-ops | 4 | deep-dive | CI/CD 파이프라인 기초 | 중급 | github-pr-review-flow | ci-cd-pipeline | planned |
+| 46 | A | ci-cd-pipeline-basics | deployment-ops | 4 | deep-dive | CI/CD 파이프라인 기초 | 중급 | github-pr-review-flow | ci-cd-pipeline | released |
 | 47 | A | production-env-and-secrets | deployment-ops | 5 | deep-dive | 운영 환경과 secret 배포 | 중급 | environment-variables-secrets | production-env-secrets | kb_needed |
 | 48 | A | monitoring-errors-rollbacks | deployment-ops | 6 | deep-dive | 모니터링, 오류 추적, 롤백 | 중급 | ci-cd-pipeline-basics | monitoring-errors-rollbacks | kb_needed |
 | 49 | D | deployment-cli-reference | deployment-ops | 7 | reference | 배포 CLI 명령 레퍼런스 | 중급 | deployment-platforms | deployment-cli-reference | kb_needed |
