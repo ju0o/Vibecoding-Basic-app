@@ -63,7 +63,7 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 45 | D | npm-scripts-reference | deployment-ops | 3 | reference | npm scripts와 package manager 명령 | 기초 | package-json-and-semver | npm-scripts-reference | released |
 | 46 | A | ci-cd-pipeline-basics | deployment-ops | 4 | deep-dive | CI/CD 파이프라인 기초 | 중급 | github-pr-review-flow | ci-cd-pipeline | released |
 | 47 | A | production-env-and-secrets | deployment-ops | 5 | deep-dive | 운영 환경과 secret 배포 | 중급 | environment-variables-secrets | production-env-secrets | kb_needed |
-| 48 | A | monitoring-errors-rollbacks | deployment-ops | 6 | deep-dive | 모니터링, 오류 추적, 롤백 | 중급 | ci-cd-pipeline-basics | monitoring-errors-rollbacks | planned |
+| 48 | A | monitoring-errors-rollbacks | deployment-ops | 6 | deep-dive | 모니터링, 오류 추적, 롤백 | 중급 | ci-cd-pipeline-basics | monitoring-errors-rollbacks | released |
 | 49 | D | deployment-cli-reference | deployment-ops | 7 | reference | 배포 CLI 명령 레퍼런스 | 중급 | deployment-platforms | deployment-cli-reference | planned |
 | 50 | C | tokenization-and-context | ai-basics | 1 | deep-dive | 토큰화와 컨텍스트 비용 | 기초 | ai-vibe-coding-orientation | tokenization-context | v2-released |
 | 51 | C | prompt-engineering-foundations | ai-basics | 2 | deep-dive | Prompt Engineering의 기본 원리 | 기초 | tokenization-and-context | prompt-engineering | v2-released |

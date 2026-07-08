@@ -68,6 +68,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | deployment-platforms | T06 | v | v 89 (2026-07-08, Fable 대행) | order 2 근거 / Firebase Hosting·Vercel Deployments |
 | ci-cd-pipeline-basics | T06 | v | v 89 (2026-07-08, Fable 대행) | order 4 근거 / GitHub Actions Understanding |
 | monitoring-errors-rollbacks | T06 | v | v 88 (2026-07-08, Fable 대행) | order 6 근거 / Vercel Instant Rollback·12factor Logs |
+| deployment-cli-reference | T06 | v | v 88 (2026-07-08, Fable 대행) | order 7 근거 / Vercel CLI Overview + 프로젝트 firebase-tools |
 
 ## Lesson 매트릭스
 
@@ -136,6 +137,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | npm-scripts-reference | deployment-ops | npm-scripts-reference | v | v | v | v | Wave 22 (Fable), reference |
 | deployment-platforms | deployment-ops | deployment-platforms | v | v | v | v | Wave 23 (Fable), deep-dive |
 | ci-cd-pipeline-basics | deployment-ops | ci-cd-pipeline-basics | v | v | v | v | Wave 23 (Fable), deep-dive |
+| monitoring-errors-rollbacks | deployment-ops | monitoring-errors-rollbacks | v | v | v | v | Wave 24 (Fable), deep-dive |
 
 ## 집계 (Executor가 행 갱신 시 함께 갱신)
 
