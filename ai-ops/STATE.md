@@ -11,13 +11,13 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) — **Codex 토큰 소진, 운영자 승인으로 Fable이 Executor 대행 중** |
-| Current State | **🌐 61강 deployed** (Wave 21: api-security-rate-limits + backend-observability-logs) — 용어 245, 다이어그램 34 / KB 46건 approved. **data-backend 모듈 order 1~7 완성** |
-| Last Completed Step | Fable(대행) Wave 21 완주(P-04~P-09) — rate limit + 로그/관찰 강의, data-backend 모듈 완성 (2026-07-08) |
+| Current State | **🌐 63강 deployed** (Wave 22: build-and-runtime + npm-scripts-reference) — 용어 249, 다이어그램 36 / KB 48건 approved. deployment-ops 모듈 착수(order 1·3) |
+| Last Completed Step | Fable(대행) Wave 22 완주(P-04~P-09) — 빌드/런타임 + npm scripts 강의 (2026-07-08) |
 | Next Executor | Codex(토큰 복구 시) 또는 Fable(대행). 병렬: **Cline — CLINE-AUDIT-RUN(전수 기계 감사 5종, 장시간)** |
-| Next Prompt File | 다음: P-01 KB 수집 — deployment-ops 모듈(build-and-runtime order 1, deployment-platforms order 2, npm-scripts-reference order 3...) |
+| Next Prompt File | 다음: P-01 KB 수집 — deployment-platforms(order 2), ci-cd-pipeline-basics(order 4), production-env-and-secrets(order 5), monitoring-errors-rollbacks(order 6), deployment-cli-reference(order 7) |
 | Blocker | 없음 |
 | Required Human Action | None — 사이트에서 학습 계속. Cline에 CLINE-AUDIT-RUN 붙여넣기 권장 |
-| Release Status | **V2 61강 deployed (비공개 모드 A)** — 61/100 |
+| Release Status | **V2 63강 deployed (비공개 모드 A)** — 63/100 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
