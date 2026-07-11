@@ -17,7 +17,7 @@
 | Next Prompt File | ai-ops/prompts/CODEX-MISSIONS.md → M6 (91부터 이어서) |
 | Blocker | 없음 (ai-workflow-design KB id 부재는 M6에서 대체 처리) |
 | Required Human Action | None |
-| Release Status | **V2 90강 released + 라이브 90강 + M5 QA 전체 0** — Release 88/100, 라이브 88, kb_needed 10(91~100). 100강 완주 후 최종 재배포 |
+| Release Status | **V2 90강 released + 라이브 90강 + M5 QA 전체 0** — Release 90/100, 라이브 90, kb_needed 10(91~100). 100강 완주 후 최종 재배포 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
@@ -70,8 +70,8 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
-- KB: **78건 approved**, stale KB 0건 / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 88강 + 라이브 90강** / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
+- KB: **80건 approved**, stale KB 0건 / D-02 플랫폼 증분 = **완료**
+- 강의: **V2 released 90강 + 라이브 90강** / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
