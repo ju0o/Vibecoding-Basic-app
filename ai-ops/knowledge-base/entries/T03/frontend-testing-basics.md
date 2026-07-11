@@ -9,8 +9,8 @@ prerequisites: [react-state-effects]
 successors: [ai-assisted-testing-loop]
 related: [typescript-type-system, react-component-model]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [frontend-testing-basics]
+  glossary: [Frontend Test, Test Runner, Vitest, Testing Library, Playwright, Locator]
 sources:
   - { title: "Vitest", url: "https://vitest.dev/", checked: 2026-07-11 }
   - { title: "Testing Library — Guiding Principles", url: "https://testing-library.com/docs/guiding-principles/", checked: 2026-07-11 }

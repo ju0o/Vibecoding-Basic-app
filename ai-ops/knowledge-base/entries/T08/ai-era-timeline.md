@@ -9,8 +9,8 @@ prerequisites: [vibe-coding-origin-karpathy]
 successors: [autocomplete-era, chat-coding-era, ide-agent-era]
 related: [model-selection-tradeoffs, agent-loop]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [ai-era-timeline]
+  glossary: [IntelliSense, GitHub Copilot, AI Pair Programming, Inline Suggestion, Chat Coding, Cloud Agent]
 sources:
   - { title: "VS Code — IntelliSense", url: "https://code.visualstudio.com/docs/editing/intellisense", checked: 2026-07-11 }
   - { title: "GitHub Blog — Introducing GitHub Copilot", url: "https://github.blog/news-insights/product-news/introducing-github-copilot-ai-pair-programmer/", checked: 2026-07-11 }

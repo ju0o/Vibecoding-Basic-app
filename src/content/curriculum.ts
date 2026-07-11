@@ -381,6 +381,30 @@ export const LESSON_META = [
     tags: ["Next.js", "App Router", "Server Components", "렌더링"],
   },
   {
+    slug: "tailwind-design-systems",
+    moduleId: "frontend-frameworks",
+    order: 6,
+    title: "Tailwind와 디자인 시스템 사고",
+    summary:
+      "Tailwind utility class를 theme variables, design token, breakpoint policy와 연결해 AI가 만든 UI도 일관된 디자인 시스템 안에 묶는 법을 배웁니다.",
+    level: "기초",
+    type: "deep-dive",
+    minutes: 75,
+    tags: ["Tailwind CSS", "Design System", "Theme Variable", "Responsive Design", "AI UI"],
+  },
+  {
+    slug: "frontend-testing-basics",
+    moduleId: "frontend-frameworks",
+    order: 7,
+    title: "프론트엔드 테스트 기초",
+    summary:
+      "Vitest, Testing Library, Playwright가 각각 어떤 불안을 줄이는지 배우고, AI가 만든 UI를 사용자 행동 중심 테스트로 검증하는 법을 익힙니다.",
+    level: "중급",
+    type: "deep-dive",
+    minutes: 80,
+    tags: ["Vitest", "Testing Library", "Playwright", "Frontend Test", "E2E"],
+  },
+  {
     slug: "git-collaboration-basics",
     moduleId: "git-collaboration",
     order: 1,
@@ -607,6 +631,18 @@ export const LESSON_META = [
     tags: ["CI/CD", "GitHub Actions", "자동화", "배포", "파이프라인"],
   },
   {
+    slug: "production-env-and-secrets",
+    moduleId: "deployment-ops",
+    order: 5,
+    title: "운영 환경과 secret 배포",
+    summary:
+      "build time과 runtime 환경변수, server-only 기본값, NEXT_PUBLIC_ 공개 경계, Vercel scope, GitHub Actions secrets를 연결해 운영 설정을 안전하게 배포합니다.",
+    level: "중급",
+    type: "deep-dive",
+    minutes: 80,
+    tags: ["Environment Variable", "Secret", "Next.js", "Vercel", "GitHub Actions"],
+  },
+  {
     slug: "monitoring-errors-rollbacks",
     moduleId: "deployment-ops",
     order: 6,
@@ -701,6 +737,18 @@ export const LESSON_META = [
     type: "deep-dive",
     minutes: 70,
     tags: ["Model Selection", "Accuracy", "Latency", "Cost", "Evaluation"],
+  },
+  {
+    slug: "ai-era-timeline",
+    moduleId: "ai-basics",
+    order: 7,
+    title: "자동완성에서 에이전트까지 AI 개발 시대 구분",
+    summary:
+      "IntelliSense, AI autocomplete, chat coding, agent surface를 작업 위임 수준과 검증 책임의 변화로 구분해 AI 코딩 도구 학습 지도를 만듭니다.",
+    level: "기초",
+    type: "deep-dive",
+    minutes: 75,
+    tags: ["AI Coding Tools", "IntelliSense", "GitHub Copilot", "Chat Coding", "Agent"],
   },
   {
     slug: "from-prompt-to-system",

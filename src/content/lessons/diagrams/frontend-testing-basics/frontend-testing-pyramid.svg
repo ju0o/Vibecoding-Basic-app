@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="460" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">프론트엔드 테스트 피라미드</title>
+  <desc id="desc">Vitest unit test, Testing Library component test, Playwright e2e test가 서로 다른 속도와 confidence를 제공하는 구조</desc>
+  <defs>
+    <style>
+      .layer1 { fill: #eef2ff; stroke: #4f46e5; stroke-width: 2; }
+      .layer2 { fill: #ecfdf5; stroke: #059669; stroke-width: 2; }
+      .layer3 { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; }
+      .text { font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; fill: #0f172a; }
+      .sub { font-family: Arial, sans-serif; font-size: 14px; fill: #334155; }
+      .axis { stroke: #64748b; stroke-width: 2; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#64748b" />
+    </marker>
+  </defs>
+  <polygon points="190,356 730,356 662,264 258,264" class="layer1" />
+  <text x="460" y="310" text-anchor="middle" class="text">Vitest Unit Test</text>
+  <text x="460" y="334" text-anchor="middle" class="sub">작은 로직을 빠르게 확인</text>
+  <polygon points="258,248 662,248 594,156 326,156" class="layer2" />
+  <text x="460" y="202" text-anchor="middle" class="text">Testing Library</text>
+  <text x="460" y="226" text-anchor="middle" class="sub">사용자 행동과 화면 결과</text>
+  <polygon points="326,140 594,140 536,62 384,62" class="layer3" />
+  <text x="460" y="100" text-anchor="middle" class="text">Playwright E2E</text>
+  <text x="460" y="124" text-anchor="middle" class="sub">브라우저 전체 흐름</text>
+  <line x1="94" y1="360" x2="94" y2="80" class="axis" />
+  <text x="94" y="54" text-anchor="middle" class="sub">confidence</text>
+  <line x1="170" y1="404" x2="740" y2="404" class="axis" />
+  <text x="760" y="409" class="sub">speed</text>
+  <text x="460" y="430" text-anchor="middle" class="sub">빠른 테스트와 실제 브라우저 검증을 층별로 나누면 AI가 만든 UI도 확인 가능해진다</text>
+</svg>

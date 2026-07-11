@@ -9,8 +9,8 @@ prerequisites: [css-cascade-layout]
 successors: [frontend-testing-basics]
 related: [react-component-model, nextjs-routing-rendering]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [tailwind-design-systems]
+  glossary: [Tailwind CSS, Utility Class, Theme Variable, Design Token, Breakpoint]
 sources:
   - { title: "Tailwind CSS — Styling with utility classes", url: "https://tailwindcss.com/docs/styling-with-utility-classes", checked: 2026-07-11 }
   - { title: "Tailwind CSS — Theme variables", url: "https://tailwindcss.com/docs/theme", checked: 2026-07-11 }

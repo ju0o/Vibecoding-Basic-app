@@ -9,8 +9,8 @@ prerequisites: [environment-variables-secrets, deployment-platforms]
 successors: [deployment-cli-reference]
 related: [build-and-runtime, web-security-basics]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [production-env-and-secrets]
+  glossary: [Environment Variable, Secret, Environment Scope, Public Environment Variable, Log Masking, GitHub Actions, Vercel]
 sources:
   - { title: "Next.js — Environment Variables", url: "https://nextjs.org/docs/pages/guides/environment-variables", checked: 2026-07-11 }
   - { title: "Vercel — Environment variables", url: "https://vercel.com/docs/environment-variables", checked: 2026-07-11 }

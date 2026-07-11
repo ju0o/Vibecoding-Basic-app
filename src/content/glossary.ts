@@ -2811,4 +2811,169 @@ export const GLOSSARY_TERMS = [
       "Effort는 모델 자체를 바꾸기 전에 시도할 수 있는 조절 장치입니다. 더 높은 추론이 필요한 작업과 빠른 응답이 필요한 작업 사이에서 trade-off를 조정합니다.",
     related: ["Model Selection", "Accuracy Target", "Latency"],
   },
+  {
+    term: "Utility Class",
+    category: "프론트엔드",
+    shortDefinition: "작은 CSS 선언을 class 이름 하나로 빠르게 적용하는 스타일 단위",
+    explanation:
+      "Utility Class는 padding, color, layout, font size처럼 작은 스타일 결정을 HTML/JSX 가까이에서 조합하게 해줍니다. Tailwind에서는 theme variable과 연결될 때 단순 class 나열이 아니라 디자인 시스템의 실행 단위가 됩니다.",
+    related: ["CSS", "Tailwind CSS", "Theme Variable"],
+  },
+  {
+    term: "Theme Variable",
+    category: "프론트엔드",
+    shortDefinition: "Tailwind에서 디자인 token과 utility class 생성을 연결하는 특수 CSS 변수",
+    explanation:
+      "Theme Variable은 color, font, breakpoint 같은 반복 값을 이름 붙여 관리하고, Tailwind가 어떤 utility class를 만들지에도 영향을 줍니다. 일반 CSS variable처럼 값을 저장하면서 동시에 스타일 API의 경계를 정합니다.",
+    related: ["Tailwind CSS", "Design Token", "Utility Class"],
+  },
+  {
+    term: "Design Token",
+    category: "프론트엔드",
+    shortDefinition: "제품 전체에서 반복되는 색상·간격·글꼴 같은 시각 값을 이름 붙인 약속",
+    explanation:
+      "Design Token은 화면마다 임의 값을 만들지 않도록 팀의 시각 기준을 고정합니다. Tailwind에서는 theme variable로 token을 코드와 연결해 AI가 만든 UI도 같은 규칙 안에서 검토할 수 있습니다.",
+    related: ["Tailwind CSS", "Theme Variable", "Responsive Design"],
+  },
+  {
+    term: "Frontend Test",
+    category: "프론트엔드",
+    shortDefinition: "UI가 렌더링·상호작용·탐색에서 사용자 기대대로 동작하는지 확인하는 테스트",
+    explanation:
+      "Frontend Test는 작은 로직, 컴포넌트 행동, 실제 브라우저 흐름을 나누어 확인합니다. AI가 만든 UI도 사용자의 클릭과 입력, 화면 결과를 테스트로 검증해야 실제 confidence를 얻을 수 있습니다.",
+    related: ["Vitest", "Testing Library", "Playwright", "Verification"],
+  },
+  {
+    term: "Test Runner",
+    category: "프론트엔드",
+    shortDefinition: "테스트 파일을 실행하고 assertion 결과를 pass/fail로 보고하는 도구",
+    explanation:
+      "Test Runner는 테스트를 찾아 실행하고 실패 위치와 메시지를 제공합니다. Vitest처럼 프로젝트 빌드 환경과 가까운 runner를 쓰면 개발 중 빠른 feedback을 얻기 쉽습니다.",
+    related: ["Vitest", "Frontend Test", "TypeScript"],
+  },
+  {
+    term: "Vitest",
+    category: "프론트엔드",
+    shortDefinition: "Vite 앱 테스트 흐름에 맞춘 JavaScript/TypeScript test runner",
+    explanation:
+      "Vitest는 작은 함수, helper, component 주변 로직을 빠르게 검증하는 데 쓰입니다. UI 전체를 띄우기 전에 순수 로직과 규칙을 확인해 AI 생성 코드의 기본 오류를 줄일 수 있습니다.",
+    related: ["Test Runner", "Frontend Test", "TypeScript"],
+  },
+  {
+    term: "Testing Library",
+    category: "프론트엔드",
+    shortDefinition: "사용자가 소프트웨어를 쓰는 방식과 닮은 UI 테스트를 권장하는 테스트 도구 철학",
+    explanation:
+      "Testing Library는 내부 구현보다 role, label, visible text처럼 사용자에게 드러나는 단서를 기준으로 테스트하게 합니다. 그래서 React 컴포넌트 리팩터링에도 사용자 계약을 중심으로 테스트를 유지할 수 있습니다.",
+    related: ["Frontend Test", "Locator", "React"],
+  },
+  {
+    term: "Playwright",
+    category: "프론트엔드",
+    shortDefinition: "브라우저를 자동 조작해 end-to-end 흐름을 검증하는 테스트·자동화 도구",
+    explanation:
+      "Playwright는 실제 브라우저에서 navigation, click, form, route 흐름을 확인합니다. AI가 만든 UI가 컴파일만 되는 것이 아니라 사용자가 거치는 핵심 경로에서 작동하는지 검증할 때 유용합니다.",
+    related: ["Frontend Test", "Locator", "Browser"],
+  },
+  {
+    term: "Locator",
+    category: "프론트엔드",
+    shortDefinition: "Playwright에서 요소를 찾고 자동 대기와 재시도를 포함해 상호작용하는 대상",
+    explanation:
+      "Locator는 UI가 준비될 때까지 기다리는 actionability check와 retry 흐름을 제공해 flaky test를 줄입니다. CSS 구조보다 role, label, text 같은 사용자-facing contract를 우선하는 것이 좋습니다.",
+    related: ["Playwright", "Frontend Test", "Browser"],
+  },
+  {
+    term: "Environment Scope",
+    category: "배포와 운영",
+    shortDefinition:
+      "환경변수가 local, preview, production 중 어느 배포 범위에 적용되는지 정한 경계",
+    explanation:
+      "Environment Scope는 같은 변수 이름이라도 preview와 production에서 다른 값을 쓰게 해 운영 사고를 줄입니다. 테스트 배포가 실제 production database를 건드리지 않도록 scope를 분리해야 합니다.",
+    related: ["Deployment", "Environment Variable", "Vercel"],
+  },
+  {
+    term: "Public Environment Variable",
+    category: "배포와 운영",
+    shortDefinition: "브라우저 bundle에 노출될 수 있으므로 공개 가능한 값만 담아야 하는 환경변수",
+    explanation:
+      "Public Environment Variable은 Next.js의 NEXT_PUBLIC_처럼 client에서 쓰기 위해 노출되는 값입니다. 이름에 public이 붙었다는 것은 secret을 안전하게 만든다는 뜻이 아니라 공개 가능하다고 선언하는 뜻입니다.",
+    related: ["Environment Variable", "Secret", "Next.js"],
+  },
+  {
+    term: "Log Masking",
+    category: "배포와 운영",
+    shortDefinition: "CI 로그나 실행 로그에서 민감 값이 평문으로 보이지 않게 가리는 절차",
+    explanation:
+      "Log Masking은 secret store를 쓰더라도 로그에 값이 찍혀 유출되는 상황을 막는 안전 장치입니다. AI에게 로그를 제공하기 전에도 token, password, private key 같은 값은 제거해야 합니다.",
+    related: ["Secret", "GitHub Actions", "CI/CD"],
+  },
+  {
+    term: "GitHub Actions",
+    category: "배포와 운영",
+    shortDefinition:
+      "GitHub repository 이벤트를 기준으로 test, build, deploy 작업을 자동 실행하는 CI/CD 플랫폼",
+    explanation:
+      "GitHub Actions는 workflow에서 repository secrets와 variables를 주입해 자동 검증과 배포를 수행할 수 있습니다. 민감 값은 secrets context로 다루고 로그 노출을 막아야 합니다.",
+    related: ["CI/CD", "Secret", "Log Masking"],
+  },
+  {
+    term: "Vercel",
+    category: "배포와 운영",
+    shortDefinition: "Next.js 앱 배포와 preview/production 환경 관리를 제공하는 배포 플랫폼",
+    explanation:
+      "Vercel은 preview와 production deployment를 나누어 환경변수를 적용할 수 있습니다. 같은 코드라도 환경 scope에 따라 다른 API나 데이터베이스를 바라보게 설계할 수 있습니다.",
+    related: ["Deployment", "Environment Scope", "Environment Variable"],
+  },
+  {
+    term: "IntelliSense",
+    category: "AI 코딩 도구",
+    shortDefinition: "code completion, parameter info, quick info 같은 editor 보조 기능군",
+    explanation:
+      "IntelliSense는 AI 이전부터 개발자가 프로젝트 symbol과 타입 정보를 빠르게 확인하게 해준 editor intelligence입니다. AI autocomplete와 달리 language service 기반의 예측 가능한 보조에 가깝습니다.",
+    related: ["AI 코딩 도구", "Inline Suggestion", "TypeScript"],
+  },
+  {
+    term: "GitHub Copilot",
+    category: "AI 코딩 도구",
+    shortDefinition: "inline suggestion, chat, agent 기능을 포함하는 GitHub의 AI 코딩 도구",
+    explanation:
+      "GitHub Copilot은 자동완성형 제안에서 출발해 coding-related questions와 cloud agent surface까지 확장된 AI 코딩 도구입니다. surface별로 권한과 검증 방식을 다르게 봐야 합니다.",
+    related: ["AI 코딩 도구", "Inline Suggestion", "Chat Coding"],
+  },
+  {
+    term: "AI Pair Programming",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "AI가 개발자의 현재 코드 맥락을 보고 다음 코드나 설명을 함께 제안하는 개발 방식",
+    explanation:
+      "AI Pair Programming은 사람이 목표와 검증을 주도하고 AI가 구현 후보, 반복 코드, 설명을 보조하는 관계입니다. 제안을 빠르게 받되 diff와 test로 확인하는 습관이 필요합니다.",
+    related: ["GitHub Copilot", "Inline Suggestion", "AI 코딩 도구"],
+  },
+  {
+    term: "Inline Suggestion",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "에디터 안에서 현재 커서 주변 맥락을 바탕으로 줄이나 블록을 바로 제안하는 기능",
+    explanation:
+      "Inline Suggestion은 작은 구현 속도를 높이지만, 제안된 코드가 요구사항과 edge case를 만족하는지는 개발자가 확인해야 합니다. 자동완성처럼 보이지만 생성 모델 기반일 수 있습니다.",
+    related: ["GitHub Copilot", "IntelliSense", "AI Pair Programming"],
+  },
+  {
+    term: "Chat Coding",
+    category: "AI 코딩 도구",
+    shortDefinition: "코딩 관련 질문, 오류 해석, 코드 설명을 대화형 AI와 주고받는 개발 방식",
+    explanation:
+      "Chat Coding은 자동완성과 달리 사람이 질문을 구성하고 답변을 검증하는 surface입니다. 오류 메시지 설명, 낯선 코드 이해, 리팩터링 방향 탐색에 좋지만 최종 확인은 테스트와 근거로 해야 합니다.",
+    related: ["GitHub Copilot", "AI 코딩 도구", "Verification"],
+  },
+  {
+    term: "Cloud Agent",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "repository가 준비된 원격 실행 환경에서 계획, 수정, 검증 작업을 수행하는 AI agent",
+    explanation:
+      "Cloud Agent는 단일 답변보다 긴 작업을 맡아 branch 변경이나 PR 후보를 만들 수 있습니다. 권한 범위, stop condition, diff review, verify command가 함께 있어야 안전하게 사용할 수 있습니다.",
+    related: ["Agent", "Codex", "GitHub Copilot"],
+  },
 ] satisfies readonly GlossaryTerm[]

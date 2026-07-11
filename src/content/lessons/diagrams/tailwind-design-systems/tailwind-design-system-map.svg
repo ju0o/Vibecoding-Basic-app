@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="460" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">Tailwind 디자인 시스템 지도</title>
+  <desc id="desc">Theme variables가 utility class, component pattern, page UI로 이어지고 AI UI review가 다시 token governance로 돌아가는 흐름</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb" />
+    </marker>
+    <style>
+      .token { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; rx: 18; }
+      .system { fill: #f0fdf4; stroke: #16a34a; stroke-width: 2; rx: 18; }
+      .review { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; rx: 18; }
+      .text { font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; fill: #0f172a; }
+      .sub { font-family: Arial, sans-serif; font-size: 14px; fill: #334155; }
+      .line { fill: none; stroke: #2563eb; stroke-width: 3; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect x="54" y="74" width="190" height="92" class="token" />
+  <text x="149" y="110" text-anchor="middle" class="text">Theme Variables</text>
+  <text x="149" y="137" text-anchor="middle" class="sub">color, font, breakpoint</text>
+  <rect x="306" y="74" width="190" height="92" class="token" />
+  <text x="401" y="110" text-anchor="middle" class="text">Utility Classes</text>
+  <text x="401" y="137" text-anchor="middle" class="sub">bg-brand, gap, text</text>
+  <rect x="558" y="74" width="190" height="92" class="system" />
+  <text x="653" y="110" text-anchor="middle" class="text">Components</text>
+  <text x="653" y="137" text-anchor="middle" class="sub">button, card, input</text>
+  <rect x="650" y="256" width="190" height="92" class="system" />
+  <text x="745" y="292" text-anchor="middle" class="text">Page UI</text>
+  <text x="745" y="319" text-anchor="middle" class="sub">consistent screens</text>
+  <rect x="366" y="256" width="190" height="92" class="review" />
+  <text x="461" y="292" text-anchor="middle" class="text">AI UI Review</text>
+  <text x="461" y="319" text-anchor="middle" class="sub">arbitrary value check</text>
+  <rect x="82" y="256" width="190" height="92" class="review" />
+  <text x="177" y="292" text-anchor="middle" class="text">Token Governance</text>
+  <text x="177" y="319" text-anchor="middle" class="sub">promote repeated values</text>
+  <path d="M244 120 H306" class="line" />
+  <path d="M496 120 H558" class="line" />
+  <path d="M653 166 C706 188 738 220 745 256" class="line" />
+  <path d="M650 302 H556" class="line" />
+  <path d="M366 302 H272" class="line" />
+  <path d="M177 256 C122 216 118 174 149 166" class="line" />
+  <text x="460" y="412" text-anchor="middle" class="sub">빠른 class 조합은 theme token과 review loop가 있을 때 디자인 시스템이 된다</text>
+</svg>

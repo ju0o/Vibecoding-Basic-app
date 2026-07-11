@@ -41,8 +41,8 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 23 | A | react-component-mental-model | frontend-frameworks | 3 | deep-dive | React 컴포넌트 사고방식 | 기초 | typescript-react-nextjs | react-component-model | v2-released |
 | 24 | A | react-state-and-effects | frontend-frameworks | 4 | deep-dive | React 상태와 effect의 경계 | 중급 | react-component-mental-model | react-state-effects | v2-released |
 | 25 | A | nextjs-routing-rendering | frontend-frameworks | 5 | deep-dive | Next.js 라우팅과 렌더링 모델 | 중급 | react-component-mental-model | nextjs-routing-rendering | v2-released |
-| 26 | A | tailwind-design-systems | frontend-frameworks | 6 | deep-dive | Tailwind와 디자인 시스템 사고 | 기초 | css-cascade-layout-responsive | tailwind-design-systems | planned |
-| 27 | A | frontend-testing-basics | frontend-frameworks | 7 | deep-dive | 프론트엔드 테스트 기초 | 중급 | react-state-and-effects | frontend-testing-basics | planned |
+| 26 | A | tailwind-design-systems | frontend-frameworks | 6 | deep-dive | Tailwind와 디자인 시스템 사고 | 기초 | css-cascade-layout-responsive | tailwind-design-systems | v2-released |
+| 27 | A | frontend-testing-basics | frontend-frameworks | 7 | deep-dive | 프론트엔드 테스트 기초 | 중급 | react-state-and-effects | frontend-testing-basics | v2-released |
 | 28 | D | git-collaboration-basics | git-collaboration | 1 | reference | Git은 왜 개발자의 타임머신인가 | 기초 | terminal-shell-basics-reference | git-init-add-commit-status,git-branch-switch-merge,git-log-diff-show,github-pr-review-flow | v2-released |
 | 29 | D | git-init-add-commit-status | git-collaboration | 2 | reference | git init/add/commit/status 레퍼런스 | 기초 | git-collaboration-basics | git-init-add-commit-status | v2-released |
 | 30 | D | git-branch-switch-merge | git-collaboration | 3 | reference | git branch/switch/merge 레퍼런스 | 기초 | git-init-add-commit-status | git-branch-switch-merge | v2-released |
@@ -62,7 +62,7 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 44 | A | deployment-platforms | deployment-ops | 2 | deep-dive | Vercel, Firebase, 서버 배포 모델 | 기초 | build-and-runtime | deployment-platforms | released |
 | 45 | D | npm-scripts-reference | deployment-ops | 3 | reference | npm scripts와 package manager 명령 | 기초 | package-json-and-semver | npm-scripts-reference | released |
 | 46 | A | ci-cd-pipeline-basics | deployment-ops | 4 | deep-dive | CI/CD 파이프라인 기초 | 중급 | github-pr-review-flow | ci-cd-pipeline | released |
-| 47 | A | production-env-and-secrets | deployment-ops | 5 | deep-dive | 운영 환경과 secret 배포 | 중급 | environment-variables-secrets | production-env-secrets | planned |
+| 47 | A | production-env-and-secrets | deployment-ops | 5 | deep-dive | 운영 환경과 secret 배포 | 중급 | environment-variables-secrets | production-env-secrets | v2-released |
 | 48 | A | monitoring-errors-rollbacks | deployment-ops | 6 | deep-dive | 모니터링, 오류 추적, 롤백 | 중급 | ci-cd-pipeline-basics | monitoring-errors-rollbacks | released |
 | 49 | D | deployment-cli-reference | deployment-ops | 7 | reference | 배포 CLI 명령 레퍼런스 | 중급 | deployment-platforms | deployment-cli-reference | released |
 | 50 | C | tokenization-and-context | ai-basics | 1 | deep-dive | 토큰화와 컨텍스트 비용 | 기초 | ai-vibe-coding-orientation | tokenization-context | v2-released |
@@ -71,7 +71,7 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 53 | C | hallucination-and-verification | ai-basics | 4 | deep-dive | 환각과 검증 루틴 | 기초 | grounding-and-citations | hallucination-verification | v2-released |
 | 54 | C | embeddings-and-similarity | ai-basics | 5 | deep-dive | 임베딩과 의미 유사도 | 중급 | tokenization-and-context | embeddings-similarity | v2-released |
 | 55 | C | model-selection-tradeoffs | ai-basics | 6 | deep-dive | 모델 선택과 trade-off | 중급 | hallucination-and-verification | model-selection-tradeoffs | v2-released |
-| 56 | B | ai-era-timeline | ai-basics | 7 | deep-dive | 자동완성에서 에이전트까지 AI 개발 시대 구분 | 기초 | vibe-coding-origin-karpathy | ai-era-timeline | planned |
+| 56 | B | ai-era-timeline | ai-basics | 7 | deep-dive | 자동완성에서 에이전트까지 AI 개발 시대 구분 | 기초 | vibe-coding-origin-karpathy | ai-era-timeline | v2-released |
 | 57 | B | autocomplete-era | ai-coding-tools | 1 | deep-dive | 자동완성 시대: Copilot 이전과 이후 | 기초 | ai-era-timeline | autocomplete-era | planned |
 | 58 | B | chat-coding-era | ai-coding-tools | 2 | deep-dive | 챗 코딩 시대: 대화형 개발의 장점과 한계 | 기초 | autocomplete-era | chat-coding-era | kb_needed |
 | 59 | B | ide-agent-era | ai-coding-tools | 3 | deep-dive | IDE 에이전트 시대 | 중급 | chat-coding-era | ide-agent-era | kb_needed |
