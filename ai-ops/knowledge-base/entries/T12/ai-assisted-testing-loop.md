@@ -9,8 +9,8 @@ prerequisites: [frontend-testing-basics, prompt-engineering]
 successors: []
 related: [human-ai-collaboration-patterns, code-change-risk-analysis, ai-code-review-tools]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [ai-assisted-testing-loop]
+  glossary: [Test Matrix, User-like Test, Actionability Check, Repeatable Test Run]
 sources:
   - { title: "GitHub Docs — Writing tests with GitHub Copilot", url: "https://docs.github.com/en/copilot/tutorials/write-tests", checked: 2026-07-12 }
   - { title: "Playwright Docs — Writing tests", url: "https://playwright.dev/docs/writing-tests", checked: 2026-07-12 }

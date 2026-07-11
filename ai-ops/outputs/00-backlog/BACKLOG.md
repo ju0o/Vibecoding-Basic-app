@@ -98,7 +98,7 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 80 | B | requirement-to-task-breakdown | practical-vibe-coding | 1 | deep-dive | 요구사항을 작업 단위로 쪼개기 | 기초 | human-ai-collaboration-patterns | requirement-task-breakdown | v2-released |
 | 81 | B | prompt-to-implementation-loop | practical-vibe-coding | 2 | deep-dive | 프롬프트에서 구현 루프까지 | 중급 | requirement-to-task-breakdown | prompt-implementation-loop | v2-released |
 | 82 | A | code-change-risk-analysis | practical-vibe-coding | 3 | deep-dive | 코드 변경 위험 분석 | 중급 | debugging-error-reading | code-change-risk-analysis | v2-released |
-| 83 | A | ai-assisted-testing-loop | practical-vibe-coding | 4 | deep-dive | AI와 테스트 루프 설계 | 중급 | frontend-testing-basics | ai-assisted-testing-loop | generated |
+| 83 | A | ai-assisted-testing-loop | practical-vibe-coding | 4 | deep-dive | AI와 테스트 루프 설계 | 중급 | frontend-testing-basics | ai-assisted-testing-loop | integrated |
 | 84 | B | refactoring-with-ai | practical-vibe-coding | 5 | deep-dive | AI와 리팩터링하기 | 중급 | code-change-risk-analysis | refactoring-with-ai | kb_needed |
 | 85 | B | reviewing-ai-output | practical-vibe-coding | 6 | deep-dive | AI 결과물 리뷰하는 법 | 기초 | hallucination-and-verification | reviewing-ai-output | kb_needed |
 | 86 | A | incident-style-ai-debugging | practical-vibe-coding | 7 | deep-dive | 장애 대응식 AI 디버깅 | 중급 | monitoring-errors-rollbacks | incident-ai-debugging | kb_needed |

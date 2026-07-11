@@ -11,28 +11,28 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **O-06.1 (v3.1) — Fable(지휘+경량QA) · Codex(Heavy 미션 M1~M5) 2인 체제.** 기획서: ORCHESTRATION-PLAN.md |
-| Current State | **AI-assisted Testing Draft generated** — 82강 released, 1강 generated, KB 73건 approved. 다음 P-05 대기 |
-| Last Completed Step | Codex가 ai-assisted-testing-loop V2 draft를 생성하고 P-04 self QA를 통과시킴 (2026-07-12) |
+| Current State | **AI-assisted Testing integrated** — 82강 released, 1강 integrated, KB 73건 approved. 다음 P-06 검증 대기 |
+| Last Completed Step | Codex가 ai-assisted-testing-loop를 사이트 콘텐츠로 반영하고 lint/typecheck를 통과시킴 (2026-07-12) |
 | Next Executor | Codex(전체 권한 연속 실행) |
-| Next Prompt File | ai-ops/prompts/P-05-site-integration.md |
+| Next Prompt File | ai-ops/prompts/P-06-build-verification.md |
 | Blocker | 없음 |
 | Required Human Action | None |
-| Release Status | **V2 82강 released (비공개 모드 A) + 1강 generated + M5 QA 전체 0, deploy HOLD** — Lesson 83/100, Site 82/100 |
+| Release Status | **V2 82강 released (비공개 모드 A) + 1강 integrated + M5 QA 전체 0, deploy HOLD** — Lesson 83/100, Site 83/100 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: AI-assisted Testing Draft generated, 82강 released, 1강 generated, KB 73건 approved
+- Current State: AI-assisted Testing integrated, 82강 released, 1강 integrated, KB 73건 approved
 - Verdict: DONE
 - Next Executor: Codex
-- Next Prompt File: ai-ops/prompts/P-05-site-integration.md
-- Why: generated 항목 1건이 생겼으므로 RUN 우선순위상 다음 단계는 P-05 사이트 반영
+- Next Prompt File: ai-ops/prompts/P-06-build-verification.md
+- Why: integrated 항목 1건이 생겼으므로 다음 단계는 P-06 build verification이며, 운영자 승인에 따라 Codex가 흐름을 끊지 않고 계속 수행함
 - Required Operator Action: None
-- If Approved: Codex가 P-05로 ai-assisted-testing-loop를 src/content에 통합
-- If Rejected: 반려 사유에 따라 draft lesson/meta/terms 수정 후 P-04 상태 보정
-- Files to Check: ai-ops/outputs/02-drafts/ai-assisted-testing-loop
-- Stop Condition: P-05 통합 중 draft와 src/content 해시 불일치, 다이어그램/용어 충돌, 또는 KB 외 콘텐츠 수정 필요
+- If Approved: Codex가 P-06으로 npm run verify 및 사이트 렌더 가능성 검증 수행
+- If Rejected: 반려 사유에 따라 P-05 통합 파일 또는 draft를 보정
+- Files to Check: src/content/lessons/markdown/ai-assisted-testing-loop.md, ai-ops/outputs/04-integrated/ai-assisted-testing-loop.md
+- Stop Condition: npm run verify 실패 또는 QA scan에서 새 위반 발생
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB: **73건 approved**, stale KB 0건 / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 82강**, generated 1강 (deployment HOLD) / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
+- 강의: **V2 released 82강**, integrated 1강 (deployment HOLD) / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-12 | ai-assisted-testing-loop | generated → integrated | Codex P-05 AI-assisted Testing Integration, markdown·curriculum·glossary 4개·diagram 1개·KB consumers 반영, lint/typecheck PASS |
 | 2026-07-12 | ai-assisted-testing-loop | planned → generated | Codex P-04 AI-assisted Testing Draft, V2 8섹션·10,753자·Quote Bank 인용 5개 일치, P-05 대기 |
 | 2026-07-12 | ai-code-review-tools·requirement-to-task-breakdown·prompt-to-implementation-loop·code-change-risk-analysis | verified → released | Codex P-08 Practical Vibe Coding Release, V2 Wave 31, deployment HOLD |
 | 2026-07-12 | ai-code-review-tools·requirement-to-task-breakdown·prompt-to-implementation-loop·code-change-risk-analysis | integrated → verified | Codex P-06 Practical Vibe Coding Verify, `npm run verify` PASS, Next build 148 static pages |
