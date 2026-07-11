@@ -16,7 +16,11 @@ async function sha256Hex(text: string): Promise<string> {
 }
 
 function stripWrappingQuotes(value: string): string {
-  if (value.length >= 2 && value[0] === value[value.length - 1] && (value[0] === "'" || value[0] === '"')) {
+  if (
+    value.length >= 2 &&
+    value[0] === value[value.length - 1] &&
+    (value[0] === "'" || value[0] === '"')
+  ) {
     return value.slice(1, -1)
   }
   return value
@@ -40,7 +44,9 @@ export function PasswordGate({ children }: { readonly children: ReactNode }) {
     }
     let cancelled = false
     ;(async () => {
-      const normalized = (isSha256Hex(seed) ? seed.toLowerCase() : await sha256Hex(seed)).toLowerCase()
+      const normalized = (
+        isSha256Hex(seed) ? seed.toLowerCase() : await sha256Hex(seed)
+      ).toLowerCase()
       if (cancelled) {
         return
       }
@@ -60,7 +66,8 @@ export function PasswordGate({ children }: { readonly children: ReactNode }) {
     return <div aria-hidden className="min-h-[100dvh]" />
   }
 
-  const hashMissing = PASSWORD_HASH === undefined || stripWrappingQuotes(PASSWORD_HASH.trim()).length === 0
+  const hashMissing =
+    PASSWORD_HASH === undefined || stripWrappingQuotes(PASSWORD_HASH.trim()).length === 0
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()

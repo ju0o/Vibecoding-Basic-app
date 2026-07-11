@@ -10,6 +10,8 @@ const LearningStateSchema = z.object({
   completedLessons: z.array(z.string()),
   checklistItems: z.record(z.string(), z.array(z.string())),
   bookmarks: z.array(z.string()),
+  lastReadLessonSlug: z.string().optional(),
+  lastReadAt: z.string().optional(),
 })
 
 type ChecklistToggleInput = {
@@ -23,6 +25,8 @@ type LearningStateContextValue = {
   readonly toggleLessonComplete: (slug: string) => void
   readonly toggleBookmark: (slug: string) => void
   readonly toggleChecklistItem: (input: ChecklistToggleInput) => void
+  readonly recordLessonVisit: (slug: string) => void
+  readonly resetLearningState: () => void
   readonly getChecklistPercent: (lessonSlug: string, totalItems: number) => number
   readonly getOverallPercent: (totalLessons: number) => number
 }
@@ -72,6 +76,18 @@ export function LearningStateProvider({ children }: { readonly children: React.R
     })
   }, [])
 
+  const recordLessonVisit = useCallback((slug: string) => {
+    setState((current) => ({
+      ...current,
+      lastReadLessonSlug: slug,
+      lastReadAt: new Date().toISOString(),
+    }))
+  }, [])
+
+  const resetLearningState = useCallback(() => {
+    setState(EMPTY_LEARNING_STATE)
+  }, [])
+
   const getChecklistPercent = useCallback(
     (lessonSlug: string, totalItems: number) => {
       const completedItems = state.checklistItems[lessonSlug]?.length ?? 0
@@ -93,6 +109,8 @@ export function LearningStateProvider({ children }: { readonly children: React.R
       toggleLessonComplete,
       toggleBookmark,
       toggleChecklistItem,
+      recordLessonVisit,
+      resetLearningState,
       getChecklistPercent,
       getOverallPercent,
     }),
@@ -102,6 +120,8 @@ export function LearningStateProvider({ children }: { readonly children: React.R
       toggleLessonComplete,
       toggleBookmark,
       toggleChecklistItem,
+      recordLessonVisit,
+      resetLearningState,
       getChecklistPercent,
       getOverallPercent,
     ],

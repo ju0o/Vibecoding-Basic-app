@@ -2,6 +2,8 @@ export type LearningState = {
   readonly completedLessons: readonly string[]
   readonly checklistItems: Readonly<Record<string, readonly string[]>>
   readonly bookmarks: readonly string[]
+  readonly lastReadLessonSlug?: string | undefined
+  readonly lastReadAt?: string | undefined
 }
 
 export type ProgressStats = {

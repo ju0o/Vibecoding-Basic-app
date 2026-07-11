@@ -3,9 +3,12 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { BackToTopButton } from "@/components/lesson/BackToTopButton"
 import { LessonMarkdown } from "@/components/lesson/LessonMarkdown"
+import { LessonNavigationCards } from "@/components/lesson/LessonNavigationCards"
 import { LessonSidebar } from "@/components/lesson/LessonSidebar"
 import { ReadingProgressBar } from "@/components/lesson/ReadingProgressBar"
 import { Badge } from "@/components/ui/Badge"
+import { LessonCompleteButton } from "@/features/progress/LessonCompleteButton"
+import { LessonVisitTracker } from "@/features/progress/LessonVisitTracker"
 import {
   getLessonBySlug,
   getModuleById,
@@ -59,6 +62,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
   return (
     <>
       <ReadingProgressBar />
+      <LessonVisitTracker lessonSlug={lesson.slug} />
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-8">
         <article className="min-w-0">
           <div className="mx-auto max-w-[78ch] rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5 sm:p-8">
@@ -115,6 +119,18 @@ export default async function LessonPage({ params }: LessonPageProps) {
             ))}
           </div>
 
+          <div className="mx-auto mt-6 max-w-[78ch] rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5 sm:p-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h2 className="text-xl font-extrabold text-[var(--text-primary)]">읽음 표시</h2>
+                <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
+                  이 강의를 다 읽었다면 완료로 표시하세요. 진행률은 이 브라우저에만 저장됩니다.
+                </p>
+              </div>
+              <LessonCompleteButton lessonSlug={lesson.slug} />
+            </div>
+          </div>
+
           {relatedLessons.length > 0 ? (
             <div className="mx-auto mt-6 max-w-[78ch] rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5 sm:p-6">
               <h2 className="text-xl font-extrabold text-[var(--text-primary)]">관련 강의</h2>
@@ -136,6 +152,12 @@ export default async function LessonPage({ params }: LessonPageProps) {
               </div>
             </div>
           ) : null}
+
+          <LessonNavigationCards
+            currentModuleId={lesson.moduleId}
+            next={next}
+            previous={previous}
+          />
         </article>
 
         <div className="mt-6 lg:mt-0">
