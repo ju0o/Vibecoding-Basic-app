@@ -12,13 +12,13 @@
 
 | # | 후보 | 근거 출처(승격 시 fetch) | 들어갈 모듈 | 상태 |
 |---|---|---|---|---|
-| R1 | **Claude 5 모델 패밀리 (Fable 5 · Mythos 5, Mythos-class 티어)** — 2026 모델 세대 구분과 선택 | anthropic.com/news/claude-fable-5-mythos-5 + docs.claude.com 모델 문서 | ai-basics(model-selection-tradeoffs와 연계) | 후보 |
-| R2 | **model-selection-tradeoffs** (백로그 55행, 기존 계획) — 능력·비용·지연의 3축 선택 | Anthropic/OpenAI 공식 모델·가격 문서 | ai-basics order 6 | 백로그 승계 |
-| R3 | **ai-era-timeline** (백로그 56행) — 자동완성→어시스턴트→에이전트 시대 구분 | GitHub Copilot 공식 문서 + Karpathy 기존 KB 재활용 | ai-basics order 7 | 백로그 승계 |
-| R4 | **AI 코딩 도구 지형 2026** — Copilot/Claude Code/Cursor 등 도구 계열과 역할 구분 | 각 도구 공식 문서 | ai-coding-tools 모듈 | 후보 |
-| R5 | **MCP 현행 스펙 재확인** — 기존 mcp KB의 checked 갱신 + 변경분 반영 | modelcontextprotocol 공식 문서 | ai-system-design(기존 강의 보수) | 후보 |
-| R6 | **Agent SDK / 에이전트 하네스** — 에이전트 실행 환경 개념 | Anthropic 공식 문서 | ai-system-design | 후보 |
-| R7 | **바이브코딩 용어 후속 동향** — 사전 등재 이후 확산·비판 담론 | 기존 vibe-coding-origin KB 재확인 + 신규 공식·사전 출처 | getting-started(기존 강의 보수) | 후보 |
+| R1 | **Claude 5 모델 패밀리 (Fable 5 · Mythos 5, Mythos-class 티어)** — 2026 모델 세대 구분과 선택 | anthropic.com/news/claude-fable-5-mythos-5 + docs.claude.com 모델 문서 | ai-basics(model-selection-tradeoffs와 연계) | R2에 흡수(공식 fetch 확보, 단독 KB 보류) |
+| R2 | **model-selection-tradeoffs** (백로그 55행, 기존 계획) — 능력·비용·지연의 3축 선택 | Anthropic/OpenAI 공식 모델·가격 문서 | ai-basics order 6 | 승격 완료 — KB approved 91 / verification report |
+| R3 | **ai-era-timeline** (백로그 56행) — 자동완성→어시스턴트→에이전트 시대 구분 | GitHub Copilot 공식 문서 + Karpathy 기존 KB 재활용 | ai-basics order 7 | 소싱 가능 — 별도 P-01 대기 |
+| R4 | **AI 코딩 도구 지형 2026** — Copilot/Claude Code/Cursor 등 도구 계열과 역할 구분 | 각 도구 공식 문서 | ai-coding-tools 모듈 | 부분 소싱 — Cursor 본문 fetch 0줄, 범위 보류 |
+| R5 | **MCP 현행 스펙 재확인** — 기존 mcp KB의 checked 갱신 + 변경분 반영 | modelcontextprotocol 공식 문서 | ai-system-design(기존 강의 보수) | stale 아님 — 기존 KB 유지 |
+| R6 | **Agent SDK / 에이전트 하네스** — 에이전트 실행 환경 개념 | Anthropic 공식 문서 | ai-system-design | 소싱 가능 — 기존 agent-loop/harness와 범위 중복 |
+| R7 | **바이브코딩 용어 후속 동향** — 사전 등재 이후 확산·비판 담론 | 기존 vibe-coding-origin KB 재확인 + 신규 공식·사전 출처 | getting-started(기존 강의 보수) | stale 아님 — 특수 출처 갱신 후 30일 이내 |
 
 ## C. 절차
 

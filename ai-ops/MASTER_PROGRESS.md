@@ -69,6 +69,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | ci-cd-pipeline-basics | T06 | v | v 89 (2026-07-08, Fable 대행) | order 4 근거 / GitHub Actions Understanding |
 | monitoring-errors-rollbacks | T06 | v | v 88 (2026-07-08, Fable 대행) | order 6 근거 / Vercel Instant Rollback·12factor Logs |
 | deployment-cli-reference | T06 | v | v 88 (2026-07-08, Fable 대행) | order 7 근거 / Vercel CLI Overview + 프로젝트 firebase-tools |
+| model-selection-tradeoffs | T08 | ✓ | ✓ 91 (2026-07-11, M4) | ai-basics order 6 근거 / R1 Claude 5 후보 흡수 |
 
 ## Lesson 매트릭스
 
@@ -144,8 +145,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
-| Knowledge Base 수집(P-01) | 37 / 37 | 100% (8차 T02/T03/T07 5건 approved) |
-| Knowledge Base (approved 이상) | 37 / 37 | 100% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건 + 4차 approved 5건 + 5차 approved 5건 + 6차 approved 5건 + 7차 approved 5건 + 8차 approved 5건) |
+| Knowledge Base 수집(P-01) | 38 / 38 | 100% (M4 model-selection-tradeoffs approved 포함) |
+| Knowledge Base (approved 이상) | 38 / 38 | 100% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건 + 4차 approved 5건 + 5차 approved 5건 + 6차 approved 5건 + 7차 approved 5건 + 8차 approved 5건 + M4 approved 1건) |
 | KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (2차 approved KB) | 3 / 3 | 100% |
 | KB Quote Bank (3차 approved KB) | 4 / 4 | 100% |
@@ -234,3 +235,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-06 | CODEX-PLAN Phase 3 P-05 T03 Wave 2 | 완료 | react-state-and-effects 사이트 반영 + glossary/KB consumers/diagram 통합, `npm run lint`·`npm run typecheck` PASS |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-06 T03 Wave 2 | 완료 | `npm run verify` PASS, react-state-and-effects 검증 통과 |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-08 T03 Wave 2 | 완료 | react-state-and-effects V2 Wave 14 릴리스, deployment HOLD |
+| 2026-07-11 | M4 Content Refresh Sweep | 완료 | stale KB 0건 확인, `model-selection-tradeoffs` 신규 KB 승격 및 검증 승인(score 91), 백로그 55행 planned 전환 |
