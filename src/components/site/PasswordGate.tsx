@@ -15,17 +15,41 @@ async function sha256Hex(text: string): Promise<string> {
   return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("")
 }
 
+function stripWrappingQuotes(value: string): string {
+  if (value.length >= 2 && value[0] === value[value.length - 1] && (value[0] === "'" || value[0] === '"')) {
+    return value.slice(1, -1)
+  }
+  return value
+}
+
+function isSha256Hex(value: string): boolean {
+  return /^[a-f0-9]{64}$/i.test(value)
+}
+
 export function PasswordGate({ children }: { readonly children: ReactNode }) {
   const [state, setState] = useState<GateState>("checking")
   const [error, setError] = useState(false)
+  const [expectedHash, setExpectedHash] = useState<string | null>(null)
 
   useEffect(() => {
-    if (PASSWORD_HASH === undefined || PASSWORD_HASH.length === 0) {
+    const seed = stripWrappingQuotes((PASSWORD_HASH ?? "").trim())
+    if (seed.length === 0) {
       // 해시 미설정: 개발 환경은 통과, 프로덕션 빌드는 잠금 화면에서 설정 방법을 안내한다.
       setState(process.env.NODE_ENV === "development" ? "unlocked" : "locked")
       return
     }
-    setState(window.localStorage.getItem(STORAGE_KEY) === PASSWORD_HASH ? "unlocked" : "locked")
+    let cancelled = false
+    ;(async () => {
+      const normalized = (isSha256Hex(seed) ? seed.toLowerCase() : await sha256Hex(seed)).toLowerCase()
+      if (cancelled) {
+        return
+      }
+      setExpectedHash(normalized)
+      setState(window.localStorage.getItem(STORAGE_KEY) === normalized ? "unlocked" : "locked")
+    })()
+    return () => {
+      cancelled = true
+    }
   }, [])
 
   if (state === "unlocked") {
@@ -36,17 +60,20 @@ export function PasswordGate({ children }: { readonly children: ReactNode }) {
     return <div aria-hidden className="min-h-[100dvh]" />
   }
 
-  const hashMissing = PASSWORD_HASH === undefined || PASSWORD_HASH.length === 0
+  const hashMissing = PASSWORD_HASH === undefined || stripWrappingQuotes(PASSWORD_HASH.trim()).length === 0
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (hashMissing) {
       return
     }
+    const seed = stripWrappingQuotes((PASSWORD_HASH ?? "").trim())
+    const normalizedExpectedHash =
+      expectedHash ?? (isSha256Hex(seed) ? seed.toLowerCase() : await sha256Hex(seed)).toLowerCase()
     const input = new FormData(event.currentTarget).get("password")
     const entered = typeof input === "string" ? input : ""
-    if ((await sha256Hex(entered)) === PASSWORD_HASH) {
-      window.localStorage.setItem(STORAGE_KEY, PASSWORD_HASH as string)
+    if ((await sha256Hex(entered)) === normalizedExpectedHash) {
+      window.localStorage.setItem(STORAGE_KEY, normalizedExpectedHash)
       setError(false)
       setState("unlocked")
       return
