@@ -10,13 +10,13 @@
 
 | 필드 | 값 |
 |---|---|
-| Current Batch | CODEX-PLAN v2 전체 실행 (Phase 0~5) — **Codex 토큰 소진, 운영자 승인으로 Fable이 Executor 대행 중** |
+| Current Batch | **O-06 오케스트레이션 체제 (v3)** — Fable=Maestro, Codex=Heavy(미션 M1~M4), Grok=Light(T1~T6). 기획서: ORCHESTRATION-PLAN.md |
 | Current State | **🌐 67강 deployed** (Wave 24·25: monitoring + CLI) — 용어 259, 다이어그램 40 / KB 52건 approved. **deployment-ops order 1~7 완성**(order 5만 미착수) |
 | Last Completed Step | Fable(대행) Wave 24·25 완주 — monitoring-errors-rollbacks·deployment-cli-reference 강의 (2026-07-08) |
-| Next Executor | Codex(토큰 복구 시) 또는 Fable(대행). 병렬: **Cline — CLINE-AUDIT-RUN(전수 기계 감사 5종, 장시간)** |
-| Next Prompt File | 다음: P-01 KB 수집 — ai-basics 모듈(model-selection-tradeoffs, ai-era-timeline) 또는 production-env-and-secrets(소싱 확보 시) |
+| Next Executor | Codex(M3 UI리팩토링 또는 M1 콘텐츠) · Grok(RUN-GROK 전수 QA) · Fable(검증·조정·배포) |
+| Next Prompt File | Codex→prompts/CODEX-MISSIONS.md(미션 택1) · Grok→prompts/RUN-GROK.md · 우선순위: ①M3 UI ②M1 콘텐츠 ③Grok QA ④리프레시 ⑤M2 V1재생성 |
 | Blocker | 없음 |
-| Required Human Action | None — 사이트에서 학습 계속. Cline에 CLINE-AUDIT-RUN 붙여넣기 권장 |
+| Required Human Action | Codex에 CODEX-MISSIONS.md 중 미션 1개 붙여넣기 + Grok에 RUN-GROK.md 붙여넣기 (병렬 가능: M3는 UI 파일만, Grok은 reports만 만짐) |
 | Release Status | **V2 67강 deployed (비공개 모드 A)** — 67/100 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
