@@ -3499,4 +3499,28 @@ export const GLOSSARY_TERMS = [
       "MCP Protocol Layer는 도구를 표준으로 제공하는 노출 층입니다. MCP는 'allows servers to expose tools'하고 'designed to be model-controlled'이며, 아키텍처는 'maintaining clear security boundaries'로 host-client-server를 분리합니다. 에이전트에 필수가 아니라, 도구를 여러 앱에 표준 노출할 때 쓰는 별도 층입니다.",
     related: ["Tool Layer", "Agent Loop Layer", "MCP"],
   },
+  {
+    term: "Term Origin",
+    category: "AI 코딩 도구",
+    shortDefinition: "용어가 처음 등장한 1차 출처와 확산 경로를 정확히 추적하는 것",
+    explanation:
+      "Term Origin은 역사 설명의 사실 기반입니다. 바이브코딩의 1차 출처는 2025년 Karpathy의 X 게시물이며(직접 접근 제한으로 Wayback snapshot으로 대조), Collins는 이를 2025 올해의 단어로 등재했습니다. 기원을 정확히 전하면 설명이 소문이 아니라 근거가 됩니다.",
+    related: ["Coined vs Popularised", "Vibe Coding", "Misconception Correction"],
+  },
+  {
+    term: "Coined vs Popularised",
+    category: "AI 코딩 도구",
+    shortDefinition: "용어를 '창안한' 것과 '대중화한' 것을 구분하는, 출처별 표현 차이",
+    explanation:
+      "Coined vs Popularised는 정확한 역사 설명의 세부입니다. Merriam-Webster는 vibe coding을 'coined by Andrej Karpathy'로, Collins는 'popularised by Andrej Karpathy'로 기록합니다. 두 동사는 다른 주장이므로, 출처마다 표현이 다름을 뭉개지 않고 그대로 인용해야 합니다.",
+    related: ["Term Origin", "Vibe Coding", "Explanation Skill"],
+  },
+  {
+    term: "Misconception Correction",
+    category: "AI 코딩 도구",
+    shortDefinition: "자극적 표현이 만드는 오해를 공식 원칙으로 바로잡는 설명 마무리",
+    explanation:
+      "Misconception Correction은 균형 잡힌 역사 설명의 핵심입니다. '코드를 안 봐도 된다'는 오해는 Karpathy의 'forget that the code even exists' 표현에서 옵니다. 이를 OpenAI의 'human review outputs' 원칙으로 교정해, 강한 뉘앙스와 검증 필요성을 함께 전합니다.",
+    related: ["Term Origin", "Verification Evidence", "AI Output Review"],
+  },
 ] satisfies readonly GlossaryTerm[]

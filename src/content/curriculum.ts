@@ -1170,4 +1170,16 @@ export const LESSON_META = [
     minutes: 50,
     tags: ["Tool Calling", "Agent", "MCP", "Explanation"],
   },
+  {
+    slug: "explain-vibe-coding-history",
+    moduleId: "explanation-practice",
+    order: 4,
+    title: "바이브코딩의 역사와 오해 설명하기",
+    summary:
+      "용어 기원(Karpathy 2025)·사전 등재(Collins 올해의 단어)·coined vs popularised 차이를 정확히 전하고, '코드를 안 봐도 된다'는 오해를 OpenAI human review 원칙으로 교정하는 균형 잡힌 역사 설명을 배웁니다.",
+    level: "기초",
+    type: "deep-dive",
+    minutes: 50,
+    tags: ["Vibe Coding", "History", "Karpathy", "Explanation"],
+  },
 ] satisfies readonly LessonMeta[]
