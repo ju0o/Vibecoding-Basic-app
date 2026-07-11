@@ -70,6 +70,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | monitoring-errors-rollbacks | T06 | v | v 88 (2026-07-08, Fable 대행) | order 6 근거 / Vercel Instant Rollback·12factor Logs |
 | deployment-cli-reference | T06 | v | v 88 (2026-07-08, Fable 대행) | order 7 근거 / Vercel CLI Overview + 프로젝트 firebase-tools |
 | model-selection-tradeoffs | T08 | ✓ | ✓ 91 (2026-07-11, M4) | ai-basics order 6 근거 / R1 Claude 5 후보 흡수 |
+| tailwind-design-systems | T03 | ✓ | ✓ 89 (2026-07-11, Codex) | frontend-frameworks order 6 근거 / Tailwind theme variables·responsive design |
+| frontend-testing-basics | T03 | ✓ | ✓ 90 (2026-07-11, Codex) | frontend-frameworks order 7 근거 / Vitest·Testing Library·Playwright |
+| production-env-secrets | T07 | ✓ | ✓ 91 (2026-07-11, Codex) | deployment-ops order 5 근거 / Next.js·Vercel·GitHub Actions secrets |
+| ai-era-timeline | T08 | ✓ | ✓ 88 (2026-07-11, Codex) | ai-basics order 7 근거 / IntelliSense→Copilot→Chat→Agent |
+| autocomplete-era | T11 | ✓ | ✓ 89 (2026-07-11, Codex) | ai-coding-tools order 1 근거 / IntelliSense·Copilot inline suggestions |
 
 ## Lesson 매트릭스
 
@@ -151,8 +156,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
-| Knowledge Base 수집(P-01) | 58 / 58 | 100% (M4 model-selection-tradeoffs approved 포함) |
-| Knowledge Base (approved 이상) | 58 / 58 | 100% (QA scan 기준 KB 58건 approved 이상) |
+| Knowledge Base 수집(P-01) | 63 / 63 | 100% (P-01/P-02 KB Wave 2026-07-11 포함) |
+| Knowledge Base (approved 이상) | 63 / 63 | 100% (QA scan 기준 KB 63건 approved 이상) |
 | KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (2차 approved KB) | 3 / 3 | 100% |
 | KB Quote Bank (3차 approved KB) | 4 / 4 | 100% |
@@ -246,3 +251,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-11 | QA Remediation Wave 1 | 완료 | 용어 340개로 확장, V1 레거시 제외 M5 위반 0건, `npm run verify` PASS |
 | 2026-07-11 | V1 Legacy Regeneration | 완료 | ai-vibe-coding-orientation·web-screen-anatomy·typescript-react-nextjs·git-collaboration-basics·api-db-backend-flow V2 재생성, 다이어그램 5개 추가, M5 QA 전체 위반 0, `npm run verify` PASS |
 | 2026-07-11 | Model Selection Wave | 완료 | model-selection-tradeoffs V2 강의·meta·diagram·glossary 반영, M5 QA 전체 위반 0, `npm run verify` PASS |
+| 2026-07-11 | P-01/P-02 KB Wave | 완료 | tailwind-design-systems 89·frontend-testing-basics 90·production-env-secrets 91·ai-era-timeline 88·autocomplete-era 89 approved, planned 5강 전환 |

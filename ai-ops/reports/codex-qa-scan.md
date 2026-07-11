@@ -3,10 +3,10 @@
 ## 요약
 
 - 강의 마크다운 검사 파일 수: 68
-- KB 검사 파일 수: 58
+- KB 검사 파일 수: 63
 - 다이어그램 SVG 검사 파일 수: 46
 - 용어집 term 수: 346
-- 링크 생존 검사 도메인 수(중복 제거): 32
+- 링크 생존 검사 도메인 수(중복 제거): 37
 - 위반 수(V1 알려짐 제외): 0
 - 위반 없음
 
@@ -39,36 +39,41 @@
 
 | domain | status | method | sample | files |
 |---|---:|---|---|---:|
-| 12factor.net | 200 | HEAD | https://12factor.net/logs | 8 |
+| 12factor.net | 200 | HEAD | https://12factor.net/logs | 9 |
 | anthropic.com | 200 | HEAD | https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents | 23 |
 | arxiv.org | 200 | HEAD | https://arxiv.org/html/2506.23253v2 | 3 |
 | businessinsider.com | 200 | HEAD | https://www.businessinsider.com/vibe-coding-ai-silicon-valley-andrej-karpathy-2025-2 | 2 |
 | cheatsheetseries.owasp.org | 200 | HEAD | https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html | 2 |
 | cli.github.com | 200 | HEAD | https://cli.github.com/manual/gh_pr_create | 2 |
 | code.claude.com | 200 | HEAD | https://code.claude.com/docs/en/agent-sdk/agent-loop | 21 |
-| code.visualstudio.com | 200 | HEAD | https://code.visualstudio.com/docs/editor/debugging | 11 |
+| code.visualstudio.com | 200 | HEAD | https://code.visualstudio.com/docs/editor/debugging | 13 |
 | collinsdictionary.com | 403 | GET | https://www.collinsdictionary.com/us/woty | 3 |
 | datatracker.ietf.org | 200 | HEAD | https://datatracker.ietf.org/doc/html/rfc9110 | 4 |
 | developer.mozilla.org | 200 | HEAD | https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview | 39 |
 | developers.openai.com | 200 | HEAD | https://developers.openai.com/api/docs/guides/agent-evals | 30 |
-| docs.github.com | 200 | HEAD | https://docs.github.com/en/actions/about-github-actions/understanding-github-actions | 5 |
+| docs.github.com | 200 | HEAD | https://docs.github.com/en/actions/about-github-actions/understanding-github-actions | 8 |
 | docs.npmjs.com | 200 | HEAD | https://docs.npmjs.com/cli/v10/using-npm/scripts | 4 |
 | firebase.google.com | 200 | HEAD | https://firebase.google.com/docs/hosting | 2 |
 | git-scm.com | 200 | HEAD | https://git-scm.com/book/ms/v2/Getting-Started-About-Version-Control | 13 |
+| github.blog | 200 | HEAD | https://github.blog/news-insights/product-news/introducing-github-copilot-ai-pair-programmer/ | 2 |
 | learn.microsoft.com | 200 | HEAD | https://learn.microsoft.com/en-us/powershell/utility-modules/aishell/concepts/what-is-a-command-shell?view=ps-modules | 2 |
 | merriam-webster.com | 403 | GET | https://www.merriam-webster.com/slang/vibe-coding | 2 |
 | modelcontextprotocol.io | 200 | HEAD | https://modelcontextprotocol.io/specification/2025-11-25/server/tools | 6 |
-| nextjs.org | 200 | HEAD | https://nextjs.org/docs/app/getting-started/layouts-and-pages | 3 |
+| nextjs.org | 200 | HEAD | https://nextjs.org/docs/app/getting-started/layouts-and-pages | 4 |
 | nodejs.org | 200 | HEAD | https://nodejs.org/api/process.html | 7 |
-| openai.com | 200 | GET | https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/ | 3 |
+| openai.com | 403 | GET | https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/ | 4 |
 | owasp.org | 200 | HEAD | https://owasp.org/www-community/attacks/xss/ | 2 |
 | platform.claude.com | 200 | HEAD | https://platform.claude.com/docs/en/test-and-evaluate/develop-tests | 33 |
+| playwright.dev | 200 | HEAD | https://playwright.dev/ | 1 |
 | postgresql.org | 200 | HEAD | https://www.postgresql.org/docs/current/ddl-basics.html | 3 |
 | react.dev | 200 | HEAD | https://react.dev/learn/your-first-component | 6 |
 | semver.org | 200 | HEAD | https://semver.org/ | 2 |
+| tailwindcss.com | 200 | HEAD | https://tailwindcss.com/docs/styling-with-utility-classes | 1 |
+| testing-library.com | 200 | HEAD | https://testing-library.com/docs/guiding-principles/ | 1 |
 | timesofindia.indiatimes.com | 200 | HEAD | https://timesofindia.indiatimes.com/technology/tech-news/rewind-2025-when-teslas-former-ai-director-gave-the-world-the-word-that-has-changed-the-work-of-software-engineers-forever/articleshow/126276591.cms | 2 |
 | typescriptlang.org | 200 | HEAD | https://www.typescriptlang.org/docs/handbook/2/basic-types.html | 6 |
-| vercel.com | 200 | HEAD | https://vercel.com/docs/cli | 6 |
+| vercel.com | 200 | HEAD | https://vercel.com/docs/cli | 7 |
+| vitest.dev | 200 | HEAD | https://vitest.dev/ | 1 |
 | web.archive.org | 200 | HEAD | https://web.archive.org/web/20250206155957id_/https://x.com/karpathy/status/1886192184808149383 | 3 |
 | x.com | 200 | HEAD | https://x.com/karpathy/status/1886192184808149383 | 1 |
 

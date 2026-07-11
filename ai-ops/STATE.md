@@ -11,8 +11,8 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **O-06.1 (v3.1) — Fable(지휘+경량QA) · Codex(Heavy 미션 M1~M5) 2인 체제.** 기획서: ORCHESTRATION-PLAN.md |
-| Current State | **Model Selection Wave complete + verify PASS** — 68강 released, KB 58건 approved, 용어 346, 다이어그램 46. M5 scan: 전체 위반 0건 |
-| Last Completed Step | Codex가 `model-selection-tradeoffs` V2 강의를 생성·사이트 반영하고 glossary·diagram·metadata를 연결, `npm run verify` 통과 (2026-07-11) |
+| Current State | **P-01/P-02 KB Wave complete** — 68강 released, KB 63건 approved, planned 5강, 용어 346, 다이어그램 46. M5 scan: 전체 위반 0건 |
+| Last Completed Step | Codex가 tailwind-design-systems·frontend-testing-basics·production-env-secrets·ai-era-timeline·autocomplete-era KB 수집·검증 승인 완료 (2026-07-11) |
 | Next Executor | Codex(전체 권한 연속 실행) |
 | Next Prompt File | ai-ops/CODEX-PLAN.md / ai-ops/ORCHESTRATION-PLAN.md |
 | Blocker | 없음 |
@@ -23,15 +23,15 @@
 
 ```
 NEXT_ACTION:
-- Current State: Model Selection Wave complete, M5 전체 위반 0, npm run verify PASS
+- Current State: P-01/P-02 KB Wave complete, KB 63건 approved, planned 5강
 - Verdict: DONE
 - Next Executor: Codex
 - Next Prompt File: ai-ops/CODEX-PLAN.md / ai-ops/ORCHESTRATION-PLAN.md
-- Why: 운영자 승인에 따라 역할 제한 없이 Codex가 완성까지 연속 진행하며, planned 항목이 없어 다음 우선순위는 kb_needed 32건 중 첫 P-01 수집 물결
+- Why: 운영자 승인에 따라 역할 제한 없이 Codex가 완성까지 연속 진행하며, planned 5강 중 근거 KB가 approved 상태라 다음 우선순위는 P-04 Lesson Generation(최대 4건)
 - Required Operator Action: None
-- If Approved: Codex가 P-01로 tailwind-design-systems, frontend-testing-basics, production-env-secrets, ai-era-timeline, autocomplete-era KB를 수집·승인 루프까지 진행
-- If Rejected: 반려 사유에 따라 Model Selection Wave 수정
-- Files to Check: ai-ops/reports/codex-qa-scan.md, ai-ops/outputs/04-integrated/RELEASE-2026-07-11-model-selection.md, src/content/lessons/markdown/model-selection-tradeoffs.md
+- If Approved: Codex가 tailwind-design-systems, frontend-testing-basics, production-env-and-secrets, ai-era-timeline 4강을 V2로 생성·반영·검증·릴리스
+- If Rejected: 반려 사유에 따라 P-01/P-02 KB Wave 수정
+- Files to Check: ai-ops/knowledge-base/reviews/tailwind-design-systems/verification-report.md, ai-ops/knowledge-base/reviews/frontend-testing-basics/verification-report.md, ai-ops/outputs/04-integrated/RELEASE-2026-07-11-kb-wave.md
 - Stop Condition: `npm run verify` 실패 또는 공식 출처 없는 신규 사실이 필요한 경우
 ```
 
@@ -68,13 +68,14 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
-- KB: **58건 approved**, M4 `model-selection-tradeoffs` score 91 승격 완료, stale KB 0건 / D-02 플랫폼 증분 = **완료**
+- KB: **63건 approved**, stale KB 0건 / D-02 플랫폼 증분 = **완료**
 - 강의: **V2 released 68강** (deployment HOLD) / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-11 | KB tailwind-design-systems·frontend-testing-basics·production-env-secrets·ai-era-timeline·autocomplete-era | needed → draft → approved | Codex P-01/P-02 연속, scores 89·90·91·88·89 |
 | 2026-07-11 | model-selection-tradeoffs | planned → V2 released | Codex, V2 강의·diagram·glossary·metadata 반영, M5 QA 전체 위반 0, `npm run verify` PASS |
 | 2026-07-11 | V1 Legacy Regeneration | v2-regenerate → V2 released | Codex, 5강 V2 Deep Dive 재생성, 다이어그램 5개 추가, M5 QA 전체 위반 0, `npm run verify` PASS |
 | 2026-07-11 | QA Remediation Wave 1 | M5 위반 122건 → V1 제외 0건 | Codex, glossary 340 terms, 19강 형식 보강, `npm run verify` PASS |

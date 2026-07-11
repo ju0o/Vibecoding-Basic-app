@@ -12,11 +12,17 @@ Research·Fact Check Agent가 사용하는 허용 출처 목록. 새 출처는 R
 | Git | Git Documentation / Pro Git | https://git-scm.com/doc |
 | PostgreSQL | PostgreSQL Docs | https://www.postgresql.org/docs |
 | Node.js | Node.js Docs | https://nodejs.org/docs |
+| Tailwind CSS | Tailwind CSS Docs | https://tailwindcss.com/docs |
+| Vitest | Vitest Docs | https://vitest.dev |
+| Playwright | Playwright Docs | https://playwright.dev |
+| Testing Library | Testing Library Docs | https://testing-library.com/docs |
 | Anthropic/Claude | Claude Docs | https://platform.claude.com/docs (구 docs.anthropic.com — 2026-07 이전 확인) |
 | Claude Code | Claude Code Docs | https://code.claude.com/docs |
 | OpenAI | OpenAI Platform Docs | https://platform.openai.com/docs |
 | MCP | Model Context Protocol | https://modelcontextprotocol.io |
 | Vercel(배포) | Vercel Docs | https://vercel.com/docs |
+| GitHub | GitHub Docs | https://docs.github.com |
+| VS Code | Visual Studio Code Docs | https://code.visualstudio.com/docs |
 
 ## 2순위 — 표준 기구·보안
 | 분야 | 출처 | URL |
@@ -24,6 +30,7 @@ Research·Fact Check Agent가 사용하는 허용 출처 목록. 새 출처는 R
 | 웹 표준 | W3C / WHATWG | https://www.w3.org , https://spec.whatwg.org |
 | 프로토콜 | IETF RFC | https://datatracker.ietf.org |
 | 보안 | OWASP | https://owasp.org |
+| 운영 방법론 | The Twelve-Factor App | https://12factor.net |
 
 ## 3순위 — 공식 블로그·릴리스 노트 (역사·버전 정보용)
 - Anthropic News (https://www.anthropic.com/news)

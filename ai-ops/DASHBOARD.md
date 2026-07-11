@@ -9,21 +9,22 @@
 
 | 단계 | 현황 |
 |---|---|
-| KB (approved 이상) | 58건 approved / stale 0 |
+| KB (approved 이상) | 63건 approved / stale 0 |
 | Lesson 생성 · Site 반영 | 68강 released / 100강 목표 |
 | Verify · Release | `npm run verify` PASS / M5 전체 위반 0 |
 | Glossary · Diagrams | 346 terms / 46 SVG diagrams |
 
 ## 실행 상태
 
-- **NEXT**: Codex 계속 실행 → P-01 KB 수집 물결(tailwind-design-systems, frontend-testing-basics, production-env-secrets, ai-era-timeline, autocomplete-era), 이후 검증·강의화.
+- **NEXT**: Codex 계속 실행 → planned 5강 중 4강 P-04 Lesson Generation(tailwind-design-systems, frontend-testing-basics, production-env-and-secrets, ai-era-timeline), 이후 사이트 반영·검증.
 - 승인 대기: 없음 / 에스컬레이션: 없음 / 진행 중 루프: 없음
-- 병목: 백로그 `kb_needed` 32건, `planned` 0건.
+- 병목: 백로그 `kb_needed` 27건, `planned` 5건.
 
 ## 최근 완료 (최신 5)
 
 | 날짜 | 작업 | 실행 |
 |---|---|---|
+| 2026-07-11 | P-01/P-02 KB Wave — 5 KB approved, planned 5강 전환 | Codex |
 | 2026-07-11 | Model Selection Wave — model-selection-tradeoffs V2 released, glossary 346개, diagram 46개, verify PASS | Codex |
 | 2026-07-11 | V1 Legacy Regeneration — 5강 V2 재생성, 다이어그램 45개, M5 전체 위반 0, verify PASS | Codex |
 | 2026-07-11 | QA Remediation Wave 1 — V1 제외 M5 위반 0, 용어 340개, verify PASS | Codex |
