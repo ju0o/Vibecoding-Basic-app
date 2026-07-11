@@ -11,28 +11,28 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **O-06.1 (v3.1) — Fable(지휘+경량QA) · Codex(Heavy 미션 M1~M5) 2인 체제.** 기획서: ORCHESTRATION-PLAN.md |
-| Current State | **M4/M5 complete + verify PASS** — 67강 released, KB 58건 approved, 용어 259, 다이어그램 40. QA scan: 형식 19건·용어집 103건·V1 알려짐 5건, 인용/링크/다이어그램 위반 0건 |
-| Last Completed Step | Codex M4 콘텐츠 리프레시 + M5 기계 QA 전수 스캔, `npm run verify` 통과 (2026-07-11) |
-| Next Executor | Fable(검토·조정·배포 판단) |
-| Next Prompt File | prompts/RUN-FABLE.md |
-| Blocker | 없음 (M5 위반은 Fable triage 대상) |
-| Required Human Action | None — Fable에 "run" 또는 "계속" |
-| Release Status | **V2 67강 released (비공개 모드 A) + M3 UI/UX verified + M4/M5 reports complete, deploy pending Fable** — 67/100 |
+| Current State | **QA Remediation Wave 1 complete + verify PASS** — 67강 released, KB 58건 approved, 용어 340, 다이어그램 40. M5 scan: V1 레거시 5강 제외 위반 0건 |
+| Last Completed Step | Codex가 M5 위반 보수(형식·용어집) 완료, `npm run verify` 통과 (2026-07-11) |
+| Next Executor | Codex(전체 권한 연속 실행) |
+| Next Prompt File | ai-ops/CODEX-PLAN.md / ai-ops/ORCHESTRATION-PLAN.md |
+| Blocker | 없음 (V1 레거시 5강 잔존) |
+| Required Human Action | None |
+| Release Status | **V2 67강 released (비공개 모드 A) + M3 UI/UX verified + QA Remediation Wave 1 complete, deploy HOLD** — 67/100 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: M4 Content Refresh + M5 Machine QA Scan complete, npm run verify PASS
+- Current State: QA Remediation Wave 1 complete, V1 제외 M5 위반 0, npm run verify PASS
 - Verdict: DONE
-- Next Executor: Fable
-- Next Prompt File: prompts/RUN-FABLE.md
-- Why: M5는 보고 전용 런이고 QA 위반 triage 및 배포 판단은 Fable 검토·조정 단계로 넘기는 운영 규칙 때문
-- Required Operator Action: None — Fable에 "run" 또는 "계속" 입력
-- If Approved: Fable이 `codex-qa-scan.md`를 triage해 다음 보수 물결 또는 배포 보류/진행을 결정
-- If Rejected: 반려 사유에 따라 Codex M4/M5 수정 런으로 회귀
-- Files to Check: ai-ops/reports/stale-kb.md, ai-ops/reports/codex-qa-scan.md, ai-ops/outputs/04-integrated/RELEASE-2026-07-11-m4-m5-refresh-qa.md
-- Stop Condition: Fable이 배포 전 보수 필요 또는 운영자 범위 결정 필요를 판정
+- Next Executor: Codex
+- Next Prompt File: ai-ops/CODEX-PLAN.md / ai-ops/ORCHESTRATION-PLAN.md
+- Why: 운영자 승인에 따라 역할 제한 없이 Codex가 완성까지 연속 진행하며, 다음 병목은 V1 레거시 5강 재생성
+- Required Operator Action: None
+- If Approved: Codex가 V1 레거시 5강을 V2 규격으로 재생성하고 M5 재스캔
+- If Rejected: 반려 사유에 따라 QA Remediation Wave 1 수정
+- Files to Check: ai-ops/reports/codex-qa-scan.md, ai-ops/outputs/04-integrated/RELEASE-2026-07-11-qa-remediation-wave1.md, src/content/glossary.ts
+- Stop Condition: `npm run verify` 실패 또는 공식 출처 없는 신규 사실이 필요한 경우
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB: **58건 approved**, M4 `model-selection-tradeoffs` score 91 승격 완료, stale KB 0건 / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 67강** (deployment HOLD) / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 형식 19건·용어집 103건·V1 알려짐 5건, 인용/링크/다이어그램 위반 0건
+- 강의: **V2 released 67강** (deployment HOLD) / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: V1 레거시 5강 제외 위반 0건, V1 알려짐 5건
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-11 | QA Remediation Wave 1 | M5 위반 122건 → V1 제외 0건 | Codex, glossary 340 terms, 19강 형식 보강, `npm run verify` PASS |
 | 2026-07-11 | M5 Machine QA Scan | report-only → done | Codex, 전 강의 67개·KB 58개·다이어그램 40개·용어 259개 전수 스캔, `npm run verify` PASS |
 | 2026-07-11 | M4 Content Refresh Sweep | stale scan + 신규 후보 승격 → approved | Codex, stale KB 0건, `model-selection-tradeoffs` score 91, 커밋 4018958 |
 | 2026-07-11 | M3 UI/UX Refactor | Phase A~C → verified locally | Codex, 커리큘럼 탐색·진행률·읽기 UX·홈/용어집 마감, npm run verify PASS |

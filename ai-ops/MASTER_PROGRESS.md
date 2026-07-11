@@ -156,10 +156,10 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | KB Quote Bank (7차 approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (8차 approved KB) | 5 / 5 | 100% |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
-| Lesson 생성 | 42 / 42 | 100% (react-state-and-effects generated, P-05 대기) |
-| Site 반영 | 42 / 42 | 100% (react-state-and-effects integrated) |
-| Verify 통과 | 42 / 42 | 100% (`npm run verify` PASS, V2 Wave 14 P-08 대기) |
-| Release | 42 / 42 | 100% (V2 Wave 1+2+3+4+5+6+7+8+9+10+11+12+13+14 released, deployment HOLD) |
+| Lesson 생성 | 67 / 100 | 67% (V1 레거시 5강 및 잔여 백로그 계속 진행) |
+| Site 반영 | 67 / 100 | 67% (V2 released 콘텐츠 사이트 반영 완료) |
+| Verify 통과 | 67 / 100 | 67% (`npm run verify` PASS, QA Remediation Wave 1) |
+| Release | 67 / 100 | 67% (V2 released 67강, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
@@ -237,3 +237,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-06 | CODEX-PLAN Phase 3 P-08 T03 Wave 2 | 완료 | react-state-and-effects V2 Wave 14 릴리스, deployment HOLD |
 | 2026-07-11 | M4 Content Refresh Sweep | 완료 | stale KB 0건 확인, `model-selection-tradeoffs` 신규 KB 승격 및 검증 승인(score 91), 백로그 55행 planned 전환 |
 | 2026-07-11 | M5 Machine QA Scan | 완료 | 전 강의 67개·KB 58개·다이어그램 40개·용어 259개 스캔, 인용/링크/다이어그램 위반 0건, 형식 19건·용어집 103건 보고, `npm run verify` PASS |
+| 2026-07-11 | QA Remediation Wave 1 | 완료 | 용어 340개로 확장, V1 레거시 제외 M5 위반 0건, `npm run verify` PASS |

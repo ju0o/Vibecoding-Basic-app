@@ -468,7 +468,7 @@ export const GLOSSARY_TERMS = [
     related: ["Loop Engineering", "Agent Loop", "Harness Engineering"],
   },
   {
-    term: "Hook",
+    term: "Agent Hook",
     category: "AI 시스템",
     shortDefinition: "Agent 실행 중 특정 이벤트에서 차단, 기록, 승인, 변환 같은 결정을 넣는 제어점",
     explanation:
@@ -1824,10 +1824,10 @@ export const GLOSSARY_TERMS = [
     shortDefinition: "state variable과 setter function을 제공하는 React Hook",
     explanation:
       "useState는 component가 값을 기억하고 그 값이 바뀌었을 때 React에게 re-render를 요청할 수 있게 합니다. setter는 현재 변수를 직접 mutate하는 것이 아니라 다음 render를 예약합니다.",
-    related: ["React State", "Hook", "State Setter"],
+    related: ["React State", "React Hook", "State Setter"],
   },
   {
-    term: "Hook",
+    term: "React Hook",
     category: "React",
     shortDefinition: "React component나 custom Hook top level에서 호출하는 React 기능 연결 함수",
     explanation:
@@ -1866,7 +1866,7 @@ export const GLOSSARY_TERMS = [
       "component render 결과 이후 external system과 동기화하는 Effect를 선언하는 Hook",
     explanation:
       "useEffect는 commit 후 실행되어 component의 props/state와 React 밖의 system을 synchronize할 수 있게 합니다. 모든 derived value 계산에 쓰는 도구가 아니며 dependency를 통해 re-run 조건을 설명해야 합니다.",
-    related: ["Effect", "Effect Dependency", "Hook"],
+    related: ["Effect", "Effect Dependency", "React Hook"],
   },
   {
     term: "Effect Dependency",
@@ -2113,5 +2113,654 @@ export const GLOSSARY_TERMS = [
     explanation:
       "데이터 개수만큼 페이지가 생성되며, 컴포넌트는 params로 현재 세그먼트 값을 받아 해당 데이터를 렌더링합니다. 이 사이트의 강의 페이지 51개가 app/lessons/[slug] 파일 하나에서 나옵니다.",
     related: ["Server Component", "Client Component"],
+  },
+  {
+    term: "AI Code Review",
+    category: "AI 코딩 도구",
+    shortDefinition: "AI가 코드 변경의 위험, 품질, 테스트 필요성을 검토하도록 돕는 리뷰 방식",
+    explanation:
+      "AI Code Review는 사람이 놓치기 쉬운 반복 패턴, 변경 범위, 누락된 테스트, 보안 위험을 빠르게 훑게 하지만 최종 책임을 대신하지 않습니다. 실무에서는 Human Review와 함께 쓰며, AI가 제안한 지적도 diff와 실행 결과로 다시 확인해야 합니다.",
+    related: ["Human Review", "Code Review", "Component Boundary"],
+  },
+  {
+    term: "AI 코딩 도구",
+    category: "AI",
+    shortDefinition: "코드 작성, 수정, 리뷰, 설명을 돕는 AI 기반 개발 도구",
+    explanation:
+      "AI 코딩 도구는 자동완성, 채팅, IDE Agent, 코드 리뷰, 터미널 실행처럼 개발 흐름의 여러 위치에 붙습니다. 도구 자체보다 중요한 것은 권한, 근거, 검증, 되돌리기 루틴을 함께 설계하는 것입니다.",
+    related: ["Prompt Engineering", "AI Code Review", "Codex"],
+  },
+  {
+    term: "Accessibility",
+    category: "웹 개발",
+    shortDefinition: "다양한 사용자가 웹 콘텐츠와 기능을 사용할 수 있게 만드는 품질 기준",
+    explanation:
+      "Accessibility는 시각, 청각, 운동, 인지 조건이 다른 사용자도 화면 구조를 이해하고 조작할 수 있게 만드는 일입니다. Semantic HTML, Heading, Navigation처럼 의미가 있는 구조를 먼저 세우면 보조 기술과 검색 모두에 유리합니다.",
+    related: ["Semantic HTML", "Heading", "Navigation"],
+  },
+  {
+    term: "Agent Evaluation",
+    category: "AI 시스템",
+    shortDefinition: "에이전트가 목표를 안전하고 반복 가능하게 달성하는지 평가하는 절차",
+    explanation:
+      "Agent Evaluation은 단일 답변 품질이 아니라 tool use, loop 종료, 오류 복구, 비용, 사람 승인 지점까지 함께 봅니다. 그래서 Evaluation Harness와 Dataset을 갖추고 실제 작업에 가까운 시나리오로 재현합니다.",
+    related: ["Evaluation", "Evaluation Harness", "Dataset"],
+  },
+  {
+    term: "Approval",
+    category: "운영",
+    shortDefinition: "위험한 변경이나 배포 전에 사람이 명시적으로 허가하는 결정",
+    explanation:
+      "Approval은 AI나 자동화가 바로 실행해도 되는 작업과 사람이 확인해야 하는 작업을 나누는 경계입니다. 권한이 큰 도구 실행, 배포, 데이터 삭제처럼 되돌리기 어려운 행동 앞에서 특히 중요합니다.",
+    related: ["Human Review", "Agent Hook", "Deployment"],
+  },
+  {
+    term: "Boolean",
+    category: "프로그래밍",
+    shortDefinition: "참과 거짓 두 값으로 조건을 표현하는 데이터 타입",
+    explanation:
+      "Boolean은 if문, 필터 조건, 기능 토글처럼 코드가 어느 경로로 갈지 결정할 때 쓰입니다. 이름은 `isOpen`, `hasError`처럼 질문 형태로 붙이면 조건문을 읽기 쉬워집니다.",
+    related: ["Conditional", "Data Type", "Variable"],
+  },
+  {
+    term: "Browser",
+    category: "웹 개발",
+    shortDefinition: "HTML, CSS, JavaScript를 해석해 사용자에게 웹 페이지를 보여주는 실행 환경",
+    explanation:
+      "Browser는 문서를 다운로드하고, DOM과 CSSOM을 만들고, JavaScript 이벤트를 실행하며, 네트워크와 보안 정책을 적용합니다. 웹 개발에서 버그를 찾을 때는 코드뿐 아니라 Browser가 실제로 해석한 결과를 함께 봐야 합니다.",
+    related: ["HTML", "CSS", "JavaScript"],
+  },
+  {
+    term: "Browser Security",
+    category: "웹 보안",
+    shortDefinition: "브라우저가 웹 페이지 실행 중 적용하는 격리, 권한, 보호 정책",
+    explanation:
+      "Browser Security는 Same-Origin Policy, CORS, CSP, Cookie 정책처럼 웹 앱이 서로의 데이터와 실행 환경을 함부로 침범하지 못하게 하는 규칙 묶음입니다. 프론트엔드 보안은 서버 코드만큼 브라우저 정책 이해가 중요합니다.",
+    related: ["Same-Origin Policy", "CSP", "Cookie"],
+  },
+  {
+    term: "CSS Declaration",
+    category: "웹 개발",
+    shortDefinition: "선택자 안에서 속성과 값을 짝지어 스타일을 지정하는 한 줄 규칙",
+    explanation:
+      "CSS Declaration은 `color: red`처럼 property와 value로 구성됩니다. Cascade와 Specificity는 여러 declaration이 같은 요소를 가리킬 때 어떤 값이 최종 적용되는지 결정합니다.",
+    related: ["CSS Cascade", "Specificity", "Selector"],
+  },
+  {
+    term: "CSS Layout",
+    category: "웹 개발",
+    shortDefinition: "요소의 크기, 위치, 흐름, 반응형 배치를 정하는 CSS 영역",
+    explanation:
+      "CSS Layout은 normal flow, flex, grid, positioning, media query를 통해 화면의 구조를 만듭니다. 콘텐츠가 늘거나 기기가 바뀌어도 깨지지 않게 제약과 흐름을 함께 설계하는 것이 핵심입니다.",
+    related: ["Normal Flow", "Responsive Design", "Viewport"],
+  },
+  {
+    term: "Code Generation",
+    category: "AI 코딩 도구",
+    shortDefinition: "자연어 요구사항이나 예시를 바탕으로 코드를 생성하는 과정",
+    explanation:
+      "Code Generation은 빠른 초안 작성에 강하지만 요구사항 누락, 라이브러리 버전 착각, 테스트 부재가 함께 생길 수 있습니다. 그래서 Natural Language to Code 뒤에는 실행, 리뷰, 작은 diff 관리가 따라와야 합니다.",
+    related: ["Natural Language to Code", "AI Code Review", "검증"],
+  },
+  {
+    term: "Code Search",
+    category: "개발 기초",
+    shortDefinition: "파일, 함수, 문자열, 패턴을 찾아 코드베이스의 위치와 맥락을 파악하는 작업",
+    explanation:
+      "Code Search는 AI에게 파일을 통째로 맡기기 전에 사람이 근거를 좁히는 기본기입니다. 검색 범위와 패턴을 잘 잡으면 관련 코드, 테스트, 문서가 빠르게 모이고 수정 위험도 줄어듭니다.",
+    related: ["Search Scope", "Regular Expression", "Pattern Matching"],
+  },
+  {
+    term: "Codex",
+    category: "AI 코딩 도구",
+    shortDefinition: "코드 읽기, 수정, 검증, 터미널 실행을 함께 수행하는 AI 개발 에이전트",
+    explanation:
+      "Codex는 단순 답변 도구가 아니라 파일 시스템과 명령 실행을 다루며 작업을 끝까지 이어가는 실행자 역할을 맡을 수 있습니다. 좋은 결과를 위해서는 명확한 목표, 작은 커밋, verify, 기록이 함께 필요합니다.",
+    related: ["AI 코딩 도구", "Agent Loop", "검증"],
+  },
+  {
+    term: "Component Tree",
+    category: "프론트엔드",
+    shortDefinition: "컴포넌트들이 부모와 자식 관계로 연결된 화면 구조",
+    explanation:
+      "Component Tree는 데이터와 상태가 어디서 내려오고 이벤트가 어디로 올라가는지 보여주는 지도입니다. React에서는 이 구조를 잘 나누어야 재사용성과 디버깅 가능성이 좋아집니다.",
+    related: ["React Component", "Composition", "Component Boundary"],
+  },
+  {
+    term: "Cookie",
+    category: "웹 보안",
+    shortDefinition: "브라우저가 서버와 주고받으며 저장하는 작은 상태 데이터",
+    explanation:
+      "Cookie는 로그인 세션, 사용자 설정, 추적 식별자 등에 쓰입니다. 인증에 쓰일 때는 HttpOnly, Secure, SameSite 같은 속성으로 XSS와 CSRF 위험을 줄여야 합니다.",
+    related: ["CSRF", "Browser Security", "Auth"],
+  },
+  {
+    term: "Data Type",
+    category: "프로그래밍",
+    shortDefinition: "값이 어떤 종류이고 어떤 연산이 가능한지 설명하는 분류",
+    explanation:
+      "Data Type은 숫자, 문자열, Boolean, 객체, 배열처럼 값의 모양과 사용법을 알려줍니다. TypeScript에서는 타입이 문서이자 안전장치가 되어 AI가 생성한 코드의 실수를 더 빨리 잡게 해 줍니다.",
+    related: ["Primitive Value", "Object", "TypeScript"],
+  },
+  {
+    term: "Dataset",
+    category: "AI 시스템",
+    shortDefinition: "평가, 학습, 검증에 쓰는 입력과 기대 결과의 묶음",
+    explanation:
+      "Dataset은 모델이나 에이전트가 실제 문제를 얼마나 잘 푸는지 반복 측정하게 해 줍니다. 좋은 평가셋은 쉬운 예시뿐 아니라 edge case와 실패하기 쉬운 상황을 포함합니다.",
+    related: ["Evaluation", "Eval Run", "Agent Evaluation"],
+  },
+  {
+    term: "Debugger",
+    category: "개발 기초",
+    shortDefinition: "코드 실행을 멈추고 변수와 호출 흐름을 관찰하게 해 주는 도구",
+    explanation:
+      "Debugger는 추측 대신 실제 실행 상태를 보는 장치입니다. Breakpoint를 걸고 Variable Inspection을 하면서 오류가 발생한 순간의 데이터와 분기 흐름을 확인합니다.",
+    related: ["Breakpoint", "Variable Inspection", "Error Message"],
+  },
+  {
+    term: "Deployment",
+    category: "배포와 운영",
+    shortDefinition: "개발된 코드를 사용자가 접근할 수 있는 실행 환경에 반영하는 과정",
+    explanation:
+      "Deployment는 빌드 결과물을 서버나 호스팅 플랫폼에 올리고, 환경변수와 도메인, 접근 보호, 롤백 전략을 함께 적용하는 일입니다. 운영에서는 배포 자체보다 실패 시 되돌릴 수 있는지가 중요합니다.",
+    related: ["Build", "Environment Variable", "Rollback"],
+  },
+  {
+    term: "Display",
+    category: "웹 개발",
+    shortDefinition: "요소가 문서 흐름에서 어떤 박스와 배치 규칙을 갖는지 정하는 CSS 속성",
+    explanation:
+      "Display는 block, inline, flex, grid처럼 요소의 기본 배치 방식을 바꿉니다. 레이아웃 문제를 볼 때는 margin보다 먼저 display와 normal flow를 확인하는 편이 빠릅니다.",
+    related: ["Normal Flow", "CSS Layout", "Layout"],
+  },
+  {
+    term: "Evaluation",
+    category: "AI 시스템",
+    shortDefinition: "모델이나 시스템 결과가 목표 기준을 만족하는지 측정하는 절차",
+    explanation:
+      "Evaluation은 감으로 좋고 나쁨을 말하는 대신 입력, 기대 결과, 채점 기준, 실패 사례를 남기는 방식입니다. AI 시스템에서는 기능 추가만큼 평가 설계가 중요합니다.",
+    related: ["Dataset", "Eval Run", "Agent Evaluation"],
+  },
+  {
+    term: "EventTarget",
+    category: "웹 개발",
+    shortDefinition: "이벤트 리스너를 등록하고 이벤트를 받을 수 있는 DOM 인터페이스",
+    explanation:
+      "EventTarget은 addEventListener가 붙는 대상입니다. 버튼, 문서, 창처럼 이벤트를 받을 수 있는 객체가 이 인터페이스를 통해 클릭, 입력, 키보드 이벤트를 처리합니다.",
+    related: ["addEventListener", "Event", "DOM"],
+  },
+  {
+    term: "External System",
+    category: "프론트엔드",
+    shortDefinition: "React 렌더링 바깥에 있어 effect로 동기화해야 하는 브라우저·서버·구독 대상",
+    explanation:
+      "External System은 DOM 이벤트, 네트워크 연결, 타이머, 브라우저 API처럼 React의 순수 렌더링만으로 다룰 수 없는 대상입니다. Effect는 이런 외부 상태와 컴포넌트 상태를 맞추는 경계입니다.",
+    related: ["Effect", "Effect Dependency", "React Hook"],
+  },
+  {
+    term: "File System",
+    category: "개발 기초",
+    shortDefinition: "파일과 폴더를 저장하고 경로로 찾게 해 주는 운영체제의 저장 구조",
+    explanation:
+      "File System은 프로젝트 구조, import 경로, 빌드 산출물, 설정 파일 위치를 결정합니다. AI와 작업할 때도 파일 경로를 정확히 말해야 수정 위치가 어긋나지 않습니다.",
+    related: ["File Path", "Current Directory", "Operating System"],
+  },
+  {
+    term: "Flags",
+    category: "개발 기초",
+    shortDefinition: "명령어나 정규식의 동작 옵션을 바꾸는 짧은 설정값",
+    explanation:
+      "Flags는 같은 명령이나 패턴을 다른 방식으로 실행하게 만듭니다. 정규식에서는 대소문자 무시, 전역 검색 같은 의미를 갖고, CLI에서는 출력 형식이나 대상 범위를 바꿉니다.",
+    related: ["RegExp", "PowerShell Cmdlet", "Shell Command"],
+  },
+  {
+    term: "Git",
+    category: "Git",
+    shortDefinition: "파일 변경 이력을 커밋 단위로 기록하고 되돌릴 수 있게 하는 버전 관리 도구",
+    explanation:
+      "Git은 코드의 시간표입니다. 커밋, 브랜치, diff, merge를 이용해 작업을 작게 저장하고, 실수했을 때 복구하며, 여러 사람이 같은 프로젝트를 안전하게 다룹니다.",
+    related: ["Version Control", "Commit", "Branch"],
+  },
+  {
+    term: "HTTP",
+    category: "웹 개발",
+    shortDefinition: "브라우저와 서버가 요청과 응답으로 데이터를 주고받는 웹 통신 규약",
+    explanation:
+      "HTTP는 method, URL, header, body, status code로 구성됩니다. 웹 앱에서 화면이 데이터를 가져오거나 저장할 때 대부분 HTTP 요청과 응답 흐름을 거칩니다.",
+    related: ["HTTP Method", "HTTP 상태 코드", "REST API"],
+  },
+  {
+    term: "Heading",
+    category: "웹 개발",
+    shortDefinition: "문서의 제목 계층을 나타내는 HTML 구조",
+    explanation:
+      "Heading은 h1부터 h6까지 문서의 목차와 의미 구조를 만듭니다. 화면 크기나 글자 크기보다 정보 계층을 먼저 표현해야 접근성과 읽기 흐름이 좋아집니다.",
+    related: ["Semantic HTML", "Accessibility", "Content Sectioning"],
+  },
+  {
+    term: "Indexed Collection",
+    category: "프로그래밍",
+    shortDefinition: "번호 기반 위치로 값을 저장하고 찾는 데이터 모음",
+    explanation:
+      "Indexed Collection은 배열처럼 0, 1, 2 순서의 index로 값에 접근합니다. 순서가 중요한 목록, 반복 처리, UI 리스트 렌더링에서 자주 사용됩니다.",
+    related: ["Array", "Iteration", "Data Type"],
+  },
+  {
+    term: "Input Validation",
+    category: "웹 보안",
+    shortDefinition: "외부에서 들어온 값이 기대한 형식과 범위를 만족하는지 확인하는 절차",
+    explanation:
+      "Input Validation은 사용자가 보낸 데이터, API 응답, 파일 내용이 안전하고 처리 가능한지 확인합니다. 보안에서는 XSS와 잘못된 상태 전파를 줄이는 첫 방어선이 됩니다.",
+    related: ["Validation", "XSS", "Rendering Context"],
+  },
+  {
+    term: "Iteration",
+    category: "프로그래밍",
+    shortDefinition: "조건이 만족될 때까지 같은 작업을 반복하는 실행 방식",
+    explanation:
+      "Iteration은 배열 순회, 재시도, agent loop처럼 반복이 필요한 문제를 다룰 때 등장합니다. 반복에는 항상 종료 조건과 실패했을 때의 처리 기준이 필요합니다.",
+    related: ["Loop", "Array", "Conditional"],
+  },
+  {
+    term: "JavaScript Error Reference",
+    category: "개발 기초",
+    shortDefinition: "JavaScript 오류 이름과 원인을 찾아보는 참조 자료",
+    explanation:
+      "JavaScript Error Reference는 TypeError, ReferenceError, SyntaxError 같은 메시지가 무엇을 뜻하는지 설명합니다. 오류 메시지를 검색할 때는 전체 문장보다 오류 이름과 발생 위치를 함께 보는 것이 좋습니다.",
+    related: ["Error Message", "Debugger", "JavaScript"],
+  },
+  {
+    term: "Layout",
+    category: "웹 개발",
+    shortDefinition: "화면 안에서 요소의 위치와 크기가 결정되는 방식",
+    explanation:
+      "Layout은 콘텐츠 흐름, 부모 크기, display, flex/grid, media query가 합쳐져 만들어집니다. 레이아웃 문제는 개별 속성보다 제약 조건과 컨테이너 관계를 함께 봐야 풀립니다.",
+    related: ["CSS Layout", "Display", "Viewport"],
+  },
+  {
+    term: "Navigation",
+    category: "웹 개발",
+    shortDefinition: "사용자가 사이트 안에서 위치를 이동하고 현재 맥락을 이해하게 하는 구조",
+    explanation:
+      "Navigation은 메뉴, 목차, 이전/다음 링크, breadcrumb처럼 정보 구조를 드러냅니다. 학습 사이트에서는 사용자가 지금 어디에 있고 다음에 무엇을 읽을지 알려주는 장치입니다.",
+    related: ["Nav Element", "Accessibility", "라우팅"],
+  },
+  {
+    term: "Network",
+    category: "웹 개발",
+    shortDefinition: "브라우저와 서버, API, CDN 사이에서 데이터가 오가는 통신 계층",
+    explanation:
+      "Network를 보면 요청 URL, method, status, timing, response가 드러납니다. 화면 문제가 데이터 문제인지 렌더링 문제인지 나눌 때 브라우저 Network 패널이 핵심 증거가 됩니다.",
+    related: ["HTTP", "Performance Timing", "API"],
+  },
+  {
+    term: "Node.js",
+    category: "개발 기초",
+    shortDefinition: "브라우저 밖에서 JavaScript를 실행하는 서버·도구 런타임",
+    explanation:
+      "Node.js는 npm scripts, 빌드 도구, 개발 서버, 파일 시스템 작업을 실행합니다. 프론트엔드 프로젝트에서도 실제 빌드와 패키지 관리는 대개 Node.js 위에서 돌아갑니다.",
+    related: ["Package Folder Tree", "Node File System Module", "npm scripts"],
+  },
+  {
+    term: "Object",
+    category: "프로그래밍",
+    shortDefinition: "이름 붙은 property들을 묶어 하나의 값으로 다루는 데이터 구조",
+    explanation:
+      "Object는 사용자, 설정, API 응답처럼 여러 값을 하나의 모양으로 묶을 때 쓰입니다. TypeScript에서는 Object Shape와 Object Type으로 그 모양을 명시해 실수를 줄입니다.",
+    related: ["Object Shape", "Property", "Object Type"],
+  },
+  {
+    term: "Operating System",
+    category: "개발 기초",
+    shortDefinition: "파일, 프로세스, 경로, 권한, 명령 실행을 관리하는 컴퓨터의 기본 소프트웨어",
+    explanation:
+      "Operating System은 Windows, macOS, Linux처럼 개발 도구가 실행되는 바닥입니다. 경로 구분자, shell 문법, 환경변수 표현이 운영체제에 따라 달라질 수 있습니다.",
+    related: ["File System", "Path Separator", "Shell Command"],
+  },
+  {
+    term: "Optional Property",
+    category: "TypeScript",
+    shortDefinition: "객체 타입에서 있을 수도 있고 없을 수도 있는 property",
+    explanation:
+      "Optional Property는 `name?: string`처럼 표시하며, 값이 없을 가능성을 타입 시스템에 알려줍니다. 이 값에 접근할 때는 undefined 가능성을 좁히거나 기본값을 둬야 합니다.",
+    related: ["Object Type", "Property", "Type Guard"],
+  },
+  {
+    term: "Parameter",
+    category: "프로그래밍",
+    shortDefinition: "함수가 호출될 때 외부에서 받는 입력 이름",
+    explanation:
+      "Parameter는 함수 안에서 사용할 입력값의 자리표입니다. 좋은 parameter 이름은 함수가 무엇을 필요로 하는지 문서처럼 보여 줍니다.",
+    related: ["Function", "Return Value", "Scope"],
+  },
+  {
+    term: "Pattern Matching",
+    category: "개발 기초",
+    shortDefinition: "문자열이나 코드에서 규칙에 맞는 부분을 찾아내는 방식",
+    explanation:
+      "Pattern Matching은 정규식, 검색 도구, 로그 분석에서 반복되는 형태를 찾는 데 쓰입니다. AI에게 검색을 맡길 때도 어떤 패턴을 찾는지 명확해야 결과가 흔들리지 않습니다.",
+    related: ["Regular Expression", "Character Class", "Code Search"],
+  },
+  {
+    term: "Performance",
+    category: "웹 개발",
+    shortDefinition: "사용자가 느끼는 속도와 시스템 자원 사용의 품질",
+    explanation:
+      "Performance는 로딩 시간, 렌더링 지연, 네트워크 대기, 번들 크기처럼 여러 요소가 합쳐져 결정됩니다. 최적화는 측정 없이 시작하면 체감 개선보다 복잡도만 늘 수 있습니다.",
+    related: ["Performance Timing", "Network", "Browser Rendering"],
+  },
+  {
+    term: "PowerShell",
+    category: "개발 기초",
+    shortDefinition: "Windows에서 자주 쓰이는 객체 기반 명령줄 shell",
+    explanation:
+      "PowerShell은 명령 결과를 단순 문자열이 아니라 객체로 다룰 수 있어 파일 검색, 프로세스 확인, 스크립트 자동화에 강합니다. Windows 개발 환경에서는 cmd와 문법 차이를 이해해야 합니다.",
+    related: ["PowerShell Cmdlet", "Shell Command", "Command Output"],
+  },
+  {
+    term: "Property",
+    category: "프로그래밍",
+    shortDefinition: "객체 안에서 이름으로 접근하는 값",
+    explanation:
+      "Property는 `user.name`의 name처럼 객체를 이루는 항목입니다. API 응답이나 컴포넌트 props를 이해하려면 어떤 property가 필수인지 선택인지 구분해야 합니다.",
+    related: ["Object", "Object Shape", "Optional Property"],
+  },
+  {
+    term: "REST",
+    category: "백엔드",
+    shortDefinition: "리소스를 URL로 표현하고 HTTP method로 행동을 구분하는 API 설계 방식",
+    explanation:
+      "REST는 `/users/1` 같은 리소스 주소와 GET, POST, PATCH, DELETE 같은 method를 조합해 API 의도를 드러냅니다. 완벽한 철학보다 일관된 URL과 상태 코드 사용이 실무의 출발점입니다.",
+    related: ["REST API", "HTTP Method", "HTTP"],
+  },
+  {
+    term: "Rendering Context",
+    category: "웹 보안",
+    shortDefinition:
+      "데이터가 HTML, 속성, URL, JavaScript, CSS 중 어디에 삽입되는지 나타내는 실행 맥락",
+    explanation:
+      "Rendering Context가 달라지면 같은 문자열도 필요한 escaping과 위험이 달라집니다. XSS 방어에서는 값이 들어가는 위치를 알아야 올바른 출력 인코딩을 선택할 수 있습니다.",
+    related: ["XSS", "Input Validation", "Browser Security"],
+  },
+  {
+    term: "Return Value",
+    category: "프로그래밍",
+    shortDefinition: "함수가 실행을 마치고 호출한 쪽에 돌려주는 값",
+    explanation:
+      "Return Value는 함수의 결과 계약입니다. 함수가 무엇을 반환하는지 명확하면 다음 코드가 그 값을 안전하게 이어받아 사용할 수 있습니다.",
+    related: ["Function", "Parameter", "Data Type"],
+  },
+  {
+    term: "Reusable Component",
+    category: "프론트엔드",
+    shortDefinition: "여러 화면에서 같은 목적과 인터페이스로 다시 쓸 수 있는 컴포넌트",
+    explanation:
+      "Reusable Component는 중복 UI를 줄이지만 너무 빨리 일반화하면 props가 복잡해집니다. 반복되는 실제 사용 사례가 보일 때 경계를 잡는 것이 좋습니다.",
+    related: ["React Component", "Generic", "Component Boundary"],
+  },
+  {
+    term: "SQL",
+    category: "백엔드",
+    shortDefinition: "관계형 데이터베이스에서 데이터를 조회하고 변경하는 질의 언어",
+    explanation:
+      "SQL은 table, column, row, index를 대상으로 데이터를 찾고 집계하고 수정합니다. API 뒤에서 실제 데이터가 어떻게 저장되는지 이해하려면 SQL의 기본 구조가 필요합니다.",
+    related: ["DB", "Table", "Index"],
+  },
+  {
+    term: "Scope",
+    category: "프로그래밍",
+    shortDefinition: "변수와 함수 이름이 유효하게 보이는 코드 범위",
+    explanation:
+      "Scope는 어떤 이름을 어디서 읽고 쓸 수 있는지 결정합니다. 오류를 디버깅할 때 값이 없거나 예상과 다른 이유가 scope 경계에 있는 경우가 많습니다.",
+    related: ["Variable", "Function", "Parameter"],
+  },
+  {
+    term: "Selector",
+    category: "웹 개발",
+    shortDefinition: "CSS 규칙을 적용할 HTML 요소를 고르는 패턴",
+    explanation:
+      "Selector는 태그, 클래스, id, 속성, 상태를 조합해 대상 요소를 찾습니다. 어떤 selector가 더 강한지는 Specificity가 결정합니다.",
+    related: ["Specificity", "CSS Declaration", "CSS Cascade"],
+  },
+  {
+    term: "Shell Command",
+    category: "개발 기초",
+    shortDefinition: "터미널에서 shell이 해석해 실행하는 명령",
+    explanation:
+      "Shell Command는 파일 목록 확인, 빌드 실행, 테스트, Git 작업처럼 개발 루틴의 기본 단위입니다. AI에게 명령 실행을 맡길 때도 working directory와 인자를 정확히 남겨야 합니다.",
+    related: ["PowerShell", "Command Output", "Current Directory"],
+  },
+  {
+    term: "State Setter",
+    category: "React",
+    shortDefinition: "React state를 새 값으로 예약하는 함수",
+    explanation:
+      "State Setter는 값을 즉시 바꾸는 일반 대입이 아니라 다음 렌더링을 예약합니다. 이전 값에 의존하면 updater function을 써야 stale state 실수를 줄일 수 있습니다.",
+    related: ["useState", "Updater Function", "State Snapshot"],
+  },
+  {
+    term: "Tailwind CSS",
+    category: "프론트엔드",
+    shortDefinition: "작은 utility class를 조합해 빠르게 스타일을 만드는 CSS 프레임워크",
+    explanation:
+      "Tailwind CSS는 별도 CSS 파일에 이름을 짓는 대신 HTML/JSX에서 spacing, color, layout class를 조합합니다. 디자인 시스템과 함께 쓰면 빠르지만 class 조합이 길어질 수 있습니다.",
+    related: ["CSS", "CSS Layout", "Responsive Design"],
+  },
+  {
+    term: "Technical Debt",
+    category: "개발 기초",
+    shortDefinition: "빠른 구현을 위해 미뤄 둔 구조적 비용",
+    explanation:
+      "Technical Debt는 당장 기능은 돌아가지만 나중에 변경, 테스트, 이해를 어렵게 만드는 선택입니다. 프로토타입에서는 허용될 수 있지만 기록과 상환 계획이 없으면 제품 속도를 갉아먹습니다.",
+    related: ["Prototype Boundary", "Refactoring", "Code Review"],
+  },
+  {
+    term: "Type Guard",
+    category: "TypeScript",
+    shortDefinition: "값의 타입을 조건으로 확인해 더 좁은 타입으로 다루게 하는 코드",
+    explanation:
+      "Type Guard는 `typeof`, `in`, 사용자 정의 predicate처럼 런타임 확인을 타입 시스템에 알려 줍니다. union type에서 안전하게 property를 읽을 때 꼭 필요합니다.",
+    related: ["Narrowing", "Union Type", "Validation"],
+  },
+  {
+    term: "Updater Function",
+    category: "React",
+    shortDefinition: "이전 state를 받아 다음 state를 계산하는 setter 콜백",
+    explanation:
+      "Updater Function은 `setCount((count) => count + 1)`처럼 이전 값을 기준으로 새 값을 만듭니다. 여러 업데이트가 batching될 때도 순서대로 안전하게 계산됩니다.",
+    related: ["State Setter", "Batching", "useState"],
+  },
+  {
+    term: "Validation",
+    category: "개발 기초",
+    shortDefinition: "값이 약속한 형식, 범위, 필수 조건을 만족하는지 확인하는 절차",
+    explanation:
+      "Validation은 API 입력, JSON parsing, 폼 제출, 설정 파일에서 잘못된 데이터를 조기에 막습니다. AI가 만든 코드도 외부 입력을 신뢰하지 않는 검증 경계가 필요합니다.",
+    related: ["Input Validation", "JSON.parse", "Type Guard"],
+  },
+  {
+    term: "Variable Inspection",
+    category: "개발 기초",
+    shortDefinition: "디버깅 중 변수의 현재 값을 확인하는 행위",
+    explanation:
+      "Variable Inspection은 코드가 의도대로 실행되고 있는지 실제 값으로 확인하게 해 줍니다. breakpoint와 함께 쓰면 어떤 분기에서 값이 바뀌었는지 추적할 수 있습니다.",
+    related: ["Debugger", "Breakpoint", "Variable"],
+  },
+  {
+    term: "Viewport",
+    category: "웹 개발",
+    shortDefinition: "브라우저에서 현재 페이지가 보이는 화면 영역",
+    explanation:
+      "Viewport는 반응형 레이아웃의 기준입니다. 같은 콘텐츠라도 모바일과 데스크톱 viewport에서는 줄바꿈, grid 열 수, 터치 영역이 달라져야 합니다.",
+    related: ["Responsive Design", "Media Query", "CSS Layout"],
+  },
+  {
+    term: "unknown",
+    category: "TypeScript",
+    shortDefinition: "아직 타입을 알 수 없어 확인 전에는 안전하게 사용할 수 없는 타입",
+    explanation:
+      "unknown은 any보다 안전한 불확실성 표현입니다. 값을 사용하기 전에 type guard나 validation으로 좁혀야 하므로 외부 입력을 다룰 때 실수를 줄입니다.",
+    related: ["any", "Type Guard", "Validation"],
+  },
+  {
+    term: "검색",
+    category: "AI 시스템",
+    shortDefinition: "필요한 정보나 근거를 문서, 코드, 데이터에서 찾아오는 행위",
+    explanation:
+      "검색은 RAG, 코드 탐색, 문서 확인의 공통 동작입니다. 좋은 검색은 질문을 쪼개고 범위를 좁히며, 찾은 결과가 실제 주장에 충분한지 검증합니다.",
+    related: ["RAG", "Code Search", "BM25"],
+  },
+  {
+    term: "검증",
+    category: "운영",
+    shortDefinition: "결과가 요구사항과 근거, 실행 조건을 만족하는지 확인하는 절차",
+    explanation:
+      "검증은 AI 시대의 기본 안전장치입니다. 답변을 믿는 것이 아니라 출처, 테스트, 빌드, 사용자 흐름으로 다시 확인해 다음 작업의 기반을 단단하게 만듭니다.",
+    related: ["Verification", "Evaluation", "테스트"],
+  },
+  {
+    term: "도구",
+    category: "AI 시스템",
+    shortDefinition: "AI나 사람이 작업을 수행하기 위해 호출하는 외부 기능",
+    explanation:
+      "도구는 검색, 파일 읽기, 터미널 실행, API 호출처럼 모델 내부 지식만으로 할 수 없는 일을 가능하게 합니다. 도구 권한이 커질수록 승인과 로그가 중요해집니다.",
+    related: ["Tool Calling", "MCP", "Agent Hook"],
+  },
+  {
+    term: "라우팅",
+    category: "프론트엔드",
+    shortDefinition: "URL과 화면 또는 서버 동작을 연결하는 규칙",
+    explanation:
+      "라우팅은 사용자가 어떤 주소로 들어왔을 때 어떤 페이지와 데이터를 보여 줄지 정합니다. Next.js에서는 파일 구조와 dynamic route segment가 라우팅 설계의 중심입니다.",
+    related: ["Next.js", "Dynamic Route Segment", "Navigation"],
+  },
+  {
+    term: "반응형 UI",
+    category: "웹 개발",
+    shortDefinition: "화면 크기와 입력 방식에 맞춰 레이아웃과 상호작용이 조정되는 UI",
+    explanation:
+      "반응형 UI는 모바일, 태블릿, 데스크톱에서 같은 정보를 깨지지 않게 보여 주는 설계입니다. CSS Layout, media query, viewport 기준을 함께 고려합니다.",
+    related: ["Responsive Design", "Viewport", "CSS Layout"],
+  },
+  {
+    term: "배포",
+    category: "배포와 운영",
+    shortDefinition: "사용자가 접근할 수 있는 환경에 애플리케이션을 반영하는 일",
+    explanation:
+      "배포는 코드를 올리는 행위만이 아니라 빌드, 환경변수, 접근 제어, 롤백, 모니터링을 함께 포함합니다. 학습 사이트도 배포 전 verify와 비공개 보호가 필요합니다.",
+    related: ["Deployment", "Build", "Rollback"],
+  },
+  {
+    term: "백엔드",
+    category: "백엔드",
+    shortDefinition: "사용자 화면 뒤에서 데이터, 인증, 비즈니스 로직, API를 처리하는 영역",
+    explanation:
+      "백엔드는 DB와 API, 인증, 로그를 다루며 프론트엔드가 보여 줄 데이터를 준비합니다. 화면 문제처럼 보여도 실제 원인은 백엔드 응답이나 데이터 계약일 수 있습니다.",
+    related: ["API", "DB", "REST API"],
+  },
+  {
+    term: "브라우저",
+    category: "웹 개발",
+    shortDefinition: "웹 페이지를 내려받아 해석하고 실행하는 사용자 측 프로그램",
+    explanation:
+      "브라우저는 HTML 구조, CSS 스타일, JavaScript 동작, 네트워크 요청을 합쳐 화면을 만듭니다. 개발자는 DevTools로 브라우저가 실제로 본 상태를 확인합니다.",
+    related: ["Browser", "HTML", "JavaScript"],
+  },
+  {
+    term: "상태",
+    category: "프론트엔드",
+    shortDefinition: "시간에 따라 바뀌며 화면이나 동작에 영향을 주는 값",
+    explanation:
+      "상태는 입력값, 선택된 탭, 로딩 여부, 오류 메시지처럼 사용자 상호작용에 따라 바뀝니다. React에서는 state 변경이 렌더링을 다시 일으키므로 데이터 흐름을 명확히 해야 합니다.",
+    related: ["React State", "useState", "State Snapshot"],
+  },
+  {
+    term: "상태 코드",
+    category: "웹 개발",
+    shortDefinition: "HTTP 응답 결과를 숫자로 요약해 알려 주는 코드",
+    explanation:
+      "상태 코드는 요청이 성공했는지, 리다이렉트됐는지, 클라이언트나 서버 오류인지 알려 줍니다. API 디버깅에서는 body보다 먼저 status code와 method, URL을 확인합니다.",
+    related: ["HTTP 상태 코드", "HTTP", "API"],
+  },
+  {
+    term: "출처",
+    category: "AI 학습",
+    shortDefinition: "주장을 뒷받침하는 원문 문서나 근거 위치",
+    explanation:
+      "출처는 AI가 만든 설명을 다시 확인할 수 있게 해 주는 좌표입니다. 학습 콘텐츠에서는 직접 인용과 해설이 어떤 공식 문서에 기대는지 명확히 남겨야 합니다.",
+    related: ["Citation", "Grounding", "검증"],
+  },
+  {
+    term: "컴포넌트",
+    category: "프론트엔드",
+    shortDefinition: "화면의 일부와 그 동작을 재사용 가능한 단위로 묶은 조각",
+    explanation:
+      "컴포넌트는 버튼, 카드, 목록, 페이지 섹션처럼 UI를 작은 단위로 나눕니다. 잘 나눈 컴포넌트는 데이터 흐름과 책임이 분명하고 테스트하기 쉽습니다.",
+    related: ["React Component", "Reusable Component", "Component Boundary"],
+  },
+  {
+    term: "타입",
+    category: "TypeScript",
+    shortDefinition: "값의 모양과 가능한 사용법을 코드로 표현한 약속",
+    explanation:
+      "타입은 함수 입력, API 응답, 컴포넌트 props가 어떤 모양이어야 하는지 설명합니다. TypeScript에서는 타입을 통해 실행 전에 많은 실수를 발견할 수 있습니다.",
+    related: ["TypeScript", "Data Type", "Type Guard"],
+  },
+  {
+    term: "테스트",
+    category: "개발 기초",
+    shortDefinition: "코드가 기대한 동작을 하는지 자동 또는 수동으로 확인하는 절차",
+    explanation:
+      "테스트는 변경 후에도 기존 동작이 깨지지 않았는지 알려 주는 안전망입니다. AI가 만든 수정일수록 작은 단위 테스트와 빌드 검증을 함께 돌리는 습관이 중요합니다.",
+    related: ["검증", "Evaluation", "Assertion"],
+  },
+  {
+    term: "Auth",
+    category: "백엔드",
+    shortDefinition: "사용자나 시스템의 신원을 확인하고 접근 권한을 제어하는 인증·인가 영역",
+    explanation:
+      "Auth는 로그인, 세션, 토큰, 쿠키, 권한 확인을 포함합니다. 초보자에게는 비밀번호 확인만 떠오르기 쉽지만, 실제 서비스에서는 누구인지 확인하는 authentication과 무엇을 할 수 있는지 확인하는 authorization을 함께 봅니다.",
+    related: ["Cookie", "Session", "Token"],
+  },
+  {
+    term: "Build",
+    category: "배포와 운영",
+    shortDefinition: "소스 코드를 실행 가능한 산출물로 변환하는 단계",
+    explanation:
+      "Build는 TypeScript 변환, 번들링, 정적 페이지 생성, 최적화를 거쳐 배포 가능한 결과물을 만듭니다. 운영에서는 build, release, run을 분리해 같은 산출물이 어떤 설정으로 실행되는지 추적합니다.",
+    related: ["Deployment", "Build Time", "Runtime"],
+  },
+  {
+    term: "Index",
+    category: "백엔드",
+    shortDefinition: "데이터베이스가 특정 값을 더 빠르게 찾도록 돕는 보조 구조",
+    explanation:
+      "Index는 책의 색인처럼 검색 속도를 높이지만 저장 공간과 쓰기 비용을 늘릴 수 있습니다. 자주 조회하는 column과 조건에 맞춰 설계해야 하고, 모든 column에 무작정 붙이는 것은 좋은 전략이 아닙니다.",
+    related: ["SQL", "Table", "DB"],
+  },
+  {
+    term: "Refactoring",
+    category: "개발 기초",
+    shortDefinition: "겉으로 보이는 동작은 유지하면서 코드 구조를 더 이해하기 쉽게 고치는 작업",
+    explanation:
+      "Refactoring은 기능 추가가 아니라 구조 개선입니다. 이름, 중복, 함수 경계, 컴포넌트 책임을 정리해 다음 변경을 쉽게 만들며, 테스트나 verify가 있어야 안전하게 진행할 수 있습니다.",
+    related: ["Technical Debt", "Code Review", "테스트"],
+  },
+  {
+    term: "Table",
+    category: "백엔드",
+    shortDefinition: "관계형 데이터베이스에서 row와 column으로 데이터를 저장하는 기본 단위",
+    explanation:
+      "Table은 사용자, 주문, 게시글처럼 같은 종류의 데이터를 행 단위로 저장합니다. 어떤 column을 둘지와 어떤 index를 만들지는 API 응답 속도와 데이터 정합성에 직접 영향을 줍니다.",
+    related: ["SQL", "Index", "DB"],
+  },
+  {
+    term: "Token",
+    category: "백엔드",
+    shortDefinition: "인증 상태나 권한 정보를 전달하기 위해 발급되는 문자열 형태의 증표",
+    explanation:
+      "Token은 로그인 이후 사용자가 누구인지 또는 어떤 권한을 갖는지 서버와 클라이언트가 확인하는 데 쓰입니다. 저장 위치, 만료 시간, 갱신 방식이 보안에 직접 영향을 주므로 쿠키와 세션 개념과 함께 봐야 합니다.",
+    related: ["Auth", "Session", "Cookie"],
   },
 ] satisfies readonly GlossaryTerm[]

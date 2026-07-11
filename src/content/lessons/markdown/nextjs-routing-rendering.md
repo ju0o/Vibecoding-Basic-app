@@ -135,6 +135,12 @@ AI가 만든 Next.js 코드에서 가장 자주 깨지는 것이 바로 이 강�
 > [!WARNING]
 > "use client"를 파일 맨 위가 아닌 곳에 두거나, 서버 컴포넌트를 클라이언트 파일에서 직접 import하면(children 전달이 아니라) 의도치 않게 서버 코드가 클라이언트 그래프로 편입됩니다. 경계 선언은 항상 파일 첫 줄, 서버 조각의 전달은 항상 props/children으로.
 
+### 설명 연습: URL, 데이터, 실행 위치를 함께 말하기
+
+Next.js 라우팅을 설명할 때는 "폴더가 URL이 된다"에서 시작하되 거기서 멈추지 마세요. URL은 사용자가 보는 주소이고, page와 layout은 그 주소에 대응하는 화면 경계이며, Server Component와 Client Component는 코드가 어디서 실행되는지 나누는 경계입니다. 이 세 가지가 함께 맞아야 화면이 빠르고 안전하게 동작합니다.
+
+초보자는 use client를 "React를 쓰려면 붙이는 것"으로 오해하기 쉽습니다. 더 정확히는 브라우저 상호작용이 필요한 최소 경계를 표시하는 선언입니다. 서버에서만 필요한 데이터 접근과 secret은 서버 컴포넌트에 남기고, 클릭·입력·상태처럼 브라우저가 필요한 부분만 클라이언트 컴포넌트로 내립니다. 이 설명을 할 수 있으면 Next.js의 라우팅과 렌더링 모델을 파일 관례가 아니라 실행 위치 설계로 이해한 것입니다.
+
 ## 더 읽기
 
 - [Layouts and Pages — Next.js Docs](https://nextjs.org/docs/app/getting-started/layouts-and-pages) — 파일 시스템 라우팅, page/layout, 동적 세그먼트
