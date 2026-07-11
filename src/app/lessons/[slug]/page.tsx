@@ -65,7 +65,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
       <LessonVisitTracker lessonSlug={lesson.slug} />
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-8">
         <article className="min-w-0">
-          <div className="mx-auto max-w-[78ch] rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5 sm:p-8">
+          <div className="mx-auto max-w-[72ch] rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5 sm:p-8">
             <div className="flex flex-wrap gap-2">
               <Badge variant="accent">{moduleTitle}</Badge>
               <Badge>{lesson.level}</Badge>
@@ -79,7 +79,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
           </div>
 
           {lesson.type === "reference" && referenceItems.length > 0 ? (
-            <div className="mx-auto mt-6 max-w-[78ch] rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5">
+            <div className="mx-auto mt-6 max-w-[72ch] rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5">
               <h2 className="text-lg font-extrabold text-[var(--text-primary)]">명령어 인덱스</h2>
               <div className="mt-3 grid gap-2 sm:grid-cols-2">
                 {referenceItems.map((item) => (
@@ -95,7 +95,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
             </div>
           ) : null}
 
-          <div className="mx-auto mt-6 max-w-[78ch] space-y-6">
+          <div className="mx-auto mt-6 max-w-[72ch] space-y-6">
             {lesson.sections.map((section) => (
               <section
                 className="scroll-mt-24 rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5 sm:p-8"
@@ -119,7 +119,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
             ))}
           </div>
 
-          <div className="mx-auto mt-6 max-w-[78ch] rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5 sm:p-6">
+          <div className="mx-auto mt-6 max-w-[72ch] rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5 sm:p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <h2 className="text-xl font-extrabold text-[var(--text-primary)]">읽음 표시</h2>
@@ -132,7 +132,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
           </div>
 
           {relatedLessons.length > 0 ? (
-            <div className="mx-auto mt-6 max-w-[78ch] rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5 sm:p-6">
+            <div className="mx-auto mt-6 max-w-[72ch] rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-5 sm:p-6">
               <h2 className="text-xl font-extrabold text-[var(--text-primary)]">관련 강의</h2>
               <div className="mt-4 grid gap-3">
                 {relatedLessons.map((relatedLesson) => (

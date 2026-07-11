@@ -17,7 +17,7 @@ export function LessonNavigationCards({
   return (
     <nav
       aria-label="이전 및 다음 강의"
-      className="mx-auto mt-6 grid max-w-[78ch] gap-4 md:grid-cols-2"
+      className="mx-auto mt-6 grid max-w-[72ch] gap-4 md:grid-cols-2"
     >
       <NavigationCard currentModuleId={currentModuleId} direction="previous" lesson={previous} />
       <NavigationCard currentModuleId={currentModuleId} direction="next" lesson={next} />
