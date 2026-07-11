@@ -9,8 +9,8 @@ prerequisites: [ide-agent-era]
 successors: [tool-permissions-sandboxes]
 related: [model-selection-tradeoffs, human-ai-collaboration-patterns]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [codex-claude-cursor-comparison]
+  glossary: [Execution Surface, Context Access, Review Workflow]
 sources:
   - { title: "OpenAI — Introducing Codex", url: "https://openai.com/index/introducing-codex/", checked: 2026-07-12 }
   - { title: "OpenAI Developers — Codex CLI", url: "https://developers.openai.com/codex/cli", checked: 2026-07-12 }

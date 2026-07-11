@@ -9,8 +9,8 @@ prerequisites: [ide-agent-era]
 successors: []
 related: [harness, agent-loop, ai-coding-tool-comparison]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [tool-permissions-sandboxes]
+  glossary: [Permission Policy, Approval Prompt, Sandbox Boundary, Settings Hierarchy]
 sources:
   - { title: "OpenAI Developers — Codex CLI", url: "https://developers.openai.com/codex/cli", checked: 2026-07-12 }
   - { title: "Anthropic Claude Code — Configure permissions", url: "https://code.claude.com/docs/en/permissions", checked: 2026-07-12 }

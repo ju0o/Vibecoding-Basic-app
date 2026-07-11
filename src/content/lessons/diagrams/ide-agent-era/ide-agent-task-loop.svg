@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="460" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">IDE Agent 작업 루프</title>
+  <desc id="desc">작업 계약에서 repository 조사, 계획, 도구 실행, 테스트, diff review로 이어지는 IDE agent 흐름</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb" />
+    </marker>
+    <style>
+      .human { fill: #ecfdf5; stroke: #059669; stroke-width: 2; rx: 18; }
+      .agent { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 2; rx: 18; }
+      .tool { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; rx: 18; }
+      .review { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; rx: 18; }
+      .text { font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; fill: #0f172a; }
+      .sub { font-family: Arial, sans-serif; font-size: 14px; fill: #334155; }
+      .line { fill: none; stroke: #2563eb; stroke-width: 3; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect x="54" y="72" width="176" height="92" class="human" />
+  <text x="142" y="108" text-anchor="middle" class="text">Task Contract</text>
+  <text x="142" y="134" text-anchor="middle" class="sub">scope, tests, report</text>
+  <rect x="282" y="72" width="176" height="92" class="agent" />
+  <text x="370" y="108" text-anchor="middle" class="text">Plan</text>
+  <text x="370" y="134" text-anchor="middle" class="sub">multi-step task</text>
+  <rect x="510" y="72" width="176" height="92" class="tool" />
+  <text x="598" y="108" text-anchor="middle" class="text">Inspect Repo</text>
+  <text x="598" y="134" text-anchor="middle" class="sub">search and read files</text>
+  <rect x="644" y="250" width="176" height="92" class="tool" />
+  <text x="732" y="286" text-anchor="middle" class="text">Edit and Run</text>
+  <text x="732" y="312" text-anchor="middle" class="sub">files, commands, tests</text>
+  <rect x="374" y="250" width="176" height="92" class="review" />
+  <text x="462" y="286" text-anchor="middle" class="text">Diff Package</text>
+  <text x="462" y="312" text-anchor="middle" class="sub">changed files, risk</text>
+  <rect x="104" y="250" width="176" height="92" class="human" />
+  <text x="192" y="286" text-anchor="middle" class="text">Review</text>
+  <text x="192" y="312" text-anchor="middle" class="sub">human + CI gate</text>
+  <path d="M230 118 H282" class="line" />
+  <path d="M458 118 H510" class="line" />
+  <path d="M598 164 C674 198 728 216 732 250" class="line" />
+  <path d="M644 296 H550" class="line" />
+  <path d="M374 296 H280" class="line" />
+  <path d="M192 250 C118 202 106 170 142 164" class="line" />
+  <text x="460" y="418" text-anchor="middle" class="sub">IDE Agent는 답변 생성기가 아니라 권한과 검증을 동반한 repository task 실행 루프다</text>
+</svg>

@@ -9,8 +9,8 @@ prerequisites: [autocomplete-era]
 successors: [ide-agent-era]
 related: [ai-learning-verification, human-ai-collaboration-patterns]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [chat-coding-era]
+  glossary: [Context-aware Response, Chat Session History, Debugging Conversation]
 sources:
   - { title: "GitHub Docs — Responsible use of GitHub Copilot Chat", url: "https://docs.github.com/en/copilot/responsible-use/chat", checked: 2026-07-12 }
   - { title: "GitHub Docs — GitHub Copilot features", url: "https://docs.github.com/en/copilot/get-started/features", checked: 2026-07-12 }

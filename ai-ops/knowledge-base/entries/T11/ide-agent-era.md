@@ -9,8 +9,8 @@ prerequisites: [chat-coding-era]
 successors: [ai-coding-tool-comparison, tool-permissions-sandboxes]
 related: [agent-loop, orchestration, human-ai-collaboration-patterns]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [ide-agent-era]
+  glossary: [Agent Mode, Repository Task Delegation, Cloud Sandbox]
 sources:
   - { title: "GitHub Docs — Responsible use of GitHub Copilot Chat", url: "https://docs.github.com/en/copilot/responsible-use/chat", checked: 2026-07-12 }
   - { title: "GitHub Docs — GitHub Copilot features", url: "https://docs.github.com/en/copilot/get-started/features", checked: 2026-07-12 }

@@ -3018,4 +3018,117 @@ export const GLOSSARY_TERMS = [
       "Suggestion Scope가 커질수록 생산성 잠재력도 커지지만 검토 책임도 커집니다. 함수 전체 제안은 edge case, 보안, 테스트 기준까지 읽어야 합니다.",
     related: ["Inline Suggestion", "AI Autocomplete", "GitHub Copilot"],
   },
+  {
+    term: "Context-aware Response",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "열려 있는 파일, repository 맥락, 이전 대화 같은 정보를 참고해 만들어지는 chat 답변",
+    explanation:
+      "Context-aware Response는 chat coding이 단순 일반 지식 답변이 아니라 현재 작업 맥락을 참고할 수 있음을 보여주는 개념입니다. 다만 맥락을 참고한다는 말이 곧 정확성을 보장한다는 뜻은 아니므로, 답변은 human review와 test로 검증해야 합니다.",
+    related: ["Chat Coding", "Context Engineering", "Verification"],
+  },
+  {
+    term: "Chat Session History",
+    category: "AI 코딩 도구",
+    shortDefinition: "chat coding에서 이전 질문과 답변이 후속 답변의 맥락으로 남는 대화 기록",
+    explanation:
+      "Chat Session History는 follow-up question이 가능한 대화형 코딩 보조의 핵심입니다. 같은 오류를 이어서 파고들 수 있게 하지만, 오래된 전제나 잘못된 가정도 함께 남을 수 있으므로 중요한 결정은 현재 코드와 테스트로 다시 확인해야 합니다.",
+    related: ["Chat Coding", "Context-aware Response", "Verification"],
+  },
+  {
+    term: "Debugging Conversation",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "오류 메시지, 관련 코드, 실행 결과를 제공하고 원인 가설과 확인 절차를 대화로 좁히는 방식",
+    explanation:
+      "Debugging Conversation은 chat coding의 대표적인 실무 사용 방식입니다. 답 하나를 바로 믿는 것이 아니라 가능한 원인, 확인 명령, 수정 후보를 분리해 검증 가능한 순서로 바꾸는 데 초점이 있습니다.",
+    related: ["Chat Coding", "Debugging", "Verification"],
+  },
+  {
+    term: "Agent Mode",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "chat prompt를 시작점으로 AI가 여러 단계의 작업 계획과 도구 호출을 수행하는 코딩 도구 모드",
+    explanation:
+      "Agent Mode는 질문에 답하는 chat surface를 넘어 repository 조사, 파일 수정, terminal command, test 실행 같은 행동을 연결합니다. 따라서 prompt 품질뿐 아니라 권한, sandbox, diff review, stop condition이 함께 필요합니다.",
+    related: ["Agent", "Chat Coding", "Cloud Agent"],
+  },
+  {
+    term: "Repository Task Delegation",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "잘 정의된 repository 작업을 AI agent에게 맡기고 결과를 branch, diff, test output으로 검토하는 방식",
+    explanation:
+      "Repository Task Delegation은 agent가 독립적으로 작업한다는 환상이 아니라, 사람이 범위와 성공 기준을 정하고 agent의 변경 결과를 검토하는 협업 패턴입니다. 작은 issue, 명확한 acceptance criteria, 검증 명령이 있어야 review 가능한 단위가 됩니다.",
+    related: ["Agent Mode", "Code Review Boundary", "Verification"],
+  },
+  {
+    term: "Cloud Sandbox",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "repository snapshot이 준비된 원격 격리 실행 환경에서 AI agent가 작업하는 공간",
+    explanation:
+      "Cloud Sandbox는 agent가 파일을 읽고 수정하거나 명령을 실행할 때 로컬 환경과 분리된 실행 경계를 제공합니다. 격리는 위험을 줄이지만 결과 코드의 정확성을 보장하지 않으므로 diff review와 test가 필요합니다.",
+    related: ["Cloud Agent", "Sandbox", "Verification"],
+  },
+  {
+    term: "Execution Surface",
+    category: "AI 코딩 도구",
+    shortDefinition: "AI 코딩 도구가 사용자의 작업과 만나는 위치와 형태",
+    explanation:
+      "Execution Surface는 terminal, IDE, cloud sandbox처럼 agent가 어디에서 context를 읽고 도구를 실행하며 결과를 보여주는지 구분하는 기준입니다. 같은 AI coding tool이라도 surface가 다르면 권한, 관찰 가능성, review workflow가 달라집니다.",
+    related: ["AI 코딩 도구", "Cloud Agent", "Tool Calling"],
+  },
+  {
+    term: "Context Access",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "AI 도구가 작업 판단에 사용할 수 있는 repository, 파일, 검색, 대화, 실행 결과의 범위",
+    explanation:
+      "Context Access는 도구 비교에서 모델 성능만큼 중요한 축입니다. 로컬 codebase, remote sandbox, selected files, search tools 중 무엇을 볼 수 있는지에 따라 답변과 수정 품질이 달라지며, 많은 context가 항상 더 정확하다는 뜻은 아닙니다.",
+    related: ["Context Engineering", "AI 코딩 도구", "Verification"],
+  },
+  {
+    term: "Review Workflow",
+    category: "AI 코딩 도구",
+    shortDefinition: "AI가 만든 변경을 diff, test, branch, PR, 사람 검토로 통과시키는 절차",
+    explanation:
+      "Review Workflow는 agent output을 제품 코드로 받아들이기 전의 검증 흐름입니다. AI-generated code needs review라는 원칙을 실제 작업에서는 changed files, test result, risk report, human review로 나누어 적용합니다.",
+    related: ["Code Review Boundary", "Verification", "Cloud Agent"],
+  },
+  {
+    term: "Permission Policy",
+    category: "AI 코딩 도구",
+    shortDefinition: "AI agent가 어떤 tool, file edit, command를 허용·질문·거부할지 정하는 규칙",
+    explanation:
+      "Permission Policy는 agentic coding tool의 행동 범위를 코드와 설정으로 제한하는 운영 기준입니다. read/search만 허용할지, 특정 directory edit를 허용할지, install/delete/network/deploy 같은 행동은 approval을 요구할지 분리합니다.",
+    related: ["Agent Mode", "Tool Calling", "Verification"],
+  },
+  {
+    term: "Approval Prompt",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "위험한 agent action을 실행하기 전에 사람에게 명시적 승인을 요구하는 확인 단계",
+    explanation:
+      "Approval Prompt는 권한 정책과 사용자 판단을 연결합니다. 파일 삭제, dependency 설치, network access, deployment처럼 blast radius가 큰 행동은 자동 실행보다 승인 요청으로 멈추게 해야 합니다.",
+    related: ["Permission Policy", "Code Review Boundary", "Verification"],
+  },
+  {
+    term: "Sandbox Boundary",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "AI agent가 filesystem, network, command execution 같은 실행 자원에 접근할 수 있는 격리 경계",
+    explanation:
+      "Sandbox Boundary는 permission rule과 별개로 OS 또는 실행 환경 수준에서 접근 범위를 제한하는 안전 장치입니다. 격리는 위험 범위를 줄이지만 잘못된 코드 변경의 논리 오류까지 자동으로 막지는 못합니다.",
+    related: ["Cloud Sandbox", "Harness Engineering", "Secret"],
+  },
+  {
+    term: "Settings Hierarchy",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "개인, 프로젝트, 로컬, 관리형 설정처럼 여러 설정 레벨의 우선순위를 정하는 구조",
+    explanation:
+      "Settings Hierarchy는 agent permission과 tool behavior가 어디에서 결정되는지 추적하게 해줍니다. 팀 정책과 개인 기본값을 분리하고, 프로젝트별로 더 엄격한 규칙을 적용할 때 필요합니다.",
+    related: ["Permission Policy", "AI 코딩 도구", "Verification"],
+  },
 ] satisfies readonly GlossaryTerm[]

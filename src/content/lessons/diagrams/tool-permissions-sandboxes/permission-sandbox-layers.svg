@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="460" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">권한과 Sandbox 방어 계층</title>
+  <desc id="desc">Agent action을 permission policy, approval prompt, sandbox boundary, review and test로 제한하는 계층 구조</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb" />
+    </marker>
+    <style>
+      .action { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 2; rx: 18; }
+      .policy { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; rx: 18; }
+      .ask { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; rx: 18; }
+      .sandbox { fill: #f0fdf4; stroke: #16a34a; stroke-width: 2; rx: 18; }
+      .review { fill: #fef2f2; stroke: #dc2626; stroke-width: 2; rx: 18; }
+      .text { font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; fill: #0f172a; }
+      .sub { font-family: Arial, sans-serif; font-size: 14px; fill: #334155; }
+      .line { fill: none; stroke: #2563eb; stroke-width: 3; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect x="54" y="70" width="180" height="86" class="action" />
+  <text x="144" y="104" text-anchor="middle" class="text">Agent Action</text>
+  <text x="144" y="130" text-anchor="middle" class="sub">read, edit, command</text>
+  <rect x="286" y="70" width="180" height="86" class="policy" />
+  <text x="376" y="104" text-anchor="middle" class="text">Permission</text>
+  <text x="376" y="130" text-anchor="middle" class="sub">allow, ask, deny</text>
+  <rect x="518" y="70" width="180" height="86" class="ask" />
+  <text x="608" y="104" text-anchor="middle" class="text">Approval</text>
+  <text x="608" y="130" text-anchor="middle" class="sub">human checkpoint</text>
+  <rect x="402" y="236" width="180" height="86" class="sandbox" />
+  <text x="492" y="270" text-anchor="middle" class="text">Sandbox</text>
+  <text x="492" y="296" text-anchor="middle" class="sub">filesystem, network</text>
+  <rect x="634" y="236" width="180" height="86" class="review" />
+  <text x="724" y="270" text-anchor="middle" class="text">Review + Test</text>
+  <text x="724" y="296" text-anchor="middle" class="sub">correctness gate</text>
+  <rect x="170" y="236" width="180" height="86" class="policy" />
+  <text x="260" y="270" text-anchor="middle" class="text">Settings</text>
+  <text x="260" y="296" text-anchor="middle" class="sub">project, user, managed</text>
+  <path d="M234 113 H286" class="line" />
+  <path d="M466 113 H518" class="line" />
+  <path d="M608 156 C594 194 540 212 492 236" class="line" />
+  <path d="M492 322 C540 352 638 336 724 322" class="line" />
+  <path d="M376 156 C346 194 300 212 260 236" class="line" />
+  <text x="460" y="410" text-anchor="middle" class="sub">Permission은 행동을 고르고, sandbox는 실행 범위를 강제하며, review는 결과의 정확성을 판단한다</text>
+</svg>

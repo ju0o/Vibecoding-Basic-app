@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="460" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">AI 코딩 도구 비교 축</title>
+  <desc id="desc">Codex, Claude Code, Cursor를 execution surface, context access, permission, review workflow 기준으로 비교하는 지도</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb" />
+    </marker>
+    <style>
+      .axis { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; rx: 18; }
+      .tool { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 2; rx: 18; }
+      .review { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; rx: 18; }
+      .text { font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; fill: #0f172a; }
+      .sub { font-family: Arial, sans-serif; font-size: 14px; fill: #334155; }
+      .line { fill: none; stroke: #2563eb; stroke-width: 3; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect x="60" y="58" width="214" height="86" class="axis" />
+  <text x="167" y="92" text-anchor="middle" class="text">Execution Surface</text>
+  <text x="167" y="118" text-anchor="middle" class="sub">terminal, editor, cloud</text>
+  <rect x="353" y="58" width="214" height="86" class="axis" />
+  <text x="460" y="92" text-anchor="middle" class="text">Context Access</text>
+  <text x="460" y="118" text-anchor="middle" class="sub">repo, search, sandbox</text>
+  <rect x="646" y="58" width="214" height="86" class="axis" />
+  <text x="753" y="92" text-anchor="middle" class="text">Permission Model</text>
+  <text x="753" y="118" text-anchor="middle" class="sub">read, edit, run</text>
+  <rect x="90" y="244" width="190" height="92" class="tool" />
+  <text x="185" y="280" text-anchor="middle" class="text">Codex</text>
+  <text x="185" y="306" text-anchor="middle" class="sub">cloud task + CLI</text>
+  <rect x="365" y="244" width="190" height="92" class="tool" />
+  <text x="460" y="280" text-anchor="middle" class="text">Claude Code</text>
+  <text x="460" y="306" text-anchor="middle" class="sub">terminal + codebase</text>
+  <rect x="640" y="244" width="190" height="92" class="tool" />
+  <text x="735" y="280" text-anchor="middle" class="text">Cursor</text>
+  <text x="735" y="306" text-anchor="middle" class="sub">editor agent + search</text>
+  <rect x="326" y="370" width="268" height="60" class="review" />
+  <text x="460" y="406" text-anchor="middle" class="text">Diff · Test · Human Review</text>
+  <path d="M274 101 H353" class="line" />
+  <path d="M567 101 H646" class="line" />
+  <path d="M753 144 C734 190 724 214 735 244" class="line" />
+  <path d="M460 144 V244" class="line" />
+  <path d="M167 144 C166 190 174 214 185 244" class="line" />
+  <path d="M185 336 C250 366 292 386 326 400" class="line" />
+  <path d="M460 336 V370" class="line" />
+  <path d="M735 336 C670 366 628 386 594 400" class="line" />
+</svg>
