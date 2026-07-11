@@ -9,8 +9,8 @@ prerequisites: [human-ai-collaboration-patterns]
 successors: [prompt-implementation-loop]
 related: [prompt-engineering, ai-learning-verification, github-pr-review-flow]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [requirement-to-task-breakdown]
+  glossary: [Parent Issue, Sub-issue, Acceptance Criteria, Reviewable Plan]
 sources:
   - { title: "GitHub Docs — Quickstart for GitHub Issues", url: "https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/quickstart", checked: 2026-07-12 }
   - { title: "GitHub Docs — Adding sub-issues", url: "https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues", checked: 2026-07-12 }

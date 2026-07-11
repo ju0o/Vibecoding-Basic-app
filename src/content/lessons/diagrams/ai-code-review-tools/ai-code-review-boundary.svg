@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">AI 코드 리뷰 도구와 사람 리뷰 경계</title>
+  <desc id="desc">Pull request diff에서 AI 리뷰 comment가 생성되고, 사람이 diff, test, 보안 맥락을 검토한 뒤 approve 또는 request changes를 결정하는 흐름</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#2563eb" />
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.14" />
+    </filter>
+  </defs>
+  <rect width="960" height="420" rx="28" fill="#f8fafc" />
+  <text x="480" y="52" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="800" fill="#0f172a">AI Review는 승인자가 아니라 검토 신호 생성자</text>
+  <g filter="url(#shadow)">
+    <rect x="48" y="116" width="190" height="120" rx="18" fill="#dbeafe" stroke="#60a5fa" stroke-width="2" />
+    <text x="143" y="156" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#1e3a8a">Pull Request</text>
+    <text x="143" y="188" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#1e40af">changed files</text>
+    <text x="143" y="214" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#1e40af">diff + 목적</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="294" y="116" width="190" height="120" rx="18" fill="#ecfeff" stroke="#22d3ee" stroke-width="2" />
+    <text x="389" y="156" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#155e75">AI Review</text>
+    <text x="389" y="188" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#0e7490">comment</text>
+    <text x="389" y="214" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#0e7490">suggested change</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="540" y="116" width="190" height="120" rx="18" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" />
+    <text x="635" y="150" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#92400e">Human Review</text>
+    <text x="635" y="182" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#92400e">diff + test</text>
+    <text x="635" y="208" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#92400e">security context</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="768" y="116" width="144" height="120" rx="18" fill="#dcfce7" stroke="#22c55e" stroke-width="2" />
+    <text x="840" y="156" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#166534">Decision</text>
+    <text x="840" y="188" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#166534">approve</text>
+    <text x="840" y="214" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#166534">request changes</text>
+  </g>
+  <path d="M238 176 H286" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)" />
+  <path d="M484 176 H532" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)" />
+  <path d="M730 176 H760" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)" />
+  <rect x="90" y="298" width="780" height="72" rx="18" fill="#fff" stroke="#cbd5e1" stroke-width="2" />
+  <text x="480" y="328" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" fill="#334155">경계: AI comment는 merge approval이 아니라 사람이 검토할 evidence입니다.</text>
+  <text x="480" y="356" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#64748b">보안·business logic·팀 정책은 human expertise와 contextual understanding으로 확인합니다.</text>
+</svg>

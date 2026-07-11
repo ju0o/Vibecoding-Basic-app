@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="430" viewBox="0 0 960 430" role="img" aria-labelledby="title desc">
+  <title id="title">요구사항에서 검증 가능한 작업 단위로 쪼개는 흐름</title>
+  <desc id="desc">큰 요구사항을 parent issue, sub-issue, acceptance criteria, verification으로 나누어 AI task로 만드는 순서</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#7c3aed" />
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#1e1b4b" flood-opacity="0.12" />
+    </filter>
+  </defs>
+  <rect width="960" height="430" rx="28" fill="#fbfaff" />
+  <text x="480" y="52" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="800" fill="#1e1b4b">큰 요구사항은 바로 구현하지 않고 검증 가능한 task로 나눕니다</text>
+  <g filter="url(#shadow)">
+    <rect x="46" y="120" width="170" height="116" rx="18" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2" />
+    <text x="131" y="158" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#4c1d95">Goal</text>
+    <text x="131" y="190" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#5b21b6">큰 요구사항</text>
+    <text x="131" y="214" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#5b21b6">왜 하는가</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="268" y="120" width="170" height="116" rx="18" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" />
+    <text x="353" y="158" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#1e3a8a">Parent Issue</text>
+    <text x="353" y="190" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#1d4ed8">맥락</text>
+    <text x="353" y="214" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#1d4ed8">전체 범위</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="490" y="120" width="170" height="116" rx="18" fill="#ecfeff" stroke="#06b6d4" stroke-width="2" />
+    <text x="575" y="158" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#155e75">Sub-issue</text>
+    <text x="575" y="190" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#0e7490">작은 task</text>
+    <text x="575" y="214" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#0e7490">scope 제한</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="712" y="120" width="200" height="116" rx="18" fill="#dcfce7" stroke="#22c55e" stroke-width="2" />
+    <text x="812" y="154" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#166534">Agent-ready Task</text>
+    <text x="812" y="188" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#166534">acceptance criteria</text>
+    <text x="812" y="214" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#166534">verification</text>
+  </g>
+  <path d="M216 178 H260" stroke="#7c3aed" stroke-width="4" marker-end="url(#arrow)" />
+  <path d="M438 178 H482" stroke="#7c3aed" stroke-width="4" marker-end="url(#arrow)" />
+  <path d="M660 178 H704" stroke="#7c3aed" stroke-width="4" marker-end="url(#arrow)" />
+  <rect x="90" y="300" width="780" height="78" rx="18" fill="#fff" stroke="#ddd6fe" stroke-width="2" />
+  <text x="480" y="330" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" fill="#312e81">좋은 분해 기준</text>
+  <text x="480" y="358" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" fill="#5b21b6">사람이 review할 수 있고, AI가 build/test/validate할 수 있고, 실패하면 되돌릴 수 있는 크기</text>
+</svg>

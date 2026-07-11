@@ -3167,4 +3167,139 @@ export const GLOSSARY_TERMS = [
       "Rollback Readiness는 AI 협업에서 변경을 작게 만들고 검증 결과를 남겨 복구 가능성을 확보하는 습관입니다. 큰 작업을 작은 task로 나누면 문제가 생겼을 때 원인을 찾고 되돌리기 쉽습니다.",
     related: ["Git", "Review Workflow", "Verification"],
   },
+  {
+    term: "AI Review Comment",
+    category: "AI 코딩 도구",
+    shortDefinition: "AI 리뷰 도구가 pull request나 diff에 남기는 문제 후보·수정 제안 의견",
+    explanation:
+      "AI Review Comment는 approve나 request changes 자체가 아니라 사람이 검토할 입력입니다. comment가 실제 결함인지, suggested change를 적용할지, 추가 test가 필요한지는 사람이 diff와 요구사항을 읽고 판단해야 합니다.",
+    related: ["AI Code Review", "Review Workflow", "Verification"],
+  },
+  {
+    term: "Suggested Change",
+    category: "AI 코딩 도구",
+    shortDefinition: "리뷰 comment에서 바로 적용할 수 있는 코드 변경 후보",
+    explanation:
+      "Suggested Change는 문제 해결을 빠르게 시도하게 해주지만, 자동 정답은 아닙니다. 적용 전후 diff를 읽고 test로 검증해야 하며, 보안이나 business logic 변경에서는 사람 review가 더 깊게 필요합니다.",
+    related: ["AI Review Comment", "Code Review Boundary", "Verification"],
+  },
+  {
+    term: "Review Instruction",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "AI 리뷰 도구가 프로젝트 규칙을 참고하도록 제공하는 repository 또는 team 수준의 검토 지침",
+    explanation:
+      "Review Instruction은 custom instructions, repository rules, BUGBOT.md처럼 리뷰 도구가 프로젝트별 금지 패턴과 검증 기준을 참고하게 하는 context layer입니다. 규칙이 짧고 구체적일수록 AI comment가 팀 기준에 가까워집니다.",
+    related: ["AI Code Review", "Repository Instruction", "Review Workflow"],
+  },
+  {
+    term: "Comment Review Boundary",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "AI가 남긴 comment review와 사람이 내리는 approve/request changes 판단을 구분하는 경계",
+    explanation:
+      "Comment Review Boundary는 AI review를 merge approval로 오해하지 않게 하는 운영 기준입니다. AI는 comment와 suggested change 후보를 제공할 수 있지만, required approval과 최종 merge 책임은 사람 review 절차에 남습니다.",
+    related: ["AI Review Comment", "Code Review Boundary", "Review Workflow"],
+  },
+  {
+    term: "Parent Issue",
+    category: "AI 코딩 도구",
+    shortDefinition: "큰 목표와 전체 맥락을 담고 하위 task를 연결하는 상위 issue",
+    explanation:
+      "Parent Issue는 여러 sub-issue가 왜 존재하는지 설명하는 기준점입니다. AI 작업에서는 제품 의도, 전체 범위, 연결된 하위 작업을 보관해 agent가 작은 task를 더 큰 목표와 혼동하지 않게 도와줍니다.",
+    related: ["Sub-issue", "Task Framing", "Review Workflow"],
+  },
+  {
+    term: "Sub-issue",
+    category: "AI 코딩 도구",
+    shortDefinition: "큰 작업을 사람이 review하고 AI가 실행할 수 있는 작은 task로 나눈 하위 issue",
+    explanation:
+      "Sub-issue는 parent issue의 목표를 구현 가능한 단위로 쪼갠 것입니다. 좋은 sub-issue는 scope, acceptance criteria, verification이 분명해 독립적으로 검토하고 되돌릴 수 있습니다.",
+    related: ["Parent Issue", "Acceptance Criteria", "Repository Task Delegation"],
+  },
+  {
+    term: "Acceptance Criteria",
+    category: "AI 코딩 도구",
+    shortDefinition: "task가 완료되었다고 판단하기 위해 충족해야 하는 확인 가능한 조건",
+    explanation:
+      "Acceptance Criteria는 구현 결과가 요구사항을 만족하는지 판단하는 기준입니다. AI에게 task를 맡길 때는 원하는 동작, 유지해야 할 범위, 오류 조건, 검증 방법을 criteria와 연결해야 합니다.",
+    related: ["Sub-issue", "Verification", "Task Framing"],
+  },
+  {
+    term: "Reviewable Plan",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "코드 작성 전에 변경 파일, 단계, 검증 방법을 사람이 검토할 수 있게 정리한 구현 계획",
+    explanation:
+      "Reviewable Plan은 바로 구현하기 전에 scope mismatch와 위험한 변경을 발견하게 해주는 산출물입니다. Plan 자체도 AI output일 수 있으므로 사람이 task와 비교해 승인하거나 수정해야 합니다.",
+    related: ["Task Framing", "Repository Task Delegation", "Review Workflow"],
+  },
+  {
+    term: "Implementation Loop",
+    category: "AI 코딩 도구",
+    shortDefinition: "prompt, 구현 후보, 검증 결과, feedback이 반복되는 AI 코딩 작업 순환",
+    explanation:
+      "Implementation Loop는 AI에게 한 번 요청하고 끝내는 방식이 아니라, build/test/review observation을 다음 prompt로 되돌려 구현을 좁혀 가는 절차입니다. 루프에는 성공 조건과 중단 조건이 함께 있어야 합니다.",
+    related: ["Prompt Contract", "Verification", "Human Review Loop"],
+  },
+  {
+    term: "Follow-up Prompt",
+    category: "AI 코딩 도구",
+    shortDefinition: "AI 응답 평가나 검증 실패 결과를 반영해 다음 시도에 제공하는 추가 요청",
+    explanation:
+      'Follow-up Prompt는 "다시 해줘"가 아니라 실패한 test, review comment, 유지해야 할 scope, 바꾸지 말아야 할 조건을 포함하는 증거 기반 수정 요청입니다.',
+    related: ["Implementation Loop", "Verification Feedback", "Prompt Contract"],
+  },
+  {
+    term: "Repository Instruction",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "AI가 프로젝트를 이해하고 build/test/validate 방법을 따르도록 repository에 저장한 반복 지침",
+    explanation:
+      "Repository Instruction은 매 prompt마다 반복하기 어려운 프로젝트 규칙과 검증 방법을 고정하는 context layer입니다. 현재 task의 목표와 acceptance criteria는 별도 prompt로 제공해야 합니다.",
+    related: ["Prompt Contract", "Review Instruction", "Context Engineering"],
+  },
+  {
+    term: "Verification Feedback",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "build, test, typecheck, review 결과를 다음 AI 요청의 수정 근거로 바꾼 feedback",
+    explanation:
+      "Verification Feedback은 구현 후보가 실패한 이유와 다음 시도에서 지켜야 할 조건을 함께 전달합니다. 좋은 feedback은 실패 로그를 그대로 던지지 않고 요구사항과 연결해 수정 범위를 좁힙니다.",
+    related: ["Implementation Loop", "Follow-up Prompt", "Verification"],
+  },
+  {
+    term: "Diff Scope",
+    category: "AI 코딩 도구",
+    shortDefinition: "pull request에서 실제로 바뀐 파일과 줄, 변경 영역의 범위",
+    explanation:
+      "Diff Scope는 위험 분석의 출발점입니다. 어떤 파일과 시스템 경계가 바뀌었는지 알아야 보안, API, 데이터, UI, dependency 같은 검토 우선순위를 정할 수 있습니다.",
+    related: ["Review Workflow", "AI Code Review", "Verification"],
+  },
+  {
+    term: "Risk Signal",
+    category: "AI 코딩 도구",
+    shortDefinition: "변경이 더 깊은 review나 추가 검증을 요구할 수 있음을 알려주는 단서",
+    explanation:
+      "Risk Signal은 code scanning alert, auth 파일 변경, dependency 변경, scope 밖 diff, AI review comment처럼 위험 분석에서 우선순위를 올리는 입력입니다. signal은 결론이 아니라 사람이 확인할 후보입니다.",
+    related: ["Diff Scope", "Security Alert", "Review Workflow"],
+  },
+  {
+    term: "Security Alert",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "code scanning이나 보안 분석 도구가 PR 또는 코드에서 표시하는 취약점·오류 후보",
+    explanation:
+      "Security Alert는 PR diff 안에서 검토할 수 있는 자동 분석 신호입니다. alert가 있으면 path, details, 변경 맥락을 확인해야 하며, alert가 없다고 manual review가 사라지는 것은 아닙니다.",
+    related: ["Risk Signal", "AI Code Review", "Verification"],
+  },
+  {
+    term: "Manual Review Boundary",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "자동 분석이나 AI review가 아니라 사람이 business logic과 context를 직접 확인해야 하는 검토 경계",
+    explanation:
+      "Manual Review Boundary는 authorization intent, data flow, business rule, context-specific vulnerability처럼 human expertise가 필요한 영역을 분리합니다. 자동 도구는 signal을 주고, 사람은 시스템 맥락과 요구사항을 연결합니다.",
+    related: ["Code Review Boundary", "Verification", "Risk Signal"],
+  },
 ] satisfies readonly GlossaryTerm[]

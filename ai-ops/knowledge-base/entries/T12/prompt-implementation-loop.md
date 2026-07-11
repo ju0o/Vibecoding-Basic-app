@@ -9,8 +9,8 @@ prerequisites: [requirement-task-breakdown, prompt-engineering]
 successors: [ai-assisted-testing-loop]
 related: [agent-loop, human-ai-collaboration-patterns, ai-learning-verification]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [prompt-to-implementation-loop]
+  glossary: [Implementation Loop, Follow-up Prompt, Repository Instruction, Verification Feedback]
 sources:
   - { title: "GitHub Docs — Prompt engineering for GitHub Copilot Chat", url: "https://docs.github.com/en/copilot/concepts/prompting/prompt-engineering", checked: 2026-07-12 }
   - { title: "GitHub Docs — Asking GitHub Copilot questions in your IDE", url: "https://docs.github.com/en/copilot/how-tos/chat-with-copilot/chat-in-ide", checked: 2026-07-12 }

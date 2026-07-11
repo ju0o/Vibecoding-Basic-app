@@ -829,6 +829,18 @@ export const LESSON_META = [
     tags: ["Human Review", "AI Collaboration", "Verification", "Agent", "Vibe Coding"],
   },
   {
+    slug: "ai-code-review-tools",
+    moduleId: "ai-coding-tools",
+    order: 7,
+    title: "AI 코드 리뷰 도구와 한계",
+    summary:
+      "Copilot code review와 Bugbot 같은 AI 리뷰 도구가 PR diff에서 문제 후보를 찾는 방식, comment review의 한계, 사람 review와 보안 검토의 책임 경계를 배웁니다.",
+    level: "중급",
+    type: "deep-dive",
+    minutes: 55,
+    tags: ["AI Code Review", "Pull Request", "Copilot", "Bugbot", "Human Review"],
+  },
+  {
     slug: "from-prompt-to-system",
     moduleId: "ai-system-design",
     order: 1,
@@ -1031,5 +1043,47 @@ export const LESSON_META = [
     type: "reference",
     minutes: 70,
     tags: ["AI Evaluation", "Evals", "Trace Grading", "Agent"],
+  },
+  {
+    slug: "requirement-to-task-breakdown",
+    moduleId: "practical-vibe-coding",
+    order: 1,
+    title: "요구사항을 작업 단위로 쪼개기",
+    summary:
+      "큰 요구사항을 issue, sub-issue, acceptance criteria, 검증 기준으로 나누어 AI가 추측하지 않고 사람이 검토 가능한 단위로 일하게 만드는 방법을 배웁니다.",
+    level: "기초",
+    type: "deep-dive",
+    minutes: 55,
+    tags: [
+      "Requirement Breakdown",
+      "GitHub Issues",
+      "Sub-issue",
+      "Acceptance Criteria",
+      "Plan Mode",
+    ],
+  },
+  {
+    slug: "prompt-to-implementation-loop",
+    moduleId: "practical-vibe-coding",
+    order: 2,
+    title: "프롬프트에서 구현 루프까지",
+    summary:
+      "작업 prompt, repository instruction, 구현 후보, build/test/validate 결과, follow-up feedback을 연결해 AI 코딩을 반복 검증 루프로 운영하는 방법을 배웁니다.",
+    level: "중급",
+    type: "deep-dive",
+    minutes: 60,
+    tags: ["Prompt Loop", "Implementation", "Verification", "Custom Instructions", "Cloud Agent"],
+  },
+  {
+    slug: "code-change-risk-analysis",
+    moduleId: "practical-vibe-coding",
+    order: 3,
+    title: "코드 변경 위험 분석",
+    summary:
+      "PR diff, changed files, code scanning alert, CodeQL 신호, OWASP의 수동 보안 리뷰 관점을 연결해 변경 위험과 검증 우선순위를 판단하는 방법을 배웁니다.",
+    level: "중급",
+    type: "deep-dive",
+    minutes: 60,
+    tags: ["Risk Analysis", "Pull Request", "Diff Review", "CodeQL", "Secure Code Review"],
   },
 ] satisfies readonly LessonMeta[]

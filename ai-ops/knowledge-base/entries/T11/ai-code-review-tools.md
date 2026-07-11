@@ -9,8 +9,8 @@ prerequisites: [frontend-testing-basics, human-ai-collaboration-patterns]
 successors: []
 related: [github-pr-review-flow, tool-permissions-sandboxes, code-change-risk-analysis]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [ai-code-review-tools]
+  glossary: [AI Review Comment, Suggested Change, Review Instruction, Comment Review Boundary]
 sources:
   - { title: "GitHub Docs — About GitHub Copilot code review", url: "https://docs.github.com/en/copilot/concepts/agents/code-review", checked: 2026-07-12 }
   - { title: "GitHub Docs — Using GitHub Copilot code review", url: "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review", checked: 2026-07-12 }

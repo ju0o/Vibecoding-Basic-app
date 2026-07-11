@@ -9,8 +9,8 @@ prerequisites: [debugging-error-reading, github-pr-review-flow]
 successors: [ai-assisted-testing-loop]
 related: [web-security-basics, ai-code-review-tools, monitoring-errors-rollbacks]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [code-change-risk-analysis]
+  glossary: [Diff Scope, Risk Signal, Security Alert, Manual Review Boundary]
 sources:
   - { title: "GitHub Docs — Reviewing proposed changes in a pull request", url: "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/reviewing-proposed-changes-in-a-pull-request", checked: 2026-07-12 }
   - { title: "GitHub Docs — About pull request reviews", url: "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews", checked: 2026-07-12 }
