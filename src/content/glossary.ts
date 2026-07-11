@@ -3450,4 +3450,29 @@ export const GLOSSARY_TERMS = [
       "Status Code Class는 설명을 빠르게 만드는 요약 단위입니다. MDN은 status code가 'if the request was successful or not, and why'를 나타낸다고 설명합니다. 개별 번호보다 '4xx는 요청 문제, 5xx는 서버 문제'처럼 class로 먼저 말하면 듣는 사람이 즉시 방향을 잡습니다.",
     related: ["Request-Response Cycle", "Explanation Skill", "HTTP 상태 코드"],
   },
+  {
+    term: "Context vs RAG",
+    category: "AI 시스템",
+    shortDefinition:
+      "모델이 보는 토큰 그릇(context)과 그 그릇을 외부 검색으로 채우는 방법(RAG)의 층 구분",
+    explanation:
+      "Context vs RAG는 두 개념이 경쟁이 아니라 층 관계임을 뜻합니다. Anthropic은 context를 'the set of tokens included when sampling'으로, RAG를 검색과 생성의 결합으로 정의합니다. RAG는 무엇을 가져올지, context engineering은 가져온 것을 얼마나·어떻게 넣을지의 문제입니다.",
+    related: ["Runtime Retrieval", "High-Signal Tokens", "RAG"],
+  },
+  {
+    term: "Runtime Retrieval",
+    category: "AI 시스템",
+    shortDefinition: "사전 학습 지식이 아니라 생성 시점에 외부에서 관련 정보를 검색해 넣는 방식",
+    explanation:
+      "Runtime Retrieval은 RAG의 핵심 성질입니다. Claude glossary는 RAG의 지식이 'retrieved at run time'된다고 설명합니다. 덕분에 모델은 학습에 없던 최신·도메인 문서를 참조할 수 있고, 검색된 근거에 citation을 붙여 답을 증거에 grounded할 수 있습니다.",
+    related: ["Context vs RAG", "RAG", "Grounding"],
+  },
+  {
+    term: "High-Signal Tokens",
+    category: "AI 시스템",
+    shortDefinition: "context에 넣을 가치가 높은, 신호 대비 잡음이 낮은 최소한의 토큰 집합",
+    explanation:
+      "High-Signal Tokens는 context 최적화의 목표입니다. Anthropic은 이를 'finding the smallest possible set of high-signal tokens'라고 설명합니다. 'more context isn't automatically better'이므로, RAG로 많이 가져왔더라도 신호가 높은 것만 선별해 넣어야 답이 좋아집니다.",
+    related: ["Context vs RAG", "Context Engineering", "Runtime Retrieval"],
+  },
 ] satisfies readonly GlossaryTerm[]

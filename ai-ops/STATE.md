@@ -11,10 +11,10 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **O-06.1 (v3.1) — Fable(지휘+경량QA) · Codex(Heavy 미션 M1~M5) 2인 체제.** 기획서: ORCHESTRATION-PLAN.md |
-| Current State | **87강 released + 86강 배포됨** — explanation-practice 착수(1/5). KB 77건 approved, kb_needed 13건(88~100). Codex M6 계속 |
-| Last Completed Step | Fable(대행)이 84·85·86강 릴리스 + 86강 배포(라이브) + 87강(explain-web-flow) 릴리스, 각 verify exit 0 (2026-07-12) |
-| Next Executor | Codex(M6 — 잔여 13강 완주, 88~100, 전체 권한 연속 실행) |
-| Next Prompt File | ai-ops/prompts/CODEX-MISSIONS.md → M6 (88부터 이어서) |
+| Current State | **88강 released + 86강 배포됨** — explanation-practice 2/5. KB 78건 approved, kb_needed 12건(89~100). Codex M6 계속 |
+| Last Completed Step | Fable(대행)이 84~87강 릴리스 + 86강 배포(라이브) + 88강(explain-context-and-rag) 릴리스, 각 verify exit 0 (2026-07-12) |
+| Next Executor | Codex(M6 — 잔여 12강 완주, 89~100, 전체 권한 연속 실행) |
+| Next Prompt File | ai-ops/prompts/CODEX-MISSIONS.md → M6 (89부터 이어서) |
 | Blocker | 없음 (ai-workflow-design KB id 부재는 M6에서 대체 처리) |
 | Required Human Action | None |
 | Release Status | **V2 87강 released + 라이브 86강 + M5 QA 전체 0** — Release 87/100, 라이브 86, kb_needed 13(88~100). 100강 완주 후 최종 재배포 |
@@ -23,13 +23,13 @@
 
 ```
 NEXT_ACTION:
-- Current State: 87강 released + 라이브 86강, KB 77건 approved, kb_needed 13건(백로그 88~100)
-- Verdict: HANDOFF → Codex M6 (88부터 이어서)
-- Next Executor: Codex (미션 M6 — 잔여 13강 완주)
+- Current State: 88강 released + 라이브 86강, KB 78건 approved, kb_needed 12건(백로그 89~100)
+- Verdict: HANDOFF → Codex M6 (89부터 이어서)
+- Next Executor: Codex (미션 M6 — 잔여 12강 완주)
 - Next Prompt File: ai-ops/prompts/CODEX-MISSIONS.md → M6 (공통 규약 + M6 블록 전체를 붙여넣기)
-- Why: 87/100 released. Fable이 84~87(practical-vibe-coding 3강 + explanation-practice explain-web-flow)을 직접 완주함. 남은 13강 = explanation-practice 4강(88~91) + project-textbook 9강(92~100), 전부 kb_needed. Codex는 무정지 완주형이므로 88~100을 P-01→P-08로 연속 생산해 100강 완성.
+- Why: 88/100 released. Fable이 84~88(practical-vibe-coding 3강 + explanation-practice 2강)을 직접 완주함. 남은 12강 = explanation-practice 3강(89 explain-tool-agent-mcp · 90 explain-vibe-coding-history · 91 explain-risk-and-verification) + project-textbook 9강(92~100), 전부 kb_needed. Codex는 무정지 완주형이므로 89~100을 P-01→P-08로 연속 생산해 100강 완성.
 - Required Operator Action: None (Codex에 M6 발급만)
-- If Approved: Codex가 M6 순서(88~91 explanation-practice → 92~100 project-textbook)로 KB 수집→강의 생산→릴리스, 매 웨이브 verify exit 0. 배포는 하지 않음(Fable 세션 말미).
+- If Approved: Codex가 M6 순서(89~91 explanation-practice → 92~100 project-textbook)로 KB 수집→강의 생산→릴리스, 매 웨이브 verify exit 0. 배포는 하지 않음(Fable 세션 말미).
 - If Rejected: 배포 상태 또는 MASTER_PROGRESS 보정
 - Files to Check: ai-ops/outputs/00-backlog/BACKLOG.md(88~100행), ai-ops/prompts/CODEX-MISSIONS.md(M6), ai-ops/knowledge-base/entries/T12·T13/ (Fable이 만든 84~87 KB 형식 참고)
 - Stop Condition: 공식 출처 확보 실패 또는 Citation Rule 충족 불가 → BLOCKED 기록 후 다음 강의로 계속(전체 정지 금지)

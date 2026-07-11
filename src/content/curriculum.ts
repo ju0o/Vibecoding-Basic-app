@@ -1146,4 +1146,16 @@ export const LESSON_META = [
     minutes: 50,
     tags: ["Explanation", "HTTP", "Request-Response", "Evidence Packet"],
   },
+  {
+    slug: "explain-context-and-rag",
+    moduleId: "explanation-practice",
+    order: 2,
+    title: "Context와 RAG 비교 레퍼런스",
+    summary:
+      "context(모델이 보는 토큰 그릇)와 RAG(외부 지식을 런타임 검색해 그 그릇을 채우는 방법)의 층 관계를, Anthropic·Claude 공식 정의로 구분해 '큰 window면 RAG 불필요' 같은 오해를 바로잡는 비교 설명을 배웁니다.",
+    level: "중급",
+    type: "reference",
+    minutes: 50,
+    tags: ["Context", "RAG", "Retrieval", "Explanation"],
+  },
 ] satisfies readonly LessonMeta[]

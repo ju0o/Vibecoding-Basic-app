@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">Context와 RAG의 두 층 관계</title>
+  <desc id="desc">RAG가 외부 지식베이스를 런타임에 검색해 관련 조각을 선별하고, 그 조각이 유한한 context 토큰 집합을 채우는 두 층 구조</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#4f46e5" />
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#1e1b4b" flood-opacity="0.12" />
+    </filter>
+  </defs>
+  <rect width="960" height="420" rx="28" fill="#eef2ff" />
+  <text x="480" y="50" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="23" font-weight="800" fill="#3730a3">RAG = 무엇을 가져오나 · Context = 무엇이 들어가 있나</text>
+
+  <text x="230" y="92" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#4338ca">RAG (채우는 방법)</text>
+
+  <g filter="url(#shadow)">
+    <rect x="48" y="104" width="150" height="90" rx="16" fill="#e0e7ff" stroke="#818cf8" stroke-width="2" />
+    <text x="123" y="140" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#3730a3">외부 지식베이스</text>
+    <text x="123" y="166" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" fill="#4338ca">문서 · DB</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="228" y="104" width="150" height="90" rx="16" fill="#c7d2fe" stroke="#6366f1" stroke-width="2" />
+    <text x="303" y="134" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#3730a3">런타임 검색</text>
+    <text x="303" y="158" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" fill="#4338ca">retrieved at</text>
+    <text x="303" y="176" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" fill="#4338ca">run time</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="408" y="104" width="150" height="90" rx="16" fill="#a5b4fc" stroke="#4f46e5" stroke-width="2" />
+    <text x="483" y="134" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#312e81">high-signal 선별</text>
+    <text x="483" y="158" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" fill="#3730a3">관련 조각만</text>
+    <text x="483" y="176" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" fill="#3730a3">고른다</text>
+  </g>
+
+  <line x1="198" y1="149" x2="226" y2="149" stroke="#4f46e5" stroke-width="2.5" marker-end="url(#arrow)" />
+  <line x1="378" y1="149" x2="406" y2="149" stroke="#4f46e5" stroke-width="2.5" marker-end="url(#arrow)" />
+
+  <g filter="url(#shadow)">
+    <rect x="620" y="96" width="296" height="220" rx="20" fill="#ffffff" stroke="#4f46e5" stroke-width="2.5" />
+    <text x="768" y="128" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800" fill="#312e81">Context (그릇 · 유한한 토큰 집합)</text>
+    <rect x="648" y="146" width="240" height="30" rx="8" fill="#eef2ff" />
+    <text x="768" y="166" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" fill="#4338ca">시스템 프롬프트</text>
+    <rect x="648" y="182" width="240" height="30" rx="8" fill="#eef2ff" />
+    <text x="768" y="202" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" fill="#4338ca">대화 이력</text>
+    <rect x="648" y="218" width="240" height="30" rx="8" fill="#c7d2fe" />
+    <text x="768" y="238" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#3730a3">← RAG로 검색된 조각</text>
+    <rect x="648" y="254" width="240" height="30" rx="8" fill="#eef2ff" />
+    <text x="768" y="274" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" fill="#4338ca">도구 결과</text>
+    <text x="768" y="302" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="11" fill="#6366f1">more context isn't automatically better</text>
+  </g>
+  <path d="M558 149 L590 149 L590 233 L618 233" fill="none" stroke="#4f46e5" stroke-width="2.5" marker-end="url(#arrow)" />
+
+  <text x="330" y="360" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" fill="#4338ca">RAG는 그릇을 채우는 방법 — context를 대체하지 않는다</text>
+</svg>
