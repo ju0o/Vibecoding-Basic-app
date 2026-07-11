@@ -106,11 +106,11 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 88 | D | explain-context-and-rag | explanation-practice | 2 | reference | Context와 RAG 비교 레퍼런스 | 중급 | rag-fundamentals | explain-context-rag | v2-released |
 | 89 | D | explain-tool-agent-mcp | explanation-practice | 3 | reference | Tool Calling, Agent, MCP 관계 레퍼런스 | 중급 | mcp-architecture-basics | explain-tool-agent-mcp | v2-released |
 | 90 | B | explain-vibe-coding-history | explanation-practice | 4 | deep-dive | 바이브코딩의 역사와 오해 설명하기 | 기초 | vibe-coding-origin-karpathy | explain-vibe-coding-history | v2-released |
-| 91 | D | explain-risk-and-verification | explanation-practice | 5 | reference | 위험과 검증 설명 레퍼런스 | 중급 | reviewing-ai-output | explain-risk-verification | kb_needed |
-| 92 | A | mini-saas-architecture | project-textbook | 1 | deep-dive | 미니 SaaS 아키텍처 교재 | 중급 | auth-session-token | mini-saas-architecture | kb_needed |
-| 93 | A | admin-dashboard-project | project-textbook | 2 | deep-dive | 관리자 대시보드 프로젝트 교재 | 중급 | react-state-and-effects | admin-dashboard-project | kb_needed |
-| 94 | C | ai-chatbot-project | project-textbook | 3 | deep-dive | AI 챗봇 프로젝트 교재 | 중급 | rag-fundamentals | ai-chatbot-project | kb_needed |
-| 95 | C | automation-workflow-project | project-textbook | 4 | deep-dive | 자동화 Workflow 프로젝트 교재 | 중급 | ai-workflow-design | automation-workflow-project | kb_needed |
+| 91 | D | explain-risk-and-verification | explanation-practice | 5 | reference | 위험과 검증 설명 레퍼런스 | 중급 | reviewing-ai-output | explain-risk-verification | draft |
+| 92 | A | mini-saas-architecture | project-textbook | 1 | deep-dive | 미니 SaaS 아키텍처 교재 | 중급 | auth-session-token | mini-saas-architecture | draft |
+| 93 | A | admin-dashboard-project | project-textbook | 2 | deep-dive | 관리자 대시보드 프로젝트 교재 | 중급 | react-state-and-effects | admin-dashboard-project | draft |
+| 94 | C | ai-chatbot-project | project-textbook | 3 | deep-dive | AI 챗봇 프로젝트 교재 | 중급 | rag-fundamentals | ai-chatbot-project | draft |
+| 95 | C | automation-workflow-project | project-textbook | 4 | deep-dive | 자동화 Workflow 프로젝트 교재 | 중급 | ai-workflow-design | automation-workflow-project | draft |
 | 96 | C | mcp-enabled-tool-project | project-textbook | 5 | deep-dive | MCP 도구 연결 프로젝트 교재 | 중급 | mcp-architecture-basics | mcp-enabled-tool-project | kb_needed |
 | 97 | D | git-recovery-playbook | project-textbook | 6 | reference | Git 복구 플레이북 | 중급 | git-restore-reset-revert | git-recovery-playbook | kb_needed |
 | 98 | D | npm-debugging-playbook | project-textbook | 7 | reference | npm 설치·빌드 오류 복구 플레이북 | 중급 | npm-scripts-reference | npm-debugging-playbook | kb_needed |

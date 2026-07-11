@@ -11,30 +11,28 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **O-06.1 (v3.1) — Fable(지휘+경량QA) · Codex(Heavy 미션 M1~M5) 2인 체제.** 기획서: ORCHESTRATION-PLAN.md |
-| Current State | **90강 released + 90강 배포됨(라이브)** — explanation-practice 4/5. KB 80건 approved, kb_needed 10건(91~100). Codex M6 계속 |
-| Last Completed Step | Fable(대행)이 84~89강 릴리스 + 88강 배포(라이브) + 90강(explain-vibe-coding-history) 릴리스, 각 verify exit 0 (2026-07-12) |
-| Next Executor | Codex(M6 — 잔여 10강 완주, 91~100, 전체 권한 연속 실행) |
-| Next Prompt File | ai-ops/prompts/CODEX-MISSIONS.md → M6 (91부터 이어서) |
+| Current State | **90강 released + 90강 배포됨(라이브)** — 91~95 KB draft 수집 완료, KB 80건 approved + draft 5건, kb_needed 5건(96~100). Codex M6 계속 |
+| Last Completed Step | Codex P-01 Project Completion KB Wave A — 91~95 KB draft 5건 수집 (2026-07-12) |
+| Next Executor | Codex(P-02 — 91~95 KB 원문 재대조 검증, 연속 실행) |
+| Next Prompt File | ai-ops/prompts/P-02-knowledge-verification.md |
 | Blocker | 없음 (ai-workflow-design KB id 부재는 M6에서 대체 처리) |
 | Required Human Action | None |
-| Release Status | **V2 90강 released + 라이브 90강 + M5 QA 전체 0** — Release 90/100, 라이브 90, kb_needed 10(91~100). 100강 완주 후 최종 재배포 |
+| Release Status | **V2 90강 released + 라이브 90강 + M5 QA 전체 0** — Release 90/100, 라이브 90, 91~95 KB draft, kb_needed 5(96~100). 100강 완주 후 최종 재배포 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: 90강 released + 라이브 90강, KB 80건 approved, kb_needed 10건(백로그 91~100)
-- Verdict: HANDOFF → Codex M6 (91부터 이어서)
-- Next Executor: Codex (미션 M6 — 잔여 10강 완주)
-- Next Prompt File: ai-ops/prompts/CODEX-MISSIONS.md → M6 (공통 규약 + M6 블록 전체를 붙여넣기)
-- Why: 90/100 released. Fable이 84~90(practical-vibe-coding 3강 + explanation-practice 4강)을 직접 완주함. 남은 10강 = explanation-practice 1강(91 explain-risk-and-verification, reference) + project-textbook 9강(92~100), 전부 kb_needed. Codex는 무정지 완주형이므로 91~100을 P-01→P-08로 연속 생산해 100강 완성.
-- Required Operator Action: None (Codex에 M6 발급만)
-- If Approved: Codex가 M6 순서(91 explanation-practice → 92~100 project-textbook)로 KB 수집→강의 생산→릴리스, 매 웨이브 verify exit 0. 배포는 하지 않음(Fable 세션 말미).
-- If Rejected: 배포 상태 또는 MASTER_PROGRESS 보정
-- Files to Check: ai-ops/outputs/00-backlog/BACKLOG.md(88~100행), ai-ops/prompts/CODEX-MISSIONS.md(M6), ai-ops/knowledge-base/entries/T12·T13/ (Fable이 만든 84~87 KB 형식 참고)
-- Stop Condition: 공식 출처 확보 실패 또는 Citation Rule 충족 불가 → BLOCKED 기록 후 다음 강의로 계속(전체 정지 금지)
-- 선행 KB 상태: 88~100 prerequisites 대부분 approved. 예외 ai-workflow-design KB id 부재 → orchestration/loop-engineering 대체 또는 신규.
-- Fable 완주 참고(84~87): KB는 T12/T13에 신규. explanation-practice(87~91)·reference형 강의는 기존 approved 개념 KB의 검증된 verbatim 인용을 동일 공식 출처로 재활용 가능(explain-web-flow가 http-request-response KB 인용 재활용한 예) — 신규 fetch 최소화.
+- Current State: 90강 released + 라이브 90강, KB 80건 approved + draft 5건(91~95), kb_needed 5건(96~100)
+- Verdict: DONE
+- Next Executor: Codex (P-02 — 91~95 KB 원문 재대조 검증)
+- Next Prompt File: ai-ops/prompts/P-02-knowledge-verification.md
+- Why: P-01 완료로 91~95 KB가 draft 상태가 되었고, 상태 기계상 draft는 P-02 검증 대상이다.
+- Required Operator Action: None
+- If Approved: P-02에서 score 80+ 및 게이트 통과 시 approved로 전환하고 백로그 91~95를 planned로 전환한 뒤 M6 P-04로 이어간다.
+- If Rejected: RECOLLECT 판정 파일만 P-03 재수집하고 Loop A 카운터를 기록한다.
+- Files to Check: ai-ops/knowledge-base/entries/T13/explain-risk-verification.md, ai-ops/knowledge-base/entries/T12/mini-saas-architecture.md, ai-ops/knowledge-base/entries/T12/automation-workflow-project.md
+- Stop Condition: 공식 출처 원문 재접속 실패 또는 Citation Rule 충족 불가 → 해당 KB만 RECOLLECT/BLOCKED 기록 후 나머지 검증 계속.
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -70,13 +68,14 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
-- KB: **80건 approved**, stale KB 0건 / D-02 플랫폼 증분 = **완료**
+- KB: **80건 approved + 5건 draft**, stale KB 0건 / D-02 플랫폼 증분 = **완료**
 - 강의: **V2 released 90강 + 라이브 90강** / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-12 | KB explain-risk-verification·mini-saas-architecture·admin-dashboard-project·ai-chatbot-project·automation-workflow-project | needed → draft, 백로그 91~95 draft | Codex P-01 Project Completion KB Wave A, 공식 출처 기반 draft 5건 수집, P-02 대기 |
 | 2026-07-12 | ai-assisted-testing-loop | verified → released | Codex P-08 AI-assisted Testing Release, V2 Wave 32, deployment HOLD |
 | 2026-07-12 | ai-assisted-testing-loop | integrated → verified | Codex P-06 AI-assisted Testing Verify, `npm run verify` PASS, Next build 150 static pages |
 | 2026-07-12 | ai-assisted-testing-loop | generated → integrated | Codex P-05 AI-assisted Testing Integration, markdown·curriculum·glossary 4개·diagram 1개·KB consumers 반영, lint/typecheck PASS |
