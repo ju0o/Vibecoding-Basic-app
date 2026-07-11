@@ -153,6 +153,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | prompt-to-implementation-loop | practical-vibe-coding | prompt-implementation-loop | ✓ | ✓ | ✓ (2026-07-12, Practical Vibe Coding verify) | ✓ | V2 Wave 31, RELEASE-2026-07-12-practical-vibe-release-wave.md |
 | code-change-risk-analysis | practical-vibe-coding | code-change-risk-analysis | ✓ | ✓ | ✓ (2026-07-12, Practical Vibe Coding verify) | ✓ | V2 Wave 31, RELEASE-2026-07-12-practical-vibe-release-wave.md |
 | ai-assisted-testing-loop | practical-vibe-coding | ai-assisted-testing-loop | ✓ | ✓ | ✓ (2026-07-12, AI-assisted Testing verify) | ✓ | V2 Wave 32, RELEASE-2026-07-12-ai-assisted-testing-release.md |
+| explain-risk-and-verification | explanation-practice | explain-risk-verification | ✓ | — | — | — | P-04 Project Completion Wave A, 8섹션·12,313자·Quote Bank 인용 4개 일치 |
+| mini-saas-architecture | project-textbook | mini-saas-architecture | ✓ | — | — | — | P-04 Project Completion Wave A, 8섹션·13,387자·Quote Bank 인용 4개 일치 |
+| admin-dashboard-project | project-textbook | admin-dashboard-project | ✓ | — | — | — | P-04 Project Completion Wave A, 8섹션·12,776자·Quote Bank 인용 4개 일치 |
+| ai-chatbot-project | project-textbook | ai-chatbot-project | ✓ | — | — | — | P-04 Project Completion Wave A, 8섹션·12,624자·Quote Bank 인용 4개 일치 |
+| automation-workflow-project | project-textbook | automation-workflow-project | ✓ | — | — | — | P-04 Project Completion Wave A, 8섹션·11,602자·Quote Bank 인용 4개 일치 |
 
 | git-init-add-commit-status | git-collaboration | git-init-add-commit-status | v | v | v | v | Wave 15 (Fable), reference |
 | git-branch-switch-merge | git-collaboration | git-branch-switch-merge | v | v | v | v | Wave 15 (Fable), reference |
@@ -199,10 +204,10 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | KB Quote Bank (9차 approved KB) | 5 / 5 | 100% (AI coding tools KB Wave 승인) |
 | KB Quote Bank (10차 approved KB) | 5 / 5 | 100% (practical vibe coding KB Wave 승인) |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
-| Lesson 생성 | 83 / 100 | 83% (V2 generated 83강, integrated 83강) |
-| Site 반영 | 83 / 100 | 83% (V2 integrated 83강, P-06 검증 대기 1강) |
-| Verify 통과 | 83 / 100 | 83% (`npm run verify` PASS, Next build 150 static pages) |
-| Release | 83 / 100 | 83% (V2 released 83강, deployment HOLD) |
+| Lesson 생성 | 95 / 100 | 95% (V2 generated 95강, integrated 90강) |
+| Site 반영 | 90 / 100 | 90% (V2 integrated 90강, generated 5강 P-05 대기) |
+| Verify 통과 | 90 / 100 | 90% (`npm run verify` PASS 기준 90강, generated 5강 P-05 대기) |
+| Release | 90 / 100 | 90% (V2 released 90강, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
@@ -297,6 +302,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-12 | P-08 Human-AI Collaboration Release | 완료 | human-ai-collaboration-patterns V2 Wave 30 released, deployment HOLD |
 | 2026-07-12 | P-01/P-02 Practical Vibe Coding KB Wave | 완료 | ai-code-review-tools 90·requirement-task-breakdown 89·prompt-implementation-loop 90·code-change-risk-analysis 91·ai-assisted-testing-loop 90 approved, 백로그 63·80~83 planned 전환 |
 | 2026-07-12 | P-01/P-02 Project Completion KB Wave A | 완료 | explain-risk-verification 91·mini-saas-architecture 90·admin-dashboard-project 89·ai-chatbot-project 90·automation-workflow-project 89 approved, 백로그 91~95 planned 전환 |
+| 2026-07-12 | P-04 Project Completion Draft Wave A | 완료 | explain-risk-and-verification·mini-saas-architecture·admin-dashboard-project·ai-chatbot-project·automation-workflow-project V2 draft 생성, 8섹션·8,000자+·Quote Bank 인용 일치, P-05 대기 |
 | 2026-07-12 | P-04 Practical Vibe Coding Draft Wave | 완료 | ai-code-review-tools·requirement-to-task-breakdown·prompt-to-implementation-loop·code-change-risk-analysis V2 draft 생성, 8섹션·8,000자+·Quote Bank 인용 일치, P-05 대기 |
 | 2026-07-12 | P-05 Practical Vibe Coding Integration Wave | 완료 | 4강 markdown·curriculum·glossary 16개·diagrams 4개·KB consumers 반영, lint/typecheck PASS |
 | 2026-07-12 | P-06 Practical Vibe Coding Verify | 완료 | `npm run verify` PASS: lint·typecheck·Vitest 3 files/8 tests·Next build 148 static pages, P-08 대기 |
