@@ -11,19 +11,19 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **O-06.1 (v3.1) — Fable(지휘+경량QA) · Codex(Heavy 미션 M1~M5) 2인 체제.** 기획서: ORCHESTRATION-PLAN.md |
-| Current State | **88강 released + 86강 배포됨** — explanation-practice 2/5. KB 78건 approved, kb_needed 12건(89~100). Codex M6 계속 |
+| Current State | **88강 released + 88강 배포됨(라이브)** — explanation-practice 2/5. KB 78건 approved, kb_needed 12건(89~100). Codex M6 계속 |
 | Last Completed Step | Fable(대행)이 84~87강 릴리스 + 86강 배포(라이브) + 88강(explain-context-and-rag) 릴리스, 각 verify exit 0 (2026-07-12) |
 | Next Executor | Codex(M6 — 잔여 12강 완주, 89~100, 전체 권한 연속 실행) |
 | Next Prompt File | ai-ops/prompts/CODEX-MISSIONS.md → M6 (89부터 이어서) |
 | Blocker | 없음 (ai-workflow-design KB id 부재는 M6에서 대체 처리) |
 | Required Human Action | None |
-| Release Status | **V2 87강 released + 라이브 86강 + M5 QA 전체 0** — Release 87/100, 라이브 86, kb_needed 13(88~100). 100강 완주 후 최종 재배포 |
+| Release Status | **V2 88강 released + 라이브 88강 + M5 QA 전체 0** — Release 88/100, 라이브 88, kb_needed 12(89~100). 100강 완주 후 최종 재배포 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: 88강 released + 라이브 86강, KB 78건 approved, kb_needed 12건(백로그 89~100)
+- Current State: 88강 released + 라이브 88강, KB 78건 approved, kb_needed 12건(백로그 89~100)
 - Verdict: HANDOFF → Codex M6 (89부터 이어서)
 - Next Executor: Codex (미션 M6 — 잔여 12강 완주)
 - Next Prompt File: ai-ops/prompts/CODEX-MISSIONS.md → M6 (공통 규약 + M6 블록 전체를 붙여넣기)
@@ -70,8 +70,8 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
-- KB: **73건 approved**, stale KB 0건 / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 83강** (deployment HOLD) / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
+- KB: **78건 approved**, stale KB 0건 / D-02 플랫폼 증분 = **완료**
+- 강의: **V2 released 88강 + 라이브 88강** / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
