@@ -73,10 +73,10 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 55 | C | model-selection-tradeoffs | ai-basics | 6 | deep-dive | 모델 선택과 trade-off | 중급 | hallucination-and-verification | model-selection-tradeoffs | v2-released |
 | 56 | B | ai-era-timeline | ai-basics | 7 | deep-dive | 자동완성에서 에이전트까지 AI 개발 시대 구분 | 기초 | vibe-coding-origin-karpathy | ai-era-timeline | v2-released |
 | 57 | B | autocomplete-era | ai-coding-tools | 1 | deep-dive | 자동완성 시대: Copilot 이전과 이후 | 기초 | ai-era-timeline | autocomplete-era | v2-released |
-| 58 | B | chat-coding-era | ai-coding-tools | 2 | deep-dive | 챗 코딩 시대: 대화형 개발의 장점과 한계 | 기초 | autocomplete-era | chat-coding-era | integrated |
-| 59 | B | ide-agent-era | ai-coding-tools | 3 | deep-dive | IDE 에이전트 시대 | 중급 | chat-coding-era | ide-agent-era | integrated |
-| 60 | B | codex-claude-cursor-comparison | ai-coding-tools | 4 | deep-dive | Codex, Claude Code, Cursor의 역할 비교 | 중급 | ide-agent-era | ai-coding-tool-comparison | integrated |
-| 61 | A | tool-permissions-sandboxes | ai-coding-tools | 5 | deep-dive | AI 도구 권한과 sandbox | 중급 | ide-agent-era | tool-permissions-sandboxes | integrated |
+| 58 | B | chat-coding-era | ai-coding-tools | 2 | deep-dive | 챗 코딩 시대: 대화형 개발의 장점과 한계 | 기초 | autocomplete-era | chat-coding-era | v2-released |
+| 59 | B | ide-agent-era | ai-coding-tools | 3 | deep-dive | IDE 에이전트 시대 | 중급 | chat-coding-era | ide-agent-era | v2-released |
+| 60 | B | codex-claude-cursor-comparison | ai-coding-tools | 4 | deep-dive | Codex, Claude Code, Cursor의 역할 비교 | 중급 | ide-agent-era | ai-coding-tool-comparison | v2-released |
+| 61 | A | tool-permissions-sandboxes | ai-coding-tools | 5 | deep-dive | AI 도구 권한과 sandbox | 중급 | ide-agent-era | tool-permissions-sandboxes | v2-released |
 | 62 | B | human-ai-collaboration-patterns | ai-coding-tools | 6 | deep-dive | 사람-AI 협업 패턴 | 기초 | chat-coding-era | human-ai-collaboration-patterns | planned |
 | 63 | B | ai-code-review-tools | ai-coding-tools | 7 | deep-dive | AI 코드 리뷰 도구와 한계 | 중급 | frontend-testing-basics | ai-code-review-tools | kb_needed |
 | 64 | C | context-engineering-basics | ai-system-design | 1 | deep-dive | Context Engineering 기초 | 기초 | from-prompt-to-system | context-engineering | v2-released |

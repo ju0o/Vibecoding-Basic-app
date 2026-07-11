@@ -3,27 +3,28 @@
 요약 현황판. 원본 데이터는 [MASTER_PROGRESS.md](MASTER_PROGRESS.md), 실행 큐는 [STATE.md](STATE.md).
 **갱신 주체: Fable "run" 시 자동** (O-03부터 운영자는 이 파일을 편집하지 않는다 — 읽기만).
 
-## 마지막 갱신: 2026-07-12 (Codex AI Coding Tools P-06 Verify)
+## 마지막 갱신: 2026-07-12 (Codex V2 Wave 29)
 
 ## 진행률 (개수만 — 막대 없음, MASTER_PROGRESS 집계에서 파생)
 
 | 단계 | 현황 |
 |---|---|
 | KB (approved 이상) | 68건 approved / stale 0 |
-| Lesson 생성 · Site 반영 | 77강 generated·integrated 이상 / 73강 released / 100강 목표 |
-| Verify · Release | 77강 verify PASS / 73강 released / M5 전체 위반 0 |
+| Lesson 생성 · Site 반영 | 77강 released / 100강 목표 |
+| Verify · Release | 77강 verify PASS / 77강 released / M5 전체 위반 0 |
 | Glossary · Diagrams | 384 terms / 55 SVG diagrams |
 
 ## 실행 상태
 
-- **NEXT**: Codex 계속 실행 → AI coding tools `verified` 4강 P-08 release.
+- **NEXT**: Codex 계속 실행 → `planned` 1강 human-ai-collaboration-patterns P-04.
 - 승인 대기: 없음 / 에스컬레이션: 없음 / 진행 중 루프: 없음
-- 병목: P-08 대기 4건, 백로그 `planned` 1건, `kb_needed` 22건.
+- 병목: 백로그 `planned` 1건, `kb_needed` 22건.
 
 ## 최근 완료 (최신 5)
 
 | 날짜 | 작업 | 실행 |
 |---|---|---|
+| 2026-07-12 | V2 Wave 29 — AI coding tools 4강 released, glossary 384개, diagram 55개, deploy HOLD | Codex |
 | 2026-07-12 | AI Coding Tools P-06 Verify — `npm run verify` PASS, Next build 138 pages | Codex |
 | 2026-07-12 | AI Coding Tools P-05 Integration Wave — 4강 site 반영, glossary 384개, diagram 55개 | Codex |
 | 2026-07-12 | AI Coding Tools P-04 Draft Wave — 4강 generated, P-04 self QA PASS | Codex |
