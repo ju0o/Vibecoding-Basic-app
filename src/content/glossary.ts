@@ -3360,4 +3360,36 @@ export const GLOSSARY_TERMS = [
       "Refactoring Step은 'Since each refactoring is small, it's less likely to go wrong'이라는 안전성 원칙을 실천하는 단위입니다. 각 단계 후 빌드·테스트로 동작 보존을 확인해 'The system is kept fully working after each refactoring' 상태를 유지합니다. AI 리팩터링에서는 큰 diff를 이 단위로 쪼개 검증합니다.",
     related: ["Refactoring", "Behavior-Preserving Transformation", "Repeatable Test Run"],
   },
+  {
+    term: "AI Output Review",
+    category: "AI 코딩 도구",
+    shortDefinition: "AI가 만든 변경을 제안으로 받아 검증 증거를 확인한 뒤 결정으로 닫는 리뷰 절차",
+    explanation:
+      "AI Output Review는 pull request review 절차를 AI 출력에 적용합니다. GitHub는 리뷰를 'one of the primary ways people collaborate on GitHub'라고 설명하며, AI 출력도 이 협업 절차 안에서 검토됩니다. 기준은 작성자가 사람인지 AI인지가 아니라 무엇이 바뀌었고 검증 증거가 있는가입니다.",
+    related: ["Review Decision", "Verification Evidence", "Pull Request"],
+  },
+  {
+    term: "Review Decision",
+    category: "AI 코딩 도구",
+    shortDefinition: "리뷰를 닫는 comment·approve·request changes 세 결정 중 하나",
+    explanation:
+      "Review Decision은 리뷰의 끝이 감상이 아니라 명확한 결정임을 뜻합니다. GitHub는 comment를 'Share feedback without approving or requesting changes', approve를 'Approve the changes for merging'로 정의합니다. AI 출력 리뷰도 이 셋 중 하나로 닫아야 merge gate가 됩니다.",
+    related: ["AI Output Review", "Request Changes", "Verification Evidence"],
+  },
+  {
+    term: "Request Changes",
+    category: "AI 코딩 도구",
+    shortDefinition: "merge 전에 반드시 고쳐야 할 문제를 지적해 병합을 막는 리뷰 결정",
+    explanation:
+      "Request Changes는 GitHub가 'Identify issues that must be fixed before merging'로 정의하는 결정입니다. 검증이 부족하거나 미해결 경고나 요구 불일치가 있으면 approve 대신 이 결정을 내립니다. AI 출력에서도 증거 없는 '동작합니다' 주장은 request changes의 사유입니다.",
+    related: ["Review Decision", "AI Output Review", "Verification Evidence"],
+  },
+  {
+    term: "Verification Evidence",
+    category: "AI 코딩 도구",
+    shortDefinition: "AI 출력의 주장을 뒷받침하는 테스트 결과·실행 로그·before/after 비교",
+    explanation:
+      "Verification Evidence는 '동작합니다'·'안전합니다' 같은 주장을 결정의 근거로 바꾸는 실제 증거입니다. 환각과 검증 관점에서 유창한 설명은 정확함이 아니므로, approve는 이 증거가 충분할 때의 결정이고 증거가 없으면 request changes 또는 comment가 맞습니다.",
+    related: ["AI Output Review", "Review Decision", "Hallucination"],
+  },
 ] satisfies readonly GlossaryTerm[]

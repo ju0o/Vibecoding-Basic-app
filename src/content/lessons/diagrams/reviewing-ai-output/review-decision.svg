@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="440" viewBox="0 0 960 440" role="img" aria-labelledby="title desc">
+  <title id="title">AI 결과물 리뷰 결정 흐름</title>
+  <desc id="desc">AI 출력을 제안된 변경으로 받아 changed files와 검증 증거를 확인한 뒤 comment, approve, request changes 중 하나로 닫는 흐름</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#7c3aed" />
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#2e1065" flood-opacity="0.12" />
+    </filter>
+  </defs>
+  <rect width="960" height="440" rx="28" fill="#f5f3ff" />
+  <text x="480" y="52" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#5b21b6">유창함이 아니라 검증 증거로 결정한다</text>
+
+  <g filter="url(#shadow)">
+    <rect x="60" y="100" width="200" height="118" rx="18" fill="#ede9fe" stroke="#a78bfa" stroke-width="2" />
+    <text x="160" y="138" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#5b21b6">AI 출력</text>
+    <text x="160" y="168" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#6d28d9">"제안된 변경"</text>
+    <text x="160" y="190" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#6d28d9">으로 받는다</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="310" y="100" width="200" height="118" rx="18" fill="#ddd6fe" stroke="#8b5cf6" stroke-width="2" />
+    <text x="410" y="132" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#5b21b6">변경 + 증거 확인</text>
+    <text x="410" y="162" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#6d28d9">changed files / diff</text>
+    <text x="410" y="184" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#6d28d9">테스트·실행 증거</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="560" y="100" width="200" height="118" rx="18" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" />
+    <text x="660" y="132" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#4c1d95">줄 단위 지목</text>
+    <text x="660" y="162" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#5b21b6">근거 요구</text>
+    <text x="660" y="184" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#5b21b6">수정 제안</text>
+  </g>
+
+  <line x1="260" y1="159" x2="306" y2="159" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arrow)" />
+  <line x1="510" y1="159" x2="556" y2="159" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arrow)" />
+
+  <text x="480" y="288" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700" fill="#5b21b6">하나의 결정으로 닫는다</text>
+
+  <g filter="url(#shadow)">
+    <rect x="96" y="316" width="228" height="92" rx="16" fill="#e0e7ff" stroke="#818cf8" stroke-width="2" />
+    <text x="210" y="350" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#3730a3">Comment</text>
+    <text x="210" y="380" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" fill="#4338ca">논의·질문만 필요</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="366" y="316" width="228" height="92" rx="16" fill="#dcfce7" stroke="#4ade80" stroke-width="2" />
+    <text x="480" y="350" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#166534">Approve</text>
+    <text x="480" y="380" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" fill="#15803d">검증 증거 충분</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="636" y="316" width="228" height="92" rx="16" fill="#fee2e2" stroke="#f87171" stroke-width="2" />
+    <text x="750" y="350" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#991b1b">Request changes</text>
+    <text x="750" y="380" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" fill="#b91c1c">고칠 문제 있음</text>
+  </g>
+  <path d="M660 218 L660 250 L480 250 L480 312" fill="none" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arrow)" />
+</svg>

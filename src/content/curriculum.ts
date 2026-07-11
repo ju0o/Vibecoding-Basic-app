@@ -1110,4 +1110,16 @@ export const LESSON_META = [
     minutes: 55,
     tags: ["Refactoring", "Observable Behavior", "Behavior Preservation", "AI Refactoring"],
   },
+  {
+    slug: "reviewing-ai-output",
+    moduleId: "practical-vibe-coding",
+    order: 6,
+    title: "AI 결과물 리뷰하는 법",
+    summary:
+      "AI가 만든 코드·답변을 제안된 변경으로 받아, GitHub PR review의 comment·approve·request changes 결정 구조와 검증 증거를 기준으로 유창함과 정확함을 분리해 리뷰하는 규율을 배웁니다.",
+    level: "기초",
+    type: "deep-dive",
+    minutes: 55,
+    tags: ["AI Output Review", "Pull Request", "Review Decision", "Verification"],
+  },
 ] satisfies readonly LessonMeta[]
