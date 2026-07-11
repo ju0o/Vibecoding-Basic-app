@@ -751,6 +751,24 @@ export const LESSON_META = [
     tags: ["AI Coding Tools", "IntelliSense", "GitHub Copilot", "Chat Coding", "Agent"],
   },
   {
+    slug: "autocomplete-era",
+    moduleId: "ai-coding-tools",
+    order: 1,
+    title: "자동완성 시대: Copilot 이전과 이후",
+    summary:
+      "IntelliSense와 AI-powered inline suggestion을 구분하고, code context, Tab accept, suggestion scope, test 검증 루틴으로 자동완성 시대의 올바른 사용법을 배웁니다.",
+    level: "기초",
+    type: "deep-dive",
+    minutes: 75,
+    tags: [
+      "AI Autocomplete",
+      "IntelliSense",
+      "Inline Suggestion",
+      "GitHub Copilot",
+      "Code Context",
+    ],
+  },
+  {
     slug: "from-prompt-to-system",
     moduleId: "ai-system-design",
     order: 1,

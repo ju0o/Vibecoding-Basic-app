@@ -2976,4 +2976,46 @@ export const GLOSSARY_TERMS = [
       "Cloud Agent는 단일 답변보다 긴 작업을 맡아 branch 변경이나 PR 후보를 만들 수 있습니다. 권한 범위, stop condition, diff review, verify command가 함께 있어야 안전하게 사용할 수 있습니다.",
     related: ["Agent", "Codex", "GitHub Copilot"],
   },
+  {
+    term: "AI Autocomplete",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "현재 코드 맥락을 바탕으로 다음 줄이나 함수 후보를 AI가 inline으로 제안하는 기능",
+    explanation:
+      "AI Autocomplete는 커서 주변의 함수 이름, 타입, 주석, 기존 코드 패턴을 보고 다음 코드 후보를 제안합니다. 빠른 입력에는 좋지만, 수락한 코드는 요구사항과 테스트로 검증해야 합니다.",
+    related: ["Inline Suggestion", "GitHub Copilot", "Code Context"],
+  },
+  {
+    term: "Code Completion",
+    category: "AI 코딩 도구",
+    shortDefinition: "에디터가 현재 위치에서 가능한 코드 후보를 보여주는 자동완성 기능",
+    explanation:
+      "Code Completion은 IntelliSense의 member list처럼 project symbol을 보여주는 방식부터 AI가 줄이나 함수를 생성하는 방식까지 포함할 수 있습니다. 후보를 보여주는 것과 올바른 선택을 보장하는 것은 다릅니다.",
+    related: ["IntelliSense", "Inline Suggestion", "Code Context"],
+  },
+  {
+    term: "Code Context",
+    category: "AI 코딩 도구",
+    shortDefinition: "자동완성 모델이 제안을 만들 때 참고하는 현재 파일·주석·타입·주변 코드 맥락",
+    explanation:
+      "Code Context가 명확할수록 inline suggestion도 목적에 가까워질 수 있습니다. 좋은 함수 이름, 타입, 짧은 요구사항 주석은 AI에게 힌트가 되지만, 숨은 정책과 최신 요구사항까지 자동으로 전달되지는 않습니다.",
+    related: ["AI Autocomplete", "GitHub Copilot", "Code Completion"],
+  },
+  {
+    term: "Tab Accept",
+    category: "AI 코딩 도구",
+    shortDefinition: "에디터의 inline suggestion을 shortcut으로 받아들여 실제 코드에 반영하는 행동",
+    explanation:
+      "Tab Accept는 단순 입력이 아니라 AI 제안을 내 코드로 채택하는 순간입니다. 작은 제안도 읽고, 위험한 로직은 typecheck나 test로 확인해야 합니다.",
+    related: ["Inline Suggestion", "Verification", "AI Autocomplete"],
+  },
+  {
+    term: "Suggestion Scope",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "자동완성 제안이 한 token, 한 줄, 여러 줄, 함수 전체 중 어디까지 이어지는지 나타내는 범위",
+    explanation:
+      "Suggestion Scope가 커질수록 생산성 잠재력도 커지지만 검토 책임도 커집니다. 함수 전체 제안은 edge case, 보안, 테스트 기준까지 읽어야 합니다.",
+    related: ["Inline Suggestion", "AI Autocomplete", "GitHub Copilot"],
+  },
 ] satisfies readonly GlossaryTerm[]

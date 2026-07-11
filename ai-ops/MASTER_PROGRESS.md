@@ -127,6 +127,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | embeddings-and-similarity | ai-basics | embeddings-similarity | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 6, RELEASE-2026-07-05-v2-wave6.md |
 | model-selection-tradeoffs | ai-basics | model-selection-tradeoffs | ✓ | ✓ | ✓ (2026-07-11, model selection wave verify) | ✓ | V2 Wave 26, RELEASE-2026-07-11-model-selection.md |
 | ai-era-timeline | ai-basics | ai-era-timeline | ✓ | ✓ | ✓ (2026-07-11, V2 wave 27 verify) | ✓ | V2 Wave 27, RELEASE-2026-07-11-platform-ai-era-wave.md |
+| autocomplete-era | ai-coding-tools | autocomplete-era | ✓ | ✓ | ✓ (2026-07-11, V2 wave 28 verify) | ✓ | V2 Wave 28, RELEASE-2026-07-11-autocomplete-era.md |
 
 | git-init-add-commit-status | git-collaboration | git-init-add-commit-status | v | v | v | v | Wave 15 (Fable), reference |
 | git-branch-switch-merge | git-collaboration | git-branch-switch-merge | v | v | v | v | Wave 15 (Fable), reference |
@@ -171,10 +172,10 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | KB Quote Bank (7차 approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (8차 approved KB) | 5 / 5 | 100% |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
-| Lesson 생성 | 72 / 100 | 72% (V2 Wave 27 4강 released, 잔여 백로그 계속 진행) |
-| Site 반영 | 72 / 100 | 72% (V2 released 콘텐츠 사이트 반영 완료) |
-| Verify 통과 | 72 / 100 | 72% (`npm run verify` PASS, M5 QA 전체 위반 0) |
-| Release | 72 / 100 | 72% (V2 released 72강, deployment HOLD) |
+| Lesson 생성 | 73 / 100 | 73% (autocomplete-era V2 released, 잔여 백로그 계속 진행) |
+| Site 반영 | 73 / 100 | 73% (V2 released 콘텐츠 사이트 반영 완료) |
+| Verify 통과 | 73 / 100 | 73% (`npm run verify` PASS, M5 QA 전체 위반 0) |
+| Release | 73 / 100 | 73% (V2 released 73강, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
@@ -257,3 +258,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-11 | Model Selection Wave | 완료 | model-selection-tradeoffs V2 강의·meta·diagram·glossary 반영, M5 QA 전체 위반 0, `npm run verify` PASS |
 | 2026-07-11 | P-01/P-02 KB Wave | 완료 | tailwind-design-systems 89·frontend-testing-basics 90·production-env-secrets 91·ai-era-timeline 88·autocomplete-era 89 approved, planned 5강 전환 |
 | 2026-07-11 | V2 Wave 27 | 완료 | tailwind-design-systems·frontend-testing-basics·production-env-and-secrets·ai-era-timeline V2 강의·diagram·glossary·metadata 반영, M5 QA 전체 위반 0 |
+| 2026-07-11 | V2 Wave 28 | 완료 | autocomplete-era V2 강의·diagram·glossary·metadata 반영, M5 QA 전체 위반 0 |

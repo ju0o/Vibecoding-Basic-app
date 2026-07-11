@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="460" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">자동완성 시대 작업 루프</title>
+  <desc id="desc">코드 맥락이 inline suggestion으로 이어지고, 개발자가 Tab accept 후 읽기, 테스트, 설명을 통해 검증하는 루프</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb" />
+    </marker>
+    <style>
+      .context { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; rx: 18; }
+      .ai { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 2; rx: 18; }
+      .human { fill: #ecfdf5; stroke: #059669; stroke-width: 2; rx: 18; }
+      .warn { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; rx: 18; }
+      .text { font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; fill: #0f172a; }
+      .sub { font-family: Arial, sans-serif; font-size: 14px; fill: #334155; }
+      .line { fill: none; stroke: #2563eb; stroke-width: 3; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect x="58" y="76" width="184" height="90" class="context" />
+  <text x="150" y="112" text-anchor="middle" class="text">Code Context</text>
+  <text x="150" y="138" text-anchor="middle" class="sub">name, type, comments</text>
+  <rect x="304" y="76" width="184" height="90" class="ai" />
+  <text x="396" y="112" text-anchor="middle" class="text">Inline Suggestion</text>
+  <text x="396" y="138" text-anchor="middle" class="sub">line or function</text>
+  <rect x="550" y="76" width="184" height="90" class="human" />
+  <text x="642" y="112" text-anchor="middle" class="text">Tab Accept</text>
+  <text x="642" y="138" text-anchor="middle" class="sub">adopt or reject</text>
+  <rect x="646" y="252" width="184" height="90" class="warn" />
+  <text x="738" y="288" text-anchor="middle" class="text">Read Diff</text>
+  <text x="738" y="314" text-anchor="middle" class="sub">edge case and risk</text>
+  <rect x="368" y="252" width="184" height="90" class="human" />
+  <text x="460" y="288" text-anchor="middle" class="text">Verify</text>
+  <text x="460" y="314" text-anchor="middle" class="sub">typecheck or test</text>
+  <rect x="90" y="252" width="184" height="90" class="human" />
+  <text x="182" y="288" text-anchor="middle" class="text">Explain</text>
+  <text x="182" y="314" text-anchor="middle" class="sub">make it your code</text>
+  <path d="M242 121 H304" class="line" />
+  <path d="M488 121 H550" class="line" />
+  <path d="M642 166 C700 194 732 220 738 252" class="line" />
+  <path d="M646 297 H552" class="line" />
+  <path d="M368 297 H274" class="line" />
+  <path d="M182 252 C122 212 118 174 150 166" class="line" />
+  <text x="460" y="418" text-anchor="middle" class="sub">자동완성은 빠른 입력 도구지만, 수락한 순간 읽고 검증하고 설명해야 하는 내 코드가 된다</text>
+</svg>

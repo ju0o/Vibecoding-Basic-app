@@ -9,8 +9,8 @@ prerequisites: [ai-era-timeline]
 successors: [chat-coding-era]
 related: [dev-environment-map, ai-learning-verification]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [autocomplete-era]
+  glossary: [AI Autocomplete, Code Completion, Code Context, Tab Accept, Suggestion Scope, Inline Suggestion, IntelliSense, GitHub Copilot]
 sources:
   - { title: "VS Code — IntelliSense", url: "https://code.visualstudio.com/docs/editing/intellisense", checked: 2026-07-11 }
   - { title: "VS Code — Inline suggestions from GitHub Copilot", url: "https://code.visualstudio.com/docs/editing/ai-powered-suggestions", checked: 2026-07-11 }
