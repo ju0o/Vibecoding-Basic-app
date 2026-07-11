@@ -60,3 +60,18 @@
 - **극단값 결과(예: 전 강의 위반)는 스크립트 오류 가정** — 표본 3개 손 검증을 리포트에 병기.
 - V1 레거시 5강은 "V1 알려짐"으로 별도 표기. 콘텐츠 수정 금지(보고만).
 - 완료 조건: 리포트 커밋. 스크립트는 `ai-ops/reports/scripts/` 아래 보관(repo 루트 금지).
+
+## M6 — 커리큘럼 완주: 잔여 17강(백로그 84~100) → 100강
+
+**목표**: 백로그 84~100행(전부 `kb_needed`)을 P-01→P-08로 연속 생산해 **83강 → 100강**으로 완주한다. 세 모듈을 이 순서로 처리(의존성 순):
+
+1. **practical-vibe-coding 잔여 3강** (order 5~7): refactoring-with-ai(84), reviewing-ai-output(85), incident-style-ai-debugging(86). KB는 `ai-ops/knowledge-base/entries/T12/`에 신규(id: refactoring-with-ai, reviewing-ai-output, incident-ai-debugging).
+2. **explanation-practice 5강** (87~91): explain-web-flow, explain-context-and-rag(reference), explain-tool-agent-mcp(reference), explain-vibe-coding-history, explain-risk-and-verification(reference). 새 모듈이므로 `curriculum.ts`에 모듈 등재 여부 먼저 확인(없으면 추가).
+3. **project-textbook 9강** (92~100, 교재형): mini-saas-architecture, admin-dashboard-project, ai-chatbot-project, automation-workflow-project, mcp-enabled-tool-project, git-recovery-playbook(reference), npm-debugging-playbook(reference), deployment-checklist-playbook(reference), private-ai-learning-site-project(100번 = 이 사이트 자체를 사례로). 교재형은 이 프로젝트 실제 코드/구조를 예시로 적극 활용.
+
+- **선행 KB 상태(Fable 확인, 2026-07-12)**: 84~100의 prerequisites 대부분 approved — code-change-risk-analysis·hallucination-verification·monitoring-errors-rollbacks·http-request-response·rag·mcp·vibe-coding-origin-karpathy·auth-session-token·react-state-effects·agent-loop·git-restore-reset-revert·npm-scripts-reference·deployment-cli-reference·context-engineering 모두 approved. **예외**: `ai-workflow-design` KB id 부재(automation-workflow-project 95의 prereq) → orchestration·loop-engineering KB로 대체하거나 신규 KB 생성. reference형 3종(git-recovery/npm-debugging/deployment-checklist)은 기존 approved KB(git-restore-reset-revert·npm-scripts-reference·deployment-cli-reference) 재활용 가능 — 신규 KB 최소화.
+- 각 강의: 공통 규약 준수(V2 8섹션·8,500자 목표·콜아웃 상한·인용 KB Quote Bank 글자 일치·`> "` 콜아웃 시작 금지) + 다이어그램 1개(+마크다운 `![...]` 참조) + 용어 2~3개(충돌 검색 먼저) + KB consumers 갱신.
+- 출처: 공식 문서만(Anthropic·OpenAI·GitHub·MDN·12factor·Vercel·Firebase 등). 신규 모델/도구 세대는 fetch 확보분만 서술.
+- **배포(P-09)는 하지 않는다** — 릴리스(P-08)까지만. 배포는 Fable이 세션 말미 1회 수행. 매 강의 릴리스 후 커밋("P-08: release …"), 웨이브마다 `npm run verify` exit 0.
+- **베이스라인(2026-07-12 Fable)**: 83강 released + verify exit 0 + out/ 89페이지(강의 83) 배포됨. Codex는 이 위에서 이어붙인다 — `git log --oneline -5; git status` 재대사 후 시작.
+- 완료 조건: 84~100 전부 released(100강 달성) + 각 웨이브 verify exit 0 + BACKLOG/MASTER_PROGRESS/STATE 전이 기록 + M5 QA 재스캔 위반 0. 완료 후 STATE NEXT에 "전 커리큘럼 완주 — Fable 최종 배포 대기"로 넘긴다.

@@ -11,28 +11,29 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **O-06.1 (v3.1) — Fable(지휘+경량QA) · Codex(Heavy 미션 M1~M5) 2인 체제.** 기획서: ORCHESTRATION-PLAN.md |
-| Current State | **AI-assisted Testing released** — 83강 released, KB 73건 approved, kb_needed 17건. 다음 P-01 대기 |
-| Last Completed Step | Codex가 ai-assisted-testing-loop V2 Wave 32를 릴리스 기록함 (2026-07-12, deployment HOLD) |
-| Next Executor | Codex(전체 권한 연속 실행) |
-| Next Prompt File | ai-ops/prompts/P-01-knowledge-collection.md |
-| Blocker | 없음 |
+| Current State | **83강 배포됨(known-good)** — verify exit 0, out/ 89페이지. KB 73건 approved, kb_needed 17건(84~100). Codex M6 완주 대기 |
+| Last Completed Step | Fable이 83강 known-good 빌드 검증(verify exit 0) 후 배포(P-09) + Codex 완주 미션 M6 발급 (2026-07-12) |
+| Next Executor | Codex(M6 — 잔여 17강 완주, 전체 권한 연속 실행) |
+| Next Prompt File | ai-ops/prompts/CODEX-MISSIONS.md → M6 |
+| Blocker | 없음 (ai-workflow-design KB id 부재는 M6에서 대체 처리) |
 | Required Human Action | None |
-| Release Status | **V2 83강 released (비공개 모드 A) + M5 QA 전체 0, deploy HOLD** — Release 83/100, kb_needed 17 |
+| Release Status | **V2 83강 released + 배포 완료(비공개 모드 A) + M5 QA 전체 0** — Release 83/100, kb_needed 17(84~100), 100강 완주 후 Fable 최종 재배포 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: AI-assisted Testing released, 83강 released, KB 73건 approved, kb_needed 17건
-- Verdict: DONE
-- Next Executor: Codex
-- Next Prompt File: ai-ops/prompts/P-01-knowledge-collection.md
-- Why: generated/integrated/verified/planned 항목이 없고, kb_needed 항목이 남아 있으므로 다음 우선순위는 P-01 KB 수집 최대 5건
-- Required Operator Action: None
-- If Approved: Codex가 P-01로 refactoring-with-ai, reviewing-ai-output, incident-ai-debugging, explain-web-flow, explain-context-rag KB 수집
-- If Rejected: 반려 사유에 따라 AI-assisted Testing release note 또는 MASTER_PROGRESS 상태 보정
-- Files to Check: ai-ops/outputs/00-backlog/BACKLOG.md, ai-ops/knowledge-base/SOURCE-REGISTRY.md
-- Stop Condition: 공식 출처 확보 실패 또는 Citation Rule 충족 불가
+- Current State: 83강 released + 배포 완료(verify exit 0, out/ 89페이지), KB 73건 approved, kb_needed 17건(백로그 84~100)
+- Verdict: HANDOFF → Codex M6
+- Next Executor: Codex (미션 M6 — 잔여 17강 완주)
+- Next Prompt File: ai-ops/prompts/CODEX-MISSIONS.md → M6 (공통 규약 + M6 블록 전체를 붙여넣기)
+- Why: 83/100 released. 잔여 17강(practical-vibe-coding 3 + explanation-practice 5 + project-textbook 9)이 전부 kb_needed. Codex는 무정지 완주형이므로 84~100을 P-01→P-08로 연속 생산해 100강 완성.
+- Required Operator Action: None (Codex에 M6 발급만)
+- If Approved: Codex가 M6 순서(84~86 practical → 87~91 explanation → 92~100 project-textbook)로 KB 수집→강의 생산→릴리스, 매 웨이브 verify exit 0. 배포는 하지 않음(Fable 세션 말미).
+- If Rejected: 배포 상태 또는 MASTER_PROGRESS 보정
+- Files to Check: ai-ops/outputs/00-backlog/BACKLOG.md(84~100행), ai-ops/prompts/CODEX-MISSIONS.md(M6), ai-ops/knowledge-base/SOURCE-REGISTRY.md
+- Stop Condition: 공식 출처 확보 실패 또는 Citation Rule 충족 불가 → BLOCKED 기록 후 다음 강의로 계속(전체 정지 금지)
+- 선행 KB 상태: 84~100 prerequisites 대부분 approved. 예외 ai-workflow-design KB id 부재 → orchestration/loop-engineering 대체 또는 신규.
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
