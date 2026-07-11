@@ -11,28 +11,28 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **O-06.1 (v3.1) — Fable(지휘+경량QA) · Codex(Heavy 미션 M1~M5) 2인 체제.** 기획서: ORCHESTRATION-PLAN.md |
-| Current State | **AI-assisted Testing verified** — 82강 released, 1강 verified, KB 73건 approved. 다음 P-08 대기 |
-| Last Completed Step | Codex가 `npm run verify`로 ai-assisted-testing-loop 통합분을 검증 통과시킴 (2026-07-12, Next build 150 static pages) |
+| Current State | **AI-assisted Testing released** — 83강 released, KB 73건 approved, kb_needed 17건. 다음 P-01 대기 |
+| Last Completed Step | Codex가 ai-assisted-testing-loop V2 Wave 32를 릴리스 기록함 (2026-07-12, deployment HOLD) |
 | Next Executor | Codex(전체 권한 연속 실행) |
-| Next Prompt File | ai-ops/prompts/P-08-release.md |
+| Next Prompt File | ai-ops/prompts/P-01-knowledge-collection.md |
 | Blocker | 없음 |
 | Required Human Action | None |
-| Release Status | **V2 82강 released (비공개 모드 A) + 1강 verified + M5 QA 전체 0, deploy HOLD** — Verify 83/100, Release 82/100 |
+| Release Status | **V2 83강 released (비공개 모드 A) + M5 QA 전체 0, deploy HOLD** — Release 83/100, kb_needed 17 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: AI-assisted Testing verified, 82강 released, 1강 verified, KB 73건 approved
+- Current State: AI-assisted Testing released, 83강 released, KB 73건 approved, kb_needed 17건
 - Verdict: DONE
 - Next Executor: Codex
-- Next Prompt File: ai-ops/prompts/P-08-release.md
-- Why: P-06 verify가 통과했으므로 다음 단계는 P-08 release 기록이며, 배포(P-09)는 운영자 게이트로 HOLD
+- Next Prompt File: ai-ops/prompts/P-01-knowledge-collection.md
+- Why: generated/integrated/verified/planned 항목이 없고, kb_needed 항목이 남아 있으므로 다음 우선순위는 P-01 KB 수집 최대 5건
 - Required Operator Action: None
-- If Approved: Codex가 P-08로 ai-assisted-testing-loop release 상태를 기록하고 deployment HOLD 유지
-- If Rejected: P-06 보고서 또는 verify 로그를 재검토
-- Files to Check: ai-ops/outputs/06-build-verification/VERIFIED-2026-07-12-4.md
-- Stop Condition: P-08 기록 중 src/content 누락 확인 또는 release 상태 불일치
+- If Approved: Codex가 P-01로 refactoring-with-ai, reviewing-ai-output, incident-ai-debugging, explain-web-flow, explain-context-rag KB 수집
+- If Rejected: 반려 사유에 따라 AI-assisted Testing release note 또는 MASTER_PROGRESS 상태 보정
+- Files to Check: ai-ops/outputs/00-backlog/BACKLOG.md, ai-ops/knowledge-base/SOURCE-REGISTRY.md
+- Stop Condition: 공식 출처 확보 실패 또는 Citation Rule 충족 불가
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB: **73건 approved**, stale KB 0건 / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 82강**, verified 1강 (deployment HOLD) / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
+- 강의: **V2 released 83강** (deployment HOLD) / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-12 | ai-assisted-testing-loop | verified → released | Codex P-08 AI-assisted Testing Release, V2 Wave 32, deployment HOLD |
 | 2026-07-12 | ai-assisted-testing-loop | integrated → verified | Codex P-06 AI-assisted Testing Verify, `npm run verify` PASS, Next build 150 static pages |
 | 2026-07-12 | ai-assisted-testing-loop | generated → integrated | Codex P-05 AI-assisted Testing Integration, markdown·curriculum·glossary 4개·diagram 1개·KB consumers 반영, lint/typecheck PASS |
 | 2026-07-12 | ai-assisted-testing-loop | planned → generated | Codex P-04 AI-assisted Testing Draft, V2 8섹션·10,753자·Quote Bank 인용 5개 일치, P-05 대기 |
