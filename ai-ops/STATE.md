@@ -11,27 +11,27 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **O-06.1 (v3.1) — Fable(지휘+경량QA) · Codex(Heavy 미션 M1~M5) 2인 체제.** 기획서: ORCHESTRATION-PLAN.md |
-| Current State | **90강 released + 90강 배포됨(라이브)** — 91~95 Lesson verified, KB 85건 approved, kb_needed 5건(96~100). Codex M6 계속 |
-| Last Completed Step | Codex P-06 Project Completion Verify Wave A — 91~95 Lesson 5건 `npm run verify` PASS (2026-07-12) |
-| Next Executor | Codex(P-08 — 91~95 Release, 연속 실행) |
-| Next Prompt File | ai-ops/prompts/CODEX-MISSIONS.md → M6 / P-08 |
+| Current State | **95강 released + 90강 배포됨(라이브)** — 91~95 released/deployment HOLD, KB 85건 approved, kb_needed 5건(96~100). Codex M6 계속 |
+| Last Completed Step | Codex P-08 Project Completion Release Wave A — 91~95 Lesson 5건 V2 Wave 33 released, deployment HOLD (2026-07-12) |
+| Next Executor | Codex(P-01 — 96~100 KB Collection) |
+| Next Prompt File | ai-ops/prompts/CODEX-MISSIONS.md → M6 / P-01 |
 | Blocker | 없음 (ai-workflow-design KB id 부재는 M6에서 대체 처리) |
 | Required Human Action | None |
-| Release Status | **V2 90강 released + 라이브 90강 + M5 QA 전체 0** — Release 90/100, 라이브 90, 91~95 verified, kb_needed 5(96~100). 100강 완주 후 최종 재배포 |
+| Release Status | **V2 95강 released + 라이브 90강 + M5 QA 전체 0** — Release 95/100, 라이브 90, kb_needed 5(96~100). 100강 완주 후 최종 재배포 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
-- Current State: 90강 released + 라이브 90강, 91~95 Lesson verified, KB 85건 approved, kb_needed 5건(96~100)
+- Current State: 95강 released + 라이브 90강, KB 85건 approved, kb_needed 5건(96~100)
 - Verdict: APPROVED
-- Next Executor: Codex (P-08 — 91~95 Release)
-- Next Prompt File: ai-ops/prompts/CODEX-MISSIONS.md → M6 / P-08
-- Why: 91~95 integrated lesson 5건이 `npm run verify` 전체 게이트(lint/typecheck/test/build)를 통과했다.
+- Next Executor: Codex (P-01 — 96~100 KB Collection)
+- Next Prompt File: ai-ops/prompts/CODEX-MISSIONS.md → M6 / P-01
+- Why: 91~95 verified lesson 5건이 V2 Wave 33으로 released 처리되었고, 남은 최고 우선순위는 kb_needed 5건(96~100)이다.
 - Required Operator Action: None
-- If Approved: Codex가 P-08로 91~95를 v2-released 처리하고 release note를 작성한다. 배포(P-09)는 수행하지 않는다.
-- If Rejected: VERIFIED 보고서를 검토하고 누락 로그가 있으면 P-06 보강 보고만 수행한다.
-- Files to Check: ai-ops/outputs/06-build-verification/VERIFIED-2026-07-12-project-completion-wave-a.md, ai-ops/outputs/00-backlog/BACKLOG.md(91~95행)
-- Stop Condition: P-08 release note 작성 중 파일 누락 또는 상태 불일치 발견 → P-08 중단 후 상태 보정 보고.
+- If Approved: Codex가 96~100의 KB를 P-01로 수집한다. 배포(P-09)는 수행하지 않는다.
+- If Rejected: release note와 BACKLOG 91~95 상태를 검토하고 필요한 경우 P-08 보정만 수행한다.
+- Files to Check: ai-ops/outputs/04-integrated/RELEASE-2026-07-12-project-completion-release-wave-a.md, ai-ops/outputs/00-backlog/BACKLOG.md(91~100행)
+- Stop Condition: 96~100 중 공식 출처 확보 불가 → 해당 KB만 BLOCKED/소싱 불가 사유 기록 후 나머지 계속.
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -68,12 +68,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB: **85건 approved**, stale KB 0건 / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 verified 95강 / released 90강 + 라이브 90강** / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
+- 강의: **V2 released 95강 / 라이브 90강** / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-12 | explain-risk-and-verification·mini-saas-architecture·admin-dashboard-project·ai-chatbot-project·automation-workflow-project | verified → released | Codex P-08 Project Completion Release Wave A, V2 Wave 33, deployment HOLD |
 | 2026-07-12 | explain-risk-and-verification·mini-saas-architecture·admin-dashboard-project·ai-chatbot-project·automation-workflow-project | integrated → verified | Codex P-06 Project Completion Verify Wave A, `npm run verify` PASS, Next build 174 static pages |
 | 2026-07-12 | explain-risk-and-verification·mini-saas-architecture·admin-dashboard-project·ai-chatbot-project·automation-workflow-project | generated → integrated | Codex P-05 Project Completion Integration Wave A, markdown·curriculum·glossary 15개·diagrams 5개·KB consumers 반영, lint/typecheck PASS |
 | 2026-07-12 | explain-risk-and-verification·mini-saas-architecture·admin-dashboard-project·ai-chatbot-project·automation-workflow-project | planned → generated | Codex P-04 Project Completion Draft Wave A, V2 8섹션·8,000자+·Quote Bank 인용 일치, P-05 대기 |
