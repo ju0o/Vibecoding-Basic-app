@@ -3475,4 +3475,28 @@ export const GLOSSARY_TERMS = [
       "High-Signal Tokens는 context 최적화의 목표입니다. Anthropic은 이를 'finding the smallest possible set of high-signal tokens'라고 설명합니다. 'more context isn't automatically better'이므로, RAG로 많이 가져왔더라도 신호가 높은 것만 선별해 넣어야 답이 좋아집니다.",
     related: ["Context vs RAG", "Context Engineering", "Runtime Retrieval"],
   },
+  {
+    term: "Tool Layer",
+    category: "AI 시스템",
+    shortDefinition: "모델이 함수를 부르는 한 번의 행위 층 — tool calling",
+    explanation:
+      "Tool Layer는 세 층 중 호출 행위 층입니다. Anthropic은 'Tool use lets Claude call functions'라 하고 'Claude determines when to call a tool'이라 설명합니다. 모델이 자연어 대신 구조화된 호출로 도구를 부르는 단일 행위이며, 그 위에 반복 층(agent)이 올라갑니다.",
+    related: ["Agent Loop Layer", "MCP Protocol Layer", "Tool Calling"],
+  },
+  {
+    term: "Agent Loop Layer",
+    category: "AI 시스템",
+    shortDefinition: "도구 호출을 스스로 방향을 정하며 반복하는 자율 루프 층",
+    explanation:
+      "Agent Loop Layer는 tool calling의 상위 층입니다. Anthropic은 에이전트를 'dynamically direct their own processes'하는 시스템으로 설명합니다. 한 번의 호출이 tool layer라면, 부르고 결과를 보고 다음을 정하는 반복이 이 층입니다. 자율성이 커질수록 오류 누적 위험도 함께 커집니다.",
+    related: ["Tool Layer", "MCP Protocol Layer", "Agent Loop"],
+  },
+  {
+    term: "MCP Protocol Layer",
+    category: "AI 시스템",
+    shortDefinition: "서버가 도구를 표준 방식으로 노출하는, 호출·반복과 구분되는 노출 층",
+    explanation:
+      "MCP Protocol Layer는 도구를 표준으로 제공하는 노출 층입니다. MCP는 'allows servers to expose tools'하고 'designed to be model-controlled'이며, 아키텍처는 'maintaining clear security boundaries'로 host-client-server를 분리합니다. 에이전트에 필수가 아니라, 도구를 여러 앱에 표준 노출할 때 쓰는 별도 층입니다.",
+    related: ["Tool Layer", "Agent Loop Layer", "MCP"],
+  },
 ] satisfies readonly GlossaryTerm[]

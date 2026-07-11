@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="430" viewBox="0 0 960 430" role="img" aria-labelledby="title desc">
+  <title id="title">Tool·Agent·MCP 세 층 관계</title>
+  <desc id="desc">MCP가 도구를 노출하는 표준 층, tool calling이 모델이 도구를 부르는 행위 층, agent가 그 호출을 반복하는 루프 층으로 나뉘며 아래 층 없이 위 층만 쓸 수도 있음</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#0f766e" />
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#042f2e" flood-opacity="0.12" />
+    </filter>
+  </defs>
+  <rect width="960" height="430" rx="28" fill="#f0fdfa" />
+  <text x="480" y="48" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="23" font-weight="800" fill="#115e59">노출(MCP) · 호출(Tool) · 반복(Agent) — 세 개의 층</text>
+
+  <g filter="url(#shadow)">
+    <rect x="120" y="74" width="720" height="86" rx="16" fill="#ccfbf1" stroke="#5eead4" stroke-width="2" />
+    <text x="150" y="108" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#115e59">Agent (반복 층)</text>
+    <text x="150" y="136" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0f766e">호출을 스스로 방향을 정하며 반복 — "dynamically direct their own processes"</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="180" y="180" width="600" height="86" rx="16" fill="#99f6e4" stroke="#2dd4bf" stroke-width="2" />
+    <text x="210" y="214" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#115e59">Tool calling (호출 층)</text>
+    <text x="210" y="242" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0f766e">모델이 함수를 부르는 한 번의 행위 — "Claude determines when to call a tool"</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="240" y="286" width="480" height="86" rx="16" fill="#5eead4" stroke="#14b8a6" stroke-width="2" />
+    <text x="270" y="320" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#134e4a">MCP (노출 층)</text>
+    <text x="270" y="348" font-family="Inter, Arial, sans-serif" font-size="14" fill="#115e59">서버가 도구를 표준 방식으로 노출 — "allows servers to expose tools"</text>
+  </g>
+
+  <line x1="480" y1="266" x2="480" y2="284" stroke="#0f766e" stroke-width="2.5" marker-end="url(#arrow)" />
+  <line x1="480" y1="160" x2="480" y2="178" stroke="#0f766e" stroke-width="2.5" marker-end="url(#arrow)" />
+
+  <text x="480" y="404" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" fill="#0f766e">아래 층 없이 위 층만 쓸 수도 있다 — 필요한 만큼만 층을 올린다</text>
+</svg>

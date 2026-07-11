@@ -1158,4 +1158,16 @@ export const LESSON_META = [
     minutes: 50,
     tags: ["Context", "RAG", "Retrieval", "Explanation"],
   },
+  {
+    slug: "explain-tool-agent-mcp",
+    moduleId: "explanation-practice",
+    order: 3,
+    title: "Tool, Agent, MCP 관계 레퍼런스",
+    summary:
+      "자주 뒤섞이는 tool calling(호출)·agent loop(반복)·MCP(노출)를 세 층으로 구분해, Anthropic·MCP 공식 정의로 '에이전트에 MCP가 필수인가' 같은 설계 질문을 명확히 답하는 비교 설명을 배웁니다.",
+    level: "중급",
+    type: "reference",
+    minutes: 50,
+    tags: ["Tool Calling", "Agent", "MCP", "Explanation"],
+  },
 ] satisfies readonly LessonMeta[]
