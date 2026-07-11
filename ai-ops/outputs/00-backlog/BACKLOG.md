@@ -77,7 +77,7 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 59 | B | ide-agent-era | ai-coding-tools | 3 | deep-dive | IDE 에이전트 시대 | 중급 | chat-coding-era | ide-agent-era | v2-released |
 | 60 | B | codex-claude-cursor-comparison | ai-coding-tools | 4 | deep-dive | Codex, Claude Code, Cursor의 역할 비교 | 중급 | ide-agent-era | ai-coding-tool-comparison | v2-released |
 | 61 | A | tool-permissions-sandboxes | ai-coding-tools | 5 | deep-dive | AI 도구 권한과 sandbox | 중급 | ide-agent-era | tool-permissions-sandboxes | v2-released |
-| 62 | B | human-ai-collaboration-patterns | ai-coding-tools | 6 | deep-dive | 사람-AI 협업 패턴 | 기초 | chat-coding-era | human-ai-collaboration-patterns | planned |
+| 62 | B | human-ai-collaboration-patterns | ai-coding-tools | 6 | deep-dive | 사람-AI 협업 패턴 | 기초 | chat-coding-era | human-ai-collaboration-patterns | generated |
 | 63 | B | ai-code-review-tools | ai-coding-tools | 7 | deep-dive | AI 코드 리뷰 도구와 한계 | 중급 | frontend-testing-basics | ai-code-review-tools | kb_needed |
 | 64 | C | context-engineering-basics | ai-system-design | 1 | deep-dive | Context Engineering 기초 | 기초 | from-prompt-to-system | context-engineering | v2-released |
 | 65 | C | context-window-and-memory | ai-system-design | 2 | deep-dive | 컨텍스트 윈도와 메모리 관리 | 기초 | context-engineering-basics | context-engineering | v2-released |
