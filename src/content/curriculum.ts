@@ -1134,4 +1134,16 @@ export const LESSON_META = [
     minutes: 55,
     tags: ["Incident Response", "Logs", "Rollback", "AI Debugging"],
   },
+  {
+    slug: "explain-web-flow",
+    moduleId: "explanation-practice",
+    order: 1,
+    title: "웹 요청 흐름을 남에게 설명하기",
+    summary:
+      "브라우저가 페이지를 여는 request→response→sub-resource 흐름을, MDN·RFC 9110 표준 용어로 큰 그림부터 세부까지 배열해 사람과 AI 모두에게 오해 없이 설명하는 스킬을 배웁니다.",
+    level: "기초",
+    type: "deep-dive",
+    minutes: 50,
+    tags: ["Explanation", "HTTP", "Request-Response", "Evidence Packet"],
+  },
 ] satisfies readonly LessonMeta[]

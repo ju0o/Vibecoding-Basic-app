@@ -3424,4 +3424,30 @@ export const GLOSSARY_TERMS = [
       "Hypothesis Verification은 AI를 가설 생성기로, 로그를 판정자로 다루는 원칙입니다. AI의 첫 원인 가설은 검증 전까지 추측이므로, 로그의 시간 순서와 재현으로 확인해야 결론이 됩니다. 검증 없이 채택한 그럴듯한 가설은 증상만 가릴 수 있습니다.",
     related: ["Incident Response", "Log Stream", "Verification Evidence"],
   },
+  {
+    term: "Explanation Skill",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "개념을 듣는 사람이 순서대로 이해하도록 배열해 말하는, 지식과 구별되는 별도 능력",
+    explanation:
+      "Explanation Skill은 개념을 아는 것과 다른 능력입니다. 큰 그림 뼈대에서 세부로 배열하고 표준 용어를 써서 사람과 AI 모두에게 오해 없이 전달합니다. 바이브코딩에서는 잘 설명된 문제가 곧 AI가 원인을 좁힐 수 있는 evidence packet이 되므로, 설명의 품질이 디버깅 속도를 좌우합니다.",
+    related: ["Request-Response Cycle", "Verification Evidence", "AI Output Review"],
+  },
+  {
+    term: "Request-Response Cycle",
+    category: "AI 코딩 도구",
+    shortDefinition: "client가 request를 보내고 server가 status·headers·body로 답하는 HTTP 순환",
+    explanation:
+      "Request-Response Cycle은 웹 흐름 설명의 뼈대입니다. MDN은 'There are two types of HTTP messages, requests and responses'라고 설명합니다. 요청(method·path·headers·body)과 응답(status·headers·body)을 분리해 말하면 듣는 사람이 어느 쪽이 문제인지 짚을 수 있고, sub-resource 요청까지 포함하면 흐름 설명이 완결됩니다.",
+    related: ["Explanation Skill", "Status Code Class", "HTTP 상태 코드"],
+  },
+  {
+    term: "Status Code Class",
+    category: "AI 코딩 도구",
+    shortDefinition:
+      "status code를 informational·성공·리다이렉트·요청 오류·서버 오류로 묶은 다섯 등급",
+    explanation:
+      "Status Code Class는 설명을 빠르게 만드는 요약 단위입니다. MDN은 status code가 'if the request was successful or not, and why'를 나타낸다고 설명합니다. 개별 번호보다 '4xx는 요청 문제, 5xx는 서버 문제'처럼 class로 먼저 말하면 듣는 사람이 즉시 방향을 잡습니다.",
+    related: ["Request-Response Cycle", "Explanation Skill", "HTTP 상태 코드"],
+  },
 ] satisfies readonly GlossaryTerm[]
