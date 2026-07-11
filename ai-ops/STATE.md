@@ -11,28 +11,28 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **O-06.1 (v3.1) — Fable(지휘+경량QA) · Codex(Heavy 미션 M1~M5) 2인 체제.** 기획서: ORCHESTRATION-PLAN.md |
-| Current State | **🌐 67강 deployed** (Wave 24·25: monitoring + CLI) — 용어 259, 다이어그램 40 / KB 52건 approved. **deployment-ops order 1~7 완성**(order 5만 미착수) |
-| Last Completed Step | Fable(대행) Wave 24·25 완주 — monitoring-errors-rollbacks·deployment-cli-reference 강의 (2026-07-08) |
-| Next Executor | Codex(M3 UI 리팩토링 권장 — 미션 1개 발급) · Fable(검증·조정·배포, 콘텐츠 웨이브 대행 가능) |
-| Next Prompt File | Codex→prompts/CODEX-MISSIONS.md(M1~M5 중 택1, 공통규약 포함 붙여넣기) · 우선순위: ①M3 UI ②M1 콘텐츠 ③QA(M5 또는 Fable) ④M4 리프레시 ⑤M2 V1재생성 |
+| Current State | **🌐 67강 deployed + M3 UI/UX refactor verified locally** — 용어 259, 다이어그램 40 / KB 52건 approved. 배포는 Fable 세션 말미 판단 |
+| Last Completed Step | Codex M3 UI/UX 리팩터 Phase A~C 구현 및 verify 통과 (2026-07-11) |
+| Next Executor | Fable(검토·조정·배포 판단) |
+| Next Prompt File | prompts/RUN-FABLE.md |
 | Blocker | 없음 |
-| Required Human Action | Codex에 CODEX-MISSIONS.md의 미션 1개(권장: M3) + 공통 규약 붙여넣기. Fable에는 "계속" |
-| Release Status | **V2 67강 deployed (비공개 모드 A)** — 67/100 |
+| Required Human Action | None — Fable에 "run" 또는 "계속" |
+| Release Status | **V2 67강 deployed (비공개 모드 A) + M3 UI/UX verified, deploy pending Fable** — 67/100 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: CODEX-PLAN Phase 3 P-08 T03 Wave 2 완료 — react-state-and-effects released
+- Current State: M3 UI/UX Refactor Phase A~C verified locally
 - Verdict: DONE
-- Next Executor: Codex
-- Next Prompt File: prompts/P-01-knowledge-collection.md
-- Why: generated/recollect/planned 없음, backlog에 kb_needed 항목이 있으므로 다음 단계는 P-01 knowledge collection (최대 5건)
-- Required Operator Action: None — 같은 Codex 흐름에서 다음 KB 물결 수집 계속
-- If Approved: draft KB를 P-02 knowledge verification으로 검증
-- If Rejected: 해당 KB를 recollect 또는 blocked로 전환
-- Files to Check: ai-ops/outputs/00-backlog/BACKLOG.md rows 25-30
-- Stop Condition: Phase 5 개발 서버 확인 보고에서만 정지
+- Next Executor: Fable
+- Next Prompt File: prompts/RUN-FABLE.md
+- Why: UI 리팩터는 Codex 구현·verify 완료, 배포(P-09)는 수행하지 않고 Fable 검토·배포 판단으로 넘기는 운영 규칙 때문
+- Required Operator Action: None — Fable에 "run" 또는 "계속" 입력
+- If Approved: Fable이 검토 후 세션 말미 배포 판단
+- If Rejected: 반려 사유에 따라 Codex M3 수정 런으로 회귀
+- Files to Check: ai-ops/outputs/04-integrated/RELEASE-2026-07-11-uiux-refactor-m3.md, ai-ops/roadmap/UIUX-REFACTOR-PLAN.md, src/app/page.tsx
+- Stop Condition: Fable 검토에서 배포 보류 또는 수정 필요 판정
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved** / KB 5차 T01/T08: dev-environment-map·vibe-coding-origin-karpathy·ai-learning-verification·files-folders-paths·terminal-shell-commands = **approved** / KB 6차 T01: variables-types-data·control-flow-functions-errors·debugging-error-reading·regex-code-search·package-json-semver = **approved** / KB 7차 T02: html-semantic-elements·css-cascade-layout·javascript-dom-events·browser-rendering-network·http-request-response = **approved** / KB 8차: json-data-contracts·web-security-basics·typescript-type-system·react-component-model·react-state-effects = **approved** / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 42강** (deployment HOLD, 다음 P-01 KB 수집 대기)
+- 강의: **V2 released 67강** (deployment HOLD) / UI: **M3 UI/UX refactor verified locally**, Fable 검토·배포 판단 대기
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-11 | M3 UI/UX Refactor | Phase A~C → verified locally | Codex, 커리큘럼 탐색·진행률·읽기 UX·홈/용어집 마감, npm run verify PASS |
 | 2026-07-06 | KB nextjs-routing-rendering·git-init-add-commit-status·git-branch-switch-merge·git-log-diff-show·git-restore-reset-revert | draft → approved (89·91·90·92·92) | **Fable(대행)** P-02 KB 9차 — 인용 전건 세션 내 fetch 원문 대조 |
 | 2026-07-06 | KB nextjs-routing-rendering·git-init-add-commit-status·git-branch-switch-merge·git-log-diff-show·git-restore-reset-revert | needed → draft | **Fable(대행)** P-01 T03/T04 KB 9차 — Codex 토큰 소진, 운영자 승인 |
 | 2026-07-06 | KB json-data-contracts·web-security-basics·typescript-type-system·react-component-model·react-state-effects | needed → draft | Codex P-01 T02/T03/T07 KB 8차 |

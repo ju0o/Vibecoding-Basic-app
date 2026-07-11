@@ -174,6 +174,7 @@ export function CurriculumExplorer({ modules }: CurriculumExplorerProps) {
             return (
               <section
                 className="overflow-hidden rounded-xl border border-[var(--border-default)] bg-[var(--surface-elevated)] shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
+                id={module.id}
                 key={module.id}
               >
                 <button

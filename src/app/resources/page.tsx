@@ -16,8 +16,8 @@ export default function ResourcesPage() {
           막힐 때 돌아갈 기준 문서
         </h1>
         <p className="mt-4 text-lg leading-8 text-[var(--text-secondary)]">
-          AI가 답을 줘도 최종 기준은 공식 문서입니다. V1에서는 웹, 프론트엔드, Git, DB, 보안, AI
-          시스템 문서를 한곳에 모았습니다.
+          AI가 답을 줘도 최종 기준은 공식 문서입니다. 웹, 프론트엔드, Git, DB, 보안, AI 시스템 문서{" "}
+          {RESOURCE_LINKS.length}개를 한곳에 모았습니다.
         </p>
       </div>
       <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">

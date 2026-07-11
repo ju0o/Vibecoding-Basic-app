@@ -54,6 +54,6 @@
 
 ## 진행 체크
 
-- [ ] Phase A (A1 커리큘럼 / A2 검색 / A3 진행 추적 / A4 prev-next)
-- [ ] Phase B (B1~B5)
-- [ ] Phase C (C1~C3)
+- [x] Phase A (A1 커리큘럼 / A2 검색 / A3 진행 추적 / A4 prev-next)
+- [x] Phase B (B1~B5)
+- [x] Phase C (C1~C3)
