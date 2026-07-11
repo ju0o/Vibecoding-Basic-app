@@ -1098,4 +1098,16 @@ export const LESSON_META = [
     minutes: 60,
     tags: ["AI Testing", "Vitest", "Playwright", "Testing Library", "Regression"],
   },
+  {
+    slug: "refactoring-with-ai",
+    moduleId: "practical-vibe-coding",
+    order: 5,
+    title: "AI와 리팩터링하기",
+    summary:
+      "리팩터링을 '관찰 가능한 동작을 바꾸지 않는 구조 개선'으로 정의한 Martin Fowler·refactoring.com 기준으로, AI의 넓은 변경을 작은 동작 보존 단계로 나누고 각 단계를 검증하며 리팩터링과 기능 변경을 분리하는 규율을 배웁니다.",
+    level: "중급",
+    type: "deep-dive",
+    minutes: 55,
+    tags: ["Refactoring", "Observable Behavior", "Behavior Preservation", "AI Refactoring"],
+  },
 ] satisfies readonly LessonMeta[]

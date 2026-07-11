@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="440" viewBox="0 0 960 440" role="img" aria-labelledby="title desc">
+  <title id="title">AI와 리팩터링하기 루프</title>
+  <desc id="desc">큰 재작성 요청을 작은 동작 보존 단계로 나누고, 각 단계 후 시스템이 계속 동작하는지 검증하며, 리팩터링과 기능 변경을 분리하는 흐름</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#0891b2" />
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#083344" flood-opacity="0.12" />
+    </filter>
+  </defs>
+  <rect width="960" height="440" rx="28" fill="#ecfeff" />
+  <text x="480" y="52" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#155e75">리팩터링 = 작은 단계 + 동작 보존 검증의 연속</text>
+
+  <g filter="url(#shadow)">
+    <rect x="44" y="104" width="196" height="120" rx="18" fill="#cffafe" stroke="#22d3ee" stroke-width="2" />
+    <text x="142" y="140" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#155e75">큰 요청</text>
+    <text x="142" y="172" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0e7490">"이 코드</text>
+    <text x="142" y="194" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0e7490">리팩터링해줘"</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="284" y="104" width="196" height="120" rx="18" fill="#a5f3fc" stroke="#06b6d4" stroke-width="2" />
+    <text x="382" y="140" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#155e75">작은 단계 분해</text>
+    <text x="382" y="172" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0e7490">함수 추출 → 이름</text>
+    <text x="382" y="194" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0e7490">→ 중복 제거</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="524" y="104" width="196" height="120" rx="18" fill="#bae6fd" stroke="#38bdf8" stroke-width="2" />
+    <text x="622" y="140" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#075985">동작 보존 검증</text>
+    <text x="622" y="172" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0369a1">각 단계 후 테스트</text>
+    <text x="622" y="194" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#0369a1">시스템 계속 동작</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="764" y="104" width="152" height="120" rx="18" fill="#d9f99d" stroke="#84cc16" stroke-width="2" />
+    <text x="840" y="140" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#3f6212">병합</text>
+    <text x="840" y="172" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#4d7c0f">구조 개선만</text>
+    <text x="840" y="194" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#4d7c0f">동작 그대로</text>
+  </g>
+
+  <line x1="240" y1="164" x2="280" y2="164" stroke="#0891b2" stroke-width="2.5" marker-end="url(#arrow)" />
+  <line x1="480" y1="164" x2="520" y2="164" stroke="#0891b2" stroke-width="2.5" marker-end="url(#arrow)" />
+  <line x1="720" y1="164" x2="760" y2="164" stroke="#0891b2" stroke-width="2.5" marker-end="url(#arrow)" />
+
+  <g filter="url(#shadow)">
+    <rect x="284" y="284" width="436" height="104" rx="18" fill="#fef9c3" stroke="#eab308" stroke-width="2" />
+    <text x="502" y="320" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800" fill="#854d0e">동작이 바뀌었다면 → 리팩터링이 아니라 기능 변경</text>
+    <text x="502" y="352" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#a16207">별도 커밋으로 분리하고 다른 검증을 적용한다</text>
+  </g>
+  <path d="M622 224 L622 254 L502 254 L502 282" fill="none" stroke="#eab308" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#arrow)" />
+  <text x="640" y="250" font-family="Inter, Arial, sans-serif" font-size="13" fill="#a16207">동작 변경 감지 시</text>
+</svg>

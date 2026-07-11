@@ -3336,4 +3336,28 @@ export const GLOSSARY_TERMS = [
       "Repeatable Test Run은 `vitest run`처럼 동일한 명령으로 테스트 suite를 한 번 실행해 결과를 observation으로 남기는 방식입니다. AI 보조 테스트 루프에서는 이 결과가 다음 prompt의 feedback 근거가 됩니다.",
     related: ["Vitest", "Test Runner", "Verification Feedback"],
   },
+  {
+    term: "Observable Behavior",
+    category: "AI 코딩 도구",
+    shortDefinition: "리팩터링이 바꾸지 말아야 하는, 외부에서 관찰되는 소프트웨어의 동작",
+    explanation:
+      "Observable Behavior는 사용자와 다른 시스템이 실제로 관찰하는 동작(입출력, 응답 형식, 계약)입니다. Martin Fowler의 리팩터링 정의는 'without changing its observable behavior'를 조건으로 두므로, AI 변경이 리팩터링인지 판단하는 기준선이 됩니다. 이것이 바뀌면 리팩터링이 아니라 기능 변경입니다.",
+    related: ["Refactoring", "Behavior-Preserving Transformation", "AI Refactoring"],
+  },
+  {
+    term: "Behavior-Preserving Transformation",
+    category: "AI 코딩 도구",
+    shortDefinition: "관찰 가능한 동작을 보존하면서 코드 구조를 바꾸는 작은 변환",
+    explanation:
+      "refactoring.com은 리팩터링의 핵심이 'a series of small behavior preserving transformations'라고 설명합니다. 함수 추출, 이름 변경, 중복 제거처럼 동작은 그대로 두고 구조만 바꾸는 작은 변환이며, AI에게 큰 재작성 대신 이 변환의 연속을 요구하면 검증이 쉬워집니다.",
+    related: ["Refactoring", "Observable Behavior", "Refactoring Step"],
+  },
+  {
+    term: "Refactoring Step",
+    category: "AI 코딩 도구",
+    shortDefinition: "각 단계 후 시스템이 계속 동작하도록 작게 나눈 하나의 리팩터링 단위",
+    explanation:
+      "Refactoring Step은 'Since each refactoring is small, it's less likely to go wrong'이라는 안전성 원칙을 실천하는 단위입니다. 각 단계 후 빌드·테스트로 동작 보존을 확인해 'The system is kept fully working after each refactoring' 상태를 유지합니다. AI 리팩터링에서는 큰 diff를 이 단위로 쪼개 검증합니다.",
+    related: ["Refactoring", "Behavior-Preserving Transformation", "Repeatable Test Run"],
+  },
 ] satisfies readonly GlossaryTerm[]
