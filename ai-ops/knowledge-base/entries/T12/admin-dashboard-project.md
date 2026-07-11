@@ -9,8 +9,8 @@ prerequisites: [react-state-effects, nextjs-routing-rendering, web-security-basi
 successors: [mini-saas-architecture]
 related: [database-tables-indexes, backend-observability-logs, frontend-testing-basics]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [admin-dashboard-project]
+  glossary: [Dashboard State Owner, Admin Data Boundary, Accessible Data Table]
 sources:
   - { title: "React Docs — Sharing State Between Components", url: "https://react.dev/learn/sharing-state-between-components", checked: 2026-07-12 }
   - { title: "React Docs — Managing State", url: "https://react.dev/learn/managing-state", checked: 2026-07-12 }

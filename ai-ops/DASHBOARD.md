@@ -3,27 +3,28 @@
 요약 현황판. 원본 데이터는 [MASTER_PROGRESS.md](MASTER_PROGRESS.md), 실행 큐는 [STATE.md](STATE.md).
 **갱신 주체: Fable "run" 시 자동** (O-03부터 운영자는 이 파일을 편집하지 않는다 — 읽기만).
 
-## 마지막 갱신: 2026-07-12 (Codex P-04 Project Completion Draft Wave A)
+## 마지막 갱신: 2026-07-12 (Codex P-05 Project Completion Integration Wave A)
 
 ## 진행률 (개수만 — 막대 없음, MASTER_PROGRESS 집계에서 파생)
 
 | 단계 | 현황 |
 |---|---|
 | KB (approved 이상) | 85건 approved / stale 0 |
-| Lesson 생성 · Site 반영 | 95강 generated / 90강 integrated 이상 / 90강 released / 100강 목표 |
+| Lesson 생성 · Site 반영 | 95강 generated / 95강 integrated 이상 / 90강 released / 100강 목표 |
 | Verify · Release | 90강 verify PASS / 90강 released / M5 전체 위반 0 |
 | Glossary · Diagrams | 431 terms / 68 SVG diagrams |
 
 ## 실행 상태
 
-- **NEXT**: Codex 계속 실행 → 백로그 91~95 generated 대상 P-05 Site 반영.
+- **NEXT**: Codex 계속 실행 → 백로그 91~95 integrated 대상 P-06 Verify.
 - 승인 대기: 없음 / 에스컬레이션: 없음 / 진행 중 루프: 없음
-- 병목: generated 5강(91~95) P-05 대기 + 백로그 `kb_needed` 5건(96~100).
+- 병목: integrated 5강(91~95) P-06 대기 + 백로그 `kb_needed` 5건(96~100).
 
 ## 최근 완료 (최신 5)
 
 | 날짜 | 작업 | 실행 |
 |---|---|---|
+| 2026-07-12 | Project Completion Integration Wave A P-05 — 5강 site 반영, glossary 15개, diagrams 5개, lint/typecheck PASS | Codex |
 | 2026-07-12 | Project Completion Draft Wave A P-04 — 5강 generated, self QA PASS, P-05 대기 | Codex |
 | 2026-07-12 | Project Completion KB Wave A P-02 — 5 KB approved, planned 91~95 전환, KB 85건 | Codex |
 | 2026-07-12 | Project Completion KB Wave A P-01 — 5 KB draft 수집, 백로그 91~95 draft | Codex |

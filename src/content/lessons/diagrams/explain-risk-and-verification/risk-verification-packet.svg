@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">위험과 검증 설명 패킷</title>
+  <desc id="desc">변경 지점, 실패 비용, 검증 증거, 리뷰 결정이 하나의 evidence packet으로 이어지는 흐름</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#2563eb" />
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#1e3a8a" flood-opacity="0.12" />
+    </filter>
+  </defs>
+  <rect width="960" height="420" rx="28" fill="#eff6ff" />
+  <text x="480" y="52" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="800" fill="#1e3a8a">위험 설명은 증거를 거쳐 리뷰 결정으로 닫힙니다</text>
+  <g filter="url(#shadow)">
+    <rect x="50" y="128" width="170" height="112" rx="18" fill="#ffffff" stroke="#60a5fa" stroke-width="2" />
+    <text x="135" y="164" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#1d4ed8">Change</text>
+    <text x="135" y="196" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#2563eb">파일·route</text>
+    <text x="135" y="218" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#2563eb">data 경계</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="280" y="128" width="170" height="112" rx="18" fill="#ffffff" stroke="#60a5fa" stroke-width="2" />
+    <text x="365" y="164" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#1d4ed8">Risk</text>
+    <text x="365" y="196" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#2563eb">사용자 영향</text>
+    <text x="365" y="218" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#2563eb">실패 비용</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="510" y="128" width="170" height="112" rx="18" fill="#ffffff" stroke="#60a5fa" stroke-width="2" />
+    <text x="595" y="164" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#1d4ed8">Evidence</text>
+    <text x="595" y="196" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#2563eb">CodeQL</text>
+    <text x="595" y="218" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#2563eb">Playwright·Auth</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="740" y="128" width="170" height="112" rx="18" fill="#ffffff" stroke="#60a5fa" stroke-width="2" />
+    <text x="825" y="164" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#1d4ed8">Decision</text>
+    <text x="825" y="196" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#2563eb">comment</text>
+    <text x="825" y="218" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#2563eb">approve / changes</text>
+  </g>
+  <path d="M220 184 H272" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)" />
+  <path d="M450 184 H502" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)" />
+  <path d="M680 184 H732" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)" />
+  <rect x="180" y="300" width="600" height="58" rx="18" fill="#dbeafe" stroke="#93c5fd" />
+  <text x="480" y="335" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" fill="#1e40af">Risk Evidence Packet = 변경 + 위험 + 증거 + 결정</text>
+</svg>

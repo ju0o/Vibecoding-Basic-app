@@ -3523,4 +3523,137 @@ export const GLOSSARY_TERMS = [
       "Misconception Correction은 균형 잡힌 역사 설명의 핵심입니다. '코드를 안 봐도 된다'는 오해는 Karpathy의 'forget that the code even exists' 표현에서 옵니다. 이를 OpenAI의 'human review outputs' 원칙으로 교정해, 강한 뉘앙스와 검증 필요성을 함께 전합니다.",
     related: ["Term Origin", "Verification Evidence", "AI Output Review"],
   },
+  {
+    term: "Risk Evidence Packet",
+    category: "설명 연습",
+    shortDefinition:
+      "변경 지점, 실패 비용, 검증 증거, 리뷰 결정을 한 묶음으로 설명하는 검증 보고 단위",
+    explanation:
+      "Risk Evidence Packet은 AI가 만든 변경을 '괜찮아 보인다'가 아니라 어떤 위험을 어떤 증거로 낮췄는지 설명하게 만드는 형식입니다. PR review, 정적 분석, Playwright assertion, 권한 검토를 서로 다른 evidence로 분리합니다.",
+    related: ["Verification", "Code Review", "Review Decision"],
+  },
+  {
+    term: "Review Decision Language",
+    category: "설명 연습",
+    shortDefinition:
+      "comment, approve, request changes처럼 리뷰 결과를 행동 가능한 결정으로 닫는 언어",
+    explanation:
+      "Review Decision Language는 위험 설명의 마지막 단계입니다. 검증 증거가 충분하면 approve, merge 전 수정이 필요하면 request changes, 판단보다 논의가 목적이면 comment로 구분합니다.",
+    related: ["Review Decision", "Request Changes", "Risk Evidence Packet"],
+  },
+  {
+    term: "Authorization Evidence",
+    category: "보안",
+    shortDefinition: "권한 변경이 제품의 business context에 맞는지 확인한 검증 증거",
+    explanation:
+      "Authorization Evidence는 단순 화면 테스트와 별개로 누가 어떤 route와 data에 접근할 수 있는지 확인한 결과입니다. AI가 만든 권한 코드는 테스트 통과만으로 충분하지 않고 business context와 연결해 설명해야 합니다.",
+    related: ["Verification Evidence", "Risk Evidence Packet", "Authentication"],
+  },
+  {
+    term: "SaaS Trust Boundary",
+    category: "프로젝트 교재",
+    shortDefinition:
+      "사용자, 서버, 데이터베이스, 외부 설정 사이에서 인증 정보와 접근 권한이 넘어갈 수 있는 경계",
+    explanation:
+      "SaaS Trust Boundary는 미니 SaaS에서 어떤 정보가 client bundle에 들어가면 안 되는지, 어떤 data access가 server side에 남아야 하는지, 어떤 route와 data가 권한 판단으로 보호되어야 하는지 구분하는 설계 기준입니다.",
+    related: ["Authentication", "Environment Variable", "Server Data Boundary"],
+  },
+  {
+    term: "Server Data Boundary",
+    category: "백엔드",
+    shortDefinition:
+      "query logic과 credential을 클라이언트로 보내지 않고 서버 쪽에서 데이터 접근을 수행하는 경계",
+    explanation:
+      "Server Data Boundary는 Next.js Server Components나 서버 코드에서 데이터 접근을 처리해 민감한 credential과 query logic을 client bundle에 포함하지 않도록 하는 구조입니다. SaaS에서 데이터 접근 보안과 유지보수성을 같이 다룹니다.",
+    related: ["Server Component", "SaaS Trust Boundary", "Authentication"],
+  },
+  {
+    term: "SaaS Access Map",
+    category: "프로젝트 교재",
+    shortDefinition:
+      "route, data, user role, session state를 연결해 누가 무엇에 접근할 수 있는지 정리한 설계 표",
+    explanation:
+      "SaaS Access Map은 authentication과 authorization을 구현하기 전에 제품의 접근 규칙을 명확히 하는 문서입니다. AI에게 구현을 맡길 때도 이 표가 있어야 route guard와 data filtering을 추측이 아니라 규칙에 맞춰 만들 수 있습니다.",
+    related: ["SaaS Trust Boundary", "Server Data Boundary", "Authentication"],
+  },
+  {
+    term: "Dashboard State Owner",
+    category: "프론트엔드",
+    shortDefinition:
+      "필터, 정렬, 선택 행처럼 여러 dashboard 컴포넌트가 함께 쓰는 state를 소유하는 가장 가까운 공통 부모",
+    explanation:
+      "Dashboard State Owner는 React dashboard에서 필터와 table, summary card가 같은 조건을 공유할 때 state를 어디에 둘지 결정하는 기준입니다. 중복 state를 줄이고 한 화면의 판단 기준을 일관되게 유지합니다.",
+    related: ["React State", "Admin Data Boundary", "Accessible Data Table"],
+  },
+  {
+    term: "Admin Data Boundary",
+    category: "프로젝트 교재",
+    shortDefinition: "관리자 route와 관리자 data query가 모두 권한 판단으로 보호되어야 하는 경계",
+    explanation:
+      "Admin Data Boundary는 `/admin` 화면을 숨기는 것뿐 아니라 실제 server data fetch에서 관리자가 볼 수 있는 data만 반환하도록 만드는 설계 경계입니다. route와 data를 함께 보호하지 않으면 dashboard 보안이 깨집니다.",
+    related: ["Server Data Boundary", "Dashboard State Owner", "Authentication"],
+  },
+  {
+    term: "Accessible Data Table",
+    category: "웹 개발 기초",
+    shortDefinition:
+      "caption, header-cell 관계처럼 스크린리더와 사용자가 표의 의미를 이해할 수 있게 만든 데이터 table",
+    explanation:
+      "Accessible Data Table은 관리자 대시보드에서 단순히 표를 그리는 것이 아니라, 운영자가 행과 열의 의미를 정확히 읽고 판단할 수 있게 만드는 구조입니다. caption과 header association이 핵심입니다.",
+    related: ["HTML", "Accessibility", "Dashboard State Owner"],
+  },
+  {
+    term: "Conversation State Window",
+    category: "AI 시스템",
+    shortDefinition:
+      "여러 message와 turn에 걸쳐 보존해야 할 대화 정보와 현재 요청에 포함할 context의 범위",
+    explanation:
+      "Conversation State Window는 챗봇이 이전 대화를 기억하는 것처럼 동작하기 위해 어떤 정보를 저장하고 어떤 정보를 현재 요청에 다시 넣을지 결정하는 설계 단위입니다. 모델 요청 자체가 stateless일 수 있으므로 state 관리는 애플리케이션의 책임입니다.",
+    related: ["Context Engineering", "RAG", "Retrieval Answer Loop"],
+  },
+  {
+    term: "Chatbot Tool Boundary",
+    category: "AI 시스템",
+    shortDefinition:
+      "모델이 도구 사용을 요청하는 단계와 애플리케이션이 실제 외부 시스템을 호출하는 단계를 분리하는 경계",
+    explanation:
+      "Chatbot Tool Boundary는 tool calling에서 모델의 요청과 실제 실행 권한을 구분합니다. 챗봇은 외부 data나 system에 접근할 수 있지만, 어떤 tool을 언제 실행할지는 애플리케이션의 검증과 권한 경계를 거쳐야 합니다.",
+    related: ["Tool Calling", "Agent", "Conversation State Window"],
+  },
+  {
+    term: "Retrieval Answer Loop",
+    category: "AI 시스템",
+    shortDefinition:
+      "사용자의 질문을 semantic search로 관련 문서에 연결하고, 검색 결과를 context로 넣어 답변을 만드는 반복 구조",
+    explanation:
+      "Retrieval Answer Loop는 RAG 기반 챗봇의 핵심 흐름입니다. 사용자의 질문을 바로 모델에게만 보내지 않고, 관련 knowledge를 검색해 context에 넣고 답변 근거를 더 명확하게 만듭니다.",
+    related: ["RAG", "Context Engineering", "Conversation State Window"],
+  },
+  {
+    term: "Workflow Dependency Graph",
+    category: "AI 시스템",
+    shortDefinition:
+      "workflow 안의 job들이 어떤 순서와 의존 관계로 실행되어야 하는지 나타내는 구조",
+    explanation:
+      "Workflow Dependency Graph는 job이 기본적으로 병렬 실행될 수 있다는 사실을 고려해, build 이후 test, test 이후 release처럼 명시적인 순서를 설계하는 기준입니다. 자동화 프로젝트에서 예측 가능성과 실패 위치 파악에 중요합니다.",
+    related: ["Workflow", "Predefined Code Path", "Workflow Tool Boundary"],
+  },
+  {
+    term: "Workflow Tool Boundary",
+    category: "AI 시스템",
+    shortDefinition:
+      "LLM이 tool 사용을 요청하는 단계와 workflow가 실제 tool을 실행하는 단계를 나누는 경계",
+    explanation:
+      "Workflow Tool Boundary는 모델의 tool call request가 곧바로 외부 시스템 실행이 되지 않도록 하는 안전 경계입니다. 자동화 workflow에서는 predefined code path가 어떤 tool을 어떤 조건에서 실행할지 정합니다.",
+    related: ["Tool Calling", "Workflow", "Workflow Dependency Graph"],
+  },
+  {
+    term: "Predefined Code Path",
+    category: "AI 시스템",
+    shortDefinition:
+      "agent가 동적으로 결정하기보다 사람이 미리 정한 절차대로 LLM과 tool을 orchestration하는 실행 경로",
+    explanation:
+      "Predefined Code Path는 LLM과 tool이 미리 정한 코드 경로를 따라 움직이는 구조입니다. 반복 가능하고 예측 가능한 자동화에는 agent보다 workflow가 적합할 수 있습니다.",
+    related: ["Workflow", "Orchestration", "Workflow Dependency Graph"],
+  },
 ] satisfies readonly GlossaryTerm[]

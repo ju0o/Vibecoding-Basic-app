@@ -9,8 +9,8 @@ prerequisites: [auth-session-token, database-tables-indexes, production-env-secr
 successors: [admin-dashboard-project, private-ai-learning-site-project]
 related: [deployment-platforms, web-security-basics, rest-api-design]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [mini-saas-architecture]
+  glossary: [SaaS Trust Boundary, Server Data Boundary, SaaS Access Map]
 sources:
   - { title: "Next.js Docs — Authentication", url: "https://nextjs.org/docs/app/guides/authentication", checked: 2026-07-12 }
   - { title: "Next.js Docs — Data Security", url: "https://nextjs.org/docs/app/guides/data-security", checked: 2026-07-12 }

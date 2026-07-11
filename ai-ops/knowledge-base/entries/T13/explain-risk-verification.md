@@ -9,8 +9,8 @@ prerequisites: [reviewing-ai-output, code-change-risk-analysis, ai-assisted-test
 successors: []
 related: [hallucination-verification, github-pr-review-flow, frontend-testing-basics]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [explain-risk-and-verification]
+  glossary: [Risk Evidence Packet, Review Decision Language, Authorization Evidence]
 sources:
   - { title: "GitHub Docs — About pull request reviews", url: "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews", checked: 2026-07-12 }
   - { title: "GitHub Docs — Code scanning with CodeQL", url: "https://docs.github.com/code-security/code-scanning/introduction-to-code-scanning/about-code-scanning-with-codeql", checked: 2026-07-12 }

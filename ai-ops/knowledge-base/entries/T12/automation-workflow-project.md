@@ -9,8 +9,8 @@ prerequisites: [orchestration, loop-engineering, agent-loop]
 successors: [mcp-enabled-tool-project, private-ai-learning-site-project]
 related: [harness, ai-system-evaluation, ci-cd-pipeline-basics]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [automation-workflow-project]
+  glossary: [Workflow Dependency Graph, Workflow Tool Boundary, Predefined Code Path]
 sources:
   - { title: "GitHub Docs — Workflows", url: "https://docs.github.com/en/actions/concepts/workflows-and-actions/workflows", checked: 2026-07-12 }
   - { title: "GitHub Docs — Workflow syntax", url: "https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax", checked: 2026-07-12 }

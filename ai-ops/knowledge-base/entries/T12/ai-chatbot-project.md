@@ -9,8 +9,8 @@ prerequisites: [rag, context-engineering, tool-calling]
 successors: [private-ai-learning-site-project]
 related: [context-caching, mcp, grounding-citations]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [ai-chatbot-project]
+  glossary: [Conversation State Window, Chatbot Tool Boundary, Retrieval Answer Loop]
 sources:
   - { title: "OpenAI Docs — Conversation state", url: "https://developers.openai.com/api/docs/guides/conversation-state", checked: 2026-07-12 }
   - { title: "OpenAI Docs — Function calling", url: "https://developers.openai.com/api/docs/guides/function-calling", checked: 2026-07-12 }

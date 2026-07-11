@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="430" viewBox="0 0 960 430" role="img" aria-labelledby="title desc">
+  <title id="title">관리자 대시보드 설계 흐름</title>
+  <desc id="desc">운영 질문이 서버 데이터 경계, 상태 소유자, 접근 가능한 테이블로 이어지는 대시보드 설계 흐름</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#7c3aed" />
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#4c1d95" flood-opacity="0.12" />
+    </filter>
+  </defs>
+  <rect width="960" height="430" rx="28" fill="#f5f3ff" />
+  <text x="480" y="52" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="800" fill="#4c1d95">대시보드는 운영 질문을 같은 기준의 data view로 바꿉니다</text>
+  <g filter="url(#shadow)">
+    <rect x="58" y="126" width="182" height="116" rx="18" fill="#ffffff" stroke="#a78bfa" stroke-width="2" />
+    <text x="149" y="163" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#6d28d9">Question</text>
+    <text x="149" y="196" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#7c3aed">운영자가</text>
+    <text x="149" y="218" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#7c3aed">무엇을 판단하나</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="292" y="126" width="182" height="116" rx="18" fill="#ffffff" stroke="#a78bfa" stroke-width="2" />
+    <text x="383" y="163" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#6d28d9">Server Data</text>
+    <text x="383" y="196" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#7c3aed">admin auth</text>
+    <text x="383" y="218" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#7c3aed">safe fetch</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="526" y="126" width="182" height="116" rx="18" fill="#ffffff" stroke="#a78bfa" stroke-width="2" />
+    <text x="617" y="163" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#6d28d9">State Owner</text>
+    <text x="617" y="196" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#7c3aed">filters</text>
+    <text x="617" y="218" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#7c3aed">shared view</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="760" y="126" width="150" height="116" rx="18" fill="#ffffff" stroke="#a78bfa" stroke-width="2" />
+    <text x="835" y="163" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#6d28d9">Table</text>
+    <text x="835" y="196" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#7c3aed">caption</text>
+    <text x="835" y="218" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#7c3aed">headers</text>
+  </g>
+  <path d="M240 184 H284" stroke="#7c3aed" stroke-width="4" marker-end="url(#arrow)" />
+  <path d="M474 184 H518" stroke="#7c3aed" stroke-width="4" marker-end="url(#arrow)" />
+  <path d="M708 184 H752" stroke="#7c3aed" stroke-width="4" marker-end="url(#arrow)" />
+  <rect x="188" y="304" width="584" height="58" rx="18" fill="#ede9fe" stroke="#c4b5fd" />
+  <text x="480" y="339" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" fill="#5b21b6">route와 data 권한, filter state, table semantics가 같은 질문을 향합니다</text>
+</svg>
