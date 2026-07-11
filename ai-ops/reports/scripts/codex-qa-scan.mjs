@@ -2,7 +2,7 @@ import { promises as fs } from "node:fs"
 import path from "node:path"
 
 const ROOT = process.cwd()
-const TODAY = "2026-07-11"
+const TODAY = "2026-07-12"
 
 const LESSON_DIR = path.join(ROOT, "src/content/lessons/markdown")
 const DIAGRAM_DIR = path.join(ROOT, "src/content/lessons/diagrams")

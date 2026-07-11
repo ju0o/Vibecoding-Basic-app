@@ -1,9 +1,9 @@
-# Codex QA Scan — M5 (2026-07-11)
+# Codex QA Scan — M5 (2026-07-12)
 
 ## 요약
 
 - 강의 마크다운 검사 파일 수: 78
-- KB 검사 파일 수: 68
+- KB 검사 파일 수: 73
 - 다이어그램 SVG 검사 파일 수: 56
 - 용어집 term 수: 388
 - 링크 생존 검사 도메인 수(중복 제거): 38
@@ -43,16 +43,16 @@
 | anthropic.com | 200 | HEAD | https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents | 23 |
 | arxiv.org | 200 | HEAD | https://arxiv.org/html/2506.23253v2 | 3 |
 | businessinsider.com | 200 | HEAD | https://www.businessinsider.com/vibe-coding-ai-silicon-valley-andrej-karpathy-2025-2 | 2 |
-| cheatsheetseries.owasp.org | 200 | HEAD | https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html | 2 |
+| cheatsheetseries.owasp.org | 200 | HEAD | https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html | 4 |
 | cli.github.com | 200 | HEAD | https://cli.github.com/manual/gh_pr_create | 2 |
 | code.claude.com | 200 | HEAD | https://code.claude.com/docs/en/agent-sdk/agent-loop | 27 |
 | code.visualstudio.com | 200 | HEAD | https://code.visualstudio.com/docs/editor/debugging | 13 |
 | collinsdictionary.com | 403 | GET | https://www.collinsdictionary.com/us/woty | 3 |
-| cursor.com | 200 | HEAD | https://cursor.com/blog/agent-best-practices | 4 |
+| cursor.com | 200 | HEAD | https://cursor.com/blog/agent-best-practices | 7 |
 | datatracker.ietf.org | 200 | HEAD | https://datatracker.ietf.org/doc/html/rfc9110 | 4 |
 | developer.mozilla.org | 200 | HEAD | https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview | 39 |
 | developers.openai.com | 200 | HEAD | https://developers.openai.com/api/docs/guides/agent-evals | 34 |
-| docs.github.com | 200 | HEAD | https://docs.github.com/en/copilot/responsible-use/chat | 15 |
+| docs.github.com | 200 | HEAD | https://docs.github.com/en/copilot/responsible-use/chat | 20 |
 | docs.npmjs.com | 200 | HEAD | https://docs.npmjs.com/cli/v10/using-npm/scripts | 4 |
 | firebase.google.com | 200 | HEAD | https://firebase.google.com/docs/hosting | 2 |
 | git-scm.com | 200 | HEAD | https://git-scm.com/book/ms/v2/Getting-Started-About-Version-Control | 13 |
@@ -65,16 +65,16 @@
 | openai.com | 403 | GET | https://openai.com/index/introducing-codex/ | 10 |
 | owasp.org | 200 | HEAD | https://owasp.org/www-community/attacks/xss/ | 2 |
 | platform.claude.com | 200 | HEAD | https://platform.claude.com/docs/en/test-and-evaluate/develop-tests | 33 |
-| playwright.dev | 200 | HEAD | https://playwright.dev/ | 1 |
+| playwright.dev | 200 | HEAD | https://playwright.dev/ | 2 |
 | postgresql.org | 200 | HEAD | https://www.postgresql.org/docs/current/ddl-basics.html | 3 |
 | react.dev | 200 | HEAD | https://react.dev/learn/your-first-component | 6 |
 | semver.org | 200 | HEAD | https://semver.org/ | 2 |
 | tailwindcss.com | 200 | HEAD | https://tailwindcss.com/docs/styling-with-utility-classes | 1 |
-| testing-library.com | 200 | HEAD | https://testing-library.com/docs/guiding-principles/ | 1 |
+| testing-library.com | 200 | HEAD | https://testing-library.com/docs/guiding-principles/ | 2 |
 | timesofindia.indiatimes.com | 200 | HEAD | https://timesofindia.indiatimes.com/technology/tech-news/rewind-2025-when-teslas-former-ai-director-gave-the-world-the-word-that-has-changed-the-work-of-software-engineers-forever/articleshow/126276591.cms | 2 |
 | typescriptlang.org | 200 | HEAD | https://www.typescriptlang.org/docs/handbook/2/basic-types.html | 6 |
 | vercel.com | 200 | HEAD | https://vercel.com/docs/cli | 7 |
-| vitest.dev | 200 | HEAD | https://vitest.dev/ | 1 |
+| vitest.dev | 200 | HEAD | https://vitest.dev/ | 2 |
 | web.archive.org | 200 | HEAD | https://web.archive.org/web/20250206155957id_/https://x.com/karpathy/status/1886192184808149383 | 3 |
 | x.com | 200 | HEAD | https://x.com/karpathy/status/1886192184808149383 | 1 |
 

@@ -80,6 +80,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | ai-coding-tool-comparison | T11 | ✓ | ✓ 88 (2026-07-12, Codex) | ai-coding-tools order 4 근거 / Codex·Claude Code·Cursor 역할 비교 |
 | tool-permissions-sandboxes | T11 | ✓ | ✓ 91 (2026-07-12, Codex) | ai-coding-tools order 5 근거 / 권한 승인·sandbox·방화벽 환경 |
 | human-ai-collaboration-patterns | T11 | ✓ | ✓ 90 (2026-07-12, Codex) | ai-coding-tools order 6 근거 / 리뷰·반복·협업 패턴 |
+| ai-code-review-tools | T11 | ✓ | ✓ 90 (2026-07-12, Codex) | ai-coding-tools order 7 근거 / Copilot code review·Bugbot·human review boundary |
+| requirement-task-breakdown | T12 | ✓ | ✓ 89 (2026-07-12, Codex) | practical-vibe-coding order 1 근거 / issue·sub-issue·Plan Mode |
+| prompt-implementation-loop | T12 | ✓ | ✓ 90 (2026-07-12, Codex) | practical-vibe-coding order 2 근거 / prompt·implementation·verify feedback loop |
+| code-change-risk-analysis | T12 | ✓ | ✓ 91 (2026-07-12, Codex) | practical-vibe-coding order 3 근거 / PR diff·CodeQL·OWASP review |
+| ai-assisted-testing-loop | T12 | ✓ | ✓ 90 (2026-07-12, Codex) | practical-vibe-coding order 4 근거 / Copilot test generation·Playwright·Vitest |
 
 ## Lesson 매트릭스
 
@@ -171,8 +176,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
-| Knowledge Base 수집(P-01) | 68 / 68 | 100% (P-01/P-02 AI coding tools KB Wave 2026-07-12 포함) |
-| Knowledge Base (approved 이상) | 68 / 68 | 100% (QA scan 기준 KB 68건 approved 이상) |
+| Knowledge Base 수집(P-01) | 73 / 73 | 100% (P-01/P-02 practical vibe coding KB Wave 2026-07-12 포함) |
+| Knowledge Base (approved 이상) | 73 / 73 | 100% (QA scan 기준 KB 73건 approved 이상) |
 | KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (2차 approved KB) | 3 / 3 | 100% |
 | KB Quote Bank (3차 approved KB) | 4 / 4 | 100% |
@@ -182,6 +187,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | KB Quote Bank (7차 approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (8차 approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (9차 approved KB) | 5 / 5 | 100% (AI coding tools KB Wave 승인) |
+| KB Quote Bank (10차 approved KB) | 5 / 5 | 100% (practical vibe coding KB Wave 승인) |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
 | Lesson 생성 | 78 / 100 | 78% (V2 generated 78강, 다음 P-01/P-02 KB wave 대기) |
 | Site 반영 | 78 / 100 | 78% (V2 integrated 78강, 다음 P-01/P-02 KB wave 대기) |
@@ -279,3 +285,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-12 | P-05 Human-AI Collaboration Integration | 완료 | human-ai-collaboration-patterns markdown·curriculum·glossary 4개·diagram 1개·KB consumers 반영, lint/typecheck/verify 대기 |
 | 2026-07-12 | P-06 Human-AI Collaboration Verify | 완료 | `npm run verify` PASS: lint·typecheck·Vitest 3 files/8 tests·Next build 140 static pages, P-08 대기 |
 | 2026-07-12 | P-08 Human-AI Collaboration Release | 완료 | human-ai-collaboration-patterns V2 Wave 30 released, deployment HOLD |
+| 2026-07-12 | P-01/P-02 Practical Vibe Coding KB Wave | 완료 | ai-code-review-tools 90·requirement-task-breakdown 89·prompt-implementation-loop 90·code-change-risk-analysis 91·ai-assisted-testing-loop 90 approved, 백로그 63·80~83 planned 전환 |

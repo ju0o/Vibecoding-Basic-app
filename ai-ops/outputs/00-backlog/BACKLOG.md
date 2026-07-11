@@ -78,7 +78,7 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 60 | B | codex-claude-cursor-comparison | ai-coding-tools | 4 | deep-dive | Codex, Claude Code, Cursor의 역할 비교 | 중급 | ide-agent-era | ai-coding-tool-comparison | v2-released |
 | 61 | A | tool-permissions-sandboxes | ai-coding-tools | 5 | deep-dive | AI 도구 권한과 sandbox | 중급 | ide-agent-era | tool-permissions-sandboxes | v2-released |
 | 62 | B | human-ai-collaboration-patterns | ai-coding-tools | 6 | deep-dive | 사람-AI 협업 패턴 | 기초 | chat-coding-era | human-ai-collaboration-patterns | v2-released |
-| 63 | B | ai-code-review-tools | ai-coding-tools | 7 | deep-dive | AI 코드 리뷰 도구와 한계 | 중급 | frontend-testing-basics | ai-code-review-tools | kb_needed |
+| 63 | B | ai-code-review-tools | ai-coding-tools | 7 | deep-dive | AI 코드 리뷰 도구와 한계 | 중급 | frontend-testing-basics | ai-code-review-tools | planned |
 | 64 | C | context-engineering-basics | ai-system-design | 1 | deep-dive | Context Engineering 기초 | 기초 | from-prompt-to-system | context-engineering | v2-released |
 | 65 | C | context-window-and-memory | ai-system-design | 2 | deep-dive | 컨텍스트 윈도와 메모리 관리 | 기초 | context-engineering-basics | context-engineering | v2-released |
 | 66 | C | system-prompts-and-instruction-layers | ai-system-design | 3 | deep-dive | 시스템 프롬프트와 지침 계층 | 기초 | context-engineering-basics | context-engineering | v2-released |
@@ -95,10 +95,10 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 77 | C | harness-engineering-basics | ai-system-design | 14 | deep-dive | Harness Engineering: 실행 환경, 권한, 검증 장치 | 중급 | loop-engineering-basics | harness | v2-released |
 | 78 | C | context-caching-and-state | ai-system-design | 15 | deep-dive | Context Caching과 상태 재사용 | 중급 | context-window-and-memory | context-caching | v2-released |
 | 79 | D | ai-system-evaluation | ai-system-design | 16 | reference | AI 시스템 평가와 eval 레퍼런스 | 중급 | harness-engineering-basics | ai-system-evaluation | v2-released |
-| 80 | B | requirement-to-task-breakdown | practical-vibe-coding | 1 | deep-dive | 요구사항을 작업 단위로 쪼개기 | 기초 | human-ai-collaboration-patterns | requirement-task-breakdown | kb_needed |
-| 81 | B | prompt-to-implementation-loop | practical-vibe-coding | 2 | deep-dive | 프롬프트에서 구현 루프까지 | 중급 | requirement-to-task-breakdown | prompt-implementation-loop | kb_needed |
-| 82 | A | code-change-risk-analysis | practical-vibe-coding | 3 | deep-dive | 코드 변경 위험 분석 | 중급 | debugging-error-reading | code-change-risk-analysis | kb_needed |
-| 83 | A | ai-assisted-testing-loop | practical-vibe-coding | 4 | deep-dive | AI와 테스트 루프 설계 | 중급 | frontend-testing-basics | ai-assisted-testing-loop | kb_needed |
+| 80 | B | requirement-to-task-breakdown | practical-vibe-coding | 1 | deep-dive | 요구사항을 작업 단위로 쪼개기 | 기초 | human-ai-collaboration-patterns | requirement-task-breakdown | planned |
+| 81 | B | prompt-to-implementation-loop | practical-vibe-coding | 2 | deep-dive | 프롬프트에서 구현 루프까지 | 중급 | requirement-to-task-breakdown | prompt-implementation-loop | planned |
+| 82 | A | code-change-risk-analysis | practical-vibe-coding | 3 | deep-dive | 코드 변경 위험 분석 | 중급 | debugging-error-reading | code-change-risk-analysis | planned |
+| 83 | A | ai-assisted-testing-loop | practical-vibe-coding | 4 | deep-dive | AI와 테스트 루프 설계 | 중급 | frontend-testing-basics | ai-assisted-testing-loop | planned |
 | 84 | B | refactoring-with-ai | practical-vibe-coding | 5 | deep-dive | AI와 리팩터링하기 | 중급 | code-change-risk-analysis | refactoring-with-ai | kb_needed |
 | 85 | B | reviewing-ai-output | practical-vibe-coding | 6 | deep-dive | AI 결과물 리뷰하는 법 | 기초 | hallucination-and-verification | reviewing-ai-output | kb_needed |
 | 86 | A | incident-style-ai-debugging | practical-vibe-coding | 7 | deep-dive | 장애 대응식 AI 디버깅 | 중급 | monitoring-errors-rollbacks | incident-ai-debugging | kb_needed |
