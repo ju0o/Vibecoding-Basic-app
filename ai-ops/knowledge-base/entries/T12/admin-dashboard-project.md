@@ -2,8 +2,8 @@
 id: admin-dashboard-project
 title: "관리자 대시보드 프로젝트 (Admin Dashboard Project)"
 topicGroup: T12
-status: draft
-score: null
+status: approved
+score: 89
 level: 중급
 prerequisites: [react-state-effects, nextjs-routing-rendering, web-security-basics]
 successors: [mini-saas-architecture]

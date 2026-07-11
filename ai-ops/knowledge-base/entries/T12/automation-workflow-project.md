@@ -2,8 +2,8 @@
 id: automation-workflow-project
 title: "자동화 Workflow 프로젝트 (Automation Workflow Project)"
 topicGroup: T12
-status: draft
-score: null
+status: approved
+score: 89
 level: 중급
 prerequisites: [orchestration, loop-engineering, agent-loop]
 successors: [mcp-enabled-tool-project, private-ai-learning-site-project]

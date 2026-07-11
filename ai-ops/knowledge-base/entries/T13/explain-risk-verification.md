@@ -2,8 +2,8 @@
 id: explain-risk-verification
 title: "위험과 검증 설명 레퍼런스 (Explaining Risk and Verification)"
 topicGroup: T13
-status: draft
-score: null
+status: approved
+score: 91
 level: 중급
 prerequisites: [reviewing-ai-output, code-change-risk-analysis, ai-assisted-testing-loop]
 successors: []

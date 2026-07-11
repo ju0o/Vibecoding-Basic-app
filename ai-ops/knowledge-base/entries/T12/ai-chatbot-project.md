@@ -2,8 +2,8 @@
 id: ai-chatbot-project
 title: "AI 챗봇 프로젝트 (AI Chatbot Project)"
 topicGroup: T12
-status: draft
-score: null
+status: approved
+score: 90
 level: 중급
 prerequisites: [rag, context-engineering, tool-calling]
 successors: [private-ai-learning-site-project]

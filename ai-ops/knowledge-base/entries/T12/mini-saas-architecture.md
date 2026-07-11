@@ -2,8 +2,8 @@
 id: mini-saas-architecture
 title: "미니 SaaS 아키텍처 (Mini SaaS Architecture)"
 topicGroup: T12
-status: draft
-score: null
+status: approved
+score: 90
 level: 중급
 prerequisites: [auth-session-token, database-tables-indexes, production-env-secrets]
 successors: [admin-dashboard-project, private-ai-learning-site-project]
