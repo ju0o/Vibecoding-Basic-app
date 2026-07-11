@@ -2,10 +2,10 @@
 
 ## 요약
 
-- 강의 마크다운 검사 파일 수: 77
+- 강의 마크다운 검사 파일 수: 78
 - KB 검사 파일 수: 68
-- 다이어그램 SVG 검사 파일 수: 55
-- 용어집 term 수: 384
+- 다이어그램 SVG 검사 파일 수: 56
+- 용어집 term 수: 388
 - 링크 생존 검사 도메인 수(중복 제거): 38
 - 위반 수(V1 알려짐 제외): 0
 - 위반 없음
@@ -48,11 +48,11 @@
 | code.claude.com | 200 | HEAD | https://code.claude.com/docs/en/agent-sdk/agent-loop | 27 |
 | code.visualstudio.com | 200 | HEAD | https://code.visualstudio.com/docs/editor/debugging | 13 |
 | collinsdictionary.com | 403 | GET | https://www.collinsdictionary.com/us/woty | 3 |
-| cursor.com | 200 | HEAD | https://cursor.com/blog/agent-best-practices | 3 |
+| cursor.com | 200 | HEAD | https://cursor.com/blog/agent-best-practices | 4 |
 | datatracker.ietf.org | 200 | HEAD | https://datatracker.ietf.org/doc/html/rfc9110 | 4 |
 | developer.mozilla.org | 200 | HEAD | https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview | 39 |
 | developers.openai.com | 200 | HEAD | https://developers.openai.com/api/docs/guides/agent-evals | 34 |
-| docs.github.com | 200 | HEAD | https://docs.github.com/en/copilot/responsible-use/chat | 14 |
+| docs.github.com | 200 | HEAD | https://docs.github.com/en/copilot/responsible-use/chat | 15 |
 | docs.npmjs.com | 200 | HEAD | https://docs.npmjs.com/cli/v10/using-npm/scripts | 4 |
 | firebase.google.com | 200 | HEAD | https://firebase.google.com/docs/hosting | 2 |
 | git-scm.com | 200 | HEAD | https://git-scm.com/book/ms/v2/Getting-Started-About-Version-Control | 13 |
@@ -62,7 +62,7 @@
 | modelcontextprotocol.io | 200 | HEAD | https://modelcontextprotocol.io/specification/2025-11-25/server/tools | 6 |
 | nextjs.org | 200 | HEAD | https://nextjs.org/docs/app/getting-started/layouts-and-pages | 4 |
 | nodejs.org | 200 | HEAD | https://nodejs.org/api/process.html | 7 |
-| openai.com | 403 | GET | https://openai.com/index/introducing-codex/ | 9 |
+| openai.com | 403 | GET | https://openai.com/index/introducing-codex/ | 10 |
 | owasp.org | 200 | HEAD | https://owasp.org/www-community/attacks/xss/ | 2 |
 | platform.claude.com | 200 | HEAD | https://platform.claude.com/docs/en/test-and-evaluate/develop-tests | 33 |
 | playwright.dev | 200 | HEAD | https://playwright.dev/ | 1 |

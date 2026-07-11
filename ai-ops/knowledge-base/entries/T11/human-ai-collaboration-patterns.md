@@ -9,8 +9,8 @@ prerequisites: [chat-coding-era]
 successors: []
 related: [ai-learning-verification, ai-coding-tool-comparison, tool-permissions-sandboxes]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [human-ai-collaboration-patterns]
+  glossary: [Task Framing, Human Review Loop, Responsibility Boundary, Rollback Readiness]
 sources:
   - { title: "GitHub Docs — Responsible use of GitHub Copilot Chat in your IDE", url: "https://docs.github.com/en/copilot/responsible-use/chat", checked: 2026-07-12 }
   - { title: "GitHub Docs — Responsible use of GitHub Copilot Agents", url: "https://docs.github.com/en/copilot/responsible-use/agents", checked: 2026-07-12 }

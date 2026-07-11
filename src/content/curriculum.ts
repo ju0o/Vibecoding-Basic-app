@@ -817,6 +817,18 @@ export const LESSON_META = [
     tags: ["Tool Permissions", "Sandbox", "Codex", "Claude Code", "AI 보안"],
   },
   {
+    slug: "human-ai-collaboration-patterns",
+    moduleId: "ai-coding-tools",
+    order: 6,
+    title: "사람-AI 협업 패턴",
+    summary:
+      "사람이 목표와 검증 기준을 정하고 AI가 조사·초안·수정 후보를 보조하며, 사람이 review와 책임을 맡는 협업 루프를 배웁니다.",
+    level: "기초",
+    type: "deep-dive",
+    minutes: 55,
+    tags: ["Human Review", "AI Collaboration", "Verification", "Agent", "Vibe Coding"],
+  },
+  {
     slug: "from-prompt-to-system",
     moduleId: "ai-system-design",
     order: 1,
