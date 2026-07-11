@@ -1,4 +1,4 @@
-# ORCHESTRATION-PLAN (O-06, v3) — Fable 지휘 · Grok/Codex 에이전트 체제
+# ORCHESTRATION-PLAN (O-06.1, v3.1) — Fable 지휘 · Codex 실행 2인 체제
 
 > **지위**: 본 문서가 기존 [CODEX-PLAN.md](CODEX-PLAN.md)(v2, 단일 실행자 무정지)를 **대체**한다. 파이프라인(P-01~P-09)·품질 게이트·인용 정책은 그대로 승계하고, **실행 조직**을 오케스트레이션 체제로 재편한다. (2026-07-08, 운영자 지시)
 
@@ -7,30 +7,24 @@
 ## 1. 조직
 
 ```
-                 ┌─────────────────────────┐
-                 │   운영자 (사람)          │  게이트: 배포 승인 · 에스컬레이션 · 스팟체크
-                 └────────────┬────────────┘
-                              │
-                 ┌────────────▼────────────┐
-                 │   Fable 5 — Maestro     │  지휘: 계획 · 검증(P-02) · QA 판정 · 통합 조정
-                 │   (오케스트레이터)       │        상태 관리(STATE) · 릴리스 판정 · 배포 실행
-                 └──────┬───────────┬──────┘
-                        │           │
-            ┌───────────▼──┐   ┌───▼──────────┐
-            │  Codex        │   │  Grok        │
-            │  Heavy Executor│   │  Light Executor│
-            └───────────────┘   └──────────────┘
+운영자 (사람) — 게이트: 배포 승인 · 에스컬레이션 · 스팟체크
+   │
+   └─ Fable 5 — Maestro (지휘 + 경량 실행)
+        │   계획 · P-02 검증 · 기계 QA(T1~T6) · 릴리스 판정
+        │   STATE 관리 · 충돌 조정 · 배포 실행(P-09)
+        │
+        └─ Codex — Heavy Executor
+              대규모 무정지 미션 M1~M5 (몇 시간 완주형)
 ```
 
 ### 에이전트 특성과 역할 배정 근거
 
 | 에이전트 | 특성 (운영자 확인) | 배정 역할 |
 |---|---|---|
-| **Fable 5** | 이 세션의 지휘자. 판단·검증·조정에 강함. 세션 단위 토큰 | **Maestro**: 미션 설계, P-02 검증·승인, 에이전트 산출물 QA(표본 재검증), 충돌 해결(git 재대사), 릴리스 판정, STATE/MASTER_PROGRESS 관리, **배포 실행(P-09)** |
-| **Codex** | 한 번 명령을 받으면 **토큰이 다 되어도 몇 시간이고 완주** — 사람 호출 없는 대규모 연속 작업에 최적 | **Heavy Executor**: 다강 웨이브 묶음(P-01→P-08 연속), V1 레거시 5강 재생성, **UI/UX 리팩토링 구현**, 콘텐츠 리프레시 스윕 — "크고 긴" 미션 전담 |
-| **Grok** | **토큰 사용량이 적음** — 잦은 소규모 작업에 경제적 | **Light Executor**: 기계 QA 스캔(형식·인용·링크·용어·다이어그램 5종), stale-KB 목록 생성, P-05 기계 복사, 소규모 수정, 조사 보조 — "작고 잦은" 작업 전담 |
+| **Fable 5** | 이 세션의 지휘자. 판단·검증·조정에 강함. 세션 단위 토큰 | **Maestro + 경량 실행**: 미션 설계, P-02 검증·승인, Codex 산출물 QA(표본 재검증), **기계 QA T1~T6 직접 수행**(형식·인용·링크·다이어그램·용어·stale-KB — 웨이브마다 인라인 + 주기 전수), 충돌 해결, 릴리스 판정, STATE/MASTER_PROGRESS 관리, **배포 실행(P-09)**. 소규모 강의 웨이브 대행도 가능 |
+| **Codex** | 한 번 명령을 받으면 **토큰이 다 되어도 몇 시간이고 완주** — 사람 호출 없는 대규모 연속 작업에 최적 | **Heavy Executor**: 다강 웨이브 묶음(P-01→P-08 연속), V1 레거시 5강 재생성, **UI/UX 리팩토링 구현**, 콘텐츠 리프레시 스윕, 기계 QA 전수 스캔(M5) — "크고 긴" 미션 전담 |
 
-> Cline은 본 체제에서 제외한다(감사 신뢰성 문제 2회 실증 — reports/lesson-format-scan.md 참조). Grok이 그 역할을 승계하되, **동일한 안전장치 적용**: 극단값 결과("전부 위반" 등)는 스스로 재검토, Fable이 수용 전 표본 재검증.
+> Cline·Grok은 본 체제에 없다 (O-06.1에서 2인으로 단순화). Cline의 감사 신뢰성 교훈(극단값 결과는 표본 재검증)은 Codex 산출물 검수 시 Fable이 계속 적용한다.
 
 ### 불변 원칙 (v2에서 승계)
 
@@ -57,12 +51,12 @@
 7. **V1 레거시 5강 재생성**: ai-vibe-coding-orientation, web-screen-anatomy, typescript-react-nextjs, git-collaboration-basics, api-db-backend-flow
 8. **보류 해제**: production-env-and-secrets (deployment-ops order 5 — 소싱 확보 시)
 
-### W2 — 콘텐츠 리프레시 (신규 동향 반영)  `담당: Grok(감지) → Codex(수집·생산) / Fable(검증)`
+### W2 — 콘텐츠 리프레시 (신규 동향 반영)  `담당: Fable(감지·판정) / Codex(수집·생산)`
 
 상세: [roadmap/CONTENT-REFRESH-2026H2.md](roadmap/CONTENT-REFRESH-2026H2.md)
 - 초판 기획(2026-07-05) 이후 업데이트된 AI·바이브코딩 동향을 커리큘럼에 반영.
 - 원칙: **후보는 자유롭게, 승격은 공식 문서 P-01 확보분만** (추측 서술 금지).
-- stale-KB 재확인: `checked` 30일 경과 KB는 Grok이 목록화 → 재fetch 대조.
+- stale-KB 재확인: `checked` 30일 경과 KB는 Fable이 목록화(T6) → Codex M4가 재fetch 대조.
 
 ### W3 — UI/UX 리팩토링  `담당: Fable(스펙·리뷰) / Codex(구현)`
 
@@ -70,10 +64,10 @@
 - 67강·259용어 규모에 맞는 정보구조·탐색·읽기 경험 재설계.
 - 제약: 콘텐츠(마크다운) 무수정 · 정적 export 유지 · PasswordGate 유지 · verify 통과.
 
-### W4 — 상시 QA  `담당: Grok(실행) / Fable(판정)`
+### W4 — 상시 QA  `담당: Fable(인라인·표본) / Codex(전수 스캔 M5)`
 
-- 기계 QA 5종 스캔(형식·인용 대조·용어 무결성·링크 생존·다이어그램 참조)을 주기 실행.
-- Fable은 Grok 보고서를 표본 재검증 후 수용. 극단값은 즉시 재검토 지시.
+- Fable: 매 웨이브 인라인 QA(형식·인용 대조·다이어그램 참조·용어 충돌) + 수시 표본 점검.
+- Codex M5: 전 강의·전 KB 대상 기계 QA 5종 전수 스캔을 주기 실행 → Fable이 표본 재검증 후 수용(극단값은 재검토).
 
 ---
 
@@ -81,12 +75,11 @@
 
 ### 미션 발급 (운영자 → 에이전트)
 - **Codex**: [prompts/CODEX-MISSIONS.md](prompts/CODEX-MISSIONS.md)에서 미션 1개를 골라 Codex에 붙여넣기. Codex는 미션 완료까지 무정지 진행(중간 승인 없음, BLOCKED 기록 후 계속).
-- **Grok**: [prompts/RUN-GROK.md](prompts/RUN-GROK.md)를 붙여넣기. Grok은 태스크 목록에서 위에서부터 수행.
 - **Fable**: 본 세션에서 "계속" — STATE의 NEXT를 읽고 지휘/검증/직접 수행.
 
 ### 병렬 안전 규칙
 - 모든 에이전트는 작업 시작 전 `git log --oneline -5; git status` 재대사(다른 에이전트의 변경 확인).
-- **파일 소유권**: 동시 작업 시 Codex=콘텐츠 생산 파일(drafts, src/content) 또는 UI 파일 중 미션당 하나의 영역만. Grok=reports/·간단 수정만. 충돌 시 Fable이 조정.
+- **파일 소유권**: Codex는 미션당 하나의 영역만(콘텐츠 생산 파일 또는 UI 파일). Fable은 ai-ops/ 상태 문서·reports를 관리. 충돌 시 Fable이 조정.
 - src/content와 UI 코드(src/app, src/components)를 **같은 시점에 서로 다른 에이전트가 수정하지 않는다** (verify가 전체 빌드이므로 한쪽 깨짐이 서로를 블록).
 
 ### 게이트 (사람이 결정하는 것)
@@ -102,7 +95,7 @@
 |---|---|---|---|
 | 1 | UI/UX 리팩토링 Phase A (정보구조·탐색) | Codex (M3) | src/app·components 개편 |
 | 2 | ai-basics 잔여 2강 + ai-coding-tools 착수 | Codex (M1) | 웨이브 26~ |
-| 3 | 기계 QA 전수 스캔 + stale-KB 목록 | Grok (T1~T6) | reports/ |
+| 3 | 기계 QA 전수 스캔 + stale-KB 목록 | Fable(T6 인라인) 또는 Codex(M5) | reports/ |
 | 4 | 콘텐츠 리프레시 후보 승격(P-01) | Fable→Codex | 신규 KB |
 | 5 | V1 레거시 5강 재생성 | Codex (M2) | v2 교체 |
 
