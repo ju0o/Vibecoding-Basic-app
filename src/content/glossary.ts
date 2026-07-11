@@ -3392,4 +3392,36 @@ export const GLOSSARY_TERMS = [
       "Verification Evidence는 '동작합니다'·'안전합니다' 같은 주장을 결정의 근거로 바꾸는 실제 증거입니다. 환각과 검증 관점에서 유창한 설명은 정확함이 아니므로, approve는 이 증거가 충분할 때의 결정이고 증거가 없으면 request changes 또는 comment가 맞습니다.",
     related: ["AI Output Review", "Review Decision", "Hallucination"],
   },
+  {
+    term: "Incident Response",
+    category: "AI 코딩 도구",
+    shortDefinition: "운영 사고를 로그로 관찰하고 복구를 우선한 뒤 원인을 검증하는 대응 절차",
+    explanation:
+      "Incident Response는 이미 배포된 시스템이 실패할 때의 규율입니다. 개발 중 디버깅과 달리 사용자 영향을 멈추는 복구가 원인 이해보다 급합니다. AI 시대에는 AI가 준 원인 가설을 로그·재현으로 검증하기 전까지 결론으로 삼지 않는 것이 핵심입니다.",
+    related: ["Log Stream", "Instant Rollback", "Hypothesis Verification"],
+  },
+  {
+    term: "Log Stream",
+    category: "AI 코딩 도구",
+    shortDefinition: "실행 중 프로세스가 stdout으로 흘리는 시간순 이벤트 스트림",
+    explanation:
+      "Twelve-Factor App은 로그를 'the stream of aggregated, time-ordered events'로 정의하고, 각 프로세스는 이를 unbuffered로 stdout에 씁니다. 사고 대응은 이 time-ordered 스트림에서 오류 시작 시각과 직전 변경을 찾는 데서 출발합니다.",
+    related: ["Incident Response", "Log", "Observability"],
+  },
+  {
+    term: "Instant Rollback",
+    category: "AI 코딩 도구",
+    shortDefinition: "이전 프로덕션 배포로 즉시 되돌려 사고 영향을 멈추는 복구 수단",
+    explanation:
+      "Vercel은 Instant Rollback이 'a swift recovery from production incidents, like breaking changes or bugs'에 유용하며 'The rollback happens instantaneously'라고 설명합니다. 장애 대응에서는 원인 분석보다 먼저 사용자 영향을 멈추는 복구 우선 수단이자, 최근 변경이 원인인지 확인하는 실험이기도 합니다.",
+    related: ["Incident Response", "Rollback", "Log Stream"],
+  },
+  {
+    term: "Hypothesis Verification",
+    category: "AI 코딩 도구",
+    shortDefinition: "AI가 낸 원인 가설을 로그 시간순·재현으로 확인해 결론으로 만드는 단계",
+    explanation:
+      "Hypothesis Verification은 AI를 가설 생성기로, 로그를 판정자로 다루는 원칙입니다. AI의 첫 원인 가설은 검증 전까지 추측이므로, 로그의 시간 순서와 재현으로 확인해야 결론이 됩니다. 검증 없이 채택한 그럴듯한 가설은 증상만 가릴 수 있습니다.",
+    related: ["Incident Response", "Log Stream", "Verification Evidence"],
+  },
 ] satisfies readonly GlossaryTerm[]

@@ -73,5 +73,6 @@
 - 각 강의: 공통 규약 준수(V2 8섹션·8,500자 목표·콜아웃 상한·인용 KB Quote Bank 글자 일치·`> "` 콜아웃 시작 금지) + 다이어그램 1개(+마크다운 `![...]` 참조) + 용어 2~3개(충돌 검색 먼저) + KB consumers 갱신.
 - 출처: 공식 문서만(Anthropic·OpenAI·GitHub·MDN·12factor·Vercel·Firebase 등). 신규 모델/도구 세대는 fetch 확보분만 서술.
 - **배포(P-09)는 하지 않는다** — 릴리스(P-08)까지만. 배포는 Fable이 세션 말미 1회 수행. 매 강의 릴리스 후 커밋("P-08: release …"), 웨이브마다 `npm run verify` exit 0.
-- **베이스라인(2026-07-12 Fable)**: 83강 released + verify exit 0 + out/ 89페이지(강의 83) 배포됨. Codex는 이 위에서 이어붙인다 — `git log --oneline -5; git status` 재대사 후 시작.
-- 완료 조건: 84~100 전부 released(100강 달성) + 각 웨이브 verify exit 0 + BACKLOG/MASTER_PROGRESS/STATE 전이 기록 + M5 QA 재스캔 위반 0. 완료 후 STATE NEXT에 "전 커리큘럼 완주 — Fable 최종 배포 대기"로 넘긴다.
+- **베이스라인(2026-07-12 Fable)**: **86강 released** + verify exit 0. Fable이 84~86(practical-vibe-coding 잔여 3강: refactoring-with-ai·reviewing-ai-output·incident-style-ai-debugging)을 직접 완주함 → **1번 모듈은 완료, Codex는 2번(explanation-practice 87~91)부터 시작**한다. 84~86 KB는 `ai-ops/knowledge-base/entries/T12/`에 있으니 형식·인용 밀도 참고. Codex는 `git log --oneline -5; git status` 재대사 후 시작.
+- 완료 조건: 87~100 전부 released(100강 달성) + 각 웨이브 verify exit 0 + BACKLOG/MASTER_PROGRESS/STATE 전이 기록 + M5 QA 재스캔 위반 0. 완료 후 STATE NEXT에 "전 커리큘럼 완주 — Fable 최종 배포 대기"로 넘긴다.
+- **verify 주의**: glossary/curriculum 편집 후 `npm run format`(biome check --write)를 먼저 돌리지 않으면 `npm run lint`가 포맷 위반으로 exit 1 난다. 통합 후 항상 format → verify 순서.

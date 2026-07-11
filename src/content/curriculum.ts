@@ -1122,4 +1122,16 @@ export const LESSON_META = [
     minutes: 55,
     tags: ["AI Output Review", "Pull Request", "Review Decision", "Verification"],
   },
+  {
+    slug: "incident-style-ai-debugging",
+    moduleId: "practical-vibe-coding",
+    order: 7,
+    title: "장애 대응식 AI 디버깅",
+    summary:
+      "운영 사고에서 AI의 첫 추측 대신 time-ordered 로그로 관찰하고, 사용자 영향이 크면 즉시 롤백하며, AI 가설을 로그·재현으로 검증하는 장애 대응 순서를 Twelve-Factor Logs·Vercel Instant Rollback 기준으로 배웁니다.",
+    level: "중급",
+    type: "deep-dive",
+    minutes: 55,
+    tags: ["Incident Response", "Logs", "Rollback", "AI Debugging"],
+  },
 ] satisfies readonly LessonMeta[]

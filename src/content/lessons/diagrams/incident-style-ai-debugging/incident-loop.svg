@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="430" viewBox="0 0 960 430" role="img" aria-labelledby="title desc">
+  <title id="title">장애 대응식 AI 디버깅 루프</title>
+  <desc id="desc">사고 알림에서 로그 관찰로 출발해 사용자 영향이 크면 즉시 롤백하고, AI 가설을 로그와 재현으로 검증한 뒤 원인을 수정하는 흐름</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#ea580c" />
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#431407" flood-opacity="0.12" />
+    </filter>
+  </defs>
+  <rect width="960" height="430" rx="28" fill="#fff7ed" />
+  <text x="480" y="50" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#9a3412">관찰 → (영향 크면) 복구 → 검증 → 수정</text>
+
+  <g filter="url(#shadow)">
+    <rect x="44" y="96" width="188" height="112" rx="18" fill="#ffedd5" stroke="#fb923c" stroke-width="2" />
+    <text x="138" y="132" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800" fill="#9a3412">1. 로그 관찰</text>
+    <text x="138" y="162" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" fill="#c2410c">time-ordered</text>
+    <text x="138" y="182" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" fill="#c2410c">시작 시각·직전 변경</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="264" y="96" width="188" height="112" rx="18" fill="#fed7aa" stroke="#f97316" stroke-width="2" />
+    <text x="358" y="132" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800" fill="#9a3412">2. 즉시 롤백</text>
+    <text x="358" y="162" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" fill="#c2410c">영향 크면 먼저</text>
+    <text x="358" y="182" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" fill="#c2410c">사용자 영향 정지</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="484" y="96" width="188" height="112" rx="18" fill="#fdba74" stroke="#ea580c" stroke-width="2" />
+    <text x="578" y="132" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800" fill="#7c2d12">3. 가설 검증</text>
+    <text x="578" y="162" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" fill="#9a3412">AI 가설 + 로그</text>
+    <text x="578" y="182" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" fill="#9a3412">재현으로 확인</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="704" y="96" width="212" height="112" rx="18" fill="#d9f99d" stroke="#84cc16" stroke-width="2" />
+    <text x="810" y="132" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800" fill="#3f6212">4. 수정 + 재발 방지</text>
+    <text x="810" y="162" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" fill="#4d7c0f">검증된 수정만 배포</text>
+    <text x="810" y="182" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" fill="#4d7c0f">회귀 테스트 추가</text>
+  </g>
+
+  <line x1="232" y1="152" x2="260" y2="152" stroke="#ea580c" stroke-width="2.5" marker-end="url(#arrow)" />
+  <line x1="452" y1="152" x2="480" y2="152" stroke="#ea580c" stroke-width="2.5" marker-end="url(#arrow)" />
+  <line x1="672" y1="152" x2="700" y2="152" stroke="#ea580c" stroke-width="2.5" marker-end="url(#arrow)" />
+
+  <g filter="url(#shadow)">
+    <rect x="180" y="284" width="600" height="88" rx="16" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" />
+    <text x="480" y="318" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#854d0e">AI는 가설 생성기, 로그는 판정자</text>
+    <text x="480" y="348" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" fill="#a16207">AI의 첫 원인 가설은 검증 전까지 추측 — 시간 순서·재현으로 확인해야 결론이 된다</text>
+  </g>
+  <path d="M578 208 L578 250 L480 250 L480 282" fill="none" stroke="#ea580c" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#arrow)" />
+</svg>
