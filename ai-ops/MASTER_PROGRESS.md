@@ -147,6 +147,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | requirement-to-task-breakdown | practical-vibe-coding | requirement-task-breakdown | ✓ | ✓ | ✓ (2026-07-12, Practical Vibe Coding verify) | ✓ | V2 Wave 31, RELEASE-2026-07-12-practical-vibe-release-wave.md |
 | prompt-to-implementation-loop | practical-vibe-coding | prompt-implementation-loop | ✓ | ✓ | ✓ (2026-07-12, Practical Vibe Coding verify) | ✓ | V2 Wave 31, RELEASE-2026-07-12-practical-vibe-release-wave.md |
 | code-change-risk-analysis | practical-vibe-coding | code-change-risk-analysis | ✓ | ✓ | ✓ (2026-07-12, Practical Vibe Coding verify) | ✓ | V2 Wave 31, RELEASE-2026-07-12-practical-vibe-release-wave.md |
+| ai-assisted-testing-loop | practical-vibe-coding | ai-assisted-testing-loop | ✓ | — | — | — | V2 Wave 32 draft, P-05 대기 |
 
 | git-init-add-commit-status | git-collaboration | git-init-add-commit-status | v | v | v | v | Wave 15 (Fable), reference |
 | git-branch-switch-merge | git-collaboration | git-branch-switch-merge | v | v | v | v | Wave 15 (Fable), reference |
@@ -193,7 +194,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | KB Quote Bank (9차 approved KB) | 5 / 5 | 100% (AI coding tools KB Wave 승인) |
 | KB Quote Bank (10차 approved KB) | 5 / 5 | 100% (practical vibe coding KB Wave 승인) |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
-| Lesson 생성 | 82 / 100 | 82% (V2 generated 82강, integrated 82강) |
+| Lesson 생성 | 83 / 100 | 83% (V2 generated 83강, generated 1강 P-05 대기) |
 | Site 반영 | 82 / 100 | 82% (V2 integrated 82강, P-06 검증 대기 4강) |
 | Verify 통과 | 82 / 100 | 82% (`npm run verify` PASS, Next build 148 static pages) |
 | Release | 82 / 100 | 82% (V2 released 82강, deployment HOLD) |
@@ -294,3 +295,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-12 | P-05 Practical Vibe Coding Integration Wave | 완료 | 4강 markdown·curriculum·glossary 16개·diagrams 4개·KB consumers 반영, lint/typecheck PASS |
 | 2026-07-12 | P-06 Practical Vibe Coding Verify | 완료 | `npm run verify` PASS: lint·typecheck·Vitest 3 files/8 tests·Next build 148 static pages, P-08 대기 |
 | 2026-07-12 | P-08 Practical Vibe Coding Release | 완료 | ai-code-review-tools·requirement-to-task-breakdown·prompt-to-implementation-loop·code-change-risk-analysis V2 Wave 31 released, deployment HOLD |
+| 2026-07-12 | P-04 AI-assisted Testing Draft | 완료 | ai-assisted-testing-loop V2 draft 생성, 8섹션·10,753자·Quote Bank 인용 5개 일치, P-05 대기 |
