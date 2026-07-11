@@ -133,10 +133,10 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | model-selection-tradeoffs | ai-basics | model-selection-tradeoffs | ✓ | ✓ | ✓ (2026-07-11, model selection wave verify) | ✓ | V2 Wave 26, RELEASE-2026-07-11-model-selection.md |
 | ai-era-timeline | ai-basics | ai-era-timeline | ✓ | ✓ | ✓ (2026-07-11, V2 wave 27 verify) | ✓ | V2 Wave 27, RELEASE-2026-07-11-platform-ai-era-wave.md |
 | autocomplete-era | ai-coding-tools | autocomplete-era | ✓ | ✓ | ✓ (2026-07-11, V2 wave 28 verify) | ✓ | V2 Wave 28, RELEASE-2026-07-11-autocomplete-era.md |
-| chat-coding-era | ai-coding-tools | chat-coding-era | ✓ | ✓ | — | — | P-05 integrated 2026-07-12, diagram·glossary 연결, P-06 대기 |
-| ide-agent-era | ai-coding-tools | ide-agent-era | ✓ | ✓ | — | — | P-05 integrated 2026-07-12, diagram·glossary 연결, P-06 대기 |
-| codex-claude-cursor-comparison | ai-coding-tools | ai-coding-tool-comparison | ✓ | ✓ | — | — | P-05 integrated 2026-07-12, diagram·glossary 연결, P-06 대기 |
-| tool-permissions-sandboxes | ai-coding-tools | tool-permissions-sandboxes | ✓ | ✓ | — | — | P-05 integrated 2026-07-12, diagram·glossary 연결, P-06 대기 |
+| chat-coding-era | ai-coding-tools | chat-coding-era | ✓ | ✓ | ✓ (2026-07-12, AI coding tools verify) | — | P-06 VERIFIED, P-08 대기 |
+| ide-agent-era | ai-coding-tools | ide-agent-era | ✓ | ✓ | ✓ (2026-07-12, AI coding tools verify) | — | P-06 VERIFIED, P-08 대기 |
+| codex-claude-cursor-comparison | ai-coding-tools | ai-coding-tool-comparison | ✓ | ✓ | ✓ (2026-07-12, AI coding tools verify) | — | P-06 VERIFIED, P-08 대기 |
+| tool-permissions-sandboxes | ai-coding-tools | tool-permissions-sandboxes | ✓ | ✓ | ✓ (2026-07-12, AI coding tools verify) | — | P-06 VERIFIED, P-08 대기 |
 
 | git-init-add-commit-status | git-collaboration | git-init-add-commit-status | v | v | v | v | Wave 15 (Fable), reference |
 | git-branch-switch-merge | git-collaboration | git-branch-switch-merge | v | v | v | v | Wave 15 (Fable), reference |
@@ -184,7 +184,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
 | Lesson 생성 | 77 / 100 | 77% (AI coding tools P-04 draft 4강 generated, P-05 대기) |
 | Site 반영 | 77 / 100 | 77% (AI coding tools P-05 4강 integrated, P-06 대기) |
-| Verify 통과 | 73 / 100 | 73% (`npm run verify` PASS, M5 QA 전체 위반 0) |
+| Verify 통과 | 77 / 100 | 77% (`npm run verify` PASS, M5 QA 전체 위반 0) |
 | Release | 73 / 100 | 73% (V2 released 73강, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
@@ -272,3 +272,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-12 | P-01/P-02 AI Coding Tools KB Wave | 완료 | chat-coding-era 91·ide-agent-era 90·ai-coding-tool-comparison 88·tool-permissions-sandboxes 91·human-ai-collaboration-patterns 90 approved, 백로그 58~62행 planned 전환 |
 | 2026-07-12 | P-04 AI Coding Tools Draft Wave | 완료 | chat-coding-era·ide-agent-era·codex-claude-cursor-comparison·tool-permissions-sandboxes V2 draft 생성, 각 8섹션·1만자 내외·Quote Bank 인용 5개 원문 일치, P-05 대기 |
 | 2026-07-12 | P-05 AI Coding Tools Integration Wave | 완료 | 4강 markdown·curriculum·glossary 13개·diagrams 4개·KB consumers 반영, lint/typecheck/verify 대기 |
+| 2026-07-12 | P-06 AI Coding Tools Verify | 완료 | `npm run verify` PASS: lint·typecheck·Vitest 3 files/8 tests·Next build 138 static pages, P-08 대기 |

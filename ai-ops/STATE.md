@@ -11,27 +11,27 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **O-06.1 (v3.1) — Fable(지휘+경량QA) · Codex(Heavy 미션 M1~M5) 2인 체제.** 기획서: ORCHESTRATION-PLAN.md |
-| Current State | **AI Coding Tools P-05 integrated** — 73강 released, 4강 integrated, 1강 planned, KB 68건 approved, 용어 384, 다이어그램 55. P-06 대기 |
-| Last Completed Step | Codex가 chat-coding-era·ide-agent-era·codex-claude-cursor-comparison·tool-permissions-sandboxes 4강을 사이트 콘텐츠로 통합 (2026-07-12) |
+| Current State | **AI Coding Tools P-06 verified** — 73강 released, 4강 verified, 1강 planned, KB 68건 approved, 용어 384, 다이어그램 55. P-08 대기 |
+| Last Completed Step | Codex가 AI coding tools 4강 `npm run verify` 검증 통과를 확인 (2026-07-12) |
 | Next Executor | Codex(전체 권한 연속 실행) |
 | Next Prompt File | ai-ops/CODEX-PLAN.md / ai-ops/ORCHESTRATION-PLAN.md |
 | Blocker | 없음 |
 | Required Human Action | None |
-| Release Status | **V2 73강 released (비공개 모드 A) + M3 UI/UX verified + M5 QA 전체 0, deploy HOLD** — 73/100, integrated 4, planned 1 |
+| Release Status | **V2 73강 released (비공개 모드 A) + M3 UI/UX verified + M5 QA 전체 0, deploy HOLD** — 73/100, verified 4, planned 1 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: AI Coding Tools P-05 integrated, 73강 released, integrated 4강, planned 1강
+- Current State: AI Coding Tools P-06 verified, 73강 released, verified 4강, planned 1강
 - Verdict: DONE
 - Next Executor: Codex
 - Next Prompt File: ai-ops/CODEX-PLAN.md / ai-ops/ORCHESTRATION-PLAN.md
-- Why: 운영자 승인에 따라 역할 제한 없이 Codex가 완성까지 연속 진행하며, integrated 항목 4건이 있으므로 다음 우선순위는 P-06 verify 및 통과 시 P-08 release
+- Why: 운영자 승인에 따라 역할 제한 없이 Codex가 완성까지 연속 진행하며, P-06 verified 항목 4건이 있으므로 다음 우선순위는 P-08 release
 - Required Operator Action: None
-- If Approved: Codex가 P-06로 M5 QA scan과 `npm run verify`를 실행하고 통과 시 P-08 release 상태로 전환
-- If Rejected: 반려 사유에 따라 P-05 통합 메타데이터, glossary, diagram reference 수정
-- Files to Check: src/content/lessons/markdown/chat-coding-era.md, src/content/lessons/markdown/ide-agent-era.md, src/content/lessons/markdown/codex-claude-cursor-comparison.md, src/content/lessons/markdown/tool-permissions-sandboxes.md, src/content/curriculum.ts, src/content/glossary.ts
+- If Approved: Codex가 P-08로 4강 release 전환, release note 갱신, deploy HOLD 유지
+- If Rejected: 반려 사유에 따라 P-06 보고서 또는 P-05 통합 산출물 수정
+- Files to Check: ai-ops/outputs/06-build-verification/VERIFIED-2026-07-12-1.md, ai-ops/outputs/04-integrated/RELEASE-2026-07-12-ai-coding-tools-integration-wave.md
 - Stop Condition: `npm run verify` 실패 또는 공식 출처 없는 신규 사실이 필요한 경우
 ```
 
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB: **68건 approved**, stale KB 0건 / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 73강**, integrated 4강, planned 1강 (deployment HOLD) / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
+- 강의: **V2 released 73강**, verified 4강, planned 1강 (deployment HOLD) / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-12 | chat-coding-era·ide-agent-era·codex-claude-cursor-comparison·tool-permissions-sandboxes | integrated → verified | Codex P-06 AI Coding Tools Verify, `npm run verify` PASS, Next build 138 static pages |
 | 2026-07-12 | chat-coding-era·ide-agent-era·codex-claude-cursor-comparison·tool-permissions-sandboxes | generated → integrated | Codex P-05 AI Coding Tools Integration Wave, markdown·curriculum·glossary 13개·diagrams 4개·KB consumers 반영 |
 | 2026-07-12 | chat-coding-era·ide-agent-era·codex-claude-cursor-comparison·tool-permissions-sandboxes | planned → generated | Codex P-04 AI Coding Tools Draft Wave, 4강 모두 V2 8섹션·8,000자+·Quote Bank 인용 5개 일치, P-04 self QA PASS |
 | 2026-07-12 | KB chat-coding-era·ide-agent-era·ai-coding-tool-comparison·tool-permissions-sandboxes·human-ai-collaboration-patterns | needed → draft → approved, 백로그 58~62 planned | Codex P-01/P-02 AI Coding Tools KB Wave, scores 91·90·88·91·90, M5 QA 전체 위반 0, `npm run verify` PASS |
