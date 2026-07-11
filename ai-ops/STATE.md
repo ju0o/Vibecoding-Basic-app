@@ -11,28 +11,28 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **O-06.1 (v3.1) — Fable(지휘+경량QA) · Codex(Heavy 미션 M1~M5) 2인 체제.** 기획서: ORCHESTRATION-PLAN.md |
-| Current State | **Practical Vibe Coding KB Wave approved** — 78강 released, KB 73건 approved, planned 5강, 용어 388, 다이어그램 56. 다음 P-04 대기 |
-| Last Completed Step | Codex가 ai-code-review-tools·requirement-task-breakdown·prompt-implementation-loop·code-change-risk-analysis·ai-assisted-testing-loop KB를 수집·검증 승인 (2026-07-12) |
+| Current State | **Practical Vibe Coding Draft Wave generated** — 78강 released, 4강 generated, planned 1강, KB 73건 approved. 다음 P-05 대기 |
+| Last Completed Step | Codex가 ai-code-review-tools·requirement-to-task-breakdown·prompt-to-implementation-loop·code-change-risk-analysis V2 draft를 생성하고 P-04 self QA를 통과시킴 (2026-07-12) |
 | Next Executor | Codex(전체 권한 연속 실행) |
-| Next Prompt File | ai-ops/CODEX-PLAN.md / ai-ops/ORCHESTRATION-PLAN.md |
+| Next Prompt File | ai-ops/prompts/P-05-site-integration.md |
 | Blocker | 없음 |
 | Required Human Action | None |
-| Release Status | **V2 78강 released (비공개 모드 A) + M3 UI/UX verified + M5 QA 전체 0, deploy HOLD** — 78/100, planned 5 |
+| Release Status | **V2 78강 released (비공개 모드 A) + 4강 generated + M5 QA 전체 0, deploy HOLD** — Lesson 82/100, Site 78/100 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: Practical Vibe Coding KB Wave approved, 78강 released, KB 73건 approved, planned 5강
+- Current State: Practical Vibe Coding Draft Wave generated, 78강 released, 4강 generated, planned 1강
 - Verdict: DONE
 - Next Executor: Codex
-- Next Prompt File: ai-ops/CODEX-PLAN.md / ai-ops/ORCHESTRATION-PLAN.md
-- Why: 운영자 승인에 따라 역할 제한 없이 Codex가 완성까지 연속 진행하며, planned 항목 5건이 생겼으므로 다음 우선순위는 P-04 lesson generation 최대 4건
+- Next Prompt File: ai-ops/prompts/P-05-site-integration.md
+- Why: generated 항목 4건이 생겼으므로 RUN 우선순위상 다음 단계는 P-05 사이트 반영이며, P-05는 단독 실행해야 함
 - Required Operator Action: None
-- If Approved: Codex가 P-04로 ai-code-review-tools, requirement-to-task-breakdown, prompt-to-implementation-loop, code-change-risk-analysis 4강 draft 생성
-- If Rejected: 반려 사유에 따라 KB verification report 또는 frontmatter status/score 수정
-- Files to Check: ai-ops/knowledge-base/entries/T11/ai-code-review-tools.md, ai-ops/knowledge-base/entries/T12/requirement-task-breakdown.md, ai-ops/knowledge-base/entries/T12/prompt-implementation-loop.md, ai-ops/knowledge-base/entries/T12/code-change-risk-analysis.md
-- Stop Condition: KB 외 사실이 필요한 경우 또는 P-04 self QA 8,000자·Quote Bank 인용 일치 실패
+- If Approved: Codex가 P-05로 ai-code-review-tools, requirement-to-task-breakdown, prompt-to-implementation-loop, code-change-risk-analysis 4강을 src/content에 통합
+- If Rejected: 반려 사유에 따라 draft lesson/meta/terms 수정 후 P-04 상태 보정
+- Files to Check: ai-ops/outputs/02-drafts/ai-code-review-tools, ai-ops/outputs/02-drafts/requirement-to-task-breakdown, ai-ops/outputs/02-drafts/prompt-to-implementation-loop, ai-ops/outputs/02-drafts/code-change-risk-analysis
+- Stop Condition: P-05 통합 중 draft와 src/content 해시 불일치, 다이어그램/용어 충돌, 또는 KB 외 콘텐츠 수정 필요
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB: **73건 approved**, stale KB 0건 / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 78강**, planned 5강 (deployment HOLD) / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
+- 강의: **V2 released 78강**, generated 4강, planned 1강 (deployment HOLD) / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-12 | ai-code-review-tools·requirement-to-task-breakdown·prompt-to-implementation-loop·code-change-risk-analysis | planned → generated | Codex P-04 Practical Vibe Coding Draft Wave, V2 8섹션·8,000자+·Quote Bank 인용 일치, P-05 대기 |
 | 2026-07-12 | KB ai-code-review-tools·requirement-task-breakdown·prompt-implementation-loop·code-change-risk-analysis·ai-assisted-testing-loop | needed → draft → approved, 백로그 63·80~83 planned | Codex P-01/P-02 Practical Vibe Coding KB Wave, scores 90·89·90·91·90 |
 | 2026-07-12 | human-ai-collaboration-patterns | verified → released | Codex P-08 Human-AI Collaboration Release, V2 Wave 30, deployment HOLD |
 | 2026-07-12 | human-ai-collaboration-patterns | integrated → verified | Codex P-06 Human-AI Collaboration Verify, `npm run verify` PASS, Next build 140 static pages |
