@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="430" viewBox="0 0 920 430" role="img" aria-labelledby="title desc">
+  <title id="title">TypeScript React Next.js 책임 분리</title>
+  <desc id="desc">TypeScript, React, Next.js가 프론트엔드 앱에서 맡는 책임</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0f766e" />
+    </marker>
+    <style>
+      .box { fill: #f0fdfa; stroke: #0f766e; stroke-width: 2; rx: 18; }
+      .app { fill: #ecfeff; stroke: #0891b2; stroke-width: 2; rx: 18; }
+      .text { font-family: Arial, sans-serif; font-size: 22px; font-weight: 700; fill: #0f172a; }
+      .sub { font-family: Arial, sans-serif; font-size: 15px; fill: #334155; }
+      .line { fill: none; stroke: #0f766e; stroke-width: 3; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect x="55" y="70" width="220" height="115" class="box" />
+  <text x="165" y="112" text-anchor="middle" class="text">TypeScript</text>
+  <text x="165" y="140" text-anchor="middle" class="sub">데이터 shape</text>
+  <text x="165" y="162" text-anchor="middle" class="sub">props와 API 계약</text>
+  <rect x="350" y="70" width="220" height="115" class="box" />
+  <text x="460" y="112" text-anchor="middle" class="text">React</text>
+  <text x="460" y="140" text-anchor="middle" class="sub">component 단위</text>
+  <text x="460" y="162" text-anchor="middle" class="sub">state와 event</text>
+  <rect x="645" y="70" width="220" height="115" class="box" />
+  <text x="755" y="112" text-anchor="middle" class="text">Next.js</text>
+  <text x="755" y="140" text-anchor="middle" class="sub">route와 layout</text>
+  <text x="755" y="162" text-anchor="middle" class="sub">server/client 경계</text>
+  <rect x="270" y="280" width="380" height="92" class="app" />
+  <text x="460" y="318" text-anchor="middle" class="text">검토 가능한 프론트엔드 앱</text>
+  <text x="460" y="346" text-anchor="middle" class="sub">값의 모양, UI 책임, 렌더링 위치가 함께 맞아야 한다</text>
+  <path d="M275 130 H350" class="line" />
+  <path d="M570 130 H645" class="line" />
+  <path d="M165 185 C210 260 280 305 330 315" class="line" />
+  <path d="M460 185 V280" class="line" />
+  <path d="M755 185 C710 260 640 305 590 315" class="line" />
+</svg>

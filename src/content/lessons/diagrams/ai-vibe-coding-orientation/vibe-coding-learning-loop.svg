@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="420" viewBox="0 0 920 420" role="img" aria-labelledby="title desc">
+  <title id="title">AI 바이브코딩 학습 루프</title>
+  <desc id="desc">목표, 맥락, AI 초안, 검증, 설명, 기록이 반복되는 학습 흐름</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb" />
+    </marker>
+    <style>
+      .box { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; rx: 18; }
+      .human { fill: #ecfdf5; stroke: #059669; stroke-width: 2; rx: 18; }
+      .text { font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; fill: #0f172a; }
+      .sub { font-family: Arial, sans-serif; font-size: 14px; fill: #334155; }
+      .line { fill: none; stroke: #2563eb; stroke-width: 3; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect x="40" y="50" width="180" height="92" class="human" />
+  <text x="130" y="88" text-anchor="middle" class="text">목표</text>
+  <text x="130" y="114" text-anchor="middle" class="sub">제품 행동으로 쓰기</text>
+  <rect x="270" y="50" width="180" height="92" class="human" />
+  <text x="360" y="88" text-anchor="middle" class="text">맥락</text>
+  <text x="360" y="114" text-anchor="middle" class="sub">파일, 제약, 기준</text>
+  <rect x="500" y="50" width="180" height="92" class="box" />
+  <text x="590" y="88" text-anchor="middle" class="text">AI 초안</text>
+  <text x="590" y="114" text-anchor="middle" class="sub">코드와 설명 생성</text>
+  <rect x="700" y="170" width="180" height="92" class="human" />
+  <text x="790" y="208" text-anchor="middle" class="text">검증</text>
+  <text x="790" y="234" text-anchor="middle" class="sub">실행, 테스트, 출처</text>
+  <rect x="500" y="290" width="180" height="92" class="human" />
+  <text x="590" y="328" text-anchor="middle" class="text">설명</text>
+  <text x="590" y="354" text-anchor="middle" class="sub">남에게 말할 수 있게</text>
+  <rect x="270" y="290" width="180" height="92" class="human" />
+  <text x="360" y="328" text-anchor="middle" class="text">기록</text>
+  <text x="360" y="354" text-anchor="middle" class="sub">변경, 근거, 다음 일</text>
+  <path d="M220 96 H270" class="line" />
+  <path d="M450 96 H500" class="line" />
+  <path d="M680 96 C760 96 790 120 790 170" class="line" />
+  <path d="M790 262 C790 318 735 336 680 336" class="line" />
+  <path d="M500 336 H450" class="line" />
+  <path d="M270 336 C130 336 70 250 92 142" class="line" />
+  <text x="460" y="214" text-anchor="middle" class="sub">빠르게 만들되, 느리게 확인하고, 다음 맥락으로 되돌린다</text>
+</svg>

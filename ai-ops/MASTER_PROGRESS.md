@@ -75,6 +75,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 강의 slug | 모듈 | 근거 KB | Lesson(P-04) | Site(P-05) | Verify(P-06) | Release(P-08) | 비고 |
 |---|---|---|---|---|---|---|---|
+| ai-vibe-coding-orientation | getting-started | vibe-coding-origin-karpathy, ai-learning-verification, dev-environment-map | ✓ | ✓ | ✓ (2026-07-11, V1 regeneration verify) | ✓ | V1 legacy → V2 Deep Dive 재생성, diagram 추가 |
 | development-environment-map | getting-started | dev-environment-map | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 7, RELEASE-2026-07-06-v2-wave7.md |
 | vibe-coding-origin-karpathy | getting-started | vibe-coding-origin-karpathy | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 7, RELEASE-2026-07-06-v2-wave7.md |
 | learning-with-ai-verification | getting-started | ai-learning-verification | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 7, RELEASE-2026-07-06-v2-wave7.md |
@@ -86,6 +87,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | debugging-error-reading | development-basics | debugging-error-reading | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 9, RELEASE-2026-07-06-v2-wave9.md |
 | regex-for-code-search | development-basics | regex-code-search | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 9, RELEASE-2026-07-06-v2-wave9.md |
 | package-json-and-semver | development-basics | package-json-semver | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 10, RELEASE-2026-07-06-v2-wave10.md |
+| web-screen-anatomy | web-basics | html-semantic-elements, css-cascade-layout, javascript-dom-events, browser-rendering-network, http-request-response | ✓ | ✓ | ✓ (2026-07-11, V1 regeneration verify) | ✓ | V1 legacy → V2 Deep Dive 재생성, diagram 추가 |
 | html-semantic-elements | web-basics | html-semantic-elements | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 11, RELEASE-2026-07-06-v2-wave11.md |
 | css-cascade-layout-responsive | web-basics | css-cascade-layout | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 11, RELEASE-2026-07-06-v2-wave11.md |
 | javascript-dom-events | web-basics | javascript-dom-events | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 11, RELEASE-2026-07-06-v2-wave11.md |
@@ -93,6 +95,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | http-request-response | web-basics | http-request-response | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 12, RELEASE-2026-07-06-v2-wave12.md |
 | json-data-contracts | web-basics | json-data-contracts | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 13, RELEASE-2026-07-06-v2-wave13.md |
 | web-security-basics | web-basics | web-security-basics | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 13, RELEASE-2026-07-06-v2-wave13.md |
+| typescript-react-nextjs | frontend-frameworks | typescript-type-system, react-component-model, react-state-effects, nextjs-routing-rendering | ✓ | ✓ | ✓ (2026-07-11, V1 regeneration verify) | ✓ | V1 legacy → V2 Deep Dive 재생성, diagram 추가 |
 | typescript-type-system | frontend-frameworks | typescript-type-system | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 13, RELEASE-2026-07-06-v2-wave13.md |
 | react-component-mental-model | frontend-frameworks | react-component-model | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 13, RELEASE-2026-07-06-v2-wave13.md |
 | react-state-and-effects | frontend-frameworks | react-state-effects | ✓ | ✓ | ✓ (2026-07-06, CODEX-PLAN P-06 verify) | ✓ | V2 Wave 14, RELEASE-2026-07-06-v2-wave14.md |
@@ -125,9 +128,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | nextjs-routing-rendering | frontend-frameworks | nextjs-routing-rendering | v | v | v | v | Wave 16 (Fable), deep-dive |
 
+| git-collaboration-basics | git-collaboration | git-init-add-commit-status, git-branch-switch-merge, git-log-diff-show, github-pr-review-flow | ✓ | ✓ | ✓ (2026-07-11, V1 regeneration verify) | ✓ | V1 legacy → V2 Deep Dive 재생성, diagram 추가 |
 | git-rebase-cherry-pick-stash | git-collaboration | git-rebase-cherry-pick-stash | v | v | v | v | Wave 17 (Fable), reference |
 | github-pr-review-flow | git-collaboration | github-pr-review-flow | v | v | v | v | Wave 18 (Fable), reference |
 | gh-cli-reference | git-collaboration | gh-cli-reference | v | v | v | v | Wave 18 (Fable), reference |
+| api-db-backend-flow | data-backend | http-request-response, rest-api-design, database-tables-indexes, auth-session-token, json-data-contracts | ✓ | ✓ | ✓ (2026-07-11, V1 regeneration verify) | ✓ | V1 legacy → V2 Deep Dive 재생성, diagram 추가 |
 | rest-api-design | data-backend | rest-api-design | v | v | v | v | Wave 19 (Fable), deep-dive |
 | database-tables-indexes | data-backend | database-tables-indexes | v | v | v | v | Wave 19 (Fable), deep-dive |
 | auth-session-token | data-backend | auth-session-token | v | v | v | v | Wave 20 (Fable), deep-dive |
@@ -145,8 +150,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
-| Knowledge Base 수집(P-01) | 38 / 38 | 100% (M4 model-selection-tradeoffs approved 포함) |
-| Knowledge Base (approved 이상) | 38 / 38 | 100% (1차 qa_approved 5건 + 2차 approved 3건 + 3차 approved 4건 + 4차 approved 5건 + 5차 approved 5건 + 6차 approved 5건 + 7차 approved 5건 + 8차 approved 5건 + M4 approved 1건) |
+| Knowledge Base 수집(P-01) | 58 / 58 | 100% (M4 model-selection-tradeoffs approved 포함) |
+| Knowledge Base (approved 이상) | 58 / 58 | 100% (QA scan 기준 KB 58건 approved 이상) |
 | KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (2차 approved KB) | 3 / 3 | 100% |
 | KB Quote Bank (3차 approved KB) | 4 / 4 | 100% |
@@ -156,9 +161,9 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | KB Quote Bank (7차 approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (8차 approved KB) | 5 / 5 | 100% |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
-| Lesson 생성 | 67 / 100 | 67% (V1 레거시 5강 및 잔여 백로그 계속 진행) |
+| Lesson 생성 | 67 / 100 | 67% (V1 레거시 5강 V2 재생성 완료, 잔여 백로그 계속 진행) |
 | Site 반영 | 67 / 100 | 67% (V2 released 콘텐츠 사이트 반영 완료) |
-| Verify 통과 | 67 / 100 | 67% (`npm run verify` PASS, QA Remediation Wave 1) |
+| Verify 통과 | 67 / 100 | 67% (`npm run verify` PASS, M5 QA 전체 위반 0) |
 | Release | 67 / 100 | 67% (V2 released 67강, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
@@ -238,3 +243,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-11 | M4 Content Refresh Sweep | 완료 | stale KB 0건 확인, `model-selection-tradeoffs` 신규 KB 승격 및 검증 승인(score 91), 백로그 55행 planned 전환 |
 | 2026-07-11 | M5 Machine QA Scan | 완료 | 전 강의 67개·KB 58개·다이어그램 40개·용어 259개 스캔, 인용/링크/다이어그램 위반 0건, 형식 19건·용어집 103건 보고, `npm run verify` PASS |
 | 2026-07-11 | QA Remediation Wave 1 | 완료 | 용어 340개로 확장, V1 레거시 제외 M5 위반 0건, `npm run verify` PASS |
+| 2026-07-11 | V1 Legacy Regeneration | 완료 | ai-vibe-coding-orientation·web-screen-anatomy·typescript-react-nextjs·git-collaboration-basics·api-db-backend-flow V2 재생성, 다이어그램 5개 추가, M5 QA 전체 위반 0, `npm run verify` PASS |

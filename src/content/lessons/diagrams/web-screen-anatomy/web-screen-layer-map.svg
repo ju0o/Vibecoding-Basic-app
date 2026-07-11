@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="460" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">웹 화면 구성 층</title>
+  <desc id="desc">브라우저가 네트워크, HTML, CSS, JavaScript, 렌더링을 거쳐 화면을 만드는 층</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#7c3aed" />
+    </marker>
+    <style>
+      .layer { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 2; rx: 14; }
+      .browser { fill: #fefce8; stroke: #ca8a04; stroke-width: 2; rx: 18; }
+      .text { font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; fill: #111827; }
+      .sub { font-family: Arial, sans-serif; font-size: 14px; fill: #374151; }
+      .line { fill: none; stroke: #7c3aed; stroke-width: 3; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect x="50" y="54" width="170" height="80" class="layer" />
+  <text x="135" y="88" text-anchor="middle" class="text">Network</text>
+  <text x="135" y="112" text-anchor="middle" class="sub">HTTP request/response</text>
+  <rect x="270" y="54" width="170" height="80" class="layer" />
+  <text x="355" y="88" text-anchor="middle" class="text">HTML</text>
+  <text x="355" y="112" text-anchor="middle" class="sub">의미 구조</text>
+  <rect x="500" y="54" width="170" height="80" class="layer" />
+  <text x="585" y="88" text-anchor="middle" class="text">CSS</text>
+  <text x="585" y="112" text-anchor="middle" class="sub">cascade와 layout</text>
+  <rect x="700" y="190" width="170" height="80" class="layer" />
+  <text x="785" y="224" text-anchor="middle" class="text">JavaScript</text>
+  <text x="785" y="248" text-anchor="middle" class="sub">DOM events</text>
+  <rect x="500" y="326" width="170" height="80" class="browser" />
+  <text x="585" y="360" text-anchor="middle" class="text">Rendering</text>
+  <text x="585" y="384" text-anchor="middle" class="sub">style, layout, paint</text>
+  <rect x="270" y="326" width="170" height="80" class="browser" />
+  <text x="355" y="360" text-anchor="middle" class="text">Screen</text>
+  <text x="355" y="384" text-anchor="middle" class="sub">사용자가 보는 결과</text>
+  <path d="M220 94 H270" class="line" />
+  <path d="M440 94 H500" class="line" />
+  <path d="M670 94 C760 94 785 132 785 190" class="line" />
+  <path d="M785 270 C785 338 724 366 670 366" class="line" />
+  <path d="M500 366 H440" class="line" />
+  <text x="460" y="228" text-anchor="middle" class="sub">문제 원인을 층별로 좁히면 AI 요청도 정확해진다</text>
+</svg>

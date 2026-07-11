@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="440" viewBox="0 0 920 440" role="img" aria-labelledby="title desc">
+  <title id="title">API DB 백엔드 왕복 흐름</title>
+  <desc id="desc">브라우저 요청이 API 서버와 데이터베이스를 거쳐 응답으로 돌아오는 흐름</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0369a1" />
+    </marker>
+    <style>
+      .box { fill: #eff6ff; stroke: #0369a1; stroke-width: 2; rx: 18; }
+      .db { fill: #f0f9ff; stroke: #0284c7; stroke-width: 2; rx: 18; }
+      .text { font-family: Arial, sans-serif; font-size: 21px; font-weight: 700; fill: #0f172a; }
+      .sub { font-family: Arial, sans-serif; font-size: 14px; fill: #334155; }
+      .line { fill: none; stroke: #0369a1; stroke-width: 3; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect x="45" y="80" width="180" height="92" class="box" />
+  <text x="135" y="116" text-anchor="middle" class="text">Browser</text>
+  <text x="135" y="142" text-anchor="middle" class="sub">사용자 행동</text>
+  <rect x="285" y="80" width="180" height="92" class="box" />
+  <text x="375" y="116" text-anchor="middle" class="text">HTTP Request</text>
+  <text x="375" y="142" text-anchor="middle" class="sub">method, path, body</text>
+  <rect x="525" y="80" width="180" height="92" class="box" />
+  <text x="615" y="116" text-anchor="middle" class="text">API Server</text>
+  <text x="615" y="142" text-anchor="middle" class="sub">인증, 규칙, 검증</text>
+  <rect x="645" y="260" width="180" height="92" class="db" />
+  <text x="735" y="296" text-anchor="middle" class="text">Database</text>
+  <text x="735" y="322" text-anchor="middle" class="sub">table, row, index</text>
+  <rect x="285" y="260" width="180" height="92" class="box" />
+  <text x="375" y="296" text-anchor="middle" class="text">HTTP Response</text>
+  <text x="375" y="322" text-anchor="middle" class="sub">status, headers, JSON</text>
+  <path d="M225 126 H285" class="line" />
+  <path d="M465 126 H525" class="line" />
+  <path d="M615 172 C630 225 670 260 705 272" class="line" />
+  <path d="M645 306 H465" class="line" />
+  <path d="M285 306 C190 306 135 245 135 172" class="line" />
+  <text x="460" y="216" text-anchor="middle" class="sub">화면 버그는 request, API 규칙, DB 상태, response 중 어디인지 좁힌다</text>
+</svg>

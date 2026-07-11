@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="430" viewBox="0 0 920 430" role="img" aria-labelledby="title desc">
+  <title id="title">Git 협업 흐름 지도</title>
+  <desc id="desc">working tree, index, commit, branch, pull request로 이어지는 Git 협업 흐름</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#dc2626" />
+    </marker>
+    <style>
+      .box { fill: #fef2f2; stroke: #dc2626; stroke-width: 2; rx: 16; }
+      .review { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; rx: 16; }
+      .text { font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; fill: #111827; }
+      .sub { font-family: Arial, sans-serif; font-size: 14px; fill: #374151; }
+      .line { fill: none; stroke: #dc2626; stroke-width: 3; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect x="45" y="70" width="175" height="86" class="box" />
+  <text x="132" y="106" text-anchor="middle" class="text">Working Tree</text>
+  <text x="132" y="130" text-anchor="middle" class="sub">실제 파일 변경</text>
+  <rect x="275" y="70" width="175" height="86" class="box" />
+  <text x="362" y="106" text-anchor="middle" class="text">Index</text>
+  <text x="362" y="130" text-anchor="middle" class="sub">stage된 후보</text>
+  <rect x="505" y="70" width="175" height="86" class="box" />
+  <text x="592" y="106" text-anchor="middle" class="text">Commit</text>
+  <text x="592" y="130" text-anchor="middle" class="sub">기록된 snapshot</text>
+  <rect x="705" y="210" width="175" height="86" class="box" />
+  <text x="792" y="246" text-anchor="middle" class="text">Branch</text>
+  <text x="792" y="270" text-anchor="middle" class="sub">작업 흐름 pointer</text>
+  <rect x="505" y="330" width="175" height="64" class="review" />
+  <text x="592" y="368" text-anchor="middle" class="text">Pull Request</text>
+  <rect x="275" y="330" width="175" height="64" class="review" />
+  <text x="362" y="368" text-anchor="middle" class="text">Review / Merge</text>
+  <path d="M220 113 H275" class="line" />
+  <path d="M450 113 H505" class="line" />
+  <path d="M680 113 C760 130 792 160 792 210" class="line" />
+  <path d="M792 296 C770 350 710 362 680 362" class="line" />
+  <path d="M505 362 H450" class="line" />
+  <text x="460" y="235" text-anchor="middle" class="sub">AI 변경도 diff로 읽고 작은 commit으로 기록한다</text>
+</svg>

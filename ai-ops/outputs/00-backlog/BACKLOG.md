@@ -16,7 +16,7 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 
 | # | P | slug | moduleId | order | type | title | level | prerequisites | KB ids | status |
 |---:|---|---|---|---:|---|---|---|---|---|---|
-| 1 | B | ai-vibe-coding-orientation | getting-started | 1 | deep-dive | AI 바이브코딩이란 무엇인가 | 입문 | - | vibe-coding-origin | v2-regenerate |
+| 1 | B | ai-vibe-coding-orientation | getting-started | 1 | deep-dive | AI 바이브코딩이란 무엇인가 | 입문 | - | vibe-coding-origin-karpathy,ai-learning-verification,dev-environment-map | v2-released |
 | 2 | A | development-environment-map | getting-started | 2 | deep-dive | 개발 환경 지도: IDE, 터미널, 브라우저, Git | 입문 | ai-vibe-coding-orientation | dev-environment-map | v2-released |
 | 3 | B | vibe-coding-origin-karpathy | getting-started | 3 | deep-dive | 바이브코딩 용어의 기원과 Karpathy 2025 | 기초 | ai-vibe-coding-orientation | vibe-coding-origin-karpathy | v2-released |
 | 4 | A | learning-with-ai-verification | getting-started | 4 | deep-dive | AI와 배울 때 검증이 먼저인 이유 | 기초 | ai-vibe-coding-orientation | ai-learning-verification | v2-released |
@@ -28,7 +28,7 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 10 | A | debugging-error-reading | development-basics | 5 | deep-dive | 오류 메시지를 읽고 디버깅하는 법 | 기초 | control-flow-functions-errors | debugging-error-reading | v2-released |
 | 11 | D | regex-for-code-search | development-basics | 6 | reference | 코드 검색을 위한 정규식 레퍼런스 | 중급 | debugging-error-reading | regex-code-search | v2-released |
 | 12 | D | package-json-and-semver | development-basics | 7 | reference | package.json과 Semantic Versioning | 기초 | terminal-shell-basics-reference | package-json-semver | v2-released |
-| 13 | A | web-screen-anatomy | web-basics | 1 | deep-dive | 웹 화면은 어떻게 만들어지는가 | 입문 | files-folders-and-paths | html-css-js-browser | v2-regenerate |
+| 13 | A | web-screen-anatomy | web-basics | 1 | deep-dive | 웹 화면은 어떻게 만들어지는가 | 입문 | files-folders-and-paths | html-semantic-elements,css-cascade-layout,javascript-dom-events,browser-rendering-network,http-request-response | v2-released |
 | 14 | A | html-semantic-elements | web-basics | 2 | deep-dive | HTML 의미 구조와 접근성 | 기초 | web-screen-anatomy | html-semantic-elements | v2-released |
 | 15 | A | css-cascade-layout-responsive | web-basics | 3 | deep-dive | CSS cascade, layout, responsive | 기초 | web-screen-anatomy | css-cascade-layout | v2-released |
 | 16 | A | javascript-dom-events | web-basics | 4 | deep-dive | JavaScript, DOM, 이벤트 흐름 | 기초 | web-screen-anatomy | javascript-dom-events | v2-released |
@@ -36,14 +36,14 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 18 | A | http-request-response | web-basics | 6 | deep-dive | HTTP 요청과 응답의 실제 구조 | 기초 | browser-rendering-network | http-request-response | v2-released |
 | 19 | A | json-data-contracts | web-basics | 7 | deep-dive | JSON과 데이터 계약 | 기초 | http-request-response | json-data-contracts | v2-released |
 | 20 | A | web-security-basics | web-basics | 8 | deep-dive | 웹 보안 기초: XSS, CSRF, CORS | 중급 | http-request-response | web-security-basics | v2-released |
-| 21 | A | typescript-react-nextjs | frontend-frameworks | 1 | deep-dive | TypeScript, React, Next.js는 왜 함께 쓰는가 | 기초 | javascript-dom-events | typescript-react-nextjs | v2-regenerate |
+| 21 | A | typescript-react-nextjs | frontend-frameworks | 1 | deep-dive | TypeScript, React, Next.js는 왜 함께 쓰는가 | 기초 | javascript-dom-events | typescript-type-system,react-component-model,react-state-effects,nextjs-routing-rendering | v2-released |
 | 22 | A | typescript-type-system | frontend-frameworks | 2 | deep-dive | TypeScript 타입 시스템의 실제 역할 | 기초 | typescript-react-nextjs | typescript-type-system | v2-released |
 | 23 | A | react-component-mental-model | frontend-frameworks | 3 | deep-dive | React 컴포넌트 사고방식 | 기초 | typescript-react-nextjs | react-component-model | v2-released |
 | 24 | A | react-state-and-effects | frontend-frameworks | 4 | deep-dive | React 상태와 effect의 경계 | 중급 | react-component-mental-model | react-state-effects | v2-released |
 | 25 | A | nextjs-routing-rendering | frontend-frameworks | 5 | deep-dive | Next.js 라우팅과 렌더링 모델 | 중급 | react-component-mental-model | nextjs-routing-rendering | v2-released |
 | 26 | A | tailwind-design-systems | frontend-frameworks | 6 | deep-dive | Tailwind와 디자인 시스템 사고 | 기초 | css-cascade-layout-responsive | tailwind-design-systems | kb_needed |
 | 27 | A | frontend-testing-basics | frontend-frameworks | 7 | deep-dive | 프론트엔드 테스트 기초 | 중급 | react-state-and-effects | frontend-testing-basics | kb_needed |
-| 28 | D | git-collaboration-basics | git-collaboration | 1 | reference | Git은 왜 개발자의 타임머신인가 | 기초 | terminal-shell-basics-reference | git-basics | v2-regenerate |
+| 28 | D | git-collaboration-basics | git-collaboration | 1 | reference | Git은 왜 개발자의 타임머신인가 | 기초 | terminal-shell-basics-reference | git-init-add-commit-status,git-branch-switch-merge,git-log-diff-show,github-pr-review-flow | v2-released |
 | 29 | D | git-init-add-commit-status | git-collaboration | 2 | reference | git init/add/commit/status 레퍼런스 | 기초 | git-collaboration-basics | git-init-add-commit-status | v2-released |
 | 30 | D | git-branch-switch-merge | git-collaboration | 3 | reference | git branch/switch/merge 레퍼런스 | 기초 | git-init-add-commit-status | git-branch-switch-merge | v2-released |
 | 31 | D | git-log-diff-show | git-collaboration | 4 | reference | git log/diff/show 레퍼런스 | 기초 | git-init-add-commit-status | git-log-diff-show | v2-released |
@@ -51,14 +51,14 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 33 | D | git-rebase-cherry-pick-stash | git-collaboration | 6 | reference | git rebase/cherry-pick/stash 레퍼런스 | 중급 | git-branch-switch-merge | git-rebase-cherry-pick-stash | released |
 | 34 | D | github-pr-review-flow | git-collaboration | 7 | reference | GitHub PR, review, merge 전략 | 중급 | git-branch-switch-merge | github-pr-review-flow | released |
 | 35 | D | gh-cli-reference | git-collaboration | 8 | reference | GitHub CLI 실무 레퍼런스 | 중급 | github-pr-review-flow | gh-cli-reference | released |
-| 36 | A | api-db-backend-flow | data-backend | 1 | deep-dive | API와 DB는 제품 뒤에서 무엇을 하는가 | 기초 | http-request-response | api-db-backend-flow | v2-regenerate |
+| 36 | A | api-db-backend-flow | data-backend | 1 | deep-dive | API와 DB는 제품 뒤에서 무엇을 하는가 | 기초 | http-request-response | http-request-response,rest-api-design,database-tables-indexes,auth-session-token,json-data-contracts | v2-released |
 | 37 | A | rest-api-design | data-backend | 2 | deep-dive | REST API 설계와 상태 코드 | 기초 | api-db-backend-flow | rest-api-design | released |
 | 38 | A | database-tables-indexes | data-backend | 3 | deep-dive | DB 테이블, 인덱스, 쿼리 기초 | 기초 | api-db-backend-flow | database-tables-indexes | released |
 | 39 | A | auth-session-token | data-backend | 4 | deep-dive | 인증, 세션, 토큰 | 중급 | rest-api-design | auth-session-token | released |
 | 40 | A | environment-variables-secrets | data-backend | 5 | deep-dive | 환경변수와 secret 관리 | 기초 | auth-session-token | environment-variables-secrets | released |
 | 41 | A | api-security-rate-limits | data-backend | 6 | deep-dive | API 보안과 rate limit | 중급 | auth-session-token | api-security-rate-limits | released |
 | 42 | A | backend-observability-logs | data-backend | 7 | deep-dive | 백엔드 로그와 관찰 가능성 | 중급 | rest-api-design | backend-observability-logs | released |
-| 43 | A | build-and-runtime | deployment-ops | 1 | deep-dive | build time과 runtime 구분 | 기초 | nextjs-routing-rendering | build-runtime | kb_needed |
+| 43 | A | build-and-runtime | deployment-ops | 1 | deep-dive | build time과 runtime 구분 | 기초 | nextjs-routing-rendering | build-and-runtime | v2-released |
 | 44 | A | deployment-platforms | deployment-ops | 2 | deep-dive | Vercel, Firebase, 서버 배포 모델 | 기초 | build-and-runtime | deployment-platforms | released |
 | 45 | D | npm-scripts-reference | deployment-ops | 3 | reference | npm scripts와 package manager 명령 | 기초 | package-json-and-semver | npm-scripts-reference | released |
 | 46 | A | ci-cd-pipeline-basics | deployment-ops | 4 | deep-dive | CI/CD 파이프라인 기초 | 중급 | github-pr-review-flow | ci-cd-pipeline | released |

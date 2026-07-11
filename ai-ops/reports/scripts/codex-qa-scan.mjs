@@ -23,13 +23,7 @@ const V2_SECTIONS = [
   "더 읽기",
 ]
 
-const V1_LEGACY = new Set([
-  "ai-vibe-coding-orientation",
-  "web-screen-anatomy",
-  "typescript-react-nextjs",
-  "git-collaboration-basics",
-  "api-db-backend-flow",
-])
+const V1_LEGACY = new Set()
 
 async function pathExists(targetPath) {
   try {
@@ -552,7 +546,7 @@ function renderReport(data) {
     "- 다이어그램: 모든 `src/content/lessons/diagrams/*/*.svg`가 대응 slug 마크다운에서 `![...]`로 참조되는지 확인했다.",
   )
   lines.push("- 용어집: `term` 중복과 `related` 항목의 실제 term 존재 여부를 검사했다.")
-  lines.push("- 콘텐츠 수정 없음: 본 런은 보고만 수행했다.")
+  lines.push("- 스크립트 동작: 본 스캔은 리포트 파일만 생성한다.")
 
   return `${lines.join("\n")}\n`
 }
