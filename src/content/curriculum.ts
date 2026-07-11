@@ -691,6 +691,18 @@ export const LESSON_META = [
     tags: ["Embeddings", "Semantic Similarity", "Vector Store", "RAG"],
   },
   {
+    slug: "model-selection-tradeoffs",
+    moduleId: "ai-basics",
+    order: 6,
+    title: "모델 선택과 trade-off",
+    summary:
+      "정확도, 지연, 비용, context window, effort, 평가셋을 함께 보며 작업별로 적절한 AI 모델을 고르는 기준을 배웁니다.",
+    level: "중급",
+    type: "deep-dive",
+    minutes: 70,
+    tags: ["Model Selection", "Accuracy", "Latency", "Cost", "Evaluation"],
+  },
+  {
     slug: "from-prompt-to-system",
     moduleId: "ai-system-design",
     order: 1,

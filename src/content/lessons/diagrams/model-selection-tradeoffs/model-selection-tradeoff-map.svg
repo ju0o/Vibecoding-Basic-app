@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="460" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">모델 선택 트레이드오프 지도</title>
+  <desc id="desc">작업 위험도에서 시작해 정확도 기준을 통과한 뒤 지연, 비용, effort, context를 조정하는 모델 선택 흐름</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#4f46e5" />
+    </marker>
+    <style>
+      .box { fill: #eef2ff; stroke: #4f46e5; stroke-width: 2; rx: 18; }
+      .gate { fill: #ecfdf5; stroke: #059669; stroke-width: 2; rx: 18; }
+      .warn { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; rx: 18; }
+      .text { font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; fill: #0f172a; }
+      .sub { font-family: Arial, sans-serif; font-size: 14px; fill: #334155; }
+      .line { fill: none; stroke: #4f46e5; stroke-width: 3; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect x="44" y="62" width="184" height="88" class="box" />
+  <text x="136" y="98" text-anchor="middle" class="text">작업 분류</text>
+  <text x="136" y="124" text-anchor="middle" class="sub">위험도와 실패 비용</text>
+  <rect x="288" y="62" width="184" height="88" class="gate" />
+  <text x="380" y="98" text-anchor="middle" class="text">정확도 기준</text>
+  <text x="380" y="124" text-anchor="middle" class="sub">accuracy target</text>
+  <rect x="532" y="62" width="184" height="88" class="gate" />
+  <text x="624" y="98" text-anchor="middle" class="text">평가셋</text>
+  <text x="624" y="124" text-anchor="middle" class="sub">actual prompts/data</text>
+  <rect x="656" y="220" width="184" height="88" class="box" />
+  <text x="748" y="256" text-anchor="middle" class="text">후보 모델</text>
+  <text x="748" y="282" text-anchor="middle" class="sub">tier와 availability</text>
+  <rect x="500" y="344" width="184" height="88" class="warn" />
+  <text x="592" y="380" text-anchor="middle" class="text">지연·비용</text>
+  <text x="592" y="406" text-anchor="middle" class="sub">latency, cost, cache</text>
+  <rect x="236" y="344" width="184" height="88" class="warn" />
+  <text x="328" y="380" text-anchor="middle" class="text">Effort·Context</text>
+  <text x="328" y="406" text-anchor="middle" class="sub">추론 강도와 토큰 한도</text>
+  <rect x="44" y="220" width="184" height="88" class="gate" />
+  <text x="136" y="256" text-anchor="middle" class="text">운영 라우팅</text>
+  <text x="136" y="282" text-anchor="middle" class="sub">기본 모델과 fallback</text>
+  <path d="M228 106 H288" class="line" />
+  <path d="M472 106 H532" class="line" />
+  <path d="M716 106 C770 126 782 176 748 220" class="line" />
+  <path d="M748 308 C728 354 682 378 684 388" class="line" />
+  <path d="M500 388 H420" class="line" />
+  <path d="M328 344 C282 296 236 264 228 264" class="line" />
+  <path d="M136 220 C112 178 112 154 136 150" class="line" />
+  <text x="460" y="236" text-anchor="middle" class="sub">정확도를 먼저 통과시키고, 그 다음 비용과 속도를 줄인다</text>
+</svg>

@@ -2763,4 +2763,52 @@ export const GLOSSARY_TERMS = [
       "Token은 로그인 이후 사용자가 누구인지 또는 어떤 권한을 갖는지 서버와 클라이언트가 확인하는 데 쓰입니다. 저장 위치, 만료 시간, 갱신 방식이 보안에 직접 영향을 주므로 쿠키와 세션 개념과 함께 봐야 합니다.",
     related: ["Auth", "Session", "Cookie"],
   },
+  {
+    term: "Model Selection",
+    category: "AI 시스템",
+    shortDefinition: "작업 요구에 맞춰 AI 모델의 정확도, 지연, 비용을 선택하는 의사결정",
+    explanation:
+      "Model Selection은 가장 강한 모델을 무조건 고르는 일이 아니라 accuracy target을 먼저 맞추고 latency와 cost를 조정하는 운영 판단입니다. 작업 위험도, evaluation dataset, context window, effort, 가격 단위를 함께 봐야 합니다.",
+    related: ["Accuracy Target", "Latency", "Cost"],
+  },
+  {
+    term: "Accuracy Target",
+    category: "AI 시스템",
+    shortDefinition: "모델이 특정 작업에서 달성해야 하는 최소 정확도 기준",
+    explanation:
+      "Accuracy Target은 모델 비교를 감으로 하지 않게 만드는 기준입니다. 먼저 성공 기준과 evaluation dataset을 정한 뒤, 그 기준을 만족하는 후보 안에서 비용과 지연을 줄입니다.",
+    related: ["Model Selection", "Evaluation", "Hallucination"],
+  },
+  {
+    term: "Latency",
+    category: "AI 시스템",
+    shortDefinition: "요청 후 응답을 받기까지 사용자가 기다리는 시간",
+    explanation:
+      "Latency는 모델 품질만큼 사용자 경험에 큰 영향을 줍니다. 같은 모델 안에서도 effort, fast mode, caching, batch 처리 여부에 따라 체감 시간이 달라질 수 있습니다.",
+    related: ["Model Selection", "Cost", "Context Caching"],
+  },
+  {
+    term: "Cost",
+    category: "AI 시스템",
+    shortDefinition: "AI 요청을 처리하는 데 드는 토큰·모델·처리 방식 기반 비용",
+    explanation:
+      "Cost는 입력 토큰, 출력 토큰, cached input, batch/flex/priority 같은 처리 방식에 따라 달라집니다. 단가만 보지 말고 실패율과 재시도 비용까지 함께 계산해야 합니다.",
+    related: ["Model Selection", "Tokenization", "Prompt Caching"],
+  },
+  {
+    term: "Model Tier",
+    category: "AI 시스템",
+    shortDefinition: "성능, 속도, 가격, 용도에 따라 나뉘는 모델 등급",
+    explanation:
+      "Model Tier는 flagship, balanced, fast, cost-sensitive처럼 작업 성격에 맞는 선택지를 구분하는 표현입니다. 티어 이름보다 실제 evaluation과 사용 가능 여부가 더 중요합니다.",
+    related: ["Model Selection", "Cost", "Latency"],
+  },
+  {
+    term: "Effort",
+    category: "AI 시스템",
+    shortDefinition: "한 모델 안에서 추론 강도와 비용·지연을 조절하는 축",
+    explanation:
+      "Effort는 모델 자체를 바꾸기 전에 시도할 수 있는 조절 장치입니다. 더 높은 추론이 필요한 작업과 빠른 응답이 필요한 작업 사이에서 trade-off를 조정합니다.",
+    related: ["Model Selection", "Accuracy Target", "Latency"],
+  },
 ] satisfies readonly GlossaryTerm[]

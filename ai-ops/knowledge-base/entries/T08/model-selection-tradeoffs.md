@@ -9,8 +9,8 @@ prerequisites: [tokenization-context, hallucination-verification]
 successors: [ai-era-timeline]
 related: [context-caching, agent-loop, ai-learning-verification]
 consumers:
-  lessons: []
-  glossary: []
+  lessons: [model-selection-tradeoffs]
+  glossary: [Model Selection, Accuracy Target, Latency, Cost, Model Tier, Effort]
 sources:
   - { title: "OpenAI API Docs — Model selection", url: "https://developers.openai.com/api/docs/guides/model-selection", checked: 2026-07-11 }
   - { title: "OpenAI API Docs — Models", url: "https://developers.openai.com/api/docs/models", checked: 2026-07-11 }

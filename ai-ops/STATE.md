@@ -11,27 +11,27 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **O-06.1 (v3.1) — Fable(지휘+경량QA) · Codex(Heavy 미션 M1~M5) 2인 체제.** 기획서: ORCHESTRATION-PLAN.md |
-| Current State | **V1 Legacy Regeneration complete + verify PASS** — 67강 released, KB 58건 approved, 용어 340, 다이어그램 45. M5 scan: 전체 위반 0건 |
-| Last Completed Step | Codex가 V1 레거시 5강을 V2 Deep Dive로 재생성하고 다이어그램 5개를 추가, `npm run verify` 통과 (2026-07-11) |
+| Current State | **Model Selection Wave complete + verify PASS** — 68강 released, KB 58건 approved, 용어 346, 다이어그램 46. M5 scan: 전체 위반 0건 |
+| Last Completed Step | Codex가 `model-selection-tradeoffs` V2 강의를 생성·사이트 반영하고 glossary·diagram·metadata를 연결, `npm run verify` 통과 (2026-07-11) |
 | Next Executor | Codex(전체 권한 연속 실행) |
 | Next Prompt File | ai-ops/CODEX-PLAN.md / ai-ops/ORCHESTRATION-PLAN.md |
 | Blocker | 없음 |
 | Required Human Action | None |
-| Release Status | **V2 67강 released (비공개 모드 A) + M3 UI/UX verified + M5 QA 전체 0, deploy HOLD** — 67/100 |
+| Release Status | **V2 68강 released (비공개 모드 A) + M3 UI/UX verified + M5 QA 전체 0, deploy HOLD** — 68/100 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: V1 Legacy Regeneration complete, M5 전체 위반 0, npm run verify PASS
+- Current State: Model Selection Wave complete, M5 전체 위반 0, npm run verify PASS
 - Verdict: DONE
 - Next Executor: Codex
 - Next Prompt File: ai-ops/CODEX-PLAN.md / ai-ops/ORCHESTRATION-PLAN.md
-- Why: 운영자 승인에 따라 역할 제한 없이 Codex가 완성까지 연속 진행하며, 다음 우선순위는 planned 상태의 model-selection-tradeoffs 강의 생성·반영·검증·릴리스
+- Why: 운영자 승인에 따라 역할 제한 없이 Codex가 완성까지 연속 진행하며, planned 항목이 없어 다음 우선순위는 kb_needed 32건 중 첫 P-01 수집 물결
 - Required Operator Action: None
-- If Approved: Codex가 model-selection-tradeoffs를 승인 KB 기반 V2 강의로 생성하고 사이트 반영, M5 스캔과 `npm run verify`까지 수행
-- If Rejected: 반려 사유에 따라 V1 Legacy Regeneration 수정
-- Files to Check: ai-ops/reports/codex-qa-scan.md, ai-ops/outputs/04-integrated/RELEASE-2026-07-11-v1-regeneration.md, src/content/lessons/markdown/ai-vibe-coding-orientation.md
+- If Approved: Codex가 P-01로 tailwind-design-systems, frontend-testing-basics, production-env-secrets, ai-era-timeline, autocomplete-era KB를 수집·승인 루프까지 진행
+- If Rejected: 반려 사유에 따라 Model Selection Wave 수정
+- Files to Check: ai-ops/reports/codex-qa-scan.md, ai-ops/outputs/04-integrated/RELEASE-2026-07-11-model-selection.md, src/content/lessons/markdown/model-selection-tradeoffs.md
 - Stop Condition: `npm run verify` 실패 또는 공식 출처 없는 신규 사실이 필요한 경우
 ```
 
@@ -69,12 +69,13 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
 - KB: **58건 approved**, M4 `model-selection-tradeoffs` score 91 승격 완료, stale KB 0건 / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 67강** (deployment HOLD) / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
+- 강의: **V2 released 68강** (deployment HOLD) / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-11 | model-selection-tradeoffs | planned → V2 released | Codex, V2 강의·diagram·glossary·metadata 반영, M5 QA 전체 위반 0, `npm run verify` PASS |
 | 2026-07-11 | V1 Legacy Regeneration | v2-regenerate → V2 released | Codex, 5강 V2 Deep Dive 재생성, 다이어그램 5개 추가, M5 QA 전체 위반 0, `npm run verify` PASS |
 | 2026-07-11 | QA Remediation Wave 1 | M5 위반 122건 → V1 제외 0건 | Codex, glossary 340 terms, 19강 형식 보강, `npm run verify` PASS |
 | 2026-07-11 | M5 Machine QA Scan | report-only → done | Codex, 전 강의 67개·KB 58개·다이어그램 40개·용어 259개 전수 스캔, `npm run verify` PASS |

@@ -70,7 +70,7 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 52 | D | grounding-and-citations | ai-basics | 3 | reference | Grounding과 citation 레퍼런스 | 기초 | prompt-engineering-foundations | grounding-citations | v2-released |
 | 53 | C | hallucination-and-verification | ai-basics | 4 | deep-dive | 환각과 검증 루틴 | 기초 | grounding-and-citations | hallucination-verification | v2-released |
 | 54 | C | embeddings-and-similarity | ai-basics | 5 | deep-dive | 임베딩과 의미 유사도 | 중급 | tokenization-and-context | embeddings-similarity | v2-released |
-| 55 | C | model-selection-tradeoffs | ai-basics | 6 | deep-dive | 모델 선택과 trade-off | 중급 | hallucination-and-verification | model-selection-tradeoffs | planned |
+| 55 | C | model-selection-tradeoffs | ai-basics | 6 | deep-dive | 모델 선택과 trade-off | 중급 | hallucination-and-verification | model-selection-tradeoffs | v2-released |
 | 56 | B | ai-era-timeline | ai-basics | 7 | deep-dive | 자동완성에서 에이전트까지 AI 개발 시대 구분 | 기초 | vibe-coding-origin-karpathy | ai-era-timeline | kb_needed |
 | 57 | B | autocomplete-era | ai-coding-tools | 1 | deep-dive | 자동완성 시대: Copilot 이전과 이후 | 기초 | ai-era-timeline | autocomplete-era | kb_needed |
 | 58 | B | chat-coding-era | ai-coding-tools | 2 | deep-dive | 챗 코딩 시대: 대화형 개발의 장점과 한계 | 기초 | autocomplete-era | chat-coding-era | kb_needed |

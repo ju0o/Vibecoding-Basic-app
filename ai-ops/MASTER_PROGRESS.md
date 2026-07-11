@@ -120,6 +120,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | grounding-and-citations | ai-basics | grounding-citations | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 5, RELEASE-2026-07-05-v2-wave5.md |
 | hallucination-and-verification | ai-basics | hallucination-verification | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 5, RELEASE-2026-07-05-v2-wave5.md |
 | embeddings-and-similarity | ai-basics | embeddings-similarity | ✓ | ✓ | ✓ (2026-07-05, O-05.2 verify) | ✓ | V2 Wave 6, RELEASE-2026-07-05-v2-wave6.md |
+| model-selection-tradeoffs | ai-basics | model-selection-tradeoffs | ✓ | ✓ | ✓ (2026-07-11, model selection wave verify) | ✓ | V2 Wave 26, RELEASE-2026-07-11-model-selection.md |
 
 | git-init-add-commit-status | git-collaboration | git-init-add-commit-status | v | v | v | v | Wave 15 (Fable), reference |
 | git-branch-switch-merge | git-collaboration | git-branch-switch-merge | v | v | v | v | Wave 15 (Fable), reference |
@@ -161,10 +162,10 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | KB Quote Bank (7차 approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (8차 approved KB) | 5 / 5 | 100% |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
-| Lesson 생성 | 67 / 100 | 67% (V1 레거시 5강 V2 재생성 완료, 잔여 백로그 계속 진행) |
-| Site 반영 | 67 / 100 | 67% (V2 released 콘텐츠 사이트 반영 완료) |
-| Verify 통과 | 67 / 100 | 67% (`npm run verify` PASS, M5 QA 전체 위반 0) |
-| Release | 67 / 100 | 67% (V2 released 67강, deployment HOLD) |
+| Lesson 생성 | 68 / 100 | 68% (model-selection-tradeoffs V2 released, 잔여 백로그 계속 진행) |
+| Site 반영 | 68 / 100 | 68% (V2 released 콘텐츠 사이트 반영 완료) |
+| Verify 통과 | 68 / 100 | 68% (`npm run verify` PASS, M5 QA 전체 위반 0) |
+| Release | 68 / 100 | 68% (V2 released 68강, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
@@ -244,3 +245,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-11 | M5 Machine QA Scan | 완료 | 전 강의 67개·KB 58개·다이어그램 40개·용어 259개 스캔, 인용/링크/다이어그램 위반 0건, 형식 19건·용어집 103건 보고, `npm run verify` PASS |
 | 2026-07-11 | QA Remediation Wave 1 | 완료 | 용어 340개로 확장, V1 레거시 제외 M5 위반 0건, `npm run verify` PASS |
 | 2026-07-11 | V1 Legacy Regeneration | 완료 | ai-vibe-coding-orientation·web-screen-anatomy·typescript-react-nextjs·git-collaboration-basics·api-db-backend-flow V2 재생성, 다이어그램 5개 추가, M5 QA 전체 위반 0, `npm run verify` PASS |
+| 2026-07-11 | Model Selection Wave | 완료 | model-selection-tradeoffs V2 강의·meta·diagram·glossary 반영, M5 QA 전체 위반 0, `npm run verify` PASS |
