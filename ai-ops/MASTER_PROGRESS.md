@@ -137,7 +137,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | ide-agent-era | ai-coding-tools | ide-agent-era | ✓ | ✓ | ✓ (2026-07-12, AI coding tools verify) | ✓ | V2 Wave 29, RELEASE-2026-07-12-ai-coding-tools-release-wave.md |
 | codex-claude-cursor-comparison | ai-coding-tools | ai-coding-tool-comparison | ✓ | ✓ | ✓ (2026-07-12, AI coding tools verify) | ✓ | V2 Wave 29, RELEASE-2026-07-12-ai-coding-tools-release-wave.md |
 | tool-permissions-sandboxes | ai-coding-tools | tool-permissions-sandboxes | ✓ | ✓ | ✓ (2026-07-12, AI coding tools verify) | ✓ | V2 Wave 29, RELEASE-2026-07-12-ai-coding-tools-release-wave.md |
-| human-ai-collaboration-patterns | ai-coding-tools | human-ai-collaboration-patterns | ✓ | ✓ | ✓ (2026-07-12, human-AI collaboration verify) | — | P-06 VERIFIED, P-08 대기 |
+| human-ai-collaboration-patterns | ai-coding-tools | human-ai-collaboration-patterns | ✓ | ✓ | ✓ (2026-07-12, human-AI collaboration verify) | ✓ | V2 Wave 30, RELEASE-2026-07-12-human-ai-collaboration-release.md |
 
 | git-init-add-commit-status | git-collaboration | git-init-add-commit-status | v | v | v | v | Wave 15 (Fable), reference |
 | git-branch-switch-merge | git-collaboration | git-branch-switch-merge | v | v | v | v | Wave 15 (Fable), reference |
@@ -183,10 +183,10 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | KB Quote Bank (8차 approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (9차 approved KB) | 5 / 5 | 100% (AI coding tools KB Wave 승인) |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
-| Lesson 생성 | 78 / 100 | 78% (human-ai-collaboration-patterns P-04 generated, P-05 대기) |
-| Site 반영 | 78 / 100 | 78% (human-ai-collaboration-patterns P-05 integrated, P-06 대기) |
+| Lesson 생성 | 78 / 100 | 78% (V2 generated 78강, 다음 P-01/P-02 KB wave 대기) |
+| Site 반영 | 78 / 100 | 78% (V2 integrated 78강, 다음 P-01/P-02 KB wave 대기) |
 | Verify 통과 | 78 / 100 | 78% (`npm run verify` PASS, M5 QA 전체 위반 0) |
-| Release | 77 / 100 | 77% (V2 released 77강, deployment HOLD) |
+| Release | 78 / 100 | 78% (V2 released 78강, deployment HOLD) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 
@@ -278,3 +278,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-12 | P-04 Human-AI Collaboration Draft | 완료 | human-ai-collaboration-patterns V2 draft 생성, 8섹션·9,426자·Quote Bank 인용 5개 원문 일치, P-05 대기 |
 | 2026-07-12 | P-05 Human-AI Collaboration Integration | 완료 | human-ai-collaboration-patterns markdown·curriculum·glossary 4개·diagram 1개·KB consumers 반영, lint/typecheck/verify 대기 |
 | 2026-07-12 | P-06 Human-AI Collaboration Verify | 완료 | `npm run verify` PASS: lint·typecheck·Vitest 3 files/8 tests·Next build 140 static pages, P-08 대기 |
+| 2026-07-12 | P-08 Human-AI Collaboration Release | 완료 | human-ai-collaboration-patterns V2 Wave 30 released, deployment HOLD |
