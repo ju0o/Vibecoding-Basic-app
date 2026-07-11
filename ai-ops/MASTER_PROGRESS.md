@@ -75,6 +75,11 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | production-env-secrets | T07 | ✓ | ✓ 91 (2026-07-11, Codex) | deployment-ops order 5 근거 / Next.js·Vercel·GitHub Actions secrets |
 | ai-era-timeline | T08 | ✓ | ✓ 88 (2026-07-11, Codex) | ai-basics order 7 근거 / IntelliSense→Copilot→Chat→Agent |
 | autocomplete-era | T11 | ✓ | ✓ 89 (2026-07-11, Codex) | ai-coding-tools order 1 근거 / IntelliSense·Copilot inline suggestions |
+| chat-coding-era | T11 | ✓ | ✓ 91 (2026-07-12, Codex) | ai-coding-tools order 2 근거 / GitHub Copilot Chat·OpenAI Codex |
+| ide-agent-era | T11 | ✓ | ✓ 90 (2026-07-12, Codex) | ai-coding-tools order 3 근거 / GitHub Copilot coding agent·Claude Code |
+| ai-coding-tool-comparison | T11 | ✓ | ✓ 88 (2026-07-12, Codex) | ai-coding-tools order 4 근거 / Codex·Claude Code·Cursor 역할 비교 |
+| tool-permissions-sandboxes | T11 | ✓ | ✓ 91 (2026-07-12, Codex) | ai-coding-tools order 5 근거 / 권한 승인·sandbox·방화벽 환경 |
+| human-ai-collaboration-patterns | T11 | ✓ | ✓ 90 (2026-07-12, Codex) | ai-coding-tools order 6 근거 / 리뷰·반복·협업 패턴 |
 
 ## Lesson 매트릭스
 
@@ -161,8 +166,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
-| Knowledge Base 수집(P-01) | 63 / 63 | 100% (P-01/P-02 KB Wave 2026-07-11 포함) |
-| Knowledge Base (approved 이상) | 63 / 63 | 100% (QA scan 기준 KB 63건 approved 이상) |
+| Knowledge Base 수집(P-01) | 68 / 68 | 100% (P-01/P-02 AI coding tools KB Wave 2026-07-12 포함) |
+| Knowledge Base (approved 이상) | 68 / 68 | 100% (QA scan 기준 KB 68건 approved 이상) |
 | KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (2차 approved KB) | 3 / 3 | 100% |
 | KB Quote Bank (3차 approved KB) | 4 / 4 | 100% |
@@ -171,6 +176,7 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | KB Quote Bank (6차 approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (7차 approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (8차 approved KB) | 5 / 5 | 100% |
+| KB Quote Bank (9차 approved KB) | 5 / 5 | 100% (AI coding tools KB Wave 승인) |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
 | Lesson 생성 | 73 / 100 | 73% (autocomplete-era V2 released, 잔여 백로그 계속 진행) |
 | Site 반영 | 73 / 100 | 73% (V2 released 콘텐츠 사이트 반영 완료) |
@@ -259,3 +265,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-11 | P-01/P-02 KB Wave | 완료 | tailwind-design-systems 89·frontend-testing-basics 90·production-env-secrets 91·ai-era-timeline 88·autocomplete-era 89 approved, planned 5강 전환 |
 | 2026-07-11 | V2 Wave 27 | 완료 | tailwind-design-systems·frontend-testing-basics·production-env-and-secrets·ai-era-timeline V2 강의·diagram·glossary·metadata 반영, M5 QA 전체 위반 0 |
 | 2026-07-11 | V2 Wave 28 | 완료 | autocomplete-era V2 강의·diagram·glossary·metadata 반영, M5 QA 전체 위반 0 |
+| 2026-07-12 | P-01/P-02 AI Coding Tools KB Wave | 완료 | chat-coding-era 91·ide-agent-era 90·ai-coding-tool-comparison 88·tool-permissions-sandboxes 91·human-ai-collaboration-patterns 90 approved, 백로그 58~62행 planned 전환 |

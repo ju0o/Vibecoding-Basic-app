@@ -18,11 +18,12 @@ Research·Fact Check Agent가 사용하는 허용 출처 목록. 새 출처는 R
 | Testing Library | Testing Library Docs | https://testing-library.com/docs |
 | Anthropic/Claude | Claude Docs | https://platform.claude.com/docs (구 docs.anthropic.com — 2026-07 이전 확인) |
 | Claude Code | Claude Code Docs | https://code.claude.com/docs |
-| OpenAI | OpenAI Platform Docs | https://platform.openai.com/docs |
+| OpenAI | OpenAI Platform Docs / OpenAI Developers(Codex) | https://platform.openai.com/docs , https://developers.openai.com |
 | MCP | Model Context Protocol | https://modelcontextprotocol.io |
 | Vercel(배포) | Vercel Docs | https://vercel.com/docs |
 | GitHub | GitHub Docs | https://docs.github.com |
 | VS Code | Visual Studio Code Docs | https://code.visualstudio.com/docs |
+| Cursor | Cursor Docs / Cursor Blog | https://cursor.com/docs , https://cursor.com/blog |
 
 ## 2순위 — 표준 기구·보안
 | 분야 | 출처 | URL |

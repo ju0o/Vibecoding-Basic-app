@@ -11,27 +11,27 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **O-06.1 (v3.1) — Fable(지휘+경량QA) · Codex(Heavy 미션 M1~M5) 2인 체제.** 기획서: ORCHESTRATION-PLAN.md |
-| Current State | **V2 Wave 28 released** — 73강 released, KB 63건 approved, planned 0강, 용어 371, 다이어그램 51. M5 scan: 전체 위반 0건 |
-| Last Completed Step | Codex가 autocomplete-era V2 강의·사이트 반영·검증·릴리스 완료 (2026-07-11) |
+| Current State | **AI Coding Tools KB Wave approved** — 73강 released, KB 68건 approved, planned 5강, 용어 371, 다이어그램 51. M5 scan: 전체 위반 0건 |
+| Last Completed Step | Codex가 T11 AI coding tools KB 5건을 수집·검증 승인하고 백로그 58~62행을 planned로 전환 (2026-07-12) |
 | Next Executor | Codex(전체 권한 연속 실행) |
 | Next Prompt File | ai-ops/CODEX-PLAN.md / ai-ops/ORCHESTRATION-PLAN.md |
 | Blocker | 없음 |
 | Required Human Action | None |
-| Release Status | **V2 73강 released (비공개 모드 A) + M3 UI/UX verified + M5 QA 전체 0, deploy HOLD** — 73/100 |
+| Release Status | **V2 73강 released (비공개 모드 A) + M3 UI/UX verified + M5 QA 전체 0, deploy HOLD** — 73/100, planned 5 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: V2 Wave 28 released, 73강 released, planned 0강
+- Current State: AI Coding Tools KB Wave approved, 73강 released, KB 68건 approved, planned 5강
 - Verdict: DONE
 - Next Executor: Codex
 - Next Prompt File: ai-ops/CODEX-PLAN.md / ai-ops/ORCHESTRATION-PLAN.md
-- Why: 운영자 승인에 따라 역할 제한 없이 Codex가 완성까지 연속 진행하며, planned 항목이 0건이므로 다음 우선순위는 kb_needed 항목 P-01/P-02 수집·검증 물결
+- Why: 운영자 승인에 따라 역할 제한 없이 Codex가 완성까지 연속 진행하며, 새로 approved된 T11 KB 5건이 백로그 planned 상태로 전환되었으므로 다음 우선순위는 P-04 강의 생성
 - Required Operator Action: None
-- If Approved: Codex가 BACKLOG의 다음 kb_needed 최대 5건을 P-01/P-02로 수집·검증 승인하고 planned로 전환
-- If Rejected: 반려 사유에 따라 V2 Wave 28 콘텐츠 또는 연결 메타데이터 수정
-- Files to Check: ai-ops/outputs/04-integrated/RELEASE-2026-07-11-autocomplete-era.md, src/content/lessons/markdown/autocomplete-era.md, ai-ops/knowledge-base/entries/T11/autocomplete-era.md
+- If Approved: Codex가 chat-coding-era·ide-agent-era·codex-claude-cursor-comparison·tool-permissions-sandboxes 4강을 P-04로 생성하고 human-ai-collaboration-patterns는 다음 생성 물결로 남김
+- If Rejected: 반려 사유에 따라 AI coding tools KB 또는 백로그 planned 전환을 수정
+- Files to Check: ai-ops/knowledge-base/entries/T11/chat-coding-era.md, ai-ops/knowledge-base/entries/T11/ide-agent-era.md, ai-ops/knowledge-base/entries/T11/ai-coding-tool-comparison.md, ai-ops/knowledge-base/entries/T11/tool-permissions-sandboxes.md, ai-ops/knowledge-base/entries/T11/human-ai-collaboration-patterns.md
 - Stop Condition: `npm run verify` 실패 또는 공식 출처 없는 신규 사실이 필요한 경우
 ```
 
@@ -68,13 +68,14 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
-- KB: **63건 approved**, stale KB 0건 / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 73강** (deployment HOLD) / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
+- KB: **68건 approved**, stale KB 0건 / D-02 플랫폼 증분 = **완료**
+- 강의: **V2 released 73강**, planned 5강 (deployment HOLD) / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-12 | KB chat-coding-era·ide-agent-era·ai-coding-tool-comparison·tool-permissions-sandboxes·human-ai-collaboration-patterns | needed → draft → approved, 백로그 58~62 planned | Codex P-01/P-02 AI Coding Tools KB Wave, scores 91·90·88·91·90, M5 QA 전체 위반 0, `npm run verify` PASS |
 | 2026-07-11 | autocomplete-era | planned → generated → integrated → verified → released | Codex V2 Wave 28, diagram 1개·glossary 5개 추가, M5 QA 전체 위반 0, `npm run verify` PASS |
 | 2026-07-11 | tailwind-design-systems·frontend-testing-basics·production-env-and-secrets·ai-era-timeline | planned → generated → integrated → verified → released | Codex V2 Wave 27, diagrams 4개·glossary 20개 추가, M5 QA 전체 위반 0, `npm run verify` PASS |
 | 2026-07-11 | KB tailwind-design-systems·frontend-testing-basics·production-env-secrets·ai-era-timeline·autocomplete-era | needed → draft → approved | Codex P-01/P-02 연속, scores 89·90·91·88·89 |
