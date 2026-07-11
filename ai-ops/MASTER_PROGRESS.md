@@ -236,3 +236,4 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | 2026-07-06 | CODEX-PLAN Phase 3 P-06 T03 Wave 2 | 완료 | `npm run verify` PASS, react-state-and-effects 검증 통과 |
 | 2026-07-06 | CODEX-PLAN Phase 3 P-08 T03 Wave 2 | 완료 | react-state-and-effects V2 Wave 14 릴리스, deployment HOLD |
 | 2026-07-11 | M4 Content Refresh Sweep | 완료 | stale KB 0건 확인, `model-selection-tradeoffs` 신규 KB 승격 및 검증 승인(score 91), 백로그 55행 planned 전환 |
+| 2026-07-11 | M5 Machine QA Scan | 완료 | 전 강의 67개·KB 58개·다이어그램 40개·용어 259개 스캔, 인용/링크/다이어그램 위반 0건, 형식 19건·용어집 103건 보고, `npm run verify` PASS |

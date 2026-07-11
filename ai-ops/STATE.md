@@ -11,28 +11,28 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **O-06.1 (v3.1) — Fable(지휘+경량QA) · Codex(Heavy 미션 M1~M5) 2인 체제.** 기획서: ORCHESTRATION-PLAN.md |
-| Current State | **🌐 67강 deployed + M3 UI/UX refactor verified locally** — 용어 259, 다이어그램 40 / KB 52건 approved. 배포는 Fable 세션 말미 판단 |
-| Last Completed Step | Codex M3 UI/UX 리팩터 Phase A~C 구현 및 verify 통과 (2026-07-11) |
+| Current State | **M4/M5 complete + verify PASS** — 67강 released, KB 58건 approved, 용어 259, 다이어그램 40. QA scan: 형식 19건·용어집 103건·V1 알려짐 5건, 인용/링크/다이어그램 위반 0건 |
+| Last Completed Step | Codex M4 콘텐츠 리프레시 + M5 기계 QA 전수 스캔, `npm run verify` 통과 (2026-07-11) |
 | Next Executor | Fable(검토·조정·배포 판단) |
 | Next Prompt File | prompts/RUN-FABLE.md |
-| Blocker | 없음 |
+| Blocker | 없음 (M5 위반은 Fable triage 대상) |
 | Required Human Action | None — Fable에 "run" 또는 "계속" |
-| Release Status | **V2 67강 deployed (비공개 모드 A) + M3 UI/UX verified, deploy pending Fable** — 67/100 |
+| Release Status | **V2 67강 released (비공개 모드 A) + M3 UI/UX verified + M4/M5 reports complete, deploy pending Fable** — 67/100 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
 NEXT_ACTION:
-- Current State: M3 UI/UX Refactor Phase A~C verified locally
+- Current State: M4 Content Refresh + M5 Machine QA Scan complete, npm run verify PASS
 - Verdict: DONE
 - Next Executor: Fable
 - Next Prompt File: prompts/RUN-FABLE.md
-- Why: UI 리팩터는 Codex 구현·verify 완료, 배포(P-09)는 수행하지 않고 Fable 검토·배포 판단으로 넘기는 운영 규칙 때문
+- Why: M5는 보고 전용 런이고 QA 위반 triage 및 배포 판단은 Fable 검토·조정 단계로 넘기는 운영 규칙 때문
 - Required Operator Action: None — Fable에 "run" 또는 "계속" 입력
-- If Approved: Fable이 검토 후 세션 말미 배포 판단
-- If Rejected: 반려 사유에 따라 Codex M3 수정 런으로 회귀
-- Files to Check: ai-ops/outputs/04-integrated/RELEASE-2026-07-11-uiux-refactor-m3.md, ai-ops/roadmap/UIUX-REFACTOR-PLAN.md, src/app/page.tsx
-- Stop Condition: Fable 검토에서 배포 보류 또는 수정 필요 판정
+- If Approved: Fable이 `codex-qa-scan.md`를 triage해 다음 보수 물결 또는 배포 보류/진행을 결정
+- If Rejected: 반려 사유에 따라 Codex M4/M5 수정 런으로 회귀
+- Files to Check: ai-ops/reports/stale-kb.md, ai-ops/reports/codex-qa-scan.md, ai-ops/outputs/04-integrated/RELEASE-2026-07-11-m4-m5-refresh-qa.md
+- Stop Condition: Fable이 배포 전 보수 필요 또는 운영자 범위 결정 필요를 판정
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -68,13 +68,15 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
-- KB 1차: context-engineering·tool-calling·mcp·rag·agent-loop = **qa_approved + Quote Bank 6개씩 보강 완료** / KB 2차: skills·orchestration·harness = **approved** / KB 3차: subagents·loop-engineering·context-caching·ai-system-evaluation = **approved** / KB 4차 T08: tokenization-context·prompt-engineering·grounding-citations·hallucination-verification·embeddings-similarity = **approved** / KB 5차 T01/T08: dev-environment-map·vibe-coding-origin-karpathy·ai-learning-verification·files-folders-paths·terminal-shell-commands = **approved** / KB 6차 T01: variables-types-data·control-flow-functions-errors·debugging-error-reading·regex-code-search·package-json-semver = **approved** / KB 7차 T02: html-semantic-elements·css-cascade-layout·javascript-dom-events·browser-rendering-network·http-request-response = **approved** / KB 8차: json-data-contracts·web-security-basics·typescript-type-system·react-component-model·react-state-effects = **approved** / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 67강** (deployment HOLD) / UI: **M3 UI/UX refactor verified locally**, Fable 검토·배포 판단 대기
+- KB: **58건 approved**, M4 `model-selection-tradeoffs` score 91 승격 완료, stale KB 0건 / D-02 플랫폼 증분 = **완료**
+- 강의: **V2 released 67강** (deployment HOLD) / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 형식 19건·용어집 103건·V1 알려짐 5건, 인용/링크/다이어그램 위반 0건
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-11 | M5 Machine QA Scan | report-only → done | Codex, 전 강의 67개·KB 58개·다이어그램 40개·용어 259개 전수 스캔, `npm run verify` PASS |
+| 2026-07-11 | M4 Content Refresh Sweep | stale scan + 신규 후보 승격 → approved | Codex, stale KB 0건, `model-selection-tradeoffs` score 91, 커밋 4018958 |
 | 2026-07-11 | M3 UI/UX Refactor | Phase A~C → verified locally | Codex, 커리큘럼 탐색·진행률·읽기 UX·홈/용어집 마감, npm run verify PASS |
 | 2026-07-06 | KB nextjs-routing-rendering·git-init-add-commit-status·git-branch-switch-merge·git-log-diff-show·git-restore-reset-revert | draft → approved (89·91·90·92·92) | **Fable(대행)** P-02 KB 9차 — 인용 전건 세션 내 fetch 원문 대조 |
 | 2026-07-06 | KB nextjs-routing-rendering·git-init-add-commit-status·git-branch-switch-merge·git-log-diff-show·git-restore-reset-revert | needed → draft | **Fable(대행)** P-01 T03/T04 KB 9차 — Codex 토큰 소진, 운영자 승인 |
