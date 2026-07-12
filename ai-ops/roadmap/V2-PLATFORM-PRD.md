@@ -4,7 +4,7 @@
 |---|---|
 | **문서 종류** | V2 전체 설계 (PRD + 교육 + 아키텍처 + 로드맵) |
 | **날짜** | 2026-07-12 |
-| **상태** | Design freeze candidate — **구현 전 설계 전용** |
+| **상태** | **보류 (2026-07-12 운영자 방향 변경)** — 현행 정본은 [`ATLAS-EDUCATION-LAYER.md`](./ATLAS-EDUCATION-LAYER.md) (기존 구조 유지 + Education Layer 추가). 본 PRD는 아이디어 보관 |
 | **V1 공개 기준** | https://ju0o-ec967.web.app (Batch2 public release) |
 | **근거 소스** | V1 `src/`·`curriculum`·`ai-ops/*` · `CodingLabV2.md` · `D:\vibe-coding-basic-app` |
 

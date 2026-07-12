@@ -10,14 +10,14 @@
 
 | 필드 | 값 |
 |---|---|
-| Current Batch | **O-06.1 (v3.1) — Fable(지휘+경량QA) · Codex(Heavy 미션 M1~M5) 2인 체제.** 기획서: ORCHESTRATION-PLAN.md |
-| Current State | **🌐 공개 전환 완료(모드 B) + 🏁 100강 완주** — 게이트·noindex 제거, 인용 173블록 링크 강등, Footer(인스타 @ju0o___·비영리 고지)·about/privacy/terms/license 페이지 신설 |
-| Last Completed Step | Grok이 공개 전환(저작권 정리·SEO·Footer·정보 페이지) 수행 → Fable이 전수 QA: 인용 300블록 전건 KB 글자 일치, 강의당 인용 3블록 준수, 자가 QA 내부 메타 22건 제거, 캡스톤·배포 체크리스트 시제 정정, verify exit 0, 재배포 (2026-07-12) |
-| Next Executor | 운영자 판단 — W2 콘텐츠 리프레시(R1~R7), M5 QA 재스캔(공개판 기준), 캡스톤 4층 확장(retrieval 챗봇), Search Console 등록(선택) |
-| Next Prompt File | 후속 시 ai-ops/prompts/CODEX-MISSIONS.md → M4(리프레시) 또는 M5(QA 전수 — T2는 부분 일치 기준으로 갱신 필요) |
+| Current Batch | **🧭 ATLAS (O-07) — AI Engineering Atlas · Education Layer 추가.** 정본: [roadmap/ATLAS-EDUCATION-LAYER.md](roadmap/ATLAS-EDUCATION-LAYER.md) (기존 AI-Ops·100강·용어집 무수정, Layer만 추가. Lab PRD는 보류) |
+| Current State | **Atlas A0 완료** — 기획서 확정 + `src/content/atlas.ts` 12노드 스켈레톤(강의 slug·용어·KB id 매핑 기계검증 PASS). 사이트는 100강 공개(모드 B) 라이브 유지 |
+| Last Completed Step | 운영자 방향 지시(Evolution, not Rebuild) → Fable이 ATLAS 기획서 작성 + 12노드 데이터 스켈레톤 + 참조 무결성 검증 (2026-07-12) |
+| Next Executor | Fable(A1 UI 뼈대) 또는 Codex(A2 Chapter 12편 — 미션 발급 시) |
+| Next Prompt File | roadmap/ATLAS-EDUCATION-LAYER.md §5 (Phase 표) — **에이전트는 이 문서+NEXT만 읽는다(§0 규약)** |
 | Blocker | 없음 |
-| Required Human Action | 공개판 스팟체크(선택) + Instagram 링크 동작 확인 |
-| Release Status | **V2 100강 released + 라이브 100강 공개(모드 B)** — https://ju0o-ec967.web.app 검색 허용·무료 공개 |
+| Required Human Action | 기획서 스팟체크(선택) — 12노드 제목·연결 문장 반려 가능 |
+| Release Status | **V2 100강 공개 라이브 유지** + Atlas A0(데이터 층) 준비 — Atlas UI는 A1~A4 후 배포 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
