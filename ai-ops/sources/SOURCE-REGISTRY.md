@@ -12,6 +12,7 @@ Research·Fact Check Agent가 사용하는 허용 출처 목록. 새 출처는 R
 | Git | Git Documentation / Pro Git | https://git-scm.com/doc |
 | PostgreSQL | PostgreSQL Docs | https://www.postgresql.org/docs |
 | Node.js | Node.js Docs | https://nodejs.org/docs |
+| npm | npm Docs | https://docs.npmjs.com |
 | Tailwind CSS | Tailwind CSS Docs | https://tailwindcss.com/docs |
 | Vitest | Vitest Docs | https://vitest.dev |
 | Playwright | Playwright Docs | https://playwright.dev |
