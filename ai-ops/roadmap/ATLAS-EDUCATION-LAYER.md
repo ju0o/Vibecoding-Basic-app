@@ -6,6 +6,7 @@
 | 상태 | **현행 단일 정본(SSOT)** — 구현 전 기획 전용. Lab PRD(V2-PLATFORM-PRD.md)는 보류·아이디어 보관 |
 | 대원칙 | **Evolution, not Rebuild.** 기존 AI-Ops(Agent·Workflow·KB·Executor·QA·Dashboard)와 100강·용어집 456개·다이어그램을 그대로 유지하고, 그 위에 Education Layer만 추가한다 |
 | 선행 산출 | Phase A0(커밋 8364c09): `src/content/atlas.ts` 12노드 데이터 스켈레톤 — 본 PRD §20의 기반 |
+| 구현 계획 | **[ATLAS-BUILD-PLAN.md](ATLAS-BUILD-PLAN.md)** — Phase 1~7 게이트 실행. **챕터는 13섹션 형식(BUILD-PLAN §B)이 정본**(본 문서의 5섹션 초안 대체, 2026-07-12 운영자 지시) |
 
 ## §0. 에이전트 읽기 규약 (토큰 낭비 방지 — 모든 후속 작업의 전제)
 

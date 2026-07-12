@@ -11,10 +11,10 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **🧭 ATLAS (O-07) — AI Engineering Atlas · Education Layer 추가.** 정본: [roadmap/ATLAS-EDUCATION-LAYER.md](roadmap/ATLAS-EDUCATION-LAYER.md) (기존 AI-Ops·100강·용어집 무수정, Layer만 추가. Lab PRD는 보류) |
-| Current State | **Atlas 전체 PRD 작성 완료(20개 항목) — 운영자 승인 대기.** A0 데이터 스켈레톤 포함. 사이트는 100강 공개(모드 B) 라이브 유지, 코드 무수정 |
+| Current State | **PRD 승인됨 → 구현 계획(ATLAS-BUILD-PLAN.md, Phase 1~7) 작성 완료 — Phase 1 승인 대기.** 챕터 13섹션 형식·5대 가치(Visual·Interaction·Story·Engineering·Learning)·기능 게이트 질문이 헌법(§A)으로 명문화됨. 코드 무수정 |
 | Last Completed Step | 운영자 지시("코드 수정 금지, 20개 항목 PRD만") → Fable이 현 구조 전수 분석 후 ATLAS-EDUCATION-LAYER.md를 전체 PRD(§1~§20: 구조분석·유지구조·Layer설계·KB활용·로드맵·그래프·타임라인·관계·애니·플레이그라운드·퀴즈·진행률·Wiki발전·IA·UserFlow·내비·첫화면·철학·차별점·최종구조)로 전면 개정 (2026-07-12) |
-| Next Executor | 운영자 — PRD 승인/반려. 승인 시 Fable A1 착수(§20.2) |
-| Next Prompt File | roadmap/ATLAS-EDUCATION-LAYER.md — §0 읽기 규약 준수(지정 섹션만 열기), 실행 로드맵은 §20.2 |
+| Next Executor | 운영자 — **Phase 1 승인/반려**. 승인 시 Fable P1 착수 |
+| Next Prompt File | **roadmap/ATLAS-BUILD-PLAN.md** — 실행 정본. §A 헌법 + 해당 Phase 절만 읽기(PRD는 지시된 §만) |
 | Blocker | 없음 |
 | Required Human Action | 기획서 스팟체크(선택) — 12노드 제목·연결 문장 반려 가능 |
 | Release Status | **V2 100강 공개 라이브 유지** + Atlas A0(데이터 층) 준비 — Atlas UI는 A1~A4 후 배포 |
