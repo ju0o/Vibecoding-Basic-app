@@ -133,17 +133,11 @@ browser rendering은 network와 분리된 마법이 아닙니다. initial HTML d
 
 이 인용은 network와 rendering의 연결 고리입니다. bytes가 response로 왔다고 곧바로 화면이 되는 것이 아니라, browser가 DOM과 CSSOM이라는 구조로 바꿔야 합니다. blank page와 slow page를 볼 때 response 이후의 처리 단계를 확인해야 하는 이유입니다.
 
-> "Rendering steps include style, layout, paint, and in some cases compositing."
->
-> — rendering steps에는 style, layout, paint, 그리고 어떤 경우에는 compositing이 포함된다.
-> [Populating the page: how browsers work — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/How_browsers_work) (CC-BY-SA)
+관련 원문(링크): [Populating the page: how browsers work — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/How_browsers_work)
 
 rendering이라는 한 단어 안에도 여러 단계가 있습니다. layout 문제와 paint 문제를 모두 "렌더링 문제"라고만 부르면 원인 분리가 어렵습니다. 이 인용은 rendering을 더 작은 evidence 단위로 나누게 해 줍니다.
 
-> "The DOM and CSSOM are both trees."
->
-> — DOM과 CSSOM은 둘 다 tree다.
-> [Populating the page: how browsers work — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/How_browsers_work) (CC-BY-SA)
+관련 원문(링크): [Populating the page: how browsers work — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/How_browsers_work)
 
 DOM과 CSSOM을 tree로 이해하면 HTML/CSS 학습이 browser internals와 연결됩니다. semantic HTML은 DOM tree의 구조가 되고, CSS cascade/layout은 CSSOM과 render/layout 계산으로 이어집니다. 앞선 강의들이 이 강의의 선행 개념인 이유입니다.
 

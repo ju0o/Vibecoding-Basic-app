@@ -125,31 +125,28 @@ git show a3cf62b        # 특정 커밋의 전체 내용
 
 ## 원문으로 읽기
 
-> "List commits that are reachable by following the parent links from the given commit(s), but exclude commits that are reachable from the one(s) given with a ^ in front of them."
+> "List commits that are reachable by following the parent links from the given commit(s), but exclude commits that are reachable from the [...]"
 >
 > — 주어진 커밋(들)에서 parent 링크를 따라 도달 가능한 커밋들을 나열하되, 앞에 ^가 붙은 커밋에서 도달 가능한 것들은 제외한다.
 > [git-log — Git Documentation](https://git-scm.com/docs/git-log)
 
 log의 공식 정의가 "최근 커밋을 보여준다"가 아니라 그래프 질의라는 사실이 여기 있습니다. `main..feature` 같은 범위 문법이 마법이 아니라 이 정의("포함 집합 - 제외 집합")의 표기법일 뿐임을 알면, log는 외울 것이 아니라 조립하는 도구가 됩니다.
 
-> "Show changes between the working tree and the index or a tree, changes between the index and a tree, changes between two trees, changes resulting from a merge, changes between two blob objects, or changes between two files on disk."
+> "Show changes between the working tree and the index or a tree, changes between the index and a tree, changes between two [...]"
 >
 > — 워킹 트리와 인덱스(또는 트리) 사이, 인덱스와 트리 사이, 두 트리 사이, 병합의 결과, 두 blob 객체 사이, 또는 디스크의 두 파일 사이의 변경을 보여준다.
 > [git-diff — Git Documentation](https://git-scm.com/docs/git-diff)
 
 문서의 첫 문장이 diff의 비교쌍 전체 목록입니다. "diff가 뭘 보여주지?"라는 질문의 답이 하나가 아니라 여섯이라는 것 — 그래서 diff를 쓸 때는 항상 "지금 어느 쌍인가"를 먼저 확정해야 합니다.
 
-> "Shows one or more objects (blobs, trees, tags and commits)."
+> "Shows one or more objects (blobs, trees, tags and commits). [...]"
 >
 > — 하나 이상의 객체(blob, tree, tag, commit)를 보여준다.
 > [git-show — Git Documentation](https://git-scm.com/docs/git-show)
 
 show의 정의가 "커밋을 보여준다"가 아니라 "객체를 보여준다"인 것에 Git의 내부가 드러납니다. 저장소의 모든 것 — 파일 내용도, 폴더 구조도, 커밋도 — 이 동일한 객체 저장소(1강의 `.git/objects`)에 사는 시민이며, show는 그 저장소의 열람 창구입니다.
 
-> "For commits it shows the log message and textual diff."
->
-> — 커밋에 대해서는 로그 메시지와 텍스트 diff를 보여준다.
-> [git-show — Git Documentation](https://git-scm.com/docs/git-show)
+관련 원문(링크): [git-show — Git Documentation](https://git-scm.com/docs/git-show)
 
 커밋 하나를 조사할 때 log(메시지)와 diff(내용)를 따로 실행할 필요가 없는 이유입니다. 이 프로젝트의 운영 절차인 "커밋 후 `git show --stat`으로 누락 확인"도 이 성질 위에 서 있습니다.
 

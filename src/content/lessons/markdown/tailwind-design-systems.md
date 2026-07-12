@@ -108,11 +108,11 @@ Tailwind 공식 문서에서 먼저 볼 문장은 utility와 theme variable의 �
 
 이 문장은 바로 앞 오해를 더 분명히 막습니다. theme variable은 값을 저장하는 동시에 Tailwind가 어떤 utility를 제공할지 결정합니다. 그러므로 theme 변경은 단순 리팩터링이 아니라 public style API 변경처럼 다루어야 합니다.
 
-> "Use the `--breakpoint-*` theme variables to customize your breakpoints"
+관련 원문: 원문
 
 이 문장은 반응형 기준도 token이라는 점을 보여줍니다. 모바일, 태블릿, 데스크톱 기준이 제품마다 다르게 흩어지면 layout 품질이 떨어집니다. breakpoint는 디자이너와 개발자가 함께 합의해야 하는 시스템 값입니다.
 
-> "only exist because of the theme variables you've defined"
+관련 원문: 원문
 
 이 문장은 utility class의 존재 이유가 theme variable과 연결된다는 점을 강조합니다. 어떤 class가 존재한다는 것은 그 뒤에 팀이 정의한 token이 있다는 뜻이어야 합니다. 이 관계가 깨지면 Tailwind는 디자인 시스템이 아니라 임의 class 나열이 됩니다.
 

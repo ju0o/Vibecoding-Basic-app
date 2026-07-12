@@ -134,17 +134,11 @@ Plan Mode 같은 기능의 의미는 "AI가 계획도 알아서 한다"가 아�
 
 프롬프트 작성 문장처럼 보이지만 요구사항 분해에도 그대로 쓰입니다. 먼저 goal을 말하고, 그 다음 specific requirements를 acceptance criteria로 나눕니다. 이 순서가 있어야 AI가 목표와 세부 조건을 함께 이해할 수 있습니다.
 
-> "build, test and validate its changes"
->
-> — 변경을 빌드하고 테스트하고 검증한다.
-> [GitHub Docs — Get the best results from Copilot cloud agent](https://docs.github.com/en/copilot/tutorials/cloud-agent/get-the-best-results)
+관련 원문(링크): [GitHub Docs — Get the best results from Copilot cloud agent](https://docs.github.com/en/copilot/tutorials/cloud-agent/get-the-best-results)
 
 AI agent task에 검증 정보를 넣어야 하는 이유입니다. 구현만 요청하면 agent가 어떤 기준으로 완료를 판단해야 하는지 흐려집니다. Build, test, validate가 task에 포함되어야 사람도 결과를 검토할 수 있습니다.
 
-> "Create detailed implementation plans before writing code"
->
-> — 코드를 쓰기 전에 상세 구현 계획을 만든다.
-> [Cursor Docs — Plan Mode](https://cursor.com/docs/agent/plan-mode)
+관련 원문(링크): [Cursor Docs — Plan Mode](https://cursor.com/docs/agent/plan-mode)
 
 이 문장은 바로 구현으로 뛰어들기 전에 plan을 review artifact로 만들라는 뜻으로 읽을 수 있습니다. 큰 task일수록 plan을 먼저 보고 scope와 위험을 확인해야 합니다. Plan이 task와 맞지 않으면 구현 전에 작업 분해를 고쳐야 합니다.
 
@@ -191,5 +185,3 @@ Task가 끝나면 "수정 완료"만 쓰지 않습니다. 어떤 criteria가 만
 이 강의의 근거 KB는 `requirement-task-breakdown`입니다. 먼저 GitHub Issues quickstart를 읽고 issue가 work를 plan and track하는 단위임을 확인하세요. 그 다음 sub-issues 문서에서 큰 일을 tasks로 나누는 hierarchy를 봅니다. GitHub Copilot prompt engineering 문서에서는 general goal과 specific requirements의 순서를 확인하고, Copilot cloud agent 문서에서는 build, test, validate guidance가 왜 필요한지 읽습니다. 마지막으로 Cursor Plan Mode 문서를 보며 구현 전 plan이 어떤 review artifact가 될 수 있는지 확인하세요.
 
 다음 학습 흐름은 `prompt-to-implementation-loop`입니다. 작업을 잘게 나눴다면 이제 각 task를 prompt로 전달하고, AI의 구현 후보를 build, test, validate 결과와 함께 다시 feedback하는 루프를 배울 차례입니다. 작업 분해는 그 루프의 첫 입력을 만드는 단계입니다.
-
-자가 QA 결과: V2 8섹션을 모두 포함했고, Quote Bank 인용 5개를 원문 그대로 사용했습니다. 본문은 승인 KB의 GitHub Issues, GitHub Copilot, Cursor Plan Mode 출처 범위 안에서 작성했으며, KB 외 신규 사실을 추가하지 않았습니다. 하이라이트는 섹션당 3개 이하로 제한했고, 코드 예시는 task readiness를 확인하는 독립 TypeScript 예시입니다.

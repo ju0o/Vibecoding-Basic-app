@@ -131,31 +131,28 @@ git commit --amend -m "fix: 검색 결과 빈 상태 처리 (오타 수정)"
 
 ## 원문으로 읽기
 
-> "When you run git commit without any other arguments, it will only commit staged changes."
+> "When you run git commit without any other arguments, it will only commit staged changes. [...]"
 >
 > — 다른 인자 없이 git commit을 실행하면, 스테이징된 변경만 커밋한다.
 > [git-add — Git Documentation](https://git-scm.com/docs/git-add)
 
 이 한 문장이 add-commit 2단계 모델의 전부입니다. "커밋했는데 내 수정이 안 들어갔어요"라는 하소연의 90%가 이 규칙을 모르는 데서 나옵니다 — 커밋은 워킹 트리가 아니라 인덱스를 기록합니다.
 
-> "This command creates an empty Git repository - basically a .git directory with subdirectories for objects, refs/heads, refs/tags, and template files."
+> "This command creates an empty Git repository - basically a .git directory with subdirectories for objects, refs/heads, refs/tags, and template files. [...]"
 >
 > — 이 명령은 빈 Git 저장소를 만든다 — 본질적으로 objects, refs/heads, refs/tags 하위 디렉터리와 템플릿 파일을 가진 .git 디렉터리다.
 > [git-init — Git Documentation](https://git-scm.com/docs/git-init)
 
 공식 문서가 저장소의 실체를 "basically a .git directory"라고 잘라 말합니다. 저장소는 서버도, 클라우드도 아니고 여러분 프로젝트 안의 숨김 폴더입니다. 이 사실을 알면 "저장소가 깨졌다"는 상황도 결국 파일 시스템 문제로 접근할 수 있습니다.
 
-> "Displays paths that have differences between the index file and the current HEAD commit, paths that have differences between the working tree and the index file, and paths in the working tree that are not tracked by Git [...]"
+> "Displays paths that have differences between the index file and the current HEAD commit, paths that have differences between the working tree [...]"
 >
 > — 인덱스와 현재 HEAD 커밋이 다른 경로들, 워킹 트리와 인덱스가 다른 경로들, 그리고 Git이 추적하지 않는 워킹 트리의 경로들을 표시한다.
 > [git-status — Git Documentation](https://git-scm.com/docs/git-status)
 
 status의 정의 자체가 세 영역 모델의 증명입니다. 출력의 세 묶음은 임의 분류가 아니라 "어느 두 영역을 비교했는가"이며, 이 구조를 알고 읽으면 status는 항상 "다음에 할 일"을 알려주는 내비게이션이 됩니다.
 
-> "The new commit is a direct child of HEAD, usually the tip of the current branch, and the branch is updated to point to it [...]"
->
-> — 새 커밋은 HEAD(보통 현재 브랜치의 끝)의 직계 자식이 되며, 브랜치는 그것을 가리키도록 갱신된다.
-> [git-commit — Git Documentation](https://git-scm.com/docs/git-commit)
+관련 원문(링크): [git-commit — Git Documentation](https://git-scm.com/docs/git-commit)
 
 커밋이 "저장"이 아니라 "그래프에 노드 추가"라는 것을 보여주는 문장입니다. 부모-자식 연결이 있기에 이력을 거슬러 올라갈 수 있고(log), 갈래를 만들 수 있으며(branch), 특정 지점으로 돌아갈 수 있습니다(reset).
 

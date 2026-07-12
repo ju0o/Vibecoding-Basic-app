@@ -91,10 +91,7 @@ MCP tools primitive의 목적을 바로 보여줍니다. 이 인용은 강의의
 
 tools와 resources의 차이를 설명하는 핵심 구절입니다. 이 인용은 강의의 주장을 장식하는 문장이 아니라, 설계 판단의 기준선으로 읽어야 합니다. 원문은 짧지만 포함하는 전제는 분명합니다. 모델이 무엇을 보고, 무엇을 할 수 있으며, 어디서 멈춰야 하는지를 시스템이 명시적으로 다루어야 한다는 뜻입니다.
 
-> "maintaining clear security boundaries"
->
-> — 명확한 보안 경계를 유지한다.
-> [MCP Architecture — Model Context Protocol](https://modelcontextprotocol.io/specification/2025-11-25/architecture)
+관련 원문(링크): [MCP Architecture — Model Context Protocol](https://modelcontextprotocol.io/specification/2025-11-25/architecture)
 
 host-client-server 분리가 단순 구조화가 아니라 보안 설계임을 설명합니다. 이 인용은 강의의 주장을 장식하는 문장이 아니라, 설계 판단의 기준선으로 읽어야 합니다. 원문은 짧지만 포함하는 전제는 분명합니다. 모델이 무엇을 보고, 무엇을 할 수 있으며, 어디서 멈춰야 하는지를 시스템이 명시적으로 다루어야 한다는 뜻입니다.
 

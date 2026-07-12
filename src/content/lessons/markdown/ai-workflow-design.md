@@ -91,10 +91,7 @@ AI Workflow 설계: 단계 분해와 품질 게이트에서 가장 먼저 확인
 
 Workflow 내부에 agent loop가 들어갈 수 있지만 둘은 같은 층위가 아닙니다. 이 인용은 강의의 주장을 장식하는 문장이 아니라, 설계 판단의 기준선으로 읽어야 합니다. 원문은 짧지만 포함하는 전제는 분명합니다. 모델이 무엇을 보고, 무엇을 할 수 있으며, 어디서 멈춰야 하는지를 시스템이 명시적으로 다루어야 한다는 뜻입니다.
 
-> "mistakes can propagate and compound"
->
-> — 실수는 전파되고 누적될 수 있다.
-> [Demystifying evals for AI agents — Anthropic](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)
+관련 원문(링크): [Demystifying evals for AI agents — Anthropic](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)
 
 게이트가 없으면 앞 단계의 오류가 뒤 단계에서 커진다는 점을 설명합니다. 이 인용은 강의의 주장을 장식하는 문장이 아니라, 설계 판단의 기준선으로 읽어야 합니다. 원문은 짧지만 포함하는 전제는 분명합니다. 모델이 무엇을 보고, 무엇을 할 수 있으며, 어디서 멈춰야 하는지를 시스템이 명시적으로 다루어야 한다는 뜻입니다.
 

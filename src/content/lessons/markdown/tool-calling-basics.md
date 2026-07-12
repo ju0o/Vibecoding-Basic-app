@@ -91,10 +91,7 @@ Tool Calling: AI가 도구를 부르는 방식에서 가장 먼저 확인할 세
 
 자연어 답변과 도구 요청의 차이는 구조화된 출력에 있습니다. 이 인용은 강의의 주장을 장식하는 문장이 아니라, 설계 판단의 기준선으로 읽어야 합니다. 원문은 짧지만 포함하는 전제는 분명합니다. 모델이 무엇을 보고, 무엇을 할 수 있으며, 어디서 멈춰야 하는지를 시스템이 명시적으로 다루어야 한다는 뜻입니다.
 
-> "function calls reliably adhere to the function schema"
->
-> — 함수 호출이 함수 스키마를 안정적으로 따르게 한다.
-> [Function calling — OpenAI API Docs](https://developers.openai.com/api/docs/guides/function-calling)
+관련 원문(링크): [Function calling — OpenAI API Docs](https://developers.openai.com/api/docs/guides/function-calling)
 
 strict mode와 스키마 설계가 왜 중요한지 설명합니다. 이 인용은 강의의 주장을 장식하는 문장이 아니라, 설계 판단의 기준선으로 읽어야 합니다. 원문은 짧지만 포함하는 전제는 분명합니다. 모델이 무엇을 보고, 무엇을 할 수 있으며, 어디서 멈춰야 하는지를 시스템이 명시적으로 다루어야 한다는 뜻입니다.
 

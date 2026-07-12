@@ -137,17 +137,11 @@ KB에서 확인된 cache invalidation 원인은 system prompt timestamp, reorder
 
 실무에서 바로 적용할 수 있는 규칙입니다. system policy, tool definitions, examples처럼 반복되는 내용을 앞쪽에 두고, 현재 사용자 입력이나 timestamp처럼 바뀌는 정보는 뒤쪽에 두어야 합니다. 이 원칙은 cache hit뿐 아니라 context 구조의 가독성도 높입니다.
 
-> "specific prefixes in your prompts"
->
-> — 프롬프트의 특정 prefix.
-> [Prompt caching — Claude Docs](https://platform.claude.com/docs/en/build-with-claude/prompt-caching)
+관련 원문(링크): [Prompt caching — Claude Docs](https://platform.claude.com/docs/en/build-with-claude/prompt-caching)
 
 Anthropic 문서의 이 표현은 caching이 prompt 전체가 아니라 prefix boundary와 관련 있음을 보여줍니다. 어떤 부분까지 반복되고 어떤 부분부터 달라지는지 알아야 automatic caching이든 explicit breakpoint든 제대로 이해할 수 있습니다.
 
-> "The match is exact"
->
-> — 일치는 정확해야 한다.
-> [How Claude Code uses prompt caching — Claude Code Docs](https://code.claude.com/docs/en/prompt-caching)
+관련 원문(링크): [How Claude Code uses prompt caching — Claude Code Docs](https://code.claude.com/docs/en/prompt-caching)
 
 Claude Code의 caching을 이해할 때 중요한 문장입니다. full context를 다시 보내더라도 unchanged prefix를 재처리하지 않게 할 수 있지만, prefix 안의 작은 변화가 전체 재계산을 만들 수 있습니다. 그러므로 tool order와 system prompt 안정성이 실무 성능에 영향을 줍니다.
 

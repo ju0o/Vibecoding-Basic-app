@@ -138,17 +138,11 @@ Cloud agent가 build, test, changed software interaction을 수행할 수 있다
 
 Repository instruction의 역할을 보여주는 문장입니다. AI가 프로젝트를 매번 처음 보는 것처럼 일하지 않게, 반복되는 규칙과 검증 방법을 context로 제공합니다. 이 context는 task prompt와 결합되어야 합니다.
 
-> "build, test and validate its changes"
->
-> — 변경을 빌드하고 테스트하고 검증한다.
-> [GitHub Docs — Get the best results from Copilot cloud agent](https://docs.github.com/en/copilot/tutorials/cloud-agent/get-the-best-results)
+관련 원문(링크): [GitHub Docs — Get the best results from Copilot cloud agent](https://docs.github.com/en/copilot/tutorials/cloud-agent/get-the-best-results)
 
 구현 루프에서 observation이 왜 필요한지 설명합니다. AI가 코드를 만들었다면 build와 test로 확인하고, 요구사항과 맞는지 validate해야 합니다. 이 결과가 다음 prompt의 근거가 됩니다.
 
-> "build, test, and interact with the changed software"
->
-> — 변경된 소프트웨어를 빌드하고 테스트하고 상호작용한다.
-> [Cursor Docs — Cloud Agents](https://cursor.com/docs/cloud-agent)
+관련 원문(링크): [Cursor Docs — Cloud Agents](https://cursor.com/docs/cloud-agent)
 
 Cloud agent가 단순 답변을 넘어 실행 환경에서 변경을 확인할 수 있음을 보여줍니다. 그렇기 때문에 agent report에는 실제 실행 결과가 있어야 합니다. 사람이 그 결과를 읽어야 루프가 닫힙니다.
 
@@ -197,5 +191,3 @@ Report format을 포함하면 AI가 무엇을 돌려줘야 하는지도 분명�
 이 강의의 근거 KB는 `prompt-implementation-loop`입니다. 먼저 GitHub Copilot prompt engineering 문서에서 broad description과 specific requirements의 흐름을 읽으세요. 그 다음 Copilot Chat in IDE 문서에서 response 평가와 follow-up request가 어떻게 설명되는지 확인합니다. Repository custom instructions 문서는 반복 context를 어디에 둘지 알려줍니다. Copilot cloud agent 문서는 build, test, validate guidance가 왜 필요한지 보여주고, Cursor Cloud Agents 문서는 cloud agent가 changed software를 확인할 수 있는 실행 환경을 이해하는 데 도움이 됩니다.
 
 다음 학습 순서는 `ai-assisted-testing-loop`입니다. 프롬프트 구현 루프에서 가장 중요한 observation은 test 결과입니다. 이후 강의에서는 AI가 test generation을 어떻게 도울 수 있고, 사람이 어떤 assertion과 regression case를 검토해야 하는지 다룹니다.
-
-자가 QA 결과: V2 8섹션을 모두 포함했고, Quote Bank 인용 5개를 원문 그대로 사용했습니다. 본문은 승인 KB의 GitHub Copilot, GitHub custom instructions, Cursor Cloud Agents 출처 범위 안에서 작성했으며, KB 외 신규 사실을 추가하지 않았습니다. 하이라이트는 섹션당 3개 이하로 제한했고, 코드 예시는 observation을 follow-up prompt로 바꾸는 독립 TypeScript 예시입니다.

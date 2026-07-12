@@ -93,38 +93,32 @@ PR은 두 브랜치를 가리킵니다 — **base**(변경을 합쳐 넣을 대�
 
 ## 원문으로 읽기
 
-> "Pull requests let you propose, review, and merge code changes."
+> "Pull requests let you propose, review, and merge code changes. [...]"
 >
 > — Pull Request로 코드 변경을 제안하고, 리뷰하고, 병합할 수 있다.
 > [About pull requests — GitHub Docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
 
 PR의 정체가 세 동사에 압축되어 있습니다 — propose(제안), review(리뷰), merge(병합). 이 순서가 곧 흐름입니다. 제안 없이 리뷰 없고, 리뷰 없이 (안전한) 병합이 없습니다. PR을 "코드 올리는 곳"이 아니라 "이 세 단계를 거치는 절차"로 읽는 것이 핵심입니다.
 
-> "The Files changed tab shows the differences between the proposed changes and the existing code, making it easy to see what will change when the pull request merges."
+> "The Files changed tab shows the differences between the proposed changes and the existing code, making it easy to see what will [...]"
 >
 > — Files changed 탭은 제안된 변경과 기존 코드의 차이를 보여주어, PR이 병합될 때 무엇이 바뀔지 쉽게 볼 수 있게 한다.
 > [About pull requests — GitHub Docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
 
 "the differences between the proposed changes and the existing code" — 이것은 정확히 `git diff`가 하는 일입니다. PR의 Files changed는 diff의 웹 협업판이며, 그래서 diff를 읽는 능력(git-log-diff-show 강의)이 PR 리뷰 능력으로 그대로 이어집니다. 리뷰란 결국 diff를 읽고 판단하는 일입니다.
 
-> "Comment: Share feedback without approving or requesting changes."
+> "Comment: Share feedback without approving or requesting changes. [...]"
 >
 > — Comment: 승인하거나 변경을 요청하지 않고 피드백을 공유한다.
 > [About pull request reviews — GitHub Docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews)
 
 Comment는 "판단 보류" 상태입니다. 질문이 있거나 의견은 있지만 승인/거부를 결정하지 않을 때 씁니다. 게이트를 건드리지 않으므로, Comment만 쌓인 PR은 여전히 "아직 승인되지 않은" 상태로 남습니다.
 
-> "Approve: Approve the changes for merging."
->
-> — Approve: 병합을 위해 변경을 승인한다.
-> [About pull request reviews — GitHub Docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews)
+관련 원문(링크): [About pull request reviews — GitHub Docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews)
 
 Approve는 병합 게이트를 여는 유일한 상태입니다. required approvals가 걸린 저장소에서는 이 Approve가 정해진 수만큼 채워져야 병합 버튼이 활성화됩니다.
 
-> "Request changes: Identify issues that must be fixed before merging."
->
-> — Request changes: 병합 전에 반드시 고쳐야 할 문제를 지적한다.
-> [About pull request reviews — GitHub Docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews)
+관련 원문(링크): [About pull request reviews — GitHub Docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews)
 
 "must be fixed before merging" — Request changes는 강한 상태입니다. 단순한 의견이 아니라 "이대로는 병합 불가"라는 판정이며, 작성자가 고쳐서 다시 올릴 때까지 게이트를 잠급니다.
 

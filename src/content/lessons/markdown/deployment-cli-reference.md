@@ -86,31 +86,28 @@ Vercel의 기본 명령은 배포입니다 — ==인자 없이 `vercel`만 쳐�
 
 ## 원문으로 읽기
 
-> "With the command-line interface (CLI) you can interact with the Vercel platform using a terminal, or through an automated system, enabling you to retrieve logs, manage certificates, replicate your deployment environment locally, manage Domain Name System (DNS) records, and more."
+> "With the command-line interface (CLI) you can interact with the Vercel platform using a terminal, or through an automated system, enabling you [...]"
 >
 > — CLI로 터미널이나 자동화 시스템을 통해 Vercel 플랫폼과 상호작용할 수 있으며, 로그 조회·인증서 관리·배포 환경 로컬 복제·DNS 레코드 관리 등이 가능하다.
 > [Vercel CLI Overview](https://vercel.com/docs/cli)
 
 "using a terminal, or through an automated system" — 이 구절이 CLI의 두 얼굴입니다. 사람이 터미널에서 직접 치기도 하고, 자동화 시스템(CI/CD)이 대신 실행하기도 합니다. 같은 명령이 두 맥락에서 쓰이므로, CLI를 배우면 수동 배포와 자동 배포를 하나의 도구로 다루게 됩니다.
 
-> "Deploy your Vercel projects. Default command when no subcommand is specified."
+> "Deploy your Vercel projects. Default command when no subcommand is specified. [...]"
 >
 > — Vercel 프로젝트를 배포한다. 하위 명령이 지정되지 않으면 기본 명령이다.
 > [Vercel CLI Overview](https://vercel.com/docs/cli)
 
 배포가 "기본 명령"이라는 점이 흥미롭습니다 — `vercel`만 쳐도 배포됩니다. 가장 자주 하는 동작을 기본값으로 둔 설계입니다. 다만 이 편의는 주의도 요합니다: 무심코 `vercel --prod`를 치면 검증 없이 프로덕션에 배포될 수 있으므로, 프로덕션 플래그는 의식적으로 다뤄야 합니다.
 
-> "Roll back production deployments to previous deployments."
+> "Roll back production deployments to previous deployments. [...]"
 >
 > — 프로덕션 배포를 이전 배포로 되돌린다.
 > [Vercel CLI Overview](https://vercel.com/docs/cli)
 
 `vercel rollback`의 정의가 monitoring 강의와 정확히 이어집니다. 그 강의에서 "복구가 원인 분석보다 먼저"라고 배운 그 복구를, 이 명령 한 줄이 수행합니다. 사고 시 대시보드를 헤매지 않고 터미널에서 즉시 되돌릴 수 있다는 것이 CLI의 큰 가치입니다.
 
-> "Using the VERCEL_TOKEN environment variable is recommended for CI/CD because it avoids exposing the token in command-line arguments, which can be visible in process lists and logs."
->
-> — CI/CD에서는 VERCEL_TOKEN 환경변수 사용이 권장된다. 토큰이 명령 인자로 노출되는 것을 피하기 때문인데, 인자는 프로세스 목록과 로그에서 보일 수 있다.
-> [Vercel CLI Overview](https://vercel.com/docs/cli)
+관련 원문(링크): [Vercel CLI Overview](https://vercel.com/docs/cli)
 
 이 문장이 배포 자동화의 핵심 보안 원칙입니다. "visible in process lists and logs"(프로세스 목록·로그에 노출) — 토큰을 인자로 넘기면 여러 곳에 흔적이 남습니다. 앞 강의(환경변수·로그)에서 배운 "secret은 로그에 남기지 않는다"가 배포 명령에서 구체화된 것입니다. ==인증 정보는 인자가 아니라 환경변수로==.
 

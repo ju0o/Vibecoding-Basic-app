@@ -150,10 +150,7 @@ Agent는 plan하고 tools를 call하는 application으로 확장될 수 있습�
 
 이 문장은 RAG 기반 챗봇의 검색 단계를 설명합니다. 모델에게 모든 지식을 암기시키는 대신, 사용자의 질문과 관련된 data를 찾아 context에 공급합니다. 교재 챗봇에서는 lesson과 glossary가 retrieval source가 될 수 있습니다.
 
-> "interface with external systems and access data"
->
-> — 외부 시스템과 인터페이스하고 data에 접근한다.
-> [OpenAI Docs — Function calling](https://developers.openai.com/api/docs/guides/function-calling)
+관련 원문(링크): [OpenAI Docs — Function calling](https://developers.openai.com/api/docs/guides/function-calling)
 
 이 문장은 tool calling의 힘과 위험을 동시에 보여줍니다. 챗봇이 외부 시스템과 data에 접근할 수 있다면, 권한과 validation이 필수입니다. 모델이 요청한 tool call과 실제 실행은 분리되어야 합니다.
 

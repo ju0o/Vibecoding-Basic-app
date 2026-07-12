@@ -114,17 +114,11 @@ Agent는 multi-step task를 계획할 수 있으므로 종료 조건이 중요�
 
 이 인용은 agent 실행 환경의 안전 경계를 보여줍니다. 원격 agent가 어디에서 실행되는지, 그 환경이 어떤 격리를 제공하는지 이해해야 합니다. 다만 격리 환경은 잘못된 로직을 자동으로 막지 않습니다.
 
-> "Codex can perform tasks for you"
->
-> — Codex는 사용자를 위해 작업을 수행할 수 있다.
-> [OpenAI — Introducing Codex](https://openai.com/index/introducing-codex/)
+관련 원문(링크): [OpenAI — Introducing Codex](https://openai.com/index/introducing-codex/)
 
 이 문장은 Codex 같은 coding agent의 사용 감각을 잘 보여줍니다. 하지만 perform tasks라는 말은 task definition과 review를 전제로 읽어야 합니다. 작업이 모호하면 수행 결과도 모호하고, 검증이 없으면 완료 여부도 모호합니다.
 
-> "agentic coding tool"
->
-> — 에이전트형 코딩 도구.
-> [Anthropic — Claude Code overview](https://code.claude.com/docs/en/overview)
+관련 원문(링크): [Anthropic — Claude Code overview](https://code.claude.com/docs/en/overview)
 
 Claude Code의 설명은 agentic coding이 특정 회사 하나의 기능명이 아니라 도구 유형으로 확장되고 있음을 보여줍니다. terminal, IDE, cloud surface는 다를 수 있지만 공통적으로 codebase와 도구 사용, 검토 루프가 중요합니다.
 
@@ -180,5 +174,3 @@ Agent가 수정을 만든 뒤 테스트가 실패하면 실패 로그를 다시 
 이 강의의 근거 KB는 `ide-agent-era`입니다. 먼저 GitHub Copilot Chat responsible use 문서에서 agent mode가 chat에서 multi-step tasks로 어떻게 확장되는지 읽으세요. 그 다음 GitHub Copilot features와 Copilot Agents responsible use 문서를 통해 cloud agent와 ephemeral, firewalled environment의 의미를 확인합니다. 이어서 OpenAI Codex 소개와 Claude Code overview를 읽으면 cloud sandbox, terminal/codebase agent surface의 차이를 볼 수 있습니다.
 
 다음 강의는 `codex-claude-cursor-comparison`입니다. IDE agent 시대를 이해했다면 이제 Codex, Claude Code, Cursor 같은 도구를 모델 이름이 아니라 execution surface, context access, permission model, review workflow 기준으로 비교할 수 있습니다.
-
-자가 QA 결과: V2 8섹션을 모두 포함했고, Quote Bank 인용 5개를 원문 그대로 사용했습니다. 본문은 승인 KB의 GitHub Copilot, OpenAI Codex, Claude Code 설명 범위 안에서 작성했으며, KB 외 신규 사실을 추가하지 않았습니다. 하이라이트는 섹션당 3개 이하로 제한했고, 코드 예시는 agent task contract를 설명하는 독립 TypeScript 예시입니다.

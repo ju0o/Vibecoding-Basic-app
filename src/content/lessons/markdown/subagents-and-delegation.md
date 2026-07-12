@@ -155,17 +155,11 @@ SubAgent는 main conversation의 모델을 inherit할 수 있고, 특정 model a
 
 별도 instance라는 말은 설정과 권한을 다르게 줄 수 있다는 뜻입니다. main agent와 같은 목표를 공유하더라도, subagent는 다른 prompt, tools, model, permissions를 가질 수 있습니다. 이 차이를 설계하지 않으면 SubAgent는 단순히 비용이 더 드는 복제본이 됩니다.
 
-> "Dynamic workflows orchestrate many subagents"
->
-> — Dynamic workflow는 많은 subagent를 orchestrate한다.
-> [Orchestrate subagents at scale with dynamic workflows — Claude Code Docs](https://code.claude.com/docs/en/workflows)
+관련 원문(링크): [Orchestrate subagents at scale with dynamic workflows — Claude Code Docs](https://code.claude.com/docs/en/workflows)
 
 이 인용은 SubAgent가 커질 때 어디로 이어지는지 보여줍니다. subagent 하나를 부르는 수준을 넘어서면 orchestration 문제가 됩니다. 어떤 worker를 몇 개 실행할지, 결과를 어떻게 cross-check할지, 어떤 결과를 최종 판단에 반영할지 정해야 합니다.
 
-> "specialized sub-agents can handle focused tasks"
->
-> — 전문 sub-agent는 집중된 작업을 처리할 수 있다.
-> [Effective context engineering for AI agents — Anthropic](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
+관련 원문(링크): [Effective context engineering for AI agents — Anthropic](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
 
 focused tasks라는 표현은 SubAgent 설계의 검증 질문입니다. 지금 만들려는 subagent의 task가 focused한가? 아니라면 아직 agent를 나눌 때가 아닐 수 있습니다. 분리가 성능을 높이는 순간은 책임 경계가 충분히 좁고, 결과 계약이 충분히 명확할 때입니다.
 

@@ -143,10 +143,7 @@ OWASP Authorization 관점은 authorization logic이 app business context에 맞
 
 이 문장은 CodeQL 증거의 성격을 보여줍니다. CodeQL은 정적 분석 층에서 취약점과 오류를 찾는 신호입니다. 위험 설명에서는 이 신호를 "보안이 완전히 보장됨"으로 과장하지 않고, "정적 분석에서 확인한 증거"로 위치시켜야 합니다.
 
-> "perform actions and assert the state against expectations"
->
-> — 동작을 수행하고 상태가 기대와 맞는지 검증한다.
-> [Playwright Docs — Writing tests](https://playwright.dev/docs/writing-tests)
+관련 원문(링크): [Playwright Docs — Writing tests](https://playwright.dev/docs/writing-tests)
 
 이 문장은 동작 검증 증거를 어떻게 표현해야 하는지 알려줍니다. 테스트 통과라는 결과보다 어떤 action과 expectation이 있었는지가 더 중요합니다. 위험 설명은 테스트 이름이 아니라 검증한 behavior를 설명해야 합니다.
 

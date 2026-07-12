@@ -89,7 +89,7 @@ Twelve-Factor는 각 프로세스가 이벤트 스트림을 ==버퍼 없이(unbu
 
 ## 원문으로 읽기
 
-> "Logs are the stream of aggregated, time-ordered events collected from the output streams of all running processes and backing services."
+> "Logs are the stream of aggregated, time-ordered events collected from the output streams of all running processes and backing services. [...]"
 >
 > — 로그는 실행 중인 모든 프로세스와 백킹 서비스의 출력 스트림에서 수집된, 집계되고 시간순으로 정렬된 이벤트의 스트림이다.
 > [Twelve-Factor App: Logs](https://12factor.net/logs)
@@ -110,10 +110,7 @@ Twelve-Factor는 각 프로세스가 이벤트 스트림을 ==버퍼 없이(unbu
 
 "never concerns itself" — 강한 표현입니다. 앱은 로그를 ==어디에 보낼지, 어떻게 저장할지 신경 쓰지 않아야== 합니다. 이 분리 덕분에 같은 앱이 개발에서는 터미널로, 운영에서는 로그 수집 시스템으로 로그를 보낼 수 있습니다 — 앱 코드는 그대로 두고 환경만 바뀝니다. 앞 강의(환경변수)의 "설정을 코드에서 분리"와 같은 철학입니다.
 
-> "Each running process writes its event stream, unbuffered, to stdout."
->
-> — 각 실행 프로세스는 자신의 이벤트 스트림을 버퍼 없이 stdout에 쓴다.
-> [Twelve-Factor App: Logs](https://12factor.net/logs)
+관련 원문(링크): [Twelve-Factor App: Logs](https://12factor.net/logs)
 
 가장 구체적인 지침입니다 — unbuffered, stdout. 특별한 로그 라이브러리나 파일 핸들이 아니라, 그냥 표준 출력에 즉시 씁니다. 이 단순함이 이식성을 만듭니다: stdout은 어디에나 있으므로, 앱은 실행 환경을 몰라도 로그를 남길 수 있습니다.
 

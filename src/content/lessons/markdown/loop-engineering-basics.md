@@ -165,17 +165,11 @@ compaction은 context engineering의 기법이지만 loop engineering에서도 �
 
 바이브코딩에서 agent 작업을 설명할 때 가장 실용적인 문장입니다. 코드 수정은 보통 이 세 단계가 섞여 반복됩니다. 좋은 loop는 context gathering만 길게 하지 않고, action만 반복하지도 않으며, verification 없이 끝내지도 않습니다.
 
-> "maximum number of iterations"
->
-> — 최대 반복 횟수.
-> [Building effective agents — Anthropic](https://www.anthropic.com/engineering/building-effective-agents)
+관련 원문(링크): [Building effective agents — Anthropic](https://www.anthropic.com/engineering/building-effective-agents)
 
 agent가 스스로 끝낼 수 있어도 반복 횟수 제한은 필요합니다. 반복 제한은 품질을 낮추는 장치가 아니라 폭주를 막고 결과를 운영 가능한 단위로 만드는 장치입니다. 특히 비용과 시간이 중요한 실무 환경에서는 max turns와 budget이 설계의 일부가 됩니다.
 
-> "mistakes can propagate and compound"
->
-> — 실수는 전파되고 누적될 수 있다.
-> [Demystifying evals for AI agents — Anthropic](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)
+관련 원문(링크): [Demystifying evals for AI agents — Anthropic](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)
 
 이 문장은 Loop Engineering이 단순 최적화가 아니라 안전 설계라는 점을 보여줍니다. agent는 여러 turn 동안 환경 상태를 바꿀 수 있습니다. 한 번의 착각이 다음 행동의 전제가 되고, 그 결과가 다시 다음 context에 들어가면 실수가 커질 수 있습니다. 그래서 중간 검증과 종료 조건이 필요합니다.
 

@@ -101,7 +101,7 @@ npm run build
 
 ## 원문으로 읽기
 
-> "The \"scripts\" property of your package.json file supports a number of built-in scripts and their preset life cycle events as well as arbitrary scripts."
+> "The \"
 >
 > — package.json 파일의 "scripts" 속성은 여러 내장 스크립트와 그 사전 설정된 생명주기 이벤트, 그리고 임의 스크립트를 지원한다.
 > [npm Docs: scripts](https://docs.npmjs.com/cli/v10/using-npm/scripts)
@@ -122,10 +122,7 @@ pre/post 규칙의 핵심 문장입니다. "will be run for those as well" — �
 
 `npm run`이 `npm run-script`의 짧은 형태임을 밝힙니다. 실무에서는 거의 언제나 짧은 `npm run`을 쓰며, 둘의 동작은 동일합니다. 이 통일된 진입점 덕분에 어떤 프로젝트든 "`npm run <무언가>`"라는 같은 방식으로 다룰 수 있습니다. 프로젝트마다 실행 방법을 매번 새로 배울 필요가 없다는 것이 이 표준화의 큰 이득입니다.
 
-> "Scripts from dependencies can be run with npm explore <pkg> -- npm run <stage>."
->
-> — 의존성의 스크립트는 npm explore <pkg> -- npm run <stage>로 실행할 수 있다.
-> [npm Docs: scripts](https://docs.npmjs.com/cli/v10/using-npm/scripts)
+관련 원문(링크): [npm Docs: scripts](https://docs.npmjs.com/cli/v10/using-npm/scripts)
 
 내 프로젝트의 scripts뿐 아니라 설치한 패키지 안의 스크립트도 실행할 수 있음을 보여줍니다. 자주 쓰이진 않지만, 특정 의존성이 제공하는 도구 스크립트를 직접 호출해야 할 때의 정공법입니다.
 

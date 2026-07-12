@@ -115,13 +115,13 @@ AI autocomplete surface를 보여주는 문장은 다음입니다.
 
 Copilot 2021 소개에서 중요한 변화는 scope입니다.
 
-> "suggesting whole lines or entire functions"
+관련 원문: 원문
 
 이 문장은 AI autocomplete가 symbol 목록을 넘어 구현 후보를 제안한다는 점을 보여줍니다. 함수 전체 제안은 편리하지만, 그만큼 로직 전체를 읽어야 합니다.
 
 IDE 사용 방식은 다음 문장으로 정리됩니다.
 
-> "Copilot provides suggestions inline as you type"
+관련 원문: 원문
 
 이 문장은 자동완성 시대의 체감 경험을 잘 보여줍니다. 개발자는 별도 대화로 이동하지 않고, 코드를 쓰는 바로 그 위치에서 제안을 보고 선택합니다.
 

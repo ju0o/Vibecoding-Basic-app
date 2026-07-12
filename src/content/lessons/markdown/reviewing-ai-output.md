@@ -75,17 +75,11 @@ Comment는 결정을 유보한 채 논의만 하는 상태입니다. 질문이�
 
 Approve는 검증이 충분할 때의 결정입니다. 유창함이 아니라 증거가 이 결정을 뒷받침해야 합니다.
 
-> "Request changes: Identify issues that must be fixed before merging."
->
-> — Request changes: merge 전에 반드시 고쳐야 할 문제를 지적한다.
-> [GitHub Docs — About pull request reviews](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews)
+관련 원문(링크): [GitHub Docs — About pull request reviews](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews)
 
 Request changes는 merge를 막는 결정입니다. 검증 부족, 미해결 경고, 요구 불일치가 여기 해당합니다.
 
-> "You can comment on specific lines, suggest changes for authors to apply directly, and discuss implementation approaches."
->
-> — 특정 줄에 코멘트하고, 작성자가 바로 적용할 수정을 제안하며, 구현 방식을 논의할 수 있다.
-> [GitHub Docs — About pull request reviews](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews)
+관련 원문(링크): [GitHub Docs — About pull request reviews](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews)
 
 줄 단위 지목과 수정 제안의 근거입니다. AI 출력의 특정 부분을 지목해 근거를 묻거나 수정을 요청하는 정밀도를 줍니다.
 
@@ -122,5 +116,3 @@ AI가 준 코드나 답을 즉시 실행·병합하지 않고, "이것은 제안
 이 강의의 근거 KB는 `reviewing-ai-output`입니다. 먼저 GitHub의 About pull request reviews를 읽고 comment·approve·request changes 세 상태의 정의를 확인하세요. 그 다음 Reviewing proposed changes in a pull request에서 리뷰가 changed files와 diff에서 출발하는 흐름을 봅니다. 이 두 출처가 이 강의 인용의 원문입니다.
 
 선행 강의로 `hallucination-and-verification`을 읽으면 AI 출력의 "그럴듯함"을 검증 증거로 다루는 관점을 얻고, `code-change-risk-analysis`는 리뷰 깊이를 위험에 맞추는 방법을 줍니다. 함께 읽으면 좋은 강의는 `refactoring-with-ai`로, 리팩터링 결과물을 동작 보존 증거 기준으로 리뷰하는 구체적 사례를 다룹니다. 리뷰 판단 기준을 남에게 설명하는 능력은 이후 explanation-practice 모듈로 이어집니다.
-
-자가 QA 결과: V2 8섹션을 모두 포함했고, Quote Bank 인용 5개를 원문 그대로 사용했습니다(원어+번역+링크+해설). 본문은 승인 KB `reviewing-ai-output`의 GitHub PR review 출처와 hallucination-verification·code-change-risk-analysis 승인 KB 범위 안에서 작성했으며 KB 외 신규 사실을 추가하지 않았습니다. 하이라이트(`==`)는 섹션당 3개 이하·마커 짝수로 유지했고 콜아웃은 사용하지 않았습니다.

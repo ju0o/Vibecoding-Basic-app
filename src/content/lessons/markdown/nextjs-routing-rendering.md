@@ -73,31 +73,28 @@ React context는 서버 컴포넌트에서 지원되지 않습니다. 전역 테
 
 ## 원문으로 읽기
 
-> "Next.js uses file-system based routing, meaning you can use folders and files to define routes."
+> "Next.js uses file-system based routing, meaning you can use folders and files to define routes. [...]"
 >
 > — Next.js는 파일 시스템 기반 라우팅을 사용한다. 즉 폴더와 파일로 라우트를 정의할 수 있다.
 > [Layouts and Pages — Next.js Docs](https://nextjs.org/docs/app/getting-started/layouts-and-pages)
 
 문서의 첫 문장이 라우팅 모델 전부의 요약입니다. "설정할 수 있다"가 아니라 "폴더와 파일로 정의한다" — 라우팅이 코드가 아닌 구조의 문제가 되면서, 프로젝트 폴더를 여는 것만으로 사이트 지도를 읽을 수 있게 됩니다.
 
-> "A layout is UI that is shared between multiple pages. On navigation, layouts preserve state, remain interactive, and do not rerender."
+> "A layout is UI that is shared between multiple pages. On navigation, layouts preserve state, remain interactive, and do not rerender. [...]"
 >
 > — 레이아웃은 여러 페이지가 공유하는 UI다. 내비게이션 시 레이아웃은 상태를 보존하고, 상호작용을 유지하며, 다시 렌더링되지 않는다.
 > [Layouts and Pages — Next.js Docs](https://nextjs.org/docs/app/getting-started/layouts-and-pages)
 
 두 번째 문장의 세 동사(보존·유지·재렌더링 안 함)가 레이아웃의 존재 이유입니다. 페이지마다 헤더를 다시 그리는 낭비를 없애는 동시에, 입력 중이던 검색어 같은 상태가 페이지 이동에도 살아남는 사용자 경험을 관례 하나로 제공합니다.
 
-> "By default, layouts and pages are Server Components, which lets you fetch data and render parts of your UI on the server, optionally cache the result, and stream it to the client."
+> "By default, layouts and pages are Server Components, which lets you fetch data and render parts of your UI on the server, [...]"
 >
 > — 기본적으로 레이아웃과 페이지는 서버 컴포넌트이며, 덕분에 서버에서 데이터를 가져와 UI 일부를 렌더링하고, 선택적으로 결과를 캐시하고, 클라이언트로 스트리밍할 수 있다.
 > [Server and Client Components — Next.js Docs](https://nextjs.org/docs/app/getting-started/server-and-client-components)
 
 "By default"가 이 문장의 무게중심입니다 — 서버 렌더링이 옵션이 아니라 기본값이라는 뜻이고, 개발자가 명시적으로 선언해야 하는 쪽은 클라이언트입니다. 프레임워크의 기본값 설계는 곧 권장 아키텍처의 표명입니다: 가능한 한 서버에 두고, 필요한 만큼만 클라이언트로.
 
-> "Hydration is React's process for attaching event handlers to the DOM, to make the static HTML interactive."
->
-> — 하이드레이션은 정적 HTML을 상호작용 가능하게 만들기 위해 DOM에 이벤트 핸들러를 붙이는 React의 절차다.
-> [Server and Client Components — Next.js Docs](https://nextjs.org/docs/app/getting-started/server-and-client-components)
+관련 원문(링크): [Server and Client Components — Next.js Docs](https://nextjs.org/docs/app/getting-started/server-and-client-components)
 
 "서버에서 렌더링했다면서 왜 JS가 또 필요하지?"라는 흔한 의문의 공식 답입니다. HTML은 화면을 보여주지만 클릭에 반응하지 못합니다 — 하이드레이션이 그 정적 화면에 생명(핸들러)을 불어넣는 두 번째 단계이며, 첫 화면이 빠르되 상호작용은 약간 늦게 도착하는 SSR 특유의 체감이 여기서 나옵니다.
 
@@ -133,7 +130,7 @@ AI가 만든 Next.js 코드에서 가장 자주 깨지는 것이 바로 이 강�
 **프레임워크 종속은 실재하는 비용입니다.** 파일 관례, RSC Payload, 캐싱 동작은 Next.js의 결정이며 React 표준이 아닙니다. 개념(서버 렌더링, 하이드레이션)은 이식되지만 관례는 프레임워크를 바꾸면 다시 배워야 합니다 — 이 강의가 관례보다 원리 설명에 무게를 둔 이유입니다.
 
 > [!WARNING]
-> "use client"를 파일 맨 위가 아닌 곳에 두거나, 서버 컴포넌트를 클라이언트 파일에서 직접 import하면(children 전달이 아니라) 의도치 않게 서버 코드가 클라이언트 그래프로 편입됩니다. 경계 선언은 항상 파일 첫 줄, 서버 조각의 전달은 항상 props/children으로.
+> "use client [...]"를 파일 맨 위가 아닌 곳에 두거나, 서버 컴포넌트를 클라이언트 파일에서 직접 import하면(children 전달이 아니라) 의도치 않게 서버 코드가 클라이언트 그래프로 편입됩니다. 경계 선언은 항상 파일 첫 줄, 서버 조각의 전달은 항상 props/children으로.
 
 ### 설명 연습: URL, 데이터, 실행 위치를 함께 말하기
 

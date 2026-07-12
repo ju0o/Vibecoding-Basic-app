@@ -147,17 +147,11 @@ gh pr merge 123 --auto --squash            # 요건 충족되면 자동 병합
 
 `--squash`의 설명이 곧 정의입니다. rebase 강의에서 `git rebase -i`로 손수 하던 "여러 커밋을 하나로"를, 병합 시점에 서버가 대신하는 것이 이 플래그입니다. AI의 지저분한 wip 커밋을 정리하는 실무 도구가 여기 있습니다.
 
-> "Rebase the commits onto the base branch"
->
-> — 커밋들을 base 브랜치 위로 rebase한다.
-> [gh pr merge — GitHub CLI manual](https://cli.github.com/manual/gh_pr_merge)
+관련 원문(링크): [gh pr merge — GitHub CLI manual](https://cli.github.com/manual/gh_pr_merge)
 
 `--rebase`는 rebase 강의의 "이식" 개념을 병합 버튼으로 옮긴 것입니다. 병합 커밋 없이 base 위에 커밋을 개별적으로 얹어 평평한 이력을 만듭니다 — 단, rebase 강의의 경고("공유 이력 재작성 주의")가 여기서도 배경에 깔려 있습니다.
 
-> "Check out a pull request in git"
->
-> — git에서 Pull Request를 체크아웃한다.
-> [gh pr checkout — GitHub CLI manual](https://cli.github.com/manual/gh_pr_checkout)
+관련 원문(링크): [gh pr checkout — GitHub CLI manual](https://cli.github.com/manual/gh_pr_checkout)
 
 `gh pr checkout`은 리뷰의 숨은 절반입니다. diff를 눈으로 읽는 것을 넘어, 남의(또는 AI의) PR을 ==실제로 내 컴퓨터에서 실행해 보고== 판단할 수 있게 합니다 — "코드를 읽는 리뷰"에서 "코드를 돌려보는 리뷰"로 넘어가는 명령입니다.
 

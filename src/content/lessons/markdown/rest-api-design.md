@@ -101,38 +101,32 @@ MDN은 401에 대해 의미상 "unauthenticated"(인증되지 않음)라고 명�
 
 ## 원문으로 읽기
 
-> "The GET method requests a representation of the specified resource. Requests using GET should only retrieve data and should not contain a request content."
+> "The GET method requests a representation of the specified resource. Requests using GET should only retrieve data and should not contain a request content. [...]"
 >
 > — GET 메서드는 지정된 자원의 표현을 요청한다. GET을 쓰는 요청은 데이터를 조회만 해야 하며 요청 본문을 담아서는 안 된다.
 > [MDN HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
 
 "should only retrieve data" — GET은 조회 전용이라는 규약입니다. GET 요청에 데이터를 담아 서버 상태를 바꾸는 설계는 이 원칙을 어기는 것이며, 캐싱·재시도·프리페치 같은 HTTP의 여러 최적화가 "GET은 안전하다"는 가정 위에 서 있어서 문제를 일으킵니다.
 
-> "The POST method submits an entity to the specified resource, often causing a change in state or side effects on the server."
+> "The POST method submits an entity to the specified resource, often causing a change in state or side effects on the server. [...]"
 >
 > — POST 메서드는 지정된 자원에 엔티티를 제출하며, 흔히 서버의 상태 변경이나 부작용을 유발한다.
 > [MDN HTTP request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
 
 "a change in state or side effects" — POST가 idempotent가 아닌 이유가 이 문장에 있습니다. 상태를 바꾸고 부작용을 만들기 때문에, 두 번 보내면 두 번의 변화가 일어납니다. 재시도 설계에서 POST를 특별 취급해야 하는 근거입니다.
 
-> "An HTTP method is safe if it doesn't alter the state of the server. In other words, a method is safe if it leads to a read-only operation."
+> "An HTTP method is safe if it doesn't alter the state of the server. In other words, a method is safe if it leads to a read-only operation. [...]"
 >
 > — HTTP 메서드는 서버의 상태를 바꾸지 않으면 safe다. 다시 말해, 읽기 전용 연산으로 이어지면 safe다.
 > [MDN Safe (HTTP)](https://developer.mozilla.org/en-US/docs/Glossary/Safe/HTTP)
 
 safe의 정의가 "read-only operation"으로 압축됩니다. 이 성질 덕분에 브라우저와 프록시는 GET 결과를 마음대로 캐시하고, 크롤러는 GET을 자유롭게 호출합니다 — 상태를 안 바꾸니 안전합니다.
 
-> "An HTTP method is idempotent if the intended effect on the server of making a single request is the same as the effect of making several identical requests."
->
-> — HTTP 메서드는, 한 번 요청한 효과가 동일한 요청을 여러 번 한 효과와 같으면 idempotent다.
-> [MDN Idempotent](https://developer.mozilla.org/en-US/docs/Glossary/Idempotent)
+관련 원문(링크): [MDN Idempotent](https://developer.mozilla.org/en-US/docs/Glossary/Idempotent)
 
 idempotent의 정의가 재시도 안전성의 근거입니다. "1회 = n회"이므로, 네트워크 오류로 응답을 못 받아도 안심하고 다시 보낼 수 있습니다. 자동 재시도 로직이 GET·PUT·DELETE에는 안전하지만 POST에는 위험한 이유가 여기 있습니다.
 
-> "The request succeeded, and a new resource was created as a result. This is typically the response sent after POST requests, or some PUT requests."
->
-> — 요청이 성공했고 그 결과로 새 자원이 생성되었다. 이는 보통 POST 요청, 또는 일부 PUT 요청 뒤에 보내는 응답이다.
-> [MDN HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
+관련 원문(링크): [MDN HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 
 생성 성공은 200이 아니라 201로 구분한다 — 이 작은 차이가 API를 읽는 사람에게 "여기서 무언가 새로 만들어졌다"를 명확히 알립니다. 상태 코드는 단순한 성공/실패가 아니라 "어떤 종류의 성공인가"까지 전달합니다.
 

@@ -111,11 +111,11 @@ Status: 확정. CODEX-PLAN v2에 따라 Phase 2 KB 물결로 진행한다.
 | 93 | A | admin-dashboard-project | project-textbook | 2 | deep-dive | 관리자 대시보드 프로젝트 교재 | 중급 | react-state-and-effects | admin-dashboard-project | v2-released |
 | 94 | C | ai-chatbot-project | project-textbook | 3 | deep-dive | AI 챗봇 프로젝트 교재 | 중급 | rag-fundamentals | ai-chatbot-project | v2-released |
 | 95 | C | automation-workflow-project | project-textbook | 4 | deep-dive | 자동화 Workflow 프로젝트 교재 | 중급 | ai-workflow-design | automation-workflow-project | v2-released |
-| 96 | C | mcp-enabled-tool-project | project-textbook | 5 | deep-dive | MCP 도구 연결 프로젝트 교재 | 중급 | mcp-architecture-basics | mcp-enabled-tool-project | kb_needed |
-| 97 | D | git-recovery-playbook | project-textbook | 6 | reference | Git 복구 플레이북 | 중급 | git-restore-reset-revert | git-recovery-playbook | kb_needed |
-| 98 | D | npm-debugging-playbook | project-textbook | 7 | reference | npm 설치·빌드 오류 복구 플레이북 | 중급 | npm-scripts-reference | npm-debugging-playbook | kb_needed |
-| 99 | A | deployment-checklist-playbook | project-textbook | 8 | reference | 배포 체크리스트 플레이북 | 중급 | deployment-cli-reference | deployment-checklist-playbook | kb_needed |
-| 100 | C | private-ai-learning-site-project | project-textbook | 9 | deep-dive | 비공개 AI 학습 사이트 완성 프로젝트 | 중급 | ai-chatbot-project | private-ai-learning-site-project | kb_needed |
+| 96 | C | mcp-enabled-tool-project | project-textbook | 5 | deep-dive | MCP 도구 연결 프로젝트 교재 | 중급 | mcp-architecture-basics | mcp-enabled-tool-project | v2-released |
+| 97 | D | git-recovery-playbook | project-textbook | 6 | reference | Git 복구 플레이북 | 중급 | git-restore-reset-revert | git-recovery-playbook | v2-released |
+| 98 | D | npm-debugging-playbook | project-textbook | 7 | reference | npm 설치·빌드 오류 복구 플레이북 | 중급 | npm-scripts-reference | npm-debugging-playbook | v2-released |
+| 99 | A | deployment-checklist-playbook | project-textbook | 8 | reference | 배포 체크리스트 플레이북 | 중급 | deployment-cli-reference | deployment-checklist-playbook | v2-released |
+| 100 | C | private-ai-learning-site-project | project-textbook | 9 | deep-dive | 비공개 AI 학습 사이트 완성 프로젝트 | 중급 | ai-chatbot-project | private-ai-learning-site-project | v2-released |
 
 ## Required KB Inventory
 

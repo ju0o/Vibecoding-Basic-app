@@ -119,10 +119,7 @@ TypeScript를 배우는 이유는 type 이름을 많이 외우기 위해서가 �
 
 state는 화면이 사용자의 행동을 기억하는 방식입니다. 하지만 모든 값을 state로 만들 필요는 없습니다. props에서 계산할 수 있는 값, 렌더 중 계산 가능한 값, 외부 시스템과 동기화해야 하는 값이 각각 다릅니다. 이 구분이 흐려지면 React 코드는 빠르게 복잡해집니다.
 
-> "Next.js uses file-system based routing, meaning you can use folders and files to define routes."
->
-> — Next.js는 폴더와 파일로 route를 정의하는 파일 시스템 기반 routing을 쓴다.
-> [Layouts and Pages — Next.js Docs](https://nextjs.org/docs/app/getting-started/layouts-and-pages)
+관련 원문(링크): [Layouts and Pages — Next.js Docs](https://nextjs.org/docs/app/getting-started/layouts-and-pages)
 
 Next.js를 읽을 때 폴더 구조가 중요한 이유가 여기에 있습니다. URL은 별도 설정 파일에만 숨어 있지 않고, app 폴더의 구조로 드러납니다. AI가 page를 새로 만들 때는 route 위치, layout 공유 범위, server/client boundary를 함께 확인해야 합니다.
 

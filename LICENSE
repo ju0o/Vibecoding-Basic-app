@@ -1,0 +1,90 @@
+# License for AI Vibe Coding Master
+
+This repository contains both **software** (the website application) and **educational content** (lessons, diagrams, glossary text). Different terms apply to each.
+
+## 1. Software (application code)
+
+Copyright (c) 2026 AI Vibe Coding Master contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of the software and associated documentation files in this repository that
+implement the website application (including but not limited to source under
+`src/app`, `src/components`, `src/features`, `src/lib`, configuration files,
+and build scripts), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom
+the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+(This section is the MIT License.)
+
+## 2. Educational content
+
+Educational content includes, without limitation:
+
+- Markdown lessons under `src/content/lessons/markdown/`
+- Diagrams under `src/content/lessons/diagrams/`
+- Curriculum, glossary, and resource metadata under `src/content/`
+- Related educational copy on public pages (About, Home, etc.)
+
+### Grant
+
+Unless otherwise noted in a specific file, educational content is provided
+**free of charge for personal learning and non-commercial educational use**.
+
+You may:
+
+- Read, share links to, and study the materials
+- Quote short excerpts with attribution and a link back to this project
+- Use the materials in free classroom or community study sessions with attribution
+
+You may **not**, without prior written permission:
+
+- Sell the content as a paid product or paid course pack
+- Remove attribution or present the content as solely your original work
+- Republish the full lesson corpus (or a substantial portion) as a competing
+  commercial dataset or mirror
+
+### Attribution
+
+When you share or adapt short excerpts, please credit:
+
+**AI Vibe Coding Master** — free educational project
+
+and link to the project site when practical.
+
+### Third-party material
+
+Quotations, trademarks, and document titles from third parties (for example
+MDN, Git, Next.js, MCP, OpenAI, and other vendors) remain the property of their
+respective owners. Short quotations are used for education with links to the
+original sources. See `THIRD_PARTY_NOTICES.md` and the in-lesson source links.
+
+### AI assistance
+
+Some materials were organized with assistance from AI tools. Human review is
+used to improve accuracy, but content may still contain errors. See the site
+Terms and About pages.
+
+### No warranty
+
+All content is provided “AS IS” without warranty of any kind. It is not legal,
+security, or professional advice. Always verify against official documentation
+and your own tests before production use.
+
+## 3. Contributions and feedback
+
+Feedback, corrections, and improvement suggestions are welcome (for example via
+the contact channel listed on the site). By submitting feedback or suggested
+text for inclusion, you agree that it may be incorporated into this free
+educational project under the terms above.

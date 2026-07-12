@@ -91,10 +91,7 @@ AI 시스템 설계는 프롬프트 한 번에 의존하던 작업을 컨텍스�
 
 AI 작업을 단계와 게이트로 묶는 방식은 임시 대화가 아니라 시스템 구성입니다. 이 인용은 강의의 주장을 장식하는 문장이 아니라, 설계 판단의 기준선으로 읽어야 합니다. 원문은 짧지만 포함하는 전제는 분명합니다. 모델이 무엇을 보고, 무엇을 할 수 있으며, 어디서 멈춰야 하는지를 시스템이 명시적으로 다루어야 한다는 뜻입니다.
 
-> "dynamically direct their own processes"
->
-> — 자신의 과정을 동적으로 지휘한다.
-> [Building effective agents — Anthropic](https://www.anthropic.com/engineering/building-effective-agents)
+관련 원문(링크): [Building effective agents — Anthropic](https://www.anthropic.com/engineering/building-effective-agents)
 
 Agent는 Workflow보다 모델 주도성이 크므로 더 강한 제한과 관찰이 필요합니다. 이 인용은 강의의 주장을 장식하는 문장이 아니라, 설계 판단의 기준선으로 읽어야 합니다. 원문은 짧지만 포함하는 전제는 분명합니다. 모델이 무엇을 보고, 무엇을 할 수 있으며, 어디서 멈춰야 하는지를 시스템이 명시적으로 다루어야 한다는 뜻입니다.
 

@@ -139,7 +139,7 @@ React docs는 sidebars, lists, complete pages에도 components를 쓰며, 일부
 
 이 문장은 component가 React의 주변 기능이 아니라 중심이라는 점을 분명히 합니다. state, effects, routing, framework integration을 배우기 전에 component boundary를 이해해야 후속 개념이 흔들리지 않습니다.
 
-> "React lets you combine your markup, CSS, and JavaScript into custom “components”, reusable UI elements for your app."
+> "React lets you combine your markup, CSS, and JavaScript into custom “components"
 >
 > — React는 markup, CSS, JavaScript를 custom "components"로 결합하게 하며, 이는 app을 위한 reusable UI elements다.
 > [Your First Component — React](https://react.dev/learn/your-first-component)
@@ -153,10 +153,7 @@ React component는 HTML만 묶는 것이 아닙니다. UI structure, style 연�
 
 이 인용은 React를 마법처럼 보지 않게 해 줍니다. component는 function이므로 input과 output을 가집니다. props는 input이고 JSX는 output입니다. 이 mental model이 있으면 TypeScript props type과 pure function 원칙이 자연스럽게 이어집니다.
 
-> "React components use props to communicate with each other."
->
-> — React components는 서로 communicate하기 위해 props를 사용한다.
-> [Passing Props to a Component — React](https://react.dev/learn/passing-props-to-a-component)
+관련 원문(링크): [Passing Props to a Component — React](https://react.dev/learn/passing-props-to-a-component)
 
 Props는 component 사이의 기본 communication channel입니다. child가 parent 내부를 몰라도 필요한 information을 받을 수 있게 해 줍니다. AI가 만든 component가 hidden global이나 외부 variable에 기대면 이 원칙을 기준으로 교정할 수 있습니다.
 

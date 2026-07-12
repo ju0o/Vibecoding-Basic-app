@@ -141,24 +141,15 @@ MDN의 이 짧은 표현은 개발 환경의 첫 축을 잡아줍니다. 코드�
 
 local testing server라는 표현은 로컬 확인과 배포를 구분하게 해줍니다. 초보자가 브라우저에서 결과를 보면 "사이트가 올라갔다"고 느낄 수 있지만, local server는 개발 중 확인을 위한 환경입니다. 배포와 운영은 뒤의 강의에서 별도로 다루어야 합니다.
 
-> "At its heart, Visual Studio Code is a code editor."
->
-> — 핵심적으로 Visual Studio Code는 코드 편집기다.
-> [User interface — VS Code Docs](https://code.visualstudio.com/docs/getstarted/userinterface)
+관련 원문(링크): [User interface — VS Code Docs](https://code.visualstudio.com/docs/getstarted/userinterface)
 
 이 문장은 VS Code를 이해하는 기준점입니다. VS Code는 많은 기능을 제공하지만 핵심은 code editor입니다. AI 시대에도 이 기준은 중요합니다. AI가 만든 변경을 사람이 검토하려면 결국 editor에서 어떤 파일이 어떻게 바뀌었는지 보게 됩니다.
 
-> "integrated terminal"
->
-> — 통합 터미널.
-> [User interface — VS Code Docs](https://code.visualstudio.com/docs/getstarted/userinterface)
+관련 원문(링크): [User interface — VS Code Docs](https://code.visualstudio.com/docs/getstarted/userinterface)
 
 integrated terminal은 명령 실행이 에디터 안으로 들어온 구조를 보여줍니다. 터미널은 editor와 다른 역할이지만, 같은 작업 화면 안에서 프로젝트 루트를 기준으로 명령을 실행할 수 있습니다. 이 결합 때문에 초보자는 더 편해지지만, 동시에 editor와 terminal의 역할을 구분해야 합니다.
 
-> "records changes to a file or set of files"
->
-> — 파일 또는 파일 집합의 변경을 기록한다.
-> [About Version Control — Git Book](https://git-scm.com/book/ms/v2/Getting-Started-About-Version-Control)
+관련 원문(링크): [About Version Control — Git Book](https://git-scm.com/book/ms/v2/Getting-Started-About-Version-Control)
 
 Git을 단순 백업 도구로 이해하면 부족합니다. 이 인용은 version control의 핵심이 변경 기록임을 말합니다. 저장은 현재 내용을 바꾸는 것이고, version control은 시간에 따른 변경 묶음을 기록하는 것입니다. AI가 코드를 많이 바꾸는 시대일수록 이 기록은 더 중요해집니다.
 

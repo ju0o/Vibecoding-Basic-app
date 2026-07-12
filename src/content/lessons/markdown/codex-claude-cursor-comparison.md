@@ -107,17 +107,11 @@ Cursor 공식 best practices는 agent가 codebase search tools를 갖고 있고,
 
 Claude Code를 설명하는 이 표현은 AI coding tool이 단순 답변기에서 agentic workflow로 이동했음을 보여줍니다. Terminal과 codebase 중심의 작업에서는 사용자가 command output과 diff를 관찰하며 검토해야 합니다.
 
-> "Cursor's agent has powerful search tools"
->
-> — Cursor의 agent는 강력한 검색 도구를 갖고 있다.
-> [Cursor Blog — Agent best practices](https://cursor.com/blog/agent-best-practices)
+관련 원문(링크): [Cursor Blog — Agent best practices](https://cursor.com/blog/agent-best-practices)
 
 이 문장은 context access의 중요성을 보여줍니다. 큰 codebase에서 관련 파일을 찾는 능력은 agent 품질에 큰 영향을 줍니다. 다만 검색 도구가 강력하다는 말은 결과가 자동으로 올바르다는 뜻이 아니므로, 검색된 파일과 변경 diff를 함께 확인해야 합니다.
 
-> "AI-generated code needs review"
->
-> — AI가 생성한 코드는 검토가 필요하다.
-> [Cursor Blog — Agent best practices](https://cursor.com/blog/agent-best-practices)
+관련 원문(링크): [Cursor Blog — Agent best practices](https://cursor.com/blog/agent-best-practices)
 
 도구 비교의 결론에 가까운 문장입니다. 어떤 도구를 쓰든 AI-generated code는 review가 필요합니다. 따라서 비교표에는 성능뿐 아니라 review workflow와 검증 명령이 들어가야 합니다.
 
@@ -163,5 +157,3 @@ Claude Code를 설명하는 이 표현은 AI coding tool이 단순 답변기에�
 이 강의의 근거 KB는 `ai-coding-tool-comparison`입니다. 먼저 OpenAI의 Codex 소개를 읽어 cloud agent가 task를 수행하는 흐름을 보고, Codex CLI 문서에서 terminal surface가 inspect, edit, run code를 어떻게 다루는지 확인하세요. 이어서 Claude Code overview를 읽어 terminal/codebase 중심 agentic coding tool의 의미를 보고, Cursor agent best practices에서 search tools와 review guidance를 확인하면 비교 축이 더 선명해집니다.
 
 다음 강의는 `tool-permissions-sandboxes`입니다. 도구 비교의 가장 중요한 후속 질문은 “그 도구가 무엇을 할 수 있는가”가 아니라 “그 행동을 어디까지 허용하고 어떻게 격리할 것인가”입니다. Permission과 sandbox를 배우면 AI coding tool을 더 안전한 팀 workflow로 가져올 수 있습니다.
-
-자가 QA 결과: V2 8섹션을 모두 포함했고, Quote Bank 인용 5개를 원문 그대로 사용했습니다. 본문은 승인 KB의 Codex, Codex CLI, Claude Code, Cursor 공식 출처 범위 안에서 작성했으며, KB 외 신규 사실을 추가하지 않았습니다. 하이라이트는 섹션당 3개 이하로 제한했고, 코드 예시는 surface 선택 기준을 설명하는 독립 TypeScript 예시입니다.

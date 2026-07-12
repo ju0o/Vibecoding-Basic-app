@@ -132,24 +132,15 @@ logical tree라는 표현은 DOM debug의 핵심입니다. HTML source를 눈으
 
 DOM이 단순한 data structure가 아니라 interaction surface라는 점을 보여 주는 문장입니다. node에 handler를 붙이면 user action이나 event에 대한 code path가 생깁니다. UI가 정적 문서에서 상호작용 앱으로 바뀌는 순간입니다.
 
-> "The DOM is not part of the JavaScript language"
->
-> — DOM은 JavaScript language의 일부가 아니다.
-> [Document Object Model — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) (CC-BY-SA)
+관련 원문(링크): [Document Object Model — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
 
 이 문장은 입문자의 큰 오해를 바로잡습니다. JavaScript 문법과 DOM API를 구분하면 오류를 더 정확히 분류할 수 있습니다. AI가 생성한 코드가 실패했을 때도 language 문제인지 browser API 문제인지 먼저 나누어야 합니다.
 
-> "The `addEventListener()` method of the EventTarget interface sets up a function"
->
-> — EventTarget interface의 `addEventListener()` method는 function을 설정한다.
-> [EventTarget.addEventListener — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) (CC-BY-SA)
+관련 원문(링크): [EventTarget.addEventListener — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
 
 listener는 event가 발생했을 때 실행될 function을 target에 설정하는 구조입니다. 이 인용은 event handler가 즉시 실행되는 일반 함수 호출과 다르다는 점을 보여 줍니다. 등록과 실행 시점의 차이를 이해해야 event flow를 읽을 수 있습니다.
 
-> "The `Event` interface represents an event which takes place on an EventTarget."
->
-> — `Event` interface는 EventTarget에서 일어나는 event를 나타낸다.
-> [Event — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/API/Event) (CC-BY-SA)
+관련 원문(링크): [Event — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/API/Event)
 
 event object는 단순 알림이 아니라 어디에서 어떤 event가 일어났는지 나타내는 API 객체입니다. target/currentTarget, event type, propagation을 이해하려면 event를 object로 다루는 관점이 필요합니다.
 

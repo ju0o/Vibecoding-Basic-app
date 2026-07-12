@@ -118,10 +118,7 @@ JSON은 JavaScript object와 닮았지만 네트워크를 건너는 text format�
 
 DB를 처음 배울 때 table 비유는 강력합니다. row는 하나의 기록, column은 기록이 가진 속성입니다. 하지만 실제 DB에서는 type, constraint, index, relation이 더해집니다. 그래서 단순히 데이터를 저장한다는 말보다 어떤 구조로 저장하는지가 중요합니다.
 
-> "HTTP provides a general framework for access control and authentication."
->
-> — HTTP는 접근 제어와 인증을 위한 일반 framework를 제공한다.
-> [MDN HTTP authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)
+관련 원문(링크): [MDN HTTP authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)
 
 인증은 백엔드에 나중에 붙이는 장식이 아닙니다. request가 어떤 사용자에게 속하는지, 어떤 resource에 접근할 수 있는지 결정하는 흐름입니다. 로그인 화면을 만들 때도 이후 request가 어떻게 인증되는지 함께 생각해야 합니다.
 

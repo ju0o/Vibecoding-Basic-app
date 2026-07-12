@@ -138,10 +138,7 @@ KB는 Anthropic 문서가 effort를 intelligence와 latency/cost 사이의 trade
 
 이 순서는 실무에서 매우 중요합니다. 정확도 기준을 만족하지 못하는 모델은 아무리 싸도 실제 비용을 줄여 주지 못할 수 있습니다. 재작업, human review, 사용자 불만, 장애 비용이 나중에 붙기 때문입니다.
 
-> "Tuning effort is often a better lever than switching models."
->
-> — effort 조정이 모델 변경보다 더 나은 조절 장치일 때가 많다.
-> [Claude Choosing the right model](https://platform.claude.com/docs/en/about-claude/models/choosing-a-model)
+관련 원문(링크): [Claude Choosing the right model](https://platform.claude.com/docs/en/about-claude/models/choosing-a-model)
 
 모델 선택은 모델 이름 교체만이 아닙니다. 같은 모델 안에서도 effort를 조정해 reasoning 강도, latency, cost를 바꿀 수 있습니다. 이 인용은 모델 선택을 더 섬세한 운영 knobs의 문제로 확장합니다.
 

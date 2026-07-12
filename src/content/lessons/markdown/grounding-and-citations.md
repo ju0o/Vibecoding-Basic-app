@@ -137,17 +137,11 @@ OpenAI 문서는 citations를 sentence나 paragraph 뒤에 두고 punctuation �
 
 이 문장은 citation hallucination을 막는 가장 직접적인 규칙입니다. 모델이 context에 없는 source ID나 locator를 만들어내면 사용자는 검증할 수 없는 citation을 보게 됩니다. 따라서 retrieval output에 있는 source만 cite하도록 제한해야 합니다.
 
-> "Citations reference specific locations in source documents"
->
-> — citation은 source document 안의 특정 위치를 참조한다.
-> [Citations — Claude Docs](https://platform.claude.com/docs/en/build-with-claude/citations)
+관련 원문(링크): [Citations — Claude Docs](https://platform.claude.com/docs/en/build-with-claude/citations)
 
 이 인용은 citation을 단순 URL 목록과 구분하게 해줍니다. 좋은 citation은 "이 문서 어딘가"가 아니라 문서 내부의 특정 위치를 가리킵니다. PDF page range, text character range 같은 locator는 사용자가 claim을 다시 확인하게 만드는 핵심 정보입니다.
 
-> "Verify with citations"
->
-> — citation으로 검증하라.
-> [Reduce hallucinations — Claude Docs](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)
+관련 원문(링크): [Reduce hallucinations — Claude Docs](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)
 
 이 문장은 citation과 verification의 연결을 보여줍니다. Citation은 답변을 멋지게 보이게 하는 장식이 아니라 claim을 audit할 수 있게 만드는 구조입니다. 다만 citation 자체가 자동으로 정답을 보장하지 않으므로, claim이 source를 정확히 대표하는지 확인해야 합니다.
 

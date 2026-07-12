@@ -106,11 +106,11 @@ Testing Library의 철학은 다음 문장으로 요약됩니다.
 
 Playwright의 범위는 다음 문장에서 드러납니다.
 
-> "Playwright enables reliable web automation for testing, scripting, and AI agents."
+관련 원문: 원문
 
 이 문장은 Playwright가 단지 QA 팀만의 도구가 아니라 개발 workflow와 AI agent 검증에도 연결될 수 있음을 보여줍니다. 브라우저를 실제로 조작할 수 있다는 것은 AI가 만든 UI를 자동으로 확인하는 기반이 됩니다.
 
-> "Locators come with auto waiting and retry-ability."
+관련 원문: 원문
 
 이 문장은 Playwright locator가 왜 중요한지 설명합니다. UI는 즉시 준비되지 않을 수 있습니다. locator 기반 테스트는 요소가 action 가능한 상태가 될 때까지 기다리는 구조를 제공하므로, 단순 query보다 안정적입니다.
 

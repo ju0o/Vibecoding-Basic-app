@@ -118,31 +118,28 @@ git commit
 
 ## 원문으로 읽기
 
-> "The command's second form creates a new branch head named <branch-name> which points to the current HEAD, or <start-point> if given."
+> "The command's second form creates a new branch head named <branch-name> which points to the current HEAD, or <start-point> if given. [...]"
 >
 > — 이 명령의 두 번째 형태는 현재 HEAD(또는 주어진 시작점)를 가리키는, <브랜치명>이라는 새 branch head를 만든다.
 > [git-branch — Git Documentation](https://git-scm.com/docs/git-branch)
 
 "branch head를 만든다" — 파일 복사나 스냅숏 생성이 아니라 포인터 하나의 생성입니다. 브랜치가 사실상 공짜인 이유, 그리고 수십 개를 만들어도 저장소가 무거워지지 않는 이유가 이 한 문장에 있습니다.
 
-> "Switch to a specified branch. The working tree and the index are updated to match the branch. All new commits will be added to the tip of this branch."
+> "Switch to a specified branch. The working tree and the index are updated to match the branch. All new commits will be added to the tip of this [...]"
 >
 > — 지정한 브랜치로 전환한다. 워킹 트리와 인덱스가 그 브랜치에 맞게 갱신된다. 모든 새 커밋은 이 브랜치의 끝에 추가된다.
 > [git-switch — Git Documentation](https://git-scm.com/docs/git-switch)
 
 세 문장이 전환의 전 효과를 빠짐없이 나열합니다 — 파일 내용(워킹 트리), 스테이징 상태(인덱스), 미래 커밋의 목적지까지. 전환이 "가벼운 이동"이 아니라 작업 환경 전체의 교체임을 문서가 명시하는 것입니다.
 
-> "Incorporates changes from the named commits (since the time their histories diverged from the current branch) into the current branch."
+> "Incorporates changes from the named commits (since the time their histories diverged from the current branch) into the current branch. [...]"
 >
 > — 이름 붙인 커밋들의 변경을 (그 이력이 현재 브랜치에서 갈라진 시점 이후부터) 현재 브랜치로 편입한다.
 > [git-merge — Git Documentation](https://git-scm.com/docs/git-merge)
 
 merge의 방향("into the current branch")과 범위("since ... diverged")가 모두 이 문장에 있습니다. 괄호 안이 특히 중요합니다 — merge는 상대 브랜치의 전체 이력이 아니라 **갈라진 이후의 차이**만 가져오므로, 공통 조상은 두 번 적용되지 않습니다.
 
-> "When both sides made changes to the same area, however, Git cannot randomly pick one side over the other, and asks you to resolve it by leaving what both sides did to that area."
->
-> — 그러나 양쪽이 같은 영역을 수정했다면, Git은 어느 한쪽을 임의로 고를 수 없으므로 그 영역에 양쪽이 한 일을 남겨두고 당신에게 해결을 요청한다.
-> [git-merge — Git Documentation](https://git-scm.com/docs/git-merge)
+관련 원문(링크): [git-merge — Git Documentation](https://git-scm.com/docs/git-merge)
 
 충돌의 정의이자 충돌 마커(`<<<<<<< =======`)의 존재 이유입니다. "Git cannot randomly pick" — 충돌은 Git의 실패가 아니라, 의미 판단을 기계가 대신하지 않겠다는 설계 결정입니다.
 

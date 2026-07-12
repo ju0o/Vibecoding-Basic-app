@@ -106,17 +106,17 @@ GitHub Copilot의 출현을 보여주는 문장은 다음입니다.
 
 Chat coding 시대를 보여주는 문장은 다음입니다.
 
-> "ask Copilot coding-related questions"
+관련 원문: 원문
 
 이 문장은 사용자가 코드에 대해 질문하고 설명을 받는 대화형 surface를 보여줍니다. 자동완성이 “다음 코드를 제안”한다면, chat은 “현재 문제를 함께 해석”합니다.
 
 Agent 시대의 표현은 다음과 같습니다.
 
-> "An autonomous AI agent"
+관련 원문: 원문
 
 이 문장은 도구가 단순 답변을 넘어 더 자율적인 작업 수행 surface로 확장됨을 보여줍니다. 다만 autonomous라는 말은 무제한 신뢰가 아니라 더 엄격한 경계 설계가 필요하다는 뜻으로 읽어야 합니다.
 
-> "Codex can perform tasks for you"
+관련 원문: 원문
 
 이 문장은 Codex 같은 cloud software engineering agent가 사용자를 대신해 작업 단위를 수행할 수 있음을 보여줍니다. 이때 핵심은 task, sandbox, diff, verification이 함께 움직인다는 점입니다.
 

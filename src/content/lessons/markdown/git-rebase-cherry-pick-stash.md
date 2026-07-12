@@ -127,31 +127,28 @@ git stash apply            # 치워둔 작업 복원
 
 ## 원문으로 읽기
 
-> "Rebasing (or any other form of rewriting) a branch that others have based work on is a bad idea: anyone downstream of it is forced to manually fix their history."
+> "Rebasing (or any other form of rewriting) a branch that others have based work on is a bad idea: anyone downstream of [...]"
 >
 > — 다른 사람이 작업의 기반으로 삼은 브랜치를 rebase(또는 어떤 형태로든 재작성)하는 것은 나쁜 생각이다: 그 하류의 모두가 자신의 이력을 수동으로 고치도록 강요당한다.
 > [git-rebase — Git Documentation](https://git-scm.com/docs/git-rebase)
 
 공식 문서가 "bad idea"라는 이례적으로 직설적인 표현을 쓴 문장입니다. rebase의 모든 옵션과 기법은 이 경고 안쪽에서만 유효합니다 — 도구 설명서가 스스로 "언제 쓰면 안 되는가"를 이렇게 강하게 못 박는 경우는 드뭅니다.
 
-> "Transplant a series of commits onto a different starting point."
+> "Transplant a series of commits onto a different starting point. [...]"
 >
 > — 일련의 커밋을 다른 시작점 위로 이식한다.
 > [git-rebase — Git Documentation](https://git-scm.com/docs/git-rebase)
 
 "이식"이라는 동사가 rebase의 정체를 정확히 담습니다. 나무를 옮겨 심으면 같은 나무처럼 보여도 뿌리가 새 땅에 다시 내리듯, 이식된 커밋은 같은 변경처럼 보여도 새 해시의 새 커밋입니다.
 
-> "Given one or more existing commits, apply the change each one introduces, recording a new commit for each."
+> "Given one or more existing commits, apply the change each one introduces, recording a new commit for each. [...]"
 >
 > — 하나 이상의 기존 커밋이 주어지면, 각각이 도입한 변경을 적용하고 각각에 대해 새 커밋을 기록한다.
 > [git-cherry-pick — Git Documentation](https://git-scm.com/docs/git-cherry-pick)
 
 "recording a new commit for each" — cherry-pick 이해의 전부가 이 구절에 있습니다. 커밋을 "가져오는" 것이 아니라 그 변경으로 "새로 기록하는" 것이며, 그래서 원본과 이식본은 같은 내용의 다른 커밋으로 공존하게 됩니다.
 
-> "Use git stash when you want to record the current state of the working directory and the index, but want to go back to a clean working directory."
->
-> — 워킹 디렉터리와 인덱스의 현재 상태를 기록하고 싶지만 깨끗한 워킹 디렉터리로 돌아가고 싶을 때 git stash를 사용하라.
-> [git-stash — Git Documentation](https://git-scm.com/docs/git-stash)
+관련 원문(링크): [git-stash — Git Documentation](https://git-scm.com/docs/git-stash)
 
 stash의 사용 시점을 문서가 "~하고 싶을 때"로 직접 규정합니다. 두 욕구(기록하고 싶다 + 깨끗해지고 싶다)가 동시에 있을 때가 stash의 자리이고, 둘 중 하나만 있다면 commit(기록) 또는 restore(폐기)가 맞는 도구입니다.
 

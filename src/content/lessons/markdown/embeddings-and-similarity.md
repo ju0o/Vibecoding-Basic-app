@@ -132,24 +132,15 @@ console.log(hits.map((hit) => `${hit.chunkId}: ${hit.embeddingScore}`).join("\n"
 
 이 인용은 OpenAI의 vector 설명과 같은 방향을 가리킵니다. 텍스트를 numerical representation으로 바꾸면 의미 비교 작업을 할 수 있습니다. 그러나 numerical representation이라는 말은 검증을 대신한다는 뜻이 아닙니다.
 
-> "enable measuring semantic similarity"
->
-> — semantic similarity를 측정할 수 있게 한다.
-> [Embeddings — Claude Docs](https://platform.claude.com/docs/en/build-with-claude/embeddings)
+관련 원문(링크): [Embeddings — Claude Docs](https://platform.claude.com/docs/en/build-with-claude/embeddings)
 
 Embeddings가 검색과 추천에 쓰이는 이유가 여기에 있습니다. 표현이 달라도 의미가 가까우면 가까운 후보로 찾을 수 있습니다. AI 학습 사이트에서는 사용자가 "토큰 비용"이라고 묻든 "입력 길이 비용"이라고 묻든 관련 강의를 찾는 데 이런 신호가 도움 됩니다.
 
-> "automatically chunked, embedded, and indexed"
->
-> — 자동으로 chunk되고, embedding되고, index된다.
-> [Retrieval — OpenAI API Docs](https://developers.openai.com/api/docs/guides/retrieval)
+관련 원문(링크): [Retrieval — OpenAI API Docs](https://developers.openai.com/api/docs/guides/retrieval)
 
 이 문장은 vector store 기반 retrieval 흐름을 보여줍니다. 파일이 들어오면 검색 가능한 단위로 쪼개지고, embedding vector가 만들어지고, index가 준비됩니다. RAG 시스템의 검색 단계가 단순 파일 목록 조회가 아니라 전처리 pipeline임을 알 수 있습니다.
 
-> "semantic search / retrieval in the vector space"
->
-> — vector space에서의 semantic search/retrieval.
-> [Embeddings — Claude Docs](https://platform.claude.com/docs/en/build-with-claude/embeddings)
+관련 원문(링크): [Embeddings — Claude Docs](https://platform.claude.com/docs/en/build-with-claude/embeddings)
 
 이 인용은 semantic search를 "문자열 검색"과 구분하게 해줍니다. vector space에서 가까운 항목을 찾는 것이므로 표현이 달라도 관련 후보를 찾을 수 있습니다. 동시에 exact keyword match가 중요한 경우에는 BM25와 함께 쓰는 hybrid retrieval을 고려해야 합니다.
 

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/generate-sitemap.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "biome check .",
@@ -12,6 +13,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "verify": "npm run lint && npm run typecheck && npm run test && npm run build",
+    "sitemap": "node scripts/generate-sitemap.mjs",
     "doctor": "npx react-doctor@latest --json"
   },
   "dependencies": {

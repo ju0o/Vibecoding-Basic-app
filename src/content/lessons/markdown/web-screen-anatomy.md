@@ -128,10 +128,7 @@ CSS가 어려운 이유는 단순히 property 이름이 많아서가 아닙니�
 
 JavaScript가 웹 화면을 다룰 수 있는 이유는 DOM이라는 tree 표현이 있기 때문입니다. 버튼을 찾고, 텍스트를 바꾸고, event listener를 붙이는 일은 모두 이 tree 위에서 일어납니다. DOM을 이해하면 "HTML 파일", "브라우저 안의 실제 구조", "JavaScript가 접근하는 객체"를 구분할 수 있습니다.
 
-> "Navigation is the first step in loading a web page."
->
-> — navigation은 웹 페이지 로딩의 첫 단계다.
-> [How browsers work](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/How_browsers_work)
+관련 원문(링크): [How browsers work](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/How_browsers_work)
 
 화면은 렌더링만으로 시작하지 않습니다. URL 이동과 네트워크 요청이 먼저 있습니다. 그래서 첫 화면이 비어 있거나 스타일이 빠지거나 데이터가 늦게 보이면 Network 탭을 함께 봐야 합니다. 웹 화면의 문제는 종종 브라우저가 첫 자원을 어떻게 가져왔는지에서 시작됩니다.
 

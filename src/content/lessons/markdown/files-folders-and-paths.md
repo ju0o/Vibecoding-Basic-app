@@ -139,24 +139,15 @@ async function readLesson(filePath: string): Promise<string> {
 
 이 인용은 `node:path`의 역할을 정의합니다. `node:path`는 파일을 읽는 모듈이 아니라 경로 문자열을 다루는 utility입니다. dirname, basename, extname 같은 기능은 경로를 분석하고 조합할 때 사용됩니다.
 
-> "interacting with the file system"
->
-> — file system과 상호작용한다.
-> [File system — Node.js Docs](https://nodejs.org/api/fs.html)
+관련 원문(링크): [File system — Node.js Docs](https://nodejs.org/api/fs.html)
 
 이 문장은 `node:fs`의 역할을 보여줍니다. 파일 내용을 읽거나 쓰는 작업은 path module이 아니라 fs module과 연결됩니다. path는 위치를 표현하고, fs는 그 위치의 file system과 상호작용합니다.
 
-> "A package is a folder tree"
->
-> — package는 folder tree다.
-> [Modules: Packages — Node.js Docs](https://nodejs.org/api/packages.html)
+관련 원문(링크): [Modules: Packages — Node.js Docs](https://nodejs.org/api/packages.html)
 
 이 인용은 folder가 프로젝트 의미를 가질 수 있음을 보여줍니다. package는 `package.json` file로 described되는 folder tree입니다. 모든 폴더가 package는 아니지만, package를 이해하려면 folder tree를 읽을 수 있어야 합니다.
 
-> "files and folders"
->
-> — files and folders.
-> [User interface — VS Code Docs](https://code.visualstudio.com/docs/getstarted/userinterface)
+관련 원문(링크): [User interface — VS Code Docs](https://code.visualstudio.com/docs/getstarted/userinterface)
 
 VS Code Explorer는 files and folders를 보여줍니다. 이 UI는 개발자가 path와 folder tree를 눈으로 읽는 시작점입니다. AI가 말한 경로가 실제 Explorer 안에서 어디인지 대조하는 습관이 필요합니다.
 

@@ -91,7 +91,7 @@ conflict가 나면 Git은 양쪽 변경을 파일에 표시합니다. 이 표시
 
 ## 원문으로 읽기
 
-> "This command creates an empty Git repository - basically a .git directory with subdirectories for objects, refs/heads, refs/tags, and template files."
+> "This command creates an empty Git repository - basically a .git directory with subdirectories for objects, refs/heads, refs/tags, and template files. [...]"
 >
 > — 이 명령은 빈 Git 저장소를 만든다.
 > [git-init](https://git-scm.com/docs/git-init)
@@ -112,10 +112,7 @@ Git은 추상적인 저장 버튼이 아니라 저장소 구조에서 시작합�
 
 branch는 협업의 기본 단위입니다. 기능, 버그 수정, 실험을 branch로 나누면 main 흐름을 보호하면서 작업할 수 있습니다. 중요한 것은 branch가 파일 복사본이 아니라 commit graph의 pointer라는 점입니다. 이 사실을 알면 switch와 merge가 덜 신비롭게 느껴집니다.
 
-> "Pull requests let you propose, review, and merge code changes."
->
-> — pull request는 코드 변경을 제안, 리뷰, 병합하게 해준다.
-> [About pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
+관련 원문(링크): [About pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
 
 PR은 Git 변경을 팀의 품질 게이트로 바꿉니다. AI가 만든 코드도 PR 사고방식으로 보면 초안, diff, 검토, 수정, 승인, 병합의 흐름을 갖습니다. 혼자 작업하더라도 이 흐름을 따르면 변경을 설명하고 되돌리기 쉬워집니다.
 

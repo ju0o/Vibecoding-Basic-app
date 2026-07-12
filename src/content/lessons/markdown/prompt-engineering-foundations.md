@@ -125,17 +125,11 @@ Citation은 출력 후반에 붙이는 장식이 아닙니다. 모델이 답을 
 
 이 인용은 출력 형식 제어에서 특히 유용합니다. "길게 쓰지 마"보다 "세 문단으로, 각 문단은 verdict, rationale, next step을 다룬다"가 더 직접적입니다. 금지가 필요할 때도 원하는 행동을 먼저 지정해야 모델이 결과의 모양을 잡을 수 있습니다.
 
-> "Use XML format indicators"
->
-> — XML 형식 표시자를 사용하라.
-> [Prompting best practices — Claude Docs](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
+관련 원문(링크): [Prompting best practices — Claude Docs](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
 
 XML tag는 긴 prompt의 역할을 분리하는 장치입니다. 목표, 자료, 제약, 출력 형식이 한 문단 안에 섞이면 모델이 어떤 정보가 지시이고 어떤 정보가 참고자료인지 헷갈릴 수 있습니다. tag를 쓰면 context 안의 정보가 역할별로 정렬됩니다.
 
-> "Never invent source IDs"
->
-> — source ID를 절대 만들어내지 말라.
-> [Citation Formatting — OpenAI API Docs](https://developers.openai.com/api/docs/guides/citation-formatting)
+관련 원문(링크): [Citation Formatting — OpenAI API Docs](https://developers.openai.com/api/docs/guides/citation-formatting)
 
 이 문장은 citation prompt에서 반드시 필요한 검증 규칙입니다. source ID가 context에 없는데 모델이 그럴듯한 ID를 만들면 citation은 신뢰 장치가 아니라 환각 장식이 됩니다. 따라서 citation behavior를 prompt에 넣을 때는 "사용 가능한 source만 cite한다"는 규칙까지 포함해야 합니다.
 

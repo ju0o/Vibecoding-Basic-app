@@ -120,17 +120,11 @@ Agent는 chat보다 더 많은 행동을 할 수 있으므로 oversight가 더 �
 
 이 문장은 AI의 역할이 설명을 넘어 task execution으로 확장됨을 보여줍니다. 하지만 perform tasks는 task framing과 review를 전제로 읽어야 합니다. 사람이 무엇을 맡길지 정의하지 않으면 AI는 성공 기준을 추측합니다.
 
-> "AI-generated code needs review"
->
-> — AI가 생성한 코드는 검토가 필요하다.
-> [Cursor Blog — Agent best practices](https://cursor.com/blog/agent-best-practices)
+관련 원문(링크): [Cursor Blog — Agent best practices](https://cursor.com/blog/agent-best-practices)
 
 협업 루프의 가장 실무적인 기준입니다. AI-generated code는 빠른 초안일 수 있지만, repository에 들어가기 전 diff와 test로 확인해야 합니다. 이 문장이 없으면 AI 협업은 생산성이 아니라 품질 위험이 됩니다.
 
-> "review the results"
->
-> — 결과를 검토하라.
-> [OpenAI — Introducing Codex](https://openai.com/index/introducing-codex/)
+관련 원문(링크): [OpenAI — Introducing Codex](https://openai.com/index/introducing-codex/)
 
 짧지만 강한 문장입니다. AI가 task를 수행한 뒤 사람의 역할은 사라지지 않고 결과 검토로 이동합니다. 이 검토가 다음 feedback loop의 입력이 됩니다.
 
@@ -176,5 +170,3 @@ AI가 코드를 만들었다는 이유로 책임을 AI에게 넘기지 않습니
 이 강의의 근거 KB는 `human-ai-collaboration-patterns`입니다. 먼저 GitHub Copilot Chat responsible use 문서에서 human review of AI-generated output 원칙을 읽으세요. 다음으로 GitHub Copilot Agents responsible use 문서에서 human oversight와 review of outputs를 확인합니다. OpenAI Codex 소개에서는 AI가 task를 수행할 수 있어도 사용자가 결과를 검토해야 한다는 흐름을 보고, Cursor agent best practices에서는 AI-generated code needs review라는 실무 기준을 확인하세요.
 
 다음 학습 흐름은 `requirement-to-task-breakdown`입니다. 사람-AI 협업을 잘하려면 먼저 요구사항을 작고 검토 가능한 task로 나눌 수 있어야 합니다. 그 뒤 `prompt-to-implementation-loop`에서 prompt, implementation, test, review를 반복하는 실전 바이브코딩 루프로 확장할 수 있습니다.
-
-자가 QA 결과: V2 8섹션을 모두 포함했고, Quote Bank 인용 5개를 원문 그대로 사용했습니다. 본문은 승인 KB의 GitHub, OpenAI, Cursor 출처 범위 안에서 작성했으며, KB 외 신규 사실을 추가하지 않았습니다. 하이라이트는 섹션당 3개 이하로 제한했고, 코드 예시는 협업 루프의 역할 분리를 설명하는 독립 TypeScript 예시입니다.

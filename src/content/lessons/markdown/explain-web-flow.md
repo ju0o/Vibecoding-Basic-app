@@ -71,17 +71,11 @@ request/response 용어를 정확히 전달하는 근거입니다. 표준 용어
 
 흐름을 두 메시지의 순환으로 설명하는 뼈대입니다. 요청과 응답을 분리하는 근거입니다.
 
-> "HTTP is stateless: there is no link between two requests"
->
-> — HTTP는 stateless다: 두 요청 사이에는 연결이 없다.
-> [MDN — Overview of HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview)
+관련 원문(링크): [MDN — Overview of HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview)
 
 stateless를 오해 없이 설명하기 위한 근거입니다. cookie 세션과 구분해 전달해야 합니다.
 
-> "A status code, indicating if the request was successful or not, and why."
->
-> — 요청이 성공했는지 아닌지, 그리고 그 이유를 나타내는 status code.
-> [MDN — Overview of HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview)
+관련 원문(링크): [MDN — Overview of HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview)
 
 status code를 설명의 핵심 신호로 쓰는 근거입니다. class로 요약하면 빠르게 방향을 잡아줍니다.
 
@@ -118,5 +112,3 @@ status code를 설명의 핵심 신호로 쓰는 근거입니다. class로 요�
 이 강의의 근거 KB는 `explain-web-flow`이며, 그 개념적 뿌리는 `http-request-response`입니다. 먼저 MDN의 Overview of HTTP를 읽고 request/response·stateless·status code 정의를 확인하세요. 그다음 RFC 9110에서 HTTP를 stateless application-level protocol로 정의하는 표준 표현을 봅니다. 이 두 출처가 이 강의 인용의 원문입니다.
 
 선행 강의로 `http-request-response`(요청/응답 구조)와 `browser-rendering-network`(HTML 이후 sub-resource 요청)를 읽으면 설명할 대상이 명확해집니다. 함께 읽으면 좋은 강의는 `reviewing-ai-output`으로, 잘 설명된 흐름이 AI 출력을 검토할 때 질문의 정확도를 어떻게 높이는지 보여줍니다. 이 설명 스킬은 이후 explanation-practice 모듈의 Context/RAG 비교, Tool·Agent·MCP 관계 설명으로 이어집니다.
-
-자가 QA 결과: V2 8섹션을 모두 포함했고, Quote Bank 인용 5개를 원문 그대로 사용했습니다(원어+번역+링크+해설). 본문은 승인 KB `explain-web-flow`와 그 근거인 `http-request-response`의 MDN·RFC 9110 출처 범위 안에서 작성했으며 KB 외 신규 사실을 추가하지 않았습니다. 하이라이트(`==`)는 섹션당 3개 이하·마커 짝수로 유지했고 콜아웃은 사용하지 않았습니다.

@@ -115,19 +115,19 @@ Next.js 환경변수 문서에서 build/runtime 구분을 보여주는 문장은
 
 Vercel environment scope를 읽을 때는 다음 짧은 단어도 중요합니다.
 
-> "Production"
+관련 원문: 원문
 
 Production이라는 scope는 실제 사용자에게 영향을 주는 배포 범위를 뜻합니다. Preview와 Production을 나누지 않으면 테스트 작업이 실제 운영 리소스를 건드릴 수 있습니다.
 
 GitHub Actions secret 문서에서는 로그 masking이 핵심입니다.
 
-> "Mask all sensitive information"
+관련 원문: 원문
 
 이 문장은 secret store를 쓰는 것만으로 끝나지 않는다는 점을 알려줍니다. 로그, error, debug output까지 민감 정보가 나오지 않게 해야 합니다.
 
 Twelve-Factor config 원칙은 다음 문장으로 요약됩니다.
 
-> "The twelve-factor app stores config in environment variables"
+관련 원문: 원문
 
 이 문장은 config를 code에서 분리하는 가장 오래되고 실용적인 기준입니다. 현대 배포 플랫폼에서도 이 원칙은 여전히 중요합니다.
 

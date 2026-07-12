@@ -168,10 +168,7 @@ shape와 behavior라는 표현이 핵심입니다. 타입은 단순 이름표가
 
 이 인용은 annotation 남용을 막아 줍니다. TypeScript는 모든 값을 수동으로 표시하라는 도구가 아닙니다. 중요한 boundary에는 명시하고, 내부의 명백한 값은 inference를 활용하는 것이 읽기 좋습니다.
 
-> "TypeScript will only allow an operation if it is valid for every member of the union."
->
-> — TypeScript는 union의 모든 member에 valid한 operation만 허용한다.
-> [Everyday Types — TypeScript Docs](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+관련 원문(링크): [Everyday Types — TypeScript Docs](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
 
 union을 이해하는 데 가장 중요한 문장입니다. 여러 가능성 중 하나인 값을 다룰 때는 먼저 어떤 가능성인지 좁혀야 합니다. AI가 success branch와 error branch를 섞는 실수도 이 원칙으로 잡을 수 있습니다.
 

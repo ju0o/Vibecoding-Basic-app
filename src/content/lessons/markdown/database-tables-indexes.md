@@ -90,38 +90,32 @@ users 테이블
 
 ## 원문으로 읽기
 
-> "A table in a relational database is much like a table on paper: It consists of rows and columns."
+> "A table in a relational database is much like a table on paper: It consists of rows and columns. [...]"
 >
 > — 관계형 데이터베이스의 테이블은 종이 위의 표와 매우 비슷하다: 행과 열로 이루어진다.
 > [PostgreSQL Table Basics](https://www.postgresql.org/docs/current/ddl-basics.html)
 
 가장 기본적인 정의가 가장 강력한 은유입니다. "종이 위의 표"라는 익숙한 그림이 관계형 DB의 출발점입니다 — 엑셀 시트를 떠올리면 됩니다. 열은 항목, 행은 기록. 이 단순한 모델이 수십 년간 데이터 저장의 표준이 된 이유는, 사람이 직관적으로 이해하면서도 기계가 엄밀히 다룰 수 있기 때문입니다.
 
-> "The data type constrains the set of possible values that can be assigned to a column and assigns semantics to the data stored in the column so that it can be used for computations."
+> "The data type constrains the set of possible values that can be assigned to a column and assigns semantics to the data [...]"
 >
 > — 데이터 타입은 열에 할당될 수 있는 가능한 값의 집합을 제한하고, 열에 저장된 데이터에 의미를 부여해 계산에 쓸 수 있게 한다.
 > [PostgreSQL Table Basics](https://www.postgresql.org/docs/current/ddl-basics.html)
 
 "constrains ... and assigns semantics" — 데이터 타입의 두 역할이 한 문장에 정확히 담겨 있습니다. 제한(constrain)만 하는 게 아니라 의미(semantics)를 부여합니다. 이것이 "모두 문자열로 저장"이 나쁜 이유입니다 — 문자열은 제한도 약하고, "1 + 1"을 계산하지 못하고 "11"로 이어붙일 뿐입니다.
 
-> "After an index is created, the system has to keep it synchronized with the table. This adds overhead to data manipulation operations."
+> "After an index is created, the system has to keep it synchronized with the table. This adds overhead to data manipulation operations. [...]"
 >
 > — 인덱스가 생성된 후, 시스템은 그것을 테이블과 동기화된 상태로 유지해야 한다. 이는 데이터 조작 연산에 오버헤드를 더한다.
 > [PostgreSQL Indexes Introduction](https://www.postgresql.org/docs/current/indexes-intro.html)
 
 이 문장이 이 강의의 핵심 경고입니다. 인덱스는 "keep it synchronized"의 대가를 요구합니다. 조회를 빠르게 하려고 만든 인덱스가, 데이터를 바꿀 때마다 함께 갱신되어 쓰기를 느리게 합니다. 공식 문서가 직접 "adds overhead"라고 못 박는 이유입니다.
 
-> "Indexes can also benefit UPDATE and DELETE commands with search conditions. Indexes can moreover be used in join searches."
->
-> — 인덱스는 검색 조건이 있는 UPDATE와 DELETE 명령에도 이득을 줄 수 있다. 나아가 인덱스는 조인 검색에도 쓰일 수 있다.
-> [PostgreSQL Indexes Introduction](https://www.postgresql.org/docs/current/indexes-intro.html)
+관련 원문(링크): [PostgreSQL Indexes Introduction](https://www.postgresql.org/docs/current/indexes-intro.html)
 
 인덱스의 이득이 조회(SELECT)에만 그치지 않는다는 점을 문서가 명시합니다. 조건이 붙은 UPDATE·DELETE도 "먼저 대상 행을 찾는" 단계가 있으므로 인덱스의 덕을 보고, 조인은 특히 크게 가속됩니다. 인덱스를 "조회용"으로만 생각하면 이 넓은 이득을 놓칩니다.
 
-> "Therefore indexes that are seldom or never used in queries should be removed."
->
-> — 따라서 쿼리에서 거의 또는 전혀 사용되지 않는 인덱스는 제거해야 한다.
-> [PostgreSQL Indexes Introduction](https://www.postgresql.org/docs/current/indexes-intro.html)
+관련 원문(링크): [PostgreSQL Indexes Introduction](https://www.postgresql.org/docs/current/indexes-intro.html)
 
 "should be removed" — 공식 문서가 제거를 권고합니다. 안 쓰는 인덱스는 조회 이득은 0인데 쓰기 비용은 그대로이므로, 순손실입니다. 인덱스를 만드는 것만큼이나 ==안 쓰는 인덱스를 찾아 지우는 것==도 성능 관리의 일부입니다.
 

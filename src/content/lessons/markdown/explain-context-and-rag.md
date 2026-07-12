@@ -73,17 +73,11 @@ RAG의 정의입니다. RAG가 검색과 생성을 잇는 방법 — "채우는 
 
 RAG의 지식이 사전 학습이 아니라 런타임 검색으로 온다는 점입니다. 이것이 RAG가 최신·도메인 지식을 붙일 수 있는 이유입니다.
 
-> "more context isn't automatically better"
->
-> — 더 많은 context가 자동으로 더 나은 것은 아니다.
-> [Anthropic — Context windows](https://platform.claude.com/docs/en/build-with-claude/context-windows)
+관련 원문(링크): [Anthropic — Context windows](https://platform.claude.com/docs/en/build-with-claude/context-windows)
 
 큰 window 만능론을 교정합니다. 관련 없는 토큰이 많으면 오히려 답이 나빠집니다.
 
-> "finding the smallest possible set of high-signal tokens"
->
-> — 가능한 한 가장 작은, 신호가 높은 토큰 집합을 찾는 것.
-> [Anthropic — Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
+관련 원문(링크): [Anthropic — Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
 
 context 최적화의 원칙입니다. RAG로 가져온 것도 이 원칙으로 선별해야 함을 보여줍니다.
 
@@ -120,5 +114,3 @@ RAG를 설명할 때 검색 품질만 말하지 않고, 가져온 것 중 high-s
 이 강의의 근거 KB는 `explain-context-rag`이며, 그 뿌리는 `rag`와 `context-engineering` 승인 KB입니다. 먼저 Anthropic의 Effective context engineering for AI agents를 읽고 context의 정의와 high-signal 원칙을 확인하세요. 그다음 Claude glossary에서 RAG 정의와 런타임 검색을, Context windows 문서에서 "more context isn't automatically better"를 봅니다. 이 출처들이 이 강의 인용의 원문입니다.
 
 선행 강의로 RAG와 context 관련 강의(임베딩·토큰화·grounding)를 읽으면 두 개념의 세부가 채워집니다. 함께 읽으면 좋은 강의는 `explain-web-flow`로, 같은 explanation-practice 모듈에서 개념을 순서대로 설명하는 스킬을 다룹니다. 다음 레퍼런스는 `explain-tool-agent-mcp`로, Tool·Agent·MCP의 관계를 비교 설명합니다.
-
-자가 QA 결과: V2 8섹션을 모두 포함했고, Quote Bank 인용 5개를 원문 그대로 사용했습니다(원어+번역+링크+해설). 본문은 승인 KB `explain-context-rag`와 그 근거인 `rag`·`context-engineering`의 Claude·Anthropic 출처 범위 안에서 작성했으며 KB 외 신규 사실을 추가하지 않았습니다. 하이라이트(`==`)는 섹션당 3개 이하·마커 짝수로 유지했고 콜아웃은 사용하지 않았습니다.

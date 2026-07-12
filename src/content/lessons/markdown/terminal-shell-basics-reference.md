@@ -151,24 +151,15 @@ console.log(`${run.shell}: ${run.command}`)
 
 이 문장은 VS Code integrated terminal의 실무 위치를 보여줍니다. 편집기 안에서 파일 작업 명령과 Git 명령을 실행할 수 있습니다. 따라서 terminal은 editor와 분리된 낯선 세계가 아니라 같은 프로젝트 작업 루프의 일부입니다.
 
-> "build, test, or deploy"
->
-> — build, test, deploy.
-> [Getting started with the terminal — VS Code Docs](https://code.visualstudio.com/docs/terminal/getting-started)
+관련 원문(링크): [Getting started with the terminal — VS Code Docs](https://code.visualstudio.com/docs/terminal/getting-started)
 
 개발자가 terminal을 배우는 이유가 여기에 있습니다. 코드를 작성하는 것만으로 끝나지 않고, build하고 test하고 deploy하는 단계가 필요합니다. 이 세 단어는 뒤의 package manager, CI/CD, 배포 강의로 이어지는 다리입니다.
 
-> "text-based interface"
->
-> — 텍스트 기반 인터페이스.
-> [What is a command shell? — Microsoft Learn](https://learn.microsoft.com/en-us/powershell/utility-modules/aishell/concepts/what-is-a-command-shell?view=ps-modules)
+관련 원문(링크): [What is a command shell? — Microsoft Learn](https://learn.microsoft.com/en-us/powershell/utility-modules/aishell/concepts/what-is-a-command-shell?view=ps-modules)
 
 Microsoft Learn의 이 표현은 shell과 terminal을 시각적 버튼 UI가 아니라 텍스트 기반 상호작용으로 이해하게 합니다. 텍스트 입력은 불친절해 보일 수 있지만, 정확한 명령과 output을 남기기 때문에 AI와의 협업에서도 강력한 증거가 됩니다.
 
-> "Verb-Noun pair"
->
-> — 동사-명사 쌍.
-> [Discover PowerShell — Microsoft Learn](https://learn.microsoft.com/en-us/powershell/scripting/discover-powershell?view=powershell-7.6)
+관련 원문(링크): [Discover PowerShell — Microsoft Learn](https://learn.microsoft.com/en-us/powershell/scripting/discover-powershell?view=powershell-7.6)
 
 PowerShell cmdlet을 읽는 핵심입니다. `Get-Location`, `Get-ChildItem`, `Set-Location`처럼 이름 자체가 동작과 대상을 드러냅니다. AI가 PowerShell 명령을 제안할 때도 이 구조를 보면 명령 의도를 더 빨리 파악할 수 있습니다.
 

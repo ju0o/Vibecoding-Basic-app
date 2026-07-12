@@ -1,78 +1,74 @@
 # AI Vibe Coding Master
 
-AI Vibe Coding Master는 개발 기초부터 최신 AI 엔지니어링 개념까지 순서대로 읽고, 검색하고, 체크리스트를 완료하며 공부하는 교재형 웹 학습 사이트입니다.
+비개발자가 AI와 함께 **개발의 원리**를 이해할 수 있도록, 개인적인 학습 과정에서 정리한 자료를 **비영리·무료**로 공개한 교재형 웹 사이트입니다.
 
-## V1 설계
+> 이 프로젝트는 개인적인 학습 과정에서 정리한 자료를 같이 공부하고 함께 발전시키기 위해 무료 공개하고 있습니다.
 
-V1은 "완성도 높은 교재형 사이트의 뼈대"에 집중합니다.
+## 무엇을 배우나요
 
-- 홈 화면: 학습 목표, 진행률, 다음 추천 강의, 핵심 기능 안내
-- 전체 커리큘럼: 13개 학습 영역과 샘플 강의 연결
-- 강의 상세: 요청한 13개 고정 섹션, 이전/다음 이동, 사이드바 목차
-- 학습 기능: 로컬 저장소 기반 진행률, 체크리스트, 북마크, 확인 퀴즈, 설명 연습 초안 저장
-- 검색: 강의, 용어, 공식 문서 통합 검색
-- 용어 사전: 개발 및 AI 시스템 용어 검색
-- 공식 문서: MDN, TypeScript, React, Next.js, Git, PostgreSQL, OWASP, OpenAI, MCP 링크
-- UI: 모바일 반응형, 다크모드, 초보자 친화적 교재형 레이아웃
+프롬프트 “사용법”만이 아니라, AI가 만들어 내는 구조—파일·프론트엔드·백엔드·API·Git·배포·보안·AI 시스템—를 읽고 설명할 수 있게 됩니다.
 
-## 폴더 구조
+- 13개 모듈 · 약 100강 (V2 심층 형식)
+- 용어 사전 · 공식 문서 링크 · 로컬 진행률/북마크
+- 검색, 다크모드, 모바일 반응형
 
-```txt
-src/
-  app/                    Next.js App Router 페이지
-  components/             공통 레이아웃, 강의, UI 컴포넌트
-  content/                커리큘럼, 용어, 공식 문서, Markdown 강의 원문
-  features/               진행률, 검색, 다크모드, 용어 브라우저
-  lib/                    강의 파서, 검색, 진행률 순수 로직
-```
+## 강의 형식 (V2)
 
-## 콘텐츠 구조
+각 강의 본문(`src/content/lessons/markdown/*.md`)은 다음 8개 섹션을 사용합니다.
 
-강의 본문은 `src/content/lessons/markdown/*.md`에 Markdown으로 관리합니다. 각 강의는 반드시 아래 13개 제목을 포함해야 합니다.
+1. 한 줄 정의  
+2. 왜 존재하는가  
+3. 작동 원리  
+4. 스펙과 세부  
+5. 원문으로 읽기  
+6. 실전에서  
+7. 한계와 트레이드오프  
+8. 더 읽기  
 
-1. 오늘 배울 것
-2. 한 줄 정의
-3. 쉬운 비유
-4. 왜 생겼는가
-5. 어떤 문제를 해결하는가
-6. 핵심 개념
-7. 실제 예시
-8. 코드 예시
-9. AI 시대에서의 의미
-10. 자주 헷갈리는 것
-11. 실무에서 쓰는 방식
-12. 공부 체크리스트
-13. 참고 출처
+메타데이터는 `src/content/curriculum.ts`에서 관리합니다.
 
-메타데이터와 커리큘럼 순서는 `src/content/curriculum.ts`에서 관리합니다.
-
-## 실행 방법
+## 실행
 
 ```bash
 npm install
 npm run dev
 ```
 
-브라우저에서 `http://localhost:3000`을 엽니다.
+브라우저에서 `http://localhost:3000` 을 엽니다.
 
-## 검증 명령
-
-```bash
-npm run lint
-npm run typecheck
-npm run test
-npm run build
-```
-
-한 번에 실행하려면:
+## 검증·배포
 
 ```bash
-npm run verify
+npm run verify   # lint + typecheck + test + build (sitemap 생성 포함)
 ```
 
-## 확장 방향
+정적 결과는 `out/` 에 생성됩니다. Firebase Hosting 예:
 
-- Markdown을 MDX로 바꿔 예제 컴포넌트와 퀴즈를 본문에 직접 삽입
-- 로컬 저장소 진행률을 사용자 계정과 DB 저장으로 교체
-- 강의별 퀴즈 점수 기록과 설명 연습 답안 피드백
-- AI 생성 학습 플랜, 복습 알림, 프로젝트형 실습 교재 추가
+```bash
+npx firebase-tools deploy --only hosting --project ju0o-ec967
+```
+
+공개 URL(기본): `https://ju0o-ec967.web.app`  
+환경 변수(선택): `NEXT_PUBLIC_SITE_URL` — canonical/OG 기준 URL
+
+## 라이선스·고지
+
+- 소프트웨어: MIT (루트 `LICENSE`)
+- 교육 콘텐츠: 개인 학습·비영리 교육 목적 무료 이용 (상세는 `LICENSE`)
+- 제3자 패키지·폰트: `THIRD_PARTY_NOTICES.md`
+- 인용 정책: `ai-ops/qa/CITATION-POLICY.md` (Mode B 공개)
+
+## 문의
+
+Instagram [@ju0o___](https://www.instagram.com/ju0o___/) — 오류·개선 의견 DM 환영
+
+## 폴더 구조
+
+```txt
+src/
+  app/                    페이지 (홈, 커리큘럼, 강의, 소개, privacy/terms 등)
+  components/             레이아웃·강의 UI
+  content/                커리큘럼, 용어, 강의 Markdown, 다이어그램
+  features/               진행률, 검색, 테마
+  lib/                    파서·검색·진행률 로직
+```

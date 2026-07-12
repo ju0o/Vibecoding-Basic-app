@@ -1,0 +1,698 @@
+{
+  "updated": 99,
+  "report": [
+    {
+      "file": "admin-dashboard-project.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "agent-loop-anatomy.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "ai-assisted-testing-loop.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "ai-chatbot-project.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "ai-code-review-tools.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "ai-era-timeline.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 3,
+      "changed": true
+    },
+    {
+      "file": "ai-system-evaluation.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "ai-vibe-coding-orientation.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "ai-workflow-design.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "api-db-backend-flow.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "api-security-rate-limits.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "auth-session-token.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "autocomplete-era.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "automation-workflow-project.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "backend-observability-logs.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "browser-rendering-network.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "build-and-runtime.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "chat-coding-era.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "ci-cd-pipeline-basics.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "code-change-risk-analysis.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "codex-claude-cursor-comparison.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "context-caching-and-state.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "context-engineering-basics.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "context-engineering-mcp-skills.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "context-window-and-memory.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "control-flow-functions-errors.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "css-cascade-layout-responsive.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "database-tables-indexes.md",
+      "kept": 3,
+      "shortened": 1,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "debugging-error-reading.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "deployment-checklist-playbook.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "deployment-cli-reference.md",
+      "kept": 3,
+      "shortened": 1,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "deployment-platforms.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "designing-reusable-skills.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "development-environment-map.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 3,
+      "changed": true
+    },
+    {
+      "file": "embeddings-and-similarity.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 3,
+      "changed": true
+    },
+    {
+      "file": "environment-variables-secrets.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "explain-context-and-rag.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "explain-risk-and-verification.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "explain-tool-agent-mcp.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "explain-vibe-coding-history.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "explain-web-flow.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "files-folders-and-paths.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 3,
+      "changed": true
+    },
+    {
+      "file": "from-prompt-to-system.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "frontend-testing-basics.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "gh-cli-reference.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "git-branch-switch-merge.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "git-collaboration-basics.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "git-init-add-commit-status.md",
+      "kept": 3,
+      "shortened": 1,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "git-log-diff-show.md",
+      "kept": 3,
+      "shortened": 2,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "git-rebase-cherry-pick-stash.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "git-recovery-playbook.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "git-restore-reset-revert.md",
+      "kept": 3,
+      "shortened": 1,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "github-pr-review-flow.md",
+      "kept": 3,
+      "shortened": 1,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "grounding-and-citations.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "hallucination-and-verification.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 3,
+      "changed": true
+    },
+    {
+      "file": "harness-engineering-basics.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "html-semantic-elements.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "human-ai-collaboration-patterns.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "ide-agent-era.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "incident-style-ai-debugging.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "javascript-dom-events.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 3,
+      "changed": true
+    },
+    {
+      "file": "json-data-contracts.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "learning-with-ai-verification.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 3,
+      "changed": true
+    },
+    {
+      "file": "loop-engineering-basics.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "mcp-architecture-basics.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "mcp-enabled-tool-project.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "mini-saas-architecture.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "model-selection-tradeoffs.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "monitoring-errors-rollbacks.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "multi-agent-orchestration.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "nextjs-routing-rendering.md",
+      "kept": 3,
+      "shortened": 1,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "npm-debugging-playbook.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "npm-scripts-reference.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "package-json-and-semver.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 3,
+      "changed": true
+    },
+    {
+      "file": "private-ai-learning-site-project.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 3,
+      "changed": true
+    },
+    {
+      "file": "production-env-and-secrets.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 3,
+      "changed": true
+    },
+    {
+      "file": "prompt-engineering-foundations.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "prompt-to-implementation-loop.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "rag-fundamentals.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "react-component-mental-model.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "react-state-and-effects.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "refactoring-with-ai.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "regex-for-code-search.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "requirement-to-task-breakdown.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "rest-api-design.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "reviewing-ai-output.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "subagents-and-delegation.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "system-prompts-and-instruction-layers.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "tailwind-design-systems.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "terminal-shell-basics-reference.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 3,
+      "changed": true
+    },
+    {
+      "file": "tokenization-and-context.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "tool-calling-basics.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "tool-permissions-sandboxes.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "typescript-react-nextjs.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "typescript-type-system.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "variables-types-and-data-shapes.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 2,
+      "changed": true
+    },
+    {
+      "file": "vibe-coding-origin-karpathy.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 3,
+      "changed": true
+    },
+    {
+      "file": "web-screen-anatomy.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    },
+    {
+      "file": "web-security-basics.md",
+      "kept": 3,
+      "shortened": 0,
+      "demoted": 1,
+      "changed": true
+    }
+  ]
+}

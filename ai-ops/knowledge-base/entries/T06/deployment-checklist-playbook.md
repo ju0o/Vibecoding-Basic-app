@@ -9,7 +9,7 @@ prerequisites: [deployment-cli-reference, production-env-secrets, ci-cd-pipeline
 successors: [private-ai-learning-site-project]
 related: [build-and-runtime, monitoring-errors-rollbacks, npm-debugging-playbook]
 consumers:
-  lessons: []
+  lessons: [deployment-checklist-playbook]
   glossary: []
 sources:
   - { title: "Next.js Docs — Production Checklist", url: "https://nextjs.org/docs/app/guides/production-checklist", checked: 2026-07-12 }

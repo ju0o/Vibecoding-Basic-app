@@ -190,17 +190,11 @@ state가 왜 필요한지 가장 짧게 설명하는 문장입니다. local vari
 
 이 문장은 오해의 출발점을 짚습니다. state variable은 변수처럼 보이지만 snapshot처럼 동작합니다. setter를 호출한 뒤 같은 render의 variable이 mutate된다고 생각하면 debugging이 어려워집니다.
 
-> "React waits until all code in the event handlers has run before processing your state updates."
->
-> — React는 state updates를 처리하기 전에 event handlers 안의 모든 code가 실행될 때까지 기다린다.
-> [Queueing a Series of State Updates — React](https://react.dev/learn/queueing-a-series-of-state-updates)
+관련 원문(링크): [Queueing a Series of State Updates — React](https://react.dev/learn/queueing-a-series-of-state-updates)
 
 batching을 이해하게 해 주는 문장입니다. event handler 안에서 여러 update가 일어나도 React는 한 번에 처리할 수 있습니다. previous state가 필요한 경우 updater function을 써야 하는 이유도 여기서 나옵니다.
 
-> "If there is no external system involved, you shouldn’t need an Effect."
->
-> — involved된 external system이 없다면 Effect가 필요하지 않아야 한다.
-> [You Might Not Need an Effect — React](https://react.dev/learn/you-might-not-need-an-effect)
+관련 원문(링크): [You Might Not Need an Effect — React](https://react.dev/learn/you-might-not-need-an-effect)
 
 Effect 남용을 막는 가장 중요한 기준입니다. props/state에서 계산 가능한 값을 Effect로 다시 state에 넣는 code는 대개 단순하지도 빠르지도 않습니다. AI가 `useEffect`를 제안할 때 외부 시스템이 있는지 먼저 물어야 합니다.
 

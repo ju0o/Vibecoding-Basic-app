@@ -69,17 +69,11 @@ Collins의 정의입니다. 바이브코딩을 초보자에게 설명할 때 가
 
 Merriam-Webster는 "창안(coined)"이라는 다른 동사를 씁니다. 두 사전의 표현 차이를 정확히 전하는 근거입니다.
 
-> "forget that the code even exists"
->
-> — 코드가 존재한다는 사실조차 잊는다.
-> [Wayback snapshot of Karpathy X post](https://web.archive.org/web/20250206155957id_/https://x.com/karpathy/status/1886192184808149383)
+관련 원문(링크): [Wayback snapshot of Karpathy X post](https://web.archive.org/web/20250206155957id_/https://x.com/karpathy/status/1886192184808149383)
 
 용어의 강한 뉘앙스입니다. 소개하되, 경험 묘사이지 규범이 아님을 맥락과 함께 전해야 합니다.
 
-> "human review outputs"
->
-> — 산출물을 사람이 검토한다.
-> [OpenAI — Safety best practices](https://developers.openai.com/api/docs/guides/safety-best-practices)
+관련 원문(링크): [OpenAI — Safety best practices](https://developers.openai.com/api/docs/guides/safety-best-practices)
 
 "검토 불필요"라는 오해를 교정하는 공식 원칙입니다. 강한 뉘앙스와 이 원칙을 함께 전해야 균형이 맞습니다.
 
@@ -116,5 +110,3 @@ Merriam-Webster는 "창안(coined)"이라는 다른 동사를 씁니다. 두 사
 이 강의의 근거 KB는 `explain-vibe-coding-history`이며, 그 뿌리는 `vibe-coding-origin-karpathy` 승인 KB입니다. 먼저 Collins의 Word of the Year 2025 문서에서 정의와 "popularised" 표현을, Merriam-Webster에서 "coined" 표현을 확인하세요. Wayback snapshot은 Karpathy 원 표현을, OpenAI Safety best practices는 human review 원칙을 제공합니다. 이 출처들이 이 강의 인용의 원문입니다.
 
 선행 강의로 `vibe-coding-origin-karpathy`를 읽으면 용어 기원의 사실 근거가, `reviewing-ai-output`은 오해 교정의 실천 규율이 채워집니다. 함께 읽으면 좋은 강의는 `explain-tool-agent-mcp`로, 같은 explanation-practice 모듈에서 개념을 정확히 설명하는 스킬을 다룹니다. 다음 레퍼런스는 위험과 검증을 설명하는 `explain-risk-and-verification`입니다.
-
-자가 QA 결과: V2 8섹션을 모두 포함했고, Quote Bank 인용 5개를 원문 그대로 사용했습니다(원어+번역+링크+해설). 본문은 승인 KB `explain-vibe-coding-history`와 그 근거인 `vibe-coding-origin-karpathy`의 Collins·Merriam-Webster·Wayback·OpenAI 출처 범위 안에서 SOURCE-REGISTRY 특수 출처 정책을 지켜 작성했으며 KB 외 신규 사실을 추가하지 않았습니다. 하이라이트(`==`)는 섹션당 3개 이하·마커 짝수로 유지했고 콜아웃은 사용하지 않았습니다.

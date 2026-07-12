@@ -127,10 +127,7 @@ MDN의 이 문장은 JSON이 왜 초보자에게 헷갈리는지 보여 줍니�
 
 이 인용은 JSON 데이터 계약이 HTTP와 만나는 이유를 설명합니다. network를 건널 때 structured data는 string representation이 되고, 수신자는 다시 value로 해석합니다. 이 왕복 과정에서 shape를 명시하지 않으면 서로 다른 쪽이 같은 데이터를 다르게 이해할 수 있습니다.
 
-> "The `JSON.parse()` static method parses a JSON string, constructing the JavaScript value or object described by the string."
->
-> — `JSON.parse()` static method는 JSON string을 parse해 그 string이 설명하는 JavaScript value 또는 object를 만든다.
-> [JSON.parse() — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) (CC-BY-SA)
+관련 원문(링크): [JSON.parse() — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse)
 
 parse는 string을 value로 바꾸는 단계입니다. 이 문장을 정확히 읽으면 parse와 validation을 구분할 수 있습니다. parse 이후에 contract check가 필요하다는 실무 판단은 이 구분에서 나옵니다.
 

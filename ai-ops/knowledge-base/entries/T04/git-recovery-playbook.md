@@ -9,7 +9,7 @@ prerequisites: [git-restore-reset-revert, git-log-diff-show]
 successors: [private-ai-learning-site-project]
 related: [git-rebase-cherry-pick-stash, github-pr-review-flow, gh-cli-reference]
 consumers:
-  lessons: []
+  lessons: [git-recovery-playbook]
   glossary: []
 sources:
   - { title: "git-restore — Git Documentation", url: "https://git-scm.com/docs/git-restore", checked: 2026-07-12 }

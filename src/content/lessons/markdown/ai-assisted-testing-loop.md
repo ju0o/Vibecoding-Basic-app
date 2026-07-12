@@ -142,17 +142,11 @@ E2E 테스트에서 흔한 실수를 막는 문장입니다. AI가 실패를 피
 
 Playwright의 안정성 원리를 설명합니다. Actionability check가 있기 때문에 테스트는 요소가 실제로 상호작용 가능한 상태인지 기다릴 수 있습니다. AI-generated E2E test에서 manual wait보다 이 구조를 우선해야 합니다.
 
-> "resemble the way your software is used"
->
-> — 소프트웨어가 사용되는 방식과 닮아야 한다.
-> [Testing Library Docs — Guiding Principles](https://testing-library.com/docs/guiding-principles/)
+관련 원문(링크): [Testing Library Docs — Guiding Principles](https://testing-library.com/docs/guiding-principles/)
 
 테스트가 무엇을 확인해야 하는지 알려주는 기준입니다. 내부 구현을 맞추는 테스트보다 사용자가 보는 동작을 확인하는 테스트가 더 실질적인 confidence를 줍니다. AI test draft를 검토할 때 이 문장을 기준으로 삼습니다.
 
-> "Perform a single run without watch mode"
->
-> — watch mode 없이 단일 실행을 수행한다.
-> [Vitest Docs — Command Line Interface](https://vitest.dev/guide/cli)
+관련 원문(링크): [Vitest Docs — Command Line Interface](https://vitest.dev/guide/cli)
 
 반복 검증 명령의 의미를 보여줍니다. AI 보조 테스트 루프에서는 실행 결과를 observation으로 받아야 하므로, 한 번 실행하고 종료하는 명령이 중요합니다. CI와 release verification에도 같은 원리가 적용됩니다.
 
@@ -200,5 +194,3 @@ AI 보조 테스트 루프:
 이 강의의 근거 KB는 `ai-assisted-testing-loop`입니다. 먼저 GitHub의 Writing tests with Copilot 문서에서 AI에게 scenario와 edge case를 구체적으로 요청하는 흐름을 읽으세요. 다음으로 Testing Library guiding principles에서 user-like test의 기준을 확인합니다. Playwright writing tests와 auto-waiting 문서를 읽으면 action/assertion 구조와 manual wait를 피하는 기준을 잡을 수 있습니다. 마지막으로 Vitest CLI 문서에서 `vitest run`이 반복 가능한 단일 실행 명령으로 쓰이는 의미를 확인하세요.
 
 다음 학습 흐름은 `reviewing-ai-output` 또는 `incident-style-ai-debugging`입니다. 테스트 루프를 이해하면 AI가 만든 코드와 테스트를 review하는 기준이 더 분명해지고, 실패한 test를 장애 대응처럼 좁히는 작업으로 이어질 수 있습니다.
-
-자가 QA 결과: V2 8섹션을 모두 포함했고, Quote Bank 인용 5개를 원문 그대로 사용했습니다. 본문은 승인 KB의 GitHub Copilot, Playwright, Testing Library, Vitest 출처 범위 안에서 작성했으며, KB 외 신규 사실을 추가하지 않았습니다. 하이라이트는 섹션당 3개 이하로 제한했고, 코드 예시는 Vitest 형태의 독립 test matrix 예시입니다.

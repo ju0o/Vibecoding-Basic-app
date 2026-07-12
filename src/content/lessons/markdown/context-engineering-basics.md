@@ -91,10 +91,7 @@ Context Engineering 기초: AI가 판단할 재료 설계에서 가장 먼저 �
 
 많이 넣기보다 선별하기가 핵심이라는 판단 기준을 줍니다. 이 인용은 강의의 주장을 장식하는 문장이 아니라, 설계 판단의 기준선으로 읽어야 합니다. 원문은 짧지만 포함하는 전제는 분명합니다. 모델이 무엇을 보고, 무엇을 할 수 있으며, 어디서 멈춰야 하는지를 시스템이 명시적으로 다루어야 한다는 뜻입니다.
 
-> "finding the smallest possible set of high-signal tokens"
->
-> — 가장 작고 신호가 높은 토큰 집합을 찾는 것
-> [Effective context engineering for AI agents — Anthropic](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
+관련 원문(링크): [Effective context engineering for AI agents — Anthropic](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
 
 실무에서 컨텍스트를 줄이는 일이 왜 품질 개선인지 설명합니다. 이 인용은 강의의 주장을 장식하는 문장이 아니라, 설계 판단의 기준선으로 읽어야 합니다. 원문은 짧지만 포함하는 전제는 분명합니다. 모델이 무엇을 보고, 무엇을 할 수 있으며, 어디서 멈춰야 하는지를 시스템이 명시적으로 다루어야 한다는 뜻입니다.
 

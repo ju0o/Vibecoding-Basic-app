@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="440" viewBox="0 0 960 440" role="img" aria-labelledby="title desc">
+  <title id="title">비공개 AI 학습 사이트 4층 구조</title>
+  <desc id="desc">접근 보호(게이트와 noindex), 콘텐츠 파이프라인(markdown에서 정적 빌드), 정적 배포(Firebase Hosting), AI 확장(retrieval 챗봇)의 네 층과 그 연쇄</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#6d28d9" />
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#2e1065" flood-opacity="0.12" />
+    </filter>
+  </defs>
+  <rect width="960" height="440" rx="28" fill="#f5f3ff" />
+  <text x="480" y="46" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="23" font-weight="800" fill="#5b21b6">이 사이트 = 99강의 조각이 조립된 완성 사례</text>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="76" width="820" height="76" rx="14" fill="#ede9fe" stroke="#a78bfa" stroke-width="2" />
+    <text x="110" y="106" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800" fill="#5b21b6">1층 접근 보호</text>
+    <text x="110" y="132" font-family="Inter, Arial, sans-serif" font-size="12.5" fill="#6d28d9">초기: PasswordGate(SHA-256 해시만 번들) + noindex → 공개 전환 시 인용 정리 후 제거 — 요구가 전 층을 제약</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="70" y="166" width="820" height="76" rx="14" fill="#ddd6fe" stroke="#8b5cf6" stroke-width="2" />
+    <text x="110" y="196" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800" fill="#5b21b6">2층 콘텐츠 파이프라인</text>
+    <text x="110" y="222" font-family="Inter, Arial, sans-serif" font-size="12.5" fill="#6d28d9">markdown 100강 + curriculum.ts + glossary.ts + 다이어그램 SVG — Git이 버전·리뷰, verify가 관문</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="70" y="256" width="820" height="76" rx="14" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2" />
+    <text x="110" y="286" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800" fill="#4c1d95">3층 정적 배포</text>
+    <text x="110" y="312" font-family="Inter, Arial, sans-serif" font-size="12.5" fill="#5b21b6">output: "export" → Firebase Hosting — 서버 없음(취약 표면·비용↓), 대가는 빌드 타임 제약</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="70" y="346" width="820" height="76" rx="14" fill="#a5b4fc" stroke="#6366f1" stroke-width="2" stroke-dasharray="6 4" />
+    <text x="110" y="376" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800" fill="#312e81">4층 AI 확장 (다음 단계)</text>
+    <text x="110" y="402" font-family="Inter, Arial, sans-serif" font-size="12.5" fill="#3730a3">retrieval 챗봇(의미 검색 + 대화 상태) — 최소 DTO 원칙, 게이트 뒤에서, 읽기 전용부터</text>
+  </g>
+
+  <line x1="920" y1="114" x2="920" y2="160" stroke="#6d28d9" stroke-width="2" marker-end="url(#arrow)" />
+  <line x1="920" y1="204" x2="920" y2="250" stroke="#6d28d9" stroke-width="2" marker-end="url(#arrow)" />
+  <line x1="920" y1="294" x2="920" y2="340" stroke="#6d28d9" stroke-width="2" marker-end="url(#arrow)" />
+</svg>

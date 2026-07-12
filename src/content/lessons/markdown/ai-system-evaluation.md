@@ -141,17 +141,11 @@ AI 평가가 필요한 근본 이유입니다. 같은 입력에도 출력이 달
 
 평가는 기준에서 시작합니다. 좋은 success criteria 없이 eval을 만들면 점수는 있어도 의미가 약합니다. 평가가 prompt 개선의 중심이 되려면 무엇이 성공인지 먼저 말할 수 있어야 합니다.
 
-> "a test for an AI system"
->
-> — AI system을 위한 테스트.
-> [Demystifying evals for AI agents — Anthropic](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)
+관련 원문(링크): [Demystifying evals for AI agents — Anthropic](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)
 
 eval을 가장 짧게 이해하게 해주는 표현입니다. 단, agent eval에서는 이 test가 단일 텍스트 출력을 넘어서 tools, environment, transcript, outcome을 포함합니다. 그래서 evaluation harness가 필요합니다.
 
-> "runtime environment doesn't factor"
->
-> — runtime environment가 영향을 주지 않는다.
-> [Quantifying infrastructure noise in agentic coding evals — Anthropic](https://www.anthropic.com/engineering/infrastructure-noise)
+관련 원문(링크): [Quantifying infrastructure noise in agentic coding evals — Anthropic](https://www.anthropic.com/engineering/infrastructure-noise)
 
 이 문장은 static benchmark와 agentic coding eval의 차이를 설명할 때 중요합니다. 정적 문제에서는 runtime environment가 크게 작용하지 않을 수 있지만, agentic coding eval에서는 CPU, RAM, time limits 같은 실행 환경이 결과에 영향을 줄 수 있습니다.
 

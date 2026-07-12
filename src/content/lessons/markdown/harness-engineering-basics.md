@@ -152,17 +152,11 @@ Trace는 run 하나를 이해하기 위한 기록이고, evaluation harness는 �
 
 guardrails의 범위를 정확히 보여주는 문장입니다. guardrail은 단지 출력 필터가 아닙니다. 입력, 출력, 도구 행동을 모두 검증할 수 있는 boundary입니다. 그러나 자동 검증만으로 부족한 행동은 human review와 approval로 넘어가야 합니다.
 
-> "Use traces for two jobs"
->
-> — trace를 두 가지 일에 사용하라.
-> [Integrations and observability — OpenAI API Docs](https://developers.openai.com/api/docs/guides/agents/integrations-observability)
+관련 원문(링크): [Integrations and observability — OpenAI API Docs](https://developers.openai.com/api/docs/guides/agents/integrations-observability)
 
 trace는 디버깅과 평가 예시라는 두 일을 연결합니다. 하나의 run을 이해하는 기록은 나중에 agent workflow evaluation의 좋은 사례가 될 수 있습니다. 이 연결 때문에 observability는 출시 후 모니터링만의 문제가 아니라 개발 중 품질 개선의 재료입니다.
 
-> "An evaluation harness is the infrastructure"
->
-> — evaluation harness는 infrastructure다.
-> [Demystifying evals for AI agents — Anthropic](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)
+관련 원문(링크): [Demystifying evals for AI agents — Anthropic](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)
 
 이 문장은 eval을 단순 점수표가 아니라 실행 infrastructure로 보게 합니다. agent를 평가하려면 task를 실행하고, trial을 기록하고, transcript와 outcome을 구분하고, grader로 결과를 판단해야 합니다. harness 없이 agent 품질을 반복적으로 개선하기 어려운 이유입니다.
 

@@ -146,17 +146,11 @@ filesystem-based라는 말이 중요합니다. Skill은 대화 안에 흩어지�
 
 이 인용은 Skill이 Context Engineering과 맞물리는 지점을 보여줍니다. 본문을 항상 넣는 것이 아니라, 요청이 description과 맞을 때 들어옵니다. 그래서 Skill 설계에서는 entrypoint와 supporting files를 작게 나누는 일이 컨텍스트 비용을 줄이는 직접적인 방법이 됩니다.
 
-> "Every skill needs a `SKILL.md` file"
->
-> — 모든 Skill에는 `SKILL.md` 파일이 필요하다.
-> [Extend Claude with skills — Claude Code Docs](https://code.claude.com/docs/en/skills)
+관련 원문(링크): [Extend Claude with skills — Claude Code Docs](https://code.claude.com/docs/en/skills)
 
 `SKILL.md`는 Skill의 중심 계약입니다. 사용자는 이 파일을 보고 Skill이 무엇을 하는지 감사할 수 있어야 하고, 모델은 이 파일을 읽고 절차를 수행할 수 있어야 합니다. 그래서 `SKILL.md`가 너무 모호하거나 너무 길면 Skill 전체의 품질이 흔들립니다.
 
-> "Good Skills are concise, well-structured"
->
-> — 좋은 Skill은 간결하고 잘 구조화되어 있다.
-> [Skill authoring best practices — Claude Platform Docs](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
+관련 원문(링크): [Skill authoring best practices — Claude Platform Docs](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
 
 Skill은 많이 적는다고 좋아지지 않습니다. 간결함은 단순함이 아니라 signal-to-noise ratio입니다. 잘 구조화된 Skill은 모델이 어디서 시작하고, 어떤 파일을 읽고, 언제 멈춰야 하는지 빠르게 알게 합니다.
 

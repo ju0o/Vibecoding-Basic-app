@@ -138,10 +138,7 @@ AI review는 후보 문제를 빠르게 보여줄 수 있습니다. Secure code 
 
 사람 reviewer가 내리는 최종 상태를 설명하는 구절입니다. AI comment가 있어도 approve 또는 request changes는 사람이 선택해야 합니다. 이 문장을 기준으로 보면 AI review는 merge 판단 자체가 아니라 merge 판단을 위한 evidence와 질문을 제공하는 단계입니다.
 
-> "automated tools often miss"
->
-> — 자동화 도구가 종종 놓친다.
-> [OWASP Cheat Sheet Series — Secure Code Review](https://cheatsheetseries.owasp.org/cheatsheets/Secure_Code_Review_Cheat_Sheet.html)
+관련 원문(링크): [OWASP Cheat Sheet Series — Secure Code Review](https://cheatsheetseries.owasp.org/cheatsheets/Secure_Code_Review_Cheat_Sheet.html)
 
 AI 리뷰 도구를 과신하지 않게 만드는 중요한 문장입니다. 자동 도구는 pattern과 signal을 잘 찾을 수 있지만, business logic이나 context-specific vulnerability를 항상 잡는 것은 아닙니다. 이 한계를 인정해야 AI review와 manual review를 함께 설계할 수 있습니다.
 
@@ -187,5 +184,3 @@ AI review 운영 루프:
 이 강의의 근거 KB는 `ai-code-review-tools`입니다. 먼저 GitHub Copilot code review 개념 문서에서 AI review의 범위와 목적을 확인하세요. 다음으로 Copilot code review 사용 문서에서 Comment review와 suggested changes의 의미를 읽습니다. Cursor Bugbot 문서는 PR 리뷰 도구가 어떤 문제 후보를 찾는지 확인하는 데 좋습니다. GitHub pull request review 문서는 comment, approve, request changes의 차이를 이해하는 기준입니다. 마지막으로 OWASP Secure Code Review 문서를 읽으며 자동 도구가 놓칠 수 있는 수동 검토 영역을 확인하세요.
 
 다음 학습 순서는 `code-change-risk-analysis`입니다. AI review comment를 받는 것만으로는 충분하지 않습니다. 어떤 파일과 변경이 더 위험한지, 어떤 alert를 우선 검토해야 하는지, 어떤 경우 request changes가 필요한지 판단할 수 있어야 합니다. 그 뒤 `ai-assisted-testing-loop`로 넘어가면 AI review에서 나온 문제 후보를 실제 test와 regression case로 연결할 수 있습니다.
-
-자가 QA 결과: V2 8섹션을 모두 포함했고, Quote Bank 인용 4개를 원문 그대로 사용했습니다. 본문은 승인 KB의 GitHub, Cursor, OWASP 출처 범위 안에서 작성했으며, KB 외 신규 사실을 추가하지 않았습니다. 하이라이트는 섹션당 3개 이하로 제한했고, 코드 예시는 AI review comment를 사람이 triage하는 독립 TypeScript 예시입니다.

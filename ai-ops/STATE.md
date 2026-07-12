@@ -11,27 +11,27 @@
 | 필드 | 값 |
 |---|---|
 | Current Batch | **O-06.1 (v3.1) — Fable(지휘+경량QA) · Codex(Heavy 미션 M1~M5) 2인 체제.** 기획서: ORCHESTRATION-PLAN.md |
-| Current State | **95강 released + 90강 배포됨(라이브)** — 91~95 released/deployment HOLD, KB 85건 approved, kb_needed 5건(96~100). Codex M6 계속 |
-| Last Completed Step | Codex P-08 Project Completion Release Wave A — 91~95 Lesson 5건 V2 Wave 33 released, deployment HOLD (2026-07-12) |
-| Next Executor | Codex(P-01 — 96~100 KB Collection) |
-| Next Prompt File | ai-ops/prompts/CODEX-MISSIONS.md → M6 / P-01 |
-| Blocker | 없음 (ai-workflow-design KB id 부재는 M6에서 대체 처리) |
-| Required Human Action | None |
-| Release Status | **V2 95강 released + 라이브 90강 + M5 QA 전체 0** — Release 95/100, 라이브 90, kb_needed 5(96~100). 100강 완주 후 최종 재배포 |
+| Current State | **🌐 공개 전환 완료(모드 B) + 🏁 100강 완주** — 게이트·noindex 제거, 인용 173블록 링크 강등, Footer(인스타 @ju0o___·비영리 고지)·about/privacy/terms/license 페이지 신설 |
+| Last Completed Step | Grok이 공개 전환(저작권 정리·SEO·Footer·정보 페이지) 수행 → Fable이 전수 QA: 인용 300블록 전건 KB 글자 일치, 강의당 인용 3블록 준수, 자가 QA 내부 메타 22건 제거, 캡스톤·배포 체크리스트 시제 정정, verify exit 0, 재배포 (2026-07-12) |
+| Next Executor | 운영자 판단 — W2 콘텐츠 리프레시(R1~R7), M5 QA 재스캔(공개판 기준), 캡스톤 4층 확장(retrieval 챗봇), Search Console 등록(선택) |
+| Next Prompt File | 후속 시 ai-ops/prompts/CODEX-MISSIONS.md → M4(리프레시) 또는 M5(QA 전수 — T2는 부분 일치 기준으로 갱신 필요) |
+| Blocker | 없음 |
+| Required Human Action | 공개판 스팟체크(선택) + Instagram 링크 동작 확인 |
+| Release Status | **V2 100강 released + 라이브 100강 공개(모드 B)** — https://ju0o-ec967.web.app 검색 허용·무료 공개 |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
-- Current State: 95강 released + 라이브 90강, KB 85건 approved, kb_needed 5건(96~100)
-- Verdict: APPROVED
-- Next Executor: Codex (P-01 — 96~100 KB Collection)
-- Next Prompt File: ai-ops/prompts/CODEX-MISSIONS.md → M6 / P-01
-- Why: 91~95 verified lesson 5건이 V2 Wave 33으로 released 처리되었고, 남은 최고 우선순위는 kb_needed 5건(96~100)이다.
-- Required Operator Action: None
-- If Approved: Codex가 96~100의 KB를 P-01로 수집한다. 배포(P-09)는 수행하지 않는다.
-- If Rejected: release note와 BACKLOG 91~95 상태를 검토하고 필요한 경우 P-08 보정만 수행한다.
-- Files to Check: ai-ops/outputs/04-integrated/RELEASE-2026-07-12-project-completion-release-wave-a.md, ai-ops/outputs/00-backlog/BACKLOG.md(91~100행)
-- Stop Condition: 96~100 중 공식 출처 확보 불가 → 해당 KB만 BLOCKED/소싱 불가 사유 기록 후 나머지 계속.
+- Current State: 🏁 100강 완주 — V2 100강 released + 라이브 100강, KB 90건 approved, kb_needed 0, 백로그 100행 전부 v2-released/released
+- Verdict: MISSION COMPLETE (W1 커리큘럼 완주)
+- Next Executor: 운영자 판단
+- Next Prompt File: (없음) 후속 워크스트림 시 CODEX-MISSIONS → M4(콘텐츠 리프레시 R1~R7) 또는 M5(기계 QA 전수 재스캔)
+- Why: 백로그 1~100 전부 released. Codex가 91~95 + 96~100 KB(P-01)를, Fable이 84~90 + 96~100 강의 및 P-02·배포를 수행 — 2인 체제의 계획대로 완주.
+- Required Operator Action: 완주 스팟체크(선택). 후속 방향 지시(리프레시/QA 재스캔/챗봇 확장) 시 한 줄이면 충분.
+- If Approved: 유지보수 모드 — stale-KB 30일 주기 재확인(M4), 신규 동향 승격(CONTENT-REFRESH-2026H2), 캡스톤 4층(retrieval 챗봇) 설계 착수 가능.
+- If Rejected: 반려 강의 명시 → 해당 강의만 P-04 재생성.
+- Files to Check: ai-ops/outputs/00-backlog/BACKLOG.md(전 행 released 확인), src/content/lessons/markdown/(100파일), https://ju0o-ec967.web.app
+- Stop Condition: (해당 없음 — 완주)
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)

@@ -9,7 +9,7 @@ prerequisites: [npm-scripts-reference, package-json-semver]
 successors: [deployment-checklist-playbook]
 related: [build-and-runtime, ci-cd-pipeline-basics, production-env-secrets]
 consumers:
-  lessons: []
+  lessons: [npm-debugging-playbook]
   glossary: []
 sources:
   - { title: "npm Docs — npm ci", url: "https://docs.npmjs.com/cli/v11/commands/npm-ci/", checked: 2026-07-12 }

@@ -97,10 +97,7 @@ RAG가 모델 외부 지식에 기대는 구조임을 보여줍니다. 이 인�
 
 사전 학습 지식과 실행 시점 검색의 차이를 설명합니다. 이 인용은 강의의 주장을 장식하는 문장이 아니라, 설계 판단의 기준선으로 읽어야 합니다. 원문은 짧지만 포함하는 전제는 분명합니다. 모델이 무엇을 보고, 무엇을 할 수 있으며, 어디서 멈춰야 하는지를 시스템이 명시적으로 다루어야 한다는 뜻입니다.
 
-> "automatically chunked, embedded, and indexed"
->
-> — 자동으로 chunk, embedding, indexing 된다.
-> [Retrieval — OpenAI API Docs](https://developers.openai.com/api/docs/guides/retrieval)
+관련 원문(링크): [Retrieval — OpenAI API Docs](https://developers.openai.com/api/docs/guides/retrieval)
 
 vector store 기반 검색 파이프라인의 처리 단계를 이해하게 합니다. 이 인용은 강의의 주장을 장식하는 문장이 아니라, 설계 판단의 기준선으로 읽어야 합니다. 원문은 짧지만 포함하는 전제는 분명합니다. 모델이 무엇을 보고, 무엇을 할 수 있으며, 어디서 멈춰야 하는지를 시스템이 명시적으로 다루어야 한다는 뜻입니다.
 

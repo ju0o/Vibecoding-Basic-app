@@ -141,24 +141,15 @@ npm 문서의 제목 자체가 중요한 이유는 이 파일이 npm package met
 
 `scripts`라는 field 이름은 terminal command와 package metadata를 이어 줍니다. `npm run build` 같은 명령은 공중에 떠 있는 명령이 아니라 `package.json` 안의 scripts entry와 연결됩니다. 그래서 AI가 "빌드 명령을 추가했다"고 말하면, 우리는 어떤 script key와 command string이 추가됐는지 확인해야 합니다.
 
-> "MAJOR.MINOR.PATCH"
->
-> — MAJOR.MINOR.PATCH.
-> [Semantic Versioning 2.0.0](https://semver.org/)
+관련 원문(링크): [Semantic Versioning 2.0.0](https://semver.org/)
 
 SemVer의 중심 형식은 dependency update를 읽는 가장 짧은 언어입니다. major, minor, patch는 숫자 위치가 아니라 변경의 의미를 전달합니다. 이 문장을 기억하면 `2.0.0`과 `1.2.4`를 같은 종류의 "최신 숫자"로 보지 않게 됩니다.
 
-> "version ranges"
->
-> — 버전 범위.
-> [About semantic versioning — npm Docs](https://docs.npmjs.com/about-semantic-versioning)
+관련 원문(링크): [About semantic versioning — npm Docs](https://docs.npmjs.com/about-semantic-versioning)
 
 npm dependency는 version 하나만의 문제가 아니라 허용 범위의 문제입니다. version ranges는 어떤 update가 dependency 선언 안에서 허용되는지 판단하게 합니다. AI가 dependency를 추가하거나 upgrade할 때 range를 확인해야 하는 이유가 여기에 있습니다.
 
-> "package spec"
->
-> — package spec.
-> [npm package spec — npm Docs](https://docs.npmjs.com/cli/v11/using-npm/package-spec)
+관련 원문(링크): [npm package spec — npm Docs](https://docs.npmjs.com/cli/v11/using-npm/package-spec)
 
 package spec은 package를 가리키는 표기가 version number 하나로 끝나지 않을 수 있음을 알려줍니다. name, version, tag, URL, git URL 같은 형태가 가능하다는 사실은 install command나 dependency entry를 검토할 때 중요한 안전장치가 됩니다. specifier를 보지 않으면 AI가 어떤 출처 또는 어떤 표기로 package를 지정했는지 놓칠 수 있습니다.
 

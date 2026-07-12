@@ -115,10 +115,7 @@ origin 판단은 느낌이나 회사 도메인 소유 관계가 아니라 tuple 
 
 이 인용은 CORS를 JavaScript option 문제가 아니라 HTTP response header와 browser policy의 결합으로 보게 해 줍니다. client code만 만져서 해결하려는 습관을 교정하는 근거입니다.
 
-> "Cross-Site Scripting (XSS) attacks are a type of injection"
->
-> — Cross-Site Scripting(XSS) 공격은 injection의 한 유형이다.
-> [Cross Site Scripting — OWASP](https://owasp.org/www-community/attacks/xss/)
+관련 원문(링크): [Cross Site Scripting — OWASP](https://owasp.org/www-community/attacks/xss/)
 
 XSS를 단순 UI 버그가 아니라 injection 문제로 보면, input과 output 사이의 경로를 추적하게 됩니다. 어떤 untrusted data가 어디서 들어와 어떤 rendering context로 나가는지가 핵심입니다.
 

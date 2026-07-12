@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { href: "/curriculum", label: "커리큘럼" },
   { href: "/glossary", label: "용어 사전" },
   { href: "/resources", label: "공식 문서" },
+  { href: "/about", label: "소개" },
 ] as const
 
 type SiteHeaderProps = {

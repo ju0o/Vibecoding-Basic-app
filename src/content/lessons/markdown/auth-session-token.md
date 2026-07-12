@@ -101,31 +101,25 @@ MDN이 인증 흐름을 세 단계로 명시합니다:
 
 인증은 프레임워크나 라이브러리가 발명한 것이 아니라, ==HTTP 자체에 내장된 틀==입니다. 401 상태 코드와 WWW-Authenticate/Authorization 헤더가 이미 표준으로 정해져 있고, 우리가 쓰는 인증 라이브러리들은 이 틀 위에서 동작합니다. 그래서 인증을 이해한다는 것은 특정 라이브러리가 아니라 이 HTTP 틀을 이해하는 것입니다.
 
-> "The WWW-Authenticate and Proxy-Authenticate response headers define the authentication method that should be used to gain access to a resource."
+> "The WWW-Authenticate and Proxy-Authenticate response headers define the authentication method that should be used to gain access to a resource. [...]"
 >
 > — WWW-Authenticate와 Proxy-Authenticate 응답 헤더는 자원 접근에 써야 할 인증 방법을 정의한다.
 > [MDN HTTP authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)
 
 서버가 "너는 인증이 필요하다"만 말하는 게 아니라 "이런 방법으로 인증하라"까지 알려준다는 점이 중요합니다. 401 응답에 이 헤더가 함께 오므로, 클라이언트는 어떤 방식(Basic, Bearer 등)으로 자격 증명을 준비할지 알 수 있습니다.
 
-> "The Authorization and Proxy-Authorization request headers contain the credentials to authenticate a user agent with a (proxy) server."
+> "The Authorization and Proxy-Authorization request headers contain the credentials to authenticate a user agent with a (proxy) server. [...]"
 >
 > — Authorization과 Proxy-Authorization 요청 헤더는 (프록시) 서버에 user agent를 인증할 자격 증명을 담는다.
 > [MDN HTTP authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)
 
 자격 증명이 담기는 곳이 Authorization 헤더입니다. API 토큰 인증에서 `Authorization: Bearer eyJ...`를 보내는 것이 정확히 이 문장의 실현입니다 — 토큰이 곧 "user agent를 인증할 credentials"입니다.
 
-> "A cookie (also known as a web cookie or browser cookie) is a small piece of data a server sends to a user's web browser. The browser may store cookies, create new cookies, modify existing ones, and send them back to the same server with later requests."
->
-> — 쿠키는 서버가 사용자의 웹 브라우저에 보내는 작은 데이터 조각이다. 브라우저는 쿠키를 저장·생성·수정하고, 이후 요청에 같은 서버로 되돌려보낼 수 있다.
-> [MDN Using HTTP cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
+관련 원문(링크): [MDN Using HTTP cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
 
 "send them back to the same server with later requests" — 이 되돌려보냄이 세션의 핵심입니다. 서버가 준 표식을 브라우저가 이후 요청마다 자동으로 되돌려줌으로써, stateless HTTP 위에 "기억"이 생깁니다.
 
-> "A cookie with the HttpOnly attribute can't be accessed by JavaScript, for example using Document.cookie; it can only be accessed when it reaches the server."
->
-> — HttpOnly 속성이 있는 쿠키는 JavaScript(예: Document.cookie)로 접근할 수 없고, 서버에 도달할 때만 접근된다.
-> [MDN Using HTTP cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
+관련 원문(링크): [MDN Using HTTP cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
 
 이 한 속성이 세션 보안의 핵심입니다. XSS 공격으로 악성 스크립트가 페이지에 주입돼도, HttpOnly 쿠키는 `document.cookie`로 읽히지 않아 세션이 탈취되지 않습니다. ==세션을 지속하는 쿠키에는 HttpOnly가 사실상 필수==인 이유입니다.
 

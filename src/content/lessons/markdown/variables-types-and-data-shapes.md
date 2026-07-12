@@ -128,17 +128,11 @@ console.log({
 
 이 구분은 JavaScript 데이터 이해의 큰 지도입니다. string, number, boolean 같은 primitive와 object/array 같은 구조적 값을 나누면 오류 메시지를 더 빨리 읽습니다. `null`이나 `undefined`에 property를 읽으려는 문제도 이 지도 안에서 이해됩니다.
 
-> "properties"
->
-> — properties.
-> [Working with objects — MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects)
+관련 원문(링크): [Working with objects — MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects)
 
 object shape를 읽는다는 것은 property를 읽는다는 뜻입니다. AI가 `{ name: "Ada" }`를 만들었는데 UI가 `user.displayName`을 기대한다면 shape가 맞지 않습니다. 이 문제는 문법 문제가 아니라 데이터 계약 문제입니다.
 
-> "list-like objects"
->
-> — list-like objects.
-> [Indexed collections — MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections)
+관련 원문(링크): [Indexed collections — MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections)
 
 array를 list-like object로 보는 설명은 object와 array의 관계를 부드럽게 이어줍니다. array는 단순히 여러 값을 담는 통이 아니라 순서와 index를 가진 목록입니다. 이 관점이 반복문과 React list rendering으로 이어집니다.
 

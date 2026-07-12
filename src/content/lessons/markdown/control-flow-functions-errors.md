@@ -133,17 +133,11 @@ try {
 
 함수의 재사용성은 단순 복사 제거보다 깊습니다. 함수는 코드를 이름 있는 생각 단위로 만듭니다. AI에게 함수 단위로 작업을 요청하면 변경 범위가 줄고, return value와 parameter를 기준으로 검증할 수 있습니다.
 
-> "Exception handling statements"
->
-> — exception을 처리하는 statement들.
-> [Control flow and error handling — MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling)
+관련 원문(링크): [Control flow and error handling — MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling)
 
 이 인용은 오류 처리가 control flow의 일부임을 보여줍니다. 오류는 코드 바깥의 사고가 아니라, 코드가 실패를 어떤 경로로 다룰지 결정하는 구조입니다. catch를 비워두는 것은 오류 처리가 아니라 실패 정보를 버리는 일입니다.
 
-> "Function declarations"
->
-> — 함수 선언.
-> [Functions — JavaScript Guide — MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions)
+관련 원문(링크): [Functions — JavaScript Guide — MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions)
 
 함수 선언은 이름 있는 실행 단위를 만듭니다. 코드베이스에서 function declaration을 찾으면 그 이름, parameter, return value를 먼저 읽으세요. 내부 구현은 그 다음입니다. 이 순서가 코드 리뷰와 AI 수정 요청을 안정시킵니다.
 

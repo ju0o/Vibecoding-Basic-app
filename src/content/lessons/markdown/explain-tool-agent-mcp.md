@@ -69,17 +69,11 @@ MCP를 설명할 때 model-controlled만 말하고 security boundary를 빼면, 
 
 에이전트의 정의입니다. 미리 정한 경로가 아니라 스스로 방향을 정하며 호출을 반복하는 루프임을 보여줍니다.
 
-> "allows servers to expose tools"
->
-> — 서버가 도구를 노출하게 한다.
-> [MCP — Tools specification](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)
+관련 원문(링크): [MCP — Tools specification](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)
 
 MCP의 역할입니다. 도구를 표준 방식으로 제공하는 노출 층 — 호출도 반복도 아닙니다.
 
-> "maintaining clear security boundaries"
->
-> — 명확한 보안 경계를 유지한다.
-> [MCP — Architecture](https://modelcontextprotocol.io/specification/2025-11-25/architecture)
+관련 원문(링크): [MCP — Architecture](https://modelcontextprotocol.io/specification/2025-11-25/architecture)
 
 MCP 아키텍처의 host-client-server 분리 이유입니다. 모델이 도구를 주도하되 안전 경계가 있음을 보여줍니다.
 
@@ -116,5 +110,3 @@ MCP를 소개할 때 model-controlled와 security boundary를 항상 붙여 말�
 이 강의의 근거 KB는 `explain-tool-agent-mcp`이며, 그 뿌리는 `tool-calling`·`agent-loop`·`mcp` 승인 KB입니다. 먼저 Anthropic의 Tool use with Claude에서 tool calling 정의를, Building effective agents에서 에이전트의 자율성을, MCP Tools·Architecture 스펙에서 도구 노출과 보안 경계를 확인하세요. 이 출처들이 이 강의 인용의 원문입니다.
 
 선행 강의로 도구 호출·에이전트 루프·MCP 관련 강의를 읽으면 각 층의 세부가 채워집니다. 함께 읽으면 좋은 강의는 `explain-context-and-rag`로, 같은 explanation-practice 모듈에서 혼동되는 개념 쌍을 층으로 구분하는 비교 스킬을 다룹니다. 다음 레퍼런스는 개념·도구의 흐름을 역사로 설명하는 `explain-vibe-coding-history`입니다.
-
-자가 QA 결과: V2 8섹션을 모두 포함했고, Quote Bank 인용 5개를 원문 그대로 사용했습니다(원어+번역+링크+해설). 본문은 승인 KB `explain-tool-agent-mcp`와 그 근거인 `tool-calling`·`agent-loop`·`mcp`의 Anthropic·MCP 출처 범위 안에서 작성했으며 KB 외 신규 사실을 추가하지 않았습니다. 하이라이트(`==`)는 섹션당 3개 이하·마커 짝수로 유지했고 콜아웃은 사용하지 않았습니다.

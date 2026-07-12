@@ -3656,4 +3656,85 @@ export const GLOSSARY_TERMS = [
       "Predefined Code Path는 LLM과 tool이 미리 정한 코드 경로를 따라 움직이는 구조입니다. 반복 가능하고 예측 가능한 자동화에는 agent보다 workflow가 적합할 수 있습니다.",
     related: ["Workflow", "Orchestration", "Workflow Dependency Graph"],
   },
+  {
+    term: "MCP Host",
+    category: "프로젝트 교재",
+    shortDefinition: "MCP 연결을 시작하는 LLM 애플리케이션 — 사용자가 쓰는 AI 앱 쪽",
+    explanation:
+      "MCP Host는 스펙이 'Hosts: LLM applications that initiate connections'로 정의하는 역할입니다. host 안의 client가 server와 1:1 연결을 관리하고, server가 도구를 노출합니다. 이 역할 분리가 연결 격리라는 보안 경계를 만듭니다.",
+    related: ["MCP", "MCP Protocol Layer", "Token Audience"],
+  },
+  {
+    term: "Token Audience",
+    category: "프로젝트 교재",
+    shortDefinition: "토큰이 어느 서버를 대상으로 발급됐는지의 명시 — passthrough 금지의 근거",
+    explanation:
+      "Token Audience는 MCP 보안 규칙의 핵심입니다. 스펙은 'MCP servers MUST NOT accept any tokens that were not explicitly issued for the MCP server.'라고 요구합니다 — 다른 서비스용 토큰을 그대로 받는 passthrough를 금지해, 새어나온 토큰이 만능 열쇠가 되는 것을 막습니다. 토큰을 URI에 넣지 않는 규칙과 짝을 이룹니다.",
+    related: ["MCP Host", "Secret", "Environment Variable"],
+  },
+  {
+    term: "Reflog",
+    category: "프로젝트 교재",
+    shortDefinition: "브랜치 끝(참조)이 지나온 위치들의 로컬 기록 — '사라진' 커밋의 구조대",
+    explanation:
+      "Reflog는 'Reference logs, or \"reflogs\", record when the tips of branches and other references were updated'로 정의됩니다. reset을 과하게 하거나 브랜치를 잘못 옮겨 커밋이 사라진 것처럼 보일 때, 대부분 참조만 잃은 상태이므로 reflog에서 해시를 되찾을 수 있습니다. 로컬 기록이며 보존 기간이 있으므로 사고 직후 확인이 원칙입니다.",
+    related: ["Rebase", "Stash", "Dry Run"],
+  },
+  {
+    term: "Dry Run",
+    category: "프로젝트 교재",
+    shortDefinition: "실제로 실행하지 않고 무엇이 일어날지만 보여주는 안전 실행 모드",
+    explanation:
+      'Dry Run은 git clean의 -n 옵션이 대표 예입니다 — "Don’t actually remove anything, just show what would be done." 미추적 파일은 지워지면 Git도 복구하지 못하므로, 파괴적 명령 전에 dry-run으로 대상 목록을 눈으로 확인하는 것이 플레이북의 고정 절차입니다.',
+    related: ["Reflog", "Rollback", "Verification Evidence"],
+  },
+  {
+    term: "Lockfile",
+    category: "프로젝트 교재",
+    shortDefinition:
+      "실제 설치된 의존성 트리를 고정 기록해 재현성을 만드는 파일(package-lock.json)",
+    explanation:
+      "Lockfile은 '`package-lock.json` is automatically generated'로 설명되는 자동 생성 파일이지만, 커밋해야 팀·CI가 같은 트리를 갖습니다. manifest(의도)·lockfile(고정 기록)·node_modules(실체) 세 층의 불일치가 npm 사고의 대부분이며, lockfile을 진실로 삼는 재현 설치가 npm ci입니다.",
+    related: ["npm ci", "Semantic Versioning", "npm scripts"],
+  },
+  {
+    term: "npm ci",
+    category: "프로젝트 교재",
+    shortDefinition: "lockfile 그대로 동결 재현 설치하는 클린 설치 명령 — CI·사고 복구용",
+    explanation:
+      "npm ci는 'Clean install a project'가 정의이고, 'installs are essentially frozen' — manifest를 재해석하지 않고 lockfile 그대로 설치하며 어긋나면 실패로 알립니다. '지우고 재설치' 주문의 공식적·안전한 형태로, CI 서버·팀 동기화·오염 환경 복구에 씁니다.",
+    related: ["Lockfile", "npm scripts", "CI/CD"],
+  },
+  {
+    term: "Public Surface",
+    category: "프로젝트 교재",
+    shortDefinition: "배포되는 순간 외부에서 접근 가능해지는 표면 — 라우트·액션·번들",
+    explanation:
+      "Public Surface 점검은 배포 체크리스트의 보안 단입니다. 'Route Handlers are public HTTP endpoints.'이므로 '내부용'이라는 가정이 사고가 되고, 서버 액션은 'Verify authentication and authorization inside each action.'이 요구됩니다. 정적 사이트라면 번들에 secret이 섞이지 않았는지가 같은 성격의 점검입니다.",
+    related: ["Deployment Checklist", "Secret", "Client-Side Gate"],
+  },
+  {
+    term: "Deployment Checklist",
+    category: "프로젝트 교재",
+    shortDefinition: "빌드 검증→보안→환경 변수→접근 보호→배포→배포 후 확인의 6단 점검표",
+    explanation:
+      "Deployment Checklist는 배포 사고의 다수가 '몰라서'가 아니라 '잊어서'라는 사실에 대한 해법입니다. Next.js가 'Before taking your Next.js application to production' 체크리스트를 공식 제공하듯, 압박 속에서도 같은 항목을 같은 순서로 확인하게 만드는 장치입니다. 짧아야 지켜지고, 각 단은 관찰 가능한 증거로 답합니다.",
+    related: ["Public Surface", "Deployment CLI", "Rollback"],
+  },
+  {
+    term: "Client-Side Gate",
+    category: "프로젝트 교재",
+    shortDefinition: "정적 사이트에서 서버 없이 클라이언트에서 동작하는 접근 게이트",
+    explanation:
+      "Client-Side Gate는 이 사이트의 PasswordGate가 실례입니다 — 정적 호스팅에는 서버 미들웨어가 없으므로 게이트가 클라이언트에서 동작하고, 번들은 공개물이므로 비밀번호 원문 대신 SHA-256 해시만 번들에 들어갑니다. 서버 인증보다 약한 보호이므로, 1인 학습 노트 수준의 위험에 맞춘 의도적 선택입니다.",
+    related: ["Public Surface", "Static Hosting", "Secret"],
+  },
+  {
+    term: "Capstone Project",
+    category: "프로젝트 교재",
+    shortDefinition: "배운 조각들을 실제 서비스 하나로 조립하는 커리큘럼 마무리 프로젝트",
+    explanation:
+      "Capstone Project의 목표는 새 기술이 아니라 통합입니다. 이 커리큘럼의 캡스톤은 이 사이트 자체 — 접근 보호·콘텐츠 파이프라인·정적 배포·AI 확장의 4층이 '비공개'라는 요구 하나에서 연쇄적으로 결정되는 과정을 보여줍니다. 완성 조건은 기능이 아니라 절차(verify·보호 확인·배포 후 확인)의 준수입니다.",
+    related: ["Client-Side Gate", "Deployment Checklist", "RAG"],
+  },
 ] satisfies readonly GlossaryTerm[]

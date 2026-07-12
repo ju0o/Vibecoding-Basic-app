@@ -51,7 +51,9 @@
       "!dist",
       "!coverage",
       "!package-lock.json",
-      "!next-env.d.ts"
+      "!next-env.d.ts",
+      "!mcps",
+      "!ai-ops/reports/*.json"
     ]
   }
 }

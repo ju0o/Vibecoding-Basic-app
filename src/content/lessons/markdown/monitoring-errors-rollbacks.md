@@ -109,17 +109,11 @@ Vercel도 롤백 시 "external APIs, databases"의 변화에 주의를 줍니다
 
 "instantaneously" — 왜 즉각적일까요? 새로 빌드하지 않고 이미 만들어진 이전 배포로 도메인만 다시 가리키기 때문입니다. 빌드에 몇 분이 걸린다면 그 시간 동안 사고가 지속되지만, 롤백은 도메인 재지정만으로 끝나므로 즉시입니다. 앞 강의(빌드/런타임)의 "빌드는 한 번, 실행은 여러 번"이 여기서 빛을 발합니다 — 과거 빌드가 남아 있어 재빌드가 필요 없습니다. 만약 롤백할 때마다 재빌드해야 한다면, 그 몇 분이 사고 지속 시간이 되어 복구가 늦어졌을 것입니다.
 
-> "After a rollback, Vercel turns off auto-assignment of production domains."
->
-> — 롤백 후, Vercel은 프로덕션 도메인의 자동 할당을 끈다.
-> [Performing an Instant Rollback](https://vercel.com/docs/instant-rollback)
+관련 원문(링크): [Performing an Instant Rollback](https://vercel.com/docs/instant-rollback)
 
 이 문장이 롤백의 숨은 안전장치입니다. 롤백했는데 자동 배포가 그대로 켜져 있으면, 다음 커밋(문제를 아직 못 고친)이 자동으로 나가 애써 되돌린 상태를 덮어씁니다. 자동 할당을 꺼둠으로써, ==사람이 "이제 괜찮다"고 명시적으로 승격할 때까지 되돌린 상태를 지킵니다==.
 
-> "Logs are the stream of aggregated, time-ordered events collected from the output streams of all running processes and backing services."
->
-> — 로그는 실행 중인 모든 프로세스와 백킹 서비스의 출력에서 수집된, 집계되고 시간순으로 정렬된 이벤트의 스트림이다.
-> [Twelve-Factor App: Logs](https://12factor.net/logs)
+관련 원문(링크): [Twelve-Factor App: Logs](https://12factor.net/logs)
 
 모니터링의 근거가 왜 로그인지가 이 정의에 있습니다. "time-ordered events"(시간순 이벤트)가 있어야 "언제부터 5xx가 늘었는가", "이 오류가 어느 배포 이후인가"를 재구성할 수 있습니다. 로그 없는 모니터링은 눈을 감고 이상을 감지하려는 것과 같습니다.
 

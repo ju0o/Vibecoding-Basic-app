@@ -91,10 +91,7 @@ AI에게 작업을 맡길 때 사용자 요청만으로는 행동 기준이 충�
 
 지침은 길이가 아니라 행동을 바꾸는 신호 밀도로 평가해야 합니다. 이 인용은 강의의 주장을 장식하는 문장이 아니라, 설계 판단의 기준선으로 읽어야 합니다. 원문은 짧지만 포함하는 전제는 분명합니다. 모델이 무엇을 보고, 무엇을 할 수 있으며, 어디서 멈춰야 하는지를 시스템이 명시적으로 다루어야 한다는 뜻입니다.
 
-> "more context isn't automatically better"
->
-> — 컨텍스트가 더 많다고 자동으로 더 좋은 것은 아니다.
-> [Context windows — Claude Platform Docs](https://platform.claude.com/docs/en/build-with-claude/context-windows)
+관련 원문(링크): [Context windows — Claude Platform Docs](https://platform.claude.com/docs/en/build-with-claude/context-windows)
 
 규칙을 많이 쌓는 것이 오히려 판단을 흐릴 수 있음을 설명합니다. 이 인용은 강의의 주장을 장식하는 문장이 아니라, 설계 판단의 기준선으로 읽어야 합니다. 원문은 짧지만 포함하는 전제는 분명합니다. 모델이 무엇을 보고, 무엇을 할 수 있으며, 어디서 멈춰야 하는지를 시스템이 명시적으로 다루어야 한다는 뜻입니다.
 

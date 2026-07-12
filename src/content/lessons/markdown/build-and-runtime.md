@@ -102,7 +102,7 @@ Twelve-Factor가 나눈 세 단계는 각각 하는 일이 명확합니다:
 
 "a transform"(변환)이라는 단어가 빌드의 본질입니다. 빌드는 코드를 "실행"하는 게 아니라 "변환"합니다 — 소스를 실행 가능한 형태(번들)로 바꾸는 것입니다. TypeScript를 JavaScript로 컴파일하고, 여러 파일을 하나로 묶고, 최적화하는 이 모든 과정이 "변환"이며, 그 결과물이 실행의 재료가 됩니다.
 
-> "The run stage (also known as \"runtime\") runs the app in the execution environment, by launching some set of the app's processes."
+> "The run stage (also known as \"
 >
 > — 실행 단계(런타임이라고도 함)는 앱의 프로세스들을 구동해 실행 환경에서 앱을 돌린다.
 > [Twelve-Factor App: Build, release, run](https://12factor.net/build-release-run)
@@ -116,10 +116,7 @@ Twelve-Factor가 나눈 세 단계는 각각 하는 일이 명확합니다:
 
 "strict separation"(엄격한 분리)이 이 전체 원칙의 핵심입니다. 세 단계가 섞이면 — 예컨대 실행 중에 빌드를 다시 하거나 런타임에 코드를 고치면 — 재현성이 무너집니다. 분리를 지켜야 "이 릴리스는 정확히 이 빌드 + 이 설정"이라는 추적 가능성이 생깁니다.
 
-> "For example, it is impossible to make changes to the code at runtime, since there is no way to propagate those changes back to the build stage."
->
-> — 예를 들어, 런타임에 코드를 변경하는 것은 불가능하다. 그 변경을 빌드 단계로 되돌릴 방법이 없기 때문이다.
-> [Twelve-Factor App: Build, release, run](https://12factor.net/build-release-run)
+관련 원문(링크): [Twelve-Factor App: Build, release, run](https://12factor.net/build-release-run)
 
 "impossible ... no way to propagate back" — 이 강한 표현이 실무 규율을 정합니다. 운영 서버에 직접 접속해 파일을 고치는 것은, 설령 당장 동작해도 다음 배포에서 사라지는 임시 변경입니다. ==모든 변경은 빌드부터==라는 원칙이, 코드와 실제 배포가 항상 일치하도록 지켜줍니다.
 

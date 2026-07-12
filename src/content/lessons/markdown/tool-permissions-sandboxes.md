@@ -116,17 +116,11 @@ KB는 secret management를 관련 기술로 다룹니다. Agent에게 실제 tok
 
 Codex CLI 문서가 sandboxing을 별도 축으로 다룬다는 사실 자체가 중요합니다. Agentic coding에서 실행 환경 격리는 선택적 장식이 아니라 권한 모델의 일부입니다. 특히 파일 시스템과 network 접근을 어디까지 허용할지 정해야 합니다.
 
-> "fine-grained permissions"
->
-> — 세분화된 권한.
-> [Anthropic Claude Code — Configure permissions](https://code.claude.com/docs/en/permissions)
+관련 원문(링크): [Anthropic Claude Code — Configure permissions](https://code.claude.com/docs/en/permissions)
 
 Fine-grained permissions는 안전한 AI 사용의 실무 기준입니다. 모든 것을 허용하거나 모두 막는 방식은 오래가지 못합니다. 행동별 위험도에 따라 allow, ask, deny를 나누어야 실제 작업 속도와 안전성을 함께 얻을 수 있습니다.
 
-> "Sandboxing provides OS-level enforcement"
->
-> — 샌드박싱은 OS 수준의 강제를 제공한다.
-> [Anthropic Claude Code — Configure sandboxing](https://code.claude.com/docs/en/sandboxing)
+관련 원문(링크): [Anthropic Claude Code — Configure sandboxing](https://code.claude.com/docs/en/sandboxing)
 
 이 문장은 sandbox가 단순한 UI 경고가 아니라 실행 환경 수준의 경계임을 보여줍니다. 다만 OS-level enforcement가 코드 correctness를 보장하지는 않습니다. 안전한 실행과 올바른 결과는 다른 문제이므로 review와 test가 계속 필요합니다.
 
@@ -175,5 +169,3 @@ Agent가 어떤 파일을 읽고, 어떤 파일을 바꾸고, 어떤 command를 
 이 강의의 근거 KB는 `tool-permissions-sandboxes`입니다. 먼저 Codex CLI 문서에서 inspect, edit, run code와 permissions, commands, sandboxing이 어떻게 함께 다뤄지는지 확인하세요. 이어서 Claude Code permissions 문서에서 fine-grained permissions와 allow/ask/deny rule을 읽고, Claude Code sandboxing 문서에서 OS-level enforcement의 의미를 확인합니다. 마지막으로 Claude Code settings와 GitHub Copilot Agents responsible use를 읽으면 settings hierarchy와 explicit permission prompts, firewalled environment의 관계가 보입니다.
 
 다음 흐름은 `ai-code-review-tools` 또는 practical vibe coding 영역으로 이어집니다. Permission과 sandbox로 실행 경계를 만들었다면, 그 다음에는 agent가 만든 diff를 어떤 기준으로 검토하고 test할지 배워야 합니다. 안전한 AI 코딩은 한 장치가 아니라 여러 장치가 겹쳐진 운영 습관입니다.
-
-자가 QA 결과: V2 8섹션을 모두 포함했고, Quote Bank 인용 5개를 원문 그대로 사용했습니다. 본문은 승인 KB의 Codex CLI, Claude Code permissions/sandboxing/settings, GitHub Copilot Agents 출처 범위 안에서 작성했으며, KB 외 신규 사실을 추가하지 않았습니다. 하이라이트는 섹션당 3개 이하로 제한했고, 코드 예시는 permission decision을 설명하는 독립 TypeScript 예시입니다.

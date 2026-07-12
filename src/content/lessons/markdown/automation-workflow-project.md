@@ -136,10 +136,7 @@ OpenAI function calling의 tool call 표현은 "requests from the model to use t
 
 이 문장은 dependency 설계가 필요한 이유를 설명합니다. Job들이 기본적으로 병렬 실행될 수 있다면, 순서가 필요한 작업은 명시적으로 연결해야 합니다. 암묵적 순서를 기대하면 자동화가 불안정해집니다.
 
-> "Workflows are systems where LLMs and tools are orchestrated through predefined code paths."
->
-> — workflows는 LLM과 tool이 미리 정의된 code path를 통해 orchestration되는 시스템이다.
-> [Anthropic Engineering — Building effective agents](https://www.anthropic.com/engineering/building-effective-agents)
+관련 원문(링크): [Anthropic Engineering — Building effective agents](https://www.anthropic.com/engineering/building-effective-agents)
 
 이 문장은 LLM 자동화에서 workflow와 agent를 구분하는 핵심입니다. LLM이 들어간다고 모두 agent가 되는 것은 아닙니다. 미리 정한 경로에서 LLM과 tool을 사용하는 구조는 workflow입니다.
 

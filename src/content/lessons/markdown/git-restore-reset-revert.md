@@ -115,7 +115,7 @@ git revert HEAD            # 방금 커밋의 취소
 
 ## 원문으로 읽기
 
-> "Note: git revert is used to record some new commits to reverse the effect of some earlier commits (often only a faulty one)."
+> "Note: git revert is used to record some new commits to reverse the effect of some earlier commits (often only a faulty one). [...]"
 >
 > — 참고: git revert는 이전 커밋들(대개 결함 있는 커밋 하나)의 효과를 뒤집는 새 커밋들을 기록하는 데 쓰인다.
 > [git-revert — Git Documentation](https://git-scm.com/docs/git-revert)
@@ -129,17 +129,14 @@ git revert HEAD            # 방금 커밋의 취소
 
 --hard의 파괴 반경을 문서가 명시한 문장입니다. "may overwrite untracked files" — 아직 커밋한 적 없는 새 파일조차 안전하지 않다는 뜻입니다. hard를 쓰기 전 확인 절차가 선택이 아닌 이유가 이 한 구절에 있습니다.
 
-> "Leave your working tree files and the index unchanged. For example, if you have no staged changes, you can use git reset --soft HEAD~5; git commit to combine the last 5 commits into 1 commit."
+> "Leave your working tree files and the index unchanged."
 >
 > — 워킹 트리 파일과 인덱스를 그대로 둔다. 예를 들어 스테이징된 변경이 없다면, git reset --soft HEAD~5 후 git commit으로 최근 5개 커밋을 1개로 합칠 수 있다.
 > [git-reset — Git Documentation](https://git-scm.com/docs/git-reset)
 
 --soft의 정의와 함께 문서가 직접 제시하는 실전 레시피입니다. AI가 자잘한 커밋을 여럿 남겼을 때 이 레시피로 하나의 의미 있는 커밋으로 정리할 수 있습니다 — 단, 공유 전에만.
 
-> "The command can also be used to restore the content in the index with --staged, or restore both the working tree and the index with --staged --worktree."
->
-> — 이 명령은 --staged로 인덱스의 내용을 복원하거나, --staged --worktree로 워킹 트리와 인덱스 둘 다 복원하는 데에도 쓸 수 있다.
-> [git-restore — Git Documentation](https://git-scm.com/docs/git-restore)
+관련 원문(링크): [git-restore — Git Documentation](https://git-scm.com/docs/git-restore)
 
 "add 취소를 어떻게 하지?"의 공식 답변입니다. 스테이징 취소가 reset의 부수 용법이 아니라 restore의 명시된 기능이라는 것 — 현행 명령 체계가 "전환은 switch, 복원은 restore"로 역할을 분리한 결과입니다.
 

@@ -123,7 +123,7 @@ MDN은 Ethan Marcotte가 2010년에 responsive design term을 coined했고 fluid
 
 이 인용은 cascade를 "암기해야 할 우선순위 표"보다 넓게 보게 합니다. 핵심은 different sources의 property values를 combine한다는 점입니다. CSS debug는 여러 출처의 값이 어떻게 결합되어 최종 값이 됐는지 추적하는 작업입니다.
 
-> "The CSS cascade algorithm's job is to select CSS declarations in order to determine the correct values for CSS properties."
+> "The CSS cascade algorithm's job is to select CSS declarations in order to determine the correct values for CSS properties. [...]"
 >
 > — CSS cascade algorithm의 일은 CSS property의 올바른 값을 결정하기 위해 CSS declaration을 선택하는 것이다.
 > [Introduction to the CSS cascade — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Introduction) (CC-BY-SA)
@@ -137,17 +137,11 @@ MDN은 Ethan Marcotte가 2010년에 responsive design term을 coined했고 fluid
 
 이 인용은 layout이 단일 기능이 아니라 features의 묶음이라는 점을 보여 줍니다. normal flow, display, float, positioning, flexbox, grid를 목적별 도구로 봐야 합니다. AI가 어떤 layout feature를 선택했는지 묻는 이유도 여기에 있습니다.
 
-> "Responsive web design isn't a separate technology — it is an approach."
->
-> — responsive web design은 별도의 기술이 아니라 하나의 접근이다.
-> [Responsive web design — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design) (CC-BY-SA)
+관련 원문(링크): [Responsive web design — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design)
 
 responsive design을 `@media` 하나로 축소하면 이 문장과 어긋납니다. approach라는 말은 layout, sizing, image behavior, media query, unknown screen handling이 함께 움직인다는 뜻입니다. AI 생성 UI를 검토할 때도 "breakpoint가 있는가"만 보지 말고 approach 전체를 봐야 합니다.
 
-> "To conditionally apply styles"
->
-> — style을 조건부로 적용하기 위해.
-> [Using media queries — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries/Using) (CC-BY-SA)
+관련 원문(링크): [Using media queries — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries/Using)
 
 짧은 구절이지만 media query의 핵심을 잘 보여 줍니다. media query는 특정 화면 이름을 붙이는 문법이 아니라 조건부 style application입니다. 조건이 맞아야 rule이 후보가 되고, 그다음 cascade와 layout이 이어집니다.
 

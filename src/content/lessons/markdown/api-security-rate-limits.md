@@ -94,31 +94,25 @@ Retry-After가 없거나 반복 실패할 때, 클라이언트는 재시도 간�
 
 "the client has sent too many requests" — 주어가 클라이언트입니다. 429는 서버의 고장이 아니라 클라이언트의 과속을 알리는 신호이며, 그래서 4xx입니다. 이 한 문장이 "429를 받으면 누가 무엇을 해야 하는가"의 답(클라이언트가 속도를 줄인다)을 담고 있습니다.
 
-> "This mechanism of asking the client to slow down the rate of requests is commonly called \"rate limiting\"."
+> "This mechanism of asking the client to slow down the rate of requests is commonly called \"
 >
 > — 클라이언트에게 요청 속도를 늦추라고 요청하는 이 메커니즘을 흔히 "rate limiting"이라 부른다.
 > [MDN 429 Too Many Requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429)
 
 rate limiting의 본질이 "asking the client to slow down"이라는 점이 중요합니다. 완전히 차단(block)하는 게 아니라 ==속도를 늦추라고 요청==하는 것이므로, 클라이언트가 협조하면(기다렸다 다시 오면) 다시 정상 서비스를 받습니다. 영구 차단과 일시적 제한은 다릅니다.
 
-> "A Retry-After header may be included to this response to indicate how long a client should wait before making the request again."
+> "A Retry-After header may be included to this response to indicate how long a client should wait before making the request again. [...]"
 >
 > — 이 응답에 Retry-After 헤더가 포함되어, 클라이언트가 다시 요청하기까지 얼마나 기다려야 하는지를 나타낼 수 있다.
 > [MDN 429 Too Many Requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429)
 
 서버가 "그만"만이 아니라 "언제 다시 오라"까지 알려준다는 점이 rate limit을 협조 가능한 것으로 만듭니다. 잘 설계된 서버는 429에 Retry-After를 함께 담고, 잘 만든 클라이언트는 그 값을 존중합니다 — 둘의 협조가 서버를 지킵니다.
 
-> "The HTTP Retry-After response header indicates how long the user agent should wait before making a follow-up request."
->
-> — HTTP Retry-After 응답 헤더는 user agent가 후속 요청 전에 얼마나 기다려야 하는지를 나타낸다.
-> [MDN Retry-After](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After)
+관련 원문(링크): [MDN Retry-After](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After)
 
 Retry-After의 정의가 명확합니다 — "how long to wait". 클라이언트의 재시도 로직은 이 값을 추측이 아니라 서버의 지시로 받아야 합니다. 서버가 3초를 기다리라 했는데 1초 만에 재시도하면, 또 429를 받고 제한만 길어집니다.
 
-> "In a 429 Too Many Requests response, this indicates how long to wait before making a new request."
->
-> — 429 Too Many Requests 응답에서 이것은 새 요청을 하기까지 얼마나 기다려야 하는지를 나타낸다.
-> [MDN Retry-After](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After)
+관련 원문(링크): [MDN Retry-After](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After)
 
 같은 Retry-After라도 429에서는 "네 요청 속도를 늦추기 위한 대기"입니다(503의 "서버 복구 대기"와 대비). 응답 코드와 함께 읽어야 이 헤더의 정확한 의미가 잡힙니다.
 

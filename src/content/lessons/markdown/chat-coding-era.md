@@ -141,17 +141,11 @@ Conversational이라는 단어는 한 번의 답변보다 이어지는 대화가
 
 이 문장은 chat coding이 현재 작업 맥락과 연결될 수 있음을 보여줍니다. 열려 있는 파일이나 active repository 같은 정보가 답변에 영향을 줄 수 있습니다. 다만 맥락을 고려한다는 말은 맥락을 완벽히 이해한다는 뜻이 아닙니다. 답변은 여전히 현재 코드와 test로 검증해야 합니다.
 
-> "human review of AI-generated output is important"
->
-> — AI가 생성한 출력에 대한 사람의 검토가 중요하다.
-> [GitHub Docs — Responsible use of GitHub Copilot Chat](https://docs.github.com/en/copilot/responsible-use/chat)
+관련 원문(링크): [GitHub Docs — Responsible use of GitHub Copilot Chat](https://docs.github.com/en/copilot/responsible-use/chat)
 
 Chat coding에서 가장 중요한 안전 문장입니다. AI가 만든 설명, 절차, 코드 후보는 모두 검토 대상입니다. 특히 코드 후보는 repository에 들어오는 순간 팀의 코드가 되므로, 사람이 diff를 읽고 test를 실행해야 합니다.
 
-> "autonomously plans multi-step tasks"
->
-> — 여러 단계의 작업을 자율적으로 계획한다.
-> [GitHub Docs — Responsible use of GitHub Copilot Chat](https://docs.github.com/en/copilot/responsible-use/chat)
+관련 원문(링크): [GitHub Docs — Responsible use of GitHub Copilot Chat](https://docs.github.com/en/copilot/responsible-use/chat)
 
 이 인용은 chat과 agent의 경계를 보여줍니다. chat coding은 질문과 설명을 중심으로 하지만, agent mode는 여러 단계를 계획하고 tool invocation으로 이어질 수 있습니다. 즉 같은 자연어 입력이라도 도구 표면이 달라지면 권한과 검증 경계도 달라집니다.
 
@@ -198,5 +192,3 @@ Chat coding에서 가장 중요한 안전 문장입니다. AI가 만든 설명, 
 이 강의의 근거 KB는 `chat-coding-era`입니다. 먼저 GitHub Docs의 Responsible use of GitHub Copilot Chat을 읽어 chat interface, context-aware responses, human review 원칙을 확인하세요. 이어서 GitHub Copilot features 문서를 읽으면 inline suggestions, chat, agent가 하나의 제품 안에서 서로 다른 surface로 구분된다는 점을 볼 수 있습니다.
 
 다음 강의는 `ide-agent-era`입니다. Chat coding이 질문과 설명을 중심으로 움직인다면, IDE agent는 tool invocation, 파일 수정, command 실행, diff 제출로 확장됩니다. 이 경계를 이해해야 “AI에게 물어보기”와 “AI에게 작업 맡기기”를 안전하게 구분할 수 있습니다.
-
-자가 QA 결과: V2 8섹션을 모두 포함했고, Quote Bank 인용 5개를 원문 그대로 사용했으며, KB 외 신규 사실을 추가하지 않았습니다. 하이라이트는 섹션당 3개 이하로 제한했고, 코드 예시는 chat 답변 검증 흐름을 설명하는 독립 TypeScript 예시입니다.

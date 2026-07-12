@@ -133,17 +133,11 @@ Pull request review의 approve 또는 request changes는 단순 취향이 아닙
 
 Code scanning alert가 PR 변경 안에서 보인다는 점은 review workflow에 중요합니다. Security signal이 별도 dashboard에만 있는 것이 아니라 diff review 흐름 안으로 들어옵니다. Reviewer는 alert를 changed code와 함께 읽어야 합니다.
 
-> "identify vulnerabilities and errors"
->
-> — 취약점과 오류를 식별한다.
-> [GitHub Docs — Code scanning with CodeQL](https://docs.github.com/en/code-security/concepts/code-scanning/codeql/codeql-code-scanning)
+관련 원문(링크): [GitHub Docs — Code scanning with CodeQL](https://docs.github.com/en/code-security/concepts/code-scanning/codeql/codeql-code-scanning)
 
 CodeQL의 역할을 보여주는 문장입니다. 자동 분석은 vulnerability와 error 후보를 찾는 강력한 신호를 제공합니다. 하지만 이 신호는 manual review와 결합되어야 합니다.
 
-> "human expertise and contextual understanding"
->
-> — 사람의 전문성과 맥락 이해.
-> [OWASP Cheat Sheet Series — Secure Code Review](https://cheatsheetseries.owasp.org/cheatsheets/Secure_Code_Review_Cheat_Sheet.html)
+관련 원문(링크): [OWASP Cheat Sheet Series — Secure Code Review](https://cheatsheetseries.owasp.org/cheatsheets/Secure_Code_Review_Cheat_Sheet.html)
 
 위험 분석의 최종 경계입니다. 자동 도구와 AI comment가 있어도 business logic과 context-specific vulnerability는 사람이 이해해야 합니다. 이 문장이 없으면 risk analysis는 도구 결과를 읽는 일로 축소됩니다.
 
@@ -192,5 +186,3 @@ Risk review checklist:
 이 강의의 근거 KB는 `code-change-risk-analysis`입니다. 먼저 GitHub의 reviewing proposed changes 문서를 읽고 changed files와 diff review 흐름을 확인하세요. 그 다음 pull request review 문서에서 approve와 request changes의 의미를 봅니다. Code scanning alert triage 문서는 alert가 PR diff 안에서 어떻게 review되는지 보여줍니다. CodeQL code scanning 문서는 자동 분석이 vulnerabilities and errors를 찾는 역할을 설명합니다. 마지막으로 OWASP Secure Code Review 문서를 읽으며 human expertise와 contextual understanding이 왜 필요한지 확인하세요.
 
 다음 학습 순서는 `ai-assisted-testing-loop`입니다. 위험 분석으로 어떤 변경이 위험한지 알았다면, 그 위험을 test case와 검증 루프로 바꿔야 합니다. AI review comment, code scanning alert, manual review concern을 테스트와 regression check로 연결하는 능력이 실전 바이브코딩의 안전성을 만듭니다.
-
-자가 QA 결과: V2 8섹션을 모두 포함했고, Quote Bank 인용 5개를 원문 그대로 사용했습니다. 본문은 승인 KB의 GitHub PR review, GitHub code scanning/CodeQL, OWASP Secure Code Review 출처 범위 안에서 작성했으며, KB 외 신규 사실을 추가하지 않았습니다. 하이라이트는 섹션당 3개 이하로 제한했고, 코드 예시는 changed file risk를 분류하는 독립 TypeScript 예시입니다.

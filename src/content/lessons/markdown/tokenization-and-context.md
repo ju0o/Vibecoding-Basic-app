@@ -131,10 +131,7 @@ console.log(reviewBudget.includedEvidence.map((item) => item.reason).join("\n"))
 
 이 인용은 token count가 고정된 글자 수 변환이 아니라 모델 의존적이라는 점을 보여줍니다. 모델을 바꾸거나 routing 조건이 달라지면 같은 prompt도 다시 세어야 합니다. 특히 운영 시스템에서는 "지난번에 들어갔다"는 경험보다 현재 target model 기준의 계산이 더 신뢰할 수 있습니다.
 
-> "Cached prompt prefixes still occupy the context window"
->
-> — 캐시된 프롬프트 prefix도 여전히 context window를 차지한다.
-> [Context windows — Claude Docs](https://platform.claude.com/docs/en/build-with-claude/context-windows)
+관련 원문(링크): [Context windows — Claude Docs](https://platform.claude.com/docs/en/build-with-claude/context-windows)
 
 이 문장은 prompt caching에 대한 흔한 오해를 바로잡습니다. caching은 반복 prefix의 처리 비용과 지연을 줄일 수 있지만, window 용량을 비워주는 기능이 아닙니다. 따라서 캐시를 쓰는 시스템에서도 context budget, compaction, evidence selection이 여전히 필요합니다.
 

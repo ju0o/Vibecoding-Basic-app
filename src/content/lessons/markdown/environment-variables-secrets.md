@@ -131,17 +131,11 @@ const client = new ApiClient(key);
 
 "무엇이 설정인가"에 대한 실용적 정의입니다. 판단 기준은 "배포마다 달라지는가"입니다 — DB 주소·API 키는 환경마다 다르니 설정이고, 앱의 이름·로직은 어디서나 같으니 코드입니다. 이 기준이 "무엇을 환경변수로 뺄지"를 정합니다.
 
-> "Config varies substantially across deploys, code does not."
->
-> — 설정은 배포마다 상당히 달라지지만, 코드는 그렇지 않다.
-> [Twelve-Factor App: Config](https://12factor.net/config)
+관련 원문(링크): [Twelve-Factor App: Config](https://12factor.net/config)
 
 코드와 설정을 나누는 근본 이유입니다. 같은 코드가 여러 환경에서 돌아야 하므로, 달라지는 부분만 밖으로 빼면 코드는 하나로 유지되고 환경 전환은 값 교체만으로 끝납니다. "코드 하나, 설정 여럿"이 배포의 기본 구조입니다.
 
-> "A litmus test for whether an app has all config correctly factored out of the code is whether the codebase could be made open source at any moment, without compromising any credentials."
->
-> — 앱이 모든 설정을 코드에서 올바르게 분리했는지 판단하는 리트머스 테스트는, 어느 순간에든 자격 증명을 노출하지 않고 코드베이스를 오픈소스로 만들 수 있는가이다.
-> [Twelve-Factor App: Config](https://12factor.net/config)
+관련 원문(링크): [Twelve-Factor App: Config](https://12factor.net/config)
 
 가장 실용적인 자가 점검 기준입니다. "지금 저장소를 공개해도 되는가?"를 물어, 안 된다면(키가 코드에 있다면) 아직 분리가 덜 된 것입니다. AI가 만든 코드를 검토할 때도 이 질문 하나면 충분합니다.
 

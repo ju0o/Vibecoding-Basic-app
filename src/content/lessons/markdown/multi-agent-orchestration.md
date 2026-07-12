@@ -147,17 +147,11 @@ handoff는 내부 함수 호출이 아닙니다. control이 이동합니다. 그
 
 agents-as-tools 패턴의 핵심입니다. specialist가 일을 하더라도, user-facing answer는 manager가 책임집니다. 바이브코딩에서는 이 패턴이 특히 유용합니다. main agent가 전체 목표와 사용자 의도를 유지하고, specialist 결과를 내부 근거로 사용할 수 있기 때문입니다.
 
-> "central LLM dynamically breaks down tasks"
->
-> — central LLM이 작업을 동적으로 분해한다.
-> [Building effective agents — Anthropic](https://www.anthropic.com/engineering/building-effective-agents)
+관련 원문(링크): [Building effective agents — Anthropic](https://www.anthropic.com/engineering/building-effective-agents)
 
 orchestrator-workers 패턴은 고정 workflow와 다릅니다. central LLM이 상황을 보고 subtasks를 정합니다. 이 유연성은 복잡한 코드 변경이나 조사 작업에 강하지만, worker 범위와 결과 합성 기준이 없으면 산만해질 수 있습니다.
 
-> "Manager (agents as tools)"
->
-> — Manager, 즉 agents as tools.
-> [A practical guide to building AI agents — OpenAI](https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/)
+관련 원문(링크): [A practical guide to building AI agents — OpenAI](https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/)
 
 이 표현은 manager pattern을 짧게 기억하게 해줍니다. manager는 specialist를 도구처럼 호출하지만, 책임까지 도구에 넘기지는 않습니다. 이 차이를 이해하면 multi-agent 설계의 절반은 잡은 것입니다.
 

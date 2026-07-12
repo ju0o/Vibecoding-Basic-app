@@ -106,7 +106,7 @@ CI가 "안전한가"를 묻고, CD가 "그럼 내보내자"를 실행합니다. 
 
 ## 원문으로 읽기
 
-> "GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and deployment pipeline."
+> "GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and deployment pipeline. [...]"
 >
 > — GitHub Actions는 빌드·테스트·배포 파이프라인을 자동화할 수 있게 해주는 CI/CD(지속적 통합·지속적 전달) 플랫폼이다.
 > [Understanding GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
@@ -127,17 +127,11 @@ CI가 "안전한가"를 묻고, CD가 "그럼 내보내자"를 실행합니다. 
 
 이벤트가 자동화의 방아쇠입니다. 커밋 push, PR 생성 같은 ==저장소의 활동이 워크플로를 자동으로 시작==시킵니다. 앞 강의(PR 흐름)에서 배운 PR이 여기서 이벤트가 되어, "PR을 열면 자동으로 테스트가 돈다"는 협업과 자동화의 결합이 이뤄집니다.
 
-> "A job is a set of steps in a workflow that is executed on the same runner."
->
-> — 잡은 워크플로 안에서 같은 러너에서 실행되는 스텝의 묶음이다.
-> [Understanding GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
+관련 원문(링크): [Understanding GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
 
 잡이 스텝을 묶는 단위이고 "같은 러너"에서 실행된다는 점이 핵심입니다. 그래서 잡을 나누면(검증 잡, 배포 잡) 서로 다른 조건·의존을 걸 수 있습니다 — "배포 잡은 검증 잡이 성공해야만"처럼요. 이 잡 단위의 의존이 "검증 없는 배포 금지"를 구조로 만듭니다.
 
-> "A runner is a server that runs your workflows when they're triggered."
->
-> — 러너는 워크플로가 트리거될 때 그것을 실행하는 서버다.
-> [Understanding GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
+관련 원문(링크): [Understanding GitHub Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
 
 러너가 파이프라인이 실제로 도는 곳입니다. 내 컴퓨터가 아니라 정해진 서버에서 언제나 같은 환경으로 실행되므로, "내 컴퓨터에서만 되는" 문제가 사라집니다. ==일관된 실행 환경==이 CI/CD가 재현성을 보장하는 이유입니다.
 

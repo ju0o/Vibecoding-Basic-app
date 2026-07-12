@@ -115,17 +115,11 @@ Vercel의 핵심 성질 하나는 ==각 배포가 고유 URL을 가진다==는 �
 
 "zero-configuration"이 핵심입니다. HTTPS는 원래 인증서 발급·설치·갱신이라는 작업을 요구하지만, 플랫폼이 이를 자동화해 ==개발자가 아무것도 설정하지 않아도 HTTPS가 켜집니다==. 보안이 선택이 아니라 기본값이 되는 것 — 이것이 "안전함을 기본 제공"의 실제 모습입니다.
 
-> "A deployment on Vercel is the result of a successful build of your project."
->
-> — Vercel에서의 배포는 프로젝트 빌드 성공의 결과물이다.
-> [Deploying to Vercel](https://vercel.com/docs/deployments)
+관련 원문(링크): [Deploying to Vercel](https://vercel.com/docs/deployments)
 
 배포가 "빌드 성공의 결과물"이라는 정의가 앞 강의(빌드/런타임)와 이 강의를 잇습니다. 빌드가 실패하면 배포도 없습니다 — 즉 배포 플랫폼은 빌드 단계를 통과한 산출물만 실행 단계로 넘깁니다. 이 순서가 "깨진 코드가 사용자에게 가지 않게" 막는 첫 관문이며, 빌드와 배포를 분리해 둔 덕분에 얻는 안전장치입니다.
 
-> "Each time you deploy, Vercel generates a unique URL so you and your team can preview changes in a live environment."
->
-> — 배포할 때마다 Vercel은 고유 URL을 생성해, 팀이 실제 환경에서 변경을 미리 볼 수 있게 한다.
-> [Deploying to Vercel](https://vercel.com/docs/deployments)
+관련 원문(링크): [Deploying to Vercel](https://vercel.com/docs/deployments)
 
 "a unique URL"이 미리보기·롤백·비교를 모두 가능하게 하는 열쇠입니다. 각 배포가 사라지지 않고 고유 주소로 남으므로, 새 배포를 안전하게 시험하고 문제가 생기면 옛 배포로 돌아갈 수 있습니다. ==배포를 "덮어쓰기"가 아니라 "쌓기"로 다루는== 이 설계가 안전한 배포의 토대입니다.
 

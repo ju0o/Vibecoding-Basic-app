@@ -103,10 +103,7 @@ MCP의 tools primitive는 외부 시스템 행동을 표준 인터페이스로 �
 
 resources는 행동이 아니라 컨텍스트 데이터입니다. 이 문장은 MCP 안에서도 tools와 resources를 분리해야 하는 이유를 잘 보여줍니다. tools는 외부 시스템을 움직이고, resources는 모델이 판단에 사용할 데이터를 제공합니다. 둘을 섞으면 권한과 검증 기준이 흐려집니다.
 
-> "Agent Skills are modular capabilities"
->
-> — Agent Skills는 모듈형 capability다.
-> [Agent Skills — Claude Platform Docs](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)
+관련 원문(링크): [Agent Skills — Claude Platform Docs](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)
 
 Skills는 단순히 긴 프롬프트를 저장하는 폴더가 아닙니다. 반복 가능한 capability를 패키징하는 단위입니다. 이 인용을 관계도에 놓으면 Skills는 MCP와 경쟁하지 않습니다. MCP가 외부 연결 표준이라면, Skills는 특정 작업을 잘 수행하기 위한 절차와 자료의 재사용 단위입니다.
 

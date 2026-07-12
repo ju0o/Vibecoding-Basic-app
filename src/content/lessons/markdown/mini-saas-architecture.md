@@ -143,10 +143,7 @@ PostgreSQL index는 database server가 특정 row를 더 빠르게 찾게 하지
 
 이 문장은 server data boundary의 핵심입니다. SaaS에서 credential과 query logic은 사용자의 browser로 내려가면 안 됩니다. Server-side data access는 보안만이 아니라 사고 모델도 단순하게 만듭니다. 민감한 data는 서버에서 확인하고, client는 표시와 상호작용에 집중합니다.
 
-> "configured outside your source code"
->
-> — source code 밖에서 설정된다.
-> [Vercel Docs — Environment variables](https://vercel.com/docs/environment-variables)
+관련 원문(링크): [Vercel Docs — Environment variables](https://vercel.com/docs/environment-variables)
 
 이 문장은 환경 변수의 운영적 의미를 보여줍니다. Secret과 배포 설정은 코드에 박아 넣는 값이 아닙니다. 프로젝트가 작아도 local, preview, production을 구분하는 습관이 있어야 나중에 SaaS로 커질 수 있습니다.
 

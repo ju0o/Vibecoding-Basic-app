@@ -9,7 +9,7 @@ prerequisites: [ai-chatbot-project, mini-saas-architecture, deployment-checklist
 successors: []
 related: [mcp-enabled-tool-project, production-env-secrets, context-engineering]
 consumers:
-  lessons: []
+  lessons: [private-ai-learning-site-project]
   glossary: []
 sources:
   - { title: "Next.js Docs — Authentication", url: "https://nextjs.org/docs/app/guides/authentication", checked: 2026-07-12 }

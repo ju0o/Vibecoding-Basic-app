@@ -139,17 +139,11 @@ semantic element는 meaning과 structure를 드러내고, CSS class는 styling h
 
 `<main>`을 "가운데 박스"로 외우면 금방 깨집니다. dominant content라는 기준은 페이지의 핵심 주제와 직접 연결된 영역을 찾으라는 뜻입니다. 학습 사이트에서는 lesson body가 이 기준의 대표 예시입니다.
 
-> "Represents a section of a page whose purpose is to provide navigation links"
->
-> — navigation links를 제공하는 것이 목적인 페이지 section을 나타낸다.
-> [`<nav>` element — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav) (CC-BY-SA)
+관련 원문(링크): [`<nav>` element — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav)
 
 `<nav>`는 링크가 있기 때문에 쓰는 element가 아니라, 이동을 돕는 section이기 때문에 쓰는 element입니다. 이 차이를 알면 footer의 단일 링크와 sidebar table of contents를 같은 방식으로 처리하지 않게 됩니다.
 
-> "Sections should always have a heading, with very few exceptions."
->
-> — section은 아주 적은 예외를 제외하고 항상 heading을 가져야 한다.
-> [`<section>` element — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/section) (CC-BY-SA)
+관련 원문(링크): [`<section>` element — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/section)
 
 이 문장은 `<section>` 남용을 막는 실무 기준입니다. section을 만들었는데 heading이 어색하다면, 그 영역은 독립 주제 단위가 아니라 styling wrapper일 가능성이 있습니다. 이 판단 기준은 AI가 `<section>`을 많이 생성했을 때 검토 체크리스트로 바로 쓸 수 있습니다.
 

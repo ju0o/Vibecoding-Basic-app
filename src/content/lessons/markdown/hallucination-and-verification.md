@@ -121,7 +121,7 @@ console.log(checklist.unresolvedQuestions.join("\n"))
 
 이 문장은 hallucination의 범위를 정합니다. 모델이 세상 사실과 다르게 말하는 것도 문제지만, 사용자가 제공한 context와 다르게 말하는 것도 문제입니다. AI 코딩에서는 저장소 파일이나 테스트 결과와 맞지 않는 설명이 여기에 해당할 수 있습니다.
 
-> "Allow Claude to say \"I don't know\""
+> "Allow Claude to say \"
 >
 > — Claude가 "모른다"고 말할 수 있게 하라.
 > [Reduce hallucinations — Claude Docs](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)
@@ -135,24 +135,15 @@ console.log(checklist.unresolvedQuestions.join("\n"))
 
 Direct quote는 citation보다 더 좁은 근거 단위입니다. claim을 support하는 원문 구절을 요구하면 모델이 단순히 링크를 붙이는 것을 넘어 실제 근거 문장을 찾아야 합니다. 교육 콘텐츠의 Quote Bank 방식도 이 원칙과 잘 맞습니다.
 
-> "Verify with citations"
->
-> — citation으로 검증하라.
-> [Reduce hallucinations — Claude Docs](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)
+관련 원문(링크): [Reduce hallucinations — Claude Docs](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)
 
 Citation은 claim을 source와 연결해 audit 가능하게 만듭니다. 하지만 citation이 있다고 끝나는 것은 아닙니다. cited source가 response text를 직접 support하는지 대조해야 합니다. 따라서 citation은 검증의 완료가 아니라 검증의 입구입니다.
 
-> "Generative AI is variable"
->
-> — 생성형 AI는 가변적이다.
-> [Evaluation best practices — OpenAI API Docs](https://developers.openai.com/api/docs/guides/evaluation-best-practices)
+관련 원문(링크): [Evaluation best practices — OpenAI API Docs](https://developers.openai.com/api/docs/guides/evaluation-best-practices)
 
 이 문장은 eval이 필요한 이유를 요약합니다. 같은 prompt라도 출력이 달라질 수 있고, prompt나 model 변경은 품질을 바꿀 수 있습니다. 반복 가능한 evaluation set이 없으면 "이번에는 괜찮았다" 이상의 판단을 하기 어렵습니다.
 
-> "human review outputs before they are used"
->
-> — outputs가 사용되기 전에 사람이 검토한다.
-> [Safety best practices — OpenAI API Docs](https://developers.openai.com/api/docs/guides/safety-best-practices)
+관련 원문(링크): [Safety best practices — OpenAI API Docs](https://developers.openai.com/api/docs/guides/safety-best-practices)
 
 이 인용은 자동 검증의 한계를 보여줍니다. 특히 code generation에서는 테스트와 공식 문서 대조만으로 충분하지 않을 수 있습니다. 실제 사용 전 사람이 diff, source, test result를 확인할 수 있어야 합니다.
 

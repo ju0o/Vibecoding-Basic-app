@@ -123,7 +123,7 @@ function verdict(checks: ClaimCheck[], code?: CodeCheck): "pass" | "needs-review
 
 ## 원문으로 읽기
 
-> "Allow Claude to say \"I don't know\""
+> "Allow Claude to say \"
 >
 > — Claude가 "모르겠습니다"라고 말할 수 있게 하라.
 > [Reduce hallucinations — Claude Docs](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)
@@ -144,24 +144,15 @@ function verdict(checks: ClaimCheck[], code?: CodeCheck): "pass" | "needs-review
 
 Citation은 AI 답변의 claim이 어느 출처에 기대고 있는지 표시합니다. 그러나 citation이 있다는 사실만으로 충분하지 않습니다. 다음 OpenAI 인용처럼 citation은 cited text를 직접 support해야 합니다. 따라서 verification은 citation 생성과 citation 검토를 모두 포함합니다.
 
-> "Never invent source IDs"
->
-> — source ID를 절대 만들어내지 말라.
-> [Citation Formatting — OpenAI](https://developers.openai.com/api/docs/guides/citation-formatting)
+관련 원문(링크): [Citation Formatting — OpenAI](https://developers.openai.com/api/docs/guides/citation-formatting)
 
 이 문장은 AI 학습자가 반드시 알아야 할 안전 규칙입니다. 존재하지 않는 source ID나 locator는 검증을 불가능하게 만듭니다. AI가 만들어낸 근거 표시는 근거가 아니라 오류입니다. 검증 가능한 출처만 사용해야 합니다.
 
-> "Evals are structured tests"
->
-> — eval은 구조화된 테스트다.
-> [Evaluation best practices — OpenAI](https://developers.openai.com/api/docs/guides/evaluation-best-practices)
+관련 원문(링크): [Evaluation best practices — OpenAI](https://developers.openai.com/api/docs/guides/evaluation-best-practices)
 
 이 인용은 반복 학습의 기준을 제공합니다. 한 번의 좋은 답변보다 같은 기준을 여러 사례에 적용하는 것이 중요합니다. AI 답변 품질, citation 정확도, 코드 검증 루틴을 structured tests처럼 다루면 학습이 감각이 아니라 절차가 됩니다.
 
-> "human review outputs"
->
-> — 출력물을 사람이 검토한다.
-> [Safety best practices — OpenAI](https://developers.openai.com/api/docs/guides/safety-best-practices)
+관련 원문(링크): [Safety best practices — OpenAI](https://developers.openai.com/api/docs/guides/safety-best-practices)
 
 AI가 코드나 중요한 결정을 생성할 때 사람의 검토가 필요합니다. 이 원칙은 바이브코딩의 핵심 안전 장치입니다. AI가 실행까지 도와도 human review는 사라지지 않습니다. 오히려 AI가 더 많은 output을 만들수록 review의 기준이 더 중요해집니다.
 

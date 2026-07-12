@@ -130,17 +130,11 @@ JavaScript에서 정규식은 `RegExp` object로 표현됩니다. literal notati
 
 assertion은 위치 조건입니다. 줄 시작, 줄 끝, 단어 경계 같은 조건을 사용하면 검색 후보가 크게 줄어듭니다. 코드 검색에서는 `^import`, `$`, boundary 같은 조건이 특히 유용합니다.
 
-> "Character classes"
->
-> — character classes.
-> [Character classes — MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Character_classes)
+관련 원문(링크): [Character classes — MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Character_classes)
 
 character class는 "가능한 문자 집합"을 만드는 도구입니다. 함수명이나 변수명 pattern을 찾을 때 `[A-Z]`, `[A-Za-z]`, `[0-9]` 같은 class를 사용할 수 있습니다. class는 정규식을 단순 문자열 검색보다 강하게 만드는 핵심 재료입니다.
 
-> "Search view"
->
-> — Search view.
-> [Basic Editing in Visual Studio Code](https://code.visualstudio.com/docs/editor/codebasics)
+관련 원문(링크): [Basic Editing in Visual Studio Code](https://code.visualstudio.com/docs/editor/codebasics)
 
 정규식은 에디터 안에서 실제로 쓰일 때 가치가 생깁니다. VS Code Search view는 workspace 안에서 검색 결과를 보여줍니다. AI 변경 후 검증할 때 이 검색 결과는 diff review와 함께 중요한 확인 수단이 됩니다.
 

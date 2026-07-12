@@ -142,10 +142,7 @@ AI가 table을 만들 때 `<div>`와 CSS grid만으로 빠르게 꾸밀 수 있�
 
 이 문장은 관리자 대시보드의 server data boundary를 설명하는 출발점입니다. 민감한 운영 data는 server에서 session과 authorization을 확인한 뒤 가져오는 구조가 이해하기 쉽습니다. Client component는 필터 UI나 상호작용을 맡고, data access는 서버 경계에 둡니다.
 
-> "Adding captions to tables"
->
-> — table에 caption을 추가한다.
-> [MDN — HTML table accessibility](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Table_accessibility)
+관련 원문(링크): [MDN — HTML table accessibility](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Table_accessibility)
 
 이 문장은 dashboard table을 의미 있는 data structure로 보게 합니다. Caption은 table이 무엇을 보여주는지 알려주는 장치입니다. 운영자가 빠르게 훑는 화면에서도 table의 목적과 범위를 드러내야 합니다.
 

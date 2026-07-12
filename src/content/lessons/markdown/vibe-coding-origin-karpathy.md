@@ -137,24 +137,15 @@ console.log(canAcceptChanges(session))
 
 Collins의 이 표현은 초보자용 정의에 적합합니다. 바이브코딩은 자연어와 코드 사이의 번역 경험을 전면에 놓습니다. 그러나 natural language가 들어간다고 해서 검증이 사라지는 것은 아닙니다. 자연어 입력 뒤에는 여전히 파일 변경, 실행 결과, review가 남습니다.
 
-> "popularised by Andrej Karpathy"
->
-> — Andrej Karpathy에 의해 대중화되었다.
-> [The Collins Word of the Year 2025 is... — Collins](https://www.collinsdictionary.com/us/woty)
+관련 원문(링크): [The Collins Word of the Year 2025 is... — Collins](https://www.collinsdictionary.com/us/woty)
 
 이 인용은 용어 확산 경로를 설명합니다. coined와 popularised는 미묘하게 다릅니다. 용어를 누가 처음 만들었는지, 누가 대중화했는지, 어느 기관이 Word of the Year로 선정했는지 같은 역사 층을 나누어 보면 출처 검증이 더 정확해집니다.
 
-> "human review outputs"
->
-> — 출력물을 사람이 검토한다.
-> [Safety best practices — OpenAI](https://developers.openai.com/api/docs/guides/safety-best-practices)
+관련 원문(링크): [Safety best practices — OpenAI](https://developers.openai.com/api/docs/guides/safety-best-practices)
 
 이 인용은 바이브코딩을 안전하게 배우는 핵심 경계입니다. AI가 코드를 생성하는 속도가 빨라져도 code generation output에는 human review가 필요합니다. 특히 production에 가까운 작업일수록 diff review, test, rollback 같은 후속 검증이 필수입니다.
 
-> "Trust in AI tools during vibe coding is dynamic"
->
-> — 바이브코딩에서 AI 도구에 대한 신뢰는 동적이다.
-> [Vibe coding: programming through conversation with artificial intelligence — arXiv](https://arxiv.org/html/2506.23253v2)
+관련 원문(링크): [Vibe coding: programming through conversation with artificial intelligence — arXiv](https://arxiv.org/html/2506.23253v2)
 
 이 문장은 바이브코딩을 성숙하게 이해하는 열쇠입니다. 신뢰는 고정값이 아닙니다. 작업 위험도, 오류 비용, 검토 여부, 테스트 여부에 따라 조정됩니다. 초보자는 AI를 무조건 믿거나 무조건 배척하는 대신, 신뢰를 조절하는 기준을 배워야 합니다.
 

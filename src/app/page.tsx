@@ -22,10 +22,17 @@ export default function HomePage() {
             순서대로 읽고, 용어를 찾아보고, 진행률을 남기며 웹 개발 기본기와 AI 엔지니어링 개념을
             하나의 학습 흐름으로 연결합니다.
           </p>
+          <p className="mt-4 max-w-2xl rounded-xl border border-[var(--border-default)] bg-[var(--surface-secondary)] px-4 py-3 text-sm leading-7 text-[var(--text-secondary)]">
+            이 프로젝트는 개인적인 학습 과정에서 정리한 자료를 같이 공부하고 함께 발전시키기 위해
+            무료 공개하고 있습니다. 처음이라면 아래 추천 트랙부터 읽어 보세요.
+          </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <PrimaryLink href="/curriculum">전체 커리큘럼 보기</PrimaryLink>
             <PrimaryLink href="/lessons/ai-vibe-coding-orientation" variant="secondary">
               첫 강의 시작
+            </PrimaryLink>
+            <PrimaryLink href="/about" variant="secondary">
+              프로젝트 소개
             </PrimaryLink>
           </div>
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -84,12 +91,31 @@ export default function HomePage() {
           />
           <FeatureCard
             title="진행률과 북마크 저장"
-            body="강의 완료, 체크리스트, 북마크가 로컬 저장소에 남아 다음 방문에도 이어집니다."
+            body="강의 완료와 북마크가 이 브라우저의 로컬 저장소에 남아 다음 방문에도 이어집니다. 서버 계정은 없습니다."
           />
           <FeatureCard
             title="용어와 공식 문서 연결"
             body={`용어 ${GLOSSARY_TERMS.length}개와 공식 문서 ${RESOURCE_LINKS.length}개를 검색과 학습 흐름에 연결했습니다.`}
           />
+        </div>
+      </section>
+
+      <section className="border-t border-[var(--border-subtle)] bg-[var(--surface-secondary)]">
+        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
+          <h2 className="text-2xl font-extrabold text-[var(--text-primary)]">
+            처음 오는 분을 위한 안내
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-[var(--text-secondary)]">
+            전체는 약 100강·깊이 있는 교재 분량입니다. 처음부터 모두 읽기보다,{" "}
+            <strong className="text-[var(--text-primary)]">
+              시작하기 → 개발·웹 기초 → Git → 배포 입문 → AI 검증
+            </strong>{" "}
+            순으로 필요한 모듈을 골라 읽는 것을 권장합니다. 프로젝트 철학과 문의 방법은{" "}
+            <Link className="font-semibold text-[var(--accent-primary)] underline" href="/about">
+              소개
+            </Link>
+            페이지에 있습니다.
+          </p>
         </div>
       </section>
     </div>

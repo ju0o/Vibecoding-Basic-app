@@ -54,7 +54,7 @@ AI가 "동작은 그대로입니다"라고 말해도 그것은 주장일 뿐입�
 
 ## 원문으로 읽기
 
-> "a change made to the internal structure of software to make it easier to understand and cheaper to modify without changing its observable behavior"
+> "a change made to the internal structure of software to make it easier to understand and cheaper to modify without changing its observable behavior [...]"
 >
 > — 소프트웨어를 이해하기 쉽고 수정 비용이 싸게 만들되, 관찰 가능한 동작은 바꾸지 않는 내부 구조 변경.
 > [Martin Fowler — Definition of Refactoring](https://martinfowler.com/bliki/DefinitionOfRefactoring.html)
@@ -75,17 +75,11 @@ AI가 "동작은 그대로입니다"라고 말해도 그것은 주장일 뿐입�
 
 리팩터링의 본질이 "작음"과 "동작 보존"이라는 두 성질에 있음을 보여줍니다. 이 두 성질이 검증 가능성의 원천입니다.
 
-> "Since each refactoring is small, it's less likely to go wrong."
->
-> — 각 리팩터링이 작기 때문에, 잘못될 가능성이 더 낮다.
-> [refactoring.com](https://refactoring.com/)
+관련 원문(링크): [refactoring.com](https://refactoring.com/)
 
 왜 작게 나눠야 하는지를 설명합니다. AI가 만드는 넓은 diff의 위험이 정확히 이 문장의 반대입니다.
 
-> "The system is kept fully working after each refactoring, reducing the chances that a system can get seriously broken during the restructuring."
->
-> — 각 리팩터링 후 시스템은 완전히 동작하는 상태로 유지되어, 재구조화 도중 시스템이 심각하게 망가질 가능성을 줄인다.
-> [refactoring.com](https://refactoring.com/)
+관련 원문(링크): [refactoring.com](https://refactoring.com/)
 
 중간 상태도 동작해야 한다는 원칙입니다. AI가 나눈 각 단계가 그 자체로 완결되고 동작하는지 확인해야 합니다.
 
@@ -122,5 +116,3 @@ AI에게 지시할 때 "동작은 그대로 두고 구조만 개선하라. 새 �
 이 강의의 근거 KB는 `refactoring-with-ai`입니다. 먼저 Martin Fowler의 Definition of Refactoring을 읽고 명사·동사 정의와 "observable behavior" 조건을 확인하세요. 그 다음 refactoring.com에서 "small behavior preserving transformations", 각 단계의 안전성, 항상 동작하는 시스템 원칙을 봅니다. 이 두 출처가 이 강의의 모든 인용의 원문입니다.
 
 선행 강의로 `code-change-risk-analysis`를 읽으면 리팩터링 diff도 변경 위험 분석의 대상임을 이해할 수 있고, `hallucination-and-verification`은 "동작 보존"을 주장이 아니라 검증 증거로 다루는 관점을 줍니다. 다음 학습 순서는 `reviewing-ai-output`입니다 — 리팩터링 결과물을 포함해 AI가 만든 모든 변경을 동작 보존과 검증 증거 기준으로 리뷰하는 능력으로 이어집니다.
-
-자가 QA 결과: V2 8섹션을 모두 포함했고, Quote Bank 인용 5개를 원문 그대로 사용했습니다(원어+번역+링크+해설). 본문은 승인 KB `refactoring-with-ai`의 Martin Fowler·refactoring.com 출처 범위 안에서 작성했으며 KB 외 신규 사실을 추가하지 않았습니다. 하이라이트(`==`)는 섹션당 3개 이하, 마커 수 짝수로 유지했고 콜아웃은 사용하지 않았습니다.

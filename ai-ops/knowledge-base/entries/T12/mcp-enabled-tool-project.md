@@ -9,7 +9,7 @@ prerequisites: [mcp, tool-calling, tool-permissions-sandboxes]
 successors: [private-ai-learning-site-project]
 related: [automation-workflow-project, harness, production-env-secrets]
 consumers:
-  lessons: []
+  lessons: [mcp-enabled-tool-project]
   glossary: []
 sources:
   - { title: "MCP Specification 2025-11-25", url: "https://modelcontextprotocol.io/specification/2025-11-25", checked: 2026-07-12 }

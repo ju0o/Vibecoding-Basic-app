@@ -116,10 +116,7 @@ AI와 일할 때 기록은 선택이 아닙니다. 작업이 길어질수록 어
 
 이 문장은 바이브코딩을 학습 방식으로 안전하게 바꾸는 기준입니다. AI가 만든 코드는 사람의 검토를 통과해야 내 코드가 됩니다. 특히 초보자에게 human review는 전문가만 하는 코드 리뷰가 아니라, 실행해 보기, 오류 읽기, 공식 문서와 대조하기, 내가 설명할 수 있는지 확인하기까지 포함합니다.
 
-> "Trust in AI tools during vibe coding is dynamic"
->
-> — 바이브코딩에서 AI 도구에 대한 신뢰는 고정되어 있지 않다.
-> [Vibe coding: programming through conversation with artificial intelligence](https://arxiv.org/html/2506.23253v2)
+관련 원문(링크): [Vibe coding: programming through conversation with artificial intelligence](https://arxiv.org/html/2506.23253v2)
 
 AI 도구를 믿을지 말지는 한 번 정해지는 태도가 아닙니다. 작업 종류, 위험도, 테스트 가능성, 출처 품질, 사용자의 이해 수준에 따라 계속 바뀝니다. 간단한 CSS 여백 수정과 인증 로직 수정은 같은 정도로 맡길 수 없습니다. 이 동적인 신뢰 조절이 바이브코딩을 실무 기술로 만드는 핵심입니다.
 

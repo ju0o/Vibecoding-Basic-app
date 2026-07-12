@@ -130,17 +130,11 @@ try {
 
 오류 처리는 control flow입니다. 실패를 잡아서 숨기는 곳이 아니라, 실패 이후의 행동을 정하는 곳입니다. catch block 안에 어떤 정보를 남길지, 어떤 사용자 메시지를 줄지, 다시 던질지까지가 설계입니다.
 
-> "Breakpoints"
->
-> — breakpoints.
-> [Debugging in Visual Studio Code](https://code.visualstudio.com/docs/editor/debugging)
+관련 원문(링크): [Debugging in Visual Studio Code](https://code.visualstudio.com/docs/editor/debugging)
 
 breakpoint는 "여기서 멈춰서 보자"는 도구입니다. AI가 수정한 코드가 맞는지 확인할 때 breakpoint를 걸면 실제 값과 branch를 볼 수 있습니다. 눈으로 코드를 읽는 것과 실행 중 상태를 보는 것은 다릅니다.
 
-> "debugging console"
->
-> — debugging console.
-> [Console — MDN](https://developer.mozilla.org/en-US/docs/Web/API/console)
+관련 원문(링크): [Console — MDN](https://developer.mozilla.org/en-US/docs/Web/API/console)
 
 console은 가장 가까운 관찰 도구입니다. 값이 예상과 다른지 빠르게 확인할 수 있습니다. 단, console output도 evidence이므로 어떤 시점의 어떤 값인지 함께 읽어야 합니다.
 

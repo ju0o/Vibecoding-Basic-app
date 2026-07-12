@@ -52,7 +52,7 @@ AI에게 로그를 주면 원인 가설을 빠르게 만듭니다. 이것은 유
 
 ## 원문으로 읽기
 
-> "Logs are the stream of aggregated, time-ordered events collected from the output streams of all running processes and backing services."
+> "Logs are the stream of aggregated, time-ordered events collected from the output streams of all running processes and backing services. [...]"
 >
 > — 로그는 실행 중인 모든 프로세스와 백킹 서비스의 출력 스트림에서 수집된, 시간순으로 정렬된 이벤트의 스트림이다.
 > [The Twelve-Factor App: Logs](https://12factor.net/logs)
@@ -73,17 +73,11 @@ AI에게 로그를 주면 원인 가설을 빠르게 만듭니다. 이것은 유
 
 앱은 로그를 흘리고 저장·라우팅은 환경이 맡는 역할 분리를 보여줍니다. 사고 시 로그가 어디에 모이는지는 환경이 정하지만, 봐야 할 것은 그 이벤트 스트림입니다.
 
-> "This can be useful in situations that require a swift recovery from production incidents, like breaking changes or bugs."
->
-> — 이것은 breaking change나 버그 같은 운영 사고로부터 신속한 복구가 필요한 상황에서 유용하다.
-> [Performing an Instant Rollback — Vercel](https://vercel.com/docs/instant-rollback)
+관련 원문(링크): [Performing an Instant Rollback — Vercel](https://vercel.com/docs/instant-rollback)
 
 롤백이 사고 복구 수단임을 보여줍니다. 원인을 완전히 알기 전에도 사용자 영향을 멈출 수 있습니다.
 
-> "The rollback happens instantaneously."
->
-> — 롤백은 즉시 일어난다.
-> [Performing an Instant Rollback — Vercel](https://vercel.com/docs/instant-rollback)
+관련 원문(링크): [Performing an Instant Rollback — Vercel](https://vercel.com/docs/instant-rollback)
 
 복구를 원인 분석보다 먼저 수행할 수 있는 근거입니다. 즉시성은 압박 속에서 가장 빠른 방어입니다.
 
@@ -120,5 +114,3 @@ AI에게 로그를 주고 원인을 물을 때, "원인은 X"라는 답에 그 �
 이 강의의 근거 KB는 `incident-ai-debugging`입니다. 먼저 Twelve-Factor App의 Logs를 읽고 로그가 time-ordered event stream이라는 정의와 stdout·라우팅 분리 원칙을 확인하세요. 그 다음 Vercel의 Instant Rollback 문서에서 롤백이 운영 사고의 즉시 복구 수단임을 봅니다. 이 두 출처가 이 강의 인용의 원문입니다.
 
 선행 강의로 `monitoring-errors-rollbacks`를 읽으면 로그·모니터링·롤백의 도구를 이해할 수 있고, `debugging-error-reading`은 오류 메시지와 스택 트레이스를 읽는 기초를 줍니다. 함께 읽으면 좋은 강의는 `code-change-risk-analysis`(최근 변경을 용의자로 보는 관점)와 `reviewing-ai-output`(AI 수정안을 검증 증거로 리뷰)입니다. 사고 대응 절차를 체크리스트로 묶는 실무는 이후 project-textbook 모듈의 배포 체크리스트 플레이북으로 이어집니다.
-
-자가 QA 결과: V2 8섹션을 모두 포함했고, Quote Bank 인용 5개를 원문 그대로 사용했습니다(원어+번역+링크+해설). 본문은 승인 KB `incident-ai-debugging`의 Twelve-Factor Logs·Vercel Instant Rollback 출처와 monitoring-errors-rollbacks·debugging-error-reading 승인 KB 범위 안에서 작성했으며 KB 외 신규 사실을 추가하지 않았습니다. 하이라이트(`==`)는 섹션당 3개 이하·마커 짝수로 유지했고 콜아웃은 사용하지 않았습니다.
