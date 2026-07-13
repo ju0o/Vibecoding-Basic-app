@@ -1,61 +1,42 @@
 # STATE — 실행 큐 + 상태 기계
 
-**운영자는 아래 "## NEXT" 블록만 보면 된다.**
-
-## 현황판 (O-03.1 필수 필드)
+## 현황판
 
 | 필드 | 값 |
 |---|---|
-| Current Batch | **AI Engineering Atlas V2 — Long-Running Product Waves** |
-| Current State | **PW-0…PW-13 product track advanced.** Model Routing Learning Route shipped under `/model-routing` (shell, engine, simulator, content, quiz, graph table, progress helpers). Build/typecheck/lint/tests PASS. Phase 1 preserved uncommitted (minimal client-boundary fix local only). No push/deploy. |
-| Last Completed Step | PW-0 reconciliation + PW-1…PW-11 Model Routing vertical slice + verify (2026-07-13) |
-| Next Executor | 운영자 또는 다음 세션 — PW-14 release-candidate checklist review / optional content deepen |
-| Next Prompt File | **AGENTS.md** + **reports/ATLAS-GROK-HANDOFF.md** + **roadmap/ATLAS-LONG-RUNNING-PRODUCT-PLAN.md** |
-| Blocker | None for product CONTINUE; push/deploy remain Human gates |
-| Required Human Action | Review product commits; optional push decision; Phase 1 still separate |
-| Release Status | **100강 라이브 유지. Model Routing RC 준비 가능(로컬 verify PASS). 미배포·미push** |
+| Current Batch | **AI Engineering Atlas V2 — Education Layer Full Product** |
+| Current State | **EV-0…EV-19 complete for V2 RC.** 21 Concept + 14-section Atlas rebased from Phase 1. Model Routing RC preserved. `npm run verify` PASS. No push/deploy. |
+| Last Completed Step | EV-19 ATLAS-V2-RELEASE-CANDIDATE.md (2026-07-14) |
+| Next Executor | 운영자 — V2 release review / push·deploy 결정 |
+| Next Prompt File | **reports/ATLAS-V2-RELEASE-CANDIDATE.md** |
+| Blocker | None for RC; Human gates: push, deploy, optional content deepen |
+| Required Human Action | Review `/atlas` + `/model-routing`; decide push |
+| Release Status | **READY_FOR_V2_RELEASE_REVIEW · 미push · 미배포** |
 
-### Atlas / Product 상태
+### Status table
 
-| 항목 | 상태 |
+| Item | Status |
 |---|---|
 | Education Layer PRD | approved |
-| Model Routing Feature Spec | approved |
-| Grok OS GO-1…GO-9 | complete |
-| PW-0 Reconciliation | **PASS** |
-| PW-1 Contract app integration | **PASS** (`src/lib/model-routing/contract.ts`) |
-| PW-2 Route shell | **PASS** (`/model-routing`, units) |
-| PW-3 Rule engine + scenarios | **PASS** + tests |
-| PW-4 Diagram | **PASS** |
-| PW-5 Simulator | **PASS** |
-| PW-6 Content | **PASS** (educational patterns; Depth KB linked) |
-| PW-7 Quiz/checkpoints | **PASS** |
-| PW-8 Graph | **PASS** (table edges) |
-| PW-9 Progress helpers | **PASS** (separate key, no lesson migration) |
-| PW-10 Nav | **PASS** (home CTA; SiteHeader Phase1 untouched in commits) |
-| PW-11 A11y/perf | **PASS** (keyboard axes, aria-live, text table, reduced-motion friendly SVG) |
-| PW-12 Source QA | **PASS** (educational claimScope; no X-as-fact) |
-| PW-13 Full QA | **PASS** (lint/type/test/build) |
-| PW-14 RC prep | **READY_FOR_RELEASE_REVIEW** — `reports/ATLAS-PW14-RELEASE-CANDIDATE.md` |
-| Phase 1 work | **preserved uncommitted** |
-| BUILD-PLAN | **HOLD** |
-| 21 / 14 freezes | **unchanged** |
+| Model Routing Feature Spec + product | approved + READY_FOR_RELEASE_REVIEW |
+| Phase 1 rebaseline | **done** (21/14 in app) |
+| BUILD-PLAN | HOLD |
+| 21 / 14 freezes | enforced in app + scripts |
+| V2 RC report | `ATLAS-V2-RELEASE-CANDIDATE.md` |
 
 ## NEXT
 
 ```
-- Current State: Model Routing Learning Route product vertical slice complete under /model-routing. Verify PASS. Phase1 uncommitted preserved. No push.
-- Verdict: READY_FOR_RELEASE_REVIEW (Model Routing slice)
+- Current State: Atlas V2 Education Layer RC ready. 21 concepts, 14 sections, roadmap, passport, why bridge, graph, timeline, MR subordinate route. verify PASS.
+- Verdict: READY_FOR_V2_RELEASE_REVIEW
 - Next Executor: 운영자
-- Next Prompt File: ai-ops/reports/ATLAS-GROK-HANDOFF.md
-- Why: Mandate waves implemented for subordinate route without core concept mutation
-- Required Operator Action: Review; decide push; optional deeper content/KB P-01; Phase1 reconciliation later
-- Stop Condition: no push/deploy/reset without explicit order
+- Required Operator Action: push/deploy decisions only
+- Stop Condition: no push/deploy without explicit order
 ```
 
 ## 이력
 
-| 일시 | 항목 | 전이 | 실행 |
-|---|---|---|---|
-| 2026-07-13 | Product Waves PW-0…PW-13 | Long-running mandate → Model Routing vertical slice + verify PASS | Grok Main; Phase1 preserved |
-| 2026-07-13 | Grok OS GO-2…GO-9 | complete | prior session |
+| 일시 | 항목 | 전이 |
+|---|---|---|
+| 2026-07-14 | EV-0…EV-19 | Phase1 rebaseline + Atlas V2 RC |
+| 2026-07-13 | PW-0…PW-14 | Model Routing RC |
