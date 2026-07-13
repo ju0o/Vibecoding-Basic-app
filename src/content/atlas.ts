@@ -1,229 +1,442 @@
 /**
- * AI Engineering Atlas — Education Layer 데이터 (SSOT: ai-ops/roadmap/ATLAS-EDUCATION-LAYER.md)
- *
- * 12노드 스토리 체인: AI → LLM → Prompt → Context → Memory → Tool → MCP
- * → Agent → Workflow → Orchestration → Harness → Production AI
- *
- * 원칙:
- * - 기존 강의·용어집·KB를 참조만 한다 (기존 콘텐츠 무수정).
- * - `era`·`industryNow`는 KB 근거로만 채운다 (Phase A2). 빈 문자열이면 UI에서 숨긴다.
- * - question/limitationOfPrevious/breakthrough는 교육적 프레이밍(스토리 연결선)이다.
+ * AI Engineering Atlas V2 — 21 canonical concepts + 14-section chapter contract.
+ * SSOT: ai-ops/roadmap/ATLAS-EDUCATION-LAYER.md
+ * Model Routing is a subordinate Learning Route (not concept #22).
  */
 
-export type AtlasNode = {
+export type AtlasArcId =
+  | "intelligence"
+  | "generation"
+  | "grounding"
+  | "action"
+  | "agency"
+  | "reliability"
+
+export type AtlasConceptStatus = "complete" | "partial" | "missing" | "blocked_by_source"
+
+export type AtlasConcept = {
   readonly id: string
+  readonly slug: string
   readonly order: number
   readonly title: string
-  /** 대략적 시기 표기 — Phase A2에서 KB 근거로 채움. 빈 문자열 = UI 숨김 */
-  readonly era: string
-  /** 이 노드가 답하는 "왜" 한 문장 */
+  readonly shortDefinition: string
+  readonly arc: AtlasArcId
+  readonly stageLabel: string
   readonly question: string
-  /** 이전 노드의 한계 한 문장 (스토리 연결선) — 1번 노드는 학습 여정의 출발 문장 */
   readonly limitationOfPrevious: string
-  /** 돌파구 한 문장 */
   readonly breakthrough: string
-  /** 현재 산업 위치 — Phase A2에서 KB 근거로 채움. 빈 문자열 = UI 숨김 */
-  readonly industryNow: string
-  /** 심화 딥링크 — 기존 강의 slug (curriculum.ts에 실존해야 함) */
+  readonly whyBridge: string
+  readonly previousConceptId: string | null
+  readonly nextConceptId: string | null
   readonly lessonSlugs: readonly string[]
-  /** 관련 용어 — glossary.ts의 term과 정확히 일치해야 함 */
   readonly glossaryTerms: readonly string[]
-  /** 인용 근거 KB id (ai-ops/knowledge-base/entries) */
   readonly kbIds: readonly string[]
+  readonly status: AtlasConceptStatus
+  readonly subordinateRoutes?: readonly { readonly href: string; readonly label: string }[]
 }
 
-export const ATLAS_NODES = [
+/** Approved 14-section contract (Education Layer §4.4). */
+export const ATLAS_CHAPTER_SECTIONS = [
+  { id: "definition", title: "한 줄 정의" },
+  { id: "why-emerged", title: "왜 등장했는가" },
+  { id: "previous-limits", title: "이전 기술의 한계" },
+  { id: "what-it-solved", title: "무엇을 해결했는가" },
+  { id: "real-cases", title: "실제 사례" },
+  { id: "companies", title: "대표 기업" },
+  { id: "services", title: "대표 서비스" },
+  { id: "in-projects", title: "실제 프로젝트에서는 어떻게 사용하는가" },
+  { id: "animation", title: "인터랙티브 애니메이션" },
+  { id: "diagram", title: "인터랙티브 다이어그램" },
+  { id: "practice", title: "실습" },
+  { id: "quiz", title: "퀴즈" },
+  { id: "related-tech", title: "관련 기술" },
+  { id: "next-tech", title: "다음 기술" },
+] as const
+
+export type AtlasChapterSectionId = (typeof ATLAS_CHAPTER_SECTIONS)[number]["id"]
+
+export const ATLAS_ARCS: readonly {
+  readonly id: AtlasArcId
+  readonly title: string
+  readonly question: string
+}[] = [
   {
-    id: "ai",
-    order: 1,
-    title: "AI — 기계가 판단을 흉내 내기 시작하다",
-    era: "",
-    question: "사람이 일일이 규칙을 코딩하지 않아도 기계가 일하게 할 수 없을까?",
-    limitationOfPrevious:
-      "여정의 출발점 — 소프트웨어는 사람이 적어 준 규칙만 따를 수 있었고, 규칙으로 다 적을 수 없는 일(언어·판단)은 자동화 밖에 있었다.",
-    breakthrough:
-      "규칙을 적는 대신 데이터에서 패턴을 학습하는 접근이 자리잡으며, '가르치지 않은 입력'에도 그럴듯한 출력을 내는 소프트웨어가 등장했다.",
-    industryNow: "",
-    lessonSlugs: ["ai-vibe-coding-orientation", "ai-era-timeline", "learning-with-ai-verification"],
-    glossaryTerms: ["Vibe Coding", "Hallucination"],
-    kbIds: ["vibe-coding-origin-karpathy", "ai-learning-verification"],
+    id: "intelligence",
+    title: "Intelligence",
+    question: "규칙을 쓰는 대신 어떻게 학습하게 되었는가?",
   },
   {
-    id: "llm",
+    id: "generation",
+    title: "Generation",
+    question: "분류·예측을 넘어 어떻게 생성과 대화가 가능해졌는가?",
+  },
+  {
+    id: "grounding",
+    title: "Grounding",
+    question: "모델이 목표·상태·자료를 어떻게 다루는가?",
+  },
+  {
+    id: "action",
+    title: "Action",
+    question: "모델이 어떻게 행동하고 연결을 표준화하는가?",
+  },
+  {
+    id: "agency",
+    title: "Agency",
+    question: "한 번의 호출이 어떻게 반복·위임·조정이 되는가?",
+  },
+  {
+    id: "reliability",
+    title: "Reliability",
+    question: "데모를 어떻게 믿을 수 있는 제품으로 만드는가?",
+  },
+]
+
+/** @deprecated alias — prefer ATLAS_CONCEPTS */
+export type AtlasNode = AtlasConcept
+
+const C = (
+  partial: Omit<AtlasConcept, "slug" | "previousConceptId" | "nextConceptId" | "status"> & {
+    readonly status?: AtlasConceptStatus
+  },
+): Omit<AtlasConcept, "previousConceptId" | "nextConceptId"> => ({
+  ...partial,
+  slug: partial.id,
+  status: partial.status ?? "partial",
+})
+
+const RAW = [
+  C({
+    id: "ai",
+    order: 1,
+    title: "AI",
+    shortDefinition: "기계가 사람처럼 판단·행동을 흉내 내도록 만드는 넓은 목표다.",
+    arc: "intelligence",
+    stageLabel: "기초",
+    question: "규칙을 다 적지 않고도 기계가 일할 수 없을까?",
+    limitationOfPrevious: "소프트웨어는 사람이 적어 준 규칙만 따랐다.",
+    breakthrough: "데이터에서 패턴을 학습하는 접근이 등장했다.",
+    whyBridge: "규칙을 다 적을 수 없어 학습이 필요해졌다.",
+    lessonSlugs: ["ai-vibe-coding-orientation", "ai-era-timeline", "learning-with-ai-verification"],
+    glossaryTerms: ["Vibe Coding", "Hallucination"],
+    kbIds: ["vibe-coding-origin-karpathy", "ai-learning-verification", "ai-era-timeline"],
+  }),
+  C({
+    id: "machine-learning",
     order: 2,
-    title: "LLM — 언어가 인터페이스가 되다",
-    era: "",
-    question: "왜 하필 '거대 언어 모델'이 판을 바꿨을까?",
-    limitationOfPrevious:
-      "과제마다 모델을 따로 만들어야 했다 — 번역 모델, 분류 모델, 요약 모델이 전부 별개였고, 쓰려면 각각의 입출력 형식을 배워야 했다.",
-    breakthrough:
-      "토큰을 이어 쓰는 단일 모델이 커지자 온갖 과제를 '말로 시키는' 것이 가능해졌다 — 자연어가 곧 인터페이스가 됐고, 능력·비용·지연의 모델 선택 문제가 함께 태어났다.",
-    industryNow: "",
+    title: "Machine Learning",
+    shortDefinition: "예제 데이터로 패턴을 학습해 예측·분류하는 방법이다.",
+    arc: "intelligence",
+    stageLabel: "기초",
+    question: "규칙을 쓰는 대신 어떻게 학습하게 되었는가?",
+    limitationOfPrevious: "모든 예외를 규칙으로 쓰기 어려웠다.",
+    breakthrough: "특징과 데이터로 모델을 학습하는 일반 절차가 자리 잡았다.",
+    whyBridge: "단순 학습만으로는 복잡한 표현을 다루기 어려워 Deep Learning이 필요해졌다.",
+    lessonSlugs: ["learning-with-ai-verification"],
+    glossaryTerms: ["Machine Learning"],
+    kbIds: ["ai-learning-verification"],
+  }),
+  C({
+    id: "deep-learning",
+    order: 3,
+    title: "Deep Learning",
+    shortDefinition: "다층 신경망으로 복잡한 표현을 학습하는 방법이다.",
+    arc: "intelligence",
+    stageLabel: "기초",
+    question: "왜 더 깊은 네트워크가 필요해졌는가?",
+    limitationOfPrevious: "얕은 모델은 이미지·언어의 복잡한 패턴을 잘 못 잡았다.",
+    breakthrough: "계층적 표현 학습이 가능해졌다.",
+    whyBridge: "분류를 넘어 생성·대화가 필요해 Generative AI로 이어졌다.",
+    lessonSlugs: ["embeddings-and-similarity"],
+    glossaryTerms: ["Neural Network"],
+    kbIds: ["embeddings-similarity"],
+  }),
+  C({
+    id: "generative-ai",
+    order: 4,
+    title: "Generative AI",
+    shortDefinition: "텍스트·이미지 등 새로운 콘텐츠를 생성하는 AI다.",
+    arc: "generation",
+    stageLabel: "생성",
+    question: "분류·예측을 넘어 어떻게 생성과 대화가 가능해졌는가?",
+    limitationOfPrevious: "모델이 주로 라벨을 고르는 쪽에 머물렀다.",
+    breakthrough: "시퀀스 생성으로 말과 이미지를 만들 수 있게 되었다.",
+    whyBridge: "범용 언어 인터페이스가 필요해 LLM이 중심이 되었다.",
+    lessonSlugs: ["tokenization-and-context"],
+    glossaryTerms: ["Generative AI"],
+    kbIds: ["tokenization-context"],
+  }),
+  C({
+    id: "llm",
+    order: 5,
+    title: "LLM",
+    shortDefinition: "대규모 언어 모델로 토큰을 이어 쓰며 과제를 수행하는 모델이다.",
+    arc: "generation",
+    stageLabel: "생성",
+    question: "왜 하필 거대 언어 모델이 판을 바꿨을까?",
+    limitationOfPrevious: "과제마다 별도 모델과 인터페이스가 필요했다.",
+    breakthrough: "자연어가 공통 인터페이스가 되었다.",
+    whyBridge: "출력이 모호해 Prompt Engineering이 필요해졌다.",
     lessonSlugs: ["tokenization-and-context", "model-selection-tradeoffs"],
     glossaryTerms: ["Token", "Tokenization", "Model Selection"],
     kbIds: ["tokenization-context", "model-selection-tradeoffs"],
-  },
-  {
-    id: "prompt",
-    order: 3,
-    title: "Prompt — 말로 시키는 법을 설계하다",
-    era: "",
-    question: "같은 모델인데 왜 어떤 요청은 잘 되고 어떤 요청은 엉망일까?",
-    limitationOfPrevious:
-      "말로 시킬 수 있게 됐지만, 모델은 마음을 읽지 못한다 — 모호한 요청은 모호한 출력을 낳았고 결과가 복불복이었다.",
-    breakthrough:
-      "요청을 '좋은 문장'이 아니라 목표·제약·근거 정책·출력 형식을 담은 작업 계약으로 설계하는 프롬프트 엔지니어링이 정립됐다.",
-    industryNow: "",
-    lessonSlugs: ["prompt-engineering-foundations", "from-prompt-to-system"],
-    glossaryTerms: ["Prompt Engineering", "Output Format Control"],
-    kbIds: ["prompt-engineering"],
-  },
-  {
-    id: "context",
-    order: 4,
-    title: "Context — 모델이 보는 세계를 채우다",
-    era: "",
-    question: "프롬프트를 잘 써도 모델이 우리 문서·우리 코드를 모르는 건 어떻게 하나?",
-    limitationOfPrevious:
-      "프롬프트는 지시를 다듬지만, 모델의 지식은 학습 시점에 멈춰 있다 — 우리 회사 문서, 오늘의 코드베이스는 모델 안에 없다.",
-    breakthrough:
-      "모델이 한 번에 보는 토큰 집합(context)에 필요한 자료를 골라 넣는 기술 — 검색(RAG)과 컨텍스트 엔지니어링 — 이 지시와 지식의 간극을 메웠다.",
-    industryNow: "",
-    lessonSlugs: [
-      "context-engineering-basics",
-      "explain-context-and-rag",
-      "tokenization-and-context",
-    ],
-    glossaryTerms: ["Context Window", "Context Engineering", "RAG"],
-    kbIds: ["context-engineering", "rag"],
-  },
-  {
-    id: "memory",
-    order: 5,
-    title: "Memory — 대화가 이어지게 만들다",
-    era: "",
-    question: "왜 모델은 방금 한 말도 '창이 넘치면' 잊어버릴까?",
-    limitationOfPrevious:
-      "context는 유한한 그릇이다 — 대화가 길어지면 앞부분이 밀려나고, 세션이 끝나면 전부 사라진다.",
-    breakthrough:
-      "창 밖의 상태를 다루는 층 — 요약·캐시·외부 저장(메모리) — 이 생기며, 긴 작업과 이어지는 대화가 가능해졌다.",
-    industryNow: "",
-    lessonSlugs: ["context-window-and-memory", "context-caching-and-state"],
-    glossaryTerms: ["Context Window", "High-Signal Tokens"],
-    kbIds: ["context-caching", "context-engineering"],
-  },
-  {
-    id: "tool",
+  }),
+  C({
+    id: "prompt-engineering",
     order: 6,
-    title: "Tool — 모델이 손을 갖다",
-    era: "",
-    question: "말만 하는 모델이 어떻게 검색하고 계산하고 파일을 만들까?",
-    limitationOfPrevious:
-      "기억과 컨텍스트가 있어도 모델의 출력은 결국 글자였다 — 세상을 읽을 수도, 바꿀 수도 없었다.",
-    breakthrough:
-      "모델이 자연어 대신 구조화된 함수 호출을 내놓는 tool calling이 등장해, '언제 어떤 도구를 부를지'를 모델이 판단하게 됐다.",
-    industryNow: "",
-    lessonSlugs: ["tool-calling-basics"],
-    glossaryTerms: ["Tool Calling", "Tool Layer"],
-    kbIds: ["tool-calling"],
-  },
-  {
-    id: "mcp",
+    title: "Prompt Engineering",
+    shortDefinition: "모델에게 목표·형식·제약을 명확히 전달하는 설계다.",
+    arc: "grounding",
+    stageLabel: "접지",
+    question: "같은 모델인데 왜 어떤 요청은 되고 어떤 요청은 실패할까?",
+    limitationOfPrevious: "모호한 지시로 결과가 흔들렸다.",
+    breakthrough: "계약형 지시와 예시로 출력 품질을 안정화한다.",
+    whyBridge: "한 번의 문장만으로는 필요한 자료·상태가 부족해 Context Engineering이 필요해졌다.",
+    lessonSlugs: ["prompt-engineering-foundations", "system-prompts-and-instruction-layers"],
+    glossaryTerms: ["Prompt", "System Prompt"],
+    kbIds: ["prompt-engineering"],
+  }),
+  C({
+    id: "context-engineering",
     order: 7,
-    title: "MCP — 도구 연결이 표준이 되다",
-    era: "",
-    question: "앱마다 도구를 새로 붙이는 N×M 문제는 누가 풀까?",
-    limitationOfPrevious:
-      "도구 호출은 됐지만 연결이 제각각이었다 — 앱 3개가 같은 도구를 쓰려면 3번 붙여야 했고, 도구가 바뀌면 3곳을 고쳤다.",
-    breakthrough:
-      "도구·리소스를 표준 방식으로 노출하는 프로토콜(MCP)이 나와, 한 번 노출한 도구를 어떤 호스트든 같은 방식으로 쓰게 됐다 — 'AI의 USB-C 포트'.",
-    industryNow: "",
-    lessonSlugs: ["mcp-architecture-basics", "explain-tool-agent-mcp", "mcp-enabled-tool-project"],
-    glossaryTerms: ["MCP", "MCP Protocol Layer", "MCP Host"],
-    kbIds: ["mcp"],
-  },
-  {
-    id: "agent",
+    title: "Context Engineering",
+    shortDefinition: "제한된 창 안에 무엇을 넣고 빼을지 설계하는 일이다.",
+    arc: "grounding",
+    stageLabel: "접지",
+    question: "모델이 지금 필요한 정보를 어떻게 갖게 할까?",
+    limitationOfPrevious: "프롬프트만으로는 상태·자료·이력을 다루기 어려웠다.",
+    breakthrough: "컨텍스트 창을 예산처럼 관리하는 설계가 생겼다.",
+    whyBridge: "대화·작업 상태를 유지하려면 Memory가 필요해졌다.",
+    lessonSlugs: ["context-window-and-memory", "context-engineering-mcp-skills"],
+    glossaryTerms: ["Context Window", "Context Engineering"],
+    kbIds: ["context-engineering", "context-caching"],
+  }),
+  C({
+    id: "memory",
     order: 8,
-    title: "Agent — 한 번의 호출이 루프가 되다",
-    era: "",
-    question: "도구를 부를 줄 아는 모델이 왜 '스스로 일하는' 것처럼 보일까?",
-    limitationOfPrevious:
-      "도구 호출은 한 번의 행위였다 — 부르고, 결과를 받고, 끝. 여러 단계가 필요한 일은 사람이 매번 다음 지시를 내려야 했다.",
-    breakthrough:
-      "계획→행동→관찰→갱신을 반복하며 스스로 방향을 정하는 에이전트 루프가 등장해, 목표만 주면 여러 단계를 이어서 진행하게 됐다.",
-    industryNow: "",
-    lessonSlugs: ["agent-loop-anatomy", "explain-tool-agent-mcp"],
-    glossaryTerms: ["Agent Loop", "Agent Loop Layer"],
-    kbIds: ["agent-loop"],
-  },
-  {
-    id: "workflow",
+    title: "Memory",
+    shortDefinition: "단기·장기 상태를 저장하고 다시 꺼내 쓰는 장치다.",
+    arc: "grounding",
+    stageLabel: "접지",
+    question: "모델은 어떻게 ‘기억’하는가?",
+    limitationOfPrevious: "창이 끝나면 이전 대화가 사라졌다.",
+    breakthrough: "요약·노트·외부 저장으로 상태를 이어 간다.",
+    whyBridge: "외부 지식을 체계적으로 쓰려면 Knowledge 층이 필요해졌다.",
+    lessonSlugs: ["context-window-and-memory", "context-caching-and-state"],
+    glossaryTerms: ["Memory", "Context Caching"],
+    kbIds: ["context-caching"],
+  }),
+  C({
+    id: "knowledge",
     order: 9,
-    title: "Workflow — 예측 가능함이 필요해지다",
-    era: "",
-    question: "에이전트가 알아서 하는데 왜 다시 '정해진 절차'가 필요할까?",
-    limitationOfPrevious:
-      "자율 루프는 유연하지만 매번 경로가 달라질 수 있다 — 반복 업무·규정 업무에서는 그 자유가 오히려 위험과 비용이 된다.",
-    breakthrough:
-      "사람이 미리 정한 코드 경로 위에서 LLM과 도구를 조합하는 워크플로가 자리잡아, 반복 가능한 자동화와 자율 에이전트를 구분해 쓰게 됐다.",
-    industryNow: "",
-    lessonSlugs: ["ai-workflow-design", "automation-workflow-project"],
-    glossaryTerms: ["Workflow", "Predefined Code Path"],
-    kbIds: ["orchestration", "loop-engineering"],
-  },
-  {
-    id: "orchestration",
+    title: "Knowledge",
+    shortDefinition: "조직·제품의 자료를 모델이 참조할 수 있게 정리한 지식 층이다.",
+    arc: "grounding",
+    stageLabel: "접지",
+    question: "모델 밖의 사실을 어떻게 연결할까?",
+    limitationOfPrevious: "모델 내부 지식만으로는 최신·사내 정보가 부족했다.",
+    breakthrough: "근거 문서를 붙이는 지식 체계가 생겼다.",
+    whyBridge: "의미 검색을 위해 Embedding이 필요해졌다.",
+    lessonSlugs: ["grounding-and-citations", "hallucination-and-verification"],
+    glossaryTerms: ["Grounding", "Citation"],
+    kbIds: ["grounding-citations", "hallucination-verification"],
+  }),
+  C({
+    id: "embedding",
     order: 10,
-    title: "Orchestration — 하나로는 부족해지다",
-    era: "",
-    question: "일이 커지면 왜 에이전트를 '여럿' 쓰고, 누가 그들을 지휘할까?",
-    limitationOfPrevious:
-      "에이전트 하나의 컨텍스트와 시간에는 한계가 있다 — 큰 일을 통째로 맡기면 느려지고, 오류가 누적된다.",
-    breakthrough:
-      "일을 쪼개 서브에이전트에 위임하고 결과를 병합·조정하는 오케스트레이션이 등장해, 병렬성과 역할 분담이 가능해졌다.",
-    industryNow: "",
-    lessonSlugs: ["multi-agent-orchestration", "subagents-and-delegation"],
-    glossaryTerms: ["Orchestration", "Delegation"],
-    kbIds: ["orchestration", "subagents"],
-  },
-  {
-    id: "harness",
+    title: "Embedding",
+    shortDefinition: "텍스트를 의미 벡터로 바꿔 유사도를 계산하게 한다.",
+    arc: "grounding",
+    stageLabel: "접지",
+    question: "비슷한 문장을 어떻게 찾을까?",
+    limitationOfPrevious: "키워드 검색만으로는 의미가 안 맞았다.",
+    breakthrough: "벡터 공간에서 유사 문서를 찾을 수 있다.",
+    whyBridge: "검색 후 생성으로 이어지려면 RAG가 필요해졌다.",
+    lessonSlugs: ["embeddings-and-similarity"],
+    glossaryTerms: ["Embedding", "Vector"],
+    kbIds: ["embeddings-similarity"],
+  }),
+  C({
+    id: "rag",
     order: 11,
-    title: "Harness — 자율에 고삐를 채우다",
-    era: "",
-    question: "잘 도는 에이전트를 '믿고 맡길 수 있게' 만드는 것은 무엇일까?",
-    limitationOfPrevious:
-      "루프와 위임이 강력해질수록 실패도 조용히 커졌다 — 무한 루프, 권한 남용, 검증 없는 결과가 사람 모르게 쌓일 수 있었다.",
-    breakthrough:
-      "입력 게이트·권한 경계·루프 한도·로그·평가를 갖춘 실행 환경(하네스)이 에이전트를 감싸며, 자율성과 통제가 함께 설계되기 시작했다.",
-    industryNow: "",
-    lessonSlugs: ["harness-engineering-basics", "loop-engineering-basics"],
-    glossaryTerms: ["Harness Engineering", "Evaluation Harness"],
-    kbIds: ["harness", "loop-engineering"],
-  },
-  {
-    id: "production-ai",
+    title: "RAG",
+    shortDefinition: "검색으로 근거를 찾은 뒤 생성에 넣는 패턴이다.",
+    arc: "grounding",
+    stageLabel: "접지",
+    question: "환각을 줄이면서 최신 자료를 쓰려면?",
+    limitationOfPrevious: "모델 가중치만 믿으면 근거가 약하다.",
+    breakthrough: "검색→생성 파이프라인으로 근거를 붙인다.",
+    whyBridge: "읽기만으로는 부족해 행동하려면 Tool Calling이 필요해졌다.",
+    lessonSlugs: ["explain-context-and-rag"],
+    glossaryTerms: ["RAG", "Retrieval"],
+    kbIds: ["rag"],
+  }),
+  C({
+    id: "tool-calling",
     order: 12,
-    title: "Production AI — 데모가 제품이 되다",
-    era: "",
-    question: "돌아가는 AI와 '운영해도 되는' AI의 차이는 무엇일까?",
-    limitationOfPrevious:
-      "하네스까지 갖춰도 그것은 한 번의 실행 이야기다 — 매일, 수천 명에게, 비용과 사고 대응까지 책임지는 것은 다른 문제다.",
-    breakthrough:
-      "평가(eval)·모니터링·롤백·secret 관리·배포 체크리스트가 AI 시스템에 이식되며, AI 엔지니어링이 소프트웨어 운영의 규율과 합류했다.",
-    industryNow: "",
+    title: "Tool Calling",
+    shortDefinition: "모델이 스키마에 맞춰 도구를 호출해 행동을 수행한다.",
+    arc: "action",
+    stageLabel: "행동",
+    question: "모델이 말만 하지 않고 일을 하려면?",
+    limitationOfPrevious: "텍스트 답변만으로는 실제 시스템을 바꾸지 못한다.",
+    breakthrough: "함수 호출 형식의 도구 사용이 표준화되기 시작했다.",
+    whyBridge: "도구 연결이 제각각이라 MCP 같은 표준이 필요해졌다.",
+    lessonSlugs: ["explain-tool-agent-mcp"],
+    glossaryTerms: ["Tool Calling", "Function Calling"],
+    kbIds: ["tool-calling"],
+  }),
+  C({
+    id: "mcp",
+    order: 13,
+    title: "MCP",
+    shortDefinition: "모델과 도구·데이터를 연결하는 표준 프로토콜이다.",
+    arc: "action",
+    stageLabel: "행동",
+    question: "N×M 연결을 어떻게 줄일까?",
+    limitationOfPrevious: "제품마다 다른 도구 연결 방식이 중복되었다.",
+    breakthrough: "Host·Client·Server 경계로 연결을 표준화한다.",
+    whyBridge: "재사용 가능한 능력 묶음으로 Skill이 필요해졌다.",
+    lessonSlugs: ["explain-tool-agent-mcp", "mcp-enabled-tool-project"],
+    glossaryTerms: ["MCP"],
+    kbIds: ["mcp"],
+  }),
+  C({
+    id: "skill",
+    order: 14,
+    title: "Skill",
+    shortDefinition: "반복 가능한 지시·도구·절차를 패키지로 묶은 능력이다.",
+    arc: "action",
+    stageLabel: "행동",
+    question: "같은 작업을 매번 처음부터 설명하지 않으려면?",
+    limitationOfPrevious: "프롬프트와 도구 설정이 흩어져 재사용이 어려웠다.",
+    breakthrough: "스킬 단위로 능력을 배포·재사용한다.",
+    whyBridge: "여러 단계 자율 실행을 위해 Agent가 필요해졌다.",
+    lessonSlugs: ["designing-reusable-skills", "context-engineering-mcp-skills"],
+    glossaryTerms: ["Skill"],
+    kbIds: ["skills"],
+  }),
+  C({
+    id: "agent",
+    order: 15,
+    title: "Agent",
+    shortDefinition: "목표를 위해 계획·도구 사용·관찰을 반복하는 실행 단위다.",
+    arc: "agency",
+    stageLabel: "자율",
+    question: "한 번의 호출이 어떻게 작업 루프가 되는가?",
+    limitationOfPrevious: "단일 응답으로는 긴 작업을 끝내지 못한다.",
+    breakthrough: "루프와 도구로 다단계 작업을 수행한다.",
+    whyBridge: "한 Agent가 모든 일을 하기 어려워 SubAgent 위임이 필요해졌다.",
+    lessonSlugs: ["agent-loop-anatomy", "ai-workflow-design"],
+    glossaryTerms: ["Agent", "Agent Loop"],
+    kbIds: ["agent-loop"],
+  }),
+  C({
+    id: "subagent",
+    order: 16,
+    title: "SubAgent",
+    shortDefinition: "좁은 역할·별도 문맥을 가진 하위 실행 단위다.",
+    arc: "agency",
+    stageLabel: "자율",
+    question: "전문 작업을 어떻게 나눠 맡길까?",
+    limitationOfPrevious: "단일 컨텍스트에 모든 역할을 넣으면 혼란이 커진다.",
+    breakthrough: "역할 분리와 위임으로 전문성을 나눈다.",
+    whyBridge: "여러 단계를 안정적으로 이으려면 Workflow가 필요해졌다.",
+    lessonSlugs: ["subagents-and-delegation"],
+    glossaryTerms: ["SubAgent"],
+    kbIds: ["subagents"],
+  }),
+  C({
+    id: "workflow",
+    order: 17,
+    title: "Workflow",
+    shortDefinition: "단계·조건·핸드오프로 작업을 순서화한 흐름이다.",
+    arc: "agency",
+    stageLabel: "자율",
+    question: "반복 가능한 작업 순서를 어떻게 고정할까?",
+    limitationOfPrevious: "즉흥 루프만으로는 재현과 감사가 어렵다.",
+    breakthrough: "명시적 단계와 전이로 작업을 구조화한다.",
+    whyBridge: "여러 Agent·경로를 조율하려면 Orchestration이 필요해졌다.",
+    lessonSlugs: ["ai-workflow-design", "automation-workflow-project"],
+    glossaryTerms: ["Workflow"],
+    kbIds: ["orchestration"],
+  }),
+  C({
+    id: "orchestration",
+    order: 18,
+    title: "Orchestration",
+    shortDefinition: "여러 Agent·도구·핸드오프를 누가 언제 맡길지 조율한다.",
+    arc: "agency",
+    stageLabel: "자율",
+    question: "여러 실행 단위를 어떻게 맞춰 돌릴까?",
+    limitationOfPrevious: "워크플로만으로는 역할 간 라우팅 기준이 약했다.",
+    breakthrough: "매니저·핸드오프·도구 호출로 조율한다.",
+    whyBridge:
+      "어떤 일을 누구에게·어떤 비용으로 맡길지 기준이 필요해 Model Routing 하위 학습 경로가 이어진다. 결과는 Evaluation으로 측정한다.",
+    lessonSlugs: ["multi-agent-orchestration"],
+    glossaryTerms: ["Orchestration", "Handoff"],
+    kbIds: ["orchestration"],
+    subordinateRoutes: [{ href: "/model-routing", label: "Model Routing Learning Route" }],
+  }),
+  C({
+    id: "evaluation",
+    order: 19,
+    title: "Evaluation",
+    shortDefinition: "성공 기준을 정해 출력·경로 품질을 측정한다.",
+    arc: "reliability",
+    stageLabel: "신뢰",
+    question: "좋은 결과를 어떻게 판정할까?",
+    limitationOfPrevious: "데모 한 번으로 품질을 단정하기 쉽다.",
+    breakthrough: "루브릭·테스트·트레이스로 평가한다.",
+    whyBridge: "측정된 실행을 안전하게 감싸려면 Harness가 필요해졌다.",
+    lessonSlugs: ["ai-system-evaluation", "ai-assisted-testing-loop"],
+    glossaryTerms: ["Evaluation", "Eval"],
+    kbIds: ["ai-system-evaluation"],
+  }),
+  C({
+    id: "harness",
+    order: 20,
+    title: "Harness",
+    shortDefinition: "권한·샌드박스·승인·관측·복구로 Agent 실행을 감싼다.",
+    arc: "reliability",
+    stageLabel: "신뢰",
+    question: "자율 실행을 어떻게 안전하게 묶을까?",
+    limitationOfPrevious: "평가만으로는 권한·사고 전파를 막기 어렵다.",
+    breakthrough: "제어면과 실행면을 분리해 가드레일을 둔다.",
+    whyBridge: "운영 환경에 올리면 Production AI 문제가 남는다.",
+    lessonSlugs: ["harness-engineering-basics", "tool-permissions-sandboxes"],
+    glossaryTerms: ["Harness", "Sandbox", "Guardrails"],
+    kbIds: ["harness", "tool-permissions-sandboxes"],
+  }),
+  C({
+    id: "production-ai",
+    order: 21,
+    title: "Production AI",
+    shortDefinition: "모니터링·롤백·비용·보안을 포함한 운영 가능한 AI 시스템이다.",
+    arc: "reliability",
+    stageLabel: "신뢰",
+    question: "데모를 제품으로 어떻게 운영할까?",
+    limitationOfPrevious: "실험 환경의 성공이 운영 성공을 보장하지 않는다.",
+    breakthrough: "관측·배포·사고 대응을 제품 루프에 넣는다.",
+    whyBridge: "여기까지가 Atlas 정본 21개 Concept 여정의 끝이다. 심화는 Textbook·KB로 이어진다.",
     lessonSlugs: [
-      "ai-system-evaluation",
       "monitoring-errors-rollbacks",
       "deployment-checklist-playbook",
-      "production-env-and-secrets",
+      "explain-risk-and-verification",
     ],
-    glossaryTerms: ["Evaluation", "Monitoring", "Rollback"],
-    kbIds: ["ai-system-evaluation"],
-  },
-] as const satisfies readonly AtlasNode[]
+    glossaryTerms: ["Observability", "Rollback"],
+    kbIds: ["monitoring-errors-rollbacks"],
+  }),
+]
 
-export function getAtlasNode(id: string): AtlasNode | undefined {
-  return ATLAS_NODES.find((n) => n.id === id)
-}
+export const ATLAS_CONCEPTS: readonly AtlasConcept[] = RAW.map((concept, index, arr) => ({
+  ...concept,
+  previousConceptId: index === 0 ? null : (arr[index - 1]?.id ?? null),
+  nextConceptId: index === arr.length - 1 ? null : (arr[index + 1]?.id ?? null),
+}))
+
+/** @deprecated use ATLAS_CONCEPTS — kept for gradual rename */
+export const ATLAS_NODES = ATLAS_CONCEPTS
+
+export const ATLAS_CONCEPT_COUNT = 21
+export const ATLAS_SECTION_COUNT = 14

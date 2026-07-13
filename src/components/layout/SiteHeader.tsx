@@ -10,6 +10,7 @@ import { ThemeToggle } from "@/features/theme/ThemeToggle"
 
 const NAV_ITEMS = [
   { href: "/", label: "홈" },
+  { href: "/atlas", label: "Atlas" },
   { href: "/curriculum", label: "커리큘럼" },
   { href: "/glossary", label: "용어 사전" },
   { href: "/resources", label: "공식 문서" },
