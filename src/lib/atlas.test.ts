@@ -63,10 +63,37 @@ describe("atlas chapters", () => {
     }
   })
 
+  it("parses real headings with non-empty bodies for sections 1–4 on every concept", () => {
+    for (const concept of ATLAS_CONCEPTS) {
+      const raw = fs.readFileSync(
+        path.join(process.cwd(), "src", "content", "atlas", "chapters", `${concept.id}.md`),
+        "utf-8",
+      )
+      // Guard against accidental literal \\n corruption from generators
+      expect(raw.includes("\\n"), `${concept.id} must not contain literal backslash-n`).toBe(false)
+      expect((raw.match(/^## /gm) || []).length, concept.id).toBe(14)
+
+      const sections = getAtlasChapterSections(concept.id)
+      expect(sections, concept.id).toBeDefined()
+      const firstFour = (sections ?? []).slice(0, 4)
+      expect(firstFour).toHaveLength(4)
+      for (const section of firstFour) {
+        expect(section.empty, `${concept.id}/${section.id} should not be empty`).toBe(false)
+        expect(section.content.trim().length, `${concept.id}/${section.id}`).toBeGreaterThan(10)
+        expect(section.title.length).toBeGreaterThan(0)
+      }
+      // Remaining slots exist even if partial
+      expect(
+        (sections ?? []).filter((s) => s.content.includes("partial") || s.empty).length,
+      ).toBeGreaterThan(0)
+    }
+  })
+
   it("parses section titles in PRD order", () => {
     const md = ATLAS_CHAPTER_SECTIONS.map((s) => `## ${s.title}\n\nbody\n`).join("\n")
     const sections = parseAtlasChapterMarkdown(md)
     expect(sections.map((s) => s.id)).toEqual(ATLAS_CHAPTER_SECTIONS.map((s) => s.id))
+    expect(sections.every((s) => !s.empty)).toBe(true)
   })
 
   it("chapter files exist on disk", () => {
