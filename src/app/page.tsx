@@ -31,6 +31,9 @@ export default function HomePage() {
             <PrimaryLink href="/lessons/ai-vibe-coding-orientation" variant="secondary">
               첫 강의 시작
             </PrimaryLink>
+            <PrimaryLink href="/model-routing" variant="secondary">
+              Model Routing 학습 경로
+            </PrimaryLink>
             <PrimaryLink href="/about" variant="secondary">
               프로젝트 소개
             </PrimaryLink>

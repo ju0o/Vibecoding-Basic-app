@@ -4,7 +4,7 @@
  * Keep in sync with ATLAS-MODEL-ROUTING-DATA-CONTRACT.md
  */
 
-export const MODEL_ROUTING_ROUTE_ID = "model-routing" as const;
+export const MODEL_ROUTING_ROUTE_ID = "model-routing" as const
 
 export const MODEL_ROUTING_UNIT_IDS = [
   "lu-task-classification",
@@ -16,93 +16,93 @@ export const MODEL_ROUTING_UNIT_IDS = [
   "lu-evaluation-retry",
   "lu-human-escalation",
   "lu-routing-observability",
-] as const;
+] as const
 
-export type ModelRoutingUnitId = (typeof MODEL_ROUTING_UNIT_IDS)[number];
+export type ModelRoutingUnitId = (typeof MODEL_ROUTING_UNIT_IDS)[number]
 
 /** Educational relative classification — not vendor tiers. */
-export type EducationalModelClass = "cheap" | "standard" | "frontier" | "none";
+export type EducationalModelClass = "cheap" | "standard" | "frontier" | "none"
 
-export type ClaimScope = "educational_pattern" | "product_documented";
+export type ClaimScope = "educational_pattern" | "product_documented"
 
-export type AxisScore = 1 | 2 | 3 | 4 | 5;
+export type AxisScore = 1 | 2 | 3 | 4 | 5
 
 export type RoutingAxes = {
-  difficulty: AxisScore;
-  risk: AxisScore;
-  repetition: AxisScore;
-  judgment: AxisScore;
-  contextScope: AxisScore;
-  reversibility: AxisScore;
-};
+  difficulty: AxisScore
+  risk: AxisScore
+  repetition: AxisScore
+  judgment: AxisScore
+  contextScope: AxisScore
+  reversibility: AxisScore
+}
 
 export type AxisCondition = {
-  min?: AxisScore;
-  max?: AxisScore;
-};
+  min?: AxisScore
+  max?: AxisScore
+}
 
 export type RoutingRule = {
-  id: string;
-  name: string;
-  priority: number;
+  id: string
+  name: string
+  priority: number
   when: {
-    difficulty?: AxisCondition;
-    risk?: AxisCondition;
-    repetition?: AxisCondition;
-    judgment?: AxisCondition;
-    contextScope?: AxisCondition;
-    reversibility?: AxisCondition;
-  };
-  then: {
-    taskClass: string;
-    executor: string;
-    modelClass: EducationalModelClass;
-    verification: string;
-    approvalRequired: boolean;
-    onFailure: string;
-    rationale: string;
-  };
-  claimScope: ClaimScope;
-  sources?: string[];
-};
+    difficulty?: AxisCondition
+    risk?: AxisCondition
+    repetition?: AxisCondition
+    judgment?: AxisCondition
+    contextScope?: AxisCondition
+    reversibility?: AxisCondition
+  }
+  outcome: {
+    taskClass: string
+    executor: string
+    modelClass: EducationalModelClass
+    verification: string
+    approvalRequired: boolean
+    onFailure: string
+    rationale: string
+  }
+  claimScope: ClaimScope
+  sources?: string[]
+}
 
 export type RoutingScenario = {
-  id: string;
-  title: string;
-  summary: string;
-  axes: RoutingAxes;
-  learningFocus: string[];
-  expectedPrimaryRuleId?: string;
-};
+  id: string
+  title: string
+  summary: string
+  axes: RoutingAxes
+  learningFocus: string[]
+  expectedPrimaryRuleId?: string
+}
 
 export type RoutingDecisionResult = {
-  appliedRuleIds: string[];
-  classification: string;
-  recommendedExecutor: string;
-  recommendedModelClass: EducationalModelClass;
+  appliedRuleIds: string[]
+  classification: string
+  recommendedExecutor: string
+  recommendedModelClass: EducationalModelClass
   /** Educational relative cost index — not currency. */
-  relativeCostIndex: number;
-  rationale: string;
-  verificationMethod: string;
-  approvalRequired: boolean;
-  nextStrategyOnFailure: string;
-  claimScope: ClaimScope;
-  textRouteTable: string;
-};
+  relativeCostIndex: number
+  rationale: string
+  verificationMethod: string
+  approvalRequired: boolean
+  nextStrategyOnFailure: string
+  claimScope: ClaimScope
+  textRouteTable: string
+}
 
 export type ModelRoutingUnitProgress = {
-  visited: boolean;
-  read: boolean;
-  quizBestScore: number;
-  simulatorDone: boolean;
-  teachBackDone: boolean;
-};
+  visited: boolean
+  read: boolean
+  quizBestScore: number
+  simulatorDone: boolean
+  teachBackDone: boolean
+}
 
 export type ModelRoutingRouteProgress = {
-  units: Partial<Record<ModelRoutingUnitId, ModelRoutingUnitProgress>>;
-  lastUnitId?: ModelRoutingUnitId;
-  simulatorRuns?: number;
-};
+  units: Partial<Record<ModelRoutingUnitId, ModelRoutingUnitProgress>>
+  lastUnitId?: ModelRoutingUnitId
+  simulatorRuns?: number
+}
 
 /** Logical graph edge kinds reused from Education Layer where possible. */
 export type ModelRoutingEdgeKind =
@@ -113,12 +113,12 @@ export type ModelRoutingEdgeKind =
   | "evaluated_by"
   | "bounded_by"
   | "deepens"
-  | "evidenced_by";
+  | "evidenced_by"
 
 export type ModelRoutingEdge = {
-  id: string;
-  kind: ModelRoutingEdgeKind;
-  from: string;
-  to: string;
-  whyBridge?: string;
-};
+  id: string
+  kind: ModelRoutingEdgeKind
+  from: string
+  to: string
+  whyBridge?: string
+}

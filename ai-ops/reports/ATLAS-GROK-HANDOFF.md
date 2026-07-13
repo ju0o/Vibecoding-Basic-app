@@ -2,129 +2,97 @@
 
 | Field | Value |
 |---|---|
-| Updated | 2026-07-13 (post GO-9 pilot) |
+| Updated | 2026-07-13 (post Product Waves) |
 | Branch | master |
-| HEAD | c6ccee2 (ATLAS-GO9 contract pilot); prior ATLAS-OPS dcae130, 996cfad |
-| Current Goal | Grok Multi-Agent OS enabled; MR product work waits for next scoped wave |
-| Current Phase | **OS track complete** (GO-2…GO-9 pilot) |
-| Next work | Operator review; optional app-wiring of MR-1 types under new allowlist |
+| HEAD | see `git log -1` after product commits |
+| Current Goal | Interactive Atlas V2; Model Routing subordinate route productized |
+| Current Phase | **READY_FOR_RELEASE_REVIEW** (Model Routing slice) |
+| Next work | Operator review; optional push; Phase 1 21/14 rebaseline later; content deepen via P-01/P-02 if product facts expand |
 
 ---
 
-## Goal
+## Final Goal
 
-Non-developers understand AI engineering via accurate interactive Atlas V2. Grok Multi-Agent OS is the default Atlas V2 entry point.
-
----
-
-## Completed phases
-
-| Phase | Status | Decision |
-|---|---|---|
-| GO-0 Audit | PASS | CONTINUE |
-| GO-1 Operating Plan | **APPROVED** | CONTINUE |
-| GO-2 AGENTS.md + Handoff | PASS | CONTINUE |
-| GO-3 Read-only agents + pilot | PASS | CONTINUE |
-| GO-4 Research/Curriculum skills + pilot | PASS | CONTINUE |
-| GO-5 Content/Interaction workers | PASS (spec-only) | CONTINUE |
-| GO-6 Implementer contract | PASS (allowlist refusal + contract write) | CONTINUE |
-| GO-7 Independent Reviewer | PASS (ops artifacts) | CONTINUE |
-| GO-8 Scripts/QA | PASS | CONTINUE |
-| GO-9 MR-1 Data Contract pilot | PASS (ai-ops/contracts only) | COMPLETE for pilot |
+비개발자가 Day 1부터 AI Engineering 역사·원리·연결·운영 구조를 이해하는 인터랙티브 플랫폼.
 
 ---
 
-## Approved decisions
+## Completed
 
-1. Education SSOT wins over ops docs.
-2. Model Routing Feature Spec MR-0 approved.
-3. Grok OS = default Atlas V2 entry; AI-Ops pipeline preserved.
-4. Continuous GO-2…GO-9 with gates (this run finished ops track).
-5. Phase 1: preserve, never mix into OS commits.
-6. No push/reset/clean/rebase without explicit order.
-7. GO-9 limited to data contract under `ai-ops/contracts/**`.
+### Grok OS
+GO-0…GO-9 complete (prior commits dcae130…9b8b5eb).
+
+### Product Waves
+| Wave | Status |
+|---|---|
+| PW-0 Reconciliation | PASS — `ATLAS-PRODUCT-WAVE-RECONCILIATION.md` |
+| PW-1 Contract integration | PASS — `src/lib/model-routing/contract.ts` |
+| PW-2 Learning Route shell | PASS — `/model-routing` + 9 units |
+| PW-3 Rule engine + scenarios | PASS — pure `evaluateRouting` + fixtures |
+| PW-4 Diagram | PASS — SVG + keyboard list |
+| PW-5 Simulator | PASS — client island, no API |
+| PW-6 Content | PASS — 14 blocks × 9 units (educational) |
+| PW-7 Quiz | PASS |
+| PW-8 Graph | PASS — edge table |
+| PW-9 Progress | PASS — separate LS key helpers (no lesson migration) |
+| PW-10 Nav | PASS — home CTA |
+| PW-11 A11y | PASS — aria-live, text table, non-color risk labels |
+| PW-12 Source QA | PASS — claimScope educational_pattern; KB links |
+| PW-13 Full QA | PASS — lint/typecheck/test/build |
+| PW-14 | RC checklist = this handoff + STATE |
 
 ---
 
-## Forbidden (standing)
-
-- 21 / 14 changes, BUILD-PLAN activation
-- Approved KB body edits without P-01/P-02
-- Simulator UI / large content / progress migration without new approval
-- Phase 1 delete/reset/clean
-- push/force/deploy without Human Approval
-- App import of contract without new Context Package allowlist for `src/**`
-
----
-
-## Protected Phase 1 inventory
+## URLs (static export)
 
 ```text
-M  src/components/layout/SiteHeader.tsx
-M  src/content/atlas.ts
-?? src/app/atlas/**
-?? src/content/atlas/**
-?? src/features/atlas/**
-?? src/lib/atlas.ts
-?? src/lib/atlas-progress.ts
-?? src/lib/atlas.test.ts
-?? ai-ops/ATLAS-P1-PENDING.md
-?? ai-ops/reports/atlas-phase-1-impact-report.md
+/model-routing
+/model-routing/simulator
+/model-routing/lu-task-classification … lu-routing-observability
 ```
 
 ---
 
-## Files created/modified (Grok OS track)
+## Protected Phase 1 (still uncommitted)
 
-### Created
-- `AGENTS.md`
-- `.grok/agents/atlas-*.md` (7 agents)
-- `.grok/skills/atlas-*/SKILL.md` (8 skills)
-- `scripts/atlas/check-*.mjs` (4 scripts)
-- `ai-ops/reports/ATLAS-GROK-HANDOFF.md`
-- `ai-ops/reports/grok-runs/2026-07-13-go-pipeline-pilots.md`
-- `ai-ops/contracts/ATLAS-MODEL-ROUTING-DATA-CONTRACT.md`
-- `ai-ops/contracts/model-routing-data-contract.ts`
+```text
+src/app/atlas/**
+src/content/atlas/**
+src/features/atlas/**   # includes local client-boundary fix (LessonMarkdown/fs)
+src/lib/atlas*.ts
+src/content/atlas.ts (dirty)
+src/components/layout/SiteHeader.tsx (dirty Atlas nav)
+ai-ops/ATLAS-P1-PENDING.md
+ai-ops/reports/atlas-phase-1-impact-report.md
+```
 
-### Modified
-- `ai-ops/STATE.md`
-- `ai-ops/roadmap/ATLAS-GROK-MULTI-AGENT-OPERATING-PLAN.md` (approved)
-- (prior session) Education Layer + Feature Spec status docs
+Do **not** mix into product commits.
 
 ---
 
-## Tests / scripts (last run)
+## Tests (last)
 
 | Command | Result |
 |---|---|
-| `node scripts/atlas/check-ssot-freezes.mjs` | **PASS** |
-| `node scripts/atlas/check-model-routing-units.mjs` | **PASS** |
-| `node scripts/atlas/check-ops-inventory.mjs` | **PASS** |
-| `node scripts/atlas/check-protected-paths.mjs` | **PASS** (info: phase1 present in WT) |
-| `node scripts/atlas/check-protected-paths.mjs --staged` | **PASS** (empty staged protect) |
-| `npm run verify` | **NOT RUN** (no intentional app src change) |
-
----
-
-## Risks
-
-- Phase 1 still uncommitted; accidental stage risk
-- Contract TS not in app build — intentional
-- Token limits — refresh this handoff first in new sessions
+| biome lint | PASS |
+| tsc | PASS |
+| vitest (incl. model-routing 6) | PASS |
+| next build (static export) | PASS |
+| scripts/atlas check-ssot-freezes | PASS |
 
 ---
 
 ## Resume prompt
 
 ```text
-Read AGENTS.md, ai-ops/STATE.md, ai-ops/reports/ATLAS-GROK-HANDOFF.md.
-Grok OS GO-2..GO-9 pilot is done. Phase 1 preserved.
-Next product work needs a new Context Package allowlist.
-No push. Education SSOT wins. Use scripts/atlas for freezes.
+Read AGENTS.md, STATE.md, this handoff, ATLAS-LONG-RUNNING-PRODUCT-PLAN.md.
+Model Routing product slice is at /model-routing. Phase1 remains uncommitted.
+No push unless operator orders. Education freezes intact.
 ```
 
 ---
 
-## Independent Review summary
+## Decision
 
-Ops artifacts: **approve_merge** for OS + contract pilot (not for Phase 1, not for app release).
+**READY_FOR_RELEASE_REVIEW** for Model Routing Learning Route product slice.  
+No push/deploy performed.

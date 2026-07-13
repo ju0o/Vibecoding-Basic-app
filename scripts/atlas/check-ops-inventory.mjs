@@ -2,10 +2,10 @@
 /**
  * Atlas GO-8: inventory required Grok OS files.
  */
-import fs from "node:fs";
-import path from "node:path";
+import fs from "node:fs"
+import path from "node:path"
 
-const root = process.cwd();
+const root = process.cwd()
 
 const required = [
   "AGENTS.md",
@@ -30,13 +30,13 @@ const required = [
   "scripts/atlas/check-ssot-freezes.mjs",
   "scripts/atlas/check-ops-inventory.mjs",
   "scripts/atlas/check-model-routing-units.mjs",
-];
+]
 
-const missing = required.filter((p) => !fs.existsSync(path.join(root, p)));
+const missing = required.filter((p) => !fs.existsSync(path.join(root, p)))
 const result = {
   ok: missing.length === 0,
   required_count: required.length,
   missing,
-};
-console.log(JSON.stringify(result, null, 2));
-process.exit(result.ok ? 0 : 1);
+}
+console.log(JSON.stringify(result, null, 2))
+process.exit(result.ok ? 0 : 1)
