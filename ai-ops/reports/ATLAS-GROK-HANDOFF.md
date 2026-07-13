@@ -4,7 +4,7 @@
 |---|---|
 | Updated | 2026-07-13 (post GO-9 pilot) |
 | Branch | master |
-| HEAD | c32a802 prior to ATLAS-OPS commits (check `git log -1` after commits) |
+| HEAD | c6ccee2 (ATLAS-GO9 contract pilot); prior ATLAS-OPS dcae130, 996cfad |
 | Current Goal | Grok Multi-Agent OS enabled; MR product work waits for next scoped wave |
 | Current Phase | **OS track complete** (GO-2…GO-9 pilot) |
 | Next work | Operator review; optional app-wiring of MR-1 types under new allowlist |
