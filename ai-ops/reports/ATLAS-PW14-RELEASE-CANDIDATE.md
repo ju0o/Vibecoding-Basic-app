@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Date | 2026-07-13 |
-| HEAD (product) | `4ff3de4` (`ATLAS-PW: ship Model Routing learning route product slice`) |
+| HEAD (product) | `e325073` (PW-14 RC) · product code `4ff3de4` |
 | Verdict | **READY_FOR_RELEASE_REVIEW** |
 | Push | **not performed** |
 | Deploy | **not performed** |
