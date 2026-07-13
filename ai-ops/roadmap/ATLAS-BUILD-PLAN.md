@@ -1,11 +1,13 @@
-# AI Engineering Atlas — 구현 계획 (Phase-Gated Build Plan)
+# AI Engineering Atlas — 구현 계획 (Phase-Gated Build Plan, LEGACY DRAFT)
+
+> **HOLD (2026-07-13):** 이 문서는 12노드·13섹션 초기안이다. 최신 정본 후보는 [ATLAS-EDUCATION-LAYER.md](ATLAS-EDUCATION-LAYER.md)의 21개 개념·14개 챕터 섹션·Phase 0~12 계획이다. 운영자가 새 PRD를 승인하기 전에는 이 문서를 근거로 구현을 진행하지 않는다. 승인 후 본 문서를 새 정본에 맞게 재작성한다.
 
 | | |
 |---|---|
-| 날짜 | 2026-07-12 (운영자 PRD 승인 + 구현 지시) |
-| 상위 문서 | [ATLAS-EDUCATION-LAYER.md](ATLAS-EDUCATION-LAYER.md) (PRD, §번호 인용은 그 문서 기준) |
-| 진행 방식 | **Phase 단위. 각 Phase 완료 → 운영자 승인 → 다음 Phase.** 한 번에 구현하지 않는다 |
-| 챕터 형식 | 본 문서 §B의 **13섹션 형식이 정본** — PRD의 5섹션 초안을 대체한다(운영자 지시) |
+| 날짜 | 2026-07-12 초기안, 2026-07-13 HOLD |
+| 상위 문서 | [ATLAS-EDUCATION-LAYER.md](ATLAS-EDUCATION-LAYER.md) — 최신 PRD 후보 |
+| 진행 방식 | **실행 금지.** 최신 PRD 승인 후 Phase 1에서 재작성 |
+| 챕터 형식 | 이 문서의 13섹션은 **legacy**. 최신 PRD 후보의 14섹션이 승인 대상 |
 
 ---
 
@@ -278,4 +280,4 @@ ATLAS-P7: polish & launch — full QA sweep, home banner, public deploy
 
 - 각 Phase 완료 시 보고 형식: 산출물 목록 · verify 결과 · 테스트/QA 결과 · 스크린 확인 포인트 · 다음 Phase 요약. **운영자 "승인" 후에만 다음 Phase 착수.**
 - Phase 내 설계 변경이 필요하면 본 문서 해당 절을 먼저 수정·보고 후 구현(문서=정본).
-- 현재 상태: **Phase 1 승인 대기.**
+- 현재 상태: **HOLD — 최신 21개 개념·14섹션 PRD 승인 대기.**

@@ -1,543 +1,887 @@
-# AI Engineering Atlas — Education Layer PRD (전체 기획서 · 단일 정본)
+# AI Engineering Atlas V2 PRD
 
-| | |
+| 항목 | 내용 |
 |---|---|
-| 날짜 | 2026-07-12 (운영자 지시로 전면 기획, v2) |
-| 상태 | **현행 단일 정본(SSOT)** — 구현 전 기획 전용. Lab PRD(V2-PLATFORM-PRD.md)는 보류·아이디어 보관 |
-| 대원칙 | **Evolution, not Rebuild.** 기존 AI-Ops(Agent·Workflow·KB·Executor·QA·Dashboard)와 100강·용어집 456개·다이어그램을 그대로 유지하고, 그 위에 Education Layer만 추가한다 |
-| 선행 산출 | Phase A0(커밋 8364c09): `src/content/atlas.ts` 12노드 데이터 스켈레톤 — 본 PRD §20의 기반 |
-| 구현 계획 | **[ATLAS-BUILD-PLAN.md](ATLAS-BUILD-PLAN.md)** — Phase 1~7 게이트 실행. **챕터는 13섹션 형식(BUILD-PLAN §B)이 정본**(본 문서의 5섹션 초안 대체, 2026-07-12 운영자 지시) |
+| 문서 상태 | **DRAFT — 운영자 승인 대기** |
+| 작성 기준일 | 2026-07-13 |
+| 제품 방향 | **Evolution, not Rebuild** |
+| 제품 정의 | 기존 AI-Ops Architecture 위에 Education Layer를 추가한 인터랙티브 AI 엔지니어링 학습 플랫폼 |
+| 핵심 사용자 | AI Engineering을 체계적으로 이해하고 싶은 비개발자·초보 개발자 |
+| 구현 상태 | 이 문서는 분석·설계 산출물이다. **본 PRD 승인 전 신규 구현을 진행하지 않는다.** |
 
-## §0. 에이전트 읽기 규약 (토큰 낭비 방지 — 모든 후속 작업의 전제)
-
-- **작업 시작 시 읽는 것 = 본 문서의 해당 섹션 + `ai-ops/STATE.md`의 NEXT 블록. 끝.**
-- 본 문서는 길다 — **전체 읽기 금지.** NEXT가 지정한 섹션(예: "§9 애니메이션")만 offset-Read 또는 Grep으로 연다.
-- 기존 파이프라인 규칙이 필요하면 해당 프롬프트 파일 1개만(P-01~P-08). V1 운영 문서(ORCHESTRATION-PLAN·CODEX-PLAN·MASTER-PLAN 등)는 완결·동결 — 열지 말 것.
-- 인용 = 모드 B(`qa/CITATION-POLICY.md` §1: 짧은 인용, 문서당 ≤3블록, 출처 링크 필수).
-- 기존 강의·용어·KB 확인은 Grep으로 해당 항목만.
+> 정본 결정: Atlas의 학습 흐름은 **21개 핵심 개념**, 모든 챕터는 **14개 공통 섹션**을 사용한다. 기존 12노드 데이터 스켈레톤과 13섹션 구현 계획은 초기 탐색안이며, 본 PRD 승인 후 별도 Phase에서 안전하게 재기준화한다.
 
 ---
 
-# 1. 현재 구조 분석
+# 1. 현재 프로젝트 분석
 
-## 1.1 제품 층 (src/) — 실측 2026-07-12
+## 1.1 제품 자산 실측
 
-| 영역 | 현황 |
-|---|---|
-| 라우트 (9) | `/` 홈 · `/curriculum` · `/lessons/[slug]` (100강) · `/glossary` (456용어) · `/resources` · `/about` `/privacy` `/terms` `/license` |
-| 콘텐츠 SSOT | `src/content/` — `curriculum.ts`(13모듈·100강 메타) · `glossary.ts`(456용어, related 관계 내장) · `lessons/markdown/*.md`(V2 8섹션) · `lessons/diagrams/**/*.svg`(105+) · `resources.ts` · `schema.ts`(모듈·섹션 정의) · `atlas.ts`(A0 신설) |
-| 강의 읽기 UX | TOC · ReadingProgressBar · BackToTop · Sidebar · prev/next NavigationCards · LessonMarkdown(콜아웃·하이라이트·인용 렌더) |
-| 학습 상태 | `features/progress/` — LearningStateProvider(**localStorage, 서버 없음**), 완료·북마크·방문 추적, LearningDashboard |
-| 탐색 | `features/search/SiteSearch`(강의·용어·자료 통합 인덱스) · CurriculumExplorer(아코디언·진행률) · GlossaryBrowser(검색·카테고리) |
-| 빌드·배포 | Next.js `output: "export"` 정적 188페이지 · sitemap prebuild 훅 · Firebase Hosting · `npm run verify`(lint+typecheck+test+build) |
-| 공개 상태 | 모드 B 공개(2026-07-12): noindex 해제, 인용 정리 완료, Footer 비영리 고지·인스타 @ju0o___, LICENSE(MIT)+콘텐츠 고지 |
+현재 프로젝트는 이미 완성도 높은 교재 시스템과 콘텐츠 운영 시스템을 함께 갖고 있다.
 
-## 1.2 운영 층 (ai-ops/) — 이미 잘 설계되어 있어 그대로 쓴다
-
-| 구성 | 내용 |
-|---|---|
-| **Agents (14)** | research / source-collector / fact-check / lesson-writer / **quiz-agent** / **illustration-agent** / terminology / curriculum / education-review / qa / site-integration / release / final-editorial (+템플릿) — **퀴즈·일러스트 에이전트가 이미 존재** |
-| **Workflow** | P-01 수집 → P-02 검증(Score 80+) → P-03 재수집 → P-04 생성 → P-05 통합(해시 대조) → P-06 verify → P-07 수정 → P-08 릴리스 → P-09 배포. 상태 기계는 `STATE.md` |
-| **Knowledge Base** | `knowledge-base/entries/T01~T13` 90건 approved — frontmatter(id·score·prerequisites·consumers·sources+checked) + 13섹션 + **Quote Bank**(글자 단위 검증 인용) |
-| **Executor** | Fable(지휘·검증·릴리스·배포) / Codex(대량 무정지 미션) — 2인 체제, 미션 카탈로그 `prompts/CODEX-MISSIONS.md` |
-| **QA** | 기계 QA 5종(형식·인용 대조·링크·다이어그램 참조·용어 무결성) + 모드 B 인용 스캐너(`scripts/scan-citations.mjs`) + 표본 재검증 원칙 |
-| **Dashboard/State** | `DASHBOARD.md` · `STATE.md`(현황판+NEXT 블록) · `MASTER_PROGRESS.md` · 백로그 |
-
-## 1.3 진단 — 왜 지금 "Wiki"에 머무르는가
-
-| 강점 (자산) | 공백 (Education Layer가 채울 것) |
-|---|---|
-| 깊이: 100강 × 8섹션, 전 문장 KB 근거 | **서사 없음** — 용어들이 "왜, 어떤 순서로" 생겼는지의 이야기가 없다 |
-| 관계 원료: 강의 prerequisites, 용어 related, KB consumers가 **이미 데이터로 존재** | 관계가 **보이지 않는다** — 그래프·지도로 렌더되지 않음 |
-| 시간 원료: KB sources에 확인일·발표문 근거 | **타임라인 없음** — 발전사가 시각화되지 않음 |
-| 다이어그램 105+ | **정적** — 단계·상호작용 없음 |
-| 검색·용어집 | **찾아보기(lookup)형** — 목적어를 이미 아는 사람만 진입 가능 |
-| 진행률(localStorage) | 강의 단위뿐 — **여정 단위** 진행 감각 없음 |
-
-**결론**: 부족한 것은 콘텐츠가 아니라 **콘텐츠를 꿰는 층**이다. Education Layer는 신규 생산 최소·재조합 최대로 설계한다.
-
----
-
-# 2. 유지해야 하는 구조 (불변 조항)
-
-1. **ai-ops 전체 무수정** — agents 14종·workflow P-01~09·KB 스키마·executor 체제·QA 도구·DASHBOARD/STATE 형식. Atlas 콘텐츠도 이 파이프라인 **위에서** 생산된다(대체가 아니라 재사용).
-2. **기존 콘텐츠 무수정** — 100강 markdown·curriculum.ts·glossary.ts·다이어그램·resources. Atlas는 **참조만** 한다. (허용 예외: 헤더 메뉴 1건, 홈 배너 1건 — §16·§17)
-3. **기술 불변** — Next 정적 export · Firebase Hosting · localStorage 진행률(서버·계정 없음) · verify 게이트 · 모드 B 인용 · 비영리 공개 방침.
-4. **품질 불변** — KB Score 80+ · 인용 Quote Bank 글자 일치 · era/역사 서술은 **KB 확보분만**(추측 금지) · 극단값 표본 재검증.
-
----
-
-# 3. Education Layer 설계 (총론)
-
-## 3.1 층 구조 — 기존 위에 5개 부분층을 얹는다
-
-```
-┌────────────────────── Education Layer (신규) ──────────────────────┐
-│ ⑤ Guidance   Learning Roadmap · Progress (여정 안내)               │
-│ ④ Interaction Animation · Playground · Quiz (손으로 확인)          │
-│ ③ Time       Timeline (언제, 어떤 순서로)                          │
-│ ② Relation   Knowledge Graph · Concept Relationship (무엇과 연결)  │
-│ ① Story      12노드 Atlas Chapter (왜 등장했는가)                   │
-├────────────────────── Knowledge Layer (기존·무수정) ────────────────┤
-│ 100강 Lessons · 456 Glossary · 105+ Diagrams · Resources           │
-├────────────────────── Evidence Layer (기존·무수정) ─────────────────┤
-│ KB 90건 (Quote Bank·sources·checked) ← ai-ops 파이프라인이 생산     │
-└────────────────────────────────────────────────────────────────────┘
-```
-
-## 3.2 스토리 축 — 12노드 체인 (모든 부분층의 공통 뼈대)
-
-```
-AI → LLM → Prompt → Context → Memory → Tool → MCP
-→ Agent → Workflow → Orchestration → Harness → Production AI
-```
-
-각 노드는 세 질문에 답한다: **① 왜 등장했나(이전의 어떤 한계가)** · **② 무엇을 해결했나** · **③ 왜 이것만으로 부족했나 + 지금 산업은 어디인가**. — 용어 암기가 아니라 **필요의 역사**를 배운다.
-
-## 3.3 추가 원칙
-
-- **데이터 추가형(additive)**: 신규는 `src/content/atlas*` 데이터 파일과 `/atlas` 라우트뿐. 기존 파일은 참조 대상.
-- **관계는 승격, 생산은 최소**: prerequisites·related·consumers를 그래프 엣지로 **승격**(빌드 타임 계산). 신규 수작업 데이터는 노드 서사·타임라인 이벤트·퀴즈 문항뿐.
-- **커버리지 실측(A0)**: 12노드 중 10노드는 기존 강의 2~4편이 심화로 존재. 신규 KB는 AI·LLM 역사 1~2건.
-
----
-
-# 4. 기존 Knowledge Base 활용 방법
-
-| 용도 | 방법 |
-|---|---|
-| **챕터 인용 근거** | 각 노드의 `kbIds`(A0에 매핑 완료)가 근거 KB. 챕터의 인용은 해당 KB **Quote Bank에서만**, 모드 B(≤3블록) — explanation-practice 강의들이 검증한 재활용 패턴 그대로 |
-| **era / industryNow / Timeline 이벤트** | KB `sources`(공식 발표문·스펙·사전) 확보분만 사용. 부족하면 **P-01 신규 수집**(AI·LLM 역사 KB 1~2건) → P-02 Score 80+ → 사용. 확보 실패 시 해당 필드 공란 유지(추측 금지) |
-| **역추적** | KB frontmatter `consumers`에 `atlas: [nodeId]` 항목 추가(스키마 확장, 기존 필드 무변경) — "이 KB가 어느 노드를 지탱하나" 추적 |
-| **신선도** | 기존 stale-KB 30일 재확인 절차(M4)에 Atlas 소비 KB 자동 포함 — Timeline·industryNow가 낡으면 같은 절차로 보수 |
-| **특수 출처** | 용어 기원(예: vibe coding)은 기존 SOURCE-REGISTRY 특수 출처 절차(사전·Wayback 병기) 그대로 승계 |
-| **생산 주체** | 챕터·퀴즈·타임라인 데이터 모두 기존 에이전트 정의 재사용: research→source-collector→fact-check(P-01/02) · lesson-writer(챕터 P-04) · **quiz-agent**(문항) · **illustration-agent**(스텝 다이어그램) · site-integration(P-05) · qa·release |
-
----
-
-# 5. Learning Roadmap 설계
-
-## 5.1 여정 구조 — "노드 안 3단"
-
-각 노드는 같은 리듬으로 학습된다:
-
-```
-[Story]  Atlas Chapter (5~8분 읽기)     ← 신규, 비개발자 눈높이
-   ↓
-[Deep]   기존 강의 딥링크 2~4편 (선택)   ← 기존 100강, 무수정
-   ↓
-[Check]  Quiz 3~5문항 (2분)             ← 신규, 서사 이해 확인
-```
-
-## 5.2 트랙 (강제 아닌 권장)
-
-| 트랙 | 경로 | 소요 |
+| 영역 | 현재 자산 | 판단 |
 |---|---|---|
-| **스토리 일주** (기본) | Chapter 12편 + Quiz만 | 총 2~3시간 — "AI 엔지니어링 전체를 이야기로 한 바퀴" |
-| **심화 동반** | 각 노드에서 Deep까지 | 노드당 +1~3시간 — 기존 커리큘럼과 자연 합류 |
-| **역주행** (검색 유입) | 용어→노드→앞뒤 노드 | 자유 — Wiki 사용자를 여정으로 흡수 |
+| 프레임워크 | Next.js 16.2.10, React 19.2.7, TypeScript 6, Tailwind CSS 4 | 정적 교육 플랫폼에 충분하다. 프레임워크 교체가 필요하지 않다. |
+| 콘텐츠 | 13개 모듈, 100개 강의 Markdown, 456개 용어, 78개 SVG 다이어그램 | Atlas가 새로 만들기보다 연결해야 할 핵심 자산이다. |
+| 근거 체계 | approved KB 90건, Quote Bank, source checked, Knowledge Score | 서사·연표·기업·서비스 정보의 신뢰 기반으로 재사용할 수 있다. |
+| 읽기 UX | 8섹션 Deep Dive, 목차, 읽기 진행 바, 이전/다음, 관련 강의, 북마크 | 깊이 학습 층으로 유지한다. |
+| 탐색 | 커리큘럼 아코디언, 강의·용어·자료 통합 검색, 용어 필터 | lookup은 강하지만 개념의 발생 순서와 인과 관계는 보이지 않는다. |
+| 진행률 | localStorage 기반 완료·체크리스트·북마크·마지막 읽기 | 계정 없이 동작하는 좋은 기반이나 Atlas 여정 상태가 없다. |
+| 배포 | Next.js static export, Firebase Hosting, sitemap, verify 게이트 | V2에서도 유지한다. 서버를 전제로 한 기능은 MVP 범위에서 제외한다. |
+| 디자인 | 종이색 표면·그래파이트·명확한 블루, 다크 모드, 반응형 | 기존 디자인 토큰을 확장하고 재사용한다. |
 
-## 5.3 순서 규칙
+## 1.2 운영 자산 실측
 
-- 잠금(lock) 없음 — 권장 순서(1→12)와 "이전 장의 한계" 연결 카피로 **유도**하되 자유 탐색 허용. (성인 자율 학습자 대상 — 강제 잠금은 이탈 요인)
-- 저니 맵의 "다음 추천" = 미완료 노드 중 최저 order 1개 + 이어서 읽던 챕터.
+`ai-ops/`는 단순 문서 모음이 아니라 콘텐츠 생산 운영체제다.
+
+- Agent: research, source collection, fact check, lesson writing, quiz, illustration, terminology, education review, QA, integration, release 역할이 이미 분리되어 있다.
+- Workflow: P-01 수집부터 P-09 배포까지 상태 전이와 품질 게이트가 정의되어 있다.
+- Knowledge Base: 출처·확인일·점수·소비자를 추적할 수 있다.
+- QA: 형식, 인용, 링크, 다이어그램, 용어 무결성을 기계 검사한다.
+- Dashboard/State: 작업의 현재 상태와 다음 실행자를 기록한다.
+
+이 구조는 Atlas를 만드는 기반이며 대체 대상이 아니다. Atlas 콘텐츠도 같은 수집→검증→생성→통합→검증→릴리스 파이프라인을 통과해야 한다.
+
+## 1.3 현재 사용자 경험의 강점과 한계
+
+| 강점 | 현재 한계 |
+|---|---|
+| 개별 강의가 깊고 출처가 명확하다. | 처음 온 사용자는 무엇부터 왜 읽어야 하는지 알기 어렵다. |
+| 용어를 검색하면 빠르게 정의를 찾을 수 있다. | 검색할 용어를 이미 아는 사용자에게 유리하다. |
+| 관련 강의와 이전/다음 이동이 있다. | 기술 A의 한계가 기술 B를 낳았다는 인과 관계는 약하다. |
+| 다이어그램이 많다. | 대부분 정적이며 단계별 관찰·조작이 어렵다. |
+| 강의 진행률이 저장된다. | 전체 AI Engineering 여정에서 현재 위치를 보여주지 못한다. |
+| 운영 파이프라인이 엄격하다. | `STATE.md`와 `MASTER_PROGRESS.md` 일부 집계가 95/100과 100/100으로 어긋나는 상태 드리프트가 있다. |
+
+## 1.4 핵심 진단
+
+현재 프로젝트에 부족한 것은 콘텐츠 양이 아니다. 부족한 것은 다음 네 가지 연결이다.
+
+1. **인과 연결**: 왜 다음 기술이 필요해졌는가.
+2. **관계 연결**: 어떤 기술이 어떤 기술을 사용·보완·평가하는가.
+3. **시간 연결**: 언제 어떤 전환이 일어났는가.
+4. **행동 연결**: 읽은 개념을 어떻게 직접 관찰하고 설명하는가.
+
+따라서 V2는 기존 Wiki와 Textbook 사이에 Story·Map·Time·Practice를 제공하는 Education Layer를 추가해야 한다.
 
 ---
 
-# 6. Knowledge Graph 설계
+# 2. 유지해야 하는 구조
 
-## 6.1 노드·엣지 모델
+## 2.1 불변 구조
 
-| 노드 유형 | 수량 | 출처 |
-|---|---|---|
-| AtlasNode | 12 | atlas.ts (A0) |
-| Lesson | 100 | curriculum.ts (기존) |
-| Term | 456 | glossary.ts (기존) |
+1. `ai-ops/agents`, P-01~P-09, Knowledge Score, Citation Rule, QA·release 구조를 유지한다.
+2. `src/content/lessons/markdown`, `curriculum.ts`, `glossary.ts`, 기존 다이어그램을 Atlas의 원료로 사용한다.
+3. 기존 `/curriculum`, `/lessons/[slug]`, `/glossary`, `/resources` URL과 사용자 흐름을 보존한다.
+4. Next.js static export와 Firebase Hosting을 유지한다.
+5. 계정 없이 localStorage에 진행률을 저장하는 기본 방침을 유지한다.
+6. 라이트/다크 모드, 모바일 반응형, 키보드 접근성, reduced motion을 유지한다.
+7. 공식 출처 중심, Quote Bank 일치, KB Score 80+라는 콘텐츠 품질 기준을 유지한다.
 
-| 엣지 유형 | 의미 | 원료 (신규 수작업 여부) |
-|---|---|---|
-| `evolves-to` | 노드 n → n+1 (스토리 체인) | atlas.ts order — **완료** |
-| `deepens` | AtlasNode → Lesson (심화) | atlas.ts lessonSlugs — **완료** |
-| `defines` | AtlasNode → Term (핵심 용어) | atlas.ts glossaryTerms — **완료** |
-| `requires` | Lesson → Lesson (선행) | curriculum/백로그 prerequisites — **기존 데이터 승격, 수작업 0** |
-| `related` | Term ↔ Term | glossary related — **기존 데이터 승격, 수작업 0** |
-| `evidenced-by` | AtlasNode → KB | atlas.ts kbIds — **완료** (그래프 UI에는 옵션 표시) |
+## 2.2 유지 이유
 
-→ **그래프는 빌드 타임에 기존 데이터에서 파생 생성**한다. 신규 수작업 엣지는 없다. 무결성은 A0에서 만든 참조 검증 스크립트 방식(존재 검사)을 verify에 편입.
-
-## 6.2 뷰 2단계
-
-| 뷰 | 내용 | 인터랙션 |
-|---|---|---|
-| **전도(全圖)** `/atlas/graph` | 12노드를 성좌(constellation)로, 각 노드 주위에 핵심 용어 위성 | 노드 클릭→우측 패널(질문·한계·돌파 요약+진입 링크) · 용어 클릭→팝오버 |
-| **국소도** (챕터·용어 페이지 내) | 현재 항목 중심 1-hop 이웃 | 칩 클릭 이동 |
-
-## 6.3 렌더 제약
-
-- 정적 export 유지 → 물리 시뮬 라이브러리 지양. **빌드 타임 좌표 계산(고정 레이아웃) + 클라이언트 SVG** + CSS 트랜지션. 456용어 전부를 전도에 그리지 않는다 — 노드당 대표 용어 3~5개만 위성으로, 나머지는 국소도에서.
-- 모바일: 전도는 세로 스크롤 체인으로 강등(성좌는 데스크톱 확장).
+- 100개 강의는 Atlas보다 더 깊은 설명을 담당하는 검증된 Depth Layer다.
+- 456개 용어는 Atlas의 Concept Index이자 검색 진입점이다.
+- KB는 기업·서비스·역사처럼 변하기 쉬운 사실을 검증하는 Evidence Layer다.
+- 정적 export와 localStorage는 비용·보안·개인정보 부담을 낮춘다.
+- 기존 콘텐츠 파이프라인은 Atlas가 단순한 시각 데모로 변질되는 것을 막는다.
 
 ---
 
-# 7. Timeline 설계
+# 3. 개선해야 하는 구조
 
-## 7.1 데이터 스키마 (개념 — 구현은 A-phase에서)
+## 3.1 데이터 구조
 
-```
-TimelineEvent {
-  id, nodeId,              // 어느 노드의 사건인가
-  period,                  // "2017" | "2018–2020" | "2024-11" 등 표기 그대로
-  title, oneLiner,         // 사건 한 줄
-  kbId, sourceUrl          // 근거 KB + 원 출처 (필수 — 없으면 등재 불가)
+- 현재 강의·용어·KB 관계를 화면마다 다시 해석하지 않고, 빌드 시점에 파생되는 `AtlasIndex`로 통합한다.
+- 12노드 초기 스켈레톤을 21개 정본 개념 노드로 확장한다.
+- 챕터, 관계, 타임라인, 애니메이션, 플레이그라운드, 퀴즈를 각각 별도 데이터로 관리하되 `conceptId`로 결합한다.
+- 콘텐츠 스키마는 Zod 또는 현재 프로젝트의 타입 검증 패턴으로 빌드 시 검증한다.
+
+## 3.2 진행률 구조
+
+별도 Provider를 여러 개 만드는 대신 기존 `LearningStateProvider`를 하위 호환으로 확장한다.
+
+```ts
+type LearningStateV2 = {
+  version: 2
+  completedLessons: string[]
+  checklistItems: Record<string, string[]>
+  bookmarks: string[]
+  lastReadLessonSlug?: string
+  atlas: {
+    concepts: Record<string, {
+      visited: boolean
+      chapterRead: boolean
+      quizBestScore: number
+      practiceDone: boolean
+      teachBackDone: boolean
+    }>
+    lastConceptId?: string
+    completedPlaygrounds: string[]
+  }
 }
 ```
 
-## 7.2 두 층의 타임라인
+기존 저장값은 마이그레이션 함수가 V2로 승격하며, 실패하면 기존 강의 기록을 잃지 않는 방향으로 복구한다.
 
-| 층 | 위치 | 내용 |
-|---|---|---|
-| **거시 밴드** | `/atlas` 저니 맵 상단 + `/atlas/timeline` | 12노드의 era 밴드가 가로로 이어진 발전사 — "규칙의 시대 → 학습의 시대 → 대화의 시대 → 도구의 시대 → 자율의 시대 → 운영의 시대" 식 시대 묶음 |
-| **미시 이벤트** | 각 챕터의 "지금 산업은" 위 | 해당 노드의 사건 3~6개 점(예: MCP 노드 — 스펙 공개, 주요 호스트 채택) |
+## 3.3 검색 구조
 
-## 7.3 소싱 규칙 (엄격)
+현재 `lesson | glossary | resource` 검색 종류에 `concept | timeline | playground`를 추가한다. 검색 결과는 단순 일치 목록이 아니라 다음 질문에 답해야 한다.
 
-- 이벤트는 **KB sources에 실존하는 공식 근거**(발표문·스펙 버전·사전 등재·논문)만. 연도가 불확실하면 등재하지 않는다.
-- 1차 수집 대상(P-01 후보): Transformer/LLM 등장 계열, 주요 모델 세대, tool calling 공개, MCP 스펙(2025-11-25 등 이미 KB에 있음), vibe coding 등재(Collins 2025 — 이미 KB에 있음). **기존 KB에서 이미 캐낼 수 있는 이벤트가 상당수**다.
+- 이 개념의 한 줄 정의는 무엇인가.
+- Atlas의 몇 번째 위치인가.
+- 왜 등장했는가.
+- 깊게 읽을 기존 강의는 무엇인가.
+
+## 3.4 운영 구조
+
+- Atlas 항목도 `MASTER_PROGRESS`에 KB·chapter·interaction·QA 상태를 별도 열로 추적한다.
+- `STATE.md`, `DASHBOARD.md`, `MASTER_PROGRESS.md`의 집계는 한 스크립트가 생성하거나 검증하도록 하여 상태 드리프트를 막는다.
+- 현재 미커밋 Phase 1 코드는 폐기하지 않되, 본 PRD 승인 전에는 승인된 구현으로 간주하지 않는다.
 
 ---
 
-# 8. Concept Relationship 설계
+# 4. Education Layer 설계
 
-## 8.1 관계의 1급 시민 — "한계→돌파" 서사 엣지
+## 4.1 계층 구조
 
-일반 지식그래프의 "관련 있음"은 학습을 못 이끈다. Atlas의 핵심 관계는 방향과 이유가 있는 서사 엣지다:
+```text
+Experience Layer
+  Journey · Chapter · Graph · Timeline · Playground · Quiz · Progress
 
+Education Composition Layer
+  Concept Map · Why Bridge · Story Flow · Learning Recommendation
+
+Content Layer (기존)
+  100 Lessons · 456 Glossary Terms · 78 Diagrams · Resources
+
+Evidence Layer (기존)
+  90 Approved KBs · Quote Bank · Sources · Checked Dates
+
+Operations Layer (기존)
+  Agents · Executors · Workflow P-01~P-09 · QA · Dashboard
 ```
-[Prompt] ──"지시는 다듬지만, 모델은 우리 문서를 모른다"──▶ [Context]
+
+## 4.2 21개 정본 개념 흐름
+
+```text
+AI
+→ Machine Learning
+→ Deep Learning
+→ Generative AI
+→ LLM
+→ Prompt Engineering
+→ Context Engineering
+→ Memory
+→ Knowledge
+→ Embedding
+→ RAG
+→ Tool Calling
+→ MCP
+→ Skill
+→ Agent
+→ SubAgent
+→ Workflow
+→ Orchestration
+→ Evaluation
+→ Harness
+→ Production AI
 ```
 
-- 데이터: atlas.ts의 `limitationOfPrevious`(다음 노드 관점의 이전 한계) — **A0에서 12개 전부 작성 완료.**
-- UI 표현 3곳: ① 저니 맵 연결선 호버/탭 시 이 문장 노출 ② 챕터 도입부 "이전 세계의 한계" 카드 ③ 챕터 말미 "그래도 남은 문제" = 다음 엣지 예고.
+## 4.3 6개 학습 Arc
 
-## 8.2 보조 관계의 표현 위계
+| Arc | 개념 | 핵심 질문 |
+|---|---|---|
+| 1. Intelligence | AI → ML → Deep Learning | 규칙을 쓰는 대신 어떻게 학습하게 되었는가? |
+| 2. Generation | Generative AI → LLM | 분류·예측을 넘어 어떻게 생성과 대화가 가능해졌는가? |
+| 3. Grounding | Prompt → Context → Memory → Knowledge → Embedding → RAG | 모델이 우리의 목표·상태·자료를 어떻게 다루는가? |
+| 4. Action | Tool Calling → MCP → Skill | 모델이 어떻게 행동하고, 연결을 표준화하고, 재사용 능력을 갖는가? |
+| 5. Agency | Agent → SubAgent → Workflow → Orchestration | 한 번의 호출이 어떻게 반복·위임·조정되는 시스템이 되는가? |
+| 6. Reliability | Evaluation → Harness → Production AI | 동작하는 데모를 어떻게 믿고 운영하는 제품으로 만드는가? |
 
-| 관계 | UI |
+## 4.4 모든 챕터의 14개 공통 섹션
+
+| # | 섹션 | 작성 규칙 |
+|---|---|---|
+| 1 | 한 줄 정의 | 비개발자 언어 1~2문장 |
+| 2 | 왜 등장했는가 | 시대적·기술적 필요를 KB 근거로 설명 |
+| 3 | 이전 기술의 한계 | 직전 개념의 부족함과 연결 |
+| 4 | 무엇을 해결했는가 | 핵심 돌파구와 작동 원리 요약 |
+| 5 | 실제 사례 | 검증 가능한 사례 1~3개 |
+| 6 | 대표 기업 | 역사적 기여와 현재 채택을 구분, 공식 근거 필수 |
+| 7 | 대표 서비스 | 제품·서비스 역할과 공식 링크, 단순 홍보 금지 |
+| 8 | 실제 프로젝트에서는 어떻게 사용하는가 | 시스템 안의 위치, 입력·출력·실패 지점 설명 |
+| 9 | 인터랙티브 애니메이션 | 시간 순서나 상태 변화를 단계별로 관찰 |
+| 10 | 인터랙티브 다이어그램 | 구성 요소·경계·관계를 직접 선택·탐색 |
+| 11 | 실습 | 무료·로컬·시뮬레이션 우선, 셀프체크 포함 |
+| 12 | 퀴즈 | 암기보다 인과·판단·오해 교정 확인 |
+| 13 | 관련 기술 | 그래프 관계와 기존 강의·용어 딥링크 |
+| 14 | 다음 기술 | 아직 남은 문제를 제시하고 다음 개념으로 이동 |
+
+## 4.5 추가 학습 장치
+
+- **Concept Passport**: 정의, 시대, 이전 한계, 해결, 현재 위치를 한 화면에 요약한다.
+- **Why Bridge**: 노드 사이 연결선 자체가 “A의 한계 때문에 B가 필요했다”는 문장이 된다.
+- **Misconception Radar**: 자주 혼동하는 인접 개념을 2열 비교한다.
+- **Teach-back Checkpoint**: 사용자가 60초 설명을 작성하고 핵심 체크포인트로 스스로 평가한다.
+- **Evidence Drawer**: 기업·서비스·역사 문장의 근거와 확인일을 즉시 볼 수 있다.
+
+---
+
+# 5. 새로운 IA (Information Architecture)
+
+```text
+/
+├─ /atlas                         AI Engineering Atlas 홈
+│  ├─ /atlas/journey             21개 개념 학습 로드맵
+│  ├─ /atlas/concepts/[conceptId] 14섹션 개념 챕터
+│  ├─ /atlas/graph               지식 그래프
+│  ├─ /atlas/timeline            AI 발전 타임라인
+│  ├─ /atlas/playgrounds         실습·시뮬레이션 목록
+│  │  └─ /atlas/playgrounds/[id]
+│  └─ /atlas/progress            Atlas 진행·복습·Teach-back
+├─ /curriculum                   기존 13모듈·100강
+├─ /lessons/[slug]               기존 Deep Dive
+├─ /glossary                     기존 용어집 + Atlas 연결
+├─ /resources                    기존 공식 문서
+└─ /about · /privacy · /terms · /license
+```
+
+IA의 핵심은 Atlas가 기존 Textbook을 대체하지 않는 것이다. Atlas는 “전체 흐름을 이해하는 입구”, Textbook은 “원리를 깊게 읽는 본문”, Wiki는 “찾아보는 사전”으로 역할을 분리한다.
+
+---
+
+# 6. Learning Roadmap
+
+## 6.1 기본 학습 리듬
+
+```text
+Concept Passport
+→ Why Story
+→ Interactive Animation
+→ Interactive Diagram
+→ Mini Practice
+→ Quiz
+→ Teach-back
+→ Next Why Bridge
+```
+
+각 개념은 8~15분 Story 학습을 기본으로 하고, 기존 Deep Dive 강의는 선택 심화로 연결한다.
+
+## 6.2 학습 트랙
+
+| 트랙 | 대상 | 경로 |
+|---|---|---|
+| Story Tour | AI 전체 흐름이 처음인 사용자 | 21개 Concept Chapter + Quiz |
+| Builder Track | 실제 AI 기능을 만들고 싶은 사용자 | LLM → Prompt → Context → RAG → Tool → MCP → Agent → Evaluation |
+| Production Track | 운영 관점을 배우려는 사용자 | Workflow → Orchestration → Evaluation → Harness → Production AI |
+| Lookup Track | 검색으로 들어온 사용자 | Term → Concept Passport → 이전/다음 Why Bridge |
+
+트랙은 추천일 뿐 잠금 장치가 아니다. 모든 노드는 직접 접근할 수 있어야 한다.
+
+## 6.3 추천 규칙
+
+1. 마지막으로 읽던 개념이 있으면 “이어서 학습”을 우선한다.
+2. 없으면 완료하지 않은 가장 앞 개념을 추천한다.
+3. 기존 강의를 완료했다면 연계 개념에 “심화 학습 완료”를 표시한다.
+4. 퀴즈 오답이 반복되면 다음 노드보다 현재 노드의 관련 강의·용어를 추천한다.
+
+---
+
+# 7. Knowledge Graph
+
+## 7.1 노드 유형
+
+| 노드 | 출처 | V2 표시 범위 |
+|---|---|---|
+| Concept | Atlas 21개 정본 | 전부 표시 |
+| Lesson | 기존 100강 | 선택한 Concept의 1-hop에만 표시 |
+| Term | 기존 456개 | 대표 용어 3~6개, 나머지는 국소 그래프 |
+| Evidence | KB 90건+ | Evidence Drawer에서 표시 |
+| Company/Service | 공식 근거 확보 항목 | 챕터에서만, 그래프 전도에는 기본 미표시 |
+
+## 7.2 관계 유형
+
+- `evolves_to`: 시간·필요의 흐름
+- `solves_limit_of`: 이전 개념의 한계를 해결
+- `requires`: 이해 또는 구현 선행 조건
+- `uses`: 시스템 구성에서 사용
+- `standardizes`: 제각각인 연결을 표준화
+- `retrieves_from`: 지식에서 관련 정보를 검색
+- `delegates_to`: Agent가 SubAgent에 위임
+- `evaluated_by`: 시스템이 Evaluation으로 측정됨
+- `bounded_by`: Agent/Workflow가 Harness의 제약을 받음
+- `deepens`: Concept에서 기존 Lesson으로 이동
+- `defines`: Concept에서 Glossary Term으로 이동
+- `evidenced_by`: Concept에서 KB 근거로 이동
+
+## 7.3 뷰
+
+- **Journey View**: 21개 Why Bridge를 순서대로 본다.
+- **System View**: 선택한 개념의 1~2 hop 관계를 본다.
+- **Compare View**: 혼동하기 쉬운 두 개념의 관계·차이를 나란히 본다.
+
+데스크톱은 고정 좌표 SVG/Canvas를 사용할 수 있지만, 모바일과 스크린리더에는 동일 정보를 제공하는 세로 목록·관계 표가 반드시 존재해야 한다. V2에서는 물리 시뮬레이션 라이브러리를 추가하지 않는다.
+
+---
+
+# 8. Timeline
+
+## 8.1 타임라인 구조
+
+| Band | 내용 |
 |---|---|
-| deepens (노드→강의) | 챕터 하단 "원리 깊이 보기" 카드 (기존 LessonCard 재사용) |
-| defines (노드→용어) | 챕터 내 용어 칩 → 기존 용어집 팝오버/링크 |
-| related (용어↔용어) | 기존 용어집 그대로 + 국소 그래프 |
-| requires (강의→강의) | 기존 강의 페이지 그대로 (Atlas는 개입하지 않음) |
+| Foundation | AI, ML, Deep Learning의 주요 연구·제품 전환 |
+| Model | Generative AI, LLM, Embedding 등 모델·표현 기술의 전환 |
+| System | RAG, Tool Calling, MCP, Agent, Evaluation, Harness의 시스템 전환 |
+| Industry | 공식 출시·표준 버전·대표 서비스 채택·Production 사례 |
 
-## 8.3 일관성 규칙
+## 8.2 이벤트 데이터 규칙
 
-- 한 관계는 한 곳에서 정의된다(엣지 원천 표 §6.1) — 중복 선언 금지.
-- 서사 문장은 챕터 md와 atlas.ts 중 **atlas.ts가 정본**(챕터는 이를 확장 서술).
-
----
-
-# 9. Animation 설계
-
-## 9.1 원칙 (정적 export 제약 내)
-
-1. **Step-first**: 자동 재생이 아니라 "한 단계씩" 클릭이 기본(오프라인 강의 검증 원칙). 재생 버튼은 보조.
-2. **CSS/SVG만**: 무거운 모션 라이브러리 없이 transform/opacity 트랜지션. `prefers-reduced-motion` 준수 필수.
-3. **데이터 주도**: 애니는 `steps[]`(라벨·캡션·하이라이트 대상) 데이터로 정의하고 **플레이어 컴포넌트 1개**가 전부 렌더 — 노드마다 코드 작성 금지.
-4. **가르치지 않는 장식 금지**: 흐름 입자·강조는 데이터 이동이 있을 때만.
-
-## 9.2 카탈로그 (노드당 1개 "원리 한 장" — MVP 6종 우선)
-
-| 우선 | ID | 노드 | 스텝 스토리보드 |
-|---|---|---|---|
-| P0 | ani-story-chain | 저니 맵 | 12노드 연결선이 순서대로 점등(한계→돌파 문장과 동기) |
-| P0 | ani-token-window | Context/Memory | 창 채움 → 넘침 → 밀려남 → 요약/캐시로 회수 |
-| P0 | ani-tool-call | Tool | 의도 → 구조화 호출 → 실행 → 결과 → 답변 |
-| P0 | ani-agent-loop | Agent | 계획→행동→관찰→갱신 순환 + 종료 조건 |
-| P1 | ani-mcp-port | MCP | 앱×도구 N×M 스파게티 → 표준 포트로 정리 |
-| P1 | ani-harness-gate | Harness | 게이트·한도·로그가 루프를 감싸는 과정 |
-| P2 | 나머지 6노드 | — | 기존 정적 SVG를 스텝화(하이라이트 순서만 부여) |
-
-- 기존 다이어그램 105+ 중 재사용 가능분은 **스텝 하이라이트만 얹는다**(재제작 금지). 신규 제작은 illustration-agent 정의 재사용.
-
----
-
-# 10. Playground 설계
-
-## 10.1 원칙
-
-- **시뮬레이션 전용** (MVP): API 키·서버·비용 없음. 상태 머신 데이터로 "가짜지만 구조는 진짜"인 체험. 모든 화면에 "시뮬레이션" 배지.
-- 시크릿 입력 UI 금지. 로그는 V1의 evidence packet 언어(method·입력·결과) 재사용 — 교과서와 어휘 통일.
-- 실 API 연동(BYOK)은 본 PRD 범위 밖(추후 별도 판단).
-
-## 10.2 MVP 3종 (+확장 2종)
-
-| ID | 노드 | 체험 | 배우는 것 |
-|---|---|---|---|
-| pg-prompt-contract | Prompt | 모호한 요청 vs 계약형 요청을 토글 → 시뮬 응답 품질 비교 | 프롬프트=작업 계약 |
-| pg-context-budget | Context/Memory | 자료 카드를 창에 드래그 → 예산 초과 시 밀려남 시각화 | 유한한 그릇·선별 |
-| pg-permission-gate | Harness | 에이전트의 위험 도구 요청을 승인/거부 → 결과 분기 | 자율과 통제의 경계 |
-| (P2) pg-tool-call-cycle | Tool | 호출 한 사이클 조립(의도→스키마→결과) | 구조화 호출 |
-| (P2) pg-orchestrate | Orchestration | 작업 카드를 서브에이전트에 분배 → 병합 | 위임·병합 |
-
-## 10.3 완료 연동
-
-각 플레이그라운드는 1개 이상의 "관찰 과제"(예: "예산 초과 시 무엇이 먼저 밀려났나?")를 갖고, 완료가 Progress(§12)와 해당 노드 Quiz에 연결된다.
-
----
-
-# 11. Quiz 시스템
-
-## 11.1 목적 — 암기 확인이 아니라 **서사 이해 확인**
-
-노드당 3~5문항, 유형 배분:
-
-| 유형 | 예 | 확인하는 것 |
-|---|---|---|
-| 서사 선택 | "MCP가 등장한 직접적 이유는?" (도구 연결의 N×M 문제 / 모델이 느려서 / …) | ① 왜 등장했나 |
-| 체인 배열 | Prompt·Context·Tool·Agent 카드를 등장 순서로 정렬 | 흐름 감각 |
-| 한계 연결 | "Context만으로 부족했던 이유" ↔ 다음 노드 매칭 | ③ 왜 다음이 필요했나 |
-| OX+이유 | "에이전트에는 MCP가 필수다 — O/X" (X: 층이 다르다) | 흔한 오해 교정 |
-
-## 11.2 규칙
-
-- 모든 해설에 근거 링크(챕터 섹션 또는 KB 인용 강의) — **해설 없는 문항 금지.**
-- 오답 시 벌점·잠금 없음: 해당 챕터 섹션 딥링크로 "다시 읽기" 유도.
-- 통과 기준: 노드당 정답 ≥ 60% → Progress에 check 기록(재응시 무제한).
-- 채점·기록 전부 클라이언트(localStorage) — 서버 없음.
-- **생산**: 기존 `quiz-agent` 정의로 챕터 완성 후 일괄 생성 → education-review-agent 검수 → 데이터 파일로 통합(P-05). 문항 스키마는 구현 phase에서 확정.
-
----
-
-# 12. Progress 시스템
-
-## 12.1 기존 확장 (재작성 금지)
-
-기존 `LearningStateProvider`/`progress.ts`(localStorage·스키마 버전·초기화 제공)를 **확장 필드**로 넓힌다:
-
-```
-AtlasProgress {
-  version,
-  chapterRead:   nodeId[],     // 챕터 끝 도달(스크롤 90% 또는 버튼)
-  quizPassed:    nodeId[],
-  playgroundDone: playgroundId[],
-  lastNodeId
+```ts
+type TimelineEvent = {
+  id: string
+  conceptId: string
+  date: string
+  precision: "day" | "month" | "year" | "range"
+  kind: "research" | "release" | "standard" | "adoption"
+  title: string
+  summary: string
+  kbId: string
+  sourceUrl: string
+  checkedAt: string
 }
 ```
 
-## 12.2 노드 상태와 표시
-
-| 상태 | 조건 | 저니 맵 표시 |
-|---|---|---|
-| 미방문 | — | 윤곽선 |
-| 읽는 중 | 챕터 진입 | 반채움 |
-| 완료 | chapterRead + quizPassed | 채움 + 체크 |
-| 심화 완료 | + 연계 강의 전부 완료(기존 진행률과 교차 조회) | 채움 + 별 |
-
-- 기존 강의 완료 데이터와 **양방향 표시**: 강의를 이미 끝낸 사용자는 해당 노드에 "심화는 이미 완료" 배지가 자동 표기 — 기존 사용자의 성취가 Atlas에서 승계된다.
-- 홈·Atlas 랜딩에 "이어서 읽기"(lastNodeId) — 기존 홈의 이어읽기 패턴과 동일 UX.
+- 공식 논문·공식 발표·공식 사양·공식 제품 문서로 확인된 사건만 등재한다.
+- 기업·서비스의 “대표”는 인기 순위가 아니라 개념의 등장·채택을 설명하는 교육적 관련성으로 선정한다.
+- MCP 같은 버전형 표준은 현재 버전과 이전 주요 버전을 함께 보여준다.
+- 각 챕터에는 “이 개념의 버전·역사” 미니 타임라인을 제공한다.
 
 ---
 
-# 13. 현재 Wiki(용어집)를 어떻게 발전시킬 것인가
+# 9. Navigation
 
-**대체하지 않는다 — 용어집은 Atlas의 "사전 층"으로 승격된다.**
+## 9.1 전역 내비게이션
 
-| 추가 (용어집 화면에) | 효과 |
+`홈 · Atlas · 커리큘럼 · 용어 사전 · 공식 문서 · 검색 · 테마`
+
+기존 메뉴 구조에 Atlas만 추가한다. Atlas 내부에서만 Journey·Graph·Timeline·Playground·Progress 보조 탭을 노출한다.
+
+## 9.2 챕터 Learning Rail
+
+데스크톱의 sticky rail과 모바일의 compact rail은 다음을 항상 보여준다.
+
+- 현재 Arc와 `n/21`
+- 현재 14섹션 위치
+- 챕터·퀴즈·실습 상태
+- 이전/다음 Concept
+- Journey 복귀
+- 관련 Deep Dive 진입
+
+## 9.3 전환 원칙
+
+- 어느 화면에서든 Journey로 1회 동작 안에 돌아갈 수 있다.
+- 챕터 말미의 다음 버튼은 제목뿐 아니라 “왜 다음이 필요한가”를 보여준다.
+- 용어집과 검색 결과는 Atlas 위치를 함께 보여준다.
+- 사용자가 길을 잃었을 때 “추천 다음 학습”은 하나만 강하게 제안한다.
+
+---
+
+# 10. UX Flow
+
+## 10.1 처음 방문한 비개발자
+
+```text
+홈의 Atlas 진입
+→ 21개 여정과 6개 Arc를 한눈에 확인
+→ 1장 AI의 Concept Passport
+→ Why Story와 단계 애니메이션
+→ 3~5문항 Quiz
+→ 다음 Why Bridge
+```
+
+첫 화면에서 전문 용어를 나열하지 않고 “기계에게 규칙을 다 적지 않아도 되는 방법은 왜 필요했을까?” 같은 질문으로 시작한다.
+
+## 10.2 특정 용어로 유입된 사용자
+
+```text
+검색 또는 용어집
+→ 용어 정의
+→ “Atlas에서 이 개념의 위치 보기”
+→ 이전 한계·해결·다음 개념
+→ 필요 시 기존 Deep Dive
+```
+
+## 10.3 기존 100강 학습자
+
+```text
+기존 완료 기록 유지
+→ Atlas에서 연계 개념의 심화 배지 확인
+→ 비어 있는 Story·Quiz만 빠르게 완주
+```
+
+## 10.4 프로젝트 중심 사용자
+
+```text
+Builder Track 선택
+→ 관련 Concept만 순차 학습
+→ “실제 프로젝트에서는” 섹션
+→ Playground
+→ 기존 project-textbook 강의
+```
+
+## 10.5 복습 사용자
+
+Progress 화면에서 오답 개념·미완료 Teach-back·오래된 완료를 기준으로 복습 큐를 제공한다. 점수 경쟁이나 연속 출석 압박은 넣지 않는다.
+
+---
+
+# 11. UI 방향
+
+## 11.1 시각 언어
+
+- 기존 `DESIGN.md`의 paper-white, graphite, clear blue 토큰을 유지한다.
+- Atlas에는 Arc별 보조 색을 제한적으로 추가하되 의미 없는 단색 장식으로 사용하지 않는다.
+- 화면은 “현대적인 지도 + 시스템 블루프린트 + 읽기 좋은 교재”의 결합을 지향한다.
+- Apple·Stripe·Linear·OpenAI·Claude·Vercel·Figma의 명료한 위계와 상호작용 원칙을 참고하되 외형을 복제하지 않는다.
+
+## 11.2 주요 화면 구성
+
+- Atlas Home: 6개 Arc와 21개 노드가 첫 화면에서 전체 여정으로 보인다.
+- Concept Chapter: 본문 중심, 우측 Learning Rail, 중간에 상호작용이 자연스럽게 삽입된다.
+- Graph: 전체 그래프보다 현재 개념 주변을 먼저 보여주고 사용자가 확대한다.
+- Timeline: 사건 카드보다 기술 전환의 이유를 강조한다.
+- Progress: 숫자 대시보드보다 “무엇을 이해했고 무엇을 설명해볼 차례인지”를 보여준다.
+
+## 11.3 접근성과 반응형
+
+- 모든 그래프·다이어그램은 텍스트 대체 뷰를 제공한다.
+- 색만으로 상태를 구분하지 않는다.
+- 키보드로 전체 여정·애니메이션·퀴즈를 완료할 수 있어야 한다.
+- 44px 이상 터치 타깃, 본문 16px 이상, 충분한 대비를 유지한다.
+- 모바일에서는 Zoom Canvas보다 세로 Story Flow를 우선한다.
+
+---
+
+# 12. Animation 방향
+
+## 12.1 원칙
+
+1. 애니메이션은 장식이 아니라 상태 변화·데이터 이동·피드백을 설명한다.
+2. 자동 재생보다 Step-by-step 조작을 기본으로 한다.
+3. CSS·SVG·React 상태를 우선하며 새 모션 라이브러리는 필요가 증명될 때만 추가한다.
+4. `prefers-reduced-motion`에서는 같은 정보를 정지 단계로 제공한다.
+5. 사용자가 현재 단계와 전체 단계 수를 알 수 있어야 한다.
+
+## 12.2 재사용할 7개 시각 문법
+
+| 문법 | 설명 대상 |
 |---|---|
-| **시대 배지**: 용어마다 소속 노드 표시("MCP — 🧭 7장 도구 표준의 시대") | 검색 유입자가 낱말이 아니라 **지도 위 위치**를 얻는다 |
-| **"이 용어는 왜 생겼나" 버튼** → 해당 챕터의 돌파구 섹션 딥링크 | lookup → story 전환(역주행 트랙 §5.2) |
-| 국소 그래프(1-hop related) | 기존 related 배열의 시각화 — 데이터 신규 0 |
-| 검색 인덱스에 챕터 추가 | 기존 SiteSearch 확장 — "왜"로 검색해도 챕터가 잡힘 |
+| Evolution Chain | 이전 한계 → 다음 기술 |
+| Layer Stack | AI→모델→컨텍스트→도구→운영 계층 |
+| Data Flow | RAG, Tool Calling, MCP의 요청·응답 |
+| Budget Window | Token, Context, Memory의 용량·손실 |
+| Loop | Agent, Workflow, Evaluation의 반복 |
+| Boundary Gate | Permission, Harness, Production 제어 |
+| Feedback Compare | Prompt·Evaluation 전후 비교 |
 
-- 456용어 전부에 노드를 강제 배정하지 않는다 — atlas.ts `glossaryTerms`(핵심 용어)부터 시작, 나머지는 카테고리→노드 대응표로 점진 배정(데이터 작업, 콘텐츠 무수정).
-
----
-
-# 14. Information Architecture
-
-```
-AI Vibe Coding Master (한 사이트)
-│
-├─ 🧭 Atlas (신규 — Education Layer의 얼굴)
-│    ├─ /atlas                여정 맵 (저니 + 거시 타임라인 밴드 + 이어서 읽기)
-│    ├─ /atlas/[nodeId]       챕터 (스토리 5섹션 + 애니 + 용어 칩 + 심화 카드 + 퀴즈)
-│    ├─ /atlas/graph          지식 그래프 전도
-│    ├─ /atlas/timeline       발전사 타임라인 (거시+미시 통합 뷰)
-│    └─ /atlas/playground/[id] 시뮬 3종 (P2)
-│
-├─ 📚 Textbook (기존 — 무수정)
-│    ├─ /curriculum · /lessons/[slug]
-│    └─ Atlas와의 접점: 챕터→강의 딥링크(deepens)만. 강의 페이지는 변경 없음*
-│
-├─ 📖 Wiki (기존 + §13 승격)
-│    └─ /glossary (+시대 배지·왜 버튼·국소 그래프)
-│
-└─ 자료실·정보 (기존) /resources · /about · /privacy · /terms · /license
-
-* P3 이후 선택: 강의 페이지에 "이 개념의 자리 보기 → Atlas" 링크 1줄 (기존 페이지 유일 수정 후보, 별도 승인)
-```
-
-- 콘텐츠 파일 계층: `src/content/atlas.ts`(노드·정본) + `src/content/atlas/` 폴더(챕터 md 12·timeline·quiz·animation steps 데이터) — 기존 `content/` 관례와 동일한 "파일=SSOT" 원칙.
+애니메이션과 인터랙티브 다이어그램은 구분한다. 애니메이션은 시간 순서를 설명하고, 다이어그램은 사용자가 관계를 탐색한다.
 
 ---
 
-# 15. User Flow
+# 13. Playground
 
-## 15.1 신규 방문자 (비개발자, 처음 옴)
+## 13.1 V2 원칙
 
-```
-홈 히어로 "AI는 어떻게 여기까지 왔을까?" 배너
- → /atlas (12노드 지도 한눈에 — "당신의 여정" 0/12)
- → 1장 AI 챕터 (5분: 한계→돌파→원리 한 장→남은 문제→지금)
- → 퀴즈 3문항 통과 → 노드 채움 ✓ → "다음: LLM — 이전 장의 남은 문제가 이렇게 풀립니다"
- → … 반복 → 12장 완주 화면 (여정 요약 + 심화 트랙 제안)
-```
+- API 키·로그인·과금 없이 동작하는 결정론적 시뮬레이션을 우선한다.
+- 모든 화면에 “시뮬레이션”임을 명시한다.
+- 예쁜 결과보다 관찰 과제와 실패 이유를 보여준다.
+- 시크릿 입력 UI를 만들지 않는다.
 
-## 15.2 검색 유입 (특정 용어가 궁금해서 옴)
+## 13.2 우선 플레이그라운드
 
-```
-구글 "MCP란" → /glossary MCP → 시대 배지 "7장"
- → "이 용어는 왜 생겼나" → /atlas/mcp 돌파구 섹션
- → 앞장(Tool)의 남은 문제를 보고 "아, 그래서" → 저니 합류 or 심화 강의
-```
+| ID | 연결 개념 | 사용자가 조작하는 것 | 배우는 것 |
+|---|---|---|---|
+| prompt-contract | Prompt | 모호한 요청과 계약형 요청 토글 | 출력 품질은 지시 구조에 영향을 받는다. |
+| context-budget | Context·Memory | 자료를 제한된 창에 배치 | 무엇을 넣고 버리는지가 성능을 좌우한다. |
+| embedding-space | Embedding | 문장 카드를 벡터 공간에 배치 | 의미 유사도가 좌표로 표현된다. |
+| rag-pipeline | Knowledge·RAG | 문서·질문·검색 결과 선택 | 생성 전 검색이 어떤 근거를 제공하는지 본다. |
+| tool-call-cycle | Tool Calling | 스키마·인자·도구 결과 조립 | 모델 출력과 실제 실행은 다른 층이다. |
+| mcp-connector | MCP·Skill | Host·Client·Server 연결 | N×M 연결을 표준화하는 이유를 본다. |
+| agent-loop | Agent·SubAgent | 계획·행동·관찰·종료 조건 조절 | 자율성과 무한 루프 위험을 함께 본다. |
+| orchestration-lab | Workflow·Orchestration | 작업 분해·위임·병합 | 병렬성과 조정 비용을 비교한다. |
+| eval-harness | Evaluation·Harness | 평가 기준·권한·한도 설정 | 좋은 결과와 안전한 실행은 별개임을 배운다. |
 
-## 15.3 기존 독자 (강의로 공부하던 사용자)
-
-```
-/curriculum → 강의 완료 (기존 흐름 그대로)
- → Atlas 첫 방문 시: 완료 강의가 노드에 "심화 완료" 배지로 자동 반영
- → 비어 있는 노드(스토리·퀴즈)만 채우는 짧은 일주
-```
-
-## 15.4 이탈 방지 장치
-
-- 챕터는 5~8분 상한(V2 강의의 "무거운 첫 체감" 문제를 스토리 층에서 해소).
-- 어느 화면에서든 2클릭 내: 지도 복귀 · 다음 노드 · 심화.
+MVP는 `prompt-contract`, `context-budget`, `rag-pipeline`, `agent-loop` 4개로 시작한다. 나머지는 공용 프리미티브의 재사용성이 검증된 후 확장한다.
 
 ---
 
-# 16. Navigation
+# 14. Quiz
 
-| 위치 | 구성 |
-|---|---|
-| **헤더** (기존 +1) | 홈 · **Atlas** · 커리큘럼 · 용어집 · 자료실 · [검색] · [테마] — 기존 SiteHeader에 메뉴 1건 추가(허용 예외 ①) |
-| **Atlas 보조 탭** | 여정 ─ 그래프 ─ 타임라인 (Atlas 섹션 내 상단 탭, 상태 공유) |
-| **챕터 내부** | 상단: 노드 위치 표시(7/12)+지도 복귀 · 하단: ← 이전 장 | 다음 장 → (한계 문장 티저 포함) · 우측/하단 시트: 용어 칩·심화 카드 |
-| **모바일** | 기존 패턴 승계: 헤더 축약, 저니 맵=세로 체인, 그래프=국소도 우선, 패널=바텀시트 |
-| **키보드/접근성** | 애니 스텝 ←/→ · 탭 포커스 순서 = 읽기 순서 · reduced-motion 시 스텝 정지 화상 |
+## 14.1 평가 목표
 
----
+퀴즈는 정의 암기가 아니라 다음을 확인한다.
 
-# 17. 첫 화면
+- 왜 등장했는가.
+- 이전 기술의 어떤 한계를 해결했는가.
+- 실제 시스템에서 어느 위치에 있는가.
+- 다음 기술이 왜 필요한가.
+- 인접 개념과 무엇이 다른가.
 
-## 17.1 홈(/) — 배너 1건만 추가 (허용 예외 ②)
+## 14.2 문항 구조
 
-기존 홈 유지. 히어로 아래 Atlas 진입 배너:
+- 챕터당 4~6문항
+- 유형: 서사 선택, 순서 배열, 관계 연결, 시나리오 판단, OX+이유
+- 모든 오답에 설명과 해당 섹션 딥링크 제공
+- 60% 이상을 이해 확인으로 표시하되 재응시 무제한
+- 벌점·잠금·랭킹 없음
+- 정답은 챕터와 KB 근거에서 도출 가능해야 함
 
-> **AI는 어떻게 여기까지 왔을까?**
-> AI에서 Production AI까지, 12개의 전환점을 하나의 이야기로. — *새로 나온 Atlas에서 여정 시작* →
+## 14.3 Teach-back
 
-## 17.2 /atlas 랜딩 (Education Layer의 첫 화면)
+Quiz 다음에 “다른 사람에게 3문장으로 설명해보세요”를 제공한다. 답변은 서버로 전송하지 않고 브라우저에 저장하며, 다음 체크포인트로 자기 평가한다.
 
-```
-[히어로]  12노드 성좌 미리보기 (ani-story-chain 저속 점등)
-          "용어를 외우지 마세요. 필요의 역사를 읽으세요."
-[여정]    12노드 가로 체인(데스크톱)/세로(모바일) + 내 진행 n/12
-          각 노드: 아이콘·제목·질문 한 줄·상태
-[이어서]  "이어서 읽기: 7장 MCP" (lastNodeId) / 처음이면 "1장에서 시작"
-[안내]    3트랙 소개(스토리 일주 2~3h · 심화 동반 · 용어에서 역주행)
-```
+1. 등장 이유를 말했다.
+2. 이전 한계를 말했다.
+3. 실제 사용 위치를 말했다.
+4. 다음 기술과 연결했다.
 
 ---
 
-# 18. 사이트 철학
+# 15. Progress
 
-기존 4원칙 승계 + Atlas 3원칙 추가:
+## 15.1 상태 모델
 
-| # | 원칙 | 뿌리 |
+| 상태 | 조건 | 표시 |
 |---|---|---|
-| 1 | **출처 없는 문장은 없다** — 서사·연표도 KB 확보분만, 추측 금지 | V1 인용 정책 승계 |
-| 2 | **검증이 학습이다** — human review·퀴즈 해설·시뮬 배지 | V1 검증 철학 승계 |
-| 3 | **설명할 수 있어야 아는 것이다** — 완료 기준은 "왜"를 말할 수 있는가 | explanation-practice 승계 |
-| 4 | **비영리·무료·한국어 우선** | 공개 전환 방침 승계 |
-| 5 | **용어는 필요의 역사다** — 모든 개념은 이전 기술의 한계에서 태어났다 | Atlas 신규 |
-| 6 | **찾아보기에서 여정으로** — lookup을 부정하지 않고 story로 승격한다 | Atlas 신규 |
-| 7 | **Evolution, not Rebuild** — 쌓은 것을 부수지 않고 층을 얹는다 | 운영자 대원칙 |
+| Not Started | 방문 기록 없음 | 윤곽 노드 |
+| Exploring | 챕터 방문 또는 일부 섹션 읽음 | 부분 채움 |
+| Understood | 챕터 읽음 + Quiz 60% 이상 | 체크 노드 |
+| Applied | 실습 또는 Playground 완료 | 도구 배지 |
+| Can Explain | Teach-back 체크 완료 | 설명 배지 |
+| Deepened | 연계 기존 강의 완료 | 심화 별 배지 |
+
+## 15.2 사용자 기능
+
+- 전체 21개 진행률과 Arc별 진행률
+- 이어서 학습
+- 복습 큐
+- 오답 개념 모음
+- 북마크와 연계
+- 진행 데이터 JSON 내보내기·가져오기(계정 없는 사용자 백업)
+- 전체 초기화 전에 영향 범위 확인
+
+V2는 분석 서버나 사용자 추적을 기본 도입하지 않는다. 성과 측정은 사용자 기기 안의 학습 상태와 수동 사용성 테스트로 시작한다.
 
 ---
 
-# 19. 차별점
+# 16. 기존 Wiki를 어떻게 Evolution 시킬 것인가
 
-| 비교 대상 | 그들 | AI Engineering Atlas |
-|---|---|---|
-| 용어집·위키류 | 낱말 정의 나열, 관계·순서 없음 | **12장 서사** + 그래프 + 타임라인이 낱말을 꿰어줌 |
-| 기술 블로그·뉴스레터 | 시의성 있지만 파편적, 출처 느슨 | 전 문장 KB 근거(Quote Bank 글자 검증), 시들면 stale 절차로 보수 |
-| 강의 플랫폼 | 영상·유료·수동 시청 | 무료·텍스트+인터랙션·읽는 속도 자율, 서버·계정 없음 |
-| 공식 문서 | 정확하나 "왜"와 역사가 없음, 영어 | 공식 문서를 **인용하면서** 왜·역사·한국어 서사를 얹음 — 문서로 돌아가는 다리(원문 링크) |
-| AI 챗봇에게 묻기 | 즉답이나 검증·체계 없음 | 검증된 지식의 **지도** — 챗봇과 상호보완(질문할 좌표를 제공) |
+용어집은 폐기하거나 Atlas로 합치지 않는다. 역할을 “사전”에서 “Atlas의 인덱스”로 확장한다.
 
-**한 줄**: 검증된 지식 베이스(90 KB·100강·456용어) 위에 **서사·관계·시간·상호작용**을 얹은, 한국어 무료 AI 엔지니어링 발전사 지도 — 이 조합이 유일성이다.
+## 16.1 용어 항목에 추가할 것
 
----
+- 소속 Concept와 Arc 배지
+- “왜 생겼는가” 한 문장
+- 이전·다음 관련 개념
+- 관련 강의
+- 국소 Knowledge Graph
+- 근거 확인일과 공식 문서 링크
 
-# 20. 최종 프로젝트 구조
+## 16.2 진입 흐름
 
-## 20.1 파일 트리 (■ 신규 / □ 기존 무수정 / ◪ 최소 수정 허용 예외)
-
+```text
+용어 검색
+→ 짧은 정의
+→ Atlas 위치
+→ 왜 등장했는가
+→ 관련 Deep Dive
 ```
+
+## 16.3 마이그레이션 원칙
+
+- 456개 용어를 한 번에 수작업 분류하지 않는다.
+- Atlas 핵심 용어부터 `conceptId`를 명시한다.
+- 나머지는 기존 category와 related를 이용해 후보 매핑을 빌드 시 생성하고, 검증된 항목만 승격한다.
+- 기존 용어 검색·필터·URL 동작을 보존한다.
+
+---
+
+# 17. V2 → V3 확장 전략
+
+V3는 V2의 정적·로컬 우선 구조가 실제 학습에 효과적이라는 증거가 쌓인 뒤 진행한다.
+
+| 확장 | V2에서 준비할 인터페이스 | V3 가능성 |
+|---|---|---|
+| 계정·동기화 | Progress 저장소 인터페이스 분리 | 여러 기기 진행률, 선택적 로그인 |
+| Grounded AI Tutor | Concept·KB·Lesson 역추적 인덱스 | 출처가 있는 질의응답·설명 피드백 |
+| Adaptive Learning | Quiz·Teach-back 결과 스키마 | 개인별 복습·추천 |
+| Live Lab | Playground Shell과 시뮬레이션 계약 | 샌드박스 코드 실행, BYOK 선택 |
+| Authoring Studio | 14섹션·관계·타임라인 스키마 | 편집자용 시각 저작 도구 |
+| Collaboration | Progress·노트 export 계약 | 코호트, 교사 대시보드, 팀 학습 |
+| Localization | Concept 데이터와 UI 문자열 분리 | 영어·일본어 등 다국어 Atlas |
+| Versioned Atlas | Timeline·checkedAt·concept version | 기술 변화 비교와 릴리스 노트 |
+
+V3에서도 Evidence Layer와 AI-Ops 파이프라인은 중심에 둔다. AI Tutor가 추가되어도 근거 없는 자유 생성이 콘텐츠 정본을 덮어쓰지 못하게 한다.
+
+---
+
+# 18. 프로젝트 리스크
+
+| 리스크 | 영향 | 대응 |
+|---|---|---|
+| 21개 챕터와 상호작용의 범위 폭증 | 일정 지연·품질 하락 | Arc 단위 릴리스, 공용 시각 문법과 데모 프리미티브 재사용 |
+| 기존 100강과 챕터 내용 중복 | 사용자가 같은 설명을 반복해서 읽음 | Atlas는 Why·관계·시간에 집중, 원리 상세는 Deep Dive로 연결 |
+| 기업·서비스 정보의 빠른 노후화 | 신뢰 하락 | 공식 출처, checkedAt, stale 재검증, 역사적 기여와 현재 채택 구분 |
+| 그래프 과밀 | 모바일·초보자 사용성 저하 | 전도는 21개 Concept 중심, 나머지는 국소 1-hop과 텍스트 대체 |
+| 장식적인 애니메이션 | 성능 저하·학습 방해 | 학습 질문과 관찰 과제가 없는 애니메이션은 구현하지 않음 |
+| localStorage 스키마 변경 | 기존 진행률 유실 | 버전 마이그레이션, 백업, 실패 시 기존 필드 보존 |
+| 정적 export 제약 | 서버형 실습·동기화 제한 | V2는 결정론적 클라이언트 시뮬레이션, 서버 기능은 V3 인터페이스만 준비 |
+| 접근성 저하 | 그래프·드래그 사용 불가 | 키보드, 리스트 대체, 탭 선택 대체, reduced motion 필수 |
+| 운영 상태 문서 드리프트 | 잘못된 실행·중복 작업 | 단일 집계 검증 스크립트와 Phase 시작 전 git/status 재대사 |
+| 승인 전 병렬 구현 | PRD와 코드 불일치 | 현재 미커밋 Phase 1 변경을 보존하되 승인 전 병합·커밋·확장 금지 |
+
+---
+
+# 19. 단계별 개발 전략
+
+모든 Phase는 **계획 보고 → 운영자 승인 → 구현 → 테스트·QA → 완료 보고 → 다음 Phase 승인** 순서로 진행한다. 한 번의 승인으로 여러 Phase를 묶지 않는다.
+
+## Phase 0 — Discovery & PRD (현재)
+
+- 목표: 기존 구조를 분석하고 V2 정본을 확정한다.
+- 작업: 저장소·AI-Ops·콘텐츠·UX 분석, 21노드·14섹션·아키텍처 정의.
+- 영향 범위: `ai-ops/roadmap` 문서만.
+- 수정 파일: `ATLAS-EDUCATION-LAYER.md`, 기존 빌드 계획의 HOLD 표시.
+- 테스트: 문서 내부 숫자·경로·용어 일관성 검사.
+- QA: 사용자 요구 20개 항목과 대조.
+- 예상 리스크: 이전 12노드/13섹션 계획과 충돌.
+- Commit Message: `ATLAS-P0: rebaseline V2 PRD to 21 concepts and 14-section chapters`
+
+## Phase 1 — Baseline Reconciliation & Data Contract
+
+- 목표: 코드 작성 전에 21개 Concept·관계·챕터·진행률 계약을 확정한다.
+- 작업: 12→21 매핑표, 기존 강의·용어·KB 연결표, Zod/TypeScript 스키마, 상태 문서 집계 정합화.
+- 영향 범위: `ai-ops/roadmap`, `src/content/atlas*`, `src/lib`의 타입·검증만.
+- 수정 파일: `src/content/atlas.ts`, `src/content/atlas/schema.ts`, `src/lib/atlas-index.ts`, 테스트.
+- 테스트: 21개 order, slug, lesson/term/KB 참조 실존, 기존 100강 무변경.
+- QA: 데이터 계약 리뷰, 이전 미커밋 Phase 1 변경의 재사용/수정/보류 목록.
+- 예상 리스크: 초기 프로토타입 코드와 새 정본의 충돌.
+- Commit Message: `ATLAS-P1: establish 21-concept data contract and reference integrity`
+
+## Phase 2 — Information Architecture & Navigation Shell
+
+- 목표: Atlas에 들어와 현재 위치와 다음 행동을 이해하게 한다.
+- 작업: `/atlas`, Journey, Concept shell, Learning Rail, 전역 메뉴 연결.
+- 영향 범위: 신규 Atlas 라우트와 헤더 1건.
+- 수정 파일: `src/app/atlas/**`, `src/features/atlas/**`, `SiteHeader.tsx`.
+- 테스트: static params 21개, notFound, 모바일·키보드 내비.
+- QA: 기존 URL·헤더·검색 회귀, 라이트/다크/모바일 육안.
+- 예상 리스크: 첫 화면의 정보 과밀.
+- Commit Message: `ATLAS-P2: add journey navigation and 21-concept chapter shell`
+
+## Phase 3 — Evidence & Story Content
+
+- 목표: 21개 챕터의 14섹션 중 서사·사실·연결 콘텐츠를 근거 기반으로 채운다.
+- 작업: KB gap 분석, P-01/P-02, Arc별 P-04/P-05, 기업·서비스·사례 근거 수집.
+- 영향 범위: KB·Atlas chapter 데이터만. 기존 100강 본문 무수정.
+- 수정 파일: `ai-ops/knowledge-base/entries/T14/**`, `src/content/atlas/chapters/**`.
+- 테스트: 14개 헤딩·순서, Quote Bank 인용, 링크 생존, KB consumer.
+- QA: Arc당 3개 표본 Teach-back 리뷰, 마케팅성 문장 제거.
+- 예상 리스크: 21개 챕터 동시 생산에 따른 깊이 편차.
+- Commit Message: `ATLAS-P3x: publish evidence-grounded chapters for arc {name}`
+
+## Phase 4 — Unified Progress & Learning Roadmap
+
+- 목표: 기존 강의 진행률과 Atlas 진행률을 하나의 학습 상태로 연결한다.
+- 작업: LearningState V2 마이그레이션, Arc/Concept 상태, 이어서 학습, 데이터 export/import.
+- 영향 범위: 기존 progress 기능의 하위 호환 확장.
+- 수정 파일: `src/lib/progress.ts`, `LearningStateProvider.tsx`, Atlas progress UI.
+- 테스트: V1→V2 마이그레이션, 손상 데이터 복구, reset, lesson badge 교차 조회.
+- QA: 기존 완료·북마크 유실 0.
+- 예상 리스크: localStorage 데이터 손상.
+- Commit Message: `ATLAS-P4: unify textbook and atlas learning progress`
+
+## Phase 5 — Knowledge Graph
+
+- 목표: 개념의 관계를 탐색 가능한 지도에서 이해하게 한다.
+- 작업: 파생 edge 엔진, Journey/System/Compare 뷰, 텍스트 대체.
+- 영향 범위: Atlas와 용어 연결만.
+- 수정 파일: `src/lib/atlas-graph.ts`, `src/features/atlas/graph/**`, route.
+- 테스트: edge 무결성, 1-hop 결과, 키보드 탐색, 모바일 목록.
+- QA: 21개 노드 과밀·라벨 겹침·색 의존 점검.
+- 예상 리스크: 시각 복잡도와 번들 증가.
+- Commit Message: `ATLAS-P5: add derived knowledge graph and accessible relation views`
+
+## Phase 6 — Timeline & Version History
+
+- 목표: 기술의 발생·표준·채택을 시간 흐름으로 이해하게 한다.
+- 작업: 공식 근거 이벤트 수집, 4-band 타임라인, 챕터 미니 역사.
+- 영향 범위: Atlas timeline 데이터와 화면.
+- 수정 파일: `src/content/atlas/timeline.ts`, timeline components/routes.
+- 테스트: 모든 이벤트에 kbId·sourceUrl·checkedAt, 날짜 정렬.
+- QA: 공식 출처 전수 확인, 불확실 날짜 미등재.
+- 예상 리스크: 현재성 정보의 빠른 노후화.
+- Commit Message: `ATLAS-P6: add sourced AI evolution timeline and concept history`
+
+## Phase 7 — Animation & Interactive Diagrams
+
+- 목표: 추상 원리와 관계를 단계·조작으로 보이게 한다.
+- 작업: StepPlayer, DiagramExplorer, 공용 7개 시각 문법, 우선 Concept 적용.
+- 영향 범위: Atlas 챕터 섹션 9·10.
+- 수정 파일: `src/features/atlas/visuals/**`, `src/content/atlas/animations.ts`, diagram assets.
+- 테스트: 단계 경계, keyboard, reduced motion, SVG id 무결성.
+- QA: 각 시각화가 답하는 학습 질문 명시, 장식 단계 제거.
+- 예상 리스크: 모션 과다와 모바일 성능.
+- Commit Message: `ATLAS-P7: add step animations and interactive concept diagrams`
+
+## Phase 8 — Playground & Practice
+
+- 목표: 핵심 개념을 사용자가 직접 조작하고 관찰한다.
+- 작업: 공용 시뮬레이션 프리미티브, MVP 4개 Playground, 챕터 실습 연결.
+- 영향 범위: Atlas 내부 클라이언트 상태.
+- 수정 파일: `src/features/atlas/playgrounds/**`, `src/content/atlas/playgrounds.ts`.
+- 테스트: 상태 머신, 완료 조건, 드래그 대체 조작, 시크릿 입력 부재.
+- QA: 시뮬레이션 배지, 관찰 과제, 모바일 터치.
+- 예상 리스크: 실제 API처럼 오해할 가능성.
+- Commit Message: `ATLAS-P8: launch four deterministic learning playgrounds`
+
+## Phase 9 — Quiz & Teach-back
+
+- 목표: 사용자가 왜·한계·실제 위치를 설명할 수 있는지 확인한다.
+- 작업: QuizRunner, 21세트 문항, 해설 딥링크, Teach-back 체크포인트.
+- 영향 범위: Atlas chapter와 progress.
+- 수정 파일: `src/content/atlas/quizzes.ts`, quiz/teach-back components.
+- 테스트: 60% 경계, 재응시, 해설 링크, 저장·복원.
+- QA: 문항 전수 근거 확인, 암기형 편중 점검.
+- 예상 리스크: 쉬운 문항으로 인한 허위 완료감.
+- Commit Message: `ATLAS-P9: add causal quizzes and teach-back checkpoints`
+
+## Phase 10 — Wiki Evolution & Search
+
+- 목표: 용어 lookup 사용자를 Atlas 여정으로 연결한다.
+- 작업: concept badge, why link, 국소 그래프, 검색 인덱스 확장.
+- 영향 범위: GlossaryBrowser·SiteSearch의 additive 변경.
+- 수정 파일: `src/features/glossary/**`, `src/lib/search-index.ts`, Atlas term map.
+- 테스트: 기존 검색·필터 회귀, 새 result kind, term mapping 실존.
+- QA: 456개 용어 전체의 미검증 자동 노출 금지.
+- 예상 리스크: 용어 매핑 오류.
+- Commit Message: `ATLAS-P10: connect glossary and search to the atlas`
+
+## Phase 11 — Full QA, Performance & Release Candidate
+
+- 목표: 학습 효과·접근성·성능·콘텐츠 무결성을 통합 검증한다.
+- 작업: 전수 스캔, 사용성 표본, 성능 최적화, sitemap, release note.
+- 영향 범위: Atlas 전체, 기존 화면 회귀 점검.
+- 수정 파일: QA script/report, 필요한 최소 수정.
+- 테스트: `npm run verify`, static export, keyboard journey, reduced motion, mobile.
+- QA: 21×14 구조, 인용, 링크, 관계, 타임라인, playground, quiz 전수.
+- 예상 리스크: 마지막 단계에서 누적 결함 발견.
+- Commit Message: `ATLAS-P11: complete atlas QA and release candidate`
+
+## Phase 12 — Release
+
+- 목표: 운영자 최종 승인 후 공개한다.
+- 작업: 배포, 라이브 스모크, rollback 확인.
+- 영향 범위: Firebase Hosting과 public sitemap.
+- 수정 파일: release/deployment report만.
+- 테스트: 홈→Journey→Concept→Quiz→Graph→Timeline 라이브 흐름.
+- QA: canonical, robots, 404, 모바일, 다크 모드.
+- 예상 리스크: 캐시·정적 경로 누락.
+- Commit Message: `ATLAS-P12: release AI Engineering Atlas V2`
+
+---
+
+# 20. 최종 아키텍처
+
+## 20.1 논리 아키텍처
+
+```text
+User
+  ├─ Journey / Chapter / Graph / Timeline / Playground / Progress
+  │
+  ▼
+Education Layer
+  ├─ AtlasIndex (21 Concepts + derived relationships)
+  ├─ Story Composer (14-section chapters)
+  ├─ Recommendation (next, review, deep dive)
+  ├─ Interaction Registry (animation, diagram, playground, quiz)
+  └─ Unified Learning State Adapter
+  │
+  ├───────────────┬────────────────┬─────────────────┐
+  ▼               ▼                ▼                 ▼
+Lessons 100     Glossary 456     Diagrams 78      Resources
+  │               │                │                 │
+  └───────────────┴──────────┬─────┴─────────────────┘
+                             ▼
+Evidence Layer: Approved KB + Quote Bank + Sources + checkedAt
+                             ▲
+                             │
+Operations Layer: Agents + P-01~P-09 + QA + STATE/DASHBOARD
+```
+
+## 20.2 목표 폴더 구조
+
+```text
 src/
-  content/
-    ■ atlas.ts                     # 12노드 정본 (A0 완료)
-    ■ atlas/
-    ■   chapters/{nodeId}.md       # 챕터 12편 (5섹션 · 2.5~4천자)
-    ■   timeline.ts                # TimelineEvent[] (KB 근거 필수)
-    ■   quizzes.ts                 # 노드별 문항
-    ■   animations.ts              # steps[] 정의 (플레이어 1개가 소비)
-    □ curriculum.ts · glossary.ts · lessons/** · resources.ts · schema.ts
   app/
-    ■ atlas/ (page · [nodeId] · graph · timeline · playground/[id])
-    □ 기존 라우트 전부
-    ◪ layout/SiteHeader (메뉴 +1) · app/page (배너 +1)
+    atlas/
+      page.tsx
+      journey/page.tsx
+      concepts/[conceptId]/page.tsx
+      graph/page.tsx
+      timeline/page.tsx
+      playgrounds/page.tsx
+      playgrounds/[id]/page.tsx
+      progress/page.tsx
+  content/
+    atlas.ts
+    atlas/
+      schema.ts
+      chapters/*.md
+      relationships.ts
+      timeline.ts
+      animations.ts
+      diagrams.ts
+      playgrounds.ts
+      quizzes.ts
   features/
-    ■ atlas/ (JourneyMap · ChapterView · GraphView · TimelineView ·
-              StepPlayer · QuizRunner · PlaygroundShell · AtlasProgressProvider)
-    □ progress/ · search/(인덱스 확장은 additive) · 기타 전부
+    atlas/
+      journey/
+      chapter/
+      graph/
+      timeline/
+      visuals/
+      playgrounds/
+      quiz/
+      progress/
+  lib/
+    atlas-index.ts
+    atlas-graph.ts
+    atlas-content.ts
+    progress.ts
+
 ai-ops/
-  □ 전 구조 무수정 (agents 14 · prompts P-01~09 · KB · QA · STATE 체계)
-  ■ knowledge-base/entries/T14/    # Atlas 서사 KB (AI·LLM 역사 등 1~3건)
-  ■ outputs 백로그에 atlas 행 추가 (기존 형식 그대로)
+  agents/                         # 기존 유지
+  prompts/                        # 기존 P-01~P-09 유지
+  knowledge-base/entries/T14/     # Atlas gap만 추가
+  reports/atlas-*.md
+  roadmap/ATLAS-EDUCATION-LAYER.md
 ```
-
-## 20.2 실행 로드맵 (기획 승인 후)
-
-| Phase | 산출 | 게이트 |
-|---|---|---|
-| **A0** ✅ | 본 PRD + atlas.ts 12노드(참조 무결성 기계검증) | verify exit 0 (완료, 커밋 8364c09) |
-| **A1** | /atlas 여정 맵 + 챕터 뼈대 + 헤더 메뉴 + AtlasProgress | verify + 육안(라이트/다크/모바일) |
-| **A2** | KB 1~3건(P-01/02) + 챕터 12편(P-04/05) + era/industryNow 충전 | 인용 QA(모드 B) + verify |
-| **A3** | StepPlayer + 애니 P0 4종 + 그래프 전도/국소도 | reduced-motion·키보드 점검 |
-| **A4** | 타임라인(거시+미시) + Wiki 승격(시대 배지·왜 버튼) | KB 근거 전수 확인 |
-| **A5** | Quiz 12세트(quiz-agent) + 완료 연동 + 홈 배너 | 해설·딥링크 전수 확인 |
-| **A6** | Playground 3종 + 폴리시(a11y·perf) + **배포** | 라이브 스팟체크 + sitemap 반영 |
-
-- 역할: Fable = 설계·P-02·QA·릴리스·배포 / Codex = 챕터·퀴즈 대량 생산 및 UI 구현 미션(발급 시). 커밋 규율 `ATLAS-Ax:`. 배포는 phase 완료 시 Fable.
 
 ## 20.3 성공 기준
 
-1. 신규 사용자가 안내 없이 1장→2장으로 넘어가고, "MCP가 왜 나왔는지"를 이전·다음 노드와 연결해 말할 수 있다(퀴즈 통과율로 측정).
-2. 기존 강의·용어집·ai-ops는 diff 0(허용 예외 ◪ 2곳 제외).
-3. 서사·연표의 모든 사실 문장에 KB 근거 존재(공란은 있어도 추측은 없다).
-4. verify exit 0 · 모드 B 인용 준수 · 정적 export 유지 · 라이브 배포.
-
-## 20.4 리스크와 대응
-
-| 리스크 | 대응 |
-|---|---|
-| 역사 서술의 부정확 | KB 근거 필수 + 공란 허용 원칙(§7.3) + stale 재확인 절차 편입 |
-| 그래프 과밀(456용어) | 전도는 대표 용어만, 나머지는 국소도(§6.3) |
-| 챕터가 강의의 요약 복제가 됨 | 챕터는 "왜"의 서사만(2.5~4천자 상한), 원리는 딥링크로 위임(§3.2) |
-| 정적 export 제약과 인터랙션 욕심 충돌 | CSS/SVG·클라이언트 상태만으로 설계(§9.1·§10.1) — 서버 필요 기능은 범위 밖 선언 |
-| 문서 엉킴 | 본 PRD가 유일 정본, Lab PRD 보류 명시, §0 읽기 규약 |
+1. 비개발자가 21개 기술을 “이전 한계 → 해결 → 다음 필요”로 설명할 수 있다.
+2. MCP·RAG·Agent 같은 용어를 독립 정의가 아니라 전체 시스템 안의 위치로 이해한다.
+3. 기존 100강·456개 용어·90개 KB의 링크와 기능이 유지된다.
+4. Atlas의 모든 사실·기업·서비스·타임라인 항목이 KB로 역추적된다.
+5. 모든 챕터가 14섹션을 갖고 Quiz·Teach-back·다음 Why Bridge로 학습 루프를 닫는다.
+6. 키보드·모바일·reduced motion에서도 핵심 학습 경험을 완료할 수 있다.
+7. `npm run verify`와 Atlas 전수 QA가 통과한다.
 
 ---
 
-*본 문서는 기획 산출물이다. 코드 구현은 운영자 승인 후 §20.2 로드맵 순서로 진행한다.*
+## 승인 요청
+
+운영자 승인 전에는 Phase 1을 실행하지 않는다. 승인 시 다음 단계는 **Phase 1 — Baseline Reconciliation & Data Contract**이며, 먼저 12노드 초기 스켈레톤과 현재 미커밋 Phase 1 코드를 21노드·14섹션 정본에 맞추는 영향 분석을 보고한 뒤 구현한다.

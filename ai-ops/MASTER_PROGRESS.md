@@ -191,8 +191,8 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 
 | 단계 | 완료 / 전체 | 진행률 |
 |---|---|---|
-| Knowledge Base 수집(P-01) | 85 / 90 | 94% (91~95 수집·검증 승인, 96~100 kb_needed) |
-| Knowledge Base (approved 이상) | 85 / 90 | 94% (Project Completion KB Wave A 승인, 96~100 kb_needed) |
+| Knowledge Base 수집(P-01) | 90 / 90 | 100% (백로그 1~100 근거 KB 수집 완료) |
+| Knowledge Base (approved 이상) | 90 / 90 | 100% (90건 approved) |
 | KB Quote Bank (1차 qa_approved KB) | 5 / 5 | 100% |
 | KB Quote Bank (2차 approved KB) | 3 / 3 | 100% |
 | KB Quote Bank (3차 approved KB) | 4 / 4 | 100% |
@@ -204,10 +204,10 @@ Executor 체제 (2026-07-04~): **Codex** = 수집(P-01)·검증(P-02)·재수집
 | KB Quote Bank (9차 approved KB) | 5 / 5 | 100% (AI coding tools KB Wave 승인) |
 | KB Quote Bank (10차 approved KB) | 5 / 5 | 100% (practical vibe coding KB Wave 승인) |
 | V2 regeneration Wave 1 | 9 / 9 | 100% |
-| Lesson 생성 | 95 / 100 | 95% (V2 generated 95강, integrated 95강) |
-| Site 반영 | 95 / 100 | 95% (V2 integrated 95강, P-06 검증 대기 5강) |
-| Verify 통과 | 95 / 100 | 95% (`npm run verify` PASS, Next build 174 static pages) |
-| Release | 95 / 100 | 95% (V2 released 95강, deployment HOLD) |
+| Lesson 생성 | 100 / 100 | 100% (V2 100강 generated) |
+| Site 반영 | 100 / 100 | 100% (V2 100강 integrated) |
+| Verify 통과 | 100 / 100 | 100% (V2 100강 verify 통과) |
+| Release | 100 / 100 | 100% (V2 100강 released·라이브) |
 
 ## 예외 상태 로그 (✗·↻ 발생 시 append)
 

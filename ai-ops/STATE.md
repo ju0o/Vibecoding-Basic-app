@@ -10,28 +10,28 @@
 
 | 필드 | 값 |
 |---|---|
-| Current Batch | **🧭 ATLAS (O-07) — AI Engineering Atlas · Education Layer 추가.** 정본: [roadmap/ATLAS-EDUCATION-LAYER.md](roadmap/ATLAS-EDUCATION-LAYER.md) (기존 AI-Ops·100강·용어집 무수정, Layer만 추가. Lab PRD는 보류) |
-| Current State | **PRD 승인됨 → 구현 계획(ATLAS-BUILD-PLAN.md, Phase 1~7) 작성 완료 — Phase 1 승인 대기.** 챕터 13섹션 형식·5대 가치(Visual·Interaction·Story·Engineering·Learning)·기능 게이트 질문이 헌법(§A)으로 명문화됨. 코드 무수정 |
-| Last Completed Step | 운영자 지시("코드 수정 금지, 20개 항목 PRD만") → Fable이 현 구조 전수 분석 후 ATLAS-EDUCATION-LAYER.md를 전체 PRD(§1~§20: 구조분석·유지구조·Layer설계·KB활용·로드맵·그래프·타임라인·관계·애니·플레이그라운드·퀴즈·진행률·Wiki발전·IA·UserFlow·내비·첫화면·철학·차별점·최종구조)로 전면 개정 (2026-07-12) |
-| Next Executor | 운영자 — **Phase 1 승인/반려**. 승인 시 Fable P1 착수 |
-| Next Prompt File | **roadmap/ATLAS-BUILD-PLAN.md** — 실행 정본. §A 헌법 + 해당 Phase 절만 읽기(PRD는 지시된 §만) |
-| Blocker | 없음 |
-| Required Human Action | 기획서 스팟체크(선택) — 12노드 제목·연결 문장 반려 가능 |
-| Release Status | **V2 100강 공개 라이브 유지** + Atlas A0(데이터 층) 준비 — Atlas UI는 A1~A4 후 배포 |
+| Current Batch | **AI Engineering Atlas V2 — Phase 0 Discovery & PRD.** 정본 후보: [roadmap/ATLAS-EDUCATION-LAYER.md](roadmap/ATLAS-EDUCATION-LAYER.md) |
+| Current State | **21개 개념·14개 공통 섹션 기준 V2 PRD 작성 완료, 운영자 승인 대기.** 기존 12노드·13섹션 빌드 계획은 HOLD. 미커밋 Phase 1 코드는 보존하되 승인된 구현으로 간주하지 않음 |
+| Last Completed Step | 현재 저장소·AI-Ops·100강·456용어·90 KB·진행률·검색·UI 구조 분석 후, 사용자 요구 20개 항목을 반영해 ATLAS-EDUCATION-LAYER.md를 V2 PRD로 재기준화 (2026-07-13) |
+| Next Executor | 운영자 — **V2 PRD 승인/수정 요청** |
+| Next Prompt File | **roadmap/ATLAS-EDUCATION-LAYER.md** |
+| Blocker | Phase 1 시작 전 운영자 승인 필요 |
+| Required Human Action | 21개 개념 흐름·14개 챕터 구조·Phase 0~12 전략 승인 또는 수정 요청 |
+| Release Status | **기존 V2 100강 공개 라이브 유지. Atlas V2는 기획 단계이며 미배포** |
 
 ## NEXT (직전 실행자의 NEXT_ACTION — 항상 이 블록이 최신)
 
 ```
-- Current State: 🏁 100강 완주 — V2 100강 released + 라이브 100강, KB 90건 approved, kb_needed 0, 백로그 100행 전부 v2-released/released
-- Verdict: MISSION COMPLETE (W1 커리큘럼 완주)
-- Next Executor: 운영자 판단
-- Next Prompt File: (없음) 후속 워크스트림 시 CODEX-MISSIONS → M4(콘텐츠 리프레시 R1~R7) 또는 M5(기계 QA 전수 재스캔)
-- Why: 백로그 1~100 전부 released. Codex가 91~95 + 96~100 KB(P-01)를, Fable이 84~90 + 96~100 강의 및 P-02·배포를 수행 — 2인 체제의 계획대로 완주.
-- Required Operator Action: 완주 스팟체크(선택). 후속 방향 지시(리프레시/QA 재스캔/챗봇 확장) 시 한 줄이면 충분.
-- If Approved: 유지보수 모드 — stale-KB 30일 주기 재확인(M4), 신규 동향 승격(CONTENT-REFRESH-2026H2), 캡스톤 4층(retrieval 챗봇) 설계 착수 가능.
-- If Rejected: 반려 강의 명시 → 해당 강의만 P-04 재생성.
-- Files to Check: ai-ops/outputs/00-backlog/BACKLOG.md(전 행 released 확인), src/content/lessons/markdown/(100파일), https://ju0o-ec967.web.app
-- Stop Condition: (해당 없음 — 완주)
+- Current State: Atlas V2 Phase 0 완료 — 21개 개념·14개 챕터 섹션·20개 PRD 항목 작성, 기존 사이트 100강 라이브 유지
+- Verdict: REVIEW REQUIRED
+- Next Executor: 운영자
+- Next Prompt File: ai-ops/roadmap/ATLAS-EDUCATION-LAYER.md
+- Why: 이전 12노드·13섹션 초기안과 달리 사용자가 요구한 21개 기술 흐름과 14개 공통 구조로 정본 후보를 재기준화했으므로 구현 전 승인이 필요하다.
+- Required Operator Action: PRD 승인 또는 수정 요청. 특히 21개 Concept, 6개 Arc, 14섹션, Phase 0~12 범위를 확인한다.
+- If Approved: Phase 1 Baseline Reconciliation & Data Contract의 상세 영향 분석을 먼저 보고하고, 승인된 범위만 구현한다.
+- If Rejected: 지적된 PRD 섹션만 수정하며 src 코드는 변경하지 않는다.
+- Files to Check: ai-ops/roadmap/ATLAS-EDUCATION-LAYER.md, ai-ops/roadmap/ATLAS-BUILD-PLAN.md, ai-ops/ATLAS-P1-PENDING.md
+- Stop Condition: 운영자 승인 전 Phase 1 코드 커밋·확장·배포 금지
 ```
 
 ## 상태 기계 (전이 규칙 — NEXT 계산의 유일한 근거)
@@ -67,13 +67,14 @@ released ──[운영자: 배포 환경·승인]──▶ deploy_ready ──[C
 
 ## 항목별 현재 상태 (요약 — 상세는 MASTER_PROGRESS.md)
 
-- KB: **85건 approved**, stale KB 0건 / D-02 플랫폼 증분 = **완료**
-- 강의: **V2 released 95강 / 라이브 90강** / UI: **M3 UI/UX refactor verified locally** / M5 QA scan: 전체 위반 0건, V1 알려짐 0건
+- KB: **90건 approved**, stale KB 0건 / D-02 플랫폼 증분 = **완료**
+- 강의: **V2 released 100강 / 라이브 100강** / UI: **M3 UI/UX refactor verified locally** / Atlas V2: **PRD 승인 대기**
 - 루프 카운터: 없음 (rag Loop A·tokenization-context Loop A 종결, Batch 1 빌드 재검증 1회 있었으나 VERIFIED로 종결)
 
 ## 이력 (전이 로그 — append 전용, 최근 10건)
 | 일시 | 항목 | 전이 | 실행 |
 |---|---|---|---|
+| 2026-07-13 | AI Engineering Atlas V2 | 12노드·13섹션 초기안 → 21개 개념·14섹션 PRD 정본 후보 | Codex Phase 0, 기존 구조 분석·20개 요구 항목 설계, 구현 HOLD·운영자 승인 대기 |
 | 2026-07-12 | explain-risk-and-verification·mini-saas-architecture·admin-dashboard-project·ai-chatbot-project·automation-workflow-project | verified → released | Codex P-08 Project Completion Release Wave A, V2 Wave 33, deployment HOLD |
 | 2026-07-12 | explain-risk-and-verification·mini-saas-architecture·admin-dashboard-project·ai-chatbot-project·automation-workflow-project | integrated → verified | Codex P-06 Project Completion Verify Wave A, `npm run verify` PASS, Next build 174 static pages |
 | 2026-07-12 | explain-risk-and-verification·mini-saas-architecture·admin-dashboard-project·ai-chatbot-project·automation-workflow-project | generated → integrated | Codex P-05 Project Completion Integration Wave A, markdown·curriculum·glossary 15개·diagrams 5개·KB consumers 반영, lint/typecheck PASS |
