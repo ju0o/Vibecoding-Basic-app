@@ -3,9 +3,12 @@
 | Field | Value |
 |---|---|
 | Date | 2026-07-14 |
+| HEAD | `3f49e8e` (chapter newline fix) · rebaseline `4387507` · MR RC `4ff3de4` |
 | Verdict | **READY_FOR_V2_RELEASE_REVIEW** |
 | Push | not performed |
 | Deploy | not performed |
+| Chapter content fix | All 21 chapter files rewritten with real newlines; tests assert §1–4 non-empty |
+| Evidence scratch | `C:\Users\user\AppData\Local\Temp\grok-goal-ed966663b76f\implementer\` |
 
 ---
 
@@ -51,12 +54,13 @@ See `ATLAS-SOURCE-FRESHNESS.md` and `ATLAS-CONTENT-COMPLETENESS.md`.
 
 | Check | Result |
 |---|---|
-| `npm run verify` | PASS (lint, typecheck, test, static build) |
-| `scripts/atlas/check-ssot-freezes.mjs` | PASS |
-| `scripts/atlas/check-app-concepts.mjs` | PASS 21/14 + 21 chapter files |
-| `scripts/atlas/check-model-routing-units.mjs` | PASS |
-| atlas unit tests | PASS |
-| model-routing unit tests | PASS |
+| `npm run verify` | PASS (lint, typecheck, test, static build) — log `{SCRATCH}/verify.log` |
+| `scripts/atlas/check-ssot-freezes.mjs` | PASS — `{SCRATCH}/ssot-freezes.json` |
+| `scripts/atlas/check-app-concepts.mjs` | PASS 21/14 + 21 chapter files — `{SCRATCH}/app-concepts.json` |
+| `scripts/atlas/check-model-routing-units.mjs` | PASS — `{SCRATCH}/routing-units.json` |
+| atlas unit tests (incl. non-empty §1–4) | PASS 8 tests — `{SCRATCH}/unit-tests.log` |
+| model-routing unit tests | PASS 6 tests — same log |
+| Evidence pack | `C:\Users\user\AppData\Local\Temp\grok-goal-ed966663b76f\implementer\` |
 
 ## Accessibility / performance
 
