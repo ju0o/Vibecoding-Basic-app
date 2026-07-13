@@ -36,7 +36,7 @@
 | PW-11 A11y/perf | **PASS** (keyboard axes, aria-live, text table, reduced-motion friendly SVG) |
 | PW-12 Source QA | **PASS** (educational claimScope; no X-as-fact) |
 | PW-13 Full QA | **PASS** (lint/type/test/build) |
-| PW-14 RC prep | **in progress / READY_FOR_RELEASE_REVIEW candidate** |
+| PW-14 RC prep | **READY_FOR_RELEASE_REVIEW** — `reports/ATLAS-PW14-RELEASE-CANDIDATE.md` |
 | Phase 1 work | **preserved uncommitted** |
 | BUILD-PLAN | **HOLD** |
 | 21 / 14 freezes | **unchanged** |

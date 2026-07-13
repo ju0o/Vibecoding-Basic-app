@@ -7,6 +7,8 @@
 | HEAD | see `git log -1` after product commits |
 | Current Goal | Interactive Atlas V2; Model Routing subordinate route productized |
 | Current Phase | **READY_FOR_RELEASE_REVIEW** (Model Routing slice) |
+| PW-14 report | `ai-ops/reports/ATLAS-PW14-RELEASE-CANDIDATE.md` |
+| Evidence scratch | `C:\Users\user\AppData\Local\Temp\grok-goal-c98eac28f42d\implementer\` (git-status, ssot-freezes, routing-units, routing-tests, verify, interaction-constraints) |
 | Next work | Operator review; optional push; Phase 1 21/14 rebaseline later; content deepen via P-01/P-02 if product facts expand |
 
 ---
