@@ -2,14 +2,17 @@
 
 | 항목 | 내용 |
 |---|---|
-| 문서 상태 | **DRAFT — 운영자 승인 대기** |
+| 문서 상태 | **APPROVED — Education Layer PRD 운영자 승인 완료** |
 | 작성 기준일 | 2026-07-13 |
+| 승인 범위 | 본 Education Layer PRD(21 Concept · 14섹션 · Phase 0~12 전략). 하위 Feature Spec·소스 구현은 별도 승인 |
 | 제품 방향 | **Evolution, not Rebuild** |
 | 제품 정의 | 기존 AI-Ops Architecture 위에 Education Layer를 추가한 인터랙티브 AI 엔지니어링 학습 플랫폼 |
 | 핵심 사용자 | AI Engineering을 체계적으로 이해하고 싶은 비개발자·초보 개발자 |
-| 구현 상태 | 이 문서는 분석·설계 산출물이다. **본 PRD 승인 전 신규 구현을 진행하지 않는다.** |
+| 구현 상태 | PRD 승인 완료. Model Routing Feature Spec 승인 완료. **소스·콘텐츠 본문 구현은 미착수.** |
 
-> 정본 결정: Atlas의 학습 흐름은 **21개 핵심 개념**, 모든 챕터는 **14개 공통 섹션**을 사용한다. 기존 12노드 데이터 스켈레톤과 13섹션 구현 계획은 초기 탐색안이며, 본 PRD 승인 후 별도 Phase에서 안전하게 재기준화한다.
+> 정본 결정: Atlas의 학습 흐름은 **21개 핵심 개념**, 모든 챕터는 **14개 공통 섹션**을 사용한다. 기존 12노드 데이터 스켈레톤과 13섹션 구현 계획([ATLAS-BUILD-PLAN.md](ATLAS-BUILD-PLAN.md))은 **HOLD**이며, 승인된 본 PRD를 기준으로 별도 Phase에서 안전하게 재기준화한다.
+
+> **하위 Feature Spec:** Model Routing Learning Route 세부 설계는 [ATLAS-MODEL-ROUTING-FEATURE-SPEC.md](ATLAS-MODEL-ROUTING-FEATURE-SPEC.md)에 둔다. 이 Learning Route는 **기존 21개 Concept와 14섹션 계약을 변경하지 않는다.** Feature Spec은 **승인 완료(MR-0)**이며, 소스·콘텐츠 구현은 **MR-1 이후 Phase 승인 전 시작하지 않는다.**
 
 ---
 
@@ -882,6 +885,16 @@ ai-ops/
 
 ---
 
-## 승인 요청
+## 승인 상태
 
-운영자 승인 전에는 Phase 1을 실행하지 않는다. 승인 시 다음 단계는 **Phase 1 — Baseline Reconciliation & Data Contract**이며, 먼저 12노드 초기 스켈레톤과 현재 미커밋 Phase 1 코드를 21노드·14섹션 정본에 맞추는 영향 분석을 보고한 뒤 구현한다.
+| 항목 | 상태 |
+|---|---|
+| Education Layer PRD (본 문서) | **승인 완료** |
+| Model Routing Learning Route Feature Spec | **승인 완료 (MR-0)** — [ATLAS-MODEL-ROUTING-FEATURE-SPEC.md](ATLAS-MODEL-ROUTING-FEATURE-SPEC.md) |
+| Model Routing 소스 구현 | **미착수** (MR-1+ 별도 승인) |
+| Model Routing 콘텐츠 구현 | **미착수** |
+| ATLAS-BUILD-PLAN (12노드·13섹션) | **HOLD** |
+
+본 PRD 승인 후에도 Phase 1 소스 구현은 별도 운영자 승인 후에만 진행한다. Phase 1 착수 시 먼저 12노드 초기 스켈레톤과 현재 미커밋 Phase 1 코드를 21노드·14섹션 정본에 맞추는 영향 분석([reports/atlas-phase-1-impact-report.md](../reports/atlas-phase-1-impact-report.md))을 기준으로 재사용·수정·보류 목록을 확정한다.
+
+Model Routing은 Orchestration → Evaluation → Harness 구간을 가로지르는 **하위 Learning Route**이며, 21개 Concept에 새 Concept를 추가하지 않는다. 상세 학습 단위·Simulator·시나리오 계약은 Feature Spec에만 기술하고 본 PRD에 복제하지 않는다.
