@@ -76,6 +76,27 @@ def main() -> None:
     for i, h in enumerate(extra_headers, 1):
         style_header(ws.cell(1, base_cols + i, h))
 
+    STATUS_KO = {
+        "draft": "초안",
+        "drafting": "작성 중",
+        "partial": "일부 완료",
+        "complete": "완료",
+        "pending": "검토 대기",
+        "approved": "승인",
+        "blocked": "진행 불가",
+        "not_started": "시작 전",
+        "pass": "통과",
+        "revise": "수정 필요",
+        "block": "차단",
+        "reviewing": "검토 중",
+        "published_path": "경로 공개",
+        "verified": "검증됨",
+        "idea": "아이디어",
+    }
+
+    def ko_status(raw: str) -> str:
+        return STATUS_KO.get(raw, raw)
+
     row_i = 2
     with CSV_PATH.open(encoding="utf-8") as f:
         for row in csv.DictReader(f):
@@ -87,11 +108,16 @@ def main() -> None:
                     val = str(val).replace("|", "\n")
                 if key == "outcomes":
                     val = str(val).replace(";", ", ")
+                if key in ("source_status", "content_status", "reviewer_status"):
+                    val = ko_status(str(val))
                 c = ws.cell(row_i, col, val)
                 style_cell(c)
-            # 파생 요약 (Day1 하드코드 없이 상태 문자열)
-            anim = "storyboard_있음·구현_대기"
-            progress = f"{row.get('content_status', '')} / {row.get('reviewer_status', '')}"
+            anim = (
+                "인터랙티브 구현됨"
+                if row.get("lesson_id") == "d1-first-success"
+                else "시작 전"
+            )
+            progress = f"{ko_status(row.get('content_status', ''))} / {ko_status(row.get('reviewer_status', ''))}"
             sample = "examples/day1-first-success" if row.get("lesson_id") == "d1-first-success" else ""
             for offset, val in enumerate([anim, progress, sample], 1):
                 style_cell(ws.cell(row_i, base_cols + offset, val))
@@ -158,18 +184,17 @@ def main() -> None:
     for col, h in enumerate(["항목", "경로/설명", "상태", "다음 작업"], 1):
         style_header(ws3.cell(1, col, h))
     status_rows = [
-        ("학생 콘텐츠", "content/courses/.../01-first-success.md", "drafting", "운영자 승인"),
-        ("학생용 Word", "exports/student/*.docx", "generated", "MD 변경 시 재생성"),
-        ("강사용 자료", "content/instructor/**", "optional", "필수 파이프라인 아님"),
-        ("실습", "content/practice/...", "drafting", "샘플 경로 정합"),
-        ("인터랙션 명세", "content/interactions/...", "drafting", "애니 구현 입력"),
-        ("애니메이션 설계", "ANIMATION_DESIGN_SYSTEM.md", "design", "AF-1 프레임워크"),
-        ("인터랙티브 애니 구현", "src/features/animations (예정)", "not_started", "Storyboard≠완료"),
-        ("퀴즈/평가", "content/assessment/...", "drafting", "Outcome 연동"),
-        ("샘플 프로젝트", "examples/day1-first-success/", "verified", "예제·실습·완성본 확장"),
-        ("출처 팩", "DAY1-SOURCE-PACK.md", "partial", "배포 전 LTS 재확인"),
-        ("사이트 연결", "Website Viewer", "not_started", "교육 패키지 완성 후"),
-        ("Curriculum CSV", "ai-ops/curriculum/CURRICULUM_MASTER.csv", "SSOT", "영문 키 유지"),
+        ("학생용 Markdown", "content/courses/.../01-first-success.md", "작성 중", "원본 유지"),
+        ("학생용 Word", "exports/student/*.docx", "생성됨", "MD 변경 시 재생성"),
+        ("강사용 자료", "content/instructor/**", "선택·보관", "필수 파이프라인 아님"),
+        ("샘플 프로젝트", "examples/day1-first-success/", "검증됨", "로컬 npm run dev"),
+        ("Storyboard", "exports/review/DAY1-INTERACTION-STORYBOARD.md", "완료", "설계도"),
+        ("인터랙티브 애니메이션", "/learn/vibe-coding-foundation/day-1", "구현됨", "조작 검증"),
+        ("퀴즈", "Day1QuizAndOutcomes", "연결됨", "페이지 내장"),
+        ("사이트 연결", "Day 1 only", "연결됨", "Day2+ 미연결"),
+        ("QA", "vitest + verify", "진행", "운영자 조작 확인"),
+        ("검토 상태", "READY_FOR_DAY1_INTERACTIVE_REVIEW", "검토 대기", "운영자 판정"),
+        ("다음 작업", "운영자 인터랙티브 리뷰", "대기", "승인 후 개선"),
     ]
     for r, row in enumerate(status_rows, 2):
         for col, v in enumerate(row, 1):

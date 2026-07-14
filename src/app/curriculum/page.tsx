@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { Badge } from "@/components/ui/Badge"
 import { CurriculumExplorer } from "@/features/curriculum/CurriculumExplorer"
 import { getCurriculumModulesWithLessons } from "@/lib/lesson-content"
@@ -24,6 +25,26 @@ export default function CurriculumPage() {
           검색해서 지금 필요한 개념으로 바로 들어가세요.
         </p>
       </div>
+
+      <aside className="mt-8 max-w-3xl rounded-2xl border border-sky-500/30 bg-sky-500/10 p-5">
+        <p className="text-xs font-bold uppercase tracking-wide text-sky-800 dark:text-sky-200">
+          신규 · 학생 자율 학습 경로
+        </p>
+        <h2 className="mt-2 text-xl font-extrabold text-[var(--text-primary)]">
+          Day 1 — 첫 성공 (인터랙티브)
+        </h2>
+        <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
+          요청 → 파일 생성 → 설치 → 서버 → 미리보기 → 수정·오류 복구를{" "}
+          <strong className="text-[var(--text-primary)]">실제로 조작</strong>해 보세요. 아래 기존
+          100강 목록과는 별도 경로입니다.
+        </p>
+        <Link
+          className="mt-4 inline-flex rounded-lg bg-sky-600 px-4 py-2 text-sm font-bold text-white hover:bg-sky-500"
+          href="/learn/vibe-coding-foundation/day-1"
+        >
+          Day 1 학습 시작
+        </Link>
+      </aside>
 
       <div className="mt-10">
         <CurriculumExplorer modules={modules} />

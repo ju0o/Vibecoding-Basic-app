@@ -4,37 +4,31 @@
 
 | 필드 | 값 |
 |---|---|
-| Current Batch | **DIRECTION UPDATE — Student Self-Serve + Animation System** |
-| Current State | **Operator direction applied.** Instructor optional. Student Word kept. Sample kept. Animation Design System drafted (no React impl yet). Curriculum XLSX Korean headers. Website last. |
-| Last Completed Step | Animation Design System + pipeline reframe + Korean curriculum export (2026-07-14) |
-| Next Executor | 운영자 — Animation Design System 승인/수정 후 AF-1 또는 Day1 콘텐츠 게이트 |
-| Next Prompt File | **roadmap/ANIMATION_DESIGN_SYSTEM.md** |
+| Current Batch | **DAY 1 INTERACTIVE IMPLEMENTATION** |
+| Current State | **Day 1 interactive experience live on local route.** Simulation + sample + quiz + outcomes. Operator review. |
+| Last Completed Step | AF-0…AF-12 Day 1 interactive (2026-07-14) |
+| Next Executor | 운영자 — dev 서버에서 조작 검증 |
+| Next Prompt File | **/learn/vibe-coding-foundation/day-1** · `ai-ops/reports/DAY1-INTERACTIVE-IMPLEMENTATION-REVIEW.md` |
 | Blocker | None |
-| Required Human Action | Confirm Animation Design System; then allowlist for AF-1 framework skeleton (or content fixes first) |
-| Release Status | 미push · 미배포 · 사이트 미연결 · 애니 미구현 |
+| Required Human Action | Approve interactive Day 1 or request revisions |
+| Release Status | 미push · 미배포 |
 
-### Direction (locked by operator)
+### Direction
 
 | Item | Status |
 |---|---|
-| Education First | **maintained** |
-| Student self-serve (not instructor LMS) | **active** |
-| Instructor scripts | **optional only** |
-| Student Word in pipeline | **required derivative** |
-| Sample projects (example/lab/done) | **required direction** |
-| Storyboard only = incomplete | **active** |
-| Interactive Animation goal | **active** (design first) |
-| Curriculum XLSX Korean | **active** |
-| Website last / Viewer | **active** |
+| Animation Design | **approved** |
+| Day 1 Interactive | **implemented** (sim) |
+| Instructor required | no (optional) |
+| Website Day 1 only | **wired** |
+| Day 2+ | not wired |
 
 ## NEXT
 
 ```
-- Verdict: READY_FOR_ANIMATION_DESIGN_REVIEW
-- Read: ANIMATION_DESIGN_SYSTEM.md + CONTENT_PIPELINE.md
-- Open: exports/curriculum/CURRICULUM_MASTER.xlsx (한글 컬럼)
-- Do not: treat instructor DOCX as required; do not ship text-stepper as animation
-- After approve AF design: AF-1 AnimationShell allowlist (separate) OR Day1 content approve
+- Verdict: READY_FOR_DAY1_INTERACTIVE_REVIEW
+- Run: npm run dev
+- Open: http://localhost:3000/learn/vibe-coding-foundation/day-1
 - Stop: no push/deploy
 ```
 
@@ -42,6 +36,5 @@
 
 | 일시 | 항목 | 전이 |
 |---|---|---|
-| 2026-07-14 | Operator direction | Student-only pipeline + Animation Design System |
-| 2026-07-14 | Day 1 operator package | READY_FOR_DAY1_OPERATOR_REVIEW (superseded in process by direction) |
-| 2026-07-14 | Outcome / Journey / Education First | prior |
+| 2026-07-14 | Day 1 interactive | READY_FOR_DAY1_INTERACTIVE_REVIEW |
+| 2026-07-14 | Animation design approve | APPROVE_ANIMATION_DESIGN |
