@@ -19,12 +19,13 @@ export function TaskBreakdownExperience() {
   const [on, setOn] = useState([true, true, false, true])
 
   const active = useMemo(() => STEPS.filter((_, i) => on[i]), [on])
+  const deferStep = STEPS[3] ?? ""
   const grade =
     active.length === 0
       ? "단계가 없음"
       : active.length > 3
         ? "너무 많음 — 한 스프린트에 과함 (교육 신호)"
-        : active.includes(STEPS[3]) && active.length <= 3
+        : deferStep !== "" && active.includes(deferStep) && active.length <= 3
           ? "좋음: 작은 검증 단위 + 나중 일 분리"
           : "보통: 더 쪼개거나 성공 기준을 붙이세요"
 

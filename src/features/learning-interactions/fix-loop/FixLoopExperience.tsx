@@ -17,7 +17,7 @@ const PHASES = [
 export function FixLoopExperience() {
   const [i, setI] = useState(0)
   const [log, setLog] = useState<string[]>([])
-  const phase = PHASES[i]
+  const phase = PHASES[i] ?? PHASES[0]
 
   const next = () => {
     setLog((L) => [...L, phase.title])
