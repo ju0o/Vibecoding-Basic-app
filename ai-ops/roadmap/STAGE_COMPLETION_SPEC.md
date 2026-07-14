@@ -3,7 +3,8 @@
 ```yaml
 document: STAGE_COMPLETION_SPEC
 authority: stage_completion_contract_ssot_candidate
-status: operator_review_required
+status: operator_approved
+approved_at: 2026-07-14
 parent: OUTCOME_FRAMEWORK.md
 sibling: LEARNING_OUTCOMES.md
 date: 2026-07-14

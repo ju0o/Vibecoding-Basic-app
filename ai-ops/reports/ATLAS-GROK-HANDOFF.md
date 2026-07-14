@@ -1,51 +1,35 @@
-# Handoff — Outcome Driven Learning (2026-07-14)
+# Handoff — Day 1 Education Package (2026-07-14)
 
 | Field | Value |
 |---|---|
-| Verdict | **READY_FOR_OUTCOME_FRAMEWORK_REVIEW** |
-| Top SSOT | **Student Journey + Learning Outcome** (pair; neither deleted) |
-| Primary question | **학생이 혼자 할 수 있는가?** |
-| Day 1 | Experience-first 10-min success (not AI→LLM→IDE→Node theory chain) |
+| Verdict | **READY_FOR_DAY1_EDUCATION_REVIEW** |
+| Top SSOT | Journey + Outcome (outcome pack **approved**) |
+| Day 1 | Path A HTML quick win + Path B local (variable time) |
+| Site | **Not wired** — originals under `content/` |
 
 ## Read first
 
-1. `ai-ops/roadmap/OUTCOME_FRAMEWORK.md`
-2. `ai-ops/roadmap/LEARNING_OUTCOMES.md`
-3. `ai-ops/roadmap/STAGE_COMPLETION_SPEC.md`
-4. `ai-ops/roadmap/ASSESSMENT_SYSTEM.md`
-5. `ai-ops/roadmap/STUDENT_JOURNEY.md` (Day1 + pair updated)
-6. `AGENTS.md`
-
-## Flow
-
-```text
-Experience → Question → Theory → Practice → Experiment
-  → Reflection → Outcome → Next
-```
-
-Atlas = after curiosity. Website = last. Complete = can-do, not attendance.
-
-## Keep
-
-- Journey, Roadmap, Node Spec, Principles  
-- Atlas, Model Routing, Foundation, Studio, 100 lessons  
+1. `ai-ops/reports/DAY1-EDUCATION-PACKAGE-REVIEW.md`
+2. `content/courses/vibe-coding-foundation/lessons/01-first-success.md`
+3. `content/practice/.../01-first-success-practice.md`
+4. `content/assessment/.../01-first-success-assessment.md`
+5. `ai-ops/curriculum/CURRICULUM_MASTER.csv`
 
 ## Do not
 
-- Code / UI / libs / push / deploy this batch  
-- Delete Journey or Atlas  
-- Theory-first Day1 as main path  
-- Mark Complete without Outcome  
+- Implement lesson pages / animation without operator content approve  
+- Edit frozen `src/content/lessons/**` for this package  
+- push / deploy  
 
-## Next after approve
+## After approve
 
-1. Author Day1 content against Day1 outcome checklist  
-2. Wire outcome_ids into node specs / Excel  
-3. Later: Studio four signals (learn/practice/quiz/**outcome**)
+1. Optional sample project + instructor DOCX  
+2. Website viewer wire + interaction implementation from spec  
+3. Day 2 curriculum row  
 
-## Resume prompt
+## Resume
 
 ```text
-Journey + Outcome top pair. Solo capability first. Experience then question then theory.
-Day1 = first success then why-Node questions. Atlas reference after curiosity. No website-first.
+Day1 package ready for education review. content/ not site-wired. Outcome approved.
+Website last.
 ```

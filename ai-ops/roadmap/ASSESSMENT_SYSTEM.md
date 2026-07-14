@@ -3,7 +3,8 @@
 ```yaml
 document: ASSESSMENT_SYSTEM
 authority: assessment_and_studio_signals_ssot_candidate
-status: operator_review_required
+status: operator_approved
+approved_at: 2026-07-14
 parent: OUTCOME_FRAMEWORK.md
 siblings:
   - LEARNING_OUTCOMES.md

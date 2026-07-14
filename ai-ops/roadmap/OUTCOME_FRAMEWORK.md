@@ -3,7 +3,8 @@
 ```yaml
 document: OUTCOME_FRAMEWORK
 authority: outcome_system_ssot_candidate
-status: operator_review_required
+status: operator_approved
+approved_at: 2026-07-14
 paired_top_ssot_with: STUDENT_JOURNEY.md
 product: capability_to_build_alone
 date: 2026-07-14

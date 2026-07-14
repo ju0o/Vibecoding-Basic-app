@@ -82,7 +82,7 @@ X = 후보 탐색만. 단독 확정 금지.
 
 | 콘텐츠 | 경로 |
 |---|---|
-| Path/Course 인덱스 (예정) | `ai-ops/curriculum/CURRICULUM_MASTER.xlsx` (신설 예정 · 승인 후) |
+| Path/Course 인덱스 | `ai-ops/curriculum/CURRICULUM_MASTER.csv` (**SSOT**, Choice B) · schema: `CURRICULUM_MASTER_SCHEMA.md` · xlsx는 추후 export 산출물 |
 | 기존 모듈 맵 | `ai-ops/roadmap/CURRICULUM-MAP.md`, `src/content/curriculum.ts` |
 | 학생 강의 MD | `src/content/lessons/markdown/**` |
 | Atlas 개념 본문 | `src/content/atlas/chapters/**` |

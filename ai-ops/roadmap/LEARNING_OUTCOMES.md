@@ -3,7 +3,8 @@
 ```yaml
 document: LEARNING_OUTCOMES
 authority: stage_outcomes_ssot_candidate
-status: operator_review_required
+status: operator_approved
+approved_at: 2026-07-14
 parent: OUTCOME_FRAMEWORK.md
 paired_with: STUDENT_JOURNEY.md
 living: true
