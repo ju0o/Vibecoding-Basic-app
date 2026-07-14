@@ -1,12 +1,23 @@
 # Node Production Status
 
-| node_id | Anim | Website | notes |
-|---|---|---|---|
-| d1-first-success | ◎ | → | approved |
-| project-file-structure | ◎ | → | approved |
-| node-npm-package-json | ◎ | → | approved |
-| ai-llm-ide | ◎ | → | Batch1 |
-| terminal-commands | ◎ | → | Batch1 |
-| errors-to-ai | ◎ | → | Batch1 |
+Mode: **Continuous Curriculum Production** · verified packages only on Website
 
-Mode: Continuous · next Batch2 B01–B04
+| node_id | Research | Write | Anim | Quiz | Review | Website | notes |
+|---|---|---|---|---|---|---|---|
+| d1-first-success | ◎ | ◎ | ◎ | ◎ | ◎ | → | A01 approved |
+| project-file-structure | ◎ | ◎ | ◎ | ◎ | ◎ | → | A02 approved |
+| node-npm-package-json | ◎ | ◎ | ◎ | ◎ | ◎ | → | A03 approved |
+| ai-llm-ide | ◎ | ◎ | ◎ | ◎ | ◎ | → | A04 Batch1 |
+| terminal-commands | ◎ | ◎ | ◎ | ◎ | ◎ | → | A05 Batch1 |
+| errors-to-ai | ◎ | ◎ | ◎ | ◎ | ◎ | → | A06 Batch1 |
+| web-how-pages-appear | ◎ | ◎ | ◎ | ◎ | ◎ | → | B01 Batch2 |
+| html-basics | ◎ | ◎ | ◎ | ◎ | ◎ | → | B02 Batch2 |
+| css-basics | ◎ | ◎ | ◎ | ◎ | ◎ | → | B03 Batch2 |
+| javascript-basics | ◎ | ◎ | ◎ | ◎ | ◎ | → | B04 Batch2 |
+| files-connect | ◎ | ◎ | ◎ | ◎ | ◎ | → | B05 Batch3 |
+| frontend | ◎ | ◎ | ◎ | ◎ | ◎ | → | B06 Batch3 |
+| backend | ◎ | ◎ | ◎ | ◎ | ◎ | → | B07 Batch3 |
+| api | ◎ | ◎ | ◎ | ◎ | ◎ | → | B08 Batch3 |
+| database | ◎ | ◎ | ◎ | ◎ | ◎ | → | B09 Batch3 |
+
+**Next:** Batch 4 C01–C04

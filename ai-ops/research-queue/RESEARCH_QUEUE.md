@@ -1,24 +1,20 @@
 # Research Queue
 
-## Open (later nodes)
+## Open
 
 | id | topic | status |
 |---|---|---|
-| RQ-004 | IDE vs AI IDE | queued — **C only** |
+| RQ-B3-06 | Firebase/Supabase/Neon pricing free tier | **blocked** — not in student body as fact |
+| RQ-C01 | Prompt engineering official defs | queued — Batch 4 |
+| RQ-C02 | Context engineering educational scope | queued — Batch 4 |
 
-## Closed — Node B applied
+## Closed / applied
 
 | id | status | applied_in |
 |---|---|---|
-| RQ-001 | verified | node-npm lesson |
-| RQ-002 | verified | LTS wording + checked_at |
-| RQ-003 | verified | zero-dep install |
-| RQ-005 | verified | prior A |
-| RQ-006 | verified | B source pack |
-| RQ-B01 | verified | Node runtime def |
-| RQ-B02 | verified | npm vs Node (not same) |
-| RQ-B03 | verified | deps/devDeps when present |
-| RQ-B04 | verified | install educational scope |
-| RQ-B05 | verified | scripts name convention |
-| RQ-B06 | verified | Missing script flow |
-| RQ-B07 | verified | cwd / package.json location |
+| RQ-001…RQ-B07 | verified | prior A/B nodes |
+| RQ-B3-01 | verified→applied | files-connect |
+| RQ-B3-02 | verified→applied | frontend/backend |
+| RQ-B3-03 | verified→applied | api request/response |
+| RQ-B3-04 | verified→applied | api interface model |
+| RQ-B3-05 | verified→applied | database need |

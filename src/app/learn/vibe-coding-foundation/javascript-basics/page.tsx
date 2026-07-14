@@ -17,15 +17,15 @@ export default function Page() {
       <section className="mt-8 text-sm" id="practice">
         실습: main.js 문자열 수정 후 새로고침
       </section>
-      <section className="mt-10 rounded-2xl border p-5 text-sm">
-        <h2 className="font-extrabold">Batch 2 완료 → Batch 3</h2>
-        <p className="mt-2 text-[var(--text-secondary)]">
-          다음: 파일 연결 · Frontend · Backend · API · Database
-        </p>
-        <Link className="mt-2 inline-block text-[var(--accent-primary)] underline" href="/learn">
-          Learning Path
+      <p className="mt-8 text-sm">
+        다음:{" "}
+        <Link
+          className="font-semibold text-[var(--accent-primary)] underline"
+          href="/learn/vibe-coding-foundation/files-connect"
+        >
+          파일이 서로 연결되는 방식 →
         </Link>
-      </section>
+      </p>
     </main>
   )
 }
