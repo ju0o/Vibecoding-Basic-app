@@ -4,19 +4,33 @@ This file is the **common operating contract** for every AI executor working in 
 
 ---
 
-## 1. Project Goal
+## 1. Project Goal (Education First)
 
-Build an accurate, interactive **AI Engineering Atlas V2** so non-developers can understand the history, principles, and connections of AI engineering technologies.
+**Product = 교육자료.** 웹사이트는 교육자료를 보여주는 **Viewer**다.
+
+이 저장소는 비개발자를 위한 **AI · 바이브코딩 교육자료를 AI와 함께 연구·제작**하는 Living Education Project다.  
+Atlas 사이트 기능 완성이 최상위 목표가 아니다. 최우선 질문은:
+
+```text
+학생이 Day 1부터 끝까지 정말 이해하며 공부할 수 있는가?
+```
 
 Every agent, skill, script, and workflow must pass:
 
-1. Does this improve learner understanding?
-2. Does it preserve existing SSOT?
-3. Does it keep facts and sources honest?
-4. Does it reduce unnecessary Main-agent work?
-5. Does it produce verifiable results?
+1. Does this improve **learner understanding** (not just ship a page)?
+2. Was **Research → Verification → Content → Practice → Animation → Quiz** done before Website?
+3. Does it preserve existing education assets (Atlas Knowledge Layer, lessons, KB)?
+4. Does it keep facts and sources honest?
+5. Does it reduce unnecessary Main-agent work?
+6. Does it produce verifiable results?
 
 If not, do not add it.
+
+**Website Last:** do not implement Viewer routes before education content is written and reviewed.
+
+Direction SSOT candidates (operator review):  
+`ai-ops/roadmap/EDUCATION_PLATFORM_MASTER_PLAN.md` and siblings  
+`COURSE_ARCHITECTURE.md`, `CONTENT_PIPELINE.md`, `CURRICULUM_SYSTEM.md`.
 
 ---
 
@@ -26,16 +40,20 @@ When documents conflict, higher rows win:
 
 | Priority | Document | Authority |
 |---:|---|---|
-| 1 | `ai-ops/roadmap/ATLAS-EDUCATION-LAYER.md` | Education Layer PRD (21 concepts, 14 sections) |
-| 2 | `ai-ops/roadmap/ATLAS-MODEL-ROUTING-FEATURE-SPEC.md` | Subordinate Model Routing Learning Route |
-| 3 | `ai-ops/STATE.md` | Live execution queue / approval status |
-| 4 | `ai-ops/roadmap/ATLAS-GROK-MULTI-AGENT-OPERATING-PLAN.md` | Grok CLI multi-agent **operations** plan |
-| 5 | `AGENTS.md` (this file) | Repo-wide AI operating contract |
-| 6 | `.grok/agents/*`, `.grok/skills/*` | Role and skill execution contracts |
+| 1 | `ai-ops/roadmap/EDUCATION_PLATFORM_MASTER_PLAN.md` | **Project direction** (education materials first; site = viewer) — pending full operator stamp but **overrides old “Atlas-site-as-product” goal** |
+| 2 | `ai-ops/roadmap/COURSE_ARCHITECTURE.md` · `CONTENT_PIPELINE.md` · `CURRICULUM_SYSTEM.md` | Learning Path / pipeline / living curriculum |
+| 3 | `ai-ops/roadmap/ATLAS-EDUCATION-LAYER.md` | Atlas **Knowledge Layer** technical PRD (21 concepts, 14 sections) — keep; not deleted |
+| 4 | `ai-ops/roadmap/ATLAS-MODEL-ROUTING-FEATURE-SPEC.md` | Subordinate Model Routing Learning Route |
+| 5 | `ai-ops/STATE.md` | Live execution queue / approval status |
+| 6 | `ai-ops/roadmap/ATLAS-GROK-MULTI-AGENT-OPERATING-PLAN.md` | Grok multi-agent **operations** |
+| 7 | `AGENTS.md` (this file) | Repo-wide AI operating contract |
+| 8 | `.grok/agents/*`, `.grok/skills/*` | Role and skill execution contracts |
 
-`ATLAS-BUILD-PLAN.md` remains **HOLD** (legacy 12-node / 13-section). Do not activate it.
+`ATLAS-BUILD-PLAN.md` remains **HOLD**. Do not activate it.
 
-Operational docs never override education SSOT.
+**Atlas is Knowledge / Reference Layer**, not the main Learning Path. Do not delete Atlas assets.
+
+Operational convenience never overrides learner understanding or claim honesty.
 
 ---
 

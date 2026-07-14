@@ -1,32 +1,50 @@
-# Atlas V2 Handoff — 2026-07-14
+# Handoff — Education First Rebaseline (2026-07-14)
 
 | Field | Value |
 |---|---|
-| Verdict | **READY_FOR_FOUNDATION_CONTENT_REVIEW** |
-| Studio | `/atlas/studio` |
-| Foundation review | `ai-ops/reports/ATLAS-FOUNDATION-CONTENT-REVIEW.md` |
-| Latest commit | `fc624a3` |
+| Verdict | **READY_FOR_DIRECTION_REVIEW** |
+| Product | 교육자료 (not the website) |
+| Site | Viewer |
+| Atlas | Knowledge Layer — **do not delete** |
 
-## Operator path
+## Read first (new)
+
+1. `ai-ops/roadmap/EDUCATION_PLATFORM_MASTER_PLAN.md`
+2. `ai-ops/roadmap/COURSE_ARCHITECTURE.md`
+3. `ai-ops/roadmap/CONTENT_PIPELINE.md`
+4. `ai-ops/roadmap/CURRICULUM_SYSTEM.md`
+5. `AGENTS.md` (goal + SSOT table updated)
+
+## Pipeline (mandatory)
 
 ```text
-npm run dev
-→ /atlas/studio  (foundation five should score high / 14 complete sections)
-→ /atlas/concepts/ai … /llm
-→ /atlas/studio/concepts/ai … /llm
+Research → Verification → Curriculum → Content → Practice → Animation → Quiz → Website
 ```
 
-## Done
+Website Builder is last.
 
-- Education Studio (prior)
-- Foundation Arc student content: AI → ML → DL → GenAI → LLM
-- Mini demos + foundation quizzes
-- Source pack + learning flow docs
+## Keep
 
-## Freezes
+- `/atlas/**`, Studio, Model Routing, Foundation chapters, 100 lessons, KB
+- 21 concepts / 14 sections technical contract
 
-21 concepts, 14 sections, BUILD-PLAN HOLD, no push/deploy.
+## Do not
 
-## Resume
+- Delete Atlas
+- Large UI rewrite this session
+- push / deploy without order
+- Invent curriculum alone without operator questions
 
-Read STATE + FOUNDATION-CONTENT-REVIEW; next content batch starts Prompt Engineering (not started).
+## Next after operator approve
+
+1. `CURRICULUM_MASTER.xlsx` foundation track only  
+2. Map existing lesson slugs → tracks  
+3. Content production for Path nodes (not new site chrome)  
+4. Optional later: Home Start Learning nav reorder  
+
+## Resume prompt
+
+```text
+Education First. Product = materials. Site = viewer. Atlas = reference.
+Read Master Plan pack. Do not website-first. Do not delete Atlas.
+```
