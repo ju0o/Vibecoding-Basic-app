@@ -25,7 +25,11 @@ export default function Page() {
         </Link>
       </p>
       <section className="mt-10" id="simulation">
-        <AgentWorkflowExperience />
+        <AgentWorkflowExperience
+          allowCompare
+          lockMode="subagents"
+          scenario="조사 / 작성 / 검토 역할을 나누어 같은 목표를 처리하는 패턴"
+        />
       </section>
       <section className="mt-8 text-sm" id="practice">
         실습: 조사 / 작성 / 검토 역할을 한 줄씩 적어 위임 문장 만들기

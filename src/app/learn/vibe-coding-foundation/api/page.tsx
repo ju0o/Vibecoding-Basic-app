@@ -17,8 +17,8 @@ export default function Page() {
       </nav>
       <h1 className="text-3xl font-extrabold">API란 무엇인가</h1>
       <p className="mt-3 max-w-3xl text-[var(--text-secondary)]">
-        API는 프로그램이 서로 이야기하기 위한 약속된 창구입니다. 웹에서는 흔히 HTTP 요청·응답
-        형태로 만납니다.
+        API는 프로그램이 서로 이야기하기 위한 약속된 창구입니다. 웹에서는 흔히 HTTP 요청·응답 형태로
+        만납니다.
       </p>
       <p className="mt-2 text-sm">
         <Link

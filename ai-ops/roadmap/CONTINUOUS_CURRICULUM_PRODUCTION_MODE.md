@@ -27,6 +27,27 @@ Research → Verify → Outcomes → MD → Word → Practice → Sample/reuse �
 
 All of: research, content, practice, interactive, quiz, outcome, IR pass, QA pass.
 
+**Hard quality gate (2026-07-14 Milestone):** see `ai-ops/contracts/NODE_QUALITY_GATE.md`.
+
+Node may not be marked Website-complete / board COMPLETE unless:
+
+- Student Question defined  
+- Outcomes evidence-linked (Observed/Assisted/Independent/Explainable)  
+- Markdown `review_ready`  
+- Practice executable (start/action/expected/fail/recover/evidence)  
+- Interactive `interactive_learning` or explicit N/A reason  
+- Quiz **node-specific** (not batch-only)  
+- Sources scoped  
+- Independent Review pass  
+- Relevant full QA pass  
+- Studio status honest  
+
+Batch speed must not relax this contract.
+
+## Track D
+
+**PAUSE** until Milestone A–C decision = `CONTINUE_TRACK_D`.
+
 ## Batch checkpoints
 
-After Batch N: write checkpoint; if CONTINUE, do not wait.
+After Batch N: write checkpoint; if CONTINUE, do not wait — except when Milestone Gate is open.

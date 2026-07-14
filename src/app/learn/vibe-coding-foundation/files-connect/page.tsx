@@ -17,8 +17,9 @@ export default function Page() {
       </nav>
       <h1 className="text-3xl font-extrabold">파일이 서로 연결되는 방식</h1>
       <p className="mt-3 max-w-3xl text-[var(--text-secondary)]">
-        HTML·CSS·JS가 한 화면이 되려면 <strong className="text-[var(--text-primary)]">참조 연결</strong>
-        이 필요합니다. Day1 샘플의 link/script 줄을 기준으로 봅니다.
+        HTML·CSS·JS가 한 화면이 되려면{" "}
+        <strong className="text-[var(--text-primary)]">참조 연결</strong>이 필요합니다. Day1 샘플의
+        link/script 줄을 기준으로 봅니다.
       </p>
       <p className="mt-2 text-sm">
         <Link

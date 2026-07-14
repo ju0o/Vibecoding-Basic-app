@@ -28,8 +28,7 @@ export default function Page() {
         </Link>
       </p>
       <section className="mt-8 rounded-2xl border bg-[var(--surface-secondary)] p-5 text-sm leading-7">
-        제외 기본: node_modules · 비밀 · 거대 로그. 원본:{" "}
-        <code>19-related-files-context.md</code>
+        제외 기본: node_modules · 비밀 · 거대 로그. 원본: <code>19-related-files-context.md</code>
       </section>
       <section className="mt-10" id="simulation">
         <h2 className="mb-4 text-xl font-extrabold">인터랙티브</h2>

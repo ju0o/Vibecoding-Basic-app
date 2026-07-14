@@ -55,8 +55,7 @@ export function FileConnectExperience() {
             onClick={() => setLinked((s) => ({ ...s, [key]: !s[key] }))}
             type="button"
           >
-            {key === "css" ? "style.css 연결" : "main.js 연결"}:{" "}
-            {linked[key] ? "연결됨" : "끊김"}
+            {key === "css" ? "style.css 연결" : "main.js 연결"}: {linked[key] ? "연결됨" : "끊김"}
           </button>
         ))}
         <pre className="max-h-56 overflow-auto rounded-xl bg-[#0f172a] p-3 font-mono text-[11px] leading-5 text-slate-100">
@@ -74,7 +73,9 @@ export function FileConnectExperience() {
   return (
     <AnimationShell
       ariaLive={`css ${linked.css} js ${linked.js}`}
-      controls={<span className="text-xs">경로/참조가 끊기면 해당 레이어만 사라질 수 있습니다</span>}
+      controls={
+        <span className="text-xs">경로/참조가 끊기면 해당 레이어만 사라질 수 있습니다</span>
+      }
       desktop={body}
       mobile={body}
       simulationNotice="교육용 · Day1 샘플 연결 모델"

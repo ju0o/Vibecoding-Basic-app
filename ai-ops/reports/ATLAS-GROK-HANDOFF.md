@@ -1,52 +1,39 @@
-# Handoff — Continuous Curriculum Production
+# Handoff — Curriculum Milestone Gate
 
 ```yaml
-mode: continuous_curriculum_production
-decision: CONTINUE
+mode: continuous_curriculum_production + quality_milestone_gate
+decision: READY_FOR_CURRICULUM_MILESTONE_REVIEW
+track_d: PAUSE
 date: 2026-07-14
 push: false
 ```
 
-## Goal
+## Completed
 
-Fill approved Learning Roadmap (A–G) with verified education packages; website last.
+- MQ-0…MQ-15 cycle (audit + targeted remediation + gate docs)
+- Matrix + content/interaction/source/review reports
+- Deepened B01–B04, C05–C10 student MD
+- Practice packs 07-10, 20-25
+- NodeCheckpoint on B01–B04 pages
+- WebLayers focus; AgentWorkflow lockMode/scenario
+- NODE_QUALITY_GATE hard contract
 
-## Completed this long loop
+## Do not
 
-| Batch | Nodes |
-|---|---|
-| 1 | A04–A06 |
-| 2 | B01–B04 |
-| 3 | B05–B09 |
-| 4 | C01–C04 |
-| 5 | C05–C10 |
+- Start D01 until operator `CONTINUE_TRACK_D` or residual accepted
+- Mass delete A–C
+- Mass thin DOCX
+- push/deploy
 
-Prior approved: A01–A03 (Day1, files, node-npm).
-
-## Live Learning Path
-
-`/learn` Track A–C fully linked for produced nodes.
-
-```text
-… → related-files-context → task-breakdown → fix-loop → qa-basics
-→ ai-agent → subagent → workflow
-```
-
-## Next resume
-
-1. **Track D Batch:** D01 첫 미니 웹사이트 → D02 데이터 저장 …  
-2. Or deepen Word exports / richer quizzes for A–C  
-3. Education Studio learn-tab optional (do not block content)  
-4. No re-ask A/B/C · No push/deploy  
-
-## Risks
-
-- Later nodes thinner Word/DOCX than A01–A03  
-- Agent/SubAgent educational labels — not product docs  
-- RQ product pricing still blocked  
-
-## Resume prompt
+## Resume
 
 ```text
-Continuous curriculum production. Batch1-5 (A04–C10) done. CONTINUE Track D D01+. Website last. No push.
+Milestone A–C review. Decision READY_FOR_CURRICULUM_MILESTONE_REVIEW.
+If operator CONTINUE_TRACK_D → start D01 only after residual notes accepted.
+Else continue remediation: full practice templates B05–C04, NodeCheckpoint C05–C10, optional workbooks.
 ```
+
+## Artifacts
+
+- `ai-ops/reports/CURRICULUM-MILESTONE-A-C-*.md`
+- `ai-ops/contracts/NODE_QUALITY_GATE.md`

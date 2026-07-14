@@ -6,10 +6,7 @@ import { AnimationShell } from "../core/AnimationShell"
 type Method = "GET" | "POST"
 type Path = "/" | "/style.css" | "/missing" | "/api/note"
 
-const RESPONSES: Record<
-  string,
-  { status: number; body: string; note: string }
-> = {
+const RESPONSES: Record<string, { status: number; body: string; note: string }> = {
   "GET|/": {
     status: 200,
     body: "<!DOCTYPE html>… index.html",
@@ -107,7 +104,11 @@ export function RequestResponseExperience() {
         </p>
         <p className="mt-2 text-sm font-extrabold text-[var(--text-primary)]">
           ← {res.status}{" "}
-          <span className={res.status < 400 ? "text-emerald-700 dark:text-emerald-300" : "text-rose-600"}>
+          <span
+            className={
+              res.status < 400 ? "text-emerald-700 dark:text-emerald-300" : "text-rose-600"
+            }
+          >
             {res.status < 400 ? "성공 계열" : "실패/거절 계열"}
           </span>
         </p>

@@ -1,24 +1,26 @@
-# STATE — Continuous Curriculum Production
+# STATE — Curriculum Milestone Gate
 
 | Field | Value |
 |---|---|
-| Mode | Continuous Curriculum Production Loop **ACTIVE** |
-| Batches 1–5 | COMPLETE · CONTINUE |
-| Track A | A01–A06 live |
-| Track B | B01–B09 live |
-| Track C | C01–C10 live |
-| **Next** | **Track D: D01 첫 미니 웹사이트 …** (or deepen A–C assets) |
-| Human gate | none |
+| Mode | Continuous **ACTIVE** + Quality Milestone |
+| Track D | **PAUSE_TRACK_D** |
+| Milestone | MQ-0…MQ-15 executed (audit + partial remediation) |
+| Decision | **READY_FOR_CURRICULUM_MILESTONE_REVIEW** |
 | Push/deploy | forbidden |
 
-## Decision
+## QA snapshot
 
-```text
-CONTINUE
-```
+| Check | Result |
+|---|---|
+| typecheck | PASS |
+| unit tests | PASS 51 |
+| build/static export | PASS (routes include A–C learn paths) |
+| lint | FAIL 4 (pre-existing export script format in scripts/atlas; not learn content) |
+| Playwright E2E | not run (no new heavy dep) |
+| Word mass regen | not run (policy: no thin DOCX mass) |
 
-## Commits (session)
+## Next
 
-- Batch3 `6f248bf`
-- Batch4 `7bc96ba`
-- Batch5 `d5f0e90` + fix `0907b16`
+Operator review of Milestone reports.  
+Do **not** start D01 until `CONTINUE_TRACK_D`.  
+Optional residual: B05–C04 full practice templates, C05–C10 NodeCheckpoint widgets, Track workbooks.

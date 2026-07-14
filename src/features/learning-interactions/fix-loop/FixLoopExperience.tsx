@@ -56,7 +56,11 @@ export function FixLoopExperience() {
         >
           다음 단계
         </button>
-        <button className="rounded-lg border px-3 py-2 text-xs font-bold" onClick={reset} type="button">
+        <button
+          className="rounded-lg border px-3 py-2 text-xs font-bold"
+          onClick={reset}
+          type="button"
+        >
           루프 리셋
         </button>
       </div>

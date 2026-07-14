@@ -1,33 +1,37 @@
-# Node Production Status
+# Node Production Status (honest — Milestone Gate)
 
-Mode: **Continuous Curriculum Production** · verified packages only on Website
+Mode: Continuous **ACTIVE** + **PAUSE_TRACK_D** (Quality Milestone)
 
-| node_id | Research | Write | Anim | Quiz | Review | Website | notes |
-|---|---|---|---|---|---|---|---|
-| d1-first-success | ◎ | ◎ | ◎ | ◎ | ◎ | → | A01 approved |
-| project-file-structure | ◎ | ◎ | ◎ | ◎ | ◎ | → | A02 approved |
-| node-npm-package-json | ◎ | ◎ | ◎ | ◎ | ◎ | → | A03 approved |
-| ai-llm-ide | ◎ | ◎ | ◎ | ◎ | ◎ | → | A04 Batch1 |
-| terminal-commands | ◎ | ◎ | ◎ | ◎ | ◎ | → | A05 Batch1 |
-| errors-to-ai | ◎ | ◎ | ◎ | ◎ | ◎ | → | A06 Batch1 |
-| web-how-pages-appear | ◎ | ◎ | ◎ | ◎ | ◎ | → | B01 Batch2 |
-| html-basics | ◎ | ◎ | ◎ | ◎ | ◎ | → | B02 Batch2 |
-| css-basics | ◎ | ◎ | ◎ | ◎ | ◎ | → | B03 Batch2 |
-| javascript-basics | ◎ | ◎ | ◎ | ◎ | ◎ | → | B04 Batch2 |
-| files-connect | ◎ | ◎ | ◎ | ◎ | ◎ | → | B05 Batch3 |
-| frontend | ◎ | ◎ | ◎ | ◎ | ◎ | → | B06 Batch3 |
-| backend | ◎ | ◎ | ◎ | ◎ | ◎ | → | B07 Batch3 |
-| api | ◎ | ◎ | ◎ | ◎ | ◎ | → | B08 Batch3 |
-| database | ◎ | ◎ | ◎ | ◎ | ◎ | → | B09 Batch3 |
-| good-ai-task-request | ◎ | ◎ | ◎ | ◎ | ◎ | → | C01 Batch4 |
-| prompt-engineering | ◎ | ◎ | ◎ | ◎ | ◎ | → | C02 Batch4 |
-| context-engineering | ◎ | ◎ | ◎ | ◎ | ◎ | → | C03 Batch4 |
-| related-files-context | ◎ | ◎ | ◎ | ◎ | ◎ | → | C04 Batch4 |
-| task-breakdown | ◎ | ◎ | ◎ | ◎ | ◎ | → | C05 Batch5 |
-| fix-loop | ◎ | ◎ | ◎ | ◎ | ◎ | → | C06 Batch5 |
-| qa-basics | ◎ | ◎ | ◎ | ◎ | ◎ | → | C07 Batch5 |
-| ai-agent | ◎ | ◎ | ◎ | ◎ | ◎ | → | C08 Batch5 |
-| subagent | ◎ | ◎ | ◎ | ◎ | ◎ | → | C09 Batch5 |
-| workflow | ◎ | ◎ | ◎ | ◎ | ◎ | → | C10 Batch5 |
+Legend: C=complete · P=partial · M=missing · R=needs_revision
 
-**Next:** Track D D01+
+| node_id | MD | Practice | Anim | Quiz | Outcome | Word | Sources | IR | Website | notes |
+|---|---|---|---|---|---|---|---|---|---|---|
+| d1-first-success | C | C | C | C | P | C | P | approve_notes | live | A01 strongest |
+| project-file-structure | C | C | C | C | P | C | P | approve_notes | live | A02 |
+| node-npm-package-json | C | C | C | C | P | C | P | approve_notes | live | A03 |
+| ai-llm-ide | P | P | C | P | P | M | P | notes | live | A04 |
+| terminal-commands | P | P | C | P | P | M | P | notes | live | A05 |
+| errors-to-ai | P | P | C | P | P | M | P | notes | live | A06 |
+| web-how-pages-appear | C* | P | C | C* | P | M | P | notes | live | B01 remediated * |
+| html-basics | C* | P | C | C* | P | M | P | notes | live | B02 * |
+| css-basics | C* | P | C | C* | P | M | P | notes | live | B03 * |
+| javascript-basics | C* | P | C | C* | P | M | P | notes | live | B04 * |
+| files-connect | P | P | C | P | P | M | P | notes | live | B05 |
+| frontend | P | P | C | P | P | M | P | notes | live | B06 |
+| backend | P | P | C | P | P | M | P | notes | live | B07 |
+| api | P | P | C | P | P | M | P | notes | live | B08 |
+| database | P | P | C | P | P | M | P | notes | live | B09 |
+| good-ai-task-request | P | P | C | P | P | M | P | notes | live | C01 |
+| prompt-engineering | P | P | C | P | P | M | P | notes | live | C02 |
+| context-engineering | P | P | C | P | P | M | P | notes | live | C03 |
+| related-files-context | P | P | C | P | P | M | P | notes | live | C04 |
+| task-breakdown | C* | P | C | M/P | P | M | P | notes | live | C05 * MD |
+| fix-loop | C* | P | C | M/P | P | M | P | notes | live | C06 * |
+| qa-basics | C* | P | C | M/P | P | M | P | notes | live | C07 * |
+| ai-agent | C* | P | C | M/P | P | M | P | notes | live | C08 * |
+| subagent | C* | P | C | M/P | P | M | P | notes | live | C09 * |
+| workflow | C* | P | C | M/P | P | M | P | notes | live | C10 * |
+
+\* Milestone remediation pass 2026-07-14
+
+**Next:** Milestone operator review — not Track D until `CONTINUE_TRACK_D`

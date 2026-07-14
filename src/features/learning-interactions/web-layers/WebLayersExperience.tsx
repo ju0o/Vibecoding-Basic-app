@@ -6,8 +6,25 @@ import { BrowserPreview } from "../primitives/BrowserPreview"
 
 type Layer = "html" | "css" | "js"
 
-export function WebLayersExperience() {
-  const [on, setOn] = useState<Record<Layer, boolean>>({ html: true, css: true, js: true })
+type WebLayersExperienceProps = {
+  /** Node-specific focus so B01–B04 are not identical tasks */
+  readonly focus?: "all" | Layer
+  readonly taskHint?: string
+}
+
+export function WebLayersExperience({
+  focus = "all",
+  taskHint = "레이어를 켜고 끄면 미리보기가 바뀝니다",
+}: WebLayersExperienceProps) {
+  const initial: Record<Layer, boolean> =
+    focus === "html"
+      ? { html: true, css: false, js: false }
+      : focus === "css"
+        ? { html: true, css: true, js: false }
+        : focus === "js"
+          ? { html: true, css: true, js: true }
+          : { html: true, css: true, js: true }
+  const [on, setOn] = useState<Record<Layer, boolean>>(initial)
 
   const title = on.html ? "나의 첫 바이브코딩" : "(구조 없음)"
   const message = on.html ? "안녕하세요" : ""
@@ -17,7 +34,10 @@ export function WebLayersExperience() {
   const body = (
     <div className="grid gap-3 lg:grid-cols-2">
       <div className="grid gap-2">
-        <p className="text-sm font-bold">레이어를 켜고 끄면 미리보기가 바뀝니다</p>
+        <p className="text-sm font-bold">{taskHint}</p>
+        {focus !== "all" ? (
+          <p className="text-xs text-[var(--text-tertiary)]">이 노드 초점: {focus.toUpperCase()}</p>
+        ) : null}
         {(["html", "css", "js"] as Layer[]).map((layer) => (
           <label className="flex items-center gap-2 text-sm font-semibold" key={layer}>
             <input

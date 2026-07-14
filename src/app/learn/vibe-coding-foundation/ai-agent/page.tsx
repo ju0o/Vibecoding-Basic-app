@@ -25,7 +25,11 @@ export default function Page() {
         </Link>
       </p>
       <section className="mt-10" id="simulation">
-        <AgentWorkflowExperience />
+        <AgentWorkflowExperience
+          allowCompare
+          lockMode="agent"
+          scenario="목표: Day1 제목만 변경 — 허용 범위와 금지 파일을 떠올리며 Agent 루프를 보세요"
+        />
       </section>
       <section className="mt-8 rounded-2xl border p-4 text-sm" id="quiz-outcomes">
         Outcome: Agent≠앱 이름 · 루프·도구 감각

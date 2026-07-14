@@ -25,7 +25,11 @@ export default function Page() {
         </Link>
       </p>
       <section className="mt-10" id="simulation">
-        <AgentWorkflowExperience />
+        <AgentWorkflowExperience
+          allowCompare
+          lockMode="workflow"
+          scenario="요청→구현→검증→기록 + 사람 확인 지점을 워크플로에 표시"
+        />
       </section>
       <section className="mt-8 text-sm" id="practice">
         실습: 내 미니 워크플로 5단계 적기 (요청→…→사람 확인)
@@ -38,7 +42,10 @@ export default function Page() {
         <p className="mt-2 text-[var(--text-secondary)]">
           다음 로드맵: Track D 실제 프로젝트 (D01 첫 미니 웹사이트 …) — Continuous mode CONTINUE
         </p>
-        <Link className="mt-2 inline-block font-semibold text-[var(--accent-primary)] underline" href="/learn">
+        <Link
+          className="mt-2 inline-block font-semibold text-[var(--accent-primary)] underline"
+          href="/learn"
+        >
           Learning Path
         </Link>
       </section>

@@ -5,10 +5,7 @@ import { AnimationShell } from "../core/AnimationShell"
 
 type Role = "frontend" | "backend"
 
-const FILES: Record<
-  string,
-  { role: Role; blurb: string }
-> = {
+const FILES: Record<string, { role: Role; blurb: string }> = {
   "src/index.html": { role: "frontend", blurb: "화면 구조 — 브라우저가 읽음" },
   "src/style.css": { role: "frontend", blurb: "스타일 — 브라우저가 적용" },
   "src/main.js": { role: "frontend", blurb: "브라우저에서 도는 동작" },
