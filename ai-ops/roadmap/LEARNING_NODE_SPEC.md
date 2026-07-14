@@ -56,7 +56,9 @@ Learning Node는 Journey 위의 **한 성장 단위**다.
 | `tools` | 관련 Tool | 필요할 때만 |
 | `next_node` | 다음 노드 id | 또는 분기 설명 |
 | `next_why` | 다음 강의가 이어지는 이유 | 한 문장 이상 |
-| `completion` | 완료 조건 | “읽음”만으로 부족하면 보완 |
+| `completion` | 완료 조건 | “읽음” 금지 기조 · Outcome 연결 |
+| `learning_outcomes` | 이 노드가 기여하는 can-do id 목록 | [LEARNING_OUTCOMES.md](./LEARNING_OUTCOMES.md) |
+| `experience_first` | Experience 스텝 요약 | Theory-only 노드 지양 |
 | `recommended_practice` | 추천 실습 (확장) | practice와 중복 가능 · 상세용 |
 | `recommended_animation` | 추천 애니메이션 시나리오 | optional |
 | `recommended_diagram` | 추천 다이어그램 | optional |

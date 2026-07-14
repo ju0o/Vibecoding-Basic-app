@@ -4,10 +4,11 @@
 document: STUDENT_JOURNEY
 authority: project_top_ssot_candidate
 status: operator_review_required
-priority: highest_over_website_atlas_course
+priority: paired_top_with_learning_outcomes
 product: learning_experience
+paired_with: OUTCOME_FRAMEWORK.md
 site_role: viewer
-atlas_role: knowledge_layer
+atlas_role: reference_after_curiosity
 living: true
 date: 2026-07-14
 modifies_core_21_concepts: false
@@ -20,28 +21,35 @@ can_activate_build_plan: false
 
 ## 0. 문서 지위
 
-이 문서는 **프로젝트 최상위 SSOT 후보**다.
+이 문서는 **프로젝트 최상위 SSOT 후보**의 한쪽이다.
+
+```text
+Student Journey  +  Learning Outcome  =  최상위 SSOT 쌍
+```
+
+Journey는 **폐기되지 않는다.** Outcome Layer가 **할 수 있는가**를 위에 올린다.
 
 | 이것보다 아래 | 이유 |
 |---|---|
 | Website | Viewer일 뿐 |
-| Atlas | Knowledge Layer — 강의 대체 아님 |
+| Atlas | Reference — 궁금할 때 · 강의 대체 아님 |
 | Course / 모듈 목록 | Journey의 구현 묶음 |
 | 개별 기능 스펙 | 경험을 돕는 수단 |
 
-**승인 후** 모든 강의 · Atlas 연결 · Tool · Practice · Studio 작업은  
-이 Student Journey를 기준으로 생성·검토한다.
+**승인 후** 모든 강의 · 실습 · 애니 · 퀴즈는  
+Journey 경로 + **Learning Outcome** 기준으로 생성·검토한다.
 
-형제 문서:
+형제 · Outcome 묶음:
 
 | 문서 | 역할 |
 |---|---|
+| [OUTCOME_FRAMEWORK.md](./OUTCOME_FRAMEWORK.md) | Outcome 철학 · Experience-first Flow · Day1 |
+| [LEARNING_OUTCOMES.md](./LEARNING_OUTCOMES.md) | Stage별 can-do |
+| [STAGE_COMPLETION_SPEC.md](./STAGE_COMPLETION_SPEC.md) | Complete 계약 |
+| [ASSESSMENT_SYSTEM.md](./ASSESSMENT_SYSTEM.md) | 측정 · Studio 신호 |
 | [LEARNING_EXPERIENCE_PRINCIPLES.md](./LEARNING_EXPERIENCE_PRINCIPLES.md) | 교육 철학 |
 | [LEARNING_ROADMAP.md](./LEARNING_ROADMAP.md) | START→END 지도 |
 | [LEARNING_NODE_SPEC.md](./LEARNING_NODE_SPEC.md) | 노드 필드 계약 |
-
-하위 실행 (우선순위 낮음 · 정합 유지):  
-`EDUCATION_PLATFORM_MASTER_PLAN.md`, Course / Pipeline / Curriculum 시스템 문서.
 
 ---
 
@@ -49,25 +57,29 @@ can_activate_build_plan: false
 
 이 프로젝트는
 
-> 세계 최고의 AI·바이브코딩 **교육 사이트**를 만드는 것
+> 세계 최고의 AI·바이브코딩 **교육 사이트** · “많이 아는” 플랫폼
 
 이 아니라
 
-> 세계 최고의 **「AI와 함께 성장하는」 학습 경험**을 만드는 것
+> 학생이 **혼자 프로젝트를 끝까지 만들 수 있게** 하는  
+> **「AI와 함께 성장하는」 학습 경험**
 
 이다.
 
 매 결정:
 
 ```text
-학생이 정말 이해하는가?
+학생이 혼자 할 수 있는가?     ← 최우선
+학생이 정말 이해하는가?       ← Outcome을 위한 이해
 ```
 
 ---
 
-## 2. 중심 루프 — 학생 경험
+## 2. 중심 루프 — 학생 경험 + Outcome
 
 설계·콘텐츠·UI·에이전트 작업은 모두 이 루프에 연결되어야 한다.
+
+**성장 인식 루프 (유지):**
 
 ```text
 무엇을 알고 있는가
@@ -75,12 +87,19 @@ can_activate_build_plan: false
   → 다음 무엇을 배우는가
   → 왜 이것을 배우는가
   → 직접 무엇을 해보는가
-  → 어디까지 이해했는가
+  → 어디까지 이해했는가 / 할 수 있는가
   → 다음으로 어디를 가는가
 ```
 
-**Journey = 이 루프가 시간에 따라 이어지는 성장 과정.**  
-강의 목록·메뉴·Atlas 그래프가 Journey를 대신하지 않는다.
+**학습 Flow 정본 (Theory-first 폐기):**
+
+```text
+Experience → Question → Theory → Practice → Experiment
+  → Reflection → Outcome → Next
+```
+
+**Journey = 경험 경로 · Outcome = 능력 증명.**  
+강의 목록·메뉴·Atlas가 둘을 대신하지 않는다.
 
 ---
 
@@ -93,37 +112,48 @@ can_activate_build_plan: false
 | 알고 있음 | AI 채팅을 조금 써 봤을 수 있음 · 코딩은 막연히 어려움 |
 | 궁금함 | “나도 앱/웹을 만들 수 있나?” “바이브코딩이 뭐지?” |
 | 두려움 | 용어 · 설치 · 실패 메시지 |
-| 원하지 않음 | 백과사전 탐험부터 · 도구 20개 소개부터 |
+| 원하지 않음 | 이론 먼저 (AI→LLM→IDE→Node 나열) · 백과사전부터 |
 
 ### 3.2 사이트가 보여 줘야 하는 것 (경험 요구 · 미구현 명세)
 
-구현은 **이 문서 승인 후 · Website Last**. 지금은 경험 정의만.
+구현은 **승인 후 · Website Last**. 지금은 경험 정의만.
 
 ```text
-1. 한 줄: 여기서는 AI와 함께 “만드는 법”을 이해하며 간다
-2. Start Learning — Day 1 첫 노드로 바로
-3. “지금 나” 위치 (진도) — 나중에
-4. 막히면 Atlas / Wiki — 심화·용어 (메인 아님)
+1. 한 줄: 여기서는 AI와 함께 “혼자 만들 수 있게” 된다
+2. Start Learning — Day 1 **첫 성공 Experience**로 바로
+3. 진도 = 학습%만이 아니라 **Outcome%**
+4. 막히면 / 궁금하면 Atlas — Reference (메인 아님)
 5. 강의 100개 목록을 메인으로 던지지 않음
 ```
 
-### 3.3 Day 1 경험 시퀀스 (예시)
+### 3.3 Day 1 — Theory-first 폐기 · 10분 첫 성공
 
-| 순간 | 학생 내면 | 시스템/콘텐츠 응답 | 학생이 얻는 것 |
-|---|---|---|---|
-| 입장 | 뭐부터? | Start Learning · “왜 코딩이 바뀌었나” 또는 바이브코딩 입구 | 방향 |
-| 질문 | 바이브코딩이 뭐지? | 학생 질문으로 여는 본문 | 정의가 아닌 **감각** |
-| 이해 | AI랑 같이 만든다는 거구나 | 짧은 예시 · 다이어그램 | 한 문장 설명 가능 |
-| 실습 | 직접 해본다 | 안전한 초미니 실습 (채팅/지시 1회 등) | “했다” 경험 |
-| 점검 | 진짜 알았나? | teach-back 한 줄 또는 퀴즈 1–2 | 완료 감각 |
-| 다음 | 그다음은? | why_now: AI/LLM을 알아야 같이 일한다 | 자발적 진행 |
+**폐기 (Day1 메인 경로):** `AI → LLM → IDE → VS Code → Node` 이론 순회.
 
-Day 1 성공 정의:
+**정본 Experience:**
 
 ```text
-학생이 “바이브코딩/이 학습이 무엇인지”를 자기 말로 말할 수 있고,
-다음 노드로 가는 이유를 수긍한다.
+AI에게 프로그램 생성 요청
+  → 프로젝트 생성
+  → VS Code로 열기
+  → Node 설치
+  → 실행
+  → Hello World 확인   ← 첫 성공
+  → 그제야 질문 (왜 Node? package.json? src? npm install? 터미널?)
+  → 짧은 Theory + (선택) Atlas
+  → Outcome 체크 (혼자 재실행·설명·수정 요청)
 ```
+
+| 순간 | 학생 내면 | 응답 | 얻는 것 |
+|---|---|---|---|
+| Experience | 된다 / 안 된다 | 실행 가이드 | **첫 성공** |
+| Question | 왜 설치했지? | 질문 카드 | 배움의 이유 |
+| Theory | 아, 그래서 | 최소 설명 · Atlas | 개념 정착 |
+| Practice | 다시 해봄 | 체크리스트 | 손 기억 |
+| Outcome | 나 혼자? | can-do 체크 | Complete 근거 |
+
+Day 1 성공 정의: [LEARNING_OUTCOMES.md](./LEARNING_OUTCOMES.md) Day1 체크리스트.  
+“개념을 들었다”가 아니라 **실행·설명·수정 요청이 되는가**.
 
 ---
 
@@ -311,14 +341,11 @@ Studio는 “페이지 찍기 현황”이 아니라 **교육 제작 현황**이
 
 ## 13. 한 줄 요약
 
-> **학생 경험이 최상위 제품이다. Journey는 성장 과정이다. Atlas는 참고다. Website는 마지막 Viewer다. 우리는 Living으로 함께 고친다.**
+> **학생 경험 + 할 수 있는 능력이 최상위 제품이다. Journey는 경로, Outcome은 증명, Atlas는 궁금할 때 참고, Website는 마지막 Viewer다.**
 
 ---
 
-## 14. 세션 종료 상태
+## 14. 관련 종료 상태 (이력)
 
-```text
-Verdict: READY_FOR_STUDENT_JOURNEY_REVIEW
-```
-
-운영자 액션: `STUDENT_JOURNEY.md` 및 형제 3문서 검토 → Approve / Revise.
+- Journey 묶음: `READY_FOR_STUDENT_JOURNEY_REVIEW`  
+- Outcome 묶음: `READY_FOR_OUTCOME_FRAMEWORK_REVIEW` (OUTCOME_FRAMEWORK 등)

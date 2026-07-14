@@ -4,53 +4,52 @@
 
 | 필드 | 값 |
 |---|---|
-| Current Batch | **STUDENT JOURNEY REBASELINE** |
-| Current State | **Student Journey pack drafted.** Experience > Website/Atlas/Course. Docs only. Operator review. |
-| Last Completed Step | STUDENT_JOURNEY + LEARNING_ROADMAP + LEARNING_NODE_SPEC + LEARNING_EXPERIENCE_PRINCIPLES (2026-07-14) |
-| Next Executor | 운영자 — Student Journey 문서 승인/수정 |
-| Next Prompt File | **roadmap/STUDENT_JOURNEY.md** |
+| Current Batch | **OUTCOME DRIVEN LEARNING** |
+| Current State | **Outcome Layer designed.** Journey kept. Experience→…→Outcome flow. Day1 first success. Docs only. |
+| Last Completed Step | OUTCOME_FRAMEWORK + LEARNING_OUTCOMES + STAGE_COMPLETION_SPEC + ASSESSMENT_SYSTEM (2026-07-14) |
+| Next Executor | 운영자 — Outcome Framework 묶음 승인/수정 |
+| Next Prompt File | **roadmap/OUTCOME_FRAMEWORK.md** |
 | Blocker | None (docs only) |
-| Required Human Action | Approve or revise Student Journey pack; then Excel + content nodes (not site-first) |
-| Release Status | 기존 V2/MR/Studio/Foundation/Education First docs 유지 · 미push · 미배포 |
+| Required Human Action | Approve/revise Outcome pack; then map D1 outcomes to content (not site-first) |
+| Release Status | Journey/Atlas/MR/Foundation 유지 · 미push · 미배포 |
 
 ### Direction
 
 | Item | Status |
 |---|---|
-| Center of design | **Student** (not Website / Atlas / Course) |
-| Student Journey SSOT pack | **operator_review_required** |
-| Education materials / Living | active (under Journey) |
-| Website as Viewer | active · last |
-| Atlas Knowledge Layer | **preserve** (no delete) |
-| Learning Path as main IA | designed · Journey supersedes as top experience SSOT |
-| Education First Master Plan | still valid **under** Student Journey |
+| Top SSOT pair | **Student Journey + Learning Outcome** |
+| “What can you do?” over “what did you learn?” | **active direction** |
+| Experience → Question → Theory → … → Outcome | **active flow** |
+| Day1 Theory-first (AI→LLM→IDE→Node) | **retired as main path** |
+| Day1 10-min first success | **designed** |
+| Atlas after curiosity | **active** |
+| Complete = solo can-do | **active** |
+| Journey / Atlas / MR / Foundation | **preserve** (no delete) |
 
-### Prior product status (unchanged assets)
+### Prior
 
 | Item | Status |
 |---|---|
-| Model Routing RC | kept |
-| Education Studio | kept · reframe as **education production** board |
-| Foundation AI→LLM | kept · feed Journey early stages |
-| 21 / 14 freezes | held |
-| BUILD-PLAN | HOLD |
+| Student Journey pack | kept · paired with Outcome |
+| Education First / Master Plan | under Journey+Outcome |
+| Studio | extend with Outcome % (spec only) |
+| 21 / 14 · BUILD-PLAN HOLD | held |
 
 ## NEXT
 
 ```
-- Verdict: READY_FOR_STUDENT_JOURNEY_REVIEW
-- Read: STUDENT_JOURNEY.md + LEARNING_ROADMAP + LEARNING_NODE_SPEC + LEARNING_EXPERIENCE_PRINCIPLES
-- After approve: CURRICULUM_MASTER foundation stages + node content (Website last)
-- Stop: no code/UI this batch, no Atlas delete, no push/deploy without order
+- Verdict: READY_FOR_OUTCOME_FRAMEWORK_REVIEW
+- Read: OUTCOME_FRAMEWORK + LEARNING_OUTCOMES + STAGE_COMPLETION_SPEC + ASSESSMENT_SYSTEM
+- Also: STUDENT_JOURNEY (updated Day1) 
+- After approve: D1 content + outcome checklists (Website last)
+- Stop: no code/UI, no Atlas/Journey delete, no push/deploy without order
 ```
 
 ## 이력
 
 | 일시 | 항목 | 전이 |
 |---|---|---|
+| 2026-07-14 | Outcome-driven learning | Outcome Layer SSOT candidates |
 | 2026-07-14 | Student Journey rebaseline | Journey top SSOT candidates |
-| 2026-07-14 | Project rebaseline | Education First master plan docs |
-| 2026-07-14 | FC-0…FC-12 | Foundation content AI→LLM |
-| 2026-07-14 | CO-0…CO-12 | Education Studio |
-| 2026-07-14 | EV-0…EV-19 | Atlas V2 RC |
-| 2026-07-13 | PW / GO | Model Routing + Grok OS |
+| 2026-07-14 | Education First | Platform master plan docs |
+| 2026-07-14 | FC / CO / EV / PW / GO | prior product layers |

@@ -1,62 +1,51 @@
-# Handoff — Student Journey Rebaseline (2026-07-14)
+# Handoff — Outcome Driven Learning (2026-07-14)
 
 | Field | Value |
 |---|---|
-| Verdict | **READY_FOR_STUDENT_JOURNEY_REVIEW** |
-| Product | **학습 경험** (materials under Journey; site = Viewer) |
-| Center | **Student** — not Website, Atlas, or Course |
-| Atlas | Knowledge Layer — **do not delete** |
+| Verdict | **READY_FOR_OUTCOME_FRAMEWORK_REVIEW** |
+| Top SSOT | **Student Journey + Learning Outcome** (pair; neither deleted) |
+| Primary question | **학생이 혼자 할 수 있는가?** |
+| Day 1 | Experience-first 10-min success (not AI→LLM→IDE→Node theory chain) |
 
-## Read first (new top pack)
+## Read first
 
-1. `ai-ops/roadmap/STUDENT_JOURNEY.md` — **highest SSOT candidate**
-2. `ai-ops/roadmap/LEARNING_EXPERIENCE_PRINCIPLES.md`
-3. `ai-ops/roadmap/LEARNING_ROADMAP.md`
-4. `ai-ops/roadmap/LEARNING_NODE_SPEC.md`
-5. `AGENTS.md` (SSOT table updated)
+1. `ai-ops/roadmap/OUTCOME_FRAMEWORK.md`
+2. `ai-ops/roadmap/LEARNING_OUTCOMES.md`
+3. `ai-ops/roadmap/STAGE_COMPLETION_SPEC.md`
+4. `ai-ops/roadmap/ASSESSMENT_SYSTEM.md`
+5. `ai-ops/roadmap/STUDENT_JOURNEY.md` (Day1 + pair updated)
+6. `AGENTS.md`
 
-## Still useful (under Journey)
-
-- `EDUCATION_PLATFORM_MASTER_PLAN.md` + Course / Pipeline / Curriculum system docs
-- Atlas Education Layer (21/14) technical contract
-
-## Growth loop
+## Flow
 
 ```text
-knows → curious → learns → why → practices → checks understanding → next
+Experience → Question → Theory → Practice → Experiment
+  → Reflection → Outcome → Next
 ```
 
-## Pipeline (mandatory)
-
-```text
-Student question → Research → Verification → Curriculum → Content
-  → Practice → Animation → Diagram → Quiz → Review → Publish → Website
-```
-
-Website last. AI proposes; operator decides.
+Atlas = after curiosity. Website = last. Complete = can-do, not attendance.
 
 ## Keep
 
-- `/atlas/**`, Studio, Model Routing, Foundation, 100 lessons, KB
-- Education First direction docs (aligned under Journey)
+- Journey, Roadmap, Node Spec, Principles  
+- Atlas, Model Routing, Foundation, Studio, 100 lessons  
 
 ## Do not
 
-- Code / UI / new libraries this batch
-- Delete Atlas or mass-edit courses
-- push / deploy without order
-- Finalize full curriculum without operator
+- Code / UI / libs / push / deploy this batch  
+- Delete Journey or Atlas  
+- Theory-first Day1 as main path  
+- Mark Complete without Outcome  
 
-## Next after operator approve
+## Next after approve
 
-1. Map Roadmap stages → `CURRICULUM_MASTER.xlsx` (foundation first)
-2. Author Day 1+ nodes per LEARNING_NODE_SPEC (content, not chrome)
-3. Map existing lesson slugs → stages
-4. Later: Studio education-production columns; Start Learning UX
+1. Author Day1 content against Day1 outcome checklist  
+2. Wire outcome_ids into node specs / Excel  
+3. Later: Studio four signals (learn/practice/quiz/**outcome**)
 
 ## Resume prompt
 
 ```text
-Student Journey first. Product = learning experience. Site = viewer. Atlas = reference.
-Read STUDENT_JOURNEY pack. No website-first. No Atlas delete. Question-driven nodes.
+Journey + Outcome top pair. Solo capability first. Experience then question then theory.
+Day1 = first success then why-Node questions. Atlas reference after curiosity. No website-first.
 ```

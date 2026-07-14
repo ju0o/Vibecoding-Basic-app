@@ -4,62 +4,74 @@ This file is the **common operating contract** for every AI executor working in 
 
 ---
 
-## 1. Project Goal (Student Journey First)
+## 1. Project Goal (Journey + Outcome)
 
-**Product = 학습 경험.** 교육자료는 그 경험을 담는 본체이고, 웹사이트는 **Viewer**다.
+**Product = 혼자 할 수 있는 능력(Learning Outcome)을 만드는 학습 경험.**  
+교육자료는 본체, 웹사이트는 **Viewer**, Atlas는 **Reference (궁금할 때)**.
 
-중심은 Website도 Atlas도 Course도 아니다. **학생**이다.
-
-```text
-학생이 Day 1부터 끝까지 정말 이해하며 성장하는가?
-```
-
-성장 루프 (모든 설계 기준):
+중심은 Website / Atlas / Course가 아니라 **학생**이다.
 
 ```text
-무엇을 알고 있는가 → 무엇이 궁금한가 → 무엇을 배우는가 → 왜 배우는가
-  → 직접 해보는가 → 어디까지 이해했는가 → 다음으로 어디를 가는가
+학생이 혼자 할 수 있는가?          ← 최우선
+학생이 정말 이해하는가?            ← Outcome을 가능하게 하는 이해
 ```
+
+**최상위 SSOT 쌍 (폐기 없음 · 함께 발전):**
+
+```text
+Student Journey  +  Learning Outcome
+```
+
+학습 Flow (Theory-first 폐기):
+
+```text
+Experience → Question → Theory → Practice → Experiment
+  → Reflection → Outcome → Next
+```
+
+Day 1 = **10분 안 첫 성공** (AI로 프로젝트 생성 → VS Code → Node → 실행 → Hello World)  
+그 **이후** “왜 Node/package.json/…?” 질문과 Atlas.
 
 Every agent, skill, script, and workflow must pass:
 
-1. Does this improve the **student journey** (not just ship a page or fill Atlas)?
-2. Is work driven by a **student question**, not only a tech label?
-3. Was **Question → Research → Verification → Content → Practice → Animation → Diagram → Quiz → Review** done before Website?
-4. Does it preserve Atlas as **Knowledge Layer** (no delete) and existing lessons/KB?
-5. Does it keep facts and sources honest?
-6. Does it produce verifiable results?
+1. Does this improve **can-do outcomes** (not just content coverage)?
+2. Is design **problem / experience first**, then question, then theory?
+3. Does Complete mean **solo capability**, not “watched the lesson”?
+4. Was content pipeline done **before Website**?
+5. Does it preserve Journey, Atlas, Foundation, MR (no delete)?
+6. Are facts and sources honest?
 
 If not, do not add it.
 
-**Website Last.** **AI proposes curriculum; operator decides.**
+**Website Last.** **AI helps the student do it themselves; operator decides curriculum.**
 
-Top SSOT candidates (operator review):  
-`ai-ops/roadmap/STUDENT_JOURNEY.md` (+ `LEARNING_ROADMAP`, `LEARNING_NODE_SPEC`, `LEARNING_EXPERIENCE_PRINCIPLES`).
+Top SSOT candidates:  
+`STUDENT_JOURNEY.md` + `OUTCOME_FRAMEWORK.md` / `LEARNING_OUTCOMES.md` (+ completion & assessment specs).
 
 ---
 
-## 2. SSOT priority (student experience wins)
+## 2. SSOT priority (capability wins)
 
 When documents conflict, higher rows win:
 
 | Priority | Document | Authority |
 |---:|---|---|
-| 1 | `ai-ops/roadmap/STUDENT_JOURNEY.md` | **Student experience** — highest; overrides site/Atlas/course-as-product framing |
-| 2 | `ai-ops/roadmap/LEARNING_EXPERIENCE_PRINCIPLES.md` · `LEARNING_ROADMAP.md` · `LEARNING_NODE_SPEC.md` | Philosophy · map · node contract |
-| 3 | `ai-ops/roadmap/EDUCATION_PLATFORM_MASTER_PLAN.md` · Course/Pipeline/Curriculum docs | Platform execution under Journey |
-| 4 | `ai-ops/roadmap/ATLAS-EDUCATION-LAYER.md` | Atlas **Knowledge Layer** technical PRD (21 concepts, 14 sections) — keep |
-| 5 | `ai-ops/roadmap/ATLAS-MODEL-ROUTING-FEATURE-SPEC.md` | Subordinate Model Routing Learning Route |
-| 6 | `ai-ops/STATE.md` | Live execution queue / approval status |
-| 7 | `ai-ops/roadmap/ATLAS-GROK-MULTI-AGENT-OPERATING-PLAN.md` | Grok multi-agent **operations** |
-| 8 | `AGENTS.md` (this file) | Repo-wide AI operating contract |
-| 9 | `.grok/agents/*`, `.grok/skills/*` | Role and skill execution contracts |
+| 1 | `STUDENT_JOURNEY.md` **+** `OUTCOME_FRAMEWORK.md` / `LEARNING_OUTCOMES.md` | **Experience path + can-do outcomes** (paired top) |
+| 2 | `STAGE_COMPLETION_SPEC.md` · `ASSESSMENT_SYSTEM.md` | Complete 판정 · Studio 신호 |
+| 3 | `LEARNING_EXPERIENCE_PRINCIPLES.md` · `LEARNING_ROADMAP.md` · `LEARNING_NODE_SPEC.md` | Journey detail (align to outcomes) |
+| 4 | Education Platform Master Plan · Course/Pipeline/Curriculum docs | Platform execution |
+| 5 | `ATLAS-EDUCATION-LAYER.md` | Atlas Knowledge Layer (21/14) — keep; **after curiosity** |
+| 6 | `ATLAS-MODEL-ROUTING-FEATURE-SPEC.md` | Subordinate MR route |
+| 7 | `ai-ops/STATE.md` | Live execution queue |
+| 8 | Grok multi-agent operating plan · `AGENTS.md` · `.grok/*` | Operations / contracts |
+
+Paths under `ai-ops/roadmap/` unless noted.
 
 `ATLAS-BUILD-PLAN.md` remains **HOLD**. Do not activate it.
 
-**Atlas is Knowledge / Reference Layer**, not the main Learning Path. Do not delete Atlas assets.
+**Atlas = Reference after curiosity.** Do not delete Atlas / Journey assets.
 
-Operational convenience never overrides learner understanding or claim honesty.
+Operational convenience never overrides **solo capability** or claim honesty.
 
 ---
 

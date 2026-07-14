@@ -29,43 +29,27 @@ code_change: false
 
 ## 2. 전체 흐름 (권장 골격)
 
+**Day1 메인 경로는 Theory 나열(AI→LLM→IDE→Node)이 아니다.**  
+→ [OUTCOME_FRAMEWORK.md](./OUTCOME_FRAMEWORK.md) · `D1_first_success` (경험 먼저).
+
 ```text
 START
-  → 왜 AI 때문에 코딩이 바뀌고 있는가
-  → 바이브코딩이란
-  → AI란
-  → LLM
-  → IDE
-  → AI IDE
-  → VS Code
-  → Node
-  → Terminal
-  → 첫 프로젝트
-  → 파일 구조
-  → HTML
-  → CSS
-  → JavaScript
-  → Frontend
-  → Backend
-  → Database
-  → API
-  → Git
-  → Deploy
-  → AI Agent
-  → Workflow
-  → Prompt
-  → Context
-  → MCP
-  → Skill
-  → SubAgent
-  → Orchestration
-  → Model Routing
-  → Harness
+  → [D1] AI로 프로젝트 생성 → VS Code → Node → 실행 → Hello World (첫 성공)
+  → 질문: 왜 Node / package.json / src / npm / 터미널?
+  → (짧게) 왜 바뀌는가 · 바이브코딩 · AI/LLM (질문·Atlas)
+  → IDE / AI IDE 심화 · Terminal 심화 · 파일 구조
+  → HTML → CSS → JavaScript → Frontend
+  → Backend → Database → API
+  → Git → Deploy
+  → AI Agent → Workflow → Prompt → Context
+  → MCP → Skill → SubAgent
+  → Orchestration → Model Routing → Harness
   → Production
 END
 ```
 
-위 목록은 **제안 순서**다. 노드 병합·분할·순서 변경은 정상 Living 작업이다.
+위 목록은 **제안 순서**다. 노드 병합·분할·순서 변경은 정상 Living 작업이다.  
+Stage 종료 = 출석이 아니라 **Learning Outcome** ([LEARNING_OUTCOMES.md](./LEARNING_OUTCOMES.md)).
 
 ---
 
