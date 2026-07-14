@@ -1,35 +1,32 @@
-# Handoff — Day 1 Education Package (2026-07-14)
+# Handoff — Day 1 Operator Review Package (2026-07-14)
 
 | Field | Value |
 |---|---|
-| Verdict | **READY_FOR_DAY1_EDUCATION_REVIEW** |
-| Top SSOT | Journey + Outcome (outcome pack **approved**) |
-| Day 1 | Path A HTML quick win + Path B local (variable time) |
-| Site | **Not wired** — originals under `content/` |
+| Verdict | **READY_FOR_DAY1_OPERATOR_REVIEW** |
+| Site | not wired |
+| Push/deploy | not run |
 
-## Read first
+## Open these (operator)
 
-1. `ai-ops/reports/DAY1-EDUCATION-PACKAGE-REVIEW.md`
-2. `content/courses/vibe-coding-foundation/lessons/01-first-success.md`
-3. `content/practice/.../01-first-success-practice.md`
-4. `content/assessment/.../01-first-success-assessment.md`
-5. `ai-ops/curriculum/CURRICULUM_MASTER.csv`
+1. `exports/curriculum/CURRICULUM_MASTER.xlsx`
+2. `exports/student/DAY1-처음으로-AI와-프로그램-실행하기.docx`
+3. `exports/instructor/DAY1-강사용-대본.docx`
+4. `examples/day1-first-success/` + README
+5. `exports/review/DAY1-INTERACTION-STORYBOARD.md`
+6. `exports/review/DAY1-OPERATOR-REVIEW-PACKAGE.md` (§I–J)
 
-## Do not
+## SSOT vs derivative
 
-- Implement lesson pages / animation without operator content approve  
-- Edit frozen `src/content/lessons/**` for this package  
-- push / deploy  
+- SSOT: `content/**`, `ai-ops/curriculum/*.csv|md`, practice/assessment/interaction MD  
+- Derivative: `exports/**` (regenerate via `scripts/atlas/export-day1-*`)
 
-## After approve
+## After operator decision
 
-1. Optional sample project + instructor DOCX  
-2. Website viewer wire + interaction implementation from spec  
-3. Day 2 curriculum row  
+- APPROVE_* → optional minor MD fixes → then Website/animation phase (separate gate)  
+- REVISE_* → edit SSOT MD/CSV only, re-run export scripts  
 
 ## Resume
 
 ```text
-Day1 package ready for education review. content/ not site-wired. Outcome approved.
-Website last.
+Day1 operator package ready. Review exports not code. Website last. No push.
 ```

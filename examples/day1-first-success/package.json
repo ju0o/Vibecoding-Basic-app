@@ -1,0 +1,13 @@
+{
+  "name": "day1-first-success",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Day 1 Path B sample — minimal Node static server (no external deps)",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
