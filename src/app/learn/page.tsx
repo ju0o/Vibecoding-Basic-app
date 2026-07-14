@@ -84,19 +84,31 @@ const TRACKS: readonly Track[] = [
   },
   {
     id: "c",
-    title: "Track C — AI 도구 사용",
-    question: "어떤 AI 도구로 어떤 일을 맡길까?",
-    canDo: "도구를 고르고 오류를 함께 고친다",
-    status: "preparing",
-    available: [],
-    preparing: [
-      "C01 좋은 작업 요청",
-      "C02 Prompt Engineering",
-      "C03 Context Engineering",
-      "C04 관련 파일만 보여주기",
+    title: "Track C — AI와 함께 개발하기",
+    question: "AI에게 어떻게 요청하고, 무엇을 보여 줄까?",
+    canDo: "좋은 요청·프롬프트·컨텍스트·관련 파일을 고른다",
+    status: "active",
+    available: [
+      {
+        title: "AI에게 좋은 작업 요청하기",
+        href: "/learn/vibe-coding-foundation/good-ai-task-request",
+      },
+      {
+        title: "Prompt Engineering 기초",
+        href: "/learn/vibe-coding-foundation/prompt-engineering",
+      },
+      {
+        title: "Context Engineering 기초",
+        href: "/learn/vibe-coding-foundation/context-engineering",
+      },
+      {
+        title: "관련 파일만 AI에게 보여주기",
+        href: "/learn/vibe-coding-foundation/related-files-context",
+      },
     ],
-    atlas: "Agent, Context, Prompt",
-    lab: "Batch 4 예정",
+    preparing: ["C05 작업 분해", "C06 오류 수정 Loop", "C07 QA", "C08–C10 Agent·Workflow"],
+    atlas: "Prompt, Context, Agent",
+    lab: "요청 조립 · Prompt Lab · Context 고르기",
   },
   {
     id: "d",

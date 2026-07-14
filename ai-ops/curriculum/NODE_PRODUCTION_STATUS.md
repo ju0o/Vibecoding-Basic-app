@@ -19,5 +19,9 @@ Mode: **Continuous Curriculum Production** · verified packages only on Website
 | backend | ◎ | ◎ | ◎ | ◎ | ◎ | → | B07 Batch3 |
 | api | ◎ | ◎ | ◎ | ◎ | ◎ | → | B08 Batch3 |
 | database | ◎ | ◎ | ◎ | ◎ | ◎ | → | B09 Batch3 |
+| good-ai-task-request | ◎ | ◎ | ◎ | ◎ | ◎ | → | C01 Batch4 |
+| prompt-engineering | ◎ | ◎ | ◎ | ◎ | ◎ | → | C02 Batch4 |
+| context-engineering | ◎ | ◎ | ◎ | ◎ | ◎ | → | C03 Batch4 |
+| related-files-context | ◎ | ◎ | ◎ | ◎ | ◎ | → | C04 Batch4 |
 
-**Next:** Batch 4 C01–C04
+**Next:** Batch 5 C05–C10

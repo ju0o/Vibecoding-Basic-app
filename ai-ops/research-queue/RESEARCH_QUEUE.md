@@ -5,8 +5,14 @@
 | id | topic | status |
 |---|---|---|
 | RQ-B3-06 | Firebase/Supabase/Neon pricing free tier | **blocked** — not in student body as fact |
-| RQ-C01 | Prompt engineering official defs | queued — Batch 4 |
-| RQ-C02 | Context engineering educational scope | queued — Batch 4 |
+| RQ-C05 | Agent definition educational vs product | queued — Batch 5 |
+
+## Batch 4 closed
+
+| id | status | applied_in |
+|---|---|---|
+| RQ-C01 | verified→applied | prompt-engineering educational scope |
+| RQ-C02 | verified→applied | context-engineering educational scope |
 
 ## Closed / applied
 
