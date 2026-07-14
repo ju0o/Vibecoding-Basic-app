@@ -49,15 +49,15 @@ export default function Page() {
           <li>O: 제외 목록 말하기</li>
         </ul>
       </section>
-      <section className="mt-10 rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-5 text-sm">
-        <h2 className="font-extrabold">Batch 4 완료 → Batch 5</h2>
-        <p className="mt-2 text-[var(--text-secondary)]">
-          다음: 작업 분해 · 오류 수정 Loop · QA · Agent · SubAgent · Workflow
-        </p>
-        <Link className="mt-2 inline-block font-semibold text-[var(--accent-primary)] underline" href="/learn">
-          Learning Path
+      <p className="mt-8 text-sm">
+        다음:{" "}
+        <Link
+          className="font-semibold text-[var(--accent-primary)] underline"
+          href="/learn/vibe-coding-foundation/task-breakdown"
+        >
+          기능을 작은 작업으로 나누기 →
         </Link>
-      </section>
+      </p>
     </main>
   )
 }

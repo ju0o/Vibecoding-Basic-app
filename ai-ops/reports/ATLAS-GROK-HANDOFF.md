@@ -11,37 +11,42 @@ push: false
 
 Fill approved Learning Roadmap (A–G) with verified education packages; website last.
 
-## Completed
+## Completed this long loop
 
-| Batch | Nodes | Notes |
-|---|---|---|
-| Prior | A01–A03 | Day1, files, node-npm |
-| Batch 1 | A04–A06 | AI/IDE, terminal, errors |
-| Batch 2 | B01–B04 | web layers HTML/CSS/JS |
-| Batch 3 | B05–B09 | files-connect, FE, BE, API, DB |
+| Batch | Nodes |
+|---|---|
+| 1 | A04–A06 |
+| 2 | B01–B04 |
+| 3 | B05–B09 |
+| 4 | C01–C04 |
+| 5 | C05–C10 |
 
-## Live path (Track A+B)
+Prior approved: A01–A03 (Day1, files, node-npm).
+
+## Live Learning Path
+
+`/learn` Track A–C fully linked for produced nodes.
 
 ```text
-… → javascript-basics
-→ files-connect → frontend → backend → api → database
+… → related-files-context → task-breakdown → fix-loop → qa-basics
+→ ai-agent → subagent → workflow
 ```
 
-## Next session resume
+## Next resume
 
-1. **Batch 4:** C01 good-ai-task-request · C02 prompt-engineering · C03 context-engineering · C04 related-files-context  
-2. Same pipeline; no re-ask A/B/C  
-3. After Batch 4 → Checkpoint CONTINUE → Batch 5 (C05–C10)
+1. **Track D Batch:** D01 첫 미니 웹사이트 → D02 데이터 저장 …  
+2. Or deepen Word exports / richer quizzes for A–C  
+3. Education Studio learn-tab optional (do not block content)  
+4. No re-ask A/B/C · No push/deploy  
 
-## Do not
+## Risks
 
-- Re-approve A01–A03 unless operator revise  
-- Empty menu pages  
-- push/deploy  
-- Product pricing as fact without official verify  
+- Later nodes thinner Word/DOCX than A01–A03  
+- Agent/SubAgent educational labels — not product docs  
+- RQ product pricing still blocked  
 
 ## Resume prompt
 
 ```text
-Continuous curriculum production. Batch1-3 done. CONTINUE Batch4 C01-C04. Website last. No push.
+Continuous curriculum production. Batch1-5 (A04–C10) done. CONTINUE Track D D01+. Website last. No push.
 ```

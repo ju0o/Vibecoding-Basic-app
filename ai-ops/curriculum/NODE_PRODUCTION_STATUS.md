@@ -23,5 +23,11 @@ Mode: **Continuous Curriculum Production** · verified packages only on Website
 | prompt-engineering | ◎ | ◎ | ◎ | ◎ | ◎ | → | C02 Batch4 |
 | context-engineering | ◎ | ◎ | ◎ | ◎ | ◎ | → | C03 Batch4 |
 | related-files-context | ◎ | ◎ | ◎ | ◎ | ◎ | → | C04 Batch4 |
+| task-breakdown | ◎ | ◎ | ◎ | ◎ | ◎ | → | C05 Batch5 |
+| fix-loop | ◎ | ◎ | ◎ | ◎ | ◎ | → | C06 Batch5 |
+| qa-basics | ◎ | ◎ | ◎ | ◎ | ◎ | → | C07 Batch5 |
+| ai-agent | ◎ | ◎ | ◎ | ◎ | ◎ | → | C08 Batch5 |
+| subagent | ◎ | ◎ | ◎ | ◎ | ◎ | → | C09 Batch5 |
+| workflow | ◎ | ◎ | ◎ | ◎ | ◎ | → | C10 Batch5 |
 
-**Next:** Batch 5 C05–C10
+**Next:** Track D D01+
