@@ -1,10 +1,11 @@
-# STATE — Curriculum Milestone Handoff
+# STATE — P0 Remediation Handoff
 
 ```yaml
-current_mode: curriculum_milestone_handoff
-current_decision: READY_FOR_CURRICULUM_MILESTONE_REVIEW
+current_mode: p0_remediation_handoff
+current_decision: REMEDIATE_P0_ONLY
 track_d: paused
-next_requires_operator_scope: true
+implementation_started: false
+next_executor_may_start_p0: true
 push: false
 deploy: false
 date: 2026-07-15
@@ -12,28 +13,23 @@ date: 2026-07-15
 
 | Field | Value |
 |---|---|
-| Mode | Continuous production **ACTIVE** + **Milestone handoff** |
-| Decision | **READY_FOR_CURRICULUM_MILESTONE_REVIEW** |
-| Track D | **paused** — do not start D01 |
-| Operator scope | **required** before next production work |
-| Handoff package | `ai-ops/reports/CURRICULUM-MILESTONE-HANDOFF.md` |
-| HEAD | verify `git rev-parse --short HEAD` · handoff `a84991d`/`8fd6cc8` · milestone `2427ef3` |
-| Branch | `master` |
-
-## Do not
-
-- Start Track D  
-- Auto-remediate without operator Option 2  
-- push / deploy / reset / clean / rebase  
+| Operator | **REMEDIATE_P0_ONLY** approved |
+| Track D | **paused** |
+| P0 implementation | **not started** this session |
+| Milestone posture | still under review until RP0-11 |
+| Handoff | `ai-ops/reports/P0-REMEDIATION-HANDOFF.md` |
+| Context Package | `ai-ops/reports/P0-REMEDIATION-CONTEXT-PACKAGE.md` |
+| Prior milestone handoff | `ai-ops/reports/CURRICULUM-MILESTONE-HANDOFF.md` |
+| Quality gate | `ai-ops/contracts/NODE_QUALITY_GATE.md` |
 
 ## Next executor
 
-1. Read `CURRICULUM-MILESTONE-HANDOFF.md`  
-2. Wait for operator: `ACCEPT_RESIDUALS_CONTINUE_TRACK_D` **or** `REMEDIATE_P0_ONLY`  
-3. Only then act  
+1. Read P0 handoff + context package  
+2. Start **RP0-0** (recovery) → RP0-11  
+3. **No Track D** until `CONTINUE_TRACK_D` after RP0-11  
 
-## Session end
+## End of planning session
 
 ```text
-READY_FOR_NEW_AGENT_HANDOFF
+READY_FOR_P0_REMEDIATION_HANDOFF
 ```
