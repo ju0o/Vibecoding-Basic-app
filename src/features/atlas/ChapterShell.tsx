@@ -46,7 +46,15 @@ export function ChapterShell({
           <MapTrifold size={16} weight="bold" />
           Roadmap
         </Link>
-        <span className="text-sm font-bold text-[var(--text-tertiary)]">
+        <span className="flex items-center gap-3 text-sm font-bold text-[var(--text-tertiary)]">
+          {process.env.NODE_ENV === "development" ? (
+            <Link
+              className="text-[var(--accent-primary)]"
+              href={`/atlas/studio/concepts/${concept.id}`}
+            >
+              Open in Education Studio
+            </Link>
+          ) : null}
           {concept.order} / {totalConcepts} · {status}
         </span>
       </div>

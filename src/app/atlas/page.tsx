@@ -41,6 +41,11 @@ export default function AtlasPage() {
           <Link className="font-bold text-[var(--text-secondary)]" href="/glossary">
             Wiki
           </Link>
+          {process.env.NODE_ENV === "development" ? (
+            <Link className="font-bold text-[var(--accent-primary)]" href="/atlas/studio">
+              Education Studio (ops)
+            </Link>
+          ) : null}
         </div>
       </div>
 

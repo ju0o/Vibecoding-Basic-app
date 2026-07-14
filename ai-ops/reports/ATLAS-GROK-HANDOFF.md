@@ -1,48 +1,33 @@
-# Atlas V2 — Handoff (2026-07-14)
+# Atlas V2 Handoff — 2026-07-14
 
 | Field | Value |
 |---|---|
-| Verdict | **READY_FOR_V2_RELEASE_REVIEW** |
-| Product RC | `ai-ops/reports/ATLAS-V2-RELEASE-CANDIDATE.md` |
-| MR RC | `ai-ops/reports/ATLAS-PW14-RELEASE-CANDIDATE.md` |
+| Verdict | **READY_FOR_OPERATOR_CONTENT_REVIEW** |
+| Studio | `/atlas/studio` |
+| Review pack | `ai-ops/reports/ATLAS-CONTENT-STUDIO-REVIEW.md` |
+| Content ops plan | `ai-ops/roadmap/ATLAS-CONTENT-OPERATIONS.md` |
 
-## Goal
-
-비개발자 Day1 → AI Engineering 역사·원리·연결·운영 인터랙티브 Atlas.
-
-## Completed waves
-
-- Grok OS GO-1…GO-9
-- Model Routing PW-0…PW-14
-- Education Layer EV-0…EV-19 (this session)
-
-## Key routes
+## Operator path
 
 ```text
-/atlas
-/atlas/concepts/[conceptId]
-/atlas/graph
-/atlas/timeline
-/model-routing
-/model-routing/simulator
+npm run dev
+→ /atlas/studio
+→ /atlas/studio/concepts/llm
+→ /atlas/studio/inventory
+→ student /atlas/concepts/llm
 ```
+
+## Done
+
+- Content manifest + completeness pure functions + tests
+- Education Studio dashboard / detail / inventory
+- Rule-based next work + inferred workflow stages
+- Dev-only Studio links on student pages
 
 ## Freezes
 
-21 concepts, 14 sections, BUILD-PLAN HOLD, no 22nd concept, MR subordinate.
-
-## Tests
-
-`npm run verify` PASS after rebaseline.
-
-## Uncommitted note
-
-After commits, working tree should be clean except intentional hold files if any.
+21 concepts, 14 sections, BUILD-PLAN HOLD, no push/deploy.
 
 ## Resume
 
-```text
-Read AGENTS.md, STATE.md, this handoff, ATLAS-V2-RELEASE-CANDIDATE.md
-Open /atlas and /model-routing
-No push unless operator orders
-```
+Read STATE + this handoff + CONTENT-STUDIO-REVIEW; continue content fill via agents, not re-architecture.
