@@ -73,9 +73,15 @@ export default function NodeNpmPage() {
       </section>
 
       <section className="rounded-2xl border p-5 text-sm text-[var(--text-secondary)]">
-        <h2 className="font-extrabold text-[var(--text-primary)]">다음 — 후보 C (미제작)</h2>
+        <h2 className="font-extrabold text-[var(--text-primary)]">다음</h2>
+        <p className="mt-2">실행 방법은 이해하기 시작했다. AI·LLM·IDE 자리를 정리해 봅시다.</p>
         <p className="mt-2">
-          실행 방법은 이해하기 시작했다. AI는 어떻게 파일을 만들고, IDE와 AI IDE는 무엇이 다를까?
+          <Link
+            className="font-semibold text-[var(--accent-primary)] underline"
+            href="/learn/vibe-coding-foundation/ai-llm-ide"
+          >
+            AI · LLM · IDE 수업으로 →
+          </Link>
         </p>
       </section>
     </main>

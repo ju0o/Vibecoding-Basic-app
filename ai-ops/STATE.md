@@ -1,14 +1,12 @@
-# STATE
+# STATE — Continuous Curriculum Production
 
 | | |
 |---|---|
-| Batch | **NODE B — Node npm package.json** |
-| A | APPROVE preserved |
-| B | **READY_FOR_NODE_NPM_NODE_REVIEW** |
-| Route | `/learn/vibe-coding-foundation/node-npm-package-json` |
-| C | not started |
+| Mode | **Continuous Curriculum Production Loop** |
+| B status | APPROVE |
+| Batch 1 | **COMPLETE** (A04–A06) · Decision CONTINUE |
+| Next | Batch 2 B01–B04 (auto) |
+| Path live | Day1 → A02 → A03 → A04 → A05 → A06 |
 | Push | no |
 
-```
-npm run dev → node-npm-package-json
-```
+Do not re-ask A/B/C. Follow roadmap.

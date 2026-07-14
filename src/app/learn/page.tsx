@@ -38,10 +38,22 @@ const TRACKS: readonly Track[] = [
         title: "Node·npm — 왜 설치하고 실행할까?",
         href: "/learn/vibe-coding-foundation/node-npm-package-json",
       },
+      {
+        title: "AI·LLM·IDE 구분",
+        href: "/learn/vibe-coding-foundation/ai-llm-ide",
+      },
+      {
+        title: "터미널과 명령어",
+        href: "/learn/vibe-coding-foundation/terminal-commands",
+      },
+      {
+        title: "오류를 AI에게 전달하기",
+        href: "/learn/vibe-coding-foundation/errors-to-ai",
+      },
     ],
-    preparing: ["AI·LLM·IDE 관계 (후보 C · 미제작)"],
+    preparing: [],
     atlas: "AI, LLM (궁금할 때)",
-    lab: "Day 1 · 파일 구조 · Node/npm",
+    lab: "Track A 전체",
   },
   {
     id: "b",
@@ -50,9 +62,9 @@ const TRACKS: readonly Track[] = [
     canDo: "FE/BE/API/파일 구조를 기초 수준으로 설명한다",
     status: "preparing",
     available: [],
-    preparing: ["HTML/CSS/JS", "package.json·src", "API·DB 감각"],
+    preparing: ["웹 표시 원리", "HTML", "CSS", "JavaScript", "FE/BE/API/DB"],
     atlas: "관련 Concept 예정",
-    lab: "준비 중",
+    lab: "Batch 2 제작 중/예정",
   },
   {
     id: "c",
