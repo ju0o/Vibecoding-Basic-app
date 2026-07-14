@@ -85,22 +85,21 @@ Hubs: `/learn`, `/start`, `/lab`, `/verification` (and existing tools/tech hubs)
 | Field | Value |
 |---|---|
 | Branch | `master` |
-| HEAD | `a84991d` (handoff package commit) |
+| HEAD | run `git rev-parse --short HEAD` (handoff series ends at pin commit on `master`) |
+| Handoff package commits | `a84991d` (body) → `8fd6cc8` (HEAD pin) — verify with `git log -3` |
 | Milestone audit commit | `2427ef3` — audit + partial remediation |
-| Message (HEAD) | `ATLAS-OPS: emergency curriculum milestone handoff package` |
-| Working tree | **clean** after handoff commit |
+| Message (handoff) | `ATLAS-OPS: emergency curriculum milestone handoff package` |
+| Working tree | expect **clean** after handoff commits; re-check `git status` |
 | Push | **not executed** |
 | Deploy | **not executed** |
 
 Recent history (context):
 
 ```text
+8fd6cc8 ATLAS-OPS: pin handoff HEAD hash after package commit
 a84991d ATLAS-OPS: emergency curriculum milestone handoff package
 2427ef3 ATLAS-OPS: A-C curriculum milestone audit and quality remediation
 ab7a78c ATLAS-OPS: STATE after Batch5 Track C complete
-0907b16 fix(learn): Batch5 interactive TypeScript strictness
-d5f0e90 content(track-c): complete Batch5 task breakdown agent workflow nodes
-7bc96ba content(track-c): complete Batch4 AI request prompt context nodes
 ```
 
 ---
@@ -248,7 +247,7 @@ Until operator speaks, next agent **stops after reading** this package and STATE
 ### Short Resume Prompt
 
 ```text
-Curriculum Milestone A–C handoff. Decision: READY_FOR_CURRICULUM_MILESTONE_REVIEW. PAUSE_TRACK_D. HEAD a84991d master clean. Read ai-ops/reports/CURRICULUM-MILESTONE-HANDOFF.md then STATE. No Track D, no new work until operator Option 1 ACCEPT_RESIDUALS_CONTINUE_TRACK_D or Option 2 REMEDIATE_P0_ONLY. No push/deploy.
+Curriculum Milestone A–C handoff. Decision: READY_FOR_CURRICULUM_MILESTONE_REVIEW. PAUSE_TRACK_D. HEAD verify git rev-parse; milestone 2427ef3; PAUSE_TRACK_D; master. Read ai-ops/reports/CURRICULUM-MILESTONE-HANDOFF.md then STATE. No Track D, no new work until operator Option 1 ACCEPT_RESIDUALS_CONTINUE_TRACK_D or Option 2 REMEDIATE_P0_ONLY. No push/deploy.
 ```
 
 ### Full Context Package Prompt
@@ -267,8 +266,7 @@ CURRENT DECISION (do not invent better status)
 
 GIT
 - branch: master
-- HEAD: a84991d (emergency handoff package); milestone work at 2427ef3
-- working tree clean after handoff commit
+- HEAD: verify with git rev-parse (handoff commits a84991d + 8fd6cc8); milestone 2427ef3
 - no push, no deploy
 
 COMPLETED
@@ -309,7 +307,7 @@ FORBIDDEN UNTIL OPERATOR
 
 | Claim | Check |
 |---|---|
-| HEAD `a84991d` (handoff) · milestone `2427ef3` | `git log` ✓ |
+| Handoff series `a84991d`/`8fd6cc8` · milestone `2427ef3` | `git log` ✓ |
 | Branch `master` | ✓ |
 | Clean tree | `git status --short` empty ✓ |
 | Milestone reports exist | path Test-Path True ✓ |
