@@ -17,7 +17,7 @@ date: 2026-07-15
 | Track D | **paused** — do not start D01 |
 | Operator scope | **required** before next production work |
 | Handoff package | `ai-ops/reports/CURRICULUM-MILESTONE-HANDOFF.md` |
-| HEAD | `9a097a4` (handoff) · milestone body `2427ef3` |
+| HEAD | `a84991d` (handoff) · milestone body `2427ef3` |
 | Branch | `master` |
 
 ## Do not

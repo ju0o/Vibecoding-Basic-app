@@ -85,7 +85,7 @@ Hubs: `/learn`, `/start`, `/lab`, `/verification` (and existing tools/tech hubs)
 | Field | Value |
 |---|---|
 | Branch | `master` |
-| HEAD | `9a097a4` (handoff package commit) |
+| HEAD | `a84991d` (handoff package commit) |
 | Milestone audit commit | `2427ef3` — audit + partial remediation |
 | Message (HEAD) | `ATLAS-OPS: emergency curriculum milestone handoff package` |
 | Working tree | **clean** after handoff commit |
@@ -95,7 +95,7 @@ Hubs: `/learn`, `/start`, `/lab`, `/verification` (and existing tools/tech hubs)
 Recent history (context):
 
 ```text
-9a097a4 ATLAS-OPS: emergency curriculum milestone handoff package
+a84991d ATLAS-OPS: emergency curriculum milestone handoff package
 2427ef3 ATLAS-OPS: A-C curriculum milestone audit and quality remediation
 ab7a78c ATLAS-OPS: STATE after Batch5 Track C complete
 0907b16 fix(learn): Batch5 interactive TypeScript strictness
@@ -248,7 +248,7 @@ Until operator speaks, next agent **stops after reading** this package and STATE
 ### Short Resume Prompt
 
 ```text
-Curriculum Milestone A–C handoff. Decision: READY_FOR_CURRICULUM_MILESTONE_REVIEW. PAUSE_TRACK_D. HEAD 9a097a4 master clean. Read ai-ops/reports/CURRICULUM-MILESTONE-HANDOFF.md then STATE. No Track D, no new work until operator Option 1 ACCEPT_RESIDUALS_CONTINUE_TRACK_D or Option 2 REMEDIATE_P0_ONLY. No push/deploy.
+Curriculum Milestone A–C handoff. Decision: READY_FOR_CURRICULUM_MILESTONE_REVIEW. PAUSE_TRACK_D. HEAD a84991d master clean. Read ai-ops/reports/CURRICULUM-MILESTONE-HANDOFF.md then STATE. No Track D, no new work until operator Option 1 ACCEPT_RESIDUALS_CONTINUE_TRACK_D or Option 2 REMEDIATE_P0_ONLY. No push/deploy.
 ```
 
 ### Full Context Package Prompt
@@ -267,7 +267,7 @@ CURRENT DECISION (do not invent better status)
 
 GIT
 - branch: master
-- HEAD: 9a097a4 (emergency handoff package); milestone work at 2427ef3
+- HEAD: a84991d (emergency handoff package); milestone work at 2427ef3
 - working tree clean after handoff commit
 - no push, no deploy
 
@@ -309,7 +309,7 @@ FORBIDDEN UNTIL OPERATOR
 
 | Claim | Check |
 |---|---|
-| HEAD `9a097a4` (handoff) · milestone `2427ef3` | `git log` ✓ |
+| HEAD `a84991d` (handoff) · milestone `2427ef3` | `git log` ✓ |
 | Branch `master` | ✓ |
 | Clean tree | `git status --short` empty ✓ |
 | Milestone reports exist | path Test-Path True ✓ |
