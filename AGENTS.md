@@ -38,7 +38,10 @@ Every agent must pass:
 
 **Website Last.** Operator decides curriculum; AI proposes.
 
-Design SSOT: Journey/Outcome pack + `CONTENT_PIPELINE.md` + `ANIMATION_DESIGN_SYSTEM.md`.
+Design SSOT: Journey/Outcome pack + `CONTENT_PIPELINE.md` + `ANIMATION_DESIGN_SYSTEM.md`  
++ **Learning Platform IA** (`LEARNING-PLATFORM-INFORMATION-ARCHITECTURE.md`) — Learning Path first; Atlas reference; Tools/Tech separate; Verification living.
+
+Day 1 interactive at `/learn/vibe-coding-foundation/day-1` is the **reference student experience** (preserve). Do not delete Atlas/100-lessons/Day1.
 
 ---
 
