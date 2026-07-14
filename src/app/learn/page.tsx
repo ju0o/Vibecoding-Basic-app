@@ -28,10 +28,16 @@ const TRACKS: readonly Track[] = [
     question: "무엇을 설치하고, 어떻게 첫 결과물을 만들지?",
     canDo: "AI와 함께 작은 결과물을 만들고 로컬에서 실행을 시도한다",
     status: "active",
-    available: [{ title: "Day 1 — 첫 성공", href: DAY1_HREF }],
-    preparing: ["프로젝트 파일 구조", "Node·npm 심화", "AI·LLM·IDE 관계"],
+    available: [
+      { title: "Day 1 — 첫 성공", href: DAY1_HREF },
+      {
+        title: "파일 구조 읽기 — 어떤 파일을 건드릴까?",
+        href: "/learn/vibe-coding-foundation/project-file-structure",
+      },
+    ],
+    preparing: ["Node·npm 심화 (후보 B · 승인 후)", "AI·LLM·IDE 관계 (후보 C)"],
     atlas: "AI, LLM (궁금할 때)",
-    lab: "Day 1 시뮬 · 샘플 프로젝트",
+    lab: "Day 1 + 파일 구조 시뮬 · 샘플",
   },
   {
     id: "b",

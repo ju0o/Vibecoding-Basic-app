@@ -87,16 +87,20 @@ export default function StartPage() {
 
       <section className="mt-12 rounded-2xl border border-[var(--border-default)] p-5">
         <h2 className="text-xl font-extrabold text-[var(--text-primary)]">다음 학습 흐름</h2>
-        <p className="mt-2 text-sm font-bold text-amber-800 dark:text-amber-200">
-          다음 단계 준비 중
-        </p>
         <p className="mt-2 text-sm text-[var(--text-secondary)]">
-          Day 2 콘텐츠는 운영자 승인 전 확정되지 않습니다. 후보만 안내합니다.
+          Day 1 다음: <strong className="text-[var(--text-primary)]">파일 구조 읽기</strong> (후보 A
+          · A_THEN_B)
         </p>
         <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-[var(--text-secondary)]">
-          <li>프로젝트 파일 구조 이해</li>
-          <li>Node와 npm 이해</li>
-          <li>AI · LLM · IDE 관계 이해</li>
+          <li>
+            <Link
+              className="font-semibold text-[var(--accent-primary)] underline"
+              href="/learn/vibe-coding-foundation/project-file-structure"
+            >
+              AI가 만든 프로젝트 파일 구조 읽기
+            </Link>
+          </li>
+          <li>그다음 후보 B: Node·npm (아직 미제작)</li>
         </ul>
         <p className="mt-4 text-sm">
           <Link className="font-semibold text-[var(--accent-primary)] underline" href="/learn">

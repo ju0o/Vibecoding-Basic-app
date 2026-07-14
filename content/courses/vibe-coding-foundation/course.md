@@ -15,15 +15,16 @@ AI와 함께 **만들고**, 결과를 **확인하고**, 점점 **혼자 할 수 
 
 ## Lessons
 
-| order | lesson_id | title | status |
-|---|---|---|---|
-| 1 | d1-first-success | 첫 성공 — AI와 함께 결과물을 실행하기 | drafting |
+| order | lesson_id | title | status | site |
+|---|---|---|---|---|
+| 1 | d1-first-success | 첫 성공 | live | /learn/vibe-coding-foundation/day-1 |
+| 2 | project-file-structure | 파일 구조 읽기 | live | /learn/vibe-coding-foundation/project-file-structure |
+
+## Pick
+
+`A_THEN_B` — B(Node·npm) 본문은 미착수.
 
 ## Paths in Day 1
 
 - **Path A** — 설치 없이 빠른 성공  
 - **Path B** — 로컬 환경 (시간 가변)
-
-## Not wired
-
-이 폴더는 **교육자료 원본**이다. 학생 사이트 라우트·`src/content/lessons`에 아직 연결하지 않는다.

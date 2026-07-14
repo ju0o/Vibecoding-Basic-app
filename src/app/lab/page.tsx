@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: "Learning Node와 연결된 시뮬레이션·샘플 프로젝트·Outcome 실습 허브.",
 }
 
+const PFS = "/learn/vibe-coding-foundation/project-file-structure"
+
 const LABS = [
   {
     title: "첫 성공 인터랙티브 시뮬레이션",
@@ -49,6 +51,36 @@ const LABS = [
     level: "입문",
     outcome: "can-do 자가 점검",
     href: `${DAY1_HREF}#quiz-outcomes`,
+  },
+  {
+    title: "파일 구조 — 역할 찾기 시뮬",
+    type: "Interactive Simulation",
+    lesson: "프로젝트 파일 구조",
+    prep: "브라우저만",
+    time: "15–25분",
+    level: "입문",
+    outcome: "문구 파일 찾기 · 잘못된 선택 피드백 · AI 범위 요청",
+    href: `${PFS}#simulation`,
+  },
+  {
+    title: "파일 구조 — 샘플에서 한 파일 수정",
+    type: "Sample Project",
+    lesson: "프로젝트 파일 구조",
+    prep: "Day1 샘플 폴더 재사용",
+    time: "10–20분",
+    level: "입문",
+    outcome: "main.js 수정 · 구조 비교",
+    href: `${PFS}#practice`,
+  },
+  {
+    title: "파일 구조 Outcome Check",
+    type: "Outcome Check",
+    lesson: "프로젝트 파일 구조",
+    prep: "없음",
+    time: "5–10분",
+    level: "입문",
+    outcome: "구조 읽기 can-do",
+    href: `${PFS}#quiz-outcomes`,
   },
 ] as const
 

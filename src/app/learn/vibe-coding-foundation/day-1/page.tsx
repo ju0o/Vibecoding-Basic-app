@@ -146,15 +146,21 @@ export default function Day1LearnPage() {
 
       <footer className="border-t border-[var(--border-subtle)] pt-6 text-sm text-[var(--text-tertiary)]">
         <p>
-          Day 2 이상은 아직 연결하지 않았습니다. Atlas·Model Routing·기존 100강 라우트는
-          그대로입니다.
+          다음:{" "}
+          <Link
+            className="font-semibold text-[var(--accent-primary)] underline"
+            href="/learn/vibe-coding-foundation/project-file-structure"
+          >
+            프로젝트 파일 구조 읽기
+          </Link>
+          . Atlas·Model Routing·기존 100강 라우트는 그대로입니다.
         </p>
         <p className="mt-2">
           <Link
             className="font-semibold text-[var(--accent-primary)] hover:underline"
-            href="/curriculum"
+            href="/learn"
           >
-            ← 커리큘럼으로
+            ← Learning Path
           </Link>
         </p>
       </footer>

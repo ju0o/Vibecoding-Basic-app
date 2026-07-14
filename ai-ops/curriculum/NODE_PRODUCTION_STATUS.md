@@ -1,17 +1,8 @@
-# Node Production Status (interim Studio board)
-
-```yaml
-ssot_interim: true
-studio_ui: later
-date: 2026-07-14
-```
-
-상태: `—` not started · `~` partial · `✓` done · `◎` interactive ready · `→` website connected
+# Node Production Status
 
 | node_id | title | Research | Verif | Writing | Word | Practice | Sample | Anim | Quiz | Review | Outcome | Website |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| d1-first-success | Day 1 첫 성공 | ✓ | ~ | ✓ | ✓ | ✓ | ✓ | ◎ | ✓ | ✓ | ✓ | → |
-| (next) | (PICK 후) | — | — | — | — | — | — | — | — | — | — | — |
+| d1-first-success | Day 1 첫 성공 | ✓ | ~ | ✓ | ✓ | ✓ | ✓ | ◎ | ✓ | ✓ | ✓ | → day-1 |
+| project-file-structure | 파일 구조 읽기 | ✓ | ✓ | ✓ | ✓ | ✓ | reuse Day1 | ◎ | ✓ | ✓ | ✓ | → project-file-structure |
 
-범례 Anim: `—` 없음 · `S` storyboard · `◎` interactive  
-Website: `→` `/learn/vibe-coding-foundation/day-1`
+Pick: A_THEN_B — **B not started**
