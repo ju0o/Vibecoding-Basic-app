@@ -60,11 +60,19 @@ const TRACKS: readonly Track[] = [
     title: "Track B — 개발 원리",
     question: "화면은 어떻게 생기고, 파일은 왜 나뉘나?",
     canDo: "FE/BE/API/파일 구조를 기초 수준으로 설명한다",
-    status: "preparing",
-    available: [],
-    preparing: ["웹 표시 원리", "HTML", "CSS", "JavaScript", "FE/BE/API/DB"],
+    status: "active",
+    available: [
+      {
+        title: "웹이 화면에 나타나는 원리",
+        href: "/learn/vibe-coding-foundation/web-how-pages-appear",
+      },
+      { title: "HTML 기초", href: "/learn/vibe-coding-foundation/html-basics" },
+      { title: "CSS 기초", href: "/learn/vibe-coding-foundation/css-basics" },
+      { title: "JavaScript 기초", href: "/learn/vibe-coding-foundation/javascript-basics" },
+    ],
+    preparing: ["파일 연결", "Frontend/Backend", "API", "Database"],
     atlas: "관련 Concept 예정",
-    lab: "Batch 2 제작 중/예정",
+    lab: "Web layers 시뮬 · Day1 샘플",
   },
   {
     id: "c",

@@ -4,9 +4,10 @@
 |---|---|
 | Mode | **Continuous Curriculum Production Loop** |
 | B status | APPROVE |
-| Batch 1 | **COMPLETE** (A04–A06) · Decision CONTINUE |
-| Next | Batch 2 B01–B04 (auto) |
-| Path live | Day1 → A02 → A03 → A04 → A05 → A06 |
+| Batch 1 | COMPLETE |
+| Batch 2 | **COMPLETE** (B01–B04) · CONTINUE |
+| Next | Batch 3 B05–B09 |
+| Path live | A01–A06 + B01–B04 |
 | Push | no |
 
 Do not re-ask A/B/C. Follow roadmap.
