@@ -1,65 +1,66 @@
 ## 한 줄 정의
 
-교육용 최소 본문입니다. 상세 원리와 출처는 연결 강의·KB에서 확인하세요.
+LLM(Large Language Model, 대규모 언어 모델)은 아주 많은 텍스트로 학습되어, 주어진 **문맥(컨텍스트) 다음에 올 토큰을 예측**하며 문장·코드 등을 이어 쓰는 생성 모델 계열입니다.
 
 ## 왜 등장했는가
 
-교육용 최소 본문입니다. 상세 원리와 출처는 연결 강의·KB에서 확인하세요.
+과제마다 다른 모델·입력 형식을 쓰면 비용과 학습 부담이 큽니다. 언어를 공통 인터페이스로 두면, 번역·요약·질의·코드 초안 등 여러 일을 “말로 지시”할 수 있습니다. 대규모 사전학습과 생성 디코딩이 이 방향을 가능하게 했습니다. (interpretation · educational_example; 세부 연혁은 Textbook/KB)
 
 ## 이전 기술의 한계
 
-교육용 최소 본문입니다. 상세 원리와 출처는 연결 강의·KB에서 확인하세요.
+생성 AI 중에도 이미지나 음성에 특화된 모델이 있습니다. 반대로 언어 과제를 작은 모델·좁은 데이터로만 다루면 **일반화와 지시 따르기**가 약할 수 있습니다. 규칙 챗봇은 정해진 경로만 답합니다.
 
 ## 무엇을 해결했는가
 
-교육용 최소 본문입니다. 상세 원리와 출처는 연결 강의·KB에서 확인하세요.
+LLM은 자연어 지시로 다양한 텍스트 과제를 시도할 수 있게 합니다. 한계가 분명합니다: **사실을 보장하지 않음(환각 가능)**, 지식 컷오프·도구 없이는 최신 정보에 약할 수 있음, 프롬프트에 민감, 비용·지연·안전 정책이 제품마다 다름. LLM이 곧 모든 AI가 아니며, “이해했다”와 “그럴듯한 토큰을 이었다”를 혼동하면 안 됩니다.
 
 ## 실제 사례
 
-<!-- partial -->
-이 섹션은 교육용 shell입니다. 근거 KB와 Textbook 심화 링크는 카드에서 확인하세요. status=partial
+- 설명·초안·리팩터 제안 등 대화형 코딩 보조 (educational_example)
+- 문서 요약·회의록 정리 보조 (educational_example)
+- 모델 선택·트레이드오프 학습: Textbook `model-selection-tradeoffs` · KB `model-selection-tradeoffs`
+
+토큰·컨텍스트 심화: `tokenization-and-context` · `tokenization-context`.
 
 ## 대표 기업
 
-<!-- partial -->
-이 섹션은 교육용 shell입니다. 근거 KB와 Textbook 심화 링크는 카드에서 확인하세요. status=partial
+여러 연구 기관과 기업이 언어 모델을 공개·서비스합니다. 이 챕터는 리더보드나 가격표를 고정 사실로 싣지 않습니다. 사용 전 공식 문서의 모델 카드·정책·요금을 **확인일**과 함께 보세요.
 
 ## 대표 서비스
 
-<!-- partial -->
-이 섹션은 교육용 shell입니다. 근거 KB와 Textbook 심화 링크는 카드에서 확인하세요. status=partial
+챗 인터페이스, API 완성형 엔드포인트, IDE 에이전트 등이 있습니다. 공통 구조: **프롬프트/메시지 → 모델 → 토큰 스트림 → 사람 또는 도구 검증**.
 
 ## 실제 프로젝트에서는 어떻게 사용하는가
 
-<!-- partial -->
-이 섹션은 교육용 shell입니다. 근거 KB와 Textbook 심화 링크는 카드에서 확인하세요. status=partial
+바이브코딩에서 LLM은 기본 동료 도구가 되기 쉽습니다. 권장 루프: (1) 작은 목표를 명확히 (2) 관련 파일을 문맥으로 제공 (3) 출력 검토·테스트 (4) 수정 요청. 금지에 가까운 패턴: 비밀키를 프롬프트에 붙여 넣기, 검증 없는 보안 코드 채택. 다음 Concept인 Prompt Engineering이 “같은 모델, 다른 품질”의 핵심 레버입니다.
 
 ## 인터랙티브 애니메이션
 
-<!-- partial -->
-이 섹션은 교육용 shell입니다. 근거 KB와 Textbook 심화 링크는 카드에서 확인하세요. status=partial
+Foundation 미니 데모에서 **텍스트 → 토큰 → 문맥 창 → 다음 토큰** 흐름을 단계별로 보세요. 실제 토크나이저 구현이 아니라 교육용 단순화입니다.
 
 ## 인터랙티브 다이어그램
 
-<!-- partial -->
-이 섹션은 교육용 shell입니다. 근거 KB와 Textbook 심화 링크는 카드에서 확인하세요. status=partial
+Roadmap에서 Generative AI → LLM → Prompt Engineering 연결을 확인하세요. Model Routing은 이후 Orchestration 구간의 하위 경로입니다(지금 필수는 아님).
 
 ## 실습
 
-<!-- partial -->
-이 섹션은 교육용 shell입니다. 근거 KB와 Textbook 심화 링크는 카드에서 확인하세요. status=partial
+1. 한 문장을 단어/조각으로 나눠 “토큰처럼” 번호를 매겨 봅니다(정확 토크나이저 아님 · educational_example).
+2. 문맥이 잘린 상태(앞부분 삭제)에서 의미가 어떻게 달라질지 적어 봅니다.
+3. LLM 답변을 받을 때 반드시 확인할 검증 항목 3개를 만듭니다 (사실, 보안, 테스트).
 
 ## 퀴즈
 
-<!-- partial -->
-이 섹션은 교육용 shell입니다. 근거 KB와 Textbook 심화 링크는 카드에서 확인하세요. status=partial
+토큰 예측, 환각, “모든 AI=LLM” 오해를 점검하고 Teach-back으로 설명해 보세요.
 
 ## 관련 기술
 
-<!-- partial -->
-이 섹션은 교육용 shell입니다. 근거 KB와 Textbook 심화 링크는 카드에서 확인하세요. status=partial
+- **이전**: Generative AI
+- **다음**: Prompt Engineering — 지시 설계로 출력 품질을 다룸
+- **Wiki**: Token, Tokenization, Model Selection
+- **Textbook / KB**: `tokenization-and-context`, `model-selection-tradeoffs` · `tokenization-context`, `model-selection-tradeoffs`
 
 ## 다음 기술
 
-<!-- partial -->
-이 섹션은 교육용 shell입니다. 근거 KB와 Textbook 심화 링크는 카드에서 확인하세요. status=partial
+- **가능해진 것**: 자연어로 여러 텍스트 과제를 시도
+- **여전히 부족한 것**: 모호한 지시에서는 출력이 불안정하고, 검증 없이는 위험을 키움
+- **다음이 필요한 이유**: **Prompt Engineering**이 목표·형식·제약을 구조화해 같은 모델에서도 더 안정적인 결과를 노립니다.

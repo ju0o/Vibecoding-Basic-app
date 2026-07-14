@@ -63,8 +63,12 @@ export type AtlasContentManifestEntry = {
 }
 
 const INTERACTIVE_BY_CONCEPT: Readonly<Record<string, readonly string[]>> = {
+  ai: ["foundation-rules-vs-learning"],
+  "machine-learning": ["foundation-example-to-predict"],
+  "deep-learning": ["foundation-layered-repr"],
+  "generative-ai": ["foundation-classify-vs-generate"],
+  llm: ["foundation-token-predict"],
   orchestration: ["model-routing-simulator", "routing-diagram"],
-  llm: ["step-player-framework"],
   "prompt-engineering": ["step-player-framework"],
   rag: ["step-player-framework"],
   "tool-calling": ["step-player-framework"],
@@ -93,9 +97,11 @@ export function buildManifestEntry(
 
   const hasPassport = Boolean(concept.shortDefinition && concept.question)
   const hasWhyBridge = concept.whyBridge.trim().length > 10
-  const hasQuiz = true // checkpoint UI always present on concept page
+  const foundationQuizIds = ["ai", "machine-learning", "deep-learning", "generative-ai", "llm"]
+  const hasQuiz =
+    foundationQuizIds.includes(concept.id) || true /* concept page always has checkpoint UI */
   const interactiveAssetIds = INTERACTIVE_BY_CONCEPT[concept.id] ?? []
-  const hasInteractive = interactiveAssetIds.length > 0 || concept.id === "orchestration"
+  const hasInteractive = interactiveAssetIds.length > 0
   const wikiIds = concept.glossaryTerms
   const kbIds = concept.kbIds
   const lessonSlugs = concept.lessonSlugs

@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/Badge"
 import type { AtlasConcept } from "@/content/atlas"
 import type { LessonMeta } from "@/content/schema"
 import { useAtlasProgress } from "@/features/atlas/AtlasProgressProvider"
+import { ConceptQuiz } from "@/features/atlas/ConceptQuiz"
+import { FoundationMiniDemo } from "@/features/atlas/FoundationMiniDemo"
 import type { AtlasChapterSection } from "@/lib/atlas"
 
 type ChapterShellProps = {
@@ -147,7 +149,18 @@ export function ChapterShell({
               ) : section.id === "next-tech" ? (
                 <NextTech next={next} whyBridge={concept.whyBridge} />
               ) : section.id === "quiz" ? (
-                <ConceptCheckpoint conceptId={concept.id} onPass={() => markRead(concept.id)} />
+                <div className="grid gap-4">
+                  <ReactMarkdown>{section.content}</ReactMarkdown>
+                  <ConceptQuiz conceptId={concept.id} />
+                  <ConceptCheckpoint conceptId={concept.id} onPass={() => markRead(concept.id)} />
+                </div>
+              ) : section.id === "animation" || section.id === "diagram" ? (
+                <div className="grid gap-4">
+                  <ReactMarkdown>{section.content}</ReactMarkdown>
+                  {section.id === "animation" ? (
+                    <FoundationMiniDemo conceptId={concept.id} />
+                  ) : null}
+                </div>
               ) : (
                 <ReactMarkdown>{section.content}</ReactMarkdown>
               )}

@@ -82,10 +82,21 @@ describe("atlas chapters", () => {
         expect(section.content.trim().length, `${concept.id}/${section.id}`).toBeGreaterThan(10)
         expect(section.title.length).toBeGreaterThan(0)
       }
-      // Remaining slots exist even if partial
-      expect(
-        (sections ?? []).filter((s) => s.content.includes("partial") || s.empty).length,
-      ).toBeGreaterThan(0)
+      // Non-foundation shells still use partial markers; foundation batch may be fully filled.
+      const foundationIds = new Set([
+        "ai",
+        "machine-learning",
+        "deep-learning",
+        "generative-ai",
+        "llm",
+      ])
+      if (!foundationIds.has(concept.id)) {
+        expect(
+          (sections ?? []).filter((s) => s.content.includes("partial") || s.empty).length,
+        ).toBeGreaterThan(0)
+      } else {
+        expect((sections ?? []).every((s) => !s.empty)).toBe(true)
+      }
     }
   })
 
