@@ -94,12 +94,19 @@ export default function ProjectFileStructurePage() {
 
       <section className="mb-8 rounded-2xl border border-[var(--border-default)] p-5">
         <h2 className="text-lg font-extrabold text-[var(--text-primary)]">
-          다음 — 후보 B (아직 미제작)
+          다음: Node와 npm은 왜 필요한가?
         </h2>
         <p className="mt-2 text-sm leading-7 text-[var(--text-secondary)]">
-          어떤 파일이 어떤 역할인지는 알기 시작했다. 하지만 이 프로젝트를 움직이는{" "}
-          <strong className="text-[var(--text-primary)]">Node, npm install, npm run dev</strong> 는
-          아직 낯설 수 있다. 후보 B는 이 노드 운영자 검토 후 시작합니다.
+          어떤 파일을 봐야 하는지는 알았다. 이제 package.json 안의 명령이 프로젝트를 어떻게
+          움직이는지 알아본다.
+        </p>
+        <p className="mt-3 text-sm">
+          <Link
+            className="font-semibold text-[var(--accent-primary)] underline"
+            href="/learn/vibe-coding-foundation/node-npm-package-json"
+          >
+            Node · npm · package.json 수업으로 →
+          </Link>
         </p>
       </section>
     </main>

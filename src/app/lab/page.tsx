@@ -82,6 +82,26 @@ const LABS = [
     outcome: "구조 읽기 can-do",
     href: `${PFS}#quiz-outcomes`,
   },
+  {
+    title: "Node·npm — scripts ↔ 터미널 시뮬",
+    type: "Interactive Simulation",
+    lesson: "Node·npm·package.json",
+    prep: "브라우저만",
+    time: "15–25분",
+    level: "입문",
+    outcome: "Missing script · 잘못된 폴더 · 명령 연결",
+    href: "/learn/vibe-coding-foundation/node-npm-package-json#simulation",
+  },
+  {
+    title: "Node·npm 실습 (Day1 샘플)",
+    type: "Sample Project",
+    lesson: "Node·npm·package.json",
+    prep: "examples/day1-first-success",
+    time: "15–30분",
+    level: "입문",
+    outcome: "scripts 확인 · 오류 복구",
+    href: "/learn/vibe-coding-foundation/node-npm-package-json#practice",
+  },
 ] as const
 
 export default function LabPage() {

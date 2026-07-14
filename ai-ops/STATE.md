@@ -1,16 +1,14 @@
 # STATE
 
-| Field | Value |
+| | |
 |---|---|
-| Current Batch | **NODE A — PROJECT FILE STRUCTURE** |
-| Pick | **A_THEN_B** (A pipeline done; B not started) |
-| Node | `project-file-structure` |
-| Route | `/learn/vibe-coding-foundation/project-file-structure` |
-| Next | Operator review · then optional B |
-| Push/deploy | no |
+| Batch | **NODE B — Node npm package.json** |
+| A | APPROVE preserved |
+| B | **READY_FOR_NODE_NPM_NODE_REVIEW** |
+| Route | `/learn/vibe-coding-foundation/node-npm-package-json` |
+| C | not started |
+| Push | no |
 
 ```
-Verdict: READY_FOR_PROJECT_STRUCTURE_NODE_REVIEW
-Open: /learn/vibe-coding-foundation/project-file-structure
-Do not author B until review + go-ahead
+npm run dev → node-npm-package-json
 ```

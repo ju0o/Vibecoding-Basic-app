@@ -34,10 +34,14 @@ const TRACKS: readonly Track[] = [
         title: "파일 구조 읽기 — 어떤 파일을 건드릴까?",
         href: "/learn/vibe-coding-foundation/project-file-structure",
       },
+      {
+        title: "Node·npm — 왜 설치하고 실행할까?",
+        href: "/learn/vibe-coding-foundation/node-npm-package-json",
+      },
     ],
-    preparing: ["Node·npm 심화 (후보 B · 승인 후)", "AI·LLM·IDE 관계 (후보 C)"],
+    preparing: ["AI·LLM·IDE 관계 (후보 C · 미제작)"],
     atlas: "AI, LLM (궁금할 때)",
-    lab: "Day 1 + 파일 구조 시뮬 · 샘플",
+    lab: "Day 1 · 파일 구조 · Node/npm",
   },
   {
     id: "b",

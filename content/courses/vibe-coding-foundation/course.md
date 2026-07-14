@@ -19,10 +19,11 @@ AI와 함께 **만들고**, 결과를 **확인하고**, 점점 **혼자 할 수 
 |---|---|---|---|---|
 | 1 | d1-first-success | 첫 성공 | live | /learn/vibe-coding-foundation/day-1 |
 | 2 | project-file-structure | 파일 구조 읽기 | live | /learn/vibe-coding-foundation/project-file-structure |
+| 3 | node-npm-package-json | Node·npm 실행 이해 | live | /learn/vibe-coding-foundation/node-npm-package-json |
 
 ## Pick
 
-`A_THEN_B` — B(Node·npm) 본문은 미착수.
+`A_THEN_B` — A approved · B shipped · C not started.
 
 ## Paths in Day 1
 
