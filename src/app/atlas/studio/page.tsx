@@ -4,8 +4,8 @@ import { StudioConceptList } from "@/features/atlas-studio/StudioConceptList"
 import { buildAtlasContentManifest, summarizeManifest } from "@/lib/atlas/content-manifest"
 
 export const metadata: Metadata = {
-  title: "Atlas Education Studio (Operator)",
-  description: "Operator content visibility dashboard for Atlas V2 education materials.",
+  title: "Education Studio (Operator)",
+  description: "Operator content visibility dashboard for education materials and Atlas.",
   robots: { index: false, follow: false },
 }
 
@@ -17,14 +17,14 @@ export default function AtlasEducationStudioPage() {
     <main className="mx-auto grid max-w-5xl gap-8 px-4 py-10 sm:px-6">
       <header className="grid gap-3">
         <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-primary)]">
-          Operator · Development
+          Operator · Education Studio
         </p>
-        <h1 className="text-3xl font-extrabold text-[var(--text-primary)]">
-          Atlas Education Studio
-        </h1>
+        <h1 className="text-3xl font-extrabold text-[var(--text-primary)]">Education Studio</h1>
         <p className="max-w-3xl text-sm leading-7 text-[var(--text-secondary)]">
-          교육 자료가 어디에 있고, 무엇이 완성·미완인지 운영자가 한 화면에서 확인합니다. 콘텐츠
-          SSOT를 복제하지 않으며 21 Concept / 14섹션 계약을 변경하지 않습니다.
+          교육 자료가 어디에 있고, 무엇이 완성·미완인지 운영자가 한 화면에서 확인합니다. 현재 탭은
+          Atlas 완성도입니다. 장기 탭 계약: 학습 과정 · 교육자료 · Atlas · 출처 검증 · 피드백. Route{" "}
+          <code className="text-xs">/atlas/studio</code> 유지 · 기존 기능 보존 · 이번 Wave 전체
+          재구현 없음.
         </p>
         <nav className="flex flex-wrap gap-3 text-sm font-bold">
           <Link className="text-[var(--accent-primary)]" href="/atlas/studio/inventory">
@@ -35,6 +35,9 @@ export default function AtlasEducationStudioPage() {
           </Link>
           <Link className="text-[var(--accent-primary)]" href="/model-routing">
             Model Routing
+          </Link>
+          <Link className="text-[var(--accent-primary)]" href="/learn">
+            Learning Path
           </Link>
         </nav>
       </header>

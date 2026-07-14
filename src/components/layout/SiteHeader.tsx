@@ -1,21 +1,18 @@
 "use client"
 
-import { List, X } from "@phosphor-icons/react"
+import { CaretDown, List, X } from "@phosphor-icons/react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 import type { SearchEntry } from "@/content/schema"
+import {
+  isActiveNavPath,
+  MOBILE_MORE_NAV,
+  MOBILE_PRIMARY_NAV,
+  PRIMARY_NAV,
+} from "@/content/site-navigation"
 import { SiteSearch } from "@/features/search/SiteSearch"
 import { ThemeToggle } from "@/features/theme/ThemeToggle"
-
-const NAV_ITEMS = [
-  { href: "/", label: "홈" },
-  { href: "/atlas", label: "Atlas" },
-  { href: "/curriculum", label: "커리큘럼" },
-  { href: "/glossary", label: "용어 사전" },
-  { href: "/resources", label: "공식 문서" },
-  { href: "/about", label: "소개" },
-] as const
 
 type SiteHeaderProps = {
   readonly searchEntries: readonly SearchEntry[]
@@ -24,6 +21,7 @@ type SiteHeaderProps = {
 export function SiteHeader({ searchEntries }: SiteHeaderProps) {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [moreOpen, setMoreOpen] = useState(false)
 
   return (
     <header className="sticky top-0 z-30 border-b border-[var(--border-subtle)] bg-[var(--surface-primary)]/95 backdrop-blur">
@@ -36,12 +34,12 @@ export function SiteHeader({ searchEntries }: SiteHeaderProps) {
             AI Vibe Coding Master
           </span>
         </Link>
-        <nav className="ml-auto hidden items-center gap-1 lg:flex" aria-label="주요 메뉴">
-          {NAV_ITEMS.map((item) => (
+        <nav className="ml-auto hidden items-center gap-1 xl:flex" aria-label="주요 메뉴">
+          {PRIMARY_NAV.map((item) => (
             <Link
               className={[
-                "rounded-lg px-3 py-2 text-sm font-semibold transition hover:bg-[var(--surface-secondary)]",
-                isActivePath(pathname, item.href)
+                "rounded-lg px-2.5 py-2 text-sm font-semibold transition hover:bg-[var(--surface-secondary)]",
+                isActiveNavPath(pathname, item.href)
                   ? "text-[var(--accent-primary)]"
                   : "text-[var(--text-secondary)]",
               ].join(" ")}
@@ -52,14 +50,17 @@ export function SiteHeader({ searchEntries }: SiteHeaderProps) {
             </Link>
           ))}
         </nav>
-        <div className="ml-auto flex items-center gap-2 lg:ml-2">
+        <div className="ml-auto flex items-center gap-2 xl:ml-2">
           <SiteSearch entries={searchEntries} />
           <ThemeToggle />
           <button
             aria-expanded={mobileOpen}
             aria-label="모바일 메뉴 열기"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border-default)] bg-[var(--surface-elevated)] text-[var(--text-primary)] lg:hidden"
-            onClick={() => setMobileOpen((current) => !current)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border-default)] bg-[var(--surface-elevated)] text-[var(--text-primary)] xl:hidden"
+            onClick={() => {
+              setMobileOpen((current) => !current)
+              setMoreOpen(false)
+            }}
             type="button"
           >
             {mobileOpen ? <X size={18} weight="bold" /> : <List size={18} weight="bold" />}
@@ -69,14 +70,14 @@ export function SiteHeader({ searchEntries }: SiteHeaderProps) {
       {mobileOpen ? (
         <nav
           aria-label="모바일 메뉴"
-          className="border-t border-[var(--border-subtle)] bg-[var(--surface-primary)] p-3 lg:hidden"
+          className="border-t border-[var(--border-subtle)] bg-[var(--surface-primary)] p-3 xl:hidden"
         >
           <div className="grid gap-2">
-            {NAV_ITEMS.map((item) => (
+            {MOBILE_PRIMARY_NAV.map((item) => (
               <Link
                 className={[
                   "rounded-lg px-3 py-3 text-sm font-semibold",
-                  isActivePath(pathname, item.href)
+                  isActiveNavPath(pathname, item.href)
                     ? "bg-[var(--accent-soft)] text-[var(--accent-primary)]"
                     : "text-[var(--text-secondary)]",
                 ].join(" ")}
@@ -87,13 +88,35 @@ export function SiteHeader({ searchEntries }: SiteHeaderProps) {
                 {item.label}
               </Link>
             ))}
+            <button
+              aria-expanded={moreOpen}
+              className="flex items-center justify-between rounded-lg px-3 py-3 text-left text-sm font-semibold text-[var(--text-secondary)]"
+              onClick={() => setMoreOpen((v) => !v)}
+              type="button"
+            >
+              더보기
+              <CaretDown className={moreOpen ? "rotate-180" : ""} size={16} weight="bold" />
+            </button>
+            {moreOpen
+              ? MOBILE_MORE_NAV.map((item) => (
+                  <Link
+                    className={[
+                      "rounded-lg px-3 py-3 pl-6 text-sm font-semibold",
+                      isActiveNavPath(pathname, item.href)
+                        ? "bg-[var(--accent-soft)] text-[var(--accent-primary)]"
+                        : "text-[var(--text-secondary)]",
+                    ].join(" ")}
+                    href={item.href}
+                    key={item.href}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))
+              : null}
           </div>
         </nav>
       ) : null}
     </header>
   )
-}
-
-function isActivePath(pathname: string, href: string): boolean {
-  return href === "/" ? pathname === href : pathname.startsWith(href)
 }
