@@ -1,26 +1,39 @@
-# STATE — Curriculum Milestone Gate
+# STATE — Curriculum Milestone Handoff
+
+```yaml
+current_mode: curriculum_milestone_handoff
+current_decision: READY_FOR_CURRICULUM_MILESTONE_REVIEW
+track_d: paused
+next_requires_operator_scope: true
+push: false
+deploy: false
+date: 2026-07-15
+```
 
 | Field | Value |
 |---|---|
-| Mode | Continuous **ACTIVE** + Quality Milestone |
-| Track D | **PAUSE_TRACK_D** |
-| Milestone | MQ-0…MQ-15 executed (audit + partial remediation) |
+| Mode | Continuous production **ACTIVE** + **Milestone handoff** |
 | Decision | **READY_FOR_CURRICULUM_MILESTONE_REVIEW** |
-| Push/deploy | forbidden |
+| Track D | **paused** — do not start D01 |
+| Operator scope | **required** before next production work |
+| Handoff package | `ai-ops/reports/CURRICULUM-MILESTONE-HANDOFF.md` |
+| HEAD | `9a097a4` (handoff) · milestone body `2427ef3` |
+| Branch | `master` |
 
-## QA snapshot
+## Do not
 
-| Check | Result |
-|---|---|
-| typecheck | PASS |
-| unit tests | PASS 51 |
-| build/static export | PASS (routes include A–C learn paths) |
-| lint | FAIL 4 (pre-existing export script format in scripts/atlas; not learn content) |
-| Playwright E2E | not run (no new heavy dep) |
-| Word mass regen | not run (policy: no thin DOCX mass) |
+- Start Track D  
+- Auto-remediate without operator Option 2  
+- push / deploy / reset / clean / rebase  
 
-## Next
+## Next executor
 
-Operator review of Milestone reports.  
-Do **not** start D01 until `CONTINUE_TRACK_D`.  
-Optional residual: B05–C04 full practice templates, C05–C10 NodeCheckpoint widgets, Track workbooks.
+1. Read `CURRICULUM-MILESTONE-HANDOFF.md`  
+2. Wait for operator: `ACCEPT_RESIDUALS_CONTINUE_TRACK_D` **or** `REMEDIATE_P0_ONLY`  
+3. Only then act  
+
+## Session end
+
+```text
+READY_FOR_NEW_AGENT_HANDOFF
+```
