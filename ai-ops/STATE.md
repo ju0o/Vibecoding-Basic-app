@@ -4,29 +4,38 @@
 
 | 필드 | 값 |
 |---|---|
-| Current Batch | **LEARNING PLATFORM T1–T6 LOCAL TRANSITION** |
-| Current State | **T1–T6 implemented.** /start /learn /lab /verification + Home/Nav. Day1 preserved. Tools/Tech skeleton only. |
-| Last Completed Step | LT-0…LT-11 local transition (2026-07-14) |
-| Next Executor | 운영자 — local URL 검토 + Day2 후보 선택 |
-| Next Prompt File | **reports/LEARNING-PLATFORM-LOCAL-TRANSITION-REVIEW.md** |
-| Blocker | None |
-| Required Human Action | Approve local transition; pick Day2 candidate A/B/C |
+| Current Batch | **EDUCATION PM MODE** |
+| Current State | **PM mode active.** Top10 questions + A/B/C curriculum pick gate. No new lesson content until PICK. Platform T1–T6 already live. |
+| Last Completed Step | Student Top10 · flow groups · ABC candidates · Research Queue · Studio board design (2026-07-14) |
+| Next Executor | **운영자** — `PICK: A` \| `B` \| `C` (or REVISE_QUESTIONS) |
+| Next Prompt File | **reports/CURRICULUM_CANDIDATES_POST_DAY1_ABC.md** |
+| Blocker | Waiting operator curriculum pick |
+| Required Human Action | Choose next Learning Node candidate only |
 | Release Status | 미push · 미배포 |
+
+### Mode
+
+| Item | Status |
+|---|---|
+| Education PM Mode | **active** |
+| Website last | enforced |
+| New lesson without pick | **forbidden** |
+| Research Queue | `ai-ops/research-queue/RESEARCH_QUEUE.md` |
+| Studio production board | design + interim table |
 
 ## NEXT
 
 ```
-- Verdict: READY_FOR_LEARNING_PLATFORM_LOCAL_REVIEW
-- Run: npm run dev
-- Open: / /start /learn /lab /verification /learn/vibe-coding-foundation/day-1
-- Day2: see DAY2-CANDIDATE-COMPARISON.md — do not author yet
-- Stop: no push/deploy
+- Verdict: WAITING_OPERATOR_CURRICULUM_PICK
+- Read: STUDENT_QUESTIONS_TOP10_POST_DAY1.md + CURRICULUM_CANDIDATES_POST_DAY1_ABC.md
+- Reply: PICK: A | PICK: B | PICK: C
+- After pick: Research→…→Website pipeline for that node only
+- Do not: invent Day2 pages before pick
 ```
 
 ## 이력
 
 | 일시 | 항목 | 전이 |
 |---|---|---|
-| 2026-07-14 | T1–T6 platform transition | READY_FOR_LEARNING_PLATFORM_LOCAL_REVIEW |
-| 2026-07-14 | Platform IA docs | approved with minor revisions |
-| 2026-07-14 | Day1 interactive | approved · preserved |
+| 2026-07-14 | Education PM mode | WAITING_OPERATOR_CURRICULUM_PICK |
+| 2026-07-14 | T1–T6 platform | READY_FOR_LEARNING_PLATFORM_LOCAL_REVIEW |

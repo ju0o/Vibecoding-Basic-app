@@ -43,6 +43,8 @@ Design SSOT: Journey/Outcome pack + `CONTENT_PIPELINE.md` + `ANIMATION_DESIGN_SY
 
 Day 1 interactive at `/learn/vibe-coding-foundation/day-1` is the **reference student experience** (preserve). Do not delete Atlas/100-lessons/Day1.
 
+**Education PM Mode (active):** Before any new lesson, answer “학생이 지금 무엇이 궁금한가?”, publish Top questions → flow groups → A/B/C candidates, wait for operator `PICK`, then Research→…→Website last. Never end unknowns as free text — use `ai-ops/research-queue/RESEARCH_QUEUE.md`. Do not create empty website pages to “fill later.”
+
 ---
 
 ## 2. SSOT priority (capability wins)
