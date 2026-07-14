@@ -4,49 +4,51 @@
 
 | 필드 | 값 |
 |---|---|
-| Current Batch | **PROJECT REBASELINE — Education First** |
-| Current State | **Direction docs drafted.** Product = education materials; site = viewer; Atlas = Knowledge Layer (kept). No large UI work this step. Operator review of Master Plan pack. |
-| Last Completed Step | Education Platform Master Plan + Course / Pipeline / Curriculum system docs (2026-07-14) |
-| Next Executor | 운영자 — 방향 문서 승인/수정 |
-| Next Prompt File | **roadmap/EDUCATION_PLATFORM_MASTER_PLAN.md** |
+| Current Batch | **STUDENT JOURNEY REBASELINE** |
+| Current State | **Student Journey pack drafted.** Experience > Website/Atlas/Course. Docs only. Operator review. |
+| Last Completed Step | STUDENT_JOURNEY + LEARNING_ROADMAP + LEARNING_NODE_SPEC + LEARNING_EXPERIENCE_PRINCIPLES (2026-07-14) |
+| Next Executor | 운영자 — Student Journey 문서 승인/수정 |
+| Next Prompt File | **roadmap/STUDENT_JOURNEY.md** |
 | Blocker | None (docs only) |
-| Required Human Action | Approve or revise Master Plan pack; then Path Excel + first Course content (not site-first) |
-| Release Status | 기존 V2/MR/Studio/Foundation 자산 유지 · 미push · 미배포 |
+| Required Human Action | Approve or revise Student Journey pack; then Excel + content nodes (not site-first) |
+| Release Status | 기존 V2/MR/Studio/Foundation/Education First docs 유지 · 미push · 미배포 |
 
 ### Direction
 
 | Item | Status |
 |---|---|
-| Old goal “Atlas site as product” | **superseded in priority** by Education First |
-| Education materials as Product | **active direction** |
-| Website as Viewer | **active** |
+| Center of design | **Student** (not Website / Atlas / Course) |
+| Student Journey SSOT pack | **operator_review_required** |
+| Education materials / Living | active (under Journey) |
+| Website as Viewer | active · last |
 | Atlas Knowledge Layer | **preserve** (no delete) |
-| Learning Path as main IA | **designed in docs** · not fully re-implemented in UI yet |
-| Master Plan pack | **operator_review_required** |
+| Learning Path as main IA | designed · Journey supersedes as top experience SSOT |
+| Education First Master Plan | still valid **under** Student Journey |
 
 ### Prior product status (unchanged assets)
 
 | Item | Status |
 |---|---|
 | Model Routing RC | kept |
-| Education Studio | kept · reframe as content ops board |
-| Foundation AI→LLM chapters | kept · feed future Path |
+| Education Studio | kept · reframe as **education production** board |
+| Foundation AI→LLM | kept · feed Journey early stages |
 | 21 / 14 freezes | held |
 | BUILD-PLAN | HOLD |
 
 ## NEXT
 
 ```
-- Verdict: READY_FOR_DIRECTION_REVIEW
-- Read: EDUCATION_PLATFORM_MASTER_PLAN.md + COURSE_ARCHITECTURE + CONTENT_PIPELINE + CURRICULUM_SYSTEM
-- After approve: CURRICULUM_MASTER.xlsx foundation track + content pipeline runs (no website-first)
-- Stop: no Atlas delete, no push/deploy without order
+- Verdict: READY_FOR_STUDENT_JOURNEY_REVIEW
+- Read: STUDENT_JOURNEY.md + LEARNING_ROADMAP + LEARNING_NODE_SPEC + LEARNING_EXPERIENCE_PRINCIPLES
+- After approve: CURRICULUM_MASTER foundation stages + node content (Website last)
+- Stop: no code/UI this batch, no Atlas delete, no push/deploy without order
 ```
 
 ## 이력
 
 | 일시 | 항목 | 전이 |
 |---|---|---|
+| 2026-07-14 | Student Journey rebaseline | Journey top SSOT candidates |
 | 2026-07-14 | Project rebaseline | Education First master plan docs |
 | 2026-07-14 | FC-0…FC-12 | Foundation content AI→LLM |
 | 2026-07-14 | CO-0…CO-12 | Education Studio |

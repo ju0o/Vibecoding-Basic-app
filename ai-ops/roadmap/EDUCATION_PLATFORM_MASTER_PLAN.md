@@ -3,8 +3,9 @@
 ```yaml
 document: EDUCATION_PLATFORM_MASTER_PLAN
 status: operator_review_required
-authority: project_direction_ssot_candidate
+authority: platform_direction_under_student_journey
 priority_over_previous_goal: true
+superseded_in_priority_by: STUDENT_JOURNEY.md
 product: education_materials
 site_role: viewer
 modifies_core_21_concepts: false
@@ -12,6 +13,10 @@ deletes_existing_atlas: false
 can_activate_build_plan: false
 date: 2026-07-14
 ```
+
+> **정렬 (2026-07-14):** 학생 경험 최상위 SSOT 후보는  
+> [`STUDENT_JOURNEY.md`](./STUDENT_JOURNEY.md) 이다.  
+> 본 Master Plan은 그 아래 **플랫폼·제작 실행** 문서다.
 
 ---
 

@@ -4,50 +4,56 @@ This file is the **common operating contract** for every AI executor working in 
 
 ---
 
-## 1. Project Goal (Education First)
+## 1. Project Goal (Student Journey First)
 
-**Product = 교육자료.** 웹사이트는 교육자료를 보여주는 **Viewer**다.
+**Product = 학습 경험.** 교육자료는 그 경험을 담는 본체이고, 웹사이트는 **Viewer**다.
 
-이 저장소는 비개발자를 위한 **AI · 바이브코딩 교육자료를 AI와 함께 연구·제작**하는 Living Education Project다.  
-Atlas 사이트 기능 완성이 최상위 목표가 아니다. 최우선 질문은:
+중심은 Website도 Atlas도 Course도 아니다. **학생**이다.
 
 ```text
-학생이 Day 1부터 끝까지 정말 이해하며 공부할 수 있는가?
+학생이 Day 1부터 끝까지 정말 이해하며 성장하는가?
+```
+
+성장 루프 (모든 설계 기준):
+
+```text
+무엇을 알고 있는가 → 무엇이 궁금한가 → 무엇을 배우는가 → 왜 배우는가
+  → 직접 해보는가 → 어디까지 이해했는가 → 다음으로 어디를 가는가
 ```
 
 Every agent, skill, script, and workflow must pass:
 
-1. Does this improve **learner understanding** (not just ship a page)?
-2. Was **Research → Verification → Content → Practice → Animation → Quiz** done before Website?
-3. Does it preserve existing education assets (Atlas Knowledge Layer, lessons, KB)?
-4. Does it keep facts and sources honest?
-5. Does it reduce unnecessary Main-agent work?
+1. Does this improve the **student journey** (not just ship a page or fill Atlas)?
+2. Is work driven by a **student question**, not only a tech label?
+3. Was **Question → Research → Verification → Content → Practice → Animation → Diagram → Quiz → Review** done before Website?
+4. Does it preserve Atlas as **Knowledge Layer** (no delete) and existing lessons/KB?
+5. Does it keep facts and sources honest?
 6. Does it produce verifiable results?
 
 If not, do not add it.
 
-**Website Last:** do not implement Viewer routes before education content is written and reviewed.
+**Website Last.** **AI proposes curriculum; operator decides.**
 
-Direction SSOT candidates (operator review):  
-`ai-ops/roadmap/EDUCATION_PLATFORM_MASTER_PLAN.md` and siblings  
-`COURSE_ARCHITECTURE.md`, `CONTENT_PIPELINE.md`, `CURRICULUM_SYSTEM.md`.
+Top SSOT candidates (operator review):  
+`ai-ops/roadmap/STUDENT_JOURNEY.md` (+ `LEARNING_ROADMAP`, `LEARNING_NODE_SPEC`, `LEARNING_EXPERIENCE_PRINCIPLES`).
 
 ---
 
-## 2. SSOT priority (education wins)
+## 2. SSOT priority (student experience wins)
 
 When documents conflict, higher rows win:
 
 | Priority | Document | Authority |
 |---:|---|---|
-| 1 | `ai-ops/roadmap/EDUCATION_PLATFORM_MASTER_PLAN.md` | **Project direction** (education materials first; site = viewer) — pending full operator stamp but **overrides old “Atlas-site-as-product” goal** |
-| 2 | `ai-ops/roadmap/COURSE_ARCHITECTURE.md` · `CONTENT_PIPELINE.md` · `CURRICULUM_SYSTEM.md` | Learning Path / pipeline / living curriculum |
-| 3 | `ai-ops/roadmap/ATLAS-EDUCATION-LAYER.md` | Atlas **Knowledge Layer** technical PRD (21 concepts, 14 sections) — keep; not deleted |
-| 4 | `ai-ops/roadmap/ATLAS-MODEL-ROUTING-FEATURE-SPEC.md` | Subordinate Model Routing Learning Route |
-| 5 | `ai-ops/STATE.md` | Live execution queue / approval status |
-| 6 | `ai-ops/roadmap/ATLAS-GROK-MULTI-AGENT-OPERATING-PLAN.md` | Grok multi-agent **operations** |
-| 7 | `AGENTS.md` (this file) | Repo-wide AI operating contract |
-| 8 | `.grok/agents/*`, `.grok/skills/*` | Role and skill execution contracts |
+| 1 | `ai-ops/roadmap/STUDENT_JOURNEY.md` | **Student experience** — highest; overrides site/Atlas/course-as-product framing |
+| 2 | `ai-ops/roadmap/LEARNING_EXPERIENCE_PRINCIPLES.md` · `LEARNING_ROADMAP.md` · `LEARNING_NODE_SPEC.md` | Philosophy · map · node contract |
+| 3 | `ai-ops/roadmap/EDUCATION_PLATFORM_MASTER_PLAN.md` · Course/Pipeline/Curriculum docs | Platform execution under Journey |
+| 4 | `ai-ops/roadmap/ATLAS-EDUCATION-LAYER.md` | Atlas **Knowledge Layer** technical PRD (21 concepts, 14 sections) — keep |
+| 5 | `ai-ops/roadmap/ATLAS-MODEL-ROUTING-FEATURE-SPEC.md` | Subordinate Model Routing Learning Route |
+| 6 | `ai-ops/STATE.md` | Live execution queue / approval status |
+| 7 | `ai-ops/roadmap/ATLAS-GROK-MULTI-AGENT-OPERATING-PLAN.md` | Grok multi-agent **operations** |
+| 8 | `AGENTS.md` (this file) | Repo-wide AI operating contract |
+| 9 | `.grok/agents/*`, `.grok/skills/*` | Role and skill execution contracts |
 
 `ATLAS-BUILD-PLAN.md` remains **HOLD**. Do not activate it.
 
