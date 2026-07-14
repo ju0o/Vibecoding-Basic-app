@@ -4,49 +4,41 @@ This file is the **common operating contract** for every AI executor working in 
 
 ---
 
-## 1. Project Goal (Journey + Outcome)
+## 1. Project Goal (Education First · Student Self-Serve)
 
-**Product = 혼자 할 수 있는 능력(Learning Outcome)을 만드는 학습 경험.**  
-교육자료는 본체, 웹사이트는 **Viewer**, Atlas는 **Reference (궁금할 때)**.
-
-중심은 Website / Atlas / Course가 아니라 **학생**이다.
+**Product = 학생이 혼자 할 수 있게 되는 학습 경험.**  
+이 사이트는 **강사용 LMS가 아니다.** 학생이 직접 학습한다.
 
 ```text
 학생이 혼자 할 수 있는가?          ← 최우선
-학생이 정말 이해하는가?            ← Outcome을 가능하게 하는 이해
 ```
 
-**최상위 SSOT 쌍 (폐기 없음 · 함께 발전):**
+**필수 완성 사슬 (문서만으로 끝내지 않음):**
 
 ```text
-Student Journey  +  Learning Outcome
+Research → Markdown → Student Word → Sample Project
+  → Interactive Animation → Quiz → Website (Viewer, last)
 ```
 
-학습 Flow (Theory-first 폐기):
+- **Storyboard = 설계도.** Interactive Animation(조작 가능 React)이 목표.  
+- **강사용 대본 = Optional** (필수 파이프라인 제외).  
+- **Sample Project** = 예제 · 실습 · 완성본.  
+- Atlas = Reference (궁금할 때). Journey + Outcome = 최상위 판단 쌍.
 
-```text
-Experience → Question → Theory → Practice → Experiment
-  → Reflection → Outcome → Next
-```
+학습 Flow: `Experience → Question → Theory → Practice → Experiment → Reflection → Outcome → Next`
 
-Day 1 = **10분 안 첫 성공** (AI로 프로젝트 생성 → VS Code → Node → 실행 → Hello World)  
-그 **이후** “왜 Node/package.json/…?” 질문과 Atlas.
+Every agent must pass:
 
-Every agent, skill, script, and workflow must pass:
+1. Improves **can-do outcomes**?  
+2. Experience/question before theory?  
+3. Complete = solo capability?  
+4. Pipeline before Website?  
+5. Animation is interactive (not text stepper only)?  
+6. Facts honest; Journey/Atlas preserved?
 
-1. Does this improve **can-do outcomes** (not just content coverage)?
-2. Is design **problem / experience first**, then question, then theory?
-3. Does Complete mean **solo capability**, not “watched the lesson”?
-4. Was content pipeline done **before Website**?
-5. Does it preserve Journey, Atlas, Foundation, MR (no delete)?
-6. Are facts and sources honest?
+**Website Last.** Operator decides curriculum; AI proposes.
 
-If not, do not add it.
-
-**Website Last.** **AI helps the student do it themselves; operator decides curriculum.**
-
-Top SSOT candidates:  
-`STUDENT_JOURNEY.md` + `OUTCOME_FRAMEWORK.md` / `LEARNING_OUTCOMES.md` (+ completion & assessment specs).
+Design SSOT: Journey/Outcome pack + `CONTENT_PIPELINE.md` + `ANIMATION_DESIGN_SYSTEM.md`.
 
 ---
 
@@ -56,14 +48,14 @@ When documents conflict, higher rows win:
 
 | Priority | Document | Authority |
 |---:|---|---|
-| 1 | `STUDENT_JOURNEY.md` **+** `OUTCOME_FRAMEWORK.md` / `LEARNING_OUTCOMES.md` | **Experience path + can-do outcomes** (paired top) |
-| 2 | `STAGE_COMPLETION_SPEC.md` · `ASSESSMENT_SYSTEM.md` | Complete 판정 · Studio 신호 |
-| 3 | `LEARNING_EXPERIENCE_PRINCIPLES.md` · `LEARNING_ROADMAP.md` · `LEARNING_NODE_SPEC.md` | Journey detail (align to outcomes) |
-| 4 | Education Platform Master Plan · Course/Pipeline/Curriculum docs | Platform execution |
-| 5 | `ATLAS-EDUCATION-LAYER.md` | Atlas Knowledge Layer (21/14) — keep; **after curiosity** |
-| 6 | `ATLAS-MODEL-ROUTING-FEATURE-SPEC.md` | Subordinate MR route |
-| 7 | `ai-ops/STATE.md` | Live execution queue |
-| 8 | Grok multi-agent operating plan · `AGENTS.md` · `.grok/*` | Operations / contracts |
+| 1 | `STUDENT_JOURNEY.md` **+** `OUTCOME_FRAMEWORK.md` / `LEARNING_OUTCOMES.md` | Experience + can-do |
+| 2 | `CONTENT_PIPELINE.md` · `ANIMATION_DESIGN_SYSTEM.md` | Student pipeline · interactive animation |
+| 3 | `STAGE_COMPLETION_SPEC.md` · `ASSESSMENT_SYSTEM.md` | Complete · Studio 신호 |
+| 4 | Journey detail (Roadmap, Node Spec, Principles) | Path detail |
+| 5 | Education Platform / Course / Curriculum schema | Platform execution |
+| 6 | `ATLAS-EDUCATION-LAYER.md` | Knowledge Layer 21/14 |
+| 7 | Model Routing Feature Spec | Subordinate route |
+| 8 | `STATE.md` · Grok ops · `AGENTS.md` · `.grok/*` | Operations |
 
 Paths under `ai-ops/roadmap/` unless noted.
 

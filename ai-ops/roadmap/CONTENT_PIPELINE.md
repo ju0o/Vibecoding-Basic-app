@@ -3,190 +3,154 @@
 ```yaml
 parent: EDUCATION_PLATFORM_MASTER_PLAN.md
 authority: content_pipeline_ssot_candidate
-status: operator_review_required
-date: 2026-07-14
+status: operator_direction_2026-07-14
 website_last: true
+audience: student_self_serve
+instructor_materials: optional_only
 ```
 
 ---
 
-## 1. 매체 사슬 (고정)
+## 1. 제품 성격
+
+이 사이트는 **강사용 LMS가 아니다.**  
+**학생이 직접 학습**하는 플랫폼이다.
+
+| 유지 (필수) | 제거·비필수 |
+|---|---|
+| 학생용 Markdown | 강사용 대본 **필수 파이프라인** |
+| 학생용 Word | 강사 DOCX 자동 생성 (Optional로만) |
+| 실습 · 샘플 프로젝트 | — |
+| Interactive Animation | Storyboard만으로 “완료” |
+| Quiz / Outcome | — |
+| Website Viewer (최후) | 사이트 먼저 구현 |
+
+---
+
+## 2. 매체 사슬 (정본)
 
 ```text
-CURRICULUM_MASTER.xlsx
-        ↓  코스·강의·순서·상태 인덱스
-Markdown (repo)
-        ↓  학생용 원본 정본
-Word (.docx)  [optional]
-        ↓  강사용 대본·인쇄
-Website Viewer
-        ↓  Next.js static export
+Research
+  → Markdown          # 학생용 원본 SSOT
+  → Student Word      # 검토·인쇄·배포용 파생 (유지)
+  → Sample Project    # 예제 · 실습 · 완성본
+  → Interactive Animation   # Storyboard → React 조작 애니 (필수 목표)
+  → Quiz / Outcome Check
+  → Website Viewer    # 항상 마지막
 ```
 
-| 매체 | 역할 | 누가 고치나 |
+| 매체 | 역할 | SSOT? |
 |---|---|---|
-| Excel | 전체 맵 · 상태 · 담당 · 의존성 | 운영자 + Curriculum Agent 제안 |
-| Markdown | 학생 본문 · 실습 · 퀴즈 원문 | Content / Practice / Quiz roles |
-| Word | 강의 스크립트 · 타이밍 | 운영자 선택 |
-| Website | 렌더 · 네비 · Studio 현황 | Implementer **최후** |
+| Curriculum CSV → 한글 XLSX | 운영 맵 | CSV SSOT / XLSX 파생 |
+| Markdown | 학생 본문·퀴즈 원문 | **Yes** |
+| Student Word | 사람이 읽기 쉬운 학생본 | No (파생) |
+| Sample Project | 다운로드 실행 | Yes (examples/) |
+| Interaction spec + Storyboard | 애니 설계도 | Yes (설계) |
+| React Animation | **실제 조작** | 구현물 (프레임워크+시나리오) |
+| Quiz | 이해·수행 점검 | Yes |
+| Website | Viewer | 최후 연결 |
 
-**코드/라우트 변경은 Markdown(+검증) 없이 시작하지 않는다.**
+**강사용 Word/MD:** `content/instructor/**` 및 export 스크립트는 **Optional**. 신규 강의 필수 산출물에 넣지 않는다.
 
 ---
 
-## 2. 제작 Workflow (필수)
+## 3. 강의 완성 정의 (문서만 ≠ 완료)
+
+한 강의가 “완성”이려면:
 
 ```text
-학생 질문 / 학습 목표
-  → Research (공식 문서 · approved KB)
-  → Claim Verification (status tags)
-  → Curriculum (선수 · 다음 · Why)
-  → Education Content (쉬운 설명)
-  → Practice
-  → Animation
-  → Quiz
+[ ] Research / 출처
+[ ] Markdown 학생 본문
+[ ] Student Word 파생 (또는 재생성 가능)
+[ ] Sample: 예제 + 실습 + 완성본 (단계적으로 채움)
+[ ] Interactive Animation (스토리보드 + 구현 또는 구현 티켓+프레임 재사용)
+[ ] Quiz / Outcome Check
+[ ] Independent Review
+[ ] Website Viewer 연결 (마지막)
+```
+
+Storyboard만 있으면 **설계 완료**, 강의 완성 아님.
+
+---
+
+## 4. Sample Project 정책
+
+각 강의(가능한 한) 제공:
+
+| 종류 | 설명 |
+|---|---|
+| 예제 (example/starter) | 바로 열 수 있는 최소 시작점 |
+| 실습 (lab) | 학생이 채울 구멍·체크리스트 |
+| 완성본 (reference) | 막혔을 때 대조 (해답 남용 주의) |
+
+경로 관례: `examples/<course-or-lesson-id>/`  
+보안: 시크릿·유료 API·DB 기본 금지.
+
+---
+
+## 5. Interactive Animation 정책
+
+상세: [ANIMATION_DESIGN_SYSTEM.md](./ANIMATION_DESIGN_SYSTEM.md)
+
+```text
+Storyboard → React primitive 조합 → 학생 조작 → Quiz 연계
+```
+
+비인정: 텍스트 Stepper, 버튼=다음 문장만, 화살표 문자 나열.
+
+---
+
+## 6. 제작 Workflow (필수)
+
+```text
+학생 질문 / 문제
+  → Research
+  → Claim Verification
+  → Curriculum (Why · Outcome)
+  → Markdown Content
+  → Student Word export
+  → Sample Project
+  → Interaction Spec + Storyboard
+  → Interactive Animation 구현 (프레임워크 재사용)
+  → Quiz / Outcome
   → Independent Review
-  → Publish to Viewer (Website)
+  → Website Viewer
 ```
 
-| 단계 | Agent (기존) | 산출 |
-|---|---|---|
-| Research | atlas-source-researcher | claim 표 · URL · checked_at |
-| Verification | claim-verification skill | allow / rewrite / drop |
-| Curriculum | atlas-curriculum-architect | 순서 · Why Bridge |
-| Content | atlas-content-writer | Markdown 본문 |
-| Practice | content-writer (+ practice skill 후보) | 실습 체크리스트 |
-| Animation | atlas-interaction-designer | StepPlayer 시나리오 · SVG 스펙 |
-| Quiz | content-writer | checkpoint · teach-back |
-| Review | atlas-independent-reviewer | approve_merge / revise / block |
-| Website | atlas-implementer | Viewer 반영 · 링크 |
+Website Last.  
+Implementer는 콘텐츠·애니 시나리오 없이 라우트만 만들지 않는다.
 
 ---
 
-## 3. Claim 상태 (학생 본문 규칙)
+## 7. Curriculum Master
 
-| Tag | 학생 본문 |
+- SSOT: `ai-ops/curriculum/CURRICULUM_MASTER.csv` (영문 키 · Git diff)  
+- 운영자 뷰: `exports/curriculum/CURRICULUM_MASTER.xlsx` (**한글 컬럼**)  
+- 스키마: `CURRICULUM_MASTER_SCHEMA.md`
+
+---
+
+## 8. Optional: 강사 자료
+
+| 항목 | 정책 |
 |---|---|
-| `approved_kb` | 사용 가능 · KB 연결 |
-| `official_verified` | 사용 가능 · 확인일 권장 |
-| `primary_research` | 요약 가능 · 과장 금지 |
-| `interpretation` | 교육 해석임을 문맥상 분명히 |
-| `educational_example` | 예시로 명시 |
-| `unverified` | **확정형 금지** |
-
-X = 후보 탐색만. 단독 확정 금지.
+| `content/instructor/**` | 보관 가능 · 신규 필수 아님 |
+| `scripts/atlas/export-day1-instructor-docx.mjs` | Optional 유틸 |
+| 운영 리뷰 체크리스트 | 강사 DOCX **필수 항목 삭제** |
 
 ---
 
-## 4. 저장 위치 (현재 repo · 이동 금지 원칙)
+## 9. Studio (교육 제작)
 
-| 콘텐츠 | 경로 |
-|---|---|
-| Path/Course 인덱스 | `ai-ops/curriculum/CURRICULUM_MASTER.csv` (**SSOT**, Choice B) · schema: `CURRICULUM_MASTER_SCHEMA.md` · xlsx는 추후 export 산출물 |
-| 기존 모듈 맵 | `ai-ops/roadmap/CURRICULUM-MAP.md`, `src/content/curriculum.ts` |
-| 학생 강의 MD | `src/content/lessons/markdown/**` |
-| Atlas 개념 본문 | `src/content/atlas/chapters/**` |
-| Atlas 메타 | `src/content/atlas.ts` |
-| Model Routing | `src/content/model-routing/**` |
-| Wiki | `src/content/glossary.ts` |
-| KB | `ai-ops/knowledge-base/entries/**` |
-| Studio 상태 | derived: `src/lib/atlas/content-manifest.ts` |
+페이지 진행률만이 아니라:
 
-원문을 여러 위치에 복사하지 않는다. Viewer와 Studio는 **참조**만 한다.
-
----
-
-## 5. 상태 머신 (강의/노드 단위)
-
-```text
-not_started
-  → researching
-  → source_verified
-  → drafting
-  → reviewing
-  → published_locally   (dev Viewer 반영)
-  → (optional) published_public  [Human deploy gate]
-```
-
-Studio의 workflow 배지는 이 머신과 맞춘다 (추론값이면 `inferred` 표시 유지).
-
----
-
-## 6. 완성도 (기존 Studio 정책과 정합)
-
-섹션·Passport·Why·Quiz·Sources·Interactive·Wiki/KB 가중치는  
-`src/lib/atlas/completeness.ts` 의 `COMPLETENESS_WEIGHTS`를 따른다.
-
-Path 노드 완성도는 별도 필드로 확장 예정:
-
-```text
-path_node_complete =
-  content + practice + quiz
-  (+ animation if required by node type)
-```
-
----
-
-## 7. Studio — 교육자료 제작 현황 보드
-
-기존 `/atlas/studio`를 **폐기하지 않고** 확장 개념으로 유지한다.  
-Studio는 “예쁜 대시보드”가 아니라 **제작·검증·다음 작업**을 한눈에 보는 ops 보드다.
-
-| 보드 영역 | 보여 줄 것 | 현재/예정 소스 |
-|---|---|---|
-| **교육자료 제작 현황** | Path 노드·Concept·강의의 draft/review/published | Excel status + content-manifest |
-| **검증 상태** | claim/source 검증 단계 · Review 결과 | claim tags · reviewer notes |
-| **출처** | official URL · KB id · checked_at | sources frontmatter · KB links |
-| **최근 수정** | 누가/무엇을/언제 고쳤는지 | git + Studio “last modified” 필드 |
-| **다음 작업** | 다음 Research / Write / Review 후보 | STATE NEXT · Excel owner 열 |
-| **학생 피드백** | 막힌 지점 · 오해 · 요청 주제 | `ai-ops/reports/feedback/` (승인 후) |
-
-### Studio 운영 규칙
-
-1. 원문(Markdown)을 Studio에 복제하지 않는다 — **경로·상태·점수만** 표시한다.  
-2. 추론(inferred) 배지는 그대로 유지하고, 확정 상태와 구분한다.  
-3. Website Builder 전에 Studio에서 “본문 준비 여부”를 확인할 수 있어야 한다.  
-4. Path 노드 열이 추가되기 전까지는 Concept/lesson completeness로 운영한다 (구현 Wave 별도).  
-5. 학생 피드백은 DB 없이 리포트 폴더로 시작하고, 커리큘럼 Living 루프에 연결한다.
-
----
-
-## 8. Website 반영 규칙
-
-Implementer 착수 조건:
-
-1. Independent Reviewer `approve_merge` 또는 운영자 명시 승인  
-2. Markdown 경로 확정  
-3. allowlist 경로만 수정  
-4. `npm run verify` (해당 변경 범위)
-
-금지: 빈 페이지·placeholder 라우트를 “콘텐츠 완료”로 보고.
-
----
-
-## 9. Excel 스키마 초안 (CURRICULUM_MASTER)
-
-| Column | 의미 |
-|---|---|
-| track_id | foundation / tools / web / ship / agency / project |
-| node_id | 고유 ID |
-| order | Path 순서 |
-| title | 학생용 제목 |
-| type | lesson / lab / atlas_ref / tool / project / checkpoint |
-| markdown_path | repo 상대 경로 |
-| atlas_concept_ids | 연결 Knowledge (optional, comma) |
-| status | 상태 머신 값 |
-| source_status | verified / partial / … |
-| owner | human / agent role |
-| last_verified | YYYY-MM-DD |
-
-파일은 Master Plan 승인 후 `ai-ops/curriculum/`에 생성한다. **이번 문서 단계에서는 xlsx 파일을 강제 생성하지 않아도 된다** (스키마만 확정).
+학생 질문 · Research · Markdown · Word · Sample · **Animation 구현 상태** · Quiz · Outcome · Review · Website
 
 ---
 
 ## 10. 성공 기준
 
-1. 신규 작업 티켓이 Workflow 단계를 명시한다.  
-2. Website 작업이 Content 단계보다 앞에 오면 거절된다.  
-3. unverified claim이 학생 본문에 확정형으로 들어가지 않는다.  
-4. Studio가 제작 현황·검증·출처·최근 수정·다음 작업·피드백 경로를 운영자에게 보여 준다.
+1. 신규 작업이 강사 LMS가 아니라 **학생 자율학습**으로 서술된다.  
+2. 애니 완료 기준이 Storyboard를 넘어 **조작 가능 컴포넌트**를 포함한다.  
+3. Word는 학생용만 필수 파생이다.  
+4. Website는 교육 패키지 뒤에만 연결된다.

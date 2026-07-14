@@ -4,40 +4,44 @@
 
 | 필드 | 값 |
 |---|---|
-| Current Batch | **DAY 1 OPERATOR REVIEW PACKAGE** |
-| Current State | **Human-readable exports ready.** XLSX, student/instructor DOCX, sample project, storyboard, operator review. Site not wired. |
-| Last Completed Step | OR-0…OR-9 operator package (2026-07-14) |
-| Next Executor | 운영자 — Excel/DOCX/샘플/Storyboard 직접 검토 후 §J 선택 |
-| Next Prompt File | **exports/review/DAY1-OPERATOR-REVIEW-PACKAGE.md** |
+| Current Batch | **DIRECTION UPDATE — Student Self-Serve + Animation System** |
+| Current State | **Operator direction applied.** Instructor optional. Student Word kept. Sample kept. Animation Design System drafted (no React impl yet). Curriculum XLSX Korean headers. Website last. |
+| Last Completed Step | Animation Design System + pipeline reframe + Korean curriculum export (2026-07-14) |
+| Next Executor | 운영자 — Animation Design System 승인/수정 후 AF-1 또는 Day1 콘텐츠 게이트 |
+| Next Prompt File | **roadmap/ANIMATION_DESIGN_SYSTEM.md** |
 | Blocker | None |
-| Required Human Action | APPROVE_AS_IS / APPROVE_WITH_MINOR_REVISIONS / REVISE_* |
-| Release Status | 미push · 미배포 · 사이트 미연결 |
+| Required Human Action | Confirm Animation Design System; then allowlist for AF-1 framework skeleton (or content fixes first) |
+| Release Status | 미push · 미배포 · 사이트 미연결 · 애니 미구현 |
 
-### Direction
+### Direction (locked by operator)
 
 | Item | Status |
 |---|---|
-| Day 1 education originals | approved structure (prior) |
-| Operator package | **READY_FOR_DAY1_OPERATOR_REVIEW** |
-| Website / animation implement | blocked until operator decision |
+| Education First | **maintained** |
+| Student self-serve (not instructor LMS) | **active** |
+| Instructor scripts | **optional only** |
+| Student Word in pipeline | **required derivative** |
+| Sample projects (example/lab/done) | **required direction** |
+| Storyboard only = incomplete | **active** |
+| Interactive Animation goal | **active** (design first) |
+| Curriculum XLSX Korean | **active** |
+| Website last / Viewer | **active** |
 
 ## NEXT
 
 ```
-- Verdict: READY_FOR_DAY1_OPERATOR_REVIEW
-- Open: exports/curriculum/CURRICULUM_MASTER.xlsx
-- Open: exports/student/DAY1-처음으로-AI와-프로그램-실행하기.docx
-- Open: exports/instructor/DAY1-강사용-대본.docx
-- Run: examples/day1-first-success (npm run dev)
-- Read: exports/review/DAY1-INTERACTION-STORYBOARD.md
-- Decide: §J in DAY1-OPERATOR-REVIEW-PACKAGE.md
-- Stop: no site wire, no push/deploy without order
+- Verdict: READY_FOR_ANIMATION_DESIGN_REVIEW
+- Read: ANIMATION_DESIGN_SYSTEM.md + CONTENT_PIPELINE.md
+- Open: exports/curriculum/CURRICULUM_MASTER.xlsx (한글 컬럼)
+- Do not: treat instructor DOCX as required; do not ship text-stepper as animation
+- After approve AF design: AF-1 AnimationShell allowlist (separate) OR Day1 content approve
+- Stop: no push/deploy
 ```
 
 ## 이력
 
 | 일시 | 항목 | 전이 |
 |---|---|---|
-| 2026-07-14 | Day 1 operator package | READY_FOR_DAY1_OPERATOR_REVIEW |
-| 2026-07-14 | Day 1 education package | READY_FOR_DAY1_EDUCATION_REVIEW (approved structure) |
-| 2026-07-14 | Outcome docs | operator_approved |
+| 2026-07-14 | Operator direction | Student-only pipeline + Animation Design System |
+| 2026-07-14 | Day 1 operator package | READY_FOR_DAY1_OPERATOR_REVIEW (superseded in process by direction) |
+| 2026-07-14 | Outcome / Journey / Education First | prior |

@@ -15,8 +15,12 @@ date: 2026-07-14
 ```
 
 > **정렬 (2026-07-14):** 학생 경험 최상위 SSOT 후보는  
-> [`STUDENT_JOURNEY.md`](./STUDENT_JOURNEY.md) 이다.  
-> 본 Master Plan은 그 아래 **플랫폼·제작 실행** 문서다.
+> [`STUDENT_JOURNEY.md`](./STUDENT_JOURNEY.md) + Outcome 쌍이다.  
+> 본 Master Plan은 그 아래 **플랫폼·제작 실행** 문서다.  
+> **운영자 방향 갱신:** 강사용 LMS 아님 · 학생 자율학습 ·  
+> Markdown→Student Word→Sample→**Interactive Animation**→Quiz→Website.  
+> 강사 대본 Optional · Storyboard≠애니 완료 ·  
+> 설계: [`ANIMATION_DESIGN_SYSTEM.md`](./ANIMATION_DESIGN_SYSTEM.md) · [`CONTENT_PIPELINE.md`](./CONTENT_PIPELINE.md).
 
 ---
 

@@ -1,5 +1,7 @@
 /**
- * Export instructor Day 1 script to review DOCX (derivative, not SSOT).
+ * OPTIONAL — Instructor DOCX export (NOT part of required student pipeline).
+ * Product is student self-serve learning, not instructor LMS.
+ * Prefer: student MD → student Word → sample → interactive animation → quiz → website.
  */
 import fs from "node:fs";
 import path from "node:path";

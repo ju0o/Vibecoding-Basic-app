@@ -1,32 +1,44 @@
-# Handoff — Day 1 Operator Review Package (2026-07-14)
+# Handoff — Student Self-Serve + Animation Design (2026-07-14)
 
 | Field | Value |
 |---|---|
-| Verdict | **READY_FOR_DAY1_OPERATOR_REVIEW** |
-| Site | not wired |
-| Push/deploy | not run |
+| Verdict | **READY_FOR_ANIMATION_DESIGN_REVIEW** |
+| Product | Student self-serve education (not instructor LMS) |
+| Animation | Design system written; React not implemented |
+| Website | Last / not wired |
 
-## Open these (operator)
+## Direction (operator)
 
-1. `exports/curriculum/CURRICULUM_MASTER.xlsx`
-2. `exports/student/DAY1-처음으로-AI와-프로그램-실행하기.docx`
-3. `exports/instructor/DAY1-강사용-대본.docx`
-4. `examples/day1-first-success/` + README
-5. `exports/review/DAY1-INTERACTION-STORYBOARD.md`
-6. `exports/review/DAY1-OPERATOR-REVIEW-PACKAGE.md` (§I–J)
+1. Drop instructor scripts from **required** pipeline (optional only)  
+2. Keep student Word: MD → Word → Website  
+3. Keep sample projects (example / lab / complete)  
+4. Storyboard → **Interactive Animation** (must implement after design)  
+5. Korean Curriculum XLSX headers  
+6. Full chain: Research → MD → Student Word → Sample → Interactive Animation → Quiz → Website  
 
-## SSOT vs derivative
+## Read
 
-- SSOT: `content/**`, `ai-ops/curriculum/*.csv|md`, practice/assessment/interaction MD  
-- Derivative: `exports/**` (regenerate via `scripts/atlas/export-day1-*`)
+1. `ai-ops/roadmap/ANIMATION_DESIGN_SYSTEM.md`  
+2. `ai-ops/roadmap/CONTENT_PIPELINE.md`  
+3. `ai-ops/curriculum/CURRICULUM_MASTER_SCHEMA.md`  
+4. `exports/curriculum/CURRICULUM_MASTER.xlsx`  
+5. `AGENTS.md`  
 
-## After operator decision
+## Do not
 
-- APPROVE_* → optional minor MD fixes → then Website/animation phase (separate gate)  
-- REVISE_* → edit SSOT MD/CSV only, re-run export scripts  
+- push / deploy  
+- Claim animation done with storyboard only  
+- Require instructor DOCX for lesson complete  
+- Wire website before content + animation readiness  
+
+## Next
+
+- Operator review Animation Design System  
+- Then AF-1 framework skeleton (allowlist) and/or Day1 interactive scenario  
 
 ## Resume
 
 ```text
-Day1 operator package ready. Review exports not code. Website last. No push.
+Student self-serve. MD→Word→Sample→Interactive Animation→Quiz→Website last.
+Instructor optional. Animation Design System first. No push.
 ```
