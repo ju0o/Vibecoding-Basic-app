@@ -1,11 +1,17 @@
-# STATE — P0 Remediation Handoff
+# STATE — Codex Configuration Review
 
 ```yaml
-current_mode: p0_remediation_handoff
-current_decision: REMEDIATE_P0_ONLY
+current_mode: codex_configuration_review
+current_decision: READY_FOR_CODEX_CONFIG_REVIEW
+operator_scope: APPROVE_CODEX_MULTI_AGENT_CONFIG
 track_d: paused
-implementation_started: false
-next_executor_may_start_p0: true
+p0_implementation_started_by_config_phase: false
+rp0_recovery_started: false
+codex_project_config_installed: true
+codex_agents: 12
+codex_skills: 10
+independent_review: approve_with_notes
+next_requires_operator_approval: true
 push: false
 deploy: false
 date: 2026-07-15
@@ -13,23 +19,35 @@ date: 2026-07-15
 
 | Field | Value |
 |---|---|
-| Operator | **REMEDIATE_P0_ONLY** approved |
-| Track D | **paused** |
-| P0 implementation | **not started** this session |
-| Milestone posture | still under review until RP0-11 |
-| Handoff | `ai-ops/reports/P0-REMEDIATION-HANDOFF.md` |
-| Context Package | `ai-ops/reports/P0-REMEDIATION-CONTEXT-PACKAGE.md` |
-| Prior milestone handoff | `ai-ops/reports/CURRICULUM-MILESTONE-HANDOFF.md` |
-| Quality gate | `ai-ops/contracts/NODE_QUALITY_GATE.md` |
+| Configuration phase | complete, review ready |
+| Active model catalog | all six requested IDs confirmed |
+| Project config | `.codex/config.toml` |
+| Agent contracts | 12 under `.codex/agents/` |
+| Skill adapters | 10 under `.agents/skills/` |
+| Validators | 2 under `scripts/codex/` |
+| P0 changes | pre-existing changes remain untouched |
+| RP0-0 | not started |
+| Track D | paused |
+| Push/deploy | not executed |
 
-## Next executor
-
-1. Read P0 handoff + context package  
-2. Start **RP0-0** (recovery) → RP0-11  
-3. **No Track D** until `CONTINUE_TRACK_D` after RP0-11  
-
-## End of planning session
+## Current gate
 
 ```text
-READY_FOR_P0_REMEDIATION_HANDOFF
+READY_FOR_CODEX_CONFIG_REVIEW
 ```
+
+Do not start RP0-0, RP0-1, P0 remediation, or Track D automatically.
+
+## Next operator approval
+
+```text
+APPROVE_CODEX_RP0_RECOVERY
+```
+
+This next approval permits RP0-0 recovery and measurement only. Custom Agent files currently remain configuration-only; the next Context Package must explicitly choose a minimal recovery-role activation update or use Main/built-in read-only execution. Writer and Implementer remain unauthorized.
+
+## History
+
+| Date | Phase | Decision | Notes |
+|---|---|---|---|
+| 2026-07-15 | Codex multi-agent configuration | READY_FOR_CODEX_CONFIG_REVIEW | 12 agents, 10 skills, validators and bounded smoke; no P0/Track D |
