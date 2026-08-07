@@ -1,0 +1,102 @@
+rules_version = "2";
+
+// GOOSE-01: Deny-by-default scaffold.
+// Each collection block will be filled by the corresponding GOOSE packet.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Deny everything by default
+    allow read, write: if false;
+
+    // GOOSE-03: users/{uid}
+    match /users/{uid} {
+      allow read, write: if false;
+      // TODO: GOOSE-03에서 구현
+    }
+
+    // GOOSE-03: profiles/{uid}
+    match /profiles/{uid} {
+      allow read, write: if false;
+      // TODO: GOOSE-03에서 구현
+    }
+
+    // GOOSE-03: membershipApplications/{uid}
+    match /membershipApplications/{uid} {
+      allow read, write: if false;
+      // TODO: GOOSE-03에서 구현
+    }
+
+    // GOOSE-04: posts/{postId}
+    match /posts/{postId} {
+      allow read, write: if false;
+      // TODO: GOOSE-04에서 구현
+    }
+
+    // GOOSE-06: materials/{materialId}
+    match /materials/{materialId} {
+      allow read, write: if false;
+      // TODO: GOOSE-06에서 구현
+    }
+
+    // GOOSE-05: comments/{commentId}
+    match /comments/{commentId} {
+      allow read, write: if false;
+      // TODO: GOOSE-05에서 구현
+    }
+
+    // GOOSE-05: reactions/{reactionId}
+    match /reactions/{reactionId} {
+      allow read, write: if false;
+      // TODO: GOOSE-05에서 구현
+    }
+
+    // GOOSE-05: bookmarks/{bookmarkId}
+    match /bookmarks/{bookmarkId} {
+      allow read, write: if false;
+      // TODO: GOOSE-05에서 구현
+    }
+
+    // GOOSE-07: categories/{categoryId}
+    match /categories/{categoryId} {
+      allow read, write: if false;
+      // TODO: GOOSE-07에서 구현
+    }
+
+    // GOOSE-07: categoryRequests/{requestId}
+    match /categoryRequests/{requestId} {
+      allow read, write: if false;
+      // TODO: GOOSE-07에서 구현
+    }
+
+    // GOOSE-08: reports/{reportId}
+    match /reports/{reportId} {
+      allow read, write: if false;
+      // TODO: GOOSE-08에서 구현
+    }
+
+    // GOOSE-04A: mediaAssets/{mediaAssetId}
+    match /mediaAssets/{mediaAssetId} {
+      allow read, write: if false;
+      // TODO: GOOSE-04A에서 구현
+    }
+
+    // GOOSE-09: notifications/{uid}/items/{notificationId}
+    match /notifications/{uid}/items/{notificationId} {
+      allow read, write: if false;
+      // TODO: GOOSE-09에서 구현
+    }
+
+    // GOOSE-08: adminLogs/{logId}
+    match /adminLogs/{logId} {
+      allow read, write: if false;
+      // TODO: GOOSE-08에서 구현
+    }
+
+    // GOOSE-08: moderationActions/{actionId}
+    match /moderationActions/{actionId} {
+      allow read, write: if false;
+      // TODO: GOOSE-08에서 구현
+    }
+  }
+}
