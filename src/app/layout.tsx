@@ -6,6 +6,7 @@ import "./globals.css"
 import { SiteFooter } from "@/components/layout/SiteFooter"
 import { SiteHeader } from "@/components/layout/SiteHeader"
 import { LearningStateProvider } from "@/features/progress/LearningStateProvider"
+import { AuthProvider } from "@/contexts/AuthContext"
 import { getSearchIndex } from "@/lib/search-index"
 
 const siteUrl = process.env["NEXT_PUBLIC_SITE_URL"] ?? "https://ju0o-ec967.web.app"
@@ -104,9 +105,11 @@ export default function RootLayout({ children }: { readonly children: ReactNode 
         className={`${notoSansKr.className} ${geistMono.variable} min-h-[100dvh] bg-[var(--surface-primary)] text-[var(--text-primary)] antialiased`}
       >
         <LearningStateProvider>
-          <SiteHeader searchEntries={searchEntries} />
-          <main>{children}</main>
-          <SiteFooter />
+          <AuthProvider>
+            <SiteHeader searchEntries={searchEntries} />
+            <main>{children}</main>
+            <SiteFooter />
+          </AuthProvider>
         </LearningStateProvider>
       </body>
     </html>
