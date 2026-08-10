@@ -1,102 +1,124 @@
-rules_version = "2";
-
-// GOOSE-01: Deny-by-default scaffold.
-// Each collection block will be filled by the corresponding GOOSE packet.
+rules_version = '2'
 
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null
+    }
 
-    // Deny everything by default
-    allow read, write: if false;
+    function isOwner(uid) {
+      return request.auth.uid == uid
+    }
 
-    // GOOSE-03: users/{uid}
+    function isAdmin() {
+      return request.auth != null &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin'
+    }
+
+    function isModerator() {
+      return request.auth != null &&
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'moderator')
+    }
+
+    function isMember() {
+      return request.auth != null &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['member', 'trusted_member', 'moderator', 'admin'] &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.status == 'active'
+    }
+
+    // Users collection
     match /users/{uid} {
-      allow read, write: if false;
-      // TODO: GOOSE-03에서 구현
+      // Anyone can read their own profile
+      allow read: if isAuthenticated() && (isOwner(uid) || isAdmin());
+
+      // Users can create their own profile
+      allow create: if isAuthenticated() && isOwner(uid) &&
+        request.resource.data.role == 'pending_member' &&
+        request.resource.data.status == 'active';
+
+      // Users can update their own profile (limited fields)
+      allow update: if isAuthenticated() && isOwner(uid) &&
+        // Cannot change own role or status
+        request.resource.data.role == resource.data.role &&
+        request.resource.data.status == resource.data.status &&
+        request.resource.data.applicationStatus == resource.data.applicationStatus;
+
+      // Admins can update any user
+      allow update: if isAdmin();
+
+      // Only admins can delete users
+      allow delete: if isAdmin();
     }
 
-    // GOOSE-03: profiles/{uid}
-    match /profiles/{uid} {
-      allow read, write: if false;
-      // TODO: GOOSE-03에서 구현
-    }
-
-    // GOOSE-03: membershipApplications/{uid}
-    match /membershipApplications/{uid} {
-      allow read, write: if false;
-      // TODO: GOOSE-03에서 구현
-    }
-
-    // GOOSE-04: posts/{postId}
+    // Posts collection
     match /posts/{postId} {
-      allow read, write: if false;
-      // TODO: GOOSE-04에서 구현
+      // Anyone can read published posts
+      allow read: if true;
+
+      // Members can create posts
+      allow create: if isMember() &&
+        request.resource.data.authorId == request.auth.uid;
+
+      // Authors can update their own posts, admins/moderators can update any
+      allow update: if isMember() &&
+        (resource.data.authorId == request.auth.uid || isModerator());
+
+      // Authors can delete their own posts, admins/moderators can delete any
+      allow delete: if isMember() &&
+        (resource.data.authorId == request.auth.uid || isModerator());
     }
 
-    // GOOSE-06: materials/{materialId}
+    // Comments collection
+    match /posts/{postId}/comments/{commentId} {
+      // Anyone can read comments
+      allow read: if true;
+
+      // Members can create comments
+      allow create: if isMember() &&
+        request.resource.data.authorId == request.auth.uid;
+
+      // Authors can update their own comments, admins/moderators can update any
+      allow update: if isMember() &&
+        (resource.data.authorId == request.auth.uid || isModerator());
+
+      // Authors can delete their own comments, admins/moderators can delete any
+      allow delete: if isMember() &&
+        (resource.data.authorId == request.auth.uid || isModerator());
+    }
+
+    // Likes collection
+    match /likes/{likeId} {
+      // Anyone can read likes
+      allow read: if true;
+
+      // Users can create their own likes
+      allow create: if isAuthenticated() &&
+        request.resource.data.userId == request.auth.uid;
+
+      // Users can delete their own likes, admins can delete any
+      allow delete: if isAuthenticated() &&
+        (resource.data.userId == request.auth.uid || isAdmin());
+    }
+
+    // Materials collection
     match /materials/{materialId} {
-      allow read, write: if false;
-      // TODO: GOOSE-06에서 구현
-    }
+      // Anyone can read official/community materials
+      allow read: if resource.data.status in ['official', 'community'] ||
+        (isAuthenticated() && (isOwner(resource.data.authorId) || isModerator()));
 
-    // GOOSE-05: comments/{commentId}
-    match /comments/{commentId} {
-      allow read, write: if false;
-      // TODO: GOOSE-05에서 구현
-    }
+      // Members can create materials
+      allow create: if isMember() &&
+        request.resource.data.authorId == request.auth.uid &&
+        request.resource.data.status == 'draft';
 
-    // GOOSE-05: reactions/{reactionId}
-    match /reactions/{reactionId} {
-      allow read, write: if false;
-      // TODO: GOOSE-05에서 구현
-    }
+      // Authors can update their own materials, admins/moderators can update any
+      allow update: if isMember() &&
+        (resource.data.authorId == request.auth.uid || isModerator());
 
-    // GOOSE-05: bookmarks/{bookmarkId}
-    match /bookmarks/{bookmarkId} {
-      allow read, write: if false;
-      // TODO: GOOSE-05에서 구현
-    }
-
-    // GOOSE-07: categories/{categoryId}
-    match /categories/{categoryId} {
-      allow read, write: if false;
-      // TODO: GOOSE-07에서 구현
-    }
-
-    // GOOSE-07: categoryRequests/{requestId}
-    match /categoryRequests/{requestId} {
-      allow read, write: if false;
-      // TODO: GOOSE-07에서 구현
-    }
-
-    // GOOSE-08: reports/{reportId}
-    match /reports/{reportId} {
-      allow read, write: if false;
-      // TODO: GOOSE-08에서 구현
-    }
-
-    // GOOSE-04A: mediaAssets/{mediaAssetId}
-    match /mediaAssets/{mediaAssetId} {
-      allow read, write: if false;
-      // TODO: GOOSE-04A에서 구현
-    }
-
-    // GOOSE-09: notifications/{uid}/items/{notificationId}
-    match /notifications/{uid}/items/{notificationId} {
-      allow read, write: if false;
-      // TODO: GOOSE-09에서 구현
-    }
-
-    // GOOSE-08: adminLogs/{logId}
-    match /adminLogs/{logId} {
-      allow read, write: if false;
-      // TODO: GOOSE-08에서 구현
-    }
-
-    // GOOSE-08: moderationActions/{actionId}
-    match /moderationActions/{actionId} {
-      allow read, write: if false;
-      // TODO: GOOSE-08에서 구현
+      // Admins/moderators can delete materials
+      allow delete: if isModerator();
     }
   }
 }
