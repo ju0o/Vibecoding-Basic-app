@@ -146,6 +146,17 @@ const TRACKS: readonly Track[] = [
   },
 ] as const
 
+const V2_NODES = [
+  { id: "D1-llm-basics", title: "AI 기초", description: "LLM · Token · Embedding" },
+  { id: "D2-vibe-coding", title: "바이브코딩", description: "Prompt · Context · Workflow" },
+  { id: "D3-ai-agent", title: "AI Agent", description: "Agent · SubAgent · 역할 분담" },
+  { id: "D4-dev-ecosystem", title: "개발 생태계", description: "Tool Calling · MCP · API" },
+  { id: "D5-orchestration", title: "오케스트레이션", description: "Workflow · Harness · Memory" },
+  { id: "D6-ide-tools", title: "IDE · 도구", description: "과업에 맞는 AI 코딩 도구 선택" },
+  { id: "D7-deploy-infra", title: "배포 · 인프라", description: "Deploy · Container · Backend" },
+  { id: "D8-timeline", title: "AI 개발 연표", description: "Autocomplete에서 Multi-Agent까지" },
+] as const
+
 export default function LearnIndexPage() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
@@ -171,6 +182,50 @@ export default function LearnIndexPage() {
           </Link>
         </p>
       </div>
+
+      <section aria-labelledby="v2-heading" className="mt-10">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <Badge variant="accent">새 학습 경로</Badge>
+            <h2 className="mt-3 text-2xl font-extrabold text-[var(--text-primary)]" id="v2-heading">
+              AI Engineering V2
+            </h2>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--text-secondary)]">
+              질문에서 시작해 개념을 연결하고, 3단계 실습과 퀴즈로 혼자 설명할 수 있는지 확인합니다.
+              각 노드는 기존 Atlas 21개 정본 개념을 참조합니다.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <PrimaryLink href="/learn/ai-engineering-v2/D1-llm-basics">D1 시작하기</PrimaryLink>
+            <Link
+              href="/learn/ai-engineering-v2"
+              className="inline-flex items-center rounded-lg border border-[var(--border-default)] bg-[var(--surface-secondary)] px-4 py-2 text-sm font-semibold text-[var(--accent-primary)] transition-colors hover:border-[var(--accent-primary)] hover:bg-[var(--surface-elevated)]"
+            >
+              전체 경로 보기 →
+            </Link>
+          </div>
+        </div>
+        <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {V2_NODES.map((node, index) => (
+            <li key={node.id}>
+              <Link
+                className="block h-full rounded-2xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-4 transition-colors hover:border-[var(--accent-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                href={`/learn/ai-engineering-v2/${node.id}`}
+              >
+                <span className="text-xs font-extrabold text-[var(--accent-primary)]">
+                  D{index + 1}
+                </span>
+                <span className="mt-1 block font-extrabold text-[var(--text-primary)]">
+                  {node.title}
+                </span>
+                <span className="mt-2 block text-xs leading-5 text-[var(--text-secondary)]">
+                  {node.description}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ol>
+      </section>
 
       <div className="mt-10 grid gap-5">
         {TRACKS.map((track) => (
