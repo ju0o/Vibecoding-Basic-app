@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 심화 통합 S5 - Starter</title>
+<style>:root{color-scheme:dark;--bg:#080c14;--panel:#101722;--line:#253241;--teal:#2dd4bf;--amber:#f59e0b;--red:#fb7185;--text:#edf7f5;--muted:#8da2ad;font-family:Pretendard,"Malgun Gothic",sans-serif}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--text);letter-spacing:0}
+    header{display:flex;justify-content:space-between;align-items:center;padding:24px 6vw;border-bottom:1px solid var(--line)}header b{font-size:15px}
+    main{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(330px,.9fr);gap:24px;padding:6vh 6vw}
+    section,aside{border:1px solid var(--line);border-radius:18px;box-shadow:0 24px 70px rgba(0,0,0,.25)}section{padding:40px}aside{padding:24px}
+    small{font:850 11px Consolas,monospace}h1{margin:16px 0;font-size:clamp(32px,4.4vw,60px);line-height:1.05}p{color:var(--muted);font-size:17px;line-height:1.6}
+    table{width:100%;margin-top:22px;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid var(--line);border-radius:14px}th,td{padding:14px;border-bottom:1px solid var(--line);background:#101722;text-align:left;vertical-align:top}th{color:#bfece6;font:850 11px Consolas,monospace}td{color:#dce7e5;font-size:13px;line-height:1.45}tr:last-child td{border-bottom:0}.ok{color:var(--teal);font-weight:850}.warn{color:var(--amber);font-weight:850}
+    .matrix{display:grid;gap:12px;margin-top:26px}.row{display:grid;grid-template-columns:1.2fr .9fr .9fr 1fr;gap:1px;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:var(--line)}.row>*{padding:14px;background:var(--panel)}.row.head>*{color:#cde8e3;font:850 11px Consolas,monospace}.row b{display:block;font-size:14px}.row span{display:block;margin-top:7px;color:var(--muted);font-size:12px}
+    .cards{display:grid;gap:12px}.card{padding:16px;border:1px solid var(--line);border-radius:14px;background:#0c1320}.card h2{margin:0;font-size:18px}.card p{margin:7px 0 0;font-size:13px}
+    .terminal{margin-top:24px;padding:20px;border:1px solid rgba(251,113,133,.35);border-radius:14px;background:#090d13;color:#dbe7e5;font:750 13px Consolas,monospace;line-height:1.7}.terminal b{color:var(--red)}
+    .evi{display:grid;gap:12px}.evi div,.evi article{padding:15px;border:1px solid var(--line);border-radius:14px;background:#0d1420}.evi b{display:block;font-size:14px}.evi span{display:block;margin-top:7px;color:var(--muted);font-size:12px}.bad{border-color:rgba(251,113,133,.5)!important}.bad b{color:var(--red)}.evi article:first-child{border-color:rgba(45,212,191,.45)}
+    .badge{display:inline-flex;margin-top:16px;padding:9px 12px;border-radius:999px;color:#07110f;background:var(--teal);font:900 11px Consolas,monospace}
+    button{min-height:44px;margin-top:20px;padding:0 18px;border:0;border-radius:11px;font-weight:900;cursor:pointer}
+  body{background:radial-gradient(circle at 80% 12%,rgba(45,212,191,.14),transparent 28%),var(--bg)}
+  header{background:rgba(8,12,20,.78);backdrop-filter:blur(16px)}header span{color:var(--teal);font:800 11px Consolas,monospace}
+  section,aside{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018))}small{color:var(--teal)}.card h2{color:var(--text)}
+  button{color:#06100f;background:var(--teal)}.hint{margin-top:16px;padding:14px;border-left:3px solid var(--teal);border-radius:11px;background:rgba(45,212,191,.08);color:#bcebe5}
+</style></head>
+<body data-variant="starter">
+  <header><b>VIBE STUDIO · ADVANCED S5</b><span>STARTER · PARALLEL AGENTS</span></header>
+  <main>
+    <section>
+      <small>병렬은 소유권으로 설계한다</small>
+      <h1>소유권 맵 작성</h1>
+      <p>실제 작업 한 건을 병렬 단위로 분해해 소유권 맵을 만들고 리뷰 게이트 병합 순서를 정합니다. 기능 사용법 학습이 아닙니다.</p>
+      <div class="matrix" aria-label="빈 설계표">
+        <div class="row head"><b>분해 단위</b><b>소유자</b><b>병렬 도구</b><b>병합 순서</b></div>
+        <div class="row"><b>예: 결제 모듈</b><span>작업자 A</span><span>Codex worktree</span><span>1순위</span></div>
+        <div class="row"><b>내 항목:</b><span>소유자</span><span>도구</span><span>순서</span></div>
+      </div>
+    </section>
+    <aside>
+      <div class="cards">
+        <article class="card"><h2>소유권 분리</h2><p>한 파일에 한 소유자</p></article>
+        <article class="card"><h2>비용 의식</h2><p>병렬 수가 곧 비용</p></article>
+        <article class="card"><h2>리뷰 게이트</h2><p>검증 후 병합</p></article>
+      </div>
+      <button type="button" onclick="document.querySelector('.hint').textContent='먼저 독립 단위로 나누고, 소유권이 겹치지 않게 하세요.'">작성 힌트 보기</button>
+      <div class="hint">버튼을 누르면 작성 기준을 확인합니다.</div>
+    </aside>
+  </main>
+</body></html>

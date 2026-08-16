@@ -1,0 +1,24 @@
+{
+  "courseId": "foundation-next",
+  "lessonNumber": 3,
+  "title": "프로젝트와 파일 구조",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "foundation-next-03-ide",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "한 버튼 수정 후 모든 페이지 버튼이 변함",
+    "trace": "Shared Button component updated",
+    "cause": "공용 컴포넌트의 영향 범위를 확인하지 않음",
+    "fix": "전용 variant 또는 페이지 전용 컴포넌트로 범위를 제한"
+  },
+  "deliverables": [
+    "개인 프로젝트 파일 지도",
+    "검토한 Git diff",
+    "안전한 수정 체크리스트"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-basic-current-work-03",
+  "private": true,
+  "version": "1.0.0",
+  "description": "사용자 행동이 프론트엔드·API·백엔드·DB를 지나 돌아오는 과정을 보고 문제 위치를 말할 수 있습니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

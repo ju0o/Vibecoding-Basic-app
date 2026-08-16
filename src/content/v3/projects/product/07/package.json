@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-product-07",
+  "private": true,
+  "version": "1.0.0",
+  "description": "정상 화면 뒤에 있는 비용·실패·운영·변경 관리를 실제 사례로 연결합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

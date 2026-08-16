@@ -1,0 +1,25 @@
+{
+  "courseId": "advanced",
+  "lessonNumber": 6,
+  "title": "오케스트레이션 실전",
+  "revision": "3.0.0-beta.3",
+  "status": "review",
+  "sceneId": "s-06-orchestration",
+  "aliasSceneId": "workflow-04-agent",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "무한 반복과 중복 작업, 비용 급증",
+    "trace": "no stop condition; runaway loop / duplicated work across tools",
+    "cause": "정지조건 없이 에이전틱 남용",
+    "fix": "결정적 뼈대로 단계를 고정하고 정지조건·핸드오프·복구를 명시"
+  },
+  "deliverables": [
+    "결정적/에이전틱",
+    "핸드오프",
+    "정지·복구"
+  ]
+}

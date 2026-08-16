@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-codex-04",
+  "private": true,
+  "version": "1.0.0",
+  "description": "외부 서비스의 자료와 행동을 적절한 MCP·App·Connector로 연결하고 Browser로 실제 결과를 검증합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-foundation-next-02",
+  "private": true,
+  "version": "1.0.0",
+  "description": "버튼 클릭이 화면, 처리, 저장, 응답을 지나 돌아오는 과정을 보고 문제 위치를 구분합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

@@ -1,0 +1,523 @@
+{
+  "id": "advanced",
+  "title": "AI 심화 통합과정 · V3 파일럿",
+  "shortTitle": "심화 통합 S",
+  "code": "S50",
+  "family": "심화 통합",
+  "track": "심화 통합 · PILOT",
+  "level": "ARCHITECT+",
+  "status": "preview",
+  "visibility": "preview",
+  "audience": [
+    "studio"
+  ],
+  "curriculumVersion": "V3-S1-PILOT",
+  "description": "Claude Code와 Codex 사용법을 반복하지 않고, 두 도구를 비교·결합·계측하는 상위 설계 파일럿입니다.",
+  "color": "#2dd4bf",
+  "route": "도구 선택 → 컨텍스트 → Skill → MCP → Agent → 오케스트레이션 → 신뢰성 → 캡스톤",
+  "outcomes": [
+    "작업별 도구·표면 선택",
+    "크로스툴 워크플로 설계",
+    "실패·복구 기준 수립",
+    "도구 조합 운영 판단"
+  ],
+  "visualMode": "advanced",
+  "modules": [
+    {
+      "id": "S1",
+      "title": "S1 · SURFACE STRATEGY",
+      "weeks": [
+        1
+      ]
+    },
+    {
+      "id": "S2",
+      "title": "S2 · CONTEXT & MEMORY",
+      "weeks": [
+        2
+      ]
+    },
+    {
+      "id": "S3",
+      "title": "S3 · SKILL REUSE",
+      "weeks": [
+        3
+      ]
+    },
+    {
+      "id": "S4",
+      "title": "S4 · MCP & GRANTS",
+      "weeks": [
+        4
+      ]
+    },
+    {
+      "id": "S5",
+      "title": "S5 · PARALLEL AGENTS",
+      "weeks": [
+        5
+      ]
+    },
+    {
+      "id": "S6",
+      "title": "S6 · ORCHESTRATION",
+      "weeks": [
+        6
+      ]
+    },
+    {
+      "id": "S7",
+      "title": "S7 · EVAL & RELIABILITY",
+      "weeks": [
+        7
+      ]
+    },
+    {
+      "id": "S8",
+      "title": "S8 · INTEGRATION CAPSTONE",
+      "weeks": [
+        8
+      ]
+    }
+  ],
+  "sessions": [
+    {
+      "id": "advanced-01",
+      "title": "S1 · 도구 선택·CLI/표면 전략",
+      "subtitle": "Claude Code · Codex · IDE/App 표면을 작업 기준으로 고르는 법",
+      "description": "같은 작업을 세 표면에서 비교하고, 작업 성격과 검증 증거를 기준으로 도구 선택표를 작성합니다.",
+      "duration": "120분",
+      "type": "practice",
+      "slideCount": 9,
+      "file": "v3/deck.html?course=advanced&lesson=1",
+      "moduleId": "S1",
+      "revision": "3.0.0-beta.3-review",
+      "status": "review",
+      "sourceKeys": [
+        "claude-overview",
+        "codex-overview",
+        "claude-quickstart",
+        "node-download"
+      ],
+      "preparation": [
+        "Claude Code 또는 Codex 실행 가능 환경",
+        "비교할 실제 작업 1건",
+        "브라우저 또는 IDE 화면 캡처 준비"
+      ],
+      "deliverables": [
+        "작업→도구·표면 결정표",
+        "선택 근거 메모",
+        "실행 1건의 캡처 또는 로그",
+        "실패 시 재선택 기준"
+      ],
+      "demoProject": {
+        "root": "v3/projects/advanced/01",
+        "starter": "v3/projects/advanced/01/starter",
+        "broken": "v3/projects/advanced/01/broken",
+        "complete": "v3/projects/advanced/01/complete",
+        "manifest": "v3/projects/advanced/01/lab.json"
+      },
+      "fallbackMedia": {
+        "image": "assets/v3/fallbacks/advanced-01.png",
+        "slide": "v3/deck.html?course=advanced&lesson=1&slide=4&motion=low"
+      }
+    },
+    {
+      "id": "advanced-02",
+      "title": "S2 · Workflow·컨텍스트·메모리 설계",
+      "subtitle": "CLAUDE.md·AGENTS.md 작성법이 아니라, 두 도구가 공유할 컨텍스트·메모리 정책",
+      "description": "필요한 컨텍스트만 적시에 투입하고 메모리에 범위·유효기간·근거를 남겨, Claude와 Codex가 같은 정책을 공유하도록 설계합니다.",
+      "duration": "120분",
+      "type": "practice",
+      "slideCount": 9,
+      "file": "v3/deck.html?course=advanced&lesson=2",
+      "moduleId": "S2",
+      "revision": "3.0.0-beta.3-review",
+      "status": "review",
+      "sourceKeys": [
+        "anthropic-eng-context",
+        "claude-memory",
+        "codex-agents-md",
+        "anthropic-eng-agents"
+      ],
+      "preparation": [
+        "Claude Code 또는 Codex 실행 가능 환경",
+        "컨텍스트·메모리를 정리할 실제 작업 1건",
+        "현재 CLAUDE.md 또는 AGENTS.md(있다면)"
+      ],
+      "deliverables": [
+        "컨텍스트 예산표",
+        "메모리 정책표(범위·유효기간·근거)",
+        "크로스툴 동기화 체크",
+        "stale 발생 시 복구 기준"
+      ],
+      "demoProject": {
+        "root": "v3/projects/advanced/02",
+        "starter": "v3/projects/advanced/02/starter",
+        "broken": "v3/projects/advanced/02/broken",
+        "complete": "v3/projects/advanced/02/complete",
+        "manifest": "v3/projects/advanced/02/lab.json"
+      },
+      "fallbackMedia": {
+        "image": "assets/v3/fallbacks/advanced-02.png",
+        "slide": "v3/deck.html?course=advanced&lesson=2&slide=4&motion=low"
+      }
+    },
+    {
+      "id": "advanced-03",
+      "title": "S3 · Skill·재사용 자산 크로스툴",
+      "subtitle": "SKILL.md·Codex Skill 문법이 아니라, 반복 작업을 두 도구가 공유하는 자산으로",
+      "description": "반복 작업을 트리거·절차·예시로 캡슐화해 Claude와 Codex에서 같은 결과로 재사용되는 자산으로 만듭니다.",
+      "duration": "120분",
+      "type": "practice",
+      "slideCount": 9,
+      "file": "v3/deck.html?course=advanced&lesson=3",
+      "moduleId": "S3",
+      "revision": "3.0.0-beta.3-review",
+      "status": "review",
+      "sourceKeys": [
+        "claude-skills",
+        "anthropic-eng-skills",
+        "codex-overview",
+        "openai-tools"
+      ],
+      "preparation": [
+        "Claude Code 또는 Codex 실행 가능 환경",
+        "반복하는 작업 1건",
+        "기존 SKILL.md 또는 재사용 절차(있다면)"
+      ],
+      "deliverables": [
+        "재사용 자산(트리거·절차·예시)",
+        "통과 검증 기준",
+        "크로스툴 이식 체크",
+        "drift 발생 시 복구 기준"
+      ],
+      "demoProject": {
+        "root": "v3/projects/advanced/03",
+        "starter": "v3/projects/advanced/03/starter",
+        "broken": "v3/projects/advanced/03/broken",
+        "complete": "v3/projects/advanced/03/complete",
+        "manifest": "v3/projects/advanced/03/lab.json"
+      },
+      "fallbackMedia": {
+        "image": "assets/v3/fallbacks/advanced-03.png",
+        "slide": "v3/deck.html?course=advanced&lesson=3&slide=4&motion=low"
+      }
+    },
+    {
+      "id": "advanced-04",
+      "title": "S4 · MCP·커넥터·권한 크로스툴",
+      "subtitle": "MCP 설치법이 아니라, 두 도구의 외부 연결을 최소 권한·승인·감사로",
+      "description": "외부 능력을 Claude MCP와 Codex Connectors 양쪽에서 최소 권한·승인·감사로 연결하고 인젝션을 방어합니다.",
+      "duration": "120분",
+      "type": "practice",
+      "slideCount": 9,
+      "file": "v3/deck.html?course=advanced&lesson=4",
+      "moduleId": "S4",
+      "revision": "3.0.0-beta.3-review",
+      "status": "review",
+      "sourceKeys": [
+        "mcp-architecture",
+        "mcp-security",
+        "claude-mcp",
+        "owasp-llm-top10"
+      ],
+      "preparation": [
+        "Claude Code 또는 Codex 실행 가능 환경",
+        "연결할 외부 서비스 1건",
+        "권한·승인 정책 메모"
+      ],
+      "deliverables": [
+        "권한 설계표(범위·읽기/쓰기)",
+        "승인 게이트·감사 설정",
+        "인젝션 방어 체크",
+        "과권한 발생 시 복구 기준"
+      ],
+      "demoProject": {
+        "root": "v3/projects/advanced/04",
+        "starter": "v3/projects/advanced/04/starter",
+        "broken": "v3/projects/advanced/04/broken",
+        "complete": "v3/projects/advanced/04/complete",
+        "manifest": "v3/projects/advanced/04/lab.json"
+      },
+      "fallbackMedia": {
+        "image": "assets/v3/fallbacks/advanced-04.png",
+        "slide": "v3/deck.html?course=advanced&lesson=4&slide=4&motion=low"
+      }
+    },
+    {
+      "id": "advanced-05",
+      "title": "S5 · Agent·SubAgent·Worktree 병렬",
+      "subtitle": "서브에이전트 기능이 아니라, 두 도구의 병렬 작업을 소유권으로",
+      "description": "작업을 병렬 단위로 분해해 Claude 서브에이전트와 Codex worktree에서 진행하되, 소유권이 겹치지 않게 하고 리뷰 게이트로 병합합니다.",
+      "duration": "120분",
+      "type": "practice",
+      "slideCount": 9,
+      "file": "v3/deck.html?course=advanced&lesson=5",
+      "moduleId": "S5",
+      "revision": "3.0.0-beta.3-review",
+      "status": "review",
+      "sourceKeys": [
+        "anthropic-eng-multiagent",
+        "claude-subagents",
+        "openai-agents-sdk",
+        "anthropic-eng-agents"
+      ],
+      "preparation": [
+        "Claude Code 또는 Codex 실행 가능 환경",
+        "병렬로 나눌 작업 1건",
+        "Git worktree 사용 가능 저장소"
+      ],
+      "deliverables": [
+        "작업 분해·소유권 맵",
+        "병렬 분담 계획",
+        "리뷰 게이트·병합 순서",
+        "충돌 발생 시 복구 기준"
+      ],
+      "demoProject": {
+        "root": "v3/projects/advanced/05",
+        "starter": "v3/projects/advanced/05/starter",
+        "broken": "v3/projects/advanced/05/broken",
+        "complete": "v3/projects/advanced/05/complete",
+        "manifest": "v3/projects/advanced/05/lab.json"
+      },
+      "fallbackMedia": {
+        "image": "assets/v3/fallbacks/advanced-05.png",
+        "slide": "v3/deck.html?course=advanced&lesson=5&slide=4&motion=low"
+      }
+    },
+    {
+      "id": "advanced-06",
+      "title": "S6 · 오케스트레이션 실전",
+      "subtitle": "자동화 기능이 아니라, 결정적 뼈대 + 에이전틱을 하나의 흐름으로",
+      "description": "결정적 워크플로 뼈대에 에이전틱 보강을 더해 Claude·Codex 작업을 하나의 흐름으로 굴리고 정지조건·복구를 설계합니다.",
+      "duration": "120분",
+      "type": "practice",
+      "slideCount": 9,
+      "file": "v3/deck.html?course=advanced&lesson=6",
+      "moduleId": "S6",
+      "revision": "3.0.0-beta.3-review",
+      "status": "review",
+      "sourceKeys": [
+        "anthropic-eng-multiagent",
+        "anthropic-eng-agents",
+        "github-actions",
+        "openai-agents-sdk"
+      ],
+      "preparation": [
+        "Claude Code 또는 Codex 실행 가능 환경",
+        "반복 업무 1건",
+        "트리거·단계 메모"
+      ],
+      "deliverables": [
+        "오케스트레이션 흐름도",
+        "결정적/에이전틱 경계 표시",
+        "핸드오프 산출물 형식",
+        "정지조건·복구 경로"
+      ],
+      "demoProject": {
+        "root": "v3/projects/advanced/06",
+        "starter": "v3/projects/advanced/06/starter",
+        "broken": "v3/projects/advanced/06/broken",
+        "complete": "v3/projects/advanced/06/complete",
+        "manifest": "v3/projects/advanced/06/lab.json"
+      },
+      "fallbackMedia": {
+        "image": "assets/v3/fallbacks/advanced-06.png",
+        "slide": "v3/deck.html?course=advanced&lesson=6&slide=4&motion=low"
+      }
+    },
+    {
+      "id": "advanced-07",
+      "title": "S7 · 평가·신뢰성·관측성·비용",
+      "subtitle": "종이 운영안이 아니라, 측정 가능한 신뢰성으로",
+      "description": "평가 하니스·회귀 테스트·관측성·비용 거버넌스로 측정해 Claude·Codex 결과를 같은 스코어카드로 운영합니다.",
+      "duration": "120분",
+      "type": "practice",
+      "slideCount": 9,
+      "file": "v3/deck.html?course=advanced&lesson=7",
+      "moduleId": "S7",
+      "revision": "3.0.0-beta.3-review",
+      "status": "review",
+      "sourceKeys": [
+        "anthropic-eng-multiagent",
+        "anthropic-eng-context",
+        "owasp-llm-top10",
+        "github-actions"
+      ],
+      "preparation": [
+        "Claude Code 또는 Codex 실행 가능 환경",
+        "평가할 작업 1건",
+        "변경 전후 비교용 입력 세트"
+      ],
+      "deliverables": [
+        "평가 기준·하니스",
+        "회귀 비교 결과",
+        "트레이스·지표 목록",
+        "토큰·시간 비용 가드"
+      ],
+      "demoProject": {
+        "root": "v3/projects/advanced/07",
+        "starter": "v3/projects/advanced/07/starter",
+        "broken": "v3/projects/advanced/07/broken",
+        "complete": "v3/projects/advanced/07/complete",
+        "manifest": "v3/projects/advanced/07/lab.json"
+      },
+      "fallbackMedia": {
+        "image": "assets/v3/fallbacks/advanced-07.png",
+        "slide": "v3/deck.html?course=advanced&lesson=7&slide=4&motion=low"
+      }
+    },
+    {
+      "id": "advanced-08",
+      "title": "S8 · 통합 캡스톤",
+      "subtitle": "새 개념이 아니라, S1~S7을 하나의 실제 제품으로 두 도구로 끝까지",
+      "description": "작업별 도구 선택·공유 정책·병렬·오케스트레이션·신뢰성을 하나의 제품에 통합해 재현 가능한 릴리즈까지 완성합니다.",
+      "duration": "120분",
+      "type": "practice",
+      "slideCount": 9,
+      "file": "v3/deck.html?course=advanced&lesson=8",
+      "moduleId": "S8",
+      "revision": "3.0.0-beta.3-review",
+      "status": "review",
+      "sourceKeys": [
+        "github-releases",
+        "vercel-deploy",
+        "github-pull-requests",
+        "anthropic-eng-agents"
+      ],
+      "preparation": [
+        "Claude Code와 Codex 실행 가능 환경",
+        "통합할 실제 제품 1건",
+        "S1~S7 산출물"
+      ],
+      "deliverables": [
+        "통합 계획(S1~S7 적용)",
+        "크로스툴 빌드·검증 기록",
+        "재현 가능한 릴리즈 증거",
+        "통합 실패 시 복구 기준"
+      ],
+      "demoProject": {
+        "root": "v3/projects/advanced/08",
+        "starter": "v3/projects/advanced/08/starter",
+        "broken": "v3/projects/advanced/08/broken",
+        "complete": "v3/projects/advanced/08/complete",
+        "manifest": "v3/projects/advanced/08/lab.json"
+      },
+      "fallbackMedia": {
+        "image": "assets/v3/fallbacks/advanced-08.png",
+        "slide": "v3/deck.html?course=advanced&lesson=8&slide=4&motion=low"
+      }
+    }
+  ],
+  "materials": {
+    "student": [
+      {
+        "id": "advanced-workbook",
+        "title": "통합 실습 워크북",
+        "description": "심화 통합 S1 작업지와 메모",
+        "file": "v3/material.html?course=advanced&kind=workbook&audience=student",
+        "audience": "student",
+        "courseId": "advanced"
+      },
+      {
+        "id": "advanced-commands",
+        "title": "Windows·Mac 명령어 및 설정집",
+        "description": "도구 실행·검증·복구 명령",
+        "file": "v3/material.html?course=advanced&kind=commands&audience=student",
+        "audience": "student",
+        "courseId": "advanced"
+      },
+      {
+        "id": "advanced-examples",
+        "title": "예제·설정·복구 파일",
+        "description": "S1 시작본과 실패 복구 예시",
+        "file": "v3/material.html?course=advanced&kind=examples&audience=student",
+        "audience": "student",
+        "courseId": "advanced"
+      },
+      {
+        "id": "advanced-errors",
+        "title": "오류 사례와 해결 훈련",
+        "description": "표면 선택 실패와 복구 시나리오",
+        "file": "v3/material.html?course=advanced&kind=errors&audience=student",
+        "audience": "student",
+        "courseId": "advanced"
+      },
+      {
+        "id": "advanced-assessment",
+        "title": "프로젝트 체크·평가표",
+        "description": "선택 근거와 검증 증거 평가",
+        "file": "v3/material.html?course=advanced&kind=assessment&audience=student",
+        "audience": "student",
+        "courseId": "advanced"
+      },
+      {
+        "id": "advanced-practice",
+        "title": "개인 실습 기록지",
+        "description": "작업 성격·위험도·증거·추천 표면 기록",
+        "file": "v3/material.html?course=advanced&kind=practice&audience=student",
+        "audience": "student",
+        "courseId": "advanced"
+      }
+    ],
+    "instructor": [
+      {
+        "id": "advanced-script",
+        "title": "슬라이드별 상세 대본",
+        "description": "SAY·DO·ASK·예상 답변·복구·시간 조정",
+        "file": "v3/material.html?course=advanced&kind=script&audience=instructor",
+        "audience": "instructor",
+        "courseId": "advanced"
+      },
+      {
+        "id": "advanced-source-study",
+        "title": "공식자료 연구노트",
+        "description": "Claude Code와 Codex 공식 문서 기반 연구자료",
+        "file": "v3/material.html?course=advanced&kind=source-study&audience=instructor",
+        "audience": "instructor",
+        "courseId": "advanced"
+      },
+      {
+        "id": "advanced-demo-runbook",
+        "title": "시연 운영 매뉴얼",
+        "description": "표면 비교 정상·실패·복구 운영",
+        "file": "v3/material.html?course=advanced&kind=demo-runbook&audience=instructor",
+        "audience": "instructor",
+        "courseId": "advanced"
+      },
+      {
+        "id": "advanced-deep-dive",
+        "title": "강사용 심화 개념집",
+        "description": "C/O 사용법과 S1 판단 수업의 경계",
+        "file": "v3/material.html?course=advanced&kind=deep-dive&audience=instructor",
+        "audience": "instructor",
+        "courseId": "advanced"
+      },
+      {
+        "id": "advanced-qa-bank",
+        "title": "질문·답변·오류 복구집",
+        "description": "도구 선택 예상 질문과 복구 답변",
+        "file": "v3/material.html?course=advanced&kind=qa-bank&audience=instructor",
+        "audience": "instructor",
+        "courseId": "advanced"
+      },
+      {
+        "id": "advanced-fallback",
+        "title": "오프라인 대체 화면",
+        "description": "캡처·인터넷 실패 시 사용할 대체 자료",
+        "file": "v3/material.html?course=advanced&kind=fallback&audience=instructor",
+        "audience": "instructor",
+        "courseId": "advanced"
+      },
+      {
+        "id": "advanced-rehearsal",
+        "title": "현장 리허설 체크리스트",
+        "description": "프로젝터·캡처·수동 진행 QA",
+        "file": "v3/material.html?course=advanced&kind=rehearsal&audience=instructor",
+        "audience": "instructor",
+        "courseId": "advanced"
+      }
+    ]
+  }
+}

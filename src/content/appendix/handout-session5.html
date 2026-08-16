@@ -33,18 +33,20 @@
       <article class="term"><h3><code>git push</code></h3><p>저장한 commit을 GitHub로 전송합니다.</p></article>
     </div>
     <div class="callout">AI IDE가 명령을 대신 입력해도 마지막 출력의 repository, branch, error 여부는 직접 확인합니다.</div>
+    <div class="callout"><b>GitHub에서 확인할 곳</b>: `git push` 뒤에는 <strong>Commits</strong>에서 변경 기록을, 검증한 배포 버전은 <strong>Releases</strong>에서, 실제 공개 상태는 <strong>Deployments</strong>에서 확인합니다.</div>
   </section>
 
   <section class="section grid-2">
-    <article class="term"><h3>Vercel</h3><p>GitHub 저장소를 연결해 웹 프로젝트를 빠르게 배포하고 Preview URL을 확인하기 좋습니다.</p></article>
-    <article class="term"><h3>Firebase Hosting</h3><p>Google 프로젝트와 연결하고 Hosting, 로그인, 데이터 기능을 함께 사용할 때 편리합니다.</p></article>
+    <article class="term"><h3>Vercel</h3><p>검증한 GitHub release를 build해서 웹 화면과 공개 URL로 연결하는 역할입니다.</p></article>
+    <article class="term"><h3>Firebase</h3><p>로그인, Firestore 데이터, 파일 저장처럼 서비스 기능을 연결하는 역할입니다. 공개 URL과 데이터 권한은 별도로 확인합니다.</p></article>
   </section>
 
   <section class="section">
     <h2>3. 공개하면 안 되는 값</h2>
     <div class="checklist">
       <div class="check">결제 비밀키, AI API 키, 관리자 DB 주소, 서비스 계정 파일을 코드에 직접 쓰지 않습니다.</div>
-      <div class="check">`.env`, `.env.local`이 `.gitignore`에 포함되어 있는지 확인합니다.</div>
+      <div class="check">실제 값이 들어간 `.env`, `.env.local`, `.env.*.local`이 `.gitignore`에 포함되어 있는지 확인합니다.</div>
+      <div class="check">공유가 필요할 때는 실제 값이 없는 `.env.example`에 변수 이름만 적습니다.</div>
       <div class="check">배포 서비스의 Environment Variables에 실제 값을 별도로 입력합니다.</div>
       <div class="check">`NEXT_PUBLIC_`, `VITE_`처럼 브라우저에 전달되는 변수에는 비밀값을 넣지 않습니다.</div>
       <div class="check">이미 노출된 비밀키는 삭제만 하지 말고 폐기한 뒤 새로 발급합니다.</div>
@@ -56,6 +58,8 @@
     <div class="checklist">
       <div class="check">`npm run build`가 오류 없이 끝납니다.</div>
       <div class="check">GitHub의 변경 파일과 commit 기록에 비밀값이 없습니다.</div>
+      <div class="check">협업은 `pull → branch → status/add/commit → push → Pull Request → merge` 순서로 진행합니다.</div>
+      <div class="check">모든 commit을 바로 배포하지 않고, 확인한 기준점에 release 이름을 붙여 배포합니다. 작은 버그 수정은 `v1.0.1`, 기능 추가는 `v1.1.0`처럼 구분할 수 있습니다.</div>
       <div class="check">공개 URL에서 로그인·저장·주요 버튼을 다시 눌렀습니다.</div>
       <div class="check">다른 브라우저 또는 모바일 화면에서도 확인했습니다.</div>
     </div>

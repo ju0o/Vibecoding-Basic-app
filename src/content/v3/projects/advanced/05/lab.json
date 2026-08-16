@@ -1,0 +1,25 @@
+{
+  "courseId": "advanced",
+  "lessonNumber": 5,
+  "title": "Agent·SubAgent·Worktree 병렬",
+  "revision": "3.0.0-beta.3",
+  "status": "review",
+  "sceneId": "s-05-agent",
+  "aliasSceneId": "workflow-04-agent",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "머지 충돌과 중복 작업 발생",
+    "trace": "merge conflict / owner duplicated",
+    "cause": "분해 시 소유권을 분리하지 않음",
+    "fix": "단위별 소유권을 분리하고 리뷰 게이트로 병합 순서를 고정"
+  },
+  "deliverables": [
+    "소유권 분리",
+    "비용 의식",
+    "리뷰 게이트"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "courseId": "claude",
+  "lessonNumber": 5,
+  "title": "Subagents·Agent Teams·리뷰 게이트",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "claude-05-team",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "Agent 결과가 서로 다른 전제를 사용",
+    "trace": "contract mismatch",
+    "cause": "공통 목표·입력·반환 형식이 없음",
+    "fix": "작업 계약과 공유 결정 로그를 먼저 제공"
+  },
+  "deliverables": [
+    "멀티 Agent 작업 계약",
+    "역할별 결과",
+    "리뷰·통합 보고서"
+  ]
+}

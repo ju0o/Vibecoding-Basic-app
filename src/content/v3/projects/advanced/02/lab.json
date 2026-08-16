@@ -1,0 +1,26 @@
+{
+  "courseId": "advanced",
+  "lessonNumber": 2,
+  "title": "Workflow·컨텍스트·메모리 설계",
+  "revision": "3.0.0-beta.3",
+  "status": "review",
+  "sceneId": "s-02-context",
+  "aliasSceneId": "workflow-02-workflow",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "옛 프로젝트 규칙이 현재 작업에 적용되고 도구마다 결과가 다름",
+    "trace": "stale context selected: memory item lacks scope/expiry; claude/codex memory drift",
+    "cause": "메모리에 범위·유효기간·근거가 없고 두 도구 정책이 어긋남",
+    "fix": "메모리에 범위·유효기간·근거를 부여하고 Claude·Codex 정책을 한 기준으로 동기화"
+  },
+  "deliverables": [
+    "컨텍스트 예산표",
+    "메모리 정책표(범위·유효기간·근거)",
+    "크로스툴 동기화 체크",
+    "stale 발생 시 복구 기준"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "courseId": "foundation-next",
+  "lessonNumber": 1,
+  "title": "바이브코딩과 AI 개발환경",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "foundation-next-01-workspace",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "localhost가 열리지 않음",
+    "trace": "npm ERR! missing script: dev",
+    "cause": "실행 폴더 또는 package.json 명령이 다름",
+    "fix": "현재 폴더와 scripts를 확인한 뒤 올바른 명령으로 재실행"
+  },
+  "deliverables": [
+    "실행되는 로컬 프로젝트",
+    "첫 작업 요청서",
+    "수정 전후 캡처"
+  ]
+}

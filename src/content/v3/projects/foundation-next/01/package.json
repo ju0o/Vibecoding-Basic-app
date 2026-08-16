@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-foundation-next-01",
+  "private": true,
+  "version": "1.0.0",
+  "description": "네 작업대의 역할을 구분하고 요청, 생성, 실행, 확인의 첫 반복을 완성합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

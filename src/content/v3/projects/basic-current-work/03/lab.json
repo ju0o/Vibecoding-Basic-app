@@ -1,0 +1,24 @@
+{
+  "courseId": "basic-current-work",
+  "lessonNumber": 3,
+  "title": "개발 용어 이해",
+  "revision": "3.0.0-beta.3-review",
+  "status": "review",
+  "sceneId": "basic-current-work-03-request",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "완료 알림은 뜨지만 주문 목록에 없음",
+    "trace": "POST /orders 200, DB write skipped",
+    "cause": "화면 성공과 저장 성공이 연결되지 않음",
+    "fix": "저장 완료 응답 이후에만 성공 UI 표시"
+  },
+  "deliverables": [
+    "기능 흐름도",
+    "문제 위치 판단표",
+    "AI 수정 요청"
+  ]
+}

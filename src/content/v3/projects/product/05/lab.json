@@ -1,0 +1,24 @@
+{
+  "courseId": "product",
+  "lessonNumber": 5,
+  "title": "트랙 설계 I",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "product-05-split",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "팀마다 완료 기준이 다름",
+    "trace": "scope mismatch / role undefined",
+    "cause": "상태 또는 범위를 화면 이름만으로 표현",
+    "fix": "입력·행동·결과·제외·승인을 표로 명시"
+  },
+  "deliverables": [
+    "트랙별 설계 문서",
+    "교차 리뷰 기록",
+    "개인 적용본"
+  ]
+}

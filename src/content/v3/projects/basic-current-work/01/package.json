@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-basic-current-work-01",
+  "private": true,
+  "version": "1.0.0",
+  "description": "텍스트·이미지·코딩·영상 AI가 같은 요청을 서로 다른 결과로 바꾸는 장면을 보고 도구 선택 기준을 이해합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

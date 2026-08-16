@@ -1,0 +1,24 @@
+{
+  "courseId": "workflow",
+  "lessonNumber": 2,
+  "title": "워크플로·컨텍스트·지침·메모리",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "workflow-02-workflow",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "AI가 이전 프로젝트 규칙을 현재 작업에 잘못 적용",
+    "trace": "stale context selected",
+    "cause": "범위와 유효기간 없는 메모리",
+    "fix": "프로젝트·경로·유효기간·근거를 메모리에 함께 저장하고 폐기 규칙 설정"
+  },
+  "deliverables": [
+    "워크플로 상태도",
+    "컨텍스트 예산표",
+    "지침·메모리 승격 규칙"
+  ]
+}

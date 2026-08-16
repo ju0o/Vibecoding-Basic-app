@@ -1,0 +1,24 @@
+{
+  "courseId": "codex",
+  "lessonNumber": 4,
+  "title": "MCP·Apps·Connectors·Browser",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "codex-04-connected",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "자동 테스트는 통과했지만 버튼이 화면 밖에 있음",
+    "trace": "DOM present / viewport clipped",
+    "cause": "동작 검사만 하고 실제 렌더링을 보지 않음",
+    "fix": "대표 해상도 스크린샷과 인터랙션 QA 추가"
+  },
+  "deliverables": [
+    "연결 결정표",
+    "권한 설정",
+    "브라우저 QA 보고서"
+  ]
+}

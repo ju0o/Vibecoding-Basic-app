@@ -12,7 +12,7 @@
     <div><div class="material-kicker">INSTRUCTOR STUDY · SESSION 05</div><h1>공개되는 순간 달라지는 것</h1></div>
     <span class="session-badge">강사용</span>
   </header>
-  <div class="goal">학습 기준: Git/GitHub, Vercel/Firebase, 환경변수, 데이터 권한을 초보자에게 과장 없이 설명하고 실제 배포 오류의 위치를 구분한다.</div>
+  <div class="goal">학습 기준: 빌드·배포, Git/GitHub, 자동배포, 도메인·HTTPS, 클라이언트/서버 신뢰 경계, 환경변수, 인증·인가, 데이터(CRUD)·권한을 초보자에게 과장 없이 설명하고 실제 배포 오류의 위치를 구분한다.</div>
 
   <section class="section">
     <h2>1. 강사가 먼저 구분해야 할 여섯 개념</h2>
@@ -38,8 +38,8 @@
   </section>
 
   <section class="section grid-2">
-    <article class="term"><h3>Vercel Git 배포</h3><p>Git 저장소를 연결하면 push마다 Preview 배포를 만들고, production branch의 최신 변경을 운영 배포로 연결하는 흐름을 구성할 수 있습니다. Framework, build command, output directory, 환경변수를 확인합니다.</p></article>
-    <article class="term"><h3>Firebase Hosting</h3><p>`firebase init hosting`으로 로컬 폴더와 Firebase 프로젝트를 연결하고 공개 결과 폴더를 정한 뒤 `firebase deploy --only hosting`으로 Hosting을 배포합니다.</p></article>
+    <article class="term"><h3>Vercel Git 배포</h3><p>본 강의의 메인 공개 흐름입니다. 검증한 GitHub release를 기준으로 웹 build와 Production URL을 연결합니다. Framework, build command, output directory, 환경변수를 확인합니다.</p></article>
+    <article class="term"><h3>Firebase Hosting</h3><p>필요할 때 선택하는 대체 Hosting 경로입니다. `firebase init hosting`으로 로컬 폴더와 Firebase 프로젝트를 연결하고 `firebase deploy --only hosting`으로 공개할 수 있지만, 본문에서는 Vercel 웹 배포와 Firebase Auth·Firestore 연결을 하나의 release 흐름으로 설명합니다.</p></article>
     <article class="term"><h3>Preview와 Production</h3><p>Preview는 변경을 검토하기 위한 임시 배포, Production은 실제 사용자가 접속하는 기준 배포입니다. 두 환경의 변수와 도메인이 다를 수 있습니다.</p></article>
     <article class="term"><h3>CLI와 Dashboard</h3><p>CLI는 명령으로 연결·배포하고 Dashboard는 프로젝트 설정, 도메인, 환경변수, 로그를 관리합니다. 둘 중 하나만 아는 것이 아니라 역할을 구분합니다.</p></article>
   </section>
@@ -48,6 +48,7 @@
     <h2>3. 비밀값 설명에서 가장 많이 틀리는 부분</h2>
     <div class="checklist">
       <div class="check">`.env` 파일은 코드와 값을 분리할 뿐입니다. Git에 올리지 않고 서버에서만 읽을 때 비밀을 지킬 수 있습니다.</div>
+      <div class="check">`.env.local`은 로컬 개발자의 실제 값이고, `.env.example`은 실제 값 없이 변수 이름만 공유하는 안내 파일입니다.</div>
       <div class="check">Next.js의 `NEXT_PUBLIC_`, Vite의 `VITE_` 변수는 브라우저 코드에 포함될 수 있으므로 비밀값에 사용하지 않습니다.</div>
       <div class="check">노출된 일반 API 키는 파일에서 삭제하는 것만으로 충분하지 않습니다. 키를 폐기하고 새로 발급합니다.</div>
       <div class="check">Firebase 웹 설정의 API key는 프로젝트 식별 용도로 공개되는 구조입니다. 데이터 권한은 Security Rules와 App Check로 보호합니다.</div>
@@ -79,6 +80,18 @@
       <div class="check">Firebase 테스트 프로젝트에서 `init hosting → deploy --only hosting`을 한 번 진행합니다.</div>
       <div class="check">의도적으로 환경변수 하나를 빼고 build 또는 runtime 오류 로그를 수집합니다.</div>
       <div class="check">비회원·회원·관리자 권한표를 자기 말로 설명해봅니다.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>6. 새로 들어간 주제 빠른 정리</h2>
+    <div class="grid-2">
+      <article class="term"><h3>클라이언트/서버 신뢰 경계</h3><p>프론트엔드는 사용자 브라우저에서 실행되어 F12로 코드·요청이 모두 보입니다. 그래서 비밀값과 중요한 검증은 서버에 둡니다. 보안의 첫 질문은 “이건 어디에서 실행되지?”입니다.</p></article>
+      <article class="term"><h3>인증 vs 인가</h3><p>인증(Authentication)은 “너 누구야?”(로그인), 인가(Authorization)는 “넌 뭘 할 수 있어?”(권한)입니다. 로그인만 확인하고 권한 검사를 빠뜨리면 로그인한 누구나 남의 데이터를 볼 수 있습니다.</p></article>
+      <article class="term"><h3>데이터와 CRUD</h3><p>새로고침해도 남는 정보는 DB에 ‘표’처럼 쌓입니다. 다루는 방법은 Create·Read·Update·Delete 네 가지뿐이며, 조회(Read)는 데이터를 바꾸지 않습니다.</p></article>
+      <article class="term"><h3>도메인·DNS·HTTPS</h3><p>배포하면 무료 주소가 자동 생성됩니다. 도메인은 사람이 외우는 이름, DNS는 그 이름을 서버 주소로 안내하는 전화번호부, HTTPS는 내용을 암호화하는 자물쇠이며 인증서는 자동 발급됩니다. 도메인 구매·연결은 선택 작업입니다.</p></article>
+      <article class="term"><h3>자동 배포(CI/CD)</h3><p>GitHub에 push하면 Vercel이 변경을 감지해 자동으로 build·검사 후 새 URL을 갱신합니다. 실패한 배포는 공개되지 않고 직전 버전이 유지되므로 자주·작게 push하는 편이 안전합니다.</p></article>
+      <article class="term"><h3>무료 한도와 책임</h3><p>개인 프로젝트는 무료 한도로 시작할 수 있으나 방문자·저장량이 늘면 과금됩니다. 사용자 정보는 최소만 받고, 비밀번호는 직접 저장하지 말고 로그인 서비스에 위임합니다. 구체 한도 수치는 변하므로 공식 문서로 확인합니다.</p></article>
     </div>
   </section>
 

@@ -1,0 +1,24 @@
+{
+  "courseId": "basic-current-work",
+  "lessonNumber": 5,
+  "title": "배포와 보안 그리고 데이터",
+  "revision": "3.0.0-beta.3-review",
+  "status": "review",
+  "sceneId": "basic-current-work-05-deploy",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "로컬에서는 되지만 배포 URL에서 API 오류",
+    "trace": "401 Unauthorized / ENV undefined",
+    "cause": "배포 환경변수 누락 또는 권한 설정 차이",
+    "fix": "배포 환경변수와 권한 등록 후 새 빌드하고 로그 검증"
+  },
+  "deliverables": [
+    "GitHub 저장소",
+    "공개 배포 URL",
+    "보안·재배포 점검표"
+  ]
+}

@@ -784,7 +784,7 @@ h2{font-size:clamp(24px,3.4vw,56px);font-weight:800;line-height:1.1;letter-spaci
 <!-- 09 AI끼리 대화시키기 -->
 <div class="slide">
   <div class="eyebrow">FROM PROMPTING TO ORCHESTRATING</div>
-  <h2>지난 회차에서 우리는 — <span class="grad-text">프롬프트를 안 한다고 했습니다.</span></h2>
+  <h2>우리는 <span class="grad-text">프롬프트를 작성하지 않습니다.</span></h2>
   <div class="agent-relay">
     <div class="relay-thesis">
       <div class="relay-quote">정확히는,<small>내가 완성형 프롬프트를 직접 쓰는 게 아니라<br>AI끼리 대화하게 만든다는 뜻입니다.</small></div>
@@ -1023,6 +1023,8 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();move(1)}
   if(e.key==='ArrowLeft'){e.preventDefault();move(-1)}
 });
+// Deep-link for 6강 recap embed: ?slide=N pins a slide, ?embed=1 hides chrome. No effect during normal playback.
+(()=>{const p=new URLSearchParams(location.search);const n=Number(p.get('slide'));if(n>0){cur=Math.max(0,Math.min(slides.length-1,n-1));render()}if(p.get('embed')==='1'){const st=document.createElement('style');st.textContent='.nav-bar,.kb-hint,.edu-presenter-hud,.edu-laser-dot{display:none!important}';document.head.appendChild(st)}})();
 document.querySelectorAll('.card[data-hl]').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('lit')));
 document.querySelectorAll('.workbench-node[data-step]').forEach(node=>{
   node.addEventListener('click',()=>{

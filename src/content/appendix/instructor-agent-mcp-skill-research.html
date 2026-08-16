@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent · MCP · Skill 전문 연구자료 - 강사용</title>
+  <link rel="stylesheet" href="../../assets/fonts/pretendard.css">
+  <link rel="stylesheet" href="./appendix-print.css">
+  <style>
+    :root {
+      --ink: #141817;
+      --muted: #59625f;
+      --line: #d9dfdc;
+      --paper: #f6f7f3;
+      --dark: #0d1214;
+      --green: #2f7d62;
+      --blue: #27768f;
+      --amber: #a86f1d;
+      --violet: #7157b7;
+      --red: #b44845;
+      font-family: "Pretendard Variable", "Pretendard", "Malgun Gothic", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #e5e9e5; color: var(--ink); letter-spacing: 0; }
+    main { width: min(1180px, calc(100% - 34px)); margin: 24px auto 70px; }
+    h1, h2, h3, p { margin: 0; word-break: keep-all; }
+    code { font-family: Consolas, "JetBrains Mono", monospace; }
+    .cover {
+      min-height: 420px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(330px, .75fr);
+      gap: 44px;
+      align-items: end;
+      padding: 56px;
+      color: #f8f8f2;
+      background:
+        linear-gradient(135deg, rgba(113,87,183,.2), transparent 45%),
+        linear-gradient(90deg, rgba(47,125,98,.18), transparent 55%),
+        var(--dark);
+    }
+    .eyebrow { color: #bde86b; font: 850 12px/1.2 Consolas, monospace; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin-top: 16px; font-size: clamp(42px, 6vw, 78px); line-height: 1.04; letter-spacing: 0; }
+    .cover p { max-width: 760px; margin-top: 20px; color: #bec7c2; font-size: 19px; line-height: 1.7; }
+    .cover-index { display: grid; gap: 1px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.14); }
+    .cover-index div { padding: 18px; background: #141b1d; }
+    .cover-index span { display: block; color: #8f9a95; font: 800 10px/1.2 Consolas, monospace; letter-spacing: .08em; }
+    .cover-index b { display: block; margin-top: 7px; font-size: 17px; }
+    section.sheet { margin-top: 18px; padding: 42px 46px; background: #fff; border: 1px solid var(--line); }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 28px; padding-bottom: 18px; border-bottom: 1px solid var(--line); margin-bottom: 24px; }
+    .section-head span { color: var(--blue); font: 850 11px/1.2 Consolas, monospace; letter-spacing: .08em; }
+    h2 { margin-top: 6px; font-size: 31px; letter-spacing: 0; }
+    .section-head p { max-width: 560px; color: var(--muted); font-size: 14px; line-height: 1.65; text-align: right; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .card, .note, .source, .lesson {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 22px;
+    }
+    .card { border-top: 4px solid var(--accent, var(--green)); }
+    .card small, .note small, .lesson small { display: block; color: var(--accent, var(--green)); font: 850 11px/1.2 Consolas, monospace; letter-spacing: .06em; }
+    h3 { margin-top: 9px; font-size: 21px; line-height: 1.25; }
+    .card p, .note p, .source p, .lesson p { margin-top: 10px; color: var(--muted); font-size: 14px; line-height: 1.68; }
+    ul, ol { margin: 13px 0 0; padding-left: 20px; color: var(--muted); line-height: 1.75; font-size: 14px; }
+    li + li { margin-top: 4px; }
+    .matrix { width: 100%; border-collapse: collapse; }
+    .matrix th, .matrix td { padding: 14px 15px; border: 1px solid var(--line); text-align: left; vertical-align: top; font-size: 14px; line-height: 1.58; }
+    .matrix th { background: #edf1ee; font-size: 12px; color: #303734; }
+    .matrix td:first-child { width: 16%; font-weight: 850; color: var(--ink); }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .flow div {
+      min-height: 132px;
+      padding: 16px;
+      color: #f9fbf7;
+      background: #151b1d;
+      border-top: 4px solid var(--accent);
+    }
+    .flow b { display: block; font-size: 18px; }
+    .flow span { display: block; margin-top: 9px; color: #b6c1bc; font-size: 13px; line-height: 1.5; }
+    .reading { display: grid; gap: 10px; }
+    .source { display: grid; grid-template-columns: minmax(210px, .7fr) minmax(0, 1.3fr); gap: 18px; }
+    .source b { font-size: 15px; }
+    .source a { color: var(--blue); word-break: break-all; }
+    .cue { margin-top: 16px; padding: 16px 18px; border-left: 4px solid var(--amber); background: #fff7ea; color: #5f4630; font-size: 14px; line-height: 1.65; }
+    .danger { border-left-color: var(--red); background: #fff0ef; color: #6c3736; }
+    .lessons { display: grid; gap: 9px; }
+    .lesson { display: grid; grid-template-columns: 84px minmax(190px, .7fr) minmax(0, 1.3fr) minmax(180px, .55fr); gap: 16px; align-items: start; }
+    .lesson-num { color: var(--accent); font: 950 22px/1 Consolas, monospace; }
+    .print-note { margin-top: 18px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    @media (max-width: 900px) {
+      main { width: min(100% - 24px, 1180px); }
+      .cover, .grid-2, .grid-3, .source, .lesson { grid-template-columns: 1fr; }
+      .cover, section.sheet { padding: 30px; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 12px; text-align: left; }
+      .flow { grid-template-columns: 1fr 1fr; }
+    }
+    @media print {
+      @page { size: A4; margin: 12mm; }
+      body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      main { width: 100%; margin: 0; }
+      .cover, section.sheet { break-after: page; margin: 0; border: 0; }
+      section.sheet { padding: 20px 0; }
+      .cover { min-height: auto; padding: 32px; }
+      h1 { font-size: 36px; }
+      h2 { font-size: 24px; }
+      .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flow { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .card, .note, .source, .lesson { break-inside: avoid; }
+      a { color: #111; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header class="cover">
+    <div>
+      <div class="eyebrow">Instructor Research · Agent Systems</div>
+      <h1>Agent · MCP · Skill<br>전문 연구자료</h1>
+      <p>이 자료는 수강생용 요약본이 아닙니다. 강사가 Agent, MCP, Skill을 유행어로 말하지 않고 공식자료 기반의 구조, 권한, 실패 복구, 별도 심화과정 분리 기준까지 설명하기 위한 연구노트입니다.</p>
+    </div>
+    <div class="cover-index">
+      <div><span>BOUNDARY</span><b>Prompt → Skill → MCP → Agent → Team</b></div>
+      <div><span>TEACHING RULE</span><b>개념보다 판단 기준</b></div>
+      <div><span>SLIDE RULE</span><b>실제 화면 · 로그 · 권한망</b></div>
+      <div><span>TRACK DECISION</span><b>깊어지면 별도 과정</b></div>
+    </div>
+  </header>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>01 · TEACHING POSITION</span><h2>현재 과정 안에서 어디까지 다룰 것인가</h2></div>
+      <p>Workflow Architect 안에서는 구조와 판단 기준을 가르치고, 직접 제작과 운영까지 들어가면 별도 전문과정으로 분리합니다.</p>
+    </div>
+    <table class="matrix">
+      <thead><tr><th>주제</th><th>현재 심화과정에서 다룰 깊이</th><th>별도 과정으로 빼야 하는 신호</th><th>강의 산출물</th></tr></thead>
+      <tbody>
+        <tr><td>Skill</td><td>반복 업무를 재사용 절차로 바꾸는 법. 트리거, 입력, 절차, 산출물, 검증 기준을 설명합니다.</td><td>여러 Skill을 버전 관리하고, 스크립트·레퍼런스·배포 패키징까지 다루기 시작할 때</td><td>개인 업무 Skill 설계서 1개</td></tr>
+        <tr><td>MCP</td><td>AI가 외부 데이터·도구를 쓰는 연결 구조와 최소 권한, 승인 지점을 설명합니다.</td><td>직접 MCP 서버를 만들고 인증, OAuth, 세션, 도구 스키마, 보안 테스트까지 다룰 때</td><td>읽기 전용 MCP 권한표</td></tr>
+        <tr><td>Agent</td><td>목표, 도구, 상태, 종료 조건, 사람 승인 지점이 있는 실행 루프를 설명합니다.</td><td>평가, tracing, guardrail, handoff, 비용 측정과 운영 로그를 코드로 구축할 때</td><td>단일 Agent 운영 설계도</td></tr>
+        <tr><td>Agent Team</td><td>역할을 나누는 이유, 파일 소유권, 반환 형식, 최종 Reviewer를 설명합니다.</td><td>여러 Agent를 병렬 실행하고 충돌 조정, worktree, PR 리뷰 게이트까지 운영할 때</td><td>역할·권한·인수인계 표</td></tr>
+      </tbody>
+    </table>
+    <div class="cue danger"><b>강의 분리 기준:</b> 학생이 “개념을 이해하고 도구를 선택하는 수준”을 넘어서 “직접 제작, 배포, 운영, 보안 검증”을 해야 한다면 별도 과정으로 빼는 것이 맞습니다. 이때는 <b>AI Agent Systems Professional 6주</b> 같은 과정으로 독립시키는 편이 강의 가치가 올라갑니다.</div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>02 · CORE MENTAL MODEL</span><h2>한 장으로 설명할 구조</h2></div>
+      <p>수강생에게 처음 보여줄 대표 슬라이드는 기능 목록이 아니라 책임이 확장되는 흐름이어야 합니다.</p>
+    </div>
+    <div class="flow">
+      <div style="--accent:#d4d4d4"><b>Prompt</b><span>이번 한 번의 목표와 제약을 전달합니다. 재사용 구조는 아닙니다.</span></div>
+      <div style="--accent:var(--violet)"><b>Skill</b><span>반복 업무의 절차와 검증을 필요할 때 불러오는 작업 규격입니다.</span></div>
+      <div style="--accent:var(--blue)"><b>MCP</b><span>AI가 외부 데이터, 도구, 서비스와 연결되는 통로입니다.</span></div>
+      <div style="--accent:var(--green)"><b>Agent</b><span>목표를 계획, 실행, 관찰, 복구하는 루프입니다.</span></div>
+      <div style="--accent:var(--amber)"><b>SubAgent</b><span>읽기, 테스트, 리뷰처럼 독립 작업을 별도 맥락에서 처리합니다.</span></div>
+      <div style="--accent:var(--red)"><b>Plugin</b><span>Skill, Agent, Hook, MCP 설정을 설치 가능한 단위로 묶습니다.</span></div>
+    </div>
+    <div class="cue"><b>슬라이드 모션:</b> 처음에는 Prompt 하나만 켜고, 다음 버튼을 누를 때마다 Skill, MCP, Agent, Team 노드가 켜지게 합니다. 자동 재생하지 말고 각 단계마다 “추가된 능력”과 “사람이 새로 져야 하는 책임”을 같이 표시합니다.</div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>03 · OFFICIAL STUDY ORDER</span><h2>강사가 읽어야 할 공식자료 순서</h2></div>
+      <p>수업 전에는 링크를 많이 모으는 것보다 어떤 순서로 읽어야 개념 경계가 잡히는지가 중요합니다.</p>
+    </div>
+    <div class="reading">
+      <div class="source"><b>1. MCP 개념</b><p>Model Context Protocol의 소개와 architecture를 먼저 읽습니다. 강의에서는 “AI용 USB-C” 비유를 쓰되, 반드시 권한과 도구 범위로 연결합니다.<br><a href="https://modelcontextprotocol.io/docs/getting-started/intro">modelcontextprotocol.io/docs/getting-started/intro</a></p></div>
+      <div class="source"><b>2. MCP 보안</b><p>연결 성공보다 confused deputy, token passthrough, SSRF, scope minimization 같은 위험을 먼저 이해합니다. 초보자 수업에서는 “읽기 권한부터 시작”으로 번역합니다.<br><a href="https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices">modelcontextprotocol.io/docs/tutorials/security/security_best_practices</a></p></div>
+      <div class="source"><b>3. Skill 개념</b><p>Claude Code와 Codex 모두 Skill을 반복 가능한 작업 지침으로 다룹니다. 긴 프롬프트 저장소가 아니라 호출 조건, 자료, 절차, 검증 기준입니다.<br><a href="https://code.claude.com/docs/en/skills">code.claude.com/docs/en/skills</a></p></div>
+      <div class="source"><b>4. Agent 개념</b><p>OpenAI Agents SDK 기준으로 Agent는 instructions, tools, handoffs, guardrails, structured outputs 같은 런타임 동작을 가진 구성입니다. 강의에서는 “스스로 움직이는 마법”이 아니라 “상태를 가진 실행 루프”로 설명합니다.<br><a href="https://developers.openai.com/api/docs/guides/agents">developers.openai.com/api/docs/guides/agents</a></p></div>
+      <div class="source"><b>5. Handoff와 Team</b><p>전문 Agent에게 업무를 넘기는 handoff는 도구처럼 표현됩니다. 팀 강의에서는 manager 방식과 handoff 방식을 비교해야 합니다.<br><a href="https://openai.github.io/openai-agents-python/handoffs/">openai.github.io/openai-agents-python/handoffs/</a></p></div>
+      <div class="source"><b>6. Tracing과 운영</b><p>Agent 운영은 성공 화면보다 실행 기록이 중요합니다. LLM generation, tool call, handoff, guardrail을 추적하는 관점으로 실패 복구를 설명합니다.<br><a href="https://github.com/openai/openai-agents-python/blob/main/docs/tracing.md">github.com/openai/openai-agents-python/docs/tracing.md</a></p></div>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>04 · CONCEPT BOUNDARIES</span><h2>수업 중 반드시 구분해야 할 차이</h2></div>
+      <p>용어를 외우는 수업이 아니라, 어느 문제에 어떤 구조가 필요한지 판단하게 만드는 수업이어야 합니다.</p>
+    </div>
+    <div class="grid-3">
+      <article class="card" style="--accent:var(--violet)"><small>SKILL</small><h3>Skill은 언제 쓰는가</h3><p>같은 절차를 계속 붙여넣고 있다면 Skill 후보입니다. 예: 코드 리뷰, 배포 전 점검, 이미지 최적화, 강의자료 QA.</p><ul><li>입력: 무엇을 받을지</li><li>절차: 어떤 순서로 할지</li><li>산출물: 무엇을 반환할지</li><li>검증: 완료 기준은 무엇인지</li></ul></article>
+      <article class="card" style="--accent:var(--blue)"><small>MCP</small><h3>MCP는 언제 쓰는가</h3><p>AI가 현재 문서, 파일, 디자인, 이슈, 로그처럼 외부 시스템의 실제 정보를 읽거나 제한된 행동을 해야 할 때 씁니다.</p><ul><li>처음은 읽기 전용</li><li>쓰기 작업은 승인 필요</li><li>민감정보는 최소 권한</li><li>도구 응답은 검증 가능해야 함</li></ul></article>
+      <article class="card" style="--accent:var(--green)"><small>AGENT</small><h3>Agent는 언제 쓰는가</h3><p>한 번의 답변이 아니라 여러 단계를 수행하고, 중간 결과를 보고, 실패 시 복구해야 할 때 Agent 구조가 필요합니다.</p><ul><li>목표와 종료 조건</li><li>사용 가능한 도구</li><li>상태와 로그</li><li>사람 승인 지점</li></ul></article>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>05 · SLIDE UPGRADE PLAN</span><h2>전문가 과정 슬라이드로 바꾸는 장면</h2></div>
+      <p>카드 나열 대신 실제 시스템 화면처럼 보이도록 장면을 설계합니다.</p>
+    </div>
+    <table class="matrix">
+      <thead><tr><th>슬라이드</th><th>현재 피해야 할 형태</th><th>고도화 장면</th><th>수동 모션</th></tr></thead>
+      <tbody>
+        <tr><td>Skill</td><td>“Skill이란?” 카드 3개</td><td><code>SKILL.md</code>, references, scripts 폴더가 있는 실제 파일 트리와 우측 실행 결과</td><td>Trigger → Load → Execute → Verify 단계별 점등</td></tr>
+        <tr><td>MCP</td><td>AI와 도구가 선으로 연결된 추상 그림</td><td>Host, Client, Server, Tool, Resource, Prompt, Approval Gate가 있는 권한망</td><td>읽기 요청은 초록, 쓰기 요청은 노란 승인 대기, 차단 요청은 빨간 로그</td></tr>
+        <tr><td>Agent</td><td>“스스로 일하는 AI” 문구</td><td>Goal, Plan, Tool Call, Observation, Eval, Recover가 반복되는 관제실 화면</td><td>한 단계씩 다음 버튼으로 진행하고 실패 시 복구 루프로 이동</td></tr>
+        <tr><td>Agent Team</td><td>여러 봇 아이콘</td><td>Manager, Researcher, Builder, Reviewer, Human Lead가 있는 작업 보드</td><td>작업 카드가 각 역할로 이동하고 Reviewer 승인 후만 병합</td></tr>
+        <tr><td>보안</td><td>“권한 조심” 텍스트</td><td>읽기/쓰기/삭제 권한을 toggle로 켜고 끄는 권한 설정 패널</td><td>삭제 권한을 켜면 위험 모달과 human approval 단계 표시</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>06 · DEEP COURSE PROPOSAL</span><h2>별도 과정으로 분리할 경우</h2></div>
+      <p>Agent/MCP/Skill이 현재 Workflow Architect 안에서 너무 길어지면 아래 6주 과정으로 분리하는 것이 좋습니다.</p>
+    </div>
+    <div class="lessons">
+      <article class="lesson" style="--accent:var(--blue)"><div class="lesson-num">01</div><div><small>FOUNDATION</small><h3>AI 작업 시스템 설계</h3></div><p>Prompt, Skill, MCP, Agent, Plugin의 경계를 실제 업무 예시로 구분합니다.</p><p>산출물: 개인 업무 자동화 후보 3개와 위험도 표</p></article>
+      <article class="lesson" style="--accent:var(--violet)"><div class="lesson-num">02</div><div><small>SKILL</small><h3>Skill 제작과 검증</h3></div><p>반복 업무를 <code>SKILL.md</code>, references, scripts, 테스트 요청으로 구성합니다.</p><p>산출물: 재사용 Skill 1개</p></article>
+      <article class="lesson" style="--accent:var(--blue)"><div class="lesson-num">03</div><div><small>MCP</small><h3>MCP 연결과 최소 권한</h3></div><p>읽기 전용 연결, 도구 스키마, 승인, 권한 축소와 로그를 실습합니다.</p><p>산출물: MCP 권한 설계서</p></article>
+      <article class="lesson" style="--accent:var(--green)"><div class="lesson-num">04</div><div><small>AGENT</small><h3>단일 Agent 루프</h3></div><p>목표, 계획, 도구 호출, 관찰, 평가, 복구와 종료 조건을 만듭니다.</p><p>산출물: 추적 가능한 Agent 실행 로그</p></article>
+      <article class="lesson" style="--accent:var(--amber)"><div class="lesson-num">05</div><div><small>TEAM</small><h3>SubAgent와 팀 운영</h3></div><p>역할 경계, 반환 계약, 파일 소유권, 리뷰 게이트를 설계합니다.</p><p>산출물: Agent Team 운영표</p></article>
+      <article class="lesson" style="--accent:var(--red)"><div class="lesson-num">06</div><div><small>OPERATIONS</small><h3>관측·비용·복구·발표</h3></div><p>tracing, 비용, 실패 시나리오, 사람이 승인해야 할 지점을 발표합니다.</p><p>산출물: 개인 AI 워크스페이스 운영 문서</p></article>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="section-head">
+      <div><span>07 · REHEARSAL CHECKLIST</span><h2>수업 전 강사 리허설</h2></div>
+      <p>전문 과정은 설명의 깊이보다 실패 복구 리허설이 강의 품질을 결정합니다.</p>
+    </div>
+    <div class="grid-2">
+      <article class="note"><small>DO</small><h3>반드시 준비</h3><ul><li>정상 흐름 캡처 1장, 실패 흐름 캡처 1장, 복구 후 캡처 1장</li><li>공식자료 URL과 확인 날짜</li><li>권한을 읽기에서 쓰기로 올리는 이유</li><li>수강생이 따라 할 최소 실습 파일</li><li>인터넷 실패 시 오프라인 대체 화면</li></ul></article>
+      <article class="note"><small>DON'T</small><h3>피해야 할 설명</h3><ul><li>“Agent가 알아서 다 해준다”</li><li>“MCP 연결하면 API를 몰라도 된다”</li><li>“Skill은 프롬프트 저장소다”</li><li>“Agent가 많을수록 좋다”</li><li>“보안은 나중에 붙이면 된다”</li></ul></article>
+    </div>
+    <p class="print-note">이 자료는 강사용입니다. 수강생에게는 각 과정의 실습 워크북과 체크리스트만 나눠주고, 공식자료 연구 순서와 강사용 실패 복구 메모는 강사자료실에서만 사용합니다.</p>
+  </section>
+</main>
+<script src="./appendix-print.js"></script>
+</body>
+</html>

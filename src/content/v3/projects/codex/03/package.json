@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-codex-03",
+  "private": true,
+  "version": "1.0.0",
+  "description": "반복 업무를 Skill로 설계하고 다른 환경에 설치할 수 있도록 Plugin으로 묶어 검증합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-workflow-04",
+  "private": true,
+  "version": "1.0.0",
+  "description": "자율성을 높이기 전에 목표, 예산, 평가, 중단, 사람 인계와 복구 경로를 가진 Agent 시스템을 설계합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

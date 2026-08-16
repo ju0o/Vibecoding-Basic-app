@@ -1,0 +1,25 @@
+{
+  "courseId": "product",
+  "lessonNumber": 8,
+  "title": "출시·납품 IV",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "product-08-launch",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "배포는 됐지만 아무도 다음 행동을 모름",
+    "trace": "URL live / owner undefined",
+    "cause": "운영·측정·인수 책임이 정해지지 않음",
+    "fix": "운영 Owner, 지표 대시보드, 계정 인수와 다음 실험을 명시"
+  },
+  "deliverables": [
+    "출시 URL 또는 납품 확인서",
+    "지표·인수 문서",
+    "팀 회고",
+    "개인 사례 초안"
+  ]
+}

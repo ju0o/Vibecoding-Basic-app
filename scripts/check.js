@@ -29,6 +29,8 @@ function runNodeCheck(file) {
 function checkJavaScript() {
   const files = [
     ...walk(path.join(root, 'src', 'renderer'), (file) => file.endsWith('.js')),
+    ...walk(path.join(root, 'src', 'content', 'v3'), (file) => file.endsWith('.js')),
+    ...walk(path.join(root, 'src', 'content', 'sources'), (file) => file.endsWith('.js')),
     path.join(root, 'src', 'main', 'main.js'),
     path.join(root, 'src', 'preload', 'preload.js'),
     path.join(root, 'src', 'content', 'sessions', 'session-03-direction.bundle.js'),
@@ -58,6 +60,15 @@ function checkManifest() {
   for (const appendix of manifest.appendix || []) {
     const target = path.join(root, 'src', 'content', appendix.file.split(/[?#]/)[0]);
     if (!fs.existsSync(target)) missing.push(appendix.file);
+  }
+
+  for (const course of manifest.courses) {
+    for (const audience of ['student', 'instructor']) {
+      for (const material of course.materials?.[audience] || []) {
+        const target = path.join(root, 'src', 'content', material.file.split(/[?#]/)[0]);
+        if (!fs.existsSync(target)) missing.push(material.file);
+      }
+    }
   }
 
   if (missing.length) {

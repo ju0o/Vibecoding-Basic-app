@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-codex-02",
+  "private": true,
+  "version": "1.0.0",
+  "description": "저장소 규칙과 개인 설정, 실행 정책을 구분하고 Git 기반의 안전한 변경 루프를 구축합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

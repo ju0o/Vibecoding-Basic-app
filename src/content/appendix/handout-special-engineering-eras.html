@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>특강 배포자료 · AI 엔지니어링의 진화</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  background: #f0f2f8; color: #111; padding: 32px 24px; line-height: 1.6;
+}
+.page-wrap { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
+.print-btn {
+  background: #6d28d9; color: #fff; border: 0; border-radius: 8px; padding: 12px 24px;
+  font-size: 15px; font-weight: 700; cursor: pointer; align-self: flex-end;
+}
+.sheet { background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,.1); overflow: hidden; }
+.sheet-header {
+  background: linear-gradient(135deg, #0f172a, #312e81); color: #fff;
+  padding: 18px 28px 16px; display: flex; align-items: center; justify-content: space-between;
+}
+.sh-course { font-size: 11px; font-weight: 700; letter-spacing: .15em; color: rgba(255,255,255,.6); text-transform: uppercase; margin-bottom: 4px; }
+.sh-title { font-size: 20px; font-weight: 900; line-height: 1.2; }
+.sh-right { text-align: right; font-size: 11px; color: rgba(255,255,255,.5); line-height: 1.8; }
+.sheet-body { padding: 22px 28px 24px; }
+.sec { margin-bottom: 18px; }
+.sec-title {
+  font-size: 11px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase;
+  color: #4338ca; border-left: 3px solid #4338ca; padding-left: 8px; margin-bottom: 10px;
+}
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+th { background: #eef2ff; color: #312e81; font-weight: 800; font-size: 10.5px; letter-spacing: .06em; padding: 7px 10px; text-align: left; border-bottom: 2px solid #c7d2fe; }
+td { padding: 7px 10px; border-bottom: 1px solid #f3f4f6; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+td b { color: #312e81; }
+.era-tag { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 10px; font-weight: 800; }
+.e1 { background: #f1f5f9; color: #475569; }
+.e2 { background: #ecfdf5; color: #047857; }
+.e3 { background: #eff6ff; color: #1d4ed8; }
+.e4 { background: #fef3c7; color: #b45309; }
+.note-box { border: 1px solid #e0e7ff; background: #f8faff; border-radius: 8px; padding: 12px 14px; font-size: 12.5px; }
+.note-box b { color: #312e81; }
+ul.plain { list-style: none; }
+ul.plain li { padding-left: 18px; position: relative; font-size: 12.5px; margin-bottom: 6px; }
+ul.plain li::before { content: ''; position: absolute; left: 0; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: #4338ca; }
+.check-line { font-size: 12.5px; margin-bottom: 7px; }
+.check-line::before { content: '☐ '; color: #4338ca; font-weight: 900; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media print {
+  body { background: #fff; padding: 0; }
+  .print-btn { display: none; }
+  .page-wrap { gap: 0; }
+  .sheet { border-radius: 0; box-shadow: none; page-break-after: always; }
+  .sheet:last-child { page-break-after: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+  <button class="print-btn" onclick="window.print()">🖨️ 인쇄 / PDF 저장</button>
+
+  <!-- 시트 1: 4세대 지도 -->
+  <div class="sheet">
+    <div class="sheet-header">
+      <div>
+        <div class="sh-course">VIBE 특강 · 배포자료 1/2</div>
+        <div class="sh-title">AI 엔지니어링의 진화 — 4세대 지도</div>
+      </div>
+      <div class="sh-right">이름: ___________________<br>날짜: 20&nbsp;&nbsp;&nbsp;년&nbsp;&nbsp;&nbsp;월&nbsp;&nbsp;&nbsp;일</div>
+    </div>
+    <div class="sheet-body">
+      <div class="sec">
+        <div class="sec-title">한눈에 보는 4세대</div>
+        <table>
+          <tr><th style="width:90px">세대</th><th style="width:130px">이름</th><th>핵심 질문</th><th>대표 산출물</th></tr>
+          <tr><td><span class="era-tag e1">1세대 · 2022~</span></td><td><b>프롬프트</b></td><td>어떻게 물을까 — 역할·예시·형식을 담은 질문 (바이브 코딩의 시초)</td><td>좋은 질문 한 줄</td></tr>
+          <tr><td><span class="era-tag e2">2세대 · 2024~</span></td><td><b>컨텍스트</b></td><td>모델에게 무엇을 보여줄까 — 규칙 파일·자료·기억·도구</td><td>규칙 파일 (CLAUDE.md)</td></tr>
+          <tr><td><span class="era-tag e3">3세대 · 2025~</span></td><td><b>루프</b></td><td>작업을 어떻게 반복시킬까 — 계획→실행→검증→개선</td><td>완료 기준</td></tr>
+          <tr><td><span class="era-tag e4">4세대 · 2026~</span></td><td><b>하네스</b></td><td>모델을 무엇으로 감쌀까 — 권한·게이트·복구·로그</td><td>운영 규칙 (AI 사무실)</td></tr>
+        </table>
+      </div>
+      <div class="sec">
+        <div class="sec-title">각 세대가 태어난 이유 — 이전 세대의 한계</div>
+        <table>
+          <tr><th style="width:120px">단계</th><th>한계</th><th>다음 세대의 해결</th></tr>
+          <tr><td><b>1세대의 한계</b></td><td>잘된 결과를 반복할 수 없다 — 질문 솜씨는 개인기</td><td>보는 것을 파일로 고정 (2세대)</td></tr>
+          <tr><td><b>2세대의 한계</b></td><td>잘 보여줘도 한 번에 끝— 틀리면 사람이 다시</td><td>스스로 검증·수정하는 루프 (3세대)</td></tr>
+          <tr><td><b>3세대의 한계</b></td><td>루프가 강할수록 사고도 커진다 — 새벽 무한 반복</td><td>권한·게이트·복구·로그로 감싼다 (4세대)</td></tr>
+        </table>
+      </div>
+      <div class="sec">
+        <div class="sec-title">기억할 두 문장</div>
+        <div class="note-box">
+          <b>① 세대는 대체가 아니라 축적입니다.</b> — 4세대 시대에도 좋은 질문은 바닥에 깔려 있습니다.<br>
+          <b>② 질문은 소비되지만 구조는 자산이 됩니다.</b> — 반복 지시 하나를 파일로 옮기는 것이 2세대의 첫 계단입니다.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 시트 2: 자가 진단 + 실행 -->
+  <div class="sheet">
+    <div class="sheet-header">
+      <div>
+        <div class="sh-course">VIBE 특강 · 배포자료 2/2</div>
+        <div class="sh-title">자가 진단과 이번 주 실행 계획</div>
+      </div>
+      <div class="sh-right">AI 엔지니어링의 진화<br>프롬프트 → 컨텍스트 → 루프 → 하네스</div>
+    </div>
+    <div class="sheet-body">
+      <div class="sec">
+        <div class="sec-title">자가 진단 — 나는 지금 몇 세대?</div>
+        <div class="check-line">질문을 매번 새로 만들고, 결과는 그날그날 다르다 → <b>1세대</b></div>
+        <div class="check-line">규칙·자료 파일이 있고, 결과가 우리 것답게 나온다 → <b>2세대</b></div>
+        <div class="check-line">완료 기준을 주고, 도구가 스스로 검증하게 한다 → <b>3세대</b></div>
+        <div class="check-line">권한·게이트·로그까지 운영하고 있다 → <b>4세대</b></div>
+        <div class="note-box" style="margin-top:8px">중요한 것은 지금 몇 세대인가가 아니라 <b>다음 한 계단</b>이 무엇인가입니다. 계단은 건너뛸 수 없습니다.</div>
+      </div>
+      <div class="sec">
+        <div class="sec-title">이번 주 실행 — 다음 계단으로 가는 최소 행동</div>
+        <table>
+          <tr><th style="width:110px">지금 위치</th><th>이번 주에 할 한 가지</th></tr>
+          <tr><td><b>1세대라면</b></td><td>가장 자주 하는 지시 하나를 골라 규칙 파일(md)로 저장한다</td></tr>
+          <tr><td><b>2세대라면</b></td><td>반복 작업 하나에 "언제 끝인지"를 3줄 완료 기준으로 써 본다</td></tr>
+          <tr><td><b>3세대라면</b></td><td>"공개·돈·삭제" 앞에 사람 확인 게이트 하나를 선언한다</td></tr>
+          <tr><td><b>4세대라면</b></td><td>오늘 한 일 3줄 로그를 일주일 유지하고 병목을 찾는다</td></tr>
+        </table>
+      </div>
+      <div class="two-col">
+        <div class="sec">
+          <div class="sec-title">용어 미니 사전</div>
+          <ul class="plain">
+            <li><b>프롬프트</b> — AI에게 건네는 요청 문장</li>
+            <li><b>컨텍스트</b> — 요청과 함께 모델이 보는 모든 것</li>
+            <li><b>루프</b> — 계획→실행→검증→개선의 반복 구조</li>
+            <li><b>하네스</b> — 모델을 감싸는 운영 구조 (권한·게이트·복구·로그)</li>
+          </ul>
+        </div>
+        <div class="sec">
+          <div class="sec-title">더 배우고 싶다면</div>
+          <ul class="plain">
+            <li>기초 과정 — 만들어 보며 감 잡기</li>
+            <li>AI 한방 4주 — 2~4세대를 실물로 훈련</li>
+            <li>전문 과정 — 도구별 심화·운영 완성</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

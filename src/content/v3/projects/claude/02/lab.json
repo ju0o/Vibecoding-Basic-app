@@ -1,0 +1,24 @@
+{
+  "courseId": "claude",
+  "lessonNumber": 2,
+  "title": "CLAUDE.md·계획·Git·Diff·테스트",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "claude-02-ide",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "CLAUDE.md 규칙이 서로 충돌",
+    "trace": "root says npm / nested says pnpm",
+    "cause": "범위와 우선순위를 고려하지 않음",
+    "fix": "루트는 공통 규칙, 하위 파일은 해당 영역의 구체 규칙으로 정리"
+  },
+  "deliverables": [
+    "CLAUDE.md",
+    "변경 계획",
+    "테스트가 포함된 커밋"
+  ]
+}

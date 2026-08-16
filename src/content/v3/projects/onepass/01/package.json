@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-onepass-01",
+  "private": true,
+  "version": "1.0.0",
+  "description": "도구 사용법을 외우기 전에, AI에게 무엇을·어디까지 맡기고 결과를 어떻게 검증·복구하는지 판단 기준을 만듭니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

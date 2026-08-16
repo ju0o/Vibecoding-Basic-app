@@ -17,6 +17,8 @@ const clickCount = Math.max(1, Number(process.env.SMOKE_CLICK_COUNT || 1));
 const clickSequence = process.env.SMOKE_CLICK_SEQUENCE
   ? JSON.parse(process.env.SMOKE_CLICK_SEQUENCE)
   : [];
+const inspectSelector = process.env.SMOKE_INSPECT_SELECTOR || '';
+const overflowTolerance = Math.max(0, Number(process.env.SMOKE_OVERFLOW_TOLERANCE || 6));
 
 app.whenReady().then(async () => {
   const win = new BrowserWindow({
@@ -85,13 +87,25 @@ app.whenReady().then(async () => {
         const slides = [...document.querySelectorAll('.slide')];
         const originalActive = slides.findIndex((slide) => slide.classList.contains('active'));
         const slideOverflow = [];
+        const layoutTolerance = ${overflowTolerance};
+        const hasDeckNavigator = typeof window.move === 'function';
+        let activeIndex = Math.max(0, originalActive);
 
         for (let index = 0; index < slides.length; index += 1) {
-          slides.forEach((slide, slideIndex) => slide.classList.toggle('active', slideIndex === index));
-          await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+          if (hasDeckNavigator) {
+            window.move(index - activeIndex);
+            activeIndex = index;
+          } else {
+            slides.forEach((slide, slideIndex) => slide.classList.toggle('active', slideIndex === index));
+          }
+          // BrowserWindow is intentionally hidden in smoke runs. requestAnimationFrame can
+          // be throttled there, so use a short real timer before measuring layout.
+          await new Promise((resolve) => setTimeout(resolve, 80));
           const slide = slides[index];
           const overBy = Math.max(0, Math.ceil(slide.scrollHeight - slide.clientHeight));
-          if (overBy > 2) {
+          // Tiny font/layout rounding differences vary between Windows GPU and headless
+          // compositing. A 6px ceiling catches real scroll while avoiding false failures.
+          if (overBy > layoutTolerance) {
             slideOverflow.push({
               index: index + 1,
               title: slide.dataset.title || '',
@@ -102,7 +116,11 @@ app.whenReady().then(async () => {
           }
         }
 
-        slides.forEach((slide, index) => slide.classList.toggle('active', index === Math.max(0, originalActive)));
+        if (hasDeckNavigator) {
+          window.move(Math.max(0, originalActive) - activeIndex);
+        } else {
+          slides.forEach((slide, index) => slide.classList.toggle('active', index === Math.max(0, originalActive)));
+        }
         await new Promise((resolve) => setTimeout(resolve, 700));
         const canvas = document.querySelector('canvas');
         const canvasRect = canvas ? canvas.getBoundingClientRect() : null;
@@ -124,6 +142,26 @@ app.whenReady().then(async () => {
     `);
 
     let canvasPixelCheck = null;
+    let inspected = null;
+    if (inspectSelector) {
+      inspected = await win.webContents.executeJavaScript(`
+        (() => [...document.querySelectorAll(${JSON.stringify(inspectSelector)})].map((node) => {
+          const rect = node.getBoundingClientRect();
+          const styles = getComputedStyle(node);
+          return {
+            selector: ${JSON.stringify(inspectSelector)},
+            tag: node.tagName,
+            className: node.className,
+            clientHeight: Math.round(node.clientHeight),
+            scrollHeight: Math.round(node.scrollHeight),
+            rect: { width: Math.round(rect.width), height: Math.round(rect.height), top: Math.round(rect.top) },
+            padding: [styles.paddingTop, styles.paddingRight, styles.paddingBottom, styles.paddingLeft],
+            zoom: styles.zoom,
+            display: styles.display,
+          };
+        }))()
+      `);
+    }
     let page = null;
     if (result.canvas && result.canvas.width > 0 && result.canvas.height > 0) {
       page = await win.webContents.capturePage();
@@ -150,7 +188,7 @@ app.whenReady().then(async () => {
       && result.slideOverflow.length === 0
       && (!canvasPixelCheck || canvasPixelCheck.nonblank);
 
-    const report = { ok, result, canvasPixelCheck, errors };
+    const report = { ok, result, canvasPixelCheck, inspected, errors };
     if (reportPath) fs.writeFileSync(reportPath, JSON.stringify(report, null, 2), 'utf-8');
     console.log(JSON.stringify(report, null, 2));
     if (!ok) {

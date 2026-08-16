@@ -1,0 +1,562 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AI 한방 이해하기 · 2주차</title><link rel="stylesheet" href="../../assets/fonts/pretendard.css"><style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#070b11;color:#eaf2f6;font-family:Pretendard,"Malgun Gothic",sans-serif;-webkit-font-smoothing:antialiased}
+.app{position:fixed;inset:0}
+.nav-bar{position:fixed;top:0;left:0;right:0;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(8,12,18,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.1);z-index:100}
+.nav-title{font-weight:700;font-size:13px;color:#cdd8de;letter-spacing:.01em}
+.nav-controls{display:flex;align-items:center;gap:8px}
+.nav-btn{width:32px;height:32px;border-radius:8px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#eaf2f6;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+.nav-btn:disabled{opacity:.3;cursor:default}
+#counter{min-width:58px;text-align:center;color:#9fb0bd;font:700 13px ui-monospace,SFMono-Regular,Consolas,monospace}
+.deck{position:absolute;top:48px;left:0;right:0;bottom:0;overflow:hidden}
+.src-scope{display:contents}
+.app .deck .slide{position:absolute;inset:0;overflow-y:auto}
+.app .deck .slide:not(.active){display:none!important}
+.app .deck .slide.active{display:flex!important;flex-direction:column;opacity:1!important;transform:none!important;pointer-events:all!important;transition:none!important}
+/* Reused source scenes own their motion. Do not globally freeze descendants here:
+   their visual state is the teaching material, not decorative entrance motion. */
+.app .deck .slide.cover{justify-content:center}
+/* op-enhanced (고도화): clean visual-first custom slides */
+.op-slide{padding:clamp(30px,4.2vw,64px) clamp(40px,6vw,96px)!important;gap:18px;justify-content:center}
+.op-eyebrow{color:#34d399;font:800 12px/1 ui-monospace,SFMono-Regular,monospace;letter-spacing:.16em}
+.op-title{margin:6px 0 4px;font-size:clamp(27px,3.3vw,46px);font-weight:800;line-height:1.14;letter-spacing:-.01em;word-break:keep-all}
+.op-title .g{color:#34d399}.op-title .a{color:#fbbf24}
+.op-visual{margin:6px 0;display:flex;flex-direction:column;gap:16px}
+.op-cap{margin:0;color:#aebcc4;font-size:clamp(14px,1.3vw,18px);line-height:1.55;word-break:keep-all}
+.op-cap b,.op-cap .g{color:#eaf2f6}
+.op-flow{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.op-node{display:flex;flex-direction:column;gap:4px;padding:15px 19px;min-width:118px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:rgba(255,255,255,.04)}
+.op-node b{color:#eaf2f6;font-size:clamp(15px,1.5vw,19px)}
+.op-node span{color:#9fb0bd;font:700 12px ui-monospace,monospace}
+.op-node.a{border-color:rgba(251,191,36,.4);background:rgba(251,191,36,.08)}.op-node.a b{color:#fbbf24}
+.op-node.g{border-color:rgba(52,211,153,.4);background:rgba(52,211,153,.08)}.op-node.g b{color:#34d399}
+.op-arrow{color:#6b7a85;font-size:22px;font-weight:800}
+.op-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.op-card{display:flex;flex-direction:column;gap:12px;padding:22px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(255,255,255,.03)}
+.op-card-h{color:#eaf2f6;font-weight:800;font-size:clamp(16px,1.6vw,21px)}
+.op-card-h.g{color:#34d399}.op-card-h.a{color:#fbbf24}
+.op-card small{color:#9fb0bd;font-size:13px;line-height:1.5}.op-card small b{color:#eaf2f6}
+.op-merge{color:#6b7a85;font:800 13px ui-monospace,monospace;text-align:center}
+.op-page,.op-ui-mock{display:flex;flex-direction:column;gap:7px;padding:14px;border:1px solid rgba(255,255,255,.12);border-radius:10px;background:#0c1320}
+.op-page-bar{height:9px;border-radius:5px;background:rgba(255,255,255,.16)}.op-page-bar.s{width:60%}
+.op-page-btn{align-self:flex-start;margin-top:4px;padding:6px 14px;border-radius:7px;background:#1c7d5e;color:#fff;font:800 12px ui-monospace,monospace}
+.op-anim{display:flex;align-items:center}
+.op-track{flex:1;height:3px;margin:0 14px;border-radius:3px;background:linear-gradient(90deg,rgba(255,255,255,.12),rgba(52,211,153,.55));position:relative}
+.op-dot{position:absolute;right:0;top:50%;width:12px;height:12px;border-radius:50%;background:#34d399;box-shadow:0 0 14px #34d399;transform:translateY(-50%)}
+.op-legend{color:#9fb0bd;font-size:13px}
+.op-db{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.op-db-in{padding:16px 18px;border:1px dashed rgba(255,255,255,.22);border-radius:12px;color:#cdd8de;font-weight:700}
+.op-shelves{display:grid;gap:8px}
+.op-shelves div{padding:11px 16px;border:1px solid rgba(52,211,153,.3);border-radius:9px;background:rgba(52,211,153,.07);color:#d9f3e8;font:700 13px ui-monospace,monospace}
+.op-check{display:flex;flex-direction:column;gap:12px}
+.op-url{align-self:flex-start;padding:9px 16px;border:1px solid rgba(52,211,153,.4);border-radius:8px;background:rgba(52,211,153,.08);color:#34d399;font:800 14px ui-monospace,monospace}
+.op-check ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}
+.op-check li{color:#d9e3e6;font-size:clamp(14px,1.4vw,18px)}
+/* elevated React/Next — realistic mockups + build animation */
+.op-rn-stage{display:flex;align-items:center;gap:clamp(14px,2vw,30px)}
+.op-rn-parts{display:grid;gap:9px}
+.op-comp{display:flex;align-items:center;gap:12px;padding:10px 13px;border:1px solid rgba(255,255,255,.12);border-radius:10px;background:rgba(255,255,255,.03)}
+.op-comp code{color:#7dd3fc;font:800 12px ui-monospace,SFMono-Regular,monospace;min-width:80px}
+.mk-nav{display:flex;gap:5px;width:118px}.mk-nav i{flex:1;height:8px;border-radius:3px;background:rgba(255,255,255,.24)}
+.mk-card{width:118px;display:grid;gap:4px}.mk-img{height:24px;border-radius:5px;background:linear-gradient(120deg,#34d399,#60a5fa)}.mk-l{height:6px;border-radius:3px;background:rgba(255,255,255,.22)}.mk-l.s{width:60%}
+.mk-btn{display:inline-block;padding:6px 14px;border-radius:7px;background:#1c7d5e;color:#fff;font:800 12px ui-monospace,monospace}
+.op-rn-arrow{display:flex;flex-direction:column;align-items:center;color:#6b7a85;font:800 16px ui-monospace,monospace}.op-rn-arrow span{font-size:10px;letter-spacing:.1em}
+.op-browser{flex:1;max-width:430px;border:1px solid rgba(255,255,255,.16);border-radius:12px;overflow:hidden;background:#0c1320;box-shadow:0 30px 60px -24px rgba(0,0,0,.72)}
+.op-bchrome{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#172230;border-bottom:1px solid rgba(255,255,255,.08)}
+.op-bchrome i{width:9px;height:9px;border-radius:50%;background:#46505c}.op-bchrome i:nth-child(1){background:#ed6a5e}.op-bchrome i:nth-child(2){background:#f4bf4f}.op-bchrome i:nth-child(3){background:#61c554}
+.op-bchrome small{margin-left:6px;color:#9fb0bd;font:700 11px ui-monospace,monospace}
+.op-bbody{padding:18px;display:grid;gap:13px;min-height:172px;align-content:start}
+.op-bbody .bd{opacity:0;animation:rnBuild 4.8s ease infinite}
+.op-bbody .b1{animation-delay:.2s}.op-bbody .b2{animation-delay:1s}.op-bbody .b3{animation-delay:1.8s}
+.op-bbody .mk-nav,.op-bbody .mk-card{width:auto}
+@keyframes rnBuild{0%,3%{opacity:0;transform:translateY(9px)}11%,88%{opacity:1;transform:none}97%,100%{opacity:0;transform:translateY(-4px)}}
+.op-rn-next{margin-top:8px;padding:11px 16px;border-left:3px solid #fbbf24;background:rgba(251,191,36,.08);border-radius:0 8px 8px 0;color:#d9e3e6;font-size:14px}.op-rn-next b{color:#fbbf24}
+.op-source-cue{display:inline-block;margin-left:8px;color:#90a2ab;font:700 10px ui-monospace,SFMono-Regular,monospace;letter-spacing:.04em}
+/* elevated API — phone mockup + request/response packet */
+.op-api-stage{display:flex;align-items:center;gap:clamp(16px,3vw,46px);justify-content:center;padding:6px 0}
+.op-phone{width:142px;border:2px solid rgba(255,255,255,.18);border-radius:22px;overflow:hidden;background:#0a1118;box-shadow:0 26px 52px -20px rgba(0,0,0,.72)}
+.ph-top{padding:9px;text-align:center;color:#9fb0bd;font:700 11px ui-monospace,monospace;border-bottom:1px solid rgba(255,255,255,.08)}
+.ph-body{padding:28px 16px;text-align:center;background:linear-gradient(160deg,#0f3a4d,#0a1118)}
+.ph-temp{font:800 46px/1 Pretendard,sans-serif;color:#7dd3fc}.ph-city{margin-top:8px;color:#aebcc4;font-size:13px}
+.op-wire{flex:1;max-width:360px;display:grid;gap:9px}
+.op-wlabel{font:700 12px ui-monospace,monospace;padding:6px 11px;border-radius:6px}
+.op-wlabel.req{color:#fbbf24;background:rgba(251,191,36,.1);justify-self:start}
+.op-wlabel.res{color:#34d399;background:rgba(52,211,153,.1);justify-self:end}
+.op-wtrack{position:relative;height:3px;border-radius:3px;background:linear-gradient(90deg,rgba(251,191,36,.45),rgba(52,211,153,.45))}
+.op-packet{position:absolute;top:50%;left:0;width:14px;height:14px;border-radius:50%;background:#fbbf24;box-shadow:0 0 14px #fbbf24;transform:translateY(-50%);animation:apiPacket 3.6s ease-in-out infinite}
+@keyframes apiPacket{0%{left:0;opacity:0;background:#fbbf24;box-shadow:0 0 14px #fbbf24}9%{opacity:1}44%{left:calc(100% - 14px);background:#fbbf24;box-shadow:0 0 14px #fbbf24}53%{left:calc(100% - 14px);background:#34d399;box-shadow:0 0 14px #34d399}92%{left:0;background:#34d399;box-shadow:0 0 14px #34d399;opacity:1}100%{left:0;opacity:0}}
+.op-cloud{width:140px;text-align:center;padding:22px 14px;border:1px solid rgba(255,255,255,.16);border-radius:16px;background:rgba(255,255,255,.04)}
+.op-cloud b{display:block;color:#eaf2f6;font-size:16px}.op-cloud span{color:#9fb0bd;font:700 11px ui-monospace,monospace}
+/* UI/UX — screen mockup + animated flow */
+.op-screen{display:grid;gap:9px;padding:14px;border:1px solid rgba(255,255,255,.12);border-radius:10px;background:#0c1320}
+.sc-img{height:66px;border-radius:7px;background:linear-gradient(120deg,#34d399,#60a5fa)}
+.sc-row{display:flex;align-items:center;justify-content:space-between}.sc-l{width:50%;height:8px;border-radius:4px;background:rgba(255,255,255,.2)}.sc-row b{color:#eaf2f6;font-size:15px}
+.op-screen .mk-btn{text-align:center}
+.op-ux{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ux-step{padding:11px 14px;border:1px solid rgba(251,191,36,.35);border-radius:9px;background:rgba(251,191,36,.07);color:#fbe6a8;font:700 13px Pretendard,sans-serif}
+.ux-step.done{border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.12);color:#7ee8b0;animation:uxPulse 2.6s ease-in-out infinite}
+.ux-line{flex:1;min-width:22px;height:3px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden;position:relative}
+.ux-line i{position:absolute;inset:0;background:linear-gradient(90deg,#fbbf24,#34d399);transform-origin:left;animation:uxFill 2.6s ease-in-out infinite}
+.ux-line i.d2{animation-delay:.5s}
+@keyframes uxFill{0%,10%{transform:scaleX(0)}45%,100%{transform:scaleX(1)}}
+@keyframes uxPulse{0%,40%{box-shadow:0 0 0 0 rgba(52,211,153,0)}60%{box-shadow:0 0 18px 2px rgba(52,211,153,.4)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+/* ANIM — real micro-interaction demos */
+.op-demos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.op-demo{display:flex;flex-direction:column;align-items:center;gap:14px;padding:26px 16px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.03)}
+.op-demo small{color:#9fb0bd;font-size:12px}
+.dm-heart{font-size:40px;color:#3a4450;animation:dmHeart 2.4s ease-in-out infinite}
+@keyframes dmHeart{0%,30%{color:#3a4450;transform:scale(1)}45%{color:#ff5a7a;transform:scale(1.25)}70%,100%{color:#ff5a7a;transform:scale(1)}}
+.dm-toggle{width:56px;height:30px;border-radius:99px;position:relative;animation:dmTrack 2.6s ease-in-out infinite}
+.dm-toggle i{position:absolute;top:3px;width:24px;height:24px;border-radius:50%;background:#fff;animation:dmKnob 2.6s ease-in-out infinite}
+@keyframes dmKnob{0%,40%{left:3px}60%,100%{left:29px}}
+@keyframes dmTrack{0%,40%{background:#3a4450}60%,100%{background:#1c7d5e}}
+.dm-load{width:60px;height:60px;border-radius:50%;border:4px solid rgba(255,255,255,.12);border-top-color:#34d399;animation:dmSpin 1.1s linear infinite}
+@keyframes dmSpin{to{transform:rotate(360deg)}}
+/* BACKEND login form */
+.ph-body.lg{display:grid;gap:9px;padding:22px 16px}
+.lg-f{padding:9px 12px;border:1px solid rgba(255,255,255,.14);border-radius:7px;color:#9fb0bd;font:700 12px ui-monospace,monospace;text-align:left}
+.ph-body.lg .mk-btn{text-align:center}
+/* DB — record into table (animated) */
+.op-dbx{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center}
+.dbx-item{padding:18px 22px;border:1px dashed rgba(52,211,153,.45);border-radius:12px;color:#cdd8de;text-align:center;animation:dbxIn 3s ease-in-out infinite}
+.dbx-item b{color:#34d399;font-size:18px}
+.dbx-arrow{color:#6b7a85;font-size:24px;font-weight:800}
+.dbx-tables{display:grid;gap:9px}
+.dbx-t{padding:12px 18px;border:1px solid rgba(255,255,255,.12);border-radius:9px;background:rgba(255,255,255,.03);color:#aebcc4;font:700 13px ui-monospace,monospace;min-width:240px}
+.dbx-t.active{border-color:rgba(52,211,153,.45);background:rgba(52,211,153,.08);color:#d9f3e8}
+.dbx-row{display:block;margin-top:6px;color:#34d399;font-size:12px;animation:dbxRow 3s ease-in-out infinite}
+@keyframes dbxIn{0%,12%{opacity:.4;transform:translateX(-8px)}30%,100%{opacity:1;transform:none}}
+@keyframes dbxRow{0%,22%{opacity:0}40%,100%{opacity:1}}
+/* RELEASE pipeline (animated progress) */
+.op-pipe{position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 4px}
+.pipe-step{position:relative;z-index:2;flex:1;text-align:center;padding:16px 8px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:#0c1320;color:#cdd8de;font:800 15px Pretendard,sans-serif;opacity:.45;animation:pipeLit 4.4s ease-in-out infinite}
+.pipe-step span{display:block;margin-top:4px;color:#9fb0bd;font:700 11px ui-monospace,monospace}
+.pipe-step.live{border-color:rgba(52,211,153,.5);color:#7ee8b0}
+.pipe-step.p1{animation-delay:.2s}.pipe-step.p2{animation-delay:1s}.pipe-step.p3{animation-delay:1.8s}.pipe-step.p4{animation-delay:2.6s}
+@keyframes pipeLit{0%,7%{opacity:.4}16%,92%{opacity:1}100%{opacity:.4}}
+.pipe-beam{position:absolute;left:0;top:50%;height:3px;width:0;border-radius:3px;background:linear-gradient(90deg,#fbbf24,#34d399);z-index:1;animation:pipeBeam 4.4s ease-in-out infinite}
+@keyframes pipeBeam{0%,7%{width:0}82%,100%{width:100%}}
+.op-rel-card{margin-top:8px;padding:12px 16px;border:1px solid rgba(52,211,153,.3);border-radius:10px;background:rgba(52,211,153,.06);color:#d9e3e6;font-size:14px}.op-rel-card b{color:#34d399}
+/* Manual explanation scene: state advances only when the presenter chooses. */
+.op-seq{width:min(100%,980px);border:1px solid rgba(255,255,255,.15);border-radius:14px;overflow:hidden;background:#0b121b;box-shadow:0 22px 48px -30px rgba(0,0,0,.85)}
+.op-seq-rail{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border-bottom:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.08)}.op-seq-rail span{min-height:56px;padding:11px 13px;background:#101820;color:#71818a;display:grid;gap:4px;align-content:center}.op-seq-rail i{font:700 9px ui-monospace,Consolas,monospace;font-style:normal;letter-spacing:.08em}.op-seq-rail b{font-size:12px}.op-seq-rail span.is-active{background:rgba(52,211,153,.1);color:#75e7bb}.op-seq-rail span.is-complete{color:#b5cfca}
+.op-seq-stage{min-height:170px;display:grid;place-items:center;padding:26px;background:radial-gradient(circle at 15% 20%,rgba(52,211,153,.12),transparent 40%),#0b121b}
+.op-seq-step{display:none;max-width:580px;text-align:center;animation:opSeqIn .38s cubic-bezier(.16,1,.3,1)}
+.op-seq-step.is-active{display:grid;gap:9px}.op-seq-step strong{color:#34d399;font:800 clamp(22px,2.5vw,34px)/1 Pretendard,"Malgun Gothic",sans-serif}.op-seq-step span{color:#d7e2e5;font-size:clamp(14px,1.5vw,18px);line-height:1.5}
+.op-seq-controls{display:flex;gap:8px;justify-content:flex-end;padding:10px 12px;border-top:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.025)}
+.op-seq-controls button{min-height:32px;padding:0 11px;border:1px solid rgba(255,255,255,.17);border-radius:6px;background:#121d28;color:#dce8eb;font:700 12px Pretendard,"Malgun Gothic",sans-serif;cursor:pointer;transition:transform .15s ease,background .15s ease}.op-seq-controls button:hover{transform:translateY(-1px);background:#1a2a38}.op-seq-controls button:first-child{border-color:rgba(52,211,153,.45);color:#69e8b8}
+@keyframes opSeqIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* LAUNCH — live URL + animated checklist */
+.op-launch{display:flex;align-items:center;gap:clamp(18px,3vw,44px)}
+.op-launch .op-browser{flex:0 0 auto;width:300px}
+.lc-body{padding:16px;display:grid;gap:9px}.lc-hero{height:78px;border-radius:8px;background:linear-gradient(120deg,#1c7d5e,#2563eb)}
+.op-checks{flex:1;margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.op-checks li{position:relative;padding-left:34px;color:#d9e3e6;font-size:clamp(14px,1.4vw,18px)}
+.op-checks li::before{content:'';position:absolute;left:0;top:50%;width:22px;height:22px;margin-top:-11px;border-radius:6px;border:1px solid rgba(52,211,153,.5);background:rgba(52,211,153,.08)}
+.op-checks li::after{content:'✓';position:absolute;left:5px;top:50%;margin-top:-12px;color:#34d399;font-weight:800;opacity:0;animation:lcCheck 4.6s ease-in-out infinite}
+.op-checks li.lc1::after{animation-delay:.4s}.op-checks li.lc2::after{animation-delay:1.1s}.op-checks li.lc3::after{animation-delay:1.8s}.op-checks li.lc4::after{animation-delay:2.5s}
+@keyframes lcCheck{0%,5%{opacity:0;transform:scale(.5)}13%,92%{opacity:1;transform:none}100%{opacity:0}}
+.op-cover{justify-content:center;gap:18px;padding:0 clamp(40px,7vw,120px)!important;background:radial-gradient(circle at 82% 18%,rgba(52,211,153,.12),transparent 30%),#080d12}
+.op-cover .op-eyebrow{color:#34d399}.op-cover-title{margin:0;font-size:clamp(38px,5.3vw,82px);font-weight:800;line-height:1.05;letter-spacing:0;background:linear-gradient(180deg,#fff 42%,#9fb0bd);-webkit-background-clip:text;background-clip:text;color:transparent}.op-cover-title .g{-webkit-text-fill-color:#34d399}.op-cover-title .a{-webkit-text-fill-color:#fbbf24}.op-cover-sub{max-width:44em;color:#aebcc4;font-size:clamp(15px,1.5vw,21px);line-height:1.6;word-break:keep-all}.op-cover-sub b{color:#eaf2f6}.op-cover-flow{display:flex;flex-wrap:wrap;gap:9px;margin-top:8px}.op-cover-flow span{padding:8px 14px;border:1px solid rgba(255,255,255,.12);border-radius:8px;color:#aebcc4;font:750 12px ui-monospace,monospace}
+.op-console{max-width:790px;border:1px solid rgba(255,255,255,.16);border-radius:12px;overflow:hidden;background:#0a0f17;box-shadow:0 26px 54px -24px rgba(0,0,0,.7)}.op-console-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#161f2c;border-bottom:1px solid rgba(255,255,255,.08)}.op-console-bar i{width:9px;height:9px;border-radius:50%;background:#46505c}.op-console-bar i:nth-child(1){background:#ed6a5e}.op-console-bar i:nth-child(2){background:#f4bf4f}.op-console-bar i:nth-child(3){background:#61c554}.op-console-bar small{margin-left:6px;color:#9fb0bd;font:700 11px ui-monospace,monospace}.op-console-body{padding:16px 18px;display:grid;gap:8px;font:600 13.5px/1.45 ui-monospace,SFMono-Regular,monospace}.op-console-body span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.op-console-body .cmd{color:#d8e6eb}.op-console-body .ok{color:#7ce4a6}.op-console-body .warn{color:#fbbf24}.op-console-body .fail{color:#fda4af}.op-console-cursor{width:9px;height:16px;background:#34d399;animation:opCursor 1s steps(1) infinite}@keyframes opCursor{50%{opacity:0}}
+.op-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:980px}.op-compare>section{min-height:210px;padding:20px;border:1px solid rgba(255,255,255,.13);border-radius:12px;background:linear-gradient(150deg,rgba(19,30,40,.94),rgba(11,18,27,.96));display:grid;align-content:start;gap:13px}.op-compare h3{margin:0;color:#f4f6f3;font-size:clamp(17px,1.7vw,23px)}.op-compare p{margin:0;color:#aebcc4;font-size:14px;line-height:1.55}.op-compare code{color:#7ee8b0;font:700 12px ui-monospace,monospace}.op-compare .amber{color:#fbbf24}.op-compare .teal{color:#34d399}
+.op-toolbar{height:34px;display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(255,255,255,.1);color:#9fb0bd;font:700 11px ui-monospace,monospace}.op-toolbar i{width:7px;height:7px;border-radius:50%;background:#596873}.op-filetree{display:grid;gap:8px;padding:12px 0;color:#cdd9df;font:700 12px ui-monospace,monospace}.op-filetree b{color:#7ee8b0}.op-diff{padding:12px;border-left:2px solid #34d399;background:rgba(52,211,153,.06);color:#dce8eb;font:600 12px/1.6 ui-monospace,monospace}.op-diff del{color:#fda4af}.op-diff ins{color:#7ee8b0;text-decoration:none}.op-codeboard{padding:13px;border:1px solid rgba(255,255,255,.1);border-radius:8px;background:#0a0f17;color:#c8d7dc;font:600 12px/1.65 ui-monospace,monospace}.op-codeboard .key{color:#7dd3fc}.op-codeboard .str{color:#fbbf24}.op-codeboard .bad{color:#fda4af}.op-codeboard .good{color:#7ee8b0}
+.op-seq{width:min(100%,1040px);border:1px solid rgba(255,255,255,.15);border-radius:14px;overflow:hidden;background:#0b121b;box-shadow:0 22px 48px -30px rgba(0,0,0,.85)}.op-seq-rail{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border-bottom:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.08)}.op-seq-rail span{min-height:56px;padding:11px 13px;background:#101820;color:#71818a;display:grid;gap:4px;align-content:center}.op-seq-rail i{font:700 9px ui-monospace,Consolas,monospace;font-style:normal;letter-spacing:.08em}.op-seq-rail b{font-size:12px}.op-seq-rail span.is-active{background:rgba(52,211,153,.1);color:#75e7bb}.op-seq-rail span.is-complete{color:#b5cfca}.op-seq-stage{min-height:176px;display:grid;place-items:center;padding:22px 26px;background:radial-gradient(circle at 15% 20%,rgba(52,211,153,.12),transparent 40%),#0b121b}.op-seq-step{display:none;max-width:650px;text-align:center;animation:opSeqIn .38s cubic-bezier(.16,1,.3,1)}.op-seq-step.is-active{display:grid;gap:10px}.op-seq-step.has-evidence{grid-template-columns:minmax(270px,1.15fr) minmax(245px,.85fr);gap:24px;max-width:930px;text-align:left;align-items:center}.op-seq-copy{display:grid;gap:8px;align-content:center}.op-seq-copy em{color:#78909a;font:800 10px ui-monospace,Consolas,monospace;font-style:normal;letter-spacing:.13em}.op-seq-step strong{color:#34d399;font:800 clamp(22px,2.5vw,34px)/1 Pretendard,"Malgun Gothic",sans-serif}.op-seq-step span{color:#d7e2e5;font-size:clamp(14px,1.5vw,18px);line-height:1.5}.op-seq-evidence{min-width:0;border:1px solid rgba(255,255,255,.13);border-radius:10px;overflow:hidden;background:#101820;box-shadow:0 18px 34px -24px rgba(0,0,0,.9);animation:opEvidenceIn .45s cubic-bezier(.16,1,.3,1)}.op-evidence-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 11px;border-bottom:1px solid rgba(255,255,255,.1);background:#151f2b;color:#aebdc5;font:800 10px ui-monospace,Consolas,monospace;letter-spacing:.07em}.op-evidence-top b{color:#eaf2f6}.op-evidence-status{color:#7ee8b0}.op-evidence-status.warn{color:#fbbf24}.op-evidence-status.fail{color:#fda4af}.op-evidence-body{padding:14px;min-height:108px}.op-evidence-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06);color:#cbd9de;font:700 11px/1.35 ui-monospace,Consolas,monospace}.op-evidence-row:last-child{border-bottom:0}.op-evidence-row i{width:7px;height:7px;border-radius:50%;background:#60717c;flex:0 0 auto}.op-evidence-row i.ok{background:#34d399;box-shadow:0 0 10px rgba(52,211,153,.75)}.op-evidence-row i.warn{background:#fbbf24;box-shadow:0 0 10px rgba(251,191,36,.62)}.op-evidence-row i.fail{background:#fb7185;box-shadow:0 0 10px rgba(251,113,133,.62)}.op-evidence-row code{color:#7dd3fc;font:inherit}.op-evidence-code{display:grid;gap:5px;color:#cddbe1;font:700 11px/1.45 ui-monospace,Consolas,monospace}.op-evidence-code .key{color:#7dd3fc}.op-evidence-code .ok{color:#7ee8b0}.op-evidence-code .amber{color:#fbbf24}.op-evidence-code .bad{color:#fda4af}.op-evidence-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.op-evidence-grid span{min-height:50px;padding:8px;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#aebdc5;font:700 10px/1.3 Pretendard,"Malgun Gothic",sans-serif}.op-evidence-grid span.live{border-color:rgba(52,211,153,.48);background:rgba(52,211,153,.08);color:#c5f5df}.op-evidence-grid span.gate{border-color:rgba(251,191,36,.48);background:rgba(251,191,36,.08);color:#ffe1a3}.op-evidence-grid span.bad{border-color:rgba(251,113,133,.48);background:rgba(251,113,133,.08);color:#ffd1d6}.op-seq-controls{display:flex;gap:8px;justify-content:flex-end;padding:10px 12px;border-top:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.025)}.op-seq-controls button{min-height:32px;padding:0 11px;border:1px solid rgba(255,255,255,.17);border-radius:6px;background:#121d28;color:#dce8eb;font:700 12px Pretendard,"Malgun Gothic",sans-serif;cursor:pointer;transition:transform .15s ease,background .15s ease}.op-seq-controls button:hover{transform:translateY(-1px);background:#1a2a38}.op-seq-controls button:first-child{border-color:rgba(52,211,153,.45);color:#69e8b8}@keyframes opSeqIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes opEvidenceIn{from{opacity:0;transform:translateX(-10px) scale(.985)}to{opacity:1;transform:none}}
+.op-map{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:960px}.op-map div{min-height:112px;padding:15px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.035);border-radius:10px;display:grid;align-content:space-between}.op-map b{color:#eaf2f6;font-size:16px}.op-map span{color:#9fb0bd;font-size:12px;line-height:1.4}.op-map div:nth-child(2n){border-color:rgba(52,211,153,.28)}.op-map div:nth-child(3n){border-color:rgba(251,191,36,.28)}
+.op-incident{max-width:850px;border:1px solid rgba(251,113,133,.38);border-radius:12px;overflow:hidden;background:#160f16}.op-incident header{padding:11px 15px;background:rgba(251,113,133,.11);color:#fda4af;font:800 12px ui-monospace,monospace}.op-incident p{margin:0;padding:18px;color:#e8d6da;font-size:15px;line-height:1.55}.op-incident footer{padding:12px 15px;border-top:1px solid rgba(255,255,255,.1);color:#7ee8b0;font:700 13px Pretendard,"Malgun Gothic",sans-serif}
+.op-office-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:980px}.op-office-grid section{min-height:138px;padding:16px;border:1px solid rgba(255,255,255,.13);border-radius:10px;background:#101820;display:grid;gap:7px}.op-office-grid b{color:#eaf2f6;font-size:16px}.op-office-grid span{color:#aebcc4;font-size:12px;line-height:1.45}.op-office-grid .live{border-color:rgba(52,211,153,.45);box-shadow:0 0 24px -12px rgba(52,211,153,.5)}.op-office-grid .gate{border-color:rgba(251,191,36,.4)}
+.op-note{max-width:830px;padding:15px 18px;border-left:3px solid #fbbf24;background:rgba(251,191,36,.08);color:#e3e8e7;font-size:15px;line-height:1.55}.op-note b{color:#fbbf24}.op-break{display:grid;place-items:center;min-height:280px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:radial-gradient(circle at 50% 0,rgba(111,156,255,.14),transparent 44%),#101820;text-align:center}.op-break strong{font-size:clamp(28px,3.2vw,46px)}.op-break span{margin-top:8px;color:#aebcc4;font-size:15px}
+@media (min-width:1600px){.op-slide:has(.op-seq) .op-seq{width:min(100%,1240px)}.op-slide:has(.op-seq) .op-seq-step.has-evidence{max-width:1110px;grid-template-columns:minmax(360px,1.15fr) minmax(320px,.85fr)}.op-slide:has(.op-seq) .op-seq-stage{min-height:214px;padding:28px 34px}.op-slide:has(.op-seq) .op-evidence-body{min-height:132px;padding:18px}.op-slide:has(.op-seq) .op-evidence-row{padding:8px 0}}@media (max-height:720px){.op-slide:has(.op-seq){padding-top:22px!important;padding-bottom:20px!important;gap:10px}.op-slide:has(.op-seq) .op-title{margin:2px 0;font-size:clamp(25px,3vw,39px)}.op-slide:has(.op-seq) .op-cap{font-size:13px;line-height:1.4}.op-seq-rail span{min-height:48px;padding:8px 11px}.op-seq-stage{min-height:144px;padding:14px 20px}.op-seq-step.has-evidence{gap:18px}.op-evidence-body{min-height:88px;padding:10px}.op-evidence-row{padding:5px 0}.op-seq-controls{padding:7px 10px}}@media (max-width:760px){.op-compare,.op-office-grid,.op-map{grid-template-columns:1fr 1fr}.op-compare>section{min-height:170px}.op-seq-step.has-evidence{grid-template-columns:1fr;gap:14px}.op-seq-controls{justify-content:flex-start;flex-wrap:wrap}}@media (prefers-reduced-motion:reduce){.op-console-cursor{animation:none}.op-seq-step,.op-seq-evidence{animation:none}}
+
+.doc-scene{width:min(100%,1120px);border:1px solid rgba(178,204,215,.2);border-radius:14px;overflow:hidden;background:linear-gradient(145deg,#111b25,#080e15);box-shadow:0 32px 80px -44px #000;color:#e8f0f2}.doc-chrome{height:38px;display:flex;align-items:center;gap:10px;padding:0 14px;border-bottom:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);font:700 11px ui-monospace,Consolas,monospace}.doc-chrome span{display:flex;gap:5px}.doc-chrome i{width:8px;height:8px;border-radius:50%;background:#42515d}.doc-chrome i:first-child{background:#fb7185}.doc-chrome i:nth-child(2){background:#f5b951}.doc-chrome i:nth-child(3){background:#37d4c1}.doc-chrome b{color:#b8c9ce}.doc-chrome em{margin-left:auto;color:#37d4c1;font-style:normal;font-size:10px;letter-spacing:.09em}.doc-tool-grid{display:grid;grid-template-columns:24% 48% 28%;min-height:292px}.doc-tool-grid>*{min-width:0}.doc-plan,.doc-agent{padding:18px;display:grid;align-content:start;gap:11px;background:rgba(9,17,25,.78)}.doc-plan{border-right:1px solid rgba(255,255,255,.08)}.doc-agent{border-left:1px solid rgba(255,255,255,.08)}.doc-plan small,.doc-agent small,.doc-editor small,.doc-skill-editor small,.doc-skill-run small,.doc-mcp-node small,.doc-agent-card small,.doc-review-gate small,.doc-office-grid small,.doc-recovery-grid small{font:800 10px ui-monospace,Consolas,monospace;letter-spacing:.1em;color:#80949c}.doc-plan b,.doc-agent b{font-size:15px;line-height:1.35}.doc-plan span{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12px;color:#9fb1b8}.doc-plan .done{color:#6fe4bd}.doc-plan .active{color:#f5b951}.doc-editor{background:#0b1119}.doc-tabs{display:flex;gap:12px;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.08);font:700 10px ui-monospace,Consolas,monospace;color:#71828c}.doc-tabs b{color:#e6f2f5;border-bottom:2px solid #37d4c1;padding-bottom:10px}.doc-editor pre,.doc-skill-editor pre{margin:0;padding:18px 20px;color:#afc1c7;font:600 12px/1.75 ui-monospace,Consolas,monospace;white-space:pre-wrap}.doc-editor pre i{color:#52636f;font-style:normal}.doc-editor pre strong,.doc-editor pre b,.doc-skill-editor pre b{color:#7cc5ff}.doc-editor pre mark{color:#f4e8b8;background:rgba(245,185,81,.12);border-bottom:1px solid rgba(245,185,81,.8)}.doc-diff{display:grid;gap:5px;padding:11px 18px;border-top:1px solid rgba(255,255,255,.08);font:600 11px ui-monospace,Consolas,monospace}.doc-diff del{color:#ff9ca3}.doc-diff ins{color:#6fe4bd;text-decoration:none}.doc-agent p{margin:0;color:#afc0c5;font-size:12px;line-height:1.5}.doc-agent p.teal{color:#7fe2c4}.doc-think{display:flex;gap:6px;margin-top:4px}.doc-think i{width:6px;height:6px;border-radius:50%;background:#37d4c1;animation:docPulse 1.4s ease-in-out infinite}.doc-think i:nth-child(2){animation-delay:.18s}.doc-think i:nth-child(3){animation-delay:.36s}.doc-status{display:flex;gap:18px;padding:11px 14px;border-top:1px solid rgba(255,255,255,.08);color:#90a8ae;font:700 10px ui-monospace,Consolas,monospace}.doc-status b{margin-left:auto;color:#f5b951}.doc-terminal-body{min-height:250px;padding:22px 28px;background:radial-gradient(circle at 84% 14%,rgba(55,212,193,.1),transparent 30%),#080e14;font:600 14px/1.7 ui-monospace,Consolas,monospace}.doc-terminal-body p{margin:0;color:#cddce0}.doc-terminal-body p b{color:#37d4c1}.doc-terminal-body p span{color:#dbe5e7}.doc-terminal-body .ok{color:#71dfae}.doc-terminal-body .ready{color:#7cc5ff}.doc-cursor{display:block;width:10px;height:18px;margin-top:6px;background:#37d4c1;animation:docBlink 1s steps(1) infinite}.doc-terminal-callout{display:flex;align-items:center;justify-content:center;gap:12px;padding:12px;background:#111c25;color:#c8d8dc;font-size:12px}.doc-terminal-callout i{width:44px;height:1px;background:linear-gradient(90deg,#37d4c1,#f5b951);position:relative}.doc-terminal-callout i:after{content:'';position:absolute;right:-1px;top:-3px;border:3px solid transparent;border-left-color:#f5b951}.doc-browser-grid{display:grid;grid-template-columns:260px 1fr;min-height:290px;padding:20px;gap:24px;background:linear-gradient(120deg,rgba(55,212,193,.05),transparent 40%)}.doc-phone{display:grid;gap:10px;padding:16px;border:8px solid #202b34;border-radius:22px;background:#f7f8f6;color:#1d2a30}.doc-phone small{color:#5c6b70;font:700 9px ui-monospace,Consolas,monospace}.doc-phone header{font-weight:800}.doc-phone label{display:grid;gap:5px;padding:8px;border:1px solid #d5dadd;border-radius:6px;font-size:10px}.doc-phone label b{font-size:11px;color:#42525a}.doc-phone .doc-error{padding:8px;margin:0;background:#ffe5e7;color:#a33d49;font-size:10px;line-height:1.4}.doc-phone button{border:0;border-radius:6px;background:#167f73;color:#fff;padding:10px;font-weight:800}.doc-proof-panel{display:grid;align-content:center;gap:12px}.doc-proof-panel small{color:#80949c;font:800 10px ui-monospace,Consolas,monospace}.doc-proof-panel b{font-size:23px;line-height:1.25}.doc-proof-panel span{position:relative;padding:10px 12px 10px 34px;border:1px solid rgba(55,212,193,.24);border-radius:7px;background:rgba(55,212,193,.06);color:#bfe9dc;font-size:12px}.doc-proof-panel span:before{content:'✓';position:absolute;left:12px;color:#37d4c1;font-weight:900}.doc-mcp-grid{display:grid;grid-template-columns:1fr 90px 1fr 90px 1fr;align-items:center;padding:30px 24px 22px}.doc-mcp-node{min-height:132px;padding:18px;border:1px solid rgba(255,255,255,.13);border-radius:10px;background:#111c25;display:grid;align-content:center;gap:8px}.doc-mcp-node b{font-size:17px}.doc-mcp-node span{color:#a9bbc1;font-size:12px;line-height:1.45}.doc-mcp-node.client{border-color:rgba(245,185,81,.45);background:linear-gradient(160deg,rgba(245,185,81,.12),#111c25)}.doc-mcp-node.server{border-color:rgba(55,212,193,.5)}.doc-mcp-link{display:grid;justify-items:center;gap:8px;color:#f5b951;font:700 10px ui-monospace,Consolas,monospace}.doc-mcp-link i{position:relative;width:80px;height:2px;background:linear-gradient(90deg,#37d4c1,#f5b951);overflow:hidden}.doc-mcp-link i:after{content:'';position:absolute;width:18px;height:8px;top:-3px;background:#f8e2a3;filter:blur(1px);animation:docPacket 1.9s linear infinite}.doc-mcp-link.return{color:#37d4c1}.doc-mcp-link.return i{background:linear-gradient(90deg,#f5b951,#37d4c1)}.doc-permission-bar{display:flex;gap:10px;align-items:center;margin:0 24px 18px;padding:11px 14px;border:1px solid rgba(55,212,193,.25);border-radius:8px;background:rgba(55,212,193,.045);color:#b5c8cc;font:700 11px ui-monospace,Consolas,monospace}.doc-permission-bar b{color:#37d4c1}.doc-permission-bar b.warn{margin-left:auto;color:#f5b951}.doc-skill-grid{display:grid;grid-template-columns:58% 42%;min-height:264px}.doc-skill-editor{padding:18px;border-right:1px solid rgba(255,255,255,.1);background:#0b1118}.doc-skill-run{padding:22px;display:grid;align-content:center;gap:12px;background:radial-gradient(circle at 80% 15%,rgba(55,212,193,.12),transparent 34%),#111b24}.doc-skill-run b{font-size:20px}.doc-skill-run span{color:#b3c7cc;font-size:12px}.doc-skill-run .chip{width:max-content;padding:5px 8px;border:1px solid rgba(55,212,193,.4);border-radius:999px;background:rgba(55,212,193,.1);color:#85e8cb;font:700 10px ui-monospace,Consolas,monospace}.doc-skill-run p{margin:4px 0 0;padding:10px;border-left:2px solid #f5b951;color:#dde9eb;font-size:12px;line-height:1.5}.doc-skill-rail{display:flex;align-items:center;justify-content:center;gap:10px;padding:13px;border-top:1px solid rgba(255,255,255,.08);font:800 10px ui-monospace,Consolas,monospace;color:#71858c}.doc-skill-rail span.on{color:#37d4c1}.doc-skill-rail i{width:54px;height:1px;background:#52626b}.doc-agent-board{display:grid;grid-template-columns:1fr 1fr 1fr 190px;gap:10px;padding:18px}.doc-agent-card,.doc-review-gate{min-height:170px;padding:15px;border:1px solid rgba(255,255,255,.13);border-radius:10px;background:#111b24;display:grid;align-content:start;gap:9px}.doc-agent-card.ui{border-top:2px solid #37d4c1}.doc-agent-card.api{border-top:2px solid #7cc5ff}.doc-agent-card.qa{border-top:2px solid #f5b951}.doc-agent-card b,.doc-review-gate b{font-size:15px}.doc-agent-card span{color:#a9bbc1;font-size:12px;line-height:1.45}.doc-agent-card i{margin-top:auto;color:#7995a0;font:700 10px ui-monospace,Consolas,monospace;font-style:normal}.doc-review-gate{border-color:rgba(245,185,81,.42);background:linear-gradient(155deg,rgba(245,185,81,.08),#111b24)}.doc-review-gate span{padding:6px 0;border-bottom:1px solid rgba(255,255,255,.08);color:#c3d0d4;font-size:11px}.doc-review-gate button{margin-top:auto;border:1px solid rgba(245,185,81,.45);border-radius:6px;background:transparent;color:#f7d48b;padding:7px;font-weight:800}.doc-agent-stream{display:flex;align-items:center;gap:9px;padding:0 18px 16px;color:#9eb4ba;font-size:11px}.doc-agent-stream i{width:50px;height:2px;background:linear-gradient(90deg,#37d4c1,#f5b951);position:relative;overflow:hidden}.doc-agent-stream i:after{content:'';position:absolute;top:-2px;left:0;width:12px;height:6px;background:#eaf7f4;animation:docPacket 2s linear infinite}.doc-office-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr;min-height:280px}.doc-office-grid>section{padding:20px;display:grid;align-content:start;gap:10px;border-right:1px solid rgba(255,255,255,.08)}.doc-office-grid>section:last-child{border:0}.doc-office-intake{background:linear-gradient(160deg,rgba(55,212,193,.09),#111b24)}.doc-office-grid b{font-size:17px;line-height:1.35}.doc-office-grid span{color:#acc0c4;font-size:12px;line-height:1.45}.doc-office-lane{background:#0c131c}.doc-office-lane i{padding:10px 11px;border:1px solid rgba(255,255,255,.11);border-radius:7px;background:#121e28;color:#c8d7da;font:700 11px ui-monospace,Consolas,monospace;font-style:normal;position:relative}.doc-office-lane i:after{content:'';position:absolute;right:-26px;top:50%;width:20px;height:1px;background:#37d4c1}.doc-office-log p{margin:0;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);color:#9fb5bb;font:600 11px ui-monospace,Consolas,monospace}.doc-office-log p.warn{color:#f5b951}.doc-office-log p.ok{color:#37d4c1}.doc-office-control footer{display:flex;gap:18px;padding:11px 16px;border-top:1px solid rgba(255,255,255,.1);color:#9bb0b6;font:700 10px ui-monospace,Consolas,monospace}.doc-office-control footer b{margin-left:auto;color:#f5b951}.doc-recovery-grid{display:grid;grid-template-columns:300px 100px 1fr;align-items:center;min-height:260px;padding:20px;gap:18px}.doc-recovery-phone{display:grid;gap:10px;padding:16px;border:8px solid #27333c;border-radius:20px;background:#f6f7f4;color:#27343a}.doc-recovery-phone small{color:#687b80;font:700 9px ui-monospace,Consolas,monospace}.doc-recovery-phone span{padding:9px;border:1px solid #dde2e1;border-radius:5px;font-size:11px}.doc-recovery-phone b{display:block;padding:11px;color:#fff;background:#167f73;text-align:center;transform:translateY(22px);opacity:.45}.doc-recovery-phone em{padding:8px;background:#ffe5e7;color:#a63f4b;font-size:10px;font-style:normal;line-height:1.35}.doc-recovery-arrow{display:grid;justify-items:center;gap:8px;color:#f5b951;font:700 10px ui-monospace,Consolas,monospace}.doc-recovery-arrow i{width:72px;height:2px;background:#f5b951;position:relative}.doc-recovery-arrow i:after{content:'';position:absolute;right:-1px;top:-3px;border:4px solid transparent;border-left-color:#f5b951}.doc-recovery-patch{display:grid;gap:12px;padding:18px;border:1px solid rgba(55,212,193,.32);border-radius:10px;background:#101d24;font:600 12px ui-monospace,Consolas,monospace}.doc-recovery-patch del{color:#ff9da4}.doc-recovery-patch ins{color:#75e8bf;text-decoration:none}.doc-recovery-patch span{color:#9fb6bc}.doc-recovery-patch button{justify-self:start;padding:9px 12px;border:1px solid rgba(55,212,193,.35);border-radius:6px;background:rgba(55,212,193,.08);color:#94ead0;font-weight:800}.doc-scene[data-focus="codex"] .doc-agent{background:radial-gradient(circle at 80% 15%,rgba(124,197,255,.13),transparent 40%),#0b151e}.doc-scene[data-focus="codex"] .doc-agent small{color:#7cc5ff}@keyframes docPulse{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}@keyframes docBlink{50%{opacity:0}}@keyframes docPacket{from{transform:translateX(-18px)}to{transform:translateX(82px)}}@media (max-height:720px){.doc-tool-grid{min-height:248px}.doc-plan,.doc-agent{padding:13px;gap:8px}.doc-editor pre,.doc-skill-editor pre{padding:12px 15px;line-height:1.5}.doc-browser-grid{min-height:235px;padding:14px}.doc-phone{padding:12px;gap:7px}.doc-mcp-grid{padding:20px 18px 14px}.doc-mcp-node{min-height:110px;padding:13px}.doc-skill-grid{min-height:218px}.doc-agent-board{padding:12px}.doc-agent-card,.doc-review-gate{min-height:132px;padding:11px}.doc-office-grid{min-height:230px}.doc-office-grid>section{padding:14px}.doc-recovery-grid{min-height:218px;padding:14px}.doc-recovery-phone{padding:12px;gap:7px}}@media (max-width:840px){.doc-tool-grid{grid-template-columns:1fr 1fr}.doc-agent{display:none}.doc-mcp-grid{grid-template-columns:1fr;gap:10px}.doc-mcp-link{transform:rotate(90deg)}.doc-agent-board{grid-template-columns:1fr 1fr}.doc-review-gate{grid-column:span 2}.doc-office-grid{grid-template-columns:1fr}.doc-office-grid>section{border-right:0;border-bottom:1px solid rgba(255,255,255,.08)}.doc-recovery-grid{grid-template-columns:1fr}.doc-recovery-arrow{transform:rotate(90deg)}}@media (prefers-reduced-motion:reduce){.doc-think i,.doc-cursor,.doc-mcp-link i:after,.doc-agent-stream i:after{animation:none}}
+
+@media (max-height:720px){
+  .op-slide:has(.doc-scene){padding-top:20px!important;padding-bottom:15px!important;gap:9px}
+  .op-slide:has(.doc-scene) .op-title{margin:2px 0;font-size:clamp(24px,2.9vw,38px)}
+  .op-slide:has(.doc-scene) .op-cap{font-size:13px;line-height:1.35}
+  .doc-tool-grid{min-height:238px}.doc-plan,.doc-agent{padding:12px;gap:7px}.doc-editor pre,.doc-skill-editor pre{padding:11px 14px;line-height:1.45}
+  .doc-browser-grid{min-height:216px;padding:12px}.doc-phone{padding:10px;gap:6px}.doc-mcp-grid{padding:18px 16px 12px}.doc-mcp-node{min-height:104px;padding:12px}
+  .doc-skill-grid{min-height:204px}.doc-agent-board{padding:11px}.doc-agent-card,.doc-review-gate{min-height:124px;padding:10px}.doc-office-grid{min-height:214px}.doc-office-grid>section{padding:12px}
+  .doc-recovery-grid{min-height:205px;padding:12px}.doc-recovery-phone{padding:10px;gap:6px}
+}
+
+.doc-capability-grid{display:grid;grid-template-columns:1fr 34px 1fr 34px 1fr 34px 1fr;align-items:stretch;padding:22px 20px 16px}.doc-capability-grid section{min-height:150px;padding:15px;display:grid;align-content:center;gap:9px;border:1px solid rgba(255,255,255,.12);border-radius:9px;background:#101b25}.doc-capability-grid small,.doc-decision-grid small{font:800 10px ui-monospace,Consolas,monospace;letter-spacing:.09em;color:#879da4}.doc-capability-grid b{font-size:15px;line-height:1.35}.doc-capability-grid span{color:#a9bdc3;font-size:11px;line-height:1.45}.doc-capability-grid i{position:relative;align-self:center;height:1px;background:linear-gradient(90deg,#37d4c1,#f5b951)}.doc-capability-grid i:after{content:'';position:absolute;top:-3px;right:-1px;border:4px solid transparent;border-left-color:#f5b951}.doc-capability-grid .capability-mcp{border-top:2px solid #7cc5ff}.doc-capability-grid .capability-skill{border-top:2px solid #37d4c1}.doc-capability-grid .capability-agent{border-top:2px solid #f5b951}.doc-capability-grid .capability-flow{border-top:2px solid #b49bff}.doc-capability-map footer{display:grid;grid-template-columns:repeat(4,1fr);padding:12px 20px;border-top:1px solid rgba(255,255,255,.08);color:#a6bac0;text-align:center;font-size:11px}.doc-decision-grid{display:grid;grid-template-columns:1fr 1.15fr 1fr;min-height:265px}.doc-decision-lane{padding:20px;display:grid;align-content:center;gap:10px}.doc-decision-lane.fixed{background:linear-gradient(145deg,rgba(245,185,81,.09),#101a22);border-right:1px solid rgba(255,255,255,.08)}.doc-decision-lane.agentic{background:linear-gradient(215deg,rgba(124,197,255,.1),#101a22);border-left:1px solid rgba(255,255,255,.08)}.doc-decision-lane b{font-size:16px;line-height:1.35}.doc-decision-lane span{padding:8px 10px;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#bed0d5;font-size:11px}.doc-decision-core{display:grid;place-content:center;justify-items:center;gap:11px;padding:20px;text-align:center;background:radial-gradient(circle at 50% 45%,rgba(55,212,193,.16),transparent 45%),#0c151d}.doc-decision-core b{font-size:19px;line-height:1.4}.doc-decision-core i{width:74px;height:74px;border:1px solid rgba(55,212,193,.45);border-radius:50%;position:relative;box-shadow:0 0 30px rgba(55,212,193,.18);animation:docControl 3.2s ease-in-out infinite}.doc-decision-core i:after{content:'✓';position:absolute;inset:0;display:grid;place-items:center;color:#37d4c1;font-size:28px}.doc-decision-core span{color:#f5d58d;font-size:11px}.doc-decision-control footer{padding:11px 18px;border-top:1px solid rgba(255,255,255,.08);text-align:center;color:#c2d2d5;font-size:12px}.doc-decision-control footer b{color:#93e7ce}@keyframes docControl{50%{transform:scale(1.07);box-shadow:0 0 46px rgba(55,212,193,.34)}}@media(max-height:720px){.doc-capability-grid{padding:16px}.doc-capability-grid section{min-height:122px;padding:12px}.doc-decision-grid{min-height:215px}.doc-decision-lane{padding:14px;gap:7px}.doc-decision-core{padding:13px}.doc-decision-core i{width:56px;height:56px}}@media(max-width:840px){.doc-capability-grid{grid-template-columns:1fr 1fr}.doc-capability-grid i{display:none}.doc-capability-map footer{grid-template-columns:1fr 1fr}.doc-decision-grid{grid-template-columns:1fr}.doc-decision-lane{border:0!important;border-bottom:1px solid rgba(255,255,255,.08)!important}.doc-decision-lane span{display:none}}
+</style></head><body data-onepass-mode="lecture"><div class="app"><nav class="nav-bar"><span class="nav-title">AI 한방 이해하기 · 2주차 · Claude Code · Codex · Desktop · CLI</span><div class="nav-controls"><button class="nav-btn" id="btn-prev" onclick="move(-1)">←</button><span id="counter">1 / 42</span><button class="nav-btn" id="btn-next" onclick="move(1)">→</button></div></nav><div class="deck"><div class="slide op-cover active"><div class="op-eyebrow">AI 한방 이해하기 · 2주차 · 180분 강의</div><h1 class="op-cover-title">Claude Code와 Codex,<br><span class="g">도구를 직접 운영하는 법</span></h1><p class="op-cover-sub">데스크톱 앱·IDE·CLI를 비교하고, AI가 저장소를 읽고 계획·수정·검증하는 실제 작업 장면을 깊게 이해합니다.</p><div class="op-cover-flow"><span>Desktop App</span><span>IDE</span><span>CLI</span><span>Context</span><span>Diff</span><span>Browser QA</span></div></div><div class="slide op-slide">
+  <div class="op-eyebrow">WEEK 02 · OPERATE</div>
+  <h2 class="op-title">도구를 잘 쓴다는 것은<br><span class="g">대화창을 많이 여는 일</span>이 아닙니다</h2>
+  <div class="op-visual"><div class="doc-scene doc-tool-surface" data-focus="claude">
+  <header class="doc-chrome"><span><i></i><i></i><i></i></span><b>workspace / class-project</b><em>SESSION</em></header>
+  <div class="doc-tool-grid">
+    <aside class="doc-plan"><small>WORK PLAN</small><b>모바일 로그인 오류</b><span class="done">01 · 원인 확인</span><span class="active">02 · UI 범위 고정</span><span>03 · Diff 검토</span><span>04 · 브라우저 QA</span></aside>
+    <section class="doc-editor"><div class="doc-tabs"><b>LoginForm.tsx</b><span>login.css</span><span>AGENTS.md</span></div><pre><i>08</i> <strong>return</strong> (
+<i>09</i>   &lt;<b>button</b> <mark>disabled={!canSubmit}</mark>&gt;
+<i>10</i>     로그인
+<i>11</i>   &lt;/<b>button</b>&gt;
+<i>12</i> );</pre><div class="doc-diff"><del>- credential error</del><ins>+ 이메일 또는 비밀번호를 확인해 주세요.</ins></div></section>
+    <aside class="doc-agent"><small>CLAUDE CODE SESSION</small><p>요청 범위: <b>LoginForm과 login.css</b></p><p class="teal">변경 전 계획과 완료 기준을 확인했습니다.</p><div class="doc-think"><i></i><i></i><i></i></div></aside>
+  </div>
+  <footer class="doc-status"><span>범위: 2 files</span><span>검증: browser QA 대기</span><b>사람 승인 전 공개 금지</b></footer>
+</div></div>
+  <p class="op-cap">오늘은 Claude Code와 Codex를 <b>작업 표면과 통제 방식</b>으로 이해합니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">TOOL SURFACES</div>
+  <h2 class="op-title"><span class="g">데스크톱 앱</span>과 <span class="a">CLI</span>는 같은 AI를 다른 방식으로 통제합니다</h2>
+  <div class="op-visual"><div class="doc-scene doc-terminal-flight">
+  <header class="doc-chrome"><span><i></i><i></i><i></i></span><b>terminal / class-project</b><em>READY</em></header>
+  <div class="doc-terminal-body"><p><b>$</b> pwd <span>/projects/class-project</span></p><p><b>$</b> ls <span>src&nbsp;&nbsp;public&nbsp;&nbsp;package.json</span></p><p><b>$</b> npm run check</p><p class="ok">✓ 0 errors · validation passed</p><p><b>$</b> npm run dev</p><p class="ready">▲ Local: http://localhost:3000</p><i class="doc-cursor"></i></div>
+  <div class="doc-terminal-callout"><span>현재 폴더</span><i></i><span>검증</span><i></i><b>브라우저 확인</b></div>
+</div></div>
+  <p class="op-cap">둘 중 하나가 우월한 것이 아니라, <b>어떤 상황을 더 분명히 보고 싶은가</b>의 차이입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">DESKTOP APP</div>
+  <h2 class="op-title">데스크톱 앱은 <span class="g">큰 그림을 잡고 판단</span>할 때 강합니다</h2>
+  <div class="op-visual"><div class="doc-scene doc-tool-surface" data-focus="claude">
+  <header class="doc-chrome"><span><i></i><i></i><i></i></span><b>workspace / class-project</b><em>SESSION</em></header>
+  <div class="doc-tool-grid">
+    <aside class="doc-plan"><small>WORK PLAN</small><b>모바일 로그인 오류</b><span class="done">01 · 원인 확인</span><span class="active">02 · UI 범위 고정</span><span>03 · Diff 검토</span><span>04 · 브라우저 QA</span></aside>
+    <section class="doc-editor"><div class="doc-tabs"><b>LoginForm.tsx</b><span>login.css</span><span>AGENTS.md</span></div><pre><i>08</i> <strong>return</strong> (
+<i>09</i>   &lt;<b>button</b> <mark>disabled={!canSubmit}</mark>&gt;
+<i>10</i>     로그인
+<i>11</i>   &lt;/<b>button</b>&gt;
+<i>12</i> );</pre><div class="doc-diff"><del>- credential error</del><ins>+ 이메일 또는 비밀번호를 확인해 주세요.</ins></div></section>
+    <aside class="doc-agent"><small>CLAUDE CODE SESSION</small><p>요청 범위: <b>LoginForm과 login.css</b></p><p class="teal">변경 전 계획과 완료 기준을 확인했습니다.</p><div class="doc-think"><i></i><i></i><i></i></div></aside>
+  </div>
+  <footer class="doc-status"><span>범위: 2 files</span><span>검증: browser QA 대기</span><b>사람 승인 전 공개 금지</b></footer>
+</div></div>
+  <p class="op-cap">프로젝트의 방향, 계획, 검토가 필요한 순간에는 화면이 넓은 데스크톱 앱이 편합니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">CLI</div>
+  <h2 class="op-title">CLI는 <span class="g">지금 이 저장소에서 무슨 일이 일어나는지</span>를 정확하게 보여줍니다</h2>
+  <div class="op-visual"><div class="doc-scene doc-terminal-flight">
+  <header class="doc-chrome"><span><i></i><i></i><i></i></span><b>terminal / class-project</b><em>READY</em></header>
+  <div class="doc-terminal-body"><p><b>$</b> pwd <span>/projects/class-project</span></p><p><b>$</b> ls <span>src&nbsp;&nbsp;public&nbsp;&nbsp;package.json</span></p><p><b>$</b> npm run check</p><p class="ok">✓ 0 errors · validation passed</p><p><b>$</b> npm run dev</p><p class="ready">▲ Local: http://localhost:3000</p><i class="doc-cursor"></i></div>
+  <div class="doc-terminal-callout"><span>현재 폴더</span><i></i><span>검증</span><i></i><b>브라우저 확인</b></div>
+</div></div>
+  <p class="op-cap">명령은 마법 주문이 아니라, <b>현재 상태를 보고 다음 행동을 고르는 질문</b>입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">IDE</div>
+  <h2 class="op-title">IDE는 <span class="g">코드가 바뀌는 자리</span>를 가장 가까이에서 보여줍니다</h2>
+  <div class="op-visual"><div class="doc-scene doc-tool-surface" data-focus="codex">
+  <header class="doc-chrome"><span><i></i><i></i><i></i></span><b>workspace / class-project</b><em>SESSION</em></header>
+  <div class="doc-tool-grid">
+    <aside class="doc-plan"><small>WORK PLAN</small><b>모바일 로그인 오류</b><span class="done">01 · 원인 확인</span><span class="active">02 · UI 범위 고정</span><span>03 · Diff 검토</span><span>04 · 브라우저 QA</span></aside>
+    <section class="doc-editor"><div class="doc-tabs"><b>LoginForm.tsx</b><span>login.css</span><span>AGENTS.md</span></div><pre><i>08</i> <strong>return</strong> (
+<i>09</i>   &lt;<b>button</b> <mark>disabled={!canSubmit}</mark>&gt;
+<i>10</i>     로그인
+<i>11</i>   &lt;/<b>button</b>&gt;
+<i>12</i> );</pre><div class="doc-diff"><del>- credential error</del><ins>+ 이메일 또는 비밀번호를 확인해 주세요.</ins></div></section>
+    <aside class="doc-agent"><small>CODEX WORKSPACE</small><p>요청 범위: <b>LoginForm과 login.css</b></p><p class="teal">변경 전 계획과 완료 기준을 확인했습니다.</p><div class="doc-think"><i></i><i></i><i></i></div></aside>
+  </div>
+  <footer class="doc-status"><span>범위: 2 files</span><span>검증: browser QA 대기</span><b>사람 승인 전 공개 금지</b></footer>
+</div></div>
+  <p class="op-cap">데스크톱 앱이 계획실이라면, IDE는 <b>수정 내용을 확인하는 작업대</b>입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">SETUP</div>
+  <h2 class="op-title">시작은 <span class="g">설치 → 로그인 → 프로젝트 폴더</span> 세 걸음입니다</h2>
+  <div class="op-visual"><div class="op-console"><div class="op-console-bar"><i></i><i></i><i></i><small>terminal · first run</small></div><div class="op-console-body"><span class="cmd">$ npm install -g @anthropic-ai/claude-code</span><span class="ok">설치 완료</span><span class="cmd">$ claude</span><span class="warn">로그인이 필요합니다 → 브라우저에서 승인</span><span class="cmd">$ cd projects/shop-app</span><span class="ok">프로젝트 규칙을 읽었습니다. 무엇을 도와드릴까요?</span><span class="op-console-cursor"></span></div></div></div>
+  <p class="op-cap">설치 명령은 도구와 버전에 따라 다르므로, <b>수업 전 공식 문서 기준</b>으로 최신 명령을 확인합니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">ONE REQUEST</div>
+  <h2 class="op-title">같은 요청도 <span class="g">작업 표면</span>에 따라 확인하는 장면이 달라집니다</h2>
+  <div class="op-visual"><div class="doc-scene doc-browser-proof">
+  <header class="doc-chrome"><span><i></i><i></i><i></i></span><b>localhost:3000 / login</b><em>BROWSER QA</em></header>
+  <div class="doc-browser-grid"><section class="doc-phone"><small>375 × 667</small><header>VIBE CLASS</header><label>이메일 <b>name@example.com</b></label><label>비밀번호 <b>••••••••</b></label><p class="doc-error">이메일 또는 비밀번호를 확인해 주세요.</p><button>로그인</button></section><aside class="doc-proof-panel"><small>CHECKPOINT</small><b>사용자가 실제로 보는 결과</b><span class="pass">텍스트가 잘리지 않음</span><span class="pass">버튼이 화면 안에 있음</span><span class="pass">오류 원인이 분명함</span></aside></div>
+</div></div>
+  <p class="op-cap">중요한 것은 “어느 도구로 했나”가 아니라 <b>요청부터 검증까지 빠진 단계가 없는가</b>입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">CLAUDE CODE</div>
+  <h2 class="op-title"><span class="g">Claude Code</span> — 저장소 맥락을 읽고 계획·수정·검토를 이어갑니다</h2>
+  <div class="op-visual"><div class="doc-scene doc-tool-surface" data-focus="claude">
+  <header class="doc-chrome"><span><i></i><i></i><i></i></span><b>workspace / class-project</b><em>SESSION</em></header>
+  <div class="doc-tool-grid">
+    <aside class="doc-plan"><small>WORK PLAN</small><b>모바일 로그인 오류</b><span class="done">01 · 원인 확인</span><span class="active">02 · UI 범위 고정</span><span>03 · Diff 검토</span><span>04 · 브라우저 QA</span></aside>
+    <section class="doc-editor"><div class="doc-tabs"><b>LoginForm.tsx</b><span>login.css</span><span>AGENTS.md</span></div><pre><i>08</i> <strong>return</strong> (
+<i>09</i>   &lt;<b>button</b> <mark>disabled={!canSubmit}</mark>&gt;
+<i>10</i>     로그인
+<i>11</i>   &lt;/<b>button</b>&gt;
+<i>12</i> );</pre><div class="doc-diff"><del>- credential error</del><ins>+ 이메일 또는 비밀번호를 확인해 주세요.</ins></div></section>
+    <aside class="doc-agent"><small>CLAUDE CODE SESSION</small><p>요청 범위: <b>LoginForm과 login.css</b></p><p class="teal">변경 전 계획과 완료 기준을 확인했습니다.</p><div class="doc-think"><i></i><i></i><i></i></div></aside>
+  </div>
+  <footer class="doc-status"><span>범위: 2 files</span><span>검증: browser QA 대기</span><b>사람 승인 전 공개 금지</b></footer>
+</div></div>
+  <p class="op-cap">프로젝트 규칙을 먼저 읽히고, 계획과 검증을 같이 남기는 흐름이 핵심입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">CODEX</div>
+  <h2 class="op-title"><span class="g">Codex</span> — 작업 공간과 검증 기준을 바탕으로 구현을 끝까지 확인합니다</h2>
+  <div class="op-visual"><div class="doc-scene doc-tool-surface" data-focus="codex">
+  <header class="doc-chrome"><span><i></i><i></i><i></i></span><b>workspace / class-project</b><em>SESSION</em></header>
+  <div class="doc-tool-grid">
+    <aside class="doc-plan"><small>WORK PLAN</small><b>모바일 로그인 오류</b><span class="done">01 · 원인 확인</span><span class="active">02 · UI 범위 고정</span><span>03 · Diff 검토</span><span>04 · 브라우저 QA</span></aside>
+    <section class="doc-editor"><div class="doc-tabs"><b>LoginForm.tsx</b><span>login.css</span><span>AGENTS.md</span></div><pre><i>08</i> <strong>return</strong> (
+<i>09</i>   &lt;<b>button</b> <mark>disabled={!canSubmit}</mark>&gt;
+<i>10</i>     로그인
+<i>11</i>   &lt;/<b>button</b>&gt;
+<i>12</i> );</pre><div class="doc-diff"><del>- credential error</del><ins>+ 이메일 또는 비밀번호를 확인해 주세요.</ins></div></section>
+    <aside class="doc-agent"><small>CODEX WORKSPACE</small><p>요청 범위: <b>LoginForm과 login.css</b></p><p class="teal">변경 전 계획과 완료 기준을 확인했습니다.</p><div class="doc-think"><i></i><i></i><i></i></div></aside>
+  </div>
+  <footer class="doc-status"><span>범위: 2 files</span><span>검증: browser QA 대기</span><b>사람 승인 전 공개 금지</b></footer>
+</div></div>
+  <p class="op-cap">작업 공간의 경계와 실제 화면 검증을 명확히 하는 것이 Codex 작업의 중요한 축입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">COMMON LOOP</div>
+  <h2 class="op-title">Claude Code와 Codex 모두 <span class="g">이 네 단계</span>를 건너뛰면 위험합니다</h2>
+  <div class="op-visual"><div class="op-flow"><div class="op-node "><b>읽기</b><span>규칙·현재 상태</span></div><span class="op-arrow">→</span><div class="op-node a"><b>계획</b><span>작은 변경 단위</span></div><span class="op-arrow">→</span><div class="op-node a"><b>수정</b><span>Diff 확인</span></div><span class="op-arrow">→</span><div class="op-node g"><b>검증</b><span>실행·화면</span></div></div></div>
+  <p class="op-cap">도구별 화면은 달라도, <b>읽기 → 계획 → 수정 → 검증</b>은 공통된 작업 규율입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">PROJECT RULES</div>
+  <h2 class="op-title">AI에게 매번 말하지 않으려면 <span class="g">규칙 파일</span>에 적어 둡니다</h2>
+  <div class="op-visual"><div class="op-cols"><div class="op-card"><div class="op-card-h g">CLAUDE.md · 프로젝트 규칙</div><div class="op-codeboard"><span class="key"># 프로젝트 규칙</span><br>- 답변은 한국어로 한다<br>- 기존 코드 스타일을 따른다<br>- <span class="bad">.env 파일은 절대 수정하지 않는다</span><br>- 수정 후 <span class="good">npm run check</span>를 실행한다</div></div><div class="op-card"><div class="op-card-h a">이 파일이 하는 일</div><small><b>새 대화를 열 때마다</b> AI가 가장 먼저 읽는 우리 프로젝트의 업무 지침입니다.</small><small>같은 지적을 두 번 이상 반복했다면, 그 지적을 규칙 파일로 옮길 시간입니다.</small></div></div></div>
+  <p class="op-cap">Claude Code는 CLAUDE.md, Codex는 AGENTS.md — 이름은 달라도 <b>“먼저 읽는 지침”</b>이라는 역할은 같습니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">RULES IN ACTION</div>
+  <h2 class="op-title">같은 요청도 <span class="g">규칙이 있으면</span> 결과가 달라집니다</h2>
+  <div class="op-visual"><div class="op-compare"><section><h3>규칙 없이 “버튼 색 바꿔줘”</h3><p>임의의 파란색을 고르고, <span class="amber">새 CSS 파일</span>을 만들고, 영어 주석을 답니다.</p><p>매번 결과가 달라서 매번 다시 설명해야 합니다.</p></section><section><h3>규칙과 함께 같은 요청</h3><p><span class="teal">프로젝트 팔레트</span>의 색을 쓰고, 기존 파일을 수정하고, 검증 명령까지 실행합니다.</p><p>누가 요청해도 같은 기준의 결과가 나옵니다.</p></section></div></div>
+  <p class="op-cap">규칙은 AI를 제한하는 장치가 아니라 <b>우리 프로젝트의 상식을 이식</b>하는 일입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">MANUAL SCENE · RULES</div>
+  <h2 class="op-title">수동 시연 4 — <span class="g">규칙 파일이 팀의 기준이 되는 순간</span></h2>
+  <div class="op-visual"><div class="op-seq" data-seq-current="0">
+  <div class="op-seq-rail"><span class="is-active" data-seq-marker="0"><i>01</i><b>규칙 없음</b></span><span class="" data-seq-marker="1"><i>02</i><b>규칙 작성</b></span><span class="" data-seq-marker="2"><i>03</i><b>같은 요청</b></span><span class="" data-seq-marker="3"><i>04</i><b>팀 공유</b></span></div>
+  <div class="op-seq-stage"><div class="op-seq-step has-evidence is-active" data-seq-step="0"><div class="op-seq-evidence"><div class="op-evidence-top"><b>CHAT · 첫 요청</b><span class="op-evidence-status fail">RANDOM</span></div><div class="op-evidence-body"><div class="op-evidence-code"><span class="key">요청</span> 버튼 색 바꿔줘<br><span class="bad">결과</span> 임의의 파란색 · 새 CSS 파일 · 영어 주석</div></div></div><div class="op-seq-copy"><em>STEP 01</em><strong>규칙 없음</strong><span>기준이 없으니 그럴듯하지만 매번 다른 결과가 나옵니다.</span></div></div><div class="op-seq-step has-evidence" data-seq-step="1"><div class="op-seq-evidence"><div class="op-evidence-top"><b>CLAUDE.md</b><span class="op-evidence-status ">SAVED</span></div><div class="op-evidence-body"><div class="op-evidence-code"><span class="key"># 프로젝트 규칙</span><br>- 팔레트: brand.css의 변수만 사용<br>- 기존 파일 수정 · 새 파일 금지<br>- 수정 후 npm run check 실행</div></div></div><div class="op-seq-copy"><em>STEP 02</em><strong>규칙 작성</strong><span>반복해서 지적하던 내용을 파일 네 줄로 옮깁니다.</span></div></div><div class="op-seq-step has-evidence" data-seq-step="2"><div class="op-seq-evidence"><div class="op-evidence-top"><b>CHAT · 재요청</b><span class="op-evidence-status ok">ON-SPEC</span></div><div class="op-evidence-body"><div class="op-evidence-code"><span class="key">요청</span> 버튼 색 바꿔줘 (동일 문장)<br><span class="ok">결과</span> 브랜드 변수 사용 · 기존 파일 수정<br><span class="ok">검증</span> npm run check 자동 실행</div></div></div><div class="op-seq-copy"><em>STEP 03</em><strong>같은 요청</strong><span>같은 문장인데 결과가 달라졌습니다. 바뀐 것은 AI가 아니라 <b>보는 것</b>입니다.</span></div></div><div class="op-seq-step has-evidence" data-seq-step="3"><div class="op-seq-evidence"><div class="op-evidence-top"><b>GIT · 커밋</b><span class="op-evidence-status ok">SHARED</span></div><div class="op-evidence-body"><div class="op-evidence-row"><i class="ok"></i><code>CLAUDE.md</code> 커밋 · 푸시</div><div class="op-evidence-row"><i class="ok"></i>동료의 요청에도 같은 기준 적용</div><div class="op-evidence-row"><i class=""></i><code>다음 기수에게도 그대로 전달</code></div></div></div><div class="op-seq-copy"><em>STEP 04</em><strong>팀 공유</strong><span>규칙 파일을 저장소에 올리면 나의 요령이 팀의 기준이 됩니다.</span></div></div></div>
+  <div class="op-seq-controls" aria-label="발표자 진행 제어">
+    <button type="button" data-seq-action="start">시작</button><button type="button" data-seq-action="previous">이전</button><button type="button" data-seq-action="next">다음</button><button type="button" data-seq-action="pause">일시정지</button><button type="button" data-seq-action="reset">초기화</button>
+  </div>
+</div></div>
+  <p class="op-cap">프롬프트를 고치는 대신 <b>모델이 보는 것</b>을 고쳤습니다 — 이 사고방식은 3주차에서 다시 만납니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">CONTEXT MEMORY</div>
+  <h2 class="op-title">AI의 작업 기억은 <span class="a">책상 크기</span>만큼만 유지됩니다</h2>
+  <div class="op-visual"><div class="op-compare"><section><h3>대화 하나로 하루 종일</h3><p>책상 위에 서류가 계속 쌓여 <span class="amber">처음의 지시를 잊기 시작</span>합니다.</p><p>답이 흐려지고, 이미 정한 내용을 다시 묻습니다.</p></section><section><h3>작업 단위로 새 대화</h3><p>새 책상에 <span class="teal">규칙 파일이 다시 깔리고</span> 판단이 선명해집니다.</p><p>끝낼 때 요약을 남기면 다음 대화가 그 요약에서 시작합니다.</p></section></div></div>
+  <p class="op-cap">대화가 길어져 답이 흐려지는 것은 고장이 아니라 <b>책상을 치울 신호</b>입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">WORKSPACE</div>
+  <h2 class="op-title">첫 명령은 늘 <span class="g">“여기가 맞는 폴더인가?”</span>입니다</h2>
+  <div class="op-visual"><div class="op-console">
+  <div class="op-console-bar"><i></i><i></i><i></i><small>terminal · safe boundary</small></div>
+  <div class="op-console-body"><span class="cmd">$ pwd</span><span class="warn">/Users/me</span><span class="fail">project root가 아닙니다</span><span class="cmd">$ cd projects/shop-app</span><span class="ok">$ ls  → src / public / package.json</span><span class="op-console-cursor"></span></div>
+</div></div>
+  <p class="op-cap">엉뚱한 폴더에서 실행하면 AI가 틀린 파일을 읽고, 변경 기록도 남지 않을 수 있습니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">COMMAND VOCABULARY</div>
+  <h2 class="op-title">터미널 명령은 외우기보다 <span class="g">역할</span>로 기억합니다</h2>
+  <div class="op-visual"><div class="op-map"><div><b>이동</b><span>cd · pwd<br>어디에서 일하나</span></div><div><b>확인</b><span>ls · find<br>무엇이 있나</span></div><div><b>실행</b><span>npm run ...<br>프로젝트를 켜고 검사</span></div><div><b>중단</b><span>Ctrl + C<br>실행을 멈추고 다시 본다</span></div></div></div>
+  <p class="op-cap">명령 한 줄은 “컴퓨터에게 시키는 일”이 아니라 <b>작업 상태를 다루는 동사</b>입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">COMMAND SCENE</div>
+  <h2 class="op-title"><span class="g">pwd → ls → npm run check</span>로 시작하면 길을 잃지 않습니다</h2>
+  <div class="op-visual"><div class="op-console">
+  <div class="op-console-bar"><i></i><i></i><i></i><small>terminal · project orientation</small></div>
+  <div class="op-console-body"><span class="cmd">$ pwd</span><span class="ok">/projects/shop-app</span><span class="cmd">$ ls</span><span class="ok">src  public  package.json  README.md</span><span class="cmd">$ npm run check</span><span class="ok">Project check passed.</span><span class="op-console-cursor"></span></div>
+</div></div>
+  <p class="op-cap">AI에게 일을 맡기기 전에도, 내가 <b>프로젝트의 위치와 상태</b>를 한 번 확인합니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">GIT SNAPSHOT</div>
+  <h2 class="op-title">Git은 <span class="g">되돌릴 수 있는 저장 지점</span>을 만드는 습관입니다</h2>
+  <div class="op-visual"><div class="op-flow"><div class="op-node "><b>c101</b><span>아침 시작 상태</span></div><span class="op-arrow">→</span><div class="op-node a"><b>c102</b><span>로그인 문구 수정</span></div><span class="op-arrow">→</span><div class="op-node a"><b>c103</b><span>결제 버그 수정</span></div><span class="op-arrow">→</span><div class="op-node g"><b>복귀 가능</b><span>어느 지점으로든</span></div></div></div>
+  <p class="op-cap">게임의 세이브포인트와 같습니다. 저장 지점이 촘촘할수록 <b>과감한 수정</b>이 가능해집니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">GIT DAILY FOUR</div>
+  <h2 class="op-title">하루에 필요한 Git은 <span class="g">네 장면</span>이 전부입니다</h2>
+  <div class="op-visual"><div class="op-console"><div class="op-console-bar"><i></i><i></i><i></i><small>terminal · daily git</small></div><div class="op-console-body"><span class="cmd">$ git status</span><span class="ok">변경 파일 2개 — 무엇이 바뀌었나</span><span class="cmd">$ git diff</span><span class="ok">+8 / -3 — 어떻게 바뀌었나</span><span class="cmd">$ git add -A && git commit -m "로그인 문구 수정"</span><span class="ok">저장 지점 생성 완료</span><span class="cmd">$ git push</span><span class="ok">GitHub 백업 완료</span><span class="op-console-cursor"></span></div></div></div>
+  <p class="op-cap">이 네 장면만 몸에 붙이면 됩니다. 나머지 명령은 <b>필요할 때 AI에게 물어보면</b> 됩니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">BRANCH</div>
+  <h2 class="op-title">브랜치는 <span class="g">본편을 건드리지 않는 실험실</span>입니다</h2>
+  <div class="op-visual"><div class="op-compare"><section><h3>main — 항상 동작하는 본편</h3><p>수업, 시연, 배포는 언제나 <span class="teal">동작이 보장된 본편</span>에서 합니다.</p><p>본편은 검증된 변경만 받아들입니다.</p></section><section><h3>feature/new-design — 실험실</h3><p>새 디자인 실험은 <span class="amber">복사본 복도</span>에서 진행합니다.</p><p>실패하면 통째로 버려도 본편은 무사합니다.</p></section></div></div>
+  <p class="op-cap">AI에게 큰 수정을 맡길 때는 <b>“브랜치를 먼저 만들어 줘”</b>라고 요청하는 것이 안전한 출발입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">CONTEXT START</div>
+  <h2 class="op-title">AI가 일을 시작하기 전에는 <span class="g">프로젝트의 현재 맥락</span>이 먼저입니다</h2>
+  <div class="op-visual"><div class="doc-scene doc-tool-surface" data-focus="claude">
+  <header class="doc-chrome"><span><i></i><i></i><i></i></span><b>workspace / class-project</b><em>SESSION</em></header>
+  <div class="doc-tool-grid">
+    <aside class="doc-plan"><small>WORK PLAN</small><b>모바일 로그인 오류</b><span class="done">01 · 원인 확인</span><span class="active">02 · UI 범위 고정</span><span>03 · Diff 검토</span><span>04 · 브라우저 QA</span></aside>
+    <section class="doc-editor"><div class="doc-tabs"><b>LoginForm.tsx</b><span>login.css</span><span>AGENTS.md</span></div><pre><i>08</i> <strong>return</strong> (
+<i>09</i>   &lt;<b>button</b> <mark>disabled={!canSubmit}</mark>&gt;
+<i>10</i>     로그인
+<i>11</i>   &lt;/<b>button</b>&gt;
+<i>12</i> );</pre><div class="doc-diff"><del>- credential error</del><ins>+ 이메일 또는 비밀번호를 확인해 주세요.</ins></div></section>
+    <aside class="doc-agent"><small>CLAUDE CODE SESSION</small><p>요청 범위: <b>LoginForm과 login.css</b></p><p class="teal">변경 전 계획과 완료 기준을 확인했습니다.</p><div class="doc-think"><i></i><i></i><i></i></div></aside>
+  </div>
+  <footer class="doc-status"><span>범위: 2 files</span><span>검증: browser QA 대기</span><b>사람 승인 전 공개 금지</b></footer>
+</div></div>
+  <p class="op-cap">GitHub의 협업 흐름은 1주차에서 다뤘습니다. 여기서는 <b>AI가 실제 작업을 시작하기 전 어떤 맥락을 읽어야 하는지</b>에 집중합니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">BROWSER PROOF</div>
+  <h2 class="op-title">작업이 끝났다는 말보다 <span class="g">실제 화면의 증거</span>가 먼저입니다</h2>
+  <div class="op-visual"><div class="doc-scene doc-browser-proof">
+  <header class="doc-chrome"><span><i></i><i></i><i></i></span><b>localhost:3000 / login</b><em>BROWSER QA</em></header>
+  <div class="doc-browser-grid"><section class="doc-phone"><small>375 × 667</small><header>VIBE CLASS</header><label>이메일 <b>name@example.com</b></label><label>비밀번호 <b>••••••••</b></label><p class="doc-error">이메일 또는 비밀번호를 확인해 주세요.</p><button>로그인</button></section><aside class="doc-proof-panel"><small>CHECKPOINT</small><b>사용자가 실제로 보는 결과</b><span class="pass">텍스트가 잘리지 않음</span><span class="pass">버튼이 화면 안에 있음</span><span class="pass">오류 원인이 분명함</span></aside></div>
+</div></div>
+  <p class="op-cap">여기서의 핵심은 기록 명령을 반복하는 것이 아니라, <b>바뀐 결과가 사용자 화면에서 실제로 읽히는지</b> 검증하는 습관입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">DIFF READING</div>
+  <h2 class="op-title">Diff를 읽을 때는 <span class="g">세 가지 질문</span>이면 충분합니다</h2>
+  <div class="op-visual"><div class="op-map"><div><b>어디를</b><span>내가 예상한 파일이<br>바뀌었는가</span></div><div><b>얼마나</b><span>요청보다 훨씬 많이<br>바뀌지 않았는가</span></div><div><b>지운 것은</b><span>빨간 줄에 중요한 것이<br>섞여 있지 않은가</span></div><div><b>모르면</b><span>이 변경을 한 줄로<br>설명해 달라고 요청</span></div></div></div>
+  <p class="op-cap">코드를 전부 이해할 필요는 없습니다. <b>예상과 다른 부분을 찾아내는 것</b>이 검토의 전부입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">VERIFY ROUTINE</div>
+  <h2 class="op-title">수정이 끝날 때마다 <span class="g">3분 검증 루틴</span>을 반복합니다</h2>
+  <div class="op-visual"><ul class="op-checks"><li>Diff에서 바뀐 파일과 규모를 확인한다</li><li>실행해서 바뀐 화면을 직접 눈으로 본다</li><li>모바일 폭(375px)에서도 한 번 확인한다</li><li>커밋으로 저장 지점을 남기고 다음 작업으로 간다</li></ul></div>
+  <p class="op-cap">이 루틴이 몸에 붙으면 AI의 속도를 <b>불안 없이</b> 쓸 수 있습니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">OPERATING FLOW</div>
+  <h2 class="op-title">도구가 달라도 <span class="g">작업의 호흡</span>은 같습니다</h2>
+  <div class="op-visual"><div class="doc-scene doc-terminal-flight">
+  <header class="doc-chrome"><span><i></i><i></i><i></i></span><b>terminal / class-project</b><em>READY</em></header>
+  <div class="doc-terminal-body"><p><b>$</b> pwd <span>/projects/class-project</span></p><p><b>$</b> ls <span>src&nbsp;&nbsp;public&nbsp;&nbsp;package.json</span></p><p><b>$</b> npm run check</p><p class="ok">✓ 0 errors · validation passed</p><p><b>$</b> npm run dev</p><p class="ready">▲ Local: http://localhost:3000</p><i class="doc-cursor"></i></div>
+  <div class="doc-terminal-callout"><span>현재 폴더</span><i></i><span>검증</span><i></i><b>브라우저 확인</b></div>
+</div></div>
+  <p class="op-cap">이번 주의 작업 흐름은 <b>맥락 → 작은 변경 → Diff → 브라우저 검증</b>입니다. 협업 명령은 1주차의 Git 장면으로 연결해 기억하면 됩니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">MANUAL SCENE · DESKTOP APP</div>
+  <h2 class="op-title">수동 시연 1 — <span class="g">계획을 확정하는 순간</span></h2>
+  <div class="op-visual"><div class="op-seq" data-seq-current="0">
+  <div class="op-seq-rail"><span class="is-active" data-seq-marker="0"><i>01</i><b>요청 접수</b></span><span class="" data-seq-marker="1"><i>02</i><b>범위 확인</b></span><span class="" data-seq-marker="2"><i>03</i><b>완료 기준</b></span><span class="" data-seq-marker="3"><i>04</i><b>실행 전달</b></span></div>
+  <div class="op-seq-stage"><div class="op-seq-step has-evidence is-active" data-seq-step="0"><div class="op-seq-evidence"><div class="op-evidence-top"><b>WORKSPACE · REQUEST</b><span class="op-evidence-status ">INBOX</span></div><div class="op-evidence-body"><div class="op-evidence-row"><i class="ok"></i><code>goal</code> 로그인 실패 원인을 읽기 쉽게</div><div class="op-evidence-row"><i></i><code>owner</code> 나 · 승인 전 공개 금지</div></div></div><div class="op-seq-copy"><em>STEP 01</em><strong>요청 접수</strong><span>“모바일에서 로그인 오류를 더 쉽게 이해하게 해줘.”</span></div></div><div class="op-seq-step has-evidence" data-seq-step="1"><div class="op-seq-evidence"><div class="op-evidence-top"><b>WORKSPACE · SCOPE</b><span class="op-evidence-status ">BOUNDARY</span></div><div class="op-evidence-body"><div class="op-evidence-row"><i class="ok"></i><code>src/LoginForm.tsx</code></div><div class="op-evidence-row"><i class="ok"></i><code>src/styles/login.css</code></div><div class="op-evidence-row"><i class="warn"></i><code>API / DB / 권한 규칙</code> 변경 금지</div></div></div><div class="op-seq-copy"><em>STEP 02</em><strong>범위 확인</strong><span>LoginForm과 validation 메시지만 수정 대상으로 잡습니다.</span></div></div><div class="op-seq-step has-evidence" data-seq-step="2"><div class="op-seq-evidence"><div class="op-evidence-top"><b>WORKSPACE · ACCEPTANCE</b><span class="op-evidence-status ">CHECK</span></div><div class="op-evidence-body"><div class="op-evidence-grid"><span class="live">375px<br>글자 안 잘림</span><span class="live">오류 문구<br>의미가 분명</span><span class="gate">check<br>통과 필요</span></div></div></div><div class="op-seq-copy"><em>STEP 03</em><strong>완료 기준</strong><span>모바일 화면에서 오류가 잘리고 겹치지 않아야 합니다.</span></div></div><div class="op-seq-step has-evidence" data-seq-step="3"><div class="op-seq-evidence"><div class="op-evidence-top"><b>WORKSPACE · HANDOFF</b><span class="op-evidence-status ">READY</span></div><div class="op-evidence-body"><div class="op-evidence-row"><i class="ok"></i><code>input</code> 요청 · 범위 · 완료 기준</div><div class="op-evidence-row"><i class="ok"></i><code>next</code> IDE / CLI에서 작은 수정</div></div></div><div class="op-seq-copy"><em>STEP 04</em><strong>실행 전달</strong><span>확정된 계획을 IDE 또는 CLI 작업으로 넘깁니다.</span></div></div></div>
+  <div class="op-seq-controls" aria-label="발표자 진행 제어">
+    <button type="button" data-seq-action="start">시작</button><button type="button" data-seq-action="previous">이전</button><button type="button" data-seq-action="next">다음</button><button type="button" data-seq-action="pause">일시정지</button><button type="button" data-seq-action="reset">초기화</button>
+  </div>
+</div></div>
+  <p class="op-cap">큰 요청을 바로 실행하지 말고 <b>수정 범위와 완료 기준</b>을 먼저 고정합니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">MANUAL SCENE · CLI</div>
+  <h2 class="op-title">수동 시연 2 — <span class="g">CLI에서 안전하게 수정</span></h2>
+  <div class="op-visual"><div class="op-seq" data-seq-current="0">
+  <div class="op-seq-rail"><span class="is-active" data-seq-marker="0"><i>01</i><b>위치 확인</b></span><span class="" data-seq-marker="1"><i>02</i><b>요청 실행</b></span><span class="" data-seq-marker="2"><i>03</i><b>Diff 읽기</b></span><span class="" data-seq-marker="3"><i>04</i><b>프로젝트 검사</b></span></div>
+  <div class="op-seq-stage"><div class="op-seq-step has-evidence is-active" data-seq-step="0"><div class="op-seq-evidence"><div class="op-evidence-top"><b>TERMINAL · ORIENTATION</b><span class="op-evidence-status ">SAFE</span></div><div class="op-evidence-body"><div class="op-evidence-code"><span class="key">$</span> pwd<br><span class="ok">/projects/shop-app</span><br><span class="key">$</span> git status<br><span class="ok">On branch main · clean</span></div></div></div><div class="op-seq-copy"><em>STEP 01</em><strong>위치 확인</strong><span>pwd와 git status로 올바른 저장소인지 확인합니다.</span></div></div><div class="op-seq-step has-evidence" data-seq-step="1"><div class="op-seq-evidence"><div class="op-evidence-top"><b>TERMINAL · REQUEST</b><span class="op-evidence-status ">SCOPED</span></div><div class="op-evidence-body"><div class="op-evidence-code"><span class="key">request</span> LoginForm 오류 문구만 수정<br><span class="amber">guard</span> API·DB 파일은 건드리지 않음</div></div></div><div class="op-seq-copy"><em>STEP 02</em><strong>요청 실행</strong><span>AI에게 LoginForm의 오류 문구만 바꾸라고 요청합니다.</span></div></div><div class="op-seq-step has-evidence" data-seq-step="2"><div class="op-seq-evidence"><div class="op-evidence-top"><b>TERMINAL · DIFF</b><span class="op-evidence-status ">REVIEW</span></div><div class="op-evidence-body"><div class="op-evidence-code"><span class="bad">- 입력값이 올바르지 않습니다.</span><br><span class="ok">+ 이메일 또는 비밀번호를 확인해 주세요.</span><br><span class="key">files</span> LoginForm.tsx · login.css</div></div></div><div class="op-seq-copy"><em>STEP 03</em><strong>Diff 읽기</strong><span>수정 파일과 변경 줄을 확인합니다.</span></div></div><div class="op-seq-step has-evidence" data-seq-step="3"><div class="op-seq-evidence"><div class="op-evidence-top"><b>TERMINAL · VERIFY</b><span class="op-evidence-status ">PASS</span></div><div class="op-evidence-body"><div class="op-evidence-grid"><span class="live">check<br>passed</span><span class="live">browser<br>375px</span><span class="gate">commit<br>가능</span></div></div></div><div class="op-seq-copy"><em>STEP 04</em><strong>프로젝트 검사</strong><span>check와 브라우저 실행으로 결과를 확인합니다.</span></div></div></div>
+  <div class="op-seq-controls" aria-label="발표자 진행 제어">
+    <button type="button" data-seq-action="start">시작</button><button type="button" data-seq-action="previous">이전</button><button type="button" data-seq-action="next">다음</button><button type="button" data-seq-action="pause">일시정지</button><button type="button" data-seq-action="reset">초기화</button>
+  </div>
+</div></div>
+  <p class="op-cap">CLI는 AI가 한 일을 숨기지 않습니다. <b>변경·검증 기록</b>이 바로 옆에 남습니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">MANUAL SCENE · DIFF</div>
+  <h2 class="op-title">수동 시연 3 — <span class="g">Diff가 승인 전 마지막 관문</span></h2>
+  <div class="op-visual"><div class="op-seq" data-seq-current="0">
+  <div class="op-seq-rail"><span class="is-active" data-seq-marker="0"><i>01</i><b>변경 전</b></span><span class="" data-seq-marker="1"><i>02</i><b>변경 확인</b></span><span class="" data-seq-marker="2"><i>03</i><b>화면 확인</b></span><span class="" data-seq-marker="3"><i>04</i><b>검증 결과</b></span></div>
+  <div class="op-seq-stage"><div class="op-seq-step has-evidence is-active" data-seq-step="0"><div class="op-seq-evidence"><div class="op-evidence-top"><b>BROWSER · 375px</b><span class="op-evidence-status fail">FAIL</span></div><div class="op-evidence-body"><div class="op-evidence-grid"><span class="bad">로그인 실패:<br>credential...</span><span>입력창</span><span>로그인</span></div></div></div><div class="op-seq-copy"><em>STEP 01</em><strong>변경 전</strong><span>오류 메시지가 기술적이고, 모바일에서 잘립니다.</span></div></div><div class="op-seq-step has-evidence" data-seq-step="1"><div class="op-seq-evidence"><div class="op-evidence-top"><b>DIFF · 2 FILES</b><span class="op-evidence-status ">REVIEW</span></div><div class="op-evidence-body"><div class="op-evidence-row"><i class="ok"></i><code>LoginForm.tsx</code> 문구 변경</div><div class="op-evidence-row"><i class="ok"></i><code>login.css</code> 줄바꿈 여백</div><div class="op-evidence-row"><i></i><code>그 외 파일 0개</code></div></div></div><div class="op-seq-copy"><em>STEP 02</em><strong>변경 확인</strong><span>문구와 레이아웃 수정이 예상한 파일에만 있는지 봅니다.</span></div></div><div class="op-seq-step has-evidence" data-seq-step="2"><div class="op-seq-evidence"><div class="op-evidence-top"><b>BROWSER · 375px</b><span class="op-evidence-status ">VISIBLE</span></div><div class="op-evidence-body"><div class="op-evidence-grid"><span class="live">이메일 또는<br>비밀번호를 확인</span><span>입력창</span><span class="live">로그인</span></div></div></div><div class="op-seq-copy"><em>STEP 03</em><strong>화면 확인</strong><span>브라우저의 모바일 폭에서 실제로 읽히는지 확인합니다.</span></div></div><div class="op-seq-step has-evidence" data-seq-step="3"><div class="op-seq-evidence"><div class="op-evidence-top"><b>WORK LOG · HANDOFF</b><span class="op-evidence-status ">READY</span></div><div class="op-evidence-body"><div class="op-evidence-code"><span class="key">changed</span> LoginForm.tsx · login.css<br><span class="ok">verified</span> check · 375px browser QA<br><span class="key">next</span> 사람 승인 대기</div></div></div><div class="op-seq-copy"><em>STEP 04</em><strong>검증 결과</strong><span>변경 범위와 브라우저 확인 결과를 다음 작업자가 읽을 수 있게 남깁니다.</span></div></div></div>
+  <div class="op-seq-controls" aria-label="발표자 진행 제어">
+    <button type="button" data-seq-action="start">시작</button><button type="button" data-seq-action="previous">이전</button><button type="button" data-seq-action="next">다음</button><button type="button" data-seq-action="pause">일시정지</button><button type="button" data-seq-action="reset">초기화</button>
+  </div>
+</div></div>
+  <p class="op-cap">AI의 제안은 자동 승인 대상이 아닙니다. <b>Diff와 실행 화면</b>이 사람의 판단 근거입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">PERMISSION</div>
+  <h2 class="op-title">권한 요청은 귀찮은 팝업이 아니라 <span class="a">작업 경계</span>를 묻는 신호입니다</h2>
+  <div class="op-visual"><div class="op-incident"><header>PERMISSION REQUEST</header><p>“외부 서비스에 연결하려고 합니다.”<br>“이 파일을 수정하려고 합니다.”<br>“명령을 실행하려고 합니다.”</p><footer>무엇을 · 어디까지 · 왜 하는지 확인한 뒤 승인합니다.</footer></div></div>
+  <p class="op-cap">권한을 많이 주는 것이 능력이 아닙니다. <b>필요한 범위를 확인하고 승인</b>하는 것이 운영입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">DANGER SIGNS</div>
+  <h2 class="op-title">이 네 가지 요청 앞에서는 <span class="a">한 번 멈추고</span> 확인합니다</h2>
+  <div class="op-visual"><div class="op-map"><div><b>파일 삭제</b><span>rm · 삭제 요청은<br>범위부터 확인</span></div><div><b>강제 초기화</b><span>reset --hard는<br>저장 안 된 작업이 증발</span></div><div><b>전면 교체</b><span>“전부 다시 짜줘”는<br>Diff가 커져 검토 불능</span></div><div><b>비밀값</b><span>.env · API 키를<br>채팅에 붙여넣지 않기</span></div></div></div>
+  <p class="op-cap">도구의 승인 창은 귀찮은 팝업이 아니라 <b>마지막 안전벨트</b>입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">RECOVERY</div>
+  <h2 class="op-title">잘못된 폴더·잘못된 명령은 <span class="g">멈추고 되돌아가는 것</span>이 정답입니다</h2>
+  <div class="op-visual"><div class="op-incident"><header>INCIDENT · wrong working directory</header><p>AI가 프로젝트 밖의 파일을 읽고 있습니다.<br>새 명령을 더 넣지 말고, 현재 경로와 열려 있는 폴더부터 다시 확인합니다.</p><footer>pwd → cd 프로젝트 루트 → ls → 다시 계획</footer></div></div>
+  <p class="op-cap">오류가 나면 더 강한 명령을 넣지 않습니다. <b>현재 위치와 변경 범위</b>로 돌아갑니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">UNDO</div>
+  <h2 class="op-title">잘못됐을 때는 <span class="g">세 단계</span>로 되돌립니다</h2>
+  <div class="op-visual"><div class="op-console"><div class="op-console-bar"><i></i><i></i><i></i><small>terminal · undo</small></div><div class="op-console-body"><span class="cmd">$ git status</span><span class="warn">저장 안 된 변경 3개 파일</span><span class="cmd">$ git checkout -- .</span><span class="ok">마지막 저장 지점으로 복귀</span><span class="cmd">$ git log --oneline</span><span class="ok">c103 · c102 · c101 — 더 이전 지점도 선택 가능</span><span class="op-console-cursor"></span></div></div></div>
+  <p class="op-cap">되돌리는 법을 알고 있는 사람만 <b>실험을 두려워하지 않게</b> 됩니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">MANUAL SCENE · UNDO</div>
+  <h2 class="op-title">수동 시연 5 — <span class="g">사고에서 복귀까지 4단계</span></h2>
+  <div class="op-visual"><div class="op-seq" data-seq-current="0">
+  <div class="op-seq-rail"><span class="is-active" data-seq-marker="0"><i>01</i><b>이상 발견</b></span><span class="" data-seq-marker="1"><i>02</i><b>상태 확인</b></span><span class="" data-seq-marker="2"><i>03</i><b>복귀</b></span><span class="" data-seq-marker="3"><i>04</i><b>기록</b></span></div>
+  <div class="op-seq-stage"><div class="op-seq-step has-evidence is-active" data-seq-step="0"><div class="op-seq-evidence"><div class="op-evidence-top"><b>BROWSER · 375px</b><span class="op-evidence-status fail">BROKEN</span></div><div class="op-evidence-body"><div class="op-evidence-code"><span class="bad">결제 버튼이 화면 밖으로 사라짐</span><br>방금의 “전체 정리” 요청이 원인으로 의심</div></div></div><div class="op-seq-copy"><em>STEP 01</em><strong>이상 발견</strong><span>화면이 깨졌습니다. 가장 먼저 할 일은 원인 분석이 아니라 <b>멈추는 것</b>입니다.</span></div></div><div class="op-seq-step has-evidence" data-seq-step="1"><div class="op-seq-evidence"><div class="op-evidence-top"><b>TERMINAL</b><span class="op-evidence-status ">CHECK</span></div><div class="op-evidence-body"><div class="op-evidence-code"><span class="key">$ git status</span><br>수정됨: checkout.css · Cart.tsx · 저장 안 됨</div></div></div><div class="op-seq-copy"><em>STEP 02</em><strong>상태 확인</strong><span>무엇이 어디까지 바뀌었는지 확인합니다. 아직 커밋 전이라 전부 되돌릴 수 있습니다.</span></div></div><div class="op-seq-step has-evidence" data-seq-step="2"><div class="op-seq-evidence"><div class="op-evidence-top"><b>TERMINAL</b><span class="op-evidence-status ok">RESTORED</span></div><div class="op-evidence-body"><div class="op-evidence-code"><span class="key">$ git checkout -- .</span><br><span class="ok">마지막 저장 지점으로 복귀 완료</span><br>브라우저 새로고침 → 결제 버튼 정상</div></div></div><div class="op-seq-copy"><em>STEP 03</em><strong>복귀</strong><span>3분 전의 멀쩡한 상태로 돌아왔습니다. 세이브포인트가 있었기 때문입니다.</span></div></div><div class="op-seq-step has-evidence" data-seq-step="3"><div class="op-seq-evidence"><div class="op-evidence-top"><b>WORK LOG</b><span class="op-evidence-status ok">NOTED</span></div><div class="op-evidence-body"><div class="op-evidence-code"><span class="key">원인</span> 범위 없는 “전체 정리” 요청<br><span class="key">교훈</span> 큰 수정은 브랜치에서 · 작게 나눠서<br><span class="ok">다음</span> checkout.css만 다시 요청</div></div></div><div class="op-seq-copy"><em>STEP 04</em><strong>기록</strong><span>한 줄 기록이 같은 사고의 재발을 막습니다. 복구는 기록까지가 한 세트입니다.</span></div></div></div>
+  <div class="op-seq-controls" aria-label="발표자 진행 제어">
+    <button type="button" data-seq-action="start">시작</button><button type="button" data-seq-action="previous">이전</button><button type="button" data-seq-action="next">다음</button><button type="button" data-seq-action="pause">일시정지</button><button type="button" data-seq-action="reset">초기화</button>
+  </div>
+</div></div>
+  <p class="op-cap">되돌리기를 시연으로 한 번 보여주면, 수강생의 <b>실험 공포</b>가 사라집니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">DECISION</div>
+  <h2 class="op-title">어떤 표면을 고를지 <span class="g">작업의 질문</span>으로 결정합니다</h2>
+  <div class="op-visual"><div class="op-map"><div><b>계획이 흐리다</b><span>데스크톱 앱<br>문서·맥락 비교</span></div><div><b>코드가 바뀐다</b><span>IDE<br>파일·Diff 확인</span></div><div><b>명령·검사가 중요</b><span>CLI<br>경로·실행·검사</span></div><div><b>사용자 확인</b><span>브라우저<br>화면·동작 검증</span></div></div></div>
+  <p class="op-cap">도구 선택은 취향이 아니라 <b>지금 해결해야 하는 질문</b>에서 출발합니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">COST SENSE</div>
+  <h2 class="op-title">비용을 결정하는 것은 요금제보다 <span class="g">대화 습관</span>입니다</h2>
+  <div class="op-visual"><div class="op-compare"><section><h3>비싸지는 습관</h3><p><span class="amber">하나의 대화로 하루 종일</span> — 매번 프로젝트 전체를 다시 읽습니다.</p><p>반복 지시를 매번 다시 타이핑합니다.</p></section><section><h3>아끼는 습관</h3><p><span class="teal">작업 단위로 새 대화</span> — 필요한 맥락만 다시 읽습니다.</p><p>반복 지시는 규칙 파일에 저장해 둡니다.</p></section></div></div>
+  <p class="op-cap">요금제와 한도는 자주 바뀌므로 <b>수업 전 공식 문서 기준</b>으로 확인하고, 습관은 이 두 가지면 충분합니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">COMMON MISTAKES</div>
+  <h2 class="op-title">처음 2주 동안 <span class="a">누구나 하는 실수</span> 네 가지</h2>
+  <div class="op-visual"><div class="op-map"><div><b>위치 없이 시작</b><span>홈 폴더에서 명령 실행<br>→ pwd부터</span></div><div><b>검증 생략</b><span>“됐다니까 됐겠지”<br>→ 화면으로 확인</span></div><div><b>대화 하나로 전부</b><span>기억 한계로 품질 저하<br>→ 작업 단위 분리</span></div><div><b>커밋 없이 진행</b><span>되돌릴 지점이 없음<br>→ 작게 자주 저장</span></div></div></div>
+  <p class="op-cap">넷 다 도구의 문제가 아니라 <b>운영 습관</b>의 문제이고, 오늘 배운 루틴으로 전부 예방됩니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">MIDPOINT</div>
+  <h2 class="op-title">90분 지점 — <span class="g">명령보다 중요한 것은 통제감</span></h2>
+  <div class="op-visual"><div class="op-break"><strong>내가 지금 무엇을 바꾸고,<br>어떻게 확인하는지 안다.</strong><span>이 감각이 생기면 앱과 CLI를 오가도 흔들리지 않습니다.</span></div></div>
+  <p class="op-cap">잠깐 멈춰 지금까지의 흐름을 한 문장으로 묶고, 다음 장면부터는 도구별 비교를 더 깊게 봅니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">TOOL-SPECIFIC</div>
+  <h2 class="op-title">도구별 명령은 <span class="a">제품의 공식 문서</span>로 확인하고, 원리는 공통으로 가져갑니다</h2>
+  <div class="op-visual"><div class="op-compare"><section><h3>고정해서 외울 것</h3><p><span class="teal">작업 위치</span> · 변경 범위 · Diff · 테스트 · 브라우저 확인</p><p>도구가 바뀌어도 이 다섯 기준은 유지됩니다.</p></section><section><h3>수업 전 재확인할 것</h3><p><span class="amber">설치 명령</span> · 메뉴 이름 · 권한 화면 · 베타 기능 · 요금과 한도</p><p>이 값들은 공식 문서 기준으로 당일 확인합니다.</p></section></div></div>
+  <p class="op-cap">변하는 제품 UI는 <b>수업 전 공식 문서 기준</b>으로 확인하고, 변하지 않는 작업 규율을 가져갑니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">DAILY ROUTINE</div>
+  <h2 class="op-title">내일 아침, <span class="g">이 순서</span>로 시작해 보세요</h2>
+  <div class="op-visual"><ul class="op-checks"><li>프로젝트 폴더에서 도구를 연다 — pwd로 위치 확인</li><li>오늘 할 일 한 가지를 작게 요청한다</li><li>Diff를 보고, 실행해서 눈으로 검증한다</li><li>커밋을 남기고 다음 작업으로 넘어간다</li><li>막히면 오류 문구를 그대로 붙여 질문한다</li></ul></div>
+  <p class="op-cap">첫 주의 목표는 속도가 아니라 <b>루틴의 완성</b>입니다.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">EXPECTED QUESTIONS</div>
+  <h2 class="op-title">현장에서 가장 자주 나오는 질문 <span class="g">두 가지</span></h2>
+  <div class="op-visual"><div class="op-compare"><section><h3>“코드를 몰라도 되나요?”</h3><p>문법 암기보다 <span class="teal">요청 · 검증 · 복구 습관</span>이 실력입니다.</p><p>모르는 코드는 “이 부분을 쉽게 설명해 줘”라고 AI에게 요청하면 됩니다.</p></section><section><h3>“어느 도구가 제일 좋나요?”</h3><p>큰 그림과 검토는 <span class="teal">데스크톱 앱</span>, 저장소 통제는 <span class="teal">CLI</span>.</p><p>도구는 상황이 고르는 것이고, 판단 기준은 어디서나 같습니다.</p></section></div></div>
+  <p class="op-cap">어떤 질문이든 답이 <b>읽기 → 계획 → 수정 → 검증의 규율</b>로 돌아오는 것을 확인하세요.</p>
+</div>
+<div class="slide op-slide">
+  <div class="op-eyebrow">CLOSE</div>
+  <h2 class="op-title">오늘의 결론 — AI 도구는 <span class="g">작업을 대신하는 손</span>, 판단은 내 몫입니다</h2>
+  <div class="op-visual"><div class="op-flow"><div class="op-node "><b>계획</b><span>내가 정함</span></div><span class="op-arrow">→</span><div class="op-node a"><b>수정</b><span>AI가 도움</span></div><span class="op-arrow">→</span><div class="op-node a"><b>검증</b><span>함께 확인</span></div><span class="op-arrow">→</span><div class="op-node g"><b>승인</b><span>내가 결정</span></div></div></div>
+  <p class="op-cap">다음 주에는 이 도구들에게 <b>외부 능력과 반복 절차</b>를 직접 연결합니다.</p>
+</div></div></div><script>
+const slides=[...document.querySelectorAll('.slide')];let cur=0;
+function render(){slides.forEach(function(slide,index){slide.classList.remove('active','prev');if(index===cur)slide.classList.add('active');else if(index<cur)slide.classList.add('prev');});var active=slides[cur];if(active)active.scrollTop=0;document.getElementById('counter').textContent=(cur+1)+' / '+slides.length;document.getElementById('btn-prev').disabled=cur===0;document.getElementById('btn-next').disabled=cur===slides.length-1;}
+function move(delta){cur=Math.max(0,Math.min(slides.length-1,cur+delta));render();}
+window.move=move;
+document.addEventListener('keydown',function(event){if(event.key==='ArrowRight'||event.key===' '){event.preventDefault();move(1);}if(event.key==='ArrowLeft'){event.preventDefault();move(-1);}});
+document.addEventListener('click',function(event){var button=event.target.closest('[data-seq-action]');if(!button)return;var scene=button.closest('.op-seq');if(!scene)return;var action=button.dataset.seqAction;if(action==='pause'){var paused=scene.dataset.seqPaused==='true';scene.dataset.seqPaused=paused?'false':'true';button.textContent=paused?'일시정지':'계속';return;}if(scene.dataset.seqPaused==='true')return;var steps=[].slice.call(scene.querySelectorAll('[data-seq-step]'));var current=Number(scene.dataset.seqCurrent||0);if(action==='start'||action==='reset')current=0;if(action==='previous')current=Math.max(0,current-1);if(action==='next')current=Math.min(steps.length-1,current+1);if(action==='reset'){scene.dataset.seqPaused='false';var pauseButton=scene.querySelector('[data-seq-action="pause"]');if(pauseButton)pauseButton.textContent='일시정지';}scene.dataset.seqCurrent=String(current);steps.forEach(function(step,index){step.classList.toggle('is-active',index===current);});scene.querySelectorAll('[data-seq-marker]').forEach(function(marker,index){marker.classList.toggle('is-active',index===current);marker.classList.toggle('is-complete',index<current);});});
+render();</script></body></html>

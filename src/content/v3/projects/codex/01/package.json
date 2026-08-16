@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-codex-01",
+  "private": true,
+  "version": "1.0.0",
+  "description": "작업에 맞는 Codex 표면을 선택하고 Workspace, Sandbox와 승인 정책 안에서 검증 가능한 첫 작업을 완료합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

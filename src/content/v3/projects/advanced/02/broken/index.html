@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 심화 통합 S2 - Stale Context Broken</title>
+  <style>
+    :root{color-scheme:dark;--bg:#080c14;--panel:#101722;--line:#2c3748;--teal:#2dd4bf;--amber:#f59e0b;--red:#fb7185;--text:#edf7f5;--muted:#8da2ad;font-family:Pretendard,"Malgun Gothic",sans-serif}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--text);background:linear-gradient(135deg,#080c14,#111827);letter-spacing:0}
+    header{display:flex;justify-content:space-between;align-items:center;padding:24px 6vw;border-bottom:1px solid var(--line)}header b{font-size:15px}header span{color:var(--red);font:850 11px Consolas,monospace}
+    main{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px;padding:6vh 6vw}
+    section,aside{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.035);box-shadow:0 24px 70px rgba(0,0,0,.25)}section{padding:40px}aside{padding:24px}
+    small{color:var(--red);font:850 11px Consolas,monospace}h1{margin:16px 0;font-size:clamp(34px,5vw,64px);line-height:1.04}p{color:var(--muted);font-size:18px;line-height:1.65}
+    .terminal{margin-top:28px;padding:22px;border:1px solid rgba(251,113,133,.35);border-radius:16px;background:#090d13;color:#dbe7e5;font:750 14px Consolas,monospace;line-height:1.7}.terminal b{color:var(--red)}
+    .evidence{display:grid;gap:12px}.evidence div{padding:16px;border:1px solid var(--line);border-radius:14px;background:#0d1420}.evidence b{display:block;font-size:15px}.evidence span{display:block;margin-top:8px;color:var(--muted);font-size:13px;line-height:1.45}.bad{border-color:rgba(251,113,133,.5)!important}.bad b{color:var(--red)}
+    button{min-height:46px;margin-top:22px;padding:0 20px;border:0;border-radius:12px;color:#080c14;background:var(--amber);font-weight:900;cursor:pointer}
+  </style>
+</head>
+<body data-variant="broken">
+  <header><b>VIBE STUDIO · ADVANCED S2</b><span>BROKEN · STALE CONTEXT</span></header>
+  <main>
+    <section>
+      <small>실패 상태</small>
+      <h1>옛 프로젝트 규칙이 지금 작업에 적용됐습니다</h1>
+      <p>메모리 항목에 범위와 유효기간이 없어, 지난 프로젝트의 규칙이 현재 작업에 적용됐고 Claude와 Codex의 결과가 서로 달라졌습니다.</p>
+      <div class="terminal">
+        $ run task with shared memory<br>
+        <b>stale context selected: memory item lacks scope/expiry</b><br>
+        claude memory: "always deploy to Vercel" (no scope, no expiry)<br>
+        codex memory: (none) &rarr; claude/codex memory drift<br>
+        applied rule from a previous project
+      </div>
+    </section>
+    <aside>
+      <div class="evidence">
+        <div><b>문제 항목</b><span>"always deploy to Vercel" · 범위/유효기간 없음</span></div>
+        <div class="bad"><b>증상</b><span>지난 프로젝트 규칙이 현재 작업에 적용</span></div>
+        <div class="bad"><b>드리프트</b><span>Claude와 Codex 메모리가 어긋나 결과가 갈림</span></div>
+        <div><b>복구</b><span>범위·유효기간·근거 부여 후 두 도구 정책 동기화</span></div>
+      </div>
+      <button type="button" onclick="alert('복구: 메모리에 범위·유효기간·근거를 붙이고, CLAUDE.md와 AGENTS.md를 같은 정책으로 동기화합니다.')">복구 기준 보기</button>
+    </aside>
+  </main>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "courseId": "basic-current-work",
+  "lessonNumber": 2,
+  "title": "바이브코딩, 우리는 코딩을 할 줄 모른다",
+  "revision": "3.0.0-beta.3-review",
+  "status": "review",
+  "sceneId": "basic-current-work-02-workspace",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "개발 서버가 시작되지 않음",
+    "trace": "npm ERR! missing script: dev",
+    "cause": "프로젝트 폴더 또는 실행 명령이 다름",
+    "fix": "현재 경로와 package.json scripts를 확인해 올바른 명령 실행"
+  },
+  "deliverables": [
+    "실행되는 로컬 프로젝트",
+    "첫 작업 요청서",
+    "수정 전후 캡처"
+  ]
+}

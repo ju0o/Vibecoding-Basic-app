@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>기초강의 프로그램 UI · 컴팩트 모던 시안</title>
+  <style>
+    :root{
+      --bg:#eff2f6;
+      --panel:#ffffff;
+      --panel-soft:#f7f8fa;
+      --line:#e6e9ee;
+      --line-strong:#d9dee6;
+      --text:#111827;
+      --text-2:#374151;
+      --muted:#6b7280;
+      --quiet:#9ca3af;
+      --brand:#111827;
+      --accent:#4f46e5;
+      --accent-soft:rgba(79,70,229,.08);
+      --ok:#059669;
+      --warn:#b45309;
+      --shadow:0 20px 50px rgba(15,23,42,.08);
+      --shadow-soft:0 6px 20px rgba(15,23,42,.05);
+      --r-xl:24px;
+      --r-lg:18px;
+      --r:14px;
+      --r-sm:11px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:"Pretendard","Segoe UI",Arial,sans-serif}
+    body{
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,.65), transparent 24rem),
+        radial-gradient(circle at bottom right, rgba(79,70,229,.05), transparent 26rem),
+        var(--bg);
+    }
+    .wrap{
+      width:min(1480px, calc(100vw - 32px));
+      margin:0 auto;
+      padding:20px 0 48px;
+    }
+    .hero{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:18px;
+      margin-bottom:18px;
+    }
+    .hero-card,.screen,.panel,.note-card,.metric,.rule-card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--r-xl);
+      box-shadow:var(--shadow-soft);
+    }
+    .hero-card{
+      padding:28px;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color:var(--accent);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:2px;
+      text-transform:uppercase;
+    }
+    .eyebrow::before{
+      content:"";
+      width:24px;
+      height:2px;
+      background:var(--accent);
+      border-radius:999px;
+    }
+    h1{
+      margin:16px 0 14px;
+      font-size:clamp(32px,4vw,52px);
+      line-height:1.08;
+      letter-spacing:-.03em;
+    }
+    h2{
+      margin:0 0 10px;
+      font-size:26px;
+      line-height:1.2;
+      letter-spacing:-.02em;
+    }
+    h3{
+      margin:0 0 10px;
+      font-size:18px;
+      line-height:1.28;
+      letter-spacing:-.01em;
+    }
+    p{margin:0}
+    .hero-card p{
+      color:var(--muted);
+      font-size:17px;
+      line-height:1.65;
+    }
+    .hero-points{
+      display:grid;
+      gap:10px;
+      margin-top:18px;
+    }
+    .hero-points div{
+      padding:14px 16px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:var(--panel-soft);
+      color:var(--text-2);
+      font-size:14px;
+      line-height:1.55;
+    }
+    .metric-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+    .metric{
+      padding:16px;
+    }
+    .metric b{
+      display:block;
+      margin-bottom:6px;
+      color:var(--quiet);
+      font-size:11px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .metric span{
+      display:block;
+      color:var(--text);
+      font-size:18px;
+      font-weight:700;
+      line-height:1.35;
+    }
+    .mock-shell{
+      padding:14px;
+      background:linear-gradient(180deg,#fafbfc,#f4f6f8);
+    }
+    .screen{
+      overflow:hidden;
+      padding:14px;
+    }
+    .shell{
+      display:grid;
+      grid-template-columns:220px 360px 1fr;
+      gap:12px;
+      height:780px;
+    }
+    .sidebar,.center,.detail{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:#fff;
+      min-width:0;
+    }
+    .sidebar{
+      display:flex;
+      flex-direction:column;
+      padding:14px 12px 12px;
+      background:#fbfcfd;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:4px 6px 18px;
+    }
+    .mark{
+      display:grid;
+      place-items:center;
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      background:#111827;
+      color:#fff;
+      font-size:15px;
+      font-weight:800;
+    }
+    .brand strong,.brand span{display:block}
+    .brand strong{font-size:14px}
+    .brand span{font-size:10px;color:var(--quiet);letter-spacing:.12em}
+    .search{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      height:34px;
+      padding:0 12px;
+      border:1px solid var(--line);
+      border-radius:11px;
+      background:#fff;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .group-title{
+      margin:16px 6px 8px;
+      color:var(--quiet);
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .course-list,.session-list,.mini-list{
+      display:grid;
+      gap:6px;
+    }
+    .course-item,.session-item,.mini-item{
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#fff;
+    }
+    .course-item{
+      display:grid;
+      grid-template-columns:30px 1fr auto;
+      gap:10px;
+      align-items:center;
+      padding:10px;
+    }
+    .course-item.active{
+      border-color:#111827;
+      background:#111827;
+      color:#fff;
+    }
+    .course-item.active .sub,.course-item.active .tiny{color:#cbd5e1}
+    .badge{
+      display:grid;
+      place-items:center;
+      width:30px;
+      height:30px;
+      border-radius:10px;
+      background:#f3f4f6;
+      color:#111827;
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.06em;
+    }
+    .course-item.active .badge{
+      background:rgba(255,255,255,.12);
+      color:#fff;
+    }
+    .title{
+      font-size:12px;
+      font-weight:700;
+      line-height:1.4;
+    }
+    .sub{
+      color:var(--muted);
+      font-size:10px;
+      margin-top:3px;
+    }
+    .tiny{
+      color:var(--quiet);
+      font-size:9px;
+      font-weight:700;
+      letter-spacing:.08em;
+    }
+    .sidebar-footer{
+      margin-top:auto;
+      display:grid;
+      gap:8px;
+      padding-top:14px;
+      border-top:1px solid var(--line);
+    }
+    .tool{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#fff;
+      font-size:12px;
+      color:var(--text-2);
+    }
+    .center{
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+    }
+    .center-head{
+      padding:18px 18px 12px;
+      border-bottom:1px solid var(--line);
+    }
+    .center-head .kicker{
+      color:var(--quiet);
+      font-size:10px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-weight:800;
+    }
+    .center-head h2{
+      margin-top:10px;
+      font-size:22px;
+    }
+    .center-head p{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .tabbar{
+      display:flex;
+      gap:6px;
+      padding:10px 18px 0;
+    }
+    .tab{
+      padding:8px 12px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:#f8fafc;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:700;
+    }
+    .tab.active{
+      background:#111827;
+      border-color:#111827;
+      color:#fff;
+    }
+    .session-scroll{
+      padding:14px 14px 16px;
+      overflow:auto;
+    }
+    .session-item{
+      padding:12px;
+      display:grid;
+      grid-template-columns:26px 1fr auto;
+      gap:10px;
+      align-items:start;
+    }
+    .session-item.active{
+      border-color:var(--accent);
+      background:var(--accent-soft);
+    }
+    .session-no{
+      display:grid;
+      place-items:center;
+      width:26px;
+      height:26px;
+      border-radius:8px;
+      background:#f3f4f6;
+      color:#6b7280;
+      font-size:10px;
+      font-weight:800;
+    }
+    .session-item.active .session-no{
+      background:#111827;
+      color:#fff;
+    }
+    .session-main b{
+      display:block;
+      font-size:12px;
+      line-height:1.4;
+    }
+    .session-main p{
+      margin-top:4px;
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.45;
+    }
+    .pill{
+      padding:4px 8px;
+      border-radius:999px;
+      background:#f3f4f6;
+      color:#6b7280;
+      font-size:9px;
+      font-weight:800;
+      letter-spacing:.06em;
+      white-space:nowrap;
+    }
+    .pill.active{
+      background:#111827;
+      color:#fff;
+    }
+    .detail{
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      background:#f8fafc;
+    }
+    .detail-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.85);
+      backdrop-filter:blur(10px);
+    }
+    .crumb{
+      color:var(--quiet);
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .actions{
+      display:flex;
+      gap:8px;
+    }
+    .btn{
+      height:32px;
+      padding:0 12px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:#fff;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:700;
+    }
+    .btn.dark{
+      background:#111827;
+      border-color:#111827;
+      color:#fff;
+    }
+    .detail-body{
+      padding:16px;
+      overflow:auto;
+      display:grid;
+      gap:12px;
+    }
+    .presenter{
+      display:grid;
+      grid-template-columns:1.45fr .9fr;
+      gap:12px;
+    }
+    .player{
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:#fff;
+    }
+    .player-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:12px;
+    }
+    .player-top b{
+      font-size:12px;
+      color:var(--quiet);
+      text-transform:uppercase;
+      letter-spacing:.1em;
+    }
+    .player-stage{
+      height:320px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:
+        linear-gradient(180deg, rgba(17,24,39,.02), rgba(17,24,39,.06)),
+        #f8fafc;
+      position:relative;
+      overflow:hidden;
+    }
+    .player-stage::before{
+      content:"";
+      position:absolute;
+      inset:18px;
+      border-radius:12px;
+      background:
+        radial-gradient(circle at top left, rgba(79,70,229,.12), transparent 30%),
+        linear-gradient(180deg, #ffffff, #f4f7fb);
+      border:1px solid var(--line);
+    }
+    .player-overlay{
+      position:absolute;
+      left:28px;
+      right:28px;
+      bottom:24px;
+      display:flex;
+      gap:10px;
+      z-index:2;
+    }
+    .player-overlay div{
+      flex:1;
+      min-height:54px;
+      padding:12px;
+      border:1px solid rgba(17,24,39,.06);
+      border-radius:14px;
+      background:rgba(255,255,255,.8);
+      backdrop-filter:blur(10px);
+      font-size:11px;
+      color:var(--text-2);
+    }
+    .cue-stack{
+      display:grid;
+      gap:10px;
+    }
+    .cue{
+      padding:12px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#fff;
+    }
+    .cue small{
+      display:block;
+      margin-bottom:6px;
+      color:var(--quiet);
+      font-size:9px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .cue b{
+      display:block;
+      margin-bottom:4px;
+      font-size:12px;
+    }
+    .cue span{
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.45;
+    }
+    .resources{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
+    .panel{
+      padding:16px;
+    }
+    .mini-list{
+      margin-top:10px;
+    }
+    .mini-item{
+      display:grid;
+      grid-template-columns:26px 1fr auto;
+      gap:10px;
+      align-items:center;
+      padding:10px;
+      background:var(--panel-soft);
+    }
+    .mini-icon{
+      display:grid;
+      place-items:center;
+      width:26px;
+      height:26px;
+      border-radius:8px;
+      background:#fff;
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:11px;
+    }
+    .mini-item b{font-size:12px}
+    .mini-item span{
+      display:block;
+      margin-top:3px;
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.4;
+    }
+    .analysis{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:18px;
+    }
+    .note-card{
+      padding:22px;
+      background:#fff;
+    }
+    .note-card p,.rule-card p{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.65;
+    }
+    .rule-grid{
+      display:grid;
+      gap:10px;
+      margin-top:12px;
+    }
+    .rule-card{
+      padding:14px 16px;
+      background:#fff;
+    }
+    .rule-card b{
+      display:block;
+      margin-bottom:5px;
+      color:var(--text);
+      font-size:13px;
+    }
+    .accent{color:var(--accent)}
+    .footer{
+      margin-top:18px;
+      padding:16px 18px;
+      border-left:3px solid var(--accent);
+      border-radius:16px;
+      background:#fff;
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.65;
+    }
+    code{
+      padding:.12em .5em;
+      border-radius:8px;
+      background:#f3f4f6;
+      color:#111827;
+      font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+      font-size:.95em;
+    }
+    @media (max-width: 1200px){
+      .hero,.analysis{grid-template-columns:1fr}
+      .shell{grid-template-columns:1fr; height:auto}
+      .resources{grid-template-columns:1fr}
+      .presenter{grid-template-columns:1fr}
+      .metric-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <article class="hero-card">
+        <div class="eyebrow">Compact Modern UI</div>
+        <h1>실제 프로그램 화면을<br>더 작고 촘촘하게 재설계한 시안</h1>
+        <p>이 시안은 기존의 큰 카드형 레이아웃을 줄이고, <span class="accent">Notion·Apple 계열의 조용하고 정리된 작업용 밀도</span>로 다시 구성한 버전입니다. 핵심은 “정보를 더 많이 담되, 무겁지 않게 보이게 만드는 것”입니다.</p>
+        <div class="hero-points">
+          <div><strong>큰 카드 감소</strong>: 화면을 차지하는 큰 덩어리를 줄이고 작은 단위의 목록과 패널로 분리</div>
+          <div><strong>밀도 상승</strong>: 간격은 좁히되, 얇은 선과 명확한 타이포 위계로 답답함을 방지</div>
+          <div><strong>강조 최소화</strong>: 선택된 상태만 진하게, 기본 상태는 거의 흰색과 회색 중심으로 유지</div>
+        </div>
+        <div class="metric-grid">
+          <div class="metric">
+            <b>레이아웃</b>
+            <span>220 / 360 / Fluid</span>
+          </div>
+          <div class="metric">
+            <b>밀도 기준</b>
+            <span>12~16px 간격</span>
+          </div>
+          <div class="metric">
+            <b>시각 톤</b>
+            <span>Quiet, Dense, Modern</span>
+          </div>
+        </div>
+      </article>
+      <article class="hero-card mock-shell">
+        <section class="screen">
+          <div class="shell">
+            <aside class="sidebar">
+              <div class="brand">
+                <div class="mark">V</div>
+                <div>
+                  <strong>Vibe Studio</strong>
+                  <span>INSTRUCTOR SYSTEM</span>
+                </div>
+              </div>
+              <div class="search">⌕ 과정 · 회차 · 자료 검색</div>
+
+              <div class="group-title">Courses</div>
+              <div class="course-list">
+                <div class="course-item active">
+                  <div class="badge">B05</div>
+                  <div>
+                    <div class="title">기초강의 5강</div>
+                    <div class="sub">배포와 보안 그리고 데이터</div>
+                  </div>
+                  <div class="tiny">LIVE</div>
+                </div>
+                <div class="course-item">
+                  <div class="badge">B03</div>
+                  <div>
+                    <div class="title">기초강의 3강</div>
+                    <div class="sub">개발 용어 이해</div>
+                  </div>
+                  <div class="tiny">DONE</div>
+                </div>
+                <div class="course-item">
+                  <div class="badge">B04</div>
+                  <div>
+                    <div class="title">기초강의 4강</div>
+                    <div class="sub">프로젝트 구조 읽기</div>
+                  </div>
+                  <div class="tiny">NEXT</div>
+                </div>
+              </div>
+
+              <div class="sidebar-footer">
+                <div class="tool"><span>일정 및 메모</span><span>›</span></div>
+                <div class="tool"><span>표시 밀도 설정</span><span>›</span></div>
+              </div>
+            </aside>
+
+            <section class="center">
+              <div class="center-head">
+                <div class="kicker">Session Flow</div>
+                <h2>5강 진행 흐름</h2>
+                <p>도입, 배포, 보안, 데이터, 실습을 작은 행 단위로 빠르게 훑을 수 있게 구성</p>
+              </div>
+              <div class="tabbar">
+                <div class="tab active">강의</div>
+                <div class="tab">자료실</div>
+                <div class="tab">체크포인트</div>
+              </div>
+              <div class="session-scroll">
+                <div class="session-list">
+                  <div class="session-item">
+                    <div class="session-no">01</div>
+                    <div class="session-main">
+                      <b>도입 · 로컬과 공개 URL</b>
+                      <p>같은 프로젝트라도 누가 접속 가능한지가 달라짐</p>
+                    </div>
+                    <div class="pill">Map</div>
+                  </div>
+                  <div class="session-item">
+                    <div class="session-no">02</div>
+                    <div class="session-main">
+                      <b>배포 · 빌드 · GitHub</b>
+                      <p>복사가 아니라 가공 후 공개되는 과정 이해</p>
+                    </div>
+                    <div class="pill">Flow</div>
+                  </div>
+                  <div class="session-item active">
+                    <div class="session-no">03</div>
+                    <div class="session-main">
+                      <b>보안 · 비밀값 · 환경변수</b>
+                      <p>브라우저에 내려간 것은 누구나 볼 수 있다는 핵심</p>
+                    </div>
+                    <div class="pill active">Focus</div>
+                  </div>
+                  <div class="session-item">
+                    <div class="session-no">04</div>
+                    <div class="session-main">
+                      <b>데이터 · 권한 · CRUD</b>
+                      <p>누가 무엇을 읽고 바꿀 수 있는지 구분</p>
+                    </div>
+                    <div class="pill">Rules</div>
+                  </div>
+                  <div class="session-item">
+                    <div class="session-no">05</div>
+                    <div class="session-main">
+                      <b>실습 · 공개 전 체크</b>
+                      <p>실제 URL에서 사용자처럼 다시 검증</p>
+                    </div>
+                    <div class="pill">QA</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="detail">
+              <div class="detail-top">
+                <div class="crumb">Session 05 · Presenter Mode</div>
+                <div class="actions">
+                  <button class="btn">메모</button>
+                  <button class="btn">판서</button>
+                  <button class="btn dark">재생</button>
+                </div>
+              </div>
+              <div class="detail-body">
+                <div class="presenter">
+                  <div class="player">
+                    <div class="player-top">
+                      <b>현재 슬라이드</b>
+                      <span class="pill active">08 / 22</span>
+                    </div>
+                    <div class="player-stage">
+                      <div class="player-overlay">
+                        <div><strong>지금 핵심</strong><br>브라우저는 공개 구역, 서버는 보호 구역</div>
+                        <div><strong>모션</strong><br>왼쪽 노출 → 경계선 → 우측 보호 구역 점등</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cue-stack">
+                    <div class="cue">
+                      <small>Say</small>
+                      <b>브라우저로 내려간 것은 누구나 열어볼 수 있습니다</b>
+                      <span>강조 문장은 한 줄만 짧고 명확하게 유지</span>
+                    </div>
+                    <div class="cue">
+                      <small>Do</small>
+                      <b>왼쪽 장면부터 켠 뒤 경계선을 설명</b>
+                      <span>동시에 여러 요소를 움직이지 않고 순차적으로 진행</span>
+                    </div>
+                    <div class="cue">
+                      <small>Ask</small>
+                      <b>“이 값이 브라우저에 보여도 괜찮은가?”</b>
+                      <span>학생이 스스로 기준 문장을 말하게 유도</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="resources">
+                  <div class="panel">
+                    <h3>이 강의의 자료</h3>
+                    <div class="mini-list">
+                      <div class="mini-item">
+                        <div class="mini-icon">▶</div>
+                        <div><b>슬라이드</b><span>22장 · 발표용 메인 덱</span></div>
+                        <div class="tiny">OPEN</div>
+                      </div>
+                      <div class="mini-item">
+                        <div class="mini-icon">✎</div>
+                        <div><b>강사 대본</b><span>SAY · DO · ASK 구조</span></div>
+                        <div class="tiny">OPEN</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel">
+                    <h3>출력자료</h3>
+                    <div class="mini-list">
+                      <div class="mini-item">
+                        <div class="mini-icon">⎙</div>
+                        <div><b>실습 체크리스트</b><span>배포 전 확인 항목</span></div>
+                        <div class="tiny">PDF</div>
+                      </div>
+                      <div class="mini-item">
+                        <div class="mini-icon">☰</div>
+                        <div><b>핵심 요약</b><span>보안 · 데이터 구분표</span></div>
+                        <div class="tiny">A4</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel">
+                    <h3>빠른 상태</h3>
+                    <div class="mini-list">
+                      <div class="mini-item">
+                        <div class="mini-icon">●</div>
+                        <div><b>발표 준비</b><span>8 / 22 슬라이드 진행 중</span></div>
+                        <div class="tiny" style="color:var(--ok)">READY</div>
+                      </div>
+                      <div class="mini-item">
+                        <div class="mini-icon">!</div>
+                        <div><b>강조 포인트</b><span>환경변수와 비밀값 구분</span></div>
+                        <div class="tiny" style="color:var(--warn)">FOCUS</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+      </article>
+    </section>
+
+    <section class="analysis">
+      <article class="note-card">
+        <h2>이 시안이 이전 제안보다 나은 이유</h2>
+        <div class="rule-grid">
+          <div class="rule-card">
+            <b>1. 더 작고 가까운 정보 단위</b>
+            <p>한 기능이 화면을 크게 점유하지 않고, 리스트와 소형 패널로 모여 있어서 훨씬 작업용 툴처럼 보입니다.</p>
+          </div>
+          <div class="rule-card">
+            <b>2. 카드보다 구조선 중심</b>
+            <p>시선을 끄는 요소는 줄이고, 얇은 경계선과 타이포 위계로 정보 구조를 읽게 만듭니다.</p>
+          </div>
+          <div class="rule-card">
+            <b>3. 선택 상태만 진하게</b>
+            <p>전체가 다 강조되지 않아서, 현재 선택된 세션과 현재 슬라이드가 더 또렷하게 보입니다.</p>
+          </div>
+          <div class="rule-card">
+            <b>4. 강사용 제어가 더 자연스러움</b>
+            <p>재생, 메모, 판서, 강사 큐를 큰 기능 블록이 아니라 작은 작업 패널로 묶어 강의 흐름이 덜 끊깁니다.</p>
+          </div>
+        </div>
+      </article>
+      <article class="note-card">
+        <h2>실제 적용할 때 바꾸면 좋은 지점</h2>
+        <div class="rule-grid">
+          <div class="rule-card">
+            <b><code>course-rail</code></b>
+            <p>현재보다 너비를 조금 줄이고, 과정 카드 높이와 내부 패딩을 축소해 더 많은 회차가 한 화면에 보이게 합니다.</p>
+          </div>
+          <div class="rule-card">
+            <b><code>lesson-pane</code></b>
+            <p>세션 목록을 큰 카드 대신 작은 행 중심으로 재정리하고, 상태 배지는 우측 끝 작은 필로만 처리합니다.</p>
+          </div>
+          <div class="rule-card">
+            <b><code>detail-pane</code></b>
+            <p>중앙 상세 영역은 큰 설명 카드보다 발표 화면 + 강사 큐 + 자료 패널의 3단 묶음으로 나누는 것이 좋습니다.</p>
+          </div>
+          <div class="rule-card">
+            <b><code>player / notes-panel</code></b>
+            <p>메모 패널을 단순 텍스트가 아니라 `SAY / DO / ASK` 블록형으로 바꾸면 강사용 활용도가 크게 올라갑니다.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="footer">
+      이 방향의 핵심은 <strong>“교육용 서비스”처럼 보이게 하는 것보다, “정리 잘 된 작업용 발표 도구”처럼 보이게 하는 것</strong>입니다. 그래서 지금처럼 큰 카드와 넓은 여백 대신, 더 작고 조용하고 촘촘한 구조가 맞습니다.
+    </section>
+  </main>
+</body>
+</html>

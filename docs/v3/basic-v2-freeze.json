@@ -1,0 +1,73 @@
+{
+  "label": "기초반 2기 6주 운영본",
+  "frozenAt": "2026-07-02",
+  "note": "2기 운영본은 자동 교체하지 않는다. 2026-07 회차 리빌드(5강 documentary 재구축, 6강 복기 강의 전환 + 슬라이드 16/21/28 재설계) 검수 후 다시 고정했다.",
+  "hashMode": "text-lf-normalized",
+  "files": [
+    {
+      "file": "src/content/sessions/session-00-curriculum.html",
+      "bytes": 21112,
+      "sha256": "89b4e88321c757ef2619f29b0965163584ba440aaa19e110479738ef80a7602d"
+    },
+    {
+      "file": "src/content/sessions/session-01-ai-understanding.html",
+      "bytes": 186275,
+      "sha256": "ca3661b3ba52f47ae05df29a16f4cc90a3fc8095e53ebb0d948295c4246ff1a1"
+    },
+    {
+      "file": "src/content/sessions/session-02-handout.html",
+      "bytes": 21723,
+      "sha256": "532dc49fa85a187750fb5f8b6b5f7dcaa34f53fef9818beb216719a1207ac31b"
+    },
+    {
+      "file": "src/content/sessions/session-02-vibe-coding.html",
+      "bytes": 113000,
+      "sha256": "229c82b1778c63f42586ca7b33aadd05eedaa61fe68a7e90c0425db43aac649c"
+    },
+    {
+      "file": "src/content/sessions/session-03-direction.bundle.js",
+      "bytes": 612567,
+      "sha256": "a5760d6462a067979574e3db21066b8c3bf086d5a1501efd6833de097f6493cb"
+    },
+    {
+      "file": "src/content/sessions/session-03-direction.css",
+      "bytes": 247500,
+      "sha256": "bb581a9c31bda9210d5a05e59d763bb7912cbd2fd827d0c0dd443754d0706a5d"
+    },
+    {
+      "file": "src/content/sessions/session-03-direction.html",
+      "bytes": 47468,
+      "sha256": "45a100d76a4a9e38e5c2452789f67071377d168a31987ad30d4d04c657d9a366"
+    },
+    {
+      "file": "src/content/sessions/session-03-direction.js",
+      "bytes": 98761,
+      "sha256": "8321a88ce4eaee59109ccff247a304040d09181bf82a3c885649dd73393d7a73"
+    },
+    {
+      "file": "src/content/sessions/session-04-revenue.html",
+      "bytes": 234230,
+      "sha256": "a0b59e7eddfea51f4e84aba0deac797d2b0a0a74c633398fa153b518defe9f3d"
+    },
+    {
+      "file": "src/content/sessions/session-05-security-api.css",
+      "bytes": 141545,
+      "sha256": "86d9a3996d4aec8f8cebfda8caa8b0a0615347295fa1632b5cebe2a58940a5fc"
+    },
+    {
+      "file": "src/content/sessions/session-05-security-api.html",
+      "bytes": 44250,
+      "sha256": "63f8c3545378a8d8b78050ea9d32646afa8c202889053b1a372f165ca00201ce"
+    },
+    {
+      "file": "src/content/sessions/session-05-security-api.js",
+      "bytes": 33820,
+      "sha256": "2ef106fe2381f8167942bc2d138ac9b204d9608a7f45e197151059815a2133d6"
+    },
+    {
+      "file": "src/content/sessions/session-06-showcase.html",
+      "bytes": 23679,
+      "sha256": "b7f4bb19518f545115274b672719a2353696c15020018786a290cfede3e66ff0"
+    }
+  ]
+}

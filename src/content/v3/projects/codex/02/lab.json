@@ -1,0 +1,24 @@
+{
+  "courseId": "codex",
+  "lessonNumber": 2,
+  "title": "AGENTS.md·config.toml·Rules·Git",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "codex-02-config",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "프로젝트 config가 적용되지 않음",
+    "trace": "project layer ignored: untrusted",
+    "cause": "신뢰하지 않은 저장소의 프로젝트 설정",
+    "fix": "프로젝트 신뢰 상태를 확인하고 전역·프로젝트 설정 범위를 구분"
+  },
+  "deliverables": [
+    "AGENTS.md",
+    "Codex 설정 설명서",
+    "검증된 Git 커밋"
+  ]
+}

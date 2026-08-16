@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 심화 통합 S1 - Surface Decision Complete</title>
+  <style>
+    :root{color-scheme:dark;--bg:#080c14;--panel:#101722;--line:#253241;--teal:#2dd4bf;--amber:#f59e0b;--text:#edf7f5;--muted:#8da2ad;font-family:Pretendard,"Malgun Gothic",sans-serif}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--text);background:radial-gradient(circle at 74% 16%,rgba(45,212,191,.16),transparent 30%),var(--bg);letter-spacing:0}
+    header{display:flex;justify-content:space-between;align-items:center;padding:24px 6vw;border-bottom:1px solid var(--line)}header b{font-size:15px}header span{color:var(--teal);font:850 11px Consolas,monospace}
+    main{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(340px,.88fr);gap:24px;padding:6vh 6vw}
+    section,aside{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.02));box-shadow:0 24px 70px rgba(0,0,0,.25)}section{padding:40px}aside{padding:24px}
+    small{color:var(--teal);font:850 11px Consolas,monospace}h1{margin:16px 0;font-size:clamp(34px,5vw,64px);line-height:1.04}p{color:var(--muted);font-size:18px;line-height:1.65}
+    table{width:100%;margin-top:24px;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid var(--line);border-radius:16px}th,td{padding:16px;border-bottom:1px solid var(--line);background:#101722;text-align:left;vertical-align:top}th{color:#bfece6;font:850 11px Consolas,monospace}td{color:#dce7e5;font-size:14px;line-height:1.45}tr:last-child td{border-bottom:0}.ok{color:var(--teal);font-weight:850}.warn{color:var(--amber);font-weight:850}
+    .evidence{display:grid;gap:12px}.evidence article{padding:18px;border:1px solid var(--line);border-radius:16px;background:#0d1420}.evidence b{display:block;font-size:16px}.evidence span{display:block;margin-top:8px;color:var(--muted);font-size:13px;line-height:1.45}.evidence article:first-child{border-color:rgba(45,212,191,.45)}
+    .badge{display:inline-flex;margin-top:18px;padding:9px 12px;border-radius:999px;color:#07110f;background:var(--teal);font:900 11px Consolas,monospace}
+  </style>
+</head>
+<body data-variant="complete">
+  <header><b>VIBE STUDIO · ADVANCED S1</b><span>COMPLETE · EVIDENCE READY</span></header>
+  <main>
+    <section>
+      <small>완성 상태</small>
+      <h1>작업 성격과 증거에 맞춰 표면을 선택했습니다</h1>
+      <p>같은 작업도 필요한 증거에 따라 Claude CLI, Codex CLI/App, IDE/App 표면이 달라집니다. 선택 기준이 남아 있어 다음 작업자가 같은 판단을 재현할 수 있습니다.</p>
+      <table>
+        <thead><tr><th>작업</th><th>위험도</th><th>필요 증거</th><th>추천 표면</th></tr></thead>
+        <tbody>
+          <tr><td>버튼이 화면 밖으로 밀림</td><td class="warn">중간</td><td>브라우저 캡처, 클릭 가능성, viewport 비교</td><td class="ok">Codex App + Browser QA</td></tr>
+          <tr><td>대량 문구 교체</td><td>낮음</td><td>diff, 검색 결과, 테스트</td><td>Claude CLI 또는 Codex CLI</td></tr>
+          <tr><td>릴리즈 버전 불일치</td><td class="warn">높음</td><td>tag, package.version, Actions 로그, checksum</td><td class="ok">Codex + GitHub Actions</td></tr>
+        </tbody>
+      </table>
+      <span class="badge">READY FOR REVIEW</span>
+    </section>
+    <aside>
+      <div class="evidence">
+        <article><b>선택 근거</b><span>화면 품질 작업은 실제 브라우저에서 보이는 증거가 필요합니다.</span></article>
+        <article><b>검증 증거</b><span>전후 캡처, 클릭 가능성, 1280x720과 1920x1080 확인.</span></article>
+        <article><b>실패 시 복구</b><span>증거가 부족하면 표면 선택을 되돌리고 필요한 증거가 남는 화면에서 재실행.</span></article>
+      </div>
+    </aside>
+  </main>
+</body>
+</html>

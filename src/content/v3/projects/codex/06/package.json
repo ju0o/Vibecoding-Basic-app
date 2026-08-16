@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-codex-06",
+  "private": true,
+  "version": "1.0.0",
+  "description": "안정된 Codex 작업을 Hook과 Automation으로 운영하고 GitHub Actions, PR과 Release까지 연결합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

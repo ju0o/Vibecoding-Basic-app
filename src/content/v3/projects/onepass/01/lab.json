@@ -1,0 +1,25 @@
+{
+  "courseId": "onepass",
+  "lessonNumber": 1,
+  "title": "바이브코딩의 원리 — 왜 AI에게 맡겨도 되는가",
+  "revision": "3.0.0-beta.1",
+  "status": "preview",
+  "sceneId": "op-01-principles",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "AI 결과를 검증 없이 신뢰해 배포 후 실제 입력에서 깨짐",
+    "trace": "works on prompt, breaks on real input",
+    "cause": "완료 기준과 검증 없이 결과 화면만 보고 진행함",
+    "fix": "작은 범위로 다시 요청하고 직접 실행해 정상·실패 흐름을 확인한 뒤 진행"
+  },
+  "deliverables": [
+    "한 문장 목표와 완료 기준",
+    "맥락·예시 메모",
+    "직접 실행한 검증 기록",
+    "실패 시 복구 한 단계"
+  ]
+}

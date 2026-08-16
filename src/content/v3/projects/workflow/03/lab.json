@@ -1,0 +1,24 @@
+{
+  "courseId": "workflow",
+  "lessonNumber": 3,
+  "title": "Tool·MCP·API·인증·최소 권한",
+  "revision": "3.0.0",
+  "status": "ready",
+  "sceneId": "workflow-03-protocol",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "Agent가 잘못된 고객 폴더에 결과를 저장",
+    "trace": "write scope: /**",
+    "cause": "도구 입력 검증과 경로 제한이 없음",
+    "fix": "허용 경로 목록, dry-run, 쓰기 전 승인과 감사 로그 추가"
+  },
+  "deliverables": [
+    "Tool 계약서",
+    "권한 매트릭스",
+    "승인·감사 흐름"
+  ]
+}

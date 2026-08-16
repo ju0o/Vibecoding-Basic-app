@@ -1,0 +1,12 @@
+{
+  "name": "vibe-lab-product-06",
+  "private": true,
+  "version": "1.0.0",
+  "description": "SaaS팀은 핵심 행동을 실제 데이터와 연결하고 외주팀은 승인 가능한 마일스톤 단위로 제작합니다.",
+  "scripts": {
+    "dev": "node server.js starter",
+    "dev:starter": "node server.js starter",
+    "dev:broken": "node server.js broken",
+    "dev:complete": "node server.js complete"
+  }
+}

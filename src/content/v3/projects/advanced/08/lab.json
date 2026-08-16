@@ -1,0 +1,25 @@
+{
+  "courseId": "advanced",
+  "lessonNumber": 8,
+  "title": "통합 캡스톤",
+  "revision": "3.0.0-beta.3",
+  "status": "review",
+  "sceneId": "s-08-capstone",
+  "aliasSceneId": "codex-06-release",
+  "variants": [
+    "starter",
+    "broken",
+    "complete"
+  ],
+  "error": {
+    "symptom": "릴리즈 증거 불일치와 재현 불가",
+    "trace": "integration drift: tool/policy/owner mismatch at release",
+    "cause": "S1~S7 기준을 일관되게 적용하지 않음",
+    "fix": "작업별 선택·공유 정책·소유권·신뢰성 기준을 한 흐름으로 통합해 재현 가능한 릴리즈로 마감"
+  },
+  "deliverables": [
+    "작업별 선택",
+    "공유 정책",
+    "재현 릴리즈"
+  ]
+}

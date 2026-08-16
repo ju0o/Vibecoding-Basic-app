@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>기초강의 5강 방향 재정의 · 시네마틱 슬라이드 + 컴팩트 UI</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#11182b;
+      --panel-2:#171f35;
+      --line:rgba(255,255,255,.08);
+      --ink:#eef3f8;
+      --muted:#a6b2c1;
+      --teal:#71ffd1;
+      --amber:#ffcc7a;
+      --blue:#8fb8ff;
+      --white:#ffffff;
+      --soft:#f6f7f9;
+      --soft-line:#e5e7eb;
+      --soft-ink:#111827;
+      --soft-muted:#6b7280;
+      --shadow:0 28px 70px rgba(2,8,23,.32);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Pretendard","Segoe UI",Arial,sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(113,255,209,.08), transparent 24rem),
+        radial-gradient(circle at top right, rgba(143,184,255,.10), transparent 24rem),
+        var(--bg);
+      line-height:1.6;
+    }
+    .wrap{
+      width:min(1380px, calc(100vw - 40px));
+      margin:0 auto;
+      padding:48px 0 96px;
+    }
+    .hero,.dark-card,.asset-card,.mini-card,.compact-panel{
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+    }
+    .hero{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:28px;
+      padding:38px;
+      background:linear-gradient(180deg, rgba(23,31,53,.94), rgba(11,16,32,.98));
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color:var(--teal);
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:2px;
+      text-transform:uppercase;
+    }
+    .eyebrow::before{
+      content:"";
+      width:28px;
+      height:2px;
+      border-radius:999px;
+      background:var(--teal);
+    }
+    h1{
+      margin:18px 0 18px;
+      font-size:clamp(36px,4.3vw,60px);
+      line-height:1.08;
+    }
+    h2{
+      margin:0 0 14px;
+      font-size:30px;
+      line-height:1.18;
+    }
+    h3{
+      margin:0 0 10px;
+      font-size:22px;
+      line-height:1.28;
+    }
+    p{margin:0}
+    .lead{
+      margin-bottom:18px;
+      color:var(--muted);
+      font-size:18px;
+    }
+    .hero img,.asset-card img,.compact-panel img{
+      display:block;
+      width:100%;
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:#0c1224;
+    }
+    .list{
+      display:grid;
+      gap:10px;
+      margin-top:18px;
+    }
+    .list div{
+      padding:14px 16px;
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+    }
+    .section{
+      margin-top:30px;
+    }
+    .section-copy{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:17px;
+    }
+    .three-col{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:18px;
+    }
+    .two-col{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:20px;
+    }
+    .dark-card{
+      padding:24px;
+      background:linear-gradient(180deg, rgba(23,31,53,.94), rgba(14,19,36,.98));
+    }
+    .dark-card p,.asset-card p{color:var(--muted)}
+    .tag-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+    .tag{
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+      color:var(--ink);
+      font-size:14px;
+      font-weight:600;
+    }
+    .asset-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:18px;
+    }
+    .asset-card{
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(23,31,53,.94), rgba(11,16,32,.98));
+    }
+    .asset-content{
+      padding:18px 20px 20px;
+    }
+    .meta{
+      display:grid;
+      gap:8px;
+      margin-top:14px;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.08);
+      color:var(--muted);
+      font-size:14px;
+    }
+    .compact-shell{
+      padding:26px;
+      border-radius:28px;
+      background:linear-gradient(180deg,#fbfcfd,#f1f4f7);
+      border:1px solid var(--soft-line);
+      color:var(--soft-ink);
+      box-shadow:0 24px 60px rgba(15,23,42,.10);
+    }
+    .compact-shell p,.compact-shell li{color:var(--soft-muted)}
+    .compact-panel{
+      padding:24px;
+      background:linear-gradient(180deg,#fbfcfd,#f2f5f8);
+      border:1px solid var(--soft-line);
+      color:var(--soft-ink);
+      box-shadow:0 24px 60px rgba(15,23,42,.08);
+    }
+    .compact-panel h3{color:var(--soft-ink)}
+    .rule-table{
+      display:grid;
+      gap:10px;
+      margin-top:16px;
+    }
+    .rule{
+      display:grid;
+      grid-template-columns:140px 1fr;
+      gap:16px;
+      padding:14px 16px;
+      border-radius:16px;
+      background:#ffffff;
+      border:1px solid #e5e7eb;
+    }
+    .rule b{
+      color:#111827;
+      font-size:14px;
+    }
+    .rule span{
+      color:#6b7280;
+      font-size:14px;
+    }
+    .mini-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:16px;
+    }
+    .mini-card{
+      padding:20px;
+      background:linear-gradient(180deg, rgba(23,31,53,.94), rgba(14,19,36,.98));
+    }
+    .mini-card p{color:var(--muted)}
+    .callout{
+      margin-top:18px;
+      padding:18px 20px;
+      border-left:3px solid var(--teal);
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+    }
+    .accent-teal{color:var(--teal)}
+    .accent-amber{color:var(--amber)}
+    .accent-blue{color:var(--blue)}
+    code{
+      padding:.1em .45em;
+      border-radius:8px;
+      background:rgba(255,255,255,.08);
+      color:var(--ink);
+      font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+      font-size:.95em;
+    }
+    @media (max-width: 1100px){
+      .hero,.two-col,.three-col,.asset-grid,.mini-grid{grid-template-columns:1fr}
+      .wrap{width:min(100vw - 24px, 1380px); padding-top:22px}
+      .rule{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Direction Reset</div>
+        <h1>맞습니다. 방향을 바꿔야 더 좋아집니다.</h1>
+        <p class="lead">원하시는 건 일반적인 교육용 슬라이드가 아니라, <span class="accent-teal">3강 2번 슬라이드처럼 시선을 확 끌어당기는 시네마틱 설명 장면</span>이고, 프로그램 UI는 반대로 <span class="accent-blue">Notion·Apple 계열의 작고 촘촘한 컴팩트 구조</span>여야 합니다.</p>
+        <div class="list">
+          <div><strong class="accent-amber">슬라이드</strong>: 실사 질감은 살리되 실제 서비스 화면 캡처는 쓰지 않고, 건축·공간·오브젝트 비유로 장면을 만듭니다.</div>
+          <div><strong class="accent-teal">애니메이션</strong>: 통통 튀는 모션보다 카메라 이동, 빛 흐름, 초점 전환, 순차 점등 중심으로 갑니다.</div>
+          <div><strong class="accent-blue">UI</strong>: 큰 카드와 넓은 여백을 줄이고, 작은 블록과 얇은 선으로 정보 밀도를 높입니다.</div>
+        </div>
+        <div class="callout">
+          한 줄로 정리하면: <strong class="accent-teal">슬라이드는 영화처럼</strong>, <strong class="accent-blue">운영 UI는 문서 도구처럼</strong> 가는 조합이 가장 맞습니다.
+        </div>
+      </div>
+      <div>
+        <img src="./assets/session-05-v2/cinematic-build-scene.jpg" alt="시네마틱한 건축형 슬라이드 키비주얼">
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>시네마틱 슬라이드 방향</h2>
+      <p class="section-copy">3강 2번 슬라이드가 강한 이유는 단순히 이미지가 좋아서가 아니라, <strong>한 건물이 단계적으로 완성되는 동일 세계관</strong>이 있고, 강사가 설명할 때마다 <strong>한 포인트씩만 움직인다</strong>는 점입니다. 이 원리를 5강에도 그대로 이식하면 됩니다.</p>
+      <div class="asset-grid">
+        <article class="asset-card">
+          <img src="./assets/session-05-v2/cinematic-build-scene.jpg" alt="건축 변환 장면">
+          <div class="asset-content">
+            <h3>1. 아이디어 → 구현 장면</h3>
+            <p>5강 도입이나 배포 파트에 맞는 방식으로, 구조가 점점 만들어지는 장면을 써서 “서비스가 현실이 되는 느낌”을 강하게 줄 수 있습니다.</p>
+            <div class="meta">
+              <div><strong>어울리는 쓰임</strong>: 도입, 빌드, 배포 철학 설명</div>
+              <div><strong>모션 방식</strong>: 느린 줌인, 구조선 점등, 안개/빛 레이어 이동</div>
+            </div>
+          </div>
+        </article>
+        <article class="asset-card">
+          <img src="./assets/session-05-v2/secure-secret-handoff.jpg" alt="비밀값 전달 시네마틱 장면">
+          <div class="asset-content">
+            <h3>2. 비밀값 전달 장면</h3>
+            <p>실제 UI 없이도 보안 개념을 설명할 수 있습니다. 로컬 공간에서 보호된 구역으로 이동하는 오브젝트만으로도 강한 몰입감을 만들 수 있습니다.</p>
+            <div class="meta">
+              <div><strong>어울리는 쓰임</strong>: 환경변수, 비밀값, 보안 경계</div>
+              <div><strong>모션 방식</strong>: 캡슐 이동, 복도 라이트 점등, 최종 금고 포커스</div>
+            </div>
+          </div>
+        </article>
+        <article class="asset-card">
+          <img src="./assets/session-05-v2/live-launch-route.jpg" alt="라이브 공개 장면">
+          <div class="asset-content">
+            <h3>3. Release → Live 공개 장면</h3>
+            <p>공개 전 대기 상태에서 점등되는 공간 비유로 가면, “드디어 서비스가 켜진다”는 감정을 만들 수 있습니다. 발표 장면에서 특히 효과적입니다.</p>
+            <div class="meta">
+              <div><strong>어울리는 쓰임</strong>: 공개 URL, 릴리즈, 런치 체크</div>
+              <div><strong>모션 방식</strong>: 라이트 트레이스, 내부 점등, 마지막 공개 상태 고정</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section three-col">
+      <article class="dark-card">
+        <h3>좋은 장면의 조건</h3>
+        <p>실사 같아 보이지만, 특정 서비스 화면을 베끼지 않는 것이 중요합니다. 그래서 오브젝트, 공간, 건축, 소재, 빛의 방향으로 장면을 구성합니다.</p>
+        <div class="tag-row">
+          <span class="tag">실사 질감</span>
+          <span class="tag">비유 중심</span>
+          <span class="tag">브랜드 독립적</span>
+        </div>
+      </article>
+      <article class="dark-card">
+        <h3>좋은 모션의 조건</h3>
+        <p>시선을 끈다고 해서 빠르고 많이 움직이면 오히려 유치해집니다. 장면 안에서는 한 번에 한 가지 현상만 켜져야 고급스럽습니다.</p>
+        <div class="tag-row">
+          <span class="tag">카메라 푸시</span>
+          <span class="tag">포커스 전환</span>
+          <span class="tag">광선 이동</span>
+        </div>
+      </article>
+      <article class="dark-card">
+        <h3>피해야 할 방향</h3>
+        <p>실제 웹 화면 캡처, 과한 파티클, 빠른 줌 반복, 강한 바운스, 한 장면에서 여러 요소가 동시에 움직이는 방식은 피하는 것이 좋습니다.</p>
+        <div class="tag-row">
+          <span class="tag">화면 캡처 남용 금지</span>
+          <span class="tag">과한 트랜지션 금지</span>
+          <span class="tag">한 번에 하나만</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="section two-col">
+      <article class="dark-card">
+        <h2>슬라이드 애니메이션 레시피</h2>
+        <p class="section-copy">실제로 제작할 때는 아래 규칙으로 맞추면 3강 2번 슬라이드처럼 밀도 있고 집중력 있는 결과가 나옵니다.</p>
+        <div class="list">
+          <div><strong>1단계</strong>: 장면 전체는 정지 상태로 깔고, 첫 설명 지점만 서서히 밝힙니다.</div>
+          <div><strong>2단계</strong>: 6%~10% 정도의 아주 짧은 카메라 푸시로 시선을 안쪽으로 끌어당깁니다.</div>
+          <div><strong>3단계</strong>: 구조선, 빛 경로, 포커스 링 같은 설명용 오버레이를 얹습니다.</div>
+          <div><strong>4단계</strong>: 설명이 끝난 뒤에는 움직임을 멈추고 장면을 잠깐 고정해 이해 시간을 줍니다.</div>
+        </div>
+        <div class="callout">
+          추천 모션 강도: <strong class="accent-amber">“빠른 화려함”이 아니라 “느린 확신”</strong>
+        </div>
+      </article>
+      <article class="compact-shell">
+        <h2>그리고 UI는 반대로 더 조용해야 합니다</h2>
+        <p>방금 말씀하신 취향은 아주 명확합니다. 지금처럼 큰 카드가 화면을 주도하는 방식보다, <strong>작고 가까운 정보 단위</strong>들이 정갈하게 모여 있는 편이 더 잘 맞습니다.</p>
+        <div class="rule-table">
+          <div class="rule">
+            <b>톤</b>
+            <span>Notion의 문서성 + Apple의 정돈된 여백 + 운영툴의 정보 밀도</span>
+          </div>
+          <div class="rule">
+            <b>레이아웃</b>
+            <span>큰 섹션 3개보다 작은 블록 8~12개가 정렬된 구조가 적합</span>
+          </div>
+          <div class="rule">
+            <b>강조 방식</b>
+            <span>컬러보다는 타이포 위계, 선택 상태, 얇은 경계선으로 차이를 만듦</span>
+          </div>
+          <div class="rule">
+            <b>밀도</b>
+            <span>간격 12~16px, 카드 반경 12~18px, 그림자는 아주 약하게만 사용</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section">
+      <div class="compact-panel">
+        <div class="two-col" style="align-items:start;">
+          <div>
+            <h2>컴팩트 UI 방향</h2>
+            <p class="section-copy">지금 제안드렸던 큰 카드형 UI는 취향과 맞지 않았습니다. 새 방향은 아래처럼 가는 게 맞습니다.</p>
+            <div class="mini-grid">
+              <article class="mini-card">
+                <h3>좋은 방향</h3>
+                <p>작은 섹션, 얇은 선, 낮은 대비, 촘촘한 정보 블록, 작은 툴바, 작지만 선명한 선택 상태</p>
+              </article>
+              <article class="mini-card">
+                <h3>피할 방향</h3>
+                <p>너무 큰 카드, 비어 보이는 여백, 과한 컬러 블록, 하나의 기능이 지나치게 큰 덩어리로 보이는 구조</p>
+              </article>
+            </div>
+            <div class="callout" style="background:#ffffff; color:#6b7280; border-left-color:#111827;">
+              추천 문장: <strong style="color:#111827">“작고 정확하게 구획된 운영용 인터페이스”</strong>
+            </div>
+          </div>
+          <div>
+            <img src="./assets/session-05-v2/compact-modern-ui.svg" alt="컴팩트하고 모던한 발표자 UI 방향">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section two-col">
+      <article class="compact-panel">
+        <h3>이런 식으로 디자인하면 됩니다</h3>
+        <div class="rule-table">
+          <div class="rule">
+            <b>사이드바</b>
+            <span>큰 카드 1개보다 작고 낮은 높이의 세션 아이템이 반복되는 방식</span>
+          </div>
+          <div class="rule">
+            <b>중앙 리스트</b>
+            <span>도입, 배포, 보안, 데이터 같은 단계 그룹을 작은 행 단위로 정리</span>
+          </div>
+          <div class="rule">
+            <b>우측 플레이어</b>
+            <span>슬라이드, 메모, 강사 큐, 빠른 제어를 작은 패널로 나눠 붙이는 구조</span>
+          </div>
+          <div class="rule">
+            <b>시각 언어</b>
+            <span>검정/회색/백색 기반에 선택 상태만 진하게, 기본 상태는 매우 차분하게 유지</span>
+          </div>
+        </div>
+      </article>
+      <article class="compact-panel">
+        <h3>지금 프로젝트에 바로 적용한다면</h3>
+        <div class="list" style="margin-top:0;">
+          <div><strong>1순위</strong>: `course-rail`의 큰 덩어리감을 줄이고, 리스트 항목을 더 촘촘하게 정리</div>
+          <div><strong>2순위</strong>: `lesson-pane`를 카드형이 아니라 작은 타임라인형 세션 묶음으로 개편</div>
+          <div><strong>3순위</strong>: `player`에서 발표자 메모와 제어 버튼을 더 얇고 작게 재배치</div>
+          <div><strong>4순위</strong>: 전체 라운드와 그림자를 줄여 더 차갑고 정제된 질감으로 변경</div>
+        </div>
+        <div class="callout" style="background:#ffffff; color:#6b7280; border-left-color:#111827;">
+          즉, <strong style="color:#111827">“교육용 대시보드”</strong>보다 <strong style="color:#111827">“정리 잘 된 작업용 문서 툴”</strong>에 더 가깝게 만들어야 합니다.
+        </div>
+      </article>
+    </section>
+
+    <section class="section dark-card">
+      <h2>최종 결론</h2>
+      <p class="section-copy">네, 원하시는 방향으로 충분히 제작 가능합니다. 그리고 지금 피드백을 기준으로 보면 방향은 아주 분명합니다.</p>
+      <div class="list">
+        <div><strong class="accent-teal">슬라이드</strong>: 3강 2번처럼 실사 질감의 시네마틱 장면을 만들고, 실제 화면 대신 공간 비유와 오브젝트 비유를 씁니다.</div>
+        <div><strong class="accent-amber">애니메이션</strong>: 액티브하지만 유치하지 않게, 빛·카메라·초점 중심의 모션으로 갑니다.</div>
+        <div><strong class="accent-blue">프로그램 UI</strong>: 큰 카드형을 버리고, Notion·Apple 느낌의 조용하고 컴팩트한 밀도형 구조로 갑니다.</div>
+      </div>
+      <div class="callout">
+        다음 단계로는 <code>실제 UI 화면 리디자인 시안</code>과 <code>5강 슬라이드별 장면/모션 시퀀스 표</code>를 바로 제작하는 것이 가장 좋습니다.
+      </div>
+    </section>
+  </main>
+</body>
+</html>
