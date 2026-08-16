@@ -9,7 +9,7 @@ const contentDir = path.join(root, 'src', 'content');
 const manifestPath = path.join(contentDir, 'course-manifest.json');
 const archiveDir = path.join(contentDir, 'archive');
 const archiveManifestPath = path.join(archiveDir, 'v2-course-manifest.json');
-const freezePath = path.join(root, 'docs', 'v3', 'basic-v2-freeze.json');
+const freezePath = path.join(root, 'scripts', 'data', 'basic-v2-freeze.json');
 const outputDataPath = path.join(contentDir, 'v3', 'course-data.js');
 const officialSourcesPath = path.join(contentDir, 'sources', 'official-sources.json');
 

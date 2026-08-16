@@ -10,3 +10,8 @@ output/
 .env.*
 !.env.example
 .claude/
+.codegraph/
+.codex/
+.agents/
+.uploads/
+.commandcode/

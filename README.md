@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="release/assets/preview.png" alt="VIBE STUDIO" width="800" />
+  <img src="src/content/assets/v3/studio-dashboard.png" alt="VIBE STUDIO" width="800" />
 </p>
 
 <h1 align="center">VIBE STUDIO</h1>
@@ -20,7 +20,7 @@
 ## 앱 화면
 
 <p align="center">
-  <img src="artifacts/qa/studio-1280x720.png" alt="Studio Dashboard" width="720" />
+  <img src="src/content/assets/v3/studio-dashboard.png" alt="Studio Dashboard" width="720" />
 </p>
 
 <p align="center"><i>VIBE STUDIO 3단 레이아웃 — 왼쪽 과정·일정, 가운데 강의·자료실, 오른쪽 목표·실행</i></p>
@@ -74,7 +74,7 @@ npm run build:v3
 - `src/content/course-manifest.json`
 - `src/content/v3/course-data.js`
 - `src/content/v3/projects/*`의 34개 실행형 실습 패키지
-- `docs/v3/basic-v2-freeze.json`
+- `scripts/data/basic-v2-freeze.json`
 
 현재 2기 활성 강의인 `src/content/sessions/*`는 생성 대상이 아니며 해시로 보호됩니다. 개편 작업본은 V3 덱으로 별도 생성됩니다.
 
@@ -123,21 +123,6 @@ npm run release:v3-beta
 ```
 
 `release/`에 portable EXE, 현장 실행 가이드, 강의 전 체크리스트와 미리보기 이미지가 생성됩니다.
-
-<hr/>
-
-## 📄 주요 문서
-
-| 문서 | 설명 |
-|---|---|
-| [`docs/v3/CURRICULUM-V3.md`](docs/v3/CURRICULUM-V3.md) | V3 커리큘럼 운영 원칙과 과정 안내 |
-| [`docs/v3/CURRICULUM-MATRIX.md`](docs/v3/CURRICULUM-MATRIX.md) | 과정별 주제 중복 방지 매트릭스 |
-| [`docs/v3/ARCHITECTURE.md`](docs/v3/ARCHITECTURE.md) | V3 콘텐츠 경계와 인터랙션 구조 |
-| [`docs/v3/QA-CHECKLIST.md`](docs/v3/QA-CHECKLIST.md) | 수강생·강사용 자료 검증 체크리스트 |
-| [`docs/v3/SOURCES-WORKFLOW.md`](docs/v3/SOURCES-WORKFLOW.md) | 공식 참고자료 갱신 워크플로 |
-| [`docs/CURRICULUM.md`](docs/CURRICULUM.md) | 기존 2기 운영 커리큘럼 보존본 |
-| [`docs/V3_BETA_RELEASE_REPORT.md`](docs/V3_BETA_RELEASE_REPORT.md) | V3 베타 릴리즈 보고서 |
-| [`docs/V2_RELEASE_REPORT.md`](docs/V2_RELEASE_REPORT.md) | V2 완료 보고서 |
 
 <hr/>
 
