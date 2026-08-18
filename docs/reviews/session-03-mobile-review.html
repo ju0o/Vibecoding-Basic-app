@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3강 모바일 검토자료</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    :root{--ink:#14191d;--muted:#58636b;--line:#cbd3d8;--soft:#f2f5f6;--mint:#13877b;--mint-soft:#e4f3f0;--amber:#a86f16;--amber-soft:#fff3db}
+    html,body{margin:0;padding:0;color:var(--ink);background:#dfe4e7;font-family:Pretendard,"Malgun Gothic",system-ui,sans-serif;line-height:1.5;letter-spacing:0}
+    .page{position:relative;width:210mm;min-height:297mm;margin:12mm auto;padding:12mm 13mm;background:#fff;box-shadow:0 14px 44px rgba(22,34,42,.15);page-break-after:always;overflow:hidden}
+    .page:last-child{page-break-after:auto}
+    .cover{display:flex;flex-direction:column;justify-content:center;padding:22mm}
+    .kicker{color:var(--mint);font-size:11px;font-weight:950;letter-spacing:.08em}
+    h1{margin:7px 0 13px;font-size:35px;line-height:1.12}
+    h2{margin:4px 0 0;font-size:22px;line-height:1.25}
+    h3{margin:0 0 5px;font-size:14px}
+    p{margin:0}
+    .cover-lead{max-width:154mm;color:var(--muted);font-size:15px}
+    .cover-rule{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin:22mm 0 9mm;background:var(--line);border:1px solid var(--line)}
+    .cover-rule span{display:grid;gap:5px;padding:13px;background:#fff}
+    .cover-rule b{color:var(--mint);font-size:21px}.cover-rule small{color:var(--muted);font-size:11px}
+    .phone-path{padding:14px 16px;border-left:5px solid var(--mint);background:var(--mint-soft);font-size:13px}
+    .phone-path b{display:block;margin-bottom:4px}
+    .privacy{margin-top:8mm;padding:12px 14px;color:#714c12;background:var(--amber-soft);font-size:11px}
+    .page-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+    .slide-num{display:grid;place-items:center;min-width:35px;height:35px;color:#fff;background:var(--ink);font-size:13px;font-weight:950}
+    .priority{margin-left:auto;padding:5px 8px;color:#075f55;border:1px solid #98cfc8;background:#e8f5f2;font-size:9px;font-weight:900}
+    .priority.medium{color:#785213;border-color:#e3c982;background:#fff7df}
+    .shot{display:block;width:100%;margin-top:10px;border:1px solid #9ca8af;background:#0b0e10}
+    .review-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:9px;margin-top:9px}
+    .panel{min-height:56mm;padding:10px 11px;border:1px solid var(--line);background:#fff}
+    .panel.current{border-top:4px solid #65727a}
+    .panel.next{border-top:4px solid var(--mint);background:#fbfdfd}
+    .panel p,.panel li{color:var(--muted);font-size:10.5px}
+    ul{margin:6px 0 0;padding-left:17px}
+    li+li{margin-top:4px}
+    .wireframe{margin-top:9px;padding:9px;border:1px solid #aeb9bf;background:var(--soft)}
+    .wireframe-head{display:flex;justify-content:space-between;gap:12px;margin-bottom:7px;font-size:10px;font-weight:900}
+    .frame{display:grid;height:35mm;border:1px solid #5d6970;background:#11171a}
+    .frame>*{display:grid;place-items:center;padding:5px;color:#dce2e4;border:1px solid #39444a;font-size:8px;font-weight:850;text-align:center}
+    .scene{background:#176e65!important;color:#fff!important}
+    .control{background:#9b7229!important;color:#fff!important}
+    .note{background:#202a2f!important}
+    .layout-cover{grid-template-columns:38% 62%;grid-template-rows:100%}
+    .layout-building{grid-template-columns:20% 55% 25%}
+    .layout-cutaway{grid-template-columns:70% 30%}
+    .layout-browser{grid-template-columns:72% 28%}
+    .layout-compare{grid-template-columns:44% 12% 44%}
+    .layout-motion{grid-template-columns:64% 36%}
+    .layout-network{grid-template-columns:24% 76%}
+    .layout-db{grid-template-columns:28% 72%}
+    .layout-api{grid-template-columns:24% 52% 24%}
+    .layout-anatomy{grid-template-columns:18% 58% 24%}
+    .layout-timer{grid-template-columns:1fr}
+    .layout-preview{grid-template-columns:44% 56%}
+    .footer{position:absolute;left:13mm;right:13mm;bottom:7mm;display:flex;justify-content:space-between;color:#78848a;font-size:8px}
+    @media(max-width:760px){body{background:#fff}.page{width:100%;min-height:0;margin:0;padding:22px;box-shadow:none}.review-grid{grid-template-columns:1fr}.panel{min-height:0}}
+    @media print{
+      @page{size:A4 portrait;margin:0}
+      html,body{background:#fff;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+      .page{width:210mm;height:297mm;min-height:297mm;margin:0;padding:12mm 13mm;box-shadow:none}
+      .cover{padding:22mm}
+    }
+  </style>
+</head>
+<body>
+  <section class="page cover">
+    <div class="kicker">MOBILE REVIEW · SESSION 03 · 2026-06-11</div>
+    <h1>3강 슬라이드별<br>스크린샷과 고도화 설계</h1>
+    <p class="cover-lead">아이폰에서 현재 화면과 다음 개선 방향을 함께 확인하기 위한 검토본입니다. 각 장은 실제 강의 화면, 현재 의도, 다음 고도화 예시, 화면 배치 와이어프레임 순서로 구성했습니다.</p>
+    <div class="cover-rule">
+      <span><b>12장</b><small>현재 슬라이드 전체</small></span>
+      <span><b>1장 1페이지</b><small>휴대폰 세로 검토 기준</small></span>
+      <span><b>강사용</b><small>외부 배포 금지</small></span>
+    </div>
+    <div class="phone-path"><b>아이폰에서 여는 방법</b>OneDrive 앱 → Desktop → <strong>3강 모바일 검토자료.pdf</strong></div>
+    <div class="privacy">이 문서는 강의 화면과 향후 설계안을 포함한 강사용 검토자료입니다. 수강생용 별첨자료와 분리해 보관합니다.</div>
+  </section>
+
+  <section class="page">
+    <header class="page-head"><div><div class="kicker">SLIDE 01 · COVER</div><h2>개발의 원리를 눈으로 이해합니다</h2></div><span class="priority medium">보완 권장</span><b class="slide-num">01</b></header>
+    <img class="shot" src="../../artifacts/mobile-review/session-03/slides/slide-01.png" alt="Slide 1">
+    <div class="review-grid">
+      <article class="panel current"><h3>현재 전달되는 내용</h3><p>화면에서 시작한 행동이 처리, 저장, 응답으로 이어진다는 강의의 전체 흐름을 첫 장에서 제시합니다. 설명을 줄이고 네 단계만 남긴 방향은 적절합니다.</p></article>
+      <article class="panel next"><h3>다음 고도화 예시</h3><ul><li>한 개의 데이터 패킷이 네 단계를 이동하도록 속도와 정지 구간을 명확히 합니다.</li><li>선택한 단계만 밝히고 다른 단계는 약하게 낮춰 강사의 설명 지점을 고정합니다.</li><li>응답 단계에서 좌측 제목 아래에 짧은 완료 파동만 전달합니다.</li></ul></article>
+    </div>
+    <div class="wireframe"><div class="wireframe-head"><span>권장 와이어프레임</span><span>제목 38% · 흐름 62%</span></div><div class="frame layout-cover"><div class="note">강의 제목<br>한 문장 소개<br>재생 버튼</div><div class="scene">화면 → 처리 → 저장 → 응답<br>수동 단계 선택 + 패킷 이동</div></div></div>
+    <footer class="footer"><span>3강 모바일 검토자료</span><span>1 / 12</span></footer>
+  </section>
+
+  <section class="page">
+    <header class="page-head"><div><div class="kicker">SLIDE 02 · SIGNATURE</div><h2>아이디어가 진짜 서비스가 되는 과정</h2></div><span class="priority">핵심 고도화</span><b class="slide-num">02</b></header>
+    <img class="shot" src="../../artifacts/mobile-review/session-03/slides/slide-02.png" alt="Slide 2">
+    <div class="review-grid">
+      <article class="panel current"><h3>현재 전달되는 내용</h3><p>빈 땅, 설계도, 철골, 외관, 빈 내부, 내부 공사, 준공을 서로 다른 실제 장면으로 보여줍니다. 외관과 내부는 같은 방향과 재료 언어를 유지하도록 보정했습니다.</p></article>
+      <article class="panel next"><h3>다음 고도화 예시</h3><ul><li>외관에서 내부 진입 시 입구 방향으로 짧게 밀고 들어가는 카메라 전환을 추가합니다.</li><li>빈 내부와 완성 내부는 같은 위치에서 크로스페이드해 공사 전후 차이를 즉시 보이게 합니다.</li><li>자동 전체 재생보다 단계별 수동 설명을 기본으로 유지합니다.</li></ul></article>
+    </div>
+    <div class="wireframe"><div class="wireframe-head"><span>시그니처 장면형</span><span>단계 20% · 장면 55% · 의미 25%</span></div><div class="frame layout-building"><div class="control">7단계 선택</div><div class="scene">동일 건물의 건축 장면<br>외부 → 내부 → 외부</div><div class="note">현재 단계<br>바이브코딩 비유<br>진행률</div></div></div>
+    <footer class="footer"><span>3강 모바일 검토자료</span><span>2 / 12</span></footer>
+  </section>
+
+  <section class="page">
+    <header class="page-head"><div><div class="kicker">SLIDE 03 · TERM MAP</div><h2>식당 안의 역할로 개발 용어 이해하기</h2></div><span class="priority medium">정밀 보완</span><b class="slide-num">03</b></header>
+    <img class="shot" src="../../artifacts/mobile-review/session-03/slides/slide-03.png" alt="Slide 3">
+    <div class="review-grid">
+      <article class="panel current"><h3>현재 전달되는 내용</h3><p>주문 카운터, 주방, 금고·기록실, 납품 통로를 프론트엔드, 백엔드, 데이터베이스, API에 대응시킵니다. 클릭 시 해당 공간으로 카메라 초점이 이동합니다.</p></article>
+      <article class="panel next"><h3>다음 고도화 예시</h3><ul><li>선택 공간 외에는 조도를 낮추고 선택 영역의 실제 작업만 짧게 움직입니다.</li><li>주방 선택 시 주문표가 들어오고 완성된 접시가 나가는 왕복 동선을 보여줍니다.</li><li>전체 보기 버튼으로 언제든 원래 단면으로 돌아오게 합니다.</li></ul></article>
+    </div>
+    <div class="wireframe"><div class="wireframe-head"><span>단면 탐색형</span><span>공간 70% · 용어 설명 30%</span></div><div class="frame layout-cutaway"><div class="scene">식당 전체 단면<br>선택 공간 확대 + 짧은 작업 동작</div><div class="note">영문 용어<br>쉬운 한글 뜻<br>식당 비유</div></div></div>
+    <footer class="footer"><span>3강 모바일 검토자료</span><span>3 / 12</span></footer>
+  </section>
+
+  <section class="page">
+    <header class="page-head"><div><div class="kicker">SLIDE 04 · FRONTEND</div><h2>우리가 보고 누르는 화면</h2></div><span class="priority">다음 우선순위</span><b class="slide-num">04</b></header>
+    <img class="shot" src="../../artifacts/mobile-review/session-03/slides/slide-04.png" alt="Slide 4">
+    <div class="review-grid">
+      <article class="panel current"><h3>현재 전달되는 내용</h3><p>한국 쇼핑몰 브라우저에서 검색, 메뉴, 상품, 장바구니, 로그인, 팝업을 직접 누릅니다. 우측에는 쇼핑몰, 커뮤니티, 예약, 관리자 화면 예시가 추가되었습니다.</p></article>
+      <article class="panel next"><h3>다음 고도화 예시</h3><ul><li>우측 예시를 누르면 작은 미리보기뿐 아니라 왼쪽 메인 브라우저 전체가 해당 서비스로 바뀝니다.</li><li>각 서비스에서도 이동·정보·행동·피드백 네 역할은 같은 색 규칙으로 표시합니다.</li><li>한 서비스당 대표 행동 하나만 직접 체험하도록 제한합니다.</li></ul></article>
+    </div>
+    <div class="wireframe"><div class="wireframe-head"><span>실제 화면 체험형</span><span>메인 브라우저 72% · 예시 전환 28%</span></div><div class="frame layout-browser"><div class="scene">선택한 서비스의 실제 브라우저<br>쇼핑몰 / 커뮤니티 / 예약 / 관리자</div><div class="control">서비스 탭<br>필수 UI 목록<br>확인 질문</div></div></div>
+    <footer class="footer"><span>3강 모바일 검토자료</span><span>4 / 12</span></footer>
+  </section>
+
+  <section class="page">
+    <header class="page-head"><div><div class="kicker">SLIDE 05 · UI VS UX</div><h2>예쁜 화면과 쉬운 경험의 차이</h2></div><span class="priority">다음 우선순위</span><b class="slide-num">05</b></header>
+    <img class="shot" src="../../artifacts/mobile-review/session-03/slides/slide-05.png" alt="Slide 5">
+    <div class="review-grid">
+      <article class="panel current"><h3>현재 전달되는 내용</h3><p>결제, 회원가입, 검색, 오류 복구 네 상황에서 불편한 화면과 좋은 화면을 나란히 비교합니다. 같은 목표라도 정보 순서와 복구 방법에 따라 경험이 달라짐을 보여줍니다.</p></article>
+      <article class="panel next"><h3>다음 고도화 예시</h3><ul><li>자동 비교 대신 강사가 문제점을 하나씩 클릭해 발견하게 합니다.</li><li>왼쪽 문제를 선택하면 오른쪽에서 대응되는 개선 요소만 밝힙니다.</li><li>마지막에 UI, UX, 좋은 경험의 판단 기준을 한 줄씩 수동 공개합니다.</li></ul></article>
+    </div>
+    <div class="wireframe"><div class="wireframe-head"><span>비교 실험형</span><span>문제 44% · 목표 12% · 개선 44%</span></div><div class="frame layout-compare"><div class="note">불편한 화면<br>문제 지점 클릭</div><div class="control">같은<br>목표</div><div class="scene">개선 화면<br>대응 요소 강조</div></div></div>
+    <footer class="footer"><span>3강 모바일 검토자료</span><span>5 / 12</span></footer>
+  </section>
+
+  <section class="page">
+    <header class="page-head"><div><div class="kicker">SLIDE 06 · ANIMATION</div><h2>화면 변화를 설명하는 애니메이션</h2></div><span class="priority">분류 보완</span><b class="slide-num">06</b></header>
+    <img class="shot" src="../../artifacts/mobile-review/session-03/slides/slide-06.png" alt="Slide 6">
+    <div class="review-grid">
+      <article class="panel current"><h3>현재 전달되는 내용</h3><p>메뉴, 로딩, 장바구니, 완료, 탭, 검증, 펼치기, 페이지 연결, 좋아요, 스크롤 위치의 10가지 실제 화면 움직임을 수동 재생합니다.</p></article>
+      <article class="panel next"><h3>다음 고도화 예시</h3><ul><li>10종을 이동·상태·피드백·오류 안내 네 범주로 묶어 선택 부담을 줄입니다.</li><li>하단에 원인→움직임→결과 타임라인을 표시합니다.</li><li>재생 전과 후 화면을 작은 썸네일로 함께 보여 차이를 정지 화면에서도 확인하게 합니다.</li></ul></article>
+    </div>
+    <div class="wireframe"><div class="wireframe-head"><span>애니메이션 실험형</span><span>시연 64% · 분류와 선택 36%</span></div><div class="frame layout-motion"><div class="scene">실제 브라우저 시연<br>전 / 움직임 / 후</div><div class="control">4개 범주<br>10개 예시<br>수동 재생</div></div></div>
+    <footer class="footer"><span>3강 모바일 검토자료</span><span>6 / 12</span></footer>
+  </section>
+
+  <section class="page">
+    <header class="page-head"><div><div class="kicker">SLIDE 07 · BACKEND</div><h2>주문이 처리실을 여행하는 과정</h2></div><span class="priority medium">현 상태 유지</span><b class="slide-num">07</b></header>
+    <img class="shot" src="../../artifacts/mobile-review/session-03/slides/slide-07.png" alt="Slide 7">
+    <div class="review-grid">
+      <article class="panel current"><h3>현재 전달되는 내용</h3><p>브라우저의 주문하기에서 요청 접수, 권한, 재고, 결제, 저장을 수동으로 진행합니다. 강사가 한 단계씩 멈추어 설명할 수 있는 구조입니다.</p></article>
+      <article class="panel next"><h3>다음 고도화 예시</h3><ul><li>요청은 청록색, 응답은 흰색 패킷으로 구분해 왕복 방향을 더 분명히 합니다.</li><li>선택한 처리실 아래에 입력값과 출력값 한 줄을 표시합니다.</li><li>마지막 응답 단계에서 왼쪽 브라우저가 주문 완료 화면으로 전환됩니다.</li></ul></article>
+    </div>
+    <div class="wireframe"><div class="wireframe-head"><span>왕복 처리형</span><span>브라우저 24% · 처리 네트워크 76%</span></div><div class="frame layout-network"><div class="note">상품 화면<br>주문 버튼<br>완료 응답</div><div class="scene">요청 → 권한 → 재고 → 결제 → 저장<br>응답이 반대 방향으로 복귀</div></div></div>
+    <footer class="footer"><span>3강 모바일 검토자료</span><span>7 / 12</span></footer>
+  </section>
+
+  <section class="page">
+    <header class="page-head"><div><div class="kicker">SLIDE 08 · DATABASE</div><h2>기록을 알맞은 보관함에 넣기</h2></div><span class="priority medium">현 상태 유지</span><b class="slide-num">08</b></header>
+    <img class="shot" src="../../artifacts/mobile-review/session-03/slides/slide-08.png" alt="Slide 8">
+    <div class="review-grid">
+      <article class="panel current"><h3>현재 전달되는 내용</h3><p>회원가입, 로그인, 게시글 작성, 상품 주문 화면을 선택하고 회원·게시글·상품·주문 창고 중 어떤 기록이 바뀌는지 보여줍니다.</p></article>
+      <article class="panel next"><h3>다음 고도화 예시</h3><ul><li>상품 주문 시 상품 재고와 주문 내역 두 창고가 순서대로 함께 변하는 장면을 강조합니다.</li><li>로그인은 새 기록 저장이 아니라 기존 회원 찾기라는 차이를 별도 색으로 구분합니다.</li><li>기록 봉투에 실제 필드 이름을 세 개까지만 표시합니다.</li></ul></article>
+    </div>
+    <div class="wireframe"><div class="wireframe-head"><span>기록 이동형</span><span>사용자 화면 28% · 보관실 72%</span></div><div class="frame layout-db"><div class="control">행동 선택<br>회원가입 / 로그인<br>글 / 주문</div><div class="scene">기록 패킷 이동<br>회원 · 게시글 · 상품 · 주문 창고</div></div></div>
+    <footer class="footer"><span>3강 모바일 검토자료</span><span>8 / 12</span></footer>
+  </section>
+
+  <section class="page">
+    <header class="page-head"><div><div class="kicker">SLIDE 09 · API</div><h2>다른 서비스에 부탁하고 답 받기</h2></div><span class="priority">단계 보완</span><b class="slide-num">09</b></header>
+    <img class="shot" src="../../artifacts/mobile-review/session-03/slides/slide-09.png" alt="Slide 9">
+    <div class="review-grid">
+      <article class="panel current"><h3>현재 전달되는 내용</h3><p>내 여행 서비스가 API 창구를 통해 외부 기상 제공처에 서울 날씨를 요청하고 24도, 맑음이라는 응답을 화면에 표시합니다.</p></article>
+      <article class="panel next"><h3>다음 고도화 예시</h3><ul><li>요청, 창구 확인, 외부 처리, 응답의 네 단계를 수동 버튼으로 나눕니다.</li><li>지연 시간과 연결 실패를 짧게 보여주고 재시도 후 성공하도록 구성합니다.</li><li>API는 데이터 자체가 아니라 부탁을 전달하는 약속이라는 문장을 마지막에만 공개합니다.</li></ul></article>
+    </div>
+    <div class="wireframe"><div class="wireframe-head"><span>외부 연결형</span><span>내 앱 24% · API 52% · 제공처 24%</span></div><div class="frame layout-api"><div class="note">내 화면<br>요청 버튼</div><div class="scene">요청 → 약속 확인 → 응답<br>지연 · 실패 · 재시도</div><div class="control">외부 서비스<br>날씨 데이터</div></div></div>
+    <footer class="footer"><span>3강 모바일 검토자료</span><span>9 / 12</span></footer>
+  </section>
+
+  <section class="page">
+    <header class="page-head"><div><div class="kicker">SLIDE 10 · SCREEN ANATOMY</div><h2>큰 화면을 역할별 요소로 나누기</h2></div><span class="priority">4강 연결 보완</span><b class="slide-num">10</b></header>
+    <img class="shot" src="../../artifacts/mobile-review/session-03/slides/slide-10.png" alt="Slide 10">
+    <div class="review-grid">
+      <article class="panel current"><h3>현재 전달되는 내용</h3><p>상단 메뉴, 검색, 상품 카드, 행동 버튼, 결과 알림을 직접 선택하며 “사이트 전체”가 아니라 수정할 부품을 정확히 말하는 연습을 합니다.</p></article>
+      <article class="panel next"><h3>다음 고도화 예시</h3><ul><li>선택한 요소 외 화면은 흐리게 만들어 시선을 한 곳에 고정합니다.</li><li>우측 설명 아래에 해당 UI가 있을 법한 파일명 한 줄을 미리 보여줍니다.</li><li>마지막 선택 후 Slide12의 파일 구조 예고로 연결되는 선을 만듭니다.</li></ul></article>
+    </div>
+    <div class="wireframe"><div class="wireframe-head"><span>화면 해부형</span><span>목록 18% · 실제 화면 58% · 설명 24%</span></div><div class="frame layout-anatomy"><div class="control">요소 목록</div><div class="scene">선택 영역만 강조된 실제 사이트</div><div class="note">역할 설명<br>AI 요청 예시<br>예상 파일 위치</div></div></div>
+    <footer class="footer"><span>3강 모바일 검토자료</span><span>10 / 12</span></footer>
+  </section>
+
+  <section class="page">
+    <header class="page-head"><div><div class="kicker">SLIDE 11 · PRACTICE</div><h2>30분 실습 타이머</h2></div><span class="priority medium">유지 권장</span><b class="slide-num">11</b></header>
+    <img class="shot" src="../../artifacts/mobile-review/session-03/slides/slide-11.png" alt="Slide 11">
+    <div class="review-grid">
+      <article class="panel current"><h3>현재 전달되는 내용</h3><p>강의 후 바로 각자 프로젝트를 진행할 수 있도록 화면의 대부분을 큰 타이머에 사용합니다. 강의장에서 멀리서도 남은 시간이 보입니다.</p></article>
+      <article class="panel next"><h3>다음 고도화 예시</h3><ul><li>기본 화면은 지금처럼 단순하게 유지합니다.</li><li>20분과 10분 남았을 때 색 변화만 한 번 주고 지속적인 장식은 추가하지 않습니다.</li><li>선택 기능으로 15분 중간 점검 알림을 작게 표시할 수 있습니다.</li></ul></article>
+    </div>
+    <div class="wireframe"><div class="wireframe-head"><span>집중 타이머형</span><span>중앙 숫자 우선</span></div><div class="frame layout-timer"><div class="scene">30:00<br>큰 원형 진행률<br>시작 · 정지 · 초기화</div></div></div>
+    <footer class="footer"><span>3강 모바일 검토자료</span><span>11 / 12</span></footer>
+  </section>
+
+  <section class="page">
+    <header class="page-head"><div><div class="kicker">SLIDE 12 · NEXT</div><h2>4강 파일 구조 이해 예고</h2></div><span class="priority medium">연결 보완</span><b class="slide-num">12</b></header>
+    <img class="shot" src="../../artifacts/mobile-review/session-03/slides/slide-12.png" alt="Slide 12">
+    <div class="review-grid">
+      <article class="panel current"><h3>현재 전달되는 내용</h3><p>오늘 화면에서 보았던 주문 버튼이 다음 시간에는 실제 파일과 폴더 안에서 어디에 있는지 찾게 된다는 흐름을 예고합니다.</p></article>
+      <article class="panel next"><h3>다음 고도화 예시</h3><ul><li>화면의 주문 버튼이 축소되어 파일 트리의 OrderButton.tsx로 이동하는 장면을 추가합니다.</li><li>components, app, api, styles 네 폴더는 한 번에 밝히지 않고 순서대로 공개합니다.</li><li>마지막에는 “화면의 부품에는 파일 주소가 있다” 한 문장만 남깁니다.</li></ul></article>
+    </div>
+    <div class="wireframe"><div class="wireframe-head"><span>다음 강의 연결형</span><span>오늘 44% · 다음 시간 56%</span></div><div class="frame layout-preview"><div class="note">오늘 본 화면의 버튼</div><div class="scene">버튼 → components/<br>OrderButton.tsx</div></div></div>
+    <footer class="footer"><span>3강 모바일 검토자료</span><span>12 / 12</span></footer>
+  </section>
+</body>
+</html>
