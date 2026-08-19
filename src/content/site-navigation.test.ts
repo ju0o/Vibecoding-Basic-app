@@ -1,22 +1,40 @@
+import fs from "node:fs"
+import path from "node:path"
 import { describe, expect, it } from "vitest"
 import {
+  FOOTER_NAV,
   isActiveNavPath,
   MOBILE_MORE_NAV,
   MOBILE_PRIMARY_NAV,
+  type NavItem,
   PRIMARY_NAV,
 } from "./site-navigation"
 
+const APP_DIR = path.join(__dirname, "..", "app")
+
+/** Resolves a static nav href (no dynamic segments) to its `src/app/**\/page.tsx` file. */
+function pageFileForHref(href: string): string {
+  const segment = href === "/" ? "" : href.slice(1)
+  return path.join(APP_DIR, segment, "page.tsx")
+}
+
+function expectAllRoutesResolve(items: readonly NavItem[]) {
+  for (const item of items) {
+    expect(fs.existsSync(pageFileForHref(item.href)), `${item.href} should have a page.tsx`).toBe(
+      true
+    )
+  }
+}
+
 describe("site-navigation", () => {
-  it("has seven desktop primary items", () => {
-    expect(PRIMARY_NAV).toHaveLength(7)
+  it("leads with the community identity: five desktop primary items", () => {
+    expect(PRIMARY_NAV).toHaveLength(5)
     expect(PRIMARY_NAV.map((i) => i.href)).toEqual([
-      "/start",
-      "/learn",
-      "/tools",
-      "/technologies",
-      "/lab",
-      "/atlas",
-      "/verification",
+      "/",
+      "/community",
+      "/materials",
+      "/curriculum",
+      "/glossary",
     ])
   })
 
@@ -33,5 +51,12 @@ describe("site-navigation", () => {
 
   it("marks atlas studio under atlas", () => {
     expect(isActiveNavPath("/atlas/studio", "/atlas")).toBe(true)
+  })
+
+  it("every navigation route resolves to an existing page path", () => {
+    expectAllRoutesResolve(PRIMARY_NAV)
+    expectAllRoutesResolve(MOBILE_PRIMARY_NAV)
+    expectAllRoutesResolve(MOBILE_MORE_NAV)
+    expectAllRoutesResolve(FOOTER_NAV)
   })
 })

@@ -13,6 +13,25 @@ export default function HomePage() {
 
   return (
     <div className="bg-[var(--surface-primary)]">
+      <section className="border-b border-[var(--border-subtle)] bg-[var(--surface-secondary)]">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-20">
+          <Badge variant="accent">구피티(GUPITI) 커뮤니티</Badge>
+          <h1 className="mt-5 max-w-3xl text-4xl font-extrabold leading-tight text-[var(--text-primary)] sm:text-5xl">
+            질문을 나누고, 함께 고치는 공부 모임
+          </h1>
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--text-secondary)]">
+            구피티(GUPITI)는 AI 학습을 함께하는 커뮤니티입니다. 궁금한 것을 묻고, 만든 결과를
+            공유하세요.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <PrimaryLink href="/community">커뮤니티</PrimaryLink>
+            <PrimaryLink href="/materials" variant="secondary">
+              자료실
+            </PrimaryLink>
+          </div>
+        </div>
+      </section>
+
       <section className="mx-auto grid min-h-[calc(100dvh-4rem)] max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-16">
         <div>
           <Badge variant="accent">공개 학습 플랫폼</Badge>

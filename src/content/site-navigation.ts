@@ -5,15 +5,13 @@ export type NavItem = {
   readonly label: string
 }
 
-/** Desktop top-level navigation */
+/** Desktop top-level navigation — leads with the 구피티(GUPITI) community identity */
 export const PRIMARY_NAV: readonly NavItem[] = [
-  { href: "/start", label: "시작하기" },
-  { href: "/learn", label: "배우기" },
-  { href: "/tools", label: "도구" },
-  { href: "/technologies", label: "기술" },
-  { href: "/lab", label: "실습" },
-  { href: "/atlas", label: "Atlas" },
-  { href: "/verification", label: "함께 고치기" },
+  { href: "/", label: "홈" },
+  { href: "/community", label: "커뮤니티" },
+  { href: "/materials", label: "자료실" },
+  { href: "/curriculum", label: "전체 학습 지도" },
+  { href: "/glossary", label: "용어" },
 ] as const
 
 /** Mobile primary strip */
@@ -35,6 +33,8 @@ export const MOBILE_MORE_NAV: readonly NavItem[] = [
 export const FOOTER_NAV: readonly NavItem[] = [
   { href: "/start", label: "시작하기" },
   { href: "/learn", label: "배우기" },
+  { href: "/tools", label: "도구" },
+  { href: "/technologies", label: "기술" },
   { href: "/lab", label: "실습" },
   { href: "/curriculum", label: "전체 학습 지도" },
   { href: "/glossary", label: "용어" },
