@@ -10,6 +10,8 @@ const slugs = fs
 
 const staticPaths = [
   "",
+  "/community",
+  "/materials",
   "/curriculum",
   "/glossary",
   "/resources",

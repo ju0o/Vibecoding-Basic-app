@@ -5,8 +5,7 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { useAuth } from "@/contexts/AuthContext"
 import { getFirestore } from "@/lib/firebase/client"
-
-const APPROVED_POST_STATUS = "approved"
+import { PostStatus } from "@/lib/firebase/types"
 
 interface CommunityPost {
   id: string
@@ -55,7 +54,7 @@ export default function CommunityPage() {
         const db = getFirestore()
         const postsQuery = query(
           collection(db, "posts"),
-          where("status", "==", APPROVED_POST_STATUS),
+          where("status", "==", PostStatus.Published),
           orderBy("createdAt", "desc")
         )
         const snapshot = await getDocs(postsQuery)
@@ -86,7 +85,7 @@ export default function CommunityPage() {
           <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
             커뮤니티
           </h1>
-          <p className="text-gray-400 mt-2">승인된 게시글 모아보기</p>
+          <p className="text-gray-400 mt-2">공개된 게시글 모아보기</p>
         </div>
 
         {!authLoading && !user && (
@@ -110,7 +109,7 @@ export default function CommunityPage() {
               지금은 커뮤니티 게시글을 불러올 수 없습니다. 잠시 후 다시 시도해 주세요.
             </div>
           ) : posts.length === 0 ? (
-            <div className="p-8 text-center text-gray-400">아직 승인된 게시글이 없습니다.</div>
+            <div className="p-8 text-center text-gray-400">아직 게시글이 없습니다.</div>
           ) : (
             <div className="divide-y divide-white/5">
               {posts.map((post) => (

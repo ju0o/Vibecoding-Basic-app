@@ -14,8 +14,10 @@ export const PRIMARY_NAV: readonly NavItem[] = [
   { href: "/glossary", label: "용어" },
 ] as const
 
-/** Mobile primary strip */
+/** Mobile primary strip -- leads with the community identity, same as PRIMARY_NAV */
 export const MOBILE_PRIMARY_NAV: readonly NavItem[] = [
+  { href: "/community", label: "커뮤니티" },
+  { href: "/materials", label: "자료실" },
   { href: "/start", label: "시작하기" },
   { href: "/learn", label: "배우기" },
   { href: "/lab", label: "실습" },
@@ -31,6 +33,8 @@ export const MOBILE_MORE_NAV: readonly NavItem[] = [
 
 /** Footer / secondary discovery */
 export const FOOTER_NAV: readonly NavItem[] = [
+  { href: "/community", label: "커뮤니티" },
+  { href: "/materials", label: "자료실" },
   { href: "/start", label: "시작하기" },
   { href: "/learn", label: "배우기" },
   { href: "/tools", label: "도구" },

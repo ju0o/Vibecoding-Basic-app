@@ -38,9 +38,22 @@ describe("site-navigation", () => {
     ])
   })
 
-  it("mobile primary is start learn lab", () => {
-    expect(MOBILE_PRIMARY_NAV.map((i) => i.href)).toEqual(["/start", "/learn", "/lab"])
+  it("mobile primary leads with community identity, then start learn lab", () => {
+    expect(MOBILE_PRIMARY_NAV.map((i) => i.href)).toEqual([
+      "/community",
+      "/materials",
+      "/start",
+      "/learn",
+      "/lab",
+    ])
     expect(MOBILE_MORE_NAV.some((i) => i.href === "/verification")).toBe(true)
+  })
+
+  it("community and materials are reachable off-desktop (mobile nav and footer), not desktop-only", () => {
+    expect(MOBILE_PRIMARY_NAV.some((i) => i.href === "/community")).toBe(true)
+    expect(MOBILE_PRIMARY_NAV.some((i) => i.href === "/materials")).toBe(true)
+    expect(FOOTER_NAV.some((i) => i.href === "/community")).toBe(true)
+    expect(FOOTER_NAV.some((i) => i.href === "/materials")).toBe(true)
   })
 
   it("marks learn nested day-1 active under /learn", () => {

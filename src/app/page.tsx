@@ -32,12 +32,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto grid min-h-[calc(100dvh-4rem)] max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-16">
+      {/* Curriculum/lesson access, preserved per V1 scope (RECONCILIATION.md ADAPT: "preserve curriculum/lesson
+          access") -- demoted from a second full-viewport hero to a normal content section so it supports the
+          community identity above rather than competing with it (independent review finding: two <h1>s / two
+          full-height hero sections back to back). */}
+      <section className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-16">
         <div>
           <Badge variant="accent">공개 학습 플랫폼</Badge>
-          <h1 className="mt-5 max-w-3xl text-4xl font-extrabold leading-tight text-[var(--text-primary)] sm:text-5xl">
+          <h2 className="mt-5 max-w-3xl text-4xl font-extrabold leading-tight text-[var(--text-primary)] sm:text-5xl">
             AI와 함께, 설명하며 만드는 법을 배웁니다
-          </h1>
+          </h2>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--text-secondary)]">
             이 사이트는 비개발자가 Day 1부터 따라가는{" "}
             <strong className="text-[var(--text-primary)]">Learning Path</strong>입니다. 궁금한
