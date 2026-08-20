@@ -57,7 +57,7 @@ export default function MaterialsPage() {
                     <li key={lesson.slug}>
                       <Link
                         className="flex items-baseline justify-between gap-3 rounded-lg border border-[var(--border-subtle)] px-3 py-2 text-sm transition hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)]"
-                        href={`/lessons/${lesson.slug}`}
+                        href={`/materials/${lesson.slug}`}
                       >
                         <span className="font-semibold text-[var(--text-primary)]">
                           {lesson.title}
