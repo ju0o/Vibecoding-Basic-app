@@ -113,7 +113,11 @@ export default function CommunityPage() {
           ) : (
             <div className="divide-y divide-white/5">
               {posts.map((post) => (
-                <div key={post.id} className="px-6 py-4 hover:bg-white/5 transition-colors">
+                <Link
+                  key={post.id}
+                  href={`/community/post?id=${encodeURIComponent(post.id)}`}
+                  className="block px-6 py-4 hover:bg-white/5 transition-colors"
+                >
                   <p className="text-white font-medium">{post.title}</p>
                   {post.authorDisplayName && (
                     <p className="text-gray-400 text-sm mt-1">{post.authorDisplayName}</p>
@@ -133,7 +137,7 @@ export default function CommunityPage() {
                   {typeof post.upvoteCount === "number" && (
                     <p className="text-gray-500 text-xs mt-2">추천 {post.upvoteCount}</p>
                   )}
-                </div>
+                </Link>
               ))}
             </div>
           )}
