@@ -96,6 +96,8 @@ Home (/)
 4. Information-architecture/navigation reconciliation.
 5. Basic responsive UX for touched areas.
 6. Tests/typecheck/build/QA for touched scope.
+7. Community post compose (`/community/post/new`), reusing the existing Auth/Firestore write
+   path -- pulled forward from the V2 roadmap by Owner decision; see Decision Log.
 
 ## 12. Non-goals (V1)
 
@@ -138,6 +140,7 @@ overnight V1 scope.
 | 2026-08-12 | 구피티(Goopti) 6-week V1 product definition + roadmap | `docs/product/PRODUCT_DEFINITION.md`, `ROADMAP_V2.md` |
 | 2026-08-19 | **Owner rebase decision:** dedicated 구피티 community gathering website + real meeting/education material archive; community = core function; stop generic platform expansion | Overnight contract |
 | 2026-08-19 | **Naming normalized:** 구피티 / GUPITI (community identity) for the site | This SSOT |
+| 2026-08-20 | **Community Compose pulled into V1:** with identity-nav, materials-detail, and community-detail integrated, the Owner approved Community post compose (`/community/post/new`) as the next V1 item (previously only in `ROADMAP_V2.md`) rather than treating V1 as complete. Confirmed via Owner Q&A during the HERMESS Company continuation run, not yet reflected anywhere else in this SSOT until this entry. | HERMESS Live Company Dogfood Run 01 (project-scoped continuation) |
 | 2026-08-19 | V1 = community identity + navigation, materials archive (reuse lessons), community feed (reuse Auth/Firestore), IA reconciliation, responsive UX, tests/build QA | This SSOT |
 | 2026-08-20 | **Independent review executed for the first time** on the V1 task set (identity-nav, materials-archive, community-feed, reconcile-qa) — every prior review attempt in Runtime evidence had crashed or escalated (`ESCALATION_REQUIRED`/`STALE`), so this content had been sitting on `company/gupiti-baseline` (commit `4dda128`) unreviewed. First-pass review verdict: `REVISION_REQUIRED` (1 Critical, 3 Major, 2 Minor). Critical: `/community` filtered Firestore on `status == "approved"`, a value `PostStatus` never produces (`published`/`hidden`/`deleted`) — the feed was silently, permanently empty. Also: `/community` and `/materials` unreachable on mobile (desktop-only `PRIMARY_NAV`); home page had two competing full-height hero `<h1>` sections; `sitemap.xml` missing the new routes. | HERMESS Live Company Dogfood Run 01 |
 | 2026-08-20 | Fixed all 4 non-taste findings above (commit `0d8212d`); fresh independent review (different pass) verdict: `REVIEW_PASS`. typecheck clean, 53/53 tests, build succeeds, `/community` and `/materials` both render and are now mobile/footer-reachable. **Not fixed** (real scope gap, not a code bug): `/materials/[slug]` and `/community/[id]` detail pages and any post-creation UI do not exist, though SSOT §6 IA lists them as V1 scope — escalated to Owner Inbox as a `[DECISION]` rather than guessed at, since implementing them or explicitly descoping them is a product decision. | HERMESS Live Company Dogfood Run 01 |
