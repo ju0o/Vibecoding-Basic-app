@@ -1,12 +1,14 @@
 "use client"
 
-import { doc, getDoc, type Timestamp } from "firebase/firestore"
+import { deleteDoc, doc, getDoc, serverTimestamp, setDoc, type Timestamp } from "firebase/firestore"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import ReactMarkdown from "react-markdown"
+import { useAuth } from "@/contexts/AuthContext"
 import { getFirestore } from "@/lib/firebase/client"
-import { PostStatus } from "@/lib/firebase/types"
+import { PostStatus, UserRole, TargetType } from "@/lib/firebase/types"
+import { buildBookmarkId } from "@/lib/bookmarks"
 
 interface CommunityPostDetail {
   id: string
@@ -21,6 +23,15 @@ interface CommunityPostDetail {
 function isFirebaseConfigured(): boolean {
   return Boolean(
     process.env["NEXT_PUBLIC_FIREBASE_API_KEY"] && process.env["NEXT_PUBLIC_FIREBASE_PROJECT_ID"],
+  )
+}
+
+function isMemberRole(role: string): boolean {
+  return (
+    role === UserRole.Member ||
+    role === UserRole.TrustedMember ||
+    role === UserRole.Moderator ||
+    role === UserRole.Admin
   )
 }
 
@@ -50,10 +61,15 @@ function formatDate(value: Timestamp | null): string | null {
 export default function CommunityDetailClient() {
   const searchParams = useSearchParams()
   const id = searchParams.get("id")
+  const { user } = useAuth()
   const [post, setPost] = useState<CommunityPostDetail | null>(null)
   const [loading, setLoading] = useState(true)
   const [unavailable, setUnavailable] = useState(false)
   const [notFound, setNotFound] = useState(false)
+  const [bookmarked, setBookmarked] = useState(false)
+  const [bookmarkLoading, setBookmarkLoading] = useState(false)
+  const [bookmarkToggling, setBookmarkToggling] = useState(false)
+  const [bookmarkError, setBookmarkError] = useState<string | null>(null)
 
   useEffect(() => {
     let cancelled = false
@@ -98,6 +114,61 @@ export default function CommunityDetailClient() {
       cancelled = true
     }
   }, [id])
+
+  useEffect(() => {
+    if (!post || !user || !isMemberRole(user.role) || !isFirebaseConfigured()) {
+      setBookmarked(false)
+      setBookmarkLoading(false)
+      return
+    }
+    let cancelled = false
+    setBookmarkLoading(true)
+    setBookmarkError(null)
+    const bookmarkId = buildBookmarkId(user.uid, TargetType.Post, post.id)
+    getDoc(doc(getFirestore(), "bookmarks", bookmarkId))
+      .then((snap) => {
+        if (!cancelled) setBookmarked(snap.exists())
+      })
+      .catch(() => {
+        if (!cancelled) setBookmarked(false)
+      })
+      .finally(() => {
+        if (!cancelled) setBookmarkLoading(false)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [post, user])
+
+  async function toggleBookmark() {
+    if (!post || !user) return
+    if (!isMemberRole(user.role)) {
+      setBookmarkError("북마크는 멤버 이상만 사용할 수 있습니다.")
+      return
+    }
+    setBookmarkToggling(true)
+    setBookmarkError(null)
+    const bookmarkId = buildBookmarkId(user.uid, TargetType.Post, post.id)
+    const ref = doc(getFirestore(), "bookmarks", bookmarkId)
+    try {
+      if (bookmarked) {
+        await deleteDoc(ref)
+        setBookmarked(false)
+      } else {
+        await setDoc(ref, {
+          uid: user.uid,
+          targetType: TargetType.Post,
+          targetId: post.id,
+          createdAt: serverTimestamp(),
+        })
+        setBookmarked(true)
+      }
+    } catch {
+      setBookmarkError("북마크 처리에 실패했습니다. 다시 시도해 주세요.")
+    } finally {
+      setBookmarkToggling(false)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-navy-900 via-gray-900 to-black px-4 py-12">
@@ -147,6 +218,36 @@ export default function CommunityDetailClient() {
                   </div>
                 ) : (
                   <p className="text-gray-500">본문이 없습니다.</p>
+                )}
+              </div>
+              <div className="mt-6 flex flex-col gap-2 border-t border-white/10 pt-6">
+                {!user ? (
+                  <Link
+                    href="/login"
+                    className="inline-flex w-fit rounded-lg border border-white/20 px-4 py-2 text-sm text-gray-200 hover:bg-white/10 transition-colors"
+                  >
+                    로그인 후 북마크하기
+                  </Link>
+                ) : !isMemberRole(user.role) ? (
+                  <p className="text-sm text-gray-400">북마크는 멤버 이상만 사용할 수 있습니다.</p>
+                ) : (
+                  <>
+                    <button
+                      type="button"
+                      onClick={toggleBookmark}
+                      disabled={bookmarkLoading || bookmarkToggling}
+                      className="inline-flex w-fit rounded-lg bg-purple-500 px-4 py-2 text-sm font-medium text-white hover:bg-purple-400 disabled:cursor-not-allowed disabled:opacity-50 transition-colors"
+                    >
+                      {bookmarkLoading
+                        ? "확인 중..."
+                        : bookmarkToggling
+                          ? "처리 중..."
+                          : bookmarked
+                            ? "북마크 해제"
+                            : "북마크 저장"}
+                    </button>
+                    {bookmarkError && <p className="text-sm text-red-300">{bookmarkError}</p>}
+                  </>
                 )}
               </div>
             </article>

@@ -120,5 +120,16 @@ service cloud.firestore {
       // Admins/moderators can delete materials
       allow delete: if isModerator();
     }
+
+    // Bookmarks collection — D-007 deterministic ID {uid}__{targetType}__{targetId}, owner-only, no counter
+    match /bookmarks/{bookmarkId} {
+      allow create: if isMember() &&
+        request.resource.data.uid == request.auth.uid &&
+        request.resource.data.targetType in ['post', 'material'] &&
+        bookmarkId == request.resource.data.uid + '__' + request.resource.data.targetType + '__' + request.resource.data.targetId;
+      allow read: if isAuthenticated() && resource.data.uid == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.uid == request.auth.uid;
+      allow update: if false;
+    }
   }
 }
