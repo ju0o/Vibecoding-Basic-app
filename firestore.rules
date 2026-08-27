@@ -63,7 +63,9 @@ service cloud.firestore {
 
       // Authors can update their own posts, admins/moderators can update any
       allow update: if isMember() &&
-        (resource.data.authorId == request.auth.uid || isModerator());
+        (resource.data.authorId == request.auth.uid || isModerator()) &&
+        (!('likeCount' in resource.data) || request.resource.data.likeCount == resource.data.likeCount) &&
+        (!('commentCount' in resource.data) || request.resource.data.commentCount == resource.data.commentCount);
 
       // Authors can delete their own posts, admins/moderators can delete any
       allow delete: if isMember() &&
@@ -100,6 +102,33 @@ service cloud.firestore {
       // Users can delete their own likes, admins can delete any
       allow delete: if isAuthenticated() &&
         (resource.data.userId == request.auth.uid || isAdmin());
+    }
+
+    // GOOSE-05 canonical top-level comments. Counters and notifications are server-owned.
+    match /comments/{commentId} {
+      allow read: if true;
+      allow create: if isMember() &&
+        request.resource.data.authorUid == request.auth.uid &&
+        request.resource.data.status == 'published' &&
+        request.resource.data.targetType in ['post', 'material'] &&
+        request.resource.data.bodyMarkdown is string &&
+        request.resource.data.bodyMarkdown.size() > 0 &&
+        request.resource.data.bodyMarkdown.size() <= 5000;
+      allow update: if false;
+      allow delete: if isAuthenticated() &&
+        (resource.data.authorUid == request.auth.uid || isModerator());
+    }
+
+    // GOOSE-05 deterministic reaction ID: {targetType}__{targetId}__{uid}.
+    match /reactions/{reactionId} {
+      allow read: if true;
+      allow create: if isMember() &&
+        request.resource.data.uid == request.auth.uid &&
+        request.resource.data.targetType in ['post', 'material'] &&
+        request.resource.data.type == 'like' &&
+        reactionId == request.resource.data.targetType + '__' + request.resource.data.targetId + '__' + request.resource.data.uid;
+      allow delete: if isMember() && resource.data.uid == request.auth.uid;
+      allow update: if false;
     }
 
     // Materials collection
