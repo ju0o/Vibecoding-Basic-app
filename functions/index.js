@@ -1,6 +1,6 @@
 const { initializeApp } = require("firebase-admin/app")
 const { FieldValue, getFirestore } = require("firebase-admin/firestore")
-const { onDocumentCreated, onDocumentDeleted } = require("firebase-functions/v2/firestore")
+const { onDocumentCreated, onDocumentDeleted, onDocumentUpdated } = require("firebase-functions/v2/firestore")
 const { onCall, HttpsError } = require("firebase-functions/v2/https")
 
 initializeApp()
@@ -137,4 +137,11 @@ exports.resolveReport = onCall(async (request) => {
   batch.set(db.collection('moderationActions').doc(), { actorUid: request.auth.uid, action: 'resolve_report', targetType: 'report', targetId: reportId, after: { status }, createdAt: now })
   await batch.commit()
   return { reportId, status }
+})
+
+exports.onMaterialStatusChanged = onDocumentUpdated("materials/{materialId}", async (event) => {
+  const before = event.data?.before.data()
+  const after = event.data?.after.data()
+  if (!after || before?.status === after.status || !after.authorUid) return
+  await db.collection("notifications").doc(after.authorUid).collection("items").add({ type: "material_status_changed", targetType: "material", targetId: event.params.materialId, createdAt: FieldValue.serverTimestamp(), read: false })
 })
