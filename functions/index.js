@@ -121,3 +121,20 @@ exports.reviewCategoryRequest = onCall(async (request) => {
   await batch.commit()
   return { requestId, status: decision }
 })
+
+exports.resolveReport = onCall(async (request) => {
+  if (!request.auth) throw new HttpsError("unauthenticated", "로그인이 필요합니다.")
+  const actor = (await db.doc(`users/${request.auth.uid}`).get()).data()
+  if (!['moderator', 'admin'].includes(actor?.role) || actor?.status !== 'active') throw new HttpsError("permission-denied", "관리자 권한이 필요합니다.")
+  const { reportId, status } = request.data || {}
+  if (typeof reportId !== "string" || !['in_review', 'resolved', 'dismissed'].includes(status)) throw new HttpsError("invalid-argument", "유효하지 않은 신고 처리입니다.")
+  const reportRef = db.doc(`reports/${reportId}`)
+  const snapshot = await reportRef.get()
+  if (!snapshot.exists) throw new HttpsError("not-found", "신고를 찾을 수 없습니다.")
+  const now = FieldValue.serverTimestamp()
+  const batch = db.batch()
+  batch.update(reportRef, { status, updatedAt: now, resolvedByUid: request.auth.uid })
+  batch.set(db.collection('moderationActions').doc(), { actorUid: request.auth.uid, action: 'resolve_report', targetType: 'report', targetId: reportId, after: { status }, createdAt: now })
+  await batch.commit()
+  return { reportId, status }
+})
