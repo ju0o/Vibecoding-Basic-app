@@ -48,6 +48,11 @@ service cloud.firestore {
     match /moderationActions/{actionId} { allow read: if isModerator(); allow write: if false; }
     match /adminLogs/{logId} { allow read: if isAdmin(); allow write: if false; }
 
+    match /notifications/{uid}/items/{itemId} {
+      allow read, update: if isAuthenticated() && request.auth.uid == uid;
+      allow create, delete: if false;
+    }
+
     // Users collection
     match /users/{uid} {
       // Anyone can read their own profile
