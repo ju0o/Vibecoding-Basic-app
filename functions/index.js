@@ -61,7 +61,9 @@ const allowedTransitions = {
 
 exports.setMaterialStatus = onCall(async (request) => {
   if (!request.auth) throw new HttpsError("unauthenticated", "로그인이 필요합니다.")
-  const role = (await db.doc(`users/${request.auth.uid}`).get()).data()?.role
+  const actor = (await db.doc(`users/${request.auth.uid}`).get()).data()
+  const role = actor?.role
+  if (actor?.status !== "active") throw new HttpsError("permission-denied", "활성 계정만 처리할 수 있습니다.")
   if (role !== "moderator" && role !== "admin")
     throw new HttpsError("permission-denied", "검토 권한이 없습니다.")
   const { materialId, status, statusNote } = request.data || {}
