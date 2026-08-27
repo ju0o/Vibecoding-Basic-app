@@ -6,10 +6,11 @@ import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import ReactMarkdown from "react-markdown"
 import { useAuth } from "@/contexts/AuthContext"
-import { getFirestore } from "@/lib/firebase/client"
-import { PostStatus, UserRole, TargetType } from "@/lib/firebase/types"
-import { buildBookmarkId } from "@/lib/bookmarks"
 import PostEngagement from "@/features/community/PostEngagement"
+import ReportButton from "@/features/community/ReportButton"
+import { buildBookmarkId } from "@/lib/bookmarks"
+import { getFirestore } from "@/lib/firebase/client"
+import { PostStatus, TargetType, UserRole } from "@/lib/firebase/types"
 
 interface CommunityPostDetail {
   id: string
@@ -51,7 +52,17 @@ function toCommunityPostDetail(id: string, data: Record<string, unknown>): Commu
   const commentCount = typeof data["commentCount"] === "number" ? data["commentCount"] : 0
   const createdAt = (data["createdAt"] ?? null) as Timestamp | null
 
-  return { id, title, bodyMarkdown, authorDisplayName, tags, upvoteCount, likeCount, commentCount, createdAt }
+  return {
+    id,
+    title,
+    bodyMarkdown,
+    authorDisplayName,
+    tags,
+    upvoteCount,
+    likeCount,
+    commentCount,
+    createdAt,
+  }
 }
 
 function formatDate(value: Timestamp | null): string | null {
@@ -254,6 +265,9 @@ export default function CommunityDetailClient() {
                     {bookmarkError && <p className="text-sm text-red-300">{bookmarkError}</p>}
                   </>
                 )}
+              </div>
+              <div className="mb-3">
+                <ReportButton targetType="post" targetId={post.id} />
               </div>
               <PostEngagement postId={post.id} likeCount={post.likeCount} />
             </article>
