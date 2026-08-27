@@ -102,7 +102,7 @@ export default function PostEngagement({
             disabled={busy}
             className="rounded-lg border border-white/20 px-3 py-2 text-sm text-gray-200 hover:bg-white/10 disabled:opacity-50"
           >
-            {liked ? "좋아요 취소" : "좋아요"} · {likeCount + (liked ? 1 : 0)}
+            {liked ? "좋아요 취소" : "좋아요"} · {likeCount}
           </button>
         ) : (
           <span className="text-sm text-gray-400">좋아요 {likeCount}</span>

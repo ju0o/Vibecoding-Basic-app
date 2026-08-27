@@ -59,7 +59,9 @@ service cloud.firestore {
 
       // Members can create posts
       allow create: if isMember() &&
-        request.resource.data.authorId == request.auth.uid;
+        request.resource.data.authorId == request.auth.uid &&
+        request.resource.data.likeCount == 0 &&
+        request.resource.data.commentCount == 0;
 
       // Authors can update their own posts, admins/moderators can update any
       allow update: if isMember() &&
@@ -106,7 +108,8 @@ service cloud.firestore {
 
     // GOOSE-05 canonical top-level comments. Counters and notifications are server-owned.
     match /comments/{commentId} {
-      allow read: if true;
+      allow read: if resource.data.status == 'published' ||
+        (isMember() && (resource.data.authorUid == request.auth.uid || isModerator()));
       allow create: if isMember() &&
         request.resource.data.authorUid == request.auth.uid &&
         request.resource.data.status == 'published' &&
@@ -121,7 +124,7 @@ service cloud.firestore {
 
     // GOOSE-05 deterministic reaction ID: {targetType}__{targetId}__{uid}.
     match /reactions/{reactionId} {
-      allow read: if true;
+      allow read: if isAuthenticated() && resource.data.uid == request.auth.uid;
       allow create: if isMember() &&
         request.resource.data.uid == request.auth.uid &&
         request.resource.data.targetType in ['post', 'material'] &&

@@ -40,6 +40,8 @@ export default function NewCommunityPostPage() {
         authorDisplayName: user.displayName ?? user.email ?? "구피티 회원",
         authorUid: user.uid,
         tags: [],
+        likeCount: 0,
+        commentCount: 0,
         upvoteCount: 0,
         createdAt: serverTimestamp(),
         status: PostStatus.Published,
