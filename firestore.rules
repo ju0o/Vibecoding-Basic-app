@@ -140,7 +140,9 @@ service cloud.firestore {
         (isAuthenticated() && (resource.data.authorUid == request.auth.uid || isModerator()));
       allow create: if isMember() &&
         request.resource.data.authorUid == request.auth.uid &&
-        request.resource.data.status in ['draft', 'community'] &&
+        (request.resource.data.status == 'draft' ||
+         (request.resource.data.status == 'community' &&
+          get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'trusted_member')) &&
         request.resource.data.likeCount == 0 &&
         request.resource.data.commentCount == 0 &&
         request.resource.data.sourceType in ['original', 'external'] &&
