@@ -9,6 +9,7 @@ import { useAuth } from "@/contexts/AuthContext"
 import { getFirestore } from "@/lib/firebase/client"
 import { PostStatus, UserRole, TargetType } from "@/lib/firebase/types"
 import { buildBookmarkId } from "@/lib/bookmarks"
+import PostEngagement from "@/features/community/PostEngagement"
 
 interface CommunityPostDetail {
   id: string
@@ -17,6 +18,8 @@ interface CommunityPostDetail {
   authorDisplayName: string | null
   tags: string[]
   upvoteCount: number | null
+  likeCount: number
+  commentCount: number
   createdAt: Timestamp | null
 }
 
@@ -44,9 +47,11 @@ function toCommunityPostDetail(id: string, data: Record<string, unknown>): Commu
     ? data["tags"].filter((tag): tag is string => typeof tag === "string")
     : []
   const upvoteCount = typeof data["upvoteCount"] === "number" ? data["upvoteCount"] : null
+  const likeCount = typeof data["likeCount"] === "number" ? data["likeCount"] : (upvoteCount ?? 0)
+  const commentCount = typeof data["commentCount"] === "number" ? data["commentCount"] : 0
   const createdAt = (data["createdAt"] ?? null) as Timestamp | null
 
-  return { id, title, bodyMarkdown, authorDisplayName, tags, upvoteCount, createdAt }
+  return { id, title, bodyMarkdown, authorDisplayName, tags, upvoteCount, likeCount, commentCount, createdAt }
 }
 
 function formatDate(value: Timestamp | null): string | null {
@@ -250,6 +255,7 @@ export default function CommunityDetailClient() {
                   </>
                 )}
               </div>
+              <PostEngagement postId={post.id} likeCount={post.likeCount} />
             </article>
           )}
         </div>
