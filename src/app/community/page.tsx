@@ -87,12 +87,20 @@ export default function CommunityPage() {
           </h1>
           <p className="text-gray-400 mt-2">공개된 게시글 모아보기</p>
           {!authLoading && user && (
-            <Link
-              href="/community/post/new"
-              className="inline-flex mt-4 rounded-lg bg-purple-500 px-4 py-2 text-sm font-medium text-white hover:bg-purple-400 transition-colors"
-            >
-              새 글쓰기
-            </Link>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <Link
+                href="/community/post/new"
+                className="inline-flex rounded-lg bg-purple-500 px-4 py-2 text-sm font-medium text-white hover:bg-purple-400 transition-colors"
+              >
+                새 글쓰기
+              </Link>
+              <Link
+                href="/community/saved"
+                className="inline-flex rounded-lg border border-white/20 px-4 py-2 text-sm font-medium text-gray-200 hover:bg-white/10 transition-colors"
+              >
+                저장한 글
+              </Link>
+            </div>
           )}
         </div>
 

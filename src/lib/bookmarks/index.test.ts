@@ -1,11 +1,23 @@
+import type { Timestamp } from "firebase/firestore"
 import { describe, expect, it } from "vitest"
 import { TargetType } from "@/lib/firebase/types"
 import {
   BookmarkCreateInputSchema,
   buildBookmarkId,
   isBookmarkIdForOwner,
+  isPostBookmark,
   parseBookmarkId,
+  toSavedPostItems,
 } from "./index"
+
+function fakeTimestamp(iso: string | null): Timestamp {
+  if (iso == null) return null as unknown as Timestamp
+  const date = new Date(iso)
+  return {
+    toDate: () => date,
+    toMillis: () => date.getTime(),
+  } as unknown as Timestamp
+}
 
 describe("buildBookmarkId", () => {
   it("builds the D-007 deterministic id: {uid}__{targetType}__{targetId}", () => {
@@ -69,5 +81,50 @@ describe("BookmarkCreateInputSchema", () => {
     expect(
       BookmarkCreateInputSchema.safeParse({ targetType: TargetType.Post, targetId: "" }).success,
     ).toBe(false)
+  })
+})
+
+describe("isPostBookmark", () => {
+  it("accepts only post targets", () => {
+    expect(isPostBookmark({ targetType: TargetType.Post })).toBe(true)
+    expect(isPostBookmark({ targetType: TargetType.Material })).toBe(false)
+  })
+})
+
+describe("toSavedPostItems", () => {
+  it("keeps only post bookmarks and maps the doc id to bookmarkId", () => {
+    const newer = fakeTimestamp("2026-03-01T09:00:00Z")
+    const items = toSavedPostItems([
+      {
+        id: "u__material__m1",
+        data: { uid: "u", targetType: TargetType.Material, targetId: "m1", createdAt: newer },
+      },
+      {
+        id: "u__post__p2",
+        data: { uid: "u", targetType: TargetType.Post, targetId: "p2", createdAt: newer },
+      },
+    ])
+    expect(items).toEqual([{ bookmarkId: "u__post__p2", postId: "p2", createdAtMillis: newer.toMillis() }])
+  })
+
+  it("sorts newest first and puts entries without a timestamp last", () => {
+    const older = fakeTimestamp("2026-01-01T09:00:00Z")
+    const newest = fakeTimestamp("2026-06-01T09:00:00Z")
+    const items = toSavedPostItems([
+      {
+        id: "u__post__old",
+        data: { uid: "u", targetType: TargetType.Post, targetId: "old", createdAt: older },
+      },
+      {
+        id: "u__post__none",
+        data: { uid: "u", targetType: TargetType.Post, targetId: "none", createdAt: fakeTimestamp(null) },
+      },
+      {
+        id: "u__post__new",
+        data: { uid: "u", targetType: TargetType.Post, targetId: "new", createdAt: newest },
+      },
+    ])
+    expect(items.map((item) => item.postId)).toEqual(["new", "old", "none"])
+    expect(items[2]?.createdAtMillis).toBeNull()
   })
 })

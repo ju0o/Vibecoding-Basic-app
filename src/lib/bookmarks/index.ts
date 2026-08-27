@@ -42,3 +42,38 @@ export function isBookmarkIdForOwner(bookmarkId: string, uid: string): boolean {
   const parsed = parseBookmarkId(bookmarkId)
   return parsed != null && parsed.uid === uid
 }
+
+export type BookmarkDocEntry = {
+  readonly id: string
+  readonly data: Bookmark
+}
+
+export type SavedPostItem = {
+  readonly bookmarkId: string
+  readonly postId: string
+  readonly createdAtMillis: number | null
+}
+
+export function isPostBookmark(bookmark: Pick<Bookmark, "targetType">): boolean {
+  return bookmark.targetType === TargetType.Post
+}
+
+function timestampToMillis(timestamp: Bookmark["createdAt"]): number | null {
+  if (!timestamp || typeof timestamp.toMillis !== "function") return null
+  try {
+    return timestamp.toMillis()
+  } catch {
+    return null
+  }
+}
+
+export function toSavedPostItems(entries: readonly BookmarkDocEntry[]): SavedPostItem[] {
+  return entries
+    .filter((entry) => isPostBookmark(entry.data))
+    .map((entry) => ({
+      bookmarkId: entry.id,
+      postId: entry.data.targetId,
+      createdAtMillis: timestampToMillis(entry.data.createdAt),
+    }))
+    .sort((a, b) => (b.createdAtMillis ?? 0) - (a.createdAtMillis ?? 0))
+}
