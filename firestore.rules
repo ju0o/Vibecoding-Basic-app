@@ -136,21 +136,26 @@ service cloud.firestore {
 
     // Materials collection
     match /materials/{materialId} {
-      // Anyone can read official/community materials
-      allow read: if resource.data.status in ['official', 'community'] ||
-        (isAuthenticated() && (isOwner(resource.data.authorId) || isModerator()));
-
-      // Members can create materials
+      allow read: if resource.data.status in ['official', 'community', 'archived'] ||
+        (isAuthenticated() && (resource.data.authorUid == request.auth.uid || isModerator()));
       allow create: if isMember() &&
-        request.resource.data.authorId == request.auth.uid &&
-        request.resource.data.status == 'draft';
-
-      // Authors can update their own materials, admins/moderators can update any
+        request.resource.data.authorUid == request.auth.uid &&
+        request.resource.data.status in ['draft', 'community'] &&
+        request.resource.data.likeCount == 0 &&
+        request.resource.data.commentCount == 0 &&
+        request.resource.data.sourceType in ['original', 'external'] &&
+        ((!('resourceUrl' in request.resource.data) && request.resource.data.sourceType == 'original') ||
+         (request.resource.data.sourceType == 'external' && request.resource.data.resourceUrl is string && request.resource.data.resourceUrl.size() >= 1 && request.resource.data.resourceUrl.size() <= 2048));
       allow update: if isMember() &&
-        (resource.data.authorId == request.auth.uid || isModerator());
-
-      // Admins/moderators can delete materials
-      allow delete: if isModerator();
+        resource.data.authorUid == request.auth.uid &&
+        request.resource.data.authorUid == resource.data.authorUid &&
+        request.resource.data.createdAt == resource.data.createdAt &&
+        request.resource.data.likeCount == resource.data.likeCount &&
+        request.resource.data.commentCount == resource.data.commentCount &&
+        (request.resource.data.status == resource.data.status ||
+         (resource.data.status == 'draft' && request.resource.data.status == 'pending_review') ||
+         (resource.data.status == 'needs_revision' && request.resource.data.status == 'pending_review'));
+      allow delete: if false;
     }
 
     // Bookmarks collection — D-007 deterministic ID {uid}__{targetType}__{targetId}, owner-only, no counter

@@ -7,6 +7,7 @@ import {
   persistentLocalCache,
   persistentSingleTabManager,
 } from "firebase/firestore"
+import { connectFunctionsEmulator, type Functions, getFunctions } from "firebase/functions"
 
 const FIREBASE_CONFIG = {
   apiKey: process.env["NEXT_PUBLIC_FIREBASE_API_KEY"] ?? "",
@@ -18,6 +19,7 @@ const FIREBASE_CONFIG = {
 let app: FirebaseApp | null = null
 let auth: Auth | null = null
 let firestore: Firestore | null = null
+let functions: Functions | null = null
 
 export function getFirebaseApp(): FirebaseApp {
   if (!app) {
@@ -51,4 +53,15 @@ export function getFirestore(): Firestore {
     }
   }
   return firestore
+}
+
+export function getFirebaseFunctions(): Functions {
+  if (!functions) {
+    functions = getFunctions(getFirebaseApp())
+    const emulatorHost = process.env["NEXT_PUBLIC_EMULATOR_HOST"]
+    if (process.env["NODE_ENV"] === "development" && emulatorHost) {
+      connectFunctionsEmulator(functions, emulatorHost, 5001)
+    }
+  }
+  return functions
 }
