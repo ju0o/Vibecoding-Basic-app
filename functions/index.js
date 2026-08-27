@@ -97,3 +97,27 @@ exports.setMaterialStatus = onCall(async (request) => {
   await batch.commit()
   return { materialId, before, status }
 })
+
+exports.reviewCategoryRequest = onCall(async (request) => {
+  if (!request.auth) throw new HttpsError("unauthenticated", "로그인이 필요합니다.")
+  const actor = (await db.doc(`users/${request.auth.uid}`).get()).data()
+  if (actor?.role !== "admin") throw new HttpsError("permission-denied", "관리자 권한이 필요합니다.")
+  const { requestId, decision } = request.data || {}
+  if (typeof requestId !== "string" || !["approved", "rejected"].includes(decision))
+    throw new HttpsError("invalid-argument", "유효하지 않은 카테고리 신청 결정입니다.")
+  const requestRef = db.doc(`categoryRequests/${requestId}`)
+  const snapshot = await requestRef.get()
+  if (!snapshot.exists || snapshot.data()?.status !== "submitted")
+    throw new HttpsError("failed-precondition", "처리할 수 없는 카테고리 신청입니다.")
+  const data = snapshot.data()
+  const now = FieldValue.serverTimestamp()
+  const batch = db.batch()
+  batch.update(requestRef, { status: decision, reviewedByUid: request.auth.uid, updatedAt: now })
+  if (decision === "approved") {
+    const slug = String(data.slug)
+    batch.set(db.doc(`categories/${slug}`), { slug, label: String(data.label), kind: data.kind, status: "active", createdAt: now, updatedAt: now }, { merge: true })
+  }
+  batch.set(db.collection("adminLogs").doc(), { actorUid: request.auth.uid, action: "review_category_request", targetType: "categoryRequest", targetId: requestId, after: { status: decision }, createdAt: now })
+  await batch.commit()
+  return { requestId, status: decision }
+})

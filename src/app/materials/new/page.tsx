@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { type FormEvent, useState } from "react"
 import { useAuth } from "@/contexts/AuthContext"
+import CategorySelect from "@/features/community/CategorySelect"
 import { createMaterial, type MaterialCreateInput } from "@/lib/community/materials"
 import { UserRole } from "@/lib/firebase/types"
 
@@ -68,15 +69,10 @@ export default function NewMaterialPage() {
         onSubmit={submit}
         className="mt-8 space-y-5 rounded-2xl border border-[var(--border-default)] bg-[var(--surface-elevated)] p-6"
       >
-        <label className="block">
+        <div className="block">
           <span className="text-sm text-[var(--text-secondary)]">카테고리</span>
-          <input
-            required
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="mt-2 w-full rounded-lg border border-[var(--border-subtle)] bg-transparent px-3 py-2 text-[var(--text-primary)]"
-          />
-        </label>
+          <CategorySelect kind="material" value={category} onChange={setCategory} />
+        </div>
         <label className="block">
           <span className="text-sm text-[var(--text-secondary)]">제목</span>
           <input

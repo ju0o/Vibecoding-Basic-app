@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { type FormEvent, useEffect, useState } from "react"
 import { useAuth } from "@/contexts/AuthContext"
+import CategorySelect from "@/features/community/CategorySelect"
 import { getFirestore } from "@/lib/firebase/client"
 import { PostStatus } from "@/lib/firebase/types"
 
@@ -13,6 +14,7 @@ export default function NewCommunityPostPage() {
   const { user, loading: authLoading } = useAuth()
   const [title, setTitle] = useState("")
   const [bodyMarkdown, setBodyMarkdown] = useState("")
+  const [category, setCategory] = useState("")
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -37,6 +39,7 @@ export default function NewCommunityPostPage() {
       const post = await addDoc(collection(getFirestore(), "posts"), {
         title: trimmedTitle,
         bodyMarkdown: trimmedBody,
+        category,
         authorDisplayName: user.displayName ?? user.email ?? "구피티 회원",
         authorUid: user.uid,
         tags: [],
@@ -71,6 +74,10 @@ export default function NewCommunityPostPage() {
         <div className="mt-6 backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8">
           <h1 className="text-2xl font-bold text-white">새 글쓰기</h1>
           <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+            <div className="block">
+              <span className="text-sm text-gray-300">카테고리</span>
+              <CategorySelect kind="community" value={category} onChange={setCategory} />
+            </div>
             <label className="block">
               <span className="text-sm text-gray-300">제목</span>
               <input

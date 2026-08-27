@@ -28,6 +28,17 @@ service cloud.firestore {
         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.status == 'active'
     }
 
+    match /categories/{categoryId} {
+      allow read: if resource.data.status == 'active';
+      allow write: if isAdmin();
+    }
+
+    match /categoryRequests/{requestId} {
+      allow read: if isAuthenticated() && (resource.data.requestedByUid == request.auth.uid || isModerator());
+      allow create: if isMember() && request.resource.data.requestedByUid == request.auth.uid && request.resource.data.status == 'submitted';
+      allow update, delete: if false;
+    }
+
     // Users collection
     match /users/{uid} {
       // Anyone can read their own profile
