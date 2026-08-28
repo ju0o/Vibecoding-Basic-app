@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { type FormEvent, useEffect, useState } from "react"
 import { useAuth } from "@/contexts/AuthContext"
 import CategorySelect from "@/features/community/CategorySelect"
+import { buildGithubPostFields } from "@/lib/community/github"
 import { getFirestore } from "@/lib/firebase/client"
 import { PostStatus } from "@/lib/firebase/types"
 
@@ -14,6 +15,7 @@ export default function NewCommunityPostPage() {
   const { user, loading: authLoading } = useAuth()
   const [title, setTitle] = useState("")
   const [bodyMarkdown, setBodyMarkdown] = useState("")
+  const [githubUrl, setGithubUrl] = useState("")
   const [category, setCategory] = useState("")
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -33,12 +35,19 @@ export default function NewCommunityPostPage() {
       return
     }
 
+    const githubFields = buildGithubPostFields(githubUrl)
+    if (!githubFields) {
+      setError("GitHub 저장소 URL은 https://github.com/소유자/저장소 형식이어야 합니다.")
+      return
+    }
+
     setSaving(true)
     setError(null)
     try {
       const post = await addDoc(collection(getFirestore(), "posts"), {
         title: trimmedTitle,
         bodyMarkdown: trimmedBody,
+        ...githubFields,
         category,
         authorDisplayName: user.displayName ?? user.email ?? "구피티 회원",
         authorUid: user.uid,
@@ -86,6 +95,20 @@ export default function NewCommunityPostPage() {
                 required
                 className="mt-2 w-full rounded-lg border border-white/10 bg-black/20 px-3 py-2 text-white outline-none focus:border-purple-400"
               />
+            </label>
+            <label className="block">
+              <span className="text-sm text-gray-300">GitHub 저장소 (선택)</span>
+              <input
+                value={githubUrl}
+                onChange={(event) => setGithubUrl(event.target.value)}
+                placeholder="https://github.com/owner/repository"
+                inputMode="url"
+                autoComplete="url"
+                className="mt-2 w-full rounded-lg border border-white/10 bg-black/20 px-3 py-2 text-white outline-none focus:border-purple-400"
+              />
+              <span className="mt-1 block text-xs text-gray-500">
+                본인의 GitHub 저장소 링크를 공유할 수 있습니다.
+              </span>
             </label>
             <label className="block">
               <span className="text-sm text-gray-300">본문 (Markdown)</span>

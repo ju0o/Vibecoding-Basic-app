@@ -9,6 +9,7 @@ import { useAuth } from "@/contexts/AuthContext"
 import PostEngagement from "@/features/community/PostEngagement"
 import ReportButton from "@/features/community/ReportButton"
 import { buildBookmarkId } from "@/lib/bookmarks"
+import { getGithubRepositoryUrl } from "@/lib/community/github"
 import { getFirestore } from "@/lib/firebase/client"
 import { PostStatus, TargetType, UserRole } from "@/lib/firebase/types"
 
@@ -22,6 +23,7 @@ interface CommunityPostDetail {
   likeCount: number
   commentCount: number
   createdAt: Timestamp | null
+  githubUrl: string | null
 }
 
 function isFirebaseConfigured(): boolean {
@@ -51,6 +53,7 @@ function toCommunityPostDetail(id: string, data: Record<string, unknown>): Commu
   const likeCount = typeof data["likeCount"] === "number" ? data["likeCount"] : (upvoteCount ?? 0)
   const commentCount = typeof data["commentCount"] === "number" ? data["commentCount"] : 0
   const createdAt = (data["createdAt"] ?? null) as Timestamp | null
+  const githubUrl = getGithubRepositoryUrl(data)
 
   return {
     id,
@@ -62,6 +65,7 @@ function toCommunityPostDetail(id: string, data: Record<string, unknown>): Commu
     likeCount,
     commentCount,
     createdAt,
+    githubUrl,
   }
 }
 
@@ -236,6 +240,24 @@ export default function CommunityDetailClient() {
                   <p className="text-gray-500">본문이 없습니다.</p>
                 )}
               </div>
+              {post.githubUrl && (
+                <aside className="mt-6 rounded-xl border border-white/10 bg-white/5 p-4">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">
+                    GitHub project
+                  </p>
+                  <p className="mt-1 break-all text-sm text-gray-200">
+                    {post.githubUrl.replace("https://github.com/", "")}
+                  </p>
+                  <a
+                    href={post.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex rounded-lg border border-purple-400/50 px-3 py-2 text-sm font-medium text-purple-200 hover:bg-purple-400/10"
+                  >
+                    저장소 보기
+                  </a>
+                </aside>
+              )}
               <div className="mt-6 flex flex-col gap-2 border-t border-white/10 pt-6">
                 {!user ? (
                   <Link
