@@ -32,24 +32,55 @@ export const MOBILE_MORE_NAV: readonly NavItem[] = [
 ] as const
 
 /** Footer / secondary discovery */
-export const FOOTER_NAV: readonly NavItem[] = [
-  { href: "/community", label: "커뮤니티" },
-  { href: "/materials", label: "자료실" },
-  { href: "/start", label: "시작하기" },
-  { href: "/learn", label: "배우기" },
-  { href: "/tools", label: "도구" },
-  { href: "/technologies", label: "기술" },
-  { href: "/lab", label: "실습" },
-  { href: "/curriculum", label: "전체 학습 지도" },
-  { href: "/glossary", label: "용어" },
-  { href: "/resources", label: "공식 문서" },
-  { href: "/about", label: "소개" },
-  { href: "/verification", label: "출처와 검증" },
-  { href: "/atlas", label: "Atlas" },
-  { href: "/privacy", label: "개인정보 처리 안내" },
-  { href: "/terms", label: "이용 안내" },
-  { href: "/license", label: "라이선스·고지" },
+export type FooterNavGroup = {
+  readonly label: string
+  readonly items: readonly NavItem[]
+}
+
+/** Compact footer discovery, grouped by the way people use GUPITI. */
+export const FOOTER_NAV_GROUPS: readonly FooterNavGroup[] = [
+  {
+    label: "Community",
+    items: [
+      { href: "/community", label: "Community home" },
+      { href: "/community/post/new", label: "Share a post" },
+      { href: "/community/saved", label: "Saved posts" },
+    ],
+  },
+  {
+    label: "Learn & make",
+    items: [
+      { href: "/start", label: "Start here" },
+      { href: "/learn", label: "Learning paths" },
+      { href: "/lab", label: "Practice lab" },
+      { href: "/curriculum", label: "Curriculum" },
+    ],
+  },
+  {
+    label: "Explore",
+    items: [
+      { href: "/materials", label: "Community materials" },
+      { href: "/resources", label: "Resources" },
+      { href: "/tools", label: "Tools" },
+      { href: "/technologies", label: "Technologies" },
+      { href: "/glossary", label: "Glossary" },
+      { href: "/atlas", label: "Atlas" },
+      { href: "/verification", label: "Sources & verification" },
+    ],
+  },
+  {
+    label: "GUPITI",
+    items: [
+      { href: "/about", label: "About GUPITI" },
+      { href: "/privacy", label: "Privacy" },
+      { href: "/terms", label: "Terms" },
+      { href: "/license", label: "License" },
+    ],
+  },
 ] as const
+
+/** Flat compatibility view for consumers that still expect the old footer list. */
+export const FOOTER_NAV: readonly NavItem[] = FOOTER_NAV_GROUPS.flatMap((group) => group.items)
 
 export const DAY1_HREF = "/learn/vibe-coding-foundation/day-1" as const
 
