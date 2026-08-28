@@ -88,6 +88,14 @@ AI Ops 정합성 (AI_OPS_RECONCILIATION.md) 에 따르면:
 - [ ] `CURRICULUM_ANALYSIS.md` reviewed — tag normalization strategy understood
 - [ ] Firestore project created and credentials available (`.env.local`)
 - [ ] Firebase Auth configured (Email/Google OAuth providers enabled)
+  - **2026-08-28 verified, still open:** live production repro (real trusted
+    click, not synthetic `.click()`) confirms Google AND GitHub sign-in both
+    fail with `auth/operation-not-allowed` — neither provider is enabled in
+    the Firebase Console for `ju0o-ec967`. Both buttons temporarily disabled
+    client-side (`src/lib/firebase/auth-provider-config.ts`) per Owner
+    directive rather than left presenting as functional. Owner action
+    required (Console-only; not performed by this Task — see
+    `GUPITI-OWNER-P0-AUTH-01` final report).
 - [ ] Stash `stash@{0}` verified accessible (all 100 lessons present)
 - [ ] TypeScript strict mode passes on base branch
 
@@ -500,6 +508,8 @@ AVM-COMMUNITY-001~003 브랜치에서 이미 병합된 인프라를 활용하여
 
 - [ ] Phase 1 exit criteria met
 - [ ] Firebase Auth configured (Email + Google OAuth via NextAuth/Firebase provider)
+  - Still open as of 2026-08-28 — see the same-titled item earlier in this
+    file for verified live-repro evidence (`GUPITI-OWNER-P0-AUTH-01`).
 - [ ] Firestore security rules deployed (from AVM-COMMUNITY-002)
 - [ ] Firebase Admin SDK configured (for admin role detection)
 - [ ] `.env.local` contains `NEXT_PUBLIC_FIREBASE_*` variables
